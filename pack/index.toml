@@ -21,6 +21,11 @@ hash = "dcaf5f2e28db0b9a127d0167456832341045ddc9aec058c3d9fcf53f618d2404"
 metafile = true
 
 [[files]]
+file = "mods/kaleidoscope-cookery.pw.toml"
+hash = "06d92c6bffc5669da53206311fea3073ba83cca016830e1e1ea9ed6c2b8ecc5c"
+metafile = true
+
+[[files]]
 file = "mods/no-mans-land.pw.toml"
 hash = "55b4c00d59cfe0e2677157d41fb900e0e45fa8facb2aa7782af7070c3ecfd1aa"
 metafile = true
