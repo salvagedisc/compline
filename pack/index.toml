@@ -59,3 +59,8 @@ metafile = true
 file = "mods/surveyor.pw.toml"
 hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
 metafile = true
+
+[[files]]
+file = "mods/thirst-was-reclaimed.pw.toml"
+hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
+metafile = true
