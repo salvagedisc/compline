@@ -46,6 +46,11 @@ hash = "a9fd327bb8855bdf68fbe88e17936ba866ea608bf2def5154fc52e0c1fe9514b"
 metafile = true
 
 [[files]]
+file = "mods/companions-mod.pw.toml"
+hash = "622d0bbdb098833f3bcb3597b164af43cf9ba4cf85743dd4994168c900a459e9"
+metafile = true
+
+[[files]]
 file = "mods/create-aeronautics.pw.toml"
 hash = "3b8895369640b2a52d3e05f7186185ba6798e44d513f11c5427a0fe9c16769e9"
 metafile = true
@@ -108,6 +113,11 @@ metafile = true
 [[files]]
 file = "mods/kiwi.pw.toml"
 hash = "84f4b09b7ef3ef75478cfa6d126951958444d612375c99b1c4e7e6bdbef28c1c"
+metafile = true
+
+[[files]]
+file = "mods/knight-lib.pw.toml"
+hash = "e7039f1c13809e6ac55b0443f9c0bc05dad66824e47e3270ff7e8d5cca3a1bf6"
 metafile = true
 
 [[files]]
