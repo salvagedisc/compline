@@ -36,8 +36,6 @@ Côté : C = client, S = serveur, CS = les deux.
 |---|---|---|
 | Thirst Canteen | Gourde | Utile avec Thirst Was Reclaimed ? |
 | Serene Seasons | Saisons | Repli si le pont Ecliptic → Cold Sweat échoue |
-| Animal Husbandry | Élevage | Besoins, maladies, génétique ; jeune (0.4.2) — non validé (décision 0002) |
-| Spoiled | Conservation | Pourrissement piloté par données — non validé (décision 0002) |
 | Create: Integrated Farming | Automatisation | Moissonneuse, filet de pêche ; plus tard |
 | Naturalist | Faune | Concurrent d'Alex's Mobs Continued, pas un ajout automatique |
 | Alex's Mobs Continued | Faune | Idem |
@@ -58,6 +56,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Farmer's Delight (+ addons Create FD) | Kaleidoscope Cookery est le système alimentaire principal |
 | Legendary Survival Overhaul | Cold Sweat + Thirst Was Reclaimed retenus |
 | Minimaps / waypoints | Contraire à la vision |
+| Animal Husbandry | Mod jugé peu fiable ; mécanique d'élevage exigeant toujours voulue → alternative à trouver |
+| Spoiled | Mod jugé peu fiable ; mécanique de conservation toujours voulue → alternative à trouver |
 | Let's Do Bakery | Doublon de la farine/pâte de KC |
 | Let's Do Meadow | Biomes propres, conflit probable avec NML |
 | Graze | Rend l'élevage autonome |
