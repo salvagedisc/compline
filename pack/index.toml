@@ -1,6 +1,11 @@
 hash-format = "sha256"
 
 [[files]]
+file = "mods/adorable-hamster-pets.pw.toml"
+hash = "fd9698b3a981f1be9e64c2ef952a390f53cdd763199d567c6ec51e2b189772ad"
+metafile = true
+
+[[files]]
 file = "mods/alexs-mobs-continued.pw.toml"
 hash = "6a83b750a2a0dd77c418019b2fd61e1abcc07cf3b28c3c919569b9e5c89a8eb7"
 metafile = true
