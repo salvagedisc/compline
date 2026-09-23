@@ -3,6 +3,8 @@
 Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : `0.x` prototype, `1.0.0` lancement du monde permanent.
 
 ## [Unreleased]
+### Ajouté
+- Agriculture : [Let's Do] Farm & Charm (+ Architectury API), Ecliptic Seasons, KaleidoscopeCookery-Automation.
 
 ## [0.1.0]
 ### Ajouté
