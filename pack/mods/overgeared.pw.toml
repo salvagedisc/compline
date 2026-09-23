@@ -1,0 +1,13 @@
+name = "Overgeared"
+filename = "overgeared-neoforge-1.21.1-1.6.19.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/SQL3X2Ky/versions/YNvbzmgq/overgeared-neoforge-1.21.1-1.6.19.jar"
+hash-format = "sha512"
+hash = "06b7d48d89a313485c5dafc56de2a018820921e01602f77aa1838d7f3e245564ebc3e7cd3fbba582e901a69890f46148311054b449dc94e0196fff07639c9194"
+
+[update]
+[update.modrinth]
+mod-id = "SQL3X2Ky"
+version = "YNvbzmgq"

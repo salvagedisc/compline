@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.jar binary
+*.mrpack binary
+*.png binary
+# packwiz hashes files byte-for-byte: never convert line endings inside the pack.
+pack/** -text

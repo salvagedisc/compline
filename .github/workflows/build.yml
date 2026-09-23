@@ -1,0 +1,45 @@
+name: build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - name: Install packwiz
+        run: go install github.com/packwiz/packwiz@ef87d964f8cbd52b3b13ea42453ef322290e2b9e
+
+      - name: Check index is up to date
+        working-directory: pack
+        run: |
+          packwiz refresh
+          git diff --exit-code -- . || { echo "::error::index.toml pas à jour : lancer 'packwiz refresh' dans pack/"; exit 1; }
+
+      - name: Export .mrpack
+        id: export
+        working-directory: pack
+        run: |
+          version=$(sed -n 's/^version = "\(.*\)"/\1/p' pack.toml)
+          name="Fallow-${version}-${GITHUB_SHA::7}"
+          mkdir -p ../dist
+          packwiz mr export -o "../dist/${name}.mrpack"
+          echo "name=${name}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.export.outputs.name }}
+          path: dist/*.mrpack
