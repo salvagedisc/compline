@@ -25,6 +25,12 @@ Côté : C = client, S = serveur, CS = les deux.
 | Hybrid Aquatic | ✅ | CS | Faune marine | Océans, créatures des profondeurs rares (décision 0003) |
 | Mowzie's Mobs | ✅ | CS | Anomalies | Créatures uniques très rares (décision 0003) |
 | Critters and Companions | ✅ | CS | Compagnons | Petite faune apprivoisable (décision 0003) |
+| Untitled Duck Mod | ✅ | CS | Compagnons / ferme | Canards et oies (décision 0003) |
+| Friends & Foes | ✅ | CS | Compagnons | Créatures pacifiques du mob vote ; hostiles à désactiver en config (décision 0003) |
+| Adorable Hamster Pets | ✅ | CS | Compagnons | Génétique, variantes ; flair à diamants à désactiver si possible (décision 0003) |
+| Companion | ✅ | CS | QoL animaux | Les animaux apprivoisés ne se perdent plus (décision 0003) |
+| Companions! | ✅ | CS | Compagnons | 10 compagnons à pouvoirs ; hostiles, armes et boss à encadrer (décision 0003) |
+| Ghost | ✅ | CS | Compagnons | Petits fantômes (décision 0003) |
 
 ## Dépendances (ajoutées automatiquement)
 | Mod | Côté | Requis par |
@@ -41,6 +47,9 @@ Côté : C = client, S = serveur, CS = les deux.
 | Lithostitched | CS | Hybrid Aquatic |
 | Curios API | CS | Hybrid Aquatic |
 | Hybrid API | CS | Hybrid Aquatic |
+| Resourceful Lib | CS | Friends & Foes |
+| Kiwi | CS | Companion |
+| Knight Lib | CS | Companions! |
 
 ## À tester
 | Mod | Rôle | Question à trancher |
@@ -52,7 +61,6 @@ Côté : C = client, S = serveur, CS = les deux.
 | Create: Connected | QoL Create | Probable |
 | Distant Horizons | Rendu lointain | Performance client et serveur |
 | Terralith + Streams Reflowing | Worldgen | Preset concurrent de NML (décision 0001) |
-| Jurassic Saga / Jurassic Revived | Préhistoire (zoo) | Après visionnage des vidéos (décision 0003) |
 | Vinery / Kaleidoscope Tavern | Spécialisation | Après validation du socle agricole |
 | Create: Power Loader | Chunkloading | Risque de casser la logique d'entretien des infrastructures |
 
@@ -73,3 +81,5 @@ Côté : C = client, S = serveur, CS = les deux.
 | Integrated Mowzie's Mobs | Exige Quark + Supplementaries + Amendments |
 | Let's Do Wilder Nature | Style cubique, bêta, doublon de Naturalist |
 | Spawn / Environmental | Ajoutent des biomes (conflit NML) |
+| Jurassic Saga / Jurassic Revived / Jurassic Reborn | Préhistoire abandonnée pour le moment |
+| Critters n' Crawlers | Doublon de Naturalist, créature d'horreur |
