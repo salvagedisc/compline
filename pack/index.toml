@@ -51,8 +51,28 @@ hash = "dcaf5f2e28db0b9a127d0167456832341045ddc9aec058c3d9fcf53f618d2404"
 metafile = true
 
 [[files]]
+file = "mods/curios.pw.toml"
+hash = "36debf7653e95a855b4fedacc19027cf2e01960fc0b6d55ef2ffbffbcb455690"
+metafile = true
+
+[[files]]
 file = "mods/ecliptic-seasons.pw.toml"
 hash = "e4bd780d067c8aa930a371b1b521fdad2379623f2a22ac3e75c90b03d390e3d6"
+metafile = true
+
+[[files]]
+file = "mods/geckolib.pw.toml"
+hash = "35779b39ddc06059ec483b33de2ecfdc3adb95c0a49e69b6701fb0024827e2f5"
+metafile = true
+
+[[files]]
+file = "mods/hybrid-api.pw.toml"
+hash = "6e317343ea37f9842b317f0440ba5f7ef71a24cfb6c7c3f243f63d00fd5782c3"
+metafile = true
+
+[[files]]
+file = "mods/hybrid-aquatic.pw.toml"
+hash = "5f300877f8085660d7bc7b849daf6c9047bc487d3c6e2b65f9972fdccf780ae6"
 metafile = true
 
 [[files]]
@@ -66,6 +86,11 @@ hash = "e5ecd7b66b29f775eac89dcc96d7ca3e27e9cdde958b49da4e12be4f613e5655"
 metafile = true
 
 [[files]]
+file = "mods/kotlin-for-forge.pw.toml"
+hash = "712a69b3569a8055979de6eea262068535fe182dffb3833e53e5833e9cbf9766"
+metafile = true
+
+[[files]]
 file = "mods/kubejs.pw.toml"
 hash = "7e0eca275f27b6543f06c36dec433851a956960cbedd2be57d19e159d636bfc1"
 metafile = true
@@ -73,6 +98,11 @@ metafile = true
 [[files]]
 file = "mods/lets-do-farm-charm.pw.toml"
 hash = "1cb80474d56ee7e47fc996361a7a03b92c297ff239a9b4126d79f47f1a491e58"
+metafile = true
+
+[[files]]
+file = "mods/lithostitched.pw.toml"
+hash = "0294264654da6777cfbbbd24ffa6dd1d082768fa7ae28b36b76f78261f53fce9"
 metafile = true
 
 [[files]]
