@@ -1,6 +1,11 @@
 hash-format = "sha256"
 
 [[files]]
+file = "mods/alexs-mobs-continued.pw.toml"
+hash = "6a83b750a2a0dd77c418019b2fd61e1abcc07cf3b28c3c919569b9e5c89a8eb7"
+metafile = true
+
+[[files]]
 file = "mods/antique-atlas-4.pw.toml"
 hash = "72f9cf7ef1412b9384467782dd5444ec8adbd03b9f532d1238e5a166ffb25237"
 metafile = true
@@ -18,6 +23,11 @@ metafile = true
 [[files]]
 file = "mods/biolith.pw.toml"
 hash = "cc79b689faf345a5aa19ead3423726b6f87c267d686fb5807738e0cd20756679"
+metafile = true
+
+[[files]]
+file = "mods/codxlib.pw.toml"
+hash = "10c5766cfee693bb3843ecd60334400b239b961c24fd4b9db60aceca272e3e17"
 metafile = true
 
 [[files]]
