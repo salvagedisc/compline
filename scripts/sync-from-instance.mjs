@@ -39,6 +39,7 @@ export async function run({ argv, env, fetch, exec, confirm, log, packDir }) {
   let diff, titles;
   try {
     const jars = await readInstanceJars(instanceDir);
+    if (jars.length === 0) throw new Error(`aucun mod actif dans ${instanceDir} (mauvaise instance ?)`);
     const versions = await lookupVersions(jars.map((j) => j.sha512), { fetch });
     const instanceMods = jars.map((j) => ({ ...j, ...(versions.get(j.sha512) ?? { projectId: null, versionId: null, versionNumber: null }) }));
     diff = diffMods(instanceMods, await readPackMods(packDir));
@@ -55,6 +56,7 @@ export async function run({ argv, env, fetch, exec, confirm, log, packDir }) {
   for (const m of diff.removed) log(`  - ${m.name}`);
   for (const c of diff.changed) log(`  ~ ${c.from.name} → ${c.to.versionNumber}`);
   for (const m of diff.unknown) log(`  ! ${m.filename} : introuvable sur Modrinth (non conforme, ignoré)`);
+  for (const m of diff.serverOnly) log(`  s ${m.name} : mod serveur, non vérifiable dans une instance client (conservé)`);
   log(`  = ${diff.unchanged.length} mod(s) inchangé(s)`);
 
   const commands = toPackwizCommands(diff);
@@ -69,8 +71,9 @@ export async function run({ argv, env, fetch, exec, confirm, log, packDir }) {
   for (const args of commands) {
     if (exec(args) !== 0) { log(`Échec : packwiz ${args.join(' ')}`); return 1; }
   }
-  if (commands.length > 0 && exec(['refresh']) !== 0) { log('Échec : packwiz refresh'); return 1; }
+  // Configs are copied before refresh so index.toml lists them.
   await copyConfigs(join(instanceDir, 'config'), join(packDir, 'config'), configEntries);
+  if (exec(['refresh']) !== 0) { log('Échec : packwiz refresh (restaurer avec : git restore pack/)'); return 1; }
   log('Terminé. Pense à mettre à jour docs/mods.md et à committer un mod par commit.');
   return 0;
 }

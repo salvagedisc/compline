@@ -57,5 +57,5 @@ jobs:
           curl --fail-with-body -sS -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: ${MODRINTH_TOKEN}" \
             -H "User-Agent: salvagedisc/fallow release" \
-            -F "data=${data}" \
+            --form-string "data=${data}" \
             -F "file=@dist/Fallow-${version}.mrpack;type=application/x-modrinth-modpack+zip"

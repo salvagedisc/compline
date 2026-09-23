@@ -23,3 +23,9 @@ test('pack mods without modrinth id are never marked removed', () => {
   const d = diffMods([], [pack('local', null, null)]);
   assert.deepEqual(d.removed, []);
 });
+
+test('server-only pack mods are never marked removed (absent from client instances by design)', () => {
+  const d = diffMods([], [{ key: 'srv', name: 'srv', projectId: 'PS', versionId: 'v1', side: 'server' }]);
+  assert.deepEqual(d.removed, []);
+  assert.deepEqual(d.serverOnly.map((m) => m.key), ['srv']);
+});
