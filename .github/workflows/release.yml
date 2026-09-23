@@ -27,7 +27,7 @@ jobs:
           version=$(sed -n 's/^version = "\(.*\)"/\1/p' pack/pack.toml)
           [ "v${version}" = "${GITHUB_REF_NAME}" ] || { echo "::error::tag ${GITHUB_REF_NAME} ≠ pack.toml ${version}"; exit 1; }
           echo "version=${version}" >> "$GITHUB_OUTPUT"
-          awk -v v="${version}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
+          awk -v h="## [${version}]" 'index($0, h) == 1 {f=1; next} index($0, "## [") == 1 {f=0} f' CHANGELOG.md > notes.md
           [ -s notes.md ] || { echo "::error::section [${version}] absente du CHANGELOG"; exit 1; }
 
       - name: Export .mrpack
