@@ -26,6 +26,11 @@ hash = "55b4c00d59cfe0e2677157d41fb900e0e45fa8facb2aa7782af7070c3ecfd1aa"
 metafile = true
 
 [[files]]
+file = "mods/overgeared.pw.toml"
+hash = "9d500f6f94eaa2ce229dd015410e9154f8077be8842ca404594de28c2ce23fd4"
+metafile = true
+
+[[files]]
 file = "mods/sable.pw.toml"
 hash = "a1fa121ed5d0207e4cdd3f545d043f68f9a4bb38dcb21278b968fad5e4cefe4a"
 metafile = true
