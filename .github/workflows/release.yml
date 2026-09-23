@@ -1,0 +1,61 @@
+name: release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+      MODRINTH_PROJECT_ID: ${{ vars.MODRINTH_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - run: go install github.com/packwiz/packwiz@ef87d964f8cbd52b3b13ea42453ef322290e2b9e
+
+      - name: Check tag matches pack version
+        id: meta
+        run: |
+          version=$(sed -n 's/^version = "\(.*\)"/\1/p' pack/pack.toml)
+          [ "v${version}" = "${GITHUB_REF_NAME}" ] || { echo "::error::tag ${GITHUB_REF_NAME} ≠ pack.toml ${version}"; exit 1; }
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          awk -v v="${version}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
+          [ -s notes.md ] || { echo "::error::section [${version}] absente du CHANGELOG"; exit 1; }
+
+      - name: Export .mrpack
+        working-directory: pack
+        run: |
+          mkdir -p ../dist
+          packwiz mr export -o "../dist/Fallow-${{ steps.meta.outputs.version }}.mrpack"
+
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Fallow ${{ steps.meta.outputs.version }}" --notes-file notes.md
+
+      # Désactivé tant que le projet Modrinth n'existe pas : définir la variable MODRINTH_PROJECT_ID
+      # et le secret MODRINTH_TOKEN (créés par l'utilisateur) pour l'activer.
+      # Avant activation, vérifier la valeur attendue de "loaders" pour un modpack :
+      # https://docs.modrinth.com/api/operations/createversion/
+      - name: Publish to Modrinth
+        if: env.MODRINTH_TOKEN != '' && env.MODRINTH_PROJECT_ID != ''
+        run: |
+          version="${{ steps.meta.outputs.version }}"
+          case "$version" in 0.*) type=beta ;; *) type=release ;; esac
+          data=$(jq -n --arg p "$MODRINTH_PROJECT_ID" --arg v "$version" --arg t "$type" --rawfile c notes.md \
+            '{project_id:$p, name:("Fallow " + $v), version_number:$v, changelog:$c, version_type:$t,
+              game_versions:["1.21.1"], loaders:["neoforge"], dependencies:[], featured:true,
+              file_parts:["file"], primary_file:"file"}')
+          curl --fail-with-body -sS -X POST https://api.modrinth.com/v2/version \
+            -H "Authorization: ${MODRINTH_TOKEN}" \
+            -H "User-Agent: salvagedisc/fallow release" \
+            -F "data=${data}" \
+            -F "file=@dist/Fallow-${version}.mrpack;type=application/x-modrinth-modpack+zip"
