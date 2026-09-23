@@ -41,6 +41,11 @@ hash = "dcaf5f2e28db0b9a127d0167456832341045ddc9aec058c3d9fcf53f618d2404"
 metafile = true
 
 [[files]]
+file = "mods/ecliptic-seasons.pw.toml"
+hash = "e4bd780d067c8aa930a371b1b521fdad2379623f2a22ac3e75c90b03d390e3d6"
+metafile = true
+
+[[files]]
 file = "mods/kaleidoscope-cookery.pw.toml"
 hash = "06d92c6bffc5669da53206311fea3073ba83cca016830e1e1ea9ed6c2b8ecc5c"
 metafile = true
