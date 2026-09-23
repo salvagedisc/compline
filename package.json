@@ -4,7 +4,7 @@
   "type": "module",
   "engines": { "node": ">=20" },
   "scripts": {
-    "test": "node --test scripts/test/",
+    "test": "node --test \"scripts/test/*.test.mjs\"",
     "sync": "node scripts/sync-from-instance.mjs"
   }
 }
