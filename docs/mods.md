@@ -32,6 +32,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Companions! | ✅ | CS | Compagnons | 10 compagnons à pouvoirs ; hostiles, armes et boss à encadrer (décision 0003) |
 | Ghost | ✅ | CS | Compagnons | Petits fantômes (décision 0003) |
 | Sparse Structures | ✅ | CS | Structures | Espacement global des structures (décision 0004) |
+| Quark | ✅ | CS | QoL / construction | Tri d'inventaire et modules choisis ; tout le reste désactivé (config) |
+| Supplementaries | ✅ | CS | Décoration / QoL | Blocs décoratifs et utilitaires ; à brider (config) |
 
 ## Dépendances (ajoutées automatiquement)
 | Mod | Côté | Requis par |
@@ -51,6 +53,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Resourceful Lib | CS | Friends & Foes |
 | Kiwi | CS | Companion |
 | Knight Lib | CS | Companions! |
+| Zeta | CS | Quark |
+| Moonlight Lib | CS | Supplementaries |
 
 ## À tester
 | Mod | Rôle | Question à trancher |
@@ -62,6 +66,7 @@ Côté : C = client, S = serveur, CS = les deux.
 | Create: Connected | QoL Create | Probable |
 | Distant Horizons | Rendu lointain | Performance client et serveur |
 | Terralith + Streams Reflowing | Worldgen | Preset concurrent de NML (décision 0001) |
+| IDAS (+ Integrated API) | Structures Create/Quark | Plus tard (décision 0004) ; dépendances Quark + Supplementaries déjà présentes |
 | Vinery / Kaleidoscope Tavern | Spécialisation | Après validation du socle agricole |
 | Create: Power Loader | Chunkloading | Risque de casser la logique d'entretien des infrastructures |
 
