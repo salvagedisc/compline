@@ -186,6 +186,11 @@ hash = "a1fa121ed5d0207e4cdd3f545d043f68f9a4bb38dcb21278b968fad5e4cefe4a"
 metafile = true
 
 [[files]]
+file = "mods/sparsestructures.pw.toml"
+hash = "993b4e4970e1a5ef2fe7c6712212f57a84dcf8b31d4b6863540b6395c4f9ce09"
+metafile = true
+
+[[files]]
 file = "mods/surveyor.pw.toml"
 hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
 metafile = true
