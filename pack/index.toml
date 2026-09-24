@@ -86,6 +86,11 @@ hash = "78a50ddf9108d1dda82e7de46a991dcd61a046e4ea2279aa551071ba8f178f86"
 metafile = true
 
 [[files]]
+file = "mods/fzzy-config.pw.toml"
+hash = "932c65fb598293dba5dc60a76fc64c2579db427018b10dd4757dd421d9abcaf0"
+metafile = true
+
+[[files]]
 file = "mods/geckolib.pw.toml"
 hash = "35779b39ddc06059ec483b33de2ecfdc3adb95c0a49e69b6701fb0024827e2f5"
 metafile = true
@@ -183,6 +188,11 @@ metafile = true
 [[files]]
 file = "mods/overgeared.pw.toml"
 hash = "9d500f6f94eaa2ce229dd015410e9154f8077be8842ca404594de28c2ce23fd4"
+metafile = true
+
+[[files]]
+file = "mods/patchouli.pw.toml"
+hash = "d7f360ebb9f009d6dc0b368cd8fa399bdff70c0f6ef931687b2a35137f72715d"
 metafile = true
 
 [[files]]
