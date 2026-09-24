@@ -59,6 +59,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Modonomicon | CS | Icy's Better Horses (dépendance non déclarée sur Modrinth) |
 | Fzzy Config | CS | Adorable Hamster Pets (non déclarée) |
 | Patchouli | CS | Adorable Hamster Pets (non déclarée) |
+| Sinytra Connector | CS | Antique Atlas 4, Surveyor (mods Fabric) — en bêta, sous surveillance |
+| Forgified Fabric API | CS | Antique Atlas 4, Surveyor (via Connector) |
 
 ## À tester
 | Mod | Rôle | Question à trancher |

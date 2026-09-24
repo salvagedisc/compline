@@ -16,6 +16,14 @@ jobs:
           node-version: 22
       - run: npm test
 
+      - uses: actions/cache@v4
+        with:
+          path: .cache/jars
+          key: jars-${{ hashFiles('pack/mods/*.pw.toml') }}
+          restore-keys: jars-
+      - name: Check real mod dependencies
+        run: npm run check-deps
+
       - uses: actions/setup-go@v5
         with:
           go-version: stable

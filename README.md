@@ -9,6 +9,7 @@ Modpack Minecraft **1.21.1 / NeoForge** pour un monde permanent entre amis : exp
 ## Développer
 - Pack : `pack/` (géré par [packwiz](https://packwiz.infra.link/)).
 - Vision : `docs/vision.md` · Registre des mods : `docs/mods.md` · Décisions : `docs/decisions/`.
+- Vérifier les dépendances réelles des jars : `npm run check-deps` (aussi exécuté en CI).
 - Rapatrier les mods testés dans l'instance « Fallow test » :
 
 ```bash
