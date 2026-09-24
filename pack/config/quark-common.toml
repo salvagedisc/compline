@@ -1,0 +1,174 @@
+# Fallow — Quark réduit à l'essentiel (voir docs/decisions/0005-quark.md).
+# Fichier partiel : Quark complète les options absentes avec leurs valeurs par défaut.
+# Les noms de modules suivent le nom de classe de Quark 4.1 découpé en mots ; à vérifier
+# contre la config générée au premier lancement (npm run sync -- --configs).
+
+[general]
+	"Enable Onboarding" = false
+	"Terrablender Add Region" = false
+
+[categories]
+	automation = true
+	building = true
+	management = true
+	tools = true
+	tweaks = true
+	world = true
+	mobs = false
+	client = true
+	experimental = false
+	oddities = false
+
+[automation]
+	"Chains Connect Blocks" = false
+	"Chute" = false
+	"Dispensers Place Blocks" = false
+	"Ender Watcher" = false
+	"Feeding Trough" = false
+	"Gravisand" = false
+	"Iron Rod" = false
+	"Metal Buttons" = true
+	"Obsidian Plate" = true
+	"Pistons Move Tile Entities" = false
+	"Redstone Randomizer" = false
+
+[building]
+	"Celebratory Lamps" = false
+	"Compressed Blocks" = true
+	"Duskbound Blocks" = false
+	"Framed Glass" = true
+	"Glass Item Frame" = true
+	"Gold Bars" = false
+	"Grate" = true
+	"Hedges" = true
+	"Hollow Logs" = true
+	"Industrial Palette" = true
+	"Japanese Palette" = false
+	"Leaf Carpet" = true
+	"Midori" = false
+	"More Brick Types" = true
+	"More Mud Blocks" = true
+	"More Potted Plants" = true
+	"More Stone Variants" = true
+	"Nether Brick Fence Gate" = true
+	"Rainbow Lamps" = false
+	"Raw Metal Bricks" = true
+	"Rope" = true
+	"Shear Vines" = true
+	"Shingles" = true
+	"Soul Sandstone" = false
+	"Stools" = false
+	"Sturdy Stone" = true
+	"Thatch" = true
+	"Variant Bookshelves" = true
+	"Variant Chests" = true
+	"Variant Furnaces" = true
+	"Variant Ladders" = true
+	"Vertical Planks" = true
+	"Vertical Slabs" = true
+	"Wooden Posts" = true
+
+[management]
+	"Automatic Tool Restock" = false
+	"Easy Transferring" = true
+	"Expanded Item Interactions" = true
+	"Hotbar Changer" = true
+	"Inventory Sorting" = true
+	"Item Sharing" = true
+	"Quick Armor Swapping" = true
+
+[tools]
+	"Abacus" = false
+	"Ambient Discs" = false
+	"Ancient Tomes" = false
+	"Beacon Redirection" = false
+	"Bottled Cloud" = false
+	"Color Runes" = false
+	"Endermosh Music Disc" = false
+	"Parrot Eggs" = true
+	"Pathfinder Maps" = false
+	"Pickarang" = false
+	"Seed Pouch" = true
+	"Skull Pikes" = false
+	"Slime In A Bucket" = false
+	"Torch Arrow" = false
+	"Trowel" = true
+
+[tweaks]
+	"Armed Armor Stands" = true
+	"Automatic Recipe Unlock" = true
+	"Better Elytra Rocket" = false
+	"Campfires Boost Elytra" = false
+	"Compasses Work Everywhere" = false
+	"Coral On Cactus" = false
+	"Diamond Repair" = false
+	"Double Door Opening" = true
+	"Dragon Scales" = false
+	"Dyeable Item Frames" = true
+	"Emotes" = true
+	"Enhanced Ladders" = true
+	"Glass Shard" = false
+	"Gold Tools Have Fortune" = false
+	"Grab Chickens" = true
+	"Hoe Harvesting" = true
+	"Horses Swim" = true
+	"Improved Sponges" = false
+	"Lock Rotation" = true
+	"Magma Keeps Concrete Powder" = false
+	"Map Washing" = true
+	"More Banner Layers" = true
+	"More Note Block Sounds" = false
+	"More Villagers" = false
+	"No Durability On Cosmetics" = true
+	"Pat The Dogs" = true
+	"Petals On Water" = true
+	"Pig Litters" = true
+	"Poison Potato Usage" = false
+	"Reacharound Placing" = true
+	"Renewable Spore Blossoms" = false
+	"Replace Scaffolding" = false
+	"Safer Creatures" = true
+	"Shulker Packing" = false
+	"Simple Harvest" = true
+	"Slabs To Blocks" = true
+	"Slimes To Magma Cubes" = false
+	"Snow Golem Player Heads" = false
+	"Utility Recipes" = false
+	"Vexes Die With Their Masters" = false
+	"Villagers Follow Emeralds" = true
+	"Zombie Villagers On Normal" = false
+
+[world]
+	"Ancient Wood" = false
+	"Azalea Wood" = false
+	"Big Stone Clusters" = false
+	"Blossom Trees" = false
+	"Cherry Grove Water Petals" = false
+	"Chorus Vegetation" = false
+	"Corundum" = false
+	"Fairy Rings" = false
+	"Fallen Logs" = false
+	"Glimmering Weald" = false
+	"Monster Box" = false
+	"Nether Obsidian Spikes" = false
+	"New Stone Types" = false
+	"No More Lava Pockets" = true
+	"Permafrost" = false
+	"Spiral Spires" = false
+
+[client]
+	"Auto Walk Keybind" = false
+	"Back Button Keybind" = true
+	"Buckets Show Inhabitants" = true
+	"Camera" = true
+	"Chest Searching" = true
+	"Elytra Indicator" = false
+	"Greener Grass" = false
+	"Improved Tooltips" = true
+	"Long Range Pick Block" = false
+	"Microcrafting Helper" = true
+	"Soul Candles" = false
+	"Usage Ticker" = true
+	"Uses For Curses" = false
+	"Variant Animal Textures" = true
+	"Wool Shuts Up Minecarts" = false

@@ -1,6 +1,10 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/quark-common.toml"
+hash = "597d047ad4266070d1e2ef9ba06eef151ef4f698d1106f12a9aa95266421a71b"
+
+[[files]]
 file = "mods/adorable-hamster-pets.pw.toml"
 hash = "fd9698b3a981f1be9e64c2ef952a390f53cdd763199d567c6ec51e2b189772ad"
 metafile = true

@@ -8,7 +8,8 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : `0
 - Faune : Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, Critters and Companions.
 - Compagnons : Untitled Duck Mod, Friends & Foes, Adorable Hamster Pets, Companion, Companions!, Ghost.
 - Structures : Sparse Structures.
-- QoL / construction : Quark, Supplementaries (modules bridés).
+- QoL / construction : Quark (essentiel uniquement, config fournie), Supplementaries.
+- Voyage : Icy's Better Horses.
 
 ## [0.1.0]
 ### Ajouté

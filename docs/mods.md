@@ -32,8 +32,9 @@ Côté : C = client, S = serveur, CS = les deux.
 | Companions! | ✅ | CS | Compagnons | 10 compagnons à pouvoirs ; hostiles, armes et boss à encadrer (décision 0003) |
 | Ghost | ✅ | CS | Compagnons | Petits fantômes (décision 0003) |
 | Sparse Structures | ✅ | CS | Structures | Espacement global des structures (décision 0004) |
-| Quark | ✅ | CS | QoL / construction | Tri d'inventaire et modules choisis ; tout le reste désactivé (config) |
+| Quark | ✅ | CS | QoL / construction | L'essentiel uniquement (décision 0005) |
 | Supplementaries | ✅ | CS | Décoration / QoL | Blocs décoratifs et utilitaires ; à brider (config) |
+| Icy's Better Horses | ✅ | CS | Voyage | Chevaux compagnons : races, classes, lien, charrettes |
 
 ## Dépendances (ajoutées automatiquement)
 | Mod | Côté | Requis par |
@@ -55,6 +56,9 @@ Côté : C = client, S = serveur, CS = les deux.
 | Knight Lib | CS | Companions! |
 | Zeta | CS | Quark |
 | Moonlight Lib | CS | Supplementaries |
+| Modonomicon | CS | Icy's Better Horses (dépendance non déclarée sur Modrinth) |
+| Fzzy Config | CS | Adorable Hamster Pets (non déclarée) |
+| Patchouli | CS | Adorable Hamster Pets (non déclarée) |
 
 ## À tester
 | Mod | Rôle | Question à trancher |
