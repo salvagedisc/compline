@@ -275,6 +275,11 @@ hash = "ddf213b8ba47e0651dc89081db34c5d5350b792ba395e81da70200e593ec310c"
 metafile = true
 
 [[files]]
+file = "mods/resourceful-config.pw.toml"
+hash = "27721caca5a03b743bf25888e1d984142948069dace31453f103f94f7f24d2ce"
+metafile = true
+
+[[files]]
 file = "mods/resourceful-lib.pw.toml"
 hash = "c0b066684294c33972d562e0cb08ea17b2d31bcf86cd1d6c63b8e968f0eac7a2"
 metafile = true
@@ -307,6 +312,11 @@ metafile = true
 [[files]]
 file = "mods/sparsestructures.pw.toml"
 hash = "993b4e4970e1a5ef2fe7c6712212f57a84dcf8b31d4b6863540b6395c4f9ce09"
+metafile = true
+
+[[files]]
+file = "mods/structure-layout-optimizer.pw.toml"
+hash = "20d767f7f803fd43e7b539046878bf97a27458595a1beff0b28002aca1b671de"
 metafile = true
 
 [[files]]
