@@ -1,0 +1,167 @@
+# Fallow — Supplementaries réduit à l'essentiel (voir docs/decisions/0006-supplementaries.md).
+# Fichier partiel : les options absentes gardent leur valeur par défaut.
+
+[general]
+	creative_tab = false
+	#Le Red Merchant vend des bombes : désactivé
+	red_merchant_spawn_multiplier = 0.0
+
+[redstone]
+	[redstone.speaker_block]
+		enabled = false
+	[redstone.bellows]
+		enabled = true
+	[redstone.spring_launcher]
+		enabled = false
+	[redstone.enderman_head]
+		enabled = false
+	[redstone.turn_table]
+		enabled = true
+	[redstone.pulley_block]
+		enabled = true
+	[redstone.dispenser_minecart]
+		enabled = false
+	[redstone.faucet]
+		enabled = true
+	[redstone.crystal_display]
+		enabled = false
+
+[functional]
+	[functional.rope]
+		enabled = true
+	[functional.jar]
+		enabled = true
+	[functional.cage]
+		enabled = true
+	[functional.safe]
+		enabled = true
+	[functional.sack]
+		enabled = true
+	[functional.bamboo_spikes]
+		enabled = false
+	[functional.urn]
+		enabled = true
+		cave_urns = true
+	[functional.soap]
+		enabled = true
+	[functional.cannon]
+		enabled = false
+		[functional.cannon.cannonball]
+			enabled = false
+		[functional.cannon.cannon_boat]
+			enabled = false
+		[functional.cannon.plunderer]
+			enabled = false
+	[functional.present]
+		enabled = true
+	[functional.flax]
+		enabled = true
+		wild_flax = true
+	[functional.lumisene]
+		enabled = false
+		[functional.lumisene.lumisene_bottle]
+			enabled = false
+
+[building]
+	[building.sconce]
+		enabled = true
+	[building.blackboard]
+		enabled = true
+	[building.gravel_bricks]
+		enabled = true
+	[building.slidy_block]
+		enabled = false
+	[building.timber_frame]
+		enabled = true
+	[building.iron_gate]
+		enabled = true
+	[building.item_shelf]
+		enabled = true
+	[building.sugar_cube]
+		enabled = false
+	[building.planter]
+		enabled = true
+	[building.notice_board]
+		enabled = true
+	[building.pedestal]
+		enabled = true
+	[building.ash]
+		enabled = true
+	[building.flag]
+		enabled = true
+	[building.goblet]
+		enabled = true
+	[building.globe]
+		enabled = true
+	[building.way_sign]
+		enabled = true
+		[building.way_sign.road_signs]
+			#Pas de panneaux générés pointant vers les structures : les routes sont l'affaire des joueurs
+			enabled = false
+	[building.daub]
+		enabled = true
+	[building.ash_bricks]
+		enabled = true
+	[building.hat_stand]
+		enabled = true
+	[building.awning]
+		enabled = true
+	[building.flower_box]
+		enabled = true
+	[building.spider_head]
+		enabled = false
+	[building.barnacles]
+		enabled = true
+	[building.gold_bars]
+		enabled = false
+
+[tools]
+	[tools.quiver]
+		enabled = true
+	[tools.lunch_basket]
+		enabled = true
+	[tools.slice_map]
+		enabled = true
+	[tools.bubble_blower]
+		enabled = false
+	[tools.wrench]
+		enabled = false
+	[tools.rope_arrow]
+		enabled = true
+	[tools.flute]
+		enabled = true
+	[tools.bomb]
+		enabled = false
+	[tools.slingshot]
+		enabled = false
+	[tools.antique_ink]
+		enabled = true
+
+[tweaks]
+	[tweaks.throwable_bricks]
+		enabled = false
+	[tweaks.placeable_gunpowder]
+		enabled = false
+	[tweaks.map_tweaks]
+		block_map_markers = true
+		[tweaks.map_tweaks.random_adventurer_maps]
+			#Cartes menant aux structures : contraire à l'exploration libre
+			enabled = false
+	[tweaks.placeable_books]
+		enabled = true
+	[tweaks.zombie_horse]
+		zombie_horse_conversion = false
+	[tweaks.bad_luck_tweaks]
+		cat_unluck = false
+		lightning_unluck = false
+	[tweaks.slimed_effect]
+		enabled = false
+		throwable_slimeballs = false
+	[tweaks.ai_tweaks]
+		pillagers_use_cannon_boats = false
+	[tweaks.extra_crafting]
+		sus_recipes = false
+	[tweaks.clock_and_compass]
+		clock_right_click = true
+		#Jamais de coordonnées
+		compass_right_click = false

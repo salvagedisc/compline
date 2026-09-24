@@ -53,7 +53,7 @@
 	"Nether Brick Fence Gate" = true
 	"Rainbow Lamps" = false
 	"Raw Metal Bricks" = true
-	"Rope" = true
+	"Rope" = false
 	"Shear Vines" = true
 	"Shingles" = true
 	"Soul Sandstone" = false
