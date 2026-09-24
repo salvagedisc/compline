@@ -24,3 +24,12 @@ export function parseModsToml(text) {
 export function findMissing(provided, deps) {
   return deps.filter((d) => d.type === 'required' && !BUILTIN.has(d.dep) && !provided.has(d.dep));
 }
+
+// Nested mod jars: everything under META-INF/jarjar/ plus any path listed in META-INF/jarjar/metadata.json.
+export function nestedJarPaths(entries, metadataJson) {
+  const paths = new Set(entries.filter((n) => /^META-INF\/jarjar\/.+\.jar$/.test(n)));
+  if (metadataJson) {
+    for (const j of JSON.parse(metadataJson).jars ?? []) if (j.path && entries.includes(j.path)) paths.add(j.path);
+  }
+  return [...paths];
+}

@@ -33,7 +33,23 @@ Côté : C = client, S = serveur, CS = les deux.
 | Ghost | ✅ | CS | Compagnons | Petits fantômes (décision 0003) |
 | Sparse Structures | ✅ | CS | Structures | Espacement global des structures (décision 0004) |
 | Quark | ✅ | CS | QoL / construction | L'essentiel uniquement (décision 0005) |
-| Supplementaries | ✅ | CS | Décoration / QoL | Blocs décoratifs et utilitaires ; à brider (config) |
+| Supplementaries | ✅ | CS | Décoration / QoL | L'essentiel uniquement (décision 0006) |
+| ATMOSPHERICS | ✅ | C | Ambiance | Brouillard, ciel, brume par biome (décision 0007) |
+| AmbientSounds | ✅ | C | Ambiance | Ambiances sonores (décision 0007) |
+| Sound Physics Remastered | ✅ | CS | Ambiance | Réverbération, occlusion (décision 0007) |
+| Subtle Effects | ✅ | CS | Ambiance | Particules de détail (décision 0007) |
+| LambDynamicLights | ✅ | C | Ambiance | Lumière dynamique (décision 0007) |
+| More Darkness | ✅ | CS | Ambiance | Vraies nuits, grottes noires (décision 0007) |
+| Sodium | ✅ | C | Performance | Rendu (décision 0007) |
+| ImmediatelyFast | ✅ | C | Performance | Rendu (décision 0007) |
+| Entity Culling | ✅ | C | Performance | Rendu (décision 0007) |
+| ModernFix | ✅ | CS | Performance | Chargement (décision 0007) |
+| FerriteCore | ✅ | CS | Performance | Mémoire (décision 0007) |
+| Lithium | ✅ | CS | Performance | Logique serveur (décision 0007) |
+| Chunky | ✅ | CS | Serveur | Prégénération (décision 0007) |
+| spark | ✅ | CS | Serveur | Profilage (décision 0007) |
+| Clumps | ✅ | CS | Performance | Orbes d'XP (décision 0007) |
+| Structure Layout Optimizer | ✅ | CS | Performance | Génération des structures (décision 0007) |
 | Icy's Better Horses | ✅ | CS | Voyage | Chevaux compagnons : races, classes, lien, charrettes |
 
 ## Dépendances (ajoutées automatiquement)
@@ -61,6 +77,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Patchouli | CS | Adorable Hamster Pets (non déclarée) |
 | Sinytra Connector | CS | Antique Atlas 4, Surveyor (mods Fabric) — en bêta, sous surveillance |
 | Forgified Fabric API | CS | Antique Atlas 4, Surveyor (via Connector) |
+| CreativeCore | CS | AmbientSounds |
+| Resourceful Config | CS | Structure Layout Optimizer |
 
 ## À tester
 | Mod | Rôle | Question à trancher |
@@ -70,7 +88,9 @@ Côté : C = client, S = serveur, CS = les deux.
 | Create: Integrated Farming | Automatisation | Moissonneuse, filet de pêche ; plus tard |
 | Create: Copycats+ | Construction | Probable |
 | Create: Connected | QoL Create | Probable |
-| Distant Horizons | Rendu lointain | Performance client et serveur |
+| Distant Horizons | Rendu lointain | Coût GPU/RAM/serveur ; branche dédiée (décision 0007) |
+| Separate Sable Render Distance | Performance Aeronautics | Bêta (décision 0007) |
+| Particle Rain | Ambiance | Bêta, doublon possible avec Ecliptic (décision 0007) |
 | Terralith + Streams Reflowing | Worldgen | Preset concurrent de NML (décision 0001) |
 | IDAS (+ Integrated API) | Structures Create/Quark | Plus tard (décision 0004) ; dépendances Quark + Supplementaries déjà présentes |
 | Vinery / Kaleidoscope Tavern | Spécialisation | Après validation du socle agricole |
@@ -98,4 +118,6 @@ Côté : C = client, S = serveur, CS = les deux.
 | Explorify / Moog's Voyager / Trek / Adorabuild | Trop de structures (décision 0004) |
 | When Dungeons Arise / Dungeons and Taverns | Orientation RPG (décision 0004) |
 | Explorer's Compass / Nature's Compass / Waystones | Contraires à la vision |
+| Fog / FogRule | Doublon d'ATMOSPHERICS / alpha (décision 0007) |
+| C2ME / Noisium / MoreCulling / Ksyxis | Alpha, pas à jour ou gain marginal (décision 0007) |
 | Critters n' Crawlers | Doublon de Naturalist, créature d'horreur |

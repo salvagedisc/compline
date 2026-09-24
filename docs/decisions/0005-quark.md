@@ -4,12 +4,12 @@
 - **Statut** : config `pack/config/quark-common.toml` (à vérifier au premier lancement)
 
 ## Règle
-Garder l'essentiel de Quark (tri d'inventaire et confort) et rien qui dénature le pack. Tout module « à discuter » est désactivé.
+Garder l'essentiel de Quark (tri d'inventaire et confort) et rien qui dénature le pack. Tout module « à discuter » est désactivé. La corde de Quark est désactivée au profit de celle de Supplementaries (poulies).
 
 ## Activé
 - **Gestion** : Inventory Sorting, Easy Transferring, Expanded Item Interactions, Quick Armor Swapping, Hotbar Changer, Item Sharing.
 - **Interface** : Chest Searching, Improved Tooltips, Usage Ticker, Microcrafting Helper, Back Button Keybind, Buckets Show Inhabitants, Variant Animal Textures, Camera.
-- **Construction** : Vertical Slabs/Planks, Hedges, Hollow Logs, Leaf Carpet, Thatch, Rope, Wooden Posts, Shingles, Framed Glass, Grate, Industrial Palette, Compressed Blocks, More Stone Variants, More Brick Types, More Mud Blocks, Raw Metal Bricks, Sturdy Stone, More Potted Plants, Variant Chests/Bookshelves/Ladders/Furnaces, Glass Item Frame, Shear Vines, Nether Brick Fence Gate.
+- **Construction** : Vertical Slabs/Planks, Hedges, Hollow Logs, Leaf Carpet, Thatch, Wooden Posts, Shingles, Framed Glass, Grate, Industrial Palette, Compressed Blocks, More Stone Variants, More Brick Types, More Mud Blocks, Raw Metal Bricks, Sturdy Stone, More Potted Plants, Variant Chests/Bookshelves/Ladders/Furnaces, Glass Item Frame, Shear Vines, Nether Brick Fence Gate.
 - **Outils** : Seed Pouch, Trowel, Parrot Eggs.
 - **Ajustements** : Reacharound Placing, Lock Rotation, Slabs To Blocks, Double Door Opening, Enhanced Ladders, Horses Swim, Simple Harvest, Hoe Harvesting, Pig Litters, Pat The Dogs, Grab Chickens, Safer Creatures, Petals On Water, Map Washing, Automatic Recipe Unlock, Emotes, Armed Armor Stands, Dyeable Item Frames, More Banner Layers, No Durability On Cosmetics, Metal Buttons, Obsidian Plate, **Villagers Follow Emeralds** (escorte des survivants), No More Lava Pockets.
 

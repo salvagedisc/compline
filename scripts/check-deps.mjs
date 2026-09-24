@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readPackMods } from './sync/pwtoml.mjs';
 import { listEntries, readEntry } from './deps/zip.mjs';
-import { parseModsToml, findMissing } from './deps/modstoml.mjs';
+import { parseModsToml, findMissing, nestedJarPaths } from './deps/modstoml.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const packDir = join(root, 'pack');
@@ -37,7 +37,8 @@ for (const mod of await readPackMods(packDir)) {
   const buf = await loadJar(mod);
   addToml(mod.filename, buf, false);
   // Jar-in-jar: embedded mods count as provided.
-  for (const nested of listEntries(buf).filter((n) => /^META-INF\/jarjar\/.+\.jar$/.test(n))) {
+  const metadata = readEntry(buf, 'META-INF/jarjar/metadata.json');
+  for (const nested of nestedJarPaths(listEntries(buf), metadata?.toString('utf8'))) {
     addToml(nested, readEntry(buf, nested), true);
   }
 }

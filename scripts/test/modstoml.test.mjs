@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseModsToml, findMissing } from '../deps/modstoml.mjs';
+import { parseModsToml, findMissing, nestedJarPaths } from '../deps/modstoml.mjs';
 
 const TOML = `modLoader="javafml"
 [[mods]]
@@ -48,4 +48,11 @@ test('findMissing reports only required deps that are neither built in nor provi
     { jar: 'h.jar', dep: 'cloth_config', type: 'optional' },
   ]);
   assert.deepEqual(missing.map((m) => m.dep), ['modonomicon']);
+});
+
+test('nestedJarPaths merges META-INF/jarjar jars and paths listed in jarjar metadata.json', () => {
+  const entries = ['META-INF/jarjar/a.jar', 'META-INF/jarjar/metadata.json', 'META-INF/jars/b.jar', 'other/c.jar'];
+  const metadata = JSON.stringify({ jars: [{ path: 'META-INF/jars/b.jar' }, { path: 'META-INF/jarjar/a.jar' }] });
+  assert.deepEqual(nestedJarPaths(entries, metadata).sort(), ['META-INF/jarjar/a.jar', 'META-INF/jars/b.jar']);
+  assert.deepEqual(nestedJarPaths(['META-INF/jarjar/a.jar'], null), ['META-INF/jarjar/a.jar']);
 });
