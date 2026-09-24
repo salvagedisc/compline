@@ -205,6 +205,11 @@ hash = "bdb50204369d9b6d8b5dbd7659795e443be6508448bf937e4f866c037842d09f"
 metafile = true
 
 [[files]]
+file = "mods/more-darkness.pw.toml"
+hash = "0b6c6f5af4b200421d0d1835668245b2e3c534c157209d70c302401418449b8b"
+metafile = true
+
+[[files]]
 file = "mods/mowzies-mobs.pw.toml"
 hash = "02aa4dcb8fa24cffcd2182c66683c2a476a95abf53002373f953a49737a587e3"
 metafile = true
