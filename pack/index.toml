@@ -55,6 +55,11 @@ hash = "622d0bbdb098833f3bcb3597b164af43cf9ba4cf85743dd4994168c900a459e9"
 metafile = true
 
 [[files]]
+file = "mods/connector.pw.toml"
+hash = "a38d72ca403e9064338be6e0cf69532768b0c1aba8f88703a8ce74c2734da522"
+metafile = true
+
+[[files]]
 file = "mods/create-aeronautics.pw.toml"
 hash = "3b8895369640b2a52d3e05f7186185ba6798e44d513f11c5427a0fe9c16769e9"
 metafile = true
@@ -82,6 +87,11 @@ metafile = true
 [[files]]
 file = "mods/ecliptic-seasons.pw.toml"
 hash = "e4bd780d067c8aa930a371b1b521fdad2379623f2a22ac3e75c90b03d390e3d6"
+metafile = true
+
+[[files]]
+file = "mods/forgified-fabric-api.pw.toml"
+hash = "c490f7b680875f034af39a1556911d6edb1dcdd76a114ee6a4eca0f158cd92b2"
 metafile = true
 
 [[files]]
