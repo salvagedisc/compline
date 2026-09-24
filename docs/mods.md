@@ -31,6 +31,7 @@ Côté : C = client, S = serveur, CS = les deux.
 | Companion | ✅ | CS | QoL animaux | Les animaux apprivoisés ne se perdent plus (décision 0003) |
 | Companions! | ✅ | CS | Compagnons | 10 compagnons à pouvoirs ; hostiles, armes et boss à encadrer (décision 0003) |
 | Ghost | ✅ | CS | Compagnons | Petits fantômes (décision 0003) |
+| Sparse Structures | ✅ | CS | Structures | Espacement global des structures (décision 0004) |
 
 ## Dépendances (ajoutées automatiquement)
 | Mod | Côté | Requis par |
@@ -82,4 +83,8 @@ Côté : C = client, S = serveur, CS = les deux.
 | Let's Do Wilder Nature | Style cubique, bêta, doublon de Naturalist |
 | Spawn / Environmental | Ajoutent des biomes (conflit NML) |
 | Jurassic Saga / Jurassic Revived / Jurassic Reborn | Préhistoire abandonnée pour le moment |
+| YUNG's Better * / Structory / Structory: Towers | Pas au goût de l'utilisateur (décision 0004) |
+| Explorify / Moog's Voyager / Trek / Adorabuild | Trop de structures (décision 0004) |
+| When Dungeons Arise / Dungeons and Taverns | Orientation RPG (décision 0004) |
+| Explorer's Compass / Nature's Compass / Waystones | Contraires à la vision |
 | Critters n' Crawlers | Doublon de Naturalist, créature d'horreur |
