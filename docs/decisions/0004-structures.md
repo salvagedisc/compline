@@ -1,7 +1,7 @@
 # 0004 — Structures & villageois
 
 - **Date** : 2026-09-24
-- **Statut** : en cours sur `test/structures`
+- **Statut** : Sparse Structures retenu (testé sur `test/structures`, fusionné dans `main` le 2026-10-10) ; mise en œuvre datapack/KubeJS et mod de structures Create en recherche
 
 ## Principe
 Une structure est une découverte (« attends… c'est quoi ça ? »), pas un décor répétitif. Il faut malgré tout assez de diversité pour avoir l'impression de toujours découvrir quelque chose.

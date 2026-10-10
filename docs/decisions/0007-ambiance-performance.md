@@ -1,7 +1,7 @@
 # 0007 — Ambiance & performance
 
 - **Date** : 2026-09-24
-- **Statut** : retenus en test sur `test/structures`
+- **Statut** : retenus (testés sur `test/structures`, fusionnés dans `main` le 2026-10-10) ; Distant Horizons, Separate Sable Render Distance et Particle Rain en attente
 
 ## Ambiance (sans shader : Aeronautics a des problèmes connus avec Iris)
 | Mod | Côté | Rôle |

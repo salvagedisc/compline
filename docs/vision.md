@@ -15,12 +15,12 @@ Un monde immense, humide et presque abandonné. Une poignée de joueurs y arrive
 3. **Vie quotidienne** — Eau → agriculture → élevage → cuisine (Kaleidoscope Cookery) → conservation → expédition.
 
 ## Survie
-Plus dure par l'environnement (température, soif, saisons à l'étude), pas par le combat. Peu de créatures hostiles, rares, territoriales et soignées (modèles et animations de qualité). Aucun monstre vanilla.
+Plus dure par l'environnement (température, soif, saisons), pas par le combat. Peu de créatures hostiles, rares, territoriales et soignées (modèles et animations de qualité). Aucun monstre vanilla.
 
 ## Interdits
 - Minimap, waypoints, téléportation.
 - Monstres vanilla hostiles, difficulté par hordes.
-- End / Elytra (probable).
+- End / Elytra (supprimés, [décision 0004](decisions/0004-structures.md)).
 - Empilement d'addons Create ou de mods de nourriture qui se chevauchent.
 
 ## Règles de travail

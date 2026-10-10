@@ -1,7 +1,7 @@
 # 0002 — Agriculture & élevage
 
 - **Date** : 2026-09-23
-- **Statut** : Farm & Charm, Ecliptic Seasons et KaleidoscopeCookery-Automation retenus (en test sur `test/agriculture`) ; élevage et conservation en attente
+- **Statut** : Farm & Charm, Ecliptic Seasons et KaleidoscopeCookery-Automation retenus (testés sur `test/agriculture`, fusionnés dans `main` le 2026-10-10) ; élevage et conservation en attente
 
 ## Fonctions attendues d'une ferme
 Retenues : **A** transformation (chaînes de production), **B** élevage exigeant, **C** saisonnalité, **D** conservation, **F** automatisation Create tardive.

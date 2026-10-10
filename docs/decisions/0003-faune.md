@@ -1,7 +1,7 @@
 # 0003 — Faune
 
 - **Date** : 2026-09-23
-- **Statut** : retenus en test sur `test/faune` ; préhistoire abandonnée pour le moment
+- **Statut** : retenus (testés sur `test/faune`, fusionnés dans `main` le 2026-10-10) ; préhistoire abandonnée pour le moment
 
 ## Critères
 Beaux modèles 3D et animations (critère n° 1), écologie cohérente par biome, hostiles rares et territoriaux plutôt que nocturnes, animaux pour l'élevage et le zoo. Aucun monstre vanilla (suppression : sous-projet 3).
