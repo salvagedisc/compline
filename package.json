@@ -5,6 +5,7 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "test": "node --test \"scripts/test/*.test.mjs\"",
-    "sync": "node scripts/sync-from-instance.mjs"
+    "sync": "node scripts/sync-from-instance.mjs",
+    "check-deps": "node scripts/check-deps.mjs"
   }
 }
