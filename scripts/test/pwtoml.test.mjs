@@ -23,6 +23,7 @@ version = "abc123"
 test('parsePwToml extracts fields', () => {
   assert.deepEqual(parsePwToml(SAMPLE), {
     name: 'Create', filename: 'create-1.21.1-6.0.6.jar', side: 'both',
+    url: 'https://cdn.modrinth.com/data/LNytGWDc/versions/abc/create.jar',
     hashFormat: 'sha512', hash: 'deadbeef', projectId: 'LNytGWDc', versionId: 'abc123',
   });
 });

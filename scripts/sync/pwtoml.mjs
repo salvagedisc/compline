@@ -18,6 +18,7 @@ export function parsePwToml(text) {
   const modrinth = sections['update.modrinth'] ?? {};
   return {
     name: root.name, filename: root.filename, side: root.side,
+    url: download.url,
     hashFormat: download['hash-format'], hash: download.hash,
     projectId: modrinth['mod-id'] ?? null, versionId: modrinth.version ?? null,
   };
