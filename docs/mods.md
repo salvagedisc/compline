@@ -17,7 +17,8 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 |---|---|---|---|---|
 | No Man's Land | `no-mans-land` | ✅ (monter en 1.6.1) | CS | Le monde : relief, biomes, ruines, remodèles d'animaux ([0001](decisions/0001-nml-vs-terralith.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
-| Ancient Remnants: Monoliths | `ancient-remnants` | ➕ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardien à choisir ([12](plan/12-verification.md)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ➕ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardiens tirés de Mowzie's Mobs et Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
+| Bosses of Mass Destruction | `bosses-of-mass-destruction-forge` | ⚪ | CS | Seulement l'Obsidilith, si l'on veut un vrai boss au monolithe chasseur ; ajoute Cerbon's API |
 | Lootr | `lootr` | ➕ | CS | Chaque joueur trouve les coffres pleins |
 | Enhanced Celestials | `enhanced-celestials` | ➕ | CS | Lunes rares, dont la lune blanche |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
@@ -63,7 +64,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Naturalist | `naturalist` | ✅ | CS | Faune réaliste de base ([0003](decisions/0003-faune.md)) |
 | Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variété, espèce par espèce |
 | Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes coupés) | CS | Océans |
-| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Créatures uniques très rares |
+| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Créatures uniques très rares ; Wroughtnaut, Frostmaw et Sculpteur gardent trois monuments |
 | Cosy Critters & Creepy Crawlies | `cosy-critters` | ⚪ | C | Oiseaux qui s'envolent, papillons de nuit |
 | Longwings | `longwings` | ⚪ | CS | Papillons à collectionner |
 
@@ -76,7 +77,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Créatures pacifiques du mob vote |
 | Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters |
 | Companion | `companion` | ✅ | CS | Les animaux apprivoisés ne se perdent plus |
-| Companions! | `companions-mod` | ✅ | CS | Compagnons à pouvoirs |
+| Companions! | `companions-mod` | ✅ | CS | Compagnons à pouvoirs ; le Sacred Pontiff garde le monument du chêne |
 | Ghost | `ghost` | ✅ | CS | Petits fantômes |
 
 ## Construction et ateliers

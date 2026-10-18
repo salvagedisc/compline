@@ -2,10 +2,10 @@
 
 > Demandée par l'équipe : tout revoir pour adapter, modifier, supprimer ou ajouter, en cherchant à fond **comment relier les mods**, surtout Overgeared et Kaleidoscope. Si les scripts ne suffisent pas, on peut écrire des mods custom.
 >
-> Ce chapitre **corrige les chapitres 10 et 11** là où ils se contredisent. Les preuves (jars ouverts, versions Modrinth, tickets) sont dans les cinq rapports de `recherche/verif-2026-10-18/` :
-> [1 Overgeared](recherche/verif-2026-10-18/1-overgeared.md) · [2 Kaleidoscope, saisons, chaleur, soif](recherche/verif-2026-10-18/2-kaleidoscope.md) · [3 rendu, caméra, interface](recherche/verif-2026-10-18/3-client.md) · [4 monde, faune, objectifs](recherche/verif-2026-10-18/4-monde-et-objectifs.md) · [5 Create, construction, scripts](recherche/verif-2026-10-18/5-create-construction.md)
+> Ce chapitre **corrige les chapitres 10 et 11** là où ils se contredisent. Les preuves (jars ouverts, versions Modrinth, tickets) sont dans les six rapports de `recherche/verif-2026-10-18/` :
+> [1 Overgeared](recherche/verif-2026-10-18/1-overgeared.md) · [2 Kaleidoscope, saisons, chaleur, soif](recherche/verif-2026-10-18/2-kaleidoscope.md) · [3 rendu, caméra, interface](recherche/verif-2026-10-18/3-client.md) · [4 monde, faune, objectifs](recherche/verif-2026-10-18/4-monde-et-objectifs.md) · [5 Create, construction, scripts](recherche/verif-2026-10-18/5-create-construction.md) · [6 gardiens des monuments](recherche/verif-2026-10-18/6-gardiens.md)
 >
-> Rien n'a été testé en jeu : chaque rapport finit par sa liste de tests (77 au total).
+> Rien n'a été testé en jeu : chaque rapport finit par sa liste de tests.
 
 ## 12.1 Ce que la vérification change
 
@@ -50,7 +50,7 @@
 | 11.1 | Polytone fait une lumière plus chaude dans les clairières | Pas de lightmap par biome en 1.21.1 |
 | 11.7 | EMI regroupe les objets, et ne cache pas les recettes joueur par joueur | EMI 1.1.24 n'a pas de groupes (rapport 3 ; le rapport 5 pense que KubeJS sait le faire : à tester). AStages cache bien par joueur, mais sa licence est fermée et il touche le rendu des chunks |
 | 11.8 | Un marchand ambulant laisse les fragments du codex de Monoliths | Il n'existe pas. Seule source : 0,2 % par mob tué |
-| 11.8 | Les monuments ont des gardiens | Ce sont des spawners de breeze, que Fallow bannit : les monuments sont vides |
+| 11.8 | Les monuments ont des gardiens | Ce sont des spawners de breeze, que Fallow bannit. Le rapport 6 propose des gardiens tirés des mods déjà présents |
 | 11.8 | Les biomes des monuments se règlent par datapack | Par la config `config/obscuria/ancient_remnants-common.toml` ; un datapack peut ajouter, pas retirer. Sparse Structures ne les espace pas |
 | 11.7 | Ordre des caméras : Spatial GUI, Camera Overhaul, Shoulder Surfing, Real Camera | Spatial GUI, **Shoulder Surfing** (Sable a 5 mixins écrits pour lui), Camera Overhaul en première personne seulement et à 0 dans les véhicules, Real Camera en dernier (il touche la visée comme Shoulder Surfing) |
 | 10.6, 11.2 | NML remodèle cochons, vaches et calmars | 8 espèces (cochon, vache, mooshroom, poulet, mouton, lapin, calmar, calmar luisant), via Mixed Litter qu'il embarque ; on choisit espèce par espèce dans `mixed_litter-startup.toml` lesquelles laisser à Fresh Animations |
@@ -93,6 +93,24 @@ Chaque ligne est une config, un tag, un datapack ou un script ; le rapport cité
   - **complétion** : sans liste d'exclusions (Nether, End, monstres bannis, doublons coupés), le bestiaire ne peut pas être complété.
 - **Doublons de faune** : environ 14 espèces existent en double. Le rapport 4 dit laquelle garder, par config ou biome modifier, sans retirer aucun mod (décision de l'équipe).
 - **Autres réglages** : la Friend Moon de NML entre en concurrence avec Enhanced Celestials, les spawners vanilla des donjons NML tourneront à vide, et les jarres NML se regarnissent. `spreadFactor 3` risque de rendre les ruines NML très rares.
+
+### Les gardiens des monuments, rapport 6
+
+Freeze It and Heat It sorti, il fallait remplacer les spawners de breeze d'Ancient Remnants. **Aucun mod à ajouter** : Mowzie's Mobs et Companions! ont déjà des gardiens endormis qui vont avec le ton.
+
+| Monument | Gardien | Pourquoi |
+|---|---|---|
+| Monolithe guerrier | **Ferrous Wroughtnaut** (Mowzie's) | Une armure de héros immobile tant qu'on ne la frappe pas, qui revient à sa place |
+| Monument des conifères | **Frostmaw** (Mowzie's) | Un géant des neiges endormi, invoqué avec son cristal et sans disparition |
+| Monolithe chasseur | **Tongbi, le Sculpteur** (Mowzie's) | Une épreuve d'agilité chronométrée plutôt qu'un combat, comme la bénédiction « agilité et précision ». Il lui faut le ciel ouvert |
+| Monument du chêne | **Sacred Pontiff** (Companions!) | Un prêtre de mousse qu'on réveille de la main, boss en deux phases, qui se pétrifie en mourant |
+| Monument du cerisier, monolithe sentinelle | Aucun | Le monument de la vie et les moines pacifiques, comme le dit le texte du mod |
+
+- **La bénédiction attend la victoire** : l'Elderheart ne donne rien sans sa donnée `Blessing`. Le script la retire à la création, fait apparaître le gardien une fois quand un joueur approche, puis la rend à sa mort (ou quand le Sculpteur part après l'épreuve). Il ouvre alors la clairière et donne la page du codex. C'est le même script que celui de la clairière.
+- **Les spawners sortent par datapack** : les deux listes de processeurs du mod (`monolith`, `monument`) remplacent le spawner par du tuf ciselé.
+- **Les gardiens restent uniques** : les apparitions naturelles du Wroughtnaut, du Frostmaw et du Sculpteur sont coupées par datapack, sinon on croiserait une salle de Wroughtnaut tous les 15 chunks environ.
+- Les salles des Elderhearts sont étroites : chaque boss se pose au sol, à l'extérieur.
+- **Si l'équipe préfère un vrai combat au Sculpteur** : Bosses of Mass Destruction (1,95 Mo), dont on ne garde que l'Obsidilith, un monolithe d'obsidienne vivant ; ses structures se coupent par datapack. Réserve : il pose de l'obsidienne et son ambiance violette rappelle l'End. Legendary Monsters irait bien au thème mais pèse 44,75 Mo pour 37 créatures : écarté.
 
 ### Create et la construction, rapport 5
 
@@ -143,7 +161,7 @@ Le mod se construit dans le dépôt, sous un dossier à part (`mods-custom/fallo
 | # | Sujet | Défaut retenu | Alternative |
 |---|---|---|---|
 | 14 | Plans d'ingénieur | Plan physique, gardé dans la recette, plus les plans d'Overgeared pour les pièces forgées | Savoir personnel par joueur (module `plans`) |
-| 15 | Gardiens des monuments | Aucun : le monument est vide et silencieux | Une exception pour la breeze, ou un autre gardien placé par la structure |
+| 15 | Gardiens des monuments | Wroughtnaut, Frostmaw, Sculpteur et Sacred Pontiff, tirés des mods présents ; la bénédiction attend leur défaite (rapport 6) | Obsidilith de Bosses of Mass Destruction à la place du Sculpteur, ou des monuments vides |
 | 16 | Lune blanche visible | Module `ciel` du mod `fallow` | Abandonner la lune blanche |
 | 17 | Mod custom `fallow` | Oui, modules `ciel`, `dissipateur` et `sac` d'abord | Seulement des scripts, en acceptant les trous listés |
 | 18 | Boire au tuyau du sac | Module `sac` | Le réservoir du sac ne sert qu'à transporter de l'eau |
