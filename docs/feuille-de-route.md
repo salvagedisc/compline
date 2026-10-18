@@ -1,11 +1,11 @@
 # Feuille de route
 
-État au 2026-10-10. Le projet est découpé en sous-projets, chacun avec son cycle spec → plan → implémentation (voir [conception/](conception/)).
+État au 2026-10-18. Le projet est découpé en sous-projets, chacun avec son cycle spec → plan → implémentation (voir [conception/](conception/)).
 
 | # | Sous-projet | État |
 |---|---|---|
 | 1 | Dépôt & outillage : packwiz, sync depuis l'instance, CI, release | ✅ Fait ([spec](conception/specs/2026-09-23-repo-outillage-design.md)) |
-| 2 | Choix des systèmes : agriculture, faune, structures, ambiance, performance | 🟡 Décisions 0002 à 0007 prises ; plan complet en cours dans [plan/](plan/README.md) |
+| 2 | Choix des systèmes : agriculture, faune, structures, ambiance, performance | 🟡 Décisions 0002 à 0007 prises ; plan complet rédigé et vérifié dans [plan/](plan/README.md) (chapitres 10 à 12), en attente de validation ; liste visée dans le [registre](mods.md) |
 | 3 | Couche de règles : configs, scripts KubeJS, données datapack | ○ Seules les configs Quark et Supplementaries existent |
 | 4 | Serveur : hébergeur, déploiement, sauvegardes | ○ Pas commencé |
 

@@ -1,159 +1,228 @@
 # Registre des mods
 
-Statuts : ✅ retenu (dans `pack/mods/`) · 🟡 à tester · ❌ écarté.
-Côté : C = client, S = serveur, CS = les deux.
+Liste complète du pack **visé** au 2026-10-18 : ce qui est déjà dans `pack/mods/`, ce que le plan ajoute, ce qui reste à tester et ce qui sort. Le pourquoi de chaque choix est dans le [plan](plan/README.md), surtout les chapitres [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) et [12](plan/12-verification.md).
 
-## Retenus
+Statuts :
+- ✅ dans le pack (`pack/mods/`) ;
+- ➕ à ajouter (retenu par le plan, pas encore dans `pack/mods/`) ;
+- 🟡 à tester avant de décider ;
+- ⚪ optionnel ;
+- ❌ sort du pack.
 
-46 mods retenus (Aeronautics et Sable partagent une ligne), plus 24 dépendances ci-dessous : 70 fichiers dans `pack/mods/`.
+Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrinth pour NeoForge 1.21.1 le 2026-10-18.
 
-### Monde & exploration
-| Mod | Statut | Côté | Rôle | Justification |
+## Monde et exploration
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| No Man's Land | ✅ | CS | Worldgen | Ambiance sauvage et cohérente, meilleure pour la solitude (voir [décision 0001](decisions/0001-nml-vs-terralith.md)) |
-| Antique Atlas 4 | ✅ | C | Carte | Carte dessinée qui se construit, remplace coordonnées et minimap |
-| Surveyor Map Framework | ✅ | CS | Carte | Backend d'exploration/partage de carte pour Antique Atlas |
-| Sparse Structures | ✅ | CS | Structures | Espacement global des structures ([décision 0004](decisions/0004-structures.md)) |
-| Icy's Better Horses | ✅ | CS | Voyage | Chevaux compagnons : races, classes, lien, charrettes |
+| No Man's Land | `no-mans-land` | ✅ (monter en 1.6.1) | CS | Le monde : relief, biomes, ruines, remodèles d'animaux ([0001](decisions/0001-nml-vs-terralith.md)) |
+| Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ➕ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardien à choisir ([12](plan/12-verification.md)) |
+| Lootr | `lootr` | ➕ | CS | Chaque joueur trouve les coffres pleins |
+| Enhanced Celestials | `enhanced-celestials` | ➕ | CS | Lunes rares, dont la lune blanche |
+| Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
+| Surveyor Map Framework | `surveyor` | ✅ | CS | Exploration partagée pour l'atlas |
+| AA4 Atlas | `aa4-atlas` | ➕ | CS | L'atlas devient un objet qu'on porte |
+| Icy's Better Horses | `icys-better-horses` | ✅ (monter en 2.1.4) | CS | Chevaux, races, lien, charrettes |
 
-### Civilisation
-| Mod | Statut | Côté | Rôle | Justification |
+## Objectifs longs
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Overgeared | ✅ | CS | Artisanat | Forge, plans, alliages : fabrication physique et progressive |
-| Create | ✅ | CS | Industrie | Colonne vertébrale technologique |
-| Create Aeronautics + Sable | ✅ | CS | Aviation | Pilier civilisation ; impose 1.21.1 NeoForge |
-| Create: Steam 'n' Rails | ✅ | CS | Rail | Infrastructure ferroviaire complète (port NeoForge non officiel) |
-| KaleidoscopeCookery-Automation | ✅ | CS | Automatisation | Bras mécanique Create sur les stations KC ([décision 0002](decisions/0002-agriculture.md)) |
+| Wildex Bestiary | `wildex-bestiary` | ➕ | CS | Bestiaire automatique, colonne vertébrale du zoo |
+| Exposure | `exposure` | ➕ | CS | Photo argentique : garder un lieu, découvrir une espèce |
 
-### Vie quotidienne & survie
-| Mod | Statut | Côté | Rôle | Justification |
+## Civilisation et technique
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Kaleidoscope Cookery | ✅ | CS | Cuisine | Cuisine immersive, système alimentaire principal |
-| [Let's Do] Farm & Charm | ✅ | CS | Ferme | Infrastructure agricole ; cuisine masquée au profit de KC ([décision 0002](decisions/0002-agriculture.md)) |
-| Ecliptic Seasons | ✅ | CS | Saisons | 24 termes solaires, neige, humidité, serres ; pont Cold Sweat en KubeJS ([décision 0002](decisions/0002-agriculture.md)) |
-| Cold Sweat | ✅ | CS | Température | Survie environnementale |
-| Thirst Was Reclaimed | ✅ | CS | Soif | Survie environnementale |
+| Create | `create` | ✅ | CS | La technique |
+| Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable en 2.0.6) | CS | Dirigeables ; impose NeoForge 1.21.1 |
+| Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | Le rail (bêta) |
+| Create Ore Excavation | `create-ore-excavation` | ➕ | CS | Gisements finis : il faut repartir plus loin |
+| Overgeared | `overgeared` | ✅ | CS | Forge : haut fourneau, martelage, trempe, qualité, plans |
+| KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Bras Create sur les stations de cuisine ([0002](decisions/0002-agriculture.md)) |
 
-### Faune
-| Mod | Statut | Côté | Rôle | Justification |
+## Vie quotidienne
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Naturalist | ✅ | CS | Faune | Faune réaliste de base ([décision 0003](decisions/0003-faune.md)) |
-| Alex's Mobs Continued | ✅ | CS | Faune | Variété ; apparition gérée espèce par espèce ([décision 0003](decisions/0003-faune.md)) |
-| Hybrid Aquatic | ✅ | CS | Faune marine | Océans, créatures des profondeurs rares ([décision 0003](decisions/0003-faune.md)) |
-| Mowzie's Mobs | ✅ | CS | Anomalies | Créatures uniques très rares ([décision 0003](decisions/0003-faune.md)) |
+| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (monter en 1.6.0) | CS | La cuisine |
+| [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (rester en 1.1.25) | CS | La ferme et le four |
+| Kaleidoscope Compat | `kaleidoscope-compat` | ➕ | CS | Rend interchangeables les doublons des deux mods de cuisine |
+| Ecliptic Seasons | `ecliptic-seasons` | ✅ (monter en 0.15.4.1) | CS | Saisons |
+| Cold Sweat | `cold-sweat` | ✅ | CS | Température |
+| Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Soif |
+| Traveler's Backpack | `travelersbackpack` | ➕ | CS | Sac d'expédition et sac de couchage |
+| GraveStone Mod | `gravestone-mod` | ➕ | CS | Tombe à la mort |
 
-### Compagnons
-| Mod | Statut | Côté | Rôle | Justification |
+## Faune
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Critters and Companions | ✅ | CS | Compagnons | Petite faune apprivoisable ([décision 0003](decisions/0003-faune.md)) |
-| Untitled Duck Mod | ✅ | CS | Compagnons / ferme | Canards et oies ([décision 0003](decisions/0003-faune.md)) |
-| Friends & Foes | ✅ | CS | Compagnons | Créatures pacifiques du mob vote ; hostiles à désactiver en config ([décision 0003](decisions/0003-faune.md)) |
-| Adorable Hamster Pets | ✅ | CS | Compagnons | Génétique, variantes ; flair à diamants à désactiver si possible ([décision 0003](decisions/0003-faune.md)) |
-| Companion | ✅ | CS | QoL animaux | Les animaux apprivoisés ne se perdent plus ([décision 0003](decisions/0003-faune.md)) |
-| Companions! | ✅ | CS | Compagnons | 10 compagnons à pouvoirs ; hostiles, armes et boss à encadrer ([décision 0003](decisions/0003-faune.md)) |
-| Ghost | ✅ | CS | Compagnons | Petits fantômes ([décision 0003](decisions/0003-faune.md)) |
+| Naturalist | `naturalist` | ✅ | CS | Faune réaliste de base ([0003](decisions/0003-faune.md)) |
+| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variété, espèce par espèce |
+| Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes coupés) | CS | Océans |
+| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Créatures uniques très rares |
+| Cosy Critters & Creepy Crawlies | `cosy-critters` | ⚪ | C | Oiseaux qui s'envolent, papillons de nuit |
+| Longwings | `longwings` | ⚪ | CS | Papillons à collectionner |
 
-### Confort & construction
-| Mod | Statut | Côté | Rôle | Justification |
+## Compagnons
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Quark | ✅ | CS | QoL / construction | L'essentiel uniquement ([décision 0005](decisions/0005-quark.md)) |
-| Supplementaries | ✅ | CS | Décoration / QoL | L'essentiel uniquement ([décision 0006](decisions/0006-supplementaries.md)) |
+| Critters and Companions | `critters-and-companions` | ✅ | CS | Petite faune apprivoisable |
+| Untitled Duck Mod | `untitled-duck-mod` | ✅ | CS | Canards et oies |
+| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Créatures pacifiques du mob vote |
+| Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters |
+| Companion | `companion` | ✅ | CS | Les animaux apprivoisés ne se perdent plus |
+| Companions! | `companions-mod` | ✅ | CS | Compagnons à pouvoirs |
+| Ghost | `ghost` | ✅ | CS | Petits fantômes |
 
-### Ambiance
-| Mod | Statut | Côté | Rôle | Justification |
+## Construction et ateliers
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| ATMOSPHERICS | ✅ | C | Ambiance | Brouillard, ciel, brume par biome ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| AmbientSounds | ✅ | C | Ambiance | Ambiances sonores ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Sound Physics Remastered | ✅ | CS | Ambiance | Réverbération, occlusion ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Subtle Effects | ✅ | CS | Ambiance | Particules de détail ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| LambDynamicLights | ✅ | C | Ambiance | Lumière dynamique ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| More Darkness | ✅ | CS | Ambiance | Vraies nuits, grottes noires ([décision 0007](decisions/0007-ambiance-performance.md)) |
+| Quark | `quark` | ✅ (monter en 4.1-487) | CS | L'essentiel, modules choisis ([0005](decisions/0005-quark.md)) |
+| Supplementaries | `supplementaries` | ✅ | CS | L'essentiel ([0006](decisions/0006-supplementaries.md)) |
+| Amendments | `amendments` | ➕ | CS | Lanternes en 3D, enseignes, chaudrons |
+| Handcrafted | `handcrafted` | ➕ | CS | Mobilier |
+| Macaw's Roofs | `macaws-roofs` | ➕ | CS | Toits en pente |
+| Macaw's Windows | `macaws-windows` | ➕ | CS | Fenêtres, volets, rideaux |
+| Twigs | `twigs` | ➕ | CS | Petit décor (rhyolite coupée) |
+| Every Compat | `every-compat` | ➕ | CS | Mobilier et toits dans tous les bois, dont ceux de NML |
+| FallingTree | `fallingtree` | ➕ | S | L'arbre coupé tombe |
+| Visual Workbench | `visual-workbench` | ➕ | CS | Les objets restent posés sur l'établi |
+| Easy Magic | `easy-magic` | ➕ | CS | Les objets restent sur la table d'enchantement |
 
-### Performance & serveur
-| Mod | Statut | Côté | Rôle | Justification |
+## Corps, caméra et gestes
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Sodium | ✅ | C | Performance | Rendu ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| ImmediatelyFast | ✅ | C | Performance | Rendu ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Entity Culling | ✅ | C | Performance | Rendu ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| ModernFix | ✅ | CS | Performance | Chargement ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| FerriteCore | ✅ | CS | Performance | Mémoire ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Lithium | ✅ | CS | Performance | Logique serveur ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Clumps | ✅ | CS | Performance | Orbes d'XP ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Structure Layout Optimizer | ✅ | CS | Performance | Génération des structures ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Chunky | ✅ | CS | Serveur | Prégénération ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| spark | ✅ | CS | Serveur | Profilage ([décision 0007](decisions/0007-ambiance-performance.md)) |
+| Entity Model Features + Entity Texture Features | `entity-model-features`, `entitytexturefeatures` | ➕ | C | Moteur de Fresh Animations |
+| 3D Skin Layers | `3dskinlayers` | ➕ | C | Skin en relief |
+| Shoulder Surfing Reloaded | `shoulder-surfing-reloaded` | ➕ | C | Caméra à l'épaule |
+| Spatial GUI | `spatial-gui` | ➕ | C | Menus en 3D, caméra à l'épaule à l'ouverture |
+| Camera Overhaul | `cameraoverhaul` | ➕ | C | La caméra suit le mouvement (réglé bas) |
+| Real Camera | `real-camera` | 🟡 | C | Voir son corps en vue subjective ; le premier à retirer s'il gêne |
+| ItemPhysic Lite | `itemphysic-lite` | ➕ | C | Les objets lâchés se posent à plat |
+| Smooth Swapping | `smooth-swapping` | ➕ | C | Les objets glissent dans l'inventaire |
 
-### Règles
-| Mod | Statut | Côté | Rôle | Justification |
+## Ambiance, rendu et son
+
+| Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| KubeJS | ✅ | CS | Règles | Couche de cohérence (scripts + données datapack) |
+| ATMOSPHERICS | `atmospherics` | ✅ | C | Brume, ciel, nuages par biome ([0007](decisions/0007-ambiance-performance.md)) |
+| Polytone | `polytone` | ➕ | C | Couleur de l'herbe, des feuilles et de l'eau seulement |
+| Particular Reforged | `particular-reforged` | ➕ | C | Eau, cascades, feuilles qui tombent, poussière des grottes |
+| Subtle Effects | `subtle-effects` | ✅ | CS | Feu, fumée, vapeur, corps |
+| LambDynamicLights | `lambdynamiclights` | ✅ | C | Lumière tenue en main |
+| More Darkness | `more-darkness` | ✅ | CS | Vraies nuits |
+| AmbientSounds | `ambientsounds` | ✅ | C | Sons de biome |
+| Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Écho, étouffement |
+| Sounds | `sound` | ➕ | C | 170 sons d'interface, d'objets et de blocs |
+| Auroras | `auroras` | ⚪ | C | Aurore dans les biomes froids |
+| Drip Sounds | `dripsounds` | ⚪ | C | Gouttes dans les grottes (bêta) |
+| Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Repli si Particular ne gère pas les feuilles de NML |
 
-## Dépendances (ajoutées automatiquement)
-| Mod | Côté | Requis par |
-|---|---|---|
-| Biolith | CS | No Man's Land |
-| McQoy | C | Surveyor |
-| YetAnotherConfigLib (YACL) | CS | McQoy |
-| Rhino | CS | KubeJS |
-| Better Advanced Tooltips | CS | KubeJS |
-| Architectury API | CS | Farm & Charm, Critters and Companions |
-| CodxLib | CS | Alex's Mobs Continued |
-| GeckoLib | CS | Hybrid Aquatic, Mowzie's Mobs, Critters and Companions |
-| Kotlin for Forge | CS | Hybrid Aquatic |
-| Lithostitched | CS | Hybrid Aquatic |
-| Curios API | CS | Hybrid Aquatic |
-| Hybrid API | CS | Hybrid Aquatic |
-| Resourceful Lib | CS | Friends & Foes |
-| Kiwi | CS | Companion |
-| Knight Lib | CS | Companions! |
-| Zeta | CS | Quark |
-| Moonlight Lib | CS | Supplementaries |
-| Modonomicon | CS | Icy's Better Horses (dépendance non déclarée sur Modrinth) |
-| Fzzy Config | CS | Adorable Hamster Pets (non déclarée) |
-| Patchouli | CS | Adorable Hamster Pets (non déclarée) |
-| Sinytra Connector | CS | Antique Atlas 4, Surveyor (mods Fabric) — en bêta, sous surveillance |
-| Forgified Fabric API | CS | Antique Atlas 4, Surveyor (via Connector) |
-| CreativeCore | CS | AmbientSounds |
-| Resourceful Config | CS | Structure Layout Optimizer |
+## Interface et confort
 
-## À tester
-| Mod | Rôle | Question à trancher |
-|---|---|---|
-| Thirst Canteen | Gourde | Utile avec Thirst Was Reclaimed ? |
-| Serene Seasons | Saisons | Repli si le pont Ecliptic → Cold Sweat échoue |
-| Create: Integrated Farming | Automatisation | Moissonneuse, filet de pêche ; plus tard |
-| Create: Copycats+ | Construction | Probable |
-| Create: Connected | QoL Create | Probable |
-| Distant Horizons | Rendu lointain | Coût GPU/RAM/serveur ; branche dédiée ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Separate Sable Render Distance | Performance Aeronautics | Bêta ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Particle Rain | Ambiance | Bêta, doublon possible avec Ecliptic ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| Terralith + Streams Reflowing | Worldgen | Preset concurrent de NML ([décision 0001](decisions/0001-nml-vs-terralith.md)) |
-| IDAS (+ Integrated API) | Structures Create/Quark | Plus tard ([décision 0004](decisions/0004-structures.md)) ; dépendances Quark + Supplementaries déjà présentes |
-| Vinery / Kaleidoscope Tavern | Spécialisation | Après validation du socle agricole |
-| Create: Power Loader | Chunkloading | Risque de casser la logique d'entretien des infrastructures |
+| Mod | Slug | Statut | Côté | Rôle |
+|---|---|---|---|---|
+| EMI | `emi` | ➕ | C (S optionnel) | Visualiseur de recettes |
+| JEI | `jei` | ➕ (caché) | CS | Pont pour les mods qui n'ont qu'un plugin JEI |
+| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Infobulles |
+| Pick Up Notifier | `pick-up-notifier` | ➕ | C | Liste discrète des objets ramassés |
+| Seamless Loading Screen | `seamless-loading-screen` | ➕ | C | L'écran de chargement montre la dernière vue |
+| Mouse Tweaks | `mouse-tweaks` | ➕ | C | Inventaire à la souris |
+| Controlling + Searchables | `controlling`, `searchables` | ➕ | C | Recherche dans les touches |
+| Default Options | `default-options` | ➕ | C | Touches et réglages vidéo livrés avec le pack |
+| Chat Heads | `chat-heads` | ⚪ | C | Tête du joueur dans la discussion |
 
-## Écartés
+## Règles et scripts
+
+| Mod | Slug | Statut | Côté | Rôle |
+|---|---|---|---|---|
+| KubeJS | `kubejs` | ✅ | CS | Scripts et données datapack |
+| KubeJS Create | `kubejs-create` | ➕ | CS | Recettes Create en script (bêta) |
+| LootJS | `lootjs` | ➕ | S | Butin des ruines et des monuments |
+| MoreJS | `morejs` | ➕ | CS | Événements en plus pour KubeJS |
+| In Control! | `in-control` | ➕ | S | Règles d'apparition (bêta) |
+| Mod `fallow` (à écrire) | — | 🟡 | CS | Ce que les scripts ne savent pas faire : lune visible, Dissipateur, tuyau du sac ([12.4](plan/12-verification.md)) |
+
+## Performance et technique
+
+| Mod | Slug | Statut | Côté | Rôle |
+|---|---|---|---|---|
+| Sodium | `sodium` | ✅ | C | Rendu |
+| ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendu |
+| ModernFix | `modernfix` | ✅ | CS | Chargement |
+| FerriteCore | `ferrite-core` | ✅ | CS | Mémoire |
+| Lithium | `lithium` | ✅ | CS | Logique serveur |
+| Clumps | `clumps` | ✅ | CS | Orbes d'XP |
+| Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Génération des structures |
+| Chunky | `chunky` | ✅ | CS | Prégénération |
+| spark | `spark` | ✅ | CS | Profilage |
+| Dynamic FPS | `dynamic-fps` | ➕ | C | Le jeu ralentit en arrière-plan |
+| Neruina | `neruina` | ➕ | CS | Évite qu'une entité bloquée ne fasse planter le monde |
+| Simple Backups | `simple-backups` | ➕ | CS | Sauvegardes (bêta) |
+| Crash Assistant | `crash-assistant` | ➕ | C | Aide à lire les plantages |
+| Entity Culling | `entityculling` | ❌ (après un dernier test) | C | Casse les engins Aeronautics |
+| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Font tourner Antique Atlas, Surveyor et AA4 Atlas (bêta, sous surveillance) |
+
+## Packs de ressources
+
+| Pack | Slug | Statut | Rôle |
+|---|---|---|---|
+| Fresh Animations | `fresh-animations` | ➕ | Créatures animées |
+| FA : Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ➕ | Détails, objets animés, yeux qui brillent |
+| FA : Player Extension | `fa-player-extension` | ➕ | Le joueur dans le même style |
+| MB-3D Items | `mb3d-items-pack` | ➕ | Objets en 3D (sous Amendments) |
+| Motschen's Better Leaves | `better-leaves` | ➕ | Feuillages touffus |
+| `fallow-ambiance` (à créer) | — | ➕ | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML |
+
+## Bibliothèques
+
+Déjà là : Architectury API, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+
+À ajouter avec les mods ci-dessus : Fragmentum (Ancient Remnants), MRU (Sounds), Puzzles Lib (Visual Workbench, Easy Magic, Pick Up Notifier), Cloth Config (Camera Overhaul), Balm (Default Options), Configurable (Neruina), CorgiLib et Data Anchor (Enhanced Celestials), Mezz config (JEI).
+
+## Sortis ou écartés
+
 | Mod | Raison |
 |---|---|
-| Tectonic | Remplacé par la comparaison NML vs Terralith |
-| Downhill Rivers | Idem |
-| Prehistorum | Modèles de mauvaise qualité |
-| Farmer's Delight (+ addons Create FD) | Kaleidoscope Cookery est le système alimentaire principal |
-| Legendary Survival Overhaul | Cold Sweat + Thirst Was Reclaimed retenus |
-| Minimaps / waypoints | Contraire à la vision |
-| Animal Husbandry | Mod jugé peu fiable ; mécanique d'élevage exigeant toujours voulue → alternative à trouver |
-| Spoiled | Mod jugé peu fiable ; mécanique de conservation toujours voulue → alternative à trouver |
-| Let's Do Bakery | Doublon de la farine/pâte de KC |
-| Let's Do Meadow | Biomes propres, conflit probable avec NML |
+| Freeze It and Heat It | Retiré par l'équipe le 2026-10-18 : pas de conservation de la nourriture |
+| Easy Anvils | Remplace l'enclume dont Overgeared a besoin ([12](plan/12-verification.md)) |
+| Leaves Be Gone | Sur la liste noire d'Aeronautics ; FallingTree casse déjà les feuilles |
+| Dynamic Surroundings | Touche le moteur de son comme Sound Physics ; doublons |
+| Dragged's Simulated Tree Chopper | « C'est de trop » (L'équipe) |
+| Not Enough Animations, First-person Model | Remplacés par FA : Player Extension (choix de l'équipe) |
+| More Culling, Better Clouds, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
+| Vibrancy, Gleam, Colorful Lighting, Physics Mod | Moteurs de lumière ou de physique risqués avec Sodium 0.8 et Sable |
+| Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Retirés par l'équipe le 2026-10-18 |
+| Comforts | Doublon du sac de couchage de Traveler's Backpack |
+| ParCool! | Désactivé à la demande de l'équipe |
+| Sanity: Renewed, TheWatcher | Le monde est énigmatique, pas sombre |
+| Jade, AppleSkin | Cassent le mystère |
+| Just Zoom, Zoomify | La longue-vue est l'outil de Wildex |
+| Waystones, Explorer's Compass, Nature's Compass | Effacent le voyage |
+| Carry On | Incompatible avec Aeronautics |
+| Distant Horizons, Separate Sable Render Distance | La brume rend la vue lointaine inutile |
+| Streams Reflowing, Tectonic, Downhill Rivers, Terralith | Worldgen lourd ou concurrent de NML |
+| Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Trop d'addons Create |
+| Create Villager Labor, Open Parties and Claims | Inutiles entre amis |
+| Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | Une jauge ou une activité de plus pour un rôle déjà couvert |
+| Reactive Music | AmbientSounds suffit ; le silence fait partie de l'ambiance |
+| Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Contenu sans mécanique forte, ou casse le mystère |
+| Farmer's Delight (+ addons) | Kaleidoscope Cookery est la cuisine du pack |
+| Legendary Survival Overhaul | Cold Sweat et Thirst Was Reclaimed retenus |
+| Minimaps, waypoints | Contraires à la vision |
+| Animal Husbandry, Spoiled | Jugés peu fiables |
+| Let's Do Bakery, Meadow, Wilder Nature | Doublons ou biomes en conflit avec NML |
 | Graze | Rend l'élevage autonome |
-| Integrated Mowzie's Mobs | Exige Quark + Supplementaries + Amendments |
-| Let's Do Wilder Nature | Style cubique, bêta, doublon de Naturalist |
-| Spawn / Environmental | Ajoutent des biomes (conflit NML) |
-| Jurassic Saga / Jurassic Revived / Jurassic Reborn | Préhistoire abandonnée pour le moment |
-| YUNG's Better * / Structory / Structory: Towers | Pas au goût de l'utilisateur ([décision 0004](decisions/0004-structures.md)) |
-| Explorify / Moog's Voyager / Trek / Adorabuild | Trop de structures ([décision 0004](decisions/0004-structures.md)) |
-| When Dungeons Arise / Dungeons and Taverns | Orientation RPG ([décision 0004](decisions/0004-structures.md)) |
-| Explorer's Compass / Nature's Compass / Waystones | Contraires à la vision |
-| Fog / FogRule | Doublon d'ATMOSPHERICS / alpha ([décision 0007](decisions/0007-ambiance-performance.md)) |
-| C2ME / Noisium / MoreCulling / Ksyxis | Alpha, pas à jour ou gain marginal ([décision 0007](decisions/0007-ambiance-performance.md)) |
+| Integrated Mowzie's Mobs | Trop de dépendances |
+| Spawn, Environmental | Ajoutent des biomes (conflit NML) |
+| Prehistorum, Jurassic Saga, Jurassic Revived, Jurassic Reborn | Préhistoire écartée pour le moment |
+| YUNG's Better *, Structory, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns | Trop de structures ou orientation RPG ([0004](decisions/0004-structures.md)) |
+| C2ME, Noisium, Ksyxis, FogRule | Alpha, pas à jour ou gain marginal ([0007](decisions/0007-ambiance-performance.md)) |
 | Critters n' Crawlers | Doublon de Naturalist, créature d'horreur |
