@@ -794,7 +794,7 @@ hash = "1969e6c16d90203afaee8a1bf24ff61ee101ca29b7ff47caec0a6b59195604cc"
 
 [[files]]
 file = "kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json"
-hash = "9d2df2d5105519a2b62460f2d3e4b8311ecede044e31658a8c63d4d1cc4b9a31"
+hash = "3b29a91d10203c0672d03227f643fab6fc27686096bb1fc0d60f516e2b9d395a"
 
 [[files]]
 file = "kubejs/assets/offroad/lang/fr_fr.json"
@@ -1075,6 +1075,10 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 [[files]]
 file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tortoise_rare.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/entity/goose.json"
+hash = "1bf90ad972d9ddf3824b4f839dc7d01356310f66d2eabf2e60e51e931d66762c"
 
 [[files]]
 file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/entity/tortoise.json"

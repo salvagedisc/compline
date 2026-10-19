@@ -41,7 +41,7 @@ On garde le Compagnon (`buddy`, quête de la [Lune Amie](lune-amie.md)), le pot 
 
 **Réplique `scute`** : NML 1.6.1 la conditionne à l'objet `nomansland:tortoise_scute`, qui n'existe pas (l'écaille s'appelle `sturdy_scute`). Les répliques sont des registres de datapack, qui sautent une entrée dont les `neoforge:conditions` échouent : elle ne se chargeait jamais, et le test L8 de la Lune Amie échouait. La surcharge retire la condition et garde les écailles de tortue de mer et de tatou. Test : `scripts/test/nml-dialogues.test.mjs`.
 
-**Répliques d'offrande** : celle de la tortue vise `naturalist:tortoise`, avec le même texte.
+**Répliques d'offrande** : celle de la tortue vise `naturalist:tortoise`, avec le même texte. Celle de l'oie vise le canard de Naturalist (`naturalist:duck`), qui vit dans les mêmes rivières et marais, puisqu'Untitled Duck Mod est retiré. Le canard n'attaque pas : « Bête bruyante et furieuse » devient « Bête bruyante et têtue », en anglais (`goose.json`) comme en français. Test : `scripts/test/nml-dialogues.test.mjs`.
 
 ## Questions ouvertes
 
@@ -66,4 +66,4 @@ Sur un monde neuf : les données de registre se lisent à la création du monde.
 | F11 | Tuer un cheval, une grenouille ; ouvrir des coffres de donjon, d'igloo, d'épave | Ni viande de cheval, ni cuisses, ni galette, ni bombe |
 | F12 | Établi : 5 poudres à canon et 4 sables | Une TNT |
 | F13 | Offrir une écaille de tortue de mer à la Lune Amie (L8) | La réplique « A precious gift from a wise creature » |
-| F14 | Montrer une tortue de Naturalist à la Lune Amie | La réplique de la tortue |
+| F14 | Montrer une tortue de Naturalist, puis un canard de Naturalist, à la Lune Amie | Les répliques de la tortue et de l'oie |
