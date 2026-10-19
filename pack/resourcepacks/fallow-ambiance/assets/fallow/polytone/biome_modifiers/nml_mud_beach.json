@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:mud_beach"
+  ],
+  "grass_color": "#796644",
+  "foliage_color": "#656a3c",
+  "water_color": "#5c828d"
+}

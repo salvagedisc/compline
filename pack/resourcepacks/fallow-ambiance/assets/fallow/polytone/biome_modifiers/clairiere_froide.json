@@ -1,0 +1,11 @@
+{
+  "targets": [
+    {
+      "id": "fallow:clairiere_froide",
+      "required": false
+    }
+  ],
+  "grass_color": "#79b878",
+  "foliage_color": "#5f9f62",
+  "water_color": "#3f7fc6"
+}

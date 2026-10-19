@@ -90,7 +90,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Every Compat | `every-compat` | ✅ | CS | Mobilier et décor dans tous les bois, dont ceux de NML |
 | HT's TreeChop | `treechop` | ✅ | CS | Couper un arbre bloc par bloc, le tronc tombe en dernier |
 | Visual Workbench | `visual-workbench` | ✅ | CS | Les objets restent posés sur l'établi |
-| Easy Magic | `easy-magic` | 🟡 | CS | En attente : on cherche d'abord une refonte de l'enchantement qui en fasse une vraie étape du jeu |
+| Immersive Enchanting | `immersive-enchanting` | 🟡 (proposé) | CS | L'enchantement devient un savoir : livres anciens trouvés, rangés près de la table, niveaux payés en matériaux ([recherche](plan/recherche/2026-10-19/enchantement.md)) ; repli : Matrix Enchanting de Quark |
 
 ## Corps, caméra et gestes
 
@@ -116,6 +116,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | More Darkness | `more-darkness` | ✅ | CS | Vraies nuits |
 | AmbientSounds | `ambientsounds` | ✅ | C | Sons de biome |
 | Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Écho, étouffement |
+| True Adaptive Music | `true-adaptive-music` | 🟡 (proposé) | CS | Musique par situation (brume, clairière, saison, lune, dirigeable), longs silences réglables ([recherche](plan/recherche/2026-10-19/musique.md)) |
 | Sounds | `sound` | ✅ | C | 170 sons d'interface, d'objets et de blocs |
 | Auroras | `auroras` | ✅ | C | Aurore dans les biomes froids |
 | Drip Sounds | `dripsounds` | ✅ | C | Gouttes dans les grottes (bêta) |
@@ -173,7 +174,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | FA : Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Détails, objets animés, yeux qui brillent |
 | FA : Player Extension | `fa-player-extension` | ✅ | Le joueur dans le même style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Feuillages touffus |
-| `fallow-ambiance` | — | ➕ (en cours de création) | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML |
+| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML |
 
 ## Bibliothèques
 
@@ -209,7 +210,8 @@ Déjà là : Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor
 | Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Trop d'addons Create |
 | Create Villager Labor, Open Parties and Claims | Inutiles entre amis |
 | Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | Une jauge ou une activité de plus pour un rôle déjà couvert |
-| Reactive Music | AmbientSounds suffit ; le silence fait partie de l'ambiance |
+| Reactive Music | Silence entre morceaux plafonné à 2 min, jar de 295 Mo, coupe la musique vanilla ([recherche](plan/recherche/2026-10-19/musique.md)) |
+| Easy Magic | Remplace la table vanilla dont dépend la refonte de l'enchantement ([recherche](plan/recherche/2026-10-19/enchantement.md)) |
 | Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Contenu sans mécanique forte, ou casse le mystère |
 | Farmer's Delight (+ addons) | Kaleidoscope Cookery est la cuisine du pack |
 | Legendary Survival Overhaul | Cold Sweat et Thirst Was Reclaimed retenus |

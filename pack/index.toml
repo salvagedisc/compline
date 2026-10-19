@@ -6,11 +6,15 @@ hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "9cde89f32542b401d450af04c71e1785dd254a990d336c9106d237f7d945dd91"
+hash = "cddc060dde2b5a33cd543cd6635ea5ffa44394391ed17c08350170bc5a851485"
 
 [[files]]
 file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
+
+[[files]]
+file = "config/nomansland-client.toml"
+hash = "f153ecc79fd161e431f4d17b7ee718df4b0c46fd46bdfb58bd7acd494b127c1b"
 
 [[files]]
 file = "config/quark-common.toml"
@@ -638,6 +642,106 @@ metafile = true
 file = "resourcepacks/fa-player-extension.pw.toml"
 hash = "b10943dd0c7472c8782d27e1239a851dfa41ee21608dff9207b84c0a81b56e20"
 metafile = true
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v1.json"
+hash = "8022d84988353f51d5edd3a0c03a8b396b8fbb2ea0cebc7d21e76e753639cac9"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
+hash = "890febf7a16246096df93bb95303b9e94330f89534ecfb906ff2f672be5aa5a5"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere_chaude.json"
+hash = "5dc9f7bbc89aafd3aef566808a6973762d9ff650d3f5dfceddc8ca784bd1e8f5"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere_froide.json"
+hash = "ad14723a512552eb530178fff7aeb9fc5e3acbe2d48a10b1bee23840a72762d1"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_autumnal_forest.json"
+hash = "658ace2ad3cba6f8a831fd66b3fcf4869b17b22e466bfd5ab4a3bedb45821c16"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_bayou.json"
+hash = "07f654829dcd2d58b1c06a1b5924fc3a307f5ce2393365e135178e86215303a5"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_blackwater_river.json"
+hash = "a064695502923e087537a1023e55d4b5e9926e26d69d1c7f4bd26251a499297f"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_bog.json"
+hash = "9dc7b9f2e4eed27c6c18eccfd282b7ec5b819217291f9cdde6e91788591c201f"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_boreal_forest.json"
+hash = "9a592a26b6dc615bac5f1ec23763ad50559da63186d8a36ea0e4f8d88d908e24"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_dark_swamp.json"
+hash = "97327faa309b2aca46920badb339c9791fd3141dc48d7700c80ead8f4de778f0"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_dark_taiga.json"
+hash = "c3776c2aab53d4d02380de9648f4e6d3c238b067ac879bf703c07627f8dacd0e"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_desert_river.json"
+hash = "3fe5ff63e0f82b5efb4ea057a4c639aab176ca2f0bc97e45e5babe56b5f3033c"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_shore.json"
+hash = "252b2d5b4e50bd7d6f8128742085d1c751239854df33945fc27494bf111dad7d"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_woods.json"
+hash = "9578b5b642caccdfe5171da6d7c0ef45f9994a46267c5709776fa5312e57525f"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lavender_field.json"
+hash = "8df69f2a28ee9bda4ee3ff4ee3dac7767103a431fc6326ea88f9f902bf74c226"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lush_river.json"
+hash = "d86dc01e86f051d645c273480a594cad881afc3b1ef6b3337f0744463c9b89ef"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_forest.json"
+hash = "0c6490e0a0f456836327a68d8126b224a9a66f501523355504978b86c95e86a9"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_grove.json"
+hash = "70cb7c2bafd865ee59b8b9fe20550f5f19eed1b477c1fb0ae008fe2cff98929e"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_mud_beach.json"
+hash = "96dc3ae509d1f612e85a438c0b71bc36f1f69668101925f33ec0de610aeb5387"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest.json"
+hash = "029c4de24eb815d9de8ea63fabaf56a14e917824169a1b3f56b49643d735e7ea"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest_clearing.json"
+hash = "b755f6cb16275c4660338eb681b1efe4c3b5386efbdd4cccf13d0ef57abb56c3"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest_edge.json"
+hash = "2fcf1922a1c68c54ef38decdcaa905b633bc2f692141bffa7b416991a6eaa644"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_prairie.json"
+hash = "7bcb43ab300a05e107ef72b9bd3e972affc029ea55e6b215cbaf371e944a5a3b"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_tropical_beach.json"
+hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/pack.mcmeta"
+hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
 
 [[files]]
 file = "resourcepacks/fresh-animations-details.pw.toml"

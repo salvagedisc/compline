@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:bog"
+  ],
+  "grass_color": "#857959",
+  "foliage_color": "#756d50",
+  "water_color": "#55735b"
+}
