@@ -1,0 +1,15 @@
+# Fallow : une seule vue à la troisième personne.
+# F5 alterne entre la vue subjective et la vue à l'épaule ; les deux vues
+# vanilla (dos et face) sont coupées. La caméra est découplée : la souris
+# tourne librement autour du joueur.
+# Les clés absentes gardent leur valeur par défaut (NeoForge complète le fichier).
+
+[perspective]
+	default_perspective = "SHOULDER_SURFING"
+	replace_default_perspective = true
+	first_person_enabled = true
+	third_person_back_enabled = false
+	third_person_front_enabled = false
+
+[camera]
+	decoupled_camera = true

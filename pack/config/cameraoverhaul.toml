@@ -1,0 +1,21 @@
+# Fallow : Camera Overhaul réglé bas (environ la moitié des valeurs d'origine).
+# configVersion doit rester à 3, sinon le mod remet tout par défaut.
+configVersion = 3
+
+[general]
+enabled = true
+enableInThirdPerson = true
+contextTransitionSmoothing = 0.1
+turningRollAccumulation = 1.0
+turningRollIntensity = 0.6
+turningRollSmoothing = 1.0
+cameraSwayIntensity = 0.3
+cameraSwayFrequency = 0.16
+cameraSwayFadeInDelay = 0.15
+cameraSwayFadeInLength = 5.0
+cameraSwayFadeOutLength = 0.75
+screenShakesMaxIntensity = 1.25
+screenShakesMaxFrequency = 6.0
+explosionTrauma = 0.6
+thunderTrauma = 0.03
+handSwingTrauma = 0.015
