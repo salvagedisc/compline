@@ -9,6 +9,10 @@ file = "config/defaultoptions-common.toml"
 hash = "cddc060dde2b5a33cd543cd6635ea5ffa44394391ed17c08350170bc5a851485"
 
 [[files]]
+file = "config/defaultoptions/options.txt"
+hash = "1834422a5c493d7aa98cd9d5f240d69eb73a196e7fadfe4dab991f966f7668e1"
+
+[[files]]
 file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 
