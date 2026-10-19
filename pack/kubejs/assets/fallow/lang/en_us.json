@@ -1,0 +1,19 @@
+{
+  "fallow.lune.efface": "The moon fades. Another presence holds the sky tonight.",
+  "fallow.lune.note": "Crumpled Note",
+  "fallow.lune.note.1": "\"Deep in the ruins, a moon's face is carved into the stone.",
+  "fallow.lune.note.2": "I looked at it for a long time. In the nights after, I dreamed of her.",
+  "fallow.lune.note.3": "Since then, a shadow in the sky shows me a path.\"",
+  "fallow.sante.coeur_ancien": "The Elderheart leaves a shard of life in your hands.",
+  "fallow.sante.plein": "Your health is already whole: %s hearts.",
+  "fallow.sante.rendu": "A heart returns to you: %s / %s.",
+  "fallow.sante.reveil": "You wake up weaker. %s hearts remain.",
+  "fallow.sante.reveil_plancher": "You wake up. %s hearts remain; you will grow no weaker.",
+  "item.fallow.eclat_de_vie": "Shard of Life",
+  "item.fallow.eclat_de_vie.compteur": "Hearts: %s / %s",
+  "item.fallow.eclat_de_vie.tooltip": "Restores a lost heart.",
+  "item.fallow.peau_brute": "Raw Hide",
+  "item.fallow.peau_preparee": "Prepared Hide",
+  "tooltip.fallow.peau_brute": "Craft it with ash to prepare it.",
+  "tooltip.fallow.peau_preparee": "Soak it on a Bamboo Tray, in the rain or under a dripping stalactite."
+}
