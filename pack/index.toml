@@ -94,6 +94,11 @@ hash = "51f925e75075df676cc1efff5bb8db9d828842c0f3031310a05dbf368aa67393"
 metafile = true
 
 [[files]]
+file = "mods/chat-heads.pw.toml"
+hash = "80455b28c3010ad153ccabc2998cb445b9854b26b386628243a9c8160b8d7e8e"
+metafile = true
+
+[[files]]
 file = "mods/chipped.pw.toml"
 hash = "24c6c3fe917ffbcef04e788dec3e003d0ed03433bc00f9cf4f23fe9b85636aa7"
 metafile = true
