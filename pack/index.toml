@@ -913,10 +913,6 @@ file = "kubejs/assets/twigs/lang/fr_fr.json"
 hash = "ea856d563dfe4f9910145de8d4e60ef7d0122a598694f5ca8f615b30f8c18ec8"
 
 [[files]]
-file = "kubejs/assets/untitledduckmod/lang/fr_fr.json"
-hash = "28e54224a1d77a517ed0ddec0abdc7c2ae15a3a17bb76a4e27b04af1a725a203"
-
-[[files]]
 file = "kubejs/assets/veil/lang/fr_fr.json"
 hash = "60c5a115f610acfe0fda6915262b8f3e5f15d1f1d814656af9eadfa66b9767bb"
 
@@ -1771,11 +1767,6 @@ metafile = true
 [[files]]
 file = "mods/twigs.pw.toml"
 hash = "98ef5714a273c9153fbfaca195806d36f568556819dde7b90ec6561646bede98"
-metafile = true
-
-[[files]]
-file = "mods/untitled-duck-mod.pw.toml"
-hash = "2a55436bef50b794a4145c83487114669a0c5e896856ba7a8bab769799729e94"
 metafile = true
 
 [[files]]

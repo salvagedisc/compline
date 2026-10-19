@@ -13,13 +13,16 @@ Beaux modèles 3D et animations (critère n° 1), écologie cohérente par biome
 | Faune étendue | **Alex's Mobs Continued** | Variété et animations ; **apparition gérée espèce par espèce** |
 | Océans | **Hybrid Aquatic** | Faune marine, créatures des profondeurs rares |
 | Anomalies | **Mowzie's Mobs** | Créatures uniques, très rares |
-| Petits compagnons | **Critters and Companions**, **Untitled Duck Mod**, **Friends & Foes**, **Adorable Hamster Pets**, **Companions!**, **Ghost** | Petite faune et compagnons apprivoisables |
+| Petits compagnons | **Critters and Companions**, **Friends & Foes**, **Adorable Hamster Pets**, **Companions!**, **Ghost** | Petite faune et compagnons apprivoisables |
 | Utilitaire | **Companion** | Les animaux apprivoisés ne se perdent plus |
 
 ## Condition : cohabitation Naturalist + Alex's Mobs
 Choix de l'utilisateur contre la recommandation initiale (doublons, portage tiers, ton parfois fantaisiste). Conséquence : dans le sous-projet 3, table d'apparition par biome qui désactive
 - les doublons (ours, cerfs, crocodiliens, serpents, oiseaux : une seule version par espèce) ;
 - les créatures d'Alex's Mobs qui cassent la DA (fantaisistes ou comiques).
+
+## Untitled Duck Mod retiré (2026-10-19)
+Retiré par l'équipe. Le canard de Naturalist revient ; la réplique d'offrande de l'oie de NML vise désormais ce canard.
 
 ## No Man's Land (2026-10-19)
 Ses animaux remodelés et retexturés ne vont pas avec Fresh Animations : retour aux animaux vanilla, et ses créatures (cerf, oie, bar à serpe, tortue, Frienderman) sont coupées. Le Compagnon reste. Détail : [faune-nml](../plan/faune-nml.md).

@@ -33,7 +33,7 @@ Le cuir, ou la peau qui cuisait en cuir au four, devient une peau brute. Les qua
 | Quark | renard de feu (Nether, sans effet) | `quark:entities/foxhound` |
 | Alex's Mobs | kangourou : garde sa peau, mais deux peaux de kangourou donnent une peau brute au lieu d'un cuir | recette |
 
-Vérifié sans cuir, donc sans changement : Critters and Companions, Untitled Duck Mod, Adorable Hamster Pets, Mowzie's Mobs, Companions!, Ghost, Longwings, et le reste d'Alex's Mobs (le bison et l'ours donnent de la fourrure, qui ne servait pas au cuir). Les fourrures de Naturalist (ours, lion, tigre, mammouth…) restent aussi.
+Vérifié sans cuir, donc sans changement : Critters and Companions, Adorable Hamster Pets, Mowzie's Mobs, Companions!, Ghost, Longwings, et le reste d'Alex's Mobs (le bison et l'ours donnent de la fourrure, qui ne servait pas au cuir). Les fourrures de Naturalist (ours, lion, tigre, mammouth…) restent aussi.
 
 Le script écrit dans le journal du serveur toute table de créature qui lâche encore du cuir (`[tannerie] créature qui lâche encore du cuir`). Un nouveau mod de faune s'y verra tout de suite.
 
@@ -69,7 +69,7 @@ Gardées, parce qu'elles recyclent du cuir déjà fait ou viennent d'un butin ra
 
 ## Les usages du cuir
 
-Tous gardent `minecraft:leather` et ne changent pas : Traveler's Backpack (52 recettes, dont les sacs et les améliorations), Supplementaries (soufflet), les livres vanilla, le bestiaire Wildex, Quark (sac à graines, sac à dos), Alex's Mobs, Cold Sweat (outre), Hybrid Aquatic, Icy's Better Horses, Kaleidoscope Cookery (tenue de fermier, sac-repas), Companions!, Untitled Duck Mod, Create (boîte à outils), Aeronautics (lunettes d'aviateur), NML (bourse, lit de paille). Aucune ne dépend d'une source de cuir retirée.
+Tous gardent `minecraft:leather` et ne changent pas : Traveler's Backpack (52 recettes, dont les sacs et les améliorations), Supplementaries (soufflet), les livres vanilla, le bestiaire Wildex, Quark (sac à graines, sac à dos), Alex's Mobs, Cold Sweat (outre), Hybrid Aquatic, Icy's Better Horses, Kaleidoscope Cookery (tenue de fermier, sac-repas), Companions!, Create (boîte à outils), Aeronautics (lunettes d'aviateur), NML (bourse, lit de paille). Aucune ne dépend d'une source de cuir retirée.
 
 Overgeared 1.6.19 n'a **aucune recette au cuir** : ses armures se forgent avec des plaques de métal. Les « armures plaquées » sur une base de cuir sont une idée de Wayfarer, pas d'Overgeared.
 

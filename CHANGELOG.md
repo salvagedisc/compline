@@ -42,6 +42,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Interface : packs Dark Coffee GUI et Modded Coffee GUI, actifs au premier lancement ; pack maison `fallow-interface` qui recolore dans le même ton les écrans de Kaleidoscope, Overgeared et Wildex ([page](docs/plan/fallow-interface.md)).
 
 ### Retiré
+- Untitled Duck Mod (choix de l'équipe) : le canard de Naturalist revient, et la réplique d'offrande de l'oie de No Man's Land vise ce canard.
 - AA4 Atlas : compilé pour Antique Atlas 2, il appelait `AtlasScreen.prepareToOpen()` avec l'ancien type de retour et faisait planter le jeu à l'ouverture de l'atlas (rapport de plantage du test). L'atlas s'ouvre à la touche d'Antique Atlas.
 - Entity Culling : casse les engins Create Aeronautics et Sable.
 - Clumps : les orbes d'XP n'existent plus.
