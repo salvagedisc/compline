@@ -906,7 +906,7 @@ hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
 file = "kubejs/client_scripts/faune_nml.js"
-hash = "57adc9c58a0b58df9ca60ac70ff5c56febde3b9e4044b1c105131dcb8cb98d68"
+hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
 
 [[files]]
 file = "kubejs/client_scripts/sante.js"
@@ -947,6 +947,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/nomansland/advancement/main/explode_ore.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
 
 [[files]]
 file = "kubejs/data/nomansland/mixed_litter/variant_groups/bee.json"
@@ -1042,7 +1046,7 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/server_scripts/faune_nml.js"
-hash = "9a58d8cb8223b8f0f8438b30c9663f60209ba8756bf27be1d2bdf58be35fb52d"
+hash = "ff4b14a30aff484a4a7b4a7deca267c5efee43b0ab8a52f79a2047d3ed2ec855"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"
