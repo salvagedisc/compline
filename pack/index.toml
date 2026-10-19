@@ -89,6 +89,11 @@ hash = "a38d72ca403e9064338be6e0cf69532768b0c1aba8f88703a8ce74c2734da522"
 metafile = true
 
 [[files]]
+file = "mods/corgilib.pw.toml"
+hash = "9ae835550d113663b527b6ba934dd7d758d8e0a93c68bb44d84eb1ef1be69159"
+metafile = true
+
+[[files]]
 file = "mods/create-aeronautics.pw.toml"
 hash = "3b8895369640b2a52d3e05f7186185ba6798e44d513f11c5427a0fe9c16769e9"
 metafile = true
@@ -119,8 +124,18 @@ hash = "36debf7653e95a855b4fedacc19027cf2e01960fc0b6d55ef2ffbffbcb455690"
 metafile = true
 
 [[files]]
+file = "mods/data-anchor.pw.toml"
+hash = "64bdeecf2b2217fc22d5237a6bcc3b5f54a4352233040aaa0dbec4e8216f6536"
+metafile = true
+
+[[files]]
 file = "mods/ecliptic-seasons.pw.toml"
 hash = "e4bd780d067c8aa930a371b1b521fdad2379623f2a22ac3e75c90b03d390e3d6"
+metafile = true
+
+[[files]]
+file = "mods/enhanced-celestials.pw.toml"
+hash = "e50f87650e3a5becf3cd1772e8053a8bc04c48859a6fa814e75e6c71eaa87e6c"
 metafile = true
 
 [[files]]
