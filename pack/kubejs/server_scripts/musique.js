@@ -7,7 +7,7 @@
 // - fallow_lune     : une lune d'Enhanced Celestials est levée (lune bleue, des moissons…) ;
 // - fallow_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
 //
-// Classes lues dans les jars : Enhanced Celestials 6.0.2.6 (mêmes appels que lune.js),
+// Classes lues dans les jars : Enhanced Celestials 2 Core 2.0.3.3 (mêmes appels que lune.js),
 // Sable 2.0.6 (Sable.HELPER, ActiveSableCompanion.getTrackingOrVehicleSubLevel).
 
 const MUSIQUE_PERIODE = 40                 // ticks entre deux mises à jour (2 s)
@@ -17,7 +17,7 @@ const MUSIQUE_COEUR_ANCIEN = 'ancient_remnants:elderheart'
 let MUSIQUE_EC = null
 let MUSIQUE_SABLE = null
 try {
-  MUSIQUE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials.EnhancedCelestials')
+  MUSIQUE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials2core.EnhancedCelestials')
 } catch (e) {
   console.warn(`[Fallow] musique.js : Enhanced Celestials introuvable, pas de musique de lune (${e})`)
 }

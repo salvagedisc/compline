@@ -2,7 +2,7 @@
 
 Idée 2 tirée de Wayfarer ([recherche du 2026-10-19](recherche/2026-10-19/wayfarer.md), recommandation 2). No Man's Land (NML 1.6.1) contient déjà une quête : une lune qui parle. Fallow en fait son fil principal, et la fait cohabiter avec les lunes d'Enhanced Celestials, dont la lune blanche. Ce document tranche les points 6 et 18 du [rapport 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
 
-> **État au 2026-10-19.** Tout vient de la lecture des jars (NML 1.6.1, Enhanced Celestials 6.0.2.6, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), décompilés avec `javap` et Vineflower. Un premier passage sur le serveur de test sans joueur a validé la partie serveur ([résultats](#serveur-de-test-2026-10-19)). **Rien n'a été testé avec un joueur.** La liste des [tests](#ce-qui-reste-à-vérifier-en-jeu) dit quoi vérifier.
+> **État au 2026-10-19.** Tout vient de la lecture des jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 puis Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), décompilés avec `javap` et Vineflower. Un premier passage sur le serveur de test sans joueur a validé la partie serveur ([résultats](#serveur-de-test-2026-10-19)). **Rien n'a été testé avec un joueur.** La liste des [tests](#ce-qui-reste-à-vérifier-en-jeu) dit quoi vérifier.
 
 ## En bref
 
@@ -62,30 +62,33 @@ Le reste de la Lune Amie n'a pas de réglage : la fenêtre de nuit, les 3 jours,
 
 Commandes de test (permission 2) : `/meetingpoint` (où est le Point), `/meetingpoint set <pos>`, `/meetingpoint reset`, `/dream <joueur> nomansland:friend_moon_dream start` ou `clear`.
 
-## Enhanced Celestials : comment il choisit ses lunes
+## Enhanced Celestials 2 : comment il choisit ses lunes
 
-- Il n'a **aucun fichier de config**. Tout passe par des datapacks : les évènements (`data/<ns>/enhancedcelestials/lunar/event/`), les réglages de dimension (`data/minecraft/enhancedcelestials/lunar/dimension_settings/overworld.json`) et des surcharges de probabilité (`lunar/event_probability`).
-- Il calcule une **prévision de 100 jours** à l'avance, à partir de la graine du monde. Pour chaque jour, il mélange les évènements, puis il garde le premier qui passe tous les tests : assez de nuits depuis le même évènement, au moins 2 jours depuis n'importe quel évènement, bonne phase de lune, et son tirage de chance.
-- S'il n'y a eu aucun évènement depuis 98 jours, il en force un. Une chance à 0 ne suffit donc pas pour retirer une lune : il faut lui retirer sa dimension.
-- Les lunes n'ont lieu que par **ciel dégagé** (`requires_clear_skies`). Une nuit de pluie garde la lune ordinaire. Fallow est un monde humide, donc ses lunes seront plus rares que les chiffres ci-dessous.
+Depuis le 2026-10-19, le pack utilise **Enhanced Celestials 2** : Core 2.0.3.3 et Default Lunar Events 2.0.1.3, qui remplacent Enhanced Celestials 6.0.2.6 (les deux ne peuvent pas cohabiter). Lu dans les jars, pas encore vu en jeu.
+
+- Pas de fichier de config pour les lunes : tout passe par des datapacks, sous `data/<ns>/enhancedcelestials2core/lunar/`. Un évènement (`event/`) n'est qu'une liste de modificateurs (`event_modifier/` : couleur, taille, texture, son, textes, apparitions, sommeil…). Sa rareté est à part, dans `event_probability/` : par dimension, un **poids**, une priorité et des règles (`min_nights_between`, `valid_moon_phase`).
+- Ids : la lune ordinaire est `enhancedcelestials2core:default`, les lunes livrées sont `enhancedcelestials2defaultlunarevents:<id>` (`blood_moon`, `blue_moon`, `harvest_moon`, `super_moon` et leurs variantes `super_`).
+- Overworld (`data/minecraft/enhancedcelestials2core/lunar/dimension_settings/overworld.json`) : la nuit lunaire commence à 12500 (13000 avant) et il faut au moins 3 jours entre deux lunes (2 avant).
+- Comme avant, une lune n'a lieu que par ciel dégagé ; Fallow est humide, ses lunes seront donc rares.
+- Seul réglage livré : `config/enhancedcelestials2core/translations.json` en `DISABLED`. Par défaut, le mod télécharge des traductions de la communauté et **remplace** les textes existants, donc aussi les nôtres (`pack/kubejs/assets/enhancedcelestials2core/`, `…defaultlunarevents/`).
 
 ### Lunes actives dans Fallow
 
-Fréquences simulées sur 2 000 années de 100 nuits, avant l'effet de la pluie.
+| Lune | Effet | Dans Fallow |
+|---|---|---|
+| Lune des moissons, super lune des moissons | Récoltes plus abondantes | Gardées |
+| Lune bleue, super lune bleue | Couleur bleue | Gardées |
+| Super lune | Lune plus grosse | Gardée |
+| Lune de sang, super lune de sang | Plus de monstres, **sommeil interdit** | **Retirées** |
+| Lune blanche (brouillon Fallow) | Lune pâle, rien d'hostile | Absente |
 
-| Lune | Effet | Avant | Après ce travail |
-|---|---|---|---|
-| Lune des moissons, super lune des moissons | Récoltes doublées ou quadruplées | ≈ 5,2 et 0,3 nuit / 100 | ≈ 5,9 et 0,4 |
-| Lune bleue, super lune bleue | Couleur bleue | ≈ 5,2 et 0,3 | ≈ 5,9 et 0,4 |
-| Super lune | Lune deux fois plus grosse | ≈ 0,3 | ≈ 0,4 |
-| Lune de sang, super lune de sang | Monstres × 2,25 ou × 4,5, **sommeil interdit** | ≈ 5,2 et 0,3 | **retirées** |
-| Lune blanche (brouillon Fallow) | Lune pâle, rien d'hostile, sommeil permis | absente | ≈ 0,3 si on l'ajoute |
+Les fréquences simulées pour Enhanced Celestials 6 (environ 6 nuits sur 100 pour les lunes bleues et des moissons) ne valent plus : EC2 tire avec des poids. Elles sont à remesurer avec `/ec lunarForecast` sur un monde neuf.
 
-La lune de sang est retirée par deux fichiers, copies exactes de ceux du mod avec `"dimension_chances": {}` : `pack/kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/blood_moon.json` et `super_blood_moon.json`. Un monde déjà créé garde les lunes de sang déjà prévues dans sa prévision.
+La lune de sang est retirée par deux fichiers qui vident sa liste de dimensions (`"dimensions": {}`) : `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json` et `super_blood_moon.json`.
 
 ### La lune blanche
 
-Elle n'existe que dans `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json`. Pour l'activer, il faut copier ce fichier dans `pack/kubejs/data/fallow/enhancedcelestials/lunar/event/` et retirer sa clé `_brouillon`. Ses réglages de rareté conviennent : chance 0,04, pleine lune seulement (phase 0), au moins 10 nuits d'écart. Cela donne environ une lune blanche toutes les 300 nuits. Deux points restent à corriger dans le brouillon : la boucle sonore `minecraft:ambient.cave` serait angoissante ([musique](recherche/2026-10-19/musique.md)), et elle n'a pas de texte de nom ni d'annonce (`text_components`). Ce dossier `data/fallow/` sort de ce travail.
+Le brouillon `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` est au format d'Enhanced Celestials 6 et ne se charge plus. Pour l'activer, il faut le réécrire au format EC2 : un évènement `fallow:lune_blanche` (liste de modificateurs), ses modificateurs (couleur pâle, taille, texte de nom et d'annonce, pas de boucle `minecraft:ambient.cave`, qui serait angoissante, [musique](recherche/2026-10-19/musique.md)), et une probabilité sur l'Overworld (pleine lune, au moins 10 nuits d'écart, un poids à régler face aux poids des lunes livrées, 5 à 10).
 
 ## La cohabitation choisie
 
@@ -97,7 +100,7 @@ Elle n'existe que dans `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestia
 1. si une lune d'Enhanced Celestials est levée (presque toujours non : la vérification s'arrête là) ;
 2. si la Lune Amie est éveillée, ou si un joueur se trouve à moins de 64 blocs à plat du Point de rencontre. On n'attend pas l'éveil, car le visage endormi apparaît déjà avant.
 
-Si les deux sont vrais, le script fait le même appel que la commande `/ec setLunarEvent` vers la lune ordinaire. La lune de la nuit est retirée de la prévision. Enhanced Celestials affiche son propre message de fin (par exemple « La "Lune Bleue" se couche... »), et chaque joueur de l'Overworld lit dans sa barre d'action : « La lune pâlit. Une autre présence occupe le ciel cette nuit. » Les lunes suivantes restent prévues à leur date.
+Si les deux sont vrais, le script fait le même appel que la commande `/ec setLunarEvent` vers la lune ordinaire (`LunarForecast.setLunarEventTonight`). La lune de la nuit est coupée, la suite de la prévision ne bouge pas. Enhanced Celestials affiche son propre message de fin (par exemple « La "Lune Bleue" se couche... »), et chaque joueur de l'Overworld lit dans sa barre d'action : « La lune pâlit. Une autre présence occupe le ciel cette nuit. » Les lunes suivantes restent prévues à leur date.
 
 Pourquoi la Lune Amie gagne : c'est le mystère central, et elle ne vient que si un joueur fait le voyage. La lune blanche reste rare et revient plus tard. Le prix : la lune se couche **pour tout le serveur**, même pour un joueur resté chez lui. Pour lui, c'est un signe que quelqu'un est au Point de rencontre.
 
@@ -133,7 +136,7 @@ Si l'équipe préfère que la lune blanche continue pour les autres joueurs, la 
 | L3 | Ruine des alchimistes, regarder la gravure 2 s | Zoom et son. Dormir dans les 3 jours lance le rêve |
 | L4 | Rêve jusqu'au bout | Succès « Premier contact ». La nuit suivante, l'ombre dans le ciel vers le Point (comparer avec `/meetingpoint`) |
 | L5 | Point de rencontre, la nuit, regarder la lune | Le visage apparaît puis s'éveille, comme avec NML seul, avec ATMOSPHERICS et le module `ciel` (test C6 du [mod `fallow`](mod-fallow.md)). Aucune lune colorée d'Enhanced Celestials à côté |
-| L6 | `/ec setLunarEvent enhancedcelestials:blue_moon`, puis aller au Point | En 2 s au plus : message d'Enhanced Celestials et message Fallow, la lune bleue s'efface. `/ec lunarForecast` montre la suite inchangée. Le coucher lui-même est validé sur le serveur ; restent les messages et la détection d'un vrai joueur |
+| L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, puis aller au Point | En 2 s au plus : message d'Enhanced Celestials et message Fallow, la lune bleue s'efface. `/ec lunarForecast` montre la suite inchangée. Le coucher lui-même est validé sur le serveur ; restent les messages et la détection d'un vrai joueur |
 | L7 | Même chose avec un joueur loin du Point | Rien ne change pour lui tant que personne n'est au Point |
 | L8 | Offrandes : os, fleur, carte vierge, écaille de tortue | Répliques en français, carte du bassin, réplique `scute` en français |
 | L9 | Éteindre une bougie, puis toutes | Répliques « négatives » en français, puis lune fâchée |
@@ -144,6 +147,8 @@ Si l'équipe préfère que la lune blanche continue pour les autres joueurs, la 
 | L14 | Fréquence des ruines des alchimistes | Assez de ruines pour trouver une gravure (Sparse Structures pourrait les raréfier, [12-verification](12-verification.md)) |
 
 ## Serveur de test (2026-10-19)
+
+Ces résultats datent d'Enhanced Celestials 6.0.2.6 ; avec EC2, refaire au moins L1, L2, L5 et L6.
 
 Serveur NeoForge sans interface, monde neuf (graine « fallow »), **sans joueur**. Les commandes d'Enhanced Celestials s'écrivent `/ec setLunarEvent …` et `/ec lunarForecast` (ou `/enhancedcelestials …`), pas `/setLunarEvent` seul.
 
@@ -165,7 +170,8 @@ Non vérifiable sans joueur : la détection d'un joueur près du Point, les mess
 |---|---|
 | `pack/config/nomansland-common.toml` | `friendMoonDimensions` sur l'Overworld ; distances du Point écrites telles quelles |
 | `pack/kubejs/server_scripts/lune.js` | Une seule lune à la fois ; la note froissée (LootJS) |
-| `pack/kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/blood_moon.json`, `super_blood_moon.json` | Lunes de sang retirées de l'Overworld |
+| `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json`, `super_blood_moon.json` | Lunes de sang retirées de l'Overworld |
+| `pack/config/enhancedcelestials2core/translations.json` | Pas de téléchargement de traductions qui écraseraient les nôtres |
 | `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json` | Réplique `scute` ajoutée |
 | `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/negative/fr_fr.json` | Pool complet, « Oopsie. » traduit |
 

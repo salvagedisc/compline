@@ -11,10 +11,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
-import dev.corgitaco.enhancedcelestials.EnhancedCelestials;
-import dev.corgitaco.enhancedcelestials.api.lunarevent.client.LunarEventClientSettings;
-import dev.corgitaco.enhancedcelestials.client.ECWorldRenderer;
-import dev.corgitaco.enhancedcelestials.lunarevent.EnhancedCelestialsLunarForecastWorldData;
+import dev.corgitaco.enhancedcelestials2core.EnhancedCelestials;
+import dev.corgitaco.enhancedcelestials2core.api.lunarevent.LunarEvent;
+import dev.corgitaco.enhancedcelestials2core.api.lunarevent.LunarForecast;
+import dev.corgitaco.enhancedcelestials2core.client.ECWorldRenderer;
 import io.github.salvagedisc.fallow.Fallow;
 import io.github.salvagedisc.fallow.FallowConfig;
 import java.util.Optional;
@@ -114,7 +114,7 @@ public final class MoonOverlay {
         if (level == null) {
             return;
         }
-        Optional<EnhancedCelestialsLunarForecastWorldData> data = EnhancedCelestials.lunarForecastWorldData(level);
+        Optional<LunarForecast> data = EnhancedCelestials.lunarForecastWorldData(level);
         if (data.isEmpty()) {
             return;
         }
@@ -124,12 +124,12 @@ public final class MoonOverlay {
             return;
         }
 
-        EnhancedCelestialsLunarForecastWorldData forecast = data.get();
-        LunarEventClientSettings current = forecast.currentLunarEvent().getClientSettings();
-        LunarEventClientSettings previous = forecast.lastLunarEvent().getClientSettings();
-        ResourceLocation texture = current.moonTextureLocation() != null ? current.moonTextureLocation() : VANILLA_MOON;
-        // moon_size est le demi-côté du quad à 100 blocs (20 pour la lune vanilla), fondu entre deux évènements.
-        float size = Mth.clampedLerp(previous.moonSize(), current.moonSize(), forecast.getBlend()) * atmosphericsMoonScale();
+        LunarForecast forecast = data.get();
+        LunarEvent current = forecast.currentLunarEvent();
+        LunarEvent previous = forecast.lastLunarEvent();
+        ResourceLocation texture = current.getMoonTextureLocation() != null ? current.getMoonTextureLocation() : VANILLA_MOON;
+        // La taille est le demi-côté du quad à 100 blocs (20 pour la lune vanilla), fondue entre deux évènements.
+        float size = Mth.clampedLerp(previous.getMoonSize(), current.getMoonSize(), forecast.getBlend()) * atmosphericsMoonScale();
         if (size <= 0.0F) {
             return;
         }

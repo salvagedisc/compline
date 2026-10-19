@@ -43,6 +43,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Clumps : les orbes d'XP n'existent plus.
 
 ### Modifié
+- Enhanced Celestials 6.0.2.6 → Enhanced Celestials 2 (Core 2.0.3.3 + Default Lunar Events 2.0.1.3) : nouveaux paquets Java et nouveau format de données ; `lune.js`, `musique.js` et le module `ciel` du mod `fallow` (0.2.1) portés, lunes de sang retirées au nouveau format, traductions françaises, téléchargement des traductions de la communauté coupé.
 - JEI 19.69.0.456 (bêta) → 19.51.0.418 : depuis la 19.52, JEI envoie le transfert de recette depuis une autre méthode ; le mixin obligatoire d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plantait en entrant dans un monde (rapport de plantage du premier test). 46 textes de JEI traduits en plus.
 - Dépôt réorganisé : `README` et `CONTRIBUTING` réécrits, index de la documentation, feuille de route, emplacement `docs/plan/` pour le plan du modpack, `docs/` renommé `docs/conception/`, registre des mods classé par domaine.
 - Branches `test/agriculture`, `test/faune` et `test/structures` fusionnées dans `main`.

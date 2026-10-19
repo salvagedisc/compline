@@ -76,7 +76,7 @@ def modrinth = { String slug ->
 dependencies {
     // Module ciel (client)
     compileOnly modrinth('atmospherics')
-    compileOnly modrinth('enhanced-celestials')
+    compileOnly modrinth('enhanced-celestials-2-core')
     compileOnly modrinth('data-anchor')   // classes parentes des données lunaires d'Enhanced Celestials
     compileOnly modrinth('corgilib')      // types référencés par l'API d'Enhanced Celestials
 

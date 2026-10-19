@@ -1,8 +1,8 @@
 # Le mod custom `fallow`
 
-Le mod proposé au [12.4](12-verification.md#124-le-mod-custom-fallow) et retenu par la décision 17 du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012). Il est fait de modules qu'on active un par un. La version 0.2.0 contient les modules **ciel**, **sac** et **xp**.
+Le mod proposé au [12.4](12-verification.md#124-le-mod-custom-fallow) et retenu par la décision 17 du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012). Il est fait de modules qu'on active un par un. La version 0.2.1 contient les modules **ciel**, **sac** et **xp**.
 
-> **État au 2026-10-19.** La version 0.2.0 compile (`./gradlew build`), mais **rien n'a été testé en jeu**. Tout ce qui suit vient de la lecture du code des mods visés (jars ouverts avec `javap`). La liste des [tests en jeu](#tests-en-jeu) dit ce qu'il faut vérifier avant de s'y fier.
+> **État au 2026-10-19.** La version 0.2.1 compile (`./gradlew build`, contre Enhanced Celestials 2), mais **rien n'a été testé en jeu**. Tout ce qui suit vient de la lecture du code des mods visés (jars ouverts avec `javap`). La liste des [tests en jeu](#tests-en-jeu) dit ce qu'il faut vérifier avant de s'y fier.
 
 ## Construire et mettre à jour
 
@@ -174,7 +174,7 @@ Rien de ceci n'a été fait. À passer sur une instance du pack, puis à cocher 
 
 Points fragiles connus :
 - ATMOSPHERICS : son mixin en tête de `renderSky`, la texture `moon_phases.png`, le nom de `BiomeBlendUtil.resetCache` ;
-- Enhanced Celestials : `ECWorldRenderer.changeMoonColor` et les champs de `LunarEventClientSettings` ;
+- Enhanced Celestials 2 : `ECWorldRenderer.changeMoonColor`, `LunarEvent.getMoonTextureLocation` et `getMoonSize` (mod id `enhancedcelestials2core`) ;
 - Traveler's Backpack : le constructeur d'`EffectFluid` et le moment où il vide son registre ;
 - Thirst Was Reclaimed : `WaterPurity` et `ThirstHelper`.
 - Minecraft et NeoForge : la lecture de `Player.experienceLevel` dans `AnvilMenu.mayPickup`, les noms des couches `EXPERIENCE_BAR` et `EXPERIENCE_LEVEL`, l'annulation de `AnvilUpdateEvent`.

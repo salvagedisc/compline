@@ -21,6 +21,10 @@ file = "config/defaultoptions/options.txt"
 hash = "4fcd0f1b5ab8db53bc35261934543bfe55f191bb51c23c52d53db2384fae0637"
 
 [[files]]
+file = "config/enhancedcelestials2core/translations.json"
+hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
+
+[[files]]
 file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 
@@ -589,10 +593,6 @@ file = "kubejs/assets/emi/lang/fr_fr.json"
 hash = "4d9d0f283b38c4a03922ffb20971b0cccd2f28d45413230de0b4e1a00b3aec5b"
 
 [[files]]
-file = "kubejs/assets/enhancedcelestials/lang/fr_fr.json"
-hash = "371f5ffe03ac0d23458e93120d76d324089c5532dc4aebfe456dc5e89c4e71a2"
-
-[[files]]
 file = "kubejs/assets/entity_model_features/lang/fr_fr.json"
 hash = "88b99bab3cc367785c3385c9aa17075d105eb8a97383a3f008ac35258e6f48fd"
 
@@ -889,12 +889,12 @@ file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
 [[files]]
-file = "kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/blood_moon.json"
-hash = "7646ad2ac12db13fe4917eea7a597487739e799f3a4a1f2001718b5a862fcd43"
+file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
+hash = "ef3359093a5a8613d4641081bcbbee1d32626139c4abf07242a969be86e3cecd"
 
 [[files]]
-file = "kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/super_blood_moon.json"
-hash = "d6ffec7e8952de9d1545c365533111e99d3b72622e9350788ef2e641de0fd292"
+file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/super_blood_moon.json"
+hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
 
 [[files]]
 file = "kubejs/data/fallow/tags/item/peaux_brutes.json"
@@ -926,11 +926,11 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"
-hash = "861a0530aed39775f55f9239ae8c36b699fa2ba4fbd0cbab286de8a0a0ccb3f0"
+hash = "7b65c2980a6378de0ba1f1bd24adab3206bcc88d49eedd0916cc2fc82a8fbbb7"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
-hash = "69483a8c648bac8036d49c5915a80413dbc09456e3a330dc2cce201809b6d3de"
+hash = "a30162f06015cff75d6b5c80154ed9a195e7e98a446cc3ee5dd97d21a08c3056"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
@@ -1156,8 +1156,13 @@ hash = "67bb77eae0b644960be3b1074178ceb5d54facbb42f326981b9d94625238a54a"
 metafile = true
 
 [[files]]
-file = "mods/enhanced-celestials.pw.toml"
-hash = "e50f87650e3a5becf3cd1772e8053a8bc04c48859a6fa814e75e6c71eaa87e6c"
+file = "mods/enhanced-celestials-2-core.pw.toml"
+hash = "092c2fe392d74839d1210f7c5ecf90de3f7c230cc3f5ca064cf284b29ec97f30"
+metafile = true
+
+[[files]]
+file = "mods/enhanced-celestials-2-default-lunar-events.pw.toml"
+hash = "70f586b80beb657a8676b1147b1b96c4abd0aa421c819aa138038e082c41bc4d"
 metafile = true
 
 [[files]]
@@ -1186,8 +1191,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.2.0.jar"
-hash = "57d56401a597c381078690ca4ec5c65ad79d27a64553dd73a8db38a6c054ffbb"
+file = "mods/fallow-0.2.1.jar"
+hash = "c06e31fa02c69df77d4b895f0e038ec66d5c5d9879e1b59a2c428a4447dbe46d"
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"
