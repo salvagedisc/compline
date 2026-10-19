@@ -51,3 +51,29 @@ jobs:
         with:
           name: ${{ steps.export.outputs.name }}
           path: dist/*.mrpack
+
+  # Le mod custom fallow (mods-custom/fallow/) doit toujours compiler.
+  mod-fallow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+          cache-dependency-path: |
+            mods-custom/fallow/*.gradle
+            mods-custom/fallow/gradle.properties
+            mods-custom/fallow/gradle/wrapper/gradle-wrapper.properties
+            pack/mods/*.pw.toml
+
+      - name: Build fallow mod
+        working-directory: mods-custom/fallow
+        run: ./gradlew build --console=plain
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fallow-mod-${{ github.sha }}
+          path: mods-custom/fallow/build/libs/*.jar

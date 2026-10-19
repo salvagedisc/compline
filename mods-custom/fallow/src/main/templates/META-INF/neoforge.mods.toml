@@ -1,0 +1,33 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="salvagedisc"
+description='''
+Liens entre les mods du modpack Fallow, en modules activables (config/fallow-client.toml, config/fallow-common.toml).
+ciel : la lune d'Enhanced Celestials redessinée sous ATMOSPHERICS, cache de brume vidé après un changement de biome.
+sac : boire au tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed.
+Chaque module ne se charge que si les mods qu'il relie sont présents.
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+# Seule dépendance dure : NeoForge (et Minecraft). Les mods reliés sont détectés au chargement.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
