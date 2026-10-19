@@ -9,7 +9,9 @@ pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
     ├── atmospherics/preset/fallow_v1.json          la brume, biome par biome
-    └── fallow/polytone/biome_modifiers/*.json      herbe, feuillage, eau (23 fichiers)
+    ├── fallow/polytone/biome_modifiers/*.json      herbe, feuillage, eau (23 fichiers)
+    ├── fallow/sounds.json                         évènements des morceaux du paquet musical ([musique](musique.md))
+    └── fallow/sounds/music/*.ogg                  10 morceaux libres, crédits dans CREDITS.md
 ```
 
 Il est activé au premier lancement par Default Options (`pack/config/defaultoptions-common.toml`, en dernier, donc au-dessus des autres packs). Hors du pack, un seul réglage : `pack/config/nomansland-client.toml` coupe le brouillard de No Man's Land (`[fog_modifiers] fogModifiers = false`) pour qu'ATMOSPHERICS soit seul responsable de la brume (L6 du rapport 3). C'est une config de NML, pas d'ATMOSPHERICS : elle ne peut pas aller dans un pack de ressources.

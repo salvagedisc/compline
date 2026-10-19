@@ -1,0 +1,29 @@
+{
+  "values": [
+    "minecraft:bamboo_jungle",
+    "minecraft:birch_forest",
+    "minecraft:dark_forest",
+    "minecraft:forest",
+    "minecraft:grove",
+    "minecraft:jungle",
+    "minecraft:mangrove_swamp",
+    "minecraft:mushroom_fields",
+    "minecraft:old_growth_birch_forest",
+    "minecraft:old_growth_pine_taiga",
+    "minecraft:old_growth_spruce_taiga",
+    "minecraft:snowy_taiga",
+    "minecraft:swamp",
+    "minecraft:taiga",
+    "minecraft:windswept_forest",
+    "nomansland:autumnal_forest",
+    "nomansland:bayou",
+    "nomansland:blackwater_river",
+    "nomansland:bog",
+    "nomansland:boreal_forest",
+    "nomansland:dark_swamp",
+    "nomansland:dark_taiga",
+    "nomansland:frozen_woods",
+    "nomansland:old_growth_forest",
+    "nomansland:old_growth_forest_edge"
+  ]
+}

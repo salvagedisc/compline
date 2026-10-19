@@ -13,6 +13,7 @@ Une fiche par décision tranchée : le contexte, les options comparées, le choi
 | [0007](0007-ambiance-performance.md) | Ambiance & performance | Retenus ; Distant Horizons en attente |
 | [0008](0008-enchantement.md) | Enchantement | Immersive Enchanting retenu ; Matrix de Quark en repli |
 | [0009](0009-xp.md) | Retrait de l'expérience | Retenu ; module `xp` du mod `fallow` 0.2.0 |
+| [0010](0010-musique.md) | Musique | True Adaptive Music et paquet `fallow` retenus ; Reactive Music écarté |
 
 ## Modèle
 

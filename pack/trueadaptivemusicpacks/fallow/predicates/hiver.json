@@ -1,0 +1,6 @@
+{
+  "condition": "eclipticseasons:season",
+  "require": {
+    "season": "winter"
+  }
+}

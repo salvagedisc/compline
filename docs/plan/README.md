@@ -20,6 +20,7 @@ Un monde permanent, presque vide et énigmatique, dans l'esprit du trailer de No
 | [lune-amie.md](lune-amie.md) | La Lune Amie de No Man's Land comme fil principal : le chemin jusqu'au Point de rencontre, la cohabitation avec Enhanced Celestials, les lunes de sang retirées |
 | [sante.md](sante.md) | La santé maximale : un cœur perdu par mort (plancher de 5), les éclats de vie trouvés en explorant |
 | [tannerie.md](tannerie.md) | La tannerie : peau brute, peau préparée aux cendres, trempage sur le plateau en bambou |
+| [musique.md](musique.md) | La musique : True Adaptive Music, l'arbre du paquet `fallow`, les prédicats du serveur, les tests en jeu ([0010](../decisions/0010-musique.md)) |
 | [xp.md](xp.md) | Le retrait de l'expérience : étude des sources et des usages, application ([0009](../decisions/0009-xp.md)) |
 | [traduction.md](traduction.md) | La traduction française : où vivent nos textes, le contrôle `check-fr`, le glossaire, ce qui reste en anglais |
 | [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | Les six rapports de la vérification (le 6 traite des gardiens des monuments), avec les preuves (jars ouverts, versions, tickets) et la liste des tests en jeu |

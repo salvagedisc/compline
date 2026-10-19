@@ -1,7 +1,8 @@
 # Fallow : packs de ressources activés au premier lancement (et ajoutés ensuite
 # à chaque mise à jour du pack, une seule fois chacun). Du moins prioritaire au
 # plus prioritaire : les extensions de Fresh Animations passent au-dessus de lui,
-# et fallow-ambiance (dossier du pack) passe en dernier, au-dessus de tous.
+# Supernova apporte trois morceaux du paquet musical, et fallow-ambiance
+# (dossier du pack) passe en dernier, au-dessus de tous.
 defaultResourcePacks = [
 	"file/Better-Leaves-9.6.zip",
 	"file/FreshAnimations_v1.11_1.20+.zip",
@@ -9,5 +10,6 @@ defaultResourcePacks = [
 	"file/FA+Objects-v2.1.2.zip",
 	"file/FA+Emissive-v1.6.zip",
 	"file/FA+Player-v1.1.zip",
+	"file/supernova-pack.zip",
 	"file/fallow-ambiance"
 ]

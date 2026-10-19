@@ -117,7 +117,8 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | More Darkness | `more-darkness` | ✅ | CS | Vraies nuits |
 | AmbientSounds | `ambientsounds` | ✅ | C | Sons de biome |
 | Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Écho, étouffement |
-| True Adaptive Music | `true-adaptive-music` | 🟡 (proposé) | CS | Musique par situation (brume, clairière, saison, lune, dirigeable), longs silences réglables ([recherche](plan/recherche/2026-10-19/musique.md)) |
+| True Adaptive Music | `true-adaptive-music` | ✅ | CS | Musique par situation (brume, clairière, saison, lune, dirigeable), longs silences ([0010](decisions/0010-musique.md)) |
+| Paquet musical `fallow` | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | L'arbre des situations et les 29 morceaux choisis par l'équipe |
 | Sounds | `sound` | ✅ | C | 170 sons d'interface, d'objets et de blocs |
 | Auroras | `auroras` | ✅ | C | Aurore dans les biomes froids |
 | Drip Sounds | `dripsounds` | ✅ | C | Gouttes dans les grottes (bêta) |
@@ -174,7 +175,8 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | FA : Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Détails, objets animés, yeux qui brillent |
 | FA : Player Extension | `fa-player-extension` | ✅ | Le joueur dans le même style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Feuillages touffus |
-| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML |
+| Supernova (Original Music Pack) | `supernova-ost` | ✅ (version qui n'écrase pas la musique vanilla) | Trois morceaux du paquet musical (CC-BY-NC-SA 4.0, [musique](plan/musique.md)) |
+| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Bibliothèques
 

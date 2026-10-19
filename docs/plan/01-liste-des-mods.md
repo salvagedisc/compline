@@ -106,7 +106,7 @@ Colonne « Modrinth » : vérifiée le 2026-10-10 sur l'API Modrinth. **oui** = 
 | **Cosy Critters & Creepy Crawlies** | ➕ recommandé | C | oui | Oiseaux et papillons de nuit |
 | **Enhanced Celestials** | ➕ recommandé | CS | oui | Lunes (sans lune de sang) |
 | **Simple Voice Chat** | ➕ recommandé | CS | oui | Voix de proximité |
-| **Reactive Music** (remplace Presence Not Position, absent) | ➕ recommandé | C | oui | Musique selon le lieu, l'heure et le danger ; songpack à choisir |
+| **Reactive Music** (remplace Presence Not Position, absent) (remplacé par True Adaptive Music, [0010](../decisions/0010-musique.md)) | ➕ recommandé | C | oui | Musique selon le lieu, l'heure et le danger ; songpack à choisir |
 | Particle Rain | 🧪 | C | oui | Pluie en particules |
 | Simple Clouds | 🧪 client seul | C | oui | Orages visibles de loin |
 | Longwings | ◻ optionnel | CS | oui | Papillons à collectionner |
