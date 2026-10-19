@@ -27,6 +27,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Enchantement : Immersive Enchanting (+ AlfinoLib), structures du mod coupées, traduction française ([0008](docs/decisions/0008-enchantement.md)).
 - Outillage : `npm run sync` rapatrie les mods de l'instance de test, `npm run check-deps` vérifie les dépendances réelles des jars ; CI `build` (export `.mrpack` à chaque push) et `release` (sur tag).
 - Mod custom `fallow` 0.1.0 (`mods-custom/fallow/`, jar dans `pack/mods/`) : module ciel (lune d'Enhanced Celestials visible sous ATMOSPHERICS, cache de brume vidé après un changement de biome) et module sac (le tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed). Non testé en jeu ; CI `build` le compile.
+- Tout en français : jeu en français au premier lancement (Default Options) ; traduction des textes manquants de 94 namespaces de mods (≈25 300 textes) et de leurs livres (dictionnaire d'Alex's Mobs, guide des hamsters, chronique d'Ecliptic Seasons) dans `pack/kubejs/assets/` ; `npm run check-fr` (aussi en CI) refuse un texte sans traduction ou une variable perdue ([traduction](docs/plan/traduction.md)).
 
 ### Retiré
 - Entity Culling : casse les engins Create Aeronautics et Sable.

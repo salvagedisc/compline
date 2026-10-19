@@ -17,6 +17,7 @@ Un monde permanent, presque vide et énigmatique, dans l'esprit du trailer de No
 | [12-verification.md](12-verification.md) | **Vérification complète du 2026-10-18** : elle corrige les chapitres 10 et 11, détaille les liens entre mods (Overgeared, Kaleidoscope, Create, monde, rendu), propose le mod custom `fallow` et les décisions 14 à 18 |
 | [fallow-ambiance.md](fallow-ambiance.md) | Le pack de ressources maison : preset ATMOSPHERICS, couleurs Polytone, valeurs choisies et réglages à faire en jeu |
 | [mod-fallow.md](mod-fallow.md) | Le mod custom `fallow` 0.1.0 (modules `ciel` et `sac`) : fonctionnement, ce qui est déduit du code, tests en jeu |
+| [traduction.md](traduction.md) | La traduction française : où vivent nos textes, le contrôle `check-fr`, le glossaire, ce qui reste en anglais |
 | [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | Les six rapports de la vérification (le 6 traite des gardiens des monuments), avec les preuves (jars ouverts, versions, tickets) et la liste des tests en jeu |
 | [kubejs-brouillons/](kubejs-brouillons/) | Brouillons de scripts et de données, rangés comme `pack/kubejs/` ; à corriger selon le chapitre 12 avant usage |
 

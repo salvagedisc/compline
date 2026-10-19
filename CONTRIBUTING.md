@@ -20,6 +20,7 @@ Conventions de travail du dépôt. Elles valent pour les humains comme pour les 
 | Script KubeJS (registres, items, tags) | `pack/kubejs/startup_scripts/` |
 | Script KubeJS (recettes, règles serveur, apparitions) | `pack/kubejs/server_scripts/` |
 | Script KubeJS (affichage, JEI/EMI, tooltips) | `pack/kubejs/client_scripts/` |
+| Traduction française d'un mod (langue, livres) | `pack/kubejs/assets/<namespace>/` |
 | Données datapack (worldgen, loot tables, tags, structures) | `pack/kubejs/data/fallow/` (ou `data/<namespace>/` pour surcharger un mod) |
 | Outillage (Node.js, sans dépendance) | `scripts/` + tests dans `scripts/test/` |
 | Plan complet du modpack | `docs/plan/` |
@@ -34,6 +35,7 @@ Les datapacks passent par KubeJS : NeoForge ne charge pas de datapack global san
 2. Le passer au **filtre des 5 questions** ([vision](docs/vision.md)) : change-t-il le gameplay ? s'intègre-t-il ? tient-il 100 h ? apporte-t-il une mécanique ? évite-t-il les doublons ?
 3. L'ajouter : `cd pack && packwiz mr add <slug>` (ou `npm run sync`), puis vérifier son côté (`client` / `server` / `both`).
 4. Lancer `npm run check-deps` : Modrinth ne déclare pas toujours toutes les dépendances.
+   Puis `npm run check-fr` : tout texte du mod doit être en français ([traduction](docs/plan/traduction.md)).
 5. Mettre à jour [docs/mods.md](docs/mods.md) et, si une comparaison a eu lieu, créer une fiche dans [docs/decisions/](docs/decisions/README.md).
 6. Ajouter une ligne au `CHANGELOG.md` (section `[Unreleased]`).
 7. **Un commit par mod** :
