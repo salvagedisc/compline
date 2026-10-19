@@ -14,6 +14,8 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
+    private static final ModConfigSpec.BooleanValue SAC_ENABLED;
+    private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -33,6 +35,16 @@ public final class FallowConfig {
         CLIENT_SPEC = client.build();
 
         ModConfigSpec.Builder common = new ModConfigSpec.Builder();
+        common.comment("Module sac : il relie Traveler's Backpack et Thirst Was Reclaimed.").push("sac");
+        SAC_ENABLED = common
+                .comment("Interrupteur du module. Vrai : boire de l'eau au tuyau du sac désaltère, selon la pureté",
+                        "de l'eau du réservoir (effets de l'eau sale compris). Faux : le tuyau ne désaltère pas.")
+                .define("enabled", true);
+        SAC_BOTTLES_PER_DRINK = common
+                .comment("Une gorgée au tuyau (le sac retire 1000 mB du réservoir) vaut ce nombre de bouteilles d'eau",
+                        "au sens de Thirst Was Reclaimed (hydratation et désaltération de minecraft:potion).")
+                .defineInRange("bottlesPerDrink", 1, 1, 4);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -49,6 +61,14 @@ public final class FallowConfig {
 
     public static boolean cielClearFogOnBiomeUpdate() {
         return cielEnabled() && read(CLIENT_SPEC, CIEL_CLEAR_FOG_ON_BIOME_UPDATE);
+    }
+
+    public static boolean sacEnabled() {
+        return read(COMMON_SPEC, SAC_ENABLED);
+    }
+
+    public static int sacBottlesPerDrink() {
+        return read(COMMON_SPEC, SAC_BOTTLES_PER_DRINK);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
