@@ -1903,6 +1903,10 @@ file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.o
 hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/moon_phases.png"
+hash = "3c2c019418285ea52bc74666acc600d8577351cb89a1192ec3416a8dbfbc19e1"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
 hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
 
