@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "fallow:peau_brute",
+    {
+      "id": "naturalist:hide",
+      "required": false
+    }
+  ]
+}
