@@ -1611,8 +1611,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v1.json"
-hash = "8022d84988353f51d5edd3a0c03a8b396b8fbb2ea0cebc7d21e76e753639cac9"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v2.json"
+hash = "1ee7404f8162125ee40876e318d9c5f754da83aace4790166e4c67bea2a249f4"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
@@ -1656,15 +1656,15 @@ hash = "c3776c2aab53d4d02380de9648f4e6d3c238b067ac879bf703c07627f8dacd0e"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_desert_river.json"
-hash = "3fe5ff63e0f82b5efb4ea057a4c639aab176ca2f0bc97e45e5babe56b5f3033c"
+hash = "c7745e24dee134bc1d5e050dc2a574bf54db728c4f2ea016fc04cd8373ae63af"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_shore.json"
-hash = "252b2d5b4e50bd7d6f8128742085d1c751239854df33945fc27494bf111dad7d"
+hash = "0b86360567fc00d67f91a248727a6f6a3bfc94d1c5af72acc4e9a6f4abd25921"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_woods.json"
-hash = "9578b5b642caccdfe5171da6d7c0ef45f9994a46267c5709776fa5312e57525f"
+hash = "5b20afc640fe2865624e4df7405af66b553d91e8c0cf99705b4a6f55d99ebe72"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lavender_field.json"
@@ -1680,7 +1680,7 @@ hash = "0c6490e0a0f456836327a68d8126b224a9a66f501523355504978b86c95e86a9"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_grove.json"
-hash = "70cb7c2bafd865ee59b8b9fe20550f5f19eed1b477c1fb0ae008fe2cff98929e"
+hash = "acee6d0c8942611b47ca0f3b38d1f85f27287d8140182877fa779b0e4dcc6e25"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_mud_beach.json"
@@ -1705,6 +1705,10 @@ hash = "7bcb43ab300a05e107ef72b9bd3e972affc029ea55e6b215cbaf371e944a5a3b"
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_tropical_beach.json"
 hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/vanilla_neige.json"
+hash = "cf456c0a78cc30df14ec6327a911c05e701119f1b138db1fae0e652a89c6cee3"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"

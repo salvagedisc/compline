@@ -4,5 +4,11 @@
   ],
   "grass_color": "#99b5a1",
   "foliage_color": "#57866b",
-  "water_color": "#4966a0"
+  "water_color": "#4966a0",
+  "particle": {
+    "options": {
+      "type": "minecraft:snowflake"
+    },
+    "probability": 0.004
+  }
 }
