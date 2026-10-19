@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:autumnal_forest"
+  ],
+  "grass_color": "#8f9053",
+  "foliage_color": "#a59553",
+  "water_color": "#4583a6"
+}

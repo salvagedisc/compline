@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:desert_river"
+  ],
+  "grass_color": "#9fb575",
+  "foliage_color": "#899e37",
+  "water_color": "#47a0be"
+}
