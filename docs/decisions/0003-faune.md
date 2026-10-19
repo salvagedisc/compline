@@ -21,6 +21,9 @@ Choix de l'utilisateur contre la recommandation initiale (doublons, portage tier
 - les doublons (ours, cerfs, crocodiliens, serpents, oiseaux : une seule version par espèce) ;
 - les créatures d'Alex's Mobs qui cassent la DA (fantaisistes ou comiques).
 
+## Doublons (2026-10-19)
+Un seul modèle par espèce, le meilleur après comparaison des modèles et des animations, et non plus une règle de couche : Naturalist l'emporte sur terre et pour plusieurs poissons, Hybrid Aquatic pour les requins, méduses, orques et poulpes. Aucune coupe pour raison de style : Companions! reste en entier. Détail : [doublons](../plan/doublons.md).
+
 ## Untitled Duck Mod retiré (2026-10-19)
 Retiré par l'équipe. Le canard de Naturalist revient ; la réplique d'offrande de l'oie de NML vise désormais ce canard.
 

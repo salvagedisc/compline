@@ -20,6 +20,7 @@ Un monde permanent, presque vide et énigmatique, dans l'esprit du trailer de No
 | [mod-fallow.md](mod-fallow.md) | Le mod custom `fallow` 0.2.1 (modules `ciel`, `sac` et `xp`) : fonctionnement, ce qui est déduit du code, tests en jeu |
 | [lune-amie.md](lune-amie.md) | La Lune Amie de No Man's Land comme fil principal : le chemin jusqu'au Point de rencontre, la cohabitation avec Enhanced Celestials, les lunes de sang retirées |
 | [sante.md](sante.md) | La santé maximale : un cœur perdu par mort (plancher de 5), les éclats de vie trouvés en explorant |
+| [doublons.md](doublons.md) | Un seul modèle par espèce : comparaison des doublons entre Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings et Friends & Foes, coupes, tests en jeu |
 | [faune-nml.md](faune-nml.md) | La faune de No Man's Land revient au vanilla : remodèles et textures coupés, cerf, oie, bar, tortue et Frienderman retirés, tests en jeu |
 | [tannerie.md](tannerie.md) | La tannerie : peau brute, peau préparée aux cendres, trempage sur le plateau en bambou |
 | [musique.md](musique.md) | La musique : True Adaptive Music, l'arbre du paquet `fallow`, les prédicats du serveur, les tests en jeu ([0010](../decisions/0010-musique.md)) |
