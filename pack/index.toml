@@ -813,6 +813,10 @@ file = "kubejs/assets/ponder/lang/fr_fr.json"
 hash = "1b941cf869ea0fd6d99c10a23f9e1ba4f813fc6f28d04d905b7c54cbce271b55"
 
 [[files]]
+file = "kubejs/assets/puddleflood/lang/fr_fr.json"
+hash = "fa9bf17ff27419d305b720759034a7e70a1774d2b2194eaea92d4231e7c0393b"
+
+[[files]]
 file = "kubejs/assets/punchy/lang/fr_fr.json"
 hash = "e1b4965eb10dca790df00e810d305f4b75c590006f47e81a95b917ad726de0c9"
 
@@ -1605,6 +1609,11 @@ metafile = true
 [[files]]
 file = "mods/polytone.pw.toml"
 hash = "cbac7982f1372646ae50fb6ddfe7d75abd43101f5b461938e67c206f20a7fd7c"
+metafile = true
+
+[[files]]
+file = "mods/puddles-floods.pw.toml"
+hash = "2f1ad71531f9ce689aa536d9bd500253e8b7af9c8dee80f5f59800bdd6ecabd0"
 metafile = true
 
 [[files]]
