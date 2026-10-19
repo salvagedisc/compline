@@ -24,7 +24,7 @@ test('scute offering loads and accepts only scutes that exist', async () => {
 // dialogues must react to a creature that is still in the world.
 test('goose and tortoise offerings target creatures that still spawn', async () => {
   const wildex = await readFile(join(packDir, 'config', 'wildex', 'wildex-common.toml'), 'utf8');
-  const excluded = JSON.parse(wildex.match(/excludedModIds = (\[.*\])/)[1]);
+  const excluded = JSON.parse(wildex.match(/excludedModIds = (\[[^\]]*\])/)[1]);
   for (const name of ['goose', 'tortoise']) {
     const offering = await readOffering(join('entity', `${name}.json`));
     const entity = offering.condition.entity;
