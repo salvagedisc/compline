@@ -53,6 +53,10 @@ file = "config/shouldersurfing-client.toml"
 hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
 
 [[files]]
+file = "config/supplementaries-client.toml"
+hash = "8f39475f5d53b1244325fcc7b0dda74e86ca436542ef83ebf94777d049c01d1a"
+
+[[files]]
 file = "config/supplementaries-common.toml"
 hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 

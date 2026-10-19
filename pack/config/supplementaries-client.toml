@@ -1,0 +1,6 @@
+# Fallow : Subtle Effects applique déjà le filtre de vision quand on porte une tête de mob ;
+# celui de Supplementaries ferait doublon. Fichier partiel : les options absentes gardent
+# leur valeur par défaut.
+
+[tweaks]
+	mob_head_shaders = false
