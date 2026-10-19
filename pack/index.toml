@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "45251f5d264398716e4921faa498400b9a796fd6c4a6cf6390000cbaae7958b1"
+hash = "12f0dea72cf4fcac0d19e09cd3c27da76a341aadccac07dceb228eeb7b01c115"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
@@ -19,6 +19,14 @@ hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
 [[files]]
 file = "config/defaultoptions/options.txt"
 hash = "4fcd0f1b5ab8db53bc35261934543bfe55f191bb51c23c52d53db2384fae0637"
+
+[[files]]
+file = "config/enhancedcelestials2core/translations.json"
+hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
+
+[[files]]
+file = "config/incontrol/spawn.json"
+hash = "51b1c827f71facee2da7f217acfde15d726bdaf1d990093db90f3e56de546af4"
 
 [[files]]
 file = "config/jei/jei-client.ini"
@@ -47,6 +55,10 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 [[files]]
 file = "config/wildex/wildex-common.toml"
 hash = "9cf236122b8f7e75db4c1c263424354bb3cbf4403252cc698977b15bbbc561f8"
+
+[[files]]
+file = "defaultconfigs/emi.css"
+hash = "cdc1b208611b1f04df67e5e39949aa57843af625a03cb2e6b7943eceb3bc13f1"
 
 [[files]]
 file = "defaultconfigs/envelope-server.toml"
@@ -589,8 +601,12 @@ file = "kubejs/assets/emi/lang/fr_fr.json"
 hash = "4d9d0f283b38c4a03922ffb20971b0cccd2f28d45413230de0b4e1a00b3aec5b"
 
 [[files]]
-file = "kubejs/assets/enhancedcelestials/lang/fr_fr.json"
-hash = "371f5ffe03ac0d23458e93120d76d324089c5532dc4aebfe456dc5e89c4e71a2"
+file = "kubejs/assets/enhancedcelestials2core/lang/fr_fr.json"
+hash = "b2f2cfe07229cf80ebfefba13ae958e508409cf59b49bdf79ba06d902ab3a3eb"
+
+[[files]]
+file = "kubejs/assets/enhancedcelestials2defaultlunarevents/lang/fr_fr.json"
+hash = "9804d919da655e1042d0ead1416fc36909d559dba308ada4c987d3fdbbc02fef"
 
 [[files]]
 file = "kubejs/assets/entity_model_features/lang/fr_fr.json"
@@ -889,12 +905,12 @@ file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
 [[files]]
-file = "kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/blood_moon.json"
-hash = "7646ad2ac12db13fe4917eea7a597487739e799f3a4a1f2001718b5a862fcd43"
+file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
+hash = "ef3359093a5a8613d4641081bcbbee1d32626139c4abf07242a969be86e3cecd"
 
 [[files]]
-file = "kubejs/data/enhancedcelestials/enhancedcelestials/lunar/event/super_blood_moon.json"
-hash = "d6ffec7e8952de9d1545c365533111e99d3b72622e9350788ef2e641de0fd292"
+file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/super_blood_moon.json"
+hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
 
 [[files]]
 file = "kubejs/data/fallow/tags/item/peaux_brutes.json"
@@ -926,11 +942,11 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"
-hash = "861a0530aed39775f55f9239ae8c36b699fa2ba4fbd0cbab286de8a0a0ccb3f0"
+hash = "7b65c2980a6378de0ba1f1bd24adab3206bcc88d49eedd0916cc2fc82a8fbbb7"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
-hash = "69483a8c648bac8036d49c5915a80413dbc09456e3a330dc2cce201809b6d3de"
+hash = "a30162f06015cff75d6b5c80154ed9a195e7e98a446cc3ee5dd97d21a08c3056"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
@@ -1156,8 +1172,13 @@ hash = "67bb77eae0b644960be3b1074178ceb5d54facbb42f326981b9d94625238a54a"
 metafile = true
 
 [[files]]
-file = "mods/enhanced-celestials.pw.toml"
-hash = "e50f87650e3a5becf3cd1772e8053a8bc04c48859a6fa814e75e6c71eaa87e6c"
+file = "mods/enhanced-celestials-2-core.pw.toml"
+hash = "092c2fe392d74839d1210f7c5ecf90de3f7c230cc3f5ca064cf284b29ec97f30"
+metafile = true
+
+[[files]]
+file = "mods/enhanced-celestials-2-default-lunar-events.pw.toml"
+hash = "70f586b80beb657a8676b1147b1b96c4abd0aa421c819aa138038e082c41bc4d"
 metafile = true
 
 [[files]]
@@ -1186,8 +1207,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.2.0.jar"
-hash = "57d56401a597c381078690ca4ec5c65ad79d27a64553dd73a8db38a6c054ffbb"
+file = "mods/fallow-0.2.1.jar"
+hash = "c06e31fa02c69df77d4b895f0e038ec66d5c5d9879e1b59a2c428a4447dbe46d"
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"
@@ -1594,8 +1615,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v1.json"
-hash = "8022d84988353f51d5edd3a0c03a8b396b8fbb2ea0cebc7d21e76e753639cac9"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v2.json"
+hash = "1ee7404f8162125ee40876e318d9c5f754da83aace4790166e4c67bea2a249f4"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
@@ -1639,15 +1660,15 @@ hash = "c3776c2aab53d4d02380de9648f4e6d3c238b067ac879bf703c07627f8dacd0e"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_desert_river.json"
-hash = "3fe5ff63e0f82b5efb4ea057a4c639aab176ca2f0bc97e45e5babe56b5f3033c"
+hash = "c7745e24dee134bc1d5e050dc2a574bf54db728c4f2ea016fc04cd8373ae63af"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_shore.json"
-hash = "252b2d5b4e50bd7d6f8128742085d1c751239854df33945fc27494bf111dad7d"
+hash = "0b86360567fc00d67f91a248727a6f6a3bfc94d1c5af72acc4e9a6f4abd25921"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_woods.json"
-hash = "9578b5b642caccdfe5171da6d7c0ef45f9994a46267c5709776fa5312e57525f"
+hash = "5b20afc640fe2865624e4df7405af66b553d91e8c0cf99705b4a6f55d99ebe72"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lavender_field.json"
@@ -1663,7 +1684,7 @@ hash = "0c6490e0a0f456836327a68d8126b224a9a66f501523355504978b86c95e86a9"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_grove.json"
-hash = "70cb7c2bafd865ee59b8b9fe20550f5f19eed1b477c1fb0ae008fe2cff98929e"
+hash = "acee6d0c8942611b47ca0f3b38d1f85f27287d8140182877fa779b0e4dcc6e25"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_mud_beach.json"
@@ -1688,6 +1709,10 @@ hash = "7bcb43ab300a05e107ef72b9bd3e972affc029ea55e6b215cbaf371e944a5a3b"
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_tropical_beach.json"
 hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/vanilla_neige.json"
+hash = "cf456c0a78cc30df14ec6327a911c05e701119f1b138db1fae0e652a89c6cee3"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"

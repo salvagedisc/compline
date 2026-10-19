@@ -8,20 +8,22 @@
 //    reste prévu à sa date.
 // 2. Un indice dans les ruines des alchimistes : une note sur la lune gravée, dans les jarres.
 //
-// Classes lues dans les jars : Enhanced Celestials 6.0.2.6
-// (EnhancedCelestials.lunarForecastWorldData, EnhancedCelestialsLunarForecastWorldData
-// .currentLunarEventHolder / getDimensionSettings / setLunarEvent, celle qu'appelle
-// /setLunarEvent) et No Man's Land 1.6.1 (FriendMoon.getOrDefault / isAwake /
-// getMeetingPointPosition).
+// Classes lues dans les jars : Enhanced Celestials 2 Core 2.0.3.3
+// (EnhancedCelestials.lunarForecastWorldData, LunarForecast.currentLunarEventHolder /
+// getDimensionSettings / setLunarEventTonight, celle qu'appelle /ec setLunarEvent,
+// EnhancedCelestialsRegistry.LUNAR_EVENT_KEY) et No Man's Land 1.6.1
+// (FriendMoon.getOrDefault / isAwake / getMeetingPointPosition).
 
 const LUNE_PERIODE = 40          // ticks entre deux vérifications (2 s)
 const LUNE_RAYON = 64            // blocs autour du Point de rencontre (distance à plat)
 const LUNE_NOTE_CHANCE = 0.04    // chance qu'une jarre « alchimie » contienne la note
 
 let LUNE_EC = null
+let LUNE_EC_REGISTRE = null
 let LUNE_AMIE = null
 try {
-  LUNE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials.EnhancedCelestials')
+  LUNE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials2core.EnhancedCelestials')
+  LUNE_EC_REGISTRE = Java.loadClass('dev.corgitaco.enhancedcelestials2core.api.EnhancedCelestialsRegistry')
   LUNE_AMIE = Java.loadClass('com.farcr.nomansland.common.friend.FriendMoon')
 } catch (e) {
   console.warn(`[Fallow] lune.js : Enhanced Celestials ou No Man's Land introuvable, cohabitation des lunes coupée (${e})`)
@@ -78,9 +80,10 @@ function luneVerifier(server) {
 
   if (!luneAmiePresente(server, level)) return
 
-  // Même appel que /setLunarEvent vers la lune ordinaire : l'évènement de la nuit est
-  // retiré de la prévision, Enhanced Celestials affiche son propre message de fin.
-  prevision.setLunarEvent(ordinaire)
+  // Même appel que /ec setLunarEvent vers la lune ordinaire : l'évènement de la nuit est
+  // coupé, la suite de la prévision ne bouge pas, Enhanced Celestials affiche son message de fin.
+  let lunes = level.registryAccess().registry(LUNE_EC_REGISTRE.LUNAR_EVENT_KEY).orElseThrow()
+  prevision.setLunarEventTonight(lunes.getHolderOrThrow(ordinaire))
   let message = Text.gray(Text.translatable('fallow.lune.efface'))
   let joueurs = luneJoueursOverworld(server)
   for (let i = 0; i < joueurs.length; i++) joueurs[i].displayClientMessage(message, true)

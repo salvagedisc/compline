@@ -6,7 +6,7 @@ import net.neoforged.fml.loading.LoadingModList;
 /** Identifiants des mods que Fallow relie, et leur détection. */
 public final class ModIds {
     public static final String ATMOSPHERICS = "atmospherics";
-    public static final String ENHANCED_CELESTIALS = "enhancedcelestials";
+    public static final String ENHANCED_CELESTIALS = "enhancedcelestials2core";
     public static final String TRAVELERS_BACKPACK = "travelersbackpack";
     public static final String THIRST = "thirst";
 

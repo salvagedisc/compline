@@ -1,0 +1,15 @@
+/* Fallow : EMI sans panneaux ni barre de recherche, pour laisser la place à Spatial GUI. */
+/* Les touches restent : R (recettes) et U (usages) sur un objet survolé. */
+/* Ce fichier n'est lu que tant que config/emi.css n'existe pas. */
+#general {
+	search-sidebar: none;
+}
+
+#ui {
+	left-sidebar-pages: none;
+	right-sidebar-pages: none;
+	top-sidebar-pages: none;
+	bottom-sidebar-pages: none;
+	emi-config-button-visibility: hidden;
+	recipe-tree-button-visibility: hidden;
+}

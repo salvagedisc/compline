@@ -8,7 +8,7 @@
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v1.json          la brume, biome par biome
+    ├── atmospherics/preset/fallow_v2.json          la brume, biome par biome, et le sable
     ├── fallow/polytone/biome_modifiers/*.json      herbe, feuillage, eau (23 fichiers)
     ├── fallow/sounds.json                         évènements des morceaux du paquet musical ([musique](musique.md))
     └── fallow/sounds/music/*.ogg                  10 morceaux libres, crédits dans CREDITS.md
@@ -115,11 +115,34 @@ Les biomes vanilla en surface reçoivent aussi la brume : sans cela, une plaine 
 
 **Gardés tels quels** : les réglages globaux du preset d'origine, dont les deux drapeaux Sodium à `true`. Ce sont les valeurs par défaut du mod : il ne retouche donc pas `sodium-options.json`.
 
+## Sable et neige (v2, 2026-10-19)
+
+Demande : plus de sable dans le désert, des flocons dans les biomes enneigés. Lu dans les jars (ATMOSPHERICS 2.6.5, Polytone, Ecliptic Seasons, Subtle Effects, Particular), pas vu en jeu.
+
+**Sable : ATMOSPHERICS.** Il a déjà poussière et tempêtes de sable pour `desert`, les savanes et les badlands (liste écrite dans son code ; `nomansland:desert_river` n'y est pas). Le preset `fallow_v1` gardait les valeurs d'origine, où la poussière par temps clair est presque invisible.
+
+| Clé de `fallow_v2.json` | v1 | v2 | Borne du mod |
+|---|---|---|---|
+| `sandstormWeather.clear` count / speed / size | 0,1 / 0,1 / 1,0 | 1,0 / 0,5 / 1,15 | 2,5 / 1 / 1,35 |
+| `sandstormWeather.rain` count / speed / size | 4,0 / 1,0 / 1,0 | 6,0 / 1,3 / 1,2 | 15 / 2,5 / 6 |
+| `sandstormWeather.thunder` count / speed / size | 6,95 / 1,55 / 1,0 | 9,0 / 1,8 / 1,2 | 15 / 2,5 / 6 |
+| `airHaze` du désert : intensité / fréquence / taille / couleur | 1,15 / 1,0 / 1,15 | 1,5 / 1,4 / 1,35, `#d8c8a0` | 3 / 3 / 3 |
+| `airHaze` des 3 badlands | idem | 1,5 / 1,4 / 1,35, `#d2b48c` | idem |
+
+Les tempêtes suivent la pluie vue par le client. Avec la météo par biome d'Ecliptic, leur fréquence est à vérifier en jeu ; s'il pleut pendant une tempête, `NoRainInDeserts = true` dans `config/eclipticseasons-common.toml`.
+
+**Neige : Polytone.** Aucun mod installé ne fait tomber de flocons (Ecliptic ne peut qu'atténuer la neige vanilla). Le champ `particle` d'un `biome_modifier` Polytone ajoute une particule d'ambiance vanilla, comme NML le fait pour la poussière de ses grottes :
+- `vanilla_neige.json` : `minecraft:snowflake`, probabilité 0,004, sur `snowy_plains`, `ice_spikes`, `snowy_taiga`, `snowy_slopes`, `frozen_peaks`, `jagged_peaks`, `grove`, `snowy_beach`, `frozen_river` ;
+- même bloc ajouté à `nml_frozen_woods`, `nml_frozen_shore` et `nml_maple_grove` ;
+- `nml_desert_river.json` : `minecraft:falling_dust` de sable, probabilité 0,002, puisque ATMOSPHERICS ignore ce biome.
+
+Limites : les densités sont choisies sur le papier, et les flocons apparaissent aussi sous les toits et dans les grottes de ces biomes.
+
 ## Ce qui reste à régler en jeu
 
 1. **Le rendu des couleurs.** Le preset d'origine utilise des couleurs de brume très saturées (`#20afff` pour les plaines) : ATMOSPHERICS les assombrit ou les mélange sans doute selon l'heure. Les gris choisis ici peuvent sortir trop ternes ou trop clairs [déduit].
    - Régler avec l'éditeur d'ATMOSPHERICS.
-   - Exporter, puis enregistrer sous `fallow_v2.json` en supprimant `fallow_v1.json`.
+   - Exporter, puis enregistrer sous `fallow_v3.json` en supprimant `fallow_v2.json`.
 2. **L'épaisseur.** 52 blocs de jour et 34 de nuit en forêt : est-ce encore jouable ? Les monuments et les ruines se voient-ils assez tôt ?
 3. **La transition au bord d'une clairière.** La brume change par cellules de 4 blocs, avec un lissage (rapport 3, 1.4 et test T2). Inutile à tester avant que le biome `fallow:clairiere` existe dans `pack/kubejs/data/`.
 4. **Le biome des clairières**, quand il sera créé :

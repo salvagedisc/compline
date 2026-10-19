@@ -19,7 +19,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardiens tirés de Mowzie's Mobs et Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
 | Lootr | `lootr` | ✅ | CS | Chaque joueur trouve les coffres pleins |
-| Enhanced Celestials | `enhanced-celestials` | ✅ | CS | Lunes rares ; lunes de sang retirées, une seule lune à la fois avec la Lune Amie ([lune-amie](plan/lune-amie.md)) |
+| Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Lunes rares ; lunes de sang retirées, une seule lune à la fois avec la Lune Amie ([lune-amie](plan/lune-amie.md)). Remplace Enhanced Celestials 6 ; addon Shader Support inutile sans Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Exploration partagée pour l'atlas |
 | Icy's Better Horses | `icys-better-horses` | ✅ (monter en 2.1.4) | CS | Chevaux, races, lien, charrettes |
@@ -127,7 +127,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes |
+| EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes, sans panneaux ni recherche (`pack/defaultconfigs/emi.css`) : R et U sur un objet ouvrent ses recettes |
 | JEI | `jei` | ✅ (caché, rester en 19.51.0.418) | CS | Pont pour les mods qui n'ont qu'un plugin JEI ; à partir de 19.52, le mixin d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plante en entrant dans un monde |
 | Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Infobulles |
 | Pick Up Notifier | `pick-up-notifier` | ✅ | C | Liste discrète des objets ramassés |
@@ -145,8 +145,8 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | KubeJS Create | `kubejs-create` | ✅ | CS | Recettes Create en script (bêta) |
 | LootJS | `lootjs` | ✅ | S | Butin des ruines et des monuments |
 | MoreJS | `morejs` | ✅ | CS | Événements en plus pour KubeJS |
-| In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) |
-| Mod `fallow` 0.2.0 | `mods-custom/fallow/` | ✅ (non testé avec un joueur) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume), sac (tuyau qui désaltère) et xp (enclume sans niveaux, barre cachée, [0009](decisions/0009-xp.md)) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
+| In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) : aucun monstre vanilla dans l'Overworld (`pack/config/incontrol/spawn.json`) |
+| Mod `fallow` 0.2.1 | `mods-custom/fallow/` | ✅ (non testé avec un joueur) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume), sac (tuyau qui désaltère) et xp (enclume sans niveaux, barre cachée, [0009](decisions/0009-xp.md)) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance et technique
 

@@ -1,5 +1,5 @@
 {
-  "presetName": "Fallow : brume v1",
+  "presetName": "Fallow : brume v2",
   "presetAuthor": "Fallow",
   "version": 43,
   "resourcePackPromptSeenFingerprint": "",
@@ -205,11 +205,11 @@
     "tumbleweedEnabled": true,
     "particlesEnabled": true,
     "clear": {
-      "speedMult": 0.1,
+      "speedMult": 0.5,
       "tumbleweedSpeedMult": 1.0,
       "tumbleweedSpawnMult": 1.0,
-      "countMult": 0.1,
-      "sizeMult": 1.0,
+      "countMult": 1.0,
+      "sizeMult": 1.15,
       "heightMult": 4.0,
       "heightSpreadMult": 4.0,
       "distanceMult": 1.0,
@@ -217,11 +217,11 @@
       "lifetimeMult": 1.0
     },
     "rain": {
-      "speedMult": 1.0,
+      "speedMult": 1.3,
       "tumbleweedSpeedMult": 1.4699957,
       "tumbleweedSpawnMult": 4.0,
-      "countMult": 4.0093365,
-      "sizeMult": 1.0,
+      "countMult": 6.0,
+      "sizeMult": 1.2,
       "heightMult": 4.0,
       "heightSpreadMult": 4.0,
       "distanceMult": 1.0,
@@ -229,11 +229,11 @@
       "lifetimeMult": 1.0
     },
     "thunder": {
-      "speedMult": 1.5495099,
+      "speedMult": 1.8,
       "tumbleweedSpeedMult": 1.0,
       "tumbleweedSpawnMult": 3.6526968,
-      "countMult": 6.950428,
-      "sizeMult": 1.0,
+      "countMult": 9.0,
+      "sizeMult": 1.2,
       "heightMult": 4.0,
       "heightSpreadMult": 4.0,
       "distanceMult": 1.0,
@@ -431,12 +431,12 @@
       },
       "airHaze": {
         "enabled": true,
-        "intensity": 1.15,
-        "spawnRate": 1.0,
-        "size": 1.15,
+        "intensity": 1.5,
+        "spawnRate": 1.4,
+        "size": 1.35,
         "startDistance": 2.0,
         "endDistance": 10.0,
-        "color": 13814969
+        "color": 13808780
       },
       "weatherOverride": {
         "rainFogColor": 15837030,
@@ -1020,12 +1020,12 @@
       },
       "airHaze": {
         "enabled": true,
-        "intensity": 1.15,
-        "spawnRate": 1.0,
-        "size": 1.15,
+        "intensity": 1.5,
+        "spawnRate": 1.4,
+        "size": 1.35,
         "startDistance": 2.0,
         "endDistance": 10.0,
-        "color": 13814969
+        "color": 14207136
       },
       "weatherOverride": {
         "rainFogColor": 16042346,
@@ -1249,12 +1249,12 @@
       },
       "airHaze": {
         "enabled": true,
-        "intensity": 1.15,
-        "spawnRate": 1.0,
-        "size": 1.15,
+        "intensity": 1.5,
+        "spawnRate": 1.4,
+        "size": 1.35,
         "startDistance": 2.0,
         "endDistance": 10.0,
-        "color": 13814969
+        "color": 13808780
       },
       "weatherOverride": {
         "rainFogColor": 15837030,
@@ -3165,12 +3165,12 @@
       },
       "airHaze": {
         "enabled": true,
-        "intensity": 1.15,
-        "spawnRate": 1.0,
-        "size": 1.15,
+        "intensity": 1.5,
+        "spawnRate": 1.4,
+        "size": 1.35,
         "startDistance": 2.0,
         "endDistance": 10.0,
-        "color": 13814969
+        "color": 13808780
       },
       "weatherOverride": {
         "rainFogColor": 15634249,
