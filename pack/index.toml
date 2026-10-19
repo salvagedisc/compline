@@ -845,6 +845,10 @@ file = "kubejs/assets/trender/lang/fr_fr.json"
 hash = "147a536e96829f10bbf4fe21365d56951537b70ab97342a7a1765e613e9448c7"
 
 [[files]]
+file = "kubejs/assets/trueadaptivemusic/lang/fr_fr.json"
+hash = "fc7370419d6486b76d1483401ed7d1cb0ac58a1c86959dc091caf0183d419ad6"
+
+[[files]]
 file = "kubejs/assets/twigs/lang/fr_fr.json"
 hash = "ea856d563dfe4f9910145de8d4e60ef7d0122a598694f5ca8f615b30f8c18ec8"
 
