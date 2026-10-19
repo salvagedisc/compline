@@ -374,6 +374,11 @@ hash = "9d500f6f94eaa2ce229dd015410e9154f8077be8842ca404594de28c2ce23fd4"
 metafile = true
 
 [[files]]
+file = "mods/particular-reforged.pw.toml"
+hash = "383d9891f716981f418f6e2a97a5eeeee43912975d90d9ab4ffbfe98a832e40e"
+metafile = true
+
+[[files]]
 file = "mods/patchouli.pw.toml"
 hash = "d7f360ebb9f009d6dc0b368cd8fa399bdff70c0f6ef931687b2a35137f72715d"
 metafile = true
