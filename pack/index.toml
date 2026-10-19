@@ -612,3 +612,8 @@ metafile = true
 file = "mods/zeta.pw.toml"
 hash = "cb474b6c0dde741836ed4f796f3b6ab0b9d3cdc0453e651122cd002d5d1f8df8"
 metafile = true
+
+[[files]]
+file = "resourcepacks/fresh-animations.pw.toml"
+hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
+metafile = true
