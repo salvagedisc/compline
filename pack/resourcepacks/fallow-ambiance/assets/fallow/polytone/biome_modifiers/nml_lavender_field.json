@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:lavender_field"
+  ],
+  "grass_color": "#74b66a",
+  "foliage_color": "#77a254",
+  "water_color": "#4570a6"
+}

@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:old_growth_forest"
+  ],
+  "grass_color": "#7e9d56",
+  "foliage_color": "#728247",
+  "water_color": "#4583a6"
+}

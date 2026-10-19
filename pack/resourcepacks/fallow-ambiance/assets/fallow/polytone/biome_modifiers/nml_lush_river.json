@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:lush_river"
+  ],
+  "grass_color": "#68b042",
+  "foliage_color": "#5d9a2c",
+  "water_color": "#3f9a92"
+}

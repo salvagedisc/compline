@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "nomansland:bayou"
+  ],
+  "grass_color": "#67a248",
+  "foliage_color": "#65913d",
+  "water_color": "#30997d"
+}
