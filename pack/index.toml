@@ -57,6 +57,10 @@ file = "config/wildex/wildex-common.toml"
 hash = "9cf236122b8f7e75db4c1c263424354bb3cbf4403252cc698977b15bbbc561f8"
 
 [[files]]
+file = "defaultconfigs/emi.css"
+hash = "cdc1b208611b1f04df67e5e39949aa57843af625a03cb2e6b7943eceb3bc13f1"
+
+[[files]]
 file = "defaultconfigs/envelope-server.toml"
 hash = "8a8b8862f01f0d56077df808b9839cf3165ca0fa3844f4d86e94fd6ae6aada36"
 

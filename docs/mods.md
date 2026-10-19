@@ -127,7 +127,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes |
+| EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes, sans panneaux ni recherche (`pack/defaultconfigs/emi.css`) : R et U sur un objet ouvrent ses recettes |
 | JEI | `jei` | ✅ (caché, rester en 19.51.0.418) | CS | Pont pour les mods qui n'ont qu'un plugin JEI ; à partir de 19.52, le mixin d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plante en entrant dans un monde |
 | Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Infobulles |
 | Pick Up Notifier | `pick-up-notifier` | ✅ | C | Liste discrète des objets ramassés |
