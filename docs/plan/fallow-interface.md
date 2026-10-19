@@ -4,10 +4,19 @@ Demande de l'équipe du 2026-10-19 : adapter le ton de Kaleidoscope, Overgeared 
 
 ## Ce qu'il contient
 
-`pack/resourcepacks/fallow-interface/`, 24 textures recolorées, mêmes tailles et même transparence que les originaux :
+`pack/resourcepacks/fallow-interface/`, 24 textures, mêmes tailles et même transparence que les originaux :
 - **Overgeared** (14) : les 9 écrans (enclumes, fours, table d'empennage, établi à plans, taille de la pierre), la barre du mini-jeu de forge, le fond EMI de l'enclume et les 4 boutons de filtre du livre de recettes ;
 - **Kaleidoscope** (8) : les fonds de recettes affichés dans EMI ; seules les cases et les flèches changent, les dessins des blocs restent ;
 - **Wildex** (2) : le fond du livre (thème VINTAGE, par défaut) et le fond rouge des trophées.
+
+**Éléments dessinés** (2026-10-19, à la demande de l'équipe, pour aller au-delà des couleurs) : une petite bibliothèque d'éléments propres à Fallow, appliqués à chaque écran d'Overgeared et aux fonds de Kaleidoscope, au pixel près de la disposition d'origine :
+- case 18×18 et grande case 26×26 en creux : bord sombre en haut et à gauche, bord clair en bas et à droite, ombre intérieure de 2 px, coins coupés ;
+- flèche de progression à queue arrondie, arête claire en haut et sombre en bas ; la flèche pleine suit le même masque ;
+- fond à courtes fibres horizontales et quelques points sombres ;
+- cadre à contour sombre, liseré clair en haut et à gauche, ombre en bas et à droite ;
+- rainure de 2 px entre l'écran et l'inventaire du joueur.
+
+Dark Coffee est « tous droits réservés » : rien de ses textures n'est copié. Ses cases sont des pastilles en relief aux coins ronds, sa flèche un losange orné, son fond des grains de café ; les nôtres en reprennent l'esprit sans les reproduire (15 % des pixels hors aplats coïncident sur un four comparé au nôtre, aucun bloc de 6×6 commun). Vérifié par script : mêmes tailles et même transparence que les originaux, chaque case de l'original couverte par une case dessinée au même rectangle, aucune case ajoutée ni déplacée, flèches vide et pleine superposées. Sur les fonds transparents de Kaleidoscope et d'EMI, les flèches gardent leur silhouette d'origine avec notre ombrage, et les dessins des blocs sont identiques à l'octet près. Les cases restent jointives dans les grilles : les espacer les déplacerait.
 
 Correspondance des couleurs, reprise de Dark Coffee (des valeurs, aucun pixel) : fond `#C6C6C6` → `#451D21`, contour → `#2A0614`, biseaux → liseré `#B18469`, intérieur des cases `#8B8B8B` → `#815648` (ombre `#693F35`), bord bas des cases → `#582E2B`, flèche de progression → `#F1BA75`. Sur le livre de Wildex, l'acier devient du laiton et le bois tire vers le brun ; les pages restent claires, parce que son texte est écrit en `#2B1A10` dans le code.
 
