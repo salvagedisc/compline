@@ -349,6 +349,11 @@ hash = "d7f360ebb9f009d6dc0b368cd8fa399bdff70c0f6ef931687b2a35137f72715d"
 metafile = true
 
 [[files]]
+file = "mods/puzzles-lib.pw.toml"
+hash = "0a04f1d0b86262c6dfdbd14e0493d7f4786f24054a95a07ff7b41a7870bb258d"
+metafile = true
+
+[[files]]
 file = "mods/quark.pw.toml"
 hash = "ddf213b8ba47e0651dc89081db34c5d5350b792ba395e81da70200e593ec310c"
 metafile = true
@@ -436,6 +441,11 @@ metafile = true
 [[files]]
 file = "mods/untitled-duck-mod.pw.toml"
 hash = "2a55436bef50b794a4145c83487114669a0c5e896856ba7a8bab769799729e94"
+metafile = true
+
+[[files]]
+file = "mods/visual-workbench.pw.toml"
+hash = "2684f71394862cff4c20d0f4d8491c0f86f12e66879381295e9088e0eded025d"
 metafile = true
 
 [[files]]
