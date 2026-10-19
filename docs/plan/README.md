@@ -16,6 +16,7 @@ Un monde permanent, presque vide et énigmatique, dans l'esprit du trailer de No
 | [11-rendu-et-confort.md](11-rendu-et-confort.md) | Rendu sans shaders, caméra, menus, EMI, Wildex, Ancient Remnants, Archie's Dinos |
 | [12-verification.md](12-verification.md) | **Vérification complète du 2026-10-18** : elle corrige les chapitres 10 et 11, détaille les liens entre mods (Overgeared, Kaleidoscope, Create, monde, rendu), propose le mod custom `fallow` et les décisions 14 à 18 |
 | [fallow-ambiance.md](fallow-ambiance.md) | Le pack de ressources maison : preset ATMOSPHERICS, couleurs Polytone, valeurs choisies et réglages à faire en jeu |
+| [fallow-interface.md](fallow-interface.md) | Le pack de ressources des écrans de Kaleidoscope, Overgeared et Wildex aux couleurs de Dark Coffee : couleurs, licences, limites |
 | [mod-fallow.md](mod-fallow.md) | Le mod custom `fallow` 0.2.1 (modules `ciel`, `sac` et `xp`) : fonctionnement, ce qui est déduit du code, tests en jeu |
 | [lune-amie.md](lune-amie.md) | La Lune Amie de No Man's Land comme fil principal : le chemin jusqu'au Point de rencontre, la cohabitation avec Enhanced Celestials, les lunes de sang retirées |
 | [sante.md](sante.md) | La santé maximale : un cœur perdu par mort (plancher de 5), les éclats de vie trouvés en explorant |
