@@ -149,7 +149,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | LootJS | `lootjs` | ➕ | S | Butin des ruines et des monuments |
 | MoreJS | `morejs` | ➕ | CS | Événements en plus pour KubeJS |
 | In Control! | `in-control` | ➕ | S | Règles d'apparition (bêta) |
-| Mod `fallow` (à écrire) | — | 🟡 | CS | Ce que les scripts ne savent pas faire : lune visible, Dissipateur, tuyau du sac ([12.4](plan/12-verification.md)) |
+| Mod `fallow` 0.1.0 | `mods-custom/fallow/` | ✅ (non testé en jeu) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume) et sac (tuyau qui désaltère) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance et technique
 

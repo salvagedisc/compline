@@ -250,6 +250,10 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
+file = "mods/fallow-0.1.0.jar"
+hash = "9cede93b9091e6aae1337924b9b54f031c4a36f550557a0d21c0cca92005a4dd"
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true

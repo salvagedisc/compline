@@ -17,6 +17,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Ambiance : ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights, More Darkness.
 - Performance : Sodium, ImmediatelyFast, Entity Culling, ModernFix, FerriteCore, Lithium, Clumps, Structure Layout Optimizer ; serveur : Chunky, spark.
 - Outillage : `npm run sync` rapatrie les mods de l'instance de test, `npm run check-deps` vérifie les dépendances réelles des jars ; CI `build` (export `.mrpack` à chaque push) et `release` (sur tag).
+- Mod custom `fallow` 0.1.0 (`mods-custom/fallow/`, jar dans `pack/mods/`) : module ciel (lune d'Enhanced Celestials visible sous ATMOSPHERICS, cache de brume vidé après un changement de biome) et module sac (le tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed). Non testé en jeu ; CI `build` le compile.
 
 ### Modifié
 - Dépôt réorganisé : `README` et `CONTRIBUTING` réécrits, index de la documentation, feuille de route, emplacement `docs/plan/` pour le plan du modpack, `docs/` renommé `docs/conception/`, registre des mods classé par domaine.
