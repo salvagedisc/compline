@@ -549,6 +549,10 @@ file = "kubejs/assets/companions/lang/fr_fr.json"
 hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
+file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
+hash = "f189e28c0a7b2c224446b6e94a068fc32024c05e2cd2479d3bd33a8c5b3a8a3d"
+
+[[files]]
 file = "kubejs/assets/controlling/lang/fr_fr.json"
 hash = "d516172c328be7fd7b025934e4aa08948afbf5f3489a059a211a272e1aad4e15"
 
@@ -1248,6 +1252,11 @@ metafile = true
 [[files]]
 file = "mods/connector.pw.toml"
 hash = "a38d72ca403e9064338be6e0cf69532768b0c1aba8f88703a8ce74c2734da522"
+metafile = true
+
+[[files]]
+file = "mods/contraption-lights.pw.toml"
+hash = "30c2885369866887891716897a6e9909434b8aec2a1b2622547b8c780ec3b962"
 metafile = true
 
 [[files]]
