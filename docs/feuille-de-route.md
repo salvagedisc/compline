@@ -21,7 +21,7 @@
 - [ ] **Pont Ecliptic Seasons → Cold Sweat** en KubeJS : température saisonnière ressentie. Repli : Serene Seasons ([0002](decisions/0002-agriculture.md)).
 - [ ] **Farm & Charm cantonné à la ferme** : masquer ou fusionner ses stations de cuisine et ses ingrédients en double avec Kaleidoscope Cookery ([0002](decisions/0002-agriculture.md)).
 - [ ] Verrouiller l'automatisation de KC-Automation derrière la progression ([0002](decisions/0002-agriculture.md)).
-- [ ] **Supprimer les monstres vanilla hostiles** ; décider du sort des monuments océaniques, cabanes de sorcière et avant-postes ([0003](decisions/0003-faune.md), [0004](decisions/0004-structures.md)).
+- [x] **Supprimer les monstres vanilla hostiles** dans l'Overworld (`pack/config/incontrol/spawn.json`, à vérifier en jeu : patrouilles, phantoms, générateurs) ; décider du sort des monuments océaniques, cabanes de sorcière et avant-postes ([0003](decisions/0003-faune.md), [0004](decisions/0004-structures.md)).
 - [ ] **Table d'apparition par biome** : une seule version par espèce entre Naturalist et Alex's Mobs, retrait des créatures qui cassent la DA ([0003](decisions/0003-faune.md)).
 - [ ] Friends & Foes : garder les pacifiques, désactiver les hostiles. Adorable Hamster Pets : désactiver le flair à diamants. Companions! : encadrer hostiles, armes et boss ([0003](decisions/0003-faune.md)).
 - [ ] **Supprimer l'End** (dimension, portails, Elytra) et les strongholds ([0004](decisions/0004-structures.md)).

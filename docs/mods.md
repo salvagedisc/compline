@@ -145,7 +145,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | KubeJS Create | `kubejs-create` | ✅ | CS | Recettes Create en script (bêta) |
 | LootJS | `lootjs` | ✅ | S | Butin des ruines et des monuments |
 | MoreJS | `morejs` | ✅ | CS | Événements en plus pour KubeJS |
-| In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) |
+| In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) : aucun monstre vanilla dans l'Overworld (`pack/config/incontrol/spawn.json`) |
 | Mod `fallow` 0.2.1 | `mods-custom/fallow/` | ✅ (non testé avec un joueur) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume), sac (tuyau qui désaltère) et xp (enclume sans niveaux, barre cachée, [0009](decisions/0009-xp.md)) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance et technique
