@@ -1,7 +1,7 @@
 # 0010 — Musique
 
 - **Date** : 2026-10-19
-- **Statut** : retenu (choix de l'équipe) ; paquet écrit, pas encore entendu en jeu
+- **Statut** : retenu (choix de l'équipe) ; 29 morceaux choisis à l'écoute par l'équipe, pas encore entendus en jeu
 
 ## Contexte
 L'équipe veut de la musique « dans le style de ce que l'on construit, avec de belles transitions », sans perdre le silence. Le pack joue déjà la musique vanilla toutes les 10 à 20 minutes, avec trois morceaux de No Man's Land ; il manque des contextes (brume, clairière, saison, lune, dirigeable) et des transitions. Étude complète : [recherche musique](../plan/recherche/2026-10-19/musique.md).
@@ -17,10 +17,10 @@ L'équipe veut de la musique « dans le style de ce que l'on construit, avec de 
 
 ## Décision
 **True Adaptive Music 2.9.3**, côté client et serveur, avec le paquet `fallow` ([musique](../plan/musique.md)) :
-- un arbre de 12 situations, des silences de 4 à 15 minutes, les morceaux joués jusqu'au bout ;
-- les morceaux sont ceux déjà présents dans le jeu (vanilla et No Man's Land), déclarés comme évènements dans `fallow-ambiance` : rien n'est copié ;
+- un arbre de 11 situations, des silences de 4 à 20 minutes, les morceaux joués jusqu'au bout ;
+- 29 morceaux gardés par l'équipe à l'écoute : 12 déjà dans le jeu (vanilla et No Man's Land), 3 du pack de ressources *Supernova* (Modrinth, CC-BY-NC-SA 4.0, usage gratuit permis), 10 libres livrés dans `fallow-ambiance` avec leurs crédits (Scott Buckley et Kevin MacLeod en CC-BY 4.0, HoliznaCC0 en CC0), ramenés à −23 LUFS avec des fondus ;
 - `musique.js` pose sur le joueur les états que le client ne voit pas (monument, lune, à bord) ; les saisons passent par la condition de butin d'Ecliptic ;
-- muet près des monuments et pendant les combats de boss ;
+- un seul morceau à l'approche d'un monument, rien pendant les combats de boss ;
 - paquet choisi au premier lancement par Default Options, musique à 40 %.
 
 Repli si TAM pose problème : Music Moods pour les fondus, fichiers `background_music` d'Ecliptic, champ `music` des clairières (recherche, 2.5).

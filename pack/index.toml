@@ -930,7 +930,7 @@ hash = "861a0530aed39775f55f9239ae8c36b699fa2ba4fbd0cbab286de8a0a0ccb3f0"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
-hash = "df01b61fc8a034d6ea4d65e2c3dcdaf89b4fbbad8af25d7761c07541e5b17104"
+hash = "69483a8c648bac8036d49c5915a80413dbc09456e3a330dc2cce201809b6d3de"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
@@ -1595,6 +1595,10 @@ hash = "b10943dd0c7472c8782d27e1239a851dfa41ee21608dff9207b84c0a81b56e20"
 metafile = true
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/CREDITS.md"
+hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v1.json"
 hash = "8022d84988353f51d5edd3a0c03a8b396b8fbb2ea0cebc7d21e76e753639cac9"
 
@@ -1692,7 +1696,47 @@ hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"
-hash = "a188a40a65a9162962db36016b65662d87aa5d077bb5261d0d8de5a6e4163c0a"
+hash = "fb5a073057ae7b87e374c82c11b2089c059a3ca9c04f93b96addc397c1ea5d54"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/cicadas.ogg"
+hash = "78367a725975bc2e841e3a5181fb0184bedebbda137ea127766e2dc092da3d9b"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/hiraeth.ogg"
+hash = "90e17ab21e91916b35fef731dec12caa0cfaeca9f744ad3a9e7dbecc8e31af3c"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/hymn_to_the_dawn.ogg"
+hash = "587d28288afde66542bd9dcae6219169b5d94df347af4f3d5f5348fdc5ea20b5"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/i_walk_with_ghosts.ogg"
+hash = "b0b3f4b3829d3590c6cb632cb77ba1555d418554992eee9c92f3c16629e05ef9"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/lightless_dawn.ogg"
+hash = "c5f2ec50ad10a362e06e6d3af16624c1497096b4ef146608b142c6e54aba6cd2"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/long_note_four.ogg"
+hash = "661e2bbd66846d0a423b9c4e47e81433bf5b19990b0fe685762214b4c43ddbfb"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/lullabies_3.ogg"
+hash = "33281530dfd461a3129a1fe0eb5bd52768ab1de116bb1bccfcb62b13bd046870"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/meditation_impromptu_02.ogg"
+hash = "3f4e56850b283e7a62d2b094aef16d3a6246e6a07c4455ecb85cfa83c32223bd"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/permafrost.ogg"
+hash = "2ab2e0cfd90fa19be532b6410f60c9a926e92943e84852a5765b54bfc6f5842d"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.ogg"
+hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
@@ -1761,4 +1805,4 @@ hash = "02bf9589473fc7361a534dc4aa62cb39d9a0265fc2bd85c9b3d2357e61ae0808"
 
 [[files]]
 file = "trueadaptivemusicpacks/fallow/rules.json"
-hash = "351e57b7be80eab9298aab8e0229961fb5f8c1f296fd8dc31a27f61809a7d194"
+hash = "93f366cbd2fb9a01760814112404659f92814bb211a66a787ab22a67b6b8f979"

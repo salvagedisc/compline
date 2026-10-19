@@ -2,17 +2,12 @@
   "version": 3,
   "root": {
     "music": [
-      "fallow:music.sweden",
-      "fallow:music.key",
-      "fallow:music.mice_on_venus",
-      "fallow:music.minecraft",
-      "fallow:music.clark",
-      "fallow:music.oxygene",
-      "fallow:music.dry_hands",
-      "fallow:music.wet_hands",
-      "fallow:music.one_more_day",
-      "fallow:music.left_to_bloom",
-      "fallow:music.komorebi"
+      "fallow:music.floating_dream",
+      "fallow:music.supernova",
+      "fallow:music.cicadas",
+      "fallow:music.echo_in_the_wind",
+      "fallow:music.hiraeth",
+      "fallow:music.permafrost"
     ],
     "ambience": [],
     "predicates": [
@@ -74,7 +69,9 @@
         "children": []
       },
       {
-        "music": [],
+        "music": [
+          "fallow:music.i_walk_with_ghosts"
+        ],
         "ambience": [],
         "predicates": [
           {
@@ -94,8 +91,8 @@
           "disableFading": false,
           "disableResuming": false,
           "ignorePersistence": true,
-          "trackDelay": 0,
-          "trackDelayNoise": 0,
+          "trackDelay": 1200,
+          "trackDelayNoise": 300,
           "enterDelay": 0,
           "exitDelay": 0,
           "inheritMusic": false,
@@ -104,7 +101,7 @@
           "requireChildren": false,
           "loopMusic": false,
           "loopStartPoints": {},
-          "title": "Monument : la nappe de l'Elderheart seule"
+          "title": "Monument : un morceau à l'approche, puis la nappe du Cœur ancien"
         },
         "children": []
       },
@@ -183,8 +180,8 @@
       },
       {
         "music": [
-          "fallow:music.eld_unknown",
-          "fallow:music.floating_dream"
+          "fallow:music.lullabies_3",
+          "fallow:music.lightless_dawn"
         ],
         "ambience": [],
         "predicates": [
@@ -223,9 +220,7 @@
         "music": [
           "fallow:music.aerie",
           "fallow:music.featherfall",
-          "fallow:music.wending",
-          "fallow:music.stand_tall",
-          "fallow:music.echo_in_the_wind"
+          "fallow:music.cliff_hanger"
         ],
         "ambience": [],
         "predicates": [
@@ -261,7 +256,10 @@
         "children": []
       },
       {
-        "music": [],
+        "music": [
+          "fallow:music.drifter",
+          "fallow:music.infinite_amethyst"
+        ],
         "ambience": [],
         "predicates": [
           {
@@ -275,13 +273,13 @@
         "events": [],
         "parameters": {
           "musicWeights": {},
-          "vanillaMusic": true,
+          "vanillaMusic": false,
           "compatibilityMode": false,
           "disableFading": false,
           "disableResuming": false,
           "ignorePersistence": false,
-          "trackDelay": 0,
-          "trackDelayNoise": 0,
+          "trackDelay": 600,
+          "trackDelayNoise": 300,
           "enterDelay": 0,
           "exitDelay": 0,
           "inheritMusic": false,
@@ -290,7 +288,7 @@
           "requireChildren": false,
           "loopMusic": false,
           "loopStartPoints": {},
-          "title": "Sous terre : musique de No Man's Land"
+          "title": "Sous terre"
         },
         "children": []
       },
@@ -300,10 +298,11 @@
           "fallow:music.sweden",
           "fallow:music.wet_hands",
           "fallow:music.mice_on_venus",
-          "fallow:music.minecraft",
-          "fallow:music.clark",
+          "fallow:music.key",
           "fallow:music.komorebi",
-          "fallow:music.left_to_bloom"
+          "fallow:music.left_to_bloom",
+          "fallow:music.rose_field",
+          "fallow:music.guidance"
         ],
         "ambience": [],
         "predicates": [
@@ -356,11 +355,9 @@
         "children": [
           {
             "music": [
-              "fallow:music.oxygene",
-              "fallow:music.floating_dream",
-              "fallow:music.comforting_memories",
               "fallow:music.subwoofer_lullaby",
-              "fallow:music.yakusoku"
+              "fallow:music.the_long_dark",
+              "fallow:music.meditation_impromptu_02"
             ],
             "ambience": [],
             "predicates": [
@@ -396,9 +393,8 @@
       {
         "music": [
           "fallow:music.anachronistic",
-          "fallow:music.drifter",
-          "fallow:music.labyrinthine",
-          "fallow:music.eld_unknown"
+          "fallow:music.hymn_to_the_dawn",
+          "fallow:music.long_note_four"
         ],
         "ambience": [],
         "predicates": [
@@ -440,48 +436,9 @@
       },
       {
         "music": [
-          "fallow:music.wet_hands",
-          "fallow:music.dry_hands",
-          "fallow:music.firebugs"
-        ],
-        "ambience": [],
-        "predicates": [
-          {
-            "type": "weather",
-            "arguments": {
-              "weather": "Rain"
-            }
-          }
-        ],
-        "events": [],
-        "parameters": {
-          "musicWeights": {},
-          "vanillaMusic": false,
-          "compatibilityMode": false,
-          "disableFading": false,
-          "disableResuming": false,
-          "ignorePersistence": false,
-          "trackDelay": 720,
-          "trackDelayNoise": 300,
-          "enterDelay": 0,
-          "exitDelay": 0,
-          "inheritMusic": false,
-          "inheritAmbience": true,
-          "parallelMusic": false,
-          "requireChildren": false,
-          "loopMusic": false,
-          "loopStartPoints": {},
-          "title": "Pluie"
-        },
-        "children": []
-      },
-      {
-        "music": [
-          "fallow:music.oxygene",
           "fallow:music.subwoofer_lullaby",
-          "fallow:music.comforting_memories",
-          "fallow:music.yakusoku",
-          "fallow:music.floating_dream"
+          "fallow:music.the_long_dark",
+          "fallow:music.meditation_impromptu_02"
         ],
         "ambience": [],
         "predicates": [
@@ -544,10 +501,8 @@
         "children": [
           {
             "music": [
-              "fallow:music.left_to_bloom",
-              "fallow:music.one_more_day",
-              "fallow:music.bromeliad",
-              "fallow:music.komorebi"
+              "fallow:music.floating_dream",
+              "fallow:music.supernova"
             ],
             "ambience": [],
             "predicates": [
@@ -584,10 +539,8 @@
           },
           {
             "music": [
-              "fallow:music.danny",
-              "fallow:music.haggstrom",
-              "fallow:music.clark",
-              "fallow:music.living_mice"
+              "fallow:music.cicadas",
+              "fallow:music.echo_in_the_wind"
             ],
             "ambience": [],
             "predicates": [
@@ -624,10 +577,8 @@
           },
           {
             "music": [
-              "fallow:music.a_familiar_room",
-              "fallow:music.dry_hands",
-              "fallow:music.wending",
-              "fallow:music.infinite_amethyst"
+              "fallow:music.hiraeth",
+              "fallow:music.echo_in_the_wind"
             ],
             "ambience": [],
             "predicates": [
@@ -664,10 +615,8 @@
           },
           {
             "music": [
-              "fallow:music.mice_on_venus",
-              "fallow:music.sweden",
-              "fallow:music.key",
-              "fallow:music.yakusoku"
+              "fallow:music.permafrost",
+              "fallow:music.floating_dream"
             ],
             "ambience": [],
             "predicates": [

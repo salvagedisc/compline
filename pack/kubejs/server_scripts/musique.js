@@ -3,7 +3,7 @@
 // prédicats personnalisés du paquet (trueadaptivemusicpacks/fallow/predicates/*.json) sont
 // des conditions de butin que TAM fait évaluer par le serveur, et lisent ces tags.
 //
-// - fallow_monument : un Cœur ancien d'Ancient Remnants est proche, sa nappe sonore joue seule ;
+// - fallow_monument : un Cœur ancien d'Ancient Remnants est proche (un morceau à l'approche) ;
 // - fallow_lune     : une lune d'Enhanced Celestials est levée (lune bleue, des moissons…) ;
 // - fallow_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
 //

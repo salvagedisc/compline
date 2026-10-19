@@ -35,7 +35,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
   - tannerie : les animaux lâchent une peau brute, préparée aux cendres puis trempée sur le plateau en bambou de Kaleidoscope ([tannerie](docs/plan/tannerie.md)) ;
   - plus d'expérience : enclume sans niveaux (usure), barre cachée, aucune orbe, fioles et pépites retirées ([0009](docs/decisions/0009-xp.md)).
 - Mod `fallow` 0.2.0 : module `xp`.
-- Musique : True Adaptive Music et le paquet `fallow` (`pack/trueadaptivemusicpacks/fallow/`) : 12 situations (brume, clairière, saisons, lune, dirigeable, sous terre…), longs silences, muet près des monuments et pendant les boss ; morceaux vanilla et No Man's Land déjà dans le jeu ; script `musique.js`, tag `fallow:brumeux`, interface de TAM en français, paquet actif et musique à 40 % au premier lancement ([0010](docs/decisions/0010-musique.md)).
+- Musique : True Adaptive Music et le paquet `fallow` (`pack/trueadaptivemusicpacks/fallow/`) : 11 situations (brume, clairière, saisons, lune, dirigeable, sous terre, monument…), longs silences, muet pendant les boss ; 29 morceaux choisis par l'équipe : vanilla et No Man's Land, pack de ressources Supernova, 10 morceaux libres de Scott Buckley, Kevin MacLeod et HoliznaCC0 avec leurs crédits ; script `musique.js`, tag `fallow:brumeux`, interface de TAM en français, paquet actif et musique à 40 % au premier lancement ([0010](docs/decisions/0010-musique.md)).
 
 ### Retiré
 - Entity Culling : casse les engins Create Aeronautics et Sable.
