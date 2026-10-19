@@ -379,6 +379,11 @@ hash = "2a55436bef50b794a4145c83487114669a0c5e896856ba7a8bab769799729e94"
 metafile = true
 
 [[files]]
+file = "mods/wildex-bestiary.pw.toml"
+hash = "100accd1ac05547f4a7ae10cc36328f4b7af9cc9b132f13890a68c8f0339c16e"
+metafile = true
+
+[[files]]
 file = "mods/yacl.pw.toml"
 hash = "539f362e9e192cf3b2813e0dfdfc51a5e6814129c6e82a9733842529beea6242"
 metafile = true
