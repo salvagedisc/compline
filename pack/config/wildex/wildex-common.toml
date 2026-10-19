@@ -1,0 +1,6 @@
+# Fallow : il n'y a plus d'expérience (docs/plan/xp.md). Fichier partiel : les autres clés
+# gardent leur valeur par défaut, que NeoForge ajoute au premier lancement.
+[general]
+	#Grant XP for newly discovered Wildex entries when they are marked as viewed.
+	# Fallow : faux (défaut : vrai). La récompense d'une découverte viendra du zoo.
+	newEntryRewardsXp = false

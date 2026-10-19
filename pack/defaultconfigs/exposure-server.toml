@@ -1,0 +1,11 @@
+# Fallow : réglages serveur d'Exposure appliqués à chaque nouveau monde.
+# Seules les clés changées sont écrites ; NeoForge complète le reste avec les valeurs par défaut.
+# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Fallow (défauts : 2, 4 et 5).
+
+[lightroom]
+	#Amount of experience awarded per printed black and white Photograph. Default: 2
+	experience_black_and_white = 0
+	#Amount of experience awarded per printed color Photograph. Default: 4
+	experience_color = 0
+	#Amount of experience awarded per printed chromatic Photograph (when all three channels have been printed). Default: 5
+	experience_chromatic = 0

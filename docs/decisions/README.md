@@ -12,6 +12,7 @@ Une fiche par décision tranchée : le contexte, les options comparées, le choi
 | [0006](0006-supplementaries.md) | Supplementaries : l'essentiel uniquement | Config fournie |
 | [0007](0007-ambiance-performance.md) | Ambiance & performance | Retenus ; Distant Horizons en attente |
 | [0008](0008-enchantement.md) | Enchantement | Immersive Enchanting retenu ; Matrix de Quark en repli |
+| [0009](0009-xp.md) | Retrait de l'expérience | Retenu ; module `xp` du mod `fallow` 0.2.0 |
 
 ## Modèle
 
