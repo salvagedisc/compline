@@ -1033,6 +1033,10 @@ file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tor
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/entity/tortoise.json"
+hash = "b1d178ea2368acf5a6b7879a477541646e67537ddb56ecc3d29630b2e3b854b3"
+
+[[files]]
 file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json"
 hash = "cffea18b11ba27c908e28ffea2e5c6a610605145d6edd0e5420c45f49f3713a1"
 
