@@ -909,6 +909,10 @@ file = "kubejs/assets/visualworkbench/lang/fr_fr.json"
 hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 
 [[files]]
+file = "kubejs/assets/wakes/lang/fr_fr.json"
+hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
+
+[[files]]
 file = "kubejs/assets/waterdripsound/lang/fr_fr.json"
 hash = "d8dd0cd30af99328398e06956994681322986739b97df5f430b355f19450506a"
 
@@ -1741,6 +1745,11 @@ metafile = true
 [[files]]
 file = "mods/visual-workbench.pw.toml"
 hash = "2684f71394862cff4c20d0f4d8491c0f86f12e66879381295e9088e0eded025d"
+metafile = true
+
+[[files]]
+file = "mods/wakes-reforged.pw.toml"
+hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
 metafile = true
 
 [[files]]
