@@ -1,0 +1,13 @@
+{
+  "fabric-data-attachment-api-v1.unknown-target.attachment-identifier": "Identifiant de la pièce jointe : %s",
+  "fabric-data-attachment-api-v1.unknown-target.block-entity-position": "Position de l'entité de bloc : %s",
+  "fabric-data-attachment-api-v1.unknown-target.chunk-position": "Position du tronçon : %s",
+  "fabric-data-attachment-api-v1.unknown-target.entity-network-id": "Identifiant réseau de l'entité : %s",
+  "fabric-data-attachment-api-v1.unknown-target.target-type": "Type de cible : %s",
+  "fabric-data-attachment-api-v1.unknown-target.target-type.block-entity": "Entité de bloc",
+  "fabric-data-attachment-api-v1.unknown-target.target-type.chunk": "Tronçon",
+  "fabric-data-attachment-api-v1.unknown-target.target-type.entity": "Entité",
+  "fabric-data-attachment-api-v1.unknown-target.target-type.world": "Monde",
+  "fabric-data-attachment-api-v1.unknown-target.title": "Modification de pièce jointe reçue pour une cible inconnue !",
+  "fabric-data-attachment-api-v1.unknown-target.world": "Monde : %s"
+}

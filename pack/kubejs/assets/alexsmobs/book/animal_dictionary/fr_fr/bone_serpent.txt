@@ -1,0 +1,7 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le serpent d'os est une gigantesque créature mort-vivante d'allure serpentine qui hante les profonds lacs de lave du Nether. On le voit parfois bondir hors de la lave avant d'y replonger peu après. Il n'est pas seulement hostile aux explorateurs : c'est aussi l'ennemi juré des wither squelettes. Lorsqu'il prend une créature pour cible, il jaillit de la lave et tente d'écraser sa proie sous son poids.
+
+Une fois tué, le serpent d'os vole en éclats en tas d'os, et il peut aussi lâcher une de ses dents. Infusée avec une bouteille de lave, elle donne une potion de vision de lave, qui permet de voir à travers la lave comme à travers l'eau.

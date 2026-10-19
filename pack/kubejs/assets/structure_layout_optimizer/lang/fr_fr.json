@@ -1,0 +1,8 @@
+{
+  "config.structure_layout_optimizer.title": "Structure Layout Optimizer",
+  "config.structure_layout_optimizer.desc": "Une tentative d'optimisation de la génération par blocs puzzle",
+  "config.structure_layout_optimizer.link.bug_report": "Signaler un bug",
+  "config.structure_layout_optimizer.link.license": "Licence",
+  "config.structure_layout_optimizer.deduplicate_shuffled_template_pool_element_list": "Dédupliquer la liste mélangée des éléments de pool",
+  "config.structure_layout_optimizer.deduplicate_shuffled_template_pool_element_list.desc": "Utilise une autre stratégie pour générer l'agencement des structures un peu plus vite encore que l'optimisation par défaut de ce mod pour les poids des pools de modèles. Elle retire les doublons de la liste des pièces que les structures récupèrent dans le pool de modèles.\nCela ne casse pas la génération des structures, mais leur agencement sera différent de celui obtenu avec l'option désactivée (perte de la parité des graines vanilla). Le gain de vitesse peut en valoir la peine dans les gros modpacks où de nombreux mods de structures utilisent des poids très élevés.\n\nAvantages : un peu plus de performances avec les pools de modèles à poids élevés.\nInconvénients : agencement des structures différent des graines vanilla (il n'est pas cassé, juste différent)."
+}

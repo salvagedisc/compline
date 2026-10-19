@@ -1,0 +1,12 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le sous-mineur est un habitant fantomatique et rare des puits de mine abandonnés. Sa nature éthérée lui permet de traverser les murs sans peine, et seule la magie, comme les potions jetables, peut le blesser.
+La plupart des sous-mineurs n'apparaissent qu'après avoir passé beaucoup de temps dans un puits de mine.
+Ils ne représentent cependant aucune menace pour les vivants, tant qu'on ne les attaque pas. Leur méfiance envers les nouveaux venus est pourtant évidente : ils disparaissent temporairement si l'on s'approche. Ils se contentent d'arpenter les galeries du puits de mine, comme ils le font depuis des siècles.
+<NEWLINE>
+On voit parfois les sous-mineurs miner des blocs avec leur pioche fantomatique. Comme ils existent sur le plan spirituel, ils ne peuvent pas détruire ces blocs, mais leurs gestes peuvent révéler des minerais cachés dans les parois du puits de mine.
+Si l'on jette un bloc de minerai précis près d'un sous-mineur, il cesse d'être invisible et se met à chercher et à miner les blocs qui dissimulent ce minerai dans la zone, révélant parfois des filons.
+<NEWLINE>
+S'il est tué par magie, le sous-mineur peut lâcher sa pioche fantomatique. Bien qu'immatérielle, cette pioche est assez puissante, mais son vrai pouvoir est de pouvoir stocker jusqu'à 9 piles de blocs minés, uniquement quand l'inventaire de son utilisateur est plein. Dès qu'il y a de la place dans l'inventaire, la pioche restitue les objets. La pioche fantomatique se répare avec des membranes de phantom.

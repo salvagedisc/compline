@@ -1,0 +1,9 @@
+{
+  "config.apollib.default": "Par défaut : ",
+  "config.apollib.done": "Enregistrer et fermer",
+  "config.apollib.done.tooltip": "Enregistre les modifications et ferme l'écran.",
+  "config.apollib.export": "Exporter",
+  "config.apollib.export.tooltip": "Copie le fichier de configuration actuel dans le presse-papiers.",
+  "config.apollib.back": "Retour",
+  "config.apollib.back.tooltip": "Ferme cet écran sans enregistrer les modifications."
+}

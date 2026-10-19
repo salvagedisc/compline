@@ -1,0 +1,22 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le murmure est une âme tourmentée qu'on ne trouve que dans les entrailles de la Surface, plus profond encore que les mille-pattes des cavernes.
+Ce qui ressemble à une personne inoffensive est en réalité un monstre mort-vivant au cou serpentin, qu'il peut étirer sur plus de 50 blocs.
+Quand il repère une proie, il étire le cou vers le haut pour bien l'observer, puis fond rapidement sur elle pour la mordre avant de se replier aussitôt.
+Si l'on frappe sa tête plutôt que son corps, il ne subit que la moitié des dégâts.
+<NEWLINE>
+Une fois tué, le murmure peut lâcher de la laine rouge, un tendon élastique ou, plus rarement, un kimono troublant.
+Les tendons élastiques se combinent avec des griffes de dropbear pour créer le fouet de tendon.
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Cette arme de corps à corps à moyenne portée se manie comme une épée et blesse jusqu'à trois créatures proches, avec des dégâts décroissants. Elle s'utilise à plus de 8 blocs de distance et trouve automatiquement une cible.
+Le fouet se répare avec des tendons élastiques.
+<NEWLINE>
+Le kimono troublant se porte comme un plastron. Malgré sa faible protection et sa faible durabilité, il augmente de deux blocs la portée de pose et rend la plupart des morts-vivants hostiles neutres envers son porteur, sauf les autres murmures et le Wither.
+Il se répare avec de la laine.
+<NEWLINE>
+Si les murmures vivent généralement à grande profondeur, ils peuvent aussi apparaître rarement en surface dans les cerisaies.

@@ -1,0 +1,15 @@
+<NEWLINE>
+<NEWLINE>
+Les anacondas sont des serpents gigantesques et agressifs qui vivent dans les marais. Ces énormes serpents sont aussi à l'aise sur terre que dans l'eau. Ils peuvent être verts ou jaunes.
+<NEWLINE>
+Ce serpent a un appétit démesuré et tente d'avaler presque tout ce qu'il peut enserrer. Il tend une embuscade à sa proie, s'enroule autour d'elle et l'étouffe lentement avant de l'avaler tout entière.
+Comme elles sont avalées entières, les créatures tuées par l'anaconda ne lâchent aucun objet supplémentaire.
+<NEWLINE>
+Après avoir avalé sa proie, le serpent la digère lentement. Après quelques gros repas, il se décolore et commence à muer.
+Sa peau muée sert à créer un motif de bannière unique ou à fabriquer le Lasso en liane.
+<NEWLINE>
+Ce lasso se lance pour capturer n'importe quelle créature, même hostile, à la manière d'une laisse. Contrairement à la laisse, il ne peut cependant pas être attaché aux barrières. Il est très pratique pour transporter des créatures peu amicales.
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+L'anaconda peut être apaisé et reproduit avec du poulet.

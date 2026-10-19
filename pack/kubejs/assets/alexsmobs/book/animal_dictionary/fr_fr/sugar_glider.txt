@@ -1,0 +1,15 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le phalanger volant est un petit marsupial arboricole qui vit dans les forêts de bouleaux.
+Il grimpe souvent aux troncs ou aux feuilles des arbres et plane jusqu'à d'autres arbres de la forêt.
+<NEWLINE>
+Le phalanger volant s'apprivoise en lui donnant des baies sucrées, son mets favori.
+Apprivoisé, il peut recevoir l'ordre de rester, de suivre ou de se promener.
+On peut aussi le placer sur sa tête en interagissant avec lui accroupi.
+Lorsqu'il est sur la tête de son maître, celui-ci bénéficie de Chute lente.
+<NEWLINE>
+Il arrive qu'un phalanger volant apprivoisé fouille les blocs de feuilles à la recherche d'objets.
+Ce sont généralement des babioles comme des pousses ou des bâtons, mais on trouve parfois des objets précieux comme des flèches, de la fourrure d'ours ou des bois d'élan.
+<NEWLINE>
+Les phalangers volants se reproduisent avec des rayons de miel. Les petits sont incapables de planer.

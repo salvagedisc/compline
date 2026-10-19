@@ -1,0 +1,11 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le mille-pattes des cavernes est un arthropode souterrain rare qui vit au plus profond des grottes. Il est hostile envers quiconque s'aventure sur son territoire.
+Bien que lent, cet arthropode géant et massif inflige des dégâts redoutables et sa morsure est venimeuse.
+<NEWLINE>
+Une fois tué, il peut lâcher une ou plusieurs de ses pattes.
+Ces pattes permettent de fabriquer des jambières qui offrent à leur porteur la capacité d'escalader les murs, ainsi qu'une meilleure protection.
+Elles peuvent aussi être infusées avec une essence toxique ou une bouteille de crachat de dragon de Komodo pour obtenir une potion de résistance au poison.
+Celle-ci protège son utilisateur des effets du poison.
+

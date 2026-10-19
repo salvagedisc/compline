@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test \"scripts/test/*.test.mjs\"",
     "sync": "node scripts/sync-from-instance.mjs",
-    "check-deps": "node scripts/check-deps.mjs"
+    "check-deps": "node scripts/check-deps.mjs",
+    "check-fr": "node scripts/check-fr.mjs"
   }
 }

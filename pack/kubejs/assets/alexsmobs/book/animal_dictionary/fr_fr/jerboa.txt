@@ -1,0 +1,8 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La gerboise est un petit mammifère nocturne qu'on ne trouve que dans les déserts, la nuit.
+Ces petites créatures ont l'habitude de dormir le jour et de bondir la nuit sur leurs très longues pattes arrière.
+À cause de leur petite taille, de nombreuses créatures, dont les crotales, les renards et les chats, chassent les gerboises.
+Malgré leur timidité, les gerboises réclament des graines. Si on leur en donne quelques-unes, elles accordent l'effet Pied léger, qui augmente la vitesse quand on court et saute en même temps.
+Les gerboises se reproduisent avec des asticots ou n'importe quel petit insecte. Une gerboise nourrie de graines ou d'asticots ne disparaît pas.

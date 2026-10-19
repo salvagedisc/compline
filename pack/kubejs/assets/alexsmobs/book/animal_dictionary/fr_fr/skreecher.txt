@@ -1,0 +1,17 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le skreecher est un étrange primate horriblement muté qu'on trouve agrippé au plafond des abîmes.
+Son biome natal étant si sombre, on ne le distingue souvent qu'à ses yeux gigantesques et lumineux.
+<NEWLINE>
+Bien qu'il soit considéré comme un monstre hostile, le skreecher ne combat pas au sens habituel. Lorsqu'il détecte une proie, il se met à faire un vacarme assourdissant, en hurlant et en frappant l'un contre l'autre ses deux grands pieds.
+En quelques secondes, un tel bruit dans un biome aussi sensible aux sons ne manque pas de réveiller un warden juste sous sa cible.
+<NEWLINE>
+Heureusement pour les aventuriers, le skreecher a très peu de santé, et n'importe quel projectile l'empêche temporairement d'appeler un warden, tout en le faisant chuter au sol.
+Le plus difficile face à ces bêtes est de les repérer avant qu'elles ne vous repèrent.
+<NEWLINE>
+Une fois tué, le skreecher peut lâcher son âme. L'âme de Skreecher permet de fabriquer un boumer de sculk.
+<NEWLINE>
+<NEWLINE>
+Activé par un capteur sculk proche, ce bloc émet une forte détonation qui blesse les créatures situées à moins de 3 blocs à l'horizontale. Un signal de redstone le désactive temporairement, et les détonations ont un léger temps de recharge, ce qui rend le boumer de sculk utile pour les pièges.

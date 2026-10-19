@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le papilloneur est une petite créature végétale qui vit dans les grottes luxuriantes. Totalement pacifique, il évite le danger en s'élevant dans les airs en battant de sa fleur géante.
+Le papilloneur s'intéresse curieusement à toutes les fleurs et s'apprivoise en lui donnant 4 à 6 fleurs. Elles doivent toutes être différentes, sinon il s'en désintéresse.
+<NEWLINE>
+Apprivoisé, il peut recevoir l'ordre de rester, de suivre ou de se promener. Pour défendre son maître, il s'élève dans les airs et tire des boules de pollen sur l'agresseur. Ces boules de pollen sont autoguidées, ce qui rend quelques papilloneurs très utiles aux explorateurs de grottes.
+Malgré sa faible santé, on peut l'équiper d'un pot de fleurs pour lui donner une armure supplémentaire. Un papilloneur en pot se ramasse aussi en s'accroupissant. Les papilloneurs se soignent avec des fleurs.
+<NEWLINE>
+Étant des plantes, les papilloneurs se reproduisent avec de la poudre d'os. En les faisant se reproduire près de buissons ou de feuilles d'azalée, ceux-ci peuvent fleurir. Une fois tué, le papilloneur peut lâcher une fleur sporifère.

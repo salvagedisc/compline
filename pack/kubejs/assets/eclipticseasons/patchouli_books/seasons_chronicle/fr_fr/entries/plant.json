@@ -1,0 +1,106 @@
+{
+  "name": "06 - Agriculture",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Les cultures ont besoin d'une saison et d'une humidité adaptées : leur vitesse de pousse varie donc avec les termes solaires et l'humidité.$(br)$(br)En général, la plupart des cultures aiment une humidité modérée et la plupart des régions n'ont pas d'humidité extrême : il suffit donc le plus souvent de planter au bon moment des cultures adaptées à la saison.$(br)$(br)C'est ce qu'on appelle suivre le rythme de la nature."
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Serre",
+      "multiblock": {
+        "pattern": [
+          [
+            "GGGGG",
+            "GGGGG",
+            "GGGGG",
+            "GGGGG",
+            "GGGGG"
+          ],
+          [
+            "GGGGG",
+            "G   G",
+            "G O G",
+            "G   G",
+            "GGGGG"
+          ],
+          [
+            "GGGGG",
+            "G   G",
+            "G   G",
+            "G  PG",
+            "GGSGG"
+          ],
+          [
+            "GGGGG",
+            "GWWWG",
+            "GWWWG",
+            "GWWWG",
+            "GGRGG"
+          ],
+          [
+            "DDDDD",
+            "DFFFD",
+            "DF0FD",
+            "DFFFD",
+            "DDDDD"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:farmland",
+          "G": "minecraft:glass",
+          "F": "minecraft:farmland",
+          "D": "minecraft:grass_block",
+          "R": "minecraft:oak_door[half=lower,open=false]",
+          "S": "minecraft:oak_door[half=upper,open=false]",
+          "W": "minecraft:wheat[age=6]",
+          "O": "eclipticseasons:spring_greenhouse_core",
+          "P": "eclipticseasons:block_in_wooden_grate_block[waterlogged=false]{inner_block:\"minecraft:wet_sponge\",time:0}",
+          "Q": "minecraft:campfire"
+        }
+      },
+      "text": "Mais s'il faut d'urgence cultiver des plantes inadaptées à l'environnement du moment, il faudra construire une serre."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Construire une serre",
+      "text": "La serre n'a pas de règle stricte : il suffit d'un espace à peu près clos. Pour les murs et le toit, on conseille des matériaux solides qui laissent passer la lumière, comme le verre.$(br)$(br)Pour que les cultures poussent en toute saison, il faut un noyau de la saison préférée de la culture. Pour le blé, par exemple, le noyau de printemps ou celui d'été conviennent.$(br)$(br)Le noyau se fabrique avec l'essence correspondante ; il s'insère d'un clic droit et se retire d'un clic droit accroupi."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Par défaut, les essences de saison s'obtiennent en accomplissant des progrès ou des quêtes de saison, mais aussi par des rituels de saison avec un parchemin de prière saisonnière ; dans un modpack, suivez les quêtes.$(br)$(br)Il arrive que l'humidité ne convienne pas aux cultures. Posez alors à côté des blocs de réglage d'humidité, que vous trouverez dans JEI.$(br)$(br)Un détecteur de croissance permet de vérifier si les cultures conviennent à cette serre."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Animaux et saisons",
+      "text": "$(o)Cette fonction est facultative.$()$(br)$(br)Les animaux peuvent avoir une saison de reproduction ; la saison réelle dépend de la région, voir l'entrée $(l:region)Différences régionales$(). Changement notable : on ne peut plus traire les vaches à tout moment, seulement pendant leur saison de reproduction.$(br)$(br)Autre changement, les abeilles : elles ne butinent qu'au printemps et ne quittent pas la ruche en hiver.$(br)$(br)Pour la pêche, c'est plus simple : laissez les poissons se reposer. Hors de l'été ou par mauvais temps, vos prises diminuent."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "eclipticseasons:greenhouse_core_container",
+      "recipe2": "eclipticseasons:seasonal_prayer_scroll"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "eclipticseasons:spring_greenhouse_core",
+      "recipe2": "eclipticseasons:summer_greenhouse_core"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "eclipticseasons:autumn_greenhouse_core",
+      "recipe2": "eclipticseasons:winter_greenhouse_core"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "eclipticseasons:hygrometer",
+      "recipe2": "eclipticseasons:humidity_tank"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "eclipticseasons:dehumidifier",
+      "recipe2": "eclipticseasons:growth_detector"
+    }
+  ]
+}

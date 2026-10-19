@@ -1,0 +1,14 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le rhinocéros est un grand mammifère cuirassé qui vit en groupes dans les savanes.
+Il porte sur la tête de grandes cornes dont il se sert pour attaquer toute menace trop proche.
+Il déteste les pillards et fonce sur eux dès qu'il les aperçoit.
+Ces animaux cornus et cuirassés infligent très vite de lourds dégâts.
+<NEWLINE>
+D'abord craintifs envers les joueurs, ils s'apaisent si on leur donne du blé.
+Si l'on utilise une potion sur un rhinocéros, elle s'applique à sa corne. Toute créature qu'il attaque subit alors l'effet de la potion.
+Ces potions durent de 15 à 20 attaques avant de s'estomper. Un rhinocéros apprivoisé vient en aide à quiconque l'a nourri de blé et rôde autour des villages voisins pour se mettre en sécurité.
+<NEWLINE>
+Les rhinocéros se reproduisent avec des hautes herbes ou des buissons morts.

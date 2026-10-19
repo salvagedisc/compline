@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+L'orque est un grand cétacé proche du dauphin qui vit dans les océans froids de la Surface. On la voit souvent émerger et replonger, et lancer des attaques contre les ours blancs de la région. Elle tue aussi des bancs de poissons en les frappant de sa queue massive. Contrairement à leurs cousins dauphins, ces baleines ne sont pas si amicales : blesser l'une d'elles peut pousser tout le groupe à vous attaquer.
+<NEWLINE>
+La couleur et l'aspect d'une orque varient selon que son groupe vient du sud, du nord, de l'est ou de l'ouest.
+<NEWLINE>
+Nager avec un groupe d'orques peut accorder l'effet Puissance de l'orque, qui augmente la vitesse d'attaque. Les orques utilisent souvent leur force naturelle contre les noyés et les gardiens.

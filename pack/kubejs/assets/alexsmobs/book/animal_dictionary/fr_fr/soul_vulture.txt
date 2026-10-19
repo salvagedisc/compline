@@ -1,0 +1,9 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le vautour des âmes est la dépouille desséchée d'un oiseau mort depuis longtemps, qui hante les vallées de sable des âmes du Nether. On voit ces oiseaux morts-vivants tournoyer au-dessus des innombrables squelettes géants qui jonchent le paysage.
+Si l'on s'approche, il lance contre l'explorateur un assaut qui lui vole sa santé, jusqu'à cinq fois. S'il est tué ensuite, il peut lâcher son cœur imprégné d'âmes.
+Le cœur de l'âme permet d'infuser une potion de vol d'âme, qui confère au buveur le même pouvoir de drainer la santé que l'oiseau.
+<NEWLINE>
+Comme les wither squelettes, les vautours des âmes sont les ennemis naturels des piglins. Ils sont aussi des proies fréquentes des serpents d'os du Nether.

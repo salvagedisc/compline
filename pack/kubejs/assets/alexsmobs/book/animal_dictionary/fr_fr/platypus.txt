@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+L'ornithorynque est une créature qui ressemble à un mélange de plusieurs animaux, tout en étant parfaitement unique. On le rencontre rarement dans les rivières de la Surface.
+Cet étrange mammifère porte des ergots venimeux aux pattes, qui lui permettent d'empoisonner ses agresseurs.
+Son odorat, son ouïe et sa vue médiocres l'ont amené à chasser et à s'orienter grâce à l'électricité. C'est pourquoi il est naturellement attiré par la redstone qu'on tient en main. Nourri de redstone, il recharge sa sensibilité électrique et cherche des asticots dans les blocs d'argile voisins.
+En quête de nourriture, il déterre plusieurs boules d'argile et asticots, qu'on peut ensuite ramasser. Si on lui donne un bloc de redstone entier, la quantité d'objets déterrés augmente fortement.
+Comme les autres petites créatures aquatiques, l'ornithorynque se transporte dans un seau d'eau. Il se reproduit avec des queues de homard, son mets favori.
+
+

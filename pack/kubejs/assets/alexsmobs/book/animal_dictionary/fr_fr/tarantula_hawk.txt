@@ -1,0 +1,14 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Malgré son nom, le faucon tarentule n'est ni une araignée ni un oiseau. C'est une guêpe parasitoïde géante qu'on voit souvent bourdonner au-dessus des déserts. Malgré son allure terrifiante, il s'intéresse peu à la plupart des créatures et reste neutre.
+Il doit son nom à sa proie favorite : il adore attaquer les araignées. On le voit souvent fondre sur une araignée pour la piquer, puis tourner autour et revenir une fois sa proie totalement immobilisée par son dard. Il traîne alors l'araignée à l'écart et l'enterre. En attaquant, il peut infliger l'effet Piqûre débilitante, qui paralyse les arthropodes et blesse les autres créatures jusqu'à la moitié de leur santé. Le faucon tarentule est difficile à combattre, car son vol est très erratique et il pique souvent.
+<NEWLINE>
+Le faucon tarentule s'apprivoise en lui donnant 15 à 25 yeux d'araignée. Il peut se révéler une défense redoutable contre de nombreux monstres, et son dard est extrêmement utile face aux araignées et autres arthropodes. Deux faucons tarentules apprivoisés se reproduisent en leur donnant des yeux d'araignée fermentés. Ils partent alors à la recherche d'araignées à paralyser, mais cette fois, une larve de faucon tarentule finit par émerger de l'endroit où l'araignée est enterrée.
+Un faucon tarentule apprivoisé se soigne avec des fleurs. Ceux qui naissent dans le Nether arborent des motifs jaune orangé.
+<NEWLINE>
+<NEWLINE>
+Une fois tué, le faucon tarentule peut lâcher un fragment d'aile de faucon tarentule. Neuf fragments forment une aile de faucon tarentule, et deux ailes combinées à des élytres donnent les élytres de faucon tarentule. Cette amélioration offre 3 points d'armure supplémentaires et plus de durabilité, et elle est enchantable. Les fragments d'aile permettent aussi de créer un motif de bannière unique.
+

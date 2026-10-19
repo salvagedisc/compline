@@ -1,0 +1,15 @@
+{
+  "name": "03 - Automne",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Les anciens disaient : « J'aime l'automne plus que le printemps. » Pourtant, dès ce moment, la chaleur faiblit peu à peu et devient moins favorable aux plantes.$(br)$(br)L'automne a moins de pluie et d'orages, et une humidité modérée. Il convient en général aux tubercules et à la récolte des fruits et des courges, comme les pommes de terre et les citrouilles.$(br)$(br)Il peut neiger de temps en temps, et souvent plus tôt dans les régions froides."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Au $(l)Début de l'automne$(), la chaleur de l'été n'est souvent pas encore retombée, mais à la $(l)Fin des chaleurs$(), cela s'arrange.$(br)$(br)Après $(l)Rosée blanche$(), une légère fraîcheur s'installe. À l'$(l)Équinoxe d'automne$(), le jour et la nuit sont de nouveau égaux, puis les nuits s'allongent. La température chute vite en automne : il est temps de préparer la récolte pour affronter le rude hiver.$(br)$(br)Enfin viennent $(l)Rosée froide$() et $(l)Descente du givre$(), quand le paysage devient de plus en plus désolé."
+    }
+  ]
+}

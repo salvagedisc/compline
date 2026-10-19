@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le moustique cramoisi est un hideux insecte volant mutant qui vit dans les forêts carmin du Nether. Ce monstre vorace s'en prend à presque n'importe quel animal à sang chaud, humains compris. Il se jette d'abord sur sa proie, s'y agrippe et la vide de son sang. Une fois rassasié, il s'envole et retourne le sang de sa proie contre elle en le lui recrachant dessus.
+<NEWLINE>
+S'il est tué alors qu'il est gorgé de sang, le moustique cramoisi peut lâcher un sac de sang. Il peut aussi lâcher sa trompe. Ces deux matériaux servent à fabriquer le pulvérisateur de sang, une arme unique qui projette du sang de moustique pour infliger des dégâts de zone. Il utilise des sacs de sang comme munitions.
+<NEWLINE>
+Si une mouche ordinaire de la Surface se retrouve dans le Nether, elle peut se transformer en moustique cramoisi.
+

@@ -1,0 +1,14 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+L'enderiophage est un monstrueux automate biochimique qu'on rencontre peu fréquemment dans les terres moyennes de l'End. Cette créature contre nature semble avoir été créée dans un seul but : éliminer les endergrades, natifs de l'End.
+Vu leur faible population, il est cependant peu probable que ses créateurs aient atteint leur objectif. L'attaque de l'enderiophage repose sur un effet appelé grippe de l'Ender, qu'il inflige à sa proie. Il dure dix minutes, mais à la fin de l'effet, l'hôte libère de nouveaux phages plus petits et meurt aussitôt des énormes dégâts.
+Cet effet se soigne en mangeant un chorus ou en buvant du lait. On peut aussi donner ce fruit aux autres créatures infectées pour les soigner.
+<NEWLINE>
+Neutre envers la plupart des créatures, l'enderiophage est en revanche hostile aux Endermen. Après avoir infecté sa proie, l'œil de l'Ender qu'il renferme se brise, et il part alors à la recherche d'un Enderman.
+Pour retrouver son œil, il s'agrippe à un Enderman et l'aveugle, puis tente de s'éclipser avec un nouvel œil. Un enderiophage sans œil ne peut pas attaquer.
+<NEWLINE>
+Une fois détruit, l'enderiophage peut lâcher un bloc unique appelé capside. Une capside peut contenir jusqu'à une pile complète d'objets, et lorsqu'une autre capside ou un inventaire est placé au-dessus, l'objet monte en flottant.
+La capside permet ainsi de transporter des objets vers le haut. Elle se combine aussi avec des pépites de fer et de la pierre de l'End pour créer une fusée d'enderiophage, utilisable à la place d'une fusée d'artifice pour voler avec des élytres.
+Si un œil de l'Ender est placé sur une capside posée au-dessus d'une barre de l'End verticale, il se transforme en enderiophage ! Les enderiophages naturels, qui n'ont pas été assemblés ainsi, semblent faits de matériaux propres à la dimension où ils se trouvent. C'est peut-être ainsi que ces êtres sont apparus...

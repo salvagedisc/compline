@@ -1,0 +1,15 @@
+{
+  "name": "01 - Printemps",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Le printemps laisse souvent une bonne impression : c'est la saison où poussent les fleurs et l'herbe. À partir de ce moment, la chaleur commence à s'accumuler et les cultures se mettent à pousser vite.$(br)$(br)Le printemps fait la frontière entre l'hiver et l'été : ni trop froid ni trop chaud, la température est idéale. Pourtant, les cultures ne démarrent pas dès le $(l)Début du printemps$() ; c'est en général après $(l)Eau de pluie$() que les conditions deviennent les meilleures, quand les pluies augmentent et que l'humidité devient favorable."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Après le $(l)Réveil des insectes$(), des orages peuvent éclater, avec de petites pluies de printemps continues. À l'$(l)Équinoxe de printemps$(), le jour et la nuit sont égaux et le froid s'est presque dissipé. Bien sûr, dans les régions chaudes il recule plus tôt, et plus tard dans les régions froides.$(br)$(br)Vient ensuite $(l)Clarté pure$(), au soleil parfait : le moment idéal pour se promener. Puis $(l)Pluie des grains$() apporte encore plus de pluie. Le printemps s'achève, l'été approche, et l'on peut préparer la récolte des grains semés au printemps."
+    }
+  ]
+}

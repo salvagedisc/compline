@@ -1,0 +1,17 @@
+{
+  "key.waterdripsound.category": "Général",
+  "config.waterdripsound.general": "Configuration de Drip Sounds",
+  "config.waterdripsound.enable": "Activer le son des gouttes",
+  "config.waterdripsound.volume": "Volume des gouttes",
+  "config.waterdripsound.dripChance": "Probabilité de goutte",
+  "tooltip.config.waterdripsound.dripChance": "Probabilité qu'une particule de goutte apparaisse lors de l'animation aléatoire d'un bloc\n1 sur 10 = vanilla, plus la valeur est élevée, plus c'est rare",
+  "config.waterdripsound.blockAnimateRangeMultiplier": "Multiplicateur de portée des particules de blocs",
+  "tooltip.config.waterdripsound.blockAnimateRangeMultiplier": "Multiplie la portée maximale des effets de particules de blocs\n(gouttes, fumée, chute de feuilles, lucioles, colonnes de bulles, etc.)\nAffecte aussi les sons d'ambiance de certains blocs (feu, lave, portails, etc.)\n1.0 = vanilla, plus la valeur est élevée, plus les particules peuvent apparaître loin",
+  "config.waterdripsound.blockAnimateCountMultiplier": "Multiplicateur du nombre de particules de blocs",
+  "tooltip.config.waterdripsound.blockAnimateCountMultiplier": "Multiplie le nombre de blocs qui mettent à jour leurs effets de particules à chaque tick\nPlus la valeur est élevée, plus l'impact sur les performances est sensible !\n1.0 = vanilla, plus la valeur est élevée, plus il y a de blocs qui émettent des particules\nPour garder la même densité qu'en vanilla, cette valeur doit être le carré de la portée\n(ex. portée 2.0 -> nombre 4.0, portée 3.0 -> nombre 9.0, etc.)",
+  "config.waterdripsound.blockAnimateNotSupported": "§eOptions de particules de blocs désactivées à cause d'un conflit de mods :",
+  "config.waterdripsound.blockAnimateNotSupported.effective": "§eLe mod \"Effective\" propose déjà cette fonction",
+  "config.waterdripsound.useDripstoneSounds": "Utiliser les sons de spéléothème",
+  "tooltip.config.waterdripsound.useDripstoneSounds": "Si activé, utilise les sons de gouttes d'eau et de lave\n des spéléothèmes ajoutés en 1.17.\nSinon, utilise les sons des anciennes\n versions du mod.",
+  "config.waterdripsound.soundCategory": "Catégorie de son des gouttes"
+}

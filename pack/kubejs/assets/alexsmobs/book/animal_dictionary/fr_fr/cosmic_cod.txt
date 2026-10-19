@@ -1,0 +1,8 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La morue cosmique est un poisson qui vit dans le vide entre les îles de l'End, y compris autour de l'île principale.
+Contrairement à tous les poissons connus, elle est hydrophobe et l'eau la blesse. Elle flotte plutôt dans l'éther de l'End, en bancs de taille respectable.
+Si un poisson du banc est attaqué, tout le banc tente de se téléporter au plus vite.
+<NEWLINE>
+Ces poissons sont les proies favorites des cosmaws et permettent de les apprivoiser. La morue cosmique peut aussi se capturer avec un seau vide.

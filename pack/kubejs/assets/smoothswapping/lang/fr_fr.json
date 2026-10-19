@@ -1,0 +1,13 @@
+{
+  "smoothswapping.config.menu": "Menu de config de Smooth Swapping",
+  "smoothswapping.config.toggle": "Activer le mod",
+  "smoothswapping.config.toggle.on": "Activé",
+  "smoothswapping.config.toggle.off": "Désactivé",
+  "smoothswapping.config.testinventory": "Inventaire de test",
+  "smoothswapping.config.option.animationspeed.tooltip": "-Clic droit dans le vide pour créer un point de courbe\n-Clic gauche et glisser pour déplacer un point\n-Clic droit sur un point pour le supprimer",
+  "smoothswapping.config.option.animationspeed": "Vitesse d'animation",
+  "smoothswapping.config.option.animationspeed.speed": "Vitesse",
+  "smoothswapping.config.option.animationspeed.reset": "Réinitialiser",
+  "smoothswapping.config.save": "Enregistrer et quitter",
+  "smoothswapping.config.exit": "Quitter"
+}

@@ -1,0 +1,9 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Les mongus sont d'étranges créatures fongiques qui vivent dans les champs de champignons. Ces drôles de créatures sont apparentées au gardien et à l'arpenteur, et leur ressemblent.
+Contrairement à leurs ancêtres gardiens, les mongus sont totalement pacifiques. On en voit parfois avec un champignon qui pousse sur le manteau de mycélium qui les recouvre.
+Si on leur donne d'autres champignons du même type, de nouveaux champignons prennent racine sur le mongus. Avec un champignon ou plus, il tire un rayon semblable à celui du gardien sur les champignons du même type alentour. Il s'en sert pour faire pousser davantage de ce champignon, et si celui-ci se trouve sur du mycélium, il peut devenir un champignon géant. Cela épuise le mongus et réduit le nombre de champignons sur son dos. S'il est tué avec cinq champignons sur le dos, le mongus explose violemment et transforme la zone en biome correspondant à son champignon : champs de champignons pour les champignons rouges et bruns, forêt carmin et forêt biscornue pour les champignons carmin et biscornus.
+On peut annuler la transformation d'un biome en donnant une pomme de terre empoisonnée à un mongus. Les mongus se reproduisent avec des spores mongales, qu'ils lâchent parfois tous les quelques jours.

@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+L'imicube est un parent des slimes de la Surface et des cubes de magma du Nether. Ces monstres gardent souvent les cités de l'End.
+Contrairement à leurs cousins visqueux, ces créatures gélatineuses possèdent une magie plus puissante que presque toutes les autres bêtes connues.
+Attaqué, l'imicube tente d'imiter les armes et l'armure de son agresseur. Ainsi, quiconque porte un casque et brandit une épée peut se retrouver face à un imicube doté exactement du même équipement.
+L'imicube peut ainsi apprendre à se servir d'un bouclier, d'une épée, d'un arc, d'une arbalète, d'un trident, de nourriture et plus encore. Mieux vaut être prudent : utiliser un bouclier ou une épée puissante contre lui peut donner un adversaire difficile à vaincre.
+Une fois tué, l'imicube peut lâcher un peu de son gel magique, appelé imicrème. On peut exploiter la magie métamorphe naturelle de l'imicrème en plaçant huit imicrèmes et n'importe quel objet à durabilité dans la grille de fabrication. À quelques limites près, on obtient ainsi une copie de l'outil ou de l'équipement, avec presque tous les enchantements de l'original.
+Bien sûr, la copie n'a aucune durabilité et doit être réparée. Ce pouvoir d'imitation fait de l'imicrème une matière très recherchée.

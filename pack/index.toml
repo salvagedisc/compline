@@ -9,6 +9,10 @@ file = "config/defaultoptions-common.toml"
 hash = "cddc060dde2b5a33cd543cd6635ea5ffa44394391ed17c08350170bc5a851485"
 
 [[files]]
+file = "config/defaultoptions/options.txt"
+hash = "1834422a5c493d7aa98cd9d5f240d69eb73a196e7fadfe4dab991f966f7668e1"
+
+[[files]]
 file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 
@@ -29,8 +33,792 @@ file = "config/supplementaries-common.toml"
 hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
+file = "kubejs/assets/aa4-atlas/lang/fr_fr.json"
+hash = "fed65e4396868a288f470c0d1c022c08b73618347d7dfcc77dc9dc74108aee87"
+
+[[files]]
+file = "kubejs/assets/adorablehamsterpets/lang/fr_fr.json"
+hash = "02501dee980f9b72cb4e22d4ec61d54ff3e6d4d3ff985b3ffe547ca51b2e8234"
+
+[[files]]
+file = "kubejs/assets/adorablehamsterpets/patchouli_books/hamster_tips_guide_book/fr_fr/entries/advanced_rodentry/crop_harvesting.json"
+hash = "c5afa0489e058ff8da5354bcf1b556cf408b521e35164ea960fab6624cac2214"
+
+[[files]]
+file = "kubejs/assets/aeronautics/lang/fr_fr.json"
+hash = "ffacdb381383c1eeff4e2a1546c2bec43d326e61ecaab060cdcfb537a4cbcbfe"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/alligator_snapping_turtle.txt"
+hash = "041e0377fa89ecadee3009f24804b1eaf56cf8a4028d032a8c21e2e83350f21d"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/anaconda.txt"
+hash = "dde2c06bc1b6be04d2905e0051f7ca9ded7e8b8799eb7dbc6b9f76bb75451b11"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/anteater.txt"
+hash = "d85c90bf02a296da1574473b93badabd3982f92bc87bf04242fdf5c0ef298d2a"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/bald_eagle.txt"
+hash = "41fdcc9335033e0d48cebfcc395bb0fc638c45bd5daf42df93abec510392ef9c"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/banana_slug.txt"
+hash = "fe0ce6c82a6be2d2a7371ba7ec297b8f5c44c2a38c68799899e0f0f300732f85"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/bison.txt"
+hash = "4387b98c364d2c33d3240eed3d09ba4873401696a48890683ce9d9ae96e95d41"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/blobfish.txt"
+hash = "1a1739a23c4c4bec96b52560810c9b4dcdfe4c9658e0be23d7a7525fcbff5296"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/blue_jay.txt"
+hash = "e6906f53bce7547be87852938a62b5196092f40ee062a1eba91a2f48b32713b8"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/bone_serpent.txt"
+hash = "fc439d88a3219660af217d668797ac6354540ed5d3df846e6c3325188f17f516"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/bunfungus.txt"
+hash = "65ed16344622adffbec6e6c104e0426f2bada75095512522cd72dd41f0480f72"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/cachalot_whale.txt"
+hash = "95bfebe883c65a70244475e5af1406a2c55ac6193f8081193a576f62650d837f"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/caiman.txt"
+hash = "6d088dc683b46c80aa945b5aaf1ac36aee52dfe0bff2993195c993f746fae1ac"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/capuchin_monkey.txt"
+hash = "18e4a7acfbe653be536104e821066281b2696a38e0c71f9a5e1431adc206b4e8"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/catfish.txt"
+hash = "1d92fdd94999d5d86724cb4e47eeaaea442687ff37e8b8b67154a0a9192a09c7"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/cave_centipede.txt"
+hash = "59b8fb5bf2f920ba825112428dd206375c161c8b33a236ca798d75f1720e09cd"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/cockroach.txt"
+hash = "7962b49c3bcbeb6365cb4854744f2692122a4f5e5d06d144a7cb0b1af4c940d0"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/comb_jelly.txt"
+hash = "27a2bd8ccbf5fac271eb3fdd8c417ae6f56d27739502bdff4a630ac2b3d0d597"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/cosmaw.txt"
+hash = "26816dbd18255e987795528365240ad23a51534ee081553220ec052644426c48"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/cosmic_cod.txt"
+hash = "2b9c2242c26c69189a3e8653247f1d80acc47a5d118a99bddb395ee0259d153b"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/crimson_mosquito.txt"
+hash = "0e884349a18460c7acedf3c06c5ca53ef3daae5383804b430d0f04e4be3f056e"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/crocodile.txt"
+hash = "fc94a1d953bbadcba2689720f52189fa510bee7c08e151efb66bb367692e3413"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/crow.txt"
+hash = "905057de8262505489e71c9c054833c825ae7324539087e9d2338690d9670f1d"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/devils_hole_pupfish.txt"
+hash = "0738d5562170c9df9fa9706a4ba6ee3a659e31367cbf15d2803935620c934978"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/dropbear.txt"
+hash = "b200bcdb647a010980b418d799d088f123f32ae72239228e65cef0f710e590c6"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/elephant.txt"
+hash = "6654e14eee94ac23745368159df7de6930925c15c8b9c12ad2b9ec3d19545dc0"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/emu.txt"
+hash = "a0613afe8304d92f5b27edc6930a36d47848de51351178814f8a5d33447d5a80"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/endergrade.txt"
+hash = "2e79f986155b84be7d36c03670e812b47195cd1f4a9c92a8ef387072b4201669"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/enderiophage.txt"
+hash = "8ddfa6b0b55bb0d4c45def7d407e664669d18fdf921a80c59536342c050b2551"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/farseer.txt"
+hash = "59b9cd3d891cbbd3fece33c8296027c1d20b4ea4a4efea6c9b7fb64861c6ea9a"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/flutter.txt"
+hash = "1b4f66cd02766b7d3b69c86ec75e5bc41719549c0b92efbfda3010ab4e5e57f5"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/fly.txt"
+hash = "5c4d9b313265d0a9e2cc936ceaafc18c8ac84986b94ba15f707e4148aeb9ddf7"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/flying_fish.txt"
+hash = "be17e273b6f91343067d079e92ac279ae2c263bc8759f65cfe9fc6d6c5253896"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/frilled_shark.txt"
+hash = "ce1a61ef6dc7bc25f0a513cfe18e8b5f5f25008d17c6203d944287e6d56929b9"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/froststalker.txt"
+hash = "a4654b074d656c28771ba593ecc4095a5b90ca614b1caaa24de0ef5d954e25db"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/gazelle.txt"
+hash = "f84b1a03e5b750612a9accf2acdd9ad8e6bcfc8492991cd815bbfcb75a498de9"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/gelada_monkey.txt"
+hash = "c5c141f35a1260d1c452fba39b8c4fad6ed82f0db8367e759f15406ee32cd5d2"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/giant_squid.txt"
+hash = "7ec6af5a14c01a79b4304766e20a5299519b8c0543fec92d38042034c9c4b074"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/gorilla.txt"
+hash = "7bc2f5f25c2d6bdc0a2ff09dfac8e8dd4040115133c44d48e82680fd49bc5339"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/grizzly_bear.txt"
+hash = "15f08c0d7d7c591c0b9b9c93ab560d64b956d1070c1da0ff7daf4265e936ca12"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/guster.txt"
+hash = "179477c2edd1b05c087c421b19efac60ee4c66ab5cdc6d4b1ad4f23cdd26e5d5"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/hammerhead_shark.txt"
+hash = "d1806d38195f340a74fea44098b5a356433ed231a59845ff81aa4f3fab1bda91"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/hummingbird.txt"
+hash = "fbac02e868a1c68e1c36c12597bd629984c5537bee2dd227b6223792b1768795"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/jerboa.txt"
+hash = "1137344b621157fc4ce3a34763aa6dd70ec282bb12df358629569ae6151ea76b"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/kangaroo.txt"
+hash = "1b7ad49d55fcd12116a2970c739aca7d63259c6f3a23d8ff45ecdf257c9b9fd1"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/komodo_dragon.txt"
+hash = "93162b816ea136a26beb5fda5da4dde78a2f143ac5519de06fa8dfaa93b17885"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/laviathan.txt"
+hash = "e1fb52980ccfaf04c35a7e3b2b3628ecf0b261611a98fcf2af74fa1b49d7151f"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/leafcutter_ant.txt"
+hash = "846aa2d4139ca0d26cde8719f2389b1ba2b8bdd9875cc7f9ba133878ff902cef"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/lobster.txt"
+hash = "b96b13c09d977cf778262aae76e47febfcace438705d6c2e22d18b483835116c"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/maned_wolf.txt"
+hash = "2fed6d300393fff04a02ead724759df590a4bfd88f0b8f93d3adf96c38b75fa0"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/mantis_shrimp.txt"
+hash = "54b516a565d2f2d010767b17e28e34f9b08e6b8eee9e8b54b1cef56927d812d9"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/mimic_octopus.txt"
+hash = "6e8259544d6cf69b29c1f317b746c27424d0d28b275218093ded280a2c62bc81"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/mimicube.txt"
+hash = "5946f3a63975f12b74b24e4d335b5999648575a538d9136148dfd0b340f563e6"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/moose.txt"
+hash = "cf27d7e85d33057dcf259ff54cb3a7dda1f1f3b01ceff9cfef5b125210c0b9db"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/mudskipper.txt"
+hash = "7e7bc6d050c6b2826fb3ca2f3e6991fb004696be85b70c20b9348fdd3e922a76"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/mungus.txt"
+hash = "a4d5d623d10692d539a5b8d87e0be51e2e3d29728953dfa096ad689a2c8a4991"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/murmur.txt"
+hash = "160f7c6d559ee39aec09ff0bfa24eeae7755c604543529189b1d38403af003b8"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/orca.txt"
+hash = "20dbebf7705a585ed6bca32c10d637873c301bbf572c4f582a39133b54ea5471"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/platypus.txt"
+hash = "90d59b315c73c79bd68eecca4e2b6bede7d7233bb9ead9560f176c21466b5ae5"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/potoo.txt"
+hash = "9d1ac0a5d300df5926b5094fdb463ede43fd3e163998b2d5c60a119eedbab2b1"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/raccoon.txt"
+hash = "2572a28ea582e8e80415a18c649c56738ee66649e8420f37d758b222ae34d312"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/rain_frog.txt"
+hash = "d64e0721800bb60d15c1c1909aa202c0e384b3fa12fc673ff140a6570228daef"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/rattlesnake.txt"
+hash = "a99c30d4054aca4228b74580e948cd80c76d9942390633c3dac096c316ab427b"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/rhinoceros.txt"
+hash = "28d856e14a81fbf6acb2dea0eddac22f467b76d77863b7b606c4d4e683bd168e"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/roadrunner.txt"
+hash = "63d10bd0421639aff28c922758458494a674265cec0d36e69d8961908c13121e"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/rocky_roller.txt"
+hash = "ab2949a99f4ed677a4859a4c66b64ec24347888b47212f93753283f46026fc6f"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/root.txt"
+hash = "4498cf4dd5a9baa0eaef7637f357069ade868c72a4d6a1558cffe0e4ef305ba4"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/sea_bear.txt"
+hash = "d9d00f9bc36b0b29c9c18b7c66319fbcdc5fb7dc5d25dd21ea0071210454cfc2"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/seagull.txt"
+hash = "5dc448a51694630b6ad3a4ce14ec85e0752dc35886632934a7d9d2d79c960e19"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/seal.txt"
+hash = "251d4acee75aba361c5cc319c837391a61b80835c5f5d3fc90b7e66b3852f7e6"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/shoebill.txt"
+hash = "b262a5bf000ea275e05ce6f9fcb5e629ebbb63e688382f8532168e0c0e07b9ee"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/skelewag.txt"
+hash = "f173046f60cd00d56ece9d2a02dce3cf306e40a2502fe697d0e4b5a0faeefbf9"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/skreecher.txt"
+hash = "76c8f5671fd26f16d70fe0b15a4e1efdaa9a7422262871bfb43ed363300a710c"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/skunk.txt"
+hash = "d08fc305845ae221275405336d78b8ba735a5051b50d3038820f0c94028f0ed0"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/snow_leopard.txt"
+hash = "5889daaba99cf8ae49bfd14253163e7f73e5e13f5315c739afd567dbc72d387c"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/soul_vulture.txt"
+hash = "b5dee27e7d5b831e14d75cd40f08499d85cd1f92a7496330f18a92b7834ec90e"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/spectre.txt"
+hash = "e85f7467024cc0e1fd3726c50f2da9a40ac6dbb9358639fd6c5d0acbd251eda9"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/straddler.txt"
+hash = "18e159772fa7356fab1e7e4e0e6816d8b9828bb5b5a8f729c0c4fb5a7802cf1a"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/stradpole.txt"
+hash = "d82102a5c7188b560eab9ab3e58845916827b7eadad9c6cdadb5801329a92650"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/sugar_glider.txt"
+hash = "3d1a76522770b33c9b9c2a611d61d934a032280083961f90f8875cf7b78aeeb2"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/sunbird.txt"
+hash = "b8446efad80b0e48f7ba122f8212f2e27cd969908c31e60153cd637d6e9dc211"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/tarantula_hawk.txt"
+hash = "f17e2b95f6324c015c37003e537c8959c9072bd62e5be8dacb4b444672c771fb"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/tasmanian_devil.txt"
+hash = "8990da19dd58546c9110839b26f600621a769d763fda9e7f64b09d0d7077a889"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/terrapin.txt"
+hash = "198434c5ff37c438a645dcc1e70b7147413df72beff9b7bd4e6a008940233fed"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/tiger.txt"
+hash = "da0ac7fd6246c3a052efedda0497353e0fa9e23f2d0a3970484b9c486f4c1897"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/toucan.txt"
+hash = "e91d08d266965e241c40c50ceeff495f135004edb84fb93c01822e0a4f3c8c0e"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/triops.txt"
+hash = "85ae8c424e240d916b2ab7f1aa7b458a1d15f6f09abbce0e7920bb38970f5e1b"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/tusklin.txt"
+hash = "e3f74e26259bbe9b4595d2d1136f37d381707a1343023749789cc9f285a5a435"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/underminer.txt"
+hash = "0efe8f59f767f310377ac142d838b56847e4ac1c567b5d7fe84849121fb81cc1"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/void_worm.txt"
+hash = "5922b38b831864b2fe1f9550e7057be8eba58ec510c89e0b09a010e0de5805db"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/warped_mosco.txt"
+hash = "96926d9351320ea6d0c1c14078e906942075d0f8f3dbc3abfc9586ed83f79b64"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/warped_toad.txt"
+hash = "75dea3166a3ea92ec6583fab2e817f83e9b45d0469427c8e3326f7efa1a72b08"
+
+[[files]]
+file = "kubejs/assets/alexsmobs/lang/fr_fr.json"
+hash = "5f3ee835c2b5df2600f147da6b8f760c8d3f4747ac5ec7fd3ae49436fe14cdac"
+
+[[files]]
+file = "kubejs/assets/alfinolib/lang/fr_fr.json"
+hash = "cd896b05871ba5a2fd17296690cbbf9b045c0a46b2b69295d629e40b9f1b8207"
+
+[[files]]
+file = "kubejs/assets/amendments/lang/fr_fr.json"
+hash = "816de0920a08bf19d363b28f0e2b53a30847947ea6b198e74ebf836e919f24af"
+
+[[files]]
+file = "kubejs/assets/ancient_remnants/font/header.json"
+hash = "6702ad0dde2e22efaa1f8d2025a8d79acaf17a35446e7ff77fa1ff7855bb326d"
+
+[[files]]
+file = "kubejs/assets/ancient_remnants/lang/fr_fr.json"
+hash = "83ea39612609944cbce047e2a19e3f5875675f23ad3f0bbbc48b39c95cf4e048"
+
+[[files]]
+file = "kubejs/assets/antique_atlas/lang/fr_fr.json"
+hash = "2acb044ab7aec71685f05cbdd969cda3eff0404530fb45b2965fb9bbcd4b73a5"
+
+[[files]]
+file = "kubejs/assets/apollib/lang/fr_fr.json"
+hash = "8ce63bf51348702706179e292aa7141e00953dc93049cc45ccdd551df637050d"
+
+[[files]]
+file = "kubejs/assets/atmospherics/lang/fr_fr.json"
+hash = "8f5ef6c0102d32b262070959a8331d77f95b8d394ba893690da53ceea9dc9d27"
+
+[[files]]
+file = "kubejs/assets/auroras/lang/fr_fr.json"
+hash = "946690f20714212975a0f01e43fa47ff2d655c45041c7645711fbd9714d32312"
+
+[[files]]
+file = "kubejs/assets/balm/lang/fr_fr.json"
+hash = "49fd275feac43a47285d16553b3bda996a2bf4443ce3488cc22459b7f98c5c17"
+
+[[files]]
+file = "kubejs/assets/beautify/lang/fr_fr.json"
+hash = "6365c748776d5fd866b53428b87db9a3d166f6bedb6f774e646a4e9009ab935a"
+
+[[files]]
+file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
+hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
+
+[[files]]
+file = "kubejs/assets/biolith/lang/fr_fr.json"
+hash = "a8fdd83135e21e03a404903c2acd8e7ca4016211cee2cb2fc0d6664eee0be9d2"
+
+[[files]]
+file = "kubejs/assets/cameraoverhaul/lang/fr_fr.json"
+hash = "08fa2966c04a2e0738058e2bd3387c1bde37986c94b066e0f8d871c8a8c26130"
+
+[[files]]
+file = "kubejs/assets/chat_heads/lang/fr_fr.json"
+hash = "437498949c8a9fcf54e2385d51ed3d19103a0a0759107228a7060a711ff17f67"
+
+[[files]]
+file = "kubejs/assets/chipped/lang/fr_fr.json"
+hash = "e2fb42e83327253810fdebb150919324bd5c015f9cc27ee646960d5bcefc5d67"
+
+[[files]]
+file = "kubejs/assets/cloth-config2/lang/fr_fr.json"
+hash = "548808cf0a82c506e9c1b85f03d730ea65a4e9b3b85b1af117bc3a48e942052b"
+
+[[files]]
+file = "kubejs/assets/codxlib/lang/fr_fr.json"
+hash = "9833592f40d2f740a35397b395e94df7b8b81f9c29b082a0279f60f6b693e830"
+
+[[files]]
+file = "kubejs/assets/cold_sweat/lang/fr_fr.json"
+hash = "95d7a62bd7c03d2882b745ac4d4967222e4dbd8a3f9e9209b018f290a90a4c62"
+
+[[files]]
+file = "kubejs/assets/companion/lang/fr_fr.json"
+hash = "89002cecb184611e4e428a3b6e30d0facc78486573530d3477145c10cc4ff321"
+
+[[files]]
+file = "kubejs/assets/companions/lang/fr_fr.json"
+hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
+
+[[files]]
+file = "kubejs/assets/controlling/lang/fr_fr.json"
+hash = "d516172c328be7fd7b025934e4aa08948afbf5f3489a059a211a272e1aad4e15"
+
+[[files]]
+file = "kubejs/assets/create/lang/fr_fr.json"
+hash = "b5943a8d788c14a0a4ba8cebf1f42fec66d03f150ca07415939026128a1e99f4"
+
+[[files]]
+file = "kubejs/assets/creativecore/lang/fr_fr.json"
+hash = "76b4ddc4845cfbaa06c27b5b33efa6bbf27326fe9354f2941b24bf61a025e2bf"
+
+[[files]]
+file = "kubejs/assets/crittersandcompanions/lang/fr_fr.json"
+hash = "00905f6e0e5e564fcf695fc43d0a3a92611d1c6e0d1573fe5b2b0206a460007b"
+
+[[files]]
+file = "kubejs/assets/curios/lang/fr_fr.json"
+hash = "313ec844ff8f3f577d3b4263d02739a4ae2e98f201d7d7e97b2bfc55d2139ba4"
+
+[[files]]
+file = "kubejs/assets/defaultoptions/lang/fr_fr.json"
+hash = "d9a2ca8642587dc2a19d5bc33856da36e26af74326bd4836b4f84123ea4ba391"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/lang/fr_fr.json"
+hash = "d891f8bac94499bd52a3b4a8e5f61068b989d485f49c64a06d19e702ed8fac21"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/categories/core.json"
+hash = "18e20f50a1368585dcf86834d3844cae449ee4944a81884f5ddbbbaf0329214c"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/plant.json"
+hash = "db70706e89f2909b88c298264971d6d8127dd3cc1070bfdb435ed2790eac8c9b"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/region.json"
+hash = "934c51ab9bd49ac480b50314373f3eba90e712fdfc24a373a913df65c9675b8f"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/start.json"
+hash = "402a96ec24743ee7002921aed290a23410b6563c48c78d72a19c4c06f1150a9f"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/table.json"
+hash = "fde81eafe87ab020bbc2a1b3335a5111f69676116b6910905cb3d608fba3c4a4"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/year_01.json"
+hash = "b6e5f5ffd3e3cf6c1015c4684f1e454a3f3a32ee765cdaf0ab1610ef6669b45f"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/year_02.json"
+hash = "b72e4698bf97dbd0bc1fa41be9daa3b3cfdc5b5a2d320520dabbcbb565d394b3"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/year_03.json"
+hash = "faa508e0c32859c513a7db9b6fea62c561dc75adda644dc2ebf7c65359abd74b"
+
+[[files]]
+file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/entries/year_04.json"
+hash = "41dd63d5ed56732c11e2342f1239cc1b5a833e80740111b1fa1fbb26b433044f"
+
+[[files]]
+file = "kubejs/assets/emi/lang/fr_fr.json"
+hash = "4d9d0f283b38c4a03922ffb20971b0cccd2f28d45413230de0b4e1a00b3aec5b"
+
+[[files]]
+file = "kubejs/assets/enhancedcelestials/lang/fr_fr.json"
+hash = "371f5ffe03ac0d23458e93120d76d324089c5532dc4aebfe456dc5e89c4e71a2"
+
+[[files]]
+file = "kubejs/assets/entity_model_features/lang/fr_fr.json"
+hash = "88b99bab3cc367785c3385c9aa17075d105eb8a97383a3f008ac35258e6f48fd"
+
+[[files]]
+file = "kubejs/assets/entity_texture_features/lang/fr_fr.json"
+hash = "9dd27ce83e1e44e5bd5e14e0d711b0b7019dc2c2e99c2f9696313c66623ccf4b"
+
+[[files]]
+file = "kubejs/assets/everycomp/lang/fr_fr.json"
+hash = "4d86720cf9e413fcaaf64883fc4bcf0090466ea5eb1a074bb1998345e94cd9e8"
+
+[[files]]
+file = "kubejs/assets/exposure/lang/fr_fr.json"
+hash = "e83b2dad45cfc64bb620c1fcca3e77d63d979b1149504ce46668d5824aa56e5a"
+
+[[files]]
+file = "kubejs/assets/fabric-convention-tags-v2/lang/fr_fr.json"
+hash = "2c6115caaa9878f8f4ab587c7f930c89e6d910c55c1ff65dda31d76c8f895a0e"
+
+[[files]]
+file = "kubejs/assets/fabric-data-attachment-api-v1/lang/fr_fr.json"
+hash = "2bba661d1f0b6ae0c1a65c567ce02b44eeb646d92d4cc6fc2f8f107b53226d68"
+
+[[files]]
+file = "kubejs/assets/farm_and_charm/lang/fr_fr.json"
+hash = "be99ef33a2162dccf0cde4f83c1ec1781cd863506e09df92e4e8179fb4fe0ada"
+
+[[files]]
+file = "kubejs/assets/flywheel/lang/fr_fr.json"
+hash = "45496e5363f66fa294a594cec029c99c1ba926f9de22886ba97eeb896c2037f1"
+
+[[files]]
+file = "kubejs/assets/fragmentum/lang/fr_fr.json"
+hash = "76d410219e9ef47011b4124499adfaf8c146165477c690aceca92307648405c5"
+
+[[files]]
+file = "kubejs/assets/friendsandfoes/lang/fr_fr.json"
+hash = "c926bdfca345075fe01211e33e7e571b8a89ee78b95656c5ece425cb4953f631"
+
+[[files]]
+file = "kubejs/assets/fzzy_config/lang/fr_fr.json"
+hash = "c214379c9e0be1d86eecf75ede486a7c0de03d5c638eafc88a839d521fd13607"
+
+[[files]]
+file = "kubejs/assets/ghosts/lang/fr_fr.json"
+hash = "8028e1935a5199f2c0993862af4393f952407265864c905ce90dc4c21df23c08"
+
+[[files]]
+file = "kubejs/assets/handcrafted/lang/fr_fr.json"
+hash = "e33de2fa6e92e58ad969161a7ad84727551845ab1f7aa31c1df56ac4581148af"
+
+[[files]]
+file = "kubejs/assets/hapi/lang/fr_fr.json"
+hash = "2cb9f05fac1b3d925cae5f48caa0186e1ddbe5870dce9fd8cc233ef6c5b5b70d"
+
+[[files]]
+file = "kubejs/assets/hybrid_aquatic/lang/fr_fr.json"
+hash = "a41adaba34b60eade4ed515be037b6c028df7799af696cc9e7917a0b6df228f1"
+
+[[files]]
+file = "kubejs/assets/icys-better-horses/lang/fr_fr.json"
+hash = "e4ec5172661f94284afc945db73648de795fe9e26321dae14dadd7c64644ff53"
+
+[[files]]
 file = "kubejs/assets/immersiveenchanting/lang/fr_fr.json"
 hash = "6dea51c0c92d24bad830f737fe9332d08a8121a0bf9ac9816c175933f996377c"
+
+[[files]]
+file = "kubejs/assets/itemphysic/lang/fr_fr.json"
+hash = "086b9b009f44fad479037cb732c72a799d742bb0b622ec9a911b682bcb28f2d0"
+
+[[files]]
+file = "kubejs/assets/jei/lang/fr_fr.json"
+hash = "497abd76b82bf60c04af1d939e0d05c8ef37c274ec02036dff6e8f8b5fba96bd"
+
+[[files]]
+file = "kubejs/assets/kaleidoscope_compat/lang/fr_fr.json"
+hash = "487feb315a34762b0b9a6a60a5ce7f80d02df0760d6f59b3857b0f46198b427c"
+
+[[files]]
+file = "kubejs/assets/kaleidoscope_cookery/lang/fr_fr.json"
+hash = "2bf0d51aa5133119a982f676016205a3831fc3b82c6f295db058d24577dee685"
+
+[[files]]
+file = "kubejs/assets/kaleidoscopecookery_automation/lang/fr_fr.json"
+hash = "0e66b0af8eafb1ce4d198d9e7256b87b5d161a987d684730c2a0c9a30223dce8"
+
+[[files]]
+file = "kubejs/assets/kiwi/lang/fr_fr.json"
+hash = "d99383625a6ae8e93970b9838caebd7198bd1e78304ba57ae4e9a58559c99f21"
+
+[[files]]
+file = "kubejs/assets/knightlib/lang/fr_fr.json"
+hash = "b5321a9b98b603b81eda54822dbbaf52aaa6f86d9f244db4676266db23ebb457"
+
+[[files]]
+file = "kubejs/assets/longwings/lang/fr_fr.json"
+hash = "7108898b444c5b9cb7cb55cdd9a63ba9bd1d2e52867f46e592d326562074aca6"
+
+[[files]]
+file = "kubejs/assets/mezz_config/lang/fr_fr.json"
+hash = "a06f15bf36579a7a5c5c07f234a55fcccc16d7feadd8f4cc6f754eedd35bf492"
+
+[[files]]
+file = "kubejs/assets/modernfix/lang/fr_fr.json"
+hash = "85211634a0f3912a87f3048520a1180cebc3447fe9e399399353ba38130262b3"
+
+[[files]]
+file = "kubejs/assets/modonomicon/lang/fr_fr.json"
+hash = "a234b01676cfe02159ab2db2c6cd7faf4ce89c79f79624314df6c0797d6738ef"
+
+[[files]]
+file = "kubejs/assets/moonlight/lang/fr_fr.json"
+hash = "d4df27afd675568a9328df58897b153f791094517a44fa90016c915dfd420506"
+
+[[files]]
+file = "kubejs/assets/mowziesmobs/lang/fr_fr.json"
+hash = "186df6047390ca95514608e52c99bd5ad0d0da68e32e1ee55a6112bbdc1db1a4"
+
+[[files]]
+file = "kubejs/assets/naturalist/lang/fr_fr.json"
+hash = "59a831c3e4c90173c86cab3afa2391a7fdbef75342249cc7686f7377a6265526"
+
+[[files]]
+file = "kubejs/assets/offroad/lang/fr_fr.json"
+hash = "3eca0c0f43e5acec3d500b9509a9774b713d5447cc39ca69708d5214ae220ec7"
+
+[[files]]
+file = "kubejs/assets/overgeared/lang/fr_fr.json"
+hash = "1910aa564c151eee8f3db3e11c06d552d1fcc6a0f1ad031ee294bf71b934ef39"
+
+[[files]]
+file = "kubejs/assets/particular/lang/fr_fr.json"
+hash = "0fddeb2112e0cd9a75286b2a7b41aa5bfcbc3dfc32fa0ca5a310959902ee815b"
+
+[[files]]
+file = "kubejs/assets/patchouli/lang/fr_fr.json"
+hash = "d21a21897ce4ee9673ecb09e7469dd2e78a4d442314dd14c0dbe7eedc2bfb257"
+
+[[files]]
+file = "kubejs/assets/polytone/lang/fr_fr.json"
+hash = "b864b69aaabd7563347a8cb860e1f2bda0c97136dbaf0b16d46bab1ed96b3f23"
+
+[[files]]
+file = "kubejs/assets/ponder/lang/fr_fr.json"
+hash = "1b941cf869ea0fd6d99c10a23f9e1ba4f813fc6f28d04d905b7c54cbce271b55"
+
+[[files]]
+file = "kubejs/assets/quark/lang/fr_fr.json"
+hash = "fe2cede3dc7e5fb9d8f496f758f4adc315d21ef19301bcefa97dc61f778e20b8"
+
+[[files]]
+file = "kubejs/assets/railways/lang/fr_fr.json"
+hash = "2589790d55171c03e407d895854a63466034d03c512116795659844d90dd04ac"
+
+[[files]]
+file = "kubejs/assets/resourcefulconfig/lang/fr_fr.json"
+hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
+
+[[files]]
+file = "kubejs/assets/sable/lang/fr_fr.json"
+hash = "cf5a6666f36aead1a480809375c301ea25e2a6c9569cce5bf04954502409c581"
+
+[[files]]
+file = "kubejs/assets/seamless_loading_screen/lang/fr_fr.json"
+hash = "4553e8e16642c1b2740466da22ea0efa81b2f77ba5b5060ea6eac3a356e57da5"
+
+[[files]]
+file = "kubejs/assets/simulated/lang/fr_fr.json"
+hash = "54d279ee614dece3e60ea89bcd5d6fa13733b6b75d60eca961246a471d75bd70"
+
+[[files]]
+file = "kubejs/assets/skinlayers3d/lang/fr_fr.json"
+hash = "735a3181d67258352a5ac68e02e08c2ec8889d21e3fdda6bffd9e85f865ed262"
+
+[[files]]
+file = "kubejs/assets/smoothswapping/lang/fr_fr.json"
+hash = "f03a7755564cb1177bff1ecb17702e919c9f8c513f2e41b585524054d539465b"
+
+[[files]]
+file = "kubejs/assets/sodium/lang/fr_fr.json"
+hash = "cd9b8b03f2c550799f08d504dd26506931d7a2b773386c857dc1c9fe9a4abf53"
+
+[[files]]
+file = "kubejs/assets/sound_physics_remastered/lang/fr_fr.json"
+hash = "832b17b73f25e5bc041ea9df6423e62958dcea4e3eff417fe77df7d20c66795b"
+
+[[files]]
+file = "kubejs/assets/sounds/lang/fr_fr.json"
+hash = "e686a9586c1492b297ae63f8445f4e7884525927e4543bbc6333c35ba084ea93"
+
+[[files]]
+file = "kubejs/assets/spatial-gui/lang/fr_fr.json"
+hash = "54922a5b633ef86128653d2199b5c22117abc8402ba975802b2bf6eedf3d8d5e"
+
+[[files]]
+file = "kubejs/assets/structure_layout_optimizer/lang/fr_fr.json"
+hash = "d973329458bfcef4321e08457c64ca96e27c8c48237dd756d1b58d864ff1c65d"
+
+[[files]]
+file = "kubejs/assets/subtle_effects/lang/fr_fr.json"
+hash = "d81dc6007832792071632097c0cd10da30bdd621fc00bac6e8758bb07c2f794b"
+
+[[files]]
+file = "kubejs/assets/supplementaries/lang/fr_fr.json"
+hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
+
+[[files]]
+file = "kubejs/assets/travelersbackpack/lang/fr_fr.json"
+hash = "71ca4d165c78835d543802c1933686565955ae8fada4ff759563366c86313e8a"
+
+[[files]]
+file = "kubejs/assets/treechop/lang/fr_fr.json"
+hash = "3232139133528c6891edbdbdb37f0c0b9c2cb2870b0cac293de61bc00e1aab2c"
+
+[[files]]
+file = "kubejs/assets/trender/lang/fr_fr.json"
+hash = "147a536e96829f10bbf4fe21365d56951537b70ab97342a7a1765e613e9448c7"
+
+[[files]]
+file = "kubejs/assets/twigs/lang/fr_fr.json"
+hash = "ea856d563dfe4f9910145de8d4e60ef7d0122a598694f5ca8f615b30f8c18ec8"
+
+[[files]]
+file = "kubejs/assets/untitledduckmod/lang/fr_fr.json"
+hash = "28e54224a1d77a517ed0ddec0abdc7c2ae15a3a17bb76a4e27b04af1a725a203"
+
+[[files]]
+file = "kubejs/assets/veil/lang/fr_fr.json"
+hash = "60c5a115f610acfe0fda6915262b8f3e5f15d1f1d814656af9eadfa66b9767bb"
+
+[[files]]
+file = "kubejs/assets/visualworkbench/lang/fr_fr.json"
+hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
+
+[[files]]
+file = "kubejs/assets/waterdripsound/lang/fr_fr.json"
+hash = "d8dd0cd30af99328398e06956994681322986739b97df5f430b355f19450506a"
+
+[[files]]
+file = "kubejs/assets/wildex/lang/fr_fr.json"
+hash = "c8df1314b5b66a168239d5fe0ec4afaa1a33cc0cd625fa822bbb5a0583e5e8b3"
+
+[[files]]
+file = "kubejs/assets/yet_another_config_lib_v3/lang/fr_fr.json"
+hash = "59dce3211a1121055bc2b9d904b17dbfaf94c9878d0acf244f26aecc3f911b3c"
+
+[[files]]
+file = "kubejs/assets/zeta/lang/fr_fr.json"
+hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_desert_biomes.json"

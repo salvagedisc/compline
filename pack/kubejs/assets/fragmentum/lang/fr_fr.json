@@ -1,0 +1,19 @@
+{
+  "config.fragmentum.anyReloadWrapper": "%s\n\n§6⚠ Cette option nécessite de recharger le monde ou d'utiliser la commande /reload pour s'appliquer !",
+  "config.fragmentum.worldReloadWrapper": "%s\n\n§6⚠ Cette option nécessite de recharger le monde pour s'appliquer !",
+  "config.fragmentum.format.percentage": "%s %%",
+  "config.fragmentum.format.seconds": "%s seconde(s)",
+  "config.fragmentum.format.minutes": "%s minute(s)",
+  "config.fragmentum.format.blocks": "%s bloc(s)",
+  "config.fragmentum.format.chunks": "%s chunk(s)",
+  "config.fragmentum.format.potency.0": "I",
+  "config.fragmentum.format.potency.1": "II",
+  "config.fragmentum.format.potency.2": "III",
+  "config.fragmentum.format.potency.3": "IV",
+  "config.fragmentum.format.potency.4": "V",
+  "config.fragmentum.format.potency.5": "VI",
+  "config.fragmentum.format.potency.6": "VII",
+  "config.fragmentum.format.potency.7": "VIII",
+  "config.fragmentum.format.potency.8": "IX",
+  "config.fragmentum.format.potency.9": "X"
+}

@@ -1,0 +1,13 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La limace banane est un petit mollusque qui ne vit que dans les forêts anciennes de grands arbres, où les champignons dont elle se nourrit abondent.
+On la trouve souvent collée aux parois des blocs ou progressant lentement dans le sous-bois.
+De temps à autre, en se déplaçant, elle laisse derrière elle un peu de bave qu'il est possible de ramasser.
+Cette bave permet de fabriquer un bloc de slime de limace banane.
+<NEWLINE>
+La bave de cette limace est l'une des matières les plus absorbantes du monde naturel. Lorsqu'un bloc de ce slime touche l'eau, il en transforme instantanément une grande partie en mucus cristallisé.
+Si le bloc de slime est ensuite cassé, les blocs de mucus cristallisé se désagrègent à leur tour. Ces cristaux de mucus sont fragiles et ne se récupèrent qu'avec Toucher de soie.
+Le bloc de slime de limace banane est donc particulièrement utile pour assécher de grandes étendues d'eau.
+<NEWLINE>
+La limace banane se reproduit avec des champignons bruns et existe en plusieurs couleurs, pas toutes jaune banane.

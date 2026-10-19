@@ -1,0 +1,15 @@
+{
+  "name": "05 - Différences régionales",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Vous l'avez peut-être remarqué : le climat varie selon les régions. La différence la plus nette est la fréquence des pluies (si l'option est activée, chaque biome a même sa propre météo), qui influe beaucoup sur l'humidité : pensez aux saisons sèche et humide des savanes, ou aux pluies réparties sur toute l'année dans les régions océaniques.$(br)$(br)Il existe aussi de vraies différences de saisons, faciles à repérer."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Dans les régions chaudes, l'été dure plus longtemps ; dans les régions froides, c'est l'hiver. Cela peut influer sur la pousse des cultures et la reproduction des animaux (si l'option s'applique).$(br)$(br)La neige dépend en général de la température moyenne annuelle de la région : parfois dès l'automne, mais le plus souvent seulement en hiver.$(br)$(br)Les paysages varient aussi : certains restent identiques toute l'année, d'autres changent nettement selon les saisons. À vous de trouver l'endroit qui vous plaît."
+    }
+  ]
+}
