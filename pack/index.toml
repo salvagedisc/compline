@@ -419,6 +419,11 @@ hash = "f7ebc4c6a3887e13f28cd61e46c68289c4397f81d62b96377e32f7123d03bfad"
 metafile = true
 
 [[files]]
+file = "mods/twigs.pw.toml"
+hash = "98ef5714a273c9153fbfaca195806d36f568556819dde7b90ec6561646bede98"
+metafile = true
+
+[[files]]
 file = "mods/untitled-duck-mod.pw.toml"
 hash = "2a55436bef50b794a4145c83487114669a0c5e896856ba7a8bab769799729e94"
 metafile = true
