@@ -1,6 +1,6 @@
 # Crédits de fallow-interface
 
-Ce pack recolore des textures d'interface de trois mods aux couleurs du pack Dark Coffee GUI. Seules les couleurs changent : formes, dessins et tailles sont ceux des mods. Aucun pixel de Dark Coffee GUI n'est repris, seulement des valeurs de couleur.
+Ce pack modifie des textures d'interface de trois mods pour les accorder au pack Dark Coffee GUI. La disposition, les tailles et les dessins des blocs sont ceux des mods ; les cases, flèches, fonds et cadres sont redessinés avec des éléments propres à Fallow. Aucun pixel de Dark Coffee GUI n'est repris, seulement des valeurs de couleur.
 
 | Dossier | Mod et auteur | Licence des originaux | Licence de nos fichiers modifiés |
 |---|---|---|---|
@@ -9,7 +9,7 @@ Ce pack recolore des textures d'interface de trois mods aux couleurs du pack Dar
 | `assets/overgeared/` | Overgeared, StirDrem | MIT | MIT |
 | `assets/wildex/` | Wildex Bestiary, Coldfang | CC BY-NC 4.0 | CC BY-NC 4.0 |
 
-Modifications : la palette grise vanilla des écrans et des fonds de recettes est remplacée par des bruns ; sur le livre de Wildex, l'acier devient du laiton et le bois tire vers le brun. Les pages restent claires.
+Modifications : palette brune à la place du gris vanilla ; sur les écrans d'Overgeared et les fonds de recettes de Kaleidoscope, cases en creux aux coins coupés, flèches ombrées, fond à fibres discrètes, cadre à liseré et séparateur au-dessus de l'inventaire ; sur le livre de Wildex, l'acier devient du laiton et le bois tire vers le brun, les pages restent claires.
 
 Licences :
 - CC BY-NC-SA 4.0 : https://creativecommons.org/licenses/by-nc-sa/4.0/

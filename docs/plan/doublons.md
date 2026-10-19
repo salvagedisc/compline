@@ -60,10 +60,17 @@ Un test (`scripts/test/kubejs-lists.test.mjs`) vérifie que les objets retirés 
 
 Conséquences : trois sources de boules de slime disparaissent (crachat du Komodo, méduse de Naturalist, fiole de bave de C&C) ; l'escargot de Naturalist en lâche encore.
 
+## Autres créatures retirées
+
+Décisions anciennes du plan, confirmées par l'équipe le 2026-10-19 :
+- Alex's Mobs : Murmur, Farseer, Skelewag, mouche, cafard (direction artistique, 5.3) ;
+- Friends & Foes : iceologer, illusioner, wildfire (hostiles, décision 0003), et leurs quatre structures (cabane de l'iceologer, cabane et terrain d'entraînement de l'illusioner, citadelle du wildfire), dont les tags de biomes sont vidés ;
+- Naturalist : mammouth (préhistoire écartée, 0003).
+
+Même méthode que pour les doublons : `naturalist-server.toml`, `pack/kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (serveur et client, 22 objets dont le fouet en tendon, la table de transmutation et la couronne de wildfire, qui ne se fabriquent qu'à partir d'objets de ces créatures), exclusion du Wildex. Les succès d'Alex's Mobs liés à ces créatures restent dans leur onglet sans pouvoir s'obtenir : certains sont parents d'autres succès encore possibles.
+
 ## À trancher
 
-- Le 5.3 coupait aussi, pour la direction artistique, le Murmur, le Farseer, le Skelewag, la mouche et le cafard d'Alex's Mobs. Avec la règle « aucune coupe de style », rien n'est fait.
-- Décisions du plan hors doublons, non appliquées ici : les hostiles de Friends & Foes (iceologer, illusioner, wildfire, décision 0003) et le mammouth de Naturalist (préhistoire écartée).
 - Les biomes d'Hybrid Aquatic sont encore actifs (leur coupe est prévue au 12.1). Ses 34 espèces réservées à ces biomes en dépendent.
 
 ## Tests en jeu
@@ -80,3 +87,4 @@ Sur un monde neuf.
 | D6 | EMI : « crocodile », « homard », « étoile de mer », « libellule » | Rien des créatures coupées |
 | D7 | Wildex | Aucune entrée des créatures coupées |
 | D8 | Homard d'Hybrid Aquatic | Texture correcte (la carte de teintes n'a pas pu être rendue hors du jeu) |
+| D9 | Biomes enneigés, forêts sombres, Nether | Ni iceologer, ni illusioner, ni wildfire, ni leurs structures ; ni Murmur, Farseer, Skelewag, mouche ou cafard ; pas de mammouth |
