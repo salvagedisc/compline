@@ -9,6 +9,11 @@ file = "config/supplementaries-common.toml"
 hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
+file = "mods/aa4-atlas.pw.toml"
+hash = "c7bfef351745f41a87297176947fd72702b07606e74d9d875f3030c0ca971a4d"
+metafile = true
+
+[[files]]
 file = "mods/adorable-hamster-pets.pw.toml"
 hash = "fd9698b3a981f1be9e64c2ef952a390f53cdd763199d567c6ec51e2b189772ad"
 metafile = true
