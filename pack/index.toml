@@ -13,6 +13,14 @@ file = "config/defaultoptions-common.toml"
 hash = "40533c295a85f80ebb1485264f4b07655614ab9e2b802e23f899de779c50f418"
 
 [[files]]
+file = "config/defaultoptions/extra/config/entity_model_features.json"
+hash = "67005e1a77cf4b111ebd17137bb0e3e3bc73d9ea62154be41ea542e2ee2432a8"
+
+[[files]]
+file = "config/defaultoptions/extra/config/punchy/punchy_config.json"
+hash = "8caa03d2a2539d6da981a366a9b78c4bc6727bf031aa432c2854e5a0d77905d6"
+
+[[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
 hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
 
@@ -801,6 +809,10 @@ file = "kubejs/assets/ponder/lang/fr_fr.json"
 hash = "1b941cf869ea0fd6d99c10a23f9e1ba4f813fc6f28d04d905b7c54cbce271b55"
 
 [[files]]
+file = "kubejs/assets/punchy/lang/fr_fr.json"
+hash = "e1b4965eb10dca790df00e810d305f4b75c590006f47e81a95b917ad726de0c9"
+
+[[files]]
 file = "kubejs/assets/quark/lang/fr_fr.json"
 hash = "fe2cede3dc7e5fb9d8f496f758f4adc315d21ef19301bcefa97dc61f778e20b8"
 
@@ -1580,6 +1592,11 @@ metafile = true
 [[files]]
 file = "mods/polytone.pw.toml"
 hash = "cbac7982f1372646ae50fb6ddfe7d75abd43101f5b461938e67c206f20a7fd7c"
+metafile = true
+
+[[files]]
+file = "mods/punchy-fpa.pw.toml"
+hash = "253e843caefaf2ddb7b5d18ea5198904ed1a2e913a9d29dc577c8e0a82f4948b"
 metafile = true
 
 [[files]]
