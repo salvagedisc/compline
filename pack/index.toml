@@ -69,6 +69,11 @@ hash = "ed60e047a5a85492c3d761238524888dca729e923b6753e060fd3dc986a8e54c"
 metafile = true
 
 [[files]]
+file = "mods/balm.pw.toml"
+hash = "603cdc47142b5aa5729cbbf265a473574c9e2b55561de4318e9842d3d4b3b995"
+metafile = true
+
+[[files]]
 file = "mods/beautify.pw.toml"
 hash = "5e3421b58c8c905e686ed7b63d2fe086fe3265009347ca01aba99f13cb8edca3"
 metafile = true
@@ -176,6 +181,11 @@ metafile = true
 [[files]]
 file = "mods/data-anchor.pw.toml"
 hash = "64bdeecf2b2217fc22d5237a6bcc3b5f54a4352233040aaa0dbec4e8216f6536"
+metafile = true
+
+[[files]]
+file = "mods/default-options.pw.toml"
+hash = "a6967d761dde867ccc1af53dc9f4e530eb9917a9cb21d0fc15708e8cd2c0f2ba"
 metafile = true
 
 [[files]]
