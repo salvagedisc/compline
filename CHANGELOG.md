@@ -24,6 +24,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
   - rendu et son : Polytone, Particular Reforged, Sounds, Auroras, Drip Sounds ; packs Fresh Animations (+ Details, Objects, Emissive, Player Extension) et Motschen's Better Leaves, actifs au premier lancement via Default Options ;
   - interface : EMI, JEI (listes cachées), Pick Up Notifier, Seamless Loading Screen, Mouse Tweaks, Controlling + Searchables, Default Options, Chat Heads ;
   - scripts : KubeJS Create, LootJS, MoreJS, In Control!.
+- Enchantement : Immersive Enchanting (+ AlfinoLib), structures du mod coupées, traduction française ([0008](docs/decisions/0008-enchantement.md)).
 - Outillage : `npm run sync` rapatrie les mods de l'instance de test, `npm run check-deps` vérifie les dépendances réelles des jars ; CI `build` (export `.mrpack` à chaque push) et `release` (sur tag).
 - Mod custom `fallow` 0.1.0 (`mods-custom/fallow/`, jar dans `pack/mods/`) : module ciel (lune d'Enhanced Celestials visible sous ATMOSPHERICS, cache de brume vidé après un changement de biome) et module sac (le tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed). Non testé en jeu ; CI `build` le compile.
 
