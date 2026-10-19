@@ -99,6 +99,28 @@ Colonne « Disponible pour nous » : NeoForge 1.21.1 vérifié par l'API Modrint
 
 Écartées : les anomalies (horreur), les minerais denses (comme Create Ore Excavation), Tree Physics (comme Dragged's), les ragdolls et le corps (hors ton), tout le Nether (fermé), Tolerable Creepers (pas de monstres vanilla), Brewin' and Chewin' (Farmer's Delight), Distant Horizons et le chat vocal (déjà refusés).
 
+## Complément : le Discord de Monad Modding (2026-10-19)
+
+L'équipe a rejoint le Discord de l'équipe, et une session sur son ordinateur a lu le salon Wayfarer. Le rapport complet, avec la liste des 224 mods, est dans le dossier partagé du projet (`wayfarer-discord.md`). On n'en garde ici que ce qui change nos conclusions.
+
+- **Confirmé par l'équipe** :
+  - pas d'XP ni d'enchantements, et l'enclume améliore les outils avec du métal ;
+  - un cœur perdu à chaque mort, jusqu'à 5, regagné avec des gemmes trouvées dans des géodes de chair souterraines ;
+  - des peaux à tanner, sans doute par KubeJS ;
+  - silex, bronze, fer puis acier ;
+  - l'End est fermé, et Create n'est là que pour Aeronautics.
+- **Corrigé** : les « anomalies » n'apparaissent nulle part sur le Discord. La Lune Amie n'y apparaît que dans des blagues, mais c'est bien une mécanique de No Man's Land 1.6.1, vérifiée dans le jar ([lune-amie.md](../../lune-amie.md)).
+- **Méthode de l'équipe** : un mod maison, *Wayfarer Core*, avec beaucoup de mixins, plus KubeJS et LootJS pour les recettes et les butins. C'est la même approche que Fallow, avec notre mod `fallow` et nos scripts.
+- **Ce qu'on ne fait pas** : Farcr demande qu'on ne copie pas Wayfarer, et *Wayfarer Core* ne sera jamais publié. Fallow ne reprend ni code ni ressources : seulement des idées de jeu, écrites à notre façon (noms, taux, sources), avec des mods publics. L'équipe dit aussi encourager les addons.
+- **Idées en réserve** :
+  - un outil d'écriture qui s'use, nécessaire pour les panneaux et les livres ;
+  - la cire tirée du rayon de miel ou du porc ;
+  - un plafond d'objets au sol au lieu de leur disparition ;
+  - les outils en or avec Toucher de soie d'office ;
+  - la Chance qui remplace Fortune ;
+  - les outils abîmés dans les donjons ;
+  - pas de fonctions mcfunction dans les datapacks, pour la performance.
+
 ## Sources
 
 Vidéos de uncstatus (titre et chaîne vérifiés par oEmbed, description et transcription automatique en anglais récupérées) :

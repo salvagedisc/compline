@@ -19,7 +19,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardiens tirés de Mowzie's Mobs et Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
 | Lootr | `lootr` | ✅ | CS | Chaque joueur trouve les coffres pleins |
-| Enhanced Celestials | `enhanced-celestials` | ✅ | CS | Lunes rares, dont la lune blanche |
+| Enhanced Celestials | `enhanced-celestials` | ✅ | CS | Lunes rares ; lunes de sang retirées, une seule lune à la fois avec la Lune Amie ([lune-amie](plan/lune-amie.md)) |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Exploration partagée pour l'atlas |
 | AA4 Atlas | `aa4-atlas` | ✅ | CS | L'atlas devient un objet qu'on porte |
@@ -146,7 +146,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | LootJS | `lootjs` | ✅ | S | Butin des ruines et des monuments |
 | MoreJS | `morejs` | ✅ | CS | Événements en plus pour KubeJS |
 | In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) |
-| Mod `fallow` 0.1.0 | `mods-custom/fallow/` | ✅ (non testé en jeu) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume) et sac (tuyau qui désaltère) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
+| Mod `fallow` 0.2.0 | `mods-custom/fallow/` | ✅ (non testé avec un joueur) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume), sac (tuyau qui désaltère) et xp (enclume sans niveaux, barre cachée, [0009](decisions/0009-xp.md)) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance et technique
 
@@ -157,7 +157,6 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | ModernFix | `modernfix` | ✅ | CS | Chargement |
 | FerriteCore | `ferrite-core` | ✅ | CS | Mémoire |
 | Lithium | `lithium` | ✅ | CS | Logique serveur |
-| Clumps | `clumps` | ✅ | CS | Orbes d'XP |
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Génération des structures |
 | Chunky | `chunky` | ✅ | CS | Prégénération |
 | spark | `spark` | ✅ | CS | Profilage |
@@ -190,6 +189,7 @@ Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, 
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Retirés par l'équipe le 2026-10-19 |
 | FallingTree, ItemPhysic Lite | Remplacés par HT's TreeChop et ItemPhysic (choix de l'équipe le 2026-10-19) |
 | Entity Culling | Casse les engins Aeronautics ; retiré le 2026-10-19 |
+| Clumps | Regroupait les orbes d'XP, qui n'existent plus ([0009](decisions/0009-xp.md)) ; retiré le 2026-10-19 |
 | Freeze It and Heat It | Retiré par l'équipe le 2026-10-18 : pas de conservation de la nourriture |
 | Easy Anvils | Remplace l'enclume dont Overgeared a besoin ([12](plan/12-verification.md)) |
 | Leaves Be Gone | Sur la liste noire d'Aeronautics |
