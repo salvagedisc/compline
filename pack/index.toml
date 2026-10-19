@@ -164,6 +164,11 @@ hash = "e50f87650e3a5becf3cd1772e8053a8bc04c48859a6fa814e75e6c71eaa87e6c"
 metafile = true
 
 [[files]]
+file = "mods/every-compat.pw.toml"
+hash = "43dcf06ad13d90bac2084d9da7faee5fda850cb0a7eeea2031bc310760af56ff"
+metafile = true
+
+[[files]]
 file = "mods/exposure.pw.toml"
 hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
