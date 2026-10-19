@@ -7,5 +7,5 @@
 
 [wildexList]
 	#Entries to exclude from Wildex.
-	# Fallow : créatures de No Man's Land retirées du monde (docs/plan/faune-nml.md).
-	excludedModIds = ["nomansland:deer", "nomansland:goose", "nomansland:billhook_bass", "nomansland:tortoise", "nomansland:frienderman"]
+	# Fallow : créatures retirées du monde, celles de No Man's Land et le lapin (docs/plan/faune-nml.md).
+	excludedModIds = ["nomansland:deer", "nomansland:goose", "nomansland:billhook_bass", "nomansland:tortoise", "nomansland:frienderman", "minecraft:rabbit"]
