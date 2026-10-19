@@ -1,0 +1,19 @@
+{
+  "puddleflood.title": "Puddles & Floods",
+  "block.puddleflood.puddle": "Flaque",
+  "item.puddleflood.puddle": "Flaque",
+  "puddleflood.doFloods": "Crues",
+  "puddleflood.doRainPuddles": "Flaques de pluie",
+  "puddleflood.doDripPuddles": "Flaques de gouttes",
+  "puddleflood.doPotionPuddles": "Flaques de potion",
+  "puddleflood.doCauldronPuddles": "Flaques de chaudron",
+  "puddleflood.doFlowingWaterPuddles": "Flaques d'eau courante",
+  "puddleflood.doMeltingSnowPuddles": "Flaques de neige fondue",
+  "puddleflood.useShaderpackWater": "Utiliser l'eau du pack de shaders",
+  "puddleflood.raiseWaterHeight": "Relever le niveau de l'eau pour rejoindre la flaque",
+  "puddleflood.range": "Portée de collecte",
+  "puddleflood.collectionSpeed": "Vitesse de collecte",
+  "puddleflood.evaporationSpeed": "Vitesse d'évaporation",
+  "puddleflood.rainLevel": "Couverture sous la pluie",
+  "puddleflood.stormLevel": "Couverture sous l'orage"
+}

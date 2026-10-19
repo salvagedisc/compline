@@ -1,0 +1,11 @@
+{
+  "curios.identifier.lantern": "Lanterne",
+  "curios.modifiers.lantern": "Quand porté comme lanterne :",
+  "lamblanterns.configuration.position": "Position de la lanterne",
+  "lamblanterns.configuration.horizontalOffset": "Décalage horizontal (X)",
+  "lamblanterns.configuration.horizontalOffset.tooltip": "0,0 = au centre ; positif = hanche droite (1,0 par défaut) ; négatif = hanche gauche (-1,0). Plus la valeur est grande, plus la lanterne s'écarte sur le côté.",
+  "lamblanterns.configuration.verticalOffset": "Décalage vertical (Y)",
+  "lamblanterns.configuration.verticalOffset.tooltip": "Plus haut : la lanterne remonte vers la poitrine. Plus bas : elle descend vers la ceinture ou la hanche. À régler selon vos goûts.",
+  "lamblanterns.configuration.depthOffset": "Décalage en profondeur (Z)",
+  "lamblanterns.configuration.depthOffset.tooltip": "Plus haut : vers l'avant du corps. Plus bas : vers l'arrière. À régler selon vos goûts."
+}

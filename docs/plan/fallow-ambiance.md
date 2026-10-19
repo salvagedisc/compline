@@ -10,6 +10,8 @@ pack/resourcepacks/fallow-ambiance/
 └── assets/
     ├── atmospherics/preset/fallow_v2.json          la brume, biome par biome, et le sable
     ├── fallow/polytone/biome_modifiers/*.json      herbe, feuillage, eau (23 fichiers)
+    ├── fallow/polytone/colored_lights/*.json       couleur de la lumière des feux, des âmes, du clair de lune
+    ├── minecraft/textures/environment/moon_phases.png   la lune, dans le style du soleil d'ATMOSPHERICS
     ├── fallow/sounds.json                         évènements des morceaux du paquet musical ([musique](musique.md))
     └── fallow/sounds/music/*.ogg                  10 morceaux libres, crédits dans CREDITS.md
 ```
@@ -138,6 +140,19 @@ Les tempêtes suivent la pluie vue par le client. Avec la météo par biome d'Ec
 
 Limites : les densités sont choisies sur le papier, et les flocons apparaissent aussi sous les toits et dans les grottes de ces biomes.
 
+## Lumières colorées et lune (2026-10-19)
+
+Pour compenser l'absence de shaders, lu dans les jars (Polytone 5.1.3, ATMOSPHERICS 2.6.5, Enhanced Celestials 2), pas vu en jeu.
+
+**Lumières colorées : Polytone.** Il lit `assets/<namespace>/polytone/colored_lights/*.json` : `target_type`, `targets` (ids ou `#tag`) et `colored_light` (`color`, puis `radius` et `brightness` facultatifs). Son moteur intégré (`BUILT_IN`, par défaut) teinte la lumière de bloc sur les blocs, les entités et les particules, sans Iris. Ce n'est pas une lightmap : More Darkness et la nuit de NML ne sont pas touchés.
+- `feu.json` : torches, lanterne, feu de camp, feu, bougies (`#minecraft:candles`) et appliques de NML, `#ffb36b` ;
+- `ames.json` : les mêmes blocs aux âmes, `#8fd3e8` ;
+- `clair_de_lune.json` : bougie et bassin de clair de lune de NML, `#dde6f0`.
+
+La lumière colorée de Contraption Lights reste coupée (sa valeur par défaut) : Polytone porte seul la couleur.
+
+**La lune.** Le soleil vient du pack intégré d'ATMOSPHERICS : un carré chaud de 8 px et huit rayons ambrés très faibles, sur fond noir (le mélange est additif). Les lunes d'Enhanced Celestials 2 n'ont pas de texture propre : toutes teintent `moon_phases.png`. Le pack en fournit une dans le même style : planche 4×2 de 128×64, un carré pâle de 12 px (même taille apparente que le soleil une fois l'échelle d'ATMOSPHERICS appliquée), la part sombre à peine visible, huit rayons froids très faibles. Les phases suivent l'ordre vanilla (vérifié sur la texture du jeu). Elle habille la lune ordinaire, toutes les lunes EC2 (qui gardent leur teinte) et la lune vanilla hors d'ATMOSPHERICS.
+
 ## Ce qui reste à régler en jeu
 
 1. **Le rendu des couleurs.** Le preset d'origine utilise des couleurs de brume très saturées (`#20afff` pour les plaines) : ATMOSPHERICS les assombrit ou les mélange sans doute selon l'heure. Les gris choisis ici peuvent sortir trop ternes ou trop clairs [déduit].
@@ -151,5 +166,6 @@ Limites : les densités sont choisies sur le papier, et les flocons apparaissent
 5. **Ecliptic.** Les saisons teintent-elles encore l'herbe et les feuilles des biomes NML recolorés ? Le rapport 3 le pense, puisqu'on passe par la couleur du biome et non par une colormap de bloc [déduit].
 6. **Le rêve de NML** : le profil désactivé rend-il bien la main à NML [déduit du code] ?
 7. **Les grottes de NML** : brume gris-brun à 72 blocs, à comparer avec la poussière de Particular.
-8. **Polytone 5.x** : `coloredLightsBackend` (fichier `polytone_options.json` à la racine du jeu) reste à trancher avec le test T5. Ce pack ne s'en sert pas.
+8. **Lumières colorées de Polytone** : vérifier les teintes de nuit, avec More Darkness, et sur un dirigeable Sable assemblé (Polytone modifie le shader de chunk de Sodium). Le moteur reste `BUILT_IN` (`polytone_options.json`) ; `VEIL` et `HYBRID` sont à éviter.
 9. **Les feuilles de NML dans Particular** (test T13) : chêne générique pour 9 feuillages sur 11. Si cela gêne, passer par le mod `fallow` ou par Falling Leaves Plus (voir plus haut).
+10. **La lune** : taille et éclat à côté du soleil, teinte des lunes EC2, lune ordinaire de nuit dans la brume.

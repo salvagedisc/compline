@@ -36,6 +36,10 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
   - plus d'expérience : enclume sans niveaux (usure), barre cachée, aucune orbe, fioles et pépites retirées ([0009](docs/decisions/0009-xp.md)).
 - Mod `fallow` 0.2.0 : module `xp`.
 - Musique : True Adaptive Music et le paquet `fallow` (`pack/trueadaptivemusicpacks/fallow/`) : 11 situations (brume, clairière, saisons, lune, dirigeable, sous terre, monument…), longs silences, muet pendant les boss ; 29 morceaux choisis par l'équipe : vanilla et No Man's Land, pack de ressources Supernova, 10 morceaux libres de Scott Buckley, Kevin MacLeod et HoliznaCC0 avec leurs crédits ; script `musique.js`, tag `fallow:brumeux`, interface de TAM en français, paquet actif et musique à 40 % au premier lancement ([0010](docs/decisions/0010-musique.md)).
+- Rendu sans shaders : lumière colorée des feux, des âmes et du clair de lune (Polytone), texture de lune dans le style du soleil d'ATMOSPHERICS, Contraption Lights, Wakes Reforged, Puddles & Floods, Rainbows, Better Clouds ; graphismes « Détaillés » au premier lancement ([fallow-ambiance](docs/plan/fallow-ambiance.md)).
+- Gestes en vue subjective : Punchy! 2.8g, réglé sobre, avec EMF réglé pour qu'il soit seul à animer le bras.
+- Lamb Lanterns : une lanterne portée à la hanche éclaire.
+- Interface : packs Dark Coffee GUI et Modded Coffee GUI, actifs au premier lancement.
 
 ### Retiré
 - AA4 Atlas : compilé pour Antique Atlas 2, il appelait `AtlasScreen.prepareToOpen()` avec l'ancien type de retour et faisait planter le jeu à l'ouverture de l'atlas (rapport de plantage du test). L'atlas s'ouvre à la touche d'Antique Atlas.
@@ -44,6 +48,8 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 
 ### Modifié
 - Faune de No Man's Land : les remodèles de Mixed Litter et les textures de NML sur les animaux vanilla sont coupés, pour Fresh Animations ; cerf, oie, bar à serpe, tortue et Frienderman n'apparaissent plus, sont retirés du Wildex, et leurs 15 objets n'ont plus de recette ni de place dans EMI ([faune-nml](docs/plan/faune-nml.md)).
+- No Man's Land, objets retirés : viande de cheval, cuisses de grenouille, explosifs, flèche incendiaire et sept plats ; la TNT reprend sa recette vanilla. Le lapin est retiré du jeu (Fresh Animations n'a pas de modèle pour lui). La réplique d'offrande de la tortue vise celle de Naturalist.
+- Supplementaries : son filtre de vision des têtes de mob est coupé, Subtle Effects fait déjà le même.
 - Monstres vanilla : In Control! refuse leur apparition dans l'Overworld (22 créatures, des zombies aux pillards), biomes de No Man's Land et structures compris ; ils apparaissaient encore au premier test.
 - Enhanced Celestials 6.0.2.6 → Enhanced Celestials 2 (Core 2.0.3.3 + Default Lunar Events 2.0.1.3) : nouveaux paquets Java et nouveau format de données ; `lune.js`, `musique.js` et le module `ciel` du mod `fallow` (0.2.1) portés, lunes de sang retirées au nouveau format, traductions françaises, téléchargement des traductions de la communauté coupé.
 - JEI 19.69.0.456 (bêta) → 19.51.0.418 : depuis la 19.52, JEI envoie le transfert de recette depuis une autre méthode ; le mixin obligatoire d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plantait en entrant dans un monde (rapport de plantage du premier test). 46 textes de JEI traduits en plus.
@@ -51,3 +57,6 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Branches `test/agriculture`, `test/faune` et `test/structures` fusionnées dans `main`.
 - No Man's Land 1.5.12 → 1.6.1 : outils ancestraux (pioche rituelle, épée du serment, cloche et ciseau en bronze), carreaux lunaires et solaires ; textes nouveaux traduits.
 - Kaleidoscope Cookery 1.5.1 → 1.6.0 : la 1.5.1 faisait planter le jeu au chargement avec Kaleidoscope Compat 2.9.7 (mixin `MillstoneBlockEntityMixin`), constaté sur le serveur de test.
+
+### Corrigé
+- No Man's Land : la réplique d'offrande des écailles ne se chargeait jamais (condition sur un objet inexistant, `nomansland:tortoise_scute`).

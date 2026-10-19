@@ -13,7 +13,7 @@ Idée 4 tirée de Wayfarer ([recherche](recherche/2026-10-19/wayfarer.md), recom
 
 Pour tanner toute l'année, on construit une petite tannerie : de l'eau, en dessous un bloc de pierre de goutte avec un stalactite, puis le plateau. Sinon, on attend la pluie, qui dépend de la saison (Ecliptic Seasons).
 
-Le cuir de lapin ne change pas : quatre peaux de lapin donnent toujours un cuir à l'établi.
+Le lapin est retiré du jeu depuis le 2026-10-19 ([faune-nml](faune-nml.md)) : il n'y a plus de cuir de peaux de lapin.
 
 ## Les animaux concernés
 
@@ -62,7 +62,7 @@ Retirées, parce qu'elles donnaient du cuir trop facilement ou hors de la chaîn
 | `kaleidoscope_cookery:bamboo_tray/wetting/leather_to_rotten_flesh` | le cuir mouillé pourrit en chair putréfiée. Ce n'est pas une source, mais le plateau rendait le cuir tanné à la pluie suivante s'il restait dessus |
 
 Gardées, parce qu'elles recyclent du cuir déjà fait ou viennent d'un butin rare :
-- quatre peaux de lapin → cuir (vanilla, recette reprise à l'identique par Naturalist) ;
+- quatre peaux de lapin → cuir (vanilla, recette reprise à l'identique par Naturalist), sans effet depuis le retrait du lapin ;
 - Create : selle au moulin, armures de cheval au concasseur ; Farm & Charm : armure de cheval en cuir au hachoir ; Quark : bloc de cuir lié → 9 cuirs ;
 - Cold Sweat : peau de hoglin → 2 cuirs (le Nether est fermé, la peau est introuvable) ;
 - cuir dans quelques coffres : lettres perdues d'Envelope, pots des alchimistes de NML, grenier de la cabane de l'illusionniste (Friends & Foes), pêche vanilla.

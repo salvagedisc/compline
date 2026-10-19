@@ -103,13 +103,14 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Camera Overhaul | `cameraoverhaul` | ✅ | C | La caméra suit le mouvement (réglé bas) |
 | ItemPhysic | `itemphysic` | ✅ | C | Les objets lâchés tombent, roulent et flottent |
 | Smooth Swapping | `smooth-swapping` | ✅ | C | Les objets glissent dans l'inventaire |
+| Punchy! | `punchy-fpa` | ✅ (2.8g, version figée) | C | Gestes et bras animés en vue subjective, réglé sobre ; seul à animer le bras subjectif (option d'EMF), liste noire pour les objets de Create, d'Aeronautics et les photos d'Exposure |
 
 ## Ambiance, rendu et son
 
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
 | ATMOSPHERICS | `atmospherics` | ✅ | C | Brume, ciel, nuages par biome ([0007](decisions/0007-ambiance-performance.md)) |
-| Polytone | `polytone` | ✅ | C | Couleur de l'herbe, des feuilles et de l'eau seulement |
+| Polytone | `polytone` | ✅ | C | Couleur de l'herbe, des feuilles et de l'eau, lumière colorée des feux et des bougies ([page](plan/fallow-ambiance.md)) |
 | Particular Reforged | `particular-reforged` | ✅ | C | Eau, cascades, feuilles qui tombent, poussière des grottes |
 | Subtle Effects | `subtle-effects` | ✅ | CS | Feu, fumée, vapeur, corps |
 | LambDynamicLights | `lambdynamiclights` | ✅ | C | Lumière tenue en main |
@@ -121,6 +122,11 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Sounds | `sound` | ✅ | C | 170 sons d'interface, d'objets et de blocs |
 | Auroras | `auroras` | ✅ | C | Aurore dans les biomes froids |
 | Drip Sounds | `dripsounds` | ✅ | C | Gouttes dans les grottes (bêta) |
+| Contraption Lights | `contraption-lights` | ✅ | CS | Une lanterne posée sur un dirigeable ou un engin éclaire le monde en passant (mode LambDynamicLights, couleur coupée) |
+| Wakes Reforged | `wakes-reforged` | ✅ | CS | Sillages derrière les bateaux, les nageurs et les engins Sable |
+| Puddles & Floods | `puddles-floods` | ✅ | CS | Flaques sous la pluie et à la fonte, crues dans les creux |
+| Rainbows | `rainboows` | ✅ | C | Arc-en-ciel après la pluie |
+| Better Clouds | `better-clouds` | ✅ | C | Nuages en volume ; ordre avec No Man's Land (qui coupe les nuages pendant le rêve) à tester |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Repli si Particular ne gère pas les feuilles de NML |
 
 ## Interface et confort
@@ -136,6 +142,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Recherche dans les touches |
 | Default Options | `default-options` | ✅ | C | Touches et réglages vidéo livrés avec le pack |
 | Chat Heads | `chat-heads` | ✅ | C | Tête du joueur dans la discussion |
+| Lamb Lanterns | `lamb-lanterns` | ✅ | CS | Une lanterne portée à la hanche (emplacement Curios) éclaire comme tenue en main |
 
 ## Règles et scripts
 
@@ -175,7 +182,9 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | FA : Player Extension | `fa-player-extension` | ✅ | Le joueur dans le même style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Feuillages touffus |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version qui n'écrase pas la musique vanilla) | Trois morceaux du paquet musical (CC-BY-NC-SA 4.0, [musique](plan/musique.md)) |
-| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs Polytone, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
+| Dark Coffee GUI | `dark-coffe-gui` | ✅ | Interface vanilla en brun café |
+| Modded Coffee GUI | `modded-coffee-gui` | ✅ | Le même style pour EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
+| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs et lumières Polytone, texture de lune, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Bibliothèques
 
@@ -198,7 +207,7 @@ Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, 
 | Dynamic Surroundings | Touche le moteur de son comme Sound Physics ; doublons |
 | Dragged's Simulated Tree Chopper | « C'est de trop » (L'équipe) |
 | Not Enough Animations, First-person Model | Remplacés par FA : Player Extension (choix de l'équipe) |
-| More Culling, Better Clouds, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
+| More Culling, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Moteurs de lumière ou de physique risqués avec Sodium 0.8 et Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Retirés par l'équipe le 2026-10-18 |
 | Comforts | Doublon du sac de couchage de Traveler's Backpack |
