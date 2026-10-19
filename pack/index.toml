@@ -829,6 +829,10 @@ file = "kubejs/assets/railways/lang/fr_fr.json"
 hash = "2589790d55171c03e407d895854a63466034d03c512116795659844d90dd04ac"
 
 [[files]]
+file = "kubejs/assets/rainbows/lang/fr_fr.json"
+hash = "033a5c07f0ba91afdb9091db72bec61255bcfd96d9126473e0a4f9797c807d84"
+
+[[files]]
 file = "kubejs/assets/resourcefulconfig/lang/fr_fr.json"
 hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
 
@@ -1629,6 +1633,11 @@ metafile = true
 [[files]]
 file = "mods/quark.pw.toml"
 hash = "ddf213b8ba47e0651dc89081db34c5d5350b792ba395e81da70200e593ec310c"
+metafile = true
+
+[[files]]
+file = "mods/rainboows.pw.toml"
+hash = "fa3690cf88ce4dfd086e7cf677631a727ffe51d05929c682f1512092d2708839"
 metafile = true
 
 [[files]]
