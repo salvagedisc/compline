@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "a956779197c959c3507154857f6bbd16e6c5437ee3b48c910533259d1bb60f70"
+hash = "40533c295a85f80ebb1485264f4b07655614ab9e2b802e23f899de779c50f418"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
@@ -1933,6 +1933,11 @@ metafile = true
 [[files]]
 file = "resourcepacks/fresh-animations.pw.toml"
 hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
+metafile = true
+
+[[files]]
+file = "resourcepacks/modded-coffee-gui.pw.toml"
+hash = "ee7f28442bfe5f616ed1ca11a63a009220fc08086b87bde785f78c25026fafc3"
 metafile = true
 
 [[files]]
