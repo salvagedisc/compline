@@ -4,7 +4,9 @@
   "package": "io.github.salvagedisc.fallow.mixin",
   "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "xp.AnvilMenuMixin"
+  ],
   "client": [
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",

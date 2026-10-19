@@ -15,7 +15,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - QoL / construction : Quark et Supplementaries, réduits à l'essentiel (configs fournies).
 - Voyage : Icy's Better Horses.
 - Ambiance : ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights, More Darkness.
-- Performance : Sodium, ImmediatelyFast, Entity Culling, ModernFix, FerriteCore, Lithium, Clumps, Structure Layout Optimizer ; serveur : Chunky, spark.
+- Performance : Sodium, ImmediatelyFast, Entity Culling, ModernFix, FerriteCore, Lithium, Structure Layout Optimizer ; serveur : Chunky, spark.
 - Choix de l'équipe du 2026-10-19 :
   - monde et objectifs : Ancient Remnants: Monoliths (+ Fragmentum), Lootr, Enhanced Celestials, AA4 Atlas, Wildex Bestiary, Exposure ;
   - vie quotidienne et faune : Kaleidoscope Compat, Traveler's Backpack, Longwings ;
@@ -28,12 +28,20 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Outillage : `npm run sync` rapatrie les mods de l'instance de test, `npm run check-deps` vérifie les dépendances réelles des jars ; CI `build` (export `.mrpack` à chaque push) et `release` (sur tag).
 - Mod custom `fallow` 0.1.0 (`mods-custom/fallow/`, jar dans `pack/mods/`) : module ciel (lune d'Enhanced Celestials visible sous ATMOSPHERICS, cache de brume vidé après un changement de biome) et module sac (le tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed). Non testé en jeu ; CI `build` le compile.
 - Tout en français : jeu en français au premier lancement (Default Options) ; traduction des textes manquants de 94 namespaces de mods (≈25 300 textes) et de leurs livres (dictionnaire d'Alex's Mobs, guide des hamsters, chronique d'Ecliptic Seasons) dans `pack/kubejs/assets/` ; `npm run check-fr` (aussi en CI) refuse un texte sans traduction ou une variable perdue ([traduction](docs/plan/traduction.md)).
-- Idées reprises de Wayfarer, le modpack de l'équipe de No Man's Land ([recherche](docs/plan/recherche/2026-10-19/wayfarer.md)) : Envelope (courrier par pigeons, lettres perdues), traduit en français.
+- Idées reprises de Wayfarer, le modpack de l'équipe de No Man's Land ([recherche](docs/plan/recherche/2026-10-19/wayfarer.md)) :
+  - Envelope (courrier par pigeons, lettres perdues), traduit en français ;
+  - la Lune Amie de No Man's Land comme fil principal : note froissée dans les jarres des alchimistes, une seule lune à la fois avec Enhanced Celestials, lunes de sang retirées ([lune-amie](docs/plan/lune-amie.md)) ;
+  - santé maximale : un cœur perdu par mort, plancher de 5 cœurs, éclats de vie à trouver en explorant ([santé](docs/plan/sante.md)) ;
+  - tannerie : les animaux lâchent une peau brute, préparée aux cendres puis trempée sur le plateau en bambou de Kaleidoscope ([tannerie](docs/plan/tannerie.md)) ;
+  - plus d'expérience : enclume sans niveaux (usure), barre cachée, aucune orbe, fioles et pépites retirées ([0009](docs/decisions/0009-xp.md)).
+- Mod `fallow` 0.2.0 : module `xp`.
 
 ### Retiré
 - Entity Culling : casse les engins Create Aeronautics et Sable.
+- Clumps : les orbes d'XP n'existent plus.
 
 ### Modifié
 - Dépôt réorganisé : `README` et `CONTRIBUTING` réécrits, index de la documentation, feuille de route, emplacement `docs/plan/` pour le plan du modpack, `docs/` renommé `docs/conception/`, registre des mods classé par domaine.
 - Branches `test/agriculture`, `test/faune` et `test/structures` fusionnées dans `main`.
 - No Man's Land 1.5.12 → 1.6.1 : outils ancestraux (pioche rituelle, épée du serment, cloche et ciseau en bronze), carreaux lunaires et solaires ; textes nouveaux traduits.
+- Kaleidoscope Cookery 1.5.1 → 1.6.0 : la 1.5.1 faisait planter le jeu au chargement avec Kaleidoscope Compat 2.9.7 (mixin `MillstoneBlockEntityMixin`), constaté sur le serveur de test.

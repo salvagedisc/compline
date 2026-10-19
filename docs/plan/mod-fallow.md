@@ -1,8 +1,8 @@
 # Le mod custom `fallow`
 
-Le mod proposé au [12.4](12-verification.md#124-le-mod-custom-fallow) et retenu par la décision 17 du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012). Il est fait de modules qu'on active un par un. La version 0.1.0 contient les modules **ciel** et **sac**.
+Le mod proposé au [12.4](12-verification.md#124-le-mod-custom-fallow) et retenu par la décision 17 du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012). Il est fait de modules qu'on active un par un. La version 0.2.0 contient les modules **ciel**, **sac** et **xp**.
 
-> **État au 2026-10-19.** La version 0.1.0 compile (`./gradlew build`), mais **rien n'a été testé en jeu**. Tout ce qui suit vient de la lecture du code des mods visés (jars ouverts avec `javap`). La liste des [tests en jeu](#tests-en-jeu) dit ce qu'il faut vérifier avant de s'y fier.
+> **État au 2026-10-19.** La version 0.2.0 compile (`./gradlew build`), mais **rien n'a été testé en jeu**. Tout ce qui suit vient de la lecture du code des mods visés (jars ouverts avec `javap`). La liste des [tests en jeu](#tests-en-jeu) dit ce qu'il faut vérifier avant de s'y fier.
 
 ## Construire et mettre à jour
 
@@ -26,7 +26,7 @@ La version se règle dans `gradle.properties` (`mod_version`). Les mods visés n
 
 ## Principes
 
-- **Un module = un interrupteur.** Chaque module a son booléen `enabled` dans la config : `config/fallow-client.toml` pour `ciel`, `config/fallow-common.toml` pour `sac`. Les valeurs sont relues à chaque usage, donc un changement en jeu prend effet tout de suite.
+- **Un module = un interrupteur.** Chaque module a son booléen `enabled` dans la config : `config/fallow-client.toml` pour `ciel`, `config/fallow-common.toml` pour `sac` et `xp`. Les valeurs sont relues à chaque usage, donc un changement en jeu prend effet tout de suite.
 - **Un module ne charge que si ses mods sont là.** Au démarrage, `Fallow` vérifie avec `ModList` les mods dont dépend chaque module. Il écrit « Module X chargé » ou « Module X ignoré » dans le log. Les mixins passent par `FallowMixinPlugin`, qui ne les applique que si les mods visés sont dans `LoadingModList`. La seule dépendance dure est NeoForge.
 - **Pas de code recopié.** Le mod passe par les API publiques des mods visés et par des mixins ciblés, sur du code vanilla quand c'est possible.
 
@@ -34,6 +34,7 @@ La version se règle dans `gradle.properties` (`mod_version`). Les mods visés n
 |---|---|---|---|
 | `ciel` | client | ATMOSPHERICS ; Enhanced Celestials pour la lune | 4, tous client |
 | `sac` | les deux (l'effet s'exécute sur le serveur) | Traveler's Backpack et Thirst Was Reclaimed | aucun |
+| `xp` | les deux (l'enclume des deux côtés, la barre chez le client) | aucun | 1, commun (`xp.AnvilMenuMixin`, sur du code vanilla) |
 
 ## Module `ciel`
 
@@ -96,6 +97,24 @@ La pureté de l'eau du réservoir existe bien : TWR la range dans le composant `
 - **Un mélange garde la pureté la plus basse.** Les réservoirs du sac sont des `FluidTank` NeoForge, que TWR modifie aussi.
 - **L'eau aspirée au tuyau dans le monde compte comme purifiée.** Le mode aspiration remplit le réservoir avec `new FluidStack(eau, 1000)`, sans composant de pureté. Or TWR lit un composant absent comme une eau purifiée (`MISSING_COMPONENT_PURITY = 3`). Il retire même le composant quand il vaut 3, donc « absent » et « purifiée » ne se distinguent pas. Le module suit la règle de TWR : **l'eau aspirée directement à une source est propre**. C'est un raccourci qui évite de purifier l'eau, à trancher après le test en jeu. Correction possible : un mixin ciblé sur l'aspiration du tuyau, qui donnerait à l'eau la pureté du bloc aspiré.
 
+## Module `xp`
+
+Fallow n'a plus d'expérience ([xp.md](xp.md)). Les orbes et les gains de points sont coupés par `pack/kubejs/server_scripts/sans_xp.js`. Le module fait les deux choses que KubeJS ne sait pas faire proprement.
+
+**L'enclume sans niveaux.** Vanilla ne rend l'objet que si `player.experienceLevel >= coût` et `coût > 0` (`AnvilMenu.mayPickup`). `AnvilMenuMixin` remplace, dans cette seule méthode, la lecture de `experienceLevel` par `Integer.MAX_VALUE` (`@ModifyExpressionValue` de MixinExtras). Le reste du calcul ne change pas :
+
+- le coût vaut toujours au moins 1, et la limite de 40 posée par `createResult` reste. Elle devient une **usure** : « Usure : n », puis « Trop usé ! » (clés vanilla `container.repair.cost` et `container.repair.expensive`, traduites dans `pack/kubejs/assets/minecraft/lang/`) ;
+- les matériaux (lingots, objet sacrifié) sont toujours pris ; `onTake` retire encore `coût` niveaux, ce qui ne fait rien à 0 ;
+- la lune bleue d'Enhanced Celestials, qui divise le coût dans `createResult`, réduit donc l'usure.
+
+Le mixin s'applique des deux côtés : le client refuse lui aussi de prendre l'objet s'il croit que les niveaux manquent, et il colore le coût en rouge. Client et serveur doivent avoir la même version du mod et la même valeur de `xp.enabled`. Aucun mod du pack ne patche `mayPickup`.
+
+**La fusion d'enchantements (facultatif).** Avec `xp.blockEnchantMerge`, `XpModule` annule `AnvilUpdateEvent` quand l'objet de droite porte des enchantements (livre enchanté ou objet enchanté) : l'enclume ne donne pas de résultat, l'enchantement passe par la table. Coupé par défaut : L'équipe garde la fusion.
+
+**La barre cachée.** Chez le client, `XpClient` annule les couches `VanillaGuiLayers.EXPERIENCE_BAR` et `EXPERIENCE_LEVEL` dans `RenderGuiLayerEvent.Pre`. La jauge de saut à cheval (`JUMP_METER`) est une autre couche et reste. Les cœurs et la faim gardent leur hauteur : un petit vide reste à la place de la barre.
+
+Config (`fallow-common.toml`, section `[xp]`) : `enabled` (vrai), `hideBar` (vrai), `blockEnchantMerge` (faux). Les deux derniers ne jouent que si `enabled` est vrai. Revenir en arrière : `enabled = false` et supprimer `sans_xp.js`.
+
 ## Tests en jeu
 
 Rien de ceci n'a été fait. À passer sur une instance du pack, puis à cocher ici.
@@ -132,9 +151,22 @@ Rien de ceci n'a été fait. À passer sur une instance du pack, puis à cocher 
 | S9 | Log au démarrage | « Module sac chargé » puis « sac : effet fallow:thirst_water enregistré » |
 | S10 | Réservoir avec moins de 1000 mB | Rien ne se passe, comme avant |
 
+### XP
+
+| # | Test | Attendu |
+|---|---|---|
+| X1 | Log au démarrage | « Module xp chargé (aucun mod requis) », aucun avertissement de mixin `fallow` |
+| X2 | À 0 niveau : nommer une étiquette, réparer une pioche avec des lingots, fusionner deux pioches enchantées | Coût en vert (« Usure : n »), l'objet se prend, les matériaux partent |
+| X3 | Réparer le même objet jusqu'à l'usure 40 | « Trop usé ! », pas de résultat (sauf en créatif) |
+| X4 | Serveur dédié | Le client prend l'objet sans retour en arrière de l'emplacement |
+| X5 | `xp.enabled = false` | L'enclume redemande des niveaux, la barre revient |
+| X6 | `xp.blockEnchantMerge = true`, livre enchanté à droite | Pas de résultat ; une réparation aux lingots marche toujours |
+| X7 | À pied, à cheval, en visant au canon de Supplementaries | Ni barre ni chiffre d'XP ; la jauge de saut reste à cheval |
+| X8 | Lune bleue d'Enhanced Celestials | Le coût affiché baisse |
+
 ## Entretien
 
-À chaque mise à jour d'ATMOSPHERICS, d'Enhanced Celestials, de Traveler's Backpack ou de Thirst Was Reclaimed :
+À chaque mise à jour d'ATMOSPHERICS, d'Enhanced Celestials, de Traveler's Backpack, de Thirst Was Reclaimed ou de NeoForge :
 
 1. recompiler le mod (la CI le fait). Une erreur montre qu'une API a changé ;
 2. lancer le jeu et lire le log : un mixin qui ne trouve plus sa cible y laisse un avertissement ;
@@ -145,6 +177,7 @@ Points fragiles connus :
 - Enhanced Celestials : `ECWorldRenderer.changeMoonColor` et les champs de `LunarEventClientSettings` ;
 - Traveler's Backpack : le constructeur d'`EffectFluid` et le moment où il vide son registre ;
 - Thirst Was Reclaimed : `WaterPurity` et `ThirstHelper`.
+- Minecraft et NeoForge : la lecture de `Player.experienceLevel` dans `AnvilMenu.mayPickup`, les noms des couches `EXPERIENCE_BAR` et `EXPERIENCE_LEVEL`, l'annulation de `AnvilUpdateEvent`.
 
 ## Modules suivants
 

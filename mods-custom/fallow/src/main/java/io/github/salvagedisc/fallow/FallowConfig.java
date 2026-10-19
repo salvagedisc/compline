@@ -16,6 +16,9 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
     private static final ModConfigSpec.BooleanValue SAC_ENABLED;
     private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
+    private static final ModConfigSpec.BooleanValue XP_ENABLED;
+    private static final ModConfigSpec.BooleanValue XP_HIDE_BAR;
+    private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -45,6 +48,22 @@ public final class FallowConfig {
                         "au sens de Thirst Was Reclaimed (hydratation et désaltération de minecraft:potion).")
                 .defineInRange("bottlesPerDrink", 1, 1, 4);
         common.pop();
+
+        common.comment("Module xp : Fallow n'a plus d'expérience. Les orbes et les gains sont coupés par",
+                "kubejs/server_scripts/sans_xp.js ; ce module règle l'enclume et cache la barre.").push("xp");
+        XP_ENABLED = common
+                .comment("Interrupteur du module. Vrai : l'enclume ne demande plus de niveaux ; son coût devient une usure",
+                        "(à 40, « Trop usé ! »). Faux : l'enclume vanilla, qui demande des niveaux.",
+                        "Client et serveur doivent avoir la même valeur.")
+                .define("enabled", true);
+        XP_HIDE_BAR = common
+                .comment("Cacher la barre d'expérience et le chiffre du niveau (client). La jauge de saut à cheval reste.")
+                .define("hideBar", true);
+        XP_BLOCK_ENCHANT_MERGE = common
+                .comment("L'enclume refuse un second objet qui porte des enchantements (livre enchanté, objet enchanté) :",
+                        "l'enchantement ne passe plus que par la table. Faux : l'enclume fusionne comme en vanilla.")
+                .define("blockEnchantMerge", false);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -69,6 +88,18 @@ public final class FallowConfig {
 
     public static int sacBottlesPerDrink() {
         return read(COMMON_SPEC, SAC_BOTTLES_PER_DRINK);
+    }
+
+    public static boolean xpEnabled() {
+        return read(COMMON_SPEC, XP_ENABLED);
+    }
+
+    public static boolean xpHideBar() {
+        return xpEnabled() && read(COMMON_SPEC, XP_HIDE_BAR);
+    }
+
+    public static boolean xpBlockEnchantMerge() {
+        return xpEnabled() && read(COMMON_SPEC, XP_BLOCK_ENCHANT_MERGE);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */

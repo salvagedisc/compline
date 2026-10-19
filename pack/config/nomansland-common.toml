@@ -1,0 +1,13 @@
+# Fallow : la Lune Amie est le fil principal du pack (docs/plan/lune-amie.md).
+# Seule la section meeting_point est écrite ici. Les autres clés gardent leur
+# valeur par défaut, que NeoForge ajoute au premier lancement.
+[meeting_point]
+	#The minimum distance, from the center of the world, the Meeting Point should spawn at.
+	#Range: > 0
+	minMeetingPointDistance = 1000
+	#The maximum distance, from the center of the world, the Meeting Point should spawn at.
+	#Range: > 0
+	maxMeetingPointDistance = 2500
+	#Dimensions the Friend Moon watches over, as full dimension ids such as "minecraft:overworld". Leave empty to use every dimension that shares the overworld's dimension type, which covers most custom overworld-like dimensions.
+	# Fallow : seulement l'Overworld, la seule dimension où Enhanced Celestials a des lunes.
+	friendMoonDimensions = ["minecraft:overworld"]

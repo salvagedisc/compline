@@ -15,7 +15,9 @@ public enum FallowModule {
     /** La lune d'Enhanced Celestials et la brume sous ATMOSPHERICS (client). La lune demande aussi Enhanced Celestials. */
     CIEL("ciel", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.ciel.CielModule.start(bus), ModIds.ATMOSPHERICS),
     /** Boire au tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed (client et serveur). */
-    SAC("sac", null, bus -> io.github.salvagedisc.fallow.sac.SacModule.start(bus), ModIds.TRAVELERS_BACKPACK, ModIds.THIRST);
+    SAC("sac", null, bus -> io.github.salvagedisc.fallow.sac.SacModule.start(bus), ModIds.TRAVELERS_BACKPACK, ModIds.THIRST),
+    /** Plus d'expérience : l'enclume sans niveaux, la barre cachée (client et serveur). Aucun mod requis. */
+    XP("xp", null, bus -> io.github.salvagedisc.fallow.xp.XpModule.start(bus));
 
     private final String id;
     private final Dist side;

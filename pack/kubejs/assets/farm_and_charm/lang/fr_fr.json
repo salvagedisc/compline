@@ -35,5 +35,6 @@
   "tooltip.farm_and_charm.cart.attach_horse": "Clic droit sur un cheval ou un âne apprivoisé pour l'atteler.",
   "tooltip.farm_and_charm.cart.while_pulling": "Pendant la traction :",
   "tooltip.farm_and_charm.sink.info_0": "Clic droit pour remplir d'eau.",
-  "tooltip.farm_and_charm.sink.info_1": "Une fois rempli, utilisez un seau pour récupérer l'eau."
+  "tooltip.farm_and_charm.sink.info_1": "Une fois rempli, utilisez un seau pour récupérer l'eau.",
+  "effect.farm_and_charm.rested.description": "Un bon repos."
 }
