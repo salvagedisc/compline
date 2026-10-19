@@ -129,7 +129,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
 | EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes |
-| JEI | `jei` | ✅ (caché) | CS | Pont pour les mods qui n'ont qu'un plugin JEI |
+| JEI | `jei` | ✅ (caché, rester en 19.51.0.418) | CS | Pont pour les mods qui n'ont qu'un plugin JEI ; à partir de 19.52, le mixin d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plante en entrant dans un monde |
 | Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Infobulles |
 | Pick Up Notifier | `pick-up-notifier` | ✅ | C | Liste discrète des objets ramassés |
 | Seamless Loading Screen | `seamless-loading-screen` | ✅ | C | L'écran de chargement montre la dernière vue |
