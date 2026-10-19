@@ -419,6 +419,11 @@ hash = "993b4e4970e1a5ef2fe7c6712212f57a84dcf8b31d4b6863540b6395c4f9ce09"
 metafile = true
 
 [[files]]
+file = "mods/spatial-gui.pw.toml"
+hash = "39eac2df2b472e75842d065f3220cfedc4a1c28979e1c82ae5e3f8955c54c7de"
+metafile = true
+
+[[files]]
 file = "mods/structure-layout-optimizer.pw.toml"
 hash = "20d767f7f803fd43e7b539046878bf97a27458595a1beff0b28002aca1b671de"
 metafile = true
