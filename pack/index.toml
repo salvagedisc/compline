@@ -6,7 +6,7 @@ hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "cddc060dde2b5a33cd543cd6635ea5ffa44394391ed17c08350170bc5a851485"
+hash = "45251f5d264398716e4921faa498400b9a796fd6c4a6cf6390000cbaae7958b1"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
@@ -1716,6 +1716,11 @@ metafile = true
 [[files]]
 file = "resourcepacks/fresh-animations.pw.toml"
 hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
+metafile = true
+
+[[files]]
+file = "resourcepacks/supernova-ost.pw.toml"
+hash = "14bdef1585d0648dcee22ca01646ca4ba5edff0b902fbc2ddd2f01505d6499cd"
 metafile = true
 
 [[files]]
