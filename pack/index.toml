@@ -33,6 +33,10 @@ file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 
 [[files]]
+file = "config/mixed_litter-startup.toml"
+hash = "1a511f4ce66824a8e248d9ca9e97daa9bb76a99396898ac09b7b2050a2dff4e4"
+
+[[files]]
 file = "config/nomansland-client.toml"
 hash = "f153ecc79fd161e431f4d17b7ee718df4b0c46fd46bdfb58bd7acd494b127c1b"
 

@@ -1,0 +1,11 @@
+# Fallow : les remodèles d'animaux de No Man's Land (Mixed Litter, embarqué dans NML)
+# sont coupés : ces animaux reprennent le modèle vanilla, animé par Fresh Animations.
+# Fresh Animations n'a pas de modèle pour le lapin : il redevient le lapin vanilla, sans animation.
+# Les listes d'entités gardent leur valeur par défaut, que NeoForge ajoute au premier lancement.
+[remodels]
+	chickenRemodel = false
+	cowRemodel = false
+	pigRemodel = false
+	rabbitRemodel = false
+	sheepRemodel = false
+	squidRemodel = false
