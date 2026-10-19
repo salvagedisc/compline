@@ -90,7 +90,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Every Compat | `every-compat` | ✅ | CS | Mobilier et décor dans tous les bois, dont ceux de NML |
 | HT's TreeChop | `treechop` | ✅ | CS | Couper un arbre bloc par bloc, le tronc tombe en dernier |
 | Visual Workbench | `visual-workbench` | ✅ | CS | Les objets restent posés sur l'établi |
-| Immersive Enchanting | `immersive-enchanting` | 🟡 (proposé) | CS | L'enchantement devient un savoir : livres anciens trouvés, rangés près de la table, niveaux payés en matériaux ([recherche](plan/recherche/2026-10-19/enchantement.md)) ; repli : Matrix Enchanting de Quark |
+| Immersive Enchanting | `immersive-enchanting` | ✅ (bêta) | CS | L'enchantement devient un savoir : livres anciens trouvés, rangés près de la table, niveaux payés en matériaux ([0008](decisions/0008-enchantement.md)) ; structures coupées, traduction française |
 
 ## Corps, caméra et gestes
 
@@ -178,7 +178,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 
 ## Bibliothèques
 
-Déjà là : Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, Mezz config, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, Mezz config, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
 À ajouter avec Neruina : Configurable.
 

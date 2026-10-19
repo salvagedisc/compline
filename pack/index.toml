@@ -29,6 +29,22 @@ file = "config/supplementaries-common.toml"
 hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
+file = "kubejs/assets/immersiveenchanting/lang/fr_fr.json"
+hash = "6dea51c0c92d24bad830f737fe9332d08a8121a0bf9ac9816c175933f996377c"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_desert_biomes.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_end_biomes.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
 file = "mods/3dskinlayers.pw.toml"
 hash = "2dc498bd8a43a8e02fc9d08fe5846ac17f6eabbecbf38ae39aa7b1f23fe100b0"
 metafile = true
@@ -46,6 +62,11 @@ metafile = true
 [[files]]
 file = "mods/alexs-mobs-continued.pw.toml"
 hash = "6a83b750a2a0dd77c418019b2fd61e1abcc07cf3b28c3c919569b9e5c89a8eb7"
+metafile = true
+
+[[files]]
+file = "mods/alfinolib.pw.toml"
+hash = "59ecca3af0a1fc9fa90c6027a0f4e275b1d77c9b5e4ae50caba9337c6d5f6eae"
 metafile = true
 
 [[files]]
@@ -315,6 +336,11 @@ metafile = true
 [[files]]
 file = "mods/immediatelyfast.pw.toml"
 hash = "2863a3b187723e1f69ed2ad2b2c3d834e8442468a1347c80df5b310e243c8753"
+metafile = true
+
+[[files]]
+file = "mods/immersive-enchanting.pw.toml"
+hash = "72de092d6670e19df4b34f4451e70f5868d7a488cbb26956907bf813de9ddeb6"
 metafile = true
 
 [[files]]

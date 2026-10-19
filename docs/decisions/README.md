@@ -11,6 +11,7 @@ Une fiche par décision tranchée : le contexte, les options comparées, le choi
 | [0005](0005-quark.md) | Quark : l'essentiel uniquement | Config fournie |
 | [0006](0006-supplementaries.md) | Supplementaries : l'essentiel uniquement | Config fournie |
 | [0007](0007-ambiance-performance.md) | Ambiance & performance | Retenus ; Distant Horizons en attente |
+| [0008](0008-enchantement.md) | Enchantement | Immersive Enchanting retenu ; Matrix de Quark en repli |
 
 ## Modèle
 
