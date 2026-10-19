@@ -42,6 +42,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Interface : packs Dark Coffee GUI et Modded Coffee GUI, actifs au premier lancement ; pack maison `fallow-interface` qui recolore dans le même ton les écrans de Kaleidoscope, Overgeared et Wildex ([page](docs/plan/fallow-interface.md)).
 
 ### Retiré
+- Untitled Duck Mod (choix de l'équipe) : le canard de Naturalist revient, et la réplique d'offrande de l'oie de No Man's Land vise ce canard.
 - AA4 Atlas : compilé pour Antique Atlas 2, il appelait `AtlasScreen.prepareToOpen()` avec l'ancien type de retour et faisait planter le jeu à l'ouverture de l'atlas (rapport de plantage du test). L'atlas s'ouvre à la touche d'Antique Atlas.
 - Entity Culling : casse les engins Create Aeronautics et Sable.
 - Clumps : les orbes d'XP n'existent plus.
@@ -49,6 +50,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 ### Modifié
 - Faune de No Man's Land : les remodèles de Mixed Litter et les textures de NML sur les animaux vanilla sont coupés, pour Fresh Animations ; cerf, oie, bar à serpe, tortue et Frienderman n'apparaissent plus, sont retirés du Wildex, et leurs 15 objets n'ont plus de recette ni de place dans EMI ([faune-nml](docs/plan/faune-nml.md)).
 - No Man's Land, objets retirés : viande de cheval, cuisses de grenouille, explosifs, flèche incendiaire et sept plats ; la TNT reprend sa recette vanilla. Le lapin est retiré du jeu (Fresh Animations n'a pas de modèle pour lui). La réplique d'offrande de la tortue vise celle de Naturalist.
+- Faune : un seul modèle par espèce. 32 doublons comparés ; 17 créatures d'Alex's Mobs, 9 d'Hybrid Aquatic, 2 de Critters and Companions et 6 de Naturalist sont coupées, retirées du Wildex, et leurs 78 objets sans source retirés ([doublons](docs/plan/doublons.md)).
 - Supplementaries : son filtre de vision des têtes de mob est coupé, Subtle Effects fait déjà le même.
 - Monstres vanilla : In Control! refuse leur apparition dans l'Overworld (22 créatures, des zombies aux pillards), biomes de No Man's Land et structures compris ; ils apparaissaient encore au premier test.
 - Enhanced Celestials 6.0.2.6 → Enhanced Celestials 2 (Core 2.0.3.3 + Default Lunar Events 2.0.1.3) : nouveaux paquets Java et nouveau format de données ; `lune.js`, `musique.js` et le module `ciel` du mod `fallow` (0.2.1) portés, lunes de sang retirées au nouveau format, traductions françaises, téléchargement des traductions de la communauté coupé.

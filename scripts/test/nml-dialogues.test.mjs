@@ -19,3 +19,16 @@ test('scute offering loads and accepts only scutes that exist', async () => {
   assert.equal(offering['neoforge:conditions'], undefined);
   assert.deepEqual(offering.condition.items, ['minecraft:turtle_scute', 'minecraft:armadillo_scute']);
 });
+
+// The NML goose and tortoise no longer spawn (docs/plan/faune-nml.md): their offering
+// dialogues must react to a creature that is still in the world.
+test('goose and tortoise offerings target creatures that still spawn', async () => {
+  const wildex = await readFile(join(packDir, 'config', 'wildex', 'wildex-common.toml'), 'utf8');
+  const excluded = JSON.parse(wildex.match(/excludedModIds = (\[[^\]]*\])/)[1]);
+  for (const name of ['goose', 'tortoise']) {
+    const offering = await readOffering(join('entity', `${name}.json`));
+    const entity = offering.condition.entity;
+    assert.ok(!entity.startsWith('nomansland:'), `${name}: ${entity}`);
+    assert.ok(!excluded.includes(entity), `${name}: ${entity} is excluded from the Wildex`);
+  }
+});

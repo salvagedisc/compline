@@ -1,0 +1,18 @@
+# Fallow : créatures de Naturalist coupées quand un autre mod a un meilleur modèle pour la
+# même espèce (docs/plan/doublons.md), et lapins des forêts retirés avec le lapin
+# (docs/plan/faune-nml.md). Fichier partiel : les options absentes gardent leur valeur
+# par défaut. Une créature coupée n'apparaît plus et disparaît du monde.
+
+[disable_mobs]
+	[disable_mobs.aquatic_mobs]
+		# Grand requin blanc et méduses d'Hybrid Aquatic, étoiles de mer d'Hybrid Aquatic.
+		great_white_shark_removed = true
+		jellyfish_removed = true
+		starfish_removed = true
+	[disable_mobs.land_mobs]
+		# Crabe de Friends & Foes.
+		crab_removed = true
+		forest_rabbit_removed = true
+	[disable_mobs.bugs]
+		# Papillons de Longwings ; coupe aussi la chenille.
+		butterfly_removed = true

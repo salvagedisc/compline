@@ -45,6 +45,10 @@ file = "config/mixed_litter-startup.toml"
 hash = "81fb1ba1548f474188599c7edc2802bad0087801a3ea9d3c37b0a908080b8c96"
 
 [[files]]
+file = "config/naturalist-server.toml"
+hash = "3ab73cc79b0f23068acad420c3d21ec4330922a17905a881d155089e677f7ba3"
+
+[[files]]
 file = "config/nomansland-client.toml"
 hash = "f153ecc79fd161e431f4d17b7ee718df4b0c46fd46bdfb58bd7acd494b127c1b"
 
@@ -70,7 +74,7 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
 file = "config/wildex/wildex-common.toml"
-hash = "7b0a997f646235cda0393a76e30ff1699640badacca91d2f17a0eff21080ccfa"
+hash = "85cd637e3eb3e8eaeaf18e5a6df9797748ca9bc3ae1c3211276badc658ed2fa9"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -794,7 +798,7 @@ hash = "1969e6c16d90203afaee8a1bf24ff61ee101ca29b7ff47caec0a6b59195604cc"
 
 [[files]]
 file = "kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json"
-hash = "9d2df2d5105519a2b62460f2d3e4b8311ecede044e31658a8c63d4d1cc4b9a31"
+hash = "3b29a91d10203c0672d03227f643fab6fc27686096bb1fc0d60f516e2b9d395a"
 
 [[files]]
 file = "kubejs/assets/offroad/lang/fr_fr.json"
@@ -913,10 +917,6 @@ file = "kubejs/assets/twigs/lang/fr_fr.json"
 hash = "ea856d563dfe4f9910145de8d4e60ef7d0122a598694f5ca8f615b30f8c18ec8"
 
 [[files]]
-file = "kubejs/assets/untitledduckmod/lang/fr_fr.json"
-hash = "28e54224a1d77a517ed0ddec0abdc7c2ae15a3a17bb76a4e27b04af1a725a203"
-
-[[files]]
 file = "kubejs/assets/veil/lang/fr_fr.json"
 hash = "60c5a115f610acfe0fda6915262b8f3e5f15d1f1d814656af9eadfa66b9767bb"
 
@@ -945,6 +945,10 @@ file = "kubejs/assets/zeta/lang/fr_fr.json"
 hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
+file = "kubejs/client_scripts/doublons.js"
+hash = "4316f845f3862b349170ddaa79f28132822a967c671d51c6be2d2c7708c7146f"
+
+[[files]]
 file = "kubejs/client_scripts/faune_nml.js"
 hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
 
@@ -957,12 +961,20 @@ file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
 [[files]]
+file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
+hash = "22c2ae67c6ace47c327ec9330f51e8e98727dfe91337b11a286cd6ae1f8ff149"
+
+[[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
 hash = "ef3359093a5a8613d4641081bcbbee1d32626139c4abf07242a969be86e3cecd"
 
 [[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/super_blood_moon.json"
 hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
+
+[[files]]
+file = "kubejs/data/fallow/neoforge/biome_modifier/doublons.json"
+hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
 
 [[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json"
@@ -975,6 +987,106 @@ hash = "01293223c715bc17b280d45dce77d5f522bb67a5218c53e7cc8b8d179f8b7070"
 [[files]]
 file = "kubejs/data/fallow/tags/worldgen/biome/brumeux.json"
 hash = "d258462f94ef033f1203fbf8e6702fbf7ccb7245e0a3b53ee44083cb2d72e2fb"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/anglerfish_all_trenches.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/blobfish_all_trenches.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/frilled_shark_deep_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/frilled_shark_lukewarm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/frilled_shark_warm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_cold_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_cold_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_deep_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_temperate_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_temperate_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_isopod_warm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_squid_cold_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_squid_lukewarm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_squid_temperate_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_squid_warm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/otter_rivers.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/otter_rocky_beaches.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/otter_sandy_beaches.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/piranha_jungle.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/piranha_tropical_rivers.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_coral_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_red_meadow.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_seagrass_bed.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_shallow_lukewarm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_shallow_warm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json"
@@ -1081,6 +1193,10 @@ file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tor
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/entity/goose.json"
+hash = "1bf90ad972d9ddf3824b4f839dc7d01356310f66d2eabf2e60e51e931d66762c"
+
+[[files]]
 file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/entity/tortoise.json"
 hash = "b1d178ea2368acf5a6b7879a477541646e67537ddb56ecc3d29630b2e3b854b3"
 
@@ -1099,6 +1215,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_timber_wolves.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/server_scripts/doublons.js"
+hash = "5d725b75487d5da8d2e7a411b6695e348f42b71363cfc4f827e1bb21e0c54d5e"
 
 [[files]]
 file = "kubejs/server_scripts/faune_nml.js"
@@ -1771,11 +1891,6 @@ metafile = true
 [[files]]
 file = "mods/twigs.pw.toml"
 hash = "98ef5714a273c9153fbfaca195806d36f568556819dde7b90ec6561646bede98"
-metafile = true
-
-[[files]]
-file = "mods/untitled-duck-mod.pw.toml"
-hash = "2a55436bef50b794a4145c83487114669a0c5e896856ba7a8bab769799729e94"
 metafile = true
 
 [[files]]

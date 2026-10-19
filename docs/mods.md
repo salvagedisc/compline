@@ -69,7 +69,6 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
 | Critters and Companions | `critters-and-companions` | ✅ | CS | Petite faune apprivoisable |
-| Untitled Duck Mod | `untitled-duck-mod` | ✅ | CS | Canards et oies |
 | Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Créatures pacifiques du mob vote |
 | Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters |
 | Companion | `companion` | ✅ | CS | Les animaux apprivoisés ne se perdent plus |
@@ -211,6 +210,7 @@ Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, 
 | More Culling, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Moteurs de lumière ou de physique risqués avec Sodium 0.8 et Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Retirés par l'équipe le 2026-10-18 |
+| Untitled Duck Mod | Retiré par l'équipe le 2026-10-19 ; le canard de Naturalist le remplace ([faune-nml](plan/faune-nml.md)) |
 | Comforts | Doublon du sac de couchage de Traveler's Backpack |
 | ParCool! | Désactivé à la demande de l'équipe |
 | Sanity: Renewed, TheWatcher | Le monde est énigmatique, pas sombre |
