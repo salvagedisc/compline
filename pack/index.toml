@@ -33,6 +33,10 @@ file = "config/enhancedcelestials2core/translations.json"
 hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
 
 [[files]]
+file = "config/hybrid_aquatic.json"
+hash = "12ee2cf37f37fe0ad796fa054e4851b64fbd762d12cb5ad3745191779f2dcd3d"
+
+[[files]]
 file = "config/incontrol/spawn.json"
 hash = "51b1c827f71facee2da7f217acfde15d726bdaf1d990093db90f3e56de546af4"
 
