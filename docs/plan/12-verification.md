@@ -156,6 +156,8 @@ Les scripts et les données couvrent presque tout. Ce qui reste demande du Java.
 
 Le mod se construit dans le dépôt, sous un dossier à part (`mods-custom/fallow/`), avec la CI GitHub pour le compiler. Il ne touche jamais au code des autres mods, seulement par mixins ciblés et par leurs API.
 
+> **Suite.** Les modules `ciel` et `sac` existent en version 0.1.0, non testée en jeu : voir [mod-fallow.md](mod-fallow.md). Le mod du pack étant Thirst Was Reclaimed, c'est lui que vise `sac`.
+
 ## 12.5 Décisions qui s'ajoutent (suite du 10.12)
 
 | # | Sujet | Défaut retenu | Alternative |
