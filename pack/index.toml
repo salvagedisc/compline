@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "40533c295a85f80ebb1485264f4b07655614ab9e2b802e23f899de779c50f418"
+hash = "09241b8157b80f5088839bc4864d1fbdf79e949f6fa8672b6f328d4ea508b77c"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
@@ -1958,6 +1958,11 @@ metafile = true
 [[files]]
 file = "resourcepacks/dark-coffe-gui.pw.toml"
 hash = "b8d4788c7d05e66503d2aa760c881033f19713afe9b4081a1cacf8b54a5ab31c"
+metafile = true
+
+[[files]]
+file = "resourcepacks/dark-coffee-extras.pw.toml"
+hash = "7b48701051fb83e21107750cabee34c0e1c417539d0d6e9cb3bff03f0d367a55"
 metafile = true
 
 [[files]]

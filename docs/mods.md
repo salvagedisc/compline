@@ -182,6 +182,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Motschen's Better Leaves | `better-leaves` | ✅ | Feuillages touffus |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version qui n'écrase pas la musique vanilla) | Trois morceaux du paquet musical (CC-BY-NC-SA 4.0, [musique](plan/musique.md)) |
 | Dark Coffee GUI | `dark-coffe-gui` | ✅ | Interface vanilla en brun café |
+| Dark Coffee GUI - Extras (Normal Hunger) | `dark-coffee-extras` | ✅ | Barre de faim (cuisses de poulet au style Coffee) à la place des grains de café |
 | Modded Coffee GUI | `modded-coffee-gui` | ✅ | Le même style pour EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs et lumières Polytone, texture de lune, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
