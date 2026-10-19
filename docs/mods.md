@@ -15,7 +15,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| No Man's Land | `no-mans-land` | ✅ (monter en 1.6.1) | CS | Le monde : relief, biomes, ruines, remodèles d'animaux ([0001](decisions/0001-nml-vs-terralith.md)) |
+| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | Le monde : relief, biomes, ruines, remodèles d'animaux ([0001](decisions/0001-nml-vs-terralith.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardiens tirés de Mowzie's Mobs et Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
 | Lootr | `lootr` | ✅ | CS | Chaque joueur trouve les coffres pleins |
@@ -53,6 +53,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Cold Sweat | `cold-sweat` | ✅ | CS | Température |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Soif |
 | Traveler's Backpack | `travelersbackpack` | ✅ | CS | Sac d'expédition et sac de couchage |
+| Envelope | `envelope` | ✅ | CS | Courrier par pigeons entre joueurs, lettres perdues à retrouver (idée reprise de Wayfarer, [recherche](plan/recherche/2026-10-19/wayfarer.md)) |
 
 ## Faune
 

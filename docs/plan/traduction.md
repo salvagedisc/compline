@@ -39,6 +39,8 @@ Style : phrases courtes, vouvoiement ou forme impersonnelle dans les infobulles 
 ## Ce qui reste en anglais ou à surveiller
 
 - **Longwings** : 4 messages écrits en dur dans le code (« New Discovery! », « Check your handbook », « Your handbook has been updated! », « This isnt functional yet »). Seul un correctif du mod les traduirait.
+- **Envelope** : les descriptions des options de configuration, le message « Mail Service does not operate in this dimension. » et les messages des commandes sont écrits en dur dans le code.
+- **No Man's Land** : les dialogues de la Lune Amie sont dans `assets/nomansland/lang/nomansland/dialogue_pools/<pool>/fr_fr.json`, hors des fichiers de langue habituels. Nous fournissons une copie complète du pool `offering`, où il manquait 9 dialogues. `npm run check-fr` ne contrôle pas ces fichiers : à revoir à chaque montée de version de NML.
 - **Ancient Remnants** : la police des titres du codex n'a pas de lettres accentuées. `pack/kubejs/assets/ancient_remnants/font/header.json` ajoute la police par défaut en repli : les lettres accentuées s'affichent, dans le style vanilla. À vérifier en jeu.
 - **Quark** : sa traduction appelle le bois « blossom » « cerisier », comme le cerisier vanilla. Les deux bois portent donc le même nom.
 - **Naturalist et Alex's Mobs** : le serpent à sonnettes de Naturalist garde ce nom ; Alex's Mobs dit « Crotale ».
