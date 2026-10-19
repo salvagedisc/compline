@@ -1033,6 +1033,10 @@ file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tor
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json"
+hash = "cffea18b11ba27c908e28ffea2e5c6a610605145d6edd0e5420c45f49f3713a1"
+
+[[files]]
 file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_golden_wolves.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
