@@ -144,6 +144,11 @@ hash = "e50f87650e3a5becf3cd1772e8053a8bc04c48859a6fa814e75e6c71eaa87e6c"
 metafile = true
 
 [[files]]
+file = "mods/exposure.pw.toml"
+hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
+metafile = true
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true
