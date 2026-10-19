@@ -741,6 +741,10 @@ file = "kubejs/assets/knightlib/lang/fr_fr.json"
 hash = "b5321a9b98b603b81eda54822dbbaf52aaa6f86d9f244db4676266db23ebb457"
 
 [[files]]
+file = "kubejs/assets/lamblanterns/lang/fr_fr.json"
+hash = "26e990fe4586a5c9a89aa8a06259054aab11e39bfdab7a2634aa04cddcf91c1e"
+
+[[files]]
 file = "kubejs/assets/longwings/lang/fr_fr.json"
 hash = "7108898b444c5b9cb7cb55cdd9a63ba9bd1d2e52867f46e592d326562074aca6"
 
@@ -1493,6 +1497,11 @@ metafile = true
 [[files]]
 file = "mods/kubejs.pw.toml"
 hash = "7e0eca275f27b6543f06c36dec433851a956960cbedd2be57d19e159d636bfc1"
+metafile = true
+
+[[files]]
+file = "mods/lamb-lanterns.pw.toml"
+hash = "5633c9f1d347b6b90c7ece3b31a8783cf58e9e3b7df3cf6835286d6fc440aadf"
 metafile = true
 
 [[files]]
