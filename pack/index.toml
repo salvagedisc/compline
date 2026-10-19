@@ -259,6 +259,11 @@ hash = "2863a3b187723e1f69ed2ad2b2c3d834e8442468a1347c80df5b310e243c8753"
 metafile = true
 
 [[files]]
+file = "mods/itemphysic.pw.toml"
+hash = "a970ffa9dabefee6e82a6dc10bb140ff65ee785e1575672ab985f65fb461527f"
+metafile = true
+
+[[files]]
 file = "mods/kaleidoscope-compat.pw.toml"
 hash = "07e6db970b33163df85b1cc1259ddd54c1ea63671087bbc15486a07bd8ea7ead"
 metafile = true
