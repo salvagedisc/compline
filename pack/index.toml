@@ -9,8 +9,12 @@ file = "config/defaultoptions-common.toml"
 hash = "cddc060dde2b5a33cd543cd6635ea5ffa44394391ed17c08350170bc5a851485"
 
 [[files]]
+file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
+hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
+
+[[files]]
 file = "config/defaultoptions/options.txt"
-hash = "1834422a5c493d7aa98cd9d5f240d69eb73a196e7fadfe4dab991f966f7668e1"
+hash = "d066046b6b896778a4a80cd3def4da23dc54f8697c2496d2393a3963d577a914"
 
 [[files]]
 file = "config/jei/jei-client.ini"
@@ -897,6 +901,10 @@ file = "kubejs/data/fallow/tags/item/peaux_brutes.json"
 hash = "01293223c715bc17b280d45dce77d5f522bb67a5218c53e7cc8b8d179f8b7070"
 
 [[files]]
+file = "kubejs/data/fallow/tags/worldgen/biome/brumeux.json"
+hash = "d258462f94ef033f1203fbf8e6702fbf7ccb7245e0a3b53ee44083cb2d72e2fb"
+
+[[files]]
 file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json"
 hash = "47649c899720f22da8e13b6d7ef16cb331dc32c84cf70a7d6a165b28be4b9cc3"
 
@@ -919,6 +927,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/server_scripts/lune.js"
 hash = "861a0530aed39775f55f9239ae8c36b699fa2ba4fbd0cbab286de8a0a0ccb3f0"
+
+[[files]]
+file = "kubejs/server_scripts/musique.js"
+hash = "df01b61fc8a034d6ea4d65e2c3dcdaf89b4fbbad8af25d7761c07541e5b17104"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
@@ -1679,6 +1691,10 @@ file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml
 hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"
+hash = "a188a40a65a9162962db36016b65662d87aa5d077bb5261d0d8de5a6e4163c0a"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
 hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
 
@@ -1701,3 +1717,43 @@ metafile = true
 file = "resourcepacks/fresh-animations.pw.toml"
 hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
 metafile = true
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/meta.json"
+hash = "5dbc5591cbb61acf9d35c6a69cb7cdbd15cebe762aeb6fb1da887c045a26b13b"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/options.json"
+hash = "13acbd62d019e526e8303f03b35ca06508eb02d1f5717394004224ed0b6427f4"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/a_bord.json"
+hash = "bd9f2f8ca009c212062d5eb75e66bcc3307f2067ff8f95f448522d2829edf0d3"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/automne.json"
+hash = "d553c39efc65ea2b1e6465c511d6cc143a98c03d53c9d41a3a93e7e0316950f8"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/ete.json"
+hash = "9318ccc206b6dd72eab8b44c584dd64565af68974ad005fba00c91c9f14c3e17"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/hiver.json"
+hash = "abea75bbcdc8bb2ee3d25224a900a998eb4357e4220e80325440f372b832ba9e"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/lune.json"
+hash = "804068fc11c8845b91ea256af09c0eb4ce6eceb67236f01cffd776ac96feb3be"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/monument.json"
+hash = "81465e188333e8580e2e3e23cfbeae79522ab1f6dc400f69b7257b64302ee9a1"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/predicates/printemps.json"
+hash = "02bf9589473fc7361a534dc4aa62cb39d9a0265fc2bd85c9b3d2357e61ae0808"
+
+[[files]]
+file = "trueadaptivemusicpacks/fallow/rules.json"
+hash = "351e57b7be80eab9298aab8e0229961fb5f8c1f296fd8dc31a27f61809a7d194"
