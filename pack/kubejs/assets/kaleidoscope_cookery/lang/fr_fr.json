@@ -294,7 +294,6 @@
   "tooltip.kaleidoscope_cookery.steamer": "Empilable jusqu'à 8 étages. Clic droit accroupi pour lancer la cuisson à la vapeur.",
   "tooltip.kaleidoscope_cookery.raw_dough": "Maintenez le clic droit pour étirer la pâte",
   "tooltip.kaleidoscope_cookery.kitchenware_racks": "Sert à suspendre les ustensiles",
-  "tooltip.kaleidoscope_cookery.transmutation_lunch_bag": "Stocke de la nourriture et la transmute par magie ; clic droit pour manger.",
   "tooltip.kaleidoscope_cookery.cold_cut_ham_slices": "Épaisses tranches de jambon savoureuses, riches et fondantes.",
   "tooltip.kaleidoscope_cookery.shengjian_mantou_plate": "Des shengjian mantou dorés et croustillants.",
   "tooltip.kaleidoscope_cookery.baozi_plate": "Des baozi tout fumants.",
@@ -571,5 +570,10 @@
   "kaleidoscope_cookery.ponder.recipe_item.text_1": "Quand un wok ou une marmite contient des ingrédients, clic droit avec une recette vierge pour noter son contenu.",
   "kaleidoscope_cookery.ponder.recipe_item.text_2": "Plus tard, clic droit sur le wok ou la marmite avec la recette : tous les ingrédients notés y sont ajoutés depuis votre inventaire.",
   "kaleidoscope_cookery.ponder.tag.kitchen_blocks": "Bases de la cuisine",
-  "kaleidoscope_cookery.ponder.tag.kitchen_blocks.description": "En route pour devenir un maître cuisinier !"
+  "kaleidoscope_cookery.ponder.tag.kitchen_blocks.description": "En route pour devenir un maître cuisinier !",
+  "enchantment.kaleidoscope_cookery.quick_knife": "Couteau vif",
+  "enchantment.kaleidoscope_cookery.sweep": "Balayage",
+  "tooltip.kaleidoscope_cookery.transmutation_lunch_bag.line1": "Stocke de la nourriture et des potions.",
+  "tooltip.kaleidoscope_cookery.transmutation_lunch_bag.line2": "Clic droit pour manger.",
+  "tooltip.kaleidoscope_cookery.transmutation_lunch_bag.line3": "Consomme de la nourriture jusqu'à ce que votre faim soit rassasiée."
 }

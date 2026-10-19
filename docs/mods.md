@@ -46,7 +46,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 
 | Mod | Slug | Statut | Côté | Rôle |
 |---|---|---|---|---|
-| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (monter en 1.6.0) | CS | La cuisine |
+| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (1.6.0) | CS | La cuisine |
 | [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (rester en 1.1.25) | CS | La ferme et le four |
 | Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Rend interchangeables les doublons des deux mods de cuisine |
 | Ecliptic Seasons | `ecliptic-seasons` | ✅ (monter en 0.15.4.1) | CS | Saisons |

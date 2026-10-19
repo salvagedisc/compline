@@ -37,3 +37,4 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Dépôt réorganisé : `README` et `CONTRIBUTING` réécrits, index de la documentation, feuille de route, emplacement `docs/plan/` pour le plan du modpack, `docs/` renommé `docs/conception/`, registre des mods classé par domaine.
 - Branches `test/agriculture`, `test/faune` et `test/structures` fusionnées dans `main`.
 - No Man's Land 1.5.12 → 1.6.1 : outils ancestraux (pioche rituelle, épée du serment, cloche et ciseau en bronze), carreaux lunaires et solaires ; textes nouveaux traduits.
+- Kaleidoscope Cookery 1.5.1 → 1.6.0 : la 1.5.1 faisait planter le jeu au chargement avec Kaleidoscope Compat 2.9.7 (mixin `MillstoneBlockEntityMixin`), constaté sur le serveur de test.
