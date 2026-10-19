@@ -1,6 +1,6 @@
 # Fallow : créatures de Naturalist coupées quand un autre mod a un meilleur modèle pour la
-# même espèce (docs/plan/doublons.md), et lapins des forêts retirés avec le lapin
-# (docs/plan/faune-nml.md). Fichier partiel : les options absentes gardent leur valeur
+# même espèce (docs/plan/doublons.md), lapins des forêts retirés avec le lapin
+# (docs/plan/faune-nml.md), mammouth retiré (préhistoire écartée, décision 0003). Fichier partiel : les options absentes gardent leur valeur
 # par défaut. Une créature coupée n'apparaît plus et disparaît du monde.
 
 [disable_mobs]
@@ -13,6 +13,7 @@
 		# Crabe de Friends & Foes.
 		crab_removed = true
 		forest_rabbit_removed = true
+		mammoth_removed = true
 	[disable_mobs.bugs]
 		# Papillons de Longwings ; coupe aussi la chenille.
 		butterfly_removed = true

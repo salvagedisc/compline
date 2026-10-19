@@ -8,7 +8,8 @@
 [wildexList]
 	#Entries to exclude from Wildex.
 	# Fallow : créatures retirées du monde : celles de No Man's Land et le lapin
-	# (docs/plan/faune-nml.md), les doublons coupés (docs/plan/doublons.md).
+	# (docs/plan/faune-nml.md), les doublons et les autres créatures coupées
+	# (docs/plan/doublons.md).
 	excludedModIds = [
 		"nomansland:deer",
 		"nomansland:goose",
@@ -49,5 +50,14 @@
 		"naturalist:starfish",
 		"naturalist:crab",
 		"naturalist:butterfly",
-		"naturalist:caterpillar"
+		"naturalist:caterpillar",
+		"alexsmobs:murmur",
+		"alexsmobs:farseer",
+		"alexsmobs:skelewag",
+		"alexsmobs:fly",
+		"alexsmobs:cockroach",
+		"friendsandfoes:iceologer",
+		"friendsandfoes:illusioner",
+		"friendsandfoes:wildfire",
+		"naturalist:mammoth"
 	]

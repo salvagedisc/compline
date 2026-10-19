@@ -22,8 +22,8 @@ function clientItems(source) {
 }
 
 // Each removed item loses its recipes on the server and is hidden from EMI on the client;
-// the two lists are written twice because KubeJS server and client scripts cannot share code.
-for (const name of ['faune_nml', 'sans_lapin', 'doublons']) {
+// the lists are written twice because KubeJS server and client scripts cannot share code.
+for (const name of ['faune_nml', 'sans_lapin', 'doublons', 'faune_coupee']) {
   test(`${name}: items removed on the server are the items hidden from EMI`, async () => {
     const server = serverItems(await readFile(join(kubejsDir, 'server_scripts', `${name}.js`), 'utf8'));
     const client = clientItems(await readFile(join(kubejsDir, 'client_scripts', `${name}.js`), 'utf8'));

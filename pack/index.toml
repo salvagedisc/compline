@@ -46,7 +46,7 @@ hash = "81fb1ba1548f474188599c7edc2802bad0087801a3ea9d3c37b0a908080b8c96"
 
 [[files]]
 file = "config/naturalist-server.toml"
-hash = "3ab73cc79b0f23068acad420c3d21ec4330922a17905a881d155089e677f7ba3"
+hash = "12049b78787715c1f65c5afe6e50838da15291542dec66309d44668e264f9246"
 
 [[files]]
 file = "config/nomansland-client.toml"
@@ -74,7 +74,7 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
 file = "config/wildex/wildex-common.toml"
-hash = "85cd637e3eb3e8eaeaf18e5a6df9797748ca9bc3ae1c3211276badc658ed2fa9"
+hash = "e6df9615a04f8ee25fc4bda118a6eef3b4b86718e022a8780fb5996d8400dbcb"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -949,6 +949,10 @@ file = "kubejs/client_scripts/doublons.js"
 hash = "4316f845f3862b349170ddaa79f28132822a967c671d51c6be2d2c7708c7146f"
 
 [[files]]
+file = "kubejs/client_scripts/faune_coupee.js"
+hash = "dfc2efe2a9652baa5be4beaec6a5d57b4c364dd2868f66332bb5fee242cc93dc"
+
+[[files]]
 file = "kubejs/client_scripts/faune_nml.js"
 hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
 
@@ -977,6 +981,10 @@ file = "kubejs/data/fallow/neoforge/biome_modifier/doublons.json"
 hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
 
 [[files]]
+file = "kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json"
+hash = "1cba5ef5c996301103e87cb1b299fb47f0bd55f1feeef5f977ea3615caea6390"
+
+[[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
 
@@ -987,6 +995,22 @@ hash = "01293223c715bc17b280d45dce77d5f522bb67a5218c53e7cc8b8d179f8b7070"
 [[files]]
 file = "kubejs/data/fallow/tags/worldgen/biome/brumeux.json"
 hash = "d258462f94ef033f1203fbf8e6702fbf7ccb7245e0a3b53ee44083cb2d72e2fb"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/citadel.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/iceologer_cabin.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/illusioner_shack.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/illusioner_training_grounds.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/anglerfish_all_trenches.json"
@@ -1219,6 +1243,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/server_scripts/doublons.js"
 hash = "5d725b75487d5da8d2e7a411b6695e348f42b71363cfc4f827e1bb21e0c54d5e"
+
+[[files]]
+file = "kubejs/server_scripts/faune_coupee.js"
+hash = "7fad832078ff58e2f8c4a5cdcaef0663620cb016a5568eb3d26460f36c38bafa"
 
 [[files]]
 file = "kubejs/server_scripts/faune_nml.js"
