@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "12f0dea72cf4fcac0d19e09cd3c27da76a341aadccac07dceb228eeb7b01c115"
+hash = "a956779197c959c3507154857f6bbd16e6c5437ee3b48c910533259d1bb60f70"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
@@ -1735,6 +1735,11 @@ metafile = true
 [[files]]
 file = "resourcepacks/better-leaves.pw.toml"
 hash = "c26f8da8b6f013fb7e917e29fc6ae783eb379c539da12d9d61196bc762fd26e1"
+metafile = true
+
+[[files]]
+file = "resourcepacks/dark-coffe-gui.pw.toml"
+hash = "b8d4788c7d05e66503d2aa760c881033f19713afe9b4081a1cacf8b54a5ab31c"
 metafile = true
 
 [[files]]
