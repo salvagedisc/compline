@@ -1534,6 +1534,11 @@ hash = "da1c1cf28e8d5ffe377998d29d59eae29a2020f2de7a0aea7f7253acdc695cfd"
 metafile = true
 
 [[files]]
+file = "mods/true-adaptive-music.pw.toml"
+hash = "2ae9edc88268c99b63f08bfc5058f22b096d671587fdaaf85684f0f265bdda82"
+metafile = true
+
+[[files]]
 file = "mods/twigs.pw.toml"
 hash = "98ef5714a273c9153fbfaca195806d36f568556819dde7b90ec6561646bede98"
 metafile = true
