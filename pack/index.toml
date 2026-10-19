@@ -5,6 +5,10 @@ file = "config/cameraoverhaul.toml"
 hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
 [[files]]
+file = "config/coldsweat/client.toml"
+hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
+
+[[files]]
 file = "config/defaultoptions-common.toml"
 hash = "45251f5d264398716e4921faa498400b9a796fd6c4a6cf6390000cbaae7958b1"
 
@@ -55,10 +59,6 @@ hash = "a51b7d3e8ebbdaed9f4862cab55860b85b265bb31b345a956360783617173a96"
 [[files]]
 file = "defaultconfigs/travelersbackpack-server.toml"
 hash = "b0e9b10708e19ca15e5bd2b62876fdb9514655351dc1b2d02ee53106776361fd"
-
-[[files]]
-file = "kubejs/assets/aa4-atlas/lang/fr_fr.json"
-hash = "fed65e4396868a288f470c0d1c022c08b73618347d7dfcc77dc9dc74108aee87"
 
 [[files]]
 file = "kubejs/assets/adorablehamsterpets/lang/fr_fr.json"
@@ -963,11 +963,6 @@ hash = "d82c42a37f6a2706cf262bda01100541b507cecbed48edbd42b42859a1e04489"
 [[files]]
 file = "mods/3dskinlayers.pw.toml"
 hash = "2dc498bd8a43a8e02fc9d08fe5846ac17f6eabbecbf38ae39aa7b1f23fe100b0"
-metafile = true
-
-[[files]]
-file = "mods/aa4-atlas.pw.toml"
-hash = "c7bfef351745f41a87297176947fd72702b07606e74d9d875f3030c0ca971a4d"
 metafile = true
 
 [[files]]
