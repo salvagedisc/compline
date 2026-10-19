@@ -14,7 +14,7 @@ hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
 
 [[files]]
 file = "config/defaultoptions/options.txt"
-hash = "d066046b6b896778a4a80cd3def4da23dc54f8697c2496d2393a3963d577a914"
+hash = "4fcd0f1b5ab8db53bc35261934543bfe55f191bb51c23c52d53db2384fae0637"
 
 [[files]]
 file = "config/jei/jei-client.ini"
