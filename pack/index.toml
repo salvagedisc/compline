@@ -58,7 +58,7 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
 file = "config/wildex/wildex-common.toml"
-hash = "9cf236122b8f7e75db4c1c263424354bb3cbf4403252cc698977b15bbbc561f8"
+hash = "c9629b843d595f510c6a2c468c00d69d924d993d6fda736106add1f100c888fd"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -905,6 +905,10 @@ file = "kubejs/assets/zeta/lang/fr_fr.json"
 hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
+file = "kubejs/client_scripts/faune_nml.js"
+hash = "57adc9c58a0b58df9ca60ac70ff5c56febde3b9e4044b1c105131dcb8cb98d68"
+
+[[files]]
 file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
@@ -943,6 +947,46 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/add_feature_addition/has_regular_tortoise_burrows_tag_features.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/add_underground/tortoise_burrows/tortoise_burrow_lush.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/add_spawns_to_swamps.json"
+hash = "e25530681b7e473be35184b230bbcea773ddb02497b3fa6af1d0f3282d7ac979"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/deer/spawn_deer_forest.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/deer/spawn_deer_taiga.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/goose/spawn_goose_river.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/goose/spawn_goose_swamp.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tortoise_common.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tortoise_rare.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/server_scripts/faune_nml.js"
+hash = "9a58d8cb8223b8f0f8438b30c9663f60209ba8756bf27be1d2bdf58be35fb52d"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"
