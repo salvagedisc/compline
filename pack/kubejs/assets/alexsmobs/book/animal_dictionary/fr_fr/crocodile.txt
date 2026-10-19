@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le crocodile est un énorme reptile qui apparaît rarement dans les rivières et les marais de la Surface. Il se jette sur sa proie, la saisit et l'entraîne sous l'eau, où il lui inflige une redoutable vrille mortelle. Bloquer son attaque bondissante l'étourdit temporairement. Il est naturellement hostile envers les humains comme envers les bêtes.
+<NEWLINE>
+Malgré son hostilité, le crocodile se reproduit avec de la chair putréfiée. Après l'accouplement, il gagne la rive pour pondre ses œufs. Si ces œufs sont abîmés, les parents deviennent agressifs.
+Au bout d'un moment, les œufs éclosent et le petit crocodile peut s'attacher au joueur le plus proche. Il défend alors son lieu de naissance contre les monstres. En interagissant avec lui, on peut aussi lui demander de rester immobile pour se prélasser au soleil.
+ <NEWLINE>
+Le crocodile lâche des écailles de crocodile en devenant adulte ou à sa mort. Elles permettent de fabriquer un plastron protecteur qui augmente la vitesse de nage de son porteur. Elles servent aussi à fabriquer un exemplaire de ce livre.

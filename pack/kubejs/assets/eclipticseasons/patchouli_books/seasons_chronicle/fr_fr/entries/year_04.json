@@ -1,0 +1,15 @@
+{
+  "name": "04 - Hiver",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "L'hiver clôt l'année : les beaux jours sont passés, voici la saison de la neige.$(br)$(br)Mais seuls les lieux vraiment froids permettent de recueillir de la neige. Dans les zones un peu plus douces, la neige n'est que décorative et les rivières ne gèlent pas. On peut recueillir de la neige avec un chaudron, mais c'est bien peu efficace.$(br)$(br)Allons, mon ami, asseyons-nous près du feu pour regarder les flocons danser sur une terre couverte de blanc."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Le premier terme solaire de l'hiver est le $(l)Début de l'hiver$(). Il ne fait pas encore très froid et il ne neige pas forcément ; méfiez-vous seulement de la pluie glacée. Viennent ensuite $(l)Petite neige$() et $(l)Grande neige$(), quand la plupart des biomes voient tour à tour tomber la neige.$(br)$(br)Puis le $(l)Solstice d'hiver$(), la plus longue nuit de l'année, mais pas la plus froide. Il faut encore traverser $(l)Petit froid$() et $(l)Grand froid$(), le moment le plus froid de l'année. Même dans certaines régions chaudes, avec de la chance, on peut voir la neige."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le kangourou est un grand marsupial neutre originaire des savanes et des badlands. Il a une façon unique de se déplacer : uniquement par bonds.
+On le voit parfois avec un petit dans sa poche. Malgré son allure préhistorique, c'est un herbivore strict qui adore brouter l'herbe. Il ne se laisse pourtant pas faire : attaqué, il donne des coups de poing ou des coups de pied des deux pattes, aux effets dévastateurs.
+Une fois tué, il peut lâcher de la viande, qui se cuit et se transforme en un délicieux burger kangourou. Il peut aussi lâcher sa peau, qui permet de fabriquer du cuir ou un motif de bannière unique.
+<NEWLINE>
+Le kangourou s'apprivoise avec dix à quinze carottes. Apprivoisé, on peut lui ordonner de rester, de suivre ou de se promener en interagissant avec lui, et accéder à l'inventaire de sa poche en s'accroupissant. Si une arme de corps à corps est placée dans la poche, le kangourou s'en sert pour attaquer.
+Un kangourou adulte peut aussi s'équiper de n'importe quel casque ou plastron placé dans sa poche, et manger toute nourriture non carnée qui s'y trouve pour regagner de la vie. Les kangourous se reproduisent avec un buisson mort ou de l'herbe.

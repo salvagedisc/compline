@@ -1,0 +1,12 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le cténophore est une créature gélatineuse rudimentaire, tout juste à la limite de la définition du règne animal.
+On le trouve la nuit dans les océans gelés, où ses couleurs prismatiques scintillantes contrastent avec le bleu des profondeurs.
+Loin d'être intelligent, il se contente de dériver dans l'eau en filtrant des proies microscopiques. Il se capture avec un seau d'eau et existe en plusieurs couleurs.
+<NEWLINE>
+Une fois tué, le cténophore peut lâcher de la gelée d'arc-en-ciel. Celle-ci s'utilise sur presque n'importe quelle créature pour la parer d'un motif arc-en-ciel scintillant, semblable à celui du cténophore.
+Cet arc-en-ciel s'efface en utilisant une éponge sur la créature. On peut aussi manger la gelée pour s'appliquer cet effet.
+<NEWLINE>
+La gelée d'arc-en-ciel se combine aussi avec 8 blocs de verre pour créer du verre arc-en-ciel, dont la couleur change selon sa position dans le monde. Contrairement au verre teinté, le verre arc-en-ciel émet de la lumière.

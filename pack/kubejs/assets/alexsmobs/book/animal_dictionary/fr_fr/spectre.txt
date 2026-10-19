@@ -1,0 +1,11 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le spectre est un lointain parent du phantom de la Surface, qu'on ne trouve que dans le grand vide entre les îles de l'End. Ces êtres spectraux sont insensibles aux attaques ordinaires, à l'exception des dégâts magiques comme ceux des potions.
+Il n'y a de toute façon aucune raison de les attaquer, car contrairement à leurs cousins phantoms, les spectres sont totalement pacifiques.
+Ils se désintéressent généralement des choses de ce monde, mais portent un intérêt particulier aux cœurs de l'âme et suivent tout joueur qui en tient un.
+<NEWLINE>
+Si l'on parvient à attirer un spectre assez près, on peut s'y attacher avec une laisse.
+Ainsi attaché, on se fait tracter par le spectre. La créature fantomatique devient alors un moyen rapide et simple de parcourir l'End, car se faire tirer par un spectre à travers le vide permet facilement de découvrir de nouvelles îles à explorer.
+Pour se détacher du spectre, il suffit de s'accroupir ou d'interagir de nouveau avec la laisse.

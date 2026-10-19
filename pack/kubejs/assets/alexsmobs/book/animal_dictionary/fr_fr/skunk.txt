@@ -1,0 +1,13 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La moufette est un mammifère qu'on croise parfois dans les forêts. Naturellement très craintive, elle tente de fuir tout grand prédateur qu'elle rencontre.
+Si on la pourchasse sans relâche ou qu'on la blesse, elle se défend en aspergeant son poursuivant d'un jet nauséabond qui inflige Nausée.
+<NEWLINE>
+Une partie de ce jet peut même persister dans le monde, collée aux surfaces aspergées. On peut le mettre en bouteille pour obtenir une bouteille d'odeurs, qui sert de munition au pistolet d'odeurs.
+<NEWLINE>
+Le pistolet d'odeurs est un outil d'une puissance unique qui permet de détourner l'attention de hordes de créatures hostiles ou neutres. Tiré sur une créature, il pousse les créatures neutres et hostiles voisines à la tenir pour responsable de l'odeur épouvantable et à s'en prendre à elle, tandis que les animaux pacifiques tentent de fuir.
+Le pistolet d'odeurs permet ainsi de semer vite la zizanie dans un groupe de créatures. Chaque bouteille consommée ne fournit que cinq utilisations.
+<NEWLINE>
+Les moufettes se reproduisent avec des baies sucrées. Si une moufette subit un effet de potion pendant qu'elle asperge, elle crée à proximité un nuage persistant de cet effet. Seules les moufettes adultes peuvent asperger.

@@ -1,0 +1,6 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le crotale est un reptile de taille moyenne qui vit dans les déserts et les badlands. La plupart du temps, on l'entend plus qu'on ne le voit, car il émet un bruit de crécelle sonore lorsqu'un prédateur potentiel s'approche. Si l'on s'approche trop pendant qu'il agite sa crécelle, il devient hostile et se défend de sa morsure venimeuse. Le crotale est l'ennemi juré du géocoucou, son prédateur le plus courant. Il se reproduit avec n'importe quel type de viande.
+<NEWLINE>
+Une fois tué, le crotale peut lâcher sa crécelle (le hochet de crotale). Infusée avec une potion de poison, elle donne une répugnante essence toxique. Infuser cette essence avec une patte de mille-pattes des cavernes donne la précieuse potion de résistance au poison.

@@ -1,0 +1,15 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le pygargue à tête blanche est un grand rapace neutre qui vit dans les montagnes boisées. Il fréquente les lacs voisins, où il plonge pour attraper des saumons hors de l'eau.
+Il attaque aussi volontiers les lapins de la même façon. Face à des créatures plus grandes, il préfère tournoyer, frapper de ses serres, puis recommencer.
+<NEWLINE>
+Grand amateur de poisson, le pygargue peut être attiré et apprivoisé avec de l'huile de poisson. Un pygargue apprivoisé peut recevoir l'ordre de rester, de suivre ou de se promener, comme bien d'autres animaux, mais il peut aussi servir à la fauconnerie.
+Pour débuter la fauconnerie, il faut fabriquer un gant de fauconnerie. Tenu en main principale ou secondaire, ce gant permet de prendre le pygargue sur le poing. Pour le lancer, il suffit de frapper.
+Lancé en visant une créature, le pygargue vole jusqu'à elle, l'attaque puis, s'il survit, revient sur le poing. Si aucune créature n'est visée, il se contente de quitter le gant.
+<NEWLINE>
+Pour perfectionner sa fauconnerie, on peut fabriquer un capot de fauconnerie. Un pygargue coiffé du capot obéit directement aux commandes de son maître lorsqu'il est lancé depuis le gant.
+Le maître peut ainsi littéralement piloter son pygargue. Si l'oiseau s'éloigne de plus de 150 blocs, il tente de revenir. Pour cesser de le diriger, il suffit de s'accroupir.
+Le capot se retire avec une cisaille.
+<NEWLINE>
+Les pygargues sont souvent blessés par leurs proies pendant la chasse. Un pygargue apprivoisé se soigne avec n'importe quel poisson. Il se reproduit avec de la chair putréfiée.

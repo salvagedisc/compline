@@ -1,0 +1,16 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le grand cachalot est un énorme mammifère neutre qui vit dans les océans tièdes, froids et profonds, où il chasse sa proie favorite : le calmar.
+Pour cela, il émet un son qui rebondit sur le calmar et revient jusqu'à lui, ce qui lui permet de localiser sa proie par écholocation.
+Il accélère alors et ouvre sa gueule hérissée de dents acérées pour percuter sa proie. Il lui arrive de perdre une de ces longues dents au passage.
+Le cachalot brise la glace en se déplaçant, et lorsqu'il charge, il peut briser les bateaux et d'autres blocs en bois. Plus rarement, on croise des cachalots tout blancs, bien plus puissants que les autres.
+<NEWLINE>
+Malgré sa taille de géant, le grand cachalot reste menacé par quelques forces de la nature. Les orques raffolent des jeunes cachalots, que leurs mères défendent farouchement.
+Lors des violents orages, des cachalots peuvent apparaître échoués sur les plages. Ils sont alors sans défense et, si on les repousse dans l'eau sans les blesser, ils peuvent récompenser leurs sauveteurs.
+Cette récompense prend la forme d'ambregris, un précieux sous-produit de l'estomac que le cachalot recrache. L'ambregris s'échange contre beaucoup d'émeraudes auprès des villageois pêcheurs, ou sert à fabriquer un écholocateur.
+C'est aussi un puissant combustible qui peut faire cuire 64 objets.
+<NEWLINE>
+L'écholocateur révèle les grottes proches. Lorsqu'une grotte est détectée, il émet une onde sonore dans sa direction. Mieux vaut l'économiser, car son nombre d'utilisations est limité.
+Fabriqué avec 4 perles de l'Ender, il devient un endolocateur, qui révèle l'emplacement du portail de l'End à proximité d'un fort.

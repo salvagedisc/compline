@@ -1,0 +1,16 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le ver du vide est une créature ancienne qui vit naturellement dans le vide sous l'End.
+On pense que ces vers sont une sorte de parasite interdimensionnel, en raison de leur capacité innée à creuser à travers la réalité.
+On peut attirer ce boss hors du vide en jetant un ver mystérieux dans le vide de l'End. On obtient un tel ver en plaçant une larve de moustique cramoisi dans la capside d'un enderiophage.
+<NEWLINE>
+Le ver du vide dispose de plusieurs attaques dévastatrices. D'abord, il peut lancer de sa gueule jusqu'à quatre cristaux autoguidés à la fois, qui traquent les proies proches et infligent de lourds dégâts. Ensuite, il tente de mordre directement tout ce qui se trouve sur son chemin. Enfin, il peut ouvrir un portail à partir de rien pour atteindre une proie cachée.
+Pour vaincre cette bête, il faut veiller à n'infliger de gros dégâts qu'à la tête. Si un segment du corps est gravement endommagé, il cesse de briller, et s'il est détruit, le ver tout entier se scinde en deux. Les vers ainsi scindés ont moitié moins de santé et sont un peu plus lents, mais ils infligent toujours de lourds dégâts. Sans prudence, on peut vite se retrouver submergé de vers.
+<NEWLINE>
+Une fois tué, le ver lâche un œil et deux de ses mandibules. Les mandibules s'assemblent pour former un bec, un trophée qui mord toute créature entre ses mâchoires lorsqu'il est activé par la redstone.
+L'œil, combiné aux mandibules et à de la netherite, permet de créer une pioche magique : le tailleur dimensionnel.
+<NEWLINE>
+<NEWLINE>
+Contrairement aux autres pioches, le tailleur dimensionnel ne sert pas à briser des blocs, mais la réalité elle-même. En l'utilisant n'importe où, on ouvre un portail qui ramène à son point d'apparition. De l'autre côté, un portail de retour temporaire s'ouvre aussi, pour une minute seulement. Mieux vaut ne pas en abuser, car l'outil n'a que 20 utilisations.
+

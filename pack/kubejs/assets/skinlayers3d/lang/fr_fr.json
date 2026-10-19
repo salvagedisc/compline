@@ -1,0 +1,12 @@
+{
+  "modmenu.descriptionTranslation.skinlayers3d": "Affiche la seconde couche du skin du joueur en 3D",
+  "text.skinlayers.tab.player": "Joueurs",
+  "text.skinlayers.tab.heads": "Têtes de joueur",
+  "text.skinlayers.tab.other": "Autres réglages",
+  "text.skinlayers.compatibilityMode.enable": "Mode compatibilité",
+  "text.skinlayers.compatibilityMode.enable.tooltip": "Autre méthode d'affichage des couches, peut corriger des problèmes de compatibilité avec d'autres mods",
+  "text.skinlayers.irisCompatibilityMode.enable": "Mode compatibilité Iris",
+  "text.skinlayers.irisCompatibilityMode.enable.tooltip": "Autre méthode d'affichage des couches, corrige les ombres et couleurs étranges avec les shaders Iris. À n'activer qu'en cas de besoin : les jonctions des coins seront cassées.",
+  "text.skinlayers.applySodiumWorkaround.enable": "Contournement Sodium",
+  "text.skinlayers.applySodiumWorkaround.enable.tooltip": "Contourne les faces de cubes inversées de Sodium dans certaines versions (?). À n'activer qu'avec Sodium, si des côtés des couches du skin manquent."
+}

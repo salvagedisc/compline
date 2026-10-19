@@ -1,0 +1,11 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le rafalleur est un esprit vengeur du désert qui ne se manifeste que pendant les tempêtes dans les déserts.
+Foncièrement hostiles, ces créatures cherchent à projeter leurs cibles haut dans les airs ou à leur lancer un jet de sable.
+Le rafalleur peut aussi soulever et projeter les objets tombés au sol, ce qui complique le ramassage du butin des monstres.
+Il est formé du sable local : dans une zone de sable des âmes ou de sable rouge, il prend la couleur de ces sédiments.
+Bien que puissant, le rafalleur n'est pas très robuste. Sa présence presque éthérée le rend toutefois plus résistant aux projectiles que la plupart des monstres.
+Une fois tué, il lâche du sable et parfois un de ses yeux. Ces yeux permettent de fabriquer un Gustard, un bloc qui libère une petite bourrasque lorsqu'il est alimenté en redstone.
+Cette petite rafale peut pousser les créatures et les objets. L'œil sert aussi à créer une poche de sable, utilisable comme arme.

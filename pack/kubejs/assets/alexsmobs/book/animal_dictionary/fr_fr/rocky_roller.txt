@@ -1,0 +1,9 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le rouleau rocheux est un monstre géant et agressif qui vit exclusivement dans les grottes à spéléothèmes. Doté d'une carapace hérissée de spéléothèmes pointus, ce monstre n'aime guère les intrus et cherche à les écraser en roulant vers eux à grande vitesse.
+Malgré une santé assez faible pour un monstre, son armure très épaisse et ses dégâts élevés en font une menace pour tout spéléologue.
+<NEWLINE>
+Une fois tué, il peut lâcher du tuf, des spéléothèmes pointus et une carapace rocheuse. Celle-ci permet de fabriquer un plastron qui permet à son porteur de rouler comme un rouleau rocheux en sprintant. Cette capacité permet à la fois de se déplacer vite et de percuter les autres pour leur infliger de légers dégâts.
+Ce plastron réduit aussi les dégâts de chute, mais porté dans l'eau, il fait couler rapidement sous son poids impressionnant.

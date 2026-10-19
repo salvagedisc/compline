@@ -1,0 +1,16 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Les éléphants sont des mammifères terrestres géants qui parcourent les savanes en grands troupeaux. La plupart des troupeaux comptent trois sortes d'éléphants : les éléphanteaux, les éléphants à défenses et ceux sans défenses.
+Un troupeau compte généralement un ou deux éléphants à défenses, nettement plus forts que les autres. Ils disposent aussi d'une charge spéciale dévastatrice.
+Les éléphants protègent leur troupeau, et la plupart comptent sur ces individus à défenses pour être les plus protecteurs. En plus de la charge, ils attaquent de bien des manières : ils projettent leurs ennemis avec leur trompe massive ou se cabrent pour piétiner leur adversaire.
+On voit souvent ces mammifères se dresser pour arracher les feuilles des arbres, dans l'espoir d'obtenir une friandise assez rare : la fleur d'acacia. Ces fleurs tombent rarement des acacias et permettent d'apprivoiser les éléphants.
+Les éléphants à défenses sauvages ne peuvent pas être apprivoisés, contrairement aux éléphanteaux et aux éléphants sans défenses. Pour obtenir un éléphant à défenses apprivoisé, il faut donc l'apprivoiser quand il est encore petit.
+<NEWLINE>
+Un éléphant apprivoisé se monte en interagissant avec lui. Utiliser un coffre sur un éléphant lui donne un vaste inventaire porté sur son dos, accessible en s'accroupissant.
+N'importe quel tapis peut aussi servir à le décorer. Le coffre comme le tapis se retirent avec une cisaille.
+En le chevauchant, on peut faire charger un éléphant à défenses apprivoisé en lui donnant du blé. Cette charge accélère l'éléphant et inflige de lourds dégâts à toute créature sur son passage. L'éléphant a besoin de se reposer après une charge.
+<NEWLINE>
+Une fois apprivoisés, les éléphants se reproduisent avec des fleurs d'acacia. Dans les biomes chauds, on croise parfois des marchands ambulants juchés sur des éléphants de marchand. Ces éléphants portent un coffre contenant quelques trouvailles des voyages du marchand, accessibles à tous.

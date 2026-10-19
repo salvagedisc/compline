@@ -1,0 +1,5 @@
+{
+  "key.pickup.item": "Ramasser l'objet",
+  "item.tooltip.pickup.keybind": "Appuyez sur '%s' pour ramasser",
+  "item.throw": "Puissance : %s"
+}

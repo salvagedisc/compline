@@ -1,0 +1,13 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le calmar géant est un grand invertébré qui ne vit que dans les océans les plus profonds. Malgré son aspect redoutable, il est neutre envers la plupart des créatures, sauf les gardiens et les poissons.
+Il possède le plus grand œil du règne animal. Une fois tué, il ne lâche guère plus que quelques poches d'encre. Mais s'il est attaqué par l'un de ses rares prédateurs, le grand cachalot, il peut perdre un tentacule dans la bataille.
+Ces tentacules perdus peuvent être ramassés pour fabriquer le grappin de calmar.
+<NEWLINE>
+<NEWLINE>
+Ce grappin permet de lancer jusqu'à quatre tentacules à la fois, qui s'accrochent à n'importe quelle surface et tirent l'utilisateur vers elle. Il est très pratique pour explorer les grottes et les océans.
+<NEWLINE>
+Le calmar géant se décompresse s'il se trouve sous moins de dix blocs d'eau et prend alors une teinte pâle.
+Plus rarement, un calmar ordinaire frappé par la foudre peut se transformer en un calmar géant bleu unique.

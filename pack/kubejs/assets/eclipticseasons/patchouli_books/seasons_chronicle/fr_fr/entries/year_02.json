@@ -1,0 +1,15 @@
+{
+  "name": "02 - Été",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "L'été est le sommet de la chaleur : un soleil brûlant cuit la terre. Vers midi, mieux vaut éviter de s'activer au soleil pour ne pas subir de coup de chaleur. $(m)$(o)Peut-être une potion de résistance au feu, de quoi se rafraîchir, ou un chapeau de soleil ?$()$(br)$(br)L'humidité change aussi en été : les biomes peu humides peuvent devenir secs, et ceux déjà humides le deviennent encore plus."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Après le $(l)Début de l'été$() vient $(l)Petite plénitude$(), quand les grains commencent à mûrir.$(br)$(br)Pendant $(l)Épis barbus$(), les pluies faiblissent un peu et la pousse des cultures atteint son maximum. Au $(l)Solstice d'été$() arrive le jour le plus long de l'année ; ensuite, les journées raccourcissent peu à peu.$(br)$(br)Puis viennent $(l)Petite chaleur$() et $(l)Grande chaleur$(), le moment le plus chaud de l'année. Des sécheresses peuvent survenir et la pousse des cultures ralentit.$(br)$(br)Dans des biomes comme les savanes clairsemées, c'est souvent la saison des pluies, qui apporte un regain de vie."
+    }
+  ]
+}

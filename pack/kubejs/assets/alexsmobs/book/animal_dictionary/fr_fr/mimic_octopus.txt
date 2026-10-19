@@ -1,0 +1,15 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le poulpe imitant est un céphalopode curieux et pacifique qui vit dans les océans chauds. Proie de nombreux animaux, il compte sur sa régénération rapide et sur sa capacité à changer de forme et de couleur pour survivre.
+Il peut prendre la couleur de n'importe quel bloc et imite les poissons-globes, les creepers et les gardiens s'il y en a à proximité. Lorsqu'il imite un bloc, il est presque invisible pour ses prédateurs.
+<NEWLINE>
+Le poulpe imitant s'apprivoise en lui donnant cinq à huit queues de homard, mais seulement lorsqu'il n'est pas camouflé. Naturellement pacifique, un poulpe imitant apprivoisé tente d'effrayer ceux qui s'en prennent à son maître en changeant de forme, souvent en monstre.
+Apprivoisé, le poulpe peut suivre son maître sur la terre ferme, mais attention : il peut se dessécher dans cet environnement hostile. Une boule de slime appliquée tous les quelques jours y remédie. En interagissant avec un poulpe imitant apprivoisé avec une poche d'encre, on active ou désactive ses changements de forme aléatoires.
+Utiliser un éclat de prismarine sur un poulpe lui fait mémoriser la forme du gardien. Il en va de même avec les objets lâchés par les poissons-globes et les creepers. Aucun de ces « rappels » ne consomme l'objet.
+<NEWLINE>
+Comme les autres créatures apprivoisables, ces poulpes peuvent recevoir l'ordre de s'asseoir, de se promener ou de suivre. Si l'on applique cinq à huit imicrèmes sur un poulpe imitant, il apprend à imiter non seulement la forme des créatures, mais aussi leurs capacités au combat.
+Il peut alors tirer des rayons comme un gardien, piquer de ses épines venimeuses comme un poisson-globe et exploser comme un creeper.
+<NEWLINE>
+Un poulpe imitant apprivoisé se met en seau et se reproduit avec des poissons tropicaux. Mieux vaut le tenir éloigné des requins et des crevettes mantes, ses prédateurs naturels.

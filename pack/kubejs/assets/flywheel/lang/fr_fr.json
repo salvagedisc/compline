@@ -1,0 +1,14 @@
+{
+  "argument.flywheel_backend.id.unknown": "Moteur de rendu inconnu : « %s »",
+  "command.flywheel.backend.get": "Le moteur de rendu actuel de Flywheel est « %s »",
+  "command.flywheel.backend.set": "Le moteur de rendu de Flywheel est désormais « %s »",
+  "command.flywheel.backend.set.unavailable": "Le moteur de rendu demandé « %s » n'est pas disponible",
+  "command.flywheel.limit_updates.get.off": "La limitation des mises à jour est actuellement désactivée",
+  "command.flywheel.limit_updates.get.on": "La limitation des mises à jour est actuellement activée",
+  "command.flywheel.limit_updates.set.off": "La limitation des mises à jour est désormais désactivée",
+  "command.flywheel.limit_updates.set.on": "La limitation des mises à jour est désormais activée",
+  "command.flywheel.use_light_directions.get.off": "Directions de la lumière non utilisées",
+  "command.flywheel.use_light_directions.get.on": "Directions de la lumière utilisées",
+  "command.flywheel.use_light_directions.set.off": "Directions de la lumière désactivées",
+  "command.flywheel.use_light_directions.set.on": "Directions de la lumière activées"
+}

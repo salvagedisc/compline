@@ -1,0 +1,12 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le straddler est un parent géant de l'arpenteur commun du Nether. Contrairement à l'arpenteur, on ne le trouve que dans les deltas de basalte.
+Il est aussi bien plus robuste que son cousin, à l'aise sur terre, dans l'eau comme dans la lave. Mais il est aussi agressif.
+Tout explorateur qui s'approche trop est considéré comme un intrus et aussitôt attaqué. Le straddler se sert de ses longs poils en filet pour lancer des stradpoles sur ses cibles, ce qui inflige des dégâts non négligeables.
+Une fois tué, il lâche du basalte et, rarement, de la straddlite. Ce minéral peu commun permet de fabriquer une straddleplanche.
+<NEWLINE>
+La straddleplanche est une planche teignable qui flotte sur la lave mais coule dans l'eau. Elle permet de traverser sans peine les grands océans de lave du Nether. Contrairement à l'arpenteur, relativement sûr, la straddleplanche a tendance à décrocher et à culbuter : le voyage est plus risqué, mais plus rapide.
+Si l'on percute trop fort un plafond ou un mur en straddleplanche, on risque de finir englouti dans la lave.

@@ -1,0 +1,11 @@
+{
+  "name": "00 - Prologue",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Au commencement, le ciel et la terre s'ouvrirent ; le soleil alla et vint, les quatre saisons alternèrent, le froid et le chaud se succédèrent. Ainsi naquit le grand cycle, divisé en vingt-quatre parts.$(br)$(br)Telle est la voie du ciel : même à son apogée, rien ne dure ; un léger retard, et le déclin commence.$(br)$(br)C'est pourquoi le Solstice d'été n'est pas le moment le plus chaud, ni le Solstice d'hiver le jour le plus froid."
+    }
+  ]
+}

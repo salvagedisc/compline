@@ -1,0 +1,7 @@
+{
+  "item.patchouli:pamphlet.name": "Brochure de test",
+  "item.patchouli:pamphlet.landing": "Une brochure de test : un livre avec une seule catégorie.",
+  "patchouli.gui.lexicon.button.toggle_mock_header": "Afficher/masquer l'en-tête factice",
+  "patchouli.networking.open_book.failed": "Impossible d'ouvrir le livre %s",
+  "patchouli.networking.reload_contents.failed": "Impossible de recharger le contenu %S"
+}

@@ -1,0 +1,11 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La crevette mante est un crustacé géant qui vit dans les récifs des océans chauds ou dans les mangroves. Elle est dotée de deux poings puissants, assez rapides pour brûler ses proies.
+Ces poings sont aussi assez rapides pour projeter les ennemis et briser des blocs. Bien qu'elle soit neutre, mieux vaut ne pas la mettre en colère. C'est une prédatrice habile de poissons tropicaux, de calmars, de gardiens et surtout de shulkers, son mets favori.
+<NEWLINE>
+La crevette mante s'apprivoise en lui donnant 10 à 30 poissons tropicaux. Si elle reste hors de l'eau plus de 5 minutes, elle commence à se dessécher.
+Pour l'éviter, on peut donner des seaux d'eau à une crevette mante apprivoisée en s'accroupissant : elle pourra alors vivre hors de l'eau indéfiniment. Apprivoisée, elle peut recevoir l'ordre de suivre, de s'asseoir, de se promener ou de casser des blocs.
+En interagissant avec elle accroupi tout en tenant un bloc, on lui confie ce bloc. Sur ordre, la crevette cherchera et cassera alors tous les blocs identiques à celui qu'elle tient dans son poing.
+Blessée, la crevette mante se soigne avec n'importe quel poisson et se reproduit avec des queues de homard.

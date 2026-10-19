@@ -1,0 +1,15 @@
+{
+  "name": "07 - Annexe",
+  "icon": "eclipticseasons:calendar",
+  "category": "eclipticseasons:core",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Les 24 termes solaires :$(br2)$(l)Printemps :$() Début du printemps, Eau de pluie, Réveil des insectes, Équinoxe de printemps, Clarté pure, Pluie des grains$(br)$(br)$(l)Été :$() Début de l'été, Petite plénitude, Épis barbus, Solstice d'été, Petite chaleur, Grande chaleur$(br)$(br)$(l)Automne :$() Début de l'automne, Fin des chaleurs, Rosée blanche, "
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Équinoxe d'automne, Rosée froide, Descente du givre$(br)$(br)$(l)Hiver :$() Début de l'hiver, Petite neige, Grande neige, Solstice d'hiver, Petit froid, Grand froid$(br)$(br)$(l)Niveaux d'humidité :$(br2)$()Aride, Sèche, Moyenne, Humide, Très humide."
+    }
+  ]
+}

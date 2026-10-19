@@ -1,0 +1,23 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le voyant éloigné est un être venu d'au-delà des dimensions, qui vit dans des univers orthogonaux au nôtre. Il ne peut quitter son monde natal incompréhensible qu'aux confins mêmes du monde, ce qui rend les rencontres avec ces créatures extrêmement rares.
+<NEWLINE>
+Cela ne veut pas dire qu'il est impossible à trouver. Avec un peu de persévérance, on peut créer un tailleur dimensionnel éclaté en plaçant un tailleur dimensionnel dans une capside. Contrairement à la version normale de cet outil, le tailleur éclaté crée un portail qui mène un million de blocs plus loin, dans n'importe quelle direction.
+Il suffit d'utiliser cet outil plusieurs fois dans la même direction pour arriver à portée du voyant éloigné.
+<NEWLINE>
+Lorsqu'une proie se trouve près de la bordure du monde, le voyant éloigné peut ouvrir un portail et surgir juste à côté d'elle, la prenant par surprise.
+<NEWLINE>
+Le voyant éloigné que l'on rencontre est sans aucun doute extrêmement hostile. Il tente de dissoudre tout adversaire en pure friture statique à l'aide de ses griffes rapides ou d'un rayon dévastateur tiré de son œil. Si l'on n'esquive pas ces attaques et qu'on ne le contourne pas, il a toutes les chances de l'emporter : ses attaques traversent armures et enchantements.
+<NEWLINE>
+Une fois tué, le voyant éloigné peut lâcher l'un de ses nombreux bras. Avec de l'obsidienne et une étoile du Nether, ils permettent de fabriquer une table de transmutation.
+<NEWLINE>
+<NEWLINE>
+Grâce à la magie qu'utilisent les voyants éloignés pour réduire la matière à néant, cette table permet de transmuter des piles entières d'objets en d'autres objets.
+Une fois ouverte, elle dispose d'un emplacement pour n'importe quel objet empilable. Trois possibilités apparaissent alors : en choisir une transforme toute la pile en l'objet choisi, moyennant de l'expérience.
+Lorsqu'un objet est transmuté en un autre, il y a une faible chance que l'objet d'origine figure parmi les futures possibilités ; cette chance augmente selon la fréquence à laquelle cet objet est transmuté, et diminue selon la fréquence à laquelle il est choisi.
+<NEWLINE>
+Au départ, la table de transmutation ne propose que des objets naturels simples, mais elle se remplit vite d'autres types de ressources.
+Si elle est détruite, la table perd toute sa connaissance des objets, et seule une étoile du Nether subsiste, suivie d'une violente explosion.

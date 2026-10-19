@@ -1,0 +1,13 @@
+{
+  "zeta.misc.mod_disabled": "Désactivé. Installez %s pour l'activer.",
+  "zeta.jei.hint_preamble": "[Zeta]\n",
+  "zeta.gui.config.save": "Enregistrer",
+  "zeta.gui.config.header": "Configuration de %s",
+  "zeta.gui.config.default": "Valeur par défaut",
+  "zeta.gui.config.discard": "Annuler les modifications",
+  "zeta.gui.config.subcategories": "------- Sous-catégories -------",
+  "zeta.gui.config.onechild": "1 élément",
+  "zeta.gui.config.nchildren": "%d éléments",
+  "zeta.gui.config.defaultvalue": "Par défaut : %s",
+  "zeta.gui.config.missingaddon": "Il vous manque le mod complémentaire requis pour cette catégorie"
+}

@@ -1,0 +1,7 @@
+{
+  "config.entity_texture_features.skin_editor.overlays.-2_extra_space_for_other_lang": "",
+  "config.entity_texture_features.skin_editor.overlays.-1_extra_space_for_other_lang": "",
+  "config.entity_texture_features.skin_editor.overlays.0_extra_space_for_other_lang": "",
+  "config.entity_texture_features.property_explanation.resourcepack": "Packs de ressources\nTeste le nom de chaque pack de ressources chargé\n§aresourcepack.<n>=<resourcepack_list|regex|pattern>",
+  "config.entity_texture_features.property_explanation.usingShaders": "Shaders utilisés\nSi des shaders Iris sont utilisés ou non\n§ausingShaders.<n>=<true/false>"
+}

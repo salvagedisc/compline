@@ -1,0 +1,12 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La tortue de rivière est un petit reptile qu'on trouve parfois immergé dans les rivières non gelées.
+Totalement pacifique, elle compte sur sa carapace pour se protéger. Une tortue de rivière sauvage se ramasse avec un seau d'eau.
+<NEWLINE>
+Si l'on saute sur une tortue de rivière, elle rentre dans sa carapace. Si l'on saute de nouveau dessus, elle file en tournoyant dans la direction du sauteur et ricoche sur les murs.
+Si elle percute une autre créature, la tortue lancée à toute vitesse inflige des dégâts non négligeables. Mais la créature touchée peut devenir agressive envers celui qui a lancé la tortue.
+<NEWLINE>
+Les tortues de rivière existent en une vaste gamme de motifs et de couleurs, dont beaucoup n'existent pas dans la nature.
+Elles se reproduisent avec des herbes marines et pondent 1 à 4 œufs. La plupart des petits devraient être un croisement direct de leurs parents, mais un bébé tortue peut muter et prendre une couleur totalement aléatoire.
+Sans mutation, ses couleurs peuvent être celles de l'un de ses parents ou un mélange des deux.

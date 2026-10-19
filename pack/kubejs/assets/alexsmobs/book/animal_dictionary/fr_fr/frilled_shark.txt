@@ -1,0 +1,12 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le requin frangé est un fossile vivant léthargique qui vit dans les océans profonds. Ce requin neutre passe le plus clair de son temps à chasser les blobfish et les calmars, ses proies favorites.
+Pour chasser le calmar, il tire parti de la faible luminosité des grands fonds et de l'instinct de sa proie en l'attirant avec ses dents très réfléchissantes.
+Une fois sa proie dans la gueule, le requin utilise ses dents crantées spéciales pour infliger des dégâts ainsi que l'effet Exsanguination, qui draine rapidement la santé. Il lui arrive de perdre ces dents en attaquant un calmar.
+<NEWLINE>
+Avec des dents de requin crantées et quelques autres objets aquatiques, on peut créer le Bouclier des profondeurs. Ce bouclier est un peu plus résistant que la normale, et il inflige aussi l'effet Exsanguination en bloquant les attaques proches.
+<NEWLINE>
+<NEWLINE>
+Le requin frangé se transporte dans un seau d'eau. S'il se trouve sous moins de 10 blocs d'eau, il se décolore et devient encore plus lent que d'habitude.

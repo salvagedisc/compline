@@ -1,0 +1,9 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le champilièvre est un lapin mutant gigantesque qu'on trouve très rarement dans les champs de champignons. Il ne se reproduit pas : il faut le créer en donnant à un lapin plusieurs spores mongales, que lâchent parfois les mongus.
+Ces lagomorphes géants sont le système de défense naturel des champs de champignons et attaquent tout monstre à leur portée. Ils sont neutres envers les joueurs, mais deviennent totalement pacifiques si on leur donne une carotte.
+Les carottes leur accordent aussi Régénération et Force pendant un moment.
+<NEWLINE>
+Ces lapins paresseux passent souvent la journée à dormir et cherchent des monstres à attaquer la nuit. Malgré leur allure pataude, ils bondissent assez vite derrière leur cible et infligent de lourds dégâts sur une large zone.

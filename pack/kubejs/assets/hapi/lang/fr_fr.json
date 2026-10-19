@@ -1,0 +1,6 @@
+{
+  "item.hapi.creature_net": "Filet à créatures",
+  "item.hapi.creature_net.description": "Entité capturée : %s",
+  "item.hapi.creature_net.function": "Permet d'attraper et de déplacer les créatures aquatiques",
+  "item.hapi.creature_net.properties": "Les créatures relâchées deviennent passives et ne disparaissent pas"
+}

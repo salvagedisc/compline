@@ -1,0 +1,9 @@
+{
+  "item.breeze_backport.wind_charge": "Charge de vent",
+  "item.breeze_backport.breeze_spawn_egg": "Œuf d'apparition de Breeze",
+  "entity.ancient_remnants.elderheart": "Cœur ancien",
+  "entity.breeze_backport.breeze": "Breeze",
+  "entity.breeze_backport.wind_charge": "Charge de vent",
+  "entity.breeze_backport.breeze_wind_charge": "Charge de vent de Breeze",
+  "config.ancient_remnants.category.placement_biomes": "Biomes"
+}

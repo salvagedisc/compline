@@ -1,0 +1,14 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le poisson-chat est un poisson léthargique qui vit dans les marais et les rivières. Si ceux des rivières peuvent devenir assez corpulents, les plus gros spécimens ne se trouvent que dans les marais.
+<NEWLINE>
+Se nourrissant au fond de l'eau, le poisson-chat n'est pas difficile. Les petits et moyens poissons-chats aspirent tous les objets qu'ils voient. Les grands, eux, tentent d'avaler toute créature de moins d'un bloc de haut.
+Un petit poisson-chat ne peut stocker que trois piles d'objets dans son ventre, contre neuf pour un moyen. Un grand ne peut avoir qu'une seule créature à la fois dans le ventre.
+Le poisson-chat recrache tout objet ou créature avalé s'il est blessé ou s'il rencontre un cornichon de mer, car il en déteste le goût.
+<NEWLINE>
+Bien qu'il voie mal, la lumière clignotante d'une lanterne aquatique l'attire. On peut s'en servir pour l'attirer dans une zone, avec ou sans objets.
+<NEWLINE>
+Tous les poissons-chats, même les grands, se capturent avec un seau d'eau. Le contenu de leur ventre est conservé : on peut donc transporter des objets ou une créature en mettant un poisson-chat en seau après son repas.
+Un poisson-chat qui a avalé des objets ou qui a été mis en seau ne disparaît pas.

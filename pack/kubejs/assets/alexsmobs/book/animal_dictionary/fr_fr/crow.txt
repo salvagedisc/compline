@@ -1,0 +1,11 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le corbeau est un oiseau bruyant qui vit dans les forêts et les plaines. On le considère comme nuisible, car il tourne souvent autour des champs et abîme les cultures. Une simple citrouille sculptée suffit à éloigner les corbeaux d'un petit champ.
+Ces oiseaux s'envolent généralement dès qu'on s'en approche. Ils ramassent et dévorent tout aliment qui tient dans leur bec.
+<NEWLINE>
+Malgré leur air sombre, les corbeaux peuvent être apprivoisés en leur lançant des graines de citrouille. Un corbeau apprivoisé est une créature très utile aux multiples usages : il peut rester assis, se promener, suivre ou ramasser des objets.
+Un corbeau apprivoisé posé sur une botte de foin regagne lentement de la vie. En mode ramassage, il vole aussi autour de cette botte de foin. Lorsqu'il ramasse un objet dans ce mode, il cherche un conteneur, comme un coffre ou un four, portant un cadre contenant le même objet.
+<NEWLINE>
+Si l'objet du cadre est identique à celui qu'il tient dans son bec, il le dépose dans le conteneur par ce côté. En mode suivi, le corbeau vole autour de son maître et, au bout d'un moment, tente de se percher sur son épaule.
+Il suffit de s'accroupir pour le faire descendre de l'épaule. Quand il défend son maître, le corbeau donne des coups de bec à l'agresseur, trop faibles pour rendre le monstre agressif. Il inflige cependant des dégâts supplémentaires aux morts-vivants.

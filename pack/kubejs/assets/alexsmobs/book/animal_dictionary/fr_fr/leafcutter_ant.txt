@@ -1,0 +1,13 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+La fourmi coupe-feuilles est un minuscule insecte qu'on voit souvent arracher les feuilles des arbres dans les jungles. Elle forme d'immenses colonies comptant jusqu'à vingt fourmis. Il en existe deux formes : les ouvrières, qui récoltent les feuilles et se voient hors de la fourmilière, et les reines, qui n'apparaissent que si l'on piétine une fourmilière.
+La reine est bien plus grande et plus forte qu'une ouvrière, et il n'y en a généralement qu'une par colonie. Lorsqu'une reine est présente, chaque lot de 5 feuilles récoltées a une chance de créer une nouvelle ouvrière, tant que la fourmilière compte moins de 10 fourmis.
+<NEWLINE>
+Sans reine, la fourmilière ne peut pas se repeupler. Ces colonies sont bien plus vastes qu'il n'y paraît : sous le monticule s'étend un réseau de chambres de fourmis à feuilles, de grands blocs dans lesquels les fourmis transforment les feuilles en champignon.
+Ces chambres redeviennent de la terre à la lumière du soleil, mais elles peuvent s'étendre aux blocs de terre voisins quand on les récolte.
+<NEWLINE>
+Ce champignon s'appelle gongélidia, et c'est la seule chose que les fourmis savent cultiver et manger.
+En dehors de son utilité pour les fourmis, il se mange aussi : peu nourrissant, il est en revanche très rassasiant.
+On obtient de la gongélidia en interagissant avec une chambre souterraine couverte de champignon, mais attention : à moins qu'une champilampe ne se trouve à proximité, les fourmis de la colonie deviennent hostiles.
+Donné aux fourmis, le champignon les soigne, et donné à la reine, il augmente la population de la colonie. Donner de la gongélidia à une fourmi apaise aussi toutes les fourmis alentour. Une chambre cassée peut, rarement, lâcher une chrysalide de fourmi coupe-feuilles, qui permet de fonder une nouvelle colonie sur de la terre ou de l'herbe.

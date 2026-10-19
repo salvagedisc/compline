@@ -1,0 +1,9 @@
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+<NEWLINE>
+Le grizzli est un grand mammifère omnivore qui vit dans les forêts. On le trouve souvent accompagné d'un ou deux oursons qui suivent leur parent. Le voyageur ou le chasseur mal préparé doit garder ses distances : neutre de loin, le grizzli devient hostile si l'on s'approche. Il est bien connu pour piller les ruches pleines de miel, qu'il éventre pour se régaler des rayons de miel. Un grizzli qui vient de se rassasier de miel peut être approché sans danger. On pense qu'en lui donnant du saumon après qu'il a mangé du miel, on peut gagner sa confiance, même si peu de gens survivent à une rencontre rapprochée avec ces ours. Ceux qui y parviennent affirment qu'on peut en faire des montures de guerre.
+<NEWLINE>
+Il arrive que le grizzli perde un peu de ses poils. Combinés à une potion de Force, ces poils permettent d'infuser une potion de résistance au recul.
+<NEWLINE>
+Par temps de neige, le pelage de l'ours peut se couvrir de neige, qui s'enlève à la pelle. On peut aussi couvrir un ours de neige en posant une couche de neige sur lui. Cette neige fond si l'ours est dans l'eau, sous la pluie ou dans un biome chaud.
