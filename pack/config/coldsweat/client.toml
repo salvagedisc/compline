@@ -1,0 +1,5 @@
+# Fallow : pas de gouttes d'eau dessinées sur l'écran quand le joueur est mouillé
+# (pluie, sortie de l'eau) ; les gouttes qui tombent du joueur restent.
+# 0 : rien, 1 : particules, 2 : écran, 3 : les deux (défaut de Cold Sweat).
+[Preferences]
+	"Show Water Effect" = 1

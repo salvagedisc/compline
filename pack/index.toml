@@ -5,6 +5,10 @@ file = "config/cameraoverhaul.toml"
 hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
 [[files]]
+file = "config/coldsweat/client.toml"
+hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
+
+[[files]]
 file = "config/defaultoptions-common.toml"
 hash = "45251f5d264398716e4921faa498400b9a796fd6c4a6cf6390000cbaae7958b1"
 
