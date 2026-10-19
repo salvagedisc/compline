@@ -43,6 +43,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Clumps : les orbes d'XP n'existent plus.
 
 ### Modifié
+- Faune de No Man's Land : les remodèles de Mixed Litter et les textures de NML sur les animaux vanilla sont coupés, pour Fresh Animations ; cerf, oie, bar à serpe, tortue et Frienderman n'apparaissent plus, sont retirés du Wildex, et leurs 15 objets n'ont plus de recette ni de place dans EMI ([faune-nml](docs/plan/faune-nml.md)).
 - Monstres vanilla : In Control! refuse leur apparition dans l'Overworld (22 créatures, des zombies aux pillards), biomes de No Man's Land et structures compris ; ils apparaissaient encore au premier test.
 - Enhanced Celestials 6.0.2.6 → Enhanced Celestials 2 (Core 2.0.3.3 + Default Lunar Events 2.0.1.3) : nouveaux paquets Java et nouveau format de données ; `lune.js`, `musique.js` et le module `ciel` du mod `fallow` (0.2.1) portés, lunes de sang retirées au nouveau format, traductions françaises, téléchargement des traductions de la communauté coupé.
 - JEI 19.69.0.456 (bêta) → 19.51.0.418 : depuis la 19.52, JEI envoie le transfert de recette depuis une autre méthode ; le mixin obligatoire d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plantait en entrant dans un monde (rapport de plantage du premier test). 46 textes de JEI traduits en plus.

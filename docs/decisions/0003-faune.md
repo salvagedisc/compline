@@ -21,6 +21,9 @@ Choix de l'utilisateur contre la recommandation initiale (doublons, portage tier
 - les doublons (ours, cerfs, crocodiliens, serpents, oiseaux : une seule version par espèce) ;
 - les créatures d'Alex's Mobs qui cassent la DA (fantaisistes ou comiques).
 
+## No Man's Land (2026-10-19)
+Ses animaux remodelés et retexturés ne vont pas avec Fresh Animations : retour aux animaux vanilla, et ses créatures (cerf, oie, bar à serpe, tortue, Frienderman) sont coupées. Le Compagnon reste. Détail : [faune-nml](../plan/faune-nml.md).
+
 ## Écartés
 - Integrated Mowzie's Mobs : exige Quark, Supplementaries et Amendments (empilement de contenu).
 - Let's Do Wilder Nature : style cubique, bêta, doublon de Naturalist.
