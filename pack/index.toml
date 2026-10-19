@@ -29,6 +29,11 @@ hash = "f3d66527c4f82b44d9409f643332bc15f91b85f033afe147e3d8b421c0ea6d1e"
 metafile = true
 
 [[files]]
+file = "mods/amendments.pw.toml"
+hash = "a3c9b772845b9dab436aa5ba14b9596b314006ced8fbd2a6b0286dc0c70cf220"
+metafile = true
+
+[[files]]
 file = "mods/ancient-remnants.pw.toml"
 hash = "db0001882963da83b811339a87b4ec47ac6644be32a98d6e0a5c5dfa5af25c67"
 metafile = true
