@@ -12,7 +12,8 @@ import net.neoforged.bus.api.IEventBus;
  * L'interrupteur de chaque module est un booléen de {@link FallowConfig}, lu à chaque usage.
  */
 public enum FallowModule {
-    ;
+    /** La lune d'Enhanced Celestials et la brume sous ATMOSPHERICS (client). La lune demande aussi Enhanced Celestials. */
+    CIEL("ciel", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.ciel.CielModule.start(bus), ModIds.ATMOSPHERICS);
 
     private final String id;
     private final Dist side;

@@ -5,7 +5,12 @@
   "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
-  "client": [],
+  "client": [
+    "ciel.BiomeBlendUtilInvoker",
+    "ciel.ClientPacketListenerMixin",
+    "ciel.LevelRendererMixin",
+    "ciel.RenderSystemMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

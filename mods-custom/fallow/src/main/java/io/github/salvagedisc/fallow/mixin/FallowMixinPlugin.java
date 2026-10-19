@@ -17,7 +17,11 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 public final class FallowMixinPlugin implements IMixinConfigPlugin {
     private static final String PACKAGE = "io.github.salvagedisc.fallow.mixin.";
 
-    private static final Map<String, List<String>> REQUIRED = Map.of();
+    private static final Map<String, List<String>> REQUIRED = Map.of(
+            "ciel.LevelRendererMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
+            "ciel.RenderSystemMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
+            "ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS),
+            "ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS));
 
     @Override
     public void onLoad(String mixinPackage) {
