@@ -26,7 +26,8 @@ public final class Fallow {
                 continue;
             }
             if (module.isAvailable()) {
-                LOGGER.info("Module {} chargé ({})", module.id(), String.join(", ", module.requiredMods()));
+                LOGGER.info("Module {} chargé ({})", module.id(),
+                        module.requiredMods().isEmpty() ? "aucun mod requis" : String.join(", ", module.requiredMods()));
                 module.start(modBus);
             } else {
                 LOGGER.info("Module {} ignoré : il lui manque {}", module.id(), String.join(", ", module.missingMods()));
