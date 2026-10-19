@@ -294,6 +294,11 @@ hash = "2863a3b187723e1f69ed2ad2b2c3d834e8442468a1347c80df5b310e243c8753"
 metafile = true
 
 [[files]]
+file = "mods/in-control.pw.toml"
+hash = "8311cf201aa8d3c5d0c0291194f3c76d825591122b7ccf4f2fea08f6b39af526"
+metafile = true
+
+[[files]]
 file = "mods/itemphysic.pw.toml"
 hash = "a970ffa9dabefee6e82a6dc10bb140ff65ee785e1575672ab985f65fb461527f"
 metafile = true
