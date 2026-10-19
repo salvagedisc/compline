@@ -28,6 +28,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Outillage : `npm run sync` rapatrie les mods de l'instance de test, `npm run check-deps` vérifie les dépendances réelles des jars ; CI `build` (export `.mrpack` à chaque push) et `release` (sur tag).
 - Mod custom `fallow` 0.1.0 (`mods-custom/fallow/`, jar dans `pack/mods/`) : module ciel (lune d'Enhanced Celestials visible sous ATMOSPHERICS, cache de brume vidé après un changement de biome) et module sac (le tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed). Non testé en jeu ; CI `build` le compile.
 - Tout en français : jeu en français au premier lancement (Default Options) ; traduction des textes manquants de 94 namespaces de mods (≈25 300 textes) et de leurs livres (dictionnaire d'Alex's Mobs, guide des hamsters, chronique d'Ecliptic Seasons) dans `pack/kubejs/assets/` ; `npm run check-fr` (aussi en CI) refuse un texte sans traduction ou une variable perdue ([traduction](docs/plan/traduction.md)).
+- Idées reprises de Wayfarer, le modpack de l'équipe de No Man's Land ([recherche](docs/plan/recherche/2026-10-19/wayfarer.md)) : Envelope (courrier par pigeons, lettres perdues), traduit en français.
 
 ### Retiré
 - Entity Culling : casse les engins Create Aeronautics et Sable.
@@ -35,3 +36,4 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 ### Modifié
 - Dépôt réorganisé : `README` et `CONTRIBUTING` réécrits, index de la documentation, feuille de route, emplacement `docs/plan/` pour le plan du modpack, `docs/` renommé `docs/conception/`, registre des mods classé par domaine.
 - Branches `test/agriculture`, `test/faune` et `test/structures` fusionnées dans `main`.
+- No Man's Land 1.5.12 → 1.6.1 : outils ancestraux (pioche rituelle, épée du serment, cloche et ciseau en bronze), carreaux lunaires et solaires ; textes nouveaux traduits.

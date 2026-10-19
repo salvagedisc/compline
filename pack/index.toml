@@ -577,6 +577,10 @@ file = "kubejs/assets/entity_texture_features/lang/fr_fr.json"
 hash = "9dd27ce83e1e44e5bd5e14e0d711b0b7019dc2c2e99c2f9696313c66623ccf4b"
 
 [[files]]
+file = "kubejs/assets/envelope/lang/fr_fr.json"
+hash = "529a40c64afae1ca243f828cc69867efa37e87979bba62a5114b501088d5380d"
+
+[[files]]
 file = "kubejs/assets/everycomp/lang/fr_fr.json"
 hash = "4d86720cf9e413fcaaf64883fc4bcf0090466ea5eb1a074bb1998345e94cd9e8"
 
@@ -691,6 +695,14 @@ hash = "186df6047390ca95514608e52c99bd5ad0d0da68e32e1ee55a6112bbdc1db1a4"
 [[files]]
 file = "kubejs/assets/naturalist/lang/fr_fr.json"
 hash = "59a831c3e4c90173c86cab3afa2391a7fdbef75342249cc7686f7377a6265526"
+
+[[files]]
+file = "kubejs/assets/nomansland/lang/fr_fr.json"
+hash = "7242ecc0746377be6930afcdebff26b00af6f7d544d2ec23f6a3e937b733890d"
+
+[[files]]
+file = "kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json"
+hash = "051b1462c7b4007fbd561d6df25c2f778040c668ff32fe03964827b4ab532a1d"
 
 [[files]]
 file = "kubejs/assets/offroad/lang/fr_fr.json"
