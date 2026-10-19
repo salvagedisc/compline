@@ -33,6 +33,10 @@ file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 
 [[files]]
+file = "config/mixed_litter-startup.toml"
+hash = "1a511f4ce66824a8e248d9ca9e97daa9bb76a99396898ac09b7b2050a2dff4e4"
+
+[[files]]
 file = "config/nomansland-client.toml"
 hash = "f153ecc79fd161e431f4d17b7ee718df4b0c46fd46bdfb58bd7acd494b127c1b"
 
@@ -54,7 +58,7 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 
 [[files]]
 file = "config/wildex/wildex-common.toml"
-hash = "9cf236122b8f7e75db4c1c263424354bb3cbf4403252cc698977b15bbbc561f8"
+hash = "c9629b843d595f510c6a2c468c00d69d924d993d6fda736106add1f100c888fd"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -901,6 +905,10 @@ file = "kubejs/assets/zeta/lang/fr_fr.json"
 hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
+file = "kubejs/client_scripts/faune_nml.js"
+hash = "57adc9c58a0b58df9ca60ac70ff5c56febde3b9e4044b1c105131dcb8cb98d68"
+
+[[files]]
 file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
@@ -939,6 +947,102 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/bee.json"
+hash = "734f317c3b200a57c2b43bf4a759ad9a5c88126f90d62658448417302cabd601"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/cat.json"
+hash = "f2ee62120120c8dc9d71ae782e983167755b38dbfb2c03bd4a5d43ef5f6c2eb5"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/cod.json"
+hash = "f3fed776560a55a1fa1abfc1cda5ab407fedca443b0c155f8fa4168f6af9e9e2"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/dolphin.json"
+hash = "2bf5e7a52e7d471ea67e1bd641d5f132a5addec4ad6dabb3e748c591a7ba7c7d"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/donkey.json"
+hash = "92acfba1a05c18107bf27de4008c1bd38c8bee2159917623a4d158663006651a"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/fox.json"
+hash = "2404dd1837087b14123ae0aaf8aa5ae52e5e090bcf96b89216cb197b7a7c08f9"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/goat.json"
+hash = "55e129de54345d9a597724fdc3bc711c8f922fd4b4c8dcc2b4fed61fd3735a7f"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/husk.json"
+hash = "c5d514f5e5b55cd7455e36deb601fdf9d3424b609e5c691e811927c2711de7a9"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/salmon.json"
+hash = "c08c27235cc8e7c7f395fb12c75dcc3e4f65cc7ba4b0c5b6a1fab83d47ebb611"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/slime.json"
+hash = "bc5036748e143585eba220277965e52b9f465e952cb4d7268c5798f6ff13703c"
+
+[[files]]
+file = "kubejs/data/nomansland/mixed_litter/variant_groups/turtle.json"
+hash = "0a3edd073ed0522063acd30c4cbffe27da4f05efd106aea8259bf3c2ffd287d9"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/add_feature_addition/has_regular_tortoise_burrows_tag_features.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/add_underground/tortoise_burrows/tortoise_burrow_lush.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/add_spawns_to_swamps.json"
+hash = "e25530681b7e473be35184b230bbcea773ddb02497b3fa6af1d0f3282d7ac979"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/deer/spawn_deer_forest.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/deer/spawn_deer_taiga.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/goose/spawn_goose_river.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/goose/spawn_goose_swamp.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tortoise_common.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/neoforge/biome_modifier/spawns/tortoise/spawn_tortoise_rare.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_golden_wolves.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_mud_frogs.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_timber_wolves.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/server_scripts/faune_nml.js"
+hash = "9a58d8cb8223b8f0f8438b30c9663f60209ba8756bf27be1d2bdf58be35fb52d"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"

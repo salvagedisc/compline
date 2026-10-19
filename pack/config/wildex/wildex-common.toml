@@ -4,3 +4,8 @@
 	#Grant XP for newly discovered Wildex entries when they are marked as viewed.
 	# Fallow : faux (défaut : vrai). La récompense d'une découverte viendra du zoo.
 	newEntryRewardsXp = false
+
+[wildexList]
+	#Entries to exclude from Wildex.
+	# Fallow : créatures de No Man's Land retirées du monde (docs/plan/faune-nml.md).
+	excludedModIds = ["nomansland:deer", "nomansland:goose", "nomansland:billhook_bass", "nomansland:tortoise", "nomansland:frienderman"]

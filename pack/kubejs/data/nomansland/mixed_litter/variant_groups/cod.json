@@ -1,0 +1,11 @@
+{
+  "conditions": {
+    "unobtainable": true,
+    "entity_predicate": {
+      "type": "cod"
+    }
+  },
+  "exclusive": true,
+  "selection": "weighted",
+  "conflicts": "mixed_litter:default"
+}
