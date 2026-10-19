@@ -189,6 +189,11 @@ hash = "895a8abebb82f5cd662e71f765b0d1ae8e3bf5e9c7a1bff3270f4fa329cab0cd"
 metafile = true
 
 [[files]]
+file = "mods/handcrafted.pw.toml"
+hash = "0004feab868f7b873c12db05aae0d0dac6c87b497490b48bb66480e7c8d0f340"
+metafile = true
+
+[[files]]
 file = "mods/hybrid-api.pw.toml"
 hash = "6e317343ea37f9842b317f0440ba5f7ef71a24cfb6c7c3f243f63d00fd5782c3"
 metafile = true
