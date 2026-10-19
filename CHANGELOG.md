@@ -39,7 +39,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Rendu sans shaders : lumière colorée des feux, des âmes et du clair de lune (Polytone), texture de lune dans le style du soleil d'ATMOSPHERICS, Contraption Lights, Wakes Reforged, Puddles & Floods, Rainbows, Better Clouds ; graphismes « Détaillés » au premier lancement ([fallow-ambiance](docs/plan/fallow-ambiance.md)).
 - Gestes en vue subjective : Punchy! 2.8g, réglé sobre, avec EMF réglé pour qu'il soit seul à animer le bras.
 - Lamb Lanterns : une lanterne portée à la hanche éclaire.
-- Interface : packs Dark Coffee GUI et Modded Coffee GUI, actifs au premier lancement ; pack maison `fallow-interface` qui recolore dans le même ton les écrans de Kaleidoscope, Overgeared et Wildex ([page](docs/plan/fallow-interface.md)).
+- Interface : packs Dark Coffee GUI et Modded Coffee GUI, actifs au premier lancement.
 
 ### Retiré
 - Untitled Duck Mod (choix de l'équipe) : le canard de Naturalist revient, et la réplique d'offrande de l'oie de No Man's Land vise ce canard.

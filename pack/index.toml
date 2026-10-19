@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "f1ab90dbaee229aeebd58c6c78ecc0952b4a81692af78ffe32b51524717d10a1"
+hash = "40533c295a85f80ebb1485264f4b07655614ab9e2b802e23f899de779c50f418"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
@@ -2132,110 +2132,6 @@ hash = "3c2c019418285ea52bc74666acc600d8577351cb89a1192ec3416a8dbfbc19e1"
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
 hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
-
-[[files]]
-file = "resourcepacks/fallow-interface/CREDITS.md"
-hash = "abe0e6c8cb13d53ef88f517e94c45cd87cb8993e3d3f1d11bd1858ebafce25b8"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_compat/textures/gui/shawarma_spit.png"
-hash = "ccf16945989155fb6f1d58b66a37b934f174459f71cd7bb75cc6040ce2115fd8"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/bamboo_tray.png"
-hash = "3d8b074d5ad69c24f79db984b78e25a900aced03689e40c5b92229bc47ad8a28"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/chopping_board.png"
-hash = "476659995dfee5831f3a1cb16f608e8d189c1400e4801b3e1b47197c960c156b"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/millstone.png"
-hash = "ad49eb781954a0824380acaa4dc2df4ca10b2d45c64cd014dbca883bbfd737c7"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/pot.png"
-hash = "d4c453bd39e6f2715ec8bbc4466777228f64c19daeabf1d4b33e10fbf9566158"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/steamer.png"
-hash = "c83ed866157645bac47c7015288f0d000cac125e65125cbdf536ef9361bd3449"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/stockpot.png"
-hash = "67ba336990d57c74d7b3cd302b22eba5d15d236ff743300702f580896863f9ba"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/teapot.png"
-hash = "7e5a308452f54dc034f5ef330d7ace1f000c4ad72fe0380305d83691a2be71c7"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/blueprint_workbench.png"
-hash = "af8a6d15dcf8f52a32929cdf8eaf4963aa33b6b79ea807ee96b72827aa5563bc"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/brick_alloy_furnace.png"
-hash = "14f0b27f2a5c9bfdae7c36cef4c724524bc00f2b73c9330af7dea1dad17f0418"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/cast_furnace.png"
-hash = "ec50e123dae657707c885d1165a74b7ce3d9f6063a4b9d7c8bb90487a1389dd0"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/fletching_table.png"
-hash = "e6ffb0681a32a556ec2490450a5de95bc0b2c94b5e37e2adc78f5244f8a3206d"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/nether_alloy_furnace.png"
-hash = "6d53fae955f70d0d66c96bd7b28300e732c20680c21da0ceb2767735bf869608"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/rock_knapping_gui.png"
-hash = "6785dca0326e252fc403ec9c051cc7cc6be585f036983a3fd938cfd30c015c78"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil.png"
-hash = "8a381743c13ba8f9eb1ac9a72ee634cb4da9dd41aba9f31fce2056551d5c5084"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil_jei.png"
-hash = "62ae4108cb97ead1612526c504a8393f44a255fd15c59572f9f9a8cef827bdca"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil_minigame.png"
-hash = "b43db132bf7331b5e6debe85333dd87eab8847d985ad24f2cc83fe50312b2d7a"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/sprites/recipe_book/anvil_disabled.png"
-hash = "d778a680f1210e0a7af96f5b314d9fa41bfc07300ef01c9b13fb7c26366c8b8f"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/sprites/recipe_book/anvil_disabled_highlighted.png"
-hash = "4c5a29c48c3359e9f3eb1f861598f1dfe42a710d169e4eaaaeefefe13354db9b"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/sprites/recipe_book/anvil_enabled.png"
-hash = "e3669dbc72bb97a46ab5c094ec7eb5106bb51e4fbfe737ca73c9d0b13a0b9a0d"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/sprites/recipe_book/anvil_enabled_highlighted.png"
-hash = "219a10637587e1b01706847495a597076889e316247560d306d32dffcc4a31c9"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/stone_smithing_anvil.png"
-hash = "4a8f612bf31eaaa2eabaeed6ac83bb0d5e49fac3c56594d6483066a779e345d2"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/wildex/textures/gui/trophy_bg_red.png"
-hash = "dd1ce5fda44ed0f3f47a2b1545e8ad1a0eab99724ee6dac0d4af87ee6614e9f9"
-
-[[files]]
-file = "resourcepacks/fallow-interface/assets/wildex/textures/gui/wildex_vintage.png"
-hash = "3888155f7a32b160302728cccf7c55da449442b9fcfdd97e00da1a2e2d20d200"
-
-[[files]]
-file = "resourcepacks/fallow-interface/pack.mcmeta"
-hash = "a20a04d2645b758cbc5bca3bb5a7e2b0703e9879b933994c817e367babee4220"
 
 [[files]]
 file = "resourcepacks/fresh-animations-details.pw.toml"

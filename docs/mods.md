@@ -183,7 +183,6 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version qui n'écrase pas la musique vanilla) | Trois morceaux du paquet musical (CC-BY-NC-SA 4.0, [musique](plan/musique.md)) |
 | Dark Coffee GUI | `dark-coffe-gui` | ✅ | Interface vanilla en brun café |
 | Modded Coffee GUI | `modded-coffee-gui` | ✅ | Le même style pour EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
-| `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Écrans de Kaleidoscope, Overgeared et Wildex recolorés comme Dark Coffee ([crédits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs et lumières Polytone, texture de lune, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Bibliothèques
@@ -210,6 +209,7 @@ Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, 
 | More Culling, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Moteurs de lumière ou de physique risqués avec Sodium 0.8 et Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Retirés par l'équipe le 2026-10-18 |
+| `fallow-interface` | Écrans de Kaleidoscope, Overgeared et Wildex recolorés ; retiré le 2026-10-19, une version aux éléments de Dark Coffee est proposée à son auteur ([page](plan/fallow-interface.md)) |
 | Untitled Duck Mod | Retiré par l'équipe le 2026-10-19 ; le canard de Naturalist le remplace ([faune-nml](plan/faune-nml.md)) |
 | Comforts | Doublon du sac de couchage de Traveler's Backpack |
 | ParCool! | Désactivé à la demande de l'équipe |
