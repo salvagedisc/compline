@@ -22,7 +22,6 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Enhanced Celestials | `enhanced-celestials` | ✅ | CS | Lunes rares ; lunes de sang retirées, une seule lune à la fois avec la Lune Amie ([lune-amie](plan/lune-amie.md)) |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Exploration partagée pour l'atlas |
-| AA4 Atlas | `aa4-atlas` | ✅ | CS | L'atlas devient un objet qu'on porte |
 | Icy's Better Horses | `icys-better-horses` | ✅ (monter en 2.1.4) | CS | Chevaux, races, lien, charrettes |
 
 ## Objectifs longs
@@ -165,7 +164,7 @@ Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrin
 | Neruina | `neruina` | ➕ | CS | Évite qu'une entité bloquée ne fasse planter le monde |
 | Simple Backups | `simple-backups` | ➕ | CS | Sauvegardes (bêta) |
 | Crash Assistant | `crash-assistant` | ➕ | C | Aide à lire les plantages |
-| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Font tourner Antique Atlas, Surveyor et AA4 Atlas (bêta, sous surveillance) |
+| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Font tourner Antique Atlas et Surveyor (bêta, sous surveillance) |
 
 ## Packs de ressources
 
@@ -191,6 +190,7 @@ Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, 
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Retirés par l'équipe le 2026-10-19 |
 | FallingTree, ItemPhysic Lite | Remplacés par HT's TreeChop et ItemPhysic (choix de l'équipe le 2026-10-19) |
 | Entity Culling | Casse les engins Aeronautics ; retiré le 2026-10-19 |
+| AA4 Atlas | Fait planter le jeu à l'ouverture de l'atlas avec Antique Atlas 3 (`AtlasScreen.prepareToOpen()` ne renvoie plus l'écran) ; retiré le 2026-10-19, l'atlas s'ouvre à la touche |
 | Clumps | Regroupait les orbes d'XP, qui n'existent plus ([0009](decisions/0009-xp.md)) ; retiré le 2026-10-19 |
 | Freeze It and Heat It | Retiré par l'équipe le 2026-10-18 : pas de conservation de la nourriture |
 | Easy Anvils | Remplace l'enclume dont Overgeared a besoin ([12](plan/12-verification.md)) |

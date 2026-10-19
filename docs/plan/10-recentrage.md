@@ -77,7 +77,7 @@ Brouillons : `startup_scripts/clairieres.js`, `server_scripts/clairieres.js`, `d
 | **Le bestiaire** | Découvrir chaque espèce à la longue-vue ou en la **photographiant** avec Exposure. Un socle affiche l'hologramme de chaque espèce découverte : c'est la vitrine du zoo | **Wildex Bestiary** |
 | **Les clairières** | Repousser la brume autour de la base, puis des avant-postes, palier par palier | Script Fallow |
 | **Le réseau** | Voie ferrée entre les clairières, puis un aérodrome | Create, Steam 'n' Rails, Create Aeronautics |
-| **L'atlas** | Une carte qui se dessine en marchant, sans coordonnées | Antique Atlas 4, AA4 Atlas |
+| **L'atlas** | Une carte qui se dessine en marchant, sans coordonnées | Antique Atlas 4 (AA4 Atlas retiré le 2026-10-19, voir le [registre](../mods.md)) |
 | **La maison** | Une base meublée, couverte de vrais toits, dans le bois de la région | Handcrafted, Macaw's, Twigs, Every Compat (10.6) |
 | **Les lignées** | Des chevaux élevés sur des générations | Icy's Better Horses |
 
@@ -99,7 +99,7 @@ Les 46 mods de `pack/mods/` restent, faune et compagnons compris. Les règles de
 |---|---|
 | **Traveler's Backpack** | Le sac d'expédition. Il a son **propre sac de couchage** à déployer, ce qui rend Comforts inutile (retiré) |
 | **Wildex Bestiary** | Le bestiaire, colonne vertébrale du zoo |
-| **AA4 Atlas** | L'atlas devient un objet qu'on porte et qu'on peut perdre |
+| ~~**AA4 Atlas**~~ | Retiré le 2026-10-19 : incompatible avec Antique Atlas 3, faisait planter le jeu |
 | **Exposure** | La photo argentique : garder la trace d'un lieu, découvrir une espèce pour le bestiaire |
 | **Enhanced Celestials** | Lunes rares, dont la lune blanche |
 | **Lootr** | Chaque joueur trouve les coffres pleins ; aucun contenu |

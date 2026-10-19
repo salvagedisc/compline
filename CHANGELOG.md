@@ -38,6 +38,7 @@ Aucune version n'a encore été publiée : tout ce qui suit formera la `0.1.0`.
 - Musique : True Adaptive Music et le paquet `fallow` (`pack/trueadaptivemusicpacks/fallow/`) : 11 situations (brume, clairière, saisons, lune, dirigeable, sous terre, monument…), longs silences, muet pendant les boss ; 29 morceaux choisis par l'équipe : vanilla et No Man's Land, pack de ressources Supernova, 10 morceaux libres de Scott Buckley, Kevin MacLeod et HoliznaCC0 avec leurs crédits ; script `musique.js`, tag `fallow:brumeux`, interface de TAM en français, paquet actif et musique à 40 % au premier lancement ([0010](docs/decisions/0010-musique.md)).
 
 ### Retiré
+- AA4 Atlas : compilé pour Antique Atlas 2, il appelait `AtlasScreen.prepareToOpen()` avec l'ancien type de retour et faisait planter le jeu à l'ouverture de l'atlas (rapport de plantage du test). L'atlas s'ouvre à la touche d'Antique Atlas.
 - Entity Culling : casse les engins Create Aeronautics et Sable.
 - Clumps : les orbes d'XP n'existent plus.
 
