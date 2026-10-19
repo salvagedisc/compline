@@ -18,7 +18,7 @@ hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
 
 [[files]]
 file = "config/defaultoptions/options.txt"
-hash = "4fcd0f1b5ab8db53bc35261934543bfe55f191bb51c23c52d53db2384fae0637"
+hash = "90e4475dd55830d818d487e39094c01af1c31a085209694ba24457cb27bcf616"
 
 [[files]]
 file = "config/enhancedcelestials2core/translations.json"
