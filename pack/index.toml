@@ -10,7 +10,7 @@ hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "45251f5d264398716e4921faa498400b9a796fd6c4a6cf6390000cbaae7958b1"
+hash = "12f0dea72cf4fcac0d19e09cd3c27da76a341aadccac07dceb228eeb7b01c115"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
