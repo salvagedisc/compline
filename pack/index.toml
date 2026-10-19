@@ -279,6 +279,11 @@ hash = "a970ffa9dabefee6e82a6dc10bb140ff65ee785e1575672ab985f65fb461527f"
 metafile = true
 
 [[files]]
+file = "mods/jei.pw.toml"
+hash = "f81636b1fdf85e3291b5fd4d3e6754747793fd0e65c1d0537dc8f892b5cdcda1"
+metafile = true
+
+[[files]]
 file = "mods/kaleidoscope-compat.pw.toml"
 hash = "07e6db970b33163df85b1cc1259ddd54c1ea63671087bbc15486a07bd8ea7ead"
 metafile = true
@@ -346,6 +351,11 @@ metafile = true
 [[files]]
 file = "mods/mcqoy.pw.toml"
 hash = "604b7674b96d10b2c9f03e47a91ec50b448e8193de56f36fca93b5ff0f3132f6"
+metafile = true
+
+[[files]]
+file = "mods/mezzconfig.pw.toml"
+hash = "cf5d87f046590b99d92096a79f6ea2f456290ba5d423c256f06674d2d10a1592"
 metafile = true
 
 [[files]]
