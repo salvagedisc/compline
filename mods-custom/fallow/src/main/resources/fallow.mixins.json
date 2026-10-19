@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.salvagedisc.fallow.mixin",
+  "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "ciel.BiomeBlendUtilInvoker",
+    "ciel.ClientPacketListenerMixin",
+    "ciel.LevelRendererMixin",
+    "ciel.RenderSystemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

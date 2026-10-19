@@ -2,3 +2,6 @@ dist/
 node_modules/
 *.mrpack
 .cache/
+mods-custom/fallow/build/
+mods-custom/fallow/run/
+.gradle/
