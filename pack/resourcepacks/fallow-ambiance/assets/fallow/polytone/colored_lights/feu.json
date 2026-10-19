@@ -1,0 +1,16 @@
+{
+  "target_type": "block",
+  "targets": [
+    "minecraft:torch",
+    "minecraft:wall_torch",
+    "minecraft:lantern",
+    "minecraft:campfire",
+    "minecraft:fire",
+    "#minecraft:candles",
+    "nomansland:sconce_torch",
+    "nomansland:sconce_wall_torch"
+  ],
+  "colored_light": {
+    "color": "#ffb36b"
+  }
+}

@@ -1847,6 +1847,18 @@ file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/van
 hash = "cf456c0a78cc30df14ec6327a911c05e701119f1b138db1fae0e652a89c6cee3"
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/colored_lights/ames.json"
+hash = "639f5e1d60fab5c0483bd89e5a819e8fa30114f979bde937f486d4f2c1ad4013"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/colored_lights/clair_de_lune.json"
+hash = "c86781c3fb2cea3cfb08ebb451d1e54a8958de65d261442e15e0c3eafd66aaaf"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/colored_lights/feu.json"
+hash = "c531710b418f7cfcd874712920ed2276d743c6eee0029e5fd814068741a4686c"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"
 hash = "fb5a073057ae7b87e374c82c11b2089c059a3ca9c04f93b96addc397c1ea5d54"
 
