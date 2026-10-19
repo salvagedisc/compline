@@ -1,8 +1,24 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/cameraoverhaul.toml"
+hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
+
+[[files]]
+file = "config/defaultoptions-common.toml"
+hash = "9cde89f32542b401d450af04c71e1785dd254a990d336c9106d237f7d945dd91"
+
+[[files]]
+file = "config/jei/jei-client.ini"
+hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
+
+[[files]]
 file = "config/quark-common.toml"
 hash = "bbde550cb873dcabcbb83097b5243f2c335ec0a45d0230547006cad587ae99e6"
+
+[[files]]
+file = "config/shouldersurfing-client.toml"
+hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
 
 [[files]]
 file = "config/supplementaries-common.toml"
