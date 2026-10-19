@@ -593,6 +593,14 @@ file = "kubejs/assets/emi/lang/fr_fr.json"
 hash = "4d9d0f283b38c4a03922ffb20971b0cccd2f28d45413230de0b4e1a00b3aec5b"
 
 [[files]]
+file = "kubejs/assets/enhancedcelestials2core/lang/fr_fr.json"
+hash = "b2f2cfe07229cf80ebfefba13ae958e508409cf59b49bdf79ba06d902ab3a3eb"
+
+[[files]]
+file = "kubejs/assets/enhancedcelestials2defaultlunarevents/lang/fr_fr.json"
+hash = "9804d919da655e1042d0ead1416fc36909d559dba308ada4c987d3fdbbc02fef"
+
+[[files]]
 file = "kubejs/assets/entity_model_features/lang/fr_fr.json"
 hash = "88b99bab3cc367785c3385c9aa17075d105eb8a97383a3f008ac35258e6f48fd"
 
