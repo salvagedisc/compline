@@ -15,3 +15,6 @@ trim_trailing_whitespace = false
 [pack/**]
 insert_final_newline = unset
 trim_trailing_whitespace = unset
+
+[*.{java,gradle}]
+indent_size = 4

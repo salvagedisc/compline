@@ -4,3 +4,4 @@
 *.png binary
 # packwiz hashes files byte-for-byte: never convert line endings inside the pack.
 pack/** -text
+*.bat text eol=crlf
