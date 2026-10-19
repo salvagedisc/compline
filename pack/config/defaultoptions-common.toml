@@ -2,7 +2,7 @@
 # à chaque mise à jour du pack, une seule fois chacun). Du moins prioritaire au
 # plus prioritaire : les extensions de Fresh Animations passent au-dessus de lui,
 # Dark Coffee habille l'interface vanilla et Modded Coffee celle des mods,
-# fallow-interface (dossier du pack) les écrans de Kaleidoscope, Overgeared et Wildex,
+# Normal Hunger (Dark Coffee Extras) remet une barre de faim à la place des grains de café,
 # Supernova apporte trois morceaux du paquet musical, et fallow-ambiance
 # (dossier du pack) passe en dernier, au-dessus de tous.
 # Default Options ne sélectionne que les packs de cette liste : les ressources des
@@ -21,7 +21,7 @@ defaultResourcePacks = [
 	"file/FA+Player-v1.1.zip",
 	"file/CoffeeGUI_1.20.2-26.2_release_v2.2.1.zip",
 	"file/ModdedCoffeeGUI_Release_v1.16.0.zip",
-	"file/fallow-interface",
+	"file/CoffeeGUI_NormalHunger.zip",
 	"file/supernova-pack.zip",
 	"file/fallow-ambiance"
 ]

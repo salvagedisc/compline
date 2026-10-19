@@ -69,9 +69,11 @@ Décisions anciennes du plan, confirmées par l'équipe le 2026-10-19 :
 
 Même méthode que pour les doublons : `naturalist-server.toml`, `pack/kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (serveur et client, 22 objets dont le fouet en tendon, la table de transmutation et la couronne de wildfire, qui ne se fabriquent qu'à partir d'objets de ces créatures), exclusion du Wildex. Les succès d'Alex's Mobs liés à ces créatures restent dans leur onglet sans pouvoir s'obtenir : certains sont parents d'autres succès encore possibles.
 
-## À trancher
+## Biomes d'Hybrid Aquatic (2026-10-19)
 
-- Les biomes d'Hybrid Aquatic sont encore actifs (leur coupe est prévue au 12.1). Ses 34 espèces réservées à ces biomes en dépendent.
+Ils fonctionnent avec NML : comme lui, Hybrid Aquatic les place par Biolith. Le 12.1 voulait les couper au nom de la décision 0003 (pas de biomes qui changent le visage du monde). Décision de l'équipe : on garde ses 13 autres biomes, presque tous sous l'eau (récifs, fosses, herbiers, prairie rouge, océan chaud profond, flaques de marée, grottes sulfureuses), avec les 34 espèces qui n'apparaissent que là, et on coupe seulement la **rivière tropicale**, qui remplaçait une partie des rivières vanilla, jusque dans les taïgas.
+
+`pack/config/hybrid_aquatic.json` : `generateTropicalRiver = false`. Le mod lit ce fichier par un codec qui exige tous les champs et la version de données 8 (sinon il le sauvegarde et le remplace par ses valeurs par défaut) : le fichier est donc complet, avec les valeurs par défaut lues dans le jar 1.7.3. `spawn_configuration` est vide : la liste ne sert qu'à la génération des données du mod, pas en jeu. À chaque mise à jour du mod, vérifier `data_version`.
 
 ## Tests en jeu
 
@@ -88,3 +90,4 @@ Sur un monde neuf.
 | D7 | Wildex | Aucune entrée des créatures coupées |
 | D8 | Homard d'Hybrid Aquatic | Texture correcte (la carte de teintes n'a pas pu être rendue hors du jeu) |
 | D9 | Biomes enneigés, forêts sombres, Nether | Ni iceologer, ni illusioner, ni wildfire, ni leurs structures ; ni Murmur, Farseer, Skelewag, mouche ou cafard ; pas de mammouth |
+| D10 | `/locate biome hybrid_aquatic:tropical_river` ; `/locate biome hybrid_aquatic:coral_reef` | Introuvable ; trouvé |

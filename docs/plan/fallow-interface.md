@@ -2,6 +2,8 @@
 
 Demande de l'équipe du 2026-10-19 : adapter le ton de Kaleidoscope, Overgeared et Wildex à Dark Coffee GUI, qu'aucun pack ne couvre. Formats et couleurs lus dans les jars et les textures ; **rien n'a été vu en jeu.**
 
+> **Retiré du pack le 2026-10-19.** Ni la version recolorée ni celle aux éléments dessinés par Fallow n'ont convaincu l'équipe. Une version faite avec les éléments mêmes de Dark Coffee et Modded Coffee est proposée à leur auteur (RestlessPip, par les issues GitHub de `darkcoffeegui`) : Dark Coffee étant « tous droits réservés », elle n'entrera dans le pack que s'il l'intègre à Modded Coffee GUI ou nous autorise à la distribuer. En attendant, ces écrans gardent leur gris d'origine. La suite de cette page décrit la version retirée ; les licences et les limites restent valables.
+
 ## Ce qu'il contient
 
 `pack/resourcepacks/fallow-interface/`, 24 textures, mêmes tailles et même transparence que les originaux :

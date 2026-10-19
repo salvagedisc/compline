@@ -1,0 +1,13 @@
+name = "Dark Coffee GUI - Extras"
+filename = "CoffeeGUI_NormalHunger.zip"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/Q1JrQJtu/versions/8TfpwKSE/CoffeeGUI_NormalHunger.zip"
+hash-format = "sha512"
+hash = "93e6b05bc737a641e541d4962bb07cf9ff05911b70b32bf942385d4a6eae56c1e9d7ebd6db190b5b064a85520015860b293fb707d8efa6eed393dd7fb35e01ba"
+
+[update]
+[update.modrinth]
+mod-id = "Q1JrQJtu"
+version = "8TfpwKSE"

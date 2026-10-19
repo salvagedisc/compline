@@ -1,0 +1,27 @@
+{
+  "data_version": 8,
+  "enable_wandering_trader_trades": true,
+  "enable_villager_trades": true,
+  "add_fishing_loot": true,
+  "biomes": {
+    "enableBiomes": true,
+    "generateDeepWarmOcaen": true,
+    "generateDeepCoralReef": true,
+    "generateRedMeadow": true,
+    "generateSeagrassBed": true,
+    "generateTropicalRiver": false,
+    "generateTidePools": true,
+    "generateSulfuricCave": true
+  },
+  "worldgen_features": {
+    "generateFloatingSargassum": true,
+    "generateSargassum": true,
+    "generateBullKelp": true,
+    "generateDelesseria": true,
+    "generateRiverPlants": true,
+    "generateThermalVents": true,
+    "generateBrinePools": true,
+    "generateMounds": true
+  },
+  "spawn_configuration": []
+}
