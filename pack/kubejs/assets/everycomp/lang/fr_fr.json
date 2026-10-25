@@ -1177,6 +1177,8 @@
   "block_type.rechiseled.planks_wavy_stairs_connecting": "Escalier de planches ondulées en %s",
   "block_type.rechiseled.planks_woven_stairs": "Escalier de planches tressées en %s",
   "block_type.rechiseled.planks_woven_stairs_connecting": "Escalier de planches tressées en %s",
+  "_comment-missing_blocks": "───────────────────────────── Legends' Missing Blocks ─────────────────────────────",
+  "block_type.missing_blocks.carved": "Bois sculpté en %s",
   "wood_type.nomansland.maple": "érable",
   "wood_type.nomansland.pine": "pin",
   "wood_type.nomansland.walnut": "noyer",
