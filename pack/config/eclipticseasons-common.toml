@@ -1,0 +1,10 @@
+[Core]
+	# AGRICULTURE only: SURVIVAL adds a second temperature system on top of Cold Sweat.
+	SeasonalSimulationLevel = "AGRICULTURE"
+
+[Season]
+	LastingDaysOfEachTerm = 7
+	EnableInform = false
+
+[Temperature]
+	HeatStroke = false
