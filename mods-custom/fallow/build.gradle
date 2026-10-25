@@ -58,6 +58,19 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    // Bibliothèques que Create embarque (jarjar), nécessaires pour compiler contre ses classes
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Create'
+                url = 'https://maven.createmod.net'
+            }
+        }
+        filter {
+            includeGroup 'net.createmod.ponder'
+            includeGroup 'dev.engine-room.flywheel'
+        }
+    }
 }
 
 // Coordonnées Modrinth d'un mod du pack : le slug est le nom du fichier pack/mods/<slug>.pw.toml,
@@ -86,6 +99,12 @@ dependencies {
 
     // Module horizon
     compileOnly modrinth('distanthorizons')
+
+    // Module dissipateur
+    compileOnly modrinth('create')
+    // Versions embarquées par Create 6.0.10 (META-INF/jarjar/metadata.json)
+    compileOnly('net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1') { transitive = false }
+    compileOnly('dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6') { transitive = false }
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {

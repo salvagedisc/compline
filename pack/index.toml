@@ -537,6 +537,10 @@ file = "kubejs/assets/antique_atlas/lang/fr_fr.json"
 hash = "2acb044ab7aec71685f05cbdd969cda3eff0404530fb45b2965fb9bbcd4b73a5"
 
 [[files]]
+file = "kubejs/assets/antique_transport/lang/fr_fr.json"
+hash = "c22abc7d34f3a11e0cfde59f1ad8f271925bca41b8a59bb7b397be9e4949647f"
+
+[[files]]
 file = "kubejs/assets/apollib/lang/fr_fr.json"
 hash = "8ce63bf51348702706179e292aa7141e00953dc93049cc45ccdd551df637050d"
 
@@ -593,6 +597,10 @@ file = "kubejs/assets/cold_sweat/lang/fr_fr.json"
 hash = "95d7a62bd7c03d2882b745ac4d4967222e4dbd8a3f9e9209b018f290a90a4c62"
 
 [[files]]
+file = "kubejs/assets/coldsweat_altitude/lang/fr_fr.json"
+hash = "dc93517ec0ff6b567c0a55bb8fe90c702ea6baaf706d85503e7cc9d32791ed1d"
+
+[[files]]
 file = "kubejs/assets/companion/lang/fr_fr.json"
 hash = "89002cecb184611e4e428a3b6e30d0facc78486573530d3477145c10cc4ff321"
 
@@ -611,6 +619,10 @@ hash = "d516172c328be7fd7b025934e4aa08948afbf5f3489a059a211a272e1aad4e15"
 [[files]]
 file = "kubejs/assets/create/lang/fr_fr.json"
 hash = "b5943a8d788c14a0a4ba8cebf1f42fec66d03f150ca07415939026128a1e99f4"
+
+[[files]]
+file = "kubejs/assets/create_aeronautics_automated_logistics/lang/fr_fr.json"
+hash = "b335184bd6a548d60ffd38c6cbeef150c9bc83b706bc2e2d776624d1906f0913"
 
 [[files]]
 file = "kubejs/assets/creativecore/lang/fr_fr.json"
@@ -707,6 +719,10 @@ hash = "0935d2eaf4615e0e5b26c625b93dc5aa574219ec774c6f368ba364d63fae12bc"
 [[files]]
 file = "kubejs/assets/exposure/lang/fr_fr.json"
 hash = "e83b2dad45cfc64bb620c1fcca3e77d63d979b1149504ce46668d5824aa56e5a"
+
+[[files]]
+file = "kubejs/assets/exposure_space/lang/fr_fr.json"
+hash = "b5f2eb727df864fea1b6dcfe5406797e3c43a978143bcb1ee48e72b6b3a36b4c"
 
 [[files]]
 file = "kubejs/assets/fabric-convention-tags-v2/lang/fr_fr.json"
@@ -907,6 +923,10 @@ hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
 [[files]]
 file = "kubejs/assets/sable/lang/fr_fr.json"
 hash = "cf5a6666f36aead1a480809375c301ea25e2a6c9569cce5bf04954502409c581"
+
+[[files]]
+file = "kubejs/assets/sablephysicscompat/lang/fr_fr.json"
+hash = "e6e82b9957d5c4004a6edd1c1fb9e223ae24afd4194033f4993315fb9e49499e"
 
 [[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
@@ -1641,8 +1661,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.3.0.jar"
-hash = "54a60b83897947beec2a670353f1e6d0a95dd8dd10019dfc230809a5eafee9f3"
+file = "mods/fallow-0.4.0.jar"
+hash = "cc0dedc93a824d25434c8ed71116106779ffb2c3195e6246176a89c34d3e20c8"
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"

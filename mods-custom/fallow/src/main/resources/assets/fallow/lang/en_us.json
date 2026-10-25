@@ -1,0 +1,14 @@
+{
+  "block.fallow.feu_de_veille": "Vigil Fire",
+  "block.fallow.lanterne_de_clairiere": "Clearing Lantern",
+  "block.fallow.dissipateur": "Dissipator",
+  "tooltip.fallow.clairiere.rayon": "Lifts the mist for good within %s blocks once placed",
+  "tooltip.fallow.dissipateur.usage": "Turned at 32 RPM or more for ten seconds, lifts the mist for good within %s blocks",
+  "tooltip.fallow.dissipateur.charge": "Lifting the mist: %s%%",
+  "tooltip.fallow.dissipateur.fait": "The mist has lifted around it",
+  "message.fallow.clairiere.dissipee": "The mist withdraws.",
+  "message.fallow.clairiere.rien": "Nothing here for the mist to leave.",
+  "biome.fallow.clairiere": "Clearing",
+  "biome.fallow.clairiere_chaude": "Warm Clearing",
+  "biome.fallow.clairiere_froide": "Cold Clearing"
+}

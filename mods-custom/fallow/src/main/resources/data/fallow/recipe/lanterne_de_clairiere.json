@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "nomansland"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "overgeared"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "RLR",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "overgeared:iron_plate"
+    },
+    "R": {
+      "item": "nomansland:resin"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "result": {
+    "id": "fallow:lanterne_de_clairiere",
+    "count": 1
+  }
+}

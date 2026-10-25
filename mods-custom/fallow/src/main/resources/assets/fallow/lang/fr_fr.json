@@ -1,0 +1,14 @@
+{
+  "block.fallow.feu_de_veille": "Feu de veille",
+  "block.fallow.lanterne_de_clairiere": "Lanterne de clairière",
+  "block.fallow.dissipateur": "Dissipateur",
+  "tooltip.fallow.clairiere.rayon": "Une fois posé, lève la brume pour de bon sur %s blocs autour",
+  "tooltip.fallow.dissipateur.usage": "Entraîné à 32 tr/min ou plus pendant dix secondes, lève la brume pour de bon sur %s blocs autour",
+  "tooltip.fallow.dissipateur.charge": "La brume se lève : %s %%",
+  "tooltip.fallow.dissipateur.fait": "La brume s'est levée autour de lui",
+  "message.fallow.clairiere.dissipee": "La brume se retire.",
+  "message.fallow.clairiere.rien": "Ici, la brume n'a rien à quitter.",
+  "biome.fallow.clairiere": "Clairière",
+  "biome.fallow.clairiere_chaude": "Clairière chaude",
+  "biome.fallow.clairiere_froide": "Clairière froide"
+}

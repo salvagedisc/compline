@@ -21,6 +21,8 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue XP_ENABLED;
     private static final ModConfigSpec.BooleanValue XP_HIDE_BAR;
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
+    private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
+    private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -77,6 +79,16 @@ public final class FallowConfig {
                         "l'enchantement ne passe plus que par la table. Faux : l'enclume fusionne comme en vanilla.")
                 .define("blockEnchantMerge", false);
         common.pop();
+
+        common.comment("Modules clairiere et dissipateur : poser un feu de veille (rayon 16), une lanterne de clairière (32)",
+                "ou faire tourner un dissipateur (64) change les biomes autour en clairière, une fois pour toutes.").push("clairiere");
+        CLAIRIERE_ENABLED = common
+                .comment("Interrupteur de la conversion (serveur). Faux : les blocs restent, mais ne changent plus rien.")
+                .define("enabled", true);
+        CLAIRIERE_CHUNKS_PER_TICK = common
+                .comment("Tronçons (16 × 16 blocs) convertis par tick. Un dissipateur en touche environ 80.")
+                .defineInRange("chunksPerTick", 2, 1, 16);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -121,6 +133,14 @@ public final class FallowConfig {
 
     public static boolean xpBlockEnchantMerge() {
         return xpEnabled() && read(COMMON_SPEC, XP_BLOCK_ENCHANT_MERGE);
+    }
+
+    public static boolean clairiereEnabled() {
+        return read(COMMON_SPEC, CLAIRIERE_ENABLED);
+    }
+
+    public static int clairiereChunksPerTick() {
+        return read(COMMON_SPEC, CLAIRIERE_CHUNKS_PER_TICK);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */

@@ -1,0 +1,88 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_forest",
+    "#minecraft:is_taiga",
+    "#minecraft:is_jungle",
+    "#minecraft:is_savanna",
+    "#minecraft:is_river",
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:meadow",
+    "minecraft:cherry_grove",
+    "minecraft:swamp",
+    "minecraft:mangrove_swamp",
+    "minecraft:snowy_plains",
+    "minecraft:windswept_hills",
+    "minecraft:windswept_forest",
+    "minecraft:windswept_gravelly_hills",
+    "minecraft:windswept_savanna",
+    "minecraft:stony_peaks",
+    "minecraft:grove",
+    "minecraft:snowy_slopes",
+    {
+      "id": "nomansland:autumnal_forest",
+      "required": false
+    },
+    {
+      "id": "nomansland:bayou",
+      "required": false
+    },
+    {
+      "id": "nomansland:bog",
+      "required": false
+    },
+    {
+      "id": "nomansland:boreal_forest",
+      "required": false
+    },
+    {
+      "id": "nomansland:dark_swamp",
+      "required": false
+    },
+    {
+      "id": "nomansland:dark_taiga",
+      "required": false
+    },
+    {
+      "id": "nomansland:frozen_woods",
+      "required": false
+    },
+    {
+      "id": "nomansland:lavender_field",
+      "required": false
+    },
+    {
+      "id": "nomansland:maple_forest",
+      "required": false
+    },
+    {
+      "id": "nomansland:maple_grove",
+      "required": false
+    },
+    {
+      "id": "nomansland:old_growth_forest",
+      "required": false
+    },
+    {
+      "id": "nomansland:old_growth_forest_clearing",
+      "required": false
+    },
+    {
+      "id": "nomansland:old_growth_forest_edge",
+      "required": false
+    },
+    {
+      "id": "nomansland:prairie",
+      "required": false
+    },
+    {
+      "id": "nomansland:lush_river",
+      "required": false
+    },
+    {
+      "id": "nomansland:blackwater_river",
+      "required": false
+    }
+  ]
+}
