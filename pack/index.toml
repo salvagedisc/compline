@@ -5,12 +5,20 @@ file = "config/DistantHorizons.toml"
 hash = "50e58d2b37f477943ffd1ecadcd99cb5ff6b5a1e90e34f36fcd9614dc78b6f96"
 
 [[files]]
+file = "config/adorablehamsterpets/main.toml"
+hash = "c58df881614688ddaeb1dd84da064e77d406dbf3d29a7e6695cf19b20ccd196e"
+
+[[files]]
 file = "config/cameraoverhaul.toml"
 hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
 [[files]]
 file = "config/coldsweat/client.toml"
 hash = "c2f725bdf7e9321b0ce5ad588a56a09de1a137375e4129f8a39ccc4428c1a3d5"
+
+[[files]]
+file = "config/companions.toml"
+hash = "48b83973132d41c7fe23f5861c1ff580b3734ee0397c62ae1031e2dd289284f2"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
@@ -33,8 +41,16 @@ file = "config/defaultoptions/options.txt"
 hash = "90e4475dd55830d818d487e39094c01af1c31a085209694ba24457cb27bcf616"
 
 [[files]]
+file = "config/eclipticseasons-common.toml"
+hash = "5e0d44996518210ceda50e522824f416612db0240ccfc861dd11ffa6cb397436"
+
+[[files]]
 file = "config/enhancedcelestials2core/translations.json"
 hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
+
+[[files]]
+file = "config/friendsandfoes.json"
+hash = "318350044ec18dec4ff71520a86c870edc4ad2f041f41fc4c7900293c1154baf"
 
 [[files]]
 file = "config/hybrid_aquatic.json"
@@ -42,7 +58,7 @@ hash = "12ee2cf37f37fe0ad796fa054e4851b64fbd762d12cb5ad3745191779f2dcd3d"
 
 [[files]]
 file = "config/incontrol/spawn.json"
-hash = "51b1c827f71facee2da7f217acfde15d726bdaf1d990093db90f3e56de546af4"
+hash = "2d6b53104d4ab1bfbd7f6c1b96d8570c477a61a1df59d859665877311bc39a47"
 
 [[files]]
 file = "config/jei/jei-client.ini"
@@ -51,6 +67,10 @@ hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
 [[files]]
 file = "config/mixed_litter-startup.toml"
 hash = "81fb1ba1548f474188599c7edc2802bad0087801a3ea9d3c37b0a908080b8c96"
+
+[[files]]
+file = "config/mowziesmobs-common.toml"
+hash = "da52a1e74d2100ed61ccf10fb7e088d6cccc78524436040fa94598bebc845ea7"
 
 [[files]]
 file = "config/naturalist-server.toml"
@@ -66,11 +86,15 @@ hash = "4cc0342b40171b2006ef7d80ff03b1053cbe617820e736922abf6a0dc562bad5"
 
 [[files]]
 file = "config/quark-common.toml"
-hash = "bbde550cb873dcabcbb83097b5243f2c335ec0a45d0230547006cad587ae99e6"
+hash = "890330b216be379ffbc8f2f553cfb82e5eb6ebee9b6f9532b1688ce15eb13bac"
 
 [[files]]
 file = "config/shouldersurfing-client.toml"
 hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
+
+[[files]]
+file = "config/simplebackups-common.toml"
+hash = "6f8767311c678896646bb75b2113077d1e5601a078615031a2e7b6d24aa0f187"
 
 [[files]]
 file = "config/streamsreflowing-client.properties"
@@ -609,8 +633,12 @@ file = "kubejs/assets/distanthorizons/lang/fr_fr.json"
 hash = "15306e269324328ca774459385fe69208bed01f4b094d0f2e7c9238612a6e4a0"
 
 [[files]]
+file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
+hash = "ec7c8c515cbe1bfcaea11cedbc9404f7c1cdadb29fe337b0e41e35d8d62afb07"
+
+[[files]]
 file = "kubejs/assets/eclipticseasons/lang/fr_fr.json"
-hash = "d891f8bac94499bd52a3b4a8e5f61068b989d485f49c64a06d19e702ed8fac21"
+hash = "6355efcaffd21912a00b345d76d84c30c182141e7e16aa8528de96cc90a55c57"
 
 [[files]]
 file = "kubejs/assets/eclipticseasons/patchouli_books/seasons_chronicle/fr_fr/categories/core.json"
@@ -674,7 +702,7 @@ hash = "529a40c64afae1ca243f828cc69867efa37e87979bba62a5114b501088d5380d"
 
 [[files]]
 file = "kubejs/assets/everycomp/lang/fr_fr.json"
-hash = "4d86720cf9e413fcaaf64883fc4bcf0090466ea5eb1a074bb1998345e94cd9e8"
+hash = "0935d2eaf4615e0e5b26c625b93dc5aa574219ec774c6f368ba364d63fae12bc"
 
 [[files]]
 file = "kubejs/assets/exposure/lang/fr_fr.json"
@@ -734,7 +762,7 @@ hash = "2cb9f05fac1b3d925cae5f48caa0186e1ddbe5870dce9fd8cc233ef6c5b5b70d"
 
 [[files]]
 file = "kubejs/assets/hybrid_aquatic/lang/fr_fr.json"
-hash = "a41adaba34b60eade4ed515be037b6c028df7799af696cc9e7917a0b6df228f1"
+hash = "1543b57164b89f53956c46f14171f61f9e5005a3ad10aa08888f13cca1760140"
 
 [[files]]
 file = "kubejs/assets/icys-better-horses/lang/fr_fr.json"
@@ -810,7 +838,11 @@ hash = "186df6047390ca95514608e52c99bd5ad0d0da68e32e1ee55a6112bbdc1db1a4"
 
 [[files]]
 file = "kubejs/assets/naturalist/lang/fr_fr.json"
-hash = "59a831c3e4c90173c86cab3afa2391a7fdbef75342249cc7686f7377a6265526"
+hash = "b8d940753b05496fcd69a5f8ec4095ee211e768366c3c4e8f483374a0d6da5b9"
+
+[[files]]
+file = "kubejs/assets/neruina/lang/fr_fr.json"
+hash = "ec217dbcfad7ff24f78903d747421831a57695d5c936da9f629b8587d2936a53"
 
 [[files]]
 file = "kubejs/assets/nomansland/lang/fr_fr.json"
@@ -858,7 +890,7 @@ hash = "e1b4965eb10dca790df00e810d305f4b75c590006f47e81a95b917ad726de0c9"
 
 [[files]]
 file = "kubejs/assets/quark/lang/fr_fr.json"
-hash = "fe2cede3dc7e5fb9d8f496f758f4adc315d21ef19301bcefa97dc61f778e20b8"
+hash = "b15797c3311898390a26a37068b7748d15120d7a9604955459824e9ae4b9ddad"
 
 [[files]]
 file = "kubejs/assets/railways/lang/fr_fr.json"
@@ -875,6 +907,10 @@ hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
 [[files]]
 file = "kubejs/assets/sable/lang/fr_fr.json"
 hash = "cf5a6666f36aead1a480809375c301ea25e2a6c9569cce5bf04954502409c581"
+
+[[files]]
+file = "kubejs/assets/simplebackups/lang/fr_fr.json"
+hash = "a0f1f99a00251a48e6369b270e6caa528c82afaee9db62eb614fb67100bfb71f"
 
 [[files]]
 file = "kubejs/assets/simulated/lang/fr_fr.json"
@@ -910,7 +946,7 @@ hash = "d973329458bfcef4321e08457c64ca96e27c8c48237dd756d1b58d864ff1c65d"
 
 [[files]]
 file = "kubejs/assets/subtle_effects/lang/fr_fr.json"
-hash = "d81dc6007832792071632097c0cd10da30bdd621fc00bac6e8758bb07c2f794b"
+hash = "a1eb6603d086fa517b6118614118f1c06d73d0d0815c0834e984043a17091c53"
 
 [[files]]
 file = "kubejs/assets/supplementaries/lang/fr_fr.json"
@@ -922,7 +958,7 @@ hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
 file = "kubejs/assets/travelersbackpack/lang/fr_fr.json"
-hash = "71ca4d165c78835d543802c1933686565955ae8fada4ff759563366c86313e8a"
+hash = "5500e8ed970f6d003749dc7321cae05742aa398055fcbf01d32b7bcfdd017980"
 
 [[files]]
 file = "kubejs/assets/treechop/lang/fr_fr.json"
@@ -1153,6 +1189,10 @@ file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jung
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
+file = "kubejs/data/minecraft/tags/worldgen/biome/has_structure/stronghold.json"
+hash = "cee09dec79eaf898a5ecbf50767dd2b9b1f258be79f2a44406b694f555022cd2"
+
+[[files]]
 file = "kubejs/data/nomansland/advancement/main/explode_ore.json"
 hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
 
@@ -1263,6 +1303,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
+
+[[files]]
+file = "kubejs/server_scripts/dimensions_fermees.js"
+hash = "4380bcd64440e2b590968feb95d0792168e3d58a2e4c4087df1218983884fc99"
 
 [[files]]
 file = "kubejs/server_scripts/doublons.js"
