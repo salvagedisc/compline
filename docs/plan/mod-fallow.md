@@ -1,8 +1,8 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.3.0 contains the **ciel** (sky), **sac** (bag), **xp** and **horizon** (Distant Horizons) modules.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.0 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings) and **dissipateur** (dissipator) modules.
 
-> **Status as of 2026-10-25.** Version 0.3.0 compiles (`./gradlew build`, against Enhanced Celestials 2 and Distant Horizons 3.3.3) and the full pack starts on a dedicated server with it, but **nothing has been tested in game**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
+> **Status as of 2026-10-25.** Version 0.4.0 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
 ## Building and updating
 
@@ -36,6 +36,8 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 3: `horizon.FogRendererMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
+| `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
+| `dissipateur` | both | Create | none |
 
 ## `ciel` module
 
@@ -144,6 +146,30 @@ Config (`fallow-client.toml`, `[horizon]` section): `enabled` (true), `skipHidde
 
 Both use `require = 0`: if a future DH no longer has the targeted code, they do nothing.
 
+## `clairiere` module
+
+Plan [10.3](10-recentrage.md#103-the-mist-that-lifts), layer 3: the mist lifts where the players decide. It replaces the KubeJS drafts `clairieres.js` and `clairiere.json` of `kubejs-brouillons/`.
+
+**Blocks.**
+
+| Block | Radius | Recipe |
+|---|---|---|
+| Vigil Fire (`fallow:feu_de_veille`), a stone hearth with embers | 16 | No Man's Land resin, two charcoal, a log, three cobblestone |
+| Clearing Lantern (`fallow:lanterne_de_clairiere`) | 32 | A lantern, two Overgeared iron plates, two resin |
+| Dissipator (`fallow:dissipateur`, `dissipateur` module) | 64 | Encased fan, brass casing, propeller, two precision mechanisms |
+
+**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, for good: breaking the block does not bring the mist back. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, two chunks per tick (`chunksPerTick`), then sends the new biomes to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
+
+The conversions in progress are lost if the server stops; placing the block again finishes them. Operators can convert by command: `/fallow clairiere <radius>` around the position of the command (4 to 256).
+
+Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false keeps the blocks but they no longer convert anything), `chunksPerTick` (2).
+
+## `dissipateur` module
+
+The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken and placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
+
+Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
+
 ## In-game tests
 
 None of this has been done. To be run on an instance of the pack, then ticked off here.
@@ -227,6 +253,22 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with NML alone |
 | W10 | A clearing crossed by a stream | Note whether the stream stays misty (river biome not convertible); if so add the river biomes to `fallow:peut_devenir_clairiere` |
 
+### Clearings
+
+| # | Test | Expected |
+|---|---|---|
+| K1 | Place a vigil fire in a misty forest | "La brume se retire." above the hotbar; within seconds the mist becomes light around you, the grass turns vivid, without reconnecting |
+| K2 | F3 at the edge of the disc | `fallow:clairiere` inside, the old biome outside, a round edge of about 16 blocks |
+| K3 | Lantern in a snowy taiga, fire in a savanna | `clairiere_froide` (snow still falls), `clairiere_chaude` |
+| K4 | Clearing on a coast | The ocean and the beach keep their biome; a river crossing the disc becomes a clearing |
+| K5 | Break the fire, leave and come back, restart the server | The clearing stays |
+| K6 | Clearing music | Node "Clairière" of True Adaptive Music after 30 s |
+| K7 | Far view from a clearing on a hill | Distant Horizons landscape beyond 128 blocks (H3) |
+| K8 | Dissipator driven at 16 RPM, then 64 RPM, then overstressed | Nothing at 16; at 64 the goggles count up to 100 % and the disc of 64 converts; overstress resets the charge |
+| K9 | Dissipator on an airship (Sable) | Note what happens: it converts where the ship is when it finishes charging |
+| K10 | Ecliptic seasons and Cold Sweat in a clearing | Crops grow, temperature consistent with the old biome |
+| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips |
+
 ## Maintenance
 
 At each update of ATMOSPHERICS, Enhanced Celestials, Traveler's Backpack, Thirst Was Reclaimed or NeoForge:
@@ -241,8 +283,9 @@ Known fragile points:
 - Traveler's Backpack: the `EffectFluid` constructor and the moment it empties its registry;
 - Thirst Was Reclaimed: `WaterPurity` and `ThirstHelper`.
 - Distant Horizons: the `DhApiBeforeFogRenderEvent` and `DhApiBeforeRenderEvent` events (API 7), `GLState.saveState`, `AbstractChunkyAccessor.tryRunFirstTimeSetup` and its `listenerBound` field.
-- Minecraft and NeoForge: the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers, the cancellation of `AnvilUpdateEvent`.
+- Create: `KineticBlockEntity` (`write`/`read`, `addToGoggleTooltip`), `RotatedPillarKineticBlock`, `BlockStressValues.IMPACTS`; the compile classpath pins Ponder and Flywheel to the versions Create bundles (`build.gradle`).
+- Minecraft and NeoForge: `ChunkAccess.fillBiomesFromNoise` and `ChunkMap.resendBiomesForChunks` (clearings); the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers, the cancellation of `AnvilUpdateEvent`.
 
 ## Next modules
 
-In the order of [12.4](12-verification.md#124-the-custom-fallow-mod): **dissipator** (Create kinetic block, after the KubeJS prototype), then, depending on the tests, grave, tracks, blueprints and finishing touches. Each will have its section here, its switch and its tests.
+In the order of [12.4](12-verification.md#124-the-custom-fallow-mod), depending on the tests: a Ponder scene for the dissipator, then grave, tracks, blueprints and finishing touches. Each will have its section here, its switch and its tests.

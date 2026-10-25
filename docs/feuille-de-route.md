@@ -6,7 +6,7 @@ Status as of 2026-10-25. The project is split into sub-projects, each with its o
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](conception/specs/2026-09-23-repo-outillage-design.md)) |
 | 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0002 to 0011 made and applied to `pack/`; target list in the [registry](mods.md) |
-| 3 | Rules layer: configs, KubeJS scripts, datapack data | 🟡 Configs for most systems, 13 KubeJS scripts, custom mod `fallow`; clearings, survivors and the seasons bridge still to write |
+| 3 | Rules layer: configs, KubeJS scripts, datapack data | 🟡 Configs for most systems, 13 KubeJS scripts, custom mod `fallow` with the clearings and the dissipator; survivors and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
 ## Before the first release (`v0.1.0`)

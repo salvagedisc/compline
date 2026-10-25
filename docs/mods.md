@@ -23,6 +23,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
 | Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed, a single moon at a time with the Friendly Moon ([friendly moon](plan/lune-amie.md)). Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
+| Antique Transport | `antique-transport` | ✅ (added 2026-10-25) | CS | Create trains, tracks, stations and Sable ships appear on the atlas |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Shared exploration for the atlas |
 | Icy's Better Horses | `icys-better-horses` | ✅ (upgrade to 2.1.4) | CS | Horses, breeds, bond, carts |
 
@@ -32,6 +33,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | Wildex Bestiary | `wildex-bestiary` | ✅ | CS | Automatic bestiary, backbone of the zoo |
 | Exposure | `exposure` | ✅ | CS | Analogue photography: keep a place, discover a species |
+| Exposure: Space | `exposure-space` | ✅ (added 2026-10-25) | CS | Astrophotography: 200 celestial objects to photograph and catalogue; French names translated |
 
 ## Civilisation and technology
 
@@ -39,6 +41,9 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | Create | `create` | ✅ | CS | Technology |
 | Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable 2.0.6) | CS | Airships; requires NeoForge 1.21.1 |
+| Create Aeronautics: Automated Logistics | `create-aeronautics-automated-logistics` | ✅ (added 2026-10-25) | CS | Recorded airship routes, airship stations, transponders: an air network as a long-term goal |
+| Sable: Physics Compat | `sablecompat` | ✅ (added 2026-10-25) | CS | Mass, buoyancy and friction for the blocks of about 100 mods on Sable ships (its `sable:bouncy` tag fails to load, harmless) |
+| Aeronautics Wind Sound | `aeronautics-wind-sound` | ✅ (added 2026-10-25) | C | Wind in flight, by speed and shelter |
 | Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | The railway (beta) |
 | Overgeared | `overgeared` | ✅ | CS | Forging: blast furnace, hammering, quenching, quality, blueprints |
 | KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Create arm on cooking stations ([0002](decisions/0002-agriculture.md)) |
@@ -51,7 +56,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (stay on 1.1.25) | CS | The farm and the oven |
 | Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Makes the duplicates of the two cooking mods interchangeable |
 | Ecliptic Seasons | `ecliptic-seasons` | ✅ (0.15.5) | CS | Seasons, farming only (`AGRICULTURE`), no heat stroke: Cold Sweat owns the temperature |
-| Cold Sweat | `cold-sweat` | ✅ | CS | Temperature |
+| Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
+| Cold Sweat: Altitude | `cold-sweat-altitude` | ✅ (added 2026-10-25) | CS | Colder as you climb, sheltered areas, windproof lining; supports airships |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
 | Traveler's Backpack | `travelersbackpack` | ✅ | CS | Expedition bag and sleeping bag |
 | Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](plan/recherche/2026-10-19/wayfarer.md)) |
@@ -153,7 +159,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.3.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)) and `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)) modules written, Dissipator to come ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
+| Mod `fallow` 0.4.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist) and `dissipateur` (Create kinetic block, radius 64) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
