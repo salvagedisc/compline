@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the **target** pack, updated on 2026-10-19 with the team's choices: what is already in `pack/mods/`, what the plan adds, what remains to be tested and what is dropped. The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
+Complete list of the **target** pack, updated on 2026-10-25 with the team's choices: what is already in `pack/mods/`, what the plan adds, what remains to be tested and what is dropped. The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -15,7 +15,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | The world: biomes, ruins ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
+| No Man's Land | `no-mans-land` | ✅ (1.6.3) | CS | The world: biomes, ruins ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
 | Tectonic | `tectonic` | ✅ (3.0.28, not seen in game) | CS | The terrain under NML's biomes: continents, mountain ranges, valleys, underground rivers; height -64 to 320, never to change once the world exists; requires Lithostitched without declaring it ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
@@ -38,7 +38,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Create | `create` | ✅ | CS | Technology |
-| Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable on 2.0.6) | CS | Airships; requires NeoForge 1.21.1 |
+| Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable 2.0.6) | CS | Airships; requires NeoForge 1.21.1 |
 | Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | The railway (beta) |
 | Overgeared | `overgeared` | ✅ | CS | Forging: blast furnace, hammering, quenching, quality, blueprints |
 | KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Create arm on cooking stations ([0002](decisions/0002-agriculture.md)) |
@@ -50,7 +50,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (1.6.0) | CS | Cooking |
 | [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (stay on 1.1.25) | CS | The farm and the oven |
 | Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Makes the duplicates of the two cooking mods interchangeable |
-| Ecliptic Seasons | `ecliptic-seasons` | ✅ (upgrade to 0.15.4.1) | CS | Seasons |
+| Ecliptic Seasons | `ecliptic-seasons` | ✅ (0.15.5) | CS | Seasons, farming only (`AGRICULTURE`), no heat stroke: Cold Sweat owns the temperature |
 | Cold Sweat | `cold-sweat` | ✅ | CS | Temperature |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
 | Traveler's Backpack | `travelersbackpack` | ✅ | CS | Expedition bag and sleeping bag |
@@ -63,7 +63,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Naturalist | `naturalist` | ✅ | CS | Realistic base fauna ([0003](decisions/0003-faune.md)) |
 | Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species |
 | Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans |
-| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments |
+| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most |
 | Longwings | `longwings` | ✅ | CS | Butterflies to collect |
 
 ## Companions
@@ -71,17 +71,17 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Critters and Companions | `critters-and-companions` | ✅ | CS | Tameable small fauna |
-| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Peaceful creatures from the mob vote |
-| Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters |
+| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Peaceful creatures from the mob vote; Iceologer, Illusioner, Wildfire, their structures and the zombie horse trap disabled, fewer Maulers and crabs (`pack/config/friendsandfoes.json`) |
+| Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters; throwing, item stealing, diamond sniffing and redstone fever disabled |
 | Companion | `companion` | ✅ | CS | Tamed animals no longer get lost |
-| Companions! | `companions-mod` | ✅ | CS | Companions with powers; the Sacred Pontiff guards the oak monument |
+| Companions! | `companions-mod` | ✅ | CS | Companions with powers; the Sacred Pontiff guards the oak monument; wild spawns about three times rarer |
 | Ghost | `ghost` | ✅ | CS | Little ghosts |
 
 ## Building and workshops
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Quark | `quark` | ✅ (upgrade to 4.1-487) | CS | The essentials, selected modules ([0005](decisions/0005-quark.md)) |
+| Quark | `quark` | ✅ (4.1-487) | CS | The essentials, selected modules ([0005](decisions/0005-quark.md)) |
 | Supplementaries | `supplementaries` | ✅ | CS | The essentials ([0006](decisions/0006-supplementaries.md)) |
 | Amendments | `amendments` | ✅ | CS | 3D lanterns, signs, cauldrons |
 | Handcrafted | `handcrafted` | ✅ | CS | Furniture |
@@ -122,7 +122,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | `fallow` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 29 tracks chosen by the team |
 | Sounds | `sound` | ✅ | C | 170 interface, item and block sounds |
 | Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
-| Drip Sounds | `dripsounds` | ✅ | C | Drips in caves (beta) |
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
@@ -137,9 +136,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | EMI | `emi` | ✅ | C (S optional) | Recipe viewer, without panels or search (`pack/defaultconfigs/emi.css`): R and U on an item open its recipes |
 | JEI | `jei` | ✅ (hidden, stay on 19.51.0.418) | CS | Bridge for mods that only have a JEI plugin; from 19.52, Envelope 0.7.5's mixin no longer finds its target and the game crashes when entering a world |
-| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Tooltips |
+| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Tooltips; KubeJS bundles it anyway, so it cannot leave the pack |
 | Pick Up Notifier | `pick-up-notifier` | ✅ | C | Discreet list of picked-up items |
-| Seamless Loading Screen | `seamless-loading-screen` | ✅ | C | The loading screen shows the last view |
 | Mouse Tweaks | `mouse-tweaks` | ✅ | C | Mouse-driven inventory |
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |
 | Default Options | `default-options` | ✅ | C | Key bindings and video settings shipped with the pack |
@@ -154,7 +152,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | KubeJS Create | `kubejs-create` | ✅ | CS | Create recipes in script (beta) |
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
-| In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld (`pack/config/incontrol/spawn.json`) |
+| In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
 | Mod `fallow` 0.3.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)) and `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)) modules written, Dissipator to come ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance and technical
@@ -169,10 +167,10 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
 | Chunky | `chunky` | ✅ | CS | Pregeneration |
 | spark | `spark` | ✅ | CS | Profiling |
-| Dynamic FPS | `dynamic-fps` | ➕ | C | The game slows down in the background |
-| Neruina | `neruina` | ➕ | CS | Prevents a stuck entity from crashing the world |
-| Simple Backups | `simple-backups` | ➕ | CS | Backups (beta) |
-| Crash Assistant | `crash-assistant` | ➕ | C | Helps read crashes |
+| Dynamic FPS | `dynamic-fps` | ✅ | C | The game slows down in the background |
+| Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
+| Simple Backups | `simple-backups` | ✅ | CS | Backups every hour of play, last 24 kept, plus one when everyone leaves (beta) |
+| Crash Assistant | `crash-assistant` | ✅ | C | Helps read crashes |
 | Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Run Antique Atlas and Surveyor (beta, under watch) |
 
 ## Resource packs
@@ -191,9 +189,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
-
-To add with Neruina: Configurable.
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
 ## Dropped or rejected
 
@@ -224,6 +220,8 @@ To add with Neruina: Configurable.
 | Carry On | Incompatible with Aeronautics |
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |
 | Downhill Rivers, Terralith | Streams Reflowing and Tectonic chosen instead ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Drip Sounds | Beta build for 1.21.8, duplicates AmbientSounds and Sounds in caves; removed on 2026-10-25 |
+| Seamless Loading Screen | Last build 2024-10, Sodium overwrites the screen it draws; removed on 2026-10-25 |
 | Mezz config | Orphan library (only JEI ≥ 19.55 needs it, the pack is on 19.51); removed on 2026-10-25 |
 | Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Too many Create addons |
 | Create Villager Labor, Open Parties and Claims | Useless among friends |

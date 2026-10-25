@@ -1,13 +1,13 @@
 # Roadmap
 
-Status as of 2026-10-18. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
+Status as of 2026-10-25. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](conception/specs/2026-09-23-repo-outillage-design.md)) |
-| 2 | System choices: farming, fauna, structures, atmosphere, performance | 🟡 Decisions 0002 to 0007 made; full plan written and checked in [plan/](plan/README.md) (chapters 10 to 12), awaiting validation; target list in the [registry](mods.md) |
-| 3 | Rules layer: configs, KubeJS scripts, datapack data | ○ Only the Quark and Supplementaries configs exist |
-| 4 | Server: host, deployment, backups | ○ Not started |
+| 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0002 to 0011 made and applied to `pack/`; target list in the [registry](mods.md) |
+| 3 | Rules layer: configs, KubeJS scripts, datapack data | 🟡 Configs for most systems, 13 KubeJS scripts, custom mod `fallow`; clearings, survivors and the seasons bridge still to write |
+| 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
 ## Before the first release (`v0.1.0`)
 
@@ -22,15 +22,15 @@ Status as of 2026-10-18. The project is split into sub-projects, each with its o
 - [ ] **Farm & Charm confined to the farm**: hide or merge its cooking stations and its ingredients that duplicate Kaleidoscope Cookery ([0002](decisions/0002-agriculture.md)).
 - [ ] Lock KC-Automation's automation behind progression ([0002](decisions/0002-agriculture.md)).
 - [x] **Remove hostile vanilla monsters** from the Overworld (`pack/config/incontrol/spawn.json`, to be checked in game: patrols, phantoms, spawners); decide the fate of ocean monuments, witch huts and outposts ([0003](decisions/0003-faune.md), [0004](decisions/0004-structures.md)).
-- [ ] **Spawn table per biome**: a single version per species between Naturalist and Alex's Mobs, removal of creatures that break the art direction ([0003](decisions/0003-faune.md)).
-- [ ] Friends & Foes: keep the peaceful ones, disable the hostile ones. Adorable Hamster Pets: disable the diamond sniffing. Companions!: restrict hostile creatures, weapons and bosses ([0003](decisions/0003-faune.md)).
-- [ ] **Remove the End** (dimension, portals, Elytra) and strongholds ([0004](decisions/0004-structures.md)).
+- [x] **Spawn table per biome**: a single version per species between Naturalist and Alex's Mobs, removal of creatures that break the art direction ([0003](decisions/0003-faune.md)).
+- [x] Friends & Foes: keep the peaceful ones, disable the hostile ones. Adorable Hamster Pets: disable the diamond sniffing. Companions!: restrict hostile creatures, weapons and bosses ([0003](decisions/0003-faune.md)). Done by config on 2026-10-25; Companions! weapons and bosses kept (the Sacred Pontiff guards a monument).
+- [x] **Remove the End** (dimension, portals, Elytra) and strongholds ([0004](decisions/0004-structures.md)): `dimensions_fermees.js` and an empty stronghold tag, Nether closed too; to check in game.
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
 - [ ] Subtle Effects: turn off superfluous effects ([0007](decisions/0007-ambiance-performance.md)).
 
 ### Pending research (sub-project 2)
 - [ ] Demanding animal husbandry (needs, diseases, genetics): alternative to Animal Husbandry ([0002](decisions/0002-agriculture.md)).
-- [ ] Food preservation: alternative to Spoiled ([0002](decisions/0002-agriculture.md)).
+- [x] ~~Food preservation~~: dropped by the team on 2026-10-18 (Freeze It and Heat It removed).
 - [ ] A mod that replaces vanilla structures with Create-integrated versions; candidates: Create: Let The Adventure Begin, Create Aeronautics Structures, Create: Structures Arise, Create Rustic Structures ([0004](decisions/0004-structures.md)).
 - [x] Terrain: Tectonic + Streams Reflowing on No Man's Land; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)). In-game tests to run before pregenerating the permanent world.
 - [ ] Separate Sable Render Distance, Particle Rain ([0007](decisions/0007-ambiance-performance.md)).

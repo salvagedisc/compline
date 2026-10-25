@@ -42,8 +42,12 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Interface: Dark Coffee GUI and Modded Coffee GUI packs, active on first launch. Hunger bar from Dark Coffee GUI - Extras (Normal Hunger) in place of the coffee beans.
 - Terrain: Tectonic and Streams Reflowing under No Man's Land's biomes; Monoliths protected from streams ([0011](docs/decisions/0011-tectonic-streams-distant-horizons.md)).
 - Far view: Distant Horizons, hidden by the mist and revealed in clearings by the new `horizon` module of the `fallow` mod 0.3.0, which also fixes two Distant Horizons 3.3.3 crashes (world creation with Chunky, Apple Silicon Macs); French translation of Distant Horizons and Tectonic ([0011](docs/decisions/0011-tectonic-streams-distant-horizons.md)).
+- Safety net for the permanent world: Simple Backups (one backup per hour of play, last 24 kept), Neruina (+ Configurable: a crashing entity is stopped instead of the world), Crash Assistant, Dynamic FPS.
+- End removed and Nether closed: no ender eyes, no end crystals, Nether portals do not light, no travel to either dimension, no strongholds ([0004](docs/decisions/0004-structures.md)).
+- In Control!: at most 8 hostile creatures per player; Mowzie's Mobs and the cave creatures of Alex's Mobs only in the dark.
 
 ### Removed
+- Drip Sounds (beta build for 1.21.8, duplicates AmbientSounds and Sounds) and Seamless Loading Screen (unmaintained, overwritten by Sodium).
 - Untitled Duck Mod (team choice): the Naturalist duck returns, and the No Man's Land goose's offering line now targets that duck.
 - AA4 Atlas: compiled for Antique Atlas 2, it called `AtlasScreen.prepareToOpen()` with the old return type and crashed the game when opening the atlas (crash report from testing). The atlas opens with the Antique Atlas key.
 - Entity Culling: breaks Create Aeronautics and Sable contraptions.
@@ -51,6 +55,12 @@ No version has been published yet: everything below will make up `0.1.0`.
 - MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 
 ### Changed
+- Low-risk updates: Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, No Man's Land 1.6.3, Ecliptic Seasons 0.15.5, Contraption Lights 1.5.5, CreativeCore 2.13.51, ModernFix 5.27.27, ImmediatelyFast 1.6.15, Knight Lib 2.0.5, Companions! 1.3.6, Hybrid Aquatic 1.7.4 and Hybrid API 1.1.3, Naturalist 2.0.7, Alex's Mobs Continued 2.2.4, Traveler's Backpack 10.1.40, AmbientSounds 6.3.11, Lithostitched 1.8.1, Puzzles Lib, Modonomicon, Forgified Fabric API, Every Compat, Subtle Effects 1.15.1, Sound Physics Remastered 1.5.2; NeoForge 21.1.265.
+- Ecliptic Seasons set to farming only (`AGRICULTURE`), heat stroke and chat notices off.
+- Friends & Foes: Iceologer, Illusioner, Wildfire, their structures and the zombie horse trap disabled by config; fewer Maulers, crabs and Mooblooms.
+- Adorable Hamster Pets: throwing, item stealing, diamond sniffing and redstone fever disabled.
+- Companions! and Mowzie's Mobs: natural spawns rarer.
+- Quark: variant animal textures off (No Man's Land and Fresh Animations own them).
 - No Man's Land fauna: Mixed Litter's remodels and NML's textures on vanilla animals are disabled, for Fresh Animations; deer, goose, _bar à serpe_ (a fish), turtle and Frienderman no longer spawn, are removed from the Wildex, and their 15 items no longer have a recipe or a place in EMI ([NML fauna](docs/plan/faune-nml.md)).
 - No Man's Land, items removed: horse meat, frog legs, explosives, fire arrow and seven dishes; TNT goes back to its vanilla recipe. The rabbit is removed from the game (Fresh Animations has no model for it). The turtle's offering line targets the Naturalist one.
 - Fauna: a single model per species. 32 duplicates compared; 17 Alex's Mobs creatures, 9 from Hybrid Aquatic, 2 from Critters and Companions and 6 from Naturalist are disabled, removed from the Wildex, and their 78 sourceless items removed ([duplicates](docs/plan/doublons.md)).
