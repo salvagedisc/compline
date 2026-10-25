@@ -533,6 +533,10 @@ file = "kubejs/assets/beautify/lang/fr_fr.json"
 hash = "6365c748776d5fd866b53428b87db9a3d166f6bedb6f774e646a4e9009ab935a"
 
 [[files]]
+file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
+hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
+
+[[files]]
 file = "kubejs/assets/betterclouds/lang/fr_fr.json"
 hash = "43390bde42dc4468bb701bebcab62da998f020ee36368c9fe29bb4dc230e95dd"
 
@@ -1380,6 +1384,11 @@ metafile = true
 [[files]]
 file = "mods/beautify.pw.toml"
 hash = "5e3421b58c8c905e686ed7b63d2fe086fe3265009347ca01aba99f13cb8edca3"
+metafile = true
+
+[[files]]
+file = "mods/better-advanced-tooltips.pw.toml"
+hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
 metafile = true
 
 [[files]]
