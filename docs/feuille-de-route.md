@@ -32,8 +32,8 @@ Status as of 2026-10-18. The project is split into sub-projects, each with its o
 - [ ] Demanding animal husbandry (needs, diseases, genetics): alternative to Animal Husbandry ([0002](decisions/0002-agriculture.md)).
 - [ ] Food preservation: alternative to Spoiled ([0002](decisions/0002-agriculture.md)).
 - [ ] A mod that replaces vanilla structures with Create-integrated versions; candidates: Create: Let The Adventure Begin, Create Aeronautics Structures, Create: Structures Arise, Create Rustic Structures ([0004](decisions/0004-structures.md)).
-- [ ] Real-world comparison of NML vs Terralith + Streams Reflowing on `test/terralith-vs-nml` ([0001](decisions/0001-nml-vs-terralith.md)).
-- [ ] Distant Horizons, Separate Sable Render Distance, Particle Rain ([0007](decisions/0007-ambiance-performance.md)).
+- [x] Terrain: Tectonic + Streams Reflowing on No Man's Land; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)). In-game tests to run before pregenerating the permanent world.
+- [ ] Separate Sable Render Distance, Particle Rain ([0007](decisions/0007-ambiance-performance.md)).
 - [ ] Other "to test" candidates from the [registry](mods.md).
 
 ### Watch list

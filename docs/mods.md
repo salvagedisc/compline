@@ -15,7 +15,9 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | The world: terrain, biomes, ruins ([0001](decisions/0001-nml-vs-terralith.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
+| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | The world: biomes, ruins ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
+| Tectonic | `tectonic` | ✅ (3.0.28, not seen in game) | CS | The terrain under NML's biomes: continents, mountain ranges, valleys, underground rivers; height -64 to 320, never to change once the world exists; requires Lithostitched without declaring it ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](plan/12-verification.md#the-monument-guardians-report-6)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
@@ -126,6 +128,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Better Clouds | `better-clouds` | ✅ | C | Volumetric clouds; ordering with No Man's Land (which disables clouds during the dream) to be tested |
+| Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `fallow` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle NML's leaves |
 
 ## Interface and comfort
@@ -152,7 +155,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.2.1 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst) and `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)) modules written, Dissipator to come ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
+| Mod `fallow` 0.3.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)) and `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)) modules written, Dissipator to come ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
 ## Performance and technical
 
@@ -188,7 +191,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, Mezz config, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Already present: AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
 To add with Neruina: Configurable.
 
@@ -219,8 +222,9 @@ To add with Neruina: Configurable.
 | Just Zoom, Zoomify | The spyglass is Wildex's tool |
 | Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
 | Carry On | Incompatible with Aeronautics |
-| Distant Horizons, Separate Sable Render Distance | The mist makes long-range viewing pointless |
-| Streams Reflowing, Tectonic, Downhill Rivers, Terralith | Heavy worldgen or competing with NML |
+| Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |
+| Downhill Rivers, Terralith | Streams Reflowing and Tectonic chosen instead ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Mezz config | Orphan library (only JEI ≥ 19.55 needs it, the pack is on 19.51); removed on 2026-10-25 |
 | Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Too many Create addons |
 | Create Villager Labor, Open Parties and Claims | Useless among friends |
 | Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | One more gauge or activity for a role already covered |

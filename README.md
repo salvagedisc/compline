@@ -50,6 +50,7 @@ Requirements: Node.js ≥ 20 and [packwiz](https://packwiz.infra.link/installati
 |---|---|
 | `npm test` | Tooling tests |
 | `npm run check-deps` | Checks that the dependencies declared in the jars are provided by the pack (also run in CI) |
+| `npm run check-fr` | Checks that every text of every mod has a French translation (also run in CI) |
 | `npm run sync -- --instance "Fallow test"` | Brings the mods (and, with `--configs`, the configs) tested in the Modrinth App instance back into the repository |
 | `cd pack && packwiz refresh` | Regenerates `index.toml` after any change to `pack/` |
 | `cd pack && packwiz mr export` | Produces the `.mrpack` locally |

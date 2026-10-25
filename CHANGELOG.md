@@ -40,12 +40,15 @@ No version has been published yet: everything below will make up `0.1.0`.
 - First-person gestures: Punchy! 2.8g, set to a restrained level, with EMF configured so that it alone animates the arm.
 - Lamb Lanterns: a lantern carried at the hip gives light.
 - Interface: Dark Coffee GUI and Modded Coffee GUI packs, active on first launch. Hunger bar from Dark Coffee GUI - Extras (Normal Hunger) in place of the coffee beans.
+- Terrain: Tectonic and Streams Reflowing under No Man's Land's biomes; Monoliths protected from streams ([0011](docs/decisions/0011-tectonic-streams-distant-horizons.md)).
+- Far view: Distant Horizons, hidden by the mist and revealed in clearings by the new `horizon` module of the `fallow` mod 0.3.0, which also fixes two Distant Horizons 3.3.3 crashes (world creation with Chunky, Apple Silicon Macs); French translation of Distant Horizons and Tectonic ([0011](docs/decisions/0011-tectonic-streams-distant-horizons.md)).
 
 ### Removed
 - Untitled Duck Mod (team choice): the Naturalist duck returns, and the No Man's Land goose's offering line now targets that duck.
 - AA4 Atlas: compiled for Antique Atlas 2, it called `AtlasScreen.prepareToOpen()` with the old return type and crashed the game when opening the atlas (crash report from testing). The atlas opens with the Antique Atlas key.
 - Entity Culling: breaks Create Aeronautics and Sable contraptions.
 - Clumps: experience orbs no longer exist.
+- MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 
 ### Changed
 - No Man's Land fauna: Mixed Litter's remodels and NML's textures on vanilla animals are disabled, for Fresh Animations; deer, goose, _bar à serpe_ (a fish), turtle and Frienderman no longer spawn, are removed from the Wildex, and their 15 items no longer have a recipe or a place in EMI ([NML fauna](docs/plan/faune-nml.md)).
@@ -60,6 +63,8 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Repository reorganised: `README` and `CONTRIBUTING` rewritten, documentation index, roadmap, `docs/plan/` location for the modpack plan, `docs/` renamed `docs/conception/`, mod registry sorted by domain.
 - Branches `test/agriculture`, `test/faune` and `test/structures` merged into `main`.
 - No Man's Land 1.5.12 → 1.6.1: ancestral tools (ritual pickaxe, oath sword, bronze bell and chisel), lunar and solar tiles; new texts translated.
+- ATMOSPHERICS preset `fallow_v3`: the mist of the clearings ends at 500 blocks by day and 260 at night (124 and 84 before), so that the far landscape can be seen there.
+- Duplicate `docs/plans/` and `docs/specs/` removed (copies of `docs/conception/`).
 - Kaleidoscope Cookery 1.5.1 → 1.6.0: 1.5.1 crashed the game on loading with Kaleidoscope Compat 2.9.7 (`MillstoneBlockEntityMixin` mixin), observed on the test server.
 
 ### Fixed

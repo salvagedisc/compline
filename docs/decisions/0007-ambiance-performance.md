@@ -1,7 +1,7 @@
 # 0007 — Atmosphere & performance
 
 - **Date**: 2026-09-24
-- **Status**: kept (tested on `test/structures`, merged into `main` on 2026-10-10); Distant Horizons, Separate Sable Render Distance and Particle Rain pending
+- **Status**: kept (tested on `test/structures`, merged into `main` on 2026-10-10); Distant Horizons kept by [0011](0011-tectonic-streams-distant-horizons.md) on 2026-10-25; Separate Sable Render Distance and Particle Rain pending
 
 ## Atmosphere (no shader: Aeronautics has known problems with Iris)
 | Mod | Side | Role |

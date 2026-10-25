@@ -8,7 +8,7 @@
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v2.json          the mist, biome by biome, and the sand
+    ├── atmospherics/preset/fallow_v3.json          the mist, biome by biome, and the sand
     ├── fallow/polytone/biome_modifiers/*.json      grass, foliage, water (23 files)
     ├── fallow/polytone/colored_lights/*.json       colour of fire, soul and moonlight
     ├── minecraft/textures/environment/moon_phases.png   the moon, in the style of the ATMOSPHERICS sun
@@ -26,7 +26,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - The file is a complete configuration: it **replaces** `config/ambientfog/biome_fog.json`, including the player's tweaks.
 - Consequences:
   - a single preset in the pack;
-  - to ship a new version, **rename** the file (`fallow_v2.json`) and delete the old one, otherwise it is not reapplied;
+  - to ship a new version, **rename** the file (`fallow_v3.json` → `fallow_v4.json`) and delete the old one, otherwise it is not reapplied;
   - each new version overwrites the players' ATMOSPHERICS settings.
 - The file starts from the mod's original preset (version 43, all global settings kept). Only `presetName`, `presetAuthor` and the biome profiles change.
 - The mod's bounds are respected: intensity 0-4, density 0.2-5, veil 0-3, particles 0-3.
@@ -56,10 +56,10 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 |---|---|---|---|---|
 | **Misty** | 0 → 52 | -2 → 34 | 3 / 3 | strong (1.6) |
 | **Veiled** | 6 → 96 | 0 → 56 | 2.5 / 2.2 | medium (1.15) |
-| **Clearing** | 28 → 124 | 8 → 84 | 1.5 / 1.2 | off |
+| **Clearing** | 40 → 500 (v3; 28 → 124 before) | 16 → 260 (v3; 8 → 84 before) | 1.5 / 1.2 | off |
 
 - 10.3 spoke of "open" biomes. The maintainer wants a thick mist in general: they become **veiled**, still misty but markedly less so.
-- Only the clearings open up the view. Their 124 blocks stay below the view distance, to hide the chunk edge.
+- Only the clearings open up the view. Since v3 (2026-10-25, [0011](../decisions/0011-tectonic-streams-distant-horizons.md)) their mist ends at 500 blocks by day, well beyond the 128 blocks of terrain: Distant Horizons draws the landscape beyond, fogged with the same curve by the `horizon` module of the `fallow` mod ([mod-fallow](mod-fallow.md#horizon-module)). Without Distant Horizons, the edge of the terrain shows at 128 blocks in a clearing: the price of the far view.
 
 | Family | No Man's Land biomes | Vanilla (Overworld, surface) |
 |---|---|---|
@@ -157,7 +157,7 @@ Contraption Lights' coloured light stays off (its default value): Polytone alone
 
 1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].
    - Tune with the ATMOSPHERICS editor.
-   - Export, then save as `fallow_v3.json` while deleting `fallow_v2.json`.
+   - Export, then save as `fallow_v4.json` while deleting `fallow_v3.json`.
 2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
 3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2). No use testing before the `fallow:clairiere` biome exists in `pack/kubejs/data/`.
 4. **The clearing biome**, once created:

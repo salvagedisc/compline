@@ -4,16 +4,17 @@ One record per settled decision: the context, the options compared, the choice a
 
 | No. | Subject | Status |
 |---|---|---|
-| [0001](0001-nml-vs-terralith.md) | Worldgen: No Man's Land vs Terralith + Streams Reflowing | NML kept; Terralith to be tested as a competing preset |
+| [0001](0001-nml-vs-terralith.md) | Worldgen: No Man's Land vs Terralith + Streams Reflowing | Superseded by 0011 |
 | [0002](0002-agriculture.md) | Farming & animal husbandry | Farm & Charm, Ecliptic Seasons, KC-Automation kept; animal husbandry and preservation pending |
 | [0003](0003-faune.md) | Fauna | Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs and companions kept |
 | [0004](0004-structures.md) | Structures & villagers | Sparse Structures kept, End removed, "survivors" concept |
 | [0005](0005-quark.md) | Quark: the essentials only | Config provided |
 | [0006](0006-supplementaries.md) | Supplementaries: the essentials only | Config provided |
-| [0007](0007-ambiance-performance.md) | Atmosphere & performance | Kept; Distant Horizons pending |
+| [0007](0007-ambiance-performance.md) | Atmosphere & performance | Kept; Distant Horizons kept by 0011 |
 | [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback |
 | [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `fallow` mod 0.2.0 |
 | [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
+| [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing on NML; Distant Horizons hidden by the mist, `horizon` module |
 
 ## Template
 

@@ -2,7 +2,7 @@
 
 Minecraft **1.21.1**, NeoForge 21.1.251, packwiz, mods from Modrinth only. The plan builds on the [vision](../vision.md) and the [decisions](../decisions/README.md); the full list of mods, with their status, is in the [registry](../mods.md).
 
-> **Status as of 2026-10-18.** The plan has not yet been applied to `pack/`: it is waiting for the maintainer's approval (decisions in [10.12](10-recentrage.md#1012-decisions-to-validate-replaces-84) and [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012)). Nothing has been tested in game yet.
+> **Status as of 2026-10-25.** Most of the plan is applied to `pack/` (see the [registry](../mods.md) and the [changelog](../../CHANGELOG.md)); the clearings, the Dissipator, the zoo, the survivors and the closing of the End are still drafts ([kubejs-brouillons/](kubejs-brouillons/)). The pack starts on a dedicated server, but nothing has been tested in game with a player yet.
 
 ## What Fallow is aiming for
 
