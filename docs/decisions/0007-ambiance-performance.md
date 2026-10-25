@@ -1,35 +1,35 @@
-# 0007 — Ambiance & performance
+# 0007 — Atmosphere & performance
 
-- **Date** : 2026-09-24
-- **Statut** : retenus (testés sur `test/structures`, fusionnés dans `main` le 2026-10-10) ; Distant Horizons, Separate Sable Render Distance et Particle Rain en attente
+- **Date**: 2026-09-24
+- **Status**: kept (tested on `test/structures`, merged into `main` on 2026-10-10); Distant Horizons, Separate Sable Render Distance and Particle Rain pending
 
-## Ambiance (sans shader : Aeronautics a des problèmes connus avec Iris)
-| Mod | Côté | Rôle |
+## Atmosphere (no shader: Aeronautics has known problems with Iris)
+| Mod | Side | Role |
 |---|---|---|
-| **ATMOSPHERICS** | C | Brouillard, ciel, nuages, brume réglables par biome, jour/nuit séparés ; presets partageables. Ne pas activer « Improved Transparency » dans Sodium. |
-| **AmbientSounds** (+ CreativeCore) | C | Ambiances sonores par biome, heure, altitude (vent, oiseaux, insectes, gouttes dans les grottes) |
-| **Sound Physics Remastered** | CS | Réverbération et occlusion : les grottes et vallées sonnent comme telles. Version 1.21.1 marquée alpha mais très répandue. |
-| **Subtle Effects** | CS | Détails de particules (étincelles, fumée, poussière) ; certains effets à couper (config) |
-| **LambDynamicLights** | C | La torche tenue en main éclaire |
-| **More Darkness** | CS | Nuits réglées par la lune, grottes noires, adaptation de l'œil. Jeune (14 k) mais client : réversible |
+| **ATMOSPHERICS** | C | Fog, sky, clouds, mist adjustable per biome, separate day/night; shareable presets. Do not enable "Improved Transparency" in Sodium. |
+| **AmbientSounds** (+ CreativeCore) | C | Sound ambiences by biome, time, altitude (wind, birds, insects, drips in caves) |
+| **Sound Physics Remastered** | CS | Reverberation and occlusion: caves and valleys sound like what they are. The 1.21.1 version is marked alpha but very widely used. |
+| **Subtle Effects** | CS | Particle details (sparks, smoke, dust); some effects to be turned off (config) |
+| **LambDynamicLights** | C | A torch held in hand gives light |
+| **More Darkness** | CS | Nights governed by the moon, black caves, eye adaptation. Young (14 k) but client-side: reversible |
 
-Écartés : Fog (plus mis à jour depuis 2025-10, doublon d'ATMOSPHERICS), FogRule (alpha, exige Lootr), Presence Footsteps, Falling Leaves, Visuality, Cave Dust, True Darkness (pas de version NeoForge 1.21.1).
+Rejected: Fog (not updated since 2025-10, duplicates ATMOSPHERICS), FogRule (alpha, requires Lootr), Presence Footsteps, Falling Leaves, Visuality, Cave Dust, True Darkness (no NeoForge 1.21.1 version).
 
 ## Performance
-| Mod | Côté | Rôle / compatibilité vérifiée |
+| Mod | Side | Role / verified compatibility |
 |---|---|---|
-| **Sodium** 0.8.13 | C | Rendu ; Sable exige ≥ 0.8.12, Create ≥ 0.6.9 |
-| **ImmediatelyFast**, **Entity Culling** | C | Rendu immédiat, masquage des entités invisibles |
-| **ModernFix**, **FerriteCore** | CS | Temps de chargement, mémoire |
-| **Lithium** 0.15.4 | CS | Logique serveur ; Create exige ≥ 0.14.7 |
-| **Chunky** | CS | Prégénération du monde (serveur) |
-| **spark** | CS | Profilage (diagnostic des ralentissements) |
-| **Clumps** | CS | Fusion des orbes d'expérience |
-| **Structure Layout Optimizer** (+ Resourceful Config) | CS | Génération des grandes structures |
+| **Sodium** 0.8.13 | C | Rendering; Sable requires ≥ 0.8.12, Create ≥ 0.6.9 |
+| **ImmediatelyFast**, **Entity Culling** | C | Immediate-mode rendering, hiding of invisible entities |
+| **ModernFix**, **FerriteCore** | CS | Loading time, memory |
+| **Lithium** 0.15.4 | CS | Server logic; Create requires ≥ 0.14.7 |
+| **Chunky** | CS | World pregeneration (server) |
+| **spark** | CS | Profiling (diagnosing slowdowns) |
+| **Clumps** | CS | Merging of experience orbs |
+| **Structure Layout Optimizer** (+ Resourceful Config) | CS | Generation of large structures |
 
-Écartés : C2ME (alpha), Noisium (pas à jour), MoreCulling (gain marginal), Alternate Current (peu de redstone), Ksyxis.
+Rejected: C2ME (alpha), Noisium (not up to date), MoreCulling (marginal gain), Alternate Current (little redstone), Ksyxis.
 
-## En attente
-- **Distant Horizons** : voir une montagne à des centaines de blocs sert directement l'exploration, mais coûte cher (GPU, RAM, génération côté serveur). Compatible Ecliptic. À tester sur sa propre branche.
-- **Separate Sable Render Distance** (bêta) : distance de rendu dédiée aux engins Aeronautics.
-- **Particle Rain** (bêta) : particules de pluie/neige et brume d'orage ; possible doublon avec les effets d'Ecliptic.
+## Pending
+- **Distant Horizons**: seeing a mountain hundreds of blocks away directly serves exploration, but is expensive (GPU, RAM, server-side generation). Compatible with Ecliptic. To be tested on its own branch.
+- **Separate Sable Render Distance** (beta): a dedicated render distance for Aeronautics contraptions.
+- **Particle Rain** (beta): rain/snow particles and storm mist; possible duplicate of Ecliptic's effects.

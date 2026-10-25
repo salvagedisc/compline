@@ -1,38 +1,38 @@
-# Décisions
+# Decisions
 
-Une fiche par décision tranchée : le contexte, les options comparées, le choix et ses conditions. Une fiche n'est pas réécrite après coup ; si une décision change, une nouvelle fiche la remplace et l'ancienne passe au statut « remplacée par NNNN ».
+One record per settled decision: the context, the options compared, the choice and its conditions. A record is not rewritten after the fact; if a decision changes, a new record replaces it and the old one moves to the status "superseded by NNNN".
 
-| N° | Sujet | Statut |
+| No. | Subject | Status |
 |---|---|---|
-| [0001](0001-nml-vs-terralith.md) | Worldgen : No Man's Land vs Terralith + Streams Reflowing | NML retenu ; Terralith à tester en preset concurrent |
-| [0002](0002-agriculture.md) | Agriculture & élevage | Farm & Charm, Ecliptic Seasons, KC-Automation retenus ; élevage et conservation en attente |
-| [0003](0003-faune.md) | Faune | Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs et compagnons retenus |
-| [0004](0004-structures.md) | Structures & villageois | Sparse Structures retenu, End supprimé, concept « survivants » |
-| [0005](0005-quark.md) | Quark : l'essentiel uniquement | Config fournie |
-| [0006](0006-supplementaries.md) | Supplementaries : l'essentiel uniquement | Config fournie |
-| [0007](0007-ambiance-performance.md) | Ambiance & performance | Retenus ; Distant Horizons en attente |
-| [0008](0008-enchantement.md) | Enchantement | Immersive Enchanting retenu ; Matrix de Quark en repli |
-| [0009](0009-xp.md) | Retrait de l'expérience | Retenu ; module `xp` du mod `fallow` 0.2.0 |
-| [0010](0010-musique.md) | Musique | True Adaptive Music et paquet `fallow` retenus ; Reactive Music écarté |
+| [0001](0001-nml-vs-terralith.md) | Worldgen: No Man's Land vs Terralith + Streams Reflowing | NML kept; Terralith to be tested as a competing preset |
+| [0002](0002-agriculture.md) | Farming & animal husbandry | Farm & Charm, Ecliptic Seasons, KC-Automation kept; animal husbandry and preservation pending |
+| [0003](0003-faune.md) | Fauna | Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs and companions kept |
+| [0004](0004-structures.md) | Structures & villagers | Sparse Structures kept, End removed, "survivors" concept |
+| [0005](0005-quark.md) | Quark: the essentials only | Config provided |
+| [0006](0006-supplementaries.md) | Supplementaries: the essentials only | Config provided |
+| [0007](0007-ambiance-performance.md) | Atmosphere & performance | Kept; Distant Horizons pending |
+| [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback |
+| [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `fallow` mod 0.2.0 |
+| [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
 
-## Modèle
+## Template
 
 ```markdown
-# NNNN — Sujet
+# NNNN — Subject
 
-- **Date** : AAAA-MM-JJ
-- **Statut** : retenu / en test sur `test/<sujet>` / en attente / remplacée par NNNN
+- **Date**: YYYY-MM-DD
+- **Status**: kept / under test on `test/<subject>` / pending / superseded by NNNN
 
-## Contexte
-Pourquoi la question se pose, ce que la vision exige.
+## Context
+Why the question arises, what the vision requires.
 
 ## Options
-| Critère | Option A | Option B |
+| Criterion | Option A | Option B |
 |---|---|---|
 
-## Décision
-Le choix, et les conditions qui l'accompagnent (configs, scripts KubeJS, réglages).
+## Decision
+The choice, and the conditions that go with it (configs, KubeJS scripts, settings).
 
-## Écartés
-- Mod : raison.
+## Rejected
+- Mod: reason.
 ```

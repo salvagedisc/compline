@@ -1,32 +1,32 @@
-# 0010 — Musique
+# 0010 — Music
 
-- **Date** : 2026-10-19
-- **Statut** : retenu (choix de l'équipe) ; 29 morceaux choisis à l'écoute par l'équipe, pas encore entendus en jeu
+- **Date**: 2026-10-19
+- **Status**: kept (team choice); 29 tracks chosen by ear by the team, not yet heard in game
 
-## Contexte
-L'équipe veut de la musique « dans le style de ce que l'on construit, avec de belles transitions », sans perdre le silence. Le pack joue déjà la musique vanilla toutes les 10 à 20 minutes, avec trois morceaux de No Man's Land ; il manque des contextes (brume, clairière, saison, lune, dirigeable) et des transitions. Étude complète : [recherche musique](../plan/recherche/2026-10-19/musique.md).
+## Context
+The team wants music "in the style of what we are building, with beautiful transitions", without losing silence. The pack already plays vanilla music every 10 to 20 minutes, with three No Man's Land tracks; it lacks contexts (mist, clearing, season, moon, airship) and transitions. Full study: [music research](../plan/recherche/2026-10-19/musique.md).
 
 ## Options
-| Critère | True Adaptive Music | Reactive Music | Music Moods + Ecliptic |
+| Criterion | True Adaptive Music | Reactive Music | Music Moods + Ecliptic |
 |---|---|---|---|
-| Silence entre morceaux | Réglable par situation, avec part de hasard | 2 min au plus, codé en dur | Délais vanilla, réglables par biome et saison |
-| Contextes | 42 prédicats, dont biome et tag, hauteur, boss, météo, et conditions de butin évaluées par le serveur | Évènements fixes, biome, dimension ; ni lune, ni saison, ni structure | Saison, moment, pluie, biome |
-| Musique livrée | Aucune : on choisit | 61 MP3 celtiques imposés, 295 Mo | Aucune |
-| Musique de NML et d'Ecliptic | Gardée par les nœuds `vanillaMusic` | Coupée | Gardée |
-| Poids | 11,3 Mo | 294,8 Mo | 0,33 Mo |
+| Silence between tracks | Adjustable per situation, with a random share | 2 min at most, hard-coded | Vanilla delays, adjustable per biome and season |
+| Contexts | 42 predicates, including biome and tag, height, boss, weather, and loot conditions evaluated by the server | Fixed events, biome, dimension; no moon, season or structure | Season, time of day, rain, biome |
+| Music supplied | None: you choose | 61 imposed Celtic MP3s, 295 MB | None |
+| NML and Ecliptic music | Kept through `vanillaMusic` nodes | Cut | Kept |
+| Weight | 11.3 MB | 294.8 MB | 0.33 MB |
 
-## Décision
-**True Adaptive Music 2.9.3**, côté client et serveur, avec le paquet `fallow` ([musique](../plan/musique.md)) :
-- un arbre de 11 situations, des silences de 4 à 20 minutes, les morceaux joués jusqu'au bout ;
-- 29 morceaux gardés par l'équipe à l'écoute : 12 déjà dans le jeu (vanilla et No Man's Land), 3 du pack de ressources *Supernova* (Modrinth, CC-BY-NC-SA 4.0, usage gratuit permis), 10 libres livrés dans `fallow-ambiance` avec leurs crédits (Scott Buckley et Kevin MacLeod en CC-BY 4.0, HoliznaCC0 en CC0), ramenés à −23 LUFS avec des fondus ;
-- `musique.js` pose sur le joueur les états que le client ne voit pas (monument, lune, à bord) ; les saisons passent par la condition de butin d'Ecliptic ;
-- un seul morceau à l'approche d'un monument, rien pendant les combats de boss ;
-- paquet choisi au premier lancement par Default Options, musique à 40 %.
+## Decision
+**True Adaptive Music 2.9.3**, client and server side, with the `fallow` pack ([music](../plan/musique.md)):
+- a tree of 11 situations, silences of 4 to 20 minutes, tracks played to the end;
+- 29 tracks kept by the team after listening: 12 already in the game (vanilla and No Man's Land), 3 from the *Supernova* resource pack (Modrinth, CC-BY-NC-SA 4.0, free use permitted), 10 free tracks shipped in `fallow-ambiance` with their credits (Scott Buckley and Kevin MacLeod under CC-BY 4.0, HoliznaCC0 under CC0), normalised to −23 LUFS with fades;
+- `musique.js` sets on the player the states the client cannot see (monument, moon, aboard); the seasons go through Ecliptic's loot condition;
+- a single track on approaching a monument, nothing during boss fights;
+- pack selected on first launch by Default Options, music at 40%.
 
-Repli si TAM pose problème : Music Moods pour les fondus, fichiers `background_music` d'Ecliptic, champ `music` des clairières (recherche, 2.5).
+Fallback if TAM causes problems: Music Moods for the fades, Ecliptic's `background_music` files, the `music` field of clearings (research, 2.5).
 
-## Écartés
-- Reactive Music : silence de 2 min au plus, 295 Mo de musiques celtiques imposées, coupe la musique de NML et d'Ecliptic, aucune condition de lune, de saison ni de structure.
-- Music and Melody, The Immersive Music Mod : lourds (246 et 155 Mo), musiques sous droits, ni lune ni saison.
-- Music Triggers : alpha, Serene Seasons seulement.
-- Mini Music Tweaks, Simple Music Control et semblables : ils raccourcissent le silence.
+## Rejected
+- Reactive Music: silence of 2 min at most, 295 MB of imposed Celtic music, cuts NML and Ecliptic music, no moon, season or structure condition.
+- Music and Melody, The Immersive Music Mod: heavy (246 and 155 MB), copyrighted music, no moon or season.
+- Music Triggers: alpha, Serene Seasons only.
+- Mini Music Tweaks, Simple Music Control and similar: they shorten the silence.

@@ -1,29 +1,29 @@
 # Fallow — Vision
 
 ## Pitch
-Un monde immense, humide et presque abandonné. Une poignée de joueurs y arrive, s'installe, puis repousse lentement la frontière : cabane, ferme, hameau, voie ferrée, usine, aérodrome, colonies lointaines. Il n'y a pas de fin : le monde permanent sert à perfectionner ses installations.
+A vast, damp, almost abandoned world. A handful of players arrive, settle in, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. There is no end: the permanent world is for perfecting one's installations.
 
-## Direction artistique
-- Brume, distance, silhouettes : le monde est difficile à lire de loin.
-- Solitude et étrangeté diffuse, **sans horreur** ni jumpscare.
-- La base est un îlot de lumière ; s'en éloigner, c'est perdre ses repères.
-- Pas de shader imposé (Create Aeronautics a des problèmes connus avec Iris) : l'ambiance vient du worldgen, du brouillard, des sons et de l'éclairage.
+## Art direction
+- Mist, distance, silhouettes: the world is hard to read from afar.
+- Solitude and a lingering strangeness, **without horror** or jumpscares.
+- The base is an island of light; moving away from it means losing one's bearings.
+- No imposed shader (Create Aeronautics has known problems with Iris): the atmosphere comes from worldgen, fog, sounds and lighting.
 
-## Trois piliers
-1. **Exploration** — « Je me demande ce qu'il y a là-bas », pas « il me faut X diamants ». Inspiration : Zelda Breath of the Wild. Pas de coordonnées : la carte se construit (Antique Atlas).
-2. **Civilisation** — Artisanat (Overgeared) → atelier → industrie (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics).
-3. **Vie quotidienne** — Eau → agriculture → élevage → cuisine (Kaleidoscope Cookery) → conservation → expédition.
+## Three pillars
+1. **Exploration** — "I wonder what's over there", not "I need X diamonds". Inspiration: Zelda Breath of the Wild. No coordinates: the map builds itself (Antique Atlas).
+2. **Civilisation** — Crafting (Overgeared) → workshop → industry (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics).
+3. **Daily life** — Water → farming → animal husbandry → cooking (Kaleidoscope Cookery) → preservation → expedition.
 
-## Survie
-Plus dure par l'environnement (température, soif, saisons), pas par le combat. Peu de créatures hostiles, rares, territoriales et soignées (modèles et animations de qualité). Aucun monstre vanilla.
+## Survival
+Harder because of the environment (temperature, thirst, seasons), not because of combat. Few hostile creatures: rare, territorial and polished (quality models and animations). No vanilla monsters.
 
-## Interdits
-- Minimap, waypoints, téléportation.
-- Monstres vanilla hostiles, difficulté par hordes.
-- End / Elytra (supprimés, [décision 0004](decisions/0004-structures.md)).
-- Empilement d'addons Create ou de mods de nourriture qui se chevauchent.
+## Prohibitions
+- Minimap, waypoints, teleportation.
+- Hostile vanilla monsters, difficulty through hordes.
+- End / Elytra (removed, [decision 0004](decisions/0004-structures.md)).
+- Piling up Create addons or overlapping food mods.
 
-## Règles de travail
-- Chaque suggestion est une hypothèse : on compare réellement avant de trancher.
-- Filtre des 5 questions pour tout mod : change-t-il le gameplay ? s'intègre-t-il aux autres systèmes ? reste-t-il intéressant après 100 h ? apporte-t-il une mécanique plutôt que du contenu ? évite-t-il les doublons ?
-- « Ajoute 200 objets » n'est pas un argument ; « transforme une activité en métier » en est un.
+## Working rules
+- Every suggestion is a hypothesis: we compare for real before deciding.
+- The 5-question filter for every mod: does it change the gameplay? does it fit with the other systems? is it still interesting after 100 hours? does it bring a mechanic rather than content? does it avoid overlaps?
+- "Add 200 items" is not an argument; "turns an activity into a craft" is.

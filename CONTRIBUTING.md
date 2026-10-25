@@ -1,68 +1,68 @@
-# Contribuer à Fallow
+# Contributing to Fallow
 
-Conventions de travail du dépôt. Elles valent pour les humains comme pour les agents.
+Working conventions for the repository. They apply to everyone who contributes.
 
-## Principes
+## Principles
 
-- **Le dépôt est la source de vérité** du pack : liste de mods, configs, scripts et décisions.
-- **Stabilité avant nouveauté** : versions figées, mises à jour une par une, jamais `packwiz update --all`.
-- **Tout mod vient de Modrinth** et existe pour Minecraft 1.21.1 / NeoForge. Un mod indisponible est signalé, jamais remplacé par une source tierce.
-- **Seul `pack/` finit dans le `.mrpack`** : la doc, les scripts et la CI n'y entrent jamais.
-- Docs et messages en **français** ; identifiants de code en anglais.
+- **The repository is the source of truth** for the pack: mod list, configs, scripts and decisions.
+- **Stability before novelty**: versions are pinned and updated one by one, never with `packwiz update --all`.
+- **Every mod comes from Modrinth** and exists for Minecraft 1.21.1 / NeoForge. An unavailable mod is flagged, never replaced by a third-party source.
+- **Only `pack/` ends up in the `.mrpack`**: docs, scripts and CI never go into it.
+- Docs, commit messages and code identifiers in **English**; in-game text stays in the language of each translation file.
 
-## Où ranger quoi
+## Where to put what
 
-| Contenu | Emplacement |
+| Content | Location |
 |---|---|
-| Mod (métadonnées packwiz) | `pack/mods/<slug>.pw.toml` |
-| Config commune d'un mod | `pack/config/` |
-| Config appliquée à chaque nouveau monde (serverconfig) | `pack/defaultconfigs/` |
-| Script KubeJS (registres, items, tags) | `pack/kubejs/startup_scripts/` |
-| Script KubeJS (recettes, règles serveur, apparitions) | `pack/kubejs/server_scripts/` |
-| Script KubeJS (affichage, JEI/EMI, tooltips) | `pack/kubejs/client_scripts/` |
-| Traduction française d'un mod (langue, livres) | `pack/kubejs/assets/<namespace>/` |
-| Données datapack (worldgen, loot tables, tags, structures) | `pack/kubejs/data/fallow/` (ou `data/<namespace>/` pour surcharger un mod) |
-| Outillage (Node.js, sans dépendance) | `scripts/` + tests dans `scripts/test/` |
-| Plan complet du modpack | `docs/plan/` |
-| Décision tranchée (comparaison, choix) | `docs/decisions/NNNN-sujet.md` |
-| Spec ou plan d'implémentation d'un sous-projet | `docs/conception/specs/`, `docs/conception/plans/` |
+| Mod (packwiz metadata) | `pack/mods/<slug>.pw.toml` |
+| Shared config of a mod | `pack/config/` |
+| Config applied to every new world (serverconfig) | `pack/defaultconfigs/` |
+| KubeJS script (registries, items, tags) | `pack/kubejs/startup_scripts/` |
+| KubeJS script (recipes, server rules, spawns) | `pack/kubejs/server_scripts/` |
+| KubeJS script (display, JEI/EMI, tooltips) | `pack/kubejs/client_scripts/` |
+| French translation of a mod (language files, books) | `pack/kubejs/assets/<namespace>/` |
+| Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/fallow/` (or `data/<namespace>/` to override a mod) |
+| Tooling (Node.js, dependency-free) | `scripts/` + tests in `scripts/test/` |
+| Full modpack plan | `docs/plan/` |
+| Settled decision (comparison, choice) | `docs/decisions/NNNN-subject.md` |
+| Spec or implementation plan of a sub-project | `docs/conception/specs/`, `docs/conception/plans/` |
 
-Les datapacks passent par KubeJS : NeoForge ne charge pas de datapack global sans mod supplémentaire, alors que `kubejs/data/` est actif sur tous les mondes.
+Datapacks go through KubeJS: NeoForge does not load a global datapack without an additional mod, whereas `kubejs/data/` is active in every world.
 
-## Ajouter, mettre à jour ou retirer un mod
+## Adding, updating or removing a mod
 
-1. Vérifier sa disponibilité sur Modrinth pour 1.21.1 NeoForge.
-2. Le passer au **filtre des 5 questions** ([vision](docs/vision.md)) : change-t-il le gameplay ? s'intègre-t-il ? tient-il 100 h ? apporte-t-il une mécanique ? évite-t-il les doublons ?
-3. L'ajouter : `cd pack && packwiz mr add <slug>` (ou `npm run sync`), puis vérifier son côté (`client` / `server` / `both`).
-4. Lancer `npm run check-deps` : Modrinth ne déclare pas toujours toutes les dépendances.
-   Puis `npm run check-fr` : tout texte du mod doit être en français ([traduction](docs/plan/traduction.md)).
-5. Mettre à jour [docs/mods.md](docs/mods.md) et, si une comparaison a eu lieu, créer une fiche dans [docs/decisions/](docs/decisions/README.md).
-6. Ajouter une ligne au `CHANGELOG.md` (section `[Unreleased]`).
-7. **Un commit par mod** :
+1. Check its availability on Modrinth for 1.21.1 NeoForge.
+2. Run it through the **5-question filter** ([vision](docs/vision.md)): does it change the gameplay? does it fit in? does it hold up for 100 hours? does it bring a mechanic? does it avoid overlaps?
+3. Add it: `cd pack && packwiz mr add <slug>` (or `npm run sync`), then check its side (`client` / `server` / `both`).
+4. Run `npm run check-deps`: Modrinth does not always declare every dependency.
+   Then `npm run check-fr`: all of the mod's text must be in French ([translation](docs/plan/traduction.md)).
+5. Update [docs/mods.md](docs/mods.md) and, if a comparison took place, create a record in [docs/decisions/](docs/decisions/README.md).
+6. Add a line to `CHANGELOG.md` (`[Unreleased]` section).
+7. **One commit per mod**:
    - `feat(mods): add <slug>`
    - `chore(mods): update <slug> x → y`
    - `feat(mods)!: remove <slug>`
 
-Autres préfixes : `feat(config): …`, `feat(kubejs): …`, `feat(sync): …`, `docs: …`, `ci: …`, `chore: …`.
+Other prefixes: `feat(config): …`, `feat(kubejs): …`, `feat(sync): …`, `docs: …`, `ci: …`, `chore: …`.
 
-`index.toml` est généré : après toute modification de `pack/`, lancer `packwiz refresh` dans `pack/`. La CI échoue si l'index n'est pas à jour.
+`index.toml` is generated: after any change to `pack/`, run `packwiz refresh` in `pack/`. CI fails if the index is out of date.
 
-## Branches et PR
+## Branches and PRs
 
-- `main` est **toujours jouable** ; les tags `vX.Y.Z` y sont posés.
-- Les essais se font sur `test/<sujet>` (ex. `test/distant-horizons`), puis sont fusionnés dans `main` par PR ou abandonnés. Une branche fusionnée est supprimée.
-- Chaque push et chaque PR lancent `build` : tests, vérification des dépendances, index à jour, export du `.mrpack` en artefact. Une PR n'est fusionnée qu'au vert.
+- `main` is **always playable**; the `vX.Y.Z` tags are placed on it.
+- Experiments happen on `test/<subject>` (e.g. `test/distant-horizons`), then are merged into `main` by PR or abandoned. A merged branch is deleted.
+- Every push and every PR runs `build`: tests, dependency check, up-to-date index, `.mrpack` export as an artifact. A PR is merged only when it is green.
 
-## Versions et release
+## Versions and release
 
-- `0.x` : prototype, mondes jetables.
-- `1.0.0` : lancement du monde permanent.
-- Après `1.0.0`, tout changement qui retire des blocs ou objets ou modifie le worldgen est une **version majeure** et impose une sauvegarde du monde avant mise à jour.
+- `0.x`: prototype, disposable worlds.
+- `1.0.0`: launch of the permanent world.
+- After `1.0.0`, any change that removes blocks or items or modifies worldgen is a **major version** and requires a world backup before updating.
 
-Pour publier : passer la section `[Unreleased]` du `CHANGELOG.md` sous `[X.Y.Z]`, mettre la même version dans `pack/pack.toml`, `packwiz refresh`, puis poser le tag `vX.Y.Z` sur `main`. Le workflow `release` vérifie la concordance, exporte le `.mrpack` et crée la release GitHub. La publication Modrinth reste désactivée tant que `MODRINTH_PROJECT_ID` (variable) et `MODRINTH_TOKEN` (secret, saisi par le propriétaire) n'existent pas.
+To publish: move the `[Unreleased]` section of `CHANGELOG.md` under `[X.Y.Z]`, set the same version in `pack/pack.toml`, run `packwiz refresh`, then place the `vX.Y.Z` tag on `main`. The `release` workflow checks that they match, exports the `.mrpack` and creates the GitHub release. Publication to Modrinth stays disabled until `MODRINTH_PROJECT_ID` (variable) and `MODRINTH_TOKEN` (secret, entered by the owner) exist.
 
-## Instance de test
+## Test instance
 
-Les essais en jeu se font dans une instance **« Fallow test »** du Modrinth App. `npm run sync -- --instance "Fallow test"` compare l'instance au pack (via l'API Modrinth), affiche le diff et applique les commandes packwiz après confirmation ; `--configs` copie aussi les configs modifiées, `--dry-run` montre le diff sans rien appliquer. Le script ne modifie jamais l'instance.
+In-game testing is done in a **"Fallow test"** instance of the Modrinth App. `npm run sync -- --instance "Fallow test"` compares the instance with the pack (via the Modrinth API), prints the diff and applies the packwiz commands after confirmation; `--configs` also copies the modified configs, and `--dry-run` shows the diff without applying anything. The script never modifies the instance.
 
-Sens inverse : `packwiz mr export` puis import du `.mrpack` dans le Modrinth App.
+In the other direction: `packwiz mr export`, then import the `.mrpack` into the Modrinth App.

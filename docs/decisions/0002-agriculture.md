@@ -1,38 +1,38 @@
-# 0002 — Agriculture & élevage
+# 0002 — Farming & animal husbandry
 
-- **Date** : 2026-09-23
-- **Statut** : Farm & Charm, Ecliptic Seasons et KaleidoscopeCookery-Automation retenus (testés sur `test/agriculture`, fusionnés dans `main` le 2026-10-10) ; élevage et conservation en attente
+- **Date**: 2026-09-23
+- **Status**: Farm & Charm, Ecliptic Seasons and KaleidoscopeCookery-Automation kept (tested on `test/agriculture`, merged into `main` on 2026-10-10); animal husbandry and preservation pending
 
-## Fonctions attendues d'une ferme
-Retenues : **A** transformation (chaînes de production), **B** élevage exigeant, **C** saisonnalité, **D** conservation, **F** automatisation Create tardive.
-Non retenue : E, la spécialisation entre joueurs (pas un objectif en soi).
+## Expected functions of a farm
+Kept: **A** processing (production chains), **B** demanding animal husbandry, **C** seasonality, **D** preservation, **F** late Create automation.
+Not kept: E, specialisation between players (not a goal in itself).
 
-## A — Infrastructure agricole : Farm & Charm ✅
-Kaleidoscope Cookery apporte des cultures, un moulin et un épouvantail, mais aucune infrastructure de ferme. Farm & Charm apporte engrais, sol fertilisé, arroseurs, silos, charrue, charrette, puits, poulailler, étable, et de nouvelles céréales.
+## A — Farm infrastructure: Farm & Charm ✅
+Kaleidoscope Cookery brings crops, a mill and a scarecrow, but no farm infrastructure. Farm & Charm brings fertiliser, fertilised soil, sprinklers, silos, a plough, a cart, a well, a chicken coop, a cowshed, and new grains.
 
-**Condition** : Farm & Charm est cantonné à la ferme. Ses stations de cuisine (fourneau, marmite, poêle, rôtissoire) et ses ingrédients en double avec KC (tomate, laitue, farine, pâte) seront masqués ou fusionnés en KubeJS (sous-projet 3). KC reste le seul système de cuisine.
+**Condition**: Farm & Charm is confined to the farm. Its cooking stations (stove, cauldron, pan, rotisserie) and its ingredients that duplicate KC (tomato, lettuce, flour, dough) will be hidden or merged in KubeJS (sub-project 3). KC remains the only cooking system.
 
-## B — Élevage : en attente
-Animal Husbandry (besoins, maladies, génétique) correspond au besoin mais il est jeune (0.4.2). **Mécanique voulue, mod refusé** : Animal Husbandry inquiète (maturité). Chercher une alternative plus tard ; en attendant, élevage vanilla + infrastructure Farm & Charm.
+## B — Animal husbandry: pending
+Animal Husbandry (needs, diseases, genetics) matches the requirement but is young (0.4.2). **Mechanic wanted, mod refused**: Animal Husbandry raises concerns (maturity). Look for an alternative later; in the meantime, vanilla animal husbandry + Farm & Charm infrastructure.
 
-## C — Saisons : Ecliptic Seasons ✅ (sous condition)
+## C — Seasons: Ecliptic Seasons ✅ (conditional)
 | | Serene Seasons | Ecliptic Seasons |
 |---|---|---|
-| Maturité | ★★★★★ | ★★★☆☆ (rc, 1.21.1 en maintenance) |
-| Immersion | ★★★☆☆ | ★★★★★ (24 termes solaires, neige qui s'accumule et fond, durée du jour) |
-| Cultures | Saison | Saison + humidité + serres |
-| Cold Sweat | Intégration native | Aucune → pont KubeJS |
+| Maturity | ★★★★★ | ★★★☆☆ (rc, 1.21.1 in maintenance) |
+| Immersion | ★★★☆☆ | ★★★★★ (24 solar terms, snow that accumulates and melts, day length) |
+| Crops | Season | Season + humidity + greenhouses |
+| Cold Sweat | Native integration | None → KubeJS bridge |
 
-**Condition** : pont KubeJS Ecliptic → Cold Sweat (température saisonnière ressentie par le joueur). Faisabilité vérifiée : Ecliptic expose `EclipticSeasonsApi` (`getSeason`, `getSubSeason`, `getSolarTerm`), Cold Sweat permet d'enregistrer des modificateurs de température en KubeJS. Premier script du sous-projet 3. Si le pont échoue en jeu : retour à Serene Seasons.
+**Condition**: a KubeJS bridge from Ecliptic to Cold Sweat (seasonal temperature felt by the player). Feasibility checked: Ecliptic exposes `EclipticSeasonsApi` (`getSeason`, `getSubSeason`, `getSolarTerm`), and Cold Sweat allows temperature modifiers to be registered in KubeJS. First script of sub-project 3. If the bridge fails in game: fall back to Serene Seasons.
 
-## D — Conservation : en attente
-Spoiled (piloté par données, glacière Cold Sweat compatible) proposé mais refusé : le mod inquiète. **Mécanique voulue** ; chercher une alternative plus tard.
+## D — Preservation: pending
+Spoiled (data-driven, Cold Sweat cooler compatible) was proposed but refused: the mod raises concerns. **Mechanic wanted**; look for an alternative later.
 
-## F — Automatisation : KaleidoscopeCookery-Automation ✅
-Permet au bras mécanique de Create d'alimenter les stations de KC. Le verrouillage de l'automatisation derrière la progression relève du sous-projet 3. Create: Integrated Farming reste à évaluer plus tard.
+## F — Automation: KaleidoscopeCookery-Automation ✅
+Lets Create's mechanical arm feed KC's stations. Locking automation behind progression belongs to sub-project 3. Create: Integrated Farming remains to be evaluated later.
 
-## Écartés
-- Let's Do Bakery : doublon de la pâte/farine de KC.
-- Let's Do Meadow : ajoute des biomes, conflit probable avec No Man's Land.
-- Graze, abreuvoirs automatiques : rendent l'élevage autonome, l'inverse de B.
-- Vinery, Kaleidoscope Tavern : extensions à revoir une fois le socle validé.
+## Rejected
+- Let's Do Bakery: duplicates KC's dough/flour.
+- Let's Do Meadow: adds biomes, likely conflict with No Man's Land.
+- Graze, automatic drinking troughs: make animal husbandry self-sufficient, the opposite of B.
+- Vinery, Kaleidoscope Tavern: extensions to revisit once the foundation is validated.

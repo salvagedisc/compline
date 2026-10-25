@@ -1,19 +1,19 @@
-# 0001 — Worldgen : No Man's Land vs Terralith + Streams Reflowing
+# 0001 — Worldgen: No Man's Land vs Terralith + Streams Reflowing
 
-- **Date** : 2026-09 (conception préalable)
-- **Statut** : NML retenu ; Terralith + Streams Reflowing à tester comme preset concurrent
+- **Date**: 2026-09 (preliminary design)
+- **Status**: NML kept; Terralith + Streams Reflowing to be tested as a competing preset
 
-## Contexte
-Le worldgen porte l'ambiance (solitude, étrangeté) et l'exploration. Tectonic et Downhill Rivers ont été écartés au profit de cette comparaison. Les deux options ne sont pas combinées : ce sont deux presets concurrents.
+## Context
+Worldgen carries the atmosphere (solitude, strangeness) and exploration. Tectonic and Downhill Rivers were set aside in favour of this comparison. The two options are not combined: they are two competing presets.
 
-## Comparaison
-| Critère | NML | Terralith + Streams |
+## Comparison
+| Criterion | NML | Terralith + Streams |
 |---|---|---|
-| Ambiance inquiétante / solitude | ★★★★★ | ★★★★☆ |
-| Cohérence esthétique | ★★★★★ | ★★★★☆ |
-| Diversité / spectaculaire | ★★★★☆ | ★★★★★ |
-| Réalisme géographique, rivières | ★★★☆☆ | ★★★★★ |
-| Simplicité du stack | ★★★★★ | ★★★★☆ |
+| Unsettling atmosphere / solitude | ★★★★★ | ★★★★☆ |
+| Aesthetic coherence | ★★★★★ | ★★★★☆ |
+| Diversity / spectacle | ★★★★☆ | ★★★★★ |
+| Geographic realism, rivers | ★★★☆☆ | ★★★★★ |
+| Stack simplicity | ★★★★★ | ★★★★☆ |
 
-## Décision
-NML gagne sur l'expérience recherchée (« je suis quelque part où je ne devrais peut-être pas être »). Terralith + Streams Reflowing gagne sur la géographie : rivières cohérentes utiles à Create, courants compatibles Sable/Aeronautics. À réévaluer en test réel sur une branche `test/terralith-vs-nml`.
+## Decision
+NML wins on the intended experience ("I am somewhere I perhaps should not be"). Terralith + Streams Reflowing wins on geography: coherent rivers useful to Create, currents compatible with Sable/Aeronautics. To be re-evaluated in a real test on a `test/terralith-vs-nml` branch.

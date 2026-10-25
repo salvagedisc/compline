@@ -1,13 +1,13 @@
-# 0006 — Supplementaries : l'essentiel uniquement
+# 0006 — Supplementaries: the essentials only
 
-- **Date** : 2026-09-24
-- **Statut** : config `pack/config/supplementaries-common.toml`
+- **Date**: 2026-09-24
+- **Status**: config `pack/config/supplementaries-common.toml`
 
-## Activé
-- **Fonctionnel** : corde + poulie (la corde de Quark est désactivée au profit de celle-ci), bocal, cage (capturer de petits animaux : zoo), sac, coffre-fort, urnes des grottes, savon, cadeau, lin (culture pour la corde), robinet, soufflet, plateau tournant.
-- **Construction** : applique, tableau noir, colombage, daub, briques de gravier et de cendre, grille en fer, étagère, jardinière, tableau d'affichage, piédestal, cendre, drapeau, gobelet, globe, panneau de direction (posé par les joueurs), porte-chapeau, auvent, jardinière de fenêtre, balanes.
-- **Outils** : carquois, panier-repas (expéditions), carte en tranche, flèche-corde, flûte (rappeler ses compagnons), **encre antique**.
-- **Ajustements** : livres posables, marqueurs de carte sur les blocs, horloge lisible au clic droit.
+## Enabled
+- **Functional**: rope + pulley (Quark's rope is disabled in favour of this one), jar, cage (capture small animals: zoo), sack, safe, cave urns, soap, gift, flax (a crop for rope), faucet, bellows, turntable.
+- **Building**: wall lamp, blackboard, timber frame, daub, gravel and ash bricks, iron gate, shelf, planter, notice board, pedestal, ash, flag, goblet, globe, signpost (placed by players), hat stand, awning, window planter, barnacles.
+- **Tools**: quiver, lunch basket (expeditions), slice map, rope arrow, flute (to call back your companions), **antique ink**.
+- **Tweaks**: placeable books, map markers on blocks, clock readable with right-click.
 
-## Désactivé
-Panneaux de route générés pointant vers les structures, cartes d'aventurier menant aux structures, coordonnées à la boussole, canon / boulets / bateau-canon / pillards naviguant, bombes, lance-pierre, souffleur de bulles, clé (Create en a déjà une), piques de bambou, lumisène, bloc glissant, cube de sucre, têtes d'enderman et d'araignée, lanceur à ressort, haut-parleur, affichage cristal, wagonnet-distributeur, barres d'or, marchand rouge (vend des bombes), cheval-zombie, malchance, boules de slime lancées, briques et poudre à canon lancées/posées.
+## Disabled
+Generated road signs pointing to structures, adventurer maps leading to structures, coordinates on the compass, cannon / cannonballs / cannon boat / sailing pillagers, bombs, slingshot, bubble blower, key (Create already has one), bamboo spikes, lumisene, slidy block, sugar cube, enderman and spider heads, spring launcher, speaker, crystal display, dispenser minecart, gold bars, red merchant (sells bombs), zombie horse, bad luck, thrown slime balls, thrown/placed bricks and gunpowder.

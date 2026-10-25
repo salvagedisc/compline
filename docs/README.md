@@ -1,12 +1,12 @@
 # Documentation
 
-| Document | Contenu |
+| Document | Contents |
 |---|---|
-| [vision.md](vision.md) | Pitch, direction artistique, trois piliers, interdits, filtre des 5 questions |
-| [mods.md](mods.md) | Registre des mods : retenus, dépendances, à tester, écartés |
-| [feuille-de-route.md](feuille-de-route.md) | Sous-projets et chantiers ouverts issus des décisions |
-| [plan/](plan/README.md) | Plan complet du modpack : mods, configs, scripts |
-| [decisions/](decisions/README.md) | Une fiche par décision tranchée |
-| [conception/](conception/) | Specs et plans d'implémentation des sous-projets |
+| [vision.md](vision.md) | Pitch, art direction, three pillars, prohibitions, the 5-question filter |
+| [mods.md](mods.md) | Mod registry: kept, dependencies, to test, rejected |
+| [feuille-de-route.md](feuille-de-route.md) | Sub-projects and open work items arising from the decisions |
+| [plan/](plan/README.md) | Full modpack plan: mods, configs, scripts |
+| [decisions/](decisions/README.md) | One record per settled decision |
+| [conception/](conception/) | Specs and implementation plans of the sub-projects |
 
-Conventions de travail : [CONTRIBUTING.md](../CONTRIBUTING.md).
+Working conventions: [CONTRIBUTING.md](../CONTRIBUTING.md).

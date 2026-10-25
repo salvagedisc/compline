@@ -1,190 +1,190 @@
-# Fallow — Repo & outillage (sous-projet 1)
+# Fallow — Repository & tooling (sub-project 1)
 
-- **Date** : 2026-09-23
-- **Statut** : en revue
-- **Repo** : `salvagedisc/fallow` (GitHub, privé)
+- **Date**: 2026-09-23
+- **Status**: under review
+- **Repo**: `salvagedisc/fallow` (GitHub, private)
 
-## 1. Contexte
+## 1. Context
 
-Fallow est un modpack Minecraft pour un monde permanent joué entre amis sur un serveur dédié loué. Direction : exploration (façon Breath of the Wild), Create + Aeronautics, établissement de colonies, agriculture/élevage sur le long terme, ambiance brumeuse, solitaire et étrange.
+Fallow is a Minecraft modpack for a permanent world played with friends on a rented dedicated server. Direction: exploration (Breath of the Wild style), Create + Aeronautics, settlement building, long-term farming/animal husbandry, a misty, solitary and strange atmosphere.
 
-Contraintes fixes :
+Fixed constraints:
 
-- Minecraft **1.21.1** + **NeoForge** (imposé par Create Aeronautics).
-- **Tous les mods doivent exister sur Modrinth** pour 1.21.1 NeoForge.
-- Versions **figées** : la stabilité du monde permanent prime sur la nouveauté.
+- Minecraft **1.21.1** + **NeoForge** (imposed by Create Aeronautics).
+- **All mods must exist on Modrinth** for 1.21.1 NeoForge.
+- **Pinned** versions: the stability of the permanent world takes precedence over novelty.
 
-Le projet global est découpé en sous-projets, chacun avec son propre cycle spec → plan → implémentation :
+The overall project is split into sub-projects, each with its own spec → plan → implementation cycle:
 
-1. **Repo & outillage** — *ce document*.
-2. Choix des systèmes (agriculture, faune, structures, ambiance…).
-3. Couche de règles (KubeJS + données datapack).
-4. Serveur (hébergeur, déploiement, sauvegardes).
+1. **Repository & tooling** — *this document*.
+2. System choices (farming, fauna, structures, atmosphere…).
+3. Rules layer (KubeJS + datapack data).
+4. Server (host, deployment, backups).
 
-## 2. Objectif
+## 2. Objective
 
-Disposer d'un repo qui soit la **source de vérité** du pack : liste de mods versionnée et lisible, configs, scripts, documentation des décisions — et qui produise automatiquement un `.mrpack` installable dans le Modrinth App, puis publiable sur Modrinth.
+Have a repository that is the **source of truth** for the pack: a versioned and readable mod list, configs, scripts, documentation of the decisions — and that automatically produces a `.mrpack` installable in the Modrinth App, then publishable on Modrinth.
 
-### Critères de réussite
+### Success criteria
 
-- Le repo privé existe et contient la structure décrite en §4.
-- `packwiz` gère le pack ; `pack.toml` fige Minecraft 1.21.1 et une version précise de NeoForge.
-- Le pack de base contient les mods **retenus** (§6) et se lance dans le Modrinth App (création d'un monde sans crash).
-- Un push sur GitHub produit un `.mrpack` téléchargeable depuis l'onglet Actions.
-- Un tag `vX.Y.Z` crée une release GitHub contenant le `.mrpack`.
-- Le script de synchronisation détecte les mods ajoutés/retirés dans l'instance de test et les applique au pack après confirmation.
-- `docs/vision.md` et `docs/mods.md` reflètent l'état actuel des décisions.
+- The private repository exists and contains the structure described in §4.
+- `packwiz` manages the pack; `pack.toml` pins Minecraft 1.21.1 and a specific NeoForge version.
+- The base pack contains the **kept** mods (§6) and launches in the Modrinth App (creating a world without a crash).
+- A push to GitHub produces a `.mrpack` downloadable from the Actions tab.
+- A `vX.Y.Z` tag creates a GitHub release containing the `.mrpack`.
+- The sync script detects the mods added/removed in the test instance and applies them to the pack after confirmation.
+- `docs/vision.md` and `docs/mods.md` reflect the current state of the decisions.
 
-### Hors périmètre
+### Out of scope
 
-- Choix de nouveaux mods (sous-projet 2).
-- Scripts KubeJS de gameplay et données datapack (sous-projet 3) — seule l'arborescence est créée.
-- Hébergeur, déploiement serveur, sauvegardes (sous-projet 4).
-- Publication effective sur Modrinth (nécessite validation de modération et jeton fourni par l'utilisateur) — le workflow est prêt mais désactivé.
+- Choosing new mods (sub-project 2).
+- Gameplay KubeJS scripts and datapack data (sub-project 3) — only the directory tree is created.
+- Host, server deployment, backups (sub-project 4).
+- Actual publication on Modrinth (requires moderation approval and a token provided by the maintainer) — the workflow is ready but disabled.
 
-## 3. Outil : packwiz
+## 3. Tool: packwiz
 
-Choisi face à deux alternatives :
+Chosen over two alternatives:
 
 | Option | Verdict |
 |---|---|
-| **packwiz** — un fichier TOML par mod, export `.mrpack` natif | ✅ Retenu : repo réellement source de vérité, diffs lisibles, standard, compatible CI |
-| Modrinth App source + export décompressé dans le repo | ❌ Le repo devient une archive, exports écrasants, pas d'édition depuis le repo |
-| Script maison sur l'API Modrinth | ❌ Réimplémente packwiz, maintenance inutile |
+| **packwiz** — one TOML file per mod, native `.mrpack` export | ✅ Kept: the repository is truly the source of truth, readable diffs, standard, CI-compatible |
+| Modrinth App as source + unzipped export into the repository | ❌ The repository becomes an archive, overwriting exports, no editing from the repository |
+| Home-made script on the Modrinth API | ❌ Reimplements packwiz, pointless maintenance |
 
-Installation locale : binaire officiel (artefact CI du repo `packwiz/packwiz`) ou `go install`. Tout téléchargement est soumis à l'accord de l'utilisateur. En CI : installation via `go install` sur un commit épinglé.
+Local installation: official binary (CI artifact of the `packwiz/packwiz` repository) or `go install`. Any download is subject to the maintainer's approval. In CI: installation via `go install` on a pinned commit.
 
-## 4. Structure du repo
+## 4. Repository structure
 
 ```
 fallow/
-├── pack/                     ← racine packwiz, seul contenu du .mrpack
-│   ├── pack.toml             ← nom, version, MC 1.21.1, NeoForge figé
-│   ├── index.toml            ← généré (packwiz refresh)
-│   ├── mods/                 ← un .pw.toml par mod
-│   ├── config/               ← configs des mods
-│   ├── defaultconfigs/       ← configs par monde
+├── pack/                     ← packwiz root, only content of the .mrpack
+│   ├── pack.toml             ← name, version, MC 1.21.1, NeoForge pinned
+│   ├── index.toml            ← generated (packwiz refresh)
+│   ├── mods/                 ← one .pw.toml per mod
+│   ├── config/               ← mod configs
+│   ├── defaultconfigs/       ← per-world configs
 │   └── kubejs/
 │       ├── startup_scripts/
 │       ├── server_scripts/
 │       ├── client_scripts/
-│       └── data/fallow/      ← données "datapack" chargées par KubeJS
+│       └── data/fallow/      ← "datapack" data loaded by KubeJS
 ├── scripts/
-│   └── sync-from-instance    ← pont instance Modrinth App → repo
+│   └── sync-from-instance    ← bridge Modrinth App instance → repository
 ├── docs/
-│   ├── vision.md             ← philosophie du pack
-│   ├── mods.md               ← registre des mods (statut + justification)
-│   ├── decisions/            ← une fiche par décision tranchée
+│   ├── vision.md             ← philosophy of the pack
+│   ├── mods.md               ← mod registry (status + justification)
+│   ├── decisions/            ← one record per settled decision
 ├── .github/workflows/
 │   ├── build.yml
 │   └── release.yml
-├── README.md                 ← installation pour les joueurs
+├── README.md                 ← installation for players
 └── CHANGELOG.md
 ```
 
-Décisions :
+Decisions:
 
-- **Pack dans `pack/`** : la doc et la CI ne finissent jamais dans le `.mrpack` (`.packwizignore` en complément).
-- **Datapacks via `kubejs/data/`** : NeoForge ne charge pas de datapacks globaux sans mod supplémentaire ; KubeJS (déjà retenu) charge ce dossier comme un datapack actif sur tous les mondes.
-- **Seuls les mods retenus sont dans `pack/mods/`** ; les candidats sont listés dans `docs/mods.md` et testés dans l'instance ou sur une branche `test/*`.
+- **Pack in `pack/`**: docs and CI never end up in the `.mrpack` (`.packwizignore` as a complement).
+- **Datapacks via `kubejs/data/`**: NeoForge does not load global datapacks without an additional mod; KubeJS (already kept) loads this folder as a datapack active in every world.
+- **Only kept mods are in `pack/mods/`**; candidates are listed in `docs/mods.md` and tested in the instance or on a `test/*` branch.
 
-## 5. Cycle de travail
+## 5. Workflow
 
 ### Versions
 
-- `0.x` : prototype, mondes jetables.
-- `1.0.0` : lancement du monde permanent.
-- Après `1.0.0`, tout changement qui retire des blocs/objets ou modifie le worldgen = **version majeure** + sauvegarde obligatoire du monde avant mise à jour.
-- Mises à jour de mods **une par une**, jamais `packwiz update --all`.
+- `0.x`: prototype, disposable worlds.
+- `1.0.0`: launch of the permanent world.
+- After `1.0.0`, any change that removes blocks/items or modifies worldgen = **major version** + mandatory world backup before updating.
+- Mod updates **one by one**, never `packwiz update --all`.
 
 ### Branches
 
-- `main` : toujours jouable ; les tags `vX.Y.Z` y sont posés.
-- `test/<sujet>` : essais (ex. `test/serene-seasons`), fusionnés ou abandonnés.
-- Pas de PR obligatoire tant que le projet est mené seul.
+- `main`: always playable; the `vX.Y.Z` tags are placed on it.
+- `test/<subject>`: experiments (e.g. `test/serene-seasons`), merged or abandoned.
+- No mandatory PR as long as the project is run by a single person.
 
-### Ajout d'un mod
+### Adding a mod
 
-1. Vérifier sa disponibilité Modrinth 1.21.1 NeoForge.
-2. Le passer au filtre des 5 questions (change le gameplay ? s'intègre ? tient 100 h+ ? apporte une mécanique ? évite les doublons ?).
-3. L'ajouter (`packwiz mr add` ou script de sync) et définir son côté (client / serveur / both).
-4. Mettre à jour `docs/mods.md` ; créer une fiche `docs/decisions/` si une comparaison a eu lieu.
-5. Un commit par mod : `feat(mods): add <Nom>` / `chore(mods): update <Nom> x → y` / `feat(mods)!: remove <Nom>`.
+1. Check its availability on Modrinth 1.21.1 NeoForge.
+2. Run it through the 5-question filter (does it change the gameplay? does it fit in? does it hold up for 100+ hours? does it bring a mechanic? does it avoid overlaps?).
+3. Add it (`packwiz mr add` or the sync script) and set its side (client / server / both).
+4. Update `docs/mods.md`; create a `docs/decisions/` record if a comparison took place.
+5. One commit per mod: `feat(mods): add <Name>` / `chore(mods): update <Name> x → y` / `feat(mods)!: remove <Name>`.
 
-### Instance de test et synchronisation
+### Test instance and synchronisation
 
-L'utilisateur expérimente dans une instance **« Fallow – test »** du Modrinth App (ajout/retrait de mods libre).
+The maintainer experiments in a **"Fallow – test"** instance of the Modrinth App (free adding/removal of mods).
 
-`scripts/sync-from-instance` :
+`scripts/sync-from-instance`:
 
-1. Localise le dossier de l'instance (`%APPDATA%/ModrinthApp/profiles/<nom>/`), chemin configurable.
-2. Calcule le SHA-1 de chaque `.jar` de `mods/`.
-3. Interroge l'API Modrinth (`POST /v2/version_files`) pour identifier projet + version.
-4. Compare avec `pack/mods/*.pw.toml` et affiche le diff (ajouts, retraits, changements de version, jars inconnus de Modrinth signalés comme non conformes).
-5. Après confirmation, exécute les `packwiz mr add` / `packwiz remove` correspondants.
-6. Option `--configs` : copie les fichiers de `config/` modifiés de l'instance vers `pack/config/` (diff affiché avant copie).
+1. Locates the instance folder (`%APPDATA%/ModrinthApp/profiles/<name>/`), path configurable.
+2. Computes the SHA-1 of each `.jar` in `mods/`.
+3. Queries the Modrinth API (`POST /v2/version_files`) to identify project + version.
+4. Compares with `pack/mods/*.pw.toml` and prints the diff (additions, removals, version changes, jars unknown to Modrinth flagged as non-compliant).
+5. After confirmation, runs the corresponding `packwiz mr add` / `packwiz remove` commands.
+6. `--configs` option: copies the modified `config/` files from the instance to `pack/config/` (diff shown before copying).
 
-Le script ne modifie jamais l'instance. Implémentation en Node.js (déjà installé sur la machine), sans dépendance externe si possible.
+The script never modifies the instance. Implemented in Node.js (already installed on the machine), with no external dependency if possible.
 
-Sens inverse : `packwiz mr export` → import du `.mrpack` dans le Modrinth App.
+In the other direction: `packwiz mr export` → import of the `.mrpack` into the Modrinth App.
 
-Test entre amis en phase `0.x` : `.mrpack` importé dans le Modrinth App puis partagé via l'onglet **Share** de l'instance.
+Testing among friends during the `0.x` phase: `.mrpack` imported into the Modrinth App then shared via the instance's **Share** tab.
 
-## 6. Contenu du pack de base
+## 6. Base pack contents
 
-Mods **retenus** à l'issue de la conception préalable (à vérifier sur Modrinth pour 1.21.1 NeoForge au moment de l'ajout ; tout mod indisponible est signalé et non ajouté) :
+Mods **kept** after the preliminary design (to be checked on Modrinth for 1.21.1 NeoForge at the time of adding; any unavailable mod is flagged and not added):
 
-| Domaine | Mod |
+| Domain | Mod |
 |---|---|
 | Worldgen | No Man's Land |
-| Artisanat | Overgeared |
-| Industrie | Create |
+| Crafting | Overgeared |
+| Industry | Create |
 | Aviation | Create Aeronautics + Sable |
 | Rail | Create: Steam 'n' Rails |
-| Cuisine | Kaleidoscope Cookery |
-| Carte | Antique Atlas 4 + Surveyor |
-| Température | Cold Sweat |
-| Soif | Thirst Was Reclaimed |
+| Cooking | Kaleidoscope Cookery |
+| Map | Antique Atlas 4 + Surveyor |
+| Temperature | Cold Sweat |
+| Thirst | Thirst Was Reclaimed |
 | Scripts | KubeJS |
 
-Plus les dépendances requises par ces mods. Les mods d'optimisation (client et serveur) sont un choix du sous-projet 2 ; ils ne sont pas ajoutés ici.
+Plus the dependencies required by these mods. Optimisation mods (client and server) are a choice for sub-project 2; they are not added here.
 
-`docs/mods.md` liste aussi les mods **à tester** et **écartés** issus de la conception préalable, avec leur justification.
+`docs/mods.md` also lists the mods **to test** and **rejected** from the preliminary design, with their justification.
 
-## 7. Automatisation
+## 7. Automation
 
-### `build.yml` — sur push et PR
+### `build.yml` — on push and PR
 
-1. Installe packwiz (commit épinglé).
-2. Vérifie que `index.toml` est à jour (`packwiz refresh` ne produit aucun diff).
+1. Installs packwiz (pinned commit).
+2. Checks that `index.toml` is up to date (`packwiz refresh` produces no diff).
 3. `packwiz mr export` → `Fallow-<version>-<sha>.mrpack`.
-4. Publie le fichier comme artefact de la run.
+4. Publishes the file as a run artifact.
 
-### `release.yml` — sur tag `v*`
+### `release.yml` — on `v*` tag
 
-1. Vérifie que la version du tag correspond à `pack.toml`.
-2. Exporte le `.mrpack`.
-3. Crée une release GitHub avec le `.mrpack` et la section correspondante du `CHANGELOG.md`.
-4. **Étape Modrinth (désactivée)** : publie la version sur le projet Modrinth (Unlisted) via l'API. Activée seulement si la variable `MODRINTH_PROJECT_ID` et le secret `MODRINTH_TOKEN` existent. Le jeton est créé et saisi par l'utilisateur lui-même.
+1. Checks that the tag version matches `pack.toml`.
+2. Exports the `.mrpack`.
+3. Creates a GitHub release with the `.mrpack` and the corresponding section of `CHANGELOG.md`.
+4. **Modrinth step (disabled)**: publishes the version to the Modrinth project (Unlisted) via the API. Enabled only if the variable `MODRINTH_PROJECT_ID` and the secret `MODRINTH_TOKEN` exist. The token is created and entered by the maintainer.
 
-### Pack serveur
+### Server pack
 
-Le `.mrpack` porte l'information client/serveur de chaque mod. Le repo étant privé, `packwiz-installer` (qui lit le pack par URL) n'est pas utilisable ; le serveur sera installé à partir du `.mrpack` (outil de l'hébergeur ou `mrpack-install`). Détails : sous-projet 4.
+The `.mrpack` carries the client/server information of each mod. As the repository is private, `packwiz-installer` (which reads the pack by URL) cannot be used; the server will be installed from the `.mrpack` (host's tool or `mrpack-install`). Details: sub-project 4.
 
 ## 8. Documentation
 
-- `docs/vision.md` : pitch, DA (brume, solitude, étrangeté sans horreur), trois piliers (Exploration / Civilisation / Vie quotidienne), boucle de jeu, interdits (minimap, téléportation, hostiles vanilla, End/Elytra, hordes, empilement d'addons), règles de travail (comparaisons réelles, filtre des 5 questions).
-- `docs/mods.md` : tableau par domaine — mod, statut (✅ retenu / 🟡 à tester / ❌ écarté), côté, rôle, justification.
-- `docs/decisions/` : première fiche `0001-nml-vs-terralith.md` résumant la comparaison déjà faite (NML retenu, Terralith + Streams Reflowing en preset concurrent à tester).
-- `README.md` : présentation courte et installation (import du `.mrpack` / lien Share).
-- `CHANGELOG.md` : format Keep a Changelog.
+- `docs/vision.md`: pitch, art direction (mist, solitude, strangeness without horror), three pillars (Exploration / Civilisation / Daily life), game loop, prohibitions (minimap, teleportation, vanilla hostiles, End/Elytra, hordes, addon pile-up), working rules (real comparisons, 5-question filter).
+- `docs/mods.md`: table per domain — mod, status (✅ kept / 🟡 to test / ❌ rejected), side, role, justification.
+- `docs/decisions/`: first record `0001-nml-vs-terralith.md` summarising the comparison already made (NML kept, Terralith + Streams Reflowing as a competing preset to test).
+- `README.md`: short presentation and installation (import of the `.mrpack` / Share link).
+- `CHANGELOG.md`: Keep a Changelog format.
 
-## 9. Risques
+## 9. Risks
 
-| Risque | Parade |
+| Risk | Mitigation |
 |---|---|
-| Un mod retenu n'a pas de version 1.21.1 NeoForge sur Modrinth | Signalé, non ajouté, décision reportée au sous-projet 2 |
-| Conflit/crash au lancement du pack de base | Test de lancement obligatoire avant tag `v0.1.0` ; bisection mod par mod |
-| Jar de l'instance absent de Modrinth | Le script le signale comme non conforme au lieu de l'ignorer |
-| Mise à jour cassant le monde permanent | Règle de version majeure + sauvegarde (§5) |
-| Repo privé incompatible avec packwiz-installer | Installation serveur par `.mrpack` (§7) |
+| A kept mod has no 1.21.1 NeoForge version on Modrinth | Flagged, not added, decision postponed to sub-project 2 |
+| Conflict/crash at launch of the base pack | Mandatory launch test before the `v0.1.0` tag; mod-by-mod bisection |
+| Instance jar absent from Modrinth | The script flags it as non-compliant instead of ignoring it |
+| Update breaking the permanent world | Major version rule + backup (§5) |
+| Private repository incompatible with packwiz-installer | Server installation via `.mrpack` (§7) |

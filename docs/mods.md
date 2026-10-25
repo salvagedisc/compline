@@ -1,241 +1,241 @@
-# Registre des mods
+# Mod registry
 
-Liste complète du pack **visé**, mise à jour le 2026-10-19 avec les choix de l'équipe : ce qui est déjà dans `pack/mods/`, ce que le plan ajoute, ce qui reste à tester et ce qui sort. Le pourquoi de chaque choix est dans le [plan](plan/README.md), surtout les chapitres [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) et [12](plan/12-verification.md).
+Complete list of the **target** pack, updated on 2026-10-19 with the team's choices: what is already in `pack/mods/`, what the plan adds, what remains to be tested and what is dropped. The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
 
-Statuts :
-- ✅ dans le pack (`pack/mods/`) ;
-- ➕ à ajouter (retenu par le plan, pas encore dans `pack/mods/`) ;
-- 🟡 à tester avant de décider ;
-- ⚪ optionnel ;
-- ❌ sort du pack.
+Statuses:
+- ✅ in the pack (`pack/mods/`);
+- ➕ to add (kept by the plan, not yet in `pack/mods/`);
+- 🟡 to test before deciding;
+- ⚪ optional;
+- ❌ leaves the pack.
 
-Côté : C = client, S = serveur, CS = les deux. Versions vérifiées sur Modrinth pour NeoForge 1.21.1 le 2026-10-18.
+Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoForge 1.21.1 on 2026-10-18.
 
-## Monde et exploration
+## World and exploration
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | Le monde : relief, biomes, ruines ([0001](decisions/0001-nml-vs-terralith.md)) ; ses animaux et créatures sont coupés, les animaux vanilla restent ([faune-nml](plan/faune-nml.md)) |
-| Sparse Structures | `sparsestructures` | ✅ | CS | Structures espacées ([0004](decisions/0004-structures.md)) |
-| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments rares, bénédictions, codex à reconstituer ; gardiens tirés de Mowzie's Mobs et Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
-| Lootr | `lootr` | ✅ | CS | Chaque joueur trouve les coffres pleins |
-| Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Lunes rares ; lunes de sang retirées, une seule lune à la fois avec la Lune Amie ([lune-amie](plan/lune-amie.md)). Remplace Enhanced Celestials 6 ; addon Shader Support inutile sans Iris |
-| Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Carte dessinée, sans coordonnées |
-| Surveyor Map Framework | `surveyor` | ✅ | CS | Exploration partagée pour l'atlas |
-| Icy's Better Horses | `icys-better-horses` | ✅ (monter en 2.1.4) | CS | Chevaux, races, lien, charrettes |
+| No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | The world: terrain, biomes, ruins ([0001](decisions/0001-nml-vs-terralith.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
+| Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
+| Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
+| Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed, a single moon at a time with the Friendly Moon ([friendly moon](plan/lune-amie.md)). Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
+| Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
+| Surveyor Map Framework | `surveyor` | ✅ | CS | Shared exploration for the atlas |
+| Icy's Better Horses | `icys-better-horses` | ✅ (upgrade to 2.1.4) | CS | Horses, breeds, bond, carts |
 
-## Objectifs longs
+## Long-term goals
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Wildex Bestiary | `wildex-bestiary` | ✅ | CS | Bestiaire automatique, colonne vertébrale du zoo |
-| Exposure | `exposure` | ✅ | CS | Photo argentique : garder un lieu, découvrir une espèce |
+| Wildex Bestiary | `wildex-bestiary` | ✅ | CS | Automatic bestiary, backbone of the zoo |
+| Exposure | `exposure` | ✅ | CS | Analogue photography: keep a place, discover a species |
 
-## Civilisation et technique
+## Civilisation and technology
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Create | `create` | ✅ | CS | La technique |
-| Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable en 2.0.6) | CS | Dirigeables ; impose NeoForge 1.21.1 |
-| Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | Le rail (bêta) |
-| Overgeared | `overgeared` | ✅ | CS | Forge : haut fourneau, martelage, trempe, qualité, plans |
-| KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Bras Create sur les stations de cuisine ([0002](decisions/0002-agriculture.md)) |
+| Create | `create` | ✅ | CS | Technology |
+| Create Aeronautics + Sable | `create-aeronautics`, `sable` | ✅ (Sable on 2.0.6) | CS | Airships; requires NeoForge 1.21.1 |
+| Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | The railway (beta) |
+| Overgeared | `overgeared` | ✅ | CS | Forging: blast furnace, hammering, quenching, quality, blueprints |
+| KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Create arm on cooking stations ([0002](decisions/0002-agriculture.md)) |
 
-## Vie quotidienne
+## Daily life
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (1.6.0) | CS | La cuisine |
-| [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (rester en 1.1.25) | CS | La ferme et le four |
-| Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Rend interchangeables les doublons des deux mods de cuisine |
-| Ecliptic Seasons | `ecliptic-seasons` | ✅ (monter en 0.15.4.1) | CS | Saisons |
-| Cold Sweat | `cold-sweat` | ✅ | CS | Température |
-| Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Soif |
-| Traveler's Backpack | `travelersbackpack` | ✅ | CS | Sac d'expédition et sac de couchage |
-| Envelope | `envelope` | ✅ | CS | Courrier par pigeons entre joueurs, lettres perdues à retrouver (idée reprise de Wayfarer, [recherche](plan/recherche/2026-10-19/wayfarer.md)) |
+| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (1.6.0) | CS | Cooking |
+| [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (stay on 1.1.25) | CS | The farm and the oven |
+| Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Makes the duplicates of the two cooking mods interchangeable |
+| Ecliptic Seasons | `ecliptic-seasons` | ✅ (upgrade to 0.15.4.1) | CS | Seasons |
+| Cold Sweat | `cold-sweat` | ✅ | CS | Temperature |
+| Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
+| Traveler's Backpack | `travelersbackpack` | ✅ | CS | Expedition bag and sleeping bag |
+| Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](plan/recherche/2026-10-19/wayfarer.md)) |
 
-## Faune
+## Fauna
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Naturalist | `naturalist` | ✅ | CS | Faune réaliste de base ([0003](decisions/0003-faune.md)) |
-| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variété, espèce par espèce |
-| Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes coupés) | CS | Océans |
-| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Créatures uniques très rares ; Wroughtnaut, Frostmaw et Sculpteur gardent trois monuments |
-| Longwings | `longwings` | ✅ | CS | Papillons à collectionner |
+| Naturalist | `naturalist` | ✅ | CS | Realistic base fauna ([0003](decisions/0003-faune.md)) |
+| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species |
+| Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans |
+| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments |
+| Longwings | `longwings` | ✅ | CS | Butterflies to collect |
 
-## Compagnons
+## Companions
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Critters and Companions | `critters-and-companions` | ✅ | CS | Petite faune apprivoisable |
-| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Créatures pacifiques du mob vote |
+| Critters and Companions | `critters-and-companions` | ✅ | CS | Tameable small fauna |
+| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Peaceful creatures from the mob vote |
 | Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters |
-| Companion | `companion` | ✅ | CS | Les animaux apprivoisés ne se perdent plus |
-| Companions! | `companions-mod` | ✅ | CS | Compagnons à pouvoirs ; le Sacred Pontiff garde le monument du chêne |
-| Ghost | `ghost` | ✅ | CS | Petits fantômes |
+| Companion | `companion` | ✅ | CS | Tamed animals no longer get lost |
+| Companions! | `companions-mod` | ✅ | CS | Companions with powers; the Sacred Pontiff guards the oak monument |
+| Ghost | `ghost` | ✅ | CS | Little ghosts |
 
-## Construction et ateliers
+## Building and workshops
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Quark | `quark` | ✅ (monter en 4.1-487) | CS | L'essentiel, modules choisis ([0005](decisions/0005-quark.md)) |
-| Supplementaries | `supplementaries` | ✅ | CS | L'essentiel ([0006](decisions/0006-supplementaries.md)) |
-| Amendments | `amendments` | ✅ | CS | Lanternes en 3D, enseignes, chaudrons |
-| Handcrafted | `handcrafted` | ✅ | CS | Mobilier |
-| Chipped | `chipped` | ✅ | CS | Variantes de blocs à l'atelier (ajoute Athena) |
-| Beautify! | `beautify` | ✅ | CS | Petit décor : treillis, pots suspendus, stores, lampes |
-| Twigs | `twigs` | ✅ | CS | Petit décor (rhyolite coupée) |
-| Every Compat | `every-compat` | ✅ | CS | Mobilier et décor dans tous les bois, dont ceux de NML |
-| HT's TreeChop | `treechop` | ✅ | CS | Couper un arbre bloc par bloc, le tronc tombe en dernier |
-| Visual Workbench | `visual-workbench` | ✅ | CS | Les objets restent posés sur l'établi |
-| Immersive Enchanting | `immersive-enchanting` | ✅ (bêta) | CS | L'enchantement devient un savoir : livres anciens trouvés, rangés près de la table, niveaux payés en matériaux ([0008](decisions/0008-enchantement.md)) ; structures coupées, traduction française |
+| Quark | `quark` | ✅ (upgrade to 4.1-487) | CS | The essentials, selected modules ([0005](decisions/0005-quark.md)) |
+| Supplementaries | `supplementaries` | ✅ | CS | The essentials ([0006](decisions/0006-supplementaries.md)) |
+| Amendments | `amendments` | ✅ | CS | 3D lanterns, signs, cauldrons |
+| Handcrafted | `handcrafted` | ✅ | CS | Furniture |
+| Chipped | `chipped` | ✅ | CS | Block variants at the workbench (adds Athena) |
+| Beautify! | `beautify` | ✅ | CS | Small decor: trellises, hanging pots, blinds, lamps |
+| Twigs | `twigs` | ✅ | CS | Small decor (rhyolite disabled) |
+| Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including NML's |
+| HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
+| Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench |
+| Immersive Enchanting | `immersive-enchanting` | ✅ (beta) | CS | Enchanting becomes lore: ancient books found, shelved near the table, levels paid in materials ([0008](decisions/0008-enchantement.md)); structures disabled, French translation |
 
-## Corps, caméra et gestes
+## Body, camera and gestures
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Entity Model Features + Entity Texture Features | `entity-model-features`, `entitytexturefeatures` | ✅ | C | Moteur de Fresh Animations |
-| 3D Skin Layers | `3dskinlayers` | ✅ | C | Skin en relief |
-| Shoulder Surfing Reloaded | `shoulder-surfing-reloaded` | ✅ | C | Une seule vue à la troisième personne, à l'épaule, caméra libre à la souris (F5 : subjective ou épaule) |
-| Spatial GUI | `spatial-gui` | ✅ | C | Menus en 3D, caméra à l'épaule à l'ouverture |
-| Camera Overhaul | `cameraoverhaul` | ✅ | C | La caméra suit le mouvement (réglé bas) |
-| ItemPhysic | `itemphysic` | ✅ | C | Les objets lâchés tombent, roulent et flottent |
-| Smooth Swapping | `smooth-swapping` | ✅ | C | Les objets glissent dans l'inventaire |
-| Punchy! | `punchy-fpa` | ✅ (2.8g, version figée) | C | Gestes et bras animés en vue subjective, réglé sobre ; seul à animer le bras subjectif (option d'EMF), liste noire pour les objets de Create, d'Aeronautics et les photos d'Exposure |
+| Entity Model Features + Entity Texture Features | `entity-model-features`, `entitytexturefeatures` | ✅ | C | Engine of Fresh Animations |
+| 3D Skin Layers | `3dskinlayers` | ✅ | C | Skin with relief |
+| Shoulder Surfing Reloaded | `shoulder-surfing-reloaded` | ✅ | C | A single third-person view, over the shoulder, camera freely controlled with the mouse (F5: first-person or shoulder) |
+| Spatial GUI | `spatial-gui` | ✅ | C | 3D menus, shoulder camera on opening |
+| Camera Overhaul | `cameraoverhaul` | ✅ | C | The camera follows movement (set low) |
+| ItemPhysic | `itemphysic` | ✅ | C | Dropped items fall, roll and float |
+| Smooth Swapping | `smooth-swapping` | ✅ | C | Items slide around in the inventory |
+| Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos |
 
-## Ambiance, rendu et son
+## Atmosphere, rendering and sound
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| ATMOSPHERICS | `atmospherics` | ✅ | C | Brume, ciel, nuages par biome ([0007](decisions/0007-ambiance-performance.md)) |
-| Polytone | `polytone` | ✅ | C | Couleur de l'herbe, des feuilles et de l'eau, lumière colorée des feux et des bougies ([page](plan/fallow-ambiance.md)) |
-| Particular Reforged | `particular-reforged` | ✅ | C | Eau, cascades, feuilles qui tombent, poussière des grottes |
-| Subtle Effects | `subtle-effects` | ✅ | CS | Feu, fumée, vapeur, corps |
-| LambDynamicLights | `lambdynamiclights` | ✅ | C | Lumière tenue en main |
-| More Darkness | `more-darkness` | ✅ | CS | Vraies nuits |
-| AmbientSounds | `ambientsounds` | ✅ | C | Sons de biome |
-| Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Écho, étouffement |
-| True Adaptive Music | `true-adaptive-music` | ✅ | CS | Musique par situation (brume, clairière, saison, lune, dirigeable), longs silences ([0010](decisions/0010-musique.md)) |
-| Paquet musical `fallow` | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | L'arbre des situations et les 29 morceaux choisis par l'équipe |
-| Sounds | `sound` | ✅ | C | 170 sons d'interface, d'objets et de blocs |
-| Auroras | `auroras` | ✅ | C | Aurore dans les biomes froids |
-| Drip Sounds | `dripsounds` | ✅ | C | Gouttes dans les grottes (bêta) |
-| Contraption Lights | `contraption-lights` | ✅ | CS | Une lanterne posée sur un dirigeable ou un engin éclaire le monde en passant (mode LambDynamicLights, couleur coupée) |
-| Wakes Reforged | `wakes-reforged` | ✅ | CS | Sillages derrière les bateaux, les nageurs et les engins Sable |
-| Puddles & Floods | `puddles-floods` | ✅ | CS | Flaques sous la pluie et à la fonte, crues dans les creux |
-| Rainbows | `rainboows` | ✅ | C | Arc-en-ciel après la pluie |
-| Better Clouds | `better-clouds` | ✅ | C | Nuages en volume ; ordre avec No Man's Land (qui coupe les nuages pendant le rêve) à tester |
-| Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Repli si Particular ne gère pas les feuilles de NML |
+| ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds per biome ([0007](decisions/0007-ambiance-performance.md)) |
+| Polytone | `polytone` | ✅ | C | Colour of grass, leaves and water, coloured light from fires and candles ([page](plan/fallow-ambiance.md)) |
+| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves, cave dust |
+| Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
+| LambDynamicLights | `lambdynamiclights` | ✅ | C | Light held in hand |
+| More Darkness | `more-darkness` | ✅ | CS | Real nights |
+| AmbientSounds | `ambientsounds` | ✅ | C | Biome sounds |
+| Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Echo, muffling |
+| True Adaptive Music | `true-adaptive-music` | ✅ | CS | Music by situation (mist, clearing, season, moon, airship), long silences ([0010](decisions/0010-musique.md)) |
+| `fallow` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 29 tracks chosen by the team |
+| Sounds | `sound` | ✅ | C | 170 interface, item and block sounds |
+| Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
+| Drip Sounds | `dripsounds` | ✅ | C | Drips in caves (beta) |
+| Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
+| Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
+| Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
+| Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
+| Better Clouds | `better-clouds` | ✅ | C | Volumetric clouds; ordering with No Man's Land (which disables clouds during the dream) to be tested |
+| Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle NML's leaves |
 
-## Interface et confort
+## Interface and comfort
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| EMI | `emi` | ✅ | C (S optionnel) | Visualiseur de recettes, sans panneaux ni recherche (`pack/defaultconfigs/emi.css`) : R et U sur un objet ouvrent ses recettes |
-| JEI | `jei` | ✅ (caché, rester en 19.51.0.418) | CS | Pont pour les mods qui n'ont qu'un plugin JEI ; à partir de 19.52, le mixin d'Envelope 0.7.5 ne trouve plus sa cible et le jeu plante en entrant dans un monde |
-| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Infobulles |
-| Pick Up Notifier | `pick-up-notifier` | ✅ | C | Liste discrète des objets ramassés |
-| Seamless Loading Screen | `seamless-loading-screen` | ✅ | C | L'écran de chargement montre la dernière vue |
-| Mouse Tweaks | `mouse-tweaks` | ✅ | C | Inventaire à la souris |
-| Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Recherche dans les touches |
-| Default Options | `default-options` | ✅ | C | Touches et réglages vidéo livrés avec le pack |
-| Chat Heads | `chat-heads` | ✅ | C | Tête du joueur dans la discussion |
-| Lamb Lanterns | `lamb-lanterns` | ✅ | CS | Une lanterne portée à la hanche (emplacement Curios) éclaire comme tenue en main |
+| EMI | `emi` | ✅ | C (S optional) | Recipe viewer, without panels or search (`pack/defaultconfigs/emi.css`): R and U on an item open its recipes |
+| JEI | `jei` | ✅ (hidden, stay on 19.51.0.418) | CS | Bridge for mods that only have a JEI plugin; from 19.52, Envelope 0.7.5's mixin no longer finds its target and the game crashes when entering a world |
+| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Tooltips |
+| Pick Up Notifier | `pick-up-notifier` | ✅ | C | Discreet list of picked-up items |
+| Seamless Loading Screen | `seamless-loading-screen` | ✅ | C | The loading screen shows the last view |
+| Mouse Tweaks | `mouse-tweaks` | ✅ | C | Mouse-driven inventory |
+| Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |
+| Default Options | `default-options` | ✅ | C | Key bindings and video settings shipped with the pack |
+| Chat Heads | `chat-heads` | ✅ | C | Player head in the chat |
+| Lamb Lanterns | `lamb-lanterns` | ✅ | CS | A lantern carried at the hip (Curios slot) gives light as if held in hand |
 
-## Règles et scripts
+## Rules and scripts
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| KubeJS | `kubejs` | ✅ | CS | Scripts et données datapack |
-| KubeJS Create | `kubejs-create` | ✅ | CS | Recettes Create en script (bêta) |
-| LootJS | `lootjs` | ✅ | S | Butin des ruines et des monuments |
-| MoreJS | `morejs` | ✅ | CS | Événements en plus pour KubeJS |
-| In Control! | `in-control` | ✅ | S | Règles d'apparition (bêta) : aucun monstre vanilla dans l'Overworld (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.2.1 | `mods-custom/fallow/` | ✅ (non testé avec un joueur) | CS | Ce que les scripts ne savent pas faire : modules ciel (lune visible sous ATMOSPHERICS, brume), sac (tuyau qui désaltère) et xp (enclume sans niveaux, barre cachée, [0009](decisions/0009-xp.md)) écrits, Dissipateur à venir ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
+| KubeJS | `kubejs` | ✅ | CS | Scripts and datapack data |
+| KubeJS Create | `kubejs-create` | ✅ | CS | Create recipes in script (beta) |
+| LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
+| MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
+| In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld (`pack/config/incontrol/spawn.json`) |
+| Mod `fallow` 0.2.1 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst) and `xp` (anvil without levels, hidden bar, [0009](decisions/0009-xp.md)) modules written, Dissipator to come ([mod-fallow](plan/mod-fallow.md), [12.4](plan/12-verification.md)) |
 
-## Performance et technique
+## Performance and technical
 
-| Mod | Slug | Statut | Côté | Rôle |
+| Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Sodium | `sodium` | ✅ | C | Rendu |
-| ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendu |
-| ModernFix | `modernfix` | ✅ | CS | Chargement |
-| FerriteCore | `ferrite-core` | ✅ | CS | Mémoire |
-| Lithium | `lithium` | ✅ | CS | Logique serveur |
-| Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Génération des structures |
-| Chunky | `chunky` | ✅ | CS | Prégénération |
-| spark | `spark` | ✅ | CS | Profilage |
-| Dynamic FPS | `dynamic-fps` | ➕ | C | Le jeu ralentit en arrière-plan |
-| Neruina | `neruina` | ➕ | CS | Évite qu'une entité bloquée ne fasse planter le monde |
-| Simple Backups | `simple-backups` | ➕ | CS | Sauvegardes (bêta) |
-| Crash Assistant | `crash-assistant` | ➕ | C | Aide à lire les plantages |
-| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Font tourner Antique Atlas et Surveyor (bêta, sous surveillance) |
+| Sodium | `sodium` | ✅ | C | Rendering |
+| ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendering |
+| ModernFix | `modernfix` | ✅ | CS | Loading |
+| FerriteCore | `ferrite-core` | ✅ | CS | Memory |
+| Lithium | `lithium` | ✅ | CS | Server logic |
+| Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
+| Chunky | `chunky` | ✅ | CS | Pregeneration |
+| spark | `spark` | ✅ | CS | Profiling |
+| Dynamic FPS | `dynamic-fps` | ➕ | C | The game slows down in the background |
+| Neruina | `neruina` | ➕ | CS | Prevents a stuck entity from crashing the world |
+| Simple Backups | `simple-backups` | ➕ | CS | Backups (beta) |
+| Crash Assistant | `crash-assistant` | ➕ | C | Helps read crashes |
+| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Run Antique Atlas and Surveyor (beta, under watch) |
 
-## Packs de ressources
+## Resource packs
 
-| Pack | Slug | Statut | Rôle |
+| Pack | Slug | Status | Role |
 |---|---|---|---|
-| Fresh Animations | `fresh-animations` | ✅ | Créatures animées |
-| FA : Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Détails, objets animés, yeux qui brillent |
-| FA : Player Extension | `fa-player-extension` | ✅ | Le joueur dans le même style |
-| Motschen's Better Leaves | `better-leaves` | ✅ | Feuillages touffus |
-| Supernova (Original Music Pack) | `supernova-ost` | ✅ (version qui n'écrase pas la musique vanilla) | Trois morceaux du paquet musical (CC-BY-NC-SA 4.0, [musique](plan/musique.md)) |
-| Dark Coffee GUI | `dark-coffe-gui` | ✅ | Interface vanilla en brun café |
-| Dark Coffee GUI - Extras (Normal Hunger) | `dark-coffee-extras` | ✅ | Barre de faim (cuisses de poulet au style Coffee) à la place des grains de café |
-| Modded Coffee GUI | `modded-coffee-gui` | ✅ | Le même style pour EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
-| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | Presets ATMOSPHERICS, couleurs et lumières Polytone, texture de lune, entrées Particular pour NML, évènements sonores et 10 morceaux libres du paquet musical ([crédits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
+| Fresh Animations | `fresh-animations` | ✅ | Animated creatures |
+| FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
+| FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
+| Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
+| Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
+| Dark Coffee GUI | `dark-coffe-gui` | ✅ | Vanilla interface in coffee brown |
+| Dark Coffee GUI - Extras (Normal Hunger) | `dark-coffee-extras` | ✅ | Hunger bar (chicken drumsticks in Coffee style) in place of the coffee beans |
+| Modded Coffee GUI | `modded-coffee-gui` | ✅ | The same style for EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
+| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
-## Bibliothèques
+## Libraries
 
-Déjà là : AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, Mezz config, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Already present: AlfinoLib, Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, Mezz config, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
-À ajouter avec Neruina : Configurable.
+To add with Neruina: Configurable.
 
-## Sortis ou écartés
+## Dropped or rejected
 
-| Mod | Raison |
+| Mod | Reason |
 |---|---|
-| Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Retirés par l'équipe le 2026-10-19 |
-| FallingTree, ItemPhysic Lite | Remplacés par HT's TreeChop et ItemPhysic (choix de l'équipe le 2026-10-19) |
-| Entity Culling | Casse les engins Aeronautics ; retiré le 2026-10-19 |
-| AA4 Atlas | Fait planter le jeu à l'ouverture de l'atlas avec Antique Atlas 3 (`AtlasScreen.prepareToOpen()` ne renvoie plus l'écran) ; retiré le 2026-10-19, l'atlas s'ouvre à la touche |
-| Clumps | Regroupait les orbes d'XP, qui n'existent plus ([0009](decisions/0009-xp.md)) ; retiré le 2026-10-19 |
-| Freeze It and Heat It | Retiré par l'équipe le 2026-10-18 : pas de conservation de la nourriture |
-| Easy Anvils | Remplace l'enclume dont Overgeared a besoin ([12](plan/12-verification.md)) |
-| Leaves Be Gone | Sur la liste noire d'Aeronautics |
-| Dynamic Surroundings | Touche le moteur de son comme Sound Physics ; doublons |
-| Dragged's Simulated Tree Chopper | « C'est de trop » (L'équipe) |
-| Not Enough Animations, First-person Model | Remplacés par FA : Player Extension (choix de l'équipe) |
-| More Culling, Fog, Particle Rain | Se battent avec ATMOSPHERICS |
-| Vibrancy, Gleam, Colorful Lighting, Physics Mod | Moteurs de lumière ou de physique risqués avec Sodium 0.8 et Sable |
-| Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Retirés par l'équipe le 2026-10-18 |
-| `fallow-interface` | Écrans de Kaleidoscope, Overgeared et Wildex recolorés ; retiré le 2026-10-19, une version aux éléments de Dark Coffee est proposée à son auteur ([page](plan/fallow-interface.md)) |
-| Untitled Duck Mod | Retiré par l'équipe le 2026-10-19 ; le canard de Naturalist le remplace ([faune-nml](plan/faune-nml.md)) |
-| Comforts | Doublon du sac de couchage de Traveler's Backpack |
-| ParCool! | Désactivé à la demande de l'équipe |
-| Sanity: Renewed, TheWatcher | Le monde est énigmatique, pas sombre |
-| Jade, AppleSkin | Cassent le mystère |
-| Just Zoom, Zoomify | La longue-vue est l'outil de Wildex |
-| Waystones, Explorer's Compass, Nature's Compass | Effacent le voyage |
-| Carry On | Incompatible avec Aeronautics |
-| Distant Horizons, Separate Sable Render Distance | La brume rend la vue lointaine inutile |
-| Streams Reflowing, Tectonic, Downhill Rivers, Terralith | Worldgen lourd ou concurrent de NML |
-| Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Trop d'addons Create |
-| Create Villager Labor, Open Parties and Claims | Inutiles entre amis |
-| Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | Une jauge ou une activité de plus pour un rôle déjà couvert |
-| Reactive Music | Silence entre morceaux plafonné à 2 min, jar de 295 Mo, coupe la musique vanilla ([recherche](plan/recherche/2026-10-19/musique.md)) |
-| Easy Magic | Remplace la table vanilla dont dépend la refonte de l'enchantement ([recherche](plan/recherche/2026-10-19/enchantement.md)) |
-| Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Contenu sans mécanique forte, ou casse le mystère |
-| Farmer's Delight (+ addons) | Kaleidoscope Cookery est la cuisine du pack |
-| Legendary Survival Overhaul | Cold Sweat et Thirst Was Reclaimed retenus |
-| Minimaps, waypoints | Contraires à la vision |
-| Animal Husbandry, Spoiled | Jugés peu fiables |
-| Let's Do Bakery, Meadow, Wilder Nature | Doublons ou biomes en conflit avec NML |
-| Graze | Rend l'élevage autonome |
-| Integrated Mowzie's Mobs | Trop de dépendances |
-| Spawn, Environmental | Ajoutent des biomes (conflit NML) |
-| Prehistorum, Jurassic Saga, Jurassic Revived, Jurassic Reborn | Préhistoire écartée pour le moment |
-| YUNG's Better *, Structory, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns | Trop de structures ou orientation RPG ([0004](decisions/0004-structures.md)) |
-| C2ME, Noisium, Ksyxis, FogRule | Alpha, pas à jour ou gain marginal ([0007](decisions/0007-ambiance-performance.md)) |
-| Critters n' Crawlers | Doublon de Naturalist, créature d'horreur |
+| Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Removed by the team on 2026-10-19 |
+| FallingTree, ItemPhysic Lite | Replaced by HT's TreeChop and ItemPhysic (team choice on 2026-10-19) |
+| Entity Culling | Breaks Aeronautics contraptions; removed on 2026-10-19 |
+| AA4 Atlas | Crashes the game when opening the atlas with Antique Atlas 3 (`AtlasScreen.prepareToOpen()` no longer returns the screen); removed on 2026-10-19, the atlas opens with its key |
+| Clumps | Grouped XP orbs, which no longer exist ([0009](decisions/0009-xp.md)); removed on 2026-10-19 |
+| Freeze It and Heat It | Removed by the team on 2026-10-18: no food preservation |
+| Easy Anvils | Replaces the anvil that Overgeared needs ([12](plan/12-verification.md)) |
+| Leaves Be Gone | On Aeronautics' blacklist |
+| Dynamic Surroundings | Touches the sound engine like Sound Physics; duplicates |
+| Dragged's Simulated Tree Chopper | "It's too much" (the team) |
+| Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
+| More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
+| Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
+| Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
+| `fallow-interface` | Recoloured Kaleidoscope, Overgeared and Wildex screens; removed on 2026-10-19, a version using Dark Coffee's elements is being proposed to its author ([page](plan/fallow-interface.md)) |
+| Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([NML fauna](plan/faune-nml.md)) |
+| Comforts | Duplicates Traveler's Backpack's sleeping bag |
+| ParCool! | Disabled at the team's request |
+| Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
+| Jade, AppleSkin | Break the mystery |
+| Just Zoom, Zoomify | The spyglass is Wildex's tool |
+| Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
+| Carry On | Incompatible with Aeronautics |
+| Distant Horizons, Separate Sable Render Distance | The mist makes long-range viewing pointless |
+| Streams Reflowing, Tectonic, Downhill Rivers, Terralith | Heavy worldgen or competing with NML |
+| Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Too many Create addons |
+| Create Villager Labor, Open Parties and Claims | Useless among friends |
+| Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | One more gauge or activity for a role already covered |
+| Reactive Music | Silence between tracks capped at 2 min, 295 MB jar, cuts vanilla music ([research](plan/recherche/2026-10-19/musique.md)) |
+| Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](plan/recherche/2026-10-19/enchantement.md)) |
+| Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Content without a strong mechanic, or breaks the mystery |
+| Farmer's Delight (+ addons) | Kaleidoscope Cookery is the pack's cooking |
+| Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |
+| Minimaps, waypoints | Contrary to the vision |
+| Animal Husbandry, Spoiled | Judged unreliable |
+| Let's Do Bakery, Meadow, Wilder Nature | Duplicates or biomes in conflict with NML |
+| Graze | Makes animal husbandry self-sufficient |
+| Integrated Mowzie's Mobs | Too many dependencies |
+| Spawn, Environmental | Add biomes (NML conflict) |
+| Prehistorum, Jurassic Saga, Jurassic Revived, Jurassic Reborn | Prehistory set aside for now |
+| YUNG's Better *, Structory, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns | Too many structures or RPG orientation ([0004](decisions/0004-structures.md)) |
+| C2ME, Noisium, Ksyxis, FogRule | Alpha, not up to date or marginal gain ([0007](decisions/0007-ambiance-performance.md)) |
+| Critters n' Crawlers | Duplicates Naturalist, horror creature |
