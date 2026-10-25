@@ -1,7 +1,0 @@
-{
-  "betteradvancedtooltips.configuration.remove_creative_tab_tooltip": "Retirer l'onglet créatif de l'infobulle",
-  "betteradvancedtooltips.configuration.remove_component_count_tooltip": "Retirer le nombre de composants de l'infobulle",
-  "betteradvancedtooltips.configuration.fuel_tooltip": "Infobulle de combustible",
-  "betteradvancedtooltips.configuration.tag_tooltip": "Infobulle des tags",
-  "betteradvancedtooltips.configuration.component_tooltip": "Infobulle des composants"
-}
