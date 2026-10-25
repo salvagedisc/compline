@@ -1,0 +1,18 @@
+# Natural spawns made rare; the guardians of the Monoliths come from structures and are not affected.
+[mobs.foliaath.spawn_config]
+	extra_rarity = 0.3
+
+[mobs.umvuthana.spawn_config]
+	extra_rarity = 0.3
+
+[mobs.naga.spawn_config]
+	extra_rarity = 0.3
+
+[mobs.grottol.spawn_config]
+	extra_rarity = 0.6
+
+[mobs.bluff.spawn_config]
+	extra_rarity = 0.5
+
+[mobs.Elokosa.spawn_config]
+	extra_rarity = 0.5

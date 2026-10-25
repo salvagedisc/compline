@@ -1,0 +1,5 @@
+# Rarer wild creatures: the world stays almost empty.
+["Spawn Rates"]
+	GOLDEN_ALLAY_SPAWN = "6, 1, 1, minecraft:swamp, minecraft:mangrove_swamp, #forge:is_swamp"
+	CORNELIUS_SPAWN = "5, 1, 1, minecraft:swamp, minecraft:mangrove_swamp, #forge:is_swamp"
+	WILD_ANTLION_SPAWN = "5, 1, 1, minecraft:desert, #forge:is_desert"
