@@ -17,7 +17,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | No Man's Land | `no-mans-land` | ✅ (1.6.1) | CS | The world: terrain, biomes, ruins ([0001](decisions/0001-nml-vs-terralith.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
-| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](plan/12-verification.md#les-gardiens-des-monuments-rapport-6)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](plan/12-verification.md#the-monument-guardians-report-6)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
 | Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed, a single moon at a time with the Friendly Moon ([friendly moon](plan/lune-amie.md)). Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |

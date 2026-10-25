@@ -1,110 +1,110 @@
-# 5. Faune, écologie et ambiance
+# 5. Wildlife, ecology and ambience
 
-Ce qui existe déjà (décisions 0003 et 0007) : Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, six mods de compagnons et Companion ; ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights, More Darkness. Le bestiaire suffit largement. Ce qui manque, c'est la **chaîne qui supprime les monstres vanilla**, le **contrôle des créatures moddées** une fois la place libérée, et quelques touches d'ambiance.
+What already exists (decisions 0003 and 0007): Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, six companion mods and Companion; ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights, More Darkness. The bestiary is more than sufficient. What is missing is the **chain that removes vanilla monsters**, the **control of modded creatures** once the space is freed, and a few touches of ambience.
 
-Détail, preuves et clés : [recherche/research-faune-ambiance.md](recherche/research-faune-ambiance.md).
+Details, evidence and keys: [recherche/research-faune-ambiance.md](recherche/research-faune-ambiance.md).
 
-## 5.1 Supprimer les monstres vanilla
+## 5.1 Removing vanilla monsters
 
-Ils arrivent par six voies ; chacune a sa parade.
+They arrive by six routes; each has its countermeasure.
 
-| Voie | Exemples | Parade |
+| Route | Examples | Countermeasure |
 |---|---|---|
-| Listes de spawn des biomes | zombie, squelette, creeper, araignée, enderman, sorcière, slime, noyé, bogged | Biome modifier `neoforge:remove_spawns` sur `#minecraft:is_overworld` |
-| `spawn_overrides` des structures | gardiens, sorcière de cabane, pillards d'avant-poste | Règles In Control! + filet KubeJS |
-| Spawners | donjons, araignées des mines, trial spawners | `neoforge:remove_features` sur `monster_room` et `monster_room_deep` ; chambres d'épreuves retirées |
-| Gamerules | phantoms, patrouilles, raids, warden, marchand | `doInsomnia false`, `doPatrolSpawning false`, `disableRaids true`, `doWardenSpawning false`, `doTraderSpawning false` |
-| Conversions | villageois foudroyé → sorcière, piège de chevaux squelettes, `enableZombieHorseTrap` de Friends & Foes | Filet KubeJS + config F&F |
-| Entités placées à la génération | illageois des manoirs, zombies des villages abandonnés, silverfish des blocs infestés | Filet KubeJS ; `remove_features` sur `ore_infested` |
+| Biome spawn lists | zombie, skeleton, creeper, spider, enderman, witch, slime, drowned, bogged | Biome modifier `neoforge:remove_spawns` on `#minecraft:is_overworld` |
+| Structure `spawn_overrides` | guardians, swamp hut witch, outpost pillagers | In Control! rules + KubeJS safety net |
+| Spawners | dungeons, mineshaft spiders, trial spawners | `neoforge:remove_features` on `monster_room` and `monster_room_deep`; trial chambers removed |
+| Gamerules | phantoms, patrols, raids, warden, trader | `doInsomnia false`, `doPatrolSpawning false`, `disableRaids true`, `doWardenSpawning false`, `doTraderSpawning false` |
+| Conversions | villager struck by lightning → witch, skeleton horse trap, Friends & Foes `enableZombieHorseTrap` | KubeJS safety net + F&F config |
+| Entities placed at generation | mansion illagers, zombies in abandoned villages, silverfish in infested blocks | KubeJS safety net; `remove_features` on `ore_infested` |
 
-Trois couches, de la moins chère à la plus fine :
-1. **Datapack** (`kubejs/data/fallow/neoforge/biome_modifier/`) : retrait des spawns, des donjons et des blocs infestés. Pour neutraliser un biome modifier d'un autre mod sans toucher à sa config, on surcharge son fichier avec `{"type": "neoforge:none"}`.
-2. **In Control!** (nouveau, socle, serveur seulement) pour les règles fines.
-3. **Filet KubeJS** : toute entité vanilla bannie qui entre dans l'Overworld est annulée, sauf si elle porte le tag `fallow_allowed` (invocation par un admin).
+Three layers, from the cheapest to the most fine-grained:
+1. **Datapack** (`kubejs/data/fallow/neoforge/biome_modifier/`): removal of spawns, dungeons and infested blocks. To neutralise another mod's biome modifier without touching its config, its file is overridden with `{"type": "neoforge:none"}`.
+2. **In Control!** (new, core, server only) for the fine-grained rules.
+3. **KubeJS safety net**: any banned vanilla entity entering the Overworld is cancelled, unless it carries the `fallow_allowed` tag (summoned by an admin).
 
-## 5.2 Contrôler les créatures moddées
+## 5.2 Controlling modded creatures
 
-**Effet de bord majeur** : sans monstres vanilla, toute la limite d'hostiles (70) revient aux créatures moddées : créatures de Mowzie's, mille-pattes et Guster d'Alex's Mobs, Mauler et Barnacle de Friends & Foes, requins d'Hybrid Aquatic. Sans plafond, les « créatures rares » forment des hordes.
+**Major side effect**: without vanilla monsters, the entire hostile cap (70) goes to modded creatures: Mowzie's creatures, Alex's Mobs centipedes and Gusters, Friends & Foes Maulers and Barnacles, Hybrid Aquatic sharks. Without a ceiling, "rare creatures" form hordes.
 
-Règles In Control! proposées (`config/incontrol/spawn.json`, sémantique exacte à confirmer) :
-- aucune créature hostile moddée à une **lumière ≥ 8** : la base est littéralement un îlot de lumière ;
-- aucune anomalie Mowzie's à **moins de 40 blocs** d'un joueur : on les aperçoit au loin, dans la brume ;
-- au plus **2 créatures de Mowzie's par joueur** ;
-- au plus **8 hostiles par joueur** au total.
+Proposed In Control! rules (`config/incontrol/spawn.json`, exact semantics to be confirmed):
+- no hostile modded creature at a **light level ≥ 8**: the base is literally an island of light;
+- no Mowzie's anomaly **within 40 blocks** of a player: they are glimpsed in the distance, in the mist;
+- at most **2 Mowzie's creatures per player**;
+- at most **8 hostiles per player** in total.
 
-Pour espacer les prédateurs territoriaux (ours, lions, tigres, requins), le biome modifier `neoforge:add_spawn_costs` donne à chaque individu une « charge » qui repousse ses congénères.
+To space out territorial predators (bears, lions, tigers, sharks), the `neoforge:add_spawn_costs` biome modifier gives each individual a "charge" that repels its fellows.
 
-## 5.3 Une espèce, un mod
+## 5.3 One species, one mod
 
-Doublons à couper (table complète par biome dans la recherche) :
+Duplicates to cut (full per-biome table in the research notes):
 
-| Espèce | On garde | On coupe | Clé connue |
+| Species | Keep | Cut | Known key |
 |---|---|---|---|
-| Canard | Untitled Duck Mod | Naturalist | `disable_mobs.duck_removed = true` |
-| Éléphant | Alex's Mobs (monture à coffre : une caravane) | Naturalist | `disable_mobs.elephant_removed = true` |
-| Ours | Naturalist | Grizzly d'Alex's Mobs | à lire dans le .jar AM |
-| Crocodiliens | Alligator de Naturalist | Crocodile d'AM | idem |
-| Serpent à sonnette, rhinocéros, poisson-chat, geai bleu | Naturalist | AM | idem |
-| Requin-marteau, calmar, baudroie | Hybrid Aquatic | AM ; baudroie de Naturalist 2.x | idem |
-| Pingouin | Friends & Foes (ou Naturalist 2.x s'il en ajoute) | l'autre | — |
+| Duck | Untitled Duck Mod | Naturalist | `disable_mobs.duck_removed = true` |
+| Elephant | Alex's Mobs (mount with a chest: a caravan) | Naturalist | `disable_mobs.elephant_removed = true` |
+| Bear | Naturalist | Alex's Mobs grizzly | to be read in the AM .jar |
+| Crocodilians | Naturalist alligator | AM crocodile | same |
+| Rattlesnake, rhinoceros, catfish, blue jay | Naturalist | AM | same |
+| Hammerhead shark, squid, anglerfish | Hybrid Aquatic | AM; Naturalist 2.x anglerfish | same |
+| Penguin | Friends & Foes (or Naturalist 2.x if it adds one) | the other | — |
 
-**Créatures d'Alex's Mobs à couper pour la direction artistique** : Murmur, Farseer, Skelewag, mouche, cafard, et toutes les créatures de l'End (Void Worm, Mimicube, Cosmaw, Enderiophage, Spectre…). Celles du Nether partent avec lui si le Nether est fermé ([3.8](03-civilisation.md#38-le-nether--fermé-par-défaut)).
+**Alex's Mobs creatures to cut for art direction**: Murmur, Farseer, Skelewag, fly, cockroach, and all End creatures (Void Worm, Mimicube, Cosmaw, Enderiophage, Spectre…). Nether ones leave with it if the Nether is closed ([3.8](03-civilisation.md#38-the-nether-closed-by-default)).
 
-**Friends & Foes** (clés lues dans le code source) :
-- à couper : `enableIceologer`, `enableIceologerSpawn`, `enableIceologerInRaids`, `generateIceologerCabinStructure`, `enableIllusioner`, `enableIllusionerInRaids`, `generateIllusionerShackStructure`, `generateIllusionerTrainingGroundsStructure`, `enableWildfire`, `generateCitadelStructure`, `enableZombieHorseTrap`, `enableBeekeeperVillagerProfession`, `generateBeekeeperAreaStructureInVillages`, `generateCopperGolemWorkstationStructureInVillages` ;
-- à doser : `crabSpawnWeight` 14 → 6, Moobloom 4 → 2, `maulerSavannaSpawnWeight` 32 → 8, `maulerBadlandsSpawnWeight` 16 → 6, `maulerDesertSpawnWeight` 8 → 4, Barnacle 4 → 2 ;
-- à noter : le **Tuff Golem** n'apparaît que dans les strongholds, supprimés. Il faut lui donner une autre source (ruines, butin) ou l'accepter introuvable.
+**Friends & Foes** (keys read from the source code):
+- to cut: `enableIceologer`, `enableIceologerSpawn`, `enableIceologerInRaids`, `generateIceologerCabinStructure`, `enableIllusioner`, `enableIllusionerInRaids`, `generateIllusionerShackStructure`, `generateIllusionerTrainingGroundsStructure`, `enableWildfire`, `generateCitadelStructure`, `enableZombieHorseTrap`, `enableBeekeeperVillagerProfession`, `generateBeekeeperAreaStructureInVillages`, `generateCopperGolemWorkstationStructureInVillages`;
+- to tune: `crabSpawnWeight` 14 → 6, Moobloom 4 → 2, `maulerSavannaSpawnWeight` 32 → 8, `maulerBadlandsSpawnWeight` 16 → 6, `maulerDesertSpawnWeight` 8 → 4, Barnacle 4 → 2;
+- to note: the **Tuff Golem** only appears in strongholds, which are removed. It needs another source (ruins, loot) or must be accepted as unobtainable.
 
-**Mowzie's Mobs** (clés à confirmer dans le .jar) : Lantern et Grottol rares mais présents ; Foliaath en jungle seulement ; Naga sur les falaises côtières (×0,3) ; Frostmaw ×0,2 ; les structures (Wroughtnaut, temple du soleil, Sculptor) passent par Sparse Structures. Les Umvuthana (tribus masquées hostiles) sont une décision de direction artistique.
+**Mowzie's Mobs** (keys to be confirmed in the .jar): Lantern and Grottol rare but present; Foliaath in jungle only; Naga on coastal cliffs (×0.3); Frostmaw ×0.2; structures (Wroughtnaut, Sun Temple, Sculptor) go through Sparse Structures. The Umvuthana (hostile masked tribes) are an art-direction decision.
 
-**Adorable Hamster Pets** : flair à diamants à désactiver si la config le permet. **Companions!** : créatures hostiles, armes et boss désactivés ou rendus très rares (0003).
+**Adorable Hamster Pets**: diamond-sniffing to be disabled if the config allows. **Companions!**: hostile creatures, weapons and bosses disabled or made very rare (0003).
 
-## 5.4 Ressources perdues avec les monstres
+## 5.4 Resources lost along with the monsters
 
-À remplacer en KubeJS **avant d'ouvrir le serveur** :
+To be replaced in KubeJS **before opening the server**:
 
-| Ressource | Pourquoi elle compte | Remplacement proposé |
+| Resource | Why it matters | Proposed replacement |
 |---|---|---|
-| **Slime ball** | Super Glue, Sticker et piston collant de Create : indispensables à Aeronautics ; laisse des survivants | Mélange Create (varech + farine + eau) ; à vérifier : la *banana slug slime* d'Alex's Mobs peut-elle servir ? |
-| **Blaze** | Blaze Burner de Create | Voir le Nether ([3.8](03-civilisation.md#38-le-nether--fermé-par-défaut)) |
-| Poudre à canon | TNT, fusées | Mélange Create : charbon de bois, salpêtre (gravier lavé), soufre |
-| Ficelle | Arcs, cannes à pêche | Laine broyée (Create) ; lin de Supplementaries |
-| Os | Poudre d'os, agriculture | Ajoutés au butin des grands animaux Naturalist et AM |
-| Membrane de phantom | Potion de chute lente | Vérifier si une recette Aeronautics l'utilise |
+| **Slime ball** | Create's Super Glue, Sticker and sticky piston: essential for Aeronautics; leaves survivors | Create mixing (kelp + flour + water); to check: can Alex's Mobs' *banana slug slime* be used? |
+| **Blaze** | Create's Blaze Burner | See the Nether ([3.8](03-civilisation.md#38-the-nether-closed-by-default)) |
+| Gunpowder | TNT, rockets | Create mixing: charcoal, saltpetre (washed gravel), sulphur |
+| String | Bows, fishing rods | Crushed wool (Create); Supplementaries flax |
+| Bone | Bone meal, agriculture | Added to the loot of large Naturalist and AM animals |
+| Phantom membrane | Slow falling potion | Check whether an Aeronautics recipe uses it |
 
-Un passage sur les recettes de tous les .jar (`slime_ball`, `blaze_rod`, `gunpowder`, `ender_pearl`, `phantom_membrane`, `string`, `bone`) dimensionnera la liste.
+A pass over the recipes of every .jar (`slime_ball`, `blaze_rod`, `gunpowder`, `ender_pearl`, `phantom_membrane`, `string`, `bone`) will size the list.
 
-## 5.5 Ambiance : ce qu'on ajoute
+## 5.5 Ambience: what we add
 
-| Mod | Effet | Dispo | Statut proposé |
+| Mod | Effect | Availability | Proposed status |
 |---|---|---|---|
-| **Cosy Critters & Creepy Crawlies** | Oiseaux-particules qui se posent et s'envolent à l'approche ; papillons de nuit autour des lampes ; petites araignées des toiles. Silhouettes au loin, base = îlot de lumière, sans coût serveur | oui (client) | recommandé |
-| **Enhanced Celestials** | Lune de moisson (croissance), lune bleue ; **lune de sang coupée** ; une « Lune pâle » maison en datapack (ciel décoloré, Lantern et Ghost plus fréquents, aucun hostile de plus) | oui (6.0.2.5 ; la v1 est archivée, vérifier la v2) | recommandé |
-| **Simple Voice Chat** | Voix de proximité ; Sound Physics réverbère les voix dans les vallées et les grottes | oui | recommandé ([6](06-technique-et-serveur.md)) |
-| **Reactive Music** (remplacé par True Adaptive Music, [0010](../decisions/0010-musique.md)) | Remplace Presence Not Position (introuvable) et Biome Music (Fabric seulement). Musique choisie selon le lieu, l'heure, le danger, l'intérieur ou l'extérieur. Ses morceaux fantasy et celtiques ne collent pas forcément à Fallow : garder les règles, changer le songpack ou en écrire un sobre | oui (1.3.5, client, utilise YACL déjà présent) | recommandé ; à écouter en phase 6 |
-| **Particle Rain** | Pluie et neige en particules, brume d'orage | déjà « à tester » | à tester, Ecliptic garde la météo |
-| **Simple Clouds** | Orages qui assombrissent l'horizon, visibles de loin | oui (0.7.3) | branche dédiée, **client seul** (sinon conflit avec Ecliptic) ; compute shaders, probablement pas de macOS |
-| Longwings | 70 papillons à collectionner, manuel, filets | oui | optionnel (doublon des papillons Naturalist) |
+| **Cosy Critters & Creepy Crawlies** | Particle birds that land and fly off as you approach; moths around lamps; small web spiders. Silhouettes in the distance, base = island of light, no server cost | yes (client) | recommended |
+| **Enhanced Celestials** | Harvest moon (growth), blue moon; **blood moon cut**; a home-made "Pale Moon" as a datapack (washed-out sky, more frequent Lantern and Ghost, no extra hostiles) | yes (6.0.2.5; v1 is archived, check v2) | recommended |
+| **Simple Voice Chat** | Proximity voice; Sound Physics reverberates voices in valleys and caves | yes | recommended ([6](06-technique-et-serveur.md)) |
+| **Reactive Music** (replaced by True Adaptive Music, [0010](../decisions/0010-musique.md)) | Replaces Presence Not Position (not found) and Biome Music (Fabric only). Music chosen by place, time, danger, indoors or outdoors. Its fantasy and Celtic tracks do not necessarily suit Fallow: keep the rules, change the songpack or write a sober one | yes (1.3.5, client, uses YACL already present) | recommended; to be listened to in phase 6 |
+| **Particle Rain** | Rain and snow as particles, storm mist | already "to test" | to test, Ecliptic keeps the weather |
+| **Simple Clouds** | Storms that darken the horizon, visible from afar | yes (0.7.3) | dedicated branch, **client only** (otherwise conflicts with Ecliptic); compute shaders, probably no macOS |
+| Longwings | 70 butterflies to collect, manual, nets | yes | optional (duplicates Naturalist butterflies) |
 
-**Écartés** : Weather2 (prend le contrôle de la météo, conflit avec Ecliptic), Fowl Play (l'auteur prévient d'un risque de corruption des mondes), Whisperwoods (pas de version 1.21.1, à surveiller : c'est la direction artistique idéale), Wisp & Willow (système de magie), Dynamic Surroundings (doublon d'AmbientSounds), Spawn Balance Utility (Fabric seulement), True Darkness Biomes et Truly Dark (doublons de More Darkness).
+**Ruled out**: Weather2 (takes control of the weather, conflicts with Ecliptic), Fowl Play (the author warns of a risk of world corruption), Whisperwoods (no 1.21.1 version, to watch: it is the ideal art direction), Wisp & Willow (magic system), Dynamic Surroundings (duplicates AmbientSounds), Spawn Balance Utility (Fabric only), True Darkness Biomes and Truly Dark (duplicates of More Darkness).
 
-**À savoir** : un patch « Presence Footsteps x Sable » existe pour NeoForge 1.21.1 et fait jouer les bruits de pas sur les engins. Presence Footsteps avait été écarté en 0007 ; c'est une donnée nouvelle si la décision est rouverte.
+**Worth knowing**: a "Presence Footsteps x Sable" patch exists for NeoForge 1.21.1 and makes footstep sounds play on contraptions. Presence Footsteps had been ruled out in 0007; this is new information if the decision is reopened.
 
-## 5.6 Mettre en scène l'étrangeté sans ajouter de mod
+## 5.6 Staging strangeness without adding a mod
 
-- **AmbientSounds** : ses ambiances sont des JSON de resource pack, avec conditions de biome, d'heure, d'altitude, de pluie et de lumière. On y ajoute des **sons lointains rares et non identifiables** : grincement métallique près des ruines, cloche étouffée dans la brume du marais, chant de baleine au large la nuit, sifflet de train très lointain. Aucun jumpscare.
-- **LambDynamicLights** : luminances d'entités par resource pack. Le Lantern de Mowzie's, les lucioles de Naturalist et le Glare éclairent vraiment : un îlot de lumière mobile dans la nuit noire de More Darkness.
-- **ATMOSPHERICS** : presets de brume par biome, jour et nuit, livrés dans `pack/config`. Ne pas activer « Improved Transparency » dans Sodium.
-- **Structures vidées** : monuments sans gardiens, avant-postes sans pillards, cabanes sans sorcière, villages sans zombies. Des ruines silencieuses.
+- **AmbientSounds**: its ambiences are resource-pack JSON files, with conditions on biome, time, altitude, rain and light. We add **rare, unidentifiable distant sounds**: a metallic creak near ruins, a muffled bell in the marsh mist, a whale song far out at sea at night, a very distant train whistle. No jumpscares.
+- **LambDynamicLights**: entity luminances through a resource pack. Mowzie's Lantern, Naturalist fireflies and the Glare really give off light: a mobile island of light in the pitch-black night of More Darkness.
+- **ATMOSPHERICS**: fog presets per biome, day and night, shipped in `pack/config`. Do not enable "Improved Transparency" in Sodium.
+- **Emptied structures**: monuments without guardians, outposts without pillagers, huts without a witch, villages without zombies. Silent ruins.
 
-## 5.7 Réglages récapitulés
+## 5.7 Summary of settings
 
-| Mod | Réglage |
+| Mod | Setting |
 |---|---|
-| Naturalist | `duck_removed = true`, `elephant_removed = true` ; ne pas activer `bird_removed` (coupe tous les oiseaux). Aucun poids de spawn dans la config : la rareté passe par In Control! |
-| Alex's Mobs Continued | Couper grizzly, crocodile, serpent à sonnette, rhinocéros, poisson-chat, geai bleu, requin-marteau, Murmur, Farseer, Skelewag, mouche, cafard, créatures de l'End (format de config à lire dans le .jar) |
-| Friends & Foes | Voir 5.3 |
-| Mowzie's Mobs | Voir 5.3 |
-| Enhanced Celestials | Lune de sang désactivée ; « Lune pâle » ajoutée |
-| Subtle Effects | Couper les effets superflus (0007) et les doublons de lucioles |
-| Entity Culling | **Risque** : casse les engins Aeronautics ([6.1](06-technique-et-serveur.md#61-alertes)) |
+| Naturalist | `duck_removed = true`, `elephant_removed = true`; do not enable `bird_removed` (cuts all birds). No spawn weight in the config: rarity goes through In Control! |
+| Alex's Mobs Continued | Cut grizzly, crocodile, rattlesnake, rhinoceros, catfish, blue jay, hammerhead shark, Murmur, Farseer, Skelewag, fly, cockroach, End creatures (config format to be read in the .jar) |
+| Friends & Foes | See 5.3 |
+| Mowzie's Mobs | See 5.3 |
+| Enhanced Celestials | Blood moon disabled; "Pale Moon" added |
+| Subtle Effects | Cut superfluous effects (0007) and firefly duplicates |
+| Entity Culling | **Risk**: breaks Aeronautics contraptions ([6.1](06-technique-et-serveur.md#61-alerts)) |

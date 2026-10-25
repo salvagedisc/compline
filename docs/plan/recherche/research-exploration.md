@@ -1,440 +1,440 @@
-# Recherche : pilier Exploration (Fallow, 1.21.1 NeoForge)
+# Research: Exploration pillar (Fallow, 1.21.1 NeoForge)
 
-> Rapport de chercheur, 2026-10-10. Tient compte du registre mis à jour (46 mods, décisions 0002 à 0007). **Retenus, donc pas reproposés** : Sparse Structures, Icy's Better Horses, Supplementaries (corde/poulie, panneaux de direction posés à la main, encre antique, marqueurs de carte ; localisation de structures désactivée), Quark (essentiel). **Écartés, donc pas reproposés** : YUNG's Better *, Structory et Structory: Towers, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns, Explorer's Compass, Nature's Compass, Waystones, Terralith seul.
+> Researcher's report, 2026-10-10. Takes into account the updated registry (46 mods, decisions 0002 to 0007). **Retained, therefore not proposed again**: Sparse Structures, Icy's Better Horses, Supplementaries (rope/pulley, hand-placed direction signs, ancient ink, map markers; structure location disabled), Quark (essentials). **Rejected, therefore not proposed again**: YUNG's Better *, Structory and Structory: Towers, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns, Explorer's Compass, Nature's Compass, Waystones, Terralith alone.
 >
-> **Limites de la recherche** : modrinth.com, l'API et le CDN Modrinth sont inaccessibles depuis cette session. La disponibilité vient d'extraits WebSearch (pages de versions Modrinth et miroirs comme BoxToPlay, SkinMC, mado-hosting, qui recopient les fichiers Modrinth) et de la lecture directe de sources GitHub (raw.githubusercontent). **Le quota de recherches web (200, partagé entre tous les agents) a été épuisé en cours de route.** Ces sujets n'ont donc pas pu être vérifiés : mods de tentes, escalade hors ParCool, bateaux, événements dynamiques, Distant Horizons côté serveur. Ils sont signalés comme tels.
+> **Limits of the research**: modrinth.com, the Modrinth API and CDN were unreachable during the research. Availability comes from WebSearch excerpts (Modrinth version pages and mirrors such as BoxToPlay, SkinMC, mado-hosting, which copy Modrinth files) and from direct reading of GitHub sources (raw.githubusercontent). **The web search quota (200) ran out along the way.** The following topics therefore could not be verified: tent mods, climbing outside ParCool, boats, dynamic events, Distant Horizons server-side. They are flagged as such.
 >
-> Légende de disponibilité : **oui** (fichier 1.21.1 NeoForge vu sur une page Modrinth ou un miroir Modrinth) · **probable** (indices forts, fichier Modrinth non vu) · **non vérifié** · **non** (CurseForge seul ou pas de build).
+> Availability legend: **yes** (1.21.1 NeoForge file seen on a Modrinth page or a Modrinth mirror) · **probable** (strong hints, Modrinth file not seen) · **unverified** · **no** (CurseForge only or no build).
 
 ---
 
-## 1. Synthèse
+## 1. Summary
 
-| # | Mod | Dispo Modrinth 1.21.1 NF | Côté | Verdict |
+| # | Mod | Modrinth availability 1.21.1 NF | Side | Verdict |
 |---|---|---|---|---|
-| 1 | Lootr | oui | CS | **socle** |
-| 2 | Paraglider | probable (build 21.1.5 dans le source) | CS | **socle** |
-| 3 | Create Aeronautics Structures | oui (1.21.1–1.21.11) | CS | **recommandé** (priorité 0004) |
-| 4 | Create: New Beginnings | oui (0.1.1, 1.21.1–1.21.4) | CS | **recommandé** (priorité 0004) |
-| 5 | Create: Let The Adventure Begin | oui (datapack 4.0.3) | S | **recommandé, à tester** (priorité 0004) |
-| 6 | MCG's RPG Campsites | oui (1.0.0) | CS | **recommandé** (survivants) |
-| 7 | Cinch's Abandoned Houses | probable | CS | **recommandé** |
-| 8 | Exposure | oui (1.9.18) | CS | **recommandé** |
-| 9 | Traveler's Backpack | oui (10.1.38) | CS | **recommandé** |
-| 10 | Comforts | oui (9.0.3+1.21.1) | CS | **recommandé** |
-| 11 | Traveler's Titles | probable (v5.1.3 + YUNG's API) | C | **recommandé** |
-| 12 | Dead Reckoning | non vérifié (Fabric, via Connector) | C | **recommandé si dispo** |
-| 13 | AA4 Atlas (addon Antique Atlas) | non vérifié | CS | **recommandé si dispo** |
-| 14 | ParCool! | oui (4.0.0.5) | CS | **recommandé, bridé** |
-| 15 | Better Archeology | oui (1.3.4, peut-être 1.3.8) | CS | **recommandé, à tester** |
-| 16 | Streams Reflowing (avec NML) | oui (2.13.1, 1.21.1–1.21.5) | S | **à tester en priorité** |
-| 17 | Create: Structures Arise | oui (176.49.48) | CS | optionnel |
-| 18 | Create: Rustic Structures | oui (1.0.1) | CS | optionnel |
-| 19 | IDAS (+ Integrated API) | oui | CS | optionnel (déjà « à tester ») |
-| 20 | Integrated Villages | non vérifié côté NeoForge (fichier NeoForge 1.3.2 sur CurseForge) | CS | optionnel |
-| 21 | ChoiceTheorem's Overhauled Village (CTOV) | oui (v3.6.3) | CS | optionnel |
-| 22 | Towers of the Wild Modded | oui (1.0.9, 1.21–1.21.11) | S | optionnel (à montrer, risque de goût) |
-| 23 | Antique Trains (addon AA4) | non vérifié | C | optionnel |
-| 24 | The Athenaeum | non vérifié (CurseForge NF 1.21.1) | CS | optionnel |
-| 25 | Explorer's Journal (KayDev) | non vérifié | CS | optionnel |
-| 26 | NeoCompass / Compass Plus | oui (NF 1.21.1) | C | optionnel (repli de Dead Reckoning) |
-| 27 | Distant Horizons | (déjà « à tester ») | CS | recommandé côté exploration, coût à mesurer |
-| 28 | LootJS | non vérifié | S | optionnel (outil) |
-| 29 | Hooked / Yori3o's Grappling Hooks | oui | CS | écarté pour l'instant |
-| 30 | Sophisticated Backpacks | oui (3.26.6) | CS | écarté (doublon de TB) |
-| 31 | Wandering Villagers | oui (1.0.1) | S | écarté (casse la rareté des survivants) |
-| 32 | 80 % Abandoned Villages | non (1.21 / 1.20.6, pas de 1.21.1 vu) | S | écarté (on l'écrit nous-mêmes) |
-| 33 | Create: Dynamic Village | non (CurseForge seul) | CS | écarté (Modrinth) |
-| 34 | SWEM / SWEM Lite | non vérifié | CS | écarté (doublon d'Icy's) |
-| 35 | Hoofprint | non vérifié | C | écarté (doublon de frontend AA4) |
+| 1 | Lootr | yes | CS | **core** |
+| 2 | Paraglider | probable (build 21.1.5 in the source) | CS | **core** |
+| 3 | Create Aeronautics Structures | yes (1.21.1–1.21.11) | CS | **recommended** (priority 0004) |
+| 4 | Create: New Beginnings | yes (0.1.1, 1.21.1–1.21.4) | CS | **recommended** (priority 0004) |
+| 5 | Create: Let The Adventure Begin | yes (datapack 4.0.3) | S | **recommended, to test** (priority 0004) |
+| 6 | MCG's RPG Campsites | yes (1.0.0) | CS | **recommended** (survivors) |
+| 7 | Cinch's Abandoned Houses | probable | CS | **recommended** |
+| 8 | Exposure | yes (1.9.18) | CS | **recommended** |
+| 9 | Traveler's Backpack | yes (10.1.38) | CS | **recommended** |
+| 10 | Comforts | yes (9.0.3+1.21.1) | CS | **recommended** |
+| 11 | Traveler's Titles | probable (v5.1.3 + YUNG's API) | C | **recommended** |
+| 12 | Dead Reckoning | unverified (Fabric, via Connector) | C | **recommended if available** |
+| 13 | AA4 Atlas (Antique Atlas addon) | unverified | CS | **recommended if available** |
+| 14 | ParCool! | yes (4.0.0.5) | CS | **recommended, restricted** |
+| 15 | Better Archeology | yes (1.3.4, maybe 1.3.8) | CS | **recommended, to test** |
+| 16 | Streams Reflowing (with NML) | yes (2.13.1, 1.21.1–1.21.5) | S | **to test first** |
+| 17 | Create: Structures Arise | yes (176.49.48) | CS | optional |
+| 18 | Create: Rustic Structures | yes (1.0.1) | CS | optional |
+| 19 | IDAS (+ Integrated API) | yes | CS | optional (already "to test") |
+| 20 | Integrated Villages | unverified on the NeoForge side (NeoForge 1.3.2 file on CurseForge) | CS | optional |
+| 21 | ChoiceTheorem's Overhauled Village (CTOV) | yes (v3.6.3) | CS | optional |
+| 22 | Towers of the Wild Modded | yes (1.0.9, 1.21–1.21.11) | S | optional (to show, taste risk) |
+| 23 | Antique Trains (AA4 addon) | unverified | C | optional |
+| 24 | The Athenaeum | unverified (CurseForge NF 1.21.1) | CS | optional |
+| 25 | Explorer's Journal (KayDev) | unverified | CS | optional |
+| 26 | NeoCompass / Compass Plus | yes (NF 1.21.1) | C | optional (fallback for Dead Reckoning) |
+| 27 | Distant Horizons | (already "to test") | CS | recommended on the exploration side, cost to measure |
+| 28 | LootJS | unverified | S | optional (tool) |
+| 29 | Hooked / Yori3o's Grappling Hooks | yes | CS | rejected for now |
+| 30 | Sophisticated Backpacks | yes (3.26.6) | CS | rejected (duplicate of TB) |
+| 31 | Wandering Villagers | yes (1.0.1) | S | rejected (breaks survivor rarity) |
+| 32 | 80% Abandoned Villages | no (1.21 / 1.20.6, no 1.21.1 seen) | S | rejected (we write it ourselves) |
+| 33 | Create: Dynamic Village | no (CurseForge only) | CS | rejected (Modrinth) |
+| 34 | SWEM / SWEM Lite | unverified | CS | rejected (duplicate of Icy's) |
+| 35 | Hoofprint | unverified | C | rejected (duplicate of AA4 frontend) |
 
 ---
 
-## 2. Fiches détaillées
+## 2. Detailed sheets
 
-### A. Structures intégrant Create (recherche prioritaire de la décision 0004)
+### A. Structures integrating Create (priority research of decision 0004)
 
-**Constat** : aucun mod trouvé ne **remplace** toutes les structures vanilla par des versions Create (comme en septembre). Le plus proche est un assemblage : *Create: New Beginnings* (ajouts non destructifs aux villages) + *Create Aeronautics Structures* (ruines d'ingénieurs, épaves) + *Let The Adventure Begin* (petites structures autonomes), avec nos propres remplacements dans les pools de villages, injectés par **Lithostitched** (déjà présent comme dépendance de Hybrid Aquatic).
+**Finding**: no mod found **replaces** all vanilla structures with Create versions (as in September). The closest is an assembly: *Create: New Beginnings* (non-destructive additions to villages) + *Create Aeronautics Structures* (engineer ruins, wrecks) + *Let The Adventure Begin* (small standalone structures), with our own replacements in the village pools, injected by **Lithostitched** (already present as a dependency of Hybrid Aquatic).
 
 #### 1. Create Aeronautics Structures
-- Slug Modrinth : projet `PZIWeQhv` (compatibilité affichée 1.21.1–1.21.11). Preuves : https://modrinth.com/project/PZIWeQhv · https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-structures
-- Dispo : **oui** (Modrinth, NeoForge 1.21.1). Statut bêta (1.1.0-Beta-3.1 corrige un crash serveur à la lecture de la config), développement actif.
-- Côté : CS. Dépendances : Create 6.0.10, Create Aeronautics ≥ 1.1.3, Sable ≥ 1.1.3, GeckoLib 4.8.4 (tous déjà dans le pack).
-- Mécanique : ruines de **maisons d'ingénieur**, bateaux abandonnés, dirigeables flottants, ballons brisés (ruine non fonctionnelle) et épaves de dirigeables « à récupérer ». La maison d'ingénieur abrite un **marchand ingénieur pacifique** (`villager_create_engineer`) qui vend arbres, roues dentées, alliage d'andésite, presses. L'auteur dit : « atmosphère seulement, pas d'avantage de jeu ».
-- Intégration : colle parfaitement au concept « survivants ». L'ingénieur est un survivant tout trouvé, à ramener dans la colonie. L'épave de dirigeable est une silhouette dans la brume, la récompense rêvée du pilier Exploration.
-- Conflits et config : vérifier que l'ingénieur ne casse pas Overgeared ni la progression Create. Filtrer ses échanges en KubeJS (pas de presse ni de pièces avancées vendues tôt). Les « robber balloons » (ballons de brigands) pourraient être hostiles : à vérifier et désactiver si ce sont des mobs.
-- KubeJS/datapack : loot des épaves remplacé par des **plans** (objets « savoir » qui débloquent les recettes Aeronautics, voir §3). Rareté via Sparse Structures (×5–6).
-- **Verdict : recommandé**, à tester en premier.
+- Modrinth slug: project `PZIWeQhv` (displayed compatibility 1.21.1–1.21.11). Evidence: https://modrinth.com/project/PZIWeQhv · https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-structures
+- Availability: **yes** (Modrinth, NeoForge 1.21.1). Beta status (1.1.0-Beta-3.1 fixes a server crash when reading the config), active development.
+- Side: CS. Dependencies: Create 6.0.10, Create Aeronautics ≥ 1.1.3, Sable ≥ 1.1.3, GeckoLib 4.8.4 (all already in the pack).
+- Mechanic: ruins of **engineer houses**, abandoned boats, floating airships, broken balloons (non-functional ruin) and airship wrecks "to salvage". The engineer's house shelters a **peaceful engineer merchant** (`villager_create_engineer`) who sells shafts, cogwheels, andesite alloy, presses. The author says: "atmosphere only, no gameplay advantage".
+- Integration: fits the "survivors" concept perfectly. The engineer is a ready-made survivor, to bring back to the colony. The airship wreck is a silhouette in the mist, the dream reward of the Exploration pillar.
+- Conflicts and config: check that the engineer does not break Overgeared or Create progression. Filter his trades in KubeJS (no press or advanced parts sold early). The "robber balloons" (bandit balloons) might be hostile: to check and disable if they are mobs.
+- KubeJS/datapack: wreck loot replaced by **blueprints** ("knowledge" items that unlock Aeronautics recipes, see §3). Rarity via Sparse Structures (×5–6).
+- **Verdict: recommended**, to test first.
 
 #### 2. Create: New Beginnings
-- Slug : projet `IAnP4np7`. Preuves : https://modrinth.com/mod/IAnP4np7 · https://www.curseforge.com/minecraft/mc-mods/create-new-beginnings
-- Dispo : **oui** (0.1.1, NeoForge 1.21.1–1.21.4, mars 2025, compatible Create 6). Version précoce, peu mise à jour.
-- Côté : CS. Dépendance : Create.
-- Mécanique : ajoute de manière **non destructive** des structures Create aux villages vanilla (« remnants of the past » : vestiges, tables de loot propres, structures par type de village) pour enseigner les mécaniques Create.
-- Intégration : c'est le plus proche de la demande « villages vanilla version Create ». Comme les villages deviendront des ruines (0004), il faudra vérifier si les pièces s'injectent aussi dans les pools « zombie » (abandonnés). Sinon, les recopier dans ces pools avec un modificateur Lithostitched `add_template_pool_elements`.
-- Conflits : risque faible (ajout non destructif, compatible CTOV et autres). Inconnu : contient-il des contraptions assemblées (Create gère mal les contraptions générées) ?
-- **Verdict : recommandé** (à tester avec les villages abandonnés forcés).
+- Slug: project `IAnP4np7`. Evidence: https://modrinth.com/mod/IAnP4np7 · https://www.curseforge.com/minecraft/mc-mods/create-new-beginnings
+- Availability: **yes** (0.1.1, NeoForge 1.21.1–1.21.4, March 2025, compatible with Create 6). Early version, rarely updated.
+- Side: CS. Dependency: Create.
+- Mechanic: adds Create structures to vanilla villages in a **non-destructive** way ("remnants of the past": remains, own loot tables, structures per village type) to teach Create mechanics.
+- Integration: it is the closest to the request for "Create version of vanilla villages". Since villages will become ruins (0004), we need to check whether the pieces are also injected into the "zombie" (abandoned) pools. Otherwise, copy them into those pools with a Lithostitched `add_template_pool_elements` modifier.
+- Conflicts: low risk (non-destructive addition, compatible with CTOV and others). Unknown: does it contain assembled contraptions (Create handles generated contraptions poorly)?
+- **Verdict: recommended** (to test with forced abandoned villages).
 
 #### 3. Create: Let The Adventure Begin
-- Slug : `create-let-the-adventure-begin` (datapack Modrinth, environ 1 M de téléchargements). Preuve : miroir BoxToPlay des datapacks Modrinth « create-let-the-adventure-begin ».
-- Dispo : **oui** (4.0.3, 1.20.1–1.21.1, tous loaders car datapack).
-- Côté : serveur (datapack ; à placer via packwiz dans `kubejs/data` ou via un mod de chargement global de datapacks).
-- Mécanique : structures « inspirées de Create, équilibrées, proches du vanilla, qui récompensent l'exploration ».
-- À faire : ouvrir l'archive et lister `data/*/worldgen/structure_set` et `loot_table` (liste non trouvée). Retirer les structures trop « donjon ».
-- **Verdict : recommandé, à tester.** Risque de goût et de volume, comme pour Explorify : ne garder que la moitié la plus sobre.
+- Slug: `create-let-the-adventure-begin` (Modrinth datapack, about 1M downloads). Evidence: BoxToPlay mirror of the Modrinth datapacks "create-let-the-adventure-begin".
+- Availability: **yes** (4.0.3, 1.20.1–1.21.1, all loaders since it is a datapack).
+- Side: server (datapack; to place via packwiz in `kubejs/data` or via a global datapack loading mod).
+- Mechanic: structures "inspired by Create, balanced, close to vanilla, that reward exploration".
+- To do: open the archive and list `data/*/worldgen/structure_set` and `loot_table` (list not found). Remove the structures that are too "dungeon".
+- **Verdict: recommended, to test.** Taste and volume risk, as with Explorify: keep only the most sober half.
 
 #### 4. Create: Structures Arise
-- Slug : `create-structures-arise`. Preuves : https://modrinth.com/project/9enMEvoc/version/HSECDqTu · miroir BoxToPlay « create-structures-arise ».
-- Dispo : **oui** (176.49.48 NeoForge 1.21.1). Un changelog (174.47.46) exige **AnvilCore 10.1** : dépendance à confirmer dans le .jar.
-- Mécanique : 27 à 28 structures Create (moulins, ateliers, etc.).
-- Risque : volume (28 structures) contraire au principe « une structure est une découverte ». Qualité inégale selon les retours communautaires (non vérifié).
-- **Verdict : optionnel.** À n'envisager que si New Beginnings et Let The Adventure Begin ne suffisent pas, avec désactivation par structure via Sparse Structures ou datapack.
+- Slug: `create-structures-arise`. Evidence: https://modrinth.com/project/9enMEvoc/version/HSECDqTu · BoxToPlay mirror "create-structures-arise".
+- Availability: **yes** (176.49.48 NeoForge 1.21.1). A changelog (174.47.46) requires **AnvilCore 10.1**: dependency to confirm in the .jar.
+- Mechanic: 27 to 28 Create structures (mills, workshops, etc.).
+- Risk: volume (28 structures) contrary to the principle "a structure is a discovery". Uneven quality according to community feedback (unverified).
+- **Verdict: optional.** To consider only if New Beginnings and Let The Adventure Begin are not enough, with per-structure disabling via Sparse Structures or datapack.
 
 #### 5. Create: Rustic Structures
-- Slug : `create-rustic-structures`. Preuve : miroir BoxToPlay « create-rustic-structures ».
-- Dispo : **oui** (1.0.0 et 1.0.1 NeoForge 1.21.1).
-- Mécanique : structures fonctionnelles et décoratives en blocs Create, ton « rustique » (moulins, fermes mécanisées).
-- **Verdict : optionnel.** Le ton rustique colle à la DA, mais doublon partiel avec New Beginnings : en choisir un après comparaison visuelle.
+- Slug: `create-rustic-structures`. Evidence: BoxToPlay mirror "create-rustic-structures".
+- Availability: **yes** (1.0.0 and 1.0.1 NeoForge 1.21.1).
+- Mechanic: functional and decorative structures in Create blocks, "rustic" tone (mills, mechanized farms).
+- **Verdict: optional.** The rustic tone fits the art direction, but it partially duplicates New Beginnings: choose one after a visual comparison.
 
-#### 6. IDAS et Integrated Villages
-- IDAS : https://modrinth.com/mod/idas, NeoForge 1.21.1 (idas-1.13.5+1.21.1-neoforge, avril 2026). Exige Integrated API, Create, Quark, Supplementaries (tous présents sauf Integrated API). Configuration **par datapack** : spacing et separation dans les `structure_set`, et un datapack de configuration officiel existe.
-- Integrated Villages : https://modrinth.com/project/integrated-villages. Le fichier `integrated_villages-1.3.2+1.21.1-neoforge.jar` existe sur CurseForge, mais la page Modrinth n'annonce que « Forge & Fabric » : **NeoForge sur Modrinth non vérifié**. Exige Integrated API, Create, Supplementaries.
-- Problème : IDAS est orienté donjons et loot (RPG), et ses structures sont grandes, donc bruyantes. Integrated Villages ajoute des villages **peuplés**, l'inverse du concept « survivants ».
-- **Verdict : optionnel.** IDAS reste « à tester plus tard ». Pour Integrated Villages, ne garder que si on peut forcer leurs variantes en ruines.
+#### 6. IDAS and Integrated Villages
+- IDAS: https://modrinth.com/mod/idas, NeoForge 1.21.1 (idas-1.13.5+1.21.1-neoforge, April 2026). Requires Integrated API, Create, Quark, Supplementaries (all present except Integrated API). Configuration **by datapack**: spacing and separation in the `structure_set`s, and an official configuration datapack exists.
+- Integrated Villages: https://modrinth.com/project/integrated-villages. The file `integrated_villages-1.3.2+1.21.1-neoforge.jar` exists on CurseForge, but the Modrinth page only announces "Forge & Fabric": **NeoForge on Modrinth unverified**. Requires Integrated API, Create, Supplementaries.
+- Problem: IDAS is dungeon- and loot-oriented (RPG), and its structures are large, hence noisy. Integrated Villages adds **populated** villages, the opposite of the "survivors" concept.
+- **Verdict: optional.** IDAS stays "to test later". For Integrated Villages, keep only if their ruined variants can be forced.
 
 #### 7. Create: Dynamic Village
-- 4 métiers Create (ingénieur mécanique, ingénieur hydraulique, mécanicien de train, mineur), 20 bâtiments. **CurseForge seul** (v0.7-1.21.1) : https://curseforge.com/minecraft/mc-mods/dynamic-village
-- **Verdict : écarté** (absent de Modrinth). L'idée des métiers peut être reprise en KubeJS pour les survivants (métiers personnalisés).
+- 4 Create professions (mechanical engineer, hydraulic engineer, train mechanic, miner), 20 buildings. **CurseForge only** (v0.7-1.21.1): https://curseforge.com/minecraft/mc-mods/dynamic-village
+- **Verdict: rejected** (absent from Modrinth). The idea of professions can be taken up in KubeJS for the survivors (custom professions).
 
-### B. Ruines, villages abandonnés et survivants
+### B. Ruins, abandoned villages and survivors
 
 #### 8. MCG's RPG Campsites
-- Slug : `mcgs-rpg-campsites`. Preuves : miroir BoxToPlay des mods Modrinth (1.0.0, NeoForge 1.21.1) · https://www.curseforge.com/minecraft/mc-mods/mcgs-rpg-campsites
-- Côté : CS. Blocs vanilla uniquement.
-- Mécanique : **8 campements, dont 7 avec un villageois** (boucher, fermier, cartographe, clerc, forgeron d'outils, armurier, bibliothécaire) et 1 abandonné. Chaque camp a un coffre de loot de village ; l'un contient un portail en ruine. Plaines, taïga, savane. L'auteur recommande `/locate`, ce qui prouve leur rareté.
-- Intégration : c'est **exactement le concept « survivants »** de la décision 0004. Un réfugié isolé avec son feu de camp, à ramener à la colonie (Quark « Villagers Follow Emeralds » est déjà activé).
-- Config et datapack : retirer le portail en ruine et le coffre de loot de village, ou le remplacer par un journal (lore). Rareté ×4–6. Injecter une **botte de foin sous le feu de camp** (fumée de signal visible de très loin : le phare naturel du survivant, voir §4).
-- Conflit : le cartographe vend des cartes d'exploration vanilla (cartes de structures). Les filtrer en KubeJS (cohérent avec 0006).
-- **Verdict : recommandé.**
+- Slug: `mcgs-rpg-campsites`. Evidence: BoxToPlay mirror of Modrinth mods (1.0.0, NeoForge 1.21.1) · https://www.curseforge.com/minecraft/mc-mods/mcgs-rpg-campsites
+- Side: CS. Vanilla blocks only.
+- Mechanic: **8 campsites, 7 of them with a villager** (butcher, farmer, cartographer, cleric, toolsmith, armorer, librarian) and 1 abandoned. Each camp has a village loot chest; one contains a ruined portal. Plains, taiga, savanna. The author recommends `/locate`, which proves their rarity.
+- Integration: this is **exactly the "survivors" concept** of decision 0004. An isolated refugee with their campfire, to bring back to the colony (Quark "Villagers Follow Emeralds" is already enabled).
+- Config and datapack: remove the ruined portal and the village loot chest, or replace it with a journal (lore). Rarity ×4–6. Inject a **hay bale under the campfire** (signal smoke visible from very far away: the survivor's natural beacon, see §4).
+- Conflict: the cartographer sells vanilla exploration maps (structure maps). Filter them in KubeJS (consistent with 0006).
+- **Verdict: recommended.**
 
 #### 9. Cinch's Abandoned Houses
-- Slug : `cinchs-abandoned-houses`. Preuves : https://www.mado-hosting.com/minecraft-mods/cinchs-abandoned-houses (build NeoForge 1.21.x couvrant 1.21 et 1.21.1, version 2.0, mai 2026) · https://www.curseforge.com/minecraft/mc-mods/cinchcraft
-- Dispo : **probable** (miroir de type Modrinth ; page Modrinth non vue).
-- Mécanique : maisons isolées à différents stades de délabrement, loot de début de partie modeste. Petites, silencieuses : le « lieu » plutôt que le donjon.
-- Intégration : loot remplacé par des journaux d'anciens habitants, des outils usés (Overgeared) et parfois un plan. Rareté ×2–3.
-- **Verdict : recommandé.**
+- Slug: `cinchs-abandoned-houses`. Evidence: https://www.mado-hosting.com/minecraft-mods/cinchs-abandoned-houses (NeoForge 1.21.x build covering 1.21 and 1.21.1, version 2.0, May 2026) · https://www.curseforge.com/minecraft/mc-mods/cinchcraft
+- Availability: **probable** (Modrinth-type mirror; Modrinth page not seen).
+- Mechanic: isolated houses at various stages of decay, modest early-game loot. Small, silent: the "place" rather than the dungeon.
+- Integration: loot replaced by journals of former inhabitants, worn tools (Overgeared) and occasionally a blueprint. Rarity ×2–3.
+- **Verdict: recommended.**
 
-#### 10. Villages abandonnés forcés (datapack maison, pas de mod)
-- Vanilla possède pour chaque type de village (plaines, désert, savane, taïga, neige) une variante **« zombie »** dont les centres mènent à des maisons délabrées (pools `minecraft:village/<type>/zombie/...`).
-- Mise en œuvre :
-  1. Écraser `data/minecraft/worldgen/template_pool/village/<type>/town_centers.json` pour ne garder que les centres `zombie`.
-  2. Les pièces abandonnées contiennent des **zombies villageois** dans leurs NBT. Les hostiles vanilla étant supprimés, intercepter en KubeJS (`EntityEvents.spawned` sur `minecraft:zombie_villager`, annulé dans une structure). Éventuellement, 1 % de chance de les remplacer par un survivant terré.
-  3. Bloquer la génération des golems de fer et des chats de village si l'on veut un vide total.
-- Le datapack « 80 % Abandoned Villages » (1.21/1.20.6, non vu en 1.21.1) prouve le principe, mais il vaut mieux l'écrire soi-même.
-- **CTOV** (https://modrinth.com/project/35BiK2KV, v3.6.3 NeoForge 1.21.1, configs de fréquence et d'activation des villages) apporterait des villages par biome plus variés, donc des ruines plus variées. Cela suppose de forcer aussi ses variantes abandonnées, s'il en a : à vérifier dans le .jar. **Optionnel.**
+#### 10. Forced abandoned villages (in-house datapack, no mod)
+- For each village type (plains, desert, savanna, taiga, snow), vanilla has a **"zombie"** variant whose centers lead to dilapidated houses (pools `minecraft:village/<type>/zombie/...`).
+- Implementation:
+  1. Overwrite `data/minecraft/worldgen/template_pool/village/<type>/town_centers.json` to keep only the `zombie` centers.
+  2. The abandoned pieces contain **zombie villagers** in their NBT. Since vanilla hostiles are removed, intercept in KubeJS (`EntityEvents.spawned` on `minecraft:zombie_villager`, cancelled inside a structure). Optionally, a 1% chance to replace them with a hidden survivor.
+  3. Block the generation of iron golems and village cats if total emptiness is wanted.
+- The "80% Abandoned Villages" datapack (1.21/1.20.6, not seen for 1.21.1) proves the principle, but it is better to write it ourselves.
+- **CTOV** (https://modrinth.com/project/35BiK2KV, v3.6.3 NeoForge 1.21.1, village frequency and activation configs) would bring more varied villages per biome, hence more varied ruins. This presupposes also forcing its abandoned variants, if it has any: to check in the .jar. **Optional.**
 
 #### 11. Wandering Villagers
-- 1.0.1 NeoForge 1.21.1, gamerule `DoWanderingVillagers` (nom non confirmé à la source).
-- Fait apparaître des villageois près des joueurs : cela **supprime la découverte** du survivant. **Écarté.**
+- 1.0.1 NeoForge 1.21.1, gamerule `DoWanderingVillagers` (name not confirmed at the source).
+- Spawns villagers near players: this **removes the discovery** of the survivor. **Rejected.**
 
-### C. Lieux, savoirs et récompenses non matérielles
+### C. Places, knowledge and non-material rewards
 
 #### 12. Better Archeology
-- Projet `zCh7omyG`. Preuves : https://modrinth.com/project/zCh7omyG/version/XlJUda6G · miroir BoxToPlay (1.3.8 NeoForge 1.21.1 listée, non confirmée sur Modrinth).
-- Dispo : **oui** (1.3.4 NeoForge 1.21.1, licence MIT).
-- Mécanique (de mémoire, **à vérifier dans le .jar**) : fossiles assemblables en squelettes d'exposition, artefacts « non identifiés » à identifier sur une table d'archéologie, nouveaux sites (tunnels, ruines enfouies), outils d'excavation.
-- Intégration : transforme le pinceau vanilla en **métier**, et les fossiles décorent un musée de colonie. Les artefacts peuvent porter le lore de la civilisation disparue.
-- À désactiver : les artefacts qui donnent des bonus de combat ou des enchantements puissants (concurrents d'Overgeared).
-- **Verdict : recommandé, à tester** (contenu exact à inventorier).
+- Project `zCh7omyG`. Evidence: https://modrinth.com/project/zCh7omyG/version/XlJUda6G · BoxToPlay mirror (1.3.8 NeoForge 1.21.1 listed, not confirmed on Modrinth).
+- Availability: **yes** (1.3.4 NeoForge 1.21.1, MIT license).
+- Mechanic (from memory, **to verify in the .jar**): fossils assemblable into display skeletons, "unidentified" artifacts to identify at an archaeology table, new sites (tunnels, buried ruins), excavation tools.
+- Integration: turns the vanilla brush into a **profession**, and fossils decorate a colony museum. Artifacts can carry the lore of the vanished civilization.
+- To disable: artifacts that give combat bonuses or powerful enchantments (competitors to Overgeared).
+- **Verdict: recommended, to test** (exact content to inventory).
 
 #### 13. The Athenaeum
-- Preuve : https://www.curseforge.com/minecraft/mc-mods/the-athenaeum (Fabric/NeoForge 1.21–1.21.1). Dépendances : Architectury (présent), YACL (présent), ChimericLib. **Modrinth non vérifié.**
-- Livres écrits générés par datapack et ajoutés aux tables de loot (bibliothèques de stronghold et manoirs : à rediriger, puisque les strongholds sont supprimés).
-- **Verdict : optionnel.** Un datapack maison (`written_book` avec le composant `minecraft:written_book_content`, injecté par le modificateur NeoForge `neoforge:add_table`) fait la même chose avec **notre** lore, sans dépendance.
+- Evidence: https://www.curseforge.com/minecraft/mc-mods/the-athenaeum (Fabric/NeoForge 1.21–1.21.1). Dependencies: Architectury (present), YACL (present), ChimericLib. **Modrinth unverified.**
+- Written books generated by datapack and added to loot tables (stronghold libraries and mansions: to redirect, since strongholds are removed).
+- **Verdict: optional.** An in-house datapack (`written_book` with the `minecraft:written_book_content` component, injected by the NeoForge modifier `neoforge:add_table`) does the same thing with **our** lore, without a dependency.
 
 #### 14. Explorer's Journal (KayDev)
-- Journal universel (journal intime, encyclopédie, atlas, statistiques) qui se remplit en découvrant mobs, biomes et structures. Détection dynamique par registres NeoForge. https://www.modpackindex.com/mod/207136/explorers-journals
-- **Modrinth et 1.21.1 non vérifiés.** Risques : son onglet « Atlas » peut afficher des coordonnées et doublonne AA4.
-- **Verdict : optionnel**, seulement si l'onglet atlas et les coordonnées sont désactivables.
+- Universal journal (diary, encyclopedia, atlas, statistics) that fills in as mobs, biomes and structures are discovered. Dynamic detection through NeoForge registries. https://www.modpackindex.com/mod/207136/explorers-journals
+- **Modrinth and 1.21.1 unverified.** Risks: its "Atlas" tab may display coordinates and duplicates AA4.
+- **Verdict: optional**, only if the atlas tab and coordinates can be disabled.
 
-#### 15. Exposure (photographie)
-- Slug : `exposure`. Preuves : https://github.com/mortuusars/Exposure (branche 1.21.1, NeoForge, Forge, Fabric) · miroir BoxToPlay « exposure » (1.9.18 NeoForge 1.21.1).
-- Côté : CS. Pas de dépendance lourde connue.
-- Mécanique : appareils argentiques, pellicules noir et blanc ou couleur (16 vues, la couleur est plus dure à fabriquer et à développer), viseur (focale, vitesse, flash, grilles), accessoires (lampe de redstone en flash, longue-vue en objectif, vitre en filtre). Développement puis tirage dans un **lightroom** (papier + colorants), album photo.
-- Intégration : en fait un **métier** (chimie, papier, colorants) et une **preuve de découverte** : la photo du sommet, de l'épave ou de la créature rare, accrochée au mur de la base. Le bassin de colorants peut passer par Create.
-- Idée forte (à vérifier dans le .jar) : Exposure enregistre des données sur chaque vue (entités cadrées, biome, position, auteur) et déclenche des critères d'avancement. On peut alors créer des **primes photographiques** en KubeJS (« photographier un Frostmaw » → plan ou récompense). Vérifier aussi que **l'infobulle des photos n'affiche pas de coordonnées**.
-- **Verdict : recommandé.**
+#### 15. Exposure (photography)
+- Slug: `exposure`. Evidence: https://github.com/mortuusars/Exposure (1.21.1 branch, NeoForge, Forge, Fabric) · BoxToPlay mirror "exposure" (1.9.18 NeoForge 1.21.1).
+- Side: CS. No known heavy dependency.
+- Mechanic: film cameras, black-and-white or color film (16 frames, color is harder to make and develop), viewfinder (focal length, speed, flash, grids), accessories (redstone lamp as flash, spyglass as lens, glass pane as filter). Development then printing in a **lightroom** (paper + dyes), photo album.
+- Integration: makes it a **profession** (chemistry, paper, dyes) and a **proof of discovery**: the photo of the summit, the wreck or the rare creature, hung on the base's wall. The dye basin can go through Create.
+- Strong idea (to verify in the .jar): Exposure records data on each frame (framed entities, biome, position, author) and triggers advancement criteria. **Photographic bounties** can then be created in KubeJS ("photograph a Frostmaw" → blueprint or reward). Also check that **the photo tooltip does not display coordinates**.
+- **Verdict: recommended.**
 
 #### 16. Lootr
-- Slug : `lootr` (projet `EltpO5cN`). Preuve : https://modrinth.com/mod/lootr/version/1.21.1-1.11.36.107 (1.21.1-1.11.37.122 la plus récente vue).
-- Dispo : **oui**. Côté CS.
-- Mécanique : chaque coffre généré a un contenu **par joueur**. En multijoueur, celui qui arrive second trouve encore quelque chose.
-- Config (`lootr-common.toml`, clés de mémoire **à vérifier**) : pas de rafraîchissement ni de décroissance (chaque découverte est unique), protection contre la casse activée, conversion des structures de mods activée.
-- Interaction : FogRule (écarté) exigeait Lootr. Lootr rend aussi les loots maison par joueur (journaux de lore « personnels »).
-- **Verdict : socle.**
+- Slug: `lootr` (project `EltpO5cN`). Evidence: https://modrinth.com/mod/lootr/version/1.21.1-1.11.36.107 (1.21.1-1.11.37.122 the most recent seen).
+- Availability: **yes**. Side CS.
+- Mechanic: every generated chest has **per-player** contents. In multiplayer, whoever arrives second still finds something.
+- Config (`lootr-common.toml`, keys from memory **to verify**): no refresh or decay (each discovery is unique), break protection enabled, mod structure conversion enabled.
+- Interaction: FogRule (rejected) required Lootr. Lootr also makes in-house loot per-player ("personal" lore journals).
+- **Verdict: core.**
 
-### D. Traversée et endurance
+### D. Crossing and stamina
 
 #### 17. Paraglider (Tictim)
-- Slug Modrinth : `paragliders` (page vue avec des builds 26.1). Le dépôt https://github.com/Tictim/Paraglider a une branche `release/1.21.1` : `gradle.properties` donne **mod_id `paraglider`, version 21.1.5, NeoForge 21.1.186+**. SkinMC (miroir Modrinth) liste des builds NeoForge 1.21.1 21.1.2 et 21.1.3.
-- Dispo : **probable** (fichier 1.21.1 sur Modrinth non vu directement).
-- Côté : CS.
-- Mécanique BotW complète : planeur, **roue d'endurance**, **courants ascendants** sur les sources de vent (feux de camp, réglables par datapack), orbes spirituels, statues de la Déesse et statues cornues (échange orbes ↔ réceptacles d'endurance ou cœurs), statues ajoutées aux villages.
-- Config lue dans le source (branche 1.21.1) :
-  - `paraglider-common` → `features.spiritOrbGens`, `features.heartContainers`, `features.staminaVessels`, `features.villageStructures` (true par défaut).
-  - `paraglider-server` → `updraft` (true), `paraglidingSpeed` (1.0), `paragliderDurability` (0 = sans usure), `paragliderInTowersOfTheWild`, `spiritOrbs.enderDragonDropsVessel`, `spiritOrbs.witherDropsVessel`, `spiritOrbs.raidGivesVessel`, `spiritOrbs.elderGuardianDropsSpiritOrb`, `spiritOrbs.spawnerSpiritOrbDrops` (1.0), `spiritOrbs.trialSpiritOrbDrops` (2.0), `spiritOrbs.ominousTrialSpiritOrbDrops` (4.0), `spiritOrbs.spiritOrbLoots` (true), `vessels.startingHearts` (10), `vessels.maxHeartContainers` (20), `vessels.startingStamina` (1000), `vessels.maxStaminaVessels` (10), `vessels.staminaIncreasePerVessel` (200), `stamina.paraglidingConsumesStamina` (true), `stamina.runningAndSwimmingConsumesStamina` (false).
-- Réglages proposés pour Fallow :
-  - `heartContainers = false` (pas de cœurs supplémentaires : la survie reste environnementale).
-  - `raidGivesVessel = false`, `witherDropsVessel = false` (pas de Wither ni de raids voulus).
-  - `spawnerSpiritOrbDrops = 0`, `trial*SpiritOrbDrops = 0` (les chambres d'épreuves seront supprimées ou vidées).
-  - `stamina.runningAndSwimmingConsumesStamina = true` (la course et la nage deviennent un choix).
-  - `paragliderDurability` ≈ 600 (réparation chez Overgeared).
-  - `spiritOrbLoots = true`, mais orbes retirés des coffres vanilla et injectés **seulement** dans les sanctuaires et monuments de NML, via loot modifier.
-  - `villageStructures = true` si l'on recopie les statues dans les pools de villages abandonnés : statue de la Déesse dans une ruine = sanctuaire.
-- Recette du planeur : la verrouiller derrière Overgeared (toile + armature forgée), ou la trouver dans une épave Aeronautics.
-- **Verdict : socle.** C'est le cœur de la traversée BotW et il remplace l'Elytra supprimée.
+- Modrinth slug: `paragliders` (page seen with 26.1 builds). The repository https://github.com/Tictim/Paraglider has a `release/1.21.1` branch: `gradle.properties` gives **mod_id `paraglider`, version 21.1.5, NeoForge 21.1.186+**. SkinMC (Modrinth mirror) lists NeoForge 1.21.1 builds 21.1.2 and 21.1.3.
+- Availability: **probable** (1.21.1 file on Modrinth not seen directly).
+- Side: CS.
+- Full BotW mechanic: glider, **stamina wheel**, **updrafts** over wind sources (campfires, adjustable by datapack), spirit orbs, Goddess statues and horned statues (orbs ↔ stamina vessels or hearts exchange), statues added to villages.
+- Config read from the source (1.21.1 branch):
+  - `paraglider-common` → `features.spiritOrbGens`, `features.heartContainers`, `features.staminaVessels`, `features.villageStructures` (true by default).
+  - `paraglider-server` → `updraft` (true), `paraglidingSpeed` (1.0), `paragliderDurability` (0 = no wear), `paragliderInTowersOfTheWild`, `spiritOrbs.enderDragonDropsVessel`, `spiritOrbs.witherDropsVessel`, `spiritOrbs.raidGivesVessel`, `spiritOrbs.elderGuardianDropsSpiritOrb`, `spiritOrbs.spawnerSpiritOrbDrops` (1.0), `spiritOrbs.trialSpiritOrbDrops` (2.0), `spiritOrbs.ominousTrialSpiritOrbDrops` (4.0), `spiritOrbs.spiritOrbLoots` (true), `vessels.startingHearts` (10), `vessels.maxHeartContainers` (20), `vessels.startingStamina` (1000), `vessels.maxStaminaVessels` (10), `vessels.staminaIncreasePerVessel` (200), `stamina.paraglidingConsumesStamina` (true), `stamina.runningAndSwimmingConsumesStamina` (false).
+- Proposed settings for Fallow:
+  - `heartContainers = false` (no extra hearts: survival stays environmental).
+  - `raidGivesVessel = false`, `witherDropsVessel = false` (no Wither or raids wanted).
+  - `spawnerSpiritOrbDrops = 0`, `trial*SpiritOrbDrops = 0` (trial chambers will be removed or emptied).
+  - `stamina.runningAndSwimmingConsumesStamina = true` (running and swimming become a choice).
+  - `paragliderDurability` ≈ 600 (repair at Overgeared).
+  - `spiritOrbLoots = true`, but orbs removed from vanilla chests and injected **only** into NML's sanctuaries and monuments, via loot modifier.
+  - `villageStructures = true` if the statues are copied into the abandoned village pools: a Goddess statue in a ruin = sanctuary.
+- Glider recipe: lock it behind Overgeared (canvas + forged frame), or find it in an Aeronautics wreck.
+- **Verdict: core.** It is the heart of the BotW crossing and it replaces the removed Elytra.
 
 #### 18. ParCool!
-- Projet `Fsvx2bdR`. Preuves : https://modrinth.com/project/Fsvx2bdR · miroir BoxToPlay (1.21.1-4.0.0.5 NeoForge).
-- Dispo : **oui**. Côté CS.
-- Mécanique : parkour (accroche aux rebords, escalade de rebord, roulade, saut de mur, glissade murale, course murale, esquive, ramper, plongeon…). Endurance interne, **ou endurance fournie par Paraglider** (compatibilité officielle 1.20.1 et 1.21.1, à régler dans la config).
-- Bridage : désactiver côté serveur les actions « cinéma » (course murale horizontale et verticale, esquive, flips, saut chargé, cat leap, fast run), et garder **accroche au rebord, escalade de rebord, saut de mur, roulade de réception, vault, ramper**. On obtient l'escalade BotW sans supermanoeuvres. ParCool a aussi des **tyroliennes** (à comparer avec la corde et la poulie de Supplementaries ; en garder une seule logique).
-- Conflit : animations du joueur possiblement en conflit avec d'autres mods d'animation (aucun dans le pack). Vérifier ParCool avec les contraptions Sable (marcher sur un dirigeable en mouvement).
-- **Verdict : recommandé, bridé.**
+- Project `Fsvx2bdR`. Evidence: https://modrinth.com/project/Fsvx2bdR · BoxToPlay mirror (1.21.1-4.0.0.5 NeoForge).
+- Availability: **yes**. Side CS.
+- Mechanic: parkour (ledge grab, ledge climb, roll, wall jump, wall slide, wall run, dodge, crawl, dive…). Internal stamina, **or stamina supplied by Paraglider** (official compatibility 1.20.1 and 1.21.1, to set in the config).
+- Restriction: disable server-side the "cinematic" actions (horizontal and vertical wall run, dodge, flips, charged jump, cat leap, fast run), and keep **ledge grab, ledge climb, wall jump, landing roll, vault, crawl**. This gives BotW climbing without super-maneuvers. ParCool also has **ziplines** (to compare with Supplementaries' rope and pulley; keep only one logic).
+- Conflict: player animations possibly in conflict with other animation mods (none in the pack). Check ParCool with Sable contraptions (walking on a moving airship).
+- **Verdict: recommended, restricted.**
 
-#### 19. Grappins : Hooked (2.0.2 NF 1.21.1), Yori3o's Grappling Hooks (4.7.0-beta.2 NF 1.21.1)
-- Disponibles, mais un grappin rend la verticalité triviale et fait doublon avec ParCool + Paraglider. BotW n'en a pas.
-- **Verdict : écarté pour l'instant.** À rouvrir comme outil d'ingénieur tardif (forgé chez Overgeared) si l'escalade s'avère frustrante.
+#### 19. Grappling hooks: Hooked (2.0.2 NF 1.21.1), Yori3o's Grappling Hooks (4.7.0-beta.2 NF 1.21.1)
+- Available, but a grappling hook makes verticality trivial and duplicates ParCool + Paraglider. BotW has none.
+- **Verdict: rejected for now.** To reopen as a late engineer's tool (forged at Overgeared) if climbing proves frustrating.
 
-#### 20. Montures et bateaux
-- **Icy's Better Horses** est déjà retenu (lien, sifflet, races, maison). Ne rien empiler dessus : SWEM et SWEM Lite sont **écartés** (doublons, et disponibilité Modrinth 1.21.1 non vérifiée).
-- Bateaux : Create Aeronautics + Sable couvrent les navires. Aucun mod de bateau à ajouter (non recherché, quota épuisé). Streams Reflowing pousse les bateaux vanilla avec ses courants : le comportement des navires Sable dans ces courants reste à tester.
+#### 20. Mounts and boats
+- **Icy's Better Horses** is already retained (lead, whistle, breeds, house). Nothing to stack on it: SWEM and SWEM Lite are **rejected** (duplicates, and Modrinth 1.21.1 availability unverified).
+- Boats: Create Aeronautics + Sable cover ships. No boat mod to add (not researched, quota exhausted). Streams Reflowing pushes vanilla boats with its currents: the behavior of Sable ships in those currents remains to be tested.
 
-### E. Navigation sans coordonnées
+### E. Navigation without coordinates
 
-#### 21. Masquer les coordonnées (vanilla)
-- `/gamerule reducedDebugInfo true` masque XYZ, le bloc visé, le biome et les raccourcis F3+B, F3+G et les bordures de chunks, pour tous les joueurs. Préréglage dans le datapack de monde, ou en KubeJS `ServerEvents.loaded` → `server.runCommandSilent('gamerule reducedDebugInfo true')`.
-- Compléments :
-  - Option `showCoordinates` de vanilla : sans objet en Java.
-  - Supplementaries : « coordonnées à la boussole » déjà désactivées (0006).
-  - Commandes `/waypoints` et `/landmarks` de Surveyor : vérifier si elles impriment des coordonnées et restreindre leur niveau de permission.
-  - Exposure : vérifier les infobulles.
-  - Écran d'Antique Atlas : vérifier qu'il n'affiche pas les coordonnées au survol.
-  - Écran de mort : vanilla n'affiche pas les coordonnées. La boussole de récupération suffit.
+#### 21. Hiding coordinates (vanilla)
+- `/gamerule reducedDebugInfo true` hides XYZ, the targeted block, the biome and the shortcuts F3+B, F3+G and chunk borders, for all players. Preset in the world datapack, or in KubeJS `ServerEvents.loaded` → `server.runCommandSilent('gamerule reducedDebugInfo true')`.
+- Complements:
+  - Vanilla `showCoordinates` option: irrelevant in Java.
+  - Supplementaries: "compass coordinates" already disabled (0006).
+  - Surveyor's `/waypoints` and `/landmarks` commands: check whether they print coordinates and restrict their permission level.
+  - Exposure: check the tooltips.
+  - Antique Atlas screen: check that it does not display coordinates on hover.
+  - Death screen: vanilla does not display coordinates. The recovery compass is enough.
 
-#### 22. Dead Reckoning (addon Surveyor)
-- https://github.com/sisby-folk/dead-reckoning (ex-« Antique Atlas Compass HUD », inspiré de Compass Ribbon).
-- **Ruban de boussole façon Skyrim** dans le HUD, avec les marqueurs Surveyor colorés. Chaque élément est désactivable. Le ruban peut n'apparaître **que si l'on tient une boussole**, ou en a une dans la barre ou l'inventaire.
-- Dispo 1.21.1 sur Modrinth : **non vérifié**. Mod Fabric, il passerait par Connector comme AA4.
-- Réglage proposé : afficher le ruban seulement **boussole en main**, points cardinaux seuls, **marqueurs désactivés**. Les marqueurs sur le ruban seraient des waypoints déguisés, ce qui est interdit. Au mieux, n'afficher que la marque « maison ».
-- **Verdict : recommandé si disponible.** Repli : **NeoCompass** (HUD boussole NeoForge 1.21.1, client, sans coordonnées) ou **Compass Plus** (2.0.0, NeoForge 1.21.1 : HUD vanilla avec cardinaux, spawn, lodestone, dernière mort).
+#### 22. Dead Reckoning (Surveyor addon)
+- https://github.com/sisby-folk/dead-reckoning (formerly "Antique Atlas Compass HUD", inspired by Compass Ribbon).
+- **Skyrim-style compass ribbon** in the HUD, with colored Surveyor markers. Every element can be disabled. The ribbon can appear **only when holding a compass**, or having one in the hotbar or inventory.
+- 1.21.1 availability on Modrinth: **unverified**. A Fabric mod, it would go through Connector like AA4.
+- Proposed setting: show the ribbon only **with a compass in hand**, cardinal points only, **markers disabled**. Markers on the ribbon would be disguised waypoints, which is forbidden. At best, show only the "home" mark.
+- **Verdict: recommended if available.** Fallback: **NeoCompass** (NeoForge 1.21.1 compass HUD, client, no coordinates) or **Compass Plus** (2.0.0, NeoForge 1.21.1: vanilla HUD with cardinals, spawn, lodestone, last death).
 
-#### 23. AA4 Atlas et Antique Trains (addons Antique Atlas)
-- **AA4 Atlas** donne à l'atlas un vrai identifiant d'objet et une **recette**. Combiné à l'option AA4 « l'atlas doit être dans l'inventaire pour ouvrir la carte », la carte devient un **objet** qu'on fabrique, qu'on porte et qu'on peut perdre. **Recommandé si disponible** (non vérifié).
-- **Antique Trains** affiche vraisemblablement le réseau Create sur l'atlas (non vérifié). **Optionnel.**
-- Réglages Surveyor (`config/surveyor.toml`) :
-  - `globalSharing=false` : chacun dessine sa carte, et le partage passe par `/surveyor share` ou, mieux, par la **copie vers et depuis les cartes vanilla** que Surveyor sait faire. Ramener une carte remplie à la base devient un geste de cartographe.
-  - Section `Builtins` : garder les marqueurs de portail désactivés (Nether à statuer) et le marqueur de tombe au choix.
-- Config AA4 (`config/antique-atlas.toml`) : liste des structures marquées automatiquement (après les avoir vues). Marquer les monuments NML, les épaves et les camps, mais **pas** les petites ruines (la découverte doit rester personnelle).
+#### 23. AA4 Atlas and Antique Trains (Antique Atlas addons)
+- **AA4 Atlas** gives the atlas a real item identifier and a **recipe**. Combined with the AA4 option "the atlas must be in the inventory to open the map", the map becomes an **item** that is crafted, carried and can be lost. **Recommended if available** (unverified).
+- **Antique Trains** presumably displays the Create network on the atlas (unverified). **Optional.**
+- Surveyor settings (`config/surveyor.toml`):
+  - `globalSharing=false`: everyone draws their own map, and sharing goes through `/surveyor share` or, better, through the **copy to and from vanilla maps** that Surveyor can do. Bringing a filled map back to the base becomes a cartographer's gesture.
+  - `Builtins` section: keep portal markers disabled (Nether to be settled) and the grave marker as desired.
+- AA4 config (`config/antique-atlas.toml`): list of structures marked automatically (after having been seen). Mark NML monuments, wrecks and camps, but **not** small ruins (discovery must stay personal).
 
 #### 24. Traveler's Titles
-- v5.1.3 NeoForge 1.21.1 + YUNG's API. Client. Preuves : https://www.curseforge.com/projects/1015155 · https://gdlauncher.com/mods/modrinth/travelers-titles (référence Modrinth).
-- Dispo : **probable**.
-- Affiche le **nom du biome en titre** en y entrant (façon BotW ou Skyrim), avec un son personnalisable par biome dans un resource pack (espace de noms `travelerstitles`). Compense le biome masqué par `reducedDebugInfo`.
-- Ce n'est **pas** un « YUNG's Better * » : c'est un HUD, pas des structures. On peut renommer les biomes de NML en français évocateur via un resource pack.
-- **Verdict : recommandé.**
+- v5.1.3 NeoForge 1.21.1 + YUNG's API. Client. Evidence: https://www.curseforge.com/projects/1015155 · https://gdlauncher.com/mods/modrinth/travelers-titles (Modrinth reference).
+- Availability: **probable**.
+- Displays the **biome name as a title** on entering it (BotW or Skyrim style), with a sound customizable per biome in a resource pack (`travelerstitles` namespace). Compensates for the biome hidden by `reducedDebugInfo`.
+- It is **not** a "YUNG's Better *": it is a HUD, not structures. NML biomes can be renamed to evocative French names through a resource pack.
+- **Verdict: recommended.**
 
-### F. Campement et inventaire
+### F. Camping and inventory
 
 #### 25. Traveler's Backpack
-- Projet `rlloIFEV`. Preuve : miroir BoxToPlay (10.1.38 NeoForge 1.21.1).
-- Dispo : **oui**. Côté CS.
-- Sac porté et visible sur le dos, **deux réservoirs de fluide** (eau), grille d'artisanat, emplacements d'outils, **sac de couchage déployable**, variantes à capacités.
-- Config à vérifier dans le .jar :
-  - désactiver les **capacités** des variantes (effets magiques) ;
-  - vérifier que le sac de couchage **ne fixe pas** le point de réapparition ;
-  - vérifier que les réservoirs **conservent la pureté** de l'eau de Thirst Was Reclaimed (sinon c'est une gourde infinie qui contourne Thirst Canteen).
-- Recettes : à verrouiller par Overgeared (cuir tanné, boucles forgées).
-- **Verdict : recommandé.**
-- **Sophisticated Backpacks** (3.26.6 + Sophisticated Core) est **écarté** : ses améliorations (aimant, compactage, alimentation, filtres) font de la logistique de stockage en doublon avec Create.
+- Project `rlloIFEV`. Evidence: BoxToPlay mirror (10.1.38 NeoForge 1.21.1).
+- Availability: **yes**. Side CS.
+- Backpack worn and visible on the back, **two fluid tanks** (water), crafting grid, tool slots, **deployable sleeping bag**, capacity variants.
+- Config to check in the .jar:
+  - disable the variants' **abilities** (magical effects);
+  - check that the sleeping bag **does not set** the respawn point;
+  - check that the tanks **keep the purity** of Thirst Was Reclaimed water (otherwise it is an infinite canteen that bypasses Thirst Canteen).
+- Recipes: to be locked by Overgeared (tanned leather, forged buckles).
+- **Verdict: recommended.**
+- **Sophisticated Backpacks** (3.26.6 + Sophisticated Core) is **rejected**: its upgrades (magnet, compacting, feeding, filters) make storage logistics that duplicates Create.
 
 #### 26. Comforts
-- Projet `SaCpeal4`. Preuve : https://modrinth.com/project/SaCpeal4/version/duBFOcde (9.0.3+1.21.1 NeoForge).
-- Dispo : **oui**. Côté CS.
-- **Sacs de couchage** (dormir sans changer de point de réapparition) et **hamacs** (passer du jour à la nuit).
-- Doublon partiel avec le sac de couchage de Traveler's Backpack : garder Comforts pour la nuit sur le terrain, et désactiver celui de TB si la config le permet.
-- **Verdict : recommandé.**
+- Project `SaCpeal4`. Evidence: https://modrinth.com/project/SaCpeal4/version/duBFOcde (9.0.3+1.21.1 NeoForge).
+- Availability: **yes**. Side CS.
+- **Sleeping bags** (sleep without changing the respawn point) and **hammocks** (skip from day to night).
+- Partial duplicate with Traveler's Backpack's sleeping bag: keep Comforts for nights in the field, and disable TB's if the config allows.
+- **Verdict: recommended.**
 
-#### 27. Tentes, feux de camp, cairns
-- **Non recherchés** (quota épuisé). Pistes sans mod :
-  - feu de camp vanilla + courants ascendants Paraglider (le camp devient un point d'envol) ;
-  - chaleur du feu dans Cold Sweat ;
-  - cairns = pierres et dalles posées par les joueurs (Quark Hedges, Wooden Posts) ;
-  - panneaux de direction de Supplementaries (déjà retenus) ;
-  - drapeaux Supplementaries visibles de loin.
-- À rechercher dans une prochaine passe : un mod de tentes 1.21.1 NeoForge sur Modrinth.
+#### 27. Tents, campfires, cairns
+- **Not researched** (quota exhausted). Mod-free leads:
+  - vanilla campfire + Paraglider updrafts (the camp becomes a takeoff point);
+  - fire heat in Cold Sweat;
+  - cairns = stones and slabs placed by players (Quark Hedges, Wooden Posts);
+  - Supplementaries direction signs (already retained);
+  - Supplementaries flags, visible from afar.
+- To research in a next pass: a 1.21.1 NeoForge tent mod on Modrinth.
 
-### G. Géographie et rivières
+### G. Geography and rivers
 
-#### 28. Streams Reflowing (combiné à NML, pas en preset concurrent)
-- Projet `oLS8HdJ1`, auteur NiceJohn (sans lien avec le Streams original de delvr). Preuves : https://modrinth.com/project/oLS8HdJ1/version/5STkQGAk · https://www.modpackindex.com/mod/157991/streams-reflowing
-- Dispo : **oui** (2.13.1, NeoForge 1.21.1–1.21.5, mis à jour récemment). Côté serveur (génération).
-- Mécanique : creuse des **ruisseaux qui suivent le relief**, s'accumulent en lacs et se jettent dans l'océan. **Courant directionnel sur l'eau vanilla** (pas de fluide custom depuis 2.6.0, donc les mods qui lisent l'eau restent compatibles). Bateaux et objets flottants emportés par le courant, y compris sur serveur dédié (2.8.4). Cascades. Argile dans les lits de ruisseau. Fusion propre avec les étangs (2.12.1).
-- **Point clé pour la décision 0001** : Streams Reflowing semble être une couche de **creusement indépendante de la source de biomes**. Il pourrait donc s'ajouter à **NML** au lieu d'exiger Terralith. NML garderait l'ambiance, et Streams apporterait les rivières utiles à Create (roues à eau) et à la navigation. « Terralith seul » étant écarté, **NML + Streams Reflowing** est le premier test à faire.
-- Risques :
-  - interaction avec les rivières de NML et Biolith (doubles lits) ;
-  - comportement des navires Sable/Aeronautics dans le courant : poussés, ignorés, ou instables ;
-  - coût de génération (amélioré en 2.8.4) ;
-  - les roues à eau de Create lisent-elles le courant de Streams ?
-- **Verdict : à tester en priorité** (branche `test/streams-nml`).
+#### 28. Streams Reflowing (combined with NML, not as a competing preset)
+- Project `oLS8HdJ1`, author NiceJohn (unrelated to delvr's original Streams). Evidence: https://modrinth.com/project/oLS8HdJ1/version/5STkQGAk · https://www.modpackindex.com/mod/157991/streams-reflowing
+- Availability: **yes** (2.13.1, NeoForge 1.21.1–1.21.5, recently updated). Server side (generation).
+- Mechanic: digs **streams that follow the terrain**, pool into lakes and flow into the ocean. **Directional current on vanilla water** (no custom fluid since 2.6.0, so mods that read water stay compatible). Boats and floating items carried by the current, including on a dedicated server (2.8.4). Waterfalls. Clay in stream beds. Clean merge with ponds (2.12.1).
+- **Key point for decision 0001**: Streams Reflowing appears to be a carving layer **independent of the biome source**. It could therefore be added to **NML** instead of requiring Terralith. NML would keep the atmosphere, and Streams would provide the rivers useful for Create (water wheels) and for navigation. Since "Terralith alone" is rejected, **NML + Streams Reflowing** is the first test to run.
+- Risks:
+  - interaction with the rivers of NML and Biolith (double beds);
+  - behavior of Sable/Aeronautics ships in the current: pushed, ignored, or unstable;
+  - generation cost (improved in 2.8.4);
+  - do Create's water wheels read Streams' current?
+- **Verdict: to test first** (`test/streams-nml` branch).
 
-#### 29. Distant Horizons (déjà « à tester »)
-- Pour l'exploration, c'est le meilleur « je me demande ce qu'il y a là-bas » : silhouettes de montagnes et de tours dans la brume. À coupler avec ATMOSPHERICS (le brouillard lointain doit voiler les LOD, pas les révéler net).
-- Risques Sable et coût serveur : non recherchés, quota épuisé.
+#### 29. Distant Horizons (already "to test")
+- For exploration, it is the best "I wonder what is over there": silhouettes of mountains and towers in the mist. To be paired with ATMOSPHERICS (distant fog must veil the LODs, not reveal them sharply).
+- Sable risks and server cost: not researched, quota exhausted.
 
 #### 30. Towers of the Wild Modded
-- Slug `totw-modded`. Dispo : **oui** (1.0.9, NeoForge 1.21–1.21.11, janvier 2026).
-- Tours d'observation inspirées des tours Sheikah. Paraglider a une compatibilité native (`paragliderInTowersOfTheWild`, qui place le planeur dans les coffres des tours).
-- Contre : proche de « Structory: Towers », écarté par goût, et des tours visibles de loin vont contre « rares et silencieuses ».
-- **Verdict : optionnel**, à montrer en capture à l'utilisateur. Si retenu : rareté ×6, tours en ruine uniquement, coffre = planeur.
+- Slug `totw-modded`. Availability: **yes** (1.0.9, NeoForge 1.21–1.21.11, January 2026).
+- Observation towers inspired by Sheikah towers. Paraglider has native compatibility (`paragliderInTowersOfTheWild`, which places the glider in the towers' chests).
+- Against: close to "Structory: Towers", rejected on taste, and towers visible from afar go against "rare and silent".
+- **Verdict: optional**, to show in a screenshot. If retained: rarity ×6, ruined towers only, chest = glider.
 
 ---
 
-## 3. Récompenses d'exploration : savoirs plutôt que diamants
+## 3. Exploration rewards: knowledge rather than diamonds
 
-Outils de mise en œuvre, sans nouveau mod :
-- Modificateur NeoForge `neoforge:add_table` (global loot modifier, datapack) pour **ajouter** des tables à des loots existants sans les écraser. Pour retirer, `LootJS` est plus confortable (Modrinth 1.21.1 **non vérifié**) ; à défaut, surcharge JSON.
-- **Lithostitched** (déjà présent) : `add_template_pool_elements` pour injecter des pièces (survivants, statues Paraglider, vestiges Create) dans les pools de villages abandonnés et de NML sans les écraser. Modificateurs de structure sets.
+Implementation tools, with no new mod:
+- NeoForge modifier `neoforge:add_table` (global loot modifier, datapack) to **add** tables to existing loot without overwriting it. To remove, `LootJS` is more convenient (Modrinth 1.21.1 **unverified**); otherwise, JSON override.
+- **Lithostitched** (already present): `add_template_pool_elements` to inject pieces (survivors, Paraglider statues, Create remains) into the abandoned village and NML pools without overwriting them. Structure set modifiers.
 - Vanilla `doLimitedCrafting` + KubeJS `player.unlockRecipe` / advancements.
 
-Système proposé :
-1. **Plans d'ingénieur** (objet KubeJS, un par palier : roue hydraulique, cuve, train, hélice, ballon…). Trouvés dans les épaves Aeronautics, les maisons d'ingénieur et les vestiges New Beginnings. Clic droit = débloque un lot de recettes Create ou Aeronautics, et les **plans d'Overgeared** pour les pièces forgées (voir le chercheur Civilisation). **Conflit** : le module Quark « Automatic Recipe Unlock », activé en 0005, débloque tout. Il faut le **désactiver** et activer `doLimitedCrafting` sur une liste restreinte (recettes clés seulement, pas tout le jeu).
-2. **Orbes spirituels Paraglider** seulement dans les sanctuaires et monuments NML, échangés à une statue de la Déesse (trouvée en ruine) contre de l'endurance. C'est la boucle « shrine » de BotW.
-3. **Journaux et lore** : livres écrits maison (encre antique de Supplementaries pour l'aspect), par joueur grâce à Lootr. Ils racontent la civilisation disparue et désignent vaguement d'autres lieux (« au-delà de la deuxième crête, vers le soleil couchant »), sans coordonnées.
-4. **Primes photographiques** Exposure (si les données de vue le permettent).
-5. **Survivants** : la récompense la plus précieuse. Un villageois qualifié qui débloque un métier dans la colonie.
-6. **Fossiles et artefacts** (Better Archeology) pour le musée de colonie.
-7. **Advancements de découverte** (prédicat `location` + `structure`, ou biome) : titre, ligne de journal, aucune ressource.
+Proposed system:
+1. **Engineer blueprints** (KubeJS item, one per tier: water wheel, tank, train, propeller, balloon…). Found in Aeronautics wrecks, engineer houses and New Beginnings remains. Right-click = unlocks a batch of Create or Aeronautics recipes, and **Overgeared blueprints** for forged parts (see the Civilization research). **Conflict**: Quark's "Automatic Recipe Unlock" module, enabled in 0005, unlocks everything. It must be **disabled** and `doLimitedCrafting` enabled on a restricted list (key recipes only, not the whole game).
+2. **Paraglider spirit orbs** only in NML sanctuaries and monuments, traded to a Goddess statue (found in ruins) for stamina. This is BotW's "shrine" loop.
+3. **Journals and lore**: in-house written books (Supplementaries' ancient ink for the look), per player thanks to Lootr. They tell of the vanished civilization and vaguely point to other places ("beyond the second ridge, toward the setting sun"), without coordinates.
+4. **Exposure photographic bounties** (if the frame data allows).
+5. **Survivors**: the most precious reward. A qualified villager who unlocks a profession in the colony.
+6. **Fossils and artifacts** (Better Archeology) for the colony museum.
+7. **Discovery advancements** (`location` + `structure` predicate, or biome): title, journal line, no resource.
 
 ---
 
-## 4. Système d'exploration cohérent
+## 4. A coherent exploration system
 
-### Boucle de jeu
-1. **Voir** : depuis la base, une silhouette dans la brume (Distant Horizons + ATMOSPHERICS), une colonne de fumée de feu de camp (survivant), une épave de dirigeable.
-2. **S'orienter** sans coordonnées : soleil et étoiles, boussole en main (ruban Dead Reckoning, points cardinaux seuls), panneaux de direction posés par les joueurs, drapeaux et cairns, nom du biome à l'entrée (Traveler's Titles).
-3. **Traverser** :
-   - à pied, avec l'endurance Paraglider partagée avec ParCool : escalade de rebord, saut de mur ;
-   - en planeur, depuis les hauteurs et les courants ascendants des feux de camp ;
-   - à cheval (Icy's Better Horses), en bateau sur les rivières de Streams, plus tard en train ou en dirigeable.
-4. **Camper** : sac Traveler's Backpack (eau, outils), sac de couchage Comforts, feu de camp (chaleur Cold Sweat et courant ascendant).
-5. **Découvrir** un lieu rare et silencieux : sanctuaire NML, maison abandonnée, village en ruine, vestige Create, épave, camp de survivant.
-6. **Rapporter** : la carte (AA4 dessinée à la marche, copiée sur carte vanilla pour la partager), des photos (Exposure), un plan, un journal, des orbes, un survivant.
-7. **Convertir** à la base : le plan débloque une recette, le survivant devient un habitant, les orbes deviennent de l'endurance, les photos décorent le mur. La frontière recule, et les nouvelles machines (rail, dirigeable) permettent d'aller plus loin.
+### Gameplay loop
+1. **See**: from the base, a silhouette in the mist (Distant Horizons + ATMOSPHERICS), a column of campfire smoke (survivor), an airship wreck.
+2. **Orient** without coordinates: sun and stars, compass in hand (Dead Reckoning ribbon, cardinal points only), direction signs placed by players, flags and cairns, biome name on entry (Traveler's Titles).
+3. **Cross**:
+   - on foot, with Paraglider stamina shared with ParCool: ledge climb, wall jump;
+   - by glider, from high places and campfire updrafts;
+   - on horseback (Icy's Better Horses), by boat on Streams rivers, later by train or airship.
+4. **Camp**: Traveler's Backpack (water, tools), Comforts sleeping bag, campfire (Cold Sweat heat and updraft).
+5. **Discover** a rare, silent place: NML sanctuary, abandoned house, ruined village, Create remains, wreck, survivor camp.
+6. **Bring back**: the map (AA4 drawn on foot, copied to a vanilla map to share it), photos (Exposure), a blueprint, a journal, orbs, a survivor.
+7. **Convert** at the base: the blueprint unlocks a recipe, the survivor becomes a resident, the orbs become stamina, the photos decorate the wall. The frontier recedes, and the new machines (rail, airship) allow going further.
 
-### Qui fait quoi
-| Fonction | Mod |
+### Who does what
+| Function | Mod |
 |---|---|
-| Carte (brouillard de guerre) | Antique Atlas 4 + Surveyor (+ AA4 Atlas) |
-| Direction | boussole vanilla + Dead Reckoning (ou NeoCompass) |
-| Repérage de région | Traveler's Titles |
-| Lieux d'ambiance | No Man's Land (socle) + Cinch's Abandoned Houses + villages abandonnés forcés |
-| Lieux « civilisation perdue » | Create Aeronautics Structures + Create: New Beginnings + Let The Adventure Begin (tri) |
-| Survivants | MCG's RPG Campsites + ingénieur Aeronautics + injections maison |
-| Loot multijoueur | Lootr |
-| Traversée | Paraglider (endurance) + ParCool (bridé) + Icy's Better Horses + Sable |
-| Campement | Traveler's Backpack + Comforts + feu de camp |
-| Preuves et souvenirs | Exposure, Better Archeology |
-| Rivières | Streams Reflowing (à tester sur NML) |
+| Map (fog of war) | Antique Atlas 4 + Surveyor (+ AA4 Atlas) |
+| Direction | vanilla compass + Dead Reckoning (or NeoCompass) |
+| Region landmark | Traveler's Titles |
+| Atmosphere places | No Man's Land (core) + Cinch's Abandoned Houses + forced abandoned villages |
+| "Lost civilization" places | Create Aeronautics Structures + Create: New Beginnings + Let The Adventure Begin (sorted) |
+| Survivors | MCG's RPG Campsites + Aeronautics engineer + in-house injections |
+| Multiplayer loot | Lootr |
+| Crossing | Paraglider (stamina) + ParCool (restricted) + Icy's Better Horses + Sable |
+| Camp | Traveler's Backpack + Comforts + campfire |
+| Proofs and souvenirs | Exposure, Better Archeology |
+| Rivers | Streams Reflowing (to test on NML) |
 
-### Rareté des structures (Sparse Structures, `spreadFactor` global, défaut 2)
-- Global : **3**.
-- Surcharges par structure, valeurs de départ :
-  - petits lieux NML : 1,5–2 ;
-  - Cinch's : 3 ;
-  - villages abandonnés : 4 ;
-  - Create New Beginnings et Let The Adventure Begin : 4–5 ;
-  - campements de survivants : 6 ;
-  - épaves et maisons d'ingénieur Aeronautics : 6 ;
-  - ToTW (si retenu) : 6.
-- Le format exact des surcharges par structure dans la version 1.21.1 reste à lire dans le .jar.
-- **Désactiver** (datapack `structure_set` vide ou `biome` tag vide) :
-  - Strongholds et End : déjà décidés.
-  - Chambres d'épreuves : spawners hostiles.
-  - Avant-postes de pillards, manoirs : hostiles et RPG.
-  - Monuments océaniques et cabanes de sorcière : vider ou supprimer (cf. 0004).
-  - Villes anciennes : à statuer. Ambiance forte mais Warden : désactiver, ou garder vides comme lieu « étrange ».
-- Garder les épaves de navire, les ruines océaniques et les puits du désert (silencieux).
-- Règle de silence : aucune structure ne doit produire de son, de lumière forte ni de mob hostile. Le seul signal à distance autorisé est la **fumée de feu de camp** d'un survivant (botte de foin sous le feu, injectée dans les camps).
+### Structure rarity (Sparse Structures, global `spreadFactor`, default 2)
+- Global: **3**.
+- Per-structure overrides, starting values:
+  - small NML places: 1.5–2;
+  - Cinch's: 3;
+  - abandoned villages: 4;
+  - Create New Beginnings and Let The Adventure Begin: 4–5;
+  - survivor camps: 6;
+  - Aeronautics wrecks and engineer houses: 6;
+  - ToTW (if retained): 6.
+- The exact format of per-structure overrides in the 1.21.1 version remains to be read in the .jar.
+- **Disable** (empty `structure_set` datapack or empty `biome` tag):
+  - Strongholds and End: already decided.
+  - Trial chambers: hostile spawners.
+  - Pillager outposts, mansions: hostile and RPG.
+  - Ocean monuments and witch huts: empty or remove (cf. 0004).
+  - Ancient cities: to be settled. Strong atmosphere but Warden: disable, or keep empty as a "strange" place.
+- Keep shipwrecks, ocean ruins and desert wells (silent).
+- Silence rule: no structure may produce sound, strong light or a hostile mob. The only long-distance signal allowed is a survivor's **campfire smoke** (hay bale under the fire, injected into the camps).
 
-### Cacher les coordonnées (récapitulatif)
-1. `reducedDebugInfo true` (gamerule forcée au démarrage du serveur).
-2. Coordonnées à la boussole de Supplementaries : off (fait).
-3. Vérifier AA4, Surveyor, Exposure et Explorer's Journal pour tout affichage de coordonnées.
-4. Retirer `/locate`, `/tp` et `/waypoints` aux non-ops (niveau de permission).
-5. Cartes d'exploration : cartographe vanilla, cartographe de MCG, Pathfinder Maps de Quark (off, fait), cartes d'aventurier de Supplementaries (off, fait).
+### Hiding coordinates (recap)
+1. `reducedDebugInfo true` (gamerule forced at server startup).
+2. Supplementaries compass coordinates: off (done).
+3. Check AA4, Surveyor, Exposure and Explorer's Journal for any coordinate display.
+4. Remove `/locate`, `/tp` and `/waypoints` from non-ops (permission level).
+5. Exploration maps: vanilla cartographer, MCG's cartographer, Quark's Pathfinder Maps (off, done), Supplementaries adventurer maps (off, done).
 
-### À désactiver ou configurer (récapitulatif)
-- Paraglider :
-  - `heartContainers=false`, `raidGivesVessel=false`, `witherDropsVessel=false` ;
-  - `spawnerSpiritOrbDrops=0`, `trialSpiritOrbDrops=0`, `ominousTrialSpiritOrbDrops=0` ;
-  - `runningAndSwimmingConsumesStamina=true`, `paragliderDurability>0` ;
-  - orbes dans les loots NML uniquement.
-- ParCool : seules l'accroche au rebord, l'escalade de rebord, le saut de mur, la roulade, le vault et ramper restent actifs ; endurance fournie par Paraglider.
-- Quark : **désactiver Automatic Recipe Unlock** si le système de plans est adopté.
-- Surveyor : `globalSharing=false`. AA4 : atlas requis dans l'inventaire, liste restreinte de structures marquées.
-- Dead Reckoning : boussole requise, marqueurs off.
-- Lootr : pas de rafraîchissement ni de décroissance, protection contre la casse.
-- Traveler's Backpack : capacités off, sac de couchage sans point de réapparition, pureté de l'eau à contrôler.
-- MCG Campsites : retirer le portail en ruine, filtrer les échanges du cartographe, ajouter une botte de foin sous le feu de camp.
-- Create Aeronautics Structures : filtrer les échanges de l'ingénieur, vérifier les « robber balloons ».
-- Villages : centres `zombie` uniquement, et suppression des zombies villageois en KubeJS.
+### To disable or configure (recap)
+- Paraglider:
+  - `heartContainers=false`, `raidGivesVessel=false`, `witherDropsVessel=false`;
+  - `spawnerSpiritOrbDrops=0`, `trialSpiritOrbDrops=0`, `ominousTrialSpiritOrbDrops=0`;
+  - `runningAndSwimmingConsumesStamina=true`, `paragliderDurability>0`;
+  - orbs in NML loot only.
+- ParCool: only ledge grab, ledge climb, wall jump, roll, vault and crawl remain active; stamina supplied by Paraglider.
+- Quark: **disable Automatic Recipe Unlock** if the blueprint system is adopted.
+- Surveyor: `globalSharing=false`. AA4: atlas required in the inventory, restricted list of marked structures.
+- Dead Reckoning: compass required, markers off.
+- Lootr: no refresh or decay, break protection.
+- Traveler's Backpack: abilities off, sleeping bag without respawn point, water purity to check.
+- MCG Campsites: remove the ruined portal, filter the cartographer's trades, add a hay bale under the campfire.
+- Create Aeronautics Structures: filter the engineer's trades, check the "robber balloons".
+- Villages: `zombie` centers only, and removal of zombie villagers in KubeJS.
 
 ---
 
-## 5. Incertitudes à vérifier dans les .jar
-1. **Paraglider** : présence du build 1.21.1 sur Modrinth (slug `paragliders`). Liste des sources de vent par défaut (datapack `paraglider/wind`?) et définition des structures de statues (villages et souterrains).
-2. **ParCool** : nom exact des clés de limitation serveur et de l'option « endurance alternative = Paraglider ». Présence de la tyrolienne en 1.21.1.
-3. **Create Aeronautics Structures** : nature des « robber balloons » (mobs ?), tables de loot, configuration de rareté, échanges de `villager_create_engineer`.
-4. **Create: New Beginnings** : liste des pièces et pools ciblés (`minecraft:village/*/houses` seulement, ou aussi `zombie/*` ?), contraptions assemblées ou non.
-5. **Let The Adventure Begin** : inventaire des `structure_set` et des loots. **Structures Arise** : dépendance AnvilCore.
-6. **Sparse Structures 1.21.1** : format des surcharges par structure dans `sparsestructures.json5`.
-7. **MCG's RPG Campsites** : identifiants des structures et du loot, et si les villageois ont des métiers verrouillés (pas de changement de profession au poste de travail).
-8. **Cinch's Abandoned Houses** : présence sur Modrinth en 1.21.1 NeoForge.
-9. **Traveler's Backpack** : clés de config (capacités, sac de couchage, réservoirs), et interaction des réservoirs avec la pureté de Thirst Was Reclaimed.
-10. **Comforts** : le sac de couchage pose-t-il un point de réapparition ? Possibilité de désactiver celui de TB.
-11. **Exposure** : données de vue (entités, biome, position), critères d'avancement exposés, et affichage éventuel de coordonnées dans l'infobulle.
-12. **Better Archeology** : liste des artefacts, bonus de combat à couper, structures ajoutées.
-13. **Dead Reckoning, AA4 Atlas, Antique Trains** : builds 1.21.1 (Fabric via Connector) sur Modrinth.
-14. **AA4 et Surveyor** : coordonnées affichées sur l'écran de carte ? Permission de `/surveyor share` ? Copie vers cartes vanilla fonctionnelle sous Connector ?
-15. **Streams Reflowing + NML** : génération combinée (lits doubles ?), navires Sable dans le courant, roues à eau de Create.
-16. **Lootr** : clés exactes (`lootr-common.toml`).
-17. **Traveler's Titles** : présence Modrinth 1.21.1 NeoForge (v5.1.3), et version de YUNG's API exigée.
-18. **Quark** : effet de la désactivation d'Automatic Recipe Unlock sur le livre de recettes, et cohabitation avec `doLimitedCrafting`.
+## 5. Uncertainties to check in the .jar files
+1. **Paraglider**: presence of the 1.21.1 build on Modrinth (slug `paragliders`). List of default wind sources (`paraglider/wind` datapack?) and definition of the statue structures (villages and underground).
+2. **ParCool**: exact name of the server limitation keys and of the "alternative stamina = Paraglider" option. Presence of the zipline in 1.21.1.
+3. **Create Aeronautics Structures**: nature of the "robber balloons" (mobs?), loot tables, rarity configuration, trades of `villager_create_engineer`.
+4. **Create: New Beginnings**: list of pieces and targeted pools (`minecraft:village/*/houses` only, or also `zombie/*`?), assembled contraptions or not.
+5. **Let The Adventure Begin**: inventory of `structure_set`s and loot. **Structures Arise**: AnvilCore dependency.
+6. **Sparse Structures 1.21.1**: format of per-structure overrides in `sparsestructures.json5`.
+7. **MCG's RPG Campsites**: structure and loot identifiers, and whether villagers have locked professions (no profession change at the workstation).
+8. **Cinch's Abandoned Houses**: presence on Modrinth for 1.21.1 NeoForge.
+9. **Traveler's Backpack**: config keys (abilities, sleeping bag, tanks), and interaction of the tanks with Thirst Was Reclaimed purity.
+10. **Comforts**: does the sleeping bag set a respawn point? Possibility of disabling TB's.
+11. **Exposure**: frame data (entities, biome, position), exposed advancement criteria, and possible display of coordinates in the tooltip.
+12. **Better Archeology**: list of artifacts, combat bonuses to cut, added structures.
+13. **Dead Reckoning, AA4 Atlas, Antique Trains**: 1.21.1 builds (Fabric via Connector) on Modrinth.
+14. **AA4 and Surveyor**: coordinates displayed on the map screen? Permission of `/surveyor share`? Copy to vanilla maps working under Connector?
+15. **Streams Reflowing + NML**: combined generation (double beds?), Sable ships in the current, Create water wheels.
+16. **Lootr**: exact keys (`lootr-common.toml`).
+17. **Traveler's Titles**: Modrinth 1.21.1 NeoForge presence (v5.1.3), and required YUNG's API version.
+18. **Quark**: effect of disabling Automatic Recipe Unlock on the recipe book, and coexistence with `doLimitedCrafting`.
 
-## 6. Non couvert (quota de recherche épuisé : prochaine passe)
-Mods de tentes, escalade alternative, bateaux, mods d'« événements d'exploration », sentiers qui s'usent au passage, risques Distant Horizons + Sable côté serveur, LootJS 1.21.1, Explorer's Journal et The Athenaeum sur Modrinth.
+## 6. Not covered (search quota exhausted: next pass)
+Tent mods, alternative climbing, boats, "exploration event" mods, trails that wear in with passage, Distant Horizons + Sable server-side risks, LootJS 1.21.1, Explorer's Journal and The Athenaeum on Modrinth.
 
-## Sources principales
-- Paraglider : https://github.com/Tictim/Paraglider (branche `release/1.21.1` : `gradle.properties`, `config/ServerConfig.java`, `config/CommonConfig.java`) · https://skinmc.net/project/paragliders · https://modrinth.com/mod/paragliders/version/Ix3nj2fZ
-- ParCool : https://modrinth.com/project/Fsvx2bdR · https://www.curseforge.com/minecraft/mc-mods/parcool
-- Lootr : https://modrinth.com/mod/lootr/version/1.21.1-1.11.36.107 · https://github.com/noobanidus/Lootr
-- Exposure : https://github.com/mortuusars/Exposure · https://www.feed-the-mods.com/exposure-mod/
-- Create Aeronautics Structures : https://modrinth.com/project/PZIWeQhv · https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-structures
-- Create: New Beginnings : https://modrinth.com/mod/IAnP4np7 · https://www.curseforge.com/minecraft/mc-mods/create-new-beginnings
-- Create: Structures Arise : https://modrinth.com/project/9enMEvoc/version/HSECDqTu
-- Create: Rustic Structures, Let The Adventure Begin, Traveler's Backpack, Sophisticated Backpacks, Better Archeology, MCG's RPG Campsites, Wandering Villagers : miroirs BoxToPlay des fiches Modrinth (www.boxtoplay.com/…/modrinth-mods/… et …/modrinth-datapacks/…)
-- IDAS / Integrated Villages : https://modrinth.com/mod/idas · https://modrinth.com/project/integrated-villages · https://www.curseforge.com/minecraft/mc-mods/integrated-villages/files/7815319
-- CTOV : https://modrinth.com/project/35BiK2KV · https://www.curseforge.com/minecraft/mc-mods/choicetheorems-overhauled-village/files/7653085
-- Comforts : https://modrinth.com/project/SaCpeal4/version/duBFOcde
-- Traveler's Titles : https://www.curseforge.com/projects/1015155 · https://gdlauncher.com/mods/modrinth/travelers-titles
-- Antique Atlas 4 / Surveyor / Dead Reckoning : https://github.com/sisby-folk/antique-atlas · https://github.com/sisby-folk/surveyor · https://github.com/sisby-folk/dead-reckoning
-- Streams Reflowing : https://modrinth.com/project/oLS8HdJ1/version/5STkQGAk · https://www.modpackindex.com/mod/157991/streams-reflowing
-- Sparse Structures : https://modrinth.com/mod/sparsestructures · https://www.modpackindex.com/mod/47512/sparse-structures
-- Towers of the Wild Modded : https://modrinth.com/project/m5T5xmUy/version/Rt96zVC1
-- Cinch's Abandoned Houses : https://www.mado-hosting.com/minecraft-mods/cinchs-abandoned-houses
-- The Athenaeum : https://www.curseforge.com/minecraft/mc-mods/the-athenaeum
-- Explorer's Journal : https://www.modpackindex.com/mod/207136/explorers-journals
-- Create: Dynamic Village : https://curseforge.com/minecraft/mc-mods/dynamic-village
-- Grappins : https://www.boxtoplay.com/en/minecraft-hosting/minecraft-server/modrinth-mods/hooked-30557 · …/yori3os-grappling-hooks-39516
-- reducedDebugInfo : https://feedback.minecraft.net/hc/en-us/community/posts/39283635611021
+## Main sources
+- Paraglider: https://github.com/Tictim/Paraglider (branch `release/1.21.1`: `gradle.properties`, `config/ServerConfig.java`, `config/CommonConfig.java`) · https://skinmc.net/project/paragliders · https://modrinth.com/mod/paragliders/version/Ix3nj2fZ
+- ParCool: https://modrinth.com/project/Fsvx2bdR · https://www.curseforge.com/minecraft/mc-mods/parcool
+- Lootr: https://modrinth.com/mod/lootr/version/1.21.1-1.11.36.107 · https://github.com/noobanidus/Lootr
+- Exposure: https://github.com/mortuusars/Exposure · https://www.feed-the-mods.com/exposure-mod/
+- Create Aeronautics Structures: https://modrinth.com/project/PZIWeQhv · https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-structures
+- Create: New Beginnings: https://modrinth.com/mod/IAnP4np7 · https://www.curseforge.com/minecraft/mc-mods/create-new-beginnings
+- Create: Structures Arise: https://modrinth.com/project/9enMEvoc/version/HSECDqTu
+- Create: Rustic Structures, Let The Adventure Begin, Traveler's Backpack, Sophisticated Backpacks, Better Archeology, MCG's RPG Campsites, Wandering Villagers: BoxToPlay mirrors of the Modrinth pages (www.boxtoplay.com/…/modrinth-mods/… and …/modrinth-datapacks/…)
+- IDAS / Integrated Villages: https://modrinth.com/mod/idas · https://modrinth.com/project/integrated-villages · https://www.curseforge.com/minecraft/mc-mods/integrated-villages/files/7815319
+- CTOV: https://modrinth.com/project/35BiK2KV · https://www.curseforge.com/minecraft/mc-mods/choicetheorems-overhauled-village/files/7653085
+- Comforts: https://modrinth.com/project/SaCpeal4/version/duBFOcde
+- Traveler's Titles: https://www.curseforge.com/projects/1015155 · https://gdlauncher.com/mods/modrinth/travelers-titles
+- Antique Atlas 4 / Surveyor / Dead Reckoning: https://github.com/sisby-folk/antique-atlas · https://github.com/sisby-folk/surveyor · https://github.com/sisby-folk/dead-reckoning
+- Streams Reflowing: https://modrinth.com/project/oLS8HdJ1/version/5STkQGAk · https://www.modpackindex.com/mod/157991/streams-reflowing
+- Sparse Structures: https://modrinth.com/mod/sparsestructures · https://www.modpackindex.com/mod/47512/sparse-structures
+- Towers of the Wild Modded: https://modrinth.com/project/m5T5xmUy/version/Rt96zVC1
+- Cinch's Abandoned Houses: https://www.mado-hosting.com/minecraft-mods/cinchs-abandoned-houses
+- The Athenaeum: https://www.curseforge.com/minecraft/mc-mods/the-athenaeum
+- Explorer's Journal: https://www.modpackindex.com/mod/207136/explorers-journals
+- Create: Dynamic Village: https://curseforge.com/minecraft/mc-mods/dynamic-village
+- Grappling hooks: https://www.boxtoplay.com/en/minecraft-hosting/minecraft-server/modrinth-mods/hooked-30557 · …/yori3os-grappling-hooks-39516
+- reducedDebugInfo: https://feedback.minecraft.net/hc/en-us/community/posts/39283635611021

@@ -1,140 +1,140 @@
-# Wayfarer, le modpack et le serveur de l'équipe de No Man's Land
+# Wayfarer, the modpack and server of the No Man's Land team
 
-Recherche du 2026-10-19 pour Fallow. Légende : **[V]** vérifié (lien dans la ligne ou dans les sources), **[D]** déduit de ce qu'on voit ou entend dans les vidéos, sans confirmation écrite. « Déjà là » veut dire présent dans Fallow tel que décrit par `docs/mods.md`. **Correction du 2026-10-19 :** le pack contient encore NML **1.5.12** ; ce qui vient de la 1.6 (outils ancestraux, épée du serment) n'arrive qu'avec la montée en 1.6.1, déjà prévue.
+Research of 2026-10-19 for Fallow. Legend: **[V]** verified (link in the line or in the sources), **[D]** deduced from what is seen or heard in the videos, without written confirmation. "Already there" means present in Fallow as described by `docs/mods.md`. **Correction of 2026-10-19:** the pack still contains NML **1.5.12**; what comes from 1.6 (ancestral tools, oath sword) only arrives with the upgrade to 1.6.1, already planned.
 
-## Résumé
+## Summary
 
-1. Wayfarer est un **modpack privé** (environ 200 mods, NeoForge 1.21.1) fait par **Monad Modding**, l'équipe de No Man's Land (Farcr, tazer…), avec un **serveur SMP officiel** ouvert vers juillet 2026. On y accède par le rang Patreon « Wayfarer » ; le rang « Discoverer » donne seulement les préversions **[V]**.
-2. Une grande partie de ce qu'on voit dans les vidéos vient de **NML 1.5 et 1.6**, donc **Fallow l'a déjà** : la Lune Amie qui parle, les ruines des alchimistes, les outils ancestraux, les effigies, les pansements, les strates, les jarres anciennes **[V]**.
-3. Le reste mélange des **mods publics** (Envelope, Tree Physics, Sable Ragdolls, Tolerable Creepers, Clutter No More, Supplementaries, Farmer's Delight, Exposure, Distant Horizons) et du **contenu maison** introuvable en ligne : âge du bronze, bas fourneau, santé max perdue à la mort et « éclats de vie », sédiment de faille, « anomalies », minerais denses, pas d'XP **[D]**.
-4. Le youtubeur dit que la liste des mods est « publique », mais **je ne l'ai trouvée nulle part** ; elle est sans doute sur le Discord, qui demande un compte **[D]**. La transcription de la vidéo de GreenLikeable sur le SMP n'a pas pu être récupérée non plus.
-5. À retenir pour Fallow : **Envelope** (le courrier par pigeons et les lettres perdues), **la quête de la Lune Amie déjà dans NML**, **une santé max qui baisse à la mort et qu'on regagne en explorant** (KubeJS), une **tannerie** (KubeJS) et, à étudier, **l'XP supprimée**.
+1. Wayfarer is a **private modpack** (about 200 mods, NeoForge 1.21.1) made by **Monad Modding**, the No Man's Land team (Farcr, tazer…), with an **official SMP server** opened around July 2026. It is accessed through the "Wayfarer" Patreon tier; the "Discoverer" tier only gives pre-releases **[V]**.
+2. A large part of what is seen in the videos comes from **NML 1.5 and 1.6**, so **Fallow already has it**: the talking Friendly Moon, the alchemist ruins, the ancestral tools, the effigies, the bandages, the strata, the ancient jars **[V]**.
+3. The rest mixes **public mods** (Envelope, Tree Physics, Sable Ragdolls, Tolerable Creepers, Clutter No More, Supplementaries, Farmer's Delight, Exposure, Distant Horizons) and **in-house content** that cannot be found online: Bronze Age, bloomery, max health lost on death and "life shards", rift sediment, "anomalies", dense ores, no XP **[D]**.
+4. The YouTuber says the mod list is "public", but **it was not found anywhere**; it is probably on the Discord, which requires an account **[D]**. The transcript of GreenLikeable's video about the SMP could not be retrieved either.
+5. To retain for Fallow: **Envelope** (pigeon mail and lost letters), **the Friendly Moon quest already in NML**, **a max health that drops on death and is regained by exploring** (KubeJS), a **tannery** (KubeJS) and, to be studied, **XP removed**.
 
-## Ce qu'est Wayfarer
+## What Wayfarer is
 
-- **Qui le fait** : Monad Modding (rebaptisé « Monad Mods » le 2026-08-24). La page Patreon se présente comme « The Developers behind No Man's Land, Wayfarer & More ». L'équipe fait aussi Clutter No More, Tree Physics, Vanity, Tolerable Creepers, Glow, Mixed Litter et, depuis septembre 2026, Brewin' and Chewin' **[V]** ([Patreon](https://www.patreon.com/monad_modding), [annonce du nouveau nom](https://www.patreon.com/monad_modding/posts/fresh-coat-of-167571384), [équipe NML sur Modrinth](https://modrinth.com/mod/no-mans-land)). Sur Modrinth, l'équipe de NML compte Farcr (propriétaire) et tazer **[V]**.
-- **Ce que c'est** : un modpack « fait main » autour de NML, qui touche aux visuels, à la progression et à la génération de toutes les dimensions **[V]** (description de [la vidéo 2](https://www.youtube.com/watch?v=WpwAmPJzb7A)). Le youtubeur parle d'environ 200 mods **[D]**. Le pack se met à jour tout seul : il suffit de relancer le jeu **[V]** (vidéo 1, 04:10).
-- **Accès et prix** : réservé aux membres Patreon. Le rang « Wayfarer » coûtait 10 USD. Il a augmenté après l'ouverture du SMP, et le rang « Discoverer » a été créé pour ceux qui ne veulent que les préversions **[V]** ([billet du 2026-07-20](https://www.patreon.com/monad_modding/posts/wayfarer-rank-164357333)). Le youtubeur parle de « 20 $ en un seul paiement » **[V]**, alors que le billet parle d'un abonnement : **le prix actuel n'est pas confirmé**. Il dit aussi que le paiement ne durera que le temps du développement **[V]** (description de la vidéo 3). Au 2026-10-19, la campagne compte 793 membres, dont 195 payants **[V]** (API publique de Patreon).
-- **État** : en développement actif, avec des mises à jour fréquentes **[V]**. Brewin' and Chewin' 5.0 était « déjà jouable sur le SMP Wayfarer » le 2026-09-12 **[V]** ([billet](https://www.patreon.com/monad_modding/posts/brewin-and-5-0-3-169338425)).
-- **Le serveur** : pas de `/spawn`, distance de rendu d'environ 8 chunks, 10 à 15 joueurs connectés au moment de la visite, chat vocal en appuyer-pour-parler. Les joueurs ont bâti un village commun avec du courrier et une tyrolienne, et laissé des maisons abandonnées avec des mots (« nous sommes partis vers des terres plus riches, nous avons laissé nos ressources à ceux qui en ont besoin ») **[V]** (vidéo 1, 61:30 à 65:00). Le Discord Monad Modding compte 4 162 membres **[V]** (métadonnées publiques de [l'invitation](https://discord.gg/JW4utPut9x)).
-- **Introuvable** : la liste des mods, l'adresse du serveur, des saisons ou des remises à zéro du monde, des règles écrites, une page wiki. Le serveur « Wayfarer SMP » de [minecraftservers.org](https://minecraftservers.org/server/689670) est un **homonyme sans rapport** (client vanilla, quêtes et métro).
+- **Who makes it**: Monad Modding (renamed "Monad Mods" on 2026-08-24). The Patreon page describes itself as "The Developers behind No Man's Land, Wayfarer & More". The team also makes Clutter No More, Tree Physics, Vanity, Tolerable Creepers, Glow, Mixed Litter and, since September 2026, Brewin' and Chewin' **[V]** ([Patreon](https://www.patreon.com/monad_modding), [announcement of the new name](https://www.patreon.com/monad_modding/posts/fresh-coat-of-167571384), [NML team on Modrinth](https://modrinth.com/mod/no-mans-land)). On Modrinth, the NML team consists of Farcr (owner) and tazer **[V]**.
+- **What it is**: a "handmade" modpack built around NML, which touches visuals, progression and the generation of all dimensions **[V]** (description of [video 2](https://www.youtube.com/watch?v=WpwAmPJzb7A)). The YouTuber speaks of about 200 mods **[D]**. The pack updates itself: relaunching the game is enough **[V]** (video 1, 04:10).
+- **Access and price**: reserved for Patreon members. The "Wayfarer" tier cost 10 USD. It went up after the SMP opened, and the "Discoverer" tier was created for those who only want the pre-releases **[V]** ([post of 2026-07-20](https://www.patreon.com/monad_modding/posts/wayfarer-rank-164357333)). The YouTuber speaks of "$20 in a single payment" **[V]**, whereas the post speaks of a subscription: **the current price is not confirmed**. He also says the payment will only last for the duration of development **[V]** (description of video 3). On 2026-10-19, the campaign has 793 members, of which 195 are paying **[V]** (Patreon public API).
+- **Status**: in active development, with frequent updates **[V]**. Brewin' and Chewin' 5.0 was "already playable on the Wayfarer SMP" on 2026-09-12 **[V]** ([post](https://www.patreon.com/monad_modding/posts/brewin-and-5-0-3-169338425)).
+- **The server**: no `/spawn`, render distance of about 8 chunks, 10 to 15 players connected at the time of the visit, push-to-talk voice chat. The players built a shared village with mail and a zipline, and left abandoned houses with notes ("we left for richer lands, we left our resources for those who need them") **[V]** (video 1, 61:30 to 65:00). The Monad Modding Discord has 4,162 members **[V]** (public metadata of [the invite](https://discord.gg/JW4utPut9x)).
+- **Not found**: the mod list, the server address, seasons or world resets, written rules, a wiki page. The "Wayfarer SMP" server on [minecraftservers.org](https://minecraftservers.org/server/689670) is an **unrelated namesake** (vanilla client, quests and a subway).
 
-## Tableau des fonctionnalités
+## Feature table
 
-Colonne « Disponible pour nous » : NeoForge 1.21.1 vérifié par l'API Modrinth le 2026-10-19 pour chaque mod cité.
+"Available to us" column: NeoForge 1.21.1 checked through the Modrinth API on 2026-10-19 for each mod cited.
 
-### Monde et mystère (NML)
+### World and mystery (NML)
 
-| Fonctionnalité | Source | Disponible pour nous | Comment l'intégrer | Avis |
+| Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
-| **Lune Amie** : une lune qui parle, des rêves, des « compagnons » (Buddy, Frienderman), un rituel d'ascension ; c'est la quête principale de la « Friendship Update » | NML 1.5 **[V]** ([billets](https://www.patreon.com/monad_modding/posts/nml-1-5-0-build-155392325), langues du jar 1.6.1) | **Déjà là** (NML 1.6.1). Dialogues traduits en français **[V]** | Trancher la décision en attente (conflit avec Enhanced Celestials, voir [le rapport 4](../verif-2026-10-18/4-monde-et-objectifs.md)) en faveur de la Lune Amie | **Oui**. C'est le fil énigmatique du pack et il est gratuit |
-| **Ruines des alchimistes** (ruines ancestrales souterraines, « étrangement paisibles »), cartes des ruines | NML 1.5 **[V]** | **Déjà là** | Garder ; y glisser des fragments du codex des monolithes (LootJS, déjà prévu pour les ruines NML) | Oui |
-| **Outils ancestraux** : pioche rituelle qui « résonne » pour écouter la terre, épée du serment pacifiste, ciseau et cloche en bronze ancien, avec dialogues | NML 1.6 **[V]** ([RC1](https://www.patreon.com/monad_modding/posts/no-mans-land-1-6-170725863)) | **Déjà là**. **47 textes de la 1.6 sans français** **[V]** (dont la pioche rituelle et l'épée) | Monter NML en 1.6.1, puis traduire dans `pack/kubejs/assets/nomansland/lang/fr_fr.json` (`npm run check-fr` les signalera) | Oui, à traduire |
-| **Effigies de protection** : aucune créature hostile n'apparaît autour | NML **[V]** ([billet](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343)) | **Déjà là** | Rien | Faible effet dans Fallow, qui a peu de monstres |
-| **Pansements** (soin, antidote, effets de potion) avec animation | NML 1.5 **[V]** | **Déjà là**, en français | Rien | Oui, colle à la survie par l'environnement |
-| **Strates rocheuses et filons rares** : granite, diorite et andésite rares mais en gros gisements | NML 1.5 **[V]** (classes `StrataStateProvider`, `OreVeinSystem` du jar) | **Déjà là** | Rien | Oui |
-| **Jarres anciennes** qu'il faut casser, archéologie dans les ruines | NML 1.5 + vanilla **[V]** | **Déjà là** | Rien | Oui |
-| Parhélies, cerfs (bois qui tombent), tortues, robinet à résine, bombes incendiaires, échafaudage en bois, chaume, lit de paille | NML **[V]** | **Déjà là** | Rien | Oui |
-| Panneaux qui indiquent un village et sa distance (« 700 blocs par là ») | Introuvable (absent des fichiers de NML) **[D]** | Non | — | Non : les villages de Fallow sont des ruines |
+| **Friendly Moon**: a talking moon, dreams, "companions" (Buddy, Frienderman), an ascension ritual; it is the main quest of the "Friendship Update" | NML 1.5 **[V]** ([posts](https://www.patreon.com/monad_modding/posts/nml-1-5-0-build-155392325), languages of the 1.6.1 jar) | **Already there** (NML 1.6.1). Dialogues translated into French **[V]** | Settle the pending decision (conflict with Enhanced Celestials, see [report 4](../verif-2026-10-18/4-monde-et-objectifs.md)) in favour of the Friendly Moon | **Yes**. It is the pack's enigmatic thread and it is free |
+| **Alchemist ruins** (underground ancestral ruins, "strangely peaceful"), ruin maps | NML 1.5 **[V]** | **Already there** | Keep; slip fragments of the monolith codex into them (LootJS, already planned for the NML ruins) | Yes |
+| **Ancestral tools**: a ritual pickaxe that "resonates" to listen to the earth, a pacifist oath sword, an ancient bronze chisel and bell, with dialogues | NML 1.6 **[V]** ([RC1](https://www.patreon.com/monad_modding/posts/no-mans-land-1-6-170725863)) | **Already there**. **47 texts of 1.6 without French** **[V]** (including the ritual pickaxe and the sword) | Upgrade NML to 1.6.1, then translate into `pack/kubejs/assets/nomansland/lang/fr_fr.json` (`npm run check-fr` will flag them) | Yes, to be translated |
+| **Warding effigies**: no hostile creature spawns around them | NML **[V]** ([post](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343)) | **Already there** | Nothing | Little effect in Fallow, which has few monsters |
+| **Bandages** (healing, antidote, potion effects) with animation | NML 1.5 **[V]** | **Already there**, in French | Nothing | Yes, fits survival through the environment |
+| **Rock strata and rare veins**: granite, diorite and andesite rare but in large deposits | NML 1.5 **[V]** (classes `StrataStateProvider`, `OreVeinSystem` of the jar) | **Already there** | Nothing | Yes |
+| **Ancient jars** that must be broken, archaeology in the ruins | NML 1.5 + vanilla **[V]** | **Already there** | Nothing | Yes |
+| Parhelia, deer (antlers that fall off), tortoises, resin tap, incendiary bombs, wooden scaffolding, thatch, straw bed | NML **[V]** | **Already there** | Nothing | Yes |
+| Signs that indicate a village and its distance ("700 blocks that way") | Not found (absent from NML's files) **[D]** | No | — | No: Fallow's villages are ruins |
 
-### Progression et artisanat
+### Progression and crafting
 
-| Fonctionnalité | Source | Disponible pour nous | Comment l'intégrer | Avis |
+| Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
-| **Âge de pierre** : pas d'outils en bois, cailloux et silex ramassés au sol, couteau en silex, pioche en os qui laboure aussi | Maison **[D]** (absent de NML et de Modrinth) | Équivalent : la taille de cailloux d'**Overgeared** | Déjà couvert par Overgeared | Rien à ajouter |
-| **Âge du bronze** : étain (seulement au-dessus du niveau de la mer) et cuivre fondus au creuset en terre cuite, moules à lingot qui s'usent, outils en bronze équivalents au fer | Maison **[D]** | Équivalent : moules et fours d'alliage d'**Overgeared** | Déjà couvert | Rien à ajouter |
-| **Fer au bas fourneau** (boue tassée, paille, cendre d'os, allume-feu), loupe cassée au marteau ; haut fourneau en briques « clinker » ; acier au coke | Maison **[D]** | Équivalent : haut fourneau et acier d'**Overgeared** | Déjà couvert | Rien à ajouter |
-| **Minerais denses** qu'on ne casse qu'avec une foreuse mécanique (Create) | Maison **[D]** | Non | — | Non : ressemble à Create Ore Excavation, retiré par l'équipe |
-| **Cinabre → mercure → mécanisme gyroscopique** (pièce des engins volants) | Recette maison sur Create Aeronautics **[D]** | Faisable | Recette KubeJS | Petite idée : relie la mine à l'aviation |
-| **Cuir à tanner** : peau brute (vaches, cerfs) + cire de cochon, ou cendre + chair pourrie ; l'armure de cuir sert de base aux armures plaquées | Maison **[D]** (vidéo 1, 18:00 et 52:00) | Faisable | KubeJS : peau brute en butin, cuir au chaudron ou au tonneau | **Bonne idée légère** (recommandation 4) |
-| **Papier à la main** (écorce → pâte au mortier → papier) ; une carte demande un nécessaire d'écriture (encre, plume, fiole) et une table de scribe | Maison **[D]** | Faisable | KubeJS sur la recette de l'atlas d'Antique Atlas | Possible, à garder en réserve |
-| **Pas de barre d'XP** ni de progrès affichés ; l'enchantement existe mais demande des diamants | Maison ou réglage **[D]** (vidéo 1, 34:12 ; vidéo 2, 10:30) | Faisable | KubeJS (supprimer les orbes) + masquer la barre ; vérifier Immersive Enchanting, l'enclume et Envelope (adresse payée en niveaux, réglable) | **À étudier** (recommandation 5) |
-| Marteaux qui minent en 3×3 | Introuvable **[D]** | — | — | Non |
-| Cuisine Farmer's Delight (planche à découper, sandwichs, effets) | Farmer's Delight **[V]** (vidéo 1) | Oui | — | Non : la cuisine de Fallow est Kaleidoscope |
-| Brewin' and Chewin' 5.0 (vin, fût de vieillissement) | Mod Monad **[V]** | `4.5.0` (la 5.0 est en préversion) | — | Non : extension de Farmer's Delight |
-| Sacs qui ralentissent, bundles, corde, flèche-corde, lin → ficelle, panier-repas, souffleur de bulles | **Supplementaries** **[D]** (noms identiques) | **Déjà là** (décision 0006 du dépôt, `docs/decisions/0006-supplementaries.md`) | Rien | — |
-| Appareil photo, pellicule noir et blanc, photo encadrée | **Exposure** **[D]** | **Déjà là** | Rien | — |
-| Changer la forme d'un bloc avec Alt gauche (escalier, dalle, dalle verticale, marche) | [Clutter No More](https://modrinth.com/mod/clutternomore) (Monad) **[V]** | `3.0.2`, **français inclus** | Ajouter un mod | Confort ; fait doublon avec les dalles verticales de Quark. Plus tard |
-| Table de style : skins d'armes et d'armures | [Vanity: Core](https://modrinth.com/mod/vanity-core) **[V]** | `5.0.3` | — | Non : cosmétique |
-| Filet de sécurité, cadres d'échafaudage, luges, volets ; anneaux (« bague solaire ») ; grille de construction (touche C) | **Introuvable** | — | — | — |
+| **Stone Age**: no wooden tools, pebbles and flint picked up from the ground, flint knife, bone pickaxe that also tills | In-house **[D]** (absent from NML and Modrinth) | Equivalent: **Overgeared**'s stone knapping | Already covered by Overgeared | Nothing to add |
+| **Bronze Age**: tin (only above sea level) and copper melted in the terracotta crucible, ingot moulds that wear out, bronze tools equivalent to iron | In-house **[D]** | Equivalent: **Overgeared**'s moulds and alloy furnaces | Already covered | Nothing to add |
+| **Iron from the bloomery** (packed mud, straw, bone ash, firestarter), bloom broken with a hammer; blast furnace in "clinker" bricks; coke steel | In-house **[D]** | Equivalent: **Overgeared**'s blast furnace and steel | Already covered | Nothing to add |
+| **Dense ores** that can only be broken with a mechanical drill (Create) | In-house **[D]** | No | — | No: resembles Create Ore Excavation, removed by the maintainer |
+| **Cinnabar → mercury → gyroscopic mechanism** (a part for flying contraptions) | In-house recipe on Create Aeronautics **[D]** | Feasible | KubeJS recipe | Small idea: links mining to aviation |
+| **Leather to tan**: raw hide (cows, deer) + pig wax, or ash + rotten flesh; leather armour serves as the base for plated armours | In-house **[D]** (video 1, 18:00 and 52:00) | Feasible | KubeJS: raw hide as loot, leather in the cauldron or barrel | **Good light idea** (recommendation 4) |
+| **Handmade paper** (bark → paste in the mortar → paper); a map requires a writing kit (ink, feather, vial) and a scribe's table | In-house **[D]** | Feasible | KubeJS on Antique Atlas's atlas recipe | Possible, to keep in reserve |
+| **No XP bar** or progress displayed; enchanting exists but requires diamonds | In-house or setting **[D]** (video 1, 34:12; video 2, 10:30) | Feasible | KubeJS (remove the orbs) + hide the bar; check Immersive Enchanting, the anvil and Envelope (address paid in levels, adjustable) | **To be studied** (recommendation 5) |
+| Hammers that mine 3×3 | Not found **[D]** | — | — | No |
+| Farmer's Delight cooking (cutting board, sandwiches, effects) | Farmer's Delight **[V]** (video 1) | Yes | — | No: Fallow's cooking is Kaleidoscope |
+| Brewin' and Chewin' 5.0 (wine, ageing barrel) | Monad mod **[V]** | `4.5.0` (5.0 is in pre-release) | — | No: extension of Farmer's Delight |
+| Bags that slow you down, bundles, rope, rope arrow, flax → string, lunch basket, bubble blower | **Supplementaries** **[D]** (identical names) | **Already there** (repository decision 0006, `docs/decisions/0006-supplementaries.md`) | Nothing | — |
+| Camera, black-and-white film, framed photo | **Exposure** **[D]** | **Already there** | Nothing | — |
+| Change the shape of a block with left Alt (stairs, slab, vertical slab, step) | [Clutter No More](https://modrinth.com/mod/clutternomore) (Monad) **[V]** | `3.0.2`, **French included** | Add a mod | Comfort; duplicates Quark's vertical slabs. Later |
+| Style table: weapon and armour skins | [Vanity: Core](https://modrinth.com/mod/vanity-core) **[V]** | `5.0.3` | — | No: cosmetic |
+| Safety net, scaffolding frames, sleds, shutters; rings ("solar ring"); building grid (C key) | **Not found** | — | — | — |
 
-### Corps, mort et créatures
+### Body, death and creatures
 
-| Fonctionnalité | Source | Disponible pour nous | Comment l'intégrer | Avis |
+| Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
-| **La santé max baisse à chaque mort**, jusqu'à 5 cœurs ; on la regagne avec des **éclats de vie** trouvés dans des **géodes de chair**, plus fréquentes sous les océans | Maison **[D]** (vidéo 1, 42:20 ; vidéo 2, 57:56 et 63:33 ; vidéo 3, 77:00 et 85:37) | Mod proche : [Unhealthy Dying](https://modrinth.com/mod/unhealthy-dying) `3.2.2` **[V]**, mais on y regagne la santé **en tuant**, et il n'a qu'anglais et russe | **KubeJS** : modificateur de santé max à la mort, objet « éclat » dans les géodes, les ruines NML, les clairières ou en bénédiction de monolithe | **Fort** (recommandation 3) : la mort compte, et l'exploration la répare |
-| Le joueur laisse un **corps** qui garde son inventaire | Probablement [Sable: Ragdoll Corpse](https://modrinth.com/mod/sable-ragdoll-corpse) **[D]** | `0.3.0` alpha | — | Non : alpha, et proche de GraveStone retiré |
-| Créatures en **ragdoll** à leur mort (il faut frapper une seconde fois pour le butin) | Probablement [Sable: Ragdolls](https://modrinth.com/mod/sable-ragdolls) **[D]** | `0.7.5` | — | Non : les ragdolls ont été jugés « hors ton » (chapitre 11) |
-| **Arbres qui tombent** avec une vraie physique, flottent, et sur lesquels on peut marcher | [Tree Physics](https://modrinth.com/mod/tree-physics) (Monad, exige Sable) **[V]** | `neoforge-2.4`, anglais seul | Remplacerait HT's TreeChop | Non : très proche de Dragged's Simulated Tree Chopper (« c'est de trop ») |
-| Creepers qui libèrent des « creepies » | [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers) (Monad) **[V]** | `2.2.4` | — | Non : aucun monstre vanilla dans Fallow |
-| « **Anomalies** » : silhouettes qui copient le joueur et son équipement, très résistantes, qui lâchent du « vif-argent anomal » | Maison **[D]** (vidéo 3, 10:00 et 72:00) | Non | — | **Non** : le youtubeur les trouve « terrifiantes ». C'est de l'horreur |
+| **Max health drops with each death**, down to 5 hearts; it is regained with **life shards** found in **flesh geodes**, more frequent under the oceans | In-house **[D]** (video 1, 42:20; video 2, 57:56 and 63:33; video 3, 77:00 and 85:37) | Similar mod: [Unhealthy Dying](https://modrinth.com/mod/unhealthy-dying) `3.2.2` **[V]**, but there health is regained **by killing**, and it only has English and Russian | **KubeJS**: max health modifier on death, "shard" item in the geodes, the NML ruins, the clearings or as a monolith blessing | **Strong** (recommendation 3): death matters, and exploration repairs it |
+| The player leaves a **body** that keeps their inventory | Probably [Sable: Ragdoll Corpse](https://modrinth.com/mod/sable-ragdoll-corpse) **[D]** | `0.3.0` alpha | — | No: alpha, and close to GraveStone, which was removed |
+| Creatures in **ragdoll** on death (one has to hit a second time for the loot) | Probably [Sable: Ragdolls](https://modrinth.com/mod/sable-ragdolls) **[D]** | `0.7.5` | — | No: ragdolls were judged "out of tone" (chapter 11) |
+| **Falling trees** with real physics, that float, and that can be walked on | [Tree Physics](https://modrinth.com/mod/tree-physics) (Monad, requires Sable) **[V]** | `neoforge-2.4`, English only | Would replace HT's TreeChop | No: very close to Dragged's Simulated Tree Chopper ("that's too much") |
+| Creepers that release "creepies" | [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers) (Monad) **[V]** | `2.2.4` | — | No: no vanilla monsters in Fallow |
+| "**Anomalies**": silhouettes that copy the player and their equipment, very resistant, that drop "anomalous quicksilver" | In-house **[D]** (video 3, 10:00 and 72:00) | No | — | **No**: the YouTuber finds them "terrifying". It is horror |
 
-### Nether (fermé dans Fallow)
+### Nether (closed in Fallow)
 
-| Fonctionnalité | Source | Disponible pour nous | Comment l'intégrer | Avis |
+| Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
-| Portail qu'on allume avec du « sédiment de faille » (lâché par les endermites) ; le sédiment enflammé montre le portail en ruine le plus proche | Maison **[D]** (vidéo 3, 52:54) | Non | — | Non : Nether fermé, et c'est une boussole à structure |
-| Forteresses refaites, cristaux de glowstone, tornades de feu | [Glow](https://modrinth.com/mod/glows) (Monad) **[V]** pour les cristaux, reste introuvable | — | — | Non : Nether fermé |
+| Portal lit with "rift sediment" (dropped by endermites); the ignited sediment shows the nearest ruined portal | In-house **[D]** (video 3, 52:54) | No | — | No: Nether closed, and it is a structure compass |
+| Redone fortresses, glowstone crystals, fire tornadoes | [Glow](https://modrinth.com/mod/glows) (Monad) **[V]** for the crystals, the rest not found | — | — | No: Nether closed |
 
-### Vivre à plusieurs
+### Living together
 
-| Fonctionnalité | Source | Disponible pour nous | Comment l'intégrer | Avis |
+| Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
-| **Courrier par pigeons** : lettres, colis, sceaux, adresses de boîtes aux lettres, paiement à la livraison ; des **lettres perdues** dans un relais postal effondré au-dessus des nuages, des pigeonniers | [Envelope](https://modrinth.com/mod/envelope) (mortuusars, l'auteur d'Exposure) **[V]**, retrouvé grâce aux lettres lues dans la vidéo 2 (19:48 à 25:00) | `0.7.5` (2026-08-15), GPL-3. **Pas de français** (anglais, japonais, russe, chinois) **[V]** | Ajouter un mod ; traduire environ 29 Ko de textes dans `pack/kubejs/assets/envelope/lang/fr_fr.json` ; régler le coût en niveaux d'une adresse et la vitesse des pigeons | **Recommandation 1** |
-| Tyrolienne sur le serveur | Probablement [Ziplines: Rezipped](https://modrinth.com/mod/ziplines-rezipped) **[D]** | `1.5.3`, anglais et japonais | — | Moyen : le rail et les dirigeables couvrent déjà les liaisons |
-| Mots et lettres laissés dans les maisons abandonnées | Joueurs du serveur **[V]** | Oui | Rien à installer : les tableaux d'affichage de Supplementaries ou les lettres d'Envelope suffisent | Oui, à encourager entre amis |
-| Distant Horizons | **[V]** (vidéo 2, 29:37) | — | — | Non : déjà écarté |
-| Chat vocal | **[V]** | — | — | Non : refusé (Simple Voice Chat) |
-| Pack mis à jour tout seul au lancement | **[V]** (vidéo 1) | Oui | `packwiz-installer-bootstrap`, déjà prévu côté serveur ([06](../../06-technique-et-serveur.md)) ; côté client, le repo privé l'empêche | Note technique |
-| Journées très longues (« la journée a duré une heure ») | **Introuvable** **[D]** (vidéo 1, 25:20 et 52:00) | — | Ecliptic Seasons règle déjà la durée du jour | À vérifier |
-| Noms des joueurs affichés seulement quand c'est utile | [Subtle Name Tags](https://modrinth.com/mod/subtle-name-tags) (Monad) **[V]** ; **pas vu dans les vidéos** | `0.3` (2025) | Ajouter un mod client | Petit bonus : des silhouettes dans la brume plutôt que des étiquettes |
+| **Pigeon mail**: letters, parcels, seals, mailbox addresses, cash on delivery; **lost letters** in a collapsed postal relay above the clouds, pigeon lofts | [Envelope](https://modrinth.com/mod/envelope) (mortuusars, the author of Exposure) **[V]**, found thanks to the letters read in video 2 (19:48 to 25:00) | `0.7.5` (2026-08-15), GPL-3. **No French** (English, Japanese, Russian, Chinese) **[V]** | Add a mod; translate about 29 KB of texts into `pack/kubejs/assets/envelope/lang/fr_fr.json`; adjust the level cost of an address and the speed of the pigeons | **Recommendation 1** |
+| Zipline on the server | Probably [Ziplines: Rezipped](https://modrinth.com/mod/ziplines-rezipped) **[D]** | `1.5.3`, English and Japanese | — | Medium: rail and airships already cover the links |
+| Notes and letters left in the abandoned houses | Server players **[V]** | Yes | Nothing to install: Supplementaries' notice boards or Envelope's letters are enough | Yes, to encourage among friends |
+| Distant Horizons | **[V]** (video 2, 29:37) | — | — | No: already ruled out |
+| Voice chat | **[V]** | — | — | No: refused (Simple Voice Chat) |
+| Pack updated by itself at launch | **[V]** (video 1) | Yes | `packwiz-installer-bootstrap`, already planned server-side ([06](../../06-technique-et-serveur.md)); client-side, the private repo prevents it | Technical note |
+| Very long days ("the day lasted an hour") | **Not found** **[D]** (video 1, 25:20 and 52:00) | — | Ecliptic Seasons already sets the day length | To check |
+| Player names displayed only when useful | [Subtle Name Tags](https://modrinth.com/mod/subtle-name-tags) (Monad) **[V]**; **not seen in the videos** | `0.3` (2025) | Add a client mod | Small bonus: silhouettes in the mist rather than labels |
 
-## Recommandations classées
+## Ranked recommendations
 
-1. **Envelope : le courrier par pigeons** (nouveau mod). Fallow décrit une poignée de joueurs qui finissent par vivre loin les uns des autres. Envelope leur donne un lien lent et physique, sans téléportation : un pigeon met du temps selon la distance, peut être chassé par un renard, et ne passe que par des boîtes qui ont un nom, pas des coordonnées. Il ajoute une espèce à Wildex et un échange d'objets entre colonies. Les lettres perdues du relais postal effondré racontent, par petits bouts, ceux qui vivaient là avant : de l'énigme sans noirceur. Il a un correctif pour Sable, donc une boîte aux lettres sur un dirigeable devrait marcher **[D]**. À faire : traduire en français, régler le coût d'une adresse en XP (`MAILBOX_ADDRESS_EXPERIENCE_LEVELS_COST`), décider si le relais au-dessus des nuages reste (il casse un peu le « presque vide ») et tester avec Sable et Aeronautics.
-2. **Garder la quête de la Lune Amie de NML 1.6.1** (déjà là, aucun mod à ajouter). C'est le cœur de ce qui rend Wayfarer « énigmatique » : une lune qui parle, des rêves, des ruines paisibles et des outils au passé mystérieux. Il faut trancher la décision en attente face à Enhanced Celestials (par exemple, la lune blanche reste rare et la Lune Amie reste en rêve), traduire les 47 textes de la 1.6 et faire des ruines des alchimistes un lieu où l'on trouve des fragments du codex des monolithes.
-3. **Une santé max qui baisse à la mort et qu'on regagne en explorant** (script KubeJS). La mort a enfin un prix sans combat de plus, et la réparer pousse à partir : des éclats de vie au fond des grottes ou des géodes sous la mer, dans les ruines NML, en bénédiction de monolithe, ou au calme d'une clairière. Pas de jauge nouvelle, seulement les cœurs. Mieux qu'Unhealthy Dying, où l'on regagne la santé en tuant. À régler : un plancher (5 cœurs comme Wayfarer), une perte d'un cœur par mort, puis un essai à deux.
-4. **Une tannerie** (script KubeJS). Les vaches, les cerfs de NML et les chevaux donnent une peau brute. Le cuir demande de la cire, ou de la cendre et de la chair pourrie, et du temps. Le cuir devient un petit métier lié à la faune et à l'élevage, qui alimente le sac, la selle et les armures. Léger, en français par nos propres textes. À vérifier avant : les recettes de cuir d'Overgeared et de Traveler's Backpack.
-5. **Supprimer l'XP** (KubeJS et masquage de la barre), à étudier. Fallow paie déjà l'enchantement en matériaux, donc la barre d'XP n'a presque plus de rôle. L'enlever retire une jauge, rend le monde moins « jeu vidéo » et donne plus de valeur au savoir trouvé (livres, plans). Risques à lister avant : l'enclume, Quark, Create, Immersive Enchanting, Envelope et les fermes à XP. Si le coût est trop grand, on garde l'XP et on écarte l'idée.
+1. **Envelope: pigeon mail** (new mod). Fallow describes a handful of players who end up living far from one another. Envelope gives them a slow, physical link, without teleportation: a pigeon takes time depending on the distance, can be hunted by a fox, and only goes through mailboxes that have a name, not coordinates. It adds a species to Wildex and an exchange of items between settlements. The lost letters of the collapsed postal relay tell, in small pieces, of those who lived there before: enigma without darkness. It has a fix for Sable, so a mailbox on an airship should work **[D]**. To do: translate into French, set the cost of an address in XP (`MAILBOX_ADDRESS_EXPERIENCE_LEVELS_COST`), decide whether the relay above the clouds stays (it slightly breaks the "almost empty") and test with Sable and Aeronautics.
+2. **Keep the Friendly Moon quest of NML 1.6.1** (already there, no mod to add). It is the heart of what makes Wayfarer "enigmatic": a talking moon, dreams, peaceful ruins and tools with a mysterious past. The pending decision against Enhanced Celestials must be settled (for example, the white moon stays rare and the Friendly Moon stays in dreams), the 47 texts of 1.6 translated, and the alchemist ruins made into a place where fragments of the monolith codex are found.
+3. **A max health that drops on death and is regained by exploring** (KubeJS script). Death finally has a price without one more fight, and repairing it pushes one to set out: life shards deep in caves or in geodes under the sea, in the NML ruins, as a monolith blessing, or in the calm of a clearing. No new gauge, only the hearts. Better than Unhealthy Dying, where health is regained by killing. To settle: a floor (5 hearts like Wayfarer), a loss of one heart per death, then a trial with two players.
+4. **A tannery** (KubeJS script). Cows, NML's deer and horses give a raw hide. Leather requires wax, or ash and rotten flesh, and time. Leather becomes a small trade tied to fauna and husbandry, which feeds the pack, the saddle and the armours. Light, in French through our own texts. To check beforehand: the leather recipes of Overgeared and Traveler's Backpack.
+5. **Remove XP** (KubeJS and hiding the bar), to be studied. Fallow already pays for enchanting in materials, so the XP bar has almost no role left. Removing it takes away a gauge, makes the world less "video game" and gives more value to knowledge found (books, blueprints). Risks to list beforehand: the anvil, Quark, Create, Immersive Enchanting, Envelope and XP farms. If the cost is too high, XP is kept and the idea dropped.
 
-Écartées : les anomalies (horreur), les minerais denses (comme Create Ore Excavation), Tree Physics (comme Dragged's), les ragdolls et le corps (hors ton), tout le Nether (fermé), Tolerable Creepers (pas de monstres vanilla), Brewin' and Chewin' (Farmer's Delight), Distant Horizons et le chat vocal (déjà refusés).
+Ruled out: the anomalies (horror), the dense ores (as with Create Ore Excavation), Tree Physics (as with Dragged's), ragdolls and the body (out of tone), the whole Nether (closed), Tolerable Creepers (no vanilla monsters), Brewin' and Chewin' (Farmer's Delight), Distant Horizons and voice chat (already refused).
 
-## Complément : le Discord de Monad Modding (2026-10-19)
+## Addendum: the Monad Modding Discord (2026-10-19)
 
-L'équipe a rejoint le Discord de l'équipe, et une session sur son ordinateur a lu le salon Wayfarer. Le rapport complet, avec la liste des 224 mods, est dans le dossier partagé du projet (`wayfarer-discord.md`). On n'en garde ici que ce qui change nos conclusions.
+A later pass read the Wayfarer channel of the Monad Modding Discord. The full report, with the list of 224 mods, is in the project's shared folder (`wayfarer-discord.md`). Only what changes our conclusions is kept here.
 
-- **Confirmé par l'équipe** :
-  - pas d'XP ni d'enchantements, et l'enclume améliore les outils avec du métal ;
-  - un cœur perdu à chaque mort, jusqu'à 5, regagné avec des gemmes trouvées dans des géodes de chair souterraines ;
-  - des peaux à tanner, sans doute par KubeJS ;
-  - silex, bronze, fer puis acier ;
-  - l'End est fermé, et Create n'est là que pour Aeronautics.
-- **Corrigé** : les « anomalies » n'apparaissent nulle part sur le Discord. La Lune Amie n'y apparaît que dans des blagues, mais c'est bien une mécanique de No Man's Land 1.6.1, vérifiée dans le jar ([lune-amie.md](../../lune-amie.md)).
-- **Méthode de l'équipe** : un mod maison, *Wayfarer Core*, avec beaucoup de mixins, plus KubeJS et LootJS pour les recettes et les butins. C'est la même approche que Fallow, avec notre mod `fallow` et nos scripts.
-- **Ce qu'on ne fait pas** : Farcr demande qu'on ne copie pas Wayfarer, et *Wayfarer Core* ne sera jamais publié. Fallow ne reprend ni code ni ressources : seulement des idées de jeu, écrites à notre façon (noms, taux, sources), avec des mods publics. L'équipe dit aussi encourager les addons.
-- **Idées en réserve** :
-  - un outil d'écriture qui s'use, nécessaire pour les panneaux et les livres ;
-  - la cire tirée du rayon de miel ou du porc ;
-  - un plafond d'objets au sol au lieu de leur disparition ;
-  - les outils en or avec Toucher de soie d'office ;
-  - la Chance qui remplace Fortune ;
-  - les outils abîmés dans les donjons ;
-  - pas de fonctions mcfunction dans les datapacks, pour la performance.
+- **Confirmed by the Monad team**:
+  - no XP or enchantments, and the anvil upgrades tools with metal;
+  - one heart lost at each death, down to 5, regained with gems found in underground flesh geodes;
+  - hides to tan, probably through KubeJS;
+  - flint, bronze, iron then steel;
+  - the End is closed, and Create is only there for Aeronautics.
+- **Corrected**: the "anomalies" appear nowhere on the Discord. The Friendly Moon only appears there in jokes, but it is indeed a mechanic of No Man's Land 1.6.1, verified in the jar ([lune-amie.md](../../lune-amie.md)).
+- **The Monad team's method**: an in-house mod, *Wayfarer Core*, with many mixins, plus KubeJS and LootJS for recipes and loot. It is the same approach as Fallow, with our `fallow` mod and our scripts.
+- **What we do not do**: Farcr asks that Wayfarer not be copied, and *Wayfarer Core* will never be published. Fallow takes neither code nor resources: only gameplay ideas, written in our own way (names, rates, sources), with public mods. The Monad team also says it encourages addons.
+- **Ideas in reserve**:
+  - a writing tool that wears out, required for signs and books;
+  - wax taken from the honeycomb or from pork;
+  - a cap on items on the ground instead of their disappearance;
+  - gold tools with Silk Touch built in;
+  - Luck replacing Fortune;
+  - tools damaged in dungeons;
+  - no mcfunction functions in datapacks, for performance.
 
 ## Sources
 
-Vidéos de uncstatus (titre et chaîne vérifiés par oEmbed, description et transcription automatique en anglais récupérées) :
-- Partie 1 : [This Mod Makes Minecraft Feel Brand New](https://www.youtube.com/watch?v=31qxa34zFz8), 67 min, publiée il y a environ 2 mois.
-- Partie 2 : [This Modpack feels like Minecraft Premium](https://www.youtube.com/watch?v=WpwAmPJzb7A), 79 min, il y a environ 1 mois.
-- Partie 3 : [This is My New Favorite Modpack of All Time](https://youtu.be/9PXN0emzmnI), 86 min, 2026-08-29. Pas de chapitres.
+Videos by uncstatus (title and channel verified through oEmbed, description and automatic English transcript retrieved):
+- Part 1: [This Mod Makes Minecraft Feel Brand New](https://www.youtube.com/watch?v=31qxa34zFz8), 67 min, published about 2 months ago.
+- Part 2: [This Modpack feels like Minecraft Premium](https://www.youtube.com/watch?v=WpwAmPJzb7A), 79 min, about 1 month ago.
+- Part 3: [This is My New Favorite Modpack of All Time](https://youtu.be/9PXN0emzmnI), 86 min, 2026-08-29. No chapters.
 
-Autres :
-- GreenLikeable, [This Amazing SMP is Reinventing Minecraft](https://www.youtube.com/watch?v=LQYShHl1448), 2026-08-17 : seule la description est lisible (YouTube a bloqué la transcription).
-- Patreon Monad Modding : [page](https://www.patreon.com/monad_modding), [rang Wayfarer](https://www.patreon.com/monad_modding/posts/wayfarer-rank-164357333), [nouveau nom](https://www.patreon.com/monad_modding/posts/fresh-coat-of-167571384), [Brewin' and Chewin' 5.0](https://www.patreon.com/monad_modding/posts/brewin-and-5-0-3-169338425), [NML 1.6 RC1](https://www.patreon.com/monad_modding/posts/no-mans-land-1-6-170725863), [première préversion Wayfarer de NML 1.5](https://www.patreon.com/monad_modding/posts/no-mans-land-out-152709685), [effigies](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343). Les billets réservés aux membres ne montrent que leur accroche.
-- [No Man's Land sur Modrinth](https://modrinth.com/mod/no-mans-land) ; jar `nomansland-1.6.1.jar` ouvert pour vérifier les objets, les classes et les traductions.
-- Mods vérifiés sur l'API Modrinth (NeoForge 1.21.1) : [Envelope](https://modrinth.com/mod/envelope) (jar ouvert : langues, réglages, structures), [Tree Physics](https://modrinth.com/mod/tree-physics), [Sable: Ragdolls](https://modrinth.com/mod/sable-ragdolls), [Sable: Ragdoll Corpse](https://modrinth.com/mod/sable-ragdoll-corpse), [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers), [Glow](https://modrinth.com/mod/glows), [Clutter No More](https://modrinth.com/mod/clutternomore), [Vanity: Core](https://modrinth.com/mod/vanity-core), [Brewin' and Chewin'](https://modrinth.com/mod/brewin-and-chewin), [Ziplines: Rezipped](https://modrinth.com/mod/ziplines-rezipped), [Unhealthy Dying](https://modrinth.com/mod/unhealthy-dying), [Subtle Name Tags](https://modrinth.com/mod/subtle-name-tags), [Overgeared](https://modrinth.com/mod/overgeared).
-- Discord Monad Modding : seulement le nom, la description et le nombre de membres, via [l'invitation](https://discord.gg/JW4utPut9x). Le contenu demande un compte.
-- Homonyme sans rapport : [Wayfarer SMP sur minecraftservers.org](https://minecraftservers.org/server/689670).
-- Recherches sans résultat utile : Reddit (inaccessible), CurseForge (non consulté, seulement cité par les descriptions), « rift sediment », « flesh geode », « anomalous quicksilver », « sturdy mineral block ».
+Others:
+- GreenLikeable, [This Amazing SMP is Reinventing Minecraft](https://www.youtube.com/watch?v=LQYShHl1448), 2026-08-17: only the description is readable (YouTube blocked the transcript).
+- Patreon Monad Modding: [page](https://www.patreon.com/monad_modding), [Wayfarer tier](https://www.patreon.com/monad_modding/posts/wayfarer-rank-164357333), [new name](https://www.patreon.com/monad_modding/posts/fresh-coat-of-167571384), [Brewin' and Chewin' 5.0](https://www.patreon.com/monad_modding/posts/brewin-and-5-0-3-169338425), [NML 1.6 RC1](https://www.patreon.com/monad_modding/posts/no-mans-land-1-6-170725863), [first Wayfarer pre-release of NML 1.5](https://www.patreon.com/monad_modding/posts/no-mans-land-out-152709685), [effigies](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343). Posts reserved for members only show their teaser.
+- [No Man's Land on Modrinth](https://modrinth.com/mod/no-mans-land); jar `nomansland-1.6.1.jar` opened to check items, classes and translations.
+- Mods verified on the Modrinth API (NeoForge 1.21.1): [Envelope](https://modrinth.com/mod/envelope) (jar opened: languages, settings, structures), [Tree Physics](https://modrinth.com/mod/tree-physics), [Sable: Ragdolls](https://modrinth.com/mod/sable-ragdolls), [Sable: Ragdoll Corpse](https://modrinth.com/mod/sable-ragdoll-corpse), [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers), [Glow](https://modrinth.com/mod/glows), [Clutter No More](https://modrinth.com/mod/clutternomore), [Vanity: Core](https://modrinth.com/mod/vanity-core), [Brewin' and Chewin'](https://modrinth.com/mod/brewin-and-chewin), [Ziplines: Rezipped](https://modrinth.com/mod/ziplines-rezipped), [Unhealthy Dying](https://modrinth.com/mod/unhealthy-dying), [Subtle Name Tags](https://modrinth.com/mod/subtle-name-tags), [Overgeared](https://modrinth.com/mod/overgeared).
+- Monad Modding Discord: only the name, description and member count, through [the invite](https://discord.gg/JW4utPut9x). The content requires an account.
+- Unrelated namesake: [Wayfarer SMP on minecraftservers.org](https://minecraftservers.org/server/689670).
+- Searches with no useful result: Reddit (inaccessible), CurseForge (not consulted, only cited by descriptions), "rift sediment", "flesh geode", "anomalous quicksilver", "sturdy mineral block".
 
-Brouillons, transcriptions et jars : `/tmp/travail`.
+Drafts, transcripts and jars: kept outside the repository.

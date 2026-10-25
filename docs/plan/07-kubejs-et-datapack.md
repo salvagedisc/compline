@@ -1,79 +1,79 @@
-# 7. Couche de règles : scripts KubeJS et données datapack
+# 7. Rules layer: KubeJS scripts and datapack data
 
-Tout ce qui lie les mods entre eux passe par KubeJS (déjà dans le pack) et par des données chargées depuis `pack/kubejs/data/` (KubeJS les charge comme un datapack actif sur tous les mondes). Les **brouillons** sont dans [kubejs-brouillons/](kubejs-brouillons/), rangés comme dans `pack/kubejs/` : ils montrent la forme et la logique, mais **aucun identifiant n'est garanti** tant que les .jar n'ont pas été lus. C'est le travail de la séance d'étude des .jar ([8.3](08-mise-en-place.md#83-ce-quil-faut-lire-dans-les-jar)).
+Everything that ties the mods together goes through KubeJS (already in the pack) and through data loaded from `pack/kubejs/data/` (KubeJS loads it as an active datapack on all worlds). The **drafts** are in [kubejs-brouillons/](kubejs-brouillons/), laid out as in `pack/kubejs/`: they show the form and the logic, but **no identifier is guaranteed** until the .jar files have been read. That is the job of the .jar study session ([8.3](08-mise-en-place.md#83-what-to-read-in-the-jar-files)).
 
 ## 7.1 Organisation
 
 ```
 pack/kubejs/
 ├── startup_scripts/
-│   └── objets_fallow.js            plans d'ingénieur, pièces forgées, cœur de braise, salpêtre
+│   └── objets_fallow.js            engineer blueprints, forged parts, ember core, saltpetre
 ├── server_scripts/
-│   ├── 00_fallow_constants.js      listes partagées (hostiles bannis, plans → recettes)
-│   ├── no_end_no_nether.js         End et Nether fermés
-│   ├── spawns_safety.js            filet anti-monstres vanilla
-│   ├── survivants.js               reproduction bloquée, échanges filtrés (MoreJS)
-│   ├── plans_ingenieur.js          déblocage des recettes par plans
-│   ├── saisons_cold_sweat.js       pont Ecliptic Seasons → Cold Sweat
-│   ├── garde_manger.js             péremption lente, cave, glacière
+│   ├── 00_fallow_constants.js      shared lists (banned hostiles, blueprints → recipes)
+│   ├── no_end_no_nether.js         End and Nether closed
+│   ├── spawns_safety.js            vanilla monster safety net
+│   ├── survivants.js               breeding blocked, trades filtered (MoreJS)
+│   ├── plans_ingenieur.js          recipe unlocking through blueprints
+│   ├── saisons_cold_sweat.js       Ecliptic Seasons → Cold Sweat bridge
+│   ├── garde_manger.js             slow spoilage, cellar, cooler
 │   ├── recipes/
-│   │   ├── progression.js          verrous Overgeared → Create → rail → aviation
-│   │   ├── remplacements.js        slime, poudre, Blaze Burner, quartz
-│   │   ├── gisements_coe.js        gisements finis par biome
-│   │   ├── cuisine_unifiee.js      Farm & Charm cantonné à la ferme, tags de saison
-│   │   └── overgeared_pieces.js    recettes de forge des pièces fallow:* (types de recette à lire)
+│   │   ├── progression.js          Overgeared → Create → rail → aviation locks
+│   │   ├── remplacements.js        slime, gunpowder, Blaze Burner, quartz
+│   │   ├── gisements_coe.js        finite deposits per biome
+│   │   ├── cuisine_unifiee.js      Farm & Charm confined to the farm, season tags
+│   │   └── overgeared_pieces.js    forge recipes for fallow:* parts (recipe types to be read)
 │   └── loot/
-│       └── butin.js                élytres et œil retirés, os, plans, orbes (LootJS)
+│       └── butin.js                elytra and eye removed, bones, blueprints, orbs (LootJS)
 ├── client_scripts/
-│   └── visionneuse.js              entrées masquées dans JEI
+│   └── visionneuse.js              entries hidden in JEI
 ├── data/
-│   ├── fallow/function/init.mcfunction          gamerules au chargement
+│   ├── fallow/function/init.mcfunction          gamerules on load
 │   ├── minecraft/tags/function/load.json        → fallow:init
-│   ├── fallow/neoforge/biome_modifier/*.json    monstres, donjons, blocs infestés retirés
-│   ├── minecraft/tags/worldgen/biome/has_structure/stronghold.json   plus de strongholds
-│   ├── minecraft/tags/enchantment/{tradeable,on_traded_equipment}.json   plus de Mending échangé
-│   ├── minecraft/worldgen/template_pool/village/*/town_centers.json  villages en ruines (à écrire)
-│   ├── minecraft/worldgen/structure_set/*.json  structures retirées (à écrire)
-│   ├── fallow/advancement/**                    succès du carnet du colon (à écrire)
-│   └── <mod>/neoforge/biome_modifier/*.json     {"type":"neoforge:none"} pour neutraliser un modifier
+│   ├── fallow/neoforge/biome_modifier/*.json    monsters, dungeons, infested blocks removed
+│   ├── minecraft/tags/worldgen/biome/has_structure/stronghold.json   no more strongholds
+│   ├── minecraft/tags/enchantment/{tradeable,on_traded_equipment}.json   no more traded Mending
+│   ├── minecraft/worldgen/template_pool/village/*/town_centers.json  ruined villages (to be written)
+│   ├── minecraft/worldgen/structure_set/*.json  structures removed (to be written)
+│   ├── fallow/advancement/**                    settler's notebook achievements (to be written)
+│   └── <mod>/neoforge/biome_modifier/*.json     {"type":"neoforge:none"} to neutralise a modifier
 └── assets/
-    ├── fallow/…                    textures et noms français des objets
-    ├── ambientsounds/…             sons lointains rares (voir 5.6)
-    └── minecraft/…                 panorama du menu, splashes en français
-pack/config/incontrol/spawn.json    règles In Control!
+    ├── fallow/…                    textures and French names of the items
+    ├── ambientsounds/…             rare distant sounds (see 5.6)
+    └── minecraft/…                 menu panorama, splashes in French
+pack/config/incontrol/spawn.json    In Control! rules
 ```
 
-## 7.2 Les scripts, dans l'ordre où les écrire
+## 7.2 The scripts, in the order to write them
 
-| # | Script ou donnée | Ce qu'il fait | Dépend de | Brouillon |
+| # | Script or data | What it does | Depends on | Draft |
 |---|---|---|---|---|
-| 1 | `fallow:init` + `load.json` | Gamerules du monde, dont `reducedDebugInfo` et `doLimitedCrafting` | — | ✅ |
-| 2 | `no_end_no_nether.js` + tag stronghold | End et Nether fermés, recettes d'œil retirées | `NativeEvents` | ✅ |
-| 3 | Biome modifiers + `spawns_safety.js` + `incontrol/spawn.json` | Plus de monstres vanilla, hostiles moddés plafonnés | In Control! | ✅ |
-| 4 | `saisons_cold_sweat.js` | Température saisonnière ressentie | bindings Ecliptic et Cold Sweat | ✅ |
-| 5 | `recipes/remplacements.js` | Slime, poudre, Blaze Burner, quartz | KubeJS Create | ✅ |
-| 6 | `recipes/cuisine_unifiee.js` + Kaleidoscope Compat | Farm & Charm cantonné à la ferme, KC seul système de cuisine, mangeoire retirée | Kaleidoscope Compat | ✅ |
-| 7 | `objets_fallow.js` + `recipes/overgeared_pieces.js` | Pièces forgées qui verrouillent les machines | types de recettes Overgeared | partiel |
-| 8 | `recipes/progression.js` | Verrous par âge | 7, KubeJS Create | ✅ |
-| 9 | `plans_ingenieur.js` + `loot/butin.js` | Plans trouvés en exploration qui débloquent des recettes | 7, LootJS, Quark Auto Unlock coupé | ✅ |
-| 10 | `survivants.js` + tags d'enchantement | Survivants : pas de reproduction, échanges filtrés | MoreJS | ✅ |
-| 11 | Pools de villages + structure sets | Villages en ruines, structures retirées | Sparse Structures | à écrire |
-| 12 | `recipes/gisements_coe.js` | Gisements finis par biome | COE | ✅ |
-| 13 | ~~`garde_manger.js`~~ (retiré en v2) + config d'élevage Cattlestrophic | Aliments du bétail | Cattlestrophic | config seule |
-| 14 | `visionneuse.js` | Masquer ce qui n'existe pas | — | ✅ |
-| 15 | Succès + carnet Modonomicon | Guide du colon par âge | — | à écrire |
-| 16 | Assets : sons AmbientSounds, luminances LambDynamicLights, presets ATMOSPHERICS, panorama | Ambiance | — | à écrire |
-| 17 | `clairieres.js` (startup + server) + biome `fallow:clairiere` + preset ATMOSPHERICS ([10.3](10-recentrage.md#103-la-brume-qui-se-lève)) | Feux de clairière : la brume se retire autour de la base | ATMOSPHERICS, Overgeared, Create | ✅ (brouillon) |
-| 18 | `zoo.js` + `lune_blanche.json` | Récompenses du bestiaire Wildex ; lune blanche | Wildex Bestiary, Enhanced Celestials | lune ✅ (brouillon), zoo à écrire |
+| 1 | `fallow:init` + `load.json` | World gamerules, including `reducedDebugInfo` and `doLimitedCrafting` | — | ✅ |
+| 2 | `no_end_no_nether.js` + stronghold tag | End and Nether closed, eye recipes removed | `NativeEvents` | ✅ |
+| 3 | Biome modifiers + `spawns_safety.js` + `incontrol/spawn.json` | No more vanilla monsters, modded hostiles capped | In Control! | ✅ |
+| 4 | `saisons_cold_sweat.js` | Seasonal felt temperature | Ecliptic and Cold Sweat bindings | ✅ |
+| 5 | `recipes/remplacements.js` | Slime, gunpowder, Blaze Burner, quartz | KubeJS Create | ✅ |
+| 6 | `recipes/cuisine_unifiee.js` + Kaleidoscope Compat | Farm & Charm confined to the farm, KC as the only cooking system, feeder removed | Kaleidoscope Compat | ✅ |
+| 7 | `objets_fallow.js` + `recipes/overgeared_pieces.js` | Forged parts that lock the machines | Overgeared recipe types | partial |
+| 8 | `recipes/progression.js` | Locks by age | 7, KubeJS Create | ✅ |
+| 9 | `plans_ingenieur.js` + `loot/butin.js` | Blueprints found while exploring that unlock recipes | 7, LootJS, Quark Auto Unlock cut | ✅ |
+| 10 | `survivants.js` + enchantment tags | Survivors: no breeding, filtered trades | MoreJS | ✅ |
+| 11 | Village pools + structure sets | Ruined villages, structures removed | Sparse Structures | to be written |
+| 12 | `recipes/gisements_coe.js` | Finite deposits per biome | COE | ✅ |
+| 13 | ~~`garde_manger.js`~~ (removed in v2) + Cattlestrophic breeding config | Livestock feed | Cattlestrophic | config only |
+| 14 | `visionneuse.js` | Hide what does not exist | — | ✅ |
+| 15 | Achievements + Modonomicon notebook | Settler's guide by age | — | to be written |
+| 16 | Assets: AmbientSounds sounds, LambDynamicLights luminances, ATMOSPHERICS presets, panorama | Ambience | — | to be written |
+| 17 | `clairieres.js` (startup + server) + `fallow:clairiere` biome + ATMOSPHERICS preset ([10.3](10-recentrage.md#103-the-mist-that-lifts)) | Clearing fires: the mist recedes around the base | ATMOSPHERICS, Overgeared, Create | ✅ (draft) |
+| 18 | `zoo.js` + `lune_blanche.json` | Wildex bestiary rewards; white moon | Wildex Bestiary, Enhanced Celestials | moon ✅ (draft), zoo to be written |
 
-Les numéros 1 à 6 doivent exister **avant le premier monde de test sérieux** : sans eux, le monde généré n'est pas celui de Fallow (monstres, strongholds, recettes de base).
+Numbers 1 to 6 must exist **before the first serious test world**: without them, the generated world is not Fallow's (monsters, strongholds, basic recipes).
 
-## 7.3 Points d'API à confirmer
+## 7.3 API points to confirm
 
-Ces points conditionnent plusieurs brouillons ; ils se vérifient en une soirée avec ProbeJS dans l'instance de test :
-- `NativeEvents.onEvent` existe-t-il dans KubeJS 2101.7, et accepte-t-il les classes internes (`BlockEvent$PortalSpawnEvent`) ?
-- `EntityEvents.spawned` est-il annulable, et `entity.tags` accessible ?
-- `RecipeViewerEvents.removeEntries` (intégration JEI de KubeJS 2101) : nom exact.
-- `kubejs/data` est-il pris en compte pour le **worldgen dès la création du monde** sur serveur dédié ? Sinon, plan B : le même dossier copié dans `world/datapacks/` avant la première génération.
-- Syntaxe LootJS 3 et MoreJS pour 1.21.1 ; compatibilité de KubeJS Create avec Create 6.0.10.
-- Overgeared : identifiant du composant de qualité et types de recettes exposés.
+These points condition several drafts; they can be checked in one evening with ProbeJS in the test instance:
+- Does `NativeEvents.onEvent` exist in KubeJS 2101.7, and does it accept inner classes (`BlockEvent$PortalSpawnEvent`)?
+- Is `EntityEvents.spawned` cancellable, and is `entity.tags` accessible?
+- `RecipeViewerEvents.removeEntries` (KubeJS 2101's JEI integration): exact name.
+- Is `kubejs/data` taken into account for **worldgen from world creation** on a dedicated server? Otherwise, plan B: the same folder copied into `world/datapacks/` before the first generation.
+- LootJS 3 and MoreJS syntax for 1.21.1; compatibility of KubeJS Create with Create 6.0.10.
+- Overgeared: identifier of the quality component and the recipe types exposed.

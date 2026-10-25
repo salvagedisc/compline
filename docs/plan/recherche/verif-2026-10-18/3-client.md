@@ -1,324 +1,324 @@
-# Vérification 3 : la pile client (rendu, caméra, interface)
+# Verification 3: the client stack (rendering, camera, interface)
 
-> Vérification du 2026-10-18 sur les §10.6 et le chapitre 11. Toutes les versions ont été relues sur Modrinth le 2026-10-18 (NeoForge 1.21.1). Les jars ont été ouverts dans le scratchpad et leurs mixins lus avec `javap`. Les fichiers `*.mixins.json` ne suffisaient pas toujours, alors toutes les classes ont été parcourues (Camera Overhaul charge ses mixins par un plugin, LambDynamicLights les range dans des jars imbriqués).
+> Verification of 2026-10-18 on §10.6 and chapter 11. All versions were reread on Modrinth on 2026-10-18 (NeoForge 1.21.1). The jars were opened in the scratchpad and their mixins read with `javap`. The `*.mixins.json` files were not always enough, so all classes were scanned (Camera Overhaul loads its mixins through a plugin, LambDynamicLights stores them in nested jars).
 >
-> Légende des preuves : **[MR]** version ou dépendance relue sur Modrinth, **[jar]** classe ou fichier du jar inspecté, **[wiki]** page de wiki officielle, **[issue]** issue GitHub lue, **[déduit]** raisonnement à partir de ce qui précède.
+> Evidence legend: **[MR]** version or dependency reread on Modrinth, **[jar]** class or file of the inspected jar, **[wiki]** official wiki page, **[issue]** GitHub issue read, **[inferred]** reasoning from the above.
 
 ---
 
-## 1. Ce qui est confirmé
+## 1. What is confirmed
 
-### 1.1 Versions disponibles (NeoForge 1.21.1, au 2026-10-18)
+### 1.1 Available versions (NeoForge 1.21.1, as of 2026-10-18)
 
-| Mod | Pack actuel | Dernière version | Remarque | Preuve |
+| Mod | Current pack | Latest version | Note | Evidence |
 |---|---|---|---|---|
-| Sodium | 0.8.13 | 0.8.13 | Sable demande ≥ 0.8.12 | [MR] [jar Sable `neoforge.mods.toml`] |
-| ImmediatelyFast | 1.6.14 | 1.6.15 | mise à jour mineure | [MR] |
-| Entity Culling | 1.11.2 | 1.11.3 | casse Aeronautics, voir 3.1 | [MR] [issue] |
-| ModernFix | 5.27.24 | 5.27.26 | mise à jour mineure | [MR] |
-| ATMOSPHERICS | 2.6.5 | 2.6.5.2 | correctifs | [MR] |
-| Polytone | absent | 1.21-5.1.3 (2026-10-16) | **8 versions en 10 jours** depuis la 5.0.0 du 2026-10-06 ; la dernière 4.x est la 4.5.3 (2026-09-26) | [MR] |
-| Particular Reforged | absent | 1.5.7 | dépendances **optionnelles** Create, Aeronautics, Sable, TFC, Iris | [MR] |
+| Sodium | 0.8.13 | 0.8.13 | Sable requires ≥ 0.8.12 | [MR] [jar Sable `neoforge.mods.toml`] |
+| ImmediatelyFast | 1.6.14 | 1.6.15 | minor update | [MR] |
+| Entity Culling | 1.11.2 | 1.11.3 | breaks Aeronautics, see 3.1 | [MR] [issue] |
+| ModernFix | 5.27.24 | 5.27.26 | minor update | [MR] |
+| ATMOSPHERICS | 2.6.5 | 2.6.5.2 | fixes | [MR] |
+| Polytone | absent | 1.21-5.1.3 (2026-10-16) | **8 versions in 10 days** since 5.0.0 of 2026-10-06; the last 4.x is 4.5.3 (2026-09-26) | [MR] |
+| Particular Reforged | absent | 1.5.7 | **optional** dependencies Create, Aeronautics, Sable, TFC, Iris | [MR] |
 | Subtle Effects | 1.14.3 | 1.15.1 | | [MR] |
 | LambDynamicLights | 4.8.11 | 4.8.11 | | [MR] |
-| More Darkness | 2.0.1 | 2.0.1 | demande YACL | [MR] |
-| Entity Model Features | absent | 3.3.12 | demande ETF | [MR] |
+| More Darkness | 2.0.1 | 2.0.1 | requires YACL | [MR] |
+| Entity Model Features | absent | 3.3.12 | requires ETF | [MR] |
 | Entity Texture Features | absent | 7.2.6 | | [MR] |
-| Fresh Animations | absent | 1.10.4 (bêta) | pack de ressources | [MR] |
-| FA Extensions (lot) | absent | 1.8.1 ; Player Extension 1.1.0, Details 2.2.1, Objects 2.1.2, Emissive 1.6.0 | | [MR] |
-| 3D Skin Layers | absent | 1.11.3 | a un mixin de compatibilité EMF (`EMFModelPartMixin`) | [MR] [jar] |
-| Real Camera | absent | 0.7.8-beta | incompatible (Modrinth) avec les armures GeckoLib, OptiFine, Armourer's Workshop ; le jar a une compat Sable (`SableCompat`) | [MR] [jar] |
-| Camera Overhaul | absent | 2.1.2 | demande Cloth Config | [MR] |
-| Shoulder Surfing Reloaded | absent | 5.2.0 | incompatible avec betterthirdperson, camerautils, nimble, valkyrienskies ≤ 2.4.11, customcameraview | [MR] [jar `neoforge.mods.toml`] |
-| Spatial GUI | absent | 1.8 (2026-10-17) | demande YACL ; listes d'activation par écran ; mixin de compat Polytone | [MR] [jar] |
-| Smooth Swapping | absent | 0.9.3.2 bêta (2025-11) | | [MR] |
+| Fresh Animations | absent | 1.10.4 (beta) | resource pack | [MR] |
+| FA Extensions (bundle) | absent | 1.8.1; Player Extension 1.1.0, Details 2.2.1, Objects 2.1.2, Emissive 1.6.0 | | [MR] |
+| 3D Skin Layers | absent | 1.11.3 | has an EMF compatibility mixin (`EMFModelPartMixin`) | [MR] [jar] |
+| Real Camera | absent | 0.7.8-beta | incompatible (Modrinth) with GeckoLib armours, OptiFine, Armourer's Workshop; the jar has Sable compat (`SableCompat`) | [MR] [jar] |
+| Camera Overhaul | absent | 2.1.2 | requires Cloth Config | [MR] |
+| Shoulder Surfing Reloaded | absent | 5.2.0 | incompatible with betterthirdperson, camerautils, nimble, valkyrienskies ≤ 2.4.11, customcameraview | [MR] [jar `neoforge.mods.toml`] |
+| Spatial GUI | absent | 1.8 (2026-10-17) | requires YACL; per-screen activation lists; Polytone compat mixin | [MR] [jar] |
+| Smooth Swapping | absent | 0.9.3.2 beta (2025-11) | | [MR] |
 | ItemPhysic Lite | absent | 1.6.13 | | [MR] |
-| MB-3D Items (`mb3d-items-pack`) | absent | 2.4.0 | pack de ressources | [MR] |
-| Motschen's Better Leaves | absent | 9.6 | gère `nomansland` et `quark` | [MR] [jar du pack] |
-| More Culling | absent | 1.0.10 | demande Cloth ; incompatible Sodium < 0.8.0 | [MR] [jar] |
+| MB-3D Items (`mb3d-items-pack`) | absent | 2.4.0 | resource pack | [MR] |
+| Motschen's Better Leaves | absent | 9.6 | handles `nomansland` and `quark` | [MR] [pack jar] |
+| More Culling | absent | 1.0.10 | requires Cloth; incompatible with Sodium < 0.8.0 | [MR] [jar] |
 | EMI | absent | 1.1.24 | | [MR] |
-| JEI | absent | 19.64.0.455 | utile comme pont, voir 1.6 | [MR] |
-| Sounds | absent | 2.4.22+lts | demande MRU et YACL | [MR] |
+| JEI | absent | 19.64.0.455 | useful as a bridge, see 1.6 | [MR] |
+| Sounds | absent | 2.4.22+lts | requires MRU and YACL | [MR] |
 | Dynamic Surroundings (OreCruncher) | absent | 0.4.6 (slug `dynamicsurroundingsfabric`) | | [MR] |
 | AmbientSounds | 6.3.8 | 6.3.10 | | [MR] |
 | Sound Physics Remastered | 1.5.1 | 1.5.1 (alpha) | | [MR] |
-| Seamless Loading Screen | absent | 2.2.1 (2024-10-01, version unique) | | [MR] |
-| Default Options | absent | 21.1.8 | demande Balm | [MR] |
-| No Man's Land | 1.5.12 | **1.6.1** (2026-10-14) | embarque Mixed Litter 1.2.2 et sable-companion 1.6.0 | [MR] [jar] |
-| Sable | 2.0.5 | 2.0.6 | incompatible scalablelux et sablecompanion > 1.6.0 ; embarque Veil | [MR] [jar] |
+| Seamless Loading Screen | absent | 2.2.1 (2024-10-01, single version) | | [MR] |
+| Default Options | absent | 21.1.8 | requires Balm | [MR] |
+| No Man's Land | 1.5.12 | **1.6.1** (2026-10-14) | embeds Mixed Litter 1.2.2 and sable-companion 1.6.0 | [MR] [jar] |
+| Sable | 2.0.5 | 2.0.6 | incompatible with scalablelux and sablecompanion > 1.6.0; embeds Veil | [MR] [jar] |
 | Enhanced Celestials | — | 6.0.2.6 | | [MR] |
 
-Sinytra Connector 2.0.0-beta.17 et Forgified Fabric API sont dans le pack [dépôt `pack/mods/`]. Aucun mod Fabric n'est nécessaire dans cette pile.
+Sinytra Connector 2.0.0-beta.17 and Forgified Fabric API are in the pack [repository `pack/mods/`]. No Fabric mod is needed in this stack.
 
-### 1.2 NML contre Fresh Animations : NML gagne, par Mixed Litter
+### 1.2 NML versus Fresh Animations: NML wins, through Mixed Litter
 
-- NML ne remodèle pas les mobs lui-même : il **embarque Mixed Litter** 1.2.2 (même équipe) [jar NML, `META-INF/jarjar`].
-- Mixed Litter remplace le renderer Java de chaque espèce : `PigRemodelRenderer`, `CowRemodelRenderer`, `MooshroomRemodelRenderer`, `ChickenRemodelRenderer`, `SheepRemodelRenderer`, `RabbitRemodelRenderer`, `SquidRemodelRenderer`, choisis au rendu par `RemodelRenderers.get` [jar Mixed Litter].
-- Réglage : `config/mixed_litter-startup.toml` (type STARTUP, donc relu au lancement seulement). Les clés `chickenRemodel`, `cowRemodel`, `pigRemodel`, `rabbitRemodel`, `sheepRemodel` et celle du calmar sont **toutes à `true` par défaut**, chacune avec sa liste d'entités (vaches : `cow`, `mooshroom`, `buzzier_bees:moobloom` ; calmars : `squid`, `glow_squid`) [jar].
-- **Conclusion.** Avec les réglages par défaut, NML l'emporte sur le **cochon, la vache, la mooshroom, le poulet, le mouton, le lapin, le calmar et le calmar luisant**. Ces renderers n'utilisent pas les couches vanilla et Fresh Animations n'a aucun `.jem` pour elles : FA ne les anime pas [jar FA, déduit].
-- Le plan sous-estime le recouvrement. Il parle de « cochons, vaches et calmars », mais **poulet, mouton et lapin** sont aussi pris par NML. FA anime donc le reste : loups, renards, chats, chevaux, chèvres, tortues, villageois, monstres, objets.
-- Pour donner une espèce à FA, il suffit de passer la clé Mixed Litter de cette espèce à `false`.
+- NML does not remodel mobs itself: it **embeds Mixed Litter** 1.2.2 (same team) [jar NML, `META-INF/jarjar`].
+- Mixed Litter replaces the Java renderer of each species: `PigRemodelRenderer`, `CowRemodelRenderer`, `MooshroomRemodelRenderer`, `ChickenRemodelRenderer`, `SheepRemodelRenderer`, `RabbitRemodelRenderer`, `SquidRemodelRenderer`, chosen at render time by `RemodelRenderers.get` [jar Mixed Litter].
+- Setting: `config/mixed_litter-startup.toml` (type STARTUP, hence reread at launch only). The keys `chickenRemodel`, `cowRemodel`, `pigRemodel`, `rabbitRemodel`, `sheepRemodel` and the squid one are **all `true` by default**, each with its entity list (cows: `cow`, `mooshroom`, `buzzier_bees:moobloom`; squids: `squid`, `glow_squid`) [jar].
+- **Conclusion.** With default settings, NML wins on the **pig, cow, mooshroom, chicken, sheep, rabbit, squid and glow squid**. These renderers do not use the vanilla layers and Fresh Animations has no `.jem` for them: FA does not animate them [jar FA, inferred].
+- The plan underestimates the overlap. It speaks of "pigs, cows and squids", but **chicken, sheep and rabbit** are also taken by NML. FA therefore animates the rest: wolves, foxes, cats, horses, goats, turtles, villagers, monsters, items.
+- To give a species to FA, it is enough to set that species' Mixed Litter key to `false`.
 
-Variantes de texture de NML : `data/nomansland/mixed_litter/variants/` couvre abeille, chat, poulet, morue, vache, dauphin, âne, renard (renard crème selon le biome), chèvre, husk, mooshroom, cochon (13 variantes), saumon, mouton, slime, calmar et tortue [jar NML]. Elles sont injectées par `RenderEntityVariantMixin`, un `ModifyVariable` au `STORE` de `getTextureLocation` dans `LivingEntityRenderer.getRenderType`, **donc sur tous les mobs, remodelés ou non** [jar Mixed Litter].
+NML texture variants: `data/nomansland/mixed_litter/variants/` covers bee, cat, chicken, cod, cow, dolphin, donkey, fox (cream fox depending on the biome), goat, husk, mooshroom, pig (13 variants), salmon, sheep, slime, squid and turtle [jar NML]. They are injected by `RenderEntityVariantMixin`, a `ModifyVariable` at the `STORE` of `getTextureLocation` in `LivingEntityRenderer.getRenderType`, **hence on all mobs, remodelled or not** [jar Mixed Litter].
 
-### 1.3 ATMOSPHERICS : la clairière est reconnue, à une condition
+### 1.3 ATMOSPHERICS: the clearing is recognised, on one condition
 
-- Les presets se livrent dans un pack de ressources, sous `assets/atmospherics/preset/*.json` (lecture `listResources("preset")`, namespace `atmospherics`, suffixe `.json`) [jar].
-- Ils sont **appliqués tout seuls**, une fois par empreinte, quand aucun écran n'est ouvert (`tickResourcePackPresetPrompt` → `applyPresetAndReload`) [jar]. L'empreinte est la liste des ID de presets : un preset modifié sous le même nom **n'est pas réappliqué**. Il faut le renommer à chaque version (`fallow_v1.json`, `fallow_v2.json`…) [jar, déduit].
-- Le preset actif est recopié dans `config/ambientfog/biome_fog.json`. Les presets locaux vont dans `config/ambientfog/presets/` [jar].
-- Les biomes sont indexés par **chaîne d'ID**, donc `fallow:clairiere` est accepté tel quel. Un biome absent du preset reçoit un profil par défaut (`computeIfAbsent`), copié sur `minecraft:plains` [jar].
-- Le preset de base ne contient que 65 biomes vanilla, **aucun biome NML** [jar]. Le preset Fallow doit les nommer un par un, sans quoi toutes les forêts de NML ont la brume des plaines.
-- Le biome est lu par `ClientLevel.getBiome` à la position du joueur, mélangé sur une grille de cellules de 4 blocs (`BiomeBlendUtil`, `GRID_RADIUS` 1, pas de 4) [jar].
+- Presets are shipped in a resource pack, under `assets/atmospherics/preset/*.json` (read through `listResources("preset")`, namespace `atmospherics`, suffix `.json`) [jar].
+- They are **applied automatically**, once per fingerprint, when no screen is open (`tickResourcePackPresetPrompt` → `applyPresetAndReload`) [jar]. The fingerprint is the list of preset IDs: a preset modified under the same name **is not reapplied**. It must be renamed at each version (`fallow_v1.json`, `fallow_v2.json`…) [jar, inferred].
+- The active preset is copied into `config/ambientfog/biome_fog.json`. Local presets go in `config/ambientfog/presets/` [jar].
+- Biomes are indexed by **ID string**, so `fallow:clairiere` is accepted as is. A biome absent from the preset receives a default profile (`computeIfAbsent`), copied from `minecraft:plains` [jar].
+- The base preset contains only 65 vanilla biomes, **no NML biome** [jar]. The Fallow preset must name them one by one, otherwise all NML forests get the mist of the plains.
+- The biome is read by `ClientLevel.getBiome` at the player's position, blended on a grid of 4-block cells (`BiomeBlendUtil`, `GRID_RADIUS` 1, step of 4) [jar].
 
-### 1.4 /fillbiome : la brume suit, avec un temps de retard
+### 1.4 /fillbiome: the mist follows, with a delay
 
-- Le client reçoit les nouveaux biomes par `ClientboundChunksBiomesPacket` [déduit du code vanilla].
-- Le cache de `BiomeBlendUtil` est indexé par cellule et **n'est pas vidé** quand un biome change [jar].
-- Résultat : debout sans bouger dans la clairière fraîchement créée, la brume reste. Elle change dès que le joueur entre dans une **autre cellule de 4 blocs**, puis glisse doucement (lissage exponentiel, `tau` 0,9986 par image) [jar, déduit].
-- Pour la mise en scène « la brume se lève », c'est plutôt un avantage, puisque le joueur marche. Pour une clairière qui s'ouvre **autour** d'un joueur immobile, il faut le mod custom de 4.3.
+- The client receives the new biomes through `ClientboundChunksBiomesPacket` [inferred from vanilla code].
+- The `BiomeBlendUtil` cache is indexed by cell and is **not flushed** when a biome changes [jar].
+- Result: standing still in the freshly created clearing, the mist stays. It changes as soon as the player enters **another 4-block cell**, then glides gently (exponential smoothing, `tau` 0.9986 per frame) [jar, inferred].
+- For the "mist lifts" staging, this is rather an advantage, since the player walks. For a clearing that opens **around** a motionless player, the custom mod of 4.3 is needed.
 
-### 1.5 Ce qu'ATMOSPHERICS touche dans le rendu
+### 1.5 What ATMOSPHERICS touches in rendering
 
-| Cible | Injection | Preuve |
+| Target | Injection | Evidence |
 |---|---|---|
-| `FogRenderer.setupColor`, `setupFog` | Inject à `TAIL` | [jar] |
-| `ClientLevel.getSkyColor`, `getSunriseColor` | Inject à `RETURN` | [jar] |
-| Nuages | Redirect `getCloudColor` et `getCloudHeight`, `ModifyArg` dans `buildClouds` | [jar] |
-| `LevelRenderer.renderSky` | **Réécrit : Inject à `HEAD` avec annulation**, sauf sous l'eau, sous effet (cécité…), ciel non normal, et deux cas NML (Friend Moon) | [jar] |
-| Sodium | coupe tout seul l'occlusion du brouillard de Sodium, règle la distance des nuages | [jar] |
-| NML | lit la Friend Moon de NML par réflexion | [jar] |
+| `FogRenderer.setupColor`, `setupFog` | Inject at `TAIL` | [jar] |
+| `ClientLevel.getSkyColor`, `getSunriseColor` | Inject at `RETURN` | [jar] |
+| Clouds | Redirect `getCloudColor` and `getCloudHeight`, `ModifyArg` in `buildClouds` | [jar] |
+| `LevelRenderer.renderSky` | **Rewritten: Inject at `HEAD` with cancellation**, except underwater, under an effect (blindness…), non-normal sky, and two NML cases (Friend Moon) | [jar] |
+| Sodium | turns off Sodium's fog occlusion by itself, sets the cloud distance | [jar] |
+| NML | reads NML's Friend Moon by reflection | [jar] |
 
-### 1.6 EMI : qui n'a qu'un plugin JEI
+### 1.6 EMI: who has only a JEI plugin
 
-| Plugin JEI seulement (EMI les lit par JEMI si JEI est installé) | Plugin EMI natif |
+| JEI plugin only (EMI reads them through JEMI if JEI is installed) | Native EMI plugin |
 |---|---|
-| Create (`CreateJEI`) | Overgeared (**EMI seulement**, pas de JEI) |
-| Create Aeronautics / Simulated (`AeroJEI`, `SimulatedJEI`) | Kaleidoscope Cookery et KC Compat |
+| Create (`CreateJEI`) | Overgeared (**EMI only**, no JEI) |
+| Create Aeronautics / Simulated (`AeroJEI`, `SimulatedJEI`) | Kaleidoscope Cookery and KC Compat |
 | Cold Sweat | Curios |
 | Alex's Mobs | Supplementaries |
 | Critters and Companions | Kiwi |
 | Ecliptic | KubeJS |
 | Quark / Zeta | Traveler's Backpack |
 | Patchouli, Modonomicon | Visual Workbench |
-| Knight Lib | AStages (masquage par joueur) |
+| Knight Lib | AStages (per-player hiding) |
 | Create Ore Excavation | |
 | Exposure | |
-| Farm & Charm **1.1.25** (la 1.1.29 a un plugin EMI) | |
+| Farm & Charm **1.1.25** (1.1.29 has an EMI plugin) | |
 
-[jar de chaque mod : classes `@JeiPlugin` et `@EmiEntrypoint`]. EMI contient le pont JEMI (`dev/emi/emi/jemi`) [jar EMI]. **JEI doit donc rester dans le pack**, sans que son interface soit visible.
+[jar of each mod: `@JeiPlugin` and `@EmiEntrypoint` classes]. EMI contains the JEMI bridge (`dev/emi/emi/jemi`) [jar EMI]. **JEI must therefore stay in the pack**, without its interface being visible.
 
-### 1.7 Ce que KubeJS sait faire avec EMI
+### 1.7 What KubeJS can do with EMI
 
-KubeJS 2101 implémente `RecipeViewerEvents` pour EMI [jar KubeJS] :
-- `addEntries`, `addInformation`, `removeCategories`, `removeEntries`, `removeEntriesCompletely` ;
-- `removeRecipes`, envoyé par le serveur (`removedGlobalRecipes`, `categoryData`), ce qui marche en multijoueur.
-- **`groupEntries` n'est pas pris en charge pour EMI** : EMI 1.1.24 n'a pas d'API de groupes d'objets [jar EMI, aucune classe de groupe dans l'API]. Le §11.7 se trompe sur ce point.
+KubeJS 2101 implements `RecipeViewerEvents` for EMI [jar KubeJS]:
+- `addEntries`, `addInformation`, `removeCategories`, `removeEntries`, `removeEntriesCompletely`;
+- `removeRecipes`, sent by the server (`removedGlobalRecipes`, `categoryData`), which works in multiplayer.
+- **`groupEntries` is not supported for EMI**: EMI 1.1.24 has no item group API [jar EMI, no group class in the API]. §11.7 is wrong on this point.
 
-Ce qu'EMI sait faire avec un pack de données ou de ressources, sans KubeJS [jar EMI, chargeurs de données] :
-- `emi/index/stacks/*.json` : `disable`, `added` avec `after` (placer un objet après un autre, pour un ordre par thème), `removed`, `filters` ;
-- `emi/category/properties/*.json` : ordre et icône des catégories ;
-- `emi/recipe/filters/*.json` : cacher des recettes ;
-- `emi/recipe/additions/*.json` : ajouter des pages `emi:info` (texte) et `emi:world_interaction` (« clic droit sur X avec Y donne Z ») ;
-- `emi/aliases/*.json` : noms de recherche de remplacement ;
-- l'option d'index `creative`, `registered` ou `creative_plus_registered` : avec `creative`, l'ordre suit les **onglets créatifs**, que KubeJS sait créer et remplir (`StartupEvents.modifyCreativeTab`, `StartupEvents.registry('creative_mode_tab')`).
+What EMI can do with a data or resource pack, without KubeJS [jar EMI, data loaders]:
+- `emi/index/stacks/*.json`: `disable`, `added` with `after` (place an item after another, for a themed order), `removed`, `filters`;
+- `emi/category/properties/*.json`: order and icon of categories;
+- `emi/recipe/filters/*.json`: hide recipes;
+- `emi/recipe/additions/*.json`: add `emi:info` (text) and `emi:world_interaction` ("right-click X with Y gives Z") pages;
+- `emi/aliases/*.json`: replacement search names;
+- the index option `creative`, `registered` or `creative_plus_registered`: with `creative`, the order follows the **creative tabs**, which KubeJS can create and fill (`StartupEvents.modifyCreativeTab`, `StartupEvents.registry('creative_mode_tab')`).
 
-Le regroupement visuel « toutes les planches » se fait donc par l'ordre (onglets créatifs ou `added`/`after`) et par la recherche, pas par des groupes repliables.
+The visual grouping "all planks" is therefore done through order (creative tabs or `added`/`after`) and through search, not through collapsible groups.
 
-**Correction du plan : le masquage par joueur existe.** AStages 2.5.3 a un plugin EMI et un plugin JEI qui cachent les objets et recettes selon les étapes de chaque joueur [jar AStages]. Le §11.7 dit le contraire. Attention : AStages est en « All Rights Reserved » [MR], ce qui interdit de le modifier ou de le redistribuer hors Modrinth.
+**Correction to the plan: per-player hiding exists.** AStages 2.5.3 has an EMI plugin and a JEI plugin that hide items and recipes according to each player's stages [jar AStages]. §11.7 says the opposite. Beware: AStages is "All Rights Reserved" [MR], which forbids modifying or redistributing it outside Modrinth.
 
 ---
 
-## 2. Les liens concrets à construire
+## 2. The concrete links to build
 
-| # | Lien | Outil | Détail |
+| # | Link | Tool | Detail |
 |---|---|---|---|
-| L1 | La clairière dans ATMOSPHERICS | pack de ressources `fallow-ambiance`, `assets/atmospherics/preset/fallow_v1.json` | Une entrée `fallow:clairiere` (brume quasi nulle, lumière franche) et **une entrée par biome NML**. Renommer le fichier à chaque version (1.3) |
-| L2 | La clairière dans AmbientSounds | tag de biome dans un datapack KubeJS (`kubejs/data/minecraft/tags/worldgen/biome/is_forest.json` ou tag `c:`) | AmbientSounds associe les sons par tag (`#is_forest`) ou par morceau de nom [jar]. Sans tag, la clairière est silencieuse |
-| L3 | La clairière dans les couleurs | le JSON du biome (`grass_color`, `foliage_color`, `water_color`, `effects`) | C'est la voie la plus sûre. Polytone peut l'affiner par `biome_modifiers`, sans `fog_color` ni `sky_color` (3.3) |
-| L4 | Mixed Litter et Fresh Animations | `config/mixed_litter-startup.toml`, livré par Default Options | Choisir espèce par espèce. Proposition : NML garde cochon, vache, mooshroom, mouton et calmar (le style du trailer), FA prend poulet et lapin s'ils plaisent mieux en jeu |
-| L5 | Variantes de NML sur les modèles FA | `config/entity_model_features.json` (`modelsNamesDisabled`) ou surcharge des fichiers `data/nomansland/mixed_litter/variants/<espèce>.json` par datapack | Pour chaque mob animé par FA **et** à variante NML (chat, renard, chèvre, tortue, dauphin, âne…), soit on coupe le modèle FA, soit on vide la variante NML. À trancher après le test T3 |
-| L6 | Une seule source de brume | `config/nomansland-client.toml`, section `[fog_modifiers]` (config CLIENT de `NMLConfig`) : `fogModifiers = false`, ou `surfaceFogModifier`, `foggyBiomeFogModifier`, `cavesBiomeFogModifier`, `deepDarkFogModifier` à false | NML ajoute son propre brouillard [jar NML]. ATMOSPHERICS doit être le seul responsable (§11.1) |
-| L7 | Une seule source de variantes | `pack/config/quark-common.toml`, `"Variant Animal Textures" = false` (ligne 173) | Doublon de NML ; ses textures cassent les UV de FA (3.5) |
-| L8 | Une seule source de lucioles, cascades, poussière | configs Particular, Subtle Effects, NML | Voir le tableau 3.7 : un responsable par effet |
-| L9 | Feuilles de NML dans Particular | config de Particular (correspondance bloc de feuilles → particule) | Aucun bois NML n'y est listé [jar] : saule, noyer, érable tombent en feuille générique. Ajouter les entrées, ou garder Falling Leaves Plus en repli |
-| L10 | Ordre de l'index EMI par thème | `kubejs/assets/fallow/emi/index/stacks/fallow.json` (`added` + `after`), ou index `creative` + onglets créatifs KubeJS | Remplace les « groupes » du plan |
-| L11 | Gestes Create visibles dans EMI | `emi/recipe/additions/*.json` de type `emi:world_interaction` et `emi:info` | Pour les recettes « dans le monde » de Fallow (clairière, rituels, plans des ruines) qu'aucun mod ne déclare |
-| L12 | Recettes des plans cachées puis apprises | AStages (EMI) **ou** `RecipeViewerEvents.removeRecipes` (KubeJS, pour tous) | AStages permet le « par joueur » ; KubeJS seul cache pour tout le monde |
-| L13 | Réglages livrés une fois | Default Options : `config/defaultoptions/extra/` | Les fichiers ne sont copiés **que s'ils manquent** [jar] : ils servent de point de départ et le joueur garde ses choix. Les packs de ressources (`fallow-ambiance`, FA, MB-3D, Better Leaves) s'activent par défaut (`DefaultResourcePacksHandler`) [jar] |
-| L14 | Camera Overhaul en première personne | `cameraoverhaul.toml` : `general.enableInThirdPerson = false`, contextes `vehicles` et `mounts` à 0 | Laisse la troisième personne à SSR, et évite que la caméra penche à bord des dirigeables (3.4) |
-| L15 | Spatial GUI loin des livres | sa liste d'écrans | Exclure Wildex, le codex d'Ancient Remnants, Patchouli, Modonomicon, l'atlas, et les écrans d'EMI |
-| L16 | Lune d'Enhanced Celestials sous ATMOSPHERICS | **mod custom** (4.3) | KubeJS ne peut pas toucher au rendu du ciel |
+| L1 | The clearing in ATMOSPHERICS | resource pack `fallow-ambiance`, `assets/atmospherics/preset/fallow_v1.json` | An entry `fallow:clairiere` (almost no mist, frank light) and **one entry per NML biome**. Rename the file at each version (1.3) |
+| L2 | The clearing in AmbientSounds | biome tag in a KubeJS datapack (`kubejs/data/minecraft/tags/worldgen/biome/is_forest.json` or `c:` tag) | AmbientSounds associates sounds by tag (`#is_forest`) or by name fragment [jar]. Without a tag, the clearing is silent |
+| L3 | The clearing in colours | the biome JSON (`grass_color`, `foliage_color`, `water_color`, `effects`) | This is the safest route. Polytone can refine it through `biome_modifiers`, without `fog_color` or `sky_color` (3.3) |
+| L4 | Mixed Litter and Fresh Animations | `config/mixed_litter-startup.toml`, shipped by Default Options | Choose species by species. Proposal: NML keeps pig, cow, mooshroom, sheep and squid (the trailer's style), FA takes chicken and rabbit if they look better in game |
+| L5 | NML variants on FA models | `config/entity_model_features.json` (`modelsNamesDisabled`) or override of the files `data/nomansland/mixed_litter/variants/<species>.json` by datapack | For each mob animated by FA **and** with an NML variant (cat, fox, goat, turtle, dolphin, donkey…), either the FA model is cut, or the NML variant is emptied. To be settled after test T3 |
+| L6 | A single source of mist | `config/nomansland-client.toml`, section `[fog_modifiers]` (CLIENT config of `NMLConfig`): `fogModifiers = false`, or `surfaceFogModifier`, `foggyBiomeFogModifier`, `cavesBiomeFogModifier`, `deepDarkFogModifier` to false | NML adds its own fog [jar NML]. ATMOSPHERICS must be the only one responsible (§11.1) |
+| L7 | A single source of variants | `pack/config/quark-common.toml`, `"Variant Animal Textures" = false` (line 173) | Duplicates NML; its textures break FA's UVs (3.5) |
+| L8 | A single source of fireflies, waterfalls, dust | Particular, Subtle Effects, NML configs | See table 3.7: one owner per effect |
+| L9 | NML leaves in Particular | Particular config (leaf block → particle mapping) | No NML wood is listed there [jar]: willow, walnut, maple fall as generic leaves. Add the entries, or keep Falling Leaves Plus as a fallback |
+| L10 | EMI index order by theme | `kubejs/assets/fallow/emi/index/stacks/fallow.json` (`added` + `after`), or `creative` index + KubeJS creative tabs | Replaces the plan's "groups" |
+| L11 | Create gestures visible in EMI | `emi/recipe/additions/*.json` of type `emi:world_interaction` and `emi:info` | For Fallow's "in-world" recipes (clearing, rituals, ruin blueprints) that no mod declares |
+| L12 | Blueprint recipes hidden then learned | AStages (EMI) **or** `RecipeViewerEvents.removeRecipes` (KubeJS, for everyone) | AStages allows "per player"; KubeJS alone hides for everyone |
+| L13 | Settings shipped once | Default Options: `config/defaultoptions/extra/` | Files are copied **only if missing** [jar]: they serve as a starting point and the player keeps their choices. Resource packs (`fallow-ambiance`, FA, MB-3D, Better Leaves) are enabled by default (`DefaultResourcePacksHandler`) [jar] |
+| L14 | Camera Overhaul in first person | `cameraoverhaul.toml`: `general.enableInThirdPerson = false`, contexts `vehicles` and `mounts` at 0 | Leaves third person to SSR, and prevents the camera from tilting aboard airships (3.4) |
+| L15 | Spatial GUI away from books | its screen list | Exclude Wildex, the Ancient Remnants codex, Patchouli, Modonomicon, the atlas, and EMI's screens |
+| L16 | Enhanced Celestials moon under ATMOSPHERICS | **custom mod** (4.3) | KubeJS cannot touch sky rendering |
 
 ---
 
-## 3. Conflits et risques
+## 3. Conflicts and risks
 
-### 3.1 Entity Culling casse Aeronautics : à retirer
+### 3.1 Entity Culling breaks Aeronautics: to be removed
 
-- Issues ouvertes, sans réponse des mainteneurs : Simulated-Project **#1347** (ouverte le 2026-07-30), **#974** (voiles d'hélice qui tremblent, reconfirmée le 2026-09-09, correctif PR #1427 pas fusionné), sable **#1414** [issue].
-- Les listes blanches (`entityWhitelist`, `blockEntityWhitelist`, `tickCullingWhitelist`, `skipBlockEntityCulling`) ne visent que des types d'entités ou de blocs. Les sous-niveaux de Sable ne s'y prêtent pas [jar, déduit].
-- Sodium fait déjà le tri des chunks et ATMOSPHERICS cache le lointain sous la brume. Le gain d'Entity Culling est faible dans un monde presque vide [déduit].
+- Open issues, unanswered by the maintainers: Simulated-Project **#1347** (opened 2026-07-30), **#974** (trembling propeller sails, reconfirmed 2026-09-09, fix PR #1427 not merged), sable **#1414** [issue].
+- The whitelists (`entityWhitelist`, `blockEntityWhitelist`, `tickCullingWhitelist`, `skipBlockEntityCulling`) only target entity or block types. Sable sub-levels do not lend themselves to this [jar, inferred].
+- Sodium already sorts chunks and ATMOSPHERICS hides the distance under mist. Entity Culling's gain is small in an almost empty world [inferred].
 
-### 3.2 Polytone : utile, mais il éteint trois autres mods
+### 3.2 Polytone: useful, but it switches off three other mods
 
-- Polytone **annule `LightTexture.updateLightTexture` à `HEAD`** dès qu'une lightmap personnalisée est active (`LightTextureMixin`) [jar 5.1.3].
-- Cela coupe d'un coup :
-  - l'assombrissement de **More Darkness**, qui s'injecte juste avant l'envoi de la texture [jar More Darkness] ;
-  - la teinte de lune d'**Enhanced Celestials**, injectée sur `blockLightRedFlicker` [jar EC] ;
-  - la vraie obscurité et la Friend Moon de **NML** (son `LightTextureMixin`, actif si delightmap est absent ; la vraie obscurité ne joue que pendant les rêves) [jar NML].
-- En 1.21.1, les lightmaps de Polytone sont **par dimension** : le champ `biomeLightmaps` existe mais n'est jamais lu [jar]. Une lightmap « clairière » par biome n'existe donc pas. Le script du ciel (`sky_getter`) peut lire `p.biome()` [wiki Scripting-Expressions] : une lightmap de dimension qui change selon le biome du joueur reste possible, mais elle annule toujours les trois mods ci-dessus.
-- La fonction `season()` de Polytone ne connaît que Serene Seasons et Fabric Seasons, **pas Ecliptic** [jar].
-- Une **colormap de bloc** Polytone remplace les lambdas de `BlockColors`, dans lesquelles Ecliptic injecte ses couleurs de saison. L'herbe et les feuilles perdraient leurs saisons. Un `biome_modifier` (couleur d'herbe du biome) reste compatible [jar Ecliptic, déduit].
-- Polytone 5.x ajoute des lumières colorées (`OFF`, `BUILT_IN` par défaut, `HYBRID`, `VEIL`), des voxels, des ombres et des compute shaders. En `BUILT_IN` ou `HYBRID`, il **patche le shader de chunk de Sodium** [jar]. C'est le genre de changement qui casse avec Sable, qui embarque Veil et rend ses sous-niveaux à part [déduit]. Réglage : `<dossier du jeu>/polytone_options.json`, clé `coloredLightsBackend` [jar].
-- Rythme : 8 versions en 10 jours, avec un moteur de lumière neuf. La 4.5.3 a déjà les lumières colorées, sans le patch du shader Sodium [MR] [jar 4.5.3].
+- Polytone **cancels `LightTexture.updateLightTexture` at `HEAD`** as soon as a custom lightmap is active (`LightTextureMixin`) [jar 5.1.3].
+- This cuts out at once:
+  - the darkening of **More Darkness**, which injects just before the texture is sent [jar More Darkness];
+  - the moon tint of **Enhanced Celestials**, injected on `blockLightRedFlicker` [jar EC];
+  - the true darkness and the Friend Moon of **NML** (its `LightTextureMixin`, active if delightmap is absent; true darkness only plays during dreams) [jar NML].
+- In 1.21.1, Polytone's lightmaps are **per dimension**: the `biomeLightmaps` field exists but is never read [jar]. A per-biome "clearing" lightmap therefore does not exist. The sky script (`sky_getter`) can read `p.biome()` [wiki Scripting-Expressions]: a dimension lightmap that changes with the player's biome remains possible, but it still cancels the three mods above.
+- Polytone's `season()` function only knows Serene Seasons and Fabric Seasons, **not Ecliptic** [jar].
+- A Polytone **block colormap** replaces the `BlockColors` lambdas, in which Ecliptic injects its season colours. Grass and leaves would lose their seasons. A `biome_modifier` (biome grass colour) remains compatible [jar Ecliptic, inferred].
+- Polytone 5.x adds coloured lights (`OFF`, `BUILT_IN` by default, `HYBRID`, `VEIL`), voxels, shadows and compute shaders. In `BUILT_IN` or `HYBRID`, it **patches Sodium's chunk shader** [jar]. This is the kind of change that breaks with Sable, which embeds Veil and renders its sub-levels separately [inferred]. Setting: `<game folder>/polytone_options.json`, key `coloredLightsBackend` [jar].
+- Pace: 8 versions in 10 days, with a brand-new light engine. 4.5.3 already has coloured lights, without the Sodium shader patch [MR] [jar 4.5.3].
 
-### 3.3 Polytone contre ATMOSPHERICS : ATMOSPHERICS gagne
+### 3.3 Polytone versus ATMOSPHERICS: ATMOSPHERICS wins
 
-- Polytone change la couleur du brouillard par un `WrapOperation` sur `gaussianSampleVec3` dans `setupColor`, et celle du ciel par un `WrapOperation` sur `getSkyColor` [jar].
-- ATMOSPHERICS réécrit ces valeurs plus tard (`TAIL` et `RETURN`) [jar]. Ce qu'écrit Polytone est écrasé [déduit].
-- Donc dans le pack `fallow-ambiance`, **pas de `fog_color`, `sky_color` ni `fog_radius` côté Polytone**. Polytone ne garde que l'herbe, les feuilles, l'eau et les particules.
+- Polytone changes the fog colour through a `WrapOperation` on `gaussianSampleVec3` in `setupColor`, and the sky colour through a `WrapOperation` on `getSkyColor` [jar].
+- ATMOSPHERICS rewrites these values later (`TAIL` and `RETURN`) [jar]. What Polytone writes is overwritten [inferred].
+- So in the `fallow-ambiance` pack, **no `fog_color`, `sky_color` or `fog_radius` on the Polytone side**. Polytone keeps only grass, leaves, water and particles.
 
-### 3.4 Quatre mods sur la caméra
+### 3.4 Four mods on the camera
 
-Cibles relevées dans les jars :
+Targets found in the jars:
 
-| Cible | Shoulder Surfing | Camera Overhaul | Spatial GUI | Real Camera | Sable |
+| Target | Shoulder Surfing | Camera Overhaul | Spatial GUI | Real Camera | Sable |
 |---|---|---|---|---|---|
-| `Camera.setup` | Inject `HEAD` et après `setPosition`, Redirect `move(FFF)` | Inject à l'appel `getMaxZoom` (3e pers.) et à `RETURN` (1re pers.) | Inject `TAIL` | Inject `RETURN` | Redirect `setRotation`, WrapOperation `setPosition`, Inject après `rotationYXZ` |
-| `Camera.setRotation` | ModifyArg de `rotationYXZ` | | | | |
+| `Camera.setup` | Inject `HEAD` and after `setPosition`, Redirect `move(FFF)` | Inject at the `getMaxZoom` call (3rd person) and at `RETURN` (1st person) | Inject `TAIL` | Inject `RETURN` | Redirect `setRotation`, WrapOperation `setPosition`, Inject after `rotationYXZ` |
+| `Camera.setRotation` | ModifyArg of `rotationYXZ` | | | | |
 | `Camera.setPosition` | | | | | WrapMethod |
-| `GameRenderer.pick` | **Redirect** `getEntityHitResult` | | | **WrapOperation** sur le même appel | |
+| `GameRenderer.pick` | **Redirect** `getEntityHitResult` | | | **WrapOperation** on the same call | |
 | `GameRenderer.bobView` / `bobHurt` | Redirect `bobView` | Inject `bobHurt` `HEAD` | | | |
-| `GameRenderer.render` / `getFov` | | | Redirect `ClientHooks.drawScreen` et `PostChain.process`, ModifyReturnValue `getFov` | | |
+| `GameRenderer.render` / `getFov` | | | Redirect `ClientHooks.drawScreen` and `PostChain.process`, ModifyReturnValue `getFov` | | |
 
-[jar de chaque mod]
+[jar of each mod]
 
-- **Sable a cinq mixins de compat écrits pour Shoulder Surfing** (dont `getMaxZoom`) [jar Sable]. SSR est le seul mod de caméra que Sable connaît. C'est un bon signe pour la troisième personne à bord.
-- **Risque n° 1 : SSR et Real Camera sur `GameRenderer.pick`.** Un Redirect et un WrapOperation sur le même appel : selon l'ordre d'application, l'un échoue au chargement ou l'un perd son effet (la visée) [déduit]. Test T7.
-- **Risque n° 2 : Camera Overhaul à bord.** Ses contextes `vehicles` et `mounts` font pencher la caméra selon la vitesse. Sable tourne déjà la caméra avec le sous-niveau. Les deux s'additionnent [déduit]. À 0 sur les véhicules (L14).
-- Spatial GUI n'agit que menu ouvert (à `TAIL` de `setup`) : il passe après les autres et ne les gêne pas en jeu normal [déduit].
-- Real Camera est en bêta, incompatible avec les armures GeckoLib (beaucoup de mods d'armures en 1.21.1 en utilisent), et doublonne SSR sur la visée [MR] [déduit].
+- **Sable has five compat mixins written for Shoulder Surfing** (including `getMaxZoom`) [jar Sable]. SSR is the only camera mod Sable knows. This is a good sign for third person aboard.
+- **Risk no. 1: SSR and Real Camera on `GameRenderer.pick`.** A Redirect and a WrapOperation on the same call: depending on the order of application, one fails at load or one loses its effect (aiming) [inferred]. Test T7.
+- **Risk no. 2: Camera Overhaul aboard.** Its `vehicles` and `mounts` contexts tilt the camera according to speed. Sable already rotates the camera with the sub-level. The two add up [inferred]. Set to 0 on vehicles (L14).
+- Spatial GUI only acts with a menu open (at `TAIL` of `setup`): it comes after the others and does not interfere with them in normal play [inferred].
+- Real Camera is in beta, incompatible with GeckoLib armours (many armour mods in 1.21.1 use them), and duplicates SSR on aiming [MR] [inferred].
 
-### 3.5 Les textures d'animaux : trois mods sur le même point
+### 3.5 Animal textures: three mods on the same point
 
-- NML (`RenderEntityVariantMixin`), Quark (`Variant Animal Textures` : mixins sur `CowRenderer`, `PigRenderer`, `ChickenRenderer`, lapin, abeille, dauphin, grenouille, lama, slime, allay, tatou, tous sur `getTextureLocation`) et ETF changent la texture d'un mob [jar NML] [jar Quark] [déduit pour ETF].
-- Les textures de NML et de Quark sont dessinées pour le modèle vanilla. FA livre ses propres textures (chat, renard, chèvre, tortue, loup…) avec d'autres UV. Une variante NML ou Quark posée sur un modèle FA risque des **morceaux de texture mal placés** [déduit]. Test T3.
-- Quark est un doublon pur de NML et se coupe (L7).
+- NML (`RenderEntityVariantMixin`), Quark (`Variant Animal Textures`: mixins on `CowRenderer`, `PigRenderer`, `ChickenRenderer`, rabbit, bee, dolphin, frog, llama, slime, allay, armadillo, all on `getTextureLocation`) and ETF change a mob's texture [jar NML] [jar Quark] [inferred for ETF].
+- NML and Quark textures are drawn for the vanilla model. FA ships its own textures (cat, fox, goat, turtle, wolf…) with other UVs. An NML or Quark variant placed on an FA model risks **misplaced texture pieces** [inferred]. Test T3.
+- Quark is a pure duplicate of NML and is cut (L7).
 
-### 3.6 Les sons : Dynamic Surroundings contre Sound Physics
+### 3.6 Sounds: Dynamic Surroundings versus Sound Physics
 
-- Dynamic Surroundings 0.4.6 a ses propres « sons améliorés » (réverbération, occlusion). Lui et Sound Physics Remastered s'injectent tous deux dans `Library.init` (OpenAL), `Channel` et `SoundEngine` [jar DS] [jar SPR]. Même avec la fonction coupée dans la config, les mixins restent chargés [déduit]. Risque fort de sons cassés ou de crash au lancement.
-- Ses « pas » **ne remplacent pas Presence Footsteps** : ce sont des accents (bruit de l'armure, sol mouillé, grincements), posés sur les pas vanilla [jar DS, `dsconfigs`]. Le plan le surestime.
-- Ses ambiances de biome (`assets/dsurround/dsconfigs/biomes.json`, remplaçable par pack de ressources) doublonnent AmbientSounds [jar].
-- Ses autres fonctions doublonnent aussi :
-  - cascades : sons, particules, brume et écume (Particular et Subtle Effects font déjà les particules) ;
-  - lucioles ;
-  - sons de la barre d'objets (Sounds les fait) ;
-  - brouillard (`enableFogEffects…`, contre ATMOSPHERICS).
-- Ce qu'il apporte de vraiment neuf : **l'aurore et le son des cascades** (AmbientSounds n'a pas de cascade [jar AmbientSounds]).
+- Dynamic Surroundings 0.4.6 has its own "enhanced sounds" (reverberation, occlusion). It and Sound Physics Remastered both inject into `Library.init` (OpenAL), `Channel` and `SoundEngine` [jar DS] [jar SPR]. Even with the feature turned off in the config, the mixins remain loaded [inferred]. Strong risk of broken sounds or a crash at launch.
+- Its "footsteps" **do not replace Presence Footsteps**: they are accents (armour noise, wet ground, creaks), laid over vanilla footsteps [jar DS, `dsconfigs`]. The plan overestimates it.
+- Its biome ambiences (`assets/dsurround/dsconfigs/biomes.json`, replaceable by resource pack) duplicate AmbientSounds [jar].
+- Its other features also duplicate:
+  - waterfalls: sounds, particles, mist and foam (Particular and Subtle Effects already do the particles);
+  - fireflies;
+  - hotbar sounds (Sounds does them);
+  - fog (`enableFogEffects…`, versus ATMOSPHERICS).
+- What it brings that is really new: **the aurora and the sound of waterfalls** (AmbientSounds has no waterfall [jar AmbientSounds]).
 
-### 3.7 Les particules : qui fait quoi
+### 3.7 Particles: who does what
 
-| Effet | Particular | Subtle Effects | Dyn. Surroundings | NML | ATMOSPHERICS | Responsable proposé |
+| Effect | Particular | Subtle Effects | Dyn. Surroundings | NML | ATMOSPHERICS | Proposed owner |
 |---|---|---|---|---|---|---|
-| Lucioles | oui | oui | oui | — | — | **Particular** (comme le plan) |
-| Cascades | `cascades`, `waterfallSpray` | `waterfall_cloud`, `mist`, `droplet` | oui | — | — | **Particular** ; couper chez Subtle Effects |
-| Poussière de grotte | `caveDust` | — | — | `cave_dust` | `cave_fog` | **ATMOSPHERICS** pour la brume, **Particular** pour la poussière ; couper NML |
-| Ronds dans l'eau | oui | oui | oui | — | — | **Particular** |
-| Feuilles qui tombent | oui (pas de bois NML) | — | — | — | — | Particular + entrées NML (L9) |
+| Fireflies | yes | yes | yes | — | — | **Particular** (as in the plan) |
+| Waterfalls | `cascades`, `waterfallSpray` | `waterfall_cloud`, `mist`, `droplet` | yes | — | — | **Particular**; cut in Subtle Effects |
+| Cave dust | `caveDust` | — | — | `cave_dust` | `cave_fog` | **ATMOSPHERICS** for mist, **Particular** for dust; cut NML |
+| Water ripples | yes | yes | yes | — | — | **Particular** |
+| Falling leaves | yes (no NML wood) | — | — | — | — | Particular + NML entries (L9) |
 
-[jar de chaque mod, noms des options]
+[jar of each mod, option names]
 
-### 3.8 ATMOSPHERICS efface le ciel des autres
+### 3.8 ATMOSPHERICS erases the sky of the others
 
-Comme `renderSky` est annulé à `HEAD` (1.5), **tout ce qui s'injecte dans le `renderSky` vanilla disparaît** :
-- la couleur, la taille et la texture de la lune d'**Enhanced Celestials** (lune blanche, lune de sang…) [jar EC : injects dans `renderSky`] ;
-- les soleils doubles (« sun dogs ») et la haute atmosphère de **NML** [jar NML].
+Since `renderSky` is cancelled at `HEAD` (1.5), **everything that injects into the vanilla `renderSky` disappears**:
+- the colour, size and texture of the **Enhanced Celestials** moon (white moon, blood moon…) [jar EC: injects in `renderSky`];
+- the double suns ("sun dogs") and the upper atmosphere of **NML** [jar NML].
 
-Seule la Friend Moon de NML est gérée par ATMOSPHERICS lui-même [jar]. Les événements d'EC jouent toujours (apparitions, effets), mais leur lune ne se voit plus [déduit]. Test T1.
+Only NML's Friend Moon is handled by ATMOSPHERICS itself [jar]. EC events still play (spawns, effects), but their moon is no longer visible [inferred]. Test T1.
 
-### 3.9 Petits conflits
+### 3.9 Minor conflicts
 
-- **More Culling** : son `cloudCulling` annule `buildClouds` à `HEAD`, ce qui court-circuite le `ModifyArg` d'ATMOSPHERICS sur les nuages [jar]. Il a aussi un `leavesCullingMode` qui se discute avec Better Leaves. Il avait déjà été écarté en décision 0007 [dépôt `docs/decisions/0007`].
-- **Seamless Loading Screen contre Sodium** : Sodium écrase (`Overwrite`) `LevelLoadingScreen.renderChunks`. La retouche de couleur de fond de Seamless, posée dans une lambda de cette méthode, est perdue [jar]. Seulement cosmétique, l'écran garde la capture du monde [déduit]. Version unique de 2024, plus maintenue [MR].
-- **MB-3D Items et Amendments** : MB-3D redessine en 3D lanternes, torches, longue-vue, boussoles, cartes et seaux [jar]. Amendments dessine déjà les lanternes en main. Selon l'ordre des packs, l'un remplace l'autre [déduit]. Mettre MB-3D sous Amendments, ou retirer ses lanternes.
-- **Spatial GUI et Polytone** : Spatial GUI a un mixin sur `LightmapsManager.setupForGUI` de Polytone [jar]. C'est prévu, mais seulement pour la version visée par l'auteur [déduit].
-- **Real Camera et 3D Skin Layers / Player Extension** : le corps en vue subjective passe par le renderer du joueur. 3D Skin Layers a un mixin EMF [jar], Real Camera n'en a pas [jar]. Test T6.
+- **More Culling**: its `cloudCulling` cancels `buildClouds` at `HEAD`, which bypasses ATMOSPHERICS' `ModifyArg` on clouds [jar]. It also has a `leavesCullingMode` that is debatable with Better Leaves. It had already been ruled out in decision 0007 [repository `docs/decisions/0007`].
+- **Seamless Loading Screen versus Sodium**: Sodium overwrites (`Overwrite`) `LevelLoadingScreen.renderChunks`. Seamless's background colour tweak, placed in a lambda of this method, is lost [jar]. Only cosmetic, the screen keeps the world capture [inferred]. Single 2024 version, no longer maintained [MR].
+- **MB-3D Items and Amendments**: MB-3D redraws lanterns, torches, spyglass, compasses, maps and buckets in 3D [jar]. Amendments already draws held lanterns. Depending on pack order, one replaces the other [inferred]. Put MB-3D under Amendments, or remove its lanterns.
+- **Spatial GUI and Polytone**: Spatial GUI has a mixin on Polytone's `LightmapsManager.setupForGUI` [jar]. This is planned, but only for the version the author targets [inferred].
+- **Real Camera and 3D Skin Layers / Player Extension**: the first-person body goes through the player renderer. 3D Skin Layers has an EMF mixin [jar], Real Camera has none [jar]. Test T6.
 
 ---
 
-## 4. Ce qu'il faut adapter, supprimer ou ajouter
+## 4. What to adapt, remove or add
 
-### 4.1 Supprimer
+### 4.1 Remove
 
-| Quoi | Raison |
+| What | Reason |
 |---|---|
-| **Entity Culling** | Bugs ouverts avec Aeronautics et Sable, sans réponse (3.1). Gain faible sous la brume |
-| **Quark « Variant Animal Textures »** | Doublon de NML, et casse les UV de FA (3.5, L7) |
-| **Brouillard de NML** (`fogModifiers`) | Deux sources de brume, contraire au §11.1 (L6) |
-| **Dynamic Surroundings** | Réverbération en conflit avec SPR, pas qui ne remplacent pas Presence Footsteps, presque tout en doublon (3.6). Garder **Auroras** si l'aurore compte (déjà en repli au §11.2). Pour le son des cascades, une entrée AmbientSounds liée à la présence d'eau qui coule autour du joueur [déduit, à vérifier dans le moteur d'AmbientSounds], ou rien |
-| **More Culling** | Déjà écarté en 0007, et casse les nuages d'ATMOSPHERICS (3.9). Si on le reprend : `cloudCulling = false` |
-| **Real Camera** (à l'essai) | Premier à retirer en cas de gêne : bêta, doublon de SSR sur la visée, incompatible GeckoLib (3.4) |
+| **Entity Culling** | Open bugs with Aeronautics and Sable, unanswered (3.1). Small gain under the mist |
+| **Quark "Variant Animal Textures"** | Duplicates NML, and breaks FA's UVs (3.5, L7) |
+| **NML fog** (`fogModifiers`) | Two sources of mist, contrary to §11.1 (L6) |
+| **Dynamic Surroundings** | Reverberation conflicting with SPR, footsteps that do not replace Presence Footsteps, almost everything duplicated (3.6). Keep **Auroras** if the aurora matters (already a fallback in §11.2). For the sound of waterfalls, an AmbientSounds entry tied to the presence of flowing water around the player [inferred, to be checked in AmbientSounds' engine], or nothing |
+| **More Culling** | Already ruled out in 0007, and breaks ATMOSPHERICS clouds (3.9). If taken back: `cloudCulling = false` |
+| **Real Camera** (on trial) | First to remove if it causes trouble: beta, duplicates SSR on aiming, GeckoLib-incompatible (3.4) |
 
-### 4.2 Adapter
+### 4.2 Adapt
 
-| Point du plan | Changement | Raison |
+| Plan point | Change | Reason |
 |---|---|---|
-| §11.1 et §11.2 « Polytone : lightmaps » | Polytone **sans lightmap**, seulement `biome_modifiers` (herbe, feuilles, eau) et couleurs de particules. `coloredLightsBackend = OFF`, ou Polytone **4.5.3 figé** le temps que la 5.x se stabilise | La lightmap éteint More Darkness, la lune d'EC et la nuit de NML. Pas de lightmap par biome en 1.21.1. Patch du shader Sodium en 5.x (3.2) |
-| §11.2 « la clairière : lightmap plus chaude » | Faire la lumière de la clairière **par ATMOSPHERICS** (brume levée, couleur du ciel et du brouillard) et par les **couleurs du biome JSON** | C'est le seul responsable du ciel qui ne se fait pas écraser (3.3) |
-| §11.2 « la lune blanche : nuit argentée » | Abandonner la piste Polytone ; passer par le mod custom (4.3) | La lune d'EC disparaît sous ATMOSPHERICS (3.8) |
-| §11.2 Fresh Animations « Si NML gagne… » | NML gagne sur **8 espèces** : cochon, vache, mooshroom, poulet, mouton, lapin, calmar, calmar luisant. Le choix se fait espèce par espèce dans `mixed_litter-startup.toml` (L4) | 1.2 |
-| §11.2 Dynamic Surroundings « les pas » | Retirer. Les pas restent vanilla (plus le « toucher » de Sounds) | 3.6 |
-| §11.2 Particular et Subtle Effects | Couper aussi chez Subtle Effects les cascades et les ronds d'eau, et chez NML `cave_dust` | 3.7 |
-| §11.7 Camera Overhaul « réglé bas » | Ajouter `enableInThirdPerson = false` et 0 sur `vehicles` / `mounts` | 3.4, L14 |
-| §11.7 ordre de priorité | Voir 4.4 : **Spatial GUI, Shoulder Surfing, Camera Overhaul, Real Camera** (SSR passe avant Camera Overhaul) | Sable est écrit pour SSR ; Camera Overhaul doit lui laisser la 3e personne |
-| §11.7 EMI « Groupes » | Remplacer par « ordre par thème » (index `creative` + onglets KubeJS, ou `added`/`after`) et alias de recherche | EMI 1.1.24 n'a pas de groupes ; KubeJS ne gère pas `groupEntries` pour EMI (1.7) |
-| §11.7 EMI « pas par joueur » | Corriger : AStages le fait dans EMI | 1.7 |
-| §11.7 « JEI reste comme pont » | Confirmé, et **obligatoire** : Create, Aeronautics, Cold Sweat, Ecliptic, Quark, Exposure… n'ont qu'un plugin JEI | 1.6 |
-| Pack actuel | Monter NML en 1.6.1, Sable en 2.0.6, ATMOSPHERICS en 2.6.5.2 ; Farm & Charm en 1.1.29 (plugin EMI) | [MR] |
-| Preset ATMOSPHERICS | Nommer tous les biomes NML, versionner le nom du fichier | 1.3 |
-| MB-3D Items | Placer sous Amendments dans l'ordre des packs | 3.9 |
+| §11.1 and §11.2 "Polytone: lightmaps" | Polytone **without lightmap**, only `biome_modifiers` (grass, leaves, water) and particle colours. `coloredLightsBackend = OFF`, or Polytone **4.5.3 frozen** while 5.x stabilises | The lightmap switches off More Darkness, EC's moon and NML's night. No per-biome lightmap in 1.21.1. Sodium shader patch in 5.x (3.2) |
+| §11.2 "the clearing: warmer lightmap" | Make the clearing's light **through ATMOSPHERICS** (lifted mist, sky and fog colour) and through the **biome JSON colours** | It is the only owner of the sky that does not get overwritten (3.3) |
+| §11.2 "the white moon: silvery night" | Drop the Polytone route; go through the custom mod (4.3) | EC's moon disappears under ATMOSPHERICS (3.8) |
+| §11.2 Fresh Animations "If NML wins…" | NML wins on **8 species**: pig, cow, mooshroom, chicken, sheep, rabbit, squid, glow squid. The choice is made species by species in `mixed_litter-startup.toml` (L4) | 1.2 |
+| §11.2 Dynamic Surroundings "footsteps" | Remove. Footsteps stay vanilla (plus Sounds' "touch") | 3.6 |
+| §11.2 Particular and Subtle Effects | Also cut waterfalls and water ripples in Subtle Effects, and `cave_dust` in NML | 3.7 |
+| §11.7 Camera Overhaul "set low" | Add `enableInThirdPerson = false` and 0 on `vehicles` / `mounts` | 3.4, L14 |
+| §11.7 priority order | See 4.4: **Spatial GUI, Shoulder Surfing, Camera Overhaul, Real Camera** (SSR comes before Camera Overhaul) | Sable is written for SSR; Camera Overhaul must leave it 3rd person |
+| §11.7 EMI "Groups" | Replace with "order by theme" (`creative` index + KubeJS tabs, or `added`/`after`) and search aliases | EMI 1.1.24 has no groups; KubeJS does not handle `groupEntries` for EMI (1.7) |
+| §11.7 EMI "not per player" | Correct: AStages does it in EMI | 1.7 |
+| §11.7 "JEI stays as a bridge" | Confirmed, and **mandatory**: Create, Aeronautics, Cold Sweat, Ecliptic, Quark, Exposure… have only a JEI plugin | 1.6 |
+| Current pack | Upgrade NML to 1.6.1, Sable to 2.0.6, ATMOSPHERICS to 2.6.5.2; Farm & Charm to 1.1.29 (EMI plugin) | [MR] |
+| ATMOSPHERICS preset | Name all NML biomes, version the file name | 1.3 |
+| MB-3D Items | Place under Amendments in the pack order | 3.9 |
 
-### 4.3 Ajouter : un petit mod custom « fallow-ciel » (client, NeoForge 1.21.1)
+### 4.3 Add: a small custom mod "fallow-ciel" (client, NeoForge 1.21.1)
 
-KubeJS ne peut rien sur le rendu du ciel, de la lune ni sur le cache d'ATMOSPHERICS. Un mod client d'une centaine de lignes, avec deux mixins, ferait trois choses :
-1. **Rendre la lune d'Enhanced Celestials sous ATMOSPHERICS.** Après le ciel d'ATMOSPHERICS, lire l'événement lunaire actif dans l'API client d'EC et redessiner la lune avec sa couleur, sa taille et sa texture.
-2. **Vider le cache de `BiomeBlendUtil`** à la réception d'un `ClientboundChunksBiomesPacket`, pour que la brume réagisse à un `/fillbiome` même si le joueur ne bouge pas.
-3. Plus tard, si besoin : **teinter légèrement la nuit pendant la lune blanche**, en multipliant la lightmap après More Darkness, au lieu d'une lightmap Polytone qui l'annulerait.
+KubeJS can do nothing about sky or moon rendering, nor about ATMOSPHERICS' cache. A client mod of about a hundred lines, with two mixins, would do three things:
+1. **Render the Enhanced Celestials moon under ATMOSPHERICS.** After ATMOSPHERICS' sky, read the active lunar event in EC's client API and redraw the moon with its colour, size and texture.
+2. **Flush the `BiomeBlendUtil` cache** on receipt of a `ClientboundChunksBiomesPacket`, so that the mist reacts to a `/fillbiome` even if the player does not move.
+3. Later, if needed: **lightly tint the night during the white moon**, by multiplying the lightmap after More Darkness, instead of a Polytone lightmap that would cancel it.
 
-Les deux premiers points sont nécessaires si la lune blanche et la clairière « qui s'ouvre » restent dans le plan. Le mod dépend des classes internes d'ATMOSPHERICS et d'EC : il faudra le revoir à chaque mise à jour de ces deux mods.
+The first two points are necessary if the white moon and the clearing that "opens up" stay in the plan. The mod depends on the internal classes of ATMOSPHERICS and EC: it will have to be reviewed at each update of those two mods.
 
-### 4.4 Ordre de priorité des mods de caméra
+### 4.4 Priority order of the camera mods
 
-1. **Spatial GUI** : n'agit que menu ouvert, à la fin de `Camera.setup`. Il gagne quand un menu est ouvert.
-2. **Shoulder Surfing Reloaded** : seul maître de la troisième personne. C'est le seul que Sable connaît (5 mixins de compat).
-3. **Camera Overhaul** : première personne seulement, à pied (`enableInThirdPerson = false`, véhicules à 0).
-4. **Real Camera** : le dernier, et le premier retiré en cas de conflit. Sans lui, on garde les bras vanilla en vue subjective.
+1. **Spatial GUI**: only acts with a menu open, at the end of `Camera.setup`. It wins when a menu is open.
+2. **Shoulder Surfing Reloaded**: sole master of third person. It is the only one Sable knows (5 compat mixins).
+3. **Camera Overhaul**: first person only, on foot (`enableInThirdPerson = false`, vehicles at 0).
+4. **Real Camera**: last, and the first removed in case of conflict. Without it, vanilla arms are kept in first-person view.
 
-### 4.5 Ce qui manque pour la finition « Realism Craft »
+### 4.5 What is missing for the "Realism Craft" finish
 
-- **Les pas selon le sol** : rien sur NeoForge 1.21.1 ne remplace Presence Footsteps (3.6 pour Dynamic Surroundings, §11.2 du plan pour Presence Footsteps). Les sons de pas des blocs de NML et de Twigs restent ceux de leur matériau. Piste de mod custom si l'équipe y tient : jouer un son de pas par tag de bloc. Pas prioritaire.
-- **Un seul pack `fallow-ambiance`** qui porte ensemble les presets ATMOSPHERICS, les `biome_modifiers` Polytone, les entrées de feuilles Particular s'il les lit en ressources, et les surcharges EMI côté client. Activé par Default Options (L13).
-- **La lune vue dans le ciel**, aujourd'hui perdue (3.8, 4.3).
+- **Footsteps by ground type**: nothing on NeoForge 1.21.1 replaces Presence Footsteps (3.6 for Dynamic Surroundings, §11.2 of the plan for Presence Footsteps). The footstep sounds of NML and Twigs blocks stay those of their material. A custom mod lead if the maintainer wants it: play a footstep sound per block tag. Not a priority.
+- **A single `fallow-ambiance` pack** carrying together the ATMOSPHERICS presets, the Polytone `biome_modifiers`, the Particular leaf entries if it reads them as resources, and the client-side EMI overrides. Enabled by Default Options (L13).
+- **The moon seen in the sky**, currently lost (3.8, 4.3).
 
 ---
 
-## 5. Questions à tester en jeu (branche `test/finition`)
+## 5. Questions to test in game (branch `test/finition`)
 
-| # | Test | Ce qu'on regarde |
+| # | Test | What we look at |
 |---|---|---|
-| T1 | ATMOSPHERICS + Enhanced Celestials, nuit de lune blanche et de lune de sang | La lune change-t-elle de couleur ou de taille ? (attendu : non, 3.8) |
-| T2 | `/fillbiome` en clairière, joueur immobile puis qui marche de 4 blocs | Délai avant que la brume se lève ; douceur de la transition (1.4) |
-| T3 | FA + NML : chat, renard, chèvre, tortue, dauphin, âne de plusieurs variantes NML | Textures bien placées sur le modèle FA ? (3.5, L5) |
-| T4 | `mixed_litter-startup.toml` avec `chickenRemodel = false`, puis `rabbitRemodel = false` | FA prend-il bien le relais ? Lequel plaît le plus ? (L4) |
-| T5 | Polytone 5.1.3 avec `coloredLightsBackend` par défaut, à bord d'un dirigeable Aeronautics | Le sous-niveau Sable s'affiche-t-il ? Lumière des chunks correcte ? Sinon OFF ou 4.5.3 (3.2) |
-| T6 | Real Camera + Player Extension + 3D Skin Layers, en regardant vers le bas | Le corps animé et les couches du skin apparaissent-ils ? |
-| T7 | SSR + Real Camera : viser une entité et un bloc en troisième personne | Le chargement passe-t-il ? La visée suit-elle le réticule ? (3.4) |
-| T8 | Camera Overhaul à bord d'un dirigeable et d'un train Create, avec `vehicles` à 0 puis par défaut | La caméra penche-t-elle deux fois ? |
-| T9 | Spatial GUI sur coffre, sac (Traveler's Backpack), établi, puis Wildex et Patchouli | Le menu passe-t-il bien, les livres restent-ils à plat ? |
-| T10 | EMI + JEI (pont) : recettes Create, Aeronautics, Cold Sweat, Ecliptic, Overgeared, Kaleidoscope | Toutes visibles dans EMI ? Pas d'interface JEI à l'écran ? (1.6) |
-| T11 | AStages dans EMI : un objet lié à une étape non débloquée | Caché pour ce joueur seulement ? (L12) |
-| T12 | Better Leaves sur une grande forêt NML, en distance de rendu normale du serveur | Images par seconde (§10.6) |
-| T13 | Particular dans une forêt de saules et d'érables NML | Feuilles génériques ou propres ? (L9) |
-| T14 | More Darkness + Polytone **sans** lightmap | La nuit reste-t-elle vraiment noire ? (3.2) |
-| T15 | Si Dynamic Surroundings est quand même essayé : avec SPR, au lancement puis dans une grotte | Crash, son coupé ou double écho ? (3.6) |
+| T1 | ATMOSPHERICS + Enhanced Celestials, night of white moon and blood moon | Does the moon change colour or size? (expected: no, 3.8) |
+| T2 | `/fillbiome` in a clearing, player motionless then walking 4 blocks | Delay before the mist lifts; smoothness of the transition (1.4) |
+| T3 | FA + NML: cat, fox, goat, turtle, dolphin, donkey with several NML variants | Textures correctly placed on the FA model? (3.5, L5) |
+| T4 | `mixed_litter-startup.toml` with `chickenRemodel = false`, then `rabbitRemodel = false` | Does FA take over properly? Which looks better? (L4) |
+| T5 | Polytone 5.1.3 with default `coloredLightsBackend`, aboard an Aeronautics airship | Is the Sable sub-level displayed? Chunk lighting correct? Otherwise OFF or 4.5.3 (3.2) |
+| T6 | Real Camera + Player Extension + 3D Skin Layers, looking down | Do the animated body and skin layers appear? |
+| T7 | SSR + Real Camera: aim at an entity and a block in third person | Does loading succeed? Does aiming follow the crosshair? (3.4) |
+| T8 | Camera Overhaul aboard an airship and a Create train, with `vehicles` at 0 then default | Does the camera tilt twice? |
+| T9 | Spatial GUI on a chest, backpack (Traveler's Backpack), crafting table, then Wildex and Patchouli | Does the menu come through correctly, do books stay flat? |
+| T10 | EMI + JEI (bridge): Create, Aeronautics, Cold Sweat, Ecliptic, Overgeared, Kaleidoscope recipes | All visible in EMI? No JEI interface on screen? (1.6) |
+| T11 | AStages in EMI: an item tied to a locked stage | Hidden for that player only? (L12) |
+| T12 | Better Leaves in a large NML forest, at the server's normal render distance | Frames per second (§10.6) |
+| T13 | Particular in an NML willow and maple forest | Generic or dedicated leaves? (L9) |
+| T14 | More Darkness + Polytone **without** lightmap | Does the night stay truly black? (3.2) |
+| T15 | If Dynamic Surroundings is tried anyway: with SPR, at launch then in a cave | Crash, muted sound or double echo? (3.6) |

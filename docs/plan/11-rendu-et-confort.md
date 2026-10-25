@@ -1,247 +1,247 @@
-# 11. Rendu et confort, sans shaders
+# 11. Rendering and comfort, without shaders
 
-> **Vérification du 2026-10-18 : le [chapitre 12](12-verification.md) corrige ce chapitre** (Easy Anvils, Leaves Be Gone, Dynamic Surroundings et Entity Culling sortent, Polytone sans lightmap, ordre des caméras, Overgeared, Kaleidoscope Compat, Monoliths).
+> **Check of 2026-10-18: [chapter 12](12-verification.md) corrects this chapter** (Easy Anvils, Leaves Be Gone, Dynamic Surroundings and Entity Culling are dropped, Polytone without lightmap, camera order, Overgeared, Kaleidoscope Compat, Monoliths).
 
-> Ajouté le 2026-10-18, en réponse à l'équipe : améliorer le rendu sans pack de textures ni shaders, autour d'ATMOSPHERICS, avec des effets et des particules, et des mods de confort. Complète le [10.6](10-recentrage.md#106-la-finition-façon-realism-craft).
+> Added on 2026-10-18, at the maintainer's request: improve rendering without a texture pack or shaders, around ATMOSPHERICS, with effects and particles, and comfort mods. Complements [10.6](10-recentrage.md#106-the-finish-in-the-manner-of-realism-craft).
 >
-> Toutes les versions citées ont été vérifiées sur Modrinth le 2026-10-18 pour **NeoForge 1.21.1** (les packs de ressources pour 1.21.1).
+> All versions cited were checked on Modrinth on 2026-10-18 for **NeoForge 1.21.1** (resource packs for 1.21.1).
 
-## 11.1 Le principe : un mod par rôle
+## 11.1 The principle: one mod per role
 
-Sans shaders, le rendu se construit par couches. Chaque couche a **un seul** mod responsable, sinon deux mods se battent pour le brouillard ou les nuages et le résultat clignote.
+Without shaders, rendering is built in layers. Each layer has **a single** responsible mod, otherwise two mods fight over the fog or the clouds and the result flickers.
 
-| Couche | Responsable | Ce qu'il règle |
+| Layer | Responsible | What it handles |
 |---|---|---|
-| Ciel, brume, nuages, étoiles | **ATMOSPHERICS** (déjà retenu) | Brouillard par biome, jour et nuit, nuages « Story Mode », comètes, étoiles |
-| Lumière et couleurs | **Polytone** (nouveau) | Lightmaps (la couleur de la nuit, des torches), couleur de l'herbe, des feuilles et de l'eau par biome, couleur des particules |
-| Lumière tenue en main | LambDynamicLights (déjà retenu) | La lanterne éclaire autour du joueur |
-| Air et eau | **Particular Reforged** (nouveau) | Éclaboussures, cascades, feuilles qui tombent, poussière des grottes, ronds dans l'eau |
-| Feu, fumée, vapeur, corps | Subtle Effects (déjà retenu) | Étincelles, fumée des cheminées, vapeur, poussière sous les pas, battement de cœur |
-| Créatures | **Fresh Animations** (nouveau, pack de ressources) | Les créatures vanilla clignent des yeux, tournent la tête, respirent |
-| Sons du monde | AmbientSounds + Sound Physics Remastered (déjà retenus) | Ambiance par biome, écho et étouffement |
-| Sons des gestes | **Sounds** (nouveau) | 170 sons d'interface, d'objets et de blocs |
+| Sky, mist, clouds, stars | **ATMOSPHERICS** (already retained) | Fog per biome, day and night, "Story Mode" clouds, comets, stars |
+| Light and colors | **Polytone** (new) | Lightmaps (the color of the night, of torches), grass, leaf and water color per biome, particle color |
+| Hand-held light | LambDynamicLights (already retained) | The lantern lights up around the player |
+| Air and water | **Particular Reforged** (new) | Splashes, waterfalls, falling leaves, cave dust, ripples in the water |
+| Fire, smoke, steam, bodies | Subtle Effects (already retained) | Sparks, chimney smoke, steam, dust under footsteps, heartbeat |
+| Creatures | **Fresh Animations** (new, resource pack) | Vanilla creatures blink, turn their heads, breathe |
+| World sounds | AmbientSounds + Sound Physics Remastered (already retained) | Ambience per biome, echo and muffling |
+| Gesture sounds | **Sounds** (new) | 170 interface, item and block sounds |
 
-## 11.2 Les comparaisons
+## 11.2 The comparisons
 
-### Brume et nuages : ATMOSPHERICS seul
+### Mist and clouds: ATMOSPHERICS alone
 
-| Candidat | Verdict | Pourquoi |
+| Candidate | Verdict | Why |
 |---|---|---|
-| **ATMOSPHERICS** | Gardé | Il porte toute la mécanique de la brume (10.3) et ses presets se livrent dans un pack de ressources |
-| Fog (IMB11) | Écarté | Brouillard par biome et par météo : exactement le rôle d'ATMOSPHERICS, les deux se contrediraient |
-| Better Clouds | Écarté | Beaux nuages volumétriques, mais ATMOSPHERICS a déjà ses nuages « Story Mode », et sous la brume on les voit peu |
-| Particle Rain | Toujours écarté | Il redessine la pluie et ajoute son propre brouillard pendant les averses ; il se battrait avec ATMOSPHERICS et avec la neige d'Ecliptic |
-| Dynamic Surroundings (brouillard) | Fonction coupée | Voir plus bas : on garde ses pas et ses cascades, pas son brouillard |
+| **ATMOSPHERICS** | Kept | It carries all the mist mechanics (10.3) and its presets ship in a resource pack |
+| Fog (IMB11) | Rejected | Fog per biome and per weather: exactly ATMOSPHERICS' role, the two would contradict each other |
+| Better Clouds | Rejected | Beautiful volumetric clouds, but ATMOSPHERICS already has its "Story Mode" clouds, and under the mist they are barely seen |
+| Particle Rain | Still rejected | It redraws the rain and adds its own fog during downpours; it would fight with ATMOSPHERICS and with Ecliptic's snow |
+| Dynamic Surroundings (fog) | Feature disabled | See below: its footsteps and waterfalls are kept, not its fog |
 
-### Lumière : Polytone plutôt qu'un nouveau moteur
+### Light: Polytone rather than a new engine
 
-| Candidat | Verdict | Pourquoi |
+| Candidate | Verdict | Why |
 |---|---|---|
-| **Polytone** | Retenu | Client seul, aucune dépendance, du même auteur que Moonlight, Supplementaries et Amendments (déjà dans le pack). Tout passe par un pack de ressources Fallow |
-| Vibrancy | Écarté | Lumière colorée et ombres, mais développement en pause et remplace le moteur de lumière : risque avec Sodium 0.8 et Sable |
-| Gleam, Colorful Lighting | Écartés | Même risque, très peu utilisés (moins de 8 000 téléchargements) |
+| **Polytone** | Retained | Client-only, no dependency, by the same author as Moonlight, Supplementaries and Amendments (already in the pack). Everything goes through a Fallow resource pack |
+| Vibrancy | Rejected | Colored light and shadows, but development is paused and it replaces the lighting engine: risk with Sodium 0.8 and Sable |
+| Gleam, Colorful Lighting | Rejected | Same risk, very little used (fewer than 8,000 downloads) |
 
-Ce que Polytone fait pour Fallow, dans le pack de ressources `fallow-ambiance` (le même qui porte les presets ATMOSPHERICS) :
-- **Les biomes de brume** : herbe, feuilles et eau un peu désaturées, une nuit légèrement bleue.
-- **La clairière** (`fallow:clairiere`) : une lightmap plus chaude et des couleurs franches. Quand la brume se retire, la lumière change aussi : c'est le moment le plus important du pack.
-- **La lune blanche** : une nuit plus claire et argentée (à prototyper : il faut voir si une lightmap peut suivre un évènement d'Enhanced Celestials ; sinon la lune garde ses propres couleurs).
+What Polytone does for Fallow, in the `fallow-ambiance` resource pack (the same one that carries the ATMOSPHERICS presets):
+- **The mist biomes**: grass, leaves and water slightly desaturated, a slightly blue night.
+- **The clearing** (`fallow:clairiere`): a warmer lightmap and vivid colors. When the mist withdraws, the light changes too: this is the most important moment of the pack.
+- **The white moon**: a brighter, silvery night (to prototype: we need to see whether a lightmap can follow an Enhanced Celestials event; otherwise the moon keeps its own colors).
 
-### Particules : Particular Reforged
+### Particles: Particular Reforged
 
-| Candidat | Verdict | Pourquoi |
+| Candidate | Verdict | Why |
 |---|---|---|
-| **Particular Reforged** | Retenu | Un seul mod pour l'eau (éclaboussures en 3D, cascades, ronds de pluie, bulles qui éclatent), les feuilles qui tombent, la poussière des grottes et les lucioles. Il déclare une **compatibilité avec Create Aeronautics et Sable** sur Modrinth. 5,3 millions de téléchargements |
-| Subtle Effects | Gardé | Il couvre un autre terrain (feu, fumée, vapeur, corps). On coupe ses lucioles pour qu'il n'y en ait qu'une source |
-| Falling Leaves Plus | Repli | Feuilles par espèce d'arbre (glands, cônes, flocons) et vent selon la météo, par Fuzs (Puzzles Lib déjà là). À prendre si Particular ne fait pas tomber les feuilles des arbres de No Man's Land |
-| Falling Leaves, Ambient Leaves | Écartés | Doublons de Particular |
-| Make Bubbles Pop, Cave Dust | Écartés | Particular le fait déjà (et Cave Dust n'existe pas pour NeoForge) |
-| Wakes, Effective, Visuality, Eating Animation | Impossibles | Fabric seulement |
-| Physics Mod | Écarté | Lourd, code fermé, ragdolls et blocs qui s'écroulent : hors ton, et risque avec Sable |
+| **Particular Reforged** | Retained | A single mod for water (3D splashes, waterfalls, rain ripples, popping bubbles), falling leaves, cave dust and fireflies. It declares **compatibility with Create Aeronautics and Sable** on Modrinth. 5.3 million downloads |
+| Subtle Effects | Kept | It covers different ground (fire, smoke, steam, bodies). Its fireflies are disabled so there is only one source |
+| Falling Leaves Plus | Fallback | Leaves per tree species (acorns, cones, flakes) and wind depending on the weather, by Fuzs (Puzzles Lib already there). To be taken if Particular does not make the leaves of No Man's Land trees fall |
+| Falling Leaves, Ambient Leaves | Rejected | Duplicates of Particular |
+| Make Bubbles Pop, Cave Dust | Rejected | Particular already does it (and Cave Dust does not exist for NeoForge) |
+| Wakes, Effective, Visuality, Eating Animation | Impossible | Fabric only |
+| Physics Mod | Rejected | Heavy, closed source, ragdolls and collapsing blocks: out of tone, and risk with Sable |
 
-### Créatures : Fresh Animations entre
+### Creatures: Fresh Animations comes in
 
-| Élément | Verdict | Détail |
+| Element | Verdict | Detail |
 |---|---|---|
-| **Fresh Animations** 1.10.4 | Retenu (L'équipe l'aime) | Pack de ressources, avec **Entity Model Features** 3.3.12 et **Entity Texture Features** 7.2.6 |
-| FA : Details, Objects, Emissive | Retenus | Détails sur les mobs, animations des objets (bateaux, wagons), yeux qui brillent la nuit dans la brume |
-| **FA : Player Extension** | Retenu (choix de l'équipe, 2026-10-18) | Le joueur est animé dans le même style que les créatures. Il **remplace Not Enough Animations**, et donc First-person Model, qui en dépend |
-| Fresh Moves | Écarté | Autre pack d'animation du joueur : doublon de Player Extension |
+| **Fresh Animations** 1.10.4 | Retained (the maintainer likes it) | Resource pack, with **Entity Model Features** 3.3.12 and **Entity Texture Features** 7.2.6 |
+| FA: Details, Objects, Emissive | Retained | Details on mobs, object animations (boats, minecarts), eyes that glow at night in the mist |
+| **FA: Player Extension** | Retained (maintainer's choice, 2026-10-18) | The player is animated in the same style as the creatures. It **replaces Not Enough Animations**, and therefore First-person Model, which depends on it |
+| Fresh Moves | Rejected | Another player-animation pack: duplicate of Player Extension |
 
-Trois points à vérifier sur `test/finition` :
-1. **No Man's Land remodèle déjà** les cochons, les vaches et les calmars. Il faut voir lequel l'emporte. Si NML gagne, Fresh Animations anime tout le reste (moutons, loups, renards, chevaux, poulets, lapins…) et c'est déjà beaucoup.
-2. **Le joueur en vue subjective** : sans First-person Model, on ne voit plus son corps en regardant vers le bas. **Real Camera** (bêta, demande Cloth Config) dessine le modèle du joueur en vue subjective, donc avec les animations de Player Extension. À essayer ; sinon on garde les bras vanilla.
-3. **Les variantes d'animaux de Quark** (« Variant Animal Textures », actif) : ETF les gère d'habitude, mais il faut regarder si les textures restent bien placées sur les modèles de Fresh Animations.
+Three points to check on `test/finition`:
+1. **No Man's Land already remodels** pigs, cows and squids. We need to see which one wins. If NML wins, Fresh Animations animates everything else (sheep, wolves, foxes, horses, chickens, rabbits…) and that is already a lot.
+2. **The player in first person**: without First-person Model, the player's body is no longer visible when looking down. **Real Camera** (beta, requires Cloth Config) draws the player model in first person, hence with the Player Extension animations. To try; otherwise we keep the vanilla arms.
+3. **Quark's animal variants** ("Variant Animal Textures", active): ETF usually handles them, but we need to check that the textures stay properly placed on the Fresh Animations models.
 
-La faune des autres mods (Naturalist, Alex's Mobs, Critters and Companions…) a déjà ses propres animations GeckoLib : Fresh Animations ne la touche pas.
+The fauna of other mods (Naturalist, Alex's Mobs, Critters and Companions…) already has its own GeckoLib animations: Fresh Animations does not touch it.
 
-### Corps et objets
+### Body and items
 
-| Candidat | Verdict | Pourquoi |
+| Candidate | Verdict | Why |
 |---|---|---|
-| **3D Skin Layers** | Retenu | Les couches du skin en relief. À vérifier avec le modèle du joueur de Player Extension |
-| Real Camera | À tester | Voir son corps en vue subjective (point 2 ci-dessus) |
-| **Camera Overhaul** | Retenu, réglé bas (11.7) | La caméra penche quand on tourne ou qu'on se décale, réagit aux sauts et aux chutes, se balance doucement à l'arrêt |
-| MB-3D Items (`mb3d-items-pack`) | Déjà au 10.6 | Le bon identifiant Modrinth est `mb3d-items-pack` |
-| Better Lanterns | Écarté | Amendments dessine déjà les lanternes en 3D ; les deux modèles se remplaceraient |
-| Hold My Items | Impossible | Fabric seulement |
+| **3D Skin Layers** | Retained | Skin layers in relief. To check with the Player Extension player model |
+| Real Camera | To test | Seeing one's body in first person (point 2 above) |
+| **Camera Overhaul** | Retained, set low (11.7) | The camera tilts when turning or strafing, reacts to jumps and falls, sways gently when idle |
+| MB-3D Items (`mb3d-items-pack`) | Already in 10.6 | The correct Modrinth identifier is `mb3d-items-pack` |
+| Better Lanterns | Rejected | Amendments already draws lanterns in 3D; the two models would replace each other |
+| Hold My Items | Impossible | Fabric only |
 
-### Sons
+### Sounds
 
-| Candidat | Verdict | Pourquoi |
+| Candidate | Verdict | Why |
 |---|---|---|
-| **Sounds** (IMB11) | Retenu | 170 sons pour l'interface, les objets et les blocs : ouvrir un sac, poser un objet, tourner une page. C'est le « toucher » de Realism Craft. Client seul, version LTS pour 1.21.1 ; demande MRU (nouvelle bibliothèque) et YACL (déjà là) |
-| ~~Dynamic Surroundings~~ (OreCruncher, l'auteur d'origine) | Sorti (12.1) | On ne garde que trois fonctions : **les pas** qui sonnent selon le sol (une version légère de Presence Footsteps), **les cascades** (son) et **l'aurore** dans les biomes froids. Le brouillard, les sons de biome (AmbientSounds) et la réverbération (Sound Physics) sont coupés |
-| Presence Footsteps | Remplacé | Aucune version NeoForge 1.21.1 sur Modrinth ; Dynamic Surroundings couvre les pas |
-| Drip Sounds | Optionnel | Le son des gouttes qui tombent dans les grottes ; encore en bêta |
-| Auroras | Repli | Si Dynamic Surroundings ne convient pas, ce mod ne fait que l'aurore (dernière mise à jour 2024) |
+| **Sounds** (IMB11) | Retained | 170 sounds for the interface, items and blocks: opening a bag, setting down an object, turning a page. This is the "touch" of Realism Craft. Client-only, LTS version for 1.21.1; requires MRU (new library) and YACL (already there) |
+| ~~Dynamic Surroundings~~ (OreCruncher, the original author) | Dropped (12.1) | Only three features were kept: **footsteps** that sound according to the ground (a light version of Presence Footsteps), **waterfalls** (sound) and the **aurora** in cold biomes. Fog, biome sounds (AmbientSounds) and reverb (Sound Physics) are disabled |
+| Presence Footsteps | Replaced | No NeoForge 1.21.1 version on Modrinth; Dynamic Surroundings covers footsteps |
+| Drip Sounds | Optional | The sound of drops falling in caves; still in beta |
+| Auroras | Fallback | If Dynamic Surroundings does not fit, this mod only does the aurora (last updated 2024) |
 
-## 11.3 Le confort
+## 11.3 Comfort
 
-Règle : d'abord activer ce que **Quark** sait déjà faire (il est dans le pack), ensuite seulement ajouter un mod.
+Rule: first enable what **Quark** already does (it is in the pack), and only then add a mod.
 
-### Dans Quark, à changer
+### In Quark, to change
 
-| Module | Aujourd'hui | Proposé | Pourquoi |
+| Module | Today | Proposed | Why |
 |---|---|---|---|
-| Automatic Tool Restock | coupé | **activé** | L'outil cassé est remplacé par le suivant de l'inventaire. Évite Stack Refill |
+| Automatic Tool Restock | off | **on** | The broken tool is replaced by the next one in the inventory. Avoids Stack Refill |
 
-Déjà actifs et gardés : **le tri d'inventaire** (bouton dans l'inventaire et les coffres, gardé à la demande de l'équipe), le transfert rapide, recherche dans les coffres, compteur d'objets, récolte au clic droit, échelles améliorées, émotes, rotation verrouillée.
+Already active and kept: **inventory sorting** (button in the inventory and chests, kept at the maintainer's request), quick transfer, chest search, item counter, right-click harvesting, improved ladders, emotes, locked rotation.
 
-### À ajouter
+### To add
 
-| Mod | Côté | Ce qu'il apporte | Lien avec le reste |
+| Mod | Side | What it brings | Link with the rest |
 |---|---|---|---|
-| **Pick Up Notifier** | C (S optionnel) | Une petite liste discrète des objets ramassés, qui s'efface | Puzzles Lib, déjà là pour Visual Workbench |
-| ~~Leaves Be Gone~~ (sorti, 12.1) | S | Les feuilles d'un arbre coupé disparaissent vite | Va avec FallingTree |
-| ~~Easy Anvils~~ (sorti, 12.1 : casse l'enclume d'Overgeared) | CS | Les objets restent posés sur l'enclume, en 3D, et le « trop cher » disparaît | Même famille que Visual Workbench : chaque poste de travail montre ce qu'on y fait. **À vérifier avec Overgeared** |
-| **Easy Magic** | CS | Les objets restent sur la table d'enchantement, relance des enchantements | Même famille |
-| **Seamless Loading Screen** | C | Quand on revient dans le monde, l'écran de chargement montre la dernière vue | Le monde permanent reprend là où on l'a laissé |
-| **Dynamic FPS** | C | Le jeu ralentit quand il est en arrière-plan | Confort et batterie |
-| Chat Heads | C | La tête du joueur à côté de son message | Optionnel, utile entre amis |
+| **Pick Up Notifier** | C (S optional) | A small discreet list of picked-up items, which fades away | Puzzles Lib, already there for Visual Workbench |
+| ~~Leaves Be Gone~~ (dropped, 12.1) | S | The leaves of a felled tree disappear quickly | Goes with FallingTree |
+| ~~Easy Anvils~~ (dropped, 12.1: breaks Overgeared's anvil) | CS | Items stay on the anvil, in 3D, and the "too expensive" message disappears | Same family as Visual Workbench: each workstation shows what is being done on it. **To check with Overgeared** |
+| **Easy Magic** | CS | Items stay on the enchanting table, enchantment rerolls | Same family |
+| **Seamless Loading Screen** | C | When returning to the world, the loading screen shows the last view | The permanent world resumes where it was left |
+| **Dynamic FPS** | C | The game slows down when in the background | Comfort and battery |
+| Chat Heads | C | The player's head next to their message | Optional, useful among friends |
 
-### Écartés, et pourquoi
+### Rejected, and why
 
-| Mod | Raison |
+| Mod | Reason |
 |---|---|
-| Jade, AppleSkin | Déjà écartés : un nom sur tout ce qu'on regarde et des chiffres sur la faim cassent le mystère |
-| Just Zoom, Zoomify | La longue-vue est l'outil de découverte de Wildex ; un zoom gratuit la rendrait inutile |
-| Waystones | La téléportation efface le voyage, le réseau ferré et les dirigeables |
-| Carry On | Incompatible avec Aeronautics (chapitre 6) |
-| Inventory Profiles Next, Inventory Essentials, Crafting Tweaks, Stack Refill, Right Click Harvest | Quark le fait déjà |
-| Better Third Person | Shoulder Surfing Reloaded est retenu |
-| Shulker Box Tooltip | L'End est fermé : pas de shulkers |
-| Enchantment Descriptions | Deux bibliothèques de plus pour une info qu'on trouve dans EMI |
+| Jade, AppleSkin | Already rejected: a name on everything you look at and numbers on hunger break the mystery |
+| Just Zoom, Zoomify | The spyglass is Wildex's discovery tool; a free zoom would make it useless |
+| Waystones | Teleportation erases travel, the rail network and airships |
+| Carry On | Incompatible with Aeronautics (chapter 6) |
+| Inventory Profiles Next, Inventory Essentials, Crafting Tweaks, Stack Refill, Right Click Harvest | Quark already does it |
+| Better Third Person | Shoulder Surfing Reloaded is retained |
+| Shulker Box Tooltip | The End is closed: no shulkers |
+| Enchantment Descriptions | Two more libraries for information found in EMI |
 
 ## 11.4 Performance
 
-Les ajouts sont presque tous côté client et légers. Deux garde-fous :
-- **Le budget de particules** : Particular et Subtle Effects ajoutent chacun des particules. Subtle Effects a une distance de rendu des particules ; on la règle sous la limite de la brume.
-- **More Culling** (demande Cloth Config) : à essayer pour compenser le coût de Better Leaves en forêt. Il change la façon de cacher les blocs, donc il se teste avec Sodium 0.8 et un dirigeable assemblé, comme Entity Culling.
+The additions are almost all client-side and light. Two safeguards:
+- **The particle budget**: Particular and Subtle Effects each add particles. Subtle Effects has a particle render distance; it is set below the mist limit.
+- **More Culling** (requires Cloth Config): to try in order to offset the cost of Better Leaves in forests. It changes how blocks are hidden, so it is tested with Sodium 0.8 and an assembled airship, like Entity Culling.
 
-## 11.5 Chiffres
+## 11.5 Figures
 
-| | Mods | Packs de ressources |
+| | Mods | Resource packs |
 |---|---|---|
-| Rendu | Polytone, Particular Reforged, EMF, ETF, 3D Skin Layers, Sounds (+ MRU) : **7**, et Not Enough Animations et First-person Model sortent | Fresh Animations + Details, Objects, Emissive, Player Extension : **5** |
-| Confort | Pick Up Notifier, Leaves Be Gone, Easy Anvils, Easy Magic, Seamless Loading Screen, Dynamic FPS : **6** | — |
-| À tester | Dynamic Surroundings, Real Camera et More Culling (+ Cloth Config), Falling Leaves Plus en repli | — |
-| Écarté le 2026-10-18 | Dragged's Simulated Tree Chopper (« c'est de trop », l'équipe) | — |
+| Rendering | Polytone, Particular Reforged, EMF, ETF, 3D Skin Layers, Sounds (+ MRU): **7**, and Not Enough Animations and First-person Model are dropped | Fresh Animations + Details, Objects, Emissive, Player Extension: **5** |
+| Comfort | Pick Up Notifier, Leaves Be Gone, Easy Anvils, Easy Magic, Seamless Loading Screen, Dynamic FPS: **6** | — |
+| To test | Dynamic Surroundings, Real Camera and More Culling (+ Cloth Config), Falling Leaves Plus as a fallback | — |
+| Rejected on 2026-10-18 | Dragged's Simulated Tree Chopper ("that's too much", the maintainer) | — |
 
-Le pack passerait d'environ 110 à environ 123 fichiers, dont presque tout ce qui s'ajoute est client et désactivable.
+The pack would go from about 110 to about 123 files, almost all of the additions being client-side and disableable.
 
 ## 11.6 Archie's Dinos (archieblocks.com)
 
-Ce que c'est : 7 dinosaures avec chacun son habitat (grottes luxuriantes, jungle, océan chaud, Nether, Deep Dark ×2, End), apprivoisement par rituel, monture, reproduction, un PNJ marchand (Archie), un guide à tampons, 6 armures, 8 armes et outils, un boss de fin. **Java : Forge et Fabric, Minecraft 1.20.1 seulement**, gratuit, « bientôt » sur CurseForge et Modrinth. Bedrock : add-on payant.
+What it is: 7 dinosaurs, each with its own habitat (lush caves, jungle, warm ocean, Nether, Deep Dark ×2, End), taming by ritual, mounts, breeding, a merchant NPC (Archie), a stamp guide, 6 armors, 8 weapons and tools, an end boss. **Java: Forge and Fabric, Minecraft 1.20.1 only**, free, "coming soon" on CurseForge and Modrinth. Bedrock: paid add-on.
 
-**Passer en 1.20.1 : non.** Fallow perdrait Create Aeronautics, Sable et No Man's Land, qui n'existent qu'en NeoForge 1.21.1 (et NML ne sera pas porté, d'après ses auteurs). Le pack est construit autour d'eux.
+**Moving to 1.20.1: no.** Fallow would lose Create Aeronautics, Sable and No Man's Land, which exist only for NeoForge 1.21.1 (and NML will not be ported, according to its authors). The pack is built around them.
 
-**Le porter en 1.21.1 avec l'assistant : faisable, mais pas sans les auteurs.**
-- Techniquement, un passage de Forge 1.20.1 à NeoForge 1.21.1 touche les composants d'objets (fin du NBT sur les objets), les registres, le réseau et la version de GeckoLib. C'est un gros chantier, puis une maintenance à chaque mise à jour du mod d'origine.
-- Juridiquement, il faut **la permission** de l'équipe pour redistribuer un portage, même entre amis dans un modpack. La licence n'est pas encore publiée, et la version Bedrock est payante : un refus est possible.
-- Le bon premier pas : demander à l'équipe (Eternal Creations et Archie Blocks) si une version NeoForge 1.21.1 est prévue, ou s'ils acceptent un portage.
+**Porting it to 1.21.1: feasible, but not without the authors.**
+- Technically, a move from Forge 1.20.1 to NeoForge 1.21.1 touches item components (end of NBT on items), registries, networking and the GeckoLib version. It is a big job, followed by maintenance at every update of the original mod.
+- Legally, the authors' **permission** is required to redistribute a port, even among friends in a modpack. The license is not yet published, and the Bedrock version is paid: a refusal is possible.
+- The right first step: ask the authors (Eternal Creations and Archie Blocks) whether a NeoForge 1.21.1 version is planned, or whether they accept a port.
 
-**Et dans Fallow ?** Même porté, il entrerait mal tel quel :
-- 2 espèces sur 7 vivent dans le Nether ou l'End, que Fallow ferme ;
-- le boss, les armures et les armes vont contre le monde « presque vide » ;
-- son guide à tampons double le bestiaire Wildex, et Archie est un PNJ marchand, ce qu'on a écarté avec Easy NPC ;
-- la décision 0003 a déjà mis la préhistoire de côté.
+**And in Fallow?** Even ported, it would fit poorly as is:
+- 2 species out of 7 live in the Nether or the End, which Fallow closes;
+- the boss, armors and weapons go against the "almost empty" world;
+- its stamp guide duplicates the Wildex bestiary, and Archie is a merchant NPC, which was rejected with Easy NPC;
+- decision 0003 already set prehistory aside.
 
-Ce qui pourrait entrer : les **4 espèces de l'Overworld** (Lushsaur, Therimoss, Coralosaur, Sculkraptor ; pas le Sculksaur, qui est le boss) comme animaux rares du zoo, avec une page Wildex chacune, sans le boss ni l'équipement. À rediscuter quand le mod sortira et qu'on connaîtra sa licence.
+What could come in: the **4 Overworld species** (Lushsaur, Therimoss, Coralosaur, Sculkraptor; not the Sculksaur, which is the boss) as rare zoo animals, with one Wildex page each, without the boss or the equipment. To be revisited when the mod is released and its license is known.
 
-## 11.7 Caméra, recettes et bestiaire (demandes du 2026-10-18)
+## 11.7 Camera, recipes and bestiary (requests of 2026-10-18)
 
-### Camera Overhaul : oui, réglé bas
+### Camera Overhaul: yes, set low
 
-Version 2.1.2 pour NeoForge 1.21.1, client seul, demande Cloth Config (déjà prévu pour Real Camera et More Culling), licence GPL. Chaque effet a son intensité dans `cameraoverhaul.toml`, et 0 le coupe. C'est exactement le « ressenti du geste » de Realism Craft.
+Version 2.1.2 for NeoForge 1.21.1, client-only, requires Cloth Config (already planned for Real Camera and More Culling), GPL license. Each effect has its own intensity in `cameraoverhaul.toml`, and 0 turns it off. This is exactly the "feel of the gesture" of Realism Craft.
 
-Réglages proposés, livrés par Default Options :
-- inclinaison en tournant et en se décalant : faible ;
-- tangage aux sauts et aux chutes : moyen ;
-- secousse des explosions : gardée ;
-- balancement à l'arrêt : gardé, très doux.
+Proposed settings, delivered by Default Options:
+- tilt when turning and strafing: low;
+- pitch on jumps and falls: medium;
+- explosion shake: kept;
+- sway when idle: kept, very gentle.
 
-À vérifier sur `test/finition` : à bord d'un dirigeable ou d'un train Create (l'inclinaison s'ajoute-t-elle aux mouvements du véhicule ?), et avec Real Camera, qui bouge aussi la caméra. Si les deux se gênent, Camera Overhaul passe avant Real Camera.
+To check on `test/finition`: aboard an airship or a Create train (does the tilt add to the vehicle's movements?), and with Real Camera, which also moves the camera. If the two get in each other's way, Camera Overhaul takes precedence over Real Camera.
 
-### Spatial GUI : les menus dans le monde
+### Spatial GUI: menus in the world
 
-Version 1.8 pour NeoForge 1.21.1 (sortie le 2026-10-17), client seul, demande YACL (déjà là). Les menus s'affichent comme un panneau en 3D devant le joueur. En **mode troisième personne**, la caméra glisse au niveau de l'épaule à l'ouverture d'un coffre ou du sac, et le personnage se tourne vers ce qu'il regarde : c'est ce que l'équipe a demandé.
+Version 1.8 for NeoForge 1.21.1 (released on 2026-10-17), client-only, requires YACL (already there). Menus are displayed as a 3D panel in front of the player. In **third-person mode**, the camera slides to shoulder level when a chest or the bag is opened, and the character turns toward what they are looking at: this is what was requested.
 
-Réglages proposés :
-- mode troisième personne pour les coffres, le sac, l'établi et les fours ;
-- écran incurvé pour l'inventaire, qui reste lisible avec la colonne d'EMI à côté ;
-- **désactivé** pour les livres et les carnets (Wildex, codex d'Ancient Remnants, Patchouli, Modonomicon) et pour l'atlas, qui se lisent mieux à plat ;
-- flou du monde léger, ou coupé, pour que la brume reste visible derrière le menu.
+Proposed settings:
+- third-person mode for chests, the bag, the workbench and furnaces;
+- curved screen for the inventory, which stays readable with EMI's column next to it;
+- **disabled** for books and notebooks (Wildex, Ancient Remnants codex, Patchouli, Modonomicon) and for the atlas, which read better flat;
+- light world blur, or off, so that the mist stays visible behind the menu.
 
-À vérifier : quatre mods touchent maintenant la caméra (Shoulder Surfing Reloaded, Camera Overhaul, Spatial GUI, et Real Camera à l'essai). Ils se testent ensemble sur `test/finition`. Si deux se gênent, l'ordre de priorité proposé est Spatial GUI, Camera Overhaul, Shoulder Surfing, puis Real Camera.
+To check: four mods now affect the camera (Shoulder Surfing Reloaded, Camera Overhaul, Spatial GUI, and Real Camera on trial). They are tested together on `test/finition`. If two get in each other's way, the proposed priority order is Spatial GUI, Camera Overhaul, Shoulder Surfing, then Real Camera.
 
-### EMI à la place de JEI
+### EMI instead of JEI
 
-Version 1.1.24 pour NeoForge 1.21.1, aucune dépendance, licence MIT. Ce que Fallow en fait :
-- **Groupes et catégories** : les objets se regroupent (toutes les planches, tous les meubles Handcrafted, tous les blocs Twigs) et l'index se range par thème plutôt que par mod. Tout passe par un pack de données et KubeJS, qui sait parler à EMI.
-- **L'arbre de recettes** : EMI calcule tout ce qu'il faut pour fabriquer une machine Create, étape par étape. Il remplace un carnet de calculs.
-- **Le mystère** : les recettes qui viennent des plans trouvés dans les ruines (10.10) peuvent être cachées dans EMI pour tout le monde : on les apprend en lisant le plan. EMI ne sait pas les montrer joueur par joueur selon sa progression.
+Version 1.1.24 for NeoForge 1.21.1, no dependency, MIT license. What Fallow does with it:
+- **Groups and categories**: items are grouped (all planks, all Handcrafted furniture, all Twigs blocks) and the index is organized by theme rather than by mod. Everything goes through a datapack and KubeJS, which can talk to EMI.
+- **The recipe tree**: EMI computes everything needed to build a Create machine, step by step. It replaces a notebook of calculations.
+- **The mystery**: recipes that come from blueprints found in the ruins (10.10) can be hidden in EMI for everyone: they are learned by reading the blueprint. EMI cannot show them player by player according to their progress.
 
-Point à vérifier : certains mods n'ont qu'une intégration JEI. EMI les lit si JEI est aussi installé ; dans ce cas JEI reste dans le pack, invisible, comme simple pont. On le saura en ouvrant les recettes de Create Aeronautics, Kaleidoscope Cookery, Farm & Charm et Overgeared.
+Point to check: some mods only have a JEI integration. EMI reads them if JEI is also installed; in that case JEI stays in the pack, invisible, as a mere bridge. We will know by opening the recipes of Create Aeronautics, Kaleidoscope Cookery, Farm & Charm and Overgeared.
 
-### Les pages de Wildex
+### The Wildex pages
 
-J'ai ouvert le jar de Wildex 3.0.0. Ce qui se change et ce qui ne se change pas :
+The Wildex 3.0.0 jar was opened. What can and cannot be changed:
 
-| Élément | Modifiable ? | Comment |
+| Element | Modifiable? | How |
 |---|---|---|
-| L'image du livre (5 thèmes : vintage, modern, jungle, runes, steampunk) | **Oui** | Chaque thème est une image de 1024×704 (`assets/wildex/textures/gui/wildex_<thème>.png`) qu'un pack de ressources remplace. On peut dessiner un **carnet de naturaliste Fallow** |
-| Icônes des onglets, fond des trophées | Oui | Images de 64×64 et 128×128 dans le même dossier |
-| Disposition des zones, couleur du texte | Non | Codées en dur ; le nouveau dessin doit garder les mêmes zones et des tons proches du thème qu'il remplace |
-| Contenu des pages | Non | Généré tout seul : statistiques, butin, lieux d'apparition, nourriture d'élevage. Pas de texte libre ni d'illustration par créature ; la créature est montrée en 3D |
-| Lien KubeJS | Événements seulement | Wildex prévient KubeJS quand on découvre une créature ou qu'on termine le bestiaire, sans pouvoir écrire dans les pages |
+| The book image (5 themes: vintage, modern, jungle, runes, steampunk) | **Yes** | Each theme is a 1024×704 image (`assets/wildex/textures/gui/wildex_<theme>.png`) that a resource pack replaces. A **Fallow naturalist's notebook** can be drawn |
+| Tab icons, trophy background | Yes | 64×64 and 128×128 images in the same folder |
+| Layout of the areas, text color | No | Hard-coded; the new drawing must keep the same areas and tones close to the theme it replaces |
+| Page content | No | Generated automatically: statistics, loot, spawn locations, breeding food. No free text or per-creature illustration; the creature is shown in 3D |
+| KubeJS link | Events only | Wildex notifies KubeJS when a creature is discovered or when the bestiary is completed, without being able to write into the pages |
 
-Les pages d'Archie's Dinos sont illustrées à la main, espèce par espèce. Wildex ne peut pas faire ça. Deux façons de s'en approcher :
-1. **Recommandé : un carnet illustré à côté de Wildex.** Patchouli et Modonomicon sont déjà dans le pack et acceptent des pages dessinées, du texte libre et une couverture sur mesure. À chaque découverte, l'événement Wildex passe par KubeJS et débloque la page de la créature dans le carnet. Wildex reste le registre automatique (le zoo, les trophées), le carnet porte le récit, les dessins et les indices. Le coût est surtout artistique : une illustration par espèce importante, pas par mob.
-2. **Modifier Wildex lui-même.** Sa licence (CC BY-NC 4.0) permet une version modifiée non commerciale, en citant l'auteur ; un onglet « Notes » avec texte et image par créature est faisable avec l'assistant. Mais il faudrait suivre chaque mise à jour du mod : à garder pour plus tard.
+Archie's Dinos pages are hand-illustrated, species by species. Wildex cannot do that. Two ways to get close:
+1. **Recommended: an illustrated notebook alongside Wildex.** Patchouli and Modonomicon are already in the pack and accept drawn pages, free text and a custom cover. At each discovery, the Wildex event goes through KubeJS and unlocks the creature's page in the notebook. Wildex remains the automatic register (the zoo, the trophies), and the notebook carries the narrative, the drawings and the clues. The cost is mostly artistic: one illustration per major species, not per mob.
+2. **Modify Wildex itself.** Its license (CC BY-NC 4.0) allows a non-commercial modified version, with attribution; a "Notes" tab with text and an image per creature is feasible. But every update of the mod would have to be followed: to keep for later.
 
-Dans les deux cas, on commence par un thème Wildex redessiné, qui ne coûte qu'une image.
+In both cases, we start with a redrawn Wildex theme, which costs only one image.
 
-**Choix du 2026-10-18 : on reste sur Wildex, avec un de ses thèmes d'origine.** Aucun thème tout fait pour Wildex ni pour Modonomicon n'existe sur Modrinth, et l'équipe ne peut pas dessiner les pages. Le carnet illustré et le Wildex modifié sont donc écartés tant que personne ne fournit les dessins. Une retouche simple reste possible sans dessiner : teinter ou désaturer l'image d'un thème existant pour l'accorder aux couleurs de la brume.
+**Choice of 2026-10-18: we stay on Wildex, with one of its original themes.** No ready-made theme for Wildex or for Modonomicon exists on Modrinth, and the maintainer cannot draw the pages. The illustrated notebook and the modified Wildex are therefore set aside until someone provides the drawings. A simple touch-up remains possible without drawing: tinting or desaturating the image of an existing theme to match the colors of the mist.
 
-Pour comparer, le codex d'Ancient Remnants n'utilise pas Patchouli : c'est un écran codé par l'auteur (Obscuria). Chaque page est un fichier de données (titre, texte, image de 350×210, biomes), ce qui laisse penser qu'un pack de données pourrait y ajouter des pages ; c'est à tester.
+For comparison, the Ancient Remnants codex does not use Patchouli: it is a screen coded by the author (Obscuria). Each page is a data file (title, text, 350×210 image, biomes), which suggests that a datapack could add pages to it; to be tested.
 
 ## 11.8 Ancient Remnants: Monoliths
 
-Ajouté à la demande de l'équipe. Version 1.5.2 pour NeoForge 1.21.1 (publiée le 2026-10-18), client et serveur, demande Fragmentum (bibliothèque d'Obscuria, 4,5 millions de téléchargements). Mod écrit pour la ModJam CurseForge « Echoes of the Past », encore très jeune (environ 500 téléchargements).
+Added at the maintainer's request. Version 1.5.2 for NeoForge 1.21.1 (published on 2026-10-18), client and server, requires Fragmentum (Obscuria's library, 4.5 million downloads). A mod written for the CurseForge ModJam "Echoes of the Past", still very young (about 500 downloads).
 
-Ce que contient le jar (ouvert le 2026-10-18) :
-- **6 monuments**, chacun lié à un biome : trois monolithes (chasseur, guerrier, sentinelle) et trois monuments (cerisier, chêne, conifères).
-- Au centre, un **Elderheart** gardé par des créatures. Il donne une **bénédiction** : agilité du chasseur, force du guerrier, défense de la sentinelle, vitalité à faible santé, portée de construction, récolte abondante.
-- Un **Monolith Codex** qu'on remplit avec des fragments de recherche dispersés dans le monde, laissés par un marchand ambulant. Chaque monument a sa page d'histoire.
-- Espacement et biomes réglables dans la config ou par tags de biome.
+What the jar contains (opened on 2026-10-18):
+- **6 monuments**, each tied to a biome: three monoliths (hunter, warrior, sentinel) and three monuments (cherry, oak, conifers).
+- At the center, an **Elderheart** guarded by creatures. It grants a **blessing**: hunter's agility, warrior's strength, sentinel's defense, vitality at low health, build reach, abundant harvest.
+- A **Monolith Codex** filled with research fragments scattered across the world, left by a wandering trader. Each monument has its history page.
+- Spacing and biomes adjustable in the config or through biome tags.
 
-Pourquoi il a sa place : c'est exactement le monde « presque vide et énigmatique ». Les monuments sont rares, on les entend avant de les voir (un bourdonnement qui monte), et le mod refuse de tout expliquer : on reconstitue l'histoire soi-même. Le codex est un objectif long, comme le bestiaire.
+Why it belongs: it is exactly the "almost empty and enigmatic" world. The monuments are rare, you hear them before seeing them (a rising hum), and the mod refuses to explain everything: you piece the story together yourself. The codex is a long-term goal, like the bestiary.
 
-Réglages et liens proposés :
-- **Biomes** : rattacher chaque monument aux biomes de No Man's Land par tag (les valeurs par défaut sont ajoutées par le code, et les biomes NML n'y sont peut-être pas). Le monument du cerisier n'a de sens que si un biome de cerisiers existe.
-- **Rareté** : espacement large, en accord avec Sparse Structures. Un monument doit rester un évènement.
-- **La brume** : à prototyper, un Elderheart réveillé pourrait ouvrir une clairière (10.3) autour du monument. Il faut trouver dans le code l'évènement à brancher sur KubeJS.
-- **Les gardiens** : ils suivent la règle 0003 (hostiles rares et territoriaux), donc ils restent dans le monument.
-- **Les bénédictions** : vérifier leur durée et leur force en jeu. « Portée de construction » et « récolte abondante » vont bien avec le reste du pack ; la force et l'agilité ne doivent pas rendre la faune triviale.
+Proposed settings and links:
+- **Biomes**: attach each monument to No Man's Land biomes through tags (the default values are added by the code, and NML biomes may not be in them). The cherry monument only makes sense if a cherry biome exists.
+- **Rarity**: wide spacing, in line with Sparse Structures. A monument must remain an event.
+- **The mist**: to prototype, an awakened Elderheart could open a clearing (10.3) around the monument. The event to hook into KubeJS must be found in the code.
+- **The guardians**: they follow rule 0003 (rare, territorial hostiles), so they stay within the monument.
+- **The blessings**: check their duration and strength in play. "Build reach" and "abundant harvest" fit well with the rest of the pack; strength and agility must not make the fauna trivial.
 
-À vérifier sur une branche de test : la génération à côté de NML et de Sparse Structures, et la stabilité d'un mod aussi récent sur un monde permanent. Si on retire le mod après coup, les monuments déjà générés perdent leurs blocs et laissent des ruines trouées : il faut donc le tester avant d'ouvrir le monde.
+To check on a test branch: generation alongside NML and Sparse Structures, and the stability of such a recent mod on a permanent world. If the mod is removed afterward, monuments already generated lose their blocks and leave riddled ruins: it must therefore be tested before opening the world.

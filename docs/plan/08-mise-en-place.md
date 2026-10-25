@@ -1,87 +1,87 @@
-# 8. Mise en place : phases, vérifications, décisions
+# 8. Setup: phases, checks, decisions
 
-> Les phases restent valables pour les mods de la v2. Les décisions du 8.4 sont remplacées par le [10.9](10-recentrage.md#109-décisions-à-valider-remplace-le-84).
+> The phases remain valid for the v2 mods. The decisions in 8.4 are replaced by [10.12](10-recentrage.md#1012-decisions-to-validate-replaces-84).
 
-Chaque phase suit [CONTRIBUTING.md](https://github.com/salvagedisc/fallow/blob/main/CONTRIBUTING.md) : une branche `test/<sujet>`, un mod par commit, la config et les scripts dans `pack/`, une fiche dans `docs/decisions/` pour chaque arbitrage, et la CI verte (`check-deps`, export `.mrpack`) avant fusion. **Le `packwiz mr add` tranche la disponibilité Modrinth** : la recherche n'a pas pu l'établir pour tous les mods (voir [README](README.md#limites-de-ce-plan)), et un mod absent en 1.21.1 NeoForge est remplacé par son repli indiqué dans le chapitre concerné.
+Each phase follows [CONTRIBUTING.md](https://github.com/salvagedisc/fallow/blob/main/CONTRIBUTING.md): one `test/<topic>` branch, one mod per commit, config and scripts in `pack/`, a record in `docs/decisions/` for each trade-off, and green CI (`check-deps`, `.mrpack` export) before merging. **`packwiz mr add` settles Modrinth availability**: the research could not establish it for every mod (see [README](README.md)), and a mod absent for 1.21.1 NeoForge is replaced by the fallback given in the relevant chapter.
 
 ## 8.1 Phases
 
-| Phase | Branche | Contenu | Critère de sortie |
+| Phase | Branch | Content | Exit criterion |
 |---|---|---|---|
-| **0. Socle actuel** | `main` | Test de lancement du pack actuel (déjà au programme de `v0.1.0`) ; config Quark comparée à celle générée ; **Entity Culling testé sur un dirigeable assemblé** | Monde créé sans crash ; Entity Culling gardé (réglé) ou retiré ; tag `v0.1.0` |
-| **1. Règles de base** | `test/regles-de-base` | Neruina, JEI, In Control!, LootJS, KubeJS Create, MoreJS, Almost Unified ; scripts 1 à 6 du [7.2](07-kubejs-et-datapack.md#72-les-scripts-dans-lordre-où-les-écrire) | Aucun monstre vanilla en 3 nuits de jeu ; End et Nether inaccessibles ; Super Glue fabricable ; F3 sans coordonnées |
-| **2. Monde définitif** | `test/streams-nml`, puis `test/structures-create` | Streams Reflowing sur NML ; Lootr, Create Aeronautics Structures, New Beginnings, Let The Adventure Begin (trié), MCG's Campsites, Cinch's Abandoned Houses ; villages en ruines ; réglages Sparse Structures | Décision 0001 close ; 1 000 blocs de rayon explorés sans structure bruyante ni mob vanilla ; graine choisie |
-| **2 bis. Lointain** | `test/distant-horizons` | Distant Horizons + Separate Sable Render Distance, réglages de brume | Silhouettes dans la brume sans perte de performance rédhibitoire chez le joueur le moins équipé |
-| **3. Traversée** | `test/traversee` | Paraglider, ParCool bridé, Traveler's Backpack, Comforts, Traveler's Titles, Exposure, Better Archeology, GUI Compass, AA4 Atlas | Une expédition de deux jours de jeu sans coordonnées, retour à la base avec carte et photos |
-| **4. Civilisation** | `test/civilisation` | Copycats+, Create Connected (élagué), Factory Logistics, Ore Excavation, Prospecting Picks, Bells & Whistles, Diesel Generators, Power Loader, Rechiseled (+ Create, Fusion) ; scripts 7 à 9 et 12 | Les âges 0 à 7 se jouent dans l'ordre, sans raccourci, en solo |
-| **5. Vie quotidienne** | `test/vie-quotidienne` | Kaleidoscope Compat, Cattlestrophic!, Salt's Animal Farm, Animal Genders, Freeze It and Heat It, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance, Hardcore Revival ; pont saisons, cuisine unifiée, Garde-manger | Une année Ecliptic complète jouée : hiver ressenti, troupeau qui demande des soins, réserves nécessaires |
-| **6. Faune & ambiance** | `test/faune-ambiance` | Configs de 5.3 ; Cosy Critters, Enhanced Celestials, Reactive Music (songpack choisi) (remplacé par True Adaptive Music, [0010](../decisions/0010-musique.md)), Particle Rain ; sons et luminances | Chaque biome a sa faune sans doublon ; aucune horde ; la nuit est noire |
-| **7. Colonies** | `test/colonies` | Easy NPC, Create Villager Labor, OPAC ; script 10 ; survivants écrits | Un survivant ramené, installé, au travail ; aucun échange de Mending ni d'outil en métal |
-| **8. Serveur & confort** | `test/serveur` | Jade, AppleSkin, Mouse Tweaks, Controlling + Searchables, GraveStone, Simple Voice Chat, Crash Assistant, Default Options, Simple Backups ; `server.properties`, sauvegardes, `scripts/deploy-serverconfig` ; carnet du colon | Restauration d'une sauvegarde testée ; tous les joueurs se connectent avec la voix |
-| **Lancement** | `main` | Prégénération Chunky, CHANGELOG, tag `v1.0.0` | Monde permanent ouvert |
+| **0. Current foundation** | `main` | Launch test of the current pack (already in the `v0.1.0` agenda); Quark config compared with the generated one; **Entity Culling tested on an assembled airship** | World created without a crash; Entity Culling kept (tuned) or removed; tag `v0.1.0` |
+| **1. Base rules** | `test/regles-de-base` | Neruina, JEI, In Control!, LootJS, KubeJS Create, MoreJS, Almost Unified; scripts 1 to 6 of [7.2](07-kubejs-et-datapack.md#72-the-scripts-in-the-order-to-write-them) | No vanilla monster in 3 nights of play; End and Nether inaccessible; Super Glue craftable; F3 without coordinates |
+| **2. Final world** | `test/streams-nml`, then `test/structures-create` | Streams Reflowing on NML; Lootr, Create Aeronautics Structures, New Beginnings, Let The Adventure Begin (sorted), MCG's Campsites, Cinch's Abandoned Houses; ruined villages; Sparse Structures settings | Decision 0001 closed; 1,000-block radius explored with no noisy structure or vanilla mob; seed chosen |
+| **2 bis. Far distance** | `test/distant-horizons` | Distant Horizons + Separate Sable Render Distance, mist settings | Silhouettes in the mist without prohibitive performance loss for the least-equipped player |
+| **3. Crossing** | `test/traversee` | Paraglider, ParCool (restricted), Traveler's Backpack, Comforts, Traveler's Titles, Exposure, Better Archeology, GUI Compass, AA4 Atlas | A two-day expedition without coordinates, return to base with map and photos |
+| **4. Civilization** | `test/civilisation` | Copycats+, Create Connected (pruned), Factory Logistics, Ore Excavation, Prospecting Picks, Bells & Whistles, Diesel Generators, Power Loader, Rechiseled (+ Create, Fusion); scripts 7 to 9 and 12 | Ages 0 to 7 can be played in order, without shortcuts, solo |
+| **5. Daily life** | `test/vie-quotidienne` | Kaleidoscope Compat, Cattlestrophic!, Salt's Animal Farm, Animal Genders, Freeze It and Heat It, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance, Hardcore Revival; seasons bridge, unified cooking, Pantry | A full Ecliptic year played: winter felt, a herd that needs care, necessary reserves |
+| **6. Fauna & atmosphere** | `test/faune-ambiance` | Configs from 5.3; Cosy Critters, Enhanced Celestials, Reactive Music (songpack chosen) (replaced by True Adaptive Music, [0010](../decisions/0010-musique.md)), Particle Rain; sounds and luminances | Each biome has its fauna without duplicates; no hordes; the night is dark |
+| **7. Colonies** | `test/colonies` | Easy NPC, Create Villager Labor, OPAC; script 10; written survivors | One survivor brought back, settled, at work; no Mending or metal tool trade |
+| **8. Server & comfort** | `test/serveur` | Jade, AppleSkin, Mouse Tweaks, Controlling + Searchables, GraveStone, Simple Voice Chat, Crash Assistant, Default Options, Simple Backups; `server.properties`, backups, `scripts/deploy-serverconfig`; settler's notebook | Restoring a backup tested; all players connect with voice |
+| **Launch** | `main` | Chunky pregeneration, CHANGELOG, tag `v1.0.0` | Permanent world open |
 
-Les phases 3, 4 et 6 sont indépendantes une fois la phase 2 close et peuvent avancer en parallèle. La phase 1 doit précéder toutes les autres : sans elle, chaque test se fait dans un monde qui n'est pas celui de Fallow.
+Phases 3, 4 and 6 are independent once phase 2 is closed and can proceed in parallel. Phase 1 must precede all the others: without it, every test is run in a world that is not Fallow's.
 
-## 8.2 Pour chaque mod ajouté
+## 8.2 For each mod added
 
-1. `packwiz mr add <slug>` (ou le script de sync depuis l'instance) : il échoue tout de suite si la 1.21.1 NeoForge n'existe pas.
-2. Fixer le champ `side` (client seulement pour Crash Assistant, Mouse Tweaks, Controlling, Searchables, Default Options, Cosy Critters, Traveler's Titles, ATMOSPHERICS…).
-3. `npm run check-deps` pour les dépendances non déclarées.
-4. Appliquer les réglages du chapitre concerné (tableaux « Réglages à appliquer ») ; noter dans la fiche de décision les clés qui ont dû être corrigées.
-5. Mettre à jour `docs/mods.md`.
+1. `packwiz mr add <slug>` (or the sync script from the instance): it fails immediately if 1.21.1 NeoForge does not exist.
+2. Set the `side` field (client only for Crash Assistant, Mouse Tweaks, Controlling, Searchables, Default Options, Cosy Critters, Traveler's Titles, ATMOSPHERICS…).
+3. `npm run check-deps` for undeclared dependencies.
+4. Apply the settings of the relevant chapter ("Settings to apply" tables); note in the decision record the keys that had to be corrected.
+5. Update `docs/mods.md`.
 
-## 8.3 Ce qu'il faut lire dans les .jar
+## 8.3 What to read in the .jar files
 
-La séance d'étude des .jar commence par ces points, classés par ce qu'ils débloquent.
+The .jar study session starts with these points, ordered by what they unblock.
 
-**Bloquant pour la phase 1**
-1. KubeJS 2101.7 : `NativeEvents`, annulation de `EntityEvents.spawned`, `RecipeViewerEvents`, prise en compte de `kubejs/data` pour le worldgen.
-2. Recettes de tous les .jar qui utilisent `slime_ball`, `blaze_rod`, `blaze_powder`, `gunpowder`, `ender_pearl`, `phantom_membrane`, `string`, `bone`, `quartz`, et tout objet du Nether.
-3. In Control! 10.x : sémantique de `mincount` (avec `perplayer`) et de `maxdist`.
-4. Entity Culling : clés `tickCulling`, `skipBlockEntityCulling`.
+**Blocking for phase 1**
+1. KubeJS 2101.7: `NativeEvents`, cancellation of `EntityEvents.spawned`, `RecipeViewerEvents`, support for `kubejs/data` for worldgen.
+2. Recipes of all .jar files that use `slime_ball`, `blaze_rod`, `blaze_powder`, `gunpowder`, `ender_pearl`, `phantom_membrane`, `string`, `bone`, `quartz`, and any Nether item.
+3. In Control! 10.x: semantics of `mincount` (with `perplayer`) and of `maxdist`.
+4. Entity Culling: keys `tickCulling`, `skipBlockEntityCulling`.
 
-**Bloquant pour la phase 2**
-5. Sparse Structures 1.21.1 : format des surcharges par structure.
-6. Create Aeronautics Structures : nature des « robber balloons », tables de loot, échanges de l'ingénieur.
-7. Create: New Beginnings : pools ciblés (y compris les variantes « zombie » ?).
-8. Let The Adventure Begin : inventaire des structures pour le tri.
-9. No Man's Land : modifie-t-il les villages ? Noms des template pools à surcharger.
-10. Streams Reflowing + NML : génération combinée.
+**Blocking for phase 2**
+5. Sparse Structures 1.21.1: format of per-structure overrides.
+6. Create Aeronautics Structures: nature of the "robber balloons", loot tables, engineer trades.
+7. Create: New Beginnings: targeted pools (including the "zombie" variants?).
+8. Let The Adventure Begin: structure inventory for sorting.
+9. No Man's Land: does it modify villages? Names of the template pools to override.
+10. Streams Reflowing + NML: combined generation.
 
-**Bloquant pour les phases 3 à 7**
-11. Overgeared : composant de qualité, types de recettes, config des outils vanilla, présence d'étain et de bronze, butin du modèle d'acier, moules et alliages du Nether.
-12. Paraglider : build 1.21.1 sur Modrinth ; ParCool : clés de limitation et option d'endurance Paraglider.
-13. Traveler's Backpack : capacités, sac de couchage, pureté de l'eau dans les réservoirs.
-14. Exposure : données des photos, coordonnées dans l'infobulle.
-15. Create Connected, Ore Excavation, Power Loader, OPAC : clés de config citées aux chapitres 3 et 6.
-16. Diesel Generators : origine du pétrole.
-17. Create Aeronautics : identifiants des hélices, brûleurs et ballons ; carburant accepté ; matériau flottant.
-18. Naturalist 2.0.4 (47 animaux), Alex's Mobs Continued 2.2.2 (format de config de spawn), Mowzie's 1.8.2, Hybrid Aquatic : listes d'espèces et clés.
-19. Almost Unified : tags `c:` partagés entre Farm & Charm et Kaleidoscope Cookery, et entre Overgeared et Create.
-20. ~~Présence réelle sur Modrinth~~ : vérifiée le 2026-10-10, voir [9](09-disponibilite-modrinth.md). Reste à voir dans le .jar : les recettes de Create Villager Labor, les pistes de Reactive Music, et que KubeJS Create 2101.3.1 (beta, novembre 2025) tourne avec Create 6.0.10.
+**Blocking for phases 3 to 7**
+11. Overgeared: quality component, recipe types, vanilla tool config, presence of tin and bronze, steel pattern loot, Nether molds and alloys.
+12. Paraglider: 1.21.1 build on Modrinth; ParCool: limitation keys and Paraglider stamina option.
+13. Traveler's Backpack: capabilities, sleeping bag, water purity in tanks.
+14. Exposure: photo data, coordinates in the tooltip.
+15. Create Connected, Ore Excavation, Power Loader, OPAC: config keys cited in chapters 3 and 6.
+16. Diesel Generators: origin of oil.
+17. Create Aeronautics: identifiers of propellers, burners and balloons; accepted fuel; floating material.
+18. Naturalist 2.0.4 (47 animals), Alex's Mobs Continued 2.2.2 (spawn config format), Mowzie's 1.8.2, Hybrid Aquatic: species lists and keys.
+19. Almost Unified: `c:` tags shared between Farm & Charm and Kaleidoscope Cookery, and between Overgeared and Create.
+20. ~~Actual presence on Modrinth~~: verified on 2026-10-10, see [9](09-disponibilite-modrinth.md). Still to check in the .jar: the recipes of Create Villager Labor, the tracks of Reactive Music, and that KubeJS Create 2101.3.1 (beta, November 2025) runs with Create 6.0.10.
 
-Les points propres à la vie quotidienne sont listés en [4.8](04-vie-quotidienne.md#48-à-vérifier-dans-les-jar).
+Points specific to daily life are listed in [4.8](04-vie-quotidienne.md#48-to-check-in-the-jar-files).
 
-## 8.4 Décisions à valider ensemble
+## 8.4 Decisions to validate together
 
-Pour chacune, le plan applique le défaut indiqué ; il suffit de dire si on le garde.
+For each one, the plan applies the default shown; it is enough to say whether to keep it.
 
-| # | Décision | Défaut retenu par le plan | Alternative |
+| # | Decision | Default retained by the plan | Alternative |
 |---|---|---|---|
-| 1 | **Le Nether** | Fermé comme l'End, avec recettes de remplacement ([3.8](03-civilisation.md#38-le-nether--fermé-par-défaut)) | Ouvert comme expédition tardive, avec ses monstres vanilla gardés localement |
-| 2 | Rivières | NML + Streams Reflowing, si le test passe ([2.6](02-exploration.md#26-rivières--streams-reflowing-sur-no-mans-land)) | Garder la comparaison avec Terralith |
-| 3 | Entity Culling | Réglé, retiré s'il casse toujours les engins | — |
-| 4 | Électricité | Rester mécanique et diesel (option A) | Crafts & Additions en fin de partie |
-| 5 | Plans d'ingénieur | Système adopté, Quark Automatic Recipe Unlock coupé, `doLimitedCrafting` | Recettes libres, progression par les seuls verrous de pièces forgées |
-| 6 | Villes anciennes | Gardées vides, sans Warden | Retirées |
-| 7 | Photographie | Exposure (un métier) | Camerapture (plus simple) |
-| 8 | Colonies | Easy NPC + Create Villager Labor, sans MineColonies | Survivants Easy NPC seuls, sans travail automatisé |
-| 9 | Voix | Simple Voice Chat, groupes désactivés | Groupes autorisés pour les expéditions |
-| 10 | Umvuthana de Mowzie's (tribus masquées hostiles) | Désactivés | Gardés très rares |
-| 11 | Towers of the Wild Modded | Non retenu (proche de Structory: Towers) | Tours en ruine très rares, planeur dans le coffre |
-| 12 | Régénération naturelle | Gardée ; Hardcore Revival, faim et soif suffisent | Coupée |
-| 13 | Élevage | Trois petits mods (Cattlestrophic, Salt's, Animal Genders) | Élevage vanilla + bâtiments F&C seulement |
-| 14 | Conservation | Freeze It and Heat It + Garde-manger limité aux rations d'expédition | Garde-manger étendu à toute la nourriture |
-| 15 | Pêche | Tide | River Fishing (plus exigeant, ajoute un PNJ pêcheur) |
-| 16 | Vin et cave | Kaleidoscope Tavern à la place de Vinery | Rien pour l'instant |
+| 1 | **The Nether** | Closed like the End, with replacement recipes ([3.8](03-civilisation.md#38-the-nether-closed-by-default)) | Open as a late expedition, with its vanilla monsters kept local |
+| 2 | Rivers | NML + Streams Reflowing, if the test passes ([2.6](02-exploration.md#26-rivers-streams-reflowing-on-no-mans-land)) | Keep the comparison with Terralith |
+| 3 | Entity Culling | Tuned, removed if it still breaks contraptions | — |
+| 4 | Electricity | Stay mechanical and diesel (option A) | Crafts & Additions in the late game |
+| 5 | Engineer blueprints | System adopted, Quark Automatic Recipe Unlock disabled, `doLimitedCrafting` | Free recipes, progression only through forged-part locks |
+| 6 | Ancient cities | Kept empty, without Warden | Removed |
+| 7 | Photography | Exposure (a profession) | Camerapture (simpler) |
+| 8 | Colonies | Easy NPC + Create Villager Labor, without MineColonies | Easy NPC survivors only, without automated work |
+| 9 | Voice | Simple Voice Chat, groups disabled | Groups allowed for expeditions |
+| 10 | Mowzie's Umvuthana (masked hostile tribes) | Disabled | Kept very rare |
+| 11 | Towers of the Wild Modded | Not retained (close to Structory: Towers) | Very rare ruined towers, glider in the chest |
+| 12 | Natural regeneration | Kept; Hardcore Revival, hunger and thirst are enough | Disabled |
+| 13 | Animal husbandry | Three small mods (Cattlestrophic, Salt's, Animal Genders) | Vanilla husbandry + F&C buildings only |
+| 14 | Preservation | Freeze It and Heat It + Pantry limited to expedition rations | Pantry extended to all food |
+| 15 | Fishing | Tide | River Fishing (more demanding, adds a fisherman NPC) |
+| 16 | Wine and cellar | Kaleidoscope Tavern instead of Vinery | Nothing for now |
 

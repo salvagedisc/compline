@@ -1,182 +1,182 @@
-# La Lune Amie : le mystère central de Fallow
+# The Friendly Moon: the central mystery of Fallow
 
-Idée 2 tirée de Wayfarer ([recherche du 2026-10-19](recherche/2026-10-19/wayfarer.md), recommandation 2). No Man's Land (NML 1.6.1) contient déjà une quête : une lune qui parle. Fallow en fait son fil principal, et la fait cohabiter avec les lunes d'Enhanced Celestials, dont la lune blanche. Ce document tranche les points 6 et 18 du [rapport 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
+Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
 
-> **État au 2026-10-19.** Tout vient de la lecture des jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 puis Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), décompilés avec `javap` et Vineflower. Un premier passage sur le serveur de test sans joueur a validé la partie serveur ([résultats](#serveur-de-test-2026-10-19)). **Rien n'a été testé avec un joueur.** La liste des [tests](#ce-qui-reste-à-vérifier-en-jeu) dit quoi vérifier.
+> **Status as of 2026-10-19.** Everything comes from reading the jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 then Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), decompiled with `javap` and Vineflower. A first pass on the test server without a player validated the server side ([results](#test-server-2026-10-19)). **Nothing has been tested with a player.** The list of [tests](#what-remains-to-be-checked-in-game) says what to check.
 
-## En bref
+## In brief
 
-- La Lune Amie n'est pas un évènement tiré au hasard. Elle vit dans un lieu, le **Point de rencontre**, et s'y montre **chaque nuit** à qui vient la voir.
-- On y arrive par l'exploration : une **gravure de lune** au fond des ruines des alchimistes, puis un **rêve**, puis une **ombre dans le ciel** qui montre le chemin. Aucune coordonnée.
-- **Une seule lune à la fois.** Si une lune d'Enhanced Celestials est levée quand la Lune Amie apparaît, cette lune se couche pour la nuit. Script : `pack/kubejs/server_scripts/lune.js`.
-- La **lune de sang** et la **super lune de sang** sont retirées, comme le prévoyait le plan. Elles empêchaient de dormir, donc de rêver.
-- La **lune blanche** reste rare : environ 3 nuits sur 1 000. Attention : elle n'est **pas encore dans le pack**. Elle n'existe qu'en brouillon (voir [plus bas](#la-lune-blanche)).
+- The Friendly Moon is not a randomly drawn event. It lives in a place, the **Meeting Point**, and shows itself there **every night** to whoever comes to see it.
+- You get there by exploring: a **moon carving** at the bottom of the alchemists' ruins, then a **dream**, then a **shadow in the sky** that shows the way. No coordinates.
+- **Only one moon at a time.** If an Enhanced Celestials moon is up when the Friendly Moon appears, that moon sets for the night. Script: `pack/kubejs/server_scripts/lune.js`.
+- The **blood moon** and the **super blood moon** are removed, as the plan intended. They prevented sleeping, and therefore dreaming.
+- The **white moon** stays rare: about 3 nights in 1,000. Caution: it is **not yet in the pack**. It exists only as a draft (see [below](#the-white-moon)).
 
-## La Lune Amie, pour un joueur
+## The Friendly Moon, for a player
 
-1. **Les ruines.** Les ruines des alchimistes sont sous terre, dans les biomes de grotte, entre les hauteurs 10 et 40. Le cœur de chaque ruine ouvre sur un sanctuaire de la lune, avec une grande gravure en forme de visage de lune. Des gravures plus petites décorent aussi certaines ruines. Une note froissée, trouvée parfois dans les jarres, en parle (ajout Fallow).
-2. **La gravure.** Il suffit de regarder la gravure pendant 2 secondes, à moins de 24 blocs. L'image zoome et un son retentit. Rien d'autre ne l'annonce.
-3. **Le rêve.** Pendant les 3 jours de jeu suivants (comptés quand il est connecté), le joueur qui dort dans un lit fait un rêve : une allée de monolithes, sans barre d'interface, sans pouvoir courir. Au bout, un bassin. Il faut lever les yeux vers la lune et la regarder 10 secondes. Sortir de l'allée réveille le joueur sans résultat. Succès : « Premier contact ».
-4. **L'ombre.** Pendant les 8 nuits qui suivent le rêve, une ombre de lune apparaît dans le ciel, vers le Point de rencontre. Elle s'efface quand on arrive. Après 8 nuits, elle ne revient plus : il faut retourner regarder une gravure, puis rêver de nouveau.
-5. **Le Point de rencontre.** Un cercle de menhirs autour d'un bassin et de bougies, à la surface, entre 1 000 et 2 500 blocs du centre du monde. Il y en a **un seul par monde**, partagé par tous les joueurs.
-6. **Le réveil.** La nuit, à moins de 16 blocs du bassin, le joueur regarde la lune. Un visage endormi apparaît, puis s'éveille. La nuit s'assombrit, les bougies s'allument et la Lune Amie salue le joueur. Succès : « Amitié ».
-7. **Les offrandes.** Un objet jeté dans le bassin, ou un animal posé dessus, monte dans un rayon de lumière. La Lune Amie en parle : 80 répliques, pour des objets (os, fleurs, cloche ancienne, épée du serment…) et des créatures (cerf, oie, tortue, abeille…). Une carte vierge devient une carte du bassin, et une carte déjà remplie y gagne un repère. Ce sont des souvenirs et des confidences, pas des récompenses.
-8. **L'ascension.** On amène un **Compagnon** (le petit être champignon de NML) au bassin. La Lune Amie l'élève pendant 15 secondes et il devient une étoile du ciel. Elle laisse alors le disque « Guidance » de Samuel Organ. Succès : « Ami de mon ami ».
+1. **The ruins.** The alchemists' ruins are underground, in cave biomes, between heights 10 and 40. The heart of each ruin opens onto a moon sanctuary, with a large carving in the shape of a moon face. Smaller carvings also decorate some ruins. A crumpled note, sometimes found in the jars, mentions it (Fallow addition).
+2. **The carving.** It is enough to look at the carving for 2 seconds, within 24 blocks. The image zooms and a sound rings out. Nothing else announces it.
+3. **The dream.** During the next 3 game days (counted while connected), a player sleeping in a bed has a dream: an avenue of monoliths, with no interface bar, unable to run. At the end, a pool. You have to look up at the moon and watch it for 10 seconds. Leaving the avenue wakes the player with no result. Achievement: "First Contact".
+4. **The shadow.** For the 8 nights following the dream, a moon shadow appears in the sky, towards the Meeting Point. It fades when you arrive. After 8 nights, it no longer returns: you have to go back and look at a carving, then dream again.
+5. **The Meeting Point.** A circle of menhirs around a pool and candles, on the surface, between 1,000 and 2,500 blocks from the centre of the world. There is **only one per world**, shared by all players.
+6. **The awakening.** At night, within 16 blocks of the pool, the player looks at the moon. A sleeping face appears, then wakes. The night darkens, the candles light up and the Friendly Moon greets the player. Achievement: "Friendship".
+7. **The offerings.** An item thrown into the pool, or an animal placed on it, rises in a beam of light. The Friendly Moon comments on it: 80 lines, for items (bones, flowers, ancient bell, oath sword…) and creatures (deer, goose, turtle, bee…). A blank map becomes a map of the pool, and a map that is already filled gains a marker there. These are memories and confidences, not rewards.
+8. **The ascension.** You bring a **Companion** (NML's little mushroom being) to the pool. The Friendly Moon lifts it for 15 seconds and it becomes a star in the sky. It then leaves the "Guidance" disc by Samuel Organ. Achievement: "Friend of My Friend".
 
-Ce qui la contrarie :
-- Éteindre les bougies : elle se trouble. Si on les éteint toutes, elle se fâche.
-- Le **Mauvais présage**, ou offrir une **babiole** (trinket) de NML : elle se fâche contre ce joueur jusqu'au matin.
-- Un juke-box qui joue près du bassin : elle demande de l'arrêter et éjecte le disque.
+What upsets it:
+- Putting out the candles: it becomes troubled. If all of them are put out, it gets angry.
+- The **Bad Omen**, or offering an NML **trinket**: it gets angry with that player until morning.
+- A jukebox playing near the pool: it asks for it to be stopped and ejects the disc.
 
-Ce qu'elle donne : trois succès, le disque « Guidance », une étoile de plus dans le ciel par Compagnon élevé, une carte du bassin et surtout des **dialogues**. Elle ne donne aucun équipement. C'est un mystère à écouter, pas une boutique.
+What it gives: three achievements, the "Guidance" disc, one more star in the sky per Companion raised, a map of the pool and above all **dialogues**. It gives no equipment. It is a mystery to listen to, not a shop.
 
-## Comment elle marche (lu dans le jar)
+## How it works (read from the jar)
 
-| Élément | Valeur | Classe |
+| Element | Value | Class |
 |---|---|---|
-| Nuit | De la nuit tombée (temps ≈ 13 900) à l'aube (≈ 22 100) : `getTimeOfDay` entre 0,3 et 0,7. Pas de phase de lune, pas de hasard, pas de condition de météo | `FriendMoon.isNightTime` |
-| Présence | Joueur à moins de 16 blocs du bassin (cube), qui regarde la lune | `FriendMoon.appearConditionsMet`, `FriendMoonRenderer` |
-| Départ | Plus de 60 ticks hors de portée : réplique d'adieu ; la mort a ses propres répliques | `FriendMoon.tick` |
-| Gravure | Regard de 40 ticks à 24 blocs au plus ; ouvre une fenêtre de rêve de 72 000 ticks (3 jours) | `MoonCarvingBlockEntity` |
-| Rêve | Lit, sommeil complet ; regard de 200 ticks vers la lune ; dimension de rêve à part | `MoonlightDreamType`, `DreamManager` |
-| Ombre | 8 nuits comptées après le rêve | `CosmicBodyState` (`MAX_COSMIC_BODY_DAYS = 8`) |
-| Ascension | 300 ticks ; le Compagnon perd de la vie (jamais sous 1,5) avec des bruits d'os ; récompense après 20 ticks | `FriendMoon.specialInteraction`, `completeAscension` |
-| Lieu | Structure `nomansland:meeting_point`, placement propre (un seul exemplaire), biomes `#minecraft:is_overworld` | `MeetingPointStructure` |
+| Night | From nightfall (time ≈ 13,900) to dawn (≈ 22,100): `getTimeOfDay` between 0.3 and 0.7. No moon phase, no randomness, no weather condition | `FriendMoon.isNightTime` |
+| Presence | Player within 16 blocks of the pool (cube), looking at the moon | `FriendMoon.appearConditionsMet`, `FriendMoonRenderer` |
+| Departure | More than 60 ticks out of range: farewell line; death has its own lines | `FriendMoon.tick` |
+| Carving | 40-tick gaze at 24 blocks at most; opens a 72,000-tick dream window (3 days) | `MoonCarvingBlockEntity` |
+| Dream | Bed, full sleep; 200-tick gaze towards the moon; separate dream dimension | `MoonlightDreamType`, `DreamManager` |
+| Shadow | 8 nights counted after the dream | `CosmicBodyState` (`MAX_COSMIC_BODY_DAYS = 8`) |
+| Ascension | 300 ticks; the Companion loses health (never below 1.5) with bone sounds; reward after 20 ticks | `FriendMoon.specialInteraction`, `completeAscension` |
+| Place | Structure `nomansland:meeting_point`, own placement (single instance), biomes `#minecraft:is_overworld` | `MeetingPointStructure` |
 
-### Les compagnons
+### The companions
 
-- **Le Compagnon** (`nomansland:buddy`) naît dans des ronds de champignons, sur les **îles aux champignons** seulement (`mushroom_fields`). Il peut suivre les joueurs, et on le rend heureux en le nourrissant. L'amener jusqu'au Point de rencontre est un vrai voyage : bateau, train ou dirigeable.
-- **Le Frienderman** remplace 1 % des endermen qui apparaissent naturellement dans l'Overworld. Fallow retire les endermen, donc **il n'apparaîtra pas**. Son échange de masque demande aussi le mod Vanity, absent. Il n'est pas nécessaire à la quête.
+- **The Companion** (`nomansland:buddy`) is born in mushroom rings, on **mushroom islands** only (`mushroom_fields`). It can follow players, and it is made happy by feeding it. Bringing it to the Meeting Point is a real journey: boat, train or airship.
+- **The Frienderman** replaces 1% of the endermen that spawn naturally in the Overworld. Fallow removes endermen, so **it will not appear**. Its mask exchange also requires the Vanity mod, which is absent. It is not needed for the quest.
 
-### Les clés de config
+### The config keys
 
-Toutes dans `config/nomansland-common.toml` (config **commune**, pas de serverconfig), section `[meeting_point]` :
+All in `config/nomansland-common.toml` (**common** config, not serverconfig), section `[meeting_point]`:
 
-| Clé | Défaut | Fallow | Pourquoi |
+| Key | Default | Fallow | Why |
 |---|---|---|---|
-| `minMeetingPointDistance` | 1000 | 1000 | Écrite pour être visible. Une vraie expédition, sans être hors d'atteinte |
-| `maxMeetingPointDistance` | 2500 | 2500 | Idem |
-| `friendMoonDimensions` | `[]` (toutes les dimensions qui ont le type de l'Overworld) | `["minecraft:overworld"]` | Seule dimension où Enhanced Celestials a des lunes. On évite qu'une autre dimension compte par erreur |
+| `minMeetingPointDistance` | 1000 | 1000 | Written to be visible. A real expedition, without being out of reach |
+| `maxMeetingPointDistance` | 2500 | 2500 | Same |
+| `friendMoonDimensions` | `[]` (all dimensions with the Overworld type) | `["minecraft:overworld"]` | The only dimension where Enhanced Celestials has moons. This avoids another dimension counting by mistake |
 
-Le reste de la Lune Amie n'a pas de réglage : la fenêtre de nuit, les 3 jours, les 8 nuits et les rayons sont écrits dans le code.
+The rest of the Friendly Moon has no settings: the night window, the 3 days, the 8 nights and the radii are written in the code.
 
-Commandes de test (permission 2) : `/meetingpoint` (où est le Point), `/meetingpoint set <pos>`, `/meetingpoint reset`, `/dream <joueur> nomansland:friend_moon_dream start` ou `clear`.
+Test commands (permission 2): `/meetingpoint` (where the Point is), `/meetingpoint set <pos>`, `/meetingpoint reset`, `/dream <player> nomansland:friend_moon_dream start` or `clear`.
 
-## Enhanced Celestials 2 : comment il choisit ses lunes
+## Enhanced Celestials 2: how it chooses its moons
 
-Depuis le 2026-10-19, le pack utilise **Enhanced Celestials 2** : Core 2.0.3.3 et Default Lunar Events 2.0.1.3, qui remplacent Enhanced Celestials 6.0.2.6 (les deux ne peuvent pas cohabiter). Lu dans les jars, pas encore vu en jeu.
+Since 2026-10-19, the pack uses **Enhanced Celestials 2**: Core 2.0.3.3 and Default Lunar Events 2.0.1.3, which replace Enhanced Celestials 6.0.2.6 (the two cannot coexist). Read in the jars, not yet seen in game.
 
-- Pas de fichier de config pour les lunes : tout passe par des datapacks, sous `data/<ns>/enhancedcelestials2core/lunar/`. Un évènement (`event/`) n'est qu'une liste de modificateurs (`event_modifier/` : couleur, taille, texture, son, textes, apparitions, sommeil…). Sa rareté est à part, dans `event_probability/` : par dimension, un **poids**, une priorité et des règles (`min_nights_between`, `valid_moon_phase`).
-- Ids : la lune ordinaire est `enhancedcelestials2core:default`, les lunes livrées sont `enhancedcelestials2defaultlunarevents:<id>` (`blood_moon`, `blue_moon`, `harvest_moon`, `super_moon` et leurs variantes `super_`).
-- Overworld (`data/minecraft/enhancedcelestials2core/lunar/dimension_settings/overworld.json`) : la nuit lunaire commence à 12500 (13000 avant) et il faut au moins 3 jours entre deux lunes (2 avant).
-- Comme avant, une lune n'a lieu que par ciel dégagé ; Fallow est humide, ses lunes seront donc rares.
-- Seul réglage livré : `config/enhancedcelestials2core/translations.json` en `DISABLED`. Par défaut, le mod télécharge des traductions de la communauté et **remplace** les textes existants, donc aussi les nôtres (`pack/kubejs/assets/enhancedcelestials2core/`, `…defaultlunarevents/`).
+- No config file for the moons: everything goes through datapacks, under `data/<ns>/enhancedcelestials2core/lunar/`. An event (`event/`) is only a list of modifiers (`event_modifier/`: colour, size, texture, sound, texts, spawns, sleep…). Its rarity is separate, in `event_probability/`: per dimension, a **weight**, a priority and rules (`min_nights_between`, `valid_moon_phase`).
+- Ids: the ordinary moon is `enhancedcelestials2core:default`, the supplied moons are `enhancedcelestials2defaultlunarevents:<id>` (`blood_moon`, `blue_moon`, `harvest_moon`, `super_moon` and their `super_` variants).
+- Overworld (`data/minecraft/enhancedcelestials2core/lunar/dimension_settings/overworld.json`): the lunar night starts at 12500 (13000 before) and at least 3 days are needed between two moons (2 before).
+- As before, a moon only occurs under a clear sky; Fallow is humid, so its moons will be rare.
+- Only setting supplied: `config/enhancedcelestials2core/translations.json` set to `DISABLED`. By default, the mod downloads community translations and **replaces** existing texts, including ours (`pack/kubejs/assets/enhancedcelestials2core/`, `…defaultlunarevents/`).
 
-### Lunes actives dans Fallow
+### Active moons in Fallow
 
-| Lune | Effet | Dans Fallow |
+| Moon | Effect | In Fallow |
 |---|---|---|
-| Lune des moissons, super lune des moissons | Récoltes plus abondantes | Gardées |
-| Lune bleue, super lune bleue | Couleur bleue | Gardées |
-| Super lune | Lune plus grosse | Gardée |
-| Lune de sang, super lune de sang | Plus de monstres, **sommeil interdit** | **Retirées** |
-| Lune blanche (brouillon Fallow) | Lune pâle, rien d'hostile | Absente |
+| Harvest moon, super harvest moon | More abundant harvests | Kept |
+| Blue moon, super blue moon | Blue colour | Kept |
+| Super moon | Bigger moon | Kept |
+| Blood moon, super blood moon | More monsters, **sleep forbidden** | **Removed** |
+| White moon (Fallow draft) | Pale moon, nothing hostile | Absent |
 
-Les fréquences simulées pour Enhanced Celestials 6 (environ 6 nuits sur 100 pour les lunes bleues et des moissons) ne valent plus : EC2 tire avec des poids. Elles sont à remesurer avec `/ec lunarForecast` sur un monde neuf.
+The frequencies simulated for Enhanced Celestials 6 (about 6 nights in 100 for blue and harvest moons) no longer apply: EC2 draws with weights. They need to be measured again with `/ec lunarForecast` on a new world.
 
-La lune de sang est retirée par deux fichiers qui vident sa liste de dimensions (`"dimensions": {}`) : `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json` et `super_blood_moon.json`.
+The blood moon is removed by two files that empty its dimension list (`"dimensions": {}`): `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json` and `super_blood_moon.json`.
 
-### La lune blanche
+### The white moon
 
-Le brouillon `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` est au format d'Enhanced Celestials 6 et ne se charge plus. Pour l'activer, il faut le réécrire au format EC2 : un évènement `fallow:lune_blanche` (liste de modificateurs), ses modificateurs (couleur pâle, taille, texte de nom et d'annonce, pas de boucle `minecraft:ambient.cave`, qui serait angoissante, [musique](recherche/2026-10-19/musique.md)), et une probabilité sur l'Overworld (pleine lune, au moins 10 nuits d'écart, un poids à régler face aux poids des lunes livrées, 5 à 10).
+The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
 
-## La cohabitation choisie
+## The chosen coexistence
 
-**Le problème.** La Lune Amie se montre chaque nuit, à un endroit. Une lune d'Enhanced Celestials tombe une nuit donnée, partout. Les deux peuvent donc tomber la même nuit. Ce n'est pas qu'une question d'image. Quand la Lune Amie apparaît, ATMOSPHERICS rend la main au ciel vanilla. Enhanced Celestials redessine alors sa lune colorée à côté du visage de la Lune Amie, teinte la nuit et joue sa boucle sonore par-dessus les dialogues.
+**The problem.** The Friendly Moon shows itself every night, in one place. An Enhanced Celestials moon falls on a given night, everywhere. The two can therefore fall on the same night. It is not only a matter of image. When the Friendly Moon appears, ATMOSPHERICS hands the sky back to vanilla. Enhanced Celestials then redraws its coloured moon next to the Friendly Moon's face, tints the night and plays its sound loop over the dialogues.
 
-**Config seule : impossible.** NML ne règle que les dimensions et la distance du Point. Enhanced Celestials ne connaît pas NML et prévoit ses lunes 100 jours à l'avance. Aucun réglage ne relie les deux.
+**Config alone: impossible.** NML only sets the dimensions and the distance of the Point. Enhanced Celestials does not know NML and schedules its moons 100 days in advance. No setting links the two.
 
-**Script KubeJS : retenu.** `lune.js` vérifie toutes les 2 secondes, dans l'Overworld :
-1. si une lune d'Enhanced Celestials est levée (presque toujours non : la vérification s'arrête là) ;
-2. si la Lune Amie est éveillée, ou si un joueur se trouve à moins de 64 blocs à plat du Point de rencontre. On n'attend pas l'éveil, car le visage endormi apparaît déjà avant.
+**KubeJS script: retained.** `lune.js` checks every 2 seconds, in the Overworld:
+1. whether an Enhanced Celestials moon is up (almost always no: the check stops there);
+2. whether the Friendly Moon is awake, or whether a player is within 64 blocks (flat distance) of the Meeting Point. We do not wait for the awakening, because the sleeping face already appears before it.
 
-Si les deux sont vrais, le script fait le même appel que la commande `/ec setLunarEvent` vers la lune ordinaire (`LunarForecast.setLunarEventTonight`). La lune de la nuit est coupée, la suite de la prévision ne bouge pas. Enhanced Celestials affiche son propre message de fin (par exemple « La "Lune Bleue" se couche... »), et chaque joueur de l'Overworld lit dans sa barre d'action : « La lune pâlit. Une autre présence occupe le ciel cette nuit. » Les lunes suivantes restent prévues à leur date.
+If both are true, the script makes the same call as the `/ec setLunarEvent` command towards the ordinary moon (`LunarForecast.setLunarEventTonight`). The night's moon is cut, the rest of the forecast does not change. Enhanced Celestials displays its own ending message (for example "The "Blue Moon" sets..."), and every player in the Overworld reads in their action bar: "The moon grows pale. Another presence occupies the sky tonight." The following moons remain scheduled at their date.
 
-Pourquoi la Lune Amie gagne : c'est le mystère central, et elle ne vient que si un joueur fait le voyage. La lune blanche reste rare et revient plus tard. Le prix : la lune se couche **pour tout le serveur**, même pour un joueur resté chez lui. Pour lui, c'est un signe que quelqu'un est au Point de rencontre.
+Why the Friendly Moon wins: it is the central mystery, and it only comes if a player makes the journey. The white moon stays rare and returns later. The price: the moon sets **for the whole server**, even for a player who stayed at home. For them, it is a sign that someone is at the Meeting Point.
 
-Si une erreur de script survient (une classe renommée après une mise à jour), le script s'arrête une fois pour toutes et l'écrit dans le log. Une exception Java peut échapper au `catch` : KubeJS l'écrit alors toutes les 2 secondes dans `logs/kubejs/server.log`, sans planter le serveur.
+If a script error occurs (a class renamed after an update), the script stops once and for all and writes it to the log. A Java exception can escape the `catch`: KubeJS then writes it every 2 seconds in `logs/kubejs/server.log`, without crashing the server.
 
-### Proposition pour le mod `fallow` (non codée, dernier recours)
+### Proposal for the `fallow` mod (not coded, last resort)
 
-Si l'équipe préfère que la lune blanche continue pour les autres joueurs, la solution passe par le client, dans le module `ciel`. Option `ciel.luneAmieSeule` : tant que NML dessine la Lune Amie (`FriendMoonRenderer.getFriendMoonOpacity() > 0`, la valeur qu'ATMOSPHERICS lit déjà), le module dessine la lune ordinaire d'Enhanced Celestials. Il coupe aussi sa teinte de nuit et sa boucle sonore, **chez ce joueur seulement**. Le serveur ne change rien et la lune reste levée ailleurs. Le coût : 1 ou 2 mixins client de plus sur `ECWorldRenderer` et `LunarSoundHandler`, à revoir à chaque mise à jour des deux mods. Le script KubeJS suffit tant que personne ne s'en plaint.
+If the maintainer prefers the white moon to continue for the other players, the solution goes through the client, in the `ciel` module. Option `ciel.luneAmieSeule`: as long as NML draws the Friendly Moon (`FriendMoonRenderer.getFriendMoonOpacity() > 0`, the value ATMOSPHERICS already reads), the module draws the ordinary Enhanced Celestials moon. It also cuts its night tint and its sound loop, **for that player only**. The server changes nothing and the moon stays up elsewhere. The cost: 1 or 2 more client mixins on `ECWorldRenderer` and `LunarSoundHandler`, to be reviewed at each update of the two mods. The KubeJS script is enough as long as nobody complains.
 
-## Entrer dans le fil par l'exploration
+## Entering the thread through exploration
 
-- **Déjà dans NML.** Le cœur de chaque ruine des alchimistes mène à un sanctuaire de la lune. L'exploration souterraine mène donc d'elle-même à la gravure, et le succès « Premier contact » suit celui des ruines.
-- **Ajouté : une note froissée.** Dans les jarres « alchimie » des ruines (`nomansland:chests/alchemist_pot_alchemy`), 4 % de chance par jarre, en plus du butin normal. C'est une feuille de papier vanilla avec un nom et trois lignes de texte : « Au fond des ruines, un visage de lune est gravé dans la pierre. / Je l'ai regardé longtemps. Les nuits suivantes, j'ai rêvé d'elle. / Depuis, une ombre dans le ciel me montre un chemin. » Elle dit quoi faire sans le dire tout à fait. Les jarres se regarnissent, donc une note perdue revient. Textes : clés `fallow.lune.*`.
-- **Idées non faites, à garder.**
-  - *Monolithes* : le rêve et le Point de rencontre sont faits de monolithes et de menhirs. Une page du codex d'Ancient Remnants, ou un fragment trouvé près d'un monolithe, pourrait parler d'une « lune qui écoute ». C'est à relier au travail prévu sur les fragments du codex dans les ruines NML.
-  - *Clairières* : une clairière ouverte la nuit pourrait laisser voir l'ombre de la lune plus nettement. Cela demande le mod `fallow`, donc ce n'est pas léger.
+- **Already in NML.** The heart of each alchemists' ruin leads to a moon sanctuary. Underground exploration therefore leads by itself to the carving, and the "First Contact" achievement follows that of the ruins.
+- **Added: a crumpled note.** In the "alchemy" jars of the ruins (`nomansland:chests/alchemist_pot_alchemy`), 4% chance per jar, on top of the normal loot. It is a vanilla sheet of paper with a name and three lines of text: "At the bottom of the ruins, a moon face is carved into the stone. / I looked at it for a long time. The following nights, I dreamt of her. / Since then, a shadow in the sky shows me a path." It says what to do without quite saying it. Jars refill, so a lost note comes back. Texts: keys `fallow.lune.*`.
+- **Ideas not done, to keep.**
+  - *Monoliths*: the dream and the Meeting Point are made of monoliths and menhirs. A page of the Ancient Remnants codex, or a fragment found near a monolith, could speak of a "moon that listens". This is to be linked to the planned work on codex fragments in NML ruins.
+  - *Clearings*: a clearing opened at night could let the moon's shadow be seen more clearly. This requires the `fallow` mod, so it is not lightweight.
 
-## Textes en français
+## French texts
 
-- Les 7 pools de dialogues ont un `fr_fr` dans le jar : `contextual` 8, `greeting` 17, `leaving` 14, `negative` 26, `offering` 80, `passive` 48, `special` 2. Les clés sont complètes.
-- `offering` : Fallow fournit déjà le fichier complet (il manquait 9 répliques au jar). Il gagne la réplique `scute`. Le jar a un fichier de dialogue pour les écailles (tortue, tortue de NML, tatou), mais aucun texte de langue, même en anglais. Sans clé, le jeu affichait la phrase anglaise du fichier de données.
-- `negative` : nouveau fichier complet, copié du jar, où la seule réplique restée en anglais (« Oopsie. ») devient « Oupsi. ».
-- Les succès, les blocs (Gravure de la lune, Bassin du clair de lune, Bougie du clair de lune), le Compagnon et le disque sont traduits dans le `fr_fr` principal de NML.
-- Les textes de Fallow (`fallow.lune.efface`, `fallow.lune.note*`) vont dans `pack/kubejs/assets/fallow/lang/` (fusion des langues par le coordinateur).
-- `npm run check-fr` ne lit pas les pools de dialogues : à recontrôler à chaque montée de version de NML.
+- The 7 dialogue pools have a `fr_fr` in the jar: `contextual` 8, `greeting` 17, `leaving` 14, `negative` 26, `offering` 80, `passive` 48, `special` 2. The keys are complete.
+- `offering`: Fallow already supplies the complete file (the jar was missing 9 lines). It gains the `scute` line. The jar has a dialogue file for scutes (turtle, NML turtle, armadillo), but no language text, even in English. Without a key, the game displayed the English sentence from the data file.
+- `negative`: new complete file, copied from the jar, where the only line left in English ("Oopsie.") becomes "Oupsi.".
+- The achievements, the blocks (Gravure de la lune, Bassin du clair de lune, Bougie du clair de lune), the Companion and the disc are translated in NML's main `fr_fr`.
+- Fallow's texts (`fallow.lune.efface`, `fallow.lune.note*`) go into `pack/kubejs/assets/fallow/lang/` (language files merged separately).
+- `npm run check-fr` does not read the dialogue pools: to be rechecked at each NML version upgrade.
 
-## Ce qui reste à vérifier en jeu
+## What remains to be checked in game
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| L1 | Log au démarrage | Aucune erreur `lune.js`. Enhanced Celestials liste les lunes possibles de l'Overworld, sans `blood_moon` ni `super_blood_moon` |
-| L2 | `/ec lunarForecast` sur un monde neuf | Aucune lune de sang dans la prévision. **Fait sur le serveur de test** |
-| L3 | Ruine des alchimistes, regarder la gravure 2 s | Zoom et son. Dormir dans les 3 jours lance le rêve |
-| L4 | Rêve jusqu'au bout | Succès « Premier contact ». La nuit suivante, l'ombre dans le ciel vers le Point (comparer avec `/meetingpoint`) |
-| L5 | Point de rencontre, la nuit, regarder la lune | Le visage apparaît puis s'éveille, comme avec NML seul, avec ATMOSPHERICS et le module `ciel` (test C6 du [mod `fallow`](mod-fallow.md)). Aucune lune colorée d'Enhanced Celestials à côté |
-| L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, puis aller au Point | En 2 s au plus : message d'Enhanced Celestials et message Fallow, la lune bleue s'efface. `/ec lunarForecast` montre la suite inchangée. Le coucher lui-même est validé sur le serveur ; restent les messages et la détection d'un vrai joueur |
-| L7 | Même chose avec un joueur loin du Point | Rien ne change pour lui tant que personne n'est au Point |
-| L8 | Offrandes : os, fleur, carte vierge, écaille de tortue | Répliques en français, carte du bassin, réplique `scute` en français |
-| L9 | Éteindre une bougie, puis toutes | Répliques « négatives » en français, puis lune fâchée |
-| L10 | Amener un Compagnon d'une île aux champignons | Ascension, disque « Guidance », succès « Ami de mon ami ». Vérifier qu'on peut le transporter (laisse, bateau, train, dirigeable) |
-| L11 | Briser des jarres « alchimie » | La note froissée sort parfois, nom et lignes en français |
-| L12 | Une nuit de pluie au Point | La Lune Amie apparaît-elle sous la pluie ? Et la lune d'Enhanced Celestials qui revient quand la pluie cesse se couche-t-elle bien ? |
-| L13 | Distance réelle du Point avec la génération de Fallow | Entre 1 000 et 2 500 blocs du centre, sur un terrain accessible |
-| L14 | Fréquence des ruines des alchimistes | Assez de ruines pour trouver une gravure (Sparse Structures pourrait les raréfier, [12-verification](12-verification.md)) |
+| L1 | Log at startup | No `lune.js` error. Enhanced Celestials lists the possible Overworld moons, without `blood_moon` or `super_blood_moon` |
+| L2 | `/ec lunarForecast` on a new world | No blood moon in the forecast. **Done on the test server** |
+| L3 | Alchemists' ruin, look at the carving for 2 s | Zoom and sound. Sleeping within the 3 days starts the dream |
+| L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`) |
+| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (test C6 of the [`fallow` mod](mod-fallow.md)). No coloured Enhanced Celestials moon next to it |
+| L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then go to the Point | Within 2 s at most: Enhanced Celestials message and Fallow message, the blue moon fades. `/ec lunarForecast` shows the rest unchanged. The setting itself is validated on the server; the messages and detection of a real player remain |
+| L7 | Same with a player far from the Point | Nothing changes for them as long as nobody is at the Point |
+| L8 | Offerings: bone, flower, blank map, turtle scute | Lines in French, map of the pool, `scute` line in French |
+| L9 | Put out one candle, then all | "Negative" lines in French, then angry moon |
+| L10 | Bring a Companion from a mushroom island | Ascension, "Guidance" disc, achievement "Friend of My Friend". Check that it can be transported (lead, boat, train, airship) |
+| L11 | Break "alchemy" jars | The crumpled note sometimes drops, name and lines in French |
+| L12 | A rainy night at the Point | Does the Friendly Moon appear in the rain? And does the Enhanced Celestials moon that returns when the rain stops set properly? |
+| L13 | Real distance of the Point with Fallow's generation | Between 1,000 and 2,500 blocks from the centre, on accessible terrain |
+| L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](12-verification.md)) |
 
-## Serveur de test (2026-10-19)
+## Test server (2026-10-19)
 
-Ces résultats datent d'Enhanced Celestials 6.0.2.6 ; avec EC2, refaire au moins L1, L2, L5 et L6.
+These results date from Enhanced Celestials 6.0.2.6; with EC2, redo at least L1, L2, L5 and L6.
 
-Serveur NeoForge sans interface, monde neuf (graine « fallow »), **sans joueur**. Les commandes d'Enhanced Celestials s'écrivent `/ec setLunarEvent …` et `/ec lunarForecast` (ou `/enhancedcelestials …`), pas `/setLunarEvent` seul.
+Headless NeoForge server, new world (seed "fallow"), **without a player**. The Enhanced Celestials commands are written `/ec setLunarEvent …` and `/ec lunarForecast` (or `/enhancedcelestials …`), not `/setLunarEvent` alone.
 
-| Point | Résultat |
+| Point | Result |
 |---|---|
-| `lune.js` au chargement | 6/6 scripts serveur chargés, 0 erreur. Les deux classes Java (Enhanced Celestials, `FriendMoon`) se chargent |
-| `lune.js` à l'usage | Trois erreurs trouvées et corrigées : un `const` dans le `try` (« redeclaration of var level ») ; `clé == null` sur une `ResourceKey`, qui lève une NullPointerException hors du `catch` ; `ResourceKey.equals()` introuvable depuis Rhino. Plus `level.players()`, que KubeJS prend pour une propriété : le script passe par `server.getPlayerList()`. Après correction : plus aucune erreur, de jour comme de nuit |
-| Config NML | `config/nomansland-common.toml` lu et complété par NeoForge, `friendMoonDimensions = ["minecraft:overworld"]` conservé |
-| Datapack Enhanced Celestials | Aucune erreur. Log : « Possible lunar events for dimension "minecraft:overworld" are [super_blue_moon, blue_moon, super_moon, super_harvest_moon, harvest_moon] », donc plus de lune de sang. `/ec lunarForecast` : 14 lunes bleues ou des moissons sur 100 jours, aucune lune de sang |
-| Point de rencontre | `/meetingpoint` : (616, −1288), soit environ 1 430 blocs du centre |
-| Coucher d'une lune | Nuit (`/time set 14000`) et lune bleue forcée. Sans joueur, la lune reste levée, comme prévu. Avec la détection forcée à vrai (modification temporaire, retirée ensuite), le script la couche en 2 s au plus : log « enhancedcelestials:blue_moon couchée », et la lune du jour 0 disparaît de `/ec lunarForecast` alors que les suivantes restent |
-| Note froissée | 300 tirages de `/loot spawn … loot nomansland:chests/alchemist_pot_alchemy` : au moins 13 notes (attendu ≈ 12). L'objet porte `custom_name` `{"translate":"fallow.lune.note"}` et trois lignes de `lore` grises traduisibles |
+| `lune.js` at load | 6/6 server scripts loaded, 0 errors. The two Java classes (Enhanced Celestials, `FriendMoon`) load |
+| `lune.js` in use | Three errors found and fixed: a `const` in the `try` ("redeclaration of var level"); `key == null` on a `ResourceKey`, which throws a NullPointerException outside the `catch`; `ResourceKey.equals()` not found from Rhino. Plus `level.players()`, which KubeJS takes for a property: the script goes through `server.getPlayerList()`. After the fix: no more errors, by day or by night |
+| NML config | `config/nomansland-common.toml` read and completed by NeoForge, `friendMoonDimensions = ["minecraft:overworld"]` kept |
+| Enhanced Celestials datapack | No error. Log: "Possible lunar events for dimension "minecraft:overworld" are [super_blue_moon, blue_moon, super_moon, super_harvest_moon, harvest_moon]", so no more blood moon. `/ec lunarForecast`: 14 blue or harvest moons in 100 days, no blood moon |
+| Meeting Point | `/meetingpoint`: (616, −1288), about 1,430 blocks from the centre |
+| Moon setting | Night (`/time set 14000`) and blue moon forced. Without a player, the moon stays up, as expected. With detection forced to true (temporary change, removed afterwards), the script sets it in 2 s at most: log "enhancedcelestials:blue_moon couchée", and the day 0 moon disappears from `/ec lunarForecast` while the following ones remain |
+| Crumpled note | 300 draws of `/loot spawn … loot nomansland:chests/alchemist_pot_alchemy`: at least 13 notes (expected ≈ 12). The item carries `custom_name` `{"translate":"fallow.lune.note"}` and three translatable grey `lore` lines |
 
-Non vérifiable sans joueur : la détection d'un joueur près du Point, les messages (Enhanced Celestials et Fallow), le rendu du ciel, le rêve et les dialogues.
+Not verifiable without a player: detection of a player near the Point, the messages (Enhanced Celestials and Fallow), the sky rendering, the dream and the dialogues.
 
-## Fichiers
+## Files
 
-| Fichier | Rôle |
+| File | Role |
 |---|---|
-| `pack/config/nomansland-common.toml` | `friendMoonDimensions` sur l'Overworld ; distances du Point écrites telles quelles |
-| `pack/kubejs/server_scripts/lune.js` | Une seule lune à la fois ; la note froissée (LootJS) |
-| `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json`, `super_blood_moon.json` | Lunes de sang retirées de l'Overworld |
-| `pack/config/enhancedcelestials2core/translations.json` | Pas de téléchargement de traductions qui écraseraient les nôtres |
-| `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json` | Réplique `scute` ajoutée |
-| `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/negative/fr_fr.json` | Pool complet, « Oopsie. » traduit |
+| `pack/config/nomansland-common.toml` | `friendMoonDimensions` set to the Overworld; Point distances written as is |
+| `pack/kubejs/server_scripts/lune.js` | Only one moon at a time; the crumpled note (LootJS) |
+| `pack/kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json`, `super_blood_moon.json` | Blood moons removed from the Overworld |
+| `pack/config/enhancedcelestials2core/translations.json` | No download of translations that would overwrite ours |
+| `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/offering/fr_fr.json` | `scute` line added |
+| `pack/kubejs/assets/nomansland/lang/nomansland/dialogue_pools/negative/fr_fr.json` | Complete pool, "Oopsie." translated |
 
-## Questions pour l'équipe
+## Questions for the maintainer
 
-1. La Lune Amie fait coucher la lune du moment **pour tout le serveur**. Est-ce que cela vous va, ou faut-il la solution client du mod `fallow` ?
-2. Faut-il activer la lune blanche maintenant ? Il suffit de copier le brouillon dans `pack/kubejs/data/fallow/` et de lui donner un son et des textes.
-3. Le Frienderman n'apparaîtra pas, puisque les endermen sont retirés. Faut-il le faire apparaître autrement (In Control!), ou le laisser de côté ?
+1. The Friendly Moon makes the current moon set **for the whole server**. Is that acceptable, or is the client-side solution of the `fallow` mod needed?
+2. Should the white moon be enabled now? It is enough to copy the draft into `pack/kubejs/data/fallow/` and give it a sound and texts.
+3. The Frienderman will not appear, since endermen are removed. Should it be made to appear another way (In Control!), or left aside?

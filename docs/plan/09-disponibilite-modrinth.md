@@ -1,35 +1,35 @@
-# 9. Disponibilité sur Modrinth
+# 9. Availability on Modrinth
 
-Vérifié le 2026-10-10 sur l'API Modrinth (`/v2/project` puis `/v2/project/{id}/version?loaders=["neoforge"]&game_versions=["1.21.1"]`). La version indiquée est la plus récente pour NeoForge 1.21.1 à cette date ; elle ne remplace pas le `packwiz mr add`, qui fige la version au moment de l'ajout.
+Checked on 2026-10-10 against the Modrinth API (`/v2/project`, then `/v2/project/{id}/version?loaders=["neoforge"]&game_versions=["1.21.1"]`). The version shown is the most recent one for NeoForge 1.21.1 at that date; it does not replace `packwiz mr add`, which pins the version at the time of adding.
 
-## Résultat
+## Result
 
-- **98 des 104 mods proposés existent en 1.21.1 NeoForge sur Modrinth**, ainsi que les 3 remplaçants. Les 46 mods déjà retenus sont figés dans `pack/mods/` et ne sont pas repris ici.
-- **6 sont absents** et sont remplacés ou retirés (tableau ci-dessous). Deux autres avaient un mauvais identifiant dans le plan et sont bien présents.
-- Deux mods passent par Sinytra Connector comme Antique Atlas 4 et Surveyor, déjà dans le pack : **AA4 Atlas** et **Antique Trains**. Ce sont des fichiers multi-chargeurs de la même famille (Surveyor), publiés pour NeoForge par leurs auteurs. L'alerte « aucun autre mod Fabric » de 6.1 devient « aucun mod Fabric hors de la famille Surveyor ».
-- **12 bibliothèques nouvelles** arrivent avec les ajouts : YUNG's API, Supermartijn642's Config Lib et Core Lib, Easy NPC Core et Config UI, Cloth Config, Balm, CorgiLib, Data Anchor, Configurable, MezzConfig, Collective. Les optionnels en ajoutent 4 autres (Integrated API, Marie's Lib, Konkrete, Melody).
-- **Versions non stables** à surveiller : alpha pour COE Deposits (optionnel) ; beta pour JEI, In Control!, KubeJS Create, Simple Backups, OPAC, Simple Voice Chat, Create Factory Logistics, Salt's Animal Farm, Separate Sable Render Distance, Create Crafts & Additions, Kaleidoscope Orchard, Simple Clouds, Longwings, Better Advancements, Polymorph, Nourished, Sound Physics: Aeronautics. Pour JEI, In Control!, Simple Voice Chat et OPAC, c'est le canal habituel de l'auteur, pas un signe de fragilité.
-- **Peu entretenus** (dernier fichier 1.21.1 de plus d'un an) : Traveler's Titles, MCG's RPG Campsites, Create: New Beginnings, Create: Bells & Whistles, Fisherman's Trap, Controlling, Searchables, Mouse Tweaks, Better Advancements. Ils fonctionnent tels quels ; ils ne suivront pas les mises à jour de Create.
+- **98 of the 104 proposed mods exist for 1.21.1 NeoForge on Modrinth**, as do the 3 replacements. The 46 mods already selected are pinned in `pack/mods/` and are not repeated here.
+- **6 are missing** and are replaced or dropped (table below). Two others had a wrong identifier in the plan and are in fact present.
+- Two mods go through Sinytra Connector like Antique Atlas 4 and Surveyor, which are already in the pack: **AA4 Atlas** and **Antique Trains**. They are multi-loader files from the same family (Surveyor), published for NeoForge by their authors. The "no other Fabric mod" warning in 6.1 becomes "no Fabric mod outside the Surveyor family".
+- **12 new libraries** arrive with the additions: YUNG's API, Supermartijn642's Config Lib and Core Lib, Easy NPC Core and Config UI, Cloth Config, Balm, CorgiLib, Data Anchor, Configurable, MezzConfig, Collective. The optional mods add 4 more (Integrated API, Marie's Lib, Konkrete, Melody).
+- **Non-stable versions** to watch: alpha for COE Deposits (optional); beta for JEI, In Control!, KubeJS Create, Simple Backups, OPAC, Simple Voice Chat, Create Factory Logistics, Salt's Animal Farm, Separate Sable Render Distance, Create Crafts & Additions, Kaleidoscope Orchard, Simple Clouds, Longwings, Better Advancements, Polymorph, Nourished, Sound Physics: Aeronautics. For JEI, In Control!, Simple Voice Chat and OPAC, this is the author's usual channel, not a sign of fragility.
+- **Little maintained** (last 1.21.1 file more than a year old): Traveler's Titles, MCG's RPG Campsites, Create: New Beginnings, Create: Bells & Whistles, Fisherman's Trap, Controlling, Searchables, Mouse Tweaks, Better Advancements. They work as they are; they will not follow Create updates.
 
-## Absents et remplaçants
+## Missing mods and replacements
 
-| Mod prévu | Ce que Modrinth propose | Remplaçant retenu |
+| Planned mod | What Modrinth offers | Replacement chosen |
 |---|---|---|
-| Dead Reckoning | Fabric seulement, pas publié pour NeoForge | **GUI Compass** (`gui-compass`, natif, Serilum) : `guiCompassFormat = "F"` (direction seule, pas de coordonnées) et `mustHaveCompassInInventory = true`. Second repli : NeoCompass, toujours affiché. |
-| Villager Workers | Devenu « Hired Workers », 1.21.8 seulement | **Create Villager Labor** (`create-villager-labor`) : un villageois s'assoit à un poste Create et fait tourner la chaîne. C'est une autre idée que des ouvriers autonomes ; à tester en phase 7. Sans lui, les survivants restent des PNJ Easy NPC. |
-| Villager Recruits | Forge 1.20.1 au plus | Retiré. Pas d'escorte de convoi. |
-| Presence Not Position | Introuvable sur Modrinth | **Reactive Music** (`reactive-music`, client, 7,5 M de téléchargements) (remplacé par True Adaptive Music, [0010](../decisions/0010-musique.md)) : musique selon le lieu, l'heure, le danger et l'abri. Ses morceaux fantasy et celtiques doivent être remplacés par un songpack plus sobre ou réduits ; à écouter en phase 6. Le titre à l'entrée d'un lieu reste porté par Traveler's Titles. |
-| Biome Music | Fabric seulement | Couvert par Reactive Music. |
-| Configured | Fabric 1.21.8 et plus | Retiré (optionnel). |
-| Create: New Beginnings, CTOV | Mauvais identifiant dans le plan, mais bien présents | `create-new-beginnings` 0.1.1 et `ct-overhaul-village` 3.6.3. CTOV modifie aussi les avant-postes de pillards, que le plan désactive : sans effet. |
+| Dead Reckoning | Fabric only, not published for NeoForge | **GUI Compass** (`gui-compass`, native, Serilum): `guiCompassFormat = "F"` (direction only, no coordinates) and `mustHaveCompassInInventory = true`. Second fallback: NeoCompass, always displayed. |
+| Villager Workers | Became "Hired Workers", 1.21.8 only | **Create Villager Labor** (`create-villager-labor`): a villager sits at a Create station and keeps the chain running. This is a different idea from autonomous workers; to be tested in phase 7. Without it, the survivors remain Easy NPC NPCs. |
+| Villager Recruits | Forge 1.20.1 at most | Dropped. No convoy escort. |
+| Presence Not Position | Not found on Modrinth | **Reactive Music** (`reactive-music`, client, 7.5 M downloads) (replaced by True Adaptive Music, [0010](../decisions/0010-musique.md)): music according to place, time, danger and shelter. Its fantasy and Celtic tracks must be replaced by a more sober songpack or reduced; to be listened to in phase 6. The title on entering a place remains handled by Traveler's Titles. |
+| Biome Music | Fabric only | Covered by Reactive Music. |
+| Configured | Fabric 1.21.8 and later | Dropped (optional). |
+| Create: New Beginnings, CTOV | Wrong identifier in the plan, but both are present | `create-new-beginnings` 0.1.1 and `ct-overhaul-village` 3.6.3. CTOV also modifies pillager outposts, which the plan disables: no effect. |
 
-**MineColonies** n'a pas de fichier 1.21.1 sur Modrinth (seulement Forge 1.18.2) ; il reste exclu par la règle « Modrinth seulement », en plus du choix de 3.6.
+**MineColonies** has no 1.21.1 file on Modrinth (only Forge 1.18.2); it remains excluded by the "Modrinth only" rule, in addition to the choice made in 3.6.
 
-## Tableau complet
+## Full table
 
-Côté : **C** client seul, **S** serveur seul, **CS** les deux. Les dépendances en gras ne sont pas encore dans le pack.
+Side: **C** client only, **S** server only, **CS** both. Dependencies in bold are not yet in the pack.
 
-| Mod | Slug Modrinth | Version 1.21.1 NeoForge | Canal | Date | Côté | Dépendances requises |
+| Mod | Modrinth slug | Version 1.21.1 NeoForge | Channel | Date | Side | Required dependencies |
 |---|---|---|---|---|---|---|
 | Lootr | `lootr` | 1.21.1-1.11.38.127 | stable | 2026-09-25 | CS | — |
 | Paraglider | `paragliders` | 21.1.5 | stable | 2026-03-22 | CS | — |
@@ -43,7 +43,7 @@ Côté : **C** client seul, **S** serveur seul, **CS** les deux. Les dépendance
 | Traveler's Backpack | `travelersbackpack` | 1.21.1-10.1.39 | stable | 2026-08-29 | CS | — |
 | Comforts | `comforts` | 9.0.5+1.21.1 | stable | 2026-01-24 | CS | — |
 | Traveler's Titles | `travelers-titles` | 1.21.1-NeoForge-5.1.3 | stable | 2025-03-11 | C | **yungs-api** |
-| Dead Reckoning | `dead-reckoning` | **absent** | — | — | — | seulement fabric 1.20.1, 1.21.1 |
+| Dead Reckoning | `dead-reckoning` | **missing** | — | — | — | only fabric 1.20.1, 1.21.1 |
 | AA4 Atlas | `aa4-atlas` | 1.1.2 | stable | 2025-07-31 | CS | **fabric-api**, surveyor, antique-atlas-4 |
 | NeoCompass | `neocompass` | 1.0 | stable | 2025-11-12 | C | — |
 | Streams Reflowing | `streams-reflowing` | 2.14.4 | stable | 2026-10-04 | CS | — |
@@ -68,8 +68,8 @@ Côté : **C** client seul, **S** serveur seul, **CS** les deux. Les dépendance
 | Rechiseled: Create | `rechiseled-create` | 1.1.1-neoforge-mc1.21 | stable | 2026-06-22 | CS | create, **rechiseled** |
 | Fusion (Connected Textures) | `fusion-connected-textures` | 1.3.16-neoforge-mc1.21.1 | stable | 2026-10-05 | C | — |
 | Easy NPC | `easy-npc` | 7.14.0 | stable | 2026-10-02 | CS | **easy-npc-config-ui**, **easy-npc-core** |
-| Villager Workers | `workers` | **absent** | — | — | — | seulement neoforge 1.21.8 |
-| Villager Recruits | `villager-recruits` | **absent** | — | — | — | seulement forge 1.18.2, 1.19.2, 1.19.4, 1.20.1 |
+| Villager Workers | `workers` | **missing** | — | — | — | only neoforge 1.21.8 |
+| Villager Recruits | `villager-recruits` | **missing** | — | — | — | only forge 1.18.2, 1.19.2, 1.19.4, 1.20.1 |
 | Open Parties and Claims | `open-parties-and-claims` | neoforge-1.21.1-0.32.7 | beta | 2026-10-05 | CS | — |
 | Create Crafts & Additions | `createaddition` | neoforge-1.21.1-1.7.2 | beta | 2026-10-01 | CS | — |
 | Create: Numismatics | `numismatics` | 1.1.0+neoforge-mc1.21.1 | stable | 2026-08-27 | CS | create |
@@ -98,8 +98,8 @@ Côté : **C** client seul, **S** serveur seul, **CS** les deux. Les dépendance
 | Cosy Critters & Creepy Crawlies | `cosy-critters` | v0.3.3+1.21.1-neoforge | stable | 2026-07-07 | C | — |
 | Enhanced Celestials | `enhanced-celestials` | 6.0.2.6-neoforge | stable | 2026-08-07 | CS | **corgilib**, **data-anchor** |
 | Simple Voice Chat | `simple-voice-chat` | neoforge-1.21.1-2.6.24 | beta | 2026-09-20 | CS | — |
-| Presence Not Position | `?` | **absent** | — | — | — | introuvable |
-| Biome Music | `biome-music` | **absent** | — | — | — | seulement fabric 1.20.6, 1.21.1 |
+| Presence Not Position | `?` | **missing** | — | — | — | not found |
+| Biome Music | `biome-music` | **missing** | — | — | — | only fabric 1.20.6, 1.21.1 |
 | Particle Rain | `particle-rain` | v4.0.2+1.21.1-neoforge | stable | 2026-10-10 | C | — |
 | Simple Clouds | `simple-clouds` | 0.7.3+1.21.1 | beta | 2025-08-26 | CS | — |
 | Longwings | `longwings` | 0.9.5-neoforge | beta | 2026-05-02 | CS | — |
@@ -120,7 +120,7 @@ Côté : **C** client seul, **S** serveur seul, **CS** les deux. Les dépendance
 | Default Options | `default-options` | 21.1.8+neoforge-1.21.1 | stable | 2026-07-24 | C | **balm** |
 | ProbeJS | `probejs` | 8.0.3 | stable | 2026-06-22 | CS | kubejs |
 | EMI | `emi` | 1.1.24+1.21.1+neoforge | stable | 2026-05-13 | CS | — |
-| Configured | `configured` | **absent** | — | — | — | seulement fabric 1.21.8, 1.21.10, 1.21.11, 26.1.2, 26.2, 26.3 |
+| Configured | `configured` | **missing** | — | — | — | only fabric 1.21.8, 1.21.10, 1.21.11, 26.1.2, 26.2, 26.3 |
 | Packet Fixer | `packet-fixer` | 3.3.1 | stable | 2025-11-14 | CS | — |
 | Better Advancements | `better-advancements` | 0.4.3.21 | beta | 2024-10-27 | C | — |
 | GUI Compass | `gui-compass` | 1.21.1-5.0-fabric+forge+neo | stable | 2026-10-02 | C | **collective** |

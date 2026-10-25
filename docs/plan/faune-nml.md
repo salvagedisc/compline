@@ -1,69 +1,69 @@
-# La faune de No Man's Land revient au vanilla
+# No Man's Land wildlife goes back to vanilla
 
-Demande de l'équipe du 2026-10-19 : les animaux de No Man's Land ne vont pas avec Fresh Animations ; on garde les animaux vanilla, on coupe les autres créatures et les objets qui n'ont plus de source. Tout ce qui suit est lu dans les jars (NML 1.6.1, Mixed Litter 1.2.2 qu'il embarque, Fresh Animations v1.11, Wildex 3.0.0, KubeJS 2101.7.2). **Rien n'a encore été testé en jeu.**
+Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with Fresh Animations; we keep the vanilla animals, and cut the other creatures and the items that no longer have a source. Everything below is read from the jars (NML 1.6.1, Mixed Litter 1.2.2 which it bundles, Fresh Animations v1.11, Wildex 3.0.0, KubeJS 2101.7.2). **Nothing has been tested in game yet.**
 
-## Ce que fait NML aux animaux
+## What NML does to the animals
 
-- **Remodèles** : Mixed Litter, embarqué dans NML, remplace le rendu de huit animaux vanilla (cochon, vache, mooshroom, poulet, mouton, lapin, calmar, calmar luisant). Fresh Animations ne les anime plus.
-- **Textures** : NML pose ses propres textures sur onze autres animaux vanilla (abeille, chat, morue, dauphin, âne, renard, chèvre, husk, saumon, slime, tortue de mer), plus deux variantes de loup et une de grenouille.
-- **Créatures** : cerf, oie, bar à serpe et tortue terrestre, ajoutés par des biome modifiers et par des terriers dans les grottes. Les biomes de NML eux-mêmes ne listent que des mobs vanilla.
-- **Frienderman** : il remplace 1 % des endermen naturels de l'Overworld, sans réglage dans la config de NML.
-- L'élan (`moose`) n'est pas enregistré en 1.6.1 ; `buried`, `cave_carp` et `fat_joint` n'ont qu'une clé de langue.
+- **Remodels**: Mixed Litter, bundled in NML, replaces the rendering of eight vanilla animals (pig, cow, mooshroom, chicken, sheep, rabbit, squid, glow squid). Fresh Animations no longer animates them.
+- **Textures**: NML applies its own textures to eleven other vanilla animals (bee, cat, cod, dolphin, donkey, fox, goat, husk, salmon, slime, sea turtle), plus two wolf variants and one frog variant.
+- **Creatures**: deer, goose, bar à serpe (a fish) and land tortoise, added by biome modifiers and by burrows in caves. NML's own biomes only list vanilla mobs.
+- **Frienderman**: it replaces 1% of the natural endermen in the Overworld, with no setting in NML's config.
+- The moose (`moose`) is not registered in 1.6.1; `buried`, `cave_carp` and `fat_joint` only have a language key.
 
-## Ce que fait Fallow
+## What Fallow does
 
-| Quoi | Où | Comment |
+| What | Where | How |
 |---|---|---|
-| Remodèles coupés | `pack/config/mixed_litter-startup.toml` | les six clés `[remodels]` à `false` |
-| Textures NML coupées | `pack/kubejs/data/nomansland/mixed_litter/variant_groups/` (11 fichiers) | copie du jar avec `"unobtainable": true` en tête des conditions |
-| Loups dorés et « timber », grenouille de boue | `pack/kubejs/data/nomansland/tags/worldgen/biome/entity/` | tags vidés (`"replace": true`) |
-| Cerf, oie, tortue, terriers | `pack/kubejs/data/nomansland/neoforge/biome_modifier/` | biome modifiers remplacés par `neoforge:none` |
-| Bar à serpe | `…/biome_modifier/spawns/add_spawns_to_swamps.json` | seule la morue reste |
-| Frienderman | `pack/kubejs/server_scripts/faune_nml.js` | `EntityEvents.spawned` annulé : l'enderman qu'il remplace est déjà annulé par NML, il n'y a donc plus rien |
-| 15 objets sans source | `faune_nml.js` (serveur et client) | recettes retirées, objets cachés d'EMI ; le créatif reste un outil d'admin |
-| Wildex | `pack/config/wildex/wildex-common.toml` | `[wildexList] excludedModIds` : les cinq créatures et le lapin, absents de l'interface, des découvertes et du taux de complétion |
-| 15 objets retirés (lot B) | `faune_nml.js` | recettes retirées, objets retirés de toutes les tables de butin, cachés d'EMI |
-| TNT | `faune_nml.js` | recette vanilla 1.21.1 remise sous l'id `minecraft:tnt` |
-| Succès « explode_ore » | `pack/kubejs/data/nomansland/advancement/main/explode_ore.json` | retiré par une condition `neoforge:false` |
-| Lapin | `pack/kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json`, `sans_lapin.js` (serveur et client) | apparitions retirées de `#minecraft:is_overworld` ; objets retirés des recettes, des butins et d'EMI |
-| Réplique d'offrande `scute` | `pack/kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json` | condition impossible retirée (voir plus bas) |
-| Répliques d'offrande de l'oie et de la tortue | `…/offering/entity/goose.json`, `tortoise.json` | redirigées vers des créatures présentes |
+| Remodels cut | `pack/config/mixed_litter-startup.toml` | the six `[remodels]` keys set to `false` |
+| NML textures cut | `pack/kubejs/data/nomansland/mixed_litter/variant_groups/` (11 files) | copy from the jar with `"unobtainable": true` at the head of the conditions |
+| Golden and "timber" wolves, mud frog | `pack/kubejs/data/nomansland/tags/worldgen/biome/entity/` | tags emptied (`"replace": true`) |
+| Deer, goose, tortoise, burrows | `pack/kubejs/data/nomansland/neoforge/biome_modifier/` | biome modifiers replaced by `neoforge:none` |
+| Bass (bar à serpe) | `…/biome_modifier/spawns/add_spawns_to_swamps.json` | only the cod remains |
+| Frienderman | `pack/kubejs/server_scripts/faune_nml.js` | `EntityEvents.spawned` cancelled: the enderman it replaces is already cancelled by NML, so nothing is left |
+| 15 items with no source | `faune_nml.js` (server and client) | recipes removed, items hidden from EMI; creative mode remains an admin tool |
+| Wildex | `pack/config/wildex/wildex-common.toml` | `[wildexList] excludedModIds`: the five creatures and the rabbit, absent from the interface, the discoveries and the completion rate |
+| 15 items removed (batch B) | `faune_nml.js` | recipes removed, items removed from all loot tables, hidden from EMI |
+| TNT | `faune_nml.js` | vanilla 1.21.1 recipe restored under the id `minecraft:tnt` |
+| "explode_ore" advancement | `pack/kubejs/data/nomansland/advancement/main/explode_ore.json` | removed by a `neoforge:false` condition |
+| Rabbit | `pack/kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json`, `sans_lapin.js` (server and client) | spawns removed from `#minecraft:is_overworld`; items removed from recipes, loot and EMI |
+| `scute` offering line | `pack/kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json` | impossible condition removed (see below) |
+| Goose and tortoise offering lines | `…/offering/entity/goose.json`, `tortoise.json` | redirected to creatures that are present |
 
-Les 15 objets : œufs d'apparition du cerf, de l'oie, du bar et de la tortue ; venaison crue et cuite ; bar cru, cuit, en seau et en tonneau ; écaille robuste, carapace et œuf de tortue ; le bâton de débogage des pots (`pot_debug_stick`) et l'icône de l'onglet créatif (`no_mans_globe`). Les seules recettes qui consomment ces objets les produisent aussi.
+The 15 items: spawn eggs for the deer, goose, bass and tortoise; raw and cooked venison; raw, cooked, bucketed and barrelled bass; sturdy scute, shell and tortoise egg; the pot debug stick (`pot_debug_stick`) and the creative tab icon (`no_mans_globe`). The only recipes that consume these items also produce them.
 
-On garde le Compagnon (`buddy`, quête de la [Lune Amie](lune-amie.md)), le pot vivant des ruines des alchimistes et le joueur rêveur.
+We keep the Buddy (`buddy`, quest of the [Friendly Moon](lune-amie.md)), the living pot in the alchemists' ruins and the dreaming player.
 
-**Lot B** (décision de l'équipe du 2026-10-19) : viande de cheval (`raw_horse`, `horse_steak`), cuisses de grenouille (`frog_leg`, `cooked_frog_leg`), explosifs et flèche (`firebomb`, `ink_bomb`, `explosive`, `incendiary_arrow`) et sept plats (`pancake`, `maple_tart`, `sweet_tart`, `trail_mix`, `syruped_pear`, `honeyed_apple`, `hardtack`). NML les ajoute aux butins vanilla par des modificateurs qui tirent ses propres tables (`entities/horse_addition`, `chests/hardtack_addition`…) : retirer l'objet de toutes les tables suffit. Deux conséquences :
-- NML remplace la recette de la TNT par quatre explosifs. Sans explosif, la recette vanilla est remise.
-- Le succès `explode_ore` (miner un minerai avec un explosif) ne peut plus s'obtenir : il est retiré.
+**Batch B** (decision of the maintainer, 2026-10-19): horse meat (`raw_horse`, `horse_steak`), frog legs (`frog_leg`, `cooked_frog_leg`), explosives and an arrow (`firebomb`, `ink_bomb`, `explosive`, `incendiary_arrow`) and seven dishes (`pancake`, `maple_tart`, `sweet_tart`, `trail_mix`, `syruped_pear`, `honeyed_apple`, `hardtack`). NML adds them to vanilla loot through modifiers that draw on its own tables (`entities/horse_addition`, `chests/hardtack_addition`…): removing the item from all tables is enough. Two consequences:
+- NML replaces the TNT recipe with four explosives. Without the explosives, the vanilla recipe is restored.
+- The `explode_ore` advancement (mine an ore with an explosive) can no longer be earned: it is removed.
 
-**Lapin** (même décision) : Fresh Animations v1.11 n'a pas de modèle pour lui ; sans le remodèle, il détonnait. Il est retiré du jeu. NML inscrit ses biomes dans `#minecraft:is_overworld`, donc un seul biome modifier `neoforge:remove_spawns` couvre tout l'Overworld. Ses six objets (œuf, viande crue et cuite, ragoût, patte, peau) sortent des recettes et de toutes les tables, dont le cadeau matinal du chat. Conséquences : la potion de saut ne se brasse plus (patte de lapin), le cuir ne vient plus des peaux de lapin, le Champilièvre d'Alex's Mobs ne peut plus naître d'un lapin.
+**Rabbit** (same decision): Fresh Animations v1.11 has no model for it; without the remodel, it looked out of place. It is removed from the game. NML lists its biomes in `#minecraft:is_overworld`, so a single `neoforge:remove_spawns` biome modifier covers the whole Overworld. Its six items (egg, raw and cooked meat, stew, foot, hide) are taken out of the recipes and of all tables, including the cat's morning gift. Consequences: the potion of leaping can no longer be brewed (rabbit's foot), leather no longer comes from rabbit hides, Alex's Mobs' Bunfungus can no longer be born from a rabbit.
 
-**Réplique `scute`** : NML 1.6.1 la conditionne à l'objet `nomansland:tortoise_scute`, qui n'existe pas (l'écaille s'appelle `sturdy_scute`). Les répliques sont des registres de datapack, qui sautent une entrée dont les `neoforge:conditions` échouent : elle ne se chargeait jamais, et le test L8 de la Lune Amie échouait. La surcharge retire la condition et garde les écailles de tortue de mer et de tatou. Test : `scripts/test/nml-dialogues.test.mjs`.
+**`scute` line**: NML 1.6.1 makes it conditional on the item `nomansland:tortoise_scute`, which does not exist (the scute is called `sturdy_scute`). The lines are datapack registries, which skip an entry whose `neoforge:conditions` fail: it never loaded, and the Friendly Moon's test L8 failed. The override removes the condition and keeps the sea turtle and armadillo scutes. Test: `scripts/test/nml-dialogues.test.mjs`.
 
-**Répliques d'offrande** : celle de la tortue vise `naturalist:tortoise`, avec le même texte. Celle de l'oie vise le canard de Naturalist (`naturalist:duck`), qui vit dans les mêmes rivières et marais, puisqu'Untitled Duck Mod est retiré. Le canard n'attaque pas : « Bête bruyante et furieuse » devient « Bête bruyante et têtue », en anglais (`goose.json`) comme en français. Test : `scripts/test/nml-dialogues.test.mjs`.
+**Offering lines**: the tortoise's targets `naturalist:tortoise`, with the same text. The goose's targets Naturalist's duck (`naturalist:duck`), which lives in the same rivers and swamps, since Untitled Duck Mod is removed. The duck does not attack: « Bête bruyante et furieuse » ("Loud and furious beast") becomes « Bête bruyante et têtue » ("Loud and stubborn beast"), in English (`goose.json`) as well as in French. Test: `scripts/test/nml-dialogues.test.mjs`.
 
-## Questions ouvertes
+## Open questions
 
-1. `tannerie_butin.js` cite encore `nomansland:entities/moose` (non enregistré) et la table du cerf (plus utilisée). Sans effet en jeu.
+1. `tannerie_butin.js` still cites `nomansland:entities/moose` (not registered) and the deer table (no longer used). No effect in game.
 
-## Tests en jeu
+## In-game tests
 
-Sur un monde neuf : les données de registre se lisent à la création du monde.
+On a new world: registry data is read when the world is created.
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| F1 | Logs serveur et client au lancement | Aucune erreur sur `mixed_litter`, `biome_modifier`, `variant_groups`, `faune_nml.js` |
-| F2 | `/summon` cochon, vache, mooshroom, poulet, mouton, calmar, calmar luisant | Modèles vanilla animés par Fresh Animations |
-| F3 | Forêt, taïga, rivière, marais, jungle, badlands, forêts de NML | Ni cerf, ni oie, ni bar, ni tortue ; morue toujours dans les marais |
-| F4 | Grottes, dont les grottes luxuriantes | Plus de terriers de tortue |
-| F5 | Renard, chèvre, âne, loup en `autumnal_forest` | Textures vanilla ; aucun loup doré ou « timber », aucune grenouille de boue |
-| F6 | `/summon nomansland:frienderman` | Il disparaît aussitôt |
-| F7 | EMI : chercher « venaison », « bar », « tortue », « lapin », « cheval », « explosif », « crêpe » | Rien |
-| F8 | Wildex | Aucune entrée pour les cinq créatures ni pour le lapin |
-| F9 | Île aux champignons | Ronds et Compagnon présents ; ascension (L10) inchangée |
-| F10 | Désert, plaines enneigées, prairie fleurie, bosquet | Aucun lapin |
-| F11 | Tuer un cheval, une grenouille ; ouvrir des coffres de donjon, d'igloo, d'épave | Ni viande de cheval, ni cuisses, ni galette, ni bombe |
-| F12 | Établi : 5 poudres à canon et 4 sables | Une TNT |
-| F13 | Offrir une écaille de tortue de mer à la Lune Amie (L8) | La réplique « A precious gift from a wise creature » |
-| F14 | Montrer une tortue de Naturalist, puis un canard de Naturalist, à la Lune Amie | Les répliques de la tortue et de l'oie |
+| F1 | Server and client logs at launch | No error on `mixed_litter`, `biome_modifier`, `variant_groups`, `faune_nml.js` |
+| F2 | `/summon` pig, cow, mooshroom, chicken, sheep, squid, glow squid | Vanilla models animated by Fresh Animations |
+| F3 | Forest, taiga, river, swamp, jungle, badlands, NML forests | No deer, goose, bass or tortoise; cod still in the swamps |
+| F4 | Caves, including lush caves | No more tortoise burrows |
+| F5 | Fox, goat, donkey, wolf in `autumnal_forest` | Vanilla textures; no golden or "timber" wolf, no mud frog |
+| F6 | `/summon nomansland:frienderman` | It disappears immediately |
+| F7 | EMI: search "venison", "bass", "tortoise", "rabbit", "horse", "explosive", "pancake" | Nothing |
+| F8 | Wildex | No entry for the five creatures or for the rabbit |
+| F9 | Mushroom island | Rings and Buddy present; ascension (L10) unchanged |
+| F10 | Desert, snowy plains, flower meadow, grove | No rabbit |
+| F11 | Kill a horse, a frog; open dungeon, igloo and shipwreck chests | No horse meat, no legs, no pancake, no bomb |
+| F12 | Crafting table: 5 gunpowder and 4 sand | One TNT |
+| F13 | Offer a sea turtle scute to the Friendly Moon (L8) | The line "A precious gift from a wise creature" |
+| F14 | Show a Naturalist tortoise, then a Naturalist duck, to the Friendly Moon | The tortoise and goose lines |

@@ -1,51 +1,51 @@
-# Fallow : plan du modpack
+# Fallow: modpack plan
 
-Minecraft **1.21.1**, NeoForge 21.1.251, packwiz, mods venant uniquement de Modrinth. Le plan s'appuie sur la [vision](../vision.md) et les [décisions](../decisions/README.md) ; la liste complète des mods, avec leur statut, est dans le [registre](../mods.md).
+Minecraft **1.21.1**, NeoForge 21.1.251, packwiz, mods from Modrinth only. The plan builds on the [vision](../vision.md) and the [decisions](../decisions/README.md); the full list of mods, with their status, is in the [registry](../mods.md).
 
-> **État au 2026-10-18.** Le plan n'est pas encore appliqué à `pack/` : il attend la validation de l'équipe (décisions du [10.12](10-recentrage.md#1012-décisions-à-valider-remplace-le-84) et du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012)). Rien n'a encore été testé en jeu.
+> **Status as of 2026-10-18.** The plan has not yet been applied to `pack/`: it is waiting for the maintainer's approval (decisions in [10.12](10-recentrage.md#1012-decisions-to-validate-replaces-84) and [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012)). Nothing has been tested in game yet.
 
-## Ce que veut Fallow
+## What Fallow is aiming for
 
-Un monde permanent, presque vide et énigmatique, dans l'esprit du trailer de No Man's Land. La brume se lève par endroits et par moments, là où l'on fait revenir la vie (les clairières). Des objectifs longs : le zoo, le bestiaire, le codex des monuments, le réseau ferré et aérien, la maison. Une finition soignée façon Realism Craft, sans shaders ni textures réalistes, où chaque système se branche sur les autres.
+A permanent world, almost empty and enigmatic, in the spirit of the No Man's Land trailer. The mist lifts in places and at certain moments, wherever life is brought back (the clearings). Long-term goals: the zoo, the bestiary, the monument codex, the rail and air network, the house. A polished finish in the style of Realism Craft, without shaders or realistic textures, where every system plugs into the others.
 
-## Ordre de lecture
+## Reading order
 
-| Chapitre | Contenu |
+| Chapter | Contents |
 |---|---|
-| [10-recentrage.md](10-recentrage.md) | **Le plan en vigueur** : la brume qui se lève, les objectifs, la liste du pack, la finition, les liens entre systèmes, les scripts, les décisions 1 à 13 |
-| [11-rendu-et-confort.md](11-rendu-et-confort.md) | Rendu sans shaders, caméra, menus, EMI, Wildex, Ancient Remnants, Archie's Dinos |
-| [12-verification.md](12-verification.md) | **Vérification complète du 2026-10-18** : elle corrige les chapitres 10 et 11, détaille les liens entre mods (Overgeared, Kaleidoscope, Create, monde, rendu), propose le mod custom `fallow` et les décisions 14 à 18 |
-| [fallow-ambiance.md](fallow-ambiance.md) | Le pack de ressources maison : preset ATMOSPHERICS, couleurs Polytone, valeurs choisies et réglages à faire en jeu |
-| [fallow-interface.md](fallow-interface.md) | Les écrans de Kaleidoscope, Overgeared et Wildex aux couleurs de Dark Coffee : retiré, proposé à l'auteur de Dark Coffee ; licences et limites |
-| [mod-fallow.md](mod-fallow.md) | Le mod custom `fallow` 0.2.1 (modules `ciel`, `sac` et `xp`) : fonctionnement, ce qui est déduit du code, tests en jeu |
-| [lune-amie.md](lune-amie.md) | La Lune Amie de No Man's Land comme fil principal : le chemin jusqu'au Point de rencontre, la cohabitation avec Enhanced Celestials, les lunes de sang retirées |
-| [sante.md](sante.md) | La santé maximale : un cœur perdu par mort (plancher de 5), les éclats de vie trouvés en explorant |
-| [doublons.md](doublons.md) | Un seul modèle par espèce : comparaison des doublons entre Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings et Friends & Foes, coupes, tests en jeu |
-| [faune-nml.md](faune-nml.md) | La faune de No Man's Land revient au vanilla : remodèles et textures coupés, cerf, oie, bar, tortue et Frienderman retirés, tests en jeu |
-| [tannerie.md](tannerie.md) | La tannerie : peau brute, peau préparée aux cendres, trempage sur le plateau en bambou |
-| [musique.md](musique.md) | La musique : True Adaptive Music, l'arbre du paquet `fallow`, les prédicats du serveur, les tests en jeu ([0010](../decisions/0010-musique.md)) |
-| [xp.md](xp.md) | Le retrait de l'expérience : étude des sources et des usages, application ([0009](../decisions/0009-xp.md)) |
-| [traduction.md](traduction.md) | La traduction française : où vivent nos textes, le contrôle `check-fr`, le glossaire, ce qui reste en anglais |
-| [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | Les six rapports de la vérification (le 6 traite des gardiens des monuments), avec les preuves (jars ouverts, versions, tickets) et la liste des tests en jeu |
-| [kubejs-brouillons/](kubejs-brouillons/) | Brouillons de scripts et de données, rangés comme `pack/kubejs/` ; à corriger selon le chapitre 12 avant usage |
+| [10-recentrage.md](10-recentrage.md) | **The plan in force**: the lifting mist, the goals, the pack list, the finish, the links between systems, the scripts, decisions 1 to 13 |
+| [11-rendu-et-confort.md](11-rendu-et-confort.md) | Rendering without shaders, camera, menus, EMI, Wildex, Ancient Remnants, Archie's Dinos |
+| [12-verification.md](12-verification.md) | **Full verification of 2026-10-18**: it corrects chapters 10 and 11, details the links between mods (Overgeared, Kaleidoscope, Create, world, rendering), proposes the custom `fallow` mod and decisions 14 to 18 |
+| [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset, Polytone colours, chosen values and settings to adjust in game |
+| [fallow-interface.md](fallow-interface.md) | The Kaleidoscope, Overgeared and Wildex screens in Dark Coffee colours: withdrawn, proposed to the author of Dark Coffee; licences and limits |
+| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.2.1 (modules `ciel`, `sac` and `xp`): how it works, what is deduced from the code, in-game tests |
+| [lune-amie.md](lune-amie.md) | The Friendly Moon from No Man's Land as the main thread: the path to the Meeting Point, coexistence with Enhanced Celestials, the removed blood moons |
+| [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring |
+| [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |
+| [faune-nml.md](faune-nml.md) | The No Man's Land fauna goes back to vanilla: remodels and textures cut, deer, goose, bass, turtle and Frienderman removed, in-game tests |
+| [tannerie.md](tannerie.md) | The tannery: raw hide, ash-prepared hide, soaking on the bamboo tray |
+| [musique.md](musique.md) | The music: True Adaptive Music, the `fallow` pack tree, the server predicates, in-game tests ([0010](../decisions/0010-musique.md)) |
+| [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |
+| [traduction.md](traduction.md) | The French translation: where our texts live, the `check-fr` check, the glossary, what stays in English |
+| [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | The six verification reports (the sixth covers the monument guardians), with the evidence (opened jars, versions, tickets) and the list of in-game tests |
+| [kubejs-brouillons/](kubejs-brouillons/) | Draft scripts and data, laid out like `pack/kubejs/`; to be corrected according to chapter 12 before use |
 
-## Historique (v1 du 2026-10-10)
+## History (v1 of 2026-10-10)
 
-Les chapitres 01 à 09 sont la première version du plan, jugée trop éloignée de la vision le 2026-10-11. Ils restent pour leurs détails techniques ; quand ils contredisent les chapitres 10 à 12, ce sont ces derniers qui comptent.
+Chapters 01 to 09 are the first version of the plan, judged too far from the vision on 2026-10-11. They remain for their technical details; where they contradict chapters 10 to 12, the latter prevail.
 
-| Fichier | Contenu |
+| File | Contents |
 |---|---|
-| [01-liste-des-mods.md](01-liste-des-mods.md) | Liste v1 (remplacée par le [registre](../mods.md)) |
-| [02-exploration.md](02-exploration.md) | Exploration, structures, navigation sans coordonnées |
-| [03-civilisation.md](03-civilisation.md) | Addons Create, minerai, progression, Nether |
-| [04-vie-quotidienne.md](04-vie-quotidienne.md) | Eau, champs, élevage, cuisine |
-| [05-faune-et-ambiance.md](05-faune-et-ambiance.md) | Suppression des monstres vanilla, plafonds, doublons |
-| [06-technique-et-serveur.md](06-technique-et-serveur.md) | Alertes, socle technique, serveur, sauvegardes |
-| [07-kubejs-et-datapack.md](07-kubejs-et-datapack.md) | Organisation des scripts et des données |
-| [08-mise-en-place.md](08-mise-en-place.md) | Phases de mise en place, vérifications dans les jars |
-| [09-disponibilite-modrinth.md](09-disponibilite-modrinth.md) | Relevé Modrinth du 2026-10-10 |
-| [recherche/](recherche/) | Les cinq recherches de la v1 et le relevé brut Modrinth |
+| [01-liste-des-mods.md](01-liste-des-mods.md) | v1 list (replaced by the [registry](../mods.md)) |
+| [02-exploration.md](02-exploration.md) | Exploration, structures, navigation without coordinates |
+| [03-civilisation.md](03-civilisation.md) | Create addons, ore, progression, Nether |
+| [04-vie-quotidienne.md](04-vie-quotidienne.md) | Water, fields, animal husbandry, cooking |
+| [05-faune-et-ambiance.md](05-faune-et-ambiance.md) | Removal of vanilla monsters, caps, duplicates |
+| [06-technique-et-serveur.md](06-technique-et-serveur.md) | Alerts, technical foundation, server, backups |
+| [07-kubejs-et-datapack.md](07-kubejs-et-datapack.md) | Organisation of scripts and data |
+| [08-mise-en-place.md](08-mise-en-place.md) | Implementation phases, checks in the jars |
+| [09-disponibilite-modrinth.md](09-disponibilite-modrinth.md) | Modrinth survey of 2026-10-10 |
+| [recherche/](recherche/) | The five research notes of v1 and the raw Modrinth survey |
 
-## Après validation
+## After approval
 
-Chaque choix validé est appliqué à `pack/` selon [CONTRIBUTING.md](../../CONTRIBUTING.md) : un mod par commit, configs dans `pack/config/` ou `pack/defaultconfigs/`, scripts dans `pack/kubejs/`, et une fiche dans `docs/decisions/` pour chaque arbitrage.
+Each approved choice is applied to `pack/` following [CONTRIBUTING.md](../../CONTRIBUTING.md): one mod per commit, configs in `pack/config/` or `pack/defaultconfigs/`, scripts in `pack/kubejs/`, and a record in `docs/decisions/` for each trade-off.

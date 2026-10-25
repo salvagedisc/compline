@@ -1,101 +1,101 @@
-# Recherche : pilier « Civilisation » (Fallow, 1.21.1 NeoForge, Create 6.0.10)
+# Research: "Civilization" pillar (Fallow, 1.21.1 NeoForge, Create 6.0.10)
 
-> Périmètre : artisanat → atelier → industrie → rail → aviation → colonies.
-> Base retenue (registre du 2026-10-10, 46 mods) : Overgeared 1.6.19, Create 6.0.10, Aeronautics 1.3.2 + Sable 2.0.5, Steam 'n' Rails (port NeoForge 0.3.0-beta.2), KaleidoscopeCookery-Automation, Supplementaries et Quark (essentiel seulement), Modonomicon et Patchouli (déjà là comme dépendances), KubeJS. À tester : Copycats+, Connected, Integrated Farming, Power Loader, IDAS.
-> **Limites de la recherche** : modrinth.com, l'API Modrinth et curseforge.com sont bloqués en accès direct. Le **quota WebSearch commun à la session (200 requêtes) a été épuisé** en cours de recherche. Les disponibilités viennent donc des extraits de recherche (pages de versions Modrinth, miroirs BoxToPlay et Mado qui recopient Modrinth) et de GitHub. « ✔ Modrinth » veut dire qu'un extrait de page de version Modrinth en 1.21.1 NeoForge a été vu. « ~ miroir » veut dire que seul un miroir l'affiche. « ? » veut dire non vérifié.
-
----
-
-## 0. Ce qu'il faut retenir
-
-1. **Create 6 fournit déjà la moitié du pilier « civilisation »**, sans aucun addon. Les colis, adresses, boîtes postales, frogports, *stock ticker* et *stock keeper* forment le stockage en réseau. Les boutiques en nappe (*table cloth*) gèrent la vente entre joueurs. Les boîtes postales posées aux gares transforment les trains en poste. Il faut donc écarter les mods de stockage « magique » (Tom's, Sophisticated), les mods de livraison par drone et les mods de courrier par ender : ils feraient doublon avec ce système et contourneraient le rail.
-2. **Peu d'addons Create, chacun avec un rôle distinct** :
-   - socle : **Copycats+** (construction, engins), **Connected** (mécanique fine, config à élaguer), **Factory Logistics** (fluides en colis), **Ore Excavation** (gisements à épuiser), **Bells & Whistles** (gares) ;
-   - palier combustion : **Diesel Generators** ;
-   - électricité : **Crafts & Additions** en option, à trancher.
-   - écartés : Big Cannons, New Age, TFMG, Enchantment Industry, Hypertubes, Mobile Packages, Central Kitchen.
-3. **Overgeared reste le métier de la qualité.** Create apporte la quantité. Règle KubeJS proposée : une machine Create ne produit jamais mieux qu'une pièce de qualité « moyenne ». Les pièces critiques (tête de foreuse, bogies, moteurs d'avion) demandent une pièce forgée à la main, de qualité minimale ou avec un plan maîtrisé.
-4. **Minerai** : minerai vanilla raréfié et regroupé, pioche de prospection au début, puis gisements profonds et **finis** de Create Ore Excavation (API KubeJS complète). Un gisement épuisé oblige à repartir vers une nouvelle frontière : c'est le moteur des colonies lointaines.
-5. **Colonies** : pas de MineColonies dans le socle. Ses citoyens apparaissent tout seuls (contraire à la décision 0004), il impose des raids et pèse lourd sur le serveur. Il garde une place en branche d'essai. Proposition : villages vanilla en ruines (datapack) ; survivants scénarisés avec **Easy NPC** ; villageois secourus transformés en ouvriers avec **Villager Workers** (dispo 1.21.1 ? non vérifié) ; avant-postes protégés par **Open Parties and Claims**.
-6. **Quêtes** : FTB Quests n'existe que sur CurseForge, et Heracles/Odyssey n'a pas de version 1.21.1 trouvée. Proposition : **un carnet Modonomicon** (déjà dans le pack), dont les pages s'ouvrent par des **succès personnalisés** (datapack KubeJS). Cela n'ajoute aucun mod.
+> Scope: crafting → workshop → industry → rail → aviation → colonies.
+> Baseline retained (registry of 2026-10-10, 46 mods): Overgeared 1.6.19, Create 6.0.10, Aeronautics 1.3.2 + Sable 2.0.5, Steam 'n' Rails (NeoForge port 0.3.0-beta.2), KaleidoscopeCookery-Automation, Supplementaries and Quark (essentials only), Modonomicon and Patchouli (already there as dependencies), KubeJS. To test: Copycats+, Connected, Integrated Farming, Power Loader, IDAS.
+> **Limits of the research**: modrinth.com, the Modrinth API and curseforge.com are blocked for direct access. The **shared WebSearch quota (200 queries) ran out** during the research. Availability therefore comes from search excerpts (Modrinth version pages, BoxToPlay and Mado mirrors that copy Modrinth) and from GitHub. "✔ Modrinth" means an excerpt of a Modrinth version page for 1.21.1 NeoForge was seen. "~ mirror" means only a mirror shows it. "?" means unverified.
 
 ---
 
-## 1. Addons Create (sans empilement)
+## 0. Key takeaways
 
-Compatibilité Aeronautics/Sable : aucune liste officielle n'existe. Le dépôt [Simulated-Project](https://github.com/Creators-of-Aeronautics/Simulated-Project/issues) ne compte aucun ticket ouvert nommant Copycats+, Connected, S'n'R ou C&A (page 1 de la recherche). Des correctifs tiers existent : [Create Aeronautics: Compatibility](https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-compatability), qui corrige Bits 'n' Bobs, Etched, Sleep Tight…, et SableCat ([modrinth.com/mod/sablecat](https://modrinth.com/mod/sablecat)), qui répare les sous-niveaux corrompus et serait utile sur un monde permanent. Des addons de « poids » existent aussi pour Sable : Copycats+ Aeronautics Weight, Sable: Weighted – TFMG. On en déduit que **chaque bloc d'addon posé sur un engin doit avoir une masse définie** : point à tester.
+1. **Create 6 already provides half of the "civilization" pillar**, without any addon. Packages, addresses, mailboxes, frogports, the *stock ticker* and the *stock keeper* form the networked storage. Tablecloth shops (*table cloth*) handle selling between players. Mailboxes placed at stations turn trains into a postal service. "Magic" storage mods (Tom's, Sophisticated), drone-delivery mods and ender-mail mods should therefore be rejected: they would duplicate this system and bypass the rail.
+2. **Few Create addons, each with a distinct role**:
+   - core: **Copycats+** (building, contraptions), **Connected** (fine mechanics, config to be pruned), **Factory Logistics** (fluids in packages), **Ore Excavation** (deposits to exhaust), **Bells & Whistles** (stations);
+   - combustion tier: **Diesel Generators**;
+   - electricity: **Crafts & Additions** as an option, to be decided.
+   - rejected: Big Cannons, New Age, TFMG, Enchantment Industry, Hypertubes, Mobile Packages, Central Kitchen.
+3. **Overgeared remains the craft of quality.** Create brings quantity. Proposed KubeJS rule: a Create machine never produces better than an "average" quality part. Critical parts (drill head, bogies, airplane engines) require a hand-forged part, of minimum quality or with a mastered blueprint.
+4. **Ore**: vanilla ore made rarer and clustered, a prospecting pickaxe at the start, then deep, **finite** deposits from Create Ore Excavation (full KubeJS API). An exhausted deposit forces a move to a new frontier: this is the engine of distant colonies.
+5. **Colonies**: no MineColonies in the core. Its citizens appear on their own (contrary to decision 0004), it imposes raids and weighs heavily on the server. It keeps a place as a trial branch. Proposal: ruined vanilla villages (datapack); scripted survivors with **Easy NPC**; rescued villagers turned into workers with **Villager Workers** (available for 1.21.1? unverified); outposts protected by **Open Parties and Claims**.
+6. **Quests**: FTB Quests exists only on CurseForge, and no 1.21.1 version of Heracles/Odyssey was found. Proposal: **a Modonomicon notebook** (already in the pack), whose pages open through **custom advancements** (KubeJS datapack). This adds no mod.
 
-| # | Mod (slug) | Dispo 1.21.1 NeoForge / Create | Côté, dépendances | Mécanique apportée | Conflits, config | Verdict |
+---
+
+## 1. Create addons (no stacking)
+
+Aeronautics/Sable compatibility: no official list exists. The [Simulated-Project](https://github.com/Creators-of-Aeronautics/Simulated-Project/issues) repository has no open ticket naming Copycats+, Connected, S'n'R or C&A (page 1 of the search). Third-party fixes exist: [Create Aeronautics: Compatibility](https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-compatability), which fixes Bits 'n' Bobs, Etched, Sleep Tight…, and SableCat ([modrinth.com/mod/sablecat](https://modrinth.com/mod/sablecat)), which repairs corrupted sub-levels and would be useful on a permanent world. "Weight" addons also exist for Sable: Copycats+ Aeronautics Weight, Sable: Weighted – TFMG. From this we infer that **every addon block placed on a contraption must have a defined mass**: a point to test.
+
+| # | Mod (slug) | Availability 1.21.1 NeoForge / Create | Side, dependencies | Mechanic brought | Conflicts, config | Verdict |
 |---|---|---|---|---|---|---|
-| 1 | **Create: Copycats+** (`copycats`) | ~ miroir : 3.0.7+mc.1.21.1-neoforge (août 2026) ; Create 6 ([Mado](https://www.mado-hosting.com/en/minecraft-mods/copycats)) | CS, Create | Formes copiables (planches, marches, poutres, escaliers, vitres…) qui suivent les engins. Create 6.0.8 a corrigé leur rendu sur les engins. Sculpter la coque d'un dirigeable ou d'une locomotive avec n'importe quel bloc. | Fait doublon avec les copycats de Connected (voir #2) et avec FramedBlocks (#44, écarté). Prévoir un addon de poids pour Sable. | **Socle** |
-| 2 | **Create: Connected** (`create-connected`, Vg5TIO6d) | ✔ Modrinth : 1.1.9+ pour Create 6.0.7+, dernière vue 1.3.2-mc1.21.1 ([GitHub](https://github.com/hlysine/create_connected)) | CS, Create | Ingénierie fine : embrayages (centrifuge, roue libre, surcharge), goupille de cisaillement (casse en surcharge, très bien en début de partie), frein, boîte de vitesses en laiton, silo vertical, cuve horizontale-chaudière, chute en laiton, catalyseurs de ventilateur, tableau de bord des sièges (utile en avion et en train). | **À désactiver** (bascule par fonction et par catégorie, voir [Configs](https://github.com/hlysine/create_connected/wiki/Configs)) : tous les **copycats** (« Automatic Copycat Migration » vers Copycats+), la **Kinetic Battery** (énergie portable qui contredit l'entretien des réseaux), à discuter : Linked Transmitter et Wildcard. Réglages serveur : `Vessel Boiler Stress Multiplier` et `Vessel Max Level` pour l'équilibre de la vapeur. Incompatible avec Extended Cogwheels. | **Socle (élagué)** |
-| 3 | **Create Deco** (`create-deco`) | ~ miroir : 2.1.3 1.21.1 NeoForge (avril 2026) | CS, Create | Vocabulaire industriel : passerelles, barreaux, lampes, portes blindées, briques industrielles. C'est du contenu. | Recoupe Copycats+ et Rechiseled: Create. Prendre l'un **ou** l'autre. | Optionnel (préférer Rechiseled: Create, #23) |
-| 4 | **Create: Bells & Whistles** (`bellsandwhistles`) | ~ v0.4.7-mc1.21.1 NeoForge selon un miroir ; Modrinth affiche 1.21.1, mais sa description ne cite que Fabric et Forge → **NeoForge sur Modrinth à confirmer** ([Modrinth](https://modrinth.com/mod/bellsandwhistles)) | CS, Create | Gares : quais, bordures, rambardes, portes de wagon, signalétique. C'est ce qui fait d'une voie une **gare**. | Compatibilité avec le port S'n'R à tester. | Recommandé (pilier rail) |
-| 5 | **Create: Enchantment Industry** (`create-enchantment-industry`) | ? : 2.4.2 pour Create 6.0.10 NeoForge sur un miroir ; plusieurs projets et forks sur Modrinth | CS | Expérience liquide, enchantement mécanique, imprimante de livres | L'imprimante **duplique les livres enchantés** (contraire à 0004 : pas de Mending ni de contournement). Industrialise l'enchantement alors que le pack ne mise pas sur le combat. | **Écarté** |
-| 6 | **Create Crafts & Additions** (`createaddition`, kU1G12Nn) | ✔ Modrinth : 1.5.8 pour Create 6.0.8 ; 1.5.11 ajoute la **compatibilité d'amarrage Aeronautics** et corrige un crash Aeronautics ([version](https://modrinth.com/project/kU1G12Nn/version/cKTFwyEF)) | CS, Create | Électricité FE : alternateur, moteur, **fils et pylônes** (énergie à distance), accumulateurs, laminoir (fils, tiges), brûleur à blaze liquide, biocarburant. | Change la logique « une roue par machine » : il faut des lignes électriques. Désactiver la bobine Tesla (recharge d'objets) et éventuellement le chargeur. | **Optionnel** (palier tardif, à trancher, §6) |
-| 7 | **Create Factory Logistics** (QMGO17gm) | ✔ Modrinth : 1.6.0 1.21.1 NeoForge, client et serveur ([version](https://modrinth.com/project/QMGO17gm/version/4Drrlfu3)) | CS, Create 6 | **Fluides en colis** : bocal, embouteilleuse, jauge de fluide. On peut expédier eau potable, lait, huile ou carburant par train ou dirigeable. S'intègre à Thirst et au diesel. | Aucun connu. | **Socle** |
-| 8 | **Create: Numismatics** (`numismatics`) | ✔ Modrinth : 1.0.19 NeoForge 1.21.1 pour Create 6.0.7 ; 1.0.20 sur un miroir | CS, Create | Pièces à valeurs (spur → sun), banques, distributeurs, **vendeurs**, **dépositaires** (péage, ticket de train), cartes. | Fait doublon avec les boutiques natives de Create 6 (qui acceptent n'importe quel objet comme prix). D'où vient la monnaie ? Proposition KubeJS : frapper des pièces à la presse à partir de métal, pour une monnaie adossée au métal. | **Optionnel** (si une économie entre colonies prend forme) |
-| 9 | **Create Big Cannons** (`create-big-cannons`) | ✔ 5.11.x NeoForge 1.21.1, Create 6.0.7+. Attention : la 5.11.4 **casse les blocs de munitions existants** ([CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-big-cannons/files/8169551/dependencies)) | CS, + Ritchie's Projectile Lib | Artillerie | Guerre, sans ennemis à combattre ; contraire à la DA (Supplementaries a déjà son canon désactivé). | **Écarté** |
-| 10 | **Create: Diesel Generators** (`create-diesel-generators`, ZM3tt6p1) | ✔ Modrinth : 1.21.1-1.3.15 NeoForge ([version](https://modrinth.com/project/ZM3tt6p1/version/UoPH8lO1)) | CS, Create | Moteurs diesel (petit, modulaire, énorme), distillation (gros distillateurs en lot), carburants, pompe à pétrole. **Palier combustion** entre vapeur et aviation. Carburant pour locomotives (S'n'R gère le carburant liquide) et, à tester, pour les moteurs d'engin. | Recoupe TFMG et New Age (écartés). Vérifier dans le jar si le pétrole est un gisement propre au mod ou une ressource injectable par COE (#13). | **Recommandé** |
-| 11 | **Create: New Age** (`create-new-age`, FTeXqI9v) | ✔ Modrinth : 1.1.7a+mc1.21.1 NeoForge ; 1.2.0 sur un miroir | CS | Électricité, **réacteur nucléaire**, solaire, aimants | Doublon de C&A, nucléaire hors DA | **Écarté** |
-| 12 | **Create: The Factory Must Grow** (`create-tfmg`) | ~ 1.2.0 (1.21–1.21.11 NeoForge) sur un miroir | CS | Pétrole, acier, aluminium, électricité à tension, moteurs | Absorbe à lui seul acier, électricité et diesel. Doublon d'Overgeared (acier), de Diesel et de C&A : l'empilement interdit. | **Écarté** |
-| 13 | **Create Ore Excavation** (`create-ore-excavation`, ResbpANg) | ✔ Modrinth : 1.21.1-1.6.4, puis 1.6.6–1.6.8 NeoForge sur un miroir | CS, Create | **Gisements cachés** (un par chunk), détecteur de gisement, foreuse et extracteur de fluide entraînés par rotation. Gisements **finis ou infinis** au choix. API KubeJS : `vein().placement().biomeWhitelist().veinSize().alwaysFinite()`, `drilling().drill().fluid().stress()`, `extracting()`, tag `#createoreexcavation:drills` ([GitHub](https://github.com/tom5454/Create-Ore-Excavation)) | Passer **tous les gisements en fini** dans la config. Le détecteur affiche « gisement / taille » sans coordonnées : compatible avec la vision. | **Socle** |
-| 14 | COE Deposits (addon) | ~ 0.1.6 1.21.1 NeoForge ([SkinMC](https://skinmc.net/index.php/project/create-ore-excavation-deposits)) | CS, COE | Gisements multi-chunks (2–40 chunks, formes Perlin) : de vrais **bassins miniers** qui justifient une ville minière. | Jeune. Le Better Finder (radar) est à écarter s'il affiche des positions. | Optionnel (très intéressant) |
-| 15 | **Create: Power Loader** (`create-power-loader`, wPQ6GgFE) | ~ 2.0.5-mc1.21.1 NeoForge, Create 6 | CS, Create | Chargeurs de chunks andésite (1×1) et laiton (jusqu'à 5×5), au sol, sur train ou sur engin, réglables côté serveur | Recoupe la fonction *forceload* d'OPAC. **Proposition** : autoriser seulement les trains et engins (les convois roulent quand personne n'est là) ; chargeur au sol en laiton seulement et coûteux. | Recommandé, sous conditions (à tester) |
-| 16 | Create: Central Kitchen (btq68HMO) | ✔ 2.5.0 pour Create 6.0.10, mais **l'intégration KC a été retirée** au profit de Kaleidoscope Compat et KC Automation | CS | Automatisation de Farmer's Delight | FD est écarté | **Écarté** |
-| 17 | Kaleidoscope Contraption | ✗ seulement 1.20.1 Forge, Create 6.0.8+ ([CurseForge](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-contraption)) | CS | Blocs de KC sur engins : **voiture-restaurant**, cuisine de dirigeable | Pas de version 1.21.1 | À surveiller |
-| 18 | Create: Hypertubes (`hypertube`, ATDdrG1y) | ✔ 0.2.4 Modrinth ; 0.6.0 sur CurseForge seulement | CS | Tubes de transport rapide pour joueurs | Quasi-téléportation : contourne le rail | **Écarté** |
-| 19 | Create: Trading Floor (WROfLLvn) | ✔ Modrinth : 3.0.16 NeoForge 1.21.1 | CS | Comptoir qui fait commercer automatiquement les villageois | Les survivants deviennent des distributeurs : contraire à 0004 | **Écarté** |
-| 20 | Create: Interiors (`interiors`) | ? : 0.6.1 NeoForge 1.21.1 selon ModDex | CS | Fauteuils et banquettes de train, sièges sur engins | Poids sur Sable à vérifier | Optionnel (aménagement des wagons) |
-| 21 | Create: Mobile Packages (1vXRfEHZ) | ✔ 1.21.1 NeoForge, Create 6.0.9+ | CS | Robo-abeilles livreuses, **stock ticker portable** | Livraison par les airs et accès au stock à distance : contourne le rail et l'aviation | **Écarté** (Create: Phantom aussi) |
-| 22 | Create: Metallurgy (`create-metallurgy`) | ~ 1.0.3-1.21.1 pour Create 6.0.10 NeoForge | CS | Fonderie : fusion, mélangeur de fonderie, table et bassin de coulée | Doublon partiel des alliages et moules d'Overgeared | Optionnel, à étudier. Par défaut, préférer KubeJS (mélangeur chauffé de Create → alliages Overgeared) |
-| 23 | **Rechiseled: Create** (E6867niZ) | ✔ Modrinth : 1.1.1 NeoForge 1.21.1, Create 6+ ([version](https://modrinth.com/project/E6867niZ/version/TzPaH8MY)) | CS, Rechiseled + Fusion | Variantes ciselées des blocs Create (industriel cohérent) | Voir #43 | Recommandé si Rechiseled est retenu |
-| 24 | Aeronautics: Transmission & Linkage | ~ compatible Sable 2.0.x (juin 2026) | CS | Transmissions et tringleries entre le monde et l'engin | Jeune | Optionnel (aviation avancée) |
-| 25 | SableCat / Aeronautics Compatibility | ✔ SableCat sur Modrinth (dispo 1.21.1 ?) | S/CS | Outils pour récupérer des sous-niveaux corrompus ou abandonnés ; correctifs d'autres mods | Le mod de compatibilité sera archivé quand Sable intégrera ses correctifs | Recommandé côté serveur après lecture du jar |
+| 1 | **Create: Copycats+** (`copycats`) | ~ mirror: 3.0.7+mc.1.21.1-neoforge (August 2026); Create 6 ([Mado](https://www.mado-hosting.com/en/minecraft-mods/copycats)) | CS, Create | Copyable shapes (planks, slabs, beams, stairs, panes…) that follow contraptions. Create 6.0.8 fixed their rendering on contraptions. Sculpt the hull of an airship or a locomotive with any block. | Duplicates Connected's copycats (see #2) and FramedBlocks (#44, rejected). Plan a weight addon for Sable. | **Core** |
+| 2 | **Create: Connected** (`create-connected`, Vg5TIO6d) | ✔ Modrinth: 1.1.9+ for Create 6.0.7+, latest seen 1.3.2-mc1.21.1 ([GitHub](https://github.com/hlysine/create_connected)) | CS, Create | Fine engineering: clutches (centrifugal, freewheel, overload), shear pin (breaks on overload, very good early game), brake, brass gearbox, vertical silo, horizontal boiler tank, brass chute, fan catalysts, seat dashboard (useful on planes and trains). | **To disable** (toggle per feature and per category, see [Configs](https://github.com/hlysine/create_connected/wiki/Configs)): all **copycats** ("Automatic Copycat Migration" to Copycats+), the **Kinetic Battery** (portable energy that contradicts network maintenance), to discuss: Linked Transmitter and Wildcard. Server settings: `Vessel Boiler Stress Multiplier` and `Vessel Max Level` for steam balance. Incompatible with Extended Cogwheels. | **Core (pruned)** |
+| 3 | **Create Deco** (`create-deco`) | ~ mirror: 2.1.3 1.21.1 NeoForge (April 2026) | CS, Create | Industrial vocabulary: catwalks, bars, lamps, armored doors, industrial bricks. This is content. | Overlaps with Copycats+ and Rechiseled: Create. Take one **or** the other. | Optional (prefer Rechiseled: Create, #23) |
+| 4 | **Create: Bells & Whistles** (`bellsandwhistles`) | ~ v0.4.7-mc1.21.1 NeoForge according to a mirror; Modrinth shows 1.21.1, but its description cites only Fabric and Forge → **NeoForge on Modrinth to be confirmed** ([Modrinth](https://modrinth.com/mod/bellsandwhistles)) | CS, Create | Stations: platforms, curbs, railings, train doors, signage. This is what makes a track a **station**. | Compatibility with the S'n'R port to test. | Recommended (rail pillar) |
+| 5 | **Create: Enchantment Industry** (`create-enchantment-industry`) | ?: 2.4.2 for Create 6.0.10 NeoForge on a mirror; several projects and forks on Modrinth | CS | Liquid experience, mechanical enchanting, book printer | The printer **duplicates enchanted books** (contrary to 0004: no Mending or workaround). Industrializes enchanting although the pack does not bet on combat. | **Rejected** |
+| 6 | **Create Crafts & Additions** (`createaddition`, kU1G12Nn) | ✔ Modrinth: 1.5.8 for Create 6.0.8; 1.5.11 adds **Aeronautics docking compatibility** and fixes an Aeronautics crash ([version](https://modrinth.com/project/kU1G12Nn/version/cKTFwyEF)) | CS, Create | FE electricity: alternator, motor, **wires and pylons** (remote energy), accumulators, rolling mill (wires, rods), liquid blaze burner, biofuel. | Changes the "one wheel per machine" logic: power lines are needed. Disable the Tesla coil (item charging) and possibly the charger. | **Optional** (late tier, to be decided, §6) |
+| 7 | **Create Factory Logistics** (QMGO17gm) | ✔ Modrinth: 1.6.0 1.21.1 NeoForge, client and server ([version](https://modrinth.com/project/QMGO17gm/version/4Drrlfu3)) | CS, Create 6 | **Fluids in packages**: jar, bottler, fluid gauge. Drinking water, milk, oil or fuel can be shipped by train or airship. Integrates with Thirst and diesel. | None known. | **Core** |
+| 8 | **Create: Numismatics** (`numismatics`) | ✔ Modrinth: 1.0.19 NeoForge 1.21.1 for Create 6.0.7; 1.0.20 on a mirror | CS, Create | Coins with values (spur → sun), banks, ATMs, **vendors**, **depositors** (toll, train ticket), cards. | Duplicates Create 6's native shops (which accept any item as the price). Where does the currency come from? KubeJS proposal: stamp coins at the press from metal, for a metal-backed currency. | **Optional** (if an economy between colonies takes shape) |
+| 9 | **Create Big Cannons** (`create-big-cannons`) | ✔ 5.11.x NeoForge 1.21.1, Create 6.0.7+. Beware: 5.11.4 **breaks existing ammunition blocks** ([CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-big-cannons/files/8169551/dependencies)) | CS, + Ritchie's Projectile Lib | Artillery | War, with no enemies to fight; contrary to the art direction (Supplementaries already has its cannon disabled). | **Rejected** |
+| 10 | **Create: Diesel Generators** (`create-diesel-generators`, ZM3tt6p1) | ✔ Modrinth: 1.21.1-1.3.15 NeoForge ([version](https://modrinth.com/project/ZM3tt6p1/version/UoPH8lO1)) | CS, Create | Diesel engines (small, modular, huge), distillation (large batch distillers), fuels, oil pump. **Combustion tier** between steam and aviation. Fuel for locomotives (S'n'R handles liquid fuel) and, to test, for contraption engines. | Overlaps with TFMG and New Age (rejected). Check in the jar whether oil is a deposit specific to the mod or a resource injectable by COE (#13). | **Recommended** |
+| 11 | **Create: New Age** (`create-new-age`, FTeXqI9v) | ✔ Modrinth: 1.1.7a+mc1.21.1 NeoForge; 1.2.0 on a mirror | CS | Electricity, **nuclear reactor**, solar, magnets | Duplicate of C&A, nuclear is outside the art direction | **Rejected** |
+| 12 | **Create: The Factory Must Grow** (`create-tfmg`) | ~ 1.2.0 (1.21–1.21.11 NeoForge) on a mirror | CS | Oil, steel, aluminum, voltage electricity, engines | Alone absorbs steel, electricity and diesel. Duplicate of Overgeared (steel), Diesel and C&A: stacking forbidden. | **Rejected** |
+| 13 | **Create Ore Excavation** (`create-ore-excavation`, ResbpANg) | ✔ Modrinth: 1.21.1-1.6.4, then 1.6.6–1.6.8 NeoForge on a mirror | CS, Create | **Hidden deposits** (one per chunk), deposit detector, rotation-driven drill and fluid extractor. Deposits **finite or infinite** at will. KubeJS API: `vein().placement().biomeWhitelist().veinSize().alwaysFinite()`, `drilling().drill().fluid().stress()`, `extracting()`, tag `#createoreexcavation:drills` ([GitHub](https://github.com/tom5454/Create-Ore-Excavation)) | Switch **all deposits to finite** in the config. The detector displays "deposit / size" without coordinates: compatible with the vision. | **Core** |
+| 14 | COE Deposits (addon) | ~ 0.1.6 1.21.1 NeoForge ([SkinMC](https://skinmc.net/index.php/project/create-ore-excavation-deposits)) | CS, COE | Multi-chunk deposits (2–40 chunks, Perlin shapes): true **mining basins** that justify a mining town. | Young. The Better Finder (radar) is to be rejected if it shows positions. | Optional (very interesting) |
+| 15 | **Create: Power Loader** (`create-power-loader`, wPQ6GgFE) | ~ 2.0.5-mc1.21.1 NeoForge, Create 6 | CS, Create | Andesite (1×1) and brass (up to 5×5) chunk loaders, on the ground, on a train or on a contraption, adjustable server-side | Overlaps with OPAC's *forceload* function. **Proposal**: allow only trains and contraptions (convoys run when nobody is there); ground loader in brass only and costly. | Recommended, with conditions (to test) |
+| 16 | Create: Central Kitchen (btq68HMO) | ✔ 2.5.0 for Create 6.0.10, but **the KC integration was removed** in favor of Kaleidoscope Compat and KC Automation | CS | Farmer's Delight automation | FD is rejected | **Rejected** |
+| 17 | Kaleidoscope Contraption | ✗ only 1.20.1 Forge, Create 6.0.8+ ([CurseForge](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-contraption)) | CS | KC blocks on contraptions: **dining car**, airship kitchen | No 1.21.1 version | To watch |
+| 18 | Create: Hypertubes (`hypertube`, ATDdrG1y) | ✔ 0.2.4 Modrinth; 0.6.0 on CurseForge only | CS | Fast transport tubes for players | Near-teleportation: bypasses the rail | **Rejected** |
+| 19 | Create: Trading Floor (WROfLLvn) | ✔ Modrinth: 3.0.16 NeoForge 1.21.1 | CS | Counter that makes villagers trade automatically | Survivors become vending machines: contrary to 0004 | **Rejected** |
+| 20 | Create: Interiors (`interiors`) | ?: 0.6.1 NeoForge 1.21.1 according to ModDex | CS | Train armchairs and benches, seats on contraptions | Weight on Sable to check | Optional (railcar fittings) |
+| 21 | Create: Mobile Packages (1vXRfEHZ) | ✔ 1.21.1 NeoForge, Create 6.0.9+ | CS | Delivery robo-bees, **portable stock ticker** | Delivery by air and remote access to stock: bypasses the rail and aviation | **Rejected** (Create: Phantom too) |
+| 22 | Create: Metallurgy (`create-metallurgy`) | ~ 1.0.3-1.21.1 for Create 6.0.10 NeoForge | CS | Foundry: melting, foundry mixer, casting table and basin | Partial duplicate of Overgeared's alloys and molds | Optional, to study. By default, prefer KubeJS (heated Create mixer → Overgeared alloys) |
+| 23 | **Rechiseled: Create** (E6867niZ) | ✔ Modrinth: 1.1.1 NeoForge 1.21.1, Create 6+ ([version](https://modrinth.com/project/E6867niZ/version/TzPaH8MY)) | CS, Rechiseled + Fusion | Chiseled variants of Create blocks (consistent industrial) | See #43 | Recommended if Rechiseled is retained |
+| 24 | Aeronautics: Transmission & Linkage | ~ compatible with Sable 2.0.x (June 2026) | CS | Transmissions and linkages between the world and the contraption | Young | Optional (advanced aviation) |
+| 25 | SableCat / Aeronautics Compatibility | ✔ SableCat on Modrinth (available for 1.21.1?) | S/CS | Tools to recover corrupted or abandoned sub-levels; fixes for other mods | The compatibility mod will be archived once Sable integrates its fixes | Recommended server-side after reading the jar |
 
-Rappel : **Create: Integrated Farming** est déjà « à tester ». Cuisine sur engin : à surveiller (#17).
+Reminder: **Create: Integrated Farming** is already "to test". Cooking on contraptions: to watch (#17).
 
 ---
 
-## 2. Overgeared ↔ Create : métallurgie, minerai, prospection
+## 2. Overgeared ↔ Create: metallurgy, ore, prospecting
 
-### Ce qu'apporte Overgeared (pages du mod et miroirs)
-- Enclume de pierre (sneak + clic droit sur de la pierre) puis enclume de forgeron ; forge avec un mini-jeu d'adresse.
-- **Plans** (*blueprints*) : chacun porte un niveau de qualité, un nombre d'usages, une progression, un type d'outil et une **qualité finale maximale**. Les copier sur un plan vierge donne une copie de moindre qualité.
-- **Acier**, palier complet entre fer et diamant. L'amélioration en acier se fait à la table de forgeron, avec un modèle trouvé dans des structures (→ à placer dans les ruines et les camps de survivants).
-- Moules : argile (fragile, début) et Nether (tardif). Ils dupliquent des têtes d'outil en perdant de la qualité.
-- Recettes `overgeared:alloy_smelting` (4 entrées) et `nether_alloy_smelting` (9 entrées).
-- Addons communautaires : Overgeared x Epic Knights et OvergearedXSimplySwords ; un dépôt de recettes : [BlueAsclepias/overgeared-recipes](https://github.com/BlueAsclepias/overgeared-recipes). **Aucun pont Overgeared ↔ Create n'existe** : tout passera par KubeJS.
+### What Overgeared brings (mod pages and mirrors)
+- Stone anvil (sneak + right-click on stone), then smith's anvil; forge with a skill mini-game.
+- **Blueprints**: each carries a quality level, a number of uses, a progression, a tool type and a **maximum final quality**. Copying them onto a blank blueprint gives a lower-quality copy.
+- **Steel**, a full tier between iron and diamond. The steel upgrade is done at the smithing table, with a pattern found in structures (→ to place in the ruins and survivor camps).
+- Molds: clay (fragile, early) and Nether (late). They duplicate tool heads while losing quality.
+- Recipes `overgeared:alloy_smelting` (4 inputs) and `nether_alloy_smelting` (9 inputs).
+- Community addons: Overgeared x Epic Knights and OvergearedXSimplySwords; a recipe repository: [BlueAsclepias/overgeared-recipes](https://github.com/BlueAsclepias/overgeared-recipes). **No Overgeared ↔ Create bridge exists**: everything will go through KubeJS.
 
-### Principe d'articulation : « l'artisan fait la qualité, l'usine fait la quantité »
-| Étape | Overgeared (main) | Create (machine) | Règle KubeJS |
+### Articulation principle: "the craftsman makes quality, the factory makes quantity"
+| Step | Overgeared (hand) | Create (machine) | KubeJS rule |
 |---|---|---|---|
-| Lingots chauds | Forge et marteau | Brûleur à blaze sous dépôt ou ventilateur de « chauffe » (tester) | Le chauffage industriel est permis ; la mise en forme de qualité reste manuelle |
-| Plaques et têtes | Enclume, qualité selon le plan | Presse mécanique → **qualité « mauvaise » à « correcte » au plus** | Sortie de presse avec un composant de qualité fixé (clé exacte du composant à lire dans le jar) |
-| Alliages | Fonderie d'alliage (4 entrées) : bronze, laiton, acier | Mélangeur chauffé, puis surchauffé | **Laiton** : d'abord à la fonderie Overgeared, ensuite au mélangeur (débit ×4). **Acier en masse** : mélangeur surchauffé (brûleur + combustible de blaze/diesel) |
-| Pièces critiques | Forgées à la main, qualité ≥ « bonne » | — | Tête de foreuse COE, bogies et essieux de train, carter de moteur d'avion : recettes qui exigent l'**item forgé** (tag `fallow:forged_quality_good`) |
-| Outils et armes | Seule source d'outils de qualité | Pas d'outils en métal fabriqués par Create (déploiement, assemblage séquencé) | Supprimer les recettes vanilla d'outils et d'armures en fer, or, diamant et acier (selon la config Overgeared) et les échanges de villageois correspondants |
+| Hot ingots | Forge and hammer | Blaze burner under a basin or "heating" fan (test) | Industrial heating is allowed; quality shaping stays manual |
+| Plates and heads | Anvil, quality depending on the blueprint | Mechanical press → **"poor" to "decent" quality at most** | Press output with a fixed quality component (exact component key to read in the jar) |
+| Alloys | Alloy foundry (4 inputs): bronze, brass, steel | Heated, then superheated mixer | **Brass**: first at the Overgeared foundry, then at the mixer (rate ×4). **Steel in bulk**: superheated mixer (burner + blaze/diesel fuel) |
+| Critical parts | Hand-forged, quality ≥ "good" | — | COE drill head, train bogies and axles, airplane engine casing: recipes requiring the **forged item** (tag `fallow:forged_quality_good`) |
+| Tools and weapons | Only source of quality tools | No metal tools made by Create (deploying, sequenced assembly) | Remove the vanilla tool and armor recipes in iron, gold, diamond and steel (according to the Overgeared config) and the corresponding villager trades |
 
-### Minerai et prospection : « veines réelles »
-| # | Mod (slug) | Dispo | Mécanique | Verdict |
+### Ore and prospecting: "real veins"
+| # | Mod (slug) | Availability | Mechanic | Verdict |
 |---|---|---|---|---|
-| 26 | **Prospecting Picks** | ~ 1.2.1 MC 1.21.1 NeoForge (janv. 2026) ([Mado](https://www.mado-hosting.com/minecraft-mods/prospecting-picks)) | Pioche de prospection : sonde un rayon configurable autour du bloc de pierre frappé ; détecte les veines par leurs blocs de minerai brut ; minerais définis en config (tag `c:ores/*`). Conçue pour aller avec des amas **plus grands et plus rares**. | **Recommandé** (début de partie) |
-| 27 | GeoVein | ? 1.21.1 NeoForge (ModDex) ; Modrinth non vérifié | Énormes gisements gradués : plus on approche du cœur, meilleur est le minerai | Optionnel. Fait doublon avec COE Deposits : prendre l'un ou l'autre |
-| 28 | Advanced Ore Deposits | ~ 1.0.1 1.21.1 NeoForge | Blocs de gisement qui se régénèrent jusqu'à épuisement de leur réserve | Optionnel (moins bon que COE fini) |
-| 29 | Ore Deposits (surface) | ~ 1.1 (1.21.1, multi-loader) | Affleurements en surface qui révèlent le minerai | Optionnel : indice visuel pour l'exploration (« je vois de la rouille sur la falaise ») |
-| 30 | Create: Rock & Stone, Create: Ore Deposits | CurseForge / WIP « pas prêt pour la survie » | — | **Écartés** |
+| 26 | **Prospecting Picks** | ~ 1.2.1 MC 1.21.1 NeoForge (Jan. 2026) ([Mado](https://www.mado-hosting.com/minecraft-mods/prospecting-picks)) | Prospecting pickaxe: probes a configurable radius around the struck stone block; detects veins by their raw ore blocks; ores defined in config (tag `c:ores/*`). Designed to go with **larger and rarer** clusters. | **Recommended** (early game) |
+| 27 | GeoVein | ? 1.21.1 NeoForge (ModDex); Modrinth unverified | Huge graded deposits: the closer to the core, the better the ore | Optional. Duplicates COE Deposits: take one or the other |
+| 28 | Advanced Ore Deposits | ~ 1.0.1 1.21.1 NeoForge | Deposit blocks that regenerate until their reserve is exhausted | Optional (worse than finite COE) |
+| 29 | Ore Deposits (surface) | ~ 1.1 (1.21.1, multi-loader) | Surface outcrops that reveal the ore | Optional: visual clue for exploration ("I see rust on the cliff") |
+| 30 | Create: Rock & Stone, Create: Ore Deposits | CurseForge / WIP "not ready for survival" | — | **Rejected** |
 
-**Schéma proposé** :
-1. Datapack : minerais vanilla dispersés réduits (≈ −60 %). On garde les grandes veines vanilla de cuivre et de fer (1.18+), qui deviennent la cible de la prospection. Dans No Man's Land, les affleurements (Ore Deposits, optionnel) servent d'indices.
-2. Début : pioche de prospection, minage manuel, forge Overgeared.
-3. Industrie : détecteur COE, puis foreuse à tête **forgée** (gate Overgeared). Gisements **finis** (`.alwaysFinite()`, taille ×5–8 de la base) et **whitelists de biomes** : le zinc dans les biomes humides, l'étain dans les montagnes… La géographie dicte où fonder les colonies.
-4. Épuisement → nouveau gisement lointain → voie ferrée → colonie minière.
+**Proposed scheme**:
+1. Datapack: scattered vanilla ores reduced (≈ −60%). The large vanilla copper and iron veins (1.18+) are kept and become the target of prospecting. In No Man's Land, outcrops (Ore Deposits, optional) serve as clues.
+2. Start: prospecting pickaxe, manual mining, Overgeared forge.
+3. Industry: COE detector, then drill with a **forged** head (Overgeared gate). **Finite** deposits (`.alwaysFinite()`, size ×5–8 of the base) and **biome whitelists**: zinc in wet biomes, tin in the mountains… Geography dictates where to found colonies.
+4. Depletion → new distant deposit → railway → mining colony.
 
 ```js
-// server_scripts/coe_veins.js (syntaxe 1.21 d'après le README COE)
+// server_scripts/coe_veins.js (1.21 syntax according to the COE README)
 ServerEvents.recipes(e => {
   e.recipes.createoreexcavation.vein('{"text":"Gisement de zinc"}', 'create:raw_zinc')
-    .placement(64, 24, 91827).biomeWhitelist('#c:is_wet/overworld') // tag à vérifier
+    .placement(64, 24, 91827).biomeWhitelist('#c:is_wet/overworld') // tag to check
     .alwaysFinite().veinSize(4, 8).id('fallow:vein_zinc')
   e.recipes.createoreexcavation.drilling(
       [coeutil.processingOutput('create:raw_zinc', 1), coeutil.processingOutput('minecraft:gravel', 0.3)],
@@ -106,124 +106,124 @@ ServerEvents.recipes(e => {
 
 ---
 
-## 3. Colonies et PNJ (avec la décision 0004 « survivants »)
+## 3. Colonies and NPCs (with decision 0004 "survivors")
 
 ### Concept
-Les villages vanilla deviennent des **ruines vides**. On découvre des **survivants rares et uniques** (ermite, ingénieur, réfugiés). On les **ramène** à cheval, en charrette (Icy's), en train ou en dirigeable, guidés par le module Quark « Villagers Follow Emeralds ». Ils deviennent la **main-d'œuvre** d'une colonie. Les « colonies lointaines » sont des avant-postes de joueurs reliés par rail ou par air (mine sur un gisement COE, comptoir, aérodrome), peuplés de survivants et protégés par des claims.
+The vanilla villages become **empty ruins**. **Rare, unique survivors** are discovered (hermit, engineer, refugees). They are **brought back** on horseback, by cart (Icy's), by train or by airship, guided by the Quark module "Villagers Follow Emeralds". They become the **workforce** of a colony. The "distant colonies" are player outposts linked by rail or by air (mine on a COE deposit, trading post, airfield), populated by survivors and protected by claims.
 
-| # | Mod (slug) | Dispo 1.21.1 NeoForge | Mécanique | Conflits | Verdict |
+| # | Mod (slug) | Availability 1.21.1 NeoForge | Mechanic | Conflicts | Verdict |
 |---|---|---|---|---|---|
-| 31 | **Easy NPC** (`easy-npc`) | ~ 7.9.0 1.21.1 NeoForge (Mado) ; fichier `easy_npc_bundle-neoforge-1.21.1-6.25.0.jar` vu sur CurseForge ; Modrinth probable, non vérifié | PNJ scénarisés : dialogues, **échanges définis à la main**, apparence, actions et conditions, sans redémarrage. Parfait pour les **survivants uniques** : l'ermite qui vend un plan Overgeared contre de la nourriture, l'ingénieur qui raconte l'effondrement. | Ne passe pas par les échanges de villageois : aucun Mending possible | **Recommandé** |
-| 32 | **Villager Workers** (talhanation) | ? : dépôt [talhanation/workers](https://github.com/talhanation) actif, version 1.21.1 non confirmée | Un **villageois secouru devient ouvrier** (mineur, bûcheron, fermier, pêcheur, berger, éleveurs, marchand) avec zone de travail, coffre et besoin de nourriture. C'est l'usage exact de 0004. | Fermier ou éleveur automatiques : à encadrer (élevage exigeant voulu en 0002) | **Recommandé si la 1.21.1 NeoForge existe** (à vérifier en priorité) |
-| 33 | Villager Recruits (`villager-recruits`) | ? : la page Modrinth existe ([modrinth.com/mod/villager-recruits](https://modrinth.com/mod/villager-recruits)), version 1.21.1 non confirmée | Recrues avec solde et nourriture, escortes, patrouilles, factions | Orienté armée ; recrues achetées contre émeraudes (désactiver leur apparition spontanée) | Optionnel : escortes de convoi seulement |
-| 34 | MineColonies (`minecolonies`) | ✔ projet Modrinth ; 1.21.1 en **snapshot** (`minecolonies-1.1.1349-1.21.1-snapshot`) selon ModDex | Ville entière : bâtisseurs, université, guerriers ; plus Structurize, BlockUI, Domum Ornamentum, MultiPiston | Citoyens générés par la mairie (contraire aux survivants rares) ; **raids** de barbares et pirates (désactivables, clé à lire dans le jar) ; poids serveur ; style de construction imposé | **Écarté du socle**. Branche `test/minecolonies` si l'envie revient : citoyens initiaux 0, naissances désactivées, recrutement seulement par les **visiteurs de la taverne** (ce qui ressemble aux survivants) |
-| 35 | Guard Villagers (`guard-villagers`) | ~ 2.4.10 1.21.1 NeoForge (le projet Modrinth Ap53t4bc est un port **Fabric**, piège) | Gardes en groupe de six dans les villages | Plus de villages vivants ; doublon de Recruits | **Écarté** |
-| 36 | Taterzens | ✗ Fabric seulement (dernier Forge en 1.19) | — | — | **Écarté** |
-| 37 | Villagers Reborn | ~ plusieurs versions 1.21.1 NeoForge (miroir) | Remplace les modèles des villageois par des **humains** (fonctions vanilla conservées) | Cohérence visuelle avec Easy NPC à vérifier | Optionnel, intéressant pour la DA (survivants crédibles) |
-| 38 | MCA Reborn | ? (quota de recherche épuisé) | Villageois humains, mariage, **reproduction** | Contraire à 0004 | **Écarté** |
-| 39 | **Open Parties and Claims** (`open-parties-and-claims`) | ✔ Modrinth : `neoforge-1.21.1-0.27.5` ([version](https://modrinth.com/mod/open-parties-and-claims/version/neoforge-1.21.1-0.27.5)) | Groupes et claims ; **les mods Xaero ne sont pas requis** (intégration optionnelle) ; gestion par commandes et interface | Ne pas installer Xaero. Régler la limite de claims et le *forceload* (cohérence avec Power Loader) | **Recommandé** (protection des colonies) |
+| 31 | **Easy NPC** (`easy-npc`) | ~ 7.9.0 1.21.1 NeoForge (Mado); file `easy_npc_bundle-neoforge-1.21.1-6.25.0.jar` seen on CurseForge; Modrinth probable, unverified | Scripted NPCs: dialogues, **hand-defined trades**, appearance, actions and conditions, without a restart. Perfect for **unique survivors**: the hermit who sells an Overgeared blueprint in exchange for food, the engineer who tells of the collapse. | Does not go through villager trades: no Mending possible | **Recommended** |
+| 32 | **Villager Workers** (talhanation) | ?: [talhanation/workers](https://github.com/talhanation) repository active, 1.21.1 version unconfirmed | A **rescued villager becomes a worker** (miner, lumberjack, farmer, fisherman, shepherd, breeders, merchant) with work zone, chest and food needs. This is exactly the use case of 0004. | Automatic farmer or breeder: to be supervised (demanding husbandry wanted in 0002) | **Recommended if 1.21.1 NeoForge exists** (to verify first) |
+| 33 | Villager Recruits (`villager-recruits`) | ?: the Modrinth page exists ([modrinth.com/mod/villager-recruits](https://modrinth.com/mod/villager-recruits)), 1.21.1 version unconfirmed | Recruits with pay and food, escorts, patrols, factions | Army-oriented; recruits bought with emeralds (disable their spontaneous spawning) | Optional: convoy escorts only |
+| 34 | MineColonies (`minecolonies`) | ✔ Modrinth project; 1.21.1 in **snapshot** (`minecolonies-1.1.1349-1.21.1-snapshot`) according to ModDex | A whole town: builders, university, warriors; plus Structurize, BlockUI, Domum Ornamentum, MultiPiston | Citizens generated by the town hall (contrary to rare survivors); barbarian and pirate **raids** (disableable, key to read in the jar); server weight; imposed building style | **Rejected from the core**. `test/minecolonies` branch if the desire returns: initial citizens 0, births disabled, recruitment only through **tavern visitors** (which resembles survivors) |
+| 35 | Guard Villagers (`guard-villagers`) | ~ 2.4.10 1.21.1 NeoForge (the Modrinth project Ap53t4bc is a **Fabric** port, a trap) | Guards in groups of six in villages | More living villages; duplicate of Recruits | **Rejected** |
+| 36 | Taterzens | ✗ Fabric only (last Forge in 1.19) | — | — | **Rejected** |
+| 37 | Villagers Reborn | ~ several 1.21.1 NeoForge versions (mirror) | Replaces villager models with **humans** (vanilla functions kept) | Visual consistency with Easy NPC to check | Optional, interesting for the art direction (credible survivors) |
+| 38 | MCA Reborn | ? (search quota exhausted) | Human villagers, marriage, **reproduction** | Contrary to 0004 | **Rejected** |
+| 39 | **Open Parties and Claims** (`open-parties-and-claims`) | ✔ Modrinth: `neoforge-1.21.1-0.27.5` ([version](https://modrinth.com/mod/open-parties-and-claims/version/neoforge-1.21.1-0.27.5)) | Groups and claims; **Xaero mods are not required** (optional integration); management through commands and interface | Do not install Xaero. Set the claim limit and *forceload* (consistency with Power Loader) | **Recommended** (colony protection) |
 
-### Mise en œuvre (sous-projet 3)
-- **Villages en ruines** : remplacer dans le datapack les *template pools* `minecraft:village/*/villagers` par un pool vide, et/ou forcer les pools « zombie » des villages (bâtiments délabrés). Les zombies ne naissent pas puisque les hostiles sont bloqués. Autre option : vider `data/minecraft/worldgen/structure_set/villages.json` et générer ses propres ruines. Sparse Structures règle la rareté.
-- **Pas de reproduction** :
+### Implementation (sub-project 3)
+- **Ruined villages**: replace in the datapack the `minecraft:village/*/villagers` *template pools* with an empty pool, and/or force the village "zombie" pools (dilapidated buildings). Zombies do not spawn since hostiles are blocked. Another option: empty `data/minecraft/worldgen/structure_set/villages.json` and generate its own ruins. Sparse Structures sets the rarity.
+- **No reproduction**:
 ```js
 // server_scripts/survivants.js
 NativeEvents.onEvent('net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent', e => {
   if (e.parentA?.type == 'minecraft:villager') e.setCanceled(true)
 })
 ```
-- **Pas de Mending dans les échanges** : en 1.21 les enchantements sont des données. On redéfinit les tags `data/minecraft/tags/enchantment/tradeable.json` et `on_traded_equipment.json` avec `"replace": true`, sans `minecraft:mending`.
-- **Pas de contournement d'Overgeared** : retirer les échanges du forgeron d'outils, de l'armurier et du forgeron d'armes qui vendent des outils et armures en métal, via `VillagerTradesEvent` (NeoForge, depuis `NativeEvents`) ou un addon KubeJS d'échanges (MoreJS 1.21.1 ? non vérifié). On garde les échanges qui achètent des produits de ferme ou d'atelier : le survivant devient un débouché pour la production.
-- **Camps de survivants** : structures de datapack (2-3 PNJ Easy NPC + un villageois vanilla). Elles peuvent cacher le **modèle de forgeron d'acier** d'Overgeared.
+- **No Mending in trades**: in 1.21 enchantments are data. Redefine the tags `data/minecraft/tags/enchantment/tradeable.json` and `on_traded_equipment.json` with `"replace": true`, without `minecraft:mending`.
+- **No bypass of Overgeared**: remove the trades of the toolsmith, armorer and weaponsmith that sell metal tools and armor, via `VillagerTradesEvent` (NeoForge, from `NativeEvents`) or a KubeJS trade addon (MoreJS 1.21.1? unverified). Trades that buy farm or workshop products are kept: the survivor becomes an outlet for production.
+- **Survivor camps**: datapack structures (2-3 Easy NPC NPCs + one vanilla villager). They can hide Overgeared's **steel smith pattern**.
 
 ---
 
-## 4. Construction et décoration (ce qui en fait un métier)
-Déjà retenus : Quark (essentiel), Supplementaries (essentiel), Copycats+ (§1).
+## 4. Building and decoration (what makes it a craft)
+Already retained: Quark (essentials), Supplementaries (essentials), Copycats+ (§1).
 
-| # | Mod | Dispo | Apport | Verdict |
+| # | Mod | Availability | Contribution | Verdict |
 |---|---|---|---|---|
-| 40 | Amendments | ~ 2.1.7 1.21.1 NeoForge | Retouches vanilla (lanternes murales, chaudrons de mélange, panneaux suspendus) | **Optionnel, bas** : jugé « empilement » lors de l'écart d'Integrated Mowzie's ; ne pas relancer |
-| 41 | Handcrafted | ~ 4.0.3 1.21.1 NeoForge, + Resourceful Lib (déjà présent) | 250 meubles, du contenu | Optionnel. Il existe un patch « Furniture with Create and Sable compat » (Mado) : les meubles sur engin posent problème sans lui |
-| 42 | Macaw's (Roofs, Bridges, Doors, Windows…) | **Signal négatif** : Windows montré en 1.21.1 **Forge** et en 1.21.8 NeoForge seulement ; seuls des addons tiers (Aurora, Betters) existent en 1.21.1 NeoForge | Toits, ponts | À vérifier mod par mod. Probablement **indisponible** en 1.21.1 NeoForge sur Modrinth |
-| 43 | **Rechiseled** (+ Fusion pour les textures connectées) | ✔ Rechiseled: Create 1.1.1 NeoForge 1.21.1 ; LittleBuilders 2 (modpack 1.21.1) embarque Rechiseled et Fusion | Ciseau : variantes de blocs, textures connectées ; addon Create cohérent | **Recommandé** (un seul mod de variantes ; préféré à Chipped, qui a des établis et des milliers de blocs) |
-| 44 | FramedBlocks (`framedblocks`) | ✔ 10.5.3 sur Modrinth (10.6.2 sur un miroir) 1.21.1 NeoForge | Blocs à habiller | Doublon de Copycats+, qui suit les engins | **Écarté** |
-| 45 | LittleTiles | ? (présent dans LittleBuilders 2 en 1.21.1) ; CreativeCore déjà là | Micro-blocs | Coût serveur, comportement sur engins inconnu | **Écarté** (ou optionnel sur une branche) |
-| 46 | **Immersive Paintings** (`immersive-paintings`) | ✔ Modrinth : 0.7.8 NeoForge 1.21.1, CS ([version](https://modrinth.com/project/6txNkua3/version/DeOfrXC3)) | Tableaux d'images téléversées ; option pour couper les tableaux fournis avec le mod | Recommandé avec Camerapture |
-| 47 | **Camerapture** (`camerapture`) | ✔ Modrinth : 1.10.6+mc1.21.1-neoforge ([version](https://modrinth.com/mod/camerapture/version/1.10.6+mc1.21.1-neoforge)) | Appareil photo : **les photos deviennent des objets** à encadrer. On rapporte des clichés d'expédition et on construit la mémoire du monde (complète Antique Atlas) | **Recommandé** (peu connu, très dans l'esprit) |
-| 48 | Domum Ornamentum | Seulement avec MineColonies | Combinaison de textures à l'établi d'architecte | Écarté (suit MineColonies) |
-| 49 | Baguettes de construction (Construction Wand, Building Gadgets) | — | Raccourci | **Écarté**. Le canon à schémas de Create, qui consomme les matériaux, est la « construction industrielle » ; la truelle de Quark suffit |
+| 40 | Amendments | ~ 2.1.7 1.21.1 NeoForge | Vanilla tweaks (wall lanterns, mixing cauldrons, hanging signs) | **Optional, low**: judged "stacking" when Integrated Mowzie's was set aside; do not relaunch |
+| 41 | Handcrafted | ~ 4.0.3 1.21.1 NeoForge, + Resourceful Lib (already present) | 250 furniture items, content | Optional. A patch "Furniture with Create and Sable compat" exists (Mado): furniture on contraptions is a problem without it |
+| 42 | Macaw's (Roofs, Bridges, Doors, Windows…) | **Negative signal**: Windows shown for 1.21.1 **Forge** and 1.21.8 NeoForge only; only third-party addons (Aurora, Betters) exist for 1.21.1 NeoForge | Roofs, bridges | To check mod by mod. Probably **unavailable** for 1.21.1 NeoForge on Modrinth |
+| 43 | **Rechiseled** (+ Fusion for connected textures) | ✔ Rechiseled: Create 1.1.1 NeoForge 1.21.1; LittleBuilders 2 (1.21.1 modpack) ships Rechiseled and Fusion | Chisel: block variants, connected textures; consistent Create addon | **Recommended** (a single variant mod; preferred over Chipped, which has workbenches and thousands of blocks) |
+| 44 | FramedBlocks (`framedblocks`) | ✔ 10.5.3 on Modrinth (10.6.2 on a mirror) 1.21.1 NeoForge | Blocks to dress up | Duplicate of Copycats+, which follows contraptions | **Rejected** |
+| 45 | LittleTiles | ? (present in LittleBuilders 2 for 1.21.1); CreativeCore already there | Micro-blocks | Server cost, behavior on contraptions unknown | **Rejected** (or optional on a branch) |
+| 46 | **Immersive Paintings** (`immersive-paintings`) | ✔ Modrinth: 0.7.8 NeoForge 1.21.1, CS ([version](https://modrinth.com/project/6txNkua3/version/DeOfrXC3)) | Paintings from uploaded images; option to disable the paintings supplied with the mod | Recommended with Camerapture |
+| 47 | **Camerapture** (`camerapture`) | ✔ Modrinth: 1.10.6+mc1.21.1-neoforge ([version](https://modrinth.com/mod/camerapture/version/1.10.6+mc1.21.1-neoforge)) | Camera: **photos become items** to frame. Expedition snapshots are brought back and the world's memory is built (complements Antique Atlas) | **Recommended** (little known, very much in the spirit) |
+| 48 | Domum Ornamentum | Only with MineColonies | Texture combination at the architect's table | Rejected (follows MineColonies) |
+| 49 | Building wands (Construction Wand, Building Gadgets) | — | Shortcut | **Rejected**. Create's schematic cannon, which consumes materials, is the "industrial construction"; Quark's trowel is enough |
 
 ---
 
-## 5. Stockage, logistique, économie, courrier, protection
+## 5. Storage, logistics, economy, mail, protection
 
-| # | Mod | Dispo | Analyse | Verdict |
+| # | Mod | Availability | Analysis | Verdict |
 |---|---|---|---|---|
-| — | **Create 6, natif** | inclus | Coffres-forts, silo (Connected), colis + packager + frogport + chaîne de transport, **stock ticker + stock keeper**, **jauges d'usine**, **boutiques en nappe** (prix dans n'importe quel objet), **boîtes postales aux gares** (les trains portent les colis par adresse) | **Socle**. C'est le système de stockage, de commerce **et de poste** |
-| 50 | Sophisticated Storage | ~ Core 1.21.1 NeoForge, page Modrinth non confirmée | Améliorations magnétiques, vide, compactage, plus un addon Create Integration | **Écarté** (raccourcis « magiques », doublon des coffres-forts) |
-| 51 | Tom's Simple Storage | ? | Terminal en réseau (magique) | **Écarté** (doublon du stock ticker) |
-| 52 | Lightman's Currency | ~ 2.3.0.4g 1.21.1 NeoForge | Économie lourde avec terminaux et réseau | **Écarté** (Numismatics, plus « Create », en option) |
-| 53 | **Envelope** (Pigeon Mail, `envelope`) | ✔ page Modrinth 1.21.1 ; 0.7.2–0.7.5 NeoForge 1.21.1 sur des miroirs ; **pas encore fini** selon le wiki | Lettres, paquets, **pigeons voyageurs**, boîtes aux lettres. Le courrier du début, avant le rail : écrire à un ami à l'autre bout du monde | Optionnel (à tester). À configurer : délai et portée réalistes ; poids d'un paquet limité, pour que le colis par train reste la voie du fret |
-| 54 | Ender Mail Reborn | ✔ 1.21.1 NeoForge (port) | Livreur de l'Ender, adresse par coordonnées | **Écarté** (Ender et coordonnées) |
-| 55 | Mighty Mail (MrCrayfish) | ? loader | Boîte postale vers n'importe quelle boîte | **Écarté** (instantané) |
-| 56 | Post System | 1.21.1 NeoForge | Exige Lightman's et RegionGuard | **Écarté** |
-| 39 | Open Parties and Claims | ✔ | voir §3 | **Recommandé** |
+| — | **Create 6, native** | included | Vaults, silo (Connected), packages + packager + frogport + transport chain, **stock ticker + stock keeper**, **factory gauges**, **tablecloth shops** (price in any item), **mailboxes at stations** (trains carry packages by address) | **Core**. This is the storage, trade **and mail** system |
+| 50 | Sophisticated Storage | ~ Core 1.21.1 NeoForge, Modrinth page unconfirmed | Magnetic upgrades, void, compacting, plus a Create Integration addon | **Rejected** ("magic" shortcuts, duplicate of vaults) |
+| 51 | Tom's Simple Storage | ? | Networked terminal (magic) | **Rejected** (duplicate of the stock ticker) |
+| 52 | Lightman's Currency | ~ 2.3.0.4g 1.21.1 NeoForge | Heavy economy with terminals and network | **Rejected** (Numismatics, more "Create", as an option) |
+| 53 | **Envelope** (Pigeon Mail, `envelope`) | ✔ Modrinth page 1.21.1; 0.7.2–0.7.5 NeoForge 1.21.1 on mirrors; **not yet finished** according to the wiki | Letters, parcels, **carrier pigeons**, mailboxes. Early-game mail, before the rail: writing to a friend at the other end of the world | Optional (to test). To configure: realistic delay and range; parcel weight limited, so that train package freight remains the freight route |
+| 54 | Ender Mail Reborn | ✔ 1.21.1 NeoForge (port) | Ender courier, address by coordinates | **Rejected** (Ender and coordinates) |
+| 55 | Mighty Mail (MrCrayfish) | ? loader | Mailbox to any mailbox | **Rejected** (instantaneous) |
+| 56 | Post System | 1.21.1 NeoForge | Requires Lightman's and RegionGuard | **Rejected** |
+| 39 | Open Parties and Claims | ✔ | see §3 | **Recommended** |
 
 ---
 
-## 6. Progression technique et guidage
+## 6. Technical progression and guidance
 
-### Faut-il l'électricité ?
-- **Option A, tout mécanique** (recommandée par défaut) : bois et eau → andésite → laiton → vapeur → **diesel** → aviation. L'énergie se transporte par arbres, trains de carburant (Factory Logistics) et chaudières locales. Chaque colonie produit sa propre énergie : c'est de la géographie, et cela renforce les colonies.
-- **Option B, électricité tardive** avec **Crafts & Additions** (signal positif côté Aeronautics). Les **lignes électriques** traversent le paysage : une silhouette de civilisation dans la brume. Le risque est que l'énergie ne soit plus un problème local. Si on la garde : fils coûteux (laminoir + cuivre + caoutchouc ou résine), pas de bobine Tesla, rendement de l'alternateur réduit.
-- Décision à prendre en jeu. New Age et TFMG restent écartés dans les deux cas.
+### Is electricity needed?
+- **Option A, all mechanical** (recommended by default): wood and water → andesite → brass → steam → **diesel** → aviation. Energy is carried by shafts, fuel trains (Factory Logistics) and local boilers. Each colony produces its own energy: this is geography, and it strengthens the colonies.
+- **Option B, late-game electricity** with **Crafts & Additions** (positive signal on the Aeronautics side). **Power lines** cross the landscape: a silhouette of civilization in the mist. The risk is that energy is no longer a local problem. If kept: costly wires (rolling mill + copper + rubber or resin), no Tesla coil, reduced alternator efficiency.
+- Decision to be made in play. New Age and TFMG stay rejected in both cases.
 
-### Quêtes
-| Mod | Dispo | Verdict |
+### Quests
+| Mod | Availability | Verdict |
 |---|---|---|
-| FTB Quests | **CurseForge seulement** (FTB ne publie pas sur Modrinth) ; 2101.1.28 NeoForge sur CF | **Écarté** (contrainte Modrinth) |
-| Heracles / Odyssey Quests | 1.20.1 ; port NeoForge non officiel pour 26.2+ seulement | **Écarté** (pas de 1.21.1) |
-| **Modonomicon** (déjà présent) + **succès personnalisés** (datapack dans `kubejs/data/fallow/advancement`) | ✔ | **Socle** : un « carnet d'ingénieur ». Chaque chapitre (Forge, Atelier, Vapeur, Logistique, Rail, Combustion, Aviation, Colonies) s'ouvre sur un succès ; avec des schémas multiblocs. Aucun mod en plus. Ponder (Create, KC) sert de tutoriel en jeu |
+| FTB Quests | **CurseForge only** (FTB does not publish on Modrinth); 2101.1.28 NeoForge on CF | **Rejected** (Modrinth constraint) |
+| Heracles / Odyssey Quests | 1.20.1; unofficial NeoForge port for 26.2+ only | **Rejected** (no 1.21.1) |
+| **Modonomicon** (already present) + **custom advancements** (datapack in `kubejs/data/fallow/advancement`) | ✔ | **Core**: an "engineer's notebook". Each chapter (Forge, Workshop, Steam, Logistics, Rail, Combustion, Aviation, Colonies) opens on an advancement; with multiblock diagrams. No extra mod. Ponder (Create, KC) serves as an in-game tutorial |
 
 ---
 
-## 7. Arbre de progression proposé
+## 7. Proposed progression tree
 
-| Âge | Objectif de jeu | Mods | Matériaux clés | Verrous KubeJS (à écrire) |
+| Age | Gameplay goal | Mods | Key materials | KubeJS locks (to write) |
 |---|---|---|---|---|
-| **0. Arrivée** | Cabane, feu, outils de pierre | vanilla, Supplementaries | pierre, silex, cuivre de surface | Pas d'outils en fer à l'établi. Succès « Premier abri » → chapitre 1 du carnet |
-| **1. Forge** | Enclume de pierre → forge → premier fer forgé, bronze | **Overgeared**, Prospecting Picks | fer brut, cuivre, étain(?) et charbon ; bronze à la fonderie | Recettes d'outils et d'armures vanilla retirées ; plans de base trouvés dans les ruines ; la pioche de prospection exige une tête forgée |
-| **2. Atelier** | Roue à eau, moulin, presse, mélangeur | **Create** (andésite), **Connected** (goupille de cisaillement, embrayages), Copycats+ | alliage d'andésite, plaques de fer | `create:andesite_alloy` à la main avec un **clou ou rivet forgé** (Overgeared) ; presse et mélangeur demandent un « marteau d'atelier » forgé de qualité ≥ correcte |
-| **3. Laiton et vapeur** | Moteur à vapeur, brûleurs, premiers convoyeurs | Create (laiton), Rechiseled: Create | **laiton** (Overgeared → mélangeur), **acier** Overgeared | Moteur à vapeur et chaudière : plaques d'**acier** à la place de l'or ; mécanisme de précision : rouage forgé « bonne » qualité. Succès « Pression » |
-| **4. Logistique et mine** | Colis, frogports, stock, gisements | Create 6, **Factory Logistics**, **Ore Excavation** (+ Deposits) | têtes de foreuse forgées, laiton, acier | Foreuse COE : `.drill('fallow:forged_drill_head')` ; gisements **finis**, liste blanche de biomes ; Integrated Farming éventuel ici |
-| **5. Rail** | Première ligne, gares, poste ferroviaire | **Steam 'n' Rails**, **Bells & Whistles**, Interiors (opt.), Power Loader (trains seulement) | acier (rails, bogies), laiton | `create:track` et bogies S'n'R avec **acier** ; carter de train avec un essieu forgé ; boîte postale en gare = courrier entre colonies |
-| **6. Combustion** | Pétrole, distillation, locomotives diesel | **Diesel Generators** (+ C&A en option B) | brut (gisement fluide COE ou pétrole du mod), acier, laiton | Moteurs diesel avec bloc moteur forgé en acier ; carburant expédié en bocaux ou cuves (Factory Logistics) |
-| **7. Aviation** | Montgolfière, puis dirigeable, puis avion à hélice | **Create Aeronautics + Sable** (+ Transmission & Linkage en option) | laiton, acier, toile (lin de Supplementaries), carburant | Brûleur à air chaud au laiton (âge 3+) ; hélices et paliers de propulsion avec **pales forgées « excellente »** (vraie maîtrise de la forge) ; pierres flottantes (levitite ?) trouvées en exploration seulement |
-| **8. Colonies lointaines** | Avant-postes, survivants, commerce | **Easy NPC**, Villager Workers (?), **OPAC**, boutiques Create 6 (+ Numismatics en option), Envelope (opt.), Camerapture et Immersive Paintings | nourriture (KC) comme salaire, survivants | Reproduction bloquée, tags d'enchantement sans Mending, échanges de métal retirés, villages en ruines ; claims limités par joueur |
+| **0. Arrival** | Cabin, fire, stone tools | vanilla, Supplementaries | stone, flint, surface copper | No iron tools at the crafting table. Advancement "First shelter" → notebook chapter 1 |
+| **1. Forge** | Stone anvil → forge → first forged iron, bronze | **Overgeared**, Prospecting Picks | raw iron, copper, tin(?) and coal; bronze at the foundry | Vanilla tool and armor recipes removed; basic blueprints found in the ruins; the prospecting pickaxe requires a forged head |
+| **2. Workshop** | Water wheel, mill, press, mixer | **Create** (andesite), **Connected** (shear pin, clutches), Copycats+ | andesite alloy, iron plates | `create:andesite_alloy` by hand with a **forged nail or rivet** (Overgeared); press and mixer require a forged "workshop hammer" of quality ≥ decent |
+| **3. Brass and steam** | Steam engine, burners, first conveyors | Create (brass), Rechiseled: Create | **brass** (Overgeared → mixer), Overgeared **steel** | Steam engine and boiler: **steel** plates instead of gold; precision mechanism: forged gear of "good" quality. Advancement "Pressure" |
+| **4. Logistics and mining** | Packages, frogports, stock, deposits | Create 6, **Factory Logistics**, **Ore Excavation** (+ Deposits) | forged drill heads, brass, steel | COE drill: `.drill('fallow:forged_drill_head')`; **finite** deposits, biome whitelist; possible Integrated Farming here |
+| **5. Rail** | First line, stations, rail mail | **Steam 'n' Rails**, **Bells & Whistles**, Interiors (opt.), Power Loader (trains only) | steel (rails, bogies), brass | `create:track` and S'n'R bogies with **steel**; train casing with a forged axle; station mailbox = mail between colonies |
+| **6. Combustion** | Oil, distillation, diesel locomotives | **Diesel Generators** (+ C&A in option B) | crude (COE fluid deposit or mod oil), steel, brass | Diesel engines with a forged steel engine block; fuel shipped in jars or tanks (Factory Logistics) |
+| **7. Aviation** | Hot-air balloon, then airship, then propeller plane | **Create Aeronautics + Sable** (+ Transmission & Linkage optional) | brass, steel, canvas (Supplementaries flax), fuel | Hot-air burner in brass (age 3+); propellers and propulsion bearings with **forged "excellent" blades** (real mastery of the forge); floating stones (levitite?) found only while exploring |
+| **8. Distant colonies** | Outposts, survivors, trade | **Easy NPC**, Villager Workers (?), **OPAC**, Create 6 shops (+ Numismatics optional), Envelope (opt.), Camerapture and Immersive Paintings | food (KC) as wages, survivors | Reproduction blocked, enchantment tags without Mending, metal trades removed, ruined villages; claims limited per player |
 
-### Recettes à modifier (liste de départ)
-`create:andesite_alloy`, `create:mechanical_press`, `create:mechanical_mixer`, `create:precision_mechanism` (assemblage séquencé), `create:steam_engine`, `create:fluid_tank`, `create:track`, `create:railway_casing`, `create:controls`, les bogies de `railways:*`, la foreuse et le détecteur de COE, les moteurs `createdieselgenerators:*`, les hélices, paliers, brûleurs et ballons d'`aeronautics:*`, les fils `createaddition:*` (si option B), les outils et armures vanilla en métal (suppression), plus les échanges de villageois du même genre.
+### Recipes to modify (starting list)
+`create:andesite_alloy`, `create:mechanical_press`, `create:mechanical_mixer`, `create:precision_mechanism` (sequenced assembly), `create:steam_engine`, `create:fluid_tank`, `create:track`, `create:railway_casing`, `create:controls`, the `railways:*` bogies, the COE drill and detector, the `createdieselgenerators:*` engines, the propellers, bearings, burners and balloons of `aeronautics:*`, the `createaddition:*` wires (if option B), vanilla metal tools and armor (removal), plus villager trades of the same kind.
 
 ---
 
-## 8. Incertitudes à vérifier dans les .jar
-1. **Overgeared** : identifiant du composant de qualité (pour l'imposer en sortie de presse), types de recettes exposés à KubeJS (`overgeared:forging` ? `alloy_smelting`), config qui désactive les outils vanilla, présence d'étain et de bronze ou non, loot du modèle d'acier.
-2. **Create Aeronautics** : nom et origine de la « magic floating rock » (levitite ?), identifiants des hélices et brûleurs, carburant accepté par les moteurs.
-3. **Diesel Generators** : pétrole = gisement propre (chunks à huile) ou fluide ajoutable par COE (`extracting`) ? Identifiant du fluide.
-4. **COE** : clé de config du mode fini par défaut ; tags de biomes valides pour la liste blanche avec NML et Biolith.
-5. **Create Connected** : clés exactes de la *Feature Toggle* (copycats, kinetic_battery, linked_transmitter).
-6. **Power Loader** : clés serveur par mode (sol, train, engin).
-7. **S'n'R port** : compatibilité de Bells & Whistles et d'Interiors avec le port NeoForge 0.3.0-beta.
-8. **Sable** : masse des blocs Copycats+, Connected et Interiors (faut-il un addon de poids ?).
-9. **Villager Workers et Recruits** : existence d'une version 1.21.1 NeoForge sur Modrinth (**prioritaire** pour la partie colonies).
-10. **Easy NPC** : présence sur Modrinth (bundle NeoForge 1.21.1), syntaxe des échanges et dialogues pour les fournir en datapack.
-11. **Bells & Whistles** : le fichier NeoForge est-il bien sur Modrinth et pas seulement sur CurseForge ?
-12. **Macaw's** : y a-t-il une seule build 1.21.1 NeoForge sur Modrinth ?
-13. **Villages** : noms des template pools à vider (vérifier avec NML, qui pourrait modifier les villages) ; interaction avec Sparse Structures.
-14. **OPAC** : clés `forceload` et limites de claims ; absence de dépendance Xaero.
-15. **Envelope** : délai, portée et capacité des pigeons configurables ?
-16. **Points non vérifiés faute de quota de recherche** : GeoVein, MCA Reborn, Tom's Storage, Chipped 1.21.1, Create Interiors sur Modrinth, MoreJS 1.21.1.
+## 8. Uncertainties to check in the .jar files
+1. **Overgeared**: identifier of the quality component (to impose it on press output), recipe types exposed to KubeJS (`overgeared:forging`? `alloy_smelting`), config that disables vanilla tools, presence of tin and bronze or not, loot of the steel pattern.
+2. **Create Aeronautics**: name and origin of the "magic floating rock" (levitite?), identifiers of propellers and burners, fuel accepted by the engines.
+3. **Diesel Generators**: oil = own deposit (oil chunks) or fluid addable by COE (`extracting`)? Fluid identifier.
+4. **COE**: config key for finite mode by default; valid biome tags for the whitelist with NML and Biolith.
+5. **Create Connected**: exact keys of the *Feature Toggle* (copycats, kinetic_battery, linked_transmitter).
+6. **Power Loader**: server keys per mode (ground, train, contraption).
+7. **S'n'R port**: compatibility of Bells & Whistles and Interiors with the NeoForge port 0.3.0-beta.
+8. **Sable**: mass of Copycats+, Connected and Interiors blocks (is a weight addon needed?).
+9. **Villager Workers and Recruits**: existence of a 1.21.1 NeoForge version on Modrinth (**priority** for the colonies part).
+10. **Easy NPC**: presence on Modrinth (NeoForge 1.21.1 bundle), syntax of trades and dialogues to supply them in a datapack.
+11. **Bells & Whistles**: is the NeoForge file really on Modrinth and not only on CurseForge?
+12. **Macaw's**: is there a single 1.21.1 NeoForge build on Modrinth?
+13. **Villages**: names of the template pools to empty (check with NML, which might modify villages); interaction with Sparse Structures.
+14. **OPAC**: `forceload` keys and claim limits; absence of Xaero dependency.
+15. **Envelope**: are pigeon delay, range and capacity configurable?
+16. **Points unverified for lack of search quota**: GeoVein, MCA Reborn, Tom's Storage, Chipped 1.21.1, Create Interiors on Modrinth, MoreJS 1.21.1.
 
-## Sources principales
-[Create Connected (GitHub)](https://github.com/hlysine/create_connected) · [Configs](https://github.com/hlysine/create_connected/wiki/Configs) · [Create Ore Excavation (GitHub)](https://github.com/tom5454/Create-Ore-Excavation) · [Port S'n'R 1.21.1](https://github.com/Porters-of-Railways/Railway-1.21.1) · [Simulated-Project issues](https://github.com/Creators-of-Aeronautics/Simulated-Project/issues) · [C&A 1.5.x](https://modrinth.com/project/kU1G12Nn/version/cKTFwyEF) · [Factory Logistics 1.6.0](https://modrinth.com/project/QMGO17gm/version/4Drrlfu3) · [Diesel Generators 1.3.15](https://modrinth.com/project/ZM3tt6p1/version/UoPH8lO1) · [New Age](https://modrinth.com/project/FTeXqI9v/version/jKQGO6gz) · [COE](https://modrinth.com/mod/ResbpANg) · [Power Loader](https://modrinth.com/project/wPQ6GgFE) · [Central Kitchen 2.5.0](https://modrinth.com/project/btq68HMO/version/kmHFmmpV) · [Kaleidoscope Contraption](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-contraption) · [Hypertubes](https://modrinth.com/project/ATDdrG1y/version/nDtH1hZL) · [Trading Floor](https://modrinth.com/project/WROfLLvn/version/akJ4A9Zh) · [Mobile Packages](https://modrinth.com/mod/create-mobile-packages) · [Big Cannons](https://modrinth.com/mod/GWp4jCJj) · [Enchantment Industry](https://modrinth.com/project/create-enchantment-industry) · [Bells & Whistles](https://modrinth.com/mod/bellsandwhistles) · [Rechiseled: Create](https://modrinth.com/project/E6867niZ/version/TzPaH8MY) · [Immersive Paintings 0.7.8](https://modrinth.com/project/6txNkua3/version/DeOfrXC3) · [Camerapture](https://modrinth.com/mod/camerapture/version/1.10.6+mc1.21.1-neoforge) · [OPAC 0.27.5](https://modrinth.com/mod/open-parties-and-claims/version/neoforge-1.21.1-0.27.5) · [Envelope](https://modrinth.com/mod/envelope) · [MineColonies](https://modrinth.com/mod/minecolonies) · [Villager Recruits](https://modrinth.com/mod/villager-recruits) · [talhanation (GitHub)](https://github.com/talhanation) · [Guard Villagers (port Fabric)](https://modrinth.com/project/Ap53t4bc) · [Overgeared](https://modrinth.com/project/overgeared) · [Prospecting Picks](https://www.mado-hosting.com/minecraft-mods/prospecting-picks) · [COE Deposits](https://skinmc.net/index.php/project/create-ore-excavation-deposits) · [Copycats+](https://www.mado-hosting.com/en/minecraft-mods/copycats) · [FTB Quests NeoForge (CF)](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge/files/8520042) · [Heracles port 26.2](https://modrinth.com/project/fx73ivjN) · [Aeronautics Compatibility](https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-compatability) · [SableCat](https://modrinth.com/mod/sablecat)
+## Main sources
+[Create Connected (GitHub)](https://github.com/hlysine/create_connected) · [Configs](https://github.com/hlysine/create_connected/wiki/Configs) · [Create Ore Excavation (GitHub)](https://github.com/tom5454/Create-Ore-Excavation) · [Port S'n'R 1.21.1](https://github.com/Porters-of-Railways/Railway-1.21.1) · [Simulated-Project issues](https://github.com/Creators-of-Aeronautics/Simulated-Project/issues) · [C&A 1.5.x](https://modrinth.com/project/kU1G12Nn/version/cKTFwyEF) · [Factory Logistics 1.6.0](https://modrinth.com/project/QMGO17gm/version/4Drrlfu3) · [Diesel Generators 1.3.15](https://modrinth.com/project/ZM3tt6p1/version/UoPH8lO1) · [New Age](https://modrinth.com/project/FTeXqI9v/version/jKQGO6gz) · [COE](https://modrinth.com/mod/ResbpANg) · [Power Loader](https://modrinth.com/project/wPQ6GgFE) · [Central Kitchen 2.5.0](https://modrinth.com/project/btq68HMO/version/kmHFmmpV) · [Kaleidoscope Contraption](https://www.curseforge.com/minecraft/mc-mods/kaleidoscope-contraption) · [Hypertubes](https://modrinth.com/project/ATDdrG1y/version/nDtH1hZL) · [Trading Floor](https://modrinth.com/project/WROfLLvn/version/akJ4A9Zh) · [Mobile Packages](https://modrinth.com/mod/create-mobile-packages) · [Big Cannons](https://modrinth.com/mod/GWp4jCJj) · [Enchantment Industry](https://modrinth.com/project/create-enchantment-industry) · [Bells & Whistles](https://modrinth.com/mod/bellsandwhistles) · [Rechiseled: Create](https://modrinth.com/project/E6867niZ/version/TzPaH8MY) · [Immersive Paintings 0.7.8](https://modrinth.com/project/6txNkua3/version/DeOfrXC3) · [Camerapture](https://modrinth.com/mod/camerapture/version/1.10.6+mc1.21.1-neoforge) · [OPAC 0.27.5](https://modrinth.com/mod/open-parties-and-claims/version/neoforge-1.21.1-0.27.5) · [Envelope](https://modrinth.com/mod/envelope) · [MineColonies](https://modrinth.com/mod/minecolonies) · [Villager Recruits](https://modrinth.com/mod/villager-recruits) · [talhanation (GitHub)](https://github.com/talhanation) · [Guard Villagers (Fabric port)](https://modrinth.com/project/Ap53t4bc) · [Overgeared](https://modrinth.com/project/overgeared) · [Prospecting Picks](https://www.mado-hosting.com/minecraft-mods/prospecting-picks) · [COE Deposits](https://skinmc.net/index.php/project/create-ore-excavation-deposits) · [Copycats+](https://www.mado-hosting.com/en/minecraft-mods/copycats) · [FTB Quests NeoForge (CF)](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge/files/8520042) · [Heracles port 26.2](https://modrinth.com/project/fx73ivjN) · [Aeronautics Compatibility](https://www.curseforge.com/minecraft/mc-mods/create-aeronautics-compatability) · [SableCat](https://modrinth.com/mod/sablecat)

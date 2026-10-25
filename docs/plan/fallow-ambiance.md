@@ -1,171 +1,171 @@
-# Le pack de ressources `fallow-ambiance`
+# The `fallow-ambiance` resource pack
 
-> Créé le 2026-10-19 d'après le [11.1-11.2](11-rendu-et-confort.md), le [12.1-12.2](12-verification.md) et le [rapport 3](recherche/verif-2026-10-18/3-client.md). **Rien n'a été vu en jeu.** Les formats ont été lus dans les jars installés (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8) ; les valeurs, elles, sont des choix sur le papier, à régler à l'écran.
+> Created on 2026-10-19 from [11.1-11.2](11-rendu-et-confort.md), [12.1-12.2](12-verification.md) and [report 3](recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
 
-## Ce qu'il contient
+## What it contains
 
 ```
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v2.json          la brume, biome par biome, et le sable
-    ├── fallow/polytone/biome_modifiers/*.json      herbe, feuillage, eau (23 fichiers)
-    ├── fallow/polytone/colored_lights/*.json       couleur de la lumière des feux, des âmes, du clair de lune
-    ├── minecraft/textures/environment/moon_phases.png   la lune, dans le style du soleil d'ATMOSPHERICS
-    ├── fallow/sounds.json                         évènements des morceaux du paquet musical ([musique](musique.md))
-    └── fallow/sounds/music/*.ogg                  10 morceaux libres, crédits dans CREDITS.md
+    ├── atmospherics/preset/fallow_v2.json          the mist, biome by biome, and the sand
+    ├── fallow/polytone/biome_modifiers/*.json      grass, foliage, water (23 files)
+    ├── fallow/polytone/colored_lights/*.json       colour of fire, soul and moonlight
+    ├── minecraft/textures/environment/moon_phases.png   the moon, in the style of the ATMOSPHERICS sun
+    ├── fallow/sounds.json                         events for the music pack tracks ([musique](musique.md))
+    └── fallow/sounds/music/*.ogg                  10 free tracks, credits in CREDITS.md
 ```
 
-Il est activé au premier lancement par Default Options (`pack/config/defaultoptions-common.toml`, en dernier, donc au-dessus des autres packs). Hors du pack, un seul réglage : `pack/config/nomansland-client.toml` coupe le brouillard de No Man's Land (`[fog_modifiers] fogModifiers = false`) pour qu'ATMOSPHERICS soit seul responsable de la brume (L6 du rapport 3). C'est une config de NML, pas d'ATMOSPHERICS : elle ne peut pas aller dans un pack de ressources.
+It is enabled on first launch by Default Options (`pack/config/defaultoptions-common.toml`, last, hence above the other packs). Outside the pack, a single setting: `pack/config/nomansland-client.toml` turns off No Man's Land's fog (`[fog_modifiers] fogModifiers = false`) so that ATMOSPHERICS alone is responsible for the mist (L6 of report 3). This is an NML config, not an ATMOSPHERICS one: it cannot go in a resource pack.
 
-## Comment les mods le lisent (lu dans les jars)
+## How the mods read it (read from the jars)
 
 **ATMOSPHERICS.**
-- Il liste `assets/atmospherics/preset/**.json` dans les packs actifs.
-- Le **premier** de la liste triée est appliqué tout seul, en jeu, sans écran ouvert, une fois par empreinte (la liste des ID de presets).
-- Le fichier est une configuration complète : il **remplace** `config/ambientfog/biome_fog.json`, y compris les retouches du joueur.
-- Conséquences :
-  - un seul preset dans le pack ;
-  - pour livrer une nouvelle version, **renommer** le fichier (`fallow_v2.json`) et supprimer l'ancien, sinon il n'est pas réappliqué ;
-  - chaque nouvelle version écrase les réglages ATMOSPHERICS des joueurs.
-- Le fichier part du preset d'origine du mod (version 43, tous les réglages globaux gardés). Seuls `presetName`, `presetAuthor` et les profils de biomes changent.
-- Les bornes du mod sont respectées : intensité 0-4, densité 0,2-5, voile 0-3, particules 0-3.
+- It lists `assets/atmospherics/preset/**.json` in the active packs.
+- The **first** of the sorted list is applied automatically, in game, with no screen open, once per fingerprint (the list of preset IDs).
+- The file is a complete configuration: it **replaces** `config/ambientfog/biome_fog.json`, including the player's tweaks.
+- Consequences:
+  - a single preset in the pack;
+  - to ship a new version, **rename** the file (`fallow_v2.json`) and delete the old one, otherwise it is not reapplied;
+  - each new version overwrites the players' ATMOSPHERICS settings.
+- The file starts from the mod's original preset (version 43, all global settings kept). Only `presetName`, `presetAuthor` and the biome profiles change.
+- The mod's bounds are respected: intensity 0-4, density 0.2-5, veil 0-3, particles 0-3.
 
 **Polytone.**
-- Il lit `assets/<namespace>/polytone/biome_modifiers/*.json`.
-- Les fichiers sont dans l'espace `fallow` avec des `targets` explicites, comme le conseille le mod pour ne pas écraser un autre pack.
-- Champs utilisés : `grass_color`, `foliage_color`, `water_color` (chaîne `#rrggbb`).
-- Aucun `fog_color`, `sky_color`, `fog_start` ou `fog_end` : ATMOSPHERICS les réécrit après Polytone (rapport 3, 3.3).
-- Aucune lightmap : elle couperait More Darkness, la lune d'Enhanced Celestials et la nuit de NML (3.2).
-- Les clairières visent `{"id": "fallow:clairiere", "required": false}` : tant que le biome n'existe pas (il n'est qu'en brouillon), Polytone l'ignore sans erreur.
+- It reads `assets/<namespace>/polytone/biome_modifiers/*.json`.
+- The files are in the `fallow` namespace with explicit `targets`, as the mod advises so as not to overwrite another pack.
+- Fields used: `grass_color`, `foliage_color`, `water_color` (`#rrggbb` string).
+- No `fog_color`, `sky_color`, `fog_start` or `fog_end`: ATMOSPHERICS rewrites them after Polytone (report 3, 3.3).
+- No lightmap: it would switch off More Darkness, the Enhanced Celestials moon and NML's night (3.2).
+- The clearings target `{"id": "fallow:clairiere", "required": false}`: as long as the biome does not exist (it is only a draft), Polytone ignores it without error.
 
-**Particular Reforged : rien à livrer.**
-- La correspondance feuille → particule est **écrite dans le code** (`CommonClass.clientSetup`). Elle n'est lue ni dans un pack, ni dans sa config.
-- Les blocs inconnus sont reconnus par leur nom :
-  - `pine_leaves` de NML prend la particule d'épicéa ;
-  - `yellow_birch_leaves` celle du bouleau ;
-  - les 9 autres feuillages prennent la feuille de chêne, teintée par la couleur de leur texture.
-- Particular a bien des particules de saule et d'érable, mais les relier aux feuilles de NML demande du Java : un appel à `CommonClass.registerLeafData` depuis le mod `fallow` (12.4), ou Falling Leaves Plus en repli (11.2).
-- Le L9 du rapport 3 (« config de Particular ») est donc à corriger : cette config n'existe pas.
+**Particular Reforged: nothing to ship.**
+- The leaf → particle mapping is **written in the code** (`CommonClass.clientSetup`). It is read neither from a pack nor from its config.
+- Unknown blocks are recognised by their name:
+  - NML's `pine_leaves` takes the spruce particle;
+  - `yellow_birch_leaves` the birch one;
+  - the 9 other foliages take the oak leaf, tinted by the colour of their texture.
+- Particular does have willow and maple particles, but linking them to NML's leaves requires Java: a call to `CommonClass.registerLeafData` from the `fallow` mod (12.4), or Falling Leaves Plus as a fallback (11.2).
+- L9 of report 3 ("Particular config") must therefore be corrected: this config does not exist.
 
-## Les valeurs choisies
+## The chosen values
 
-**Trois familles de brume.** Distances en blocs, jour puis nuit. La distance de vue prévue est de 8 chunks, soit 128 blocs (10.12, décision 10).
+**Three mist families.** Distances in blocks, day then night. The planned view distance is 8 chunks, i.e. 128 blocks (10.12, decision 10).
 
-| Famille | Début → fin (jour) | Début → fin (nuit) | Voile d'horizon | Particules de brume |
+| Family | Start → end (day) | Start → end (night) | Horizon veil | Mist particles |
 |---|---|---|---|---|
-| **Brumeux** | 0 → 52 | -2 → 34 | 3 / 3 | fortes (1,6) |
-| **Voilé** | 6 → 96 | 0 → 56 | 2,5 / 2,2 | moyennes (1,15) |
-| **Clairière** | 28 → 124 | 8 → 84 | 1,5 / 1,2 | coupées |
+| **Misty** | 0 → 52 | -2 → 34 | 3 / 3 | strong (1.6) |
+| **Veiled** | 6 → 96 | 0 → 56 | 2.5 / 2.2 | medium (1.15) |
+| **Clearing** | 28 → 124 | 8 → 84 | 1.5 / 1.2 | off |
 
-- Le 10.3 parlait de biomes « dégagés ». L'équipe veut une brume épaisse en général : ils deviennent **voilés**, encore brumeux mais nettement moins.
-- Seules les clairières ouvrent la vue. Leur 124 blocs reste sous la distance de vue, pour cacher le bord des chunks.
+- 10.3 spoke of "open" biomes. The maintainer wants a thick mist in general: they become **veiled**, still misty but markedly less so.
+- Only the clearings open up the view. Their 124 blocks stay below the view distance, to hide the chunk edge.
 
-| Famille | Biomes de No Man's Land | Vanilla (Overworld, en surface) |
+| Family | No Man's Land biomes | Vanilla (Overworld, surface) |
 |---|---|---|
-| Brumeux | `old_growth_forest`, `old_growth_forest_edge`, `autumnal_forest`, `dark_taiga`, `boreal_forest`, `frozen_woods`, `dark_swamp`, `bog`, `bayou`, `blackwater_river` | forêts, taïgas, `dark_forest`, `grove`, marais, jungles, `mushroom_fields` |
-| Voilé | `old_growth_forest_clearing` (la clairière naturelle de NML), `maple_forest`, `maple_grove`, `lavender_field`, `prairie`, `frozen_shore`, `tropical_beach`, `desert_river`, `lush_river`, `mud_beach` | plaines, prairie, `flower_forest`, `cherry_grove`, savanes, déserts, badlands, montagnes, neige, plages, rivières, océans |
-| Clairière | — | `fallow:clairiere`, `fallow:clairiere_froide`, `fallow:clairiere_chaude` |
-| Grotte | `caves`, `cave_depths`, `alchemist_ruins` (brume gris-brun, 72 blocs) | grottes vanilla, Nether, End : preset d'origine |
-| Désactivé | `dream` : profil `enabled: false`, NML garde le rendu de son rêve | — |
+| Misty | `old_growth_forest`, `old_growth_forest_edge`, `autumnal_forest`, `dark_taiga`, `boreal_forest`, `frozen_woods`, `dark_swamp`, `bog`, `bayou`, `blackwater_river` | forests, taigas, `dark_forest`, `grove`, swamps, jungles, `mushroom_fields` |
+| Veiled | `old_growth_forest_clearing` (NML's natural clearing), `maple_forest`, `maple_grove`, `lavender_field`, `prairie`, `frozen_shore`, `tropical_beach`, `desert_river`, `lush_river`, `mud_beach` | plains, meadow, `flower_forest`, `cherry_grove`, savannas, deserts, badlands, mountains, snow, beaches, rivers, oceans |
+| Clearing | — | `fallow:clairiere`, `fallow:clairiere_froide`, `fallow:clairiere_chaude` |
+| Cave | `caves`, `cave_depths`, `alchemist_ruins` (grey-brown mist, 72 blocks) | vanilla caves, Nether, End: original preset |
+| Disabled | `dream`: profile `enabled: false`, NML keeps the rendering of its dream | — |
 
-Les biomes vanilla en surface reçoivent aussi la brume : sans cela, une plaine vanilla ferait une clairière (le preset d'origine ne connaît aucun biome NML et laisse 350 blocs aux plaines).
+Vanilla surface biomes also receive the mist: without it, a vanilla plain would act as a clearing (the original preset knows no NML biome and leaves 350 blocks to plains).
 
-**Couleurs de brume** (jour / nuit) :
-- par climat :
-  - tempéré `#a4aea8` / `#161b1f` (gris vert) ;
-  - froid `#b9c3cb` / `#171c24` ;
-  - marais `#8f9a86` / `#12160f` ;
-  - sec `#bdb6a2` / `#1a1a18` ;
-  - océan `#9fb0b8` / `#121820` ;
-- le ciel du jour reste proche de la brume, pour que l'horizon se dissolve ;
-- les clairières passent à une brume claire `#c3d7e2` (froide `#cfdde8`, chaude `#dcd8c4`) et un vrai ciel bleu `#7fa9d6`, avec des nuages blancs. C'est là que la lumière change, faute de lightmap par biome.
+**Mist colours** (day / night):
+- by climate:
+  - temperate `#a4aea8` / `#161b1f` (grey-green);
+  - cold `#b9c3cb` / `#171c24`;
+  - swamp `#8f9a86` / `#12160f`;
+  - dry `#bdb6a2` / `#1a1a18`;
+  - ocean `#9fb0b8` / `#121820`;
+- the daytime sky stays close to the mist, so that the horizon dissolves;
+- the clearings switch to a light mist `#c3d7e2` (cold `#cfdde8`, warm `#dcd8c4`) and a real blue sky `#7fa9d6`, with white clouds. This is where the light changes, for lack of a per-biome lightmap.
 
-**Polytone : herbe, feuillage, eau.**
-- Biomes NML de surface :
-  - brumeux : saturation × 0,72 et luminosité × 0,95 ;
-  - voilés : saturation × 0,85 et luminosité × 0,98 ;
-  - eau : saturation × 0,80.
-- `dark_swamp` et `blackwater_river` gardent leur herbe : leur modificateur « swamp » ignorerait une couleur fixe.
-- Clairières, d'un vert franc :
-  - tempérée : herbe `#74c255`, feuillage `#5fae3f`, eau `#3d86c9` ;
-  - froide : `#79b878`, `#5f9f62`, `#3f7fc6` ;
-  - chaude : `#9cc456`, `#7fae3c`, `#3a92c4`.
-- Les biomes vanilla ne sont pas touchés : leur herbe suit la palette de température, qu'une couleur fixe écraserait.
+**Polytone: grass, foliage, water.**
+- NML surface biomes:
+  - misty: saturation × 0.72 and brightness × 0.95;
+  - veiled: saturation × 0.85 and brightness × 0.98;
+  - water: saturation × 0.80.
+- `dark_swamp` and `blackwater_river` keep their grass: their "swamp" modifier would ignore a fixed colour.
+- Clearings, in a frank green:
+  - temperate: grass `#74c255`, foliage `#5fae3f`, water `#3d86c9`;
+  - cold: `#79b878`, `#5f9f62`, `#3f7fc6`;
+  - warm: `#9cc456`, `#7fae3c`, `#3a92c4`.
+- Vanilla biomes are not touched: their grass follows the temperature palette, which a fixed colour would overwrite.
 
-| Biome NML | Famille | Herbe | Feuillage | Eau |
+| NML biome | Family | Grass | Foliage | Water |
 |---|---|---|---|---|
-| `autumnal_forest` | brumeux | `#a2a44b` → `#8f9053` | `#bca549` → `#a59553` | `#3b8ab8` → `#4583a6` |
-| `bayou` | brumeux | `#67bd39` → `#67a248` | `#69aa2f` → `#65913d` | `#24ab87` → `#30997d` |
-| `blackwater_river` | brumeux | inchangée | `#6a7039` → `#5f633d` | `#3a7a6a` → `#3e7064` |
-| `bog` | brumeux | `#958455` → `#857959` | `#83774c` → `#756d50` | `#547a5c` → `#55735b` |
-| `boreal_forest` | brumeux | `#919d51` → `#838b57` | `#b69b58` → `#a48f5d` | `#2f628f` → `#375e81` |
-| `dark_swamp` | brumeux | inchangée | `#638a2c` → `#5c7736` | `#4c7b67` → `#4e7363` |
-| `dark_taiga` | brumeux | `#709968` → `#6f8b69` | `#5e8057` → `#5d7458` | `#3b7eb8` → `#4579a6` |
-| `frozen_woods` | brumeux | `#acbebf` → `#a5b3b4` | `#acbebf` → `#a5b3b4` | `#4066b0` → `#4966a0` |
-| `old_growth_forest` et `_edge` | brumeux | `#87b44c` → `#7e9d56` | `#7d953f` → `#728247` | `#3b8ab8` → `#4583a6` |
-| `old_growth_forest_clearing` | voilé | `#87b44c` → `#83a952` | `#7d953f` → `#788c44` | `#3b8ab8` → `#4583a6` |
-| `maple_forest` | voilé | `#87ab50` → `#83a155` | `#819e49` → `#7c954e` | `#3b8ab8` → `#4583a6` |
-| `maple_grove` | voilé | `#7bba8d` → `#7cb38c` | `#548d6c` → `#57866b` | `#4066b0` → `#4966a0` |
-| `lavender_field` | voilé | `#73bf67` → `#74b66a` | `#79ac4f` → `#77a254` | `#3b72b8` → `#4570a6` |
-| `prairie` | voilé | `#c0b155` → `#b6a959` | `#a8ab54` → `#9fa159` | `#3b8ab8` → `#4583a6` |
-| `frozen_shore` | voilé | `#9bbaa4` → `#99b5a1` | `#548d6c` → `#57866b` | `#4066b0` → `#4966a0` |
-| `tropical_beach` | voilé | `#7cbc52` → `#7bb256` | `#72b335` → `#70a63d` | `#3eaacf` → `#47a0be` |
-| `desert_river` | voilé | `#a3bd73` → `#9fb575` | `#91aa2f` → `#899e37` | `#3eaacf` → `#47a0be` |
-| `lush_river` | voilé | `#67bd39` → `#68b042` | `#5ea723` → `#5d9a2c` | `#35aaa0` → `#3f9a92` |
-| `mud_beach` | voilé | `#806a41` → `#796644` | `#6a7039` → `#656a3c` | `#598a98` → `#5c828d` |
+| `autumnal_forest` | misty | `#a2a44b` → `#8f9053` | `#bca549` → `#a59553` | `#3b8ab8` → `#4583a6` |
+| `bayou` | misty | `#67bd39` → `#67a248` | `#69aa2f` → `#65913d` | `#24ab87` → `#30997d` |
+| `blackwater_river` | misty | unchanged | `#6a7039` → `#5f633d` | `#3a7a6a` → `#3e7064` |
+| `bog` | misty | `#958455` → `#857959` | `#83774c` → `#756d50` | `#547a5c` → `#55735b` |
+| `boreal_forest` | misty | `#919d51` → `#838b57` | `#b69b58` → `#a48f5d` | `#2f628f` → `#375e81` |
+| `dark_swamp` | misty | unchanged | `#638a2c` → `#5c7736` | `#4c7b67` → `#4e7363` |
+| `dark_taiga` | misty | `#709968` → `#6f8b69` | `#5e8057` → `#5d7458` | `#3b7eb8` → `#4579a6` |
+| `frozen_woods` | misty | `#acbebf` → `#a5b3b4` | `#acbebf` → `#a5b3b4` | `#4066b0` → `#4966a0` |
+| `old_growth_forest` and `_edge` | misty | `#87b44c` → `#7e9d56` | `#7d953f` → `#728247` | `#3b8ab8` → `#4583a6` |
+| `old_growth_forest_clearing` | veiled | `#87b44c` → `#83a952` | `#7d953f` → `#788c44` | `#3b8ab8` → `#4583a6` |
+| `maple_forest` | veiled | `#87ab50` → `#83a155` | `#819e49` → `#7c954e` | `#3b8ab8` → `#4583a6` |
+| `maple_grove` | veiled | `#7bba8d` → `#7cb38c` | `#548d6c` → `#57866b` | `#4066b0` → `#4966a0` |
+| `lavender_field` | veiled | `#73bf67` → `#74b66a` | `#79ac4f` → `#77a254` | `#3b72b8` → `#4570a6` |
+| `prairie` | veiled | `#c0b155` → `#b6a959` | `#a8ab54` → `#9fa159` | `#3b8ab8` → `#4583a6` |
+| `frozen_shore` | veiled | `#9bbaa4` → `#99b5a1` | `#548d6c` → `#57866b` | `#4066b0` → `#4966a0` |
+| `tropical_beach` | veiled | `#7cbc52` → `#7bb256` | `#72b335` → `#70a63d` | `#3eaacf` → `#47a0be` |
+| `desert_river` | veiled | `#a3bd73` → `#9fb575` | `#91aa2f` → `#899e37` | `#3eaacf` → `#47a0be` |
+| `lush_river` | veiled | `#67bd39` → `#68b042` | `#5ea723` → `#5d9a2c` | `#35aaa0` → `#3f9a92` |
+| `mud_beach` | veiled | `#806a41` → `#796644` | `#6a7039` → `#656a3c` | `#598a98` → `#5c828d` |
 
-**Gardés tels quels** : les réglages globaux du preset d'origine, dont les deux drapeaux Sodium à `true`. Ce sont les valeurs par défaut du mod : il ne retouche donc pas `sodium-options.json`.
+**Kept as they are**: the original preset's global settings, including the two Sodium flags set to `true`. These are the mod's default values: it therefore does not touch `sodium-options.json`.
 
-## Sable et neige (v2, 2026-10-19)
+## Sand and snow (v2, 2026-10-19)
 
-Demande : plus de sable dans le désert, des flocons dans les biomes enneigés. Lu dans les jars (ATMOSPHERICS 2.6.5, Polytone, Ecliptic Seasons, Subtle Effects, Particular), pas vu en jeu.
+Request: more sand in the desert, flakes in snowy biomes. Read from the jars (ATMOSPHERICS 2.6.5, Polytone, Ecliptic Seasons, Subtle Effects, Particular), not seen in game.
 
-**Sable : ATMOSPHERICS.** Il a déjà poussière et tempêtes de sable pour `desert`, les savanes et les badlands (liste écrite dans son code ; `nomansland:desert_river` n'y est pas). Le preset `fallow_v1` gardait les valeurs d'origine, où la poussière par temps clair est presque invisible.
+**Sand: ATMOSPHERICS.** It already has dust and sandstorms for `desert`, the savannas and the badlands (list written in its code; `nomansland:desert_river` is not in it). The `fallow_v1` preset kept the original values, where dust in clear weather is almost invisible.
 
-| Clé de `fallow_v2.json` | v1 | v2 | Borne du mod |
+| `fallow_v2.json` key | v1 | v2 | Mod bound |
 |---|---|---|---|
-| `sandstormWeather.clear` count / speed / size | 0,1 / 0,1 / 1,0 | 1,0 / 0,5 / 1,15 | 2,5 / 1 / 1,35 |
-| `sandstormWeather.rain` count / speed / size | 4,0 / 1,0 / 1,0 | 6,0 / 1,3 / 1,2 | 15 / 2,5 / 6 |
-| `sandstormWeather.thunder` count / speed / size | 6,95 / 1,55 / 1,0 | 9,0 / 1,8 / 1,2 | 15 / 2,5 / 6 |
-| `airHaze` du désert : intensité / fréquence / taille / couleur | 1,15 / 1,0 / 1,15 | 1,5 / 1,4 / 1,35, `#d8c8a0` | 3 / 3 / 3 |
-| `airHaze` des 3 badlands | idem | 1,5 / 1,4 / 1,35, `#d2b48c` | idem |
+| `sandstormWeather.clear` count / speed / size | 0.1 / 0.1 / 1.0 | 1.0 / 0.5 / 1.15 | 2.5 / 1 / 1.35 |
+| `sandstormWeather.rain` count / speed / size | 4.0 / 1.0 / 1.0 | 6.0 / 1.3 / 1.2 | 15 / 2.5 / 6 |
+| `sandstormWeather.thunder` count / speed / size | 6.95 / 1.55 / 1.0 | 9.0 / 1.8 / 1.2 | 15 / 2.5 / 6 |
+| desert `airHaze`: intensity / frequency / size / colour | 1.15 / 1.0 / 1.15 | 1.5 / 1.4 / 1.35, `#d8c8a0` | 3 / 3 / 3 |
+| `airHaze` of the 3 badlands | same | 1.5 / 1.4 / 1.35, `#d2b48c` | same |
 
-Les tempêtes suivent la pluie vue par le client. Avec la météo par biome d'Ecliptic, leur fréquence est à vérifier en jeu ; s'il pleut pendant une tempête, `NoRainInDeserts = true` dans `config/eclipticseasons-common.toml`.
+Storms follow the rain as seen by the client. With Ecliptic's per-biome weather, their frequency needs checking in game; if it rains during a storm, set `NoRainInDeserts = true` in `config/eclipticseasons-common.toml`.
 
-**Neige : Polytone.** Aucun mod installé ne fait tomber de flocons (Ecliptic ne peut qu'atténuer la neige vanilla). Le champ `particle` d'un `biome_modifier` Polytone ajoute une particule d'ambiance vanilla, comme NML le fait pour la poussière de ses grottes :
-- `vanilla_neige.json` : `minecraft:snowflake`, probabilité 0,004, sur `snowy_plains`, `ice_spikes`, `snowy_taiga`, `snowy_slopes`, `frozen_peaks`, `jagged_peaks`, `grove`, `snowy_beach`, `frozen_river` ;
-- même bloc ajouté à `nml_frozen_woods`, `nml_frozen_shore` et `nml_maple_grove` ;
-- `nml_desert_river.json` : `minecraft:falling_dust` de sable, probabilité 0,002, puisque ATMOSPHERICS ignore ce biome.
+**Snow: Polytone.** No installed mod makes flakes fall (Ecliptic can only attenuate vanilla snow). The `particle` field of a Polytone `biome_modifier` adds a vanilla ambient particle, as NML does for the dust in its caves:
+- `vanilla_neige.json`: `minecraft:snowflake`, probability 0.004, on `snowy_plains`, `ice_spikes`, `snowy_taiga`, `snowy_slopes`, `frozen_peaks`, `jagged_peaks`, `grove`, `snowy_beach`, `frozen_river`;
+- same block added to `nml_frozen_woods`, `nml_frozen_shore` and `nml_maple_grove`;
+- `nml_desert_river.json`: sand `minecraft:falling_dust`, probability 0.002, since ATMOSPHERICS ignores this biome.
 
-Limites : les densités sont choisies sur le papier, et les flocons apparaissent aussi sous les toits et dans les grottes de ces biomes.
+Limits: the densities are paper choices, and the flakes also appear under roofs and in the caves of these biomes.
 
-## Lumières colorées et lune (2026-10-19)
+## Coloured lights and moon (2026-10-19)
 
-Pour compenser l'absence de shaders, lu dans les jars (Polytone 5.1.3, ATMOSPHERICS 2.6.5, Enhanced Celestials 2), pas vu en jeu.
+To compensate for the absence of shaders, read from the jars (Polytone 5.1.3, ATMOSPHERICS 2.6.5, Enhanced Celestials 2), not seen in game.
 
-**Lumières colorées : Polytone.** Il lit `assets/<namespace>/polytone/colored_lights/*.json` : `target_type`, `targets` (ids ou `#tag`) et `colored_light` (`color`, puis `radius` et `brightness` facultatifs). Son moteur intégré (`BUILT_IN`, par défaut) teinte la lumière de bloc sur les blocs, les entités et les particules, sans Iris. Ce n'est pas une lightmap : More Darkness et la nuit de NML ne sont pas touchés.
-- `feu.json` : torches, lanterne, feu de camp, feu, bougies (`#minecraft:candles`) et appliques de NML, `#ffb36b` ;
-- `ames.json` : les mêmes blocs aux âmes, `#8fd3e8` ;
-- `clair_de_lune.json` : bougie et bassin de clair de lune de NML, `#dde6f0`.
+**Coloured lights: Polytone.** It reads `assets/<namespace>/polytone/colored_lights/*.json`: `target_type`, `targets` (ids or `#tag`) and `colored_light` (`color`, then optional `radius` and `brightness`). Its built-in engine (`BUILT_IN`, the default) tints block light on blocks, entities and particles, without Iris. This is not a lightmap: More Darkness and NML's night are not affected.
+- `feu.json`: torches, lantern, campfire, fire, candles (`#minecraft:candles`) and NML sconces, `#ffb36b`;
+- `ames.json`: the same blocks in their soul versions, `#8fd3e8`;
+- `clair_de_lune.json`: NML's candle and moonlight basin, `#dde6f0`.
 
-La lumière colorée de Contraption Lights reste coupée (sa valeur par défaut) : Polytone porte seul la couleur.
+Contraption Lights' coloured light stays off (its default value): Polytone alone carries the colour.
 
-**La lune.** Le soleil vient du pack intégré d'ATMOSPHERICS : un carré chaud de 8 px et huit rayons ambrés très faibles, sur fond noir (le mélange est additif). Les lunes d'Enhanced Celestials 2 n'ont pas de texture propre : toutes teintent `moon_phases.png`. Le pack en fournit une dans le même style : planche 4×2 de 128×64, un carré pâle de 12 px (même taille apparente que le soleil une fois l'échelle d'ATMOSPHERICS appliquée), la part sombre à peine visible, huit rayons froids très faibles. Les phases suivent l'ordre vanilla (vérifié sur la texture du jeu). Elle habille la lune ordinaire, toutes les lunes EC2 (qui gardent leur teinte) et la lune vanilla hors d'ATMOSPHERICS.
+**The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack provides one in the same style: a 4×2 sheet of 128×64, a pale 12 px square (same apparent size as the sun once ATMOSPHERICS' scale is applied), the dark part barely visible, eight very faint cold rays. The phases follow the vanilla order (checked against the game texture). It dresses the ordinary moon, all EC2 moons (which keep their tint) and the vanilla moon outside ATMOSPHERICS.
 
-## Ce qui reste à régler en jeu
+## What remains to be tuned in game
 
-1. **Le rendu des couleurs.** Le preset d'origine utilise des couleurs de brume très saturées (`#20afff` pour les plaines) : ATMOSPHERICS les assombrit ou les mélange sans doute selon l'heure. Les gris choisis ici peuvent sortir trop ternes ou trop clairs [déduit].
-   - Régler avec l'éditeur d'ATMOSPHERICS.
-   - Exporter, puis enregistrer sous `fallow_v3.json` en supprimant `fallow_v2.json`.
-2. **L'épaisseur.** 52 blocs de jour et 34 de nuit en forêt : est-ce encore jouable ? Les monuments et les ruines se voient-ils assez tôt ?
-3. **La transition au bord d'une clairière.** La brume change par cellules de 4 blocs, avec un lissage (rapport 3, 1.4 et test T2). Inutile à tester avant que le biome `fallow:clairiere` existe dans `pack/kubejs/data/`.
-4. **Le biome des clairières**, quand il sera créé :
-   - aligner les couleurs de son JSON (et de ses deux variantes du rapport 4) sur celles de Polytone ;
-   - vérifier que Polytone les applique bien à un biome de datapack reçu du serveur.
-5. **Ecliptic.** Les saisons teintent-elles encore l'herbe et les feuilles des biomes NML recolorés ? Le rapport 3 le pense, puisqu'on passe par la couleur du biome et non par une colormap de bloc [déduit].
-6. **Le rêve de NML** : le profil désactivé rend-il bien la main à NML [déduit du code] ?
-7. **Les grottes de NML** : brume gris-brun à 72 blocs, à comparer avec la poussière de Particular.
-8. **Lumières colorées de Polytone** : vérifier les teintes de nuit, avec More Darkness, et sur un dirigeable Sable assemblé (Polytone modifie le shader de chunk de Sodium). Le moteur reste `BUILT_IN` (`polytone_options.json`) ; `VEIL` et `HYBRID` sont à éviter.
-9. **Les feuilles de NML dans Particular** (test T13) : chêne générique pour 9 feuillages sur 11. Si cela gêne, passer par le mod `fallow` ou par Falling Leaves Plus (voir plus haut).
-10. **La lune** : taille et éclat à côté du soleil, teinte des lunes EC2, lune ordinaire de nuit dans la brume.
+1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].
+   - Tune with the ATMOSPHERICS editor.
+   - Export, then save as `fallow_v3.json` while deleting `fallow_v2.json`.
+2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
+3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2). No use testing before the `fallow:clairiere` biome exists in `pack/kubejs/data/`.
+4. **The clearing biome**, once created:
+   - align the colours of its JSON (and of its two variants from report 4) with those of Polytone;
+   - check that Polytone does apply them to a datapack biome received from the server.
+5. **Ecliptic.** Do the seasons still tint the grass and leaves of the recoloured NML biomes? Report 3 thinks so, since we go through the biome colour and not a block colormap [inferred].
+6. **NML's dream**: does the disabled profile really hand control back to NML [inferred from the code]?
+7. **NML's caves**: grey-brown mist at 72 blocks, to compare with Particular's dust.
+8. **Polytone coloured lights**: check the night tints, with More Darkness, and on an assembled Sable airship (Polytone modifies Sodium's chunk shader). The engine stays `BUILT_IN` (`polytone_options.json`); `VEIL` and `HYBRID` are to be avoided.
+9. **NML's leaves in Particular** (test T13): generic oak for 9 foliages out of 11. If this is a nuisance, go through the `fallow` mod or Falling Leaves Plus (see above).
+10. **The moon**: size and brightness next to the sun, tint of the EC2 moons, ordinary moon at night in the mist.

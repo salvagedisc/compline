@@ -1,202 +1,202 @@
-# 1. Overgeared : étude du jar et liens avec le pack
+# 1. Overgeared: study of the jar and links with the pack
 
-> Vérification du 2026-10-18. Jar étudié : `overgeared-neoforge-1.21.1-1.6.19.jar`, celui de `pack/mods/overgeared.pw.toml`. Son sha512 commence par `06b7d48d89a3134…`, comme dans le toml.
-> Sources : l'API Modrinth (projet `overgeared`, id `SQL3X2Ky`), les classes lues avec `javap`, les JSON du jar et le [document officiel pour les créateurs de modpacks](https://docs.google.com/document/d/1dUjVXHALGE7b625DYa-cVr0Y6vJkh3NFya0gcDSE_C8) (lien donné sur la page Modrinth). J'ai aussi ouvert, pour comparer, les jars d'Easy Anvils, Visual Workbench, FallingTree, Traveler's Backpack et Subtle Effects, et ceux de 22 mods du pack (Create, Cold Sweat, Supplementaries, Quark, la faune…).
-> « déduit » = conclusion tirée du code ou des données, sans test en jeu.
-
----
-
-## 0. L'essentiel
-
-1. **Il n'y a pas de bloc « forge ».** On chauffe le métal dans le **haut fourneau vanilla**, ou dans le fourneau pour le cuivre. Ensuite on le **martèle sur l'enclume de forgeron** avec un mini-jeu, on le **trempe** dans l'eau et on le **polit** à la meule. La forge du plan est donc un **atelier à monter** : haut fourneau, enclume, eau, meule, plus le soufflet de Supplementaries.
-2. **Overgeared remplace déjà les recettes vanilla.** On ne fabrique plus ses outils à l'établi : on assemble une tête forgée et un bâton. Le diamant, le seau, le chaudron, les cisailles, le briquet, les flèches et la netherite passent par lui. La suppression prévue dans `progression.js` ne sert à rien : elle vise `crafting_shaped`, qui n'existe plus pour ces objets.
-3. **Pas de bronze, pas d'étain, pas de laiton.** Le seul alliage du four à alliage est l'acier brut (3 fers + 1 charbon). Les chapitres 03 et 08 se trompent sur ce point.
-4. **Le « modèle trouvé dans les ruines » n'est pas un modèle d'acier.** C'est le **gabarit d'amélioration en diamant** (acier → diamant à la table de forgeron). L'acier se fabrique, lui, sans rien trouver.
-5. **Tout se règle en données.** Les recettes, les tags, les attributs par qualité et les types de plans se règlent en JSON, donc en datapack ou avec `event.custom()` de KubeJS. Le mod n'a **ni plugin KubeJS, ni JEI, ni pont avec Create**. Il fournit un **plugin EMI**, un plugin Polymorph et une compatibilité **Sable/Aeronautics**.
-6. **Les plans d'Overgeared remplacent en grande partie les plans KubeJS du §10.10.** Un plan d'Overgeared d'un type caché peut être la condition pour forger une pièce : la Lanterne de clairière, un essieu, une pale d'hélice. Il se trouve en exploration, se copie et s'améliore avec l'usage.
-7. **KubeJS et des datapacks suffisent** pour tous les liens. Un petit mod n'est utile que pour un détail de finition : des étincelles à chaque coup de marteau au lieu des étoiles « coup critique » (§2.13).
-8. **Il n'y a pas de traduction française** (`fr_fr.json` absent). Il faut la livrer dans le pack.
+> Check of 2026-10-18. Jar studied: `overgeared-neoforge-1.21.1-1.6.19.jar`, the one in `pack/mods/overgeared.pw.toml`. Its sha512 starts with `06b7d48d89a3134…`, as in the toml.
+> Sources: the Modrinth API (project `overgeared`, id `SQL3X2Ky`), the classes read with `javap`, the JSON files in the jar and the [official document for modpack creators](https://docs.google.com/document/d/1dUjVXHALGE7b625DYa-cVr0Y6vJkh3NFya0gcDSE_C8) (link given on the Modrinth page). For comparison, the jars of Easy Anvils, Visual Workbench, FallingTree, Traveler's Backpack and Subtle Effects were also opened, along with those of 22 mods in the pack (Create, Cold Sweat, Supplementaries, Quark, the fauna…).
+> "deduced" = conclusion drawn from the code or the data, without an in-game test.
 
 ---
 
-## 1. Ce qui est confirmé
+## 0. The essentials
 
-### 1.1 Version et dépendances
+1. **There is no "forge" block.** Metal is heated in the **vanilla blast furnace**, or in the furnace for copper. It is then **hammered on the smith's anvil** with a mini-game, **quenched** in water and **polished** at the grindstone. The plan's forge is therefore a **workshop to assemble**: blast furnace, anvil, water, grindstone, plus Supplementaries' bellows.
+2. **Overgeared already replaces the vanilla recipes.** Tools are no longer crafted at the crafting table: a forged head and a stick are assembled. Diamond, the bucket, the cauldron, shears, the flint and steel, arrows and netherite go through it. The removal planned in `progression.js` is useless: it targets `crafting_shaped`, which no longer exists for these items.
+3. **No bronze, no tin, no brass.** The only alloy of the alloy furnace is crude steel (3 iron + 1 coal). Chapters 03 and 08 are wrong on this point.
+4. **The "pattern found in the ruins" is not a steel pattern.** It is the **diamond upgrade template** (steel → diamond at the smithing table). Steel, for its part, is made without finding anything.
+5. **Everything is tuned through data.** Recipes, tags, per-quality attributes and blueprint types are set in JSON, hence in a datapack or with KubeJS `event.custom()`. The mod has **no KubeJS plugin, no JEI, and no bridge with Create**. It provides an **EMI plugin**, a Polymorph plugin and **Sable/Aeronautics** compatibility.
+6. **Overgeared's blueprints largely replace the KubeJS blueprints of §10.10.** An Overgeared blueprint of a hidden type can be the condition for forging a part: the Clearing Lantern, an axle, a propeller blade. It is found while exploring, can be copied and improves with use.
+7. **KubeJS and datapacks are enough** for all the links. A small mod is useful only for one finishing detail: sparks at each hammer blow instead of the "critical hit" stars (§2.13).
+8. **There is no French translation** (`fr_fr.json` absent). It must be shipped in the pack.
 
-| Point | Valeur | Preuve |
+---
+
+## 1. What is confirmed
+
+### 1.1 Version and dependencies
+
+| Point | Value | Evidence |
 |---|---|---|
-| Dernière version NeoForge 1.21.1 | `neoforge-1.21.1-1.6.19`, release, 2026-09-21 : **c'est celle du pack** | API Modrinth `/project/overgeared/version?loaders=["neoforge"]&game_versions=["1.21.1"]` |
-| Dépendances obligatoires | NeoForge ≥ 21.1.227 (le pack a la 21.1.251), Minecraft 1.21.1 | `META-INF/neoforge.mods.toml` |
-| Dépendances facultatives | `quark` ≥ 4, `dragonsurvival` | idem |
-| Embarqué | `sable-companion-common-1.21.1-1.6.0.jar` (jar-in-jar) | `META-INF/jarjar/` |
-| Licence | MIT ; source sur GitHub `phuccom000/Overgeared-1.20.1` | API Modrinth |
-| Config | une seule config **COMMON** (classe `ServerConfig`, donc fichier `config/overgeared-common.toml`, nom à confirmer au premier lancement) et une config client | `OvergearedMod` : `registerConfig(COMMON, ServerConfig.SERVER_CONFIG)` |
-| Langues | de_de, en_us, es_mx, ja_jp, pl_pl, pt_br, ru_ru, vi_vn, zh_cn. **Pas de fr_fr** | `assets/overgeared/lang/` |
-| Mixins | serveur et commun seulement (refroidissement dans les conteneurs, les entités et l'inventaire ; empilement ; joueur ; potions) | `overgeared.mixins.json` |
-| Changements utiles | 1.6.13 : état « cassé » et compatibilité Sable/Aeronautics corrigée ; 1.6.14 : refroidissement dans l'eau sur une structure Sable ; 1.6.17 : marteaux par palier d'enclume ; 1.6.18.1 : compatibilité Clockwork ; 1.6.19 : le métal chaud brûle comme un bloc de magma | changelogs Modrinth |
+| Latest NeoForge 1.21.1 version | `neoforge-1.21.1-1.6.19`, release, 2026-09-21: **this is the pack's** | Modrinth API `/project/overgeared/version?loaders=["neoforge"]&game_versions=["1.21.1"]` |
+| Required dependencies | NeoForge ≥ 21.1.227 (the pack has 21.1.251), Minecraft 1.21.1 | `META-INF/neoforge.mods.toml` |
+| Optional dependencies | `quark` ≥ 4, `dragonsurvival` | same |
+| Embedded | `sable-companion-common-1.21.1-1.6.0.jar` (jar-in-jar) | `META-INF/jarjar/` |
+| License | MIT; source on GitHub `phuccom000/Overgeared-1.20.1` | Modrinth API |
+| Config | a single **COMMON** config (class `ServerConfig`, hence file `config/overgeared-common.toml`, name to confirm at first launch) and a client config | `OvergearedMod`: `registerConfig(COMMON, ServerConfig.SERVER_CONFIG)` |
+| Languages | de_de, en_us, es_mx, ja_jp, pl_pl, pt_br, ru_ru, vi_vn, zh_cn. **No fr_fr** | `assets/overgeared/lang/` |
+| Mixins | server and common only (cooling in containers, entities and inventory; stacking; player; potions) | `overgeared.mixins.json` |
+| Useful changes | 1.6.13: "broken" state and Sable/Aeronautics compatibility fixed; 1.6.14: cooling in water on a Sable structure; 1.6.17: hammers per anvil tier; 1.6.18.1: Clockwork compatibility; 1.6.19: hot metal burns like a magma block | Modrinth changelogs |
 
-### 1.2 La chaîne du forgeron (lue dans les recettes du jar)
+### 1.2 The smith's chain (read from the jar's recipes)
 
-| Étape | Ce qui se passe | Données |
+| Step | What happens | Data |
 |---|---|---|
-| **Silex et pierre** | Clic droit avec un silex sur de la pierre : on obtient un caillou (`overgeared:knappable_rock`). La pierre devient de la pierre taillée et le silex peut casser | `rock_interactions/flint_on_stone.json` (30 % de chance d'obtenir le caillou, 15 % de casser le silex) |
-| **Taille** | On taille les têtes d'outils en pierre dans une grille 3 × 3 (`overgeared:rock_knapping`), puis tête + bâton = outil en pierre vanilla | `recipe/stone_*_head.json`, `minecraft/recipe/stone_pickaxe.json` |
-| **Enclume de pierre** | Clic droit accroupi sur `minecraft:stone` avec un marteau → enclume de pierre, de palier « stone », qui monte au plus à « Well Forged » et s'use (`max_uses`) | tag `overgeared:stone_anvil_bases` = `minecraft:stone` |
-| **Marteau** | Le marteau de cuivre se fabrique à l'établi (cuivre + bâtons) ou avec une tête coulée. Le marteau d'acier vient d'une tête forgée | `copper_smithing_hammer_2.json`, `smithing_hammer.json` |
-| **Enclume de forgeron** | Clic droit accroupi sur une **enclume vanilla** `minecraft:anvil` (31 fers) avec un marteau → `overgeared:smithing_anvil`, de palier « iron ». Elle **tombe** comme l'enclume vanilla (classe `Fallable`) et **affiche les objets posés en 3D** (`SmithingAnvilBlockEntityRenderer`) | tag `overgeared:iron_anvil_bases` = `minecraft:anvil` seul (ni ébréchée ni endommagée) |
-| **Chauffe** | Fer : **haut fourneau seulement** (minerai, fer brut ou lingot → `heated_iron_ingot`). Le haut fourneau vanilla ne donne plus de lingot de fer froid. Cuivre et argent : fourneau ou haut fourneau. Acier brut : haut fourneau | `heated_*_from_blasting_*.json`, `minecraft/recipe/iron_ingot_from_blasting_*.json` (condition `neoforge:false`) |
-| **Métal chaud** | Le métal chaud brûle si on le tient sans pinces (pinces en bois avec des bâtons, en fer ou en acier). Il refroidit en 1200 ticks (60 s) dans l'inventaire ou d'un coup dans l'eau. Il fume et brûle aussi les créatures | config `heatedItemCooldownTicks = 1200`, tags `overgeared:heated_metals` et `overgeared:tongs`, recettes `overgeared:cooling` |
-| **Martelage** | On place les ingrédients dans la grille 3 × 3 de l'enclume, avec le plan dans sa case s'il y en a un. Clic droit au marteau pour lancer le **mini-jeu** : une flèche, une zone parfaite qui rétrécit, un nombre de coups (`hammering`). Le score donne la qualité | `ForgingRecipe$Serializer`, config `perfectQualityScore = 0.9`, `expert = 0.6`, `well = 0.3`, `masterQualityChance = 0.05` |
-| **Trempe et polissage** | Une tête chaude doit être trempée (eau) puis polie à la meule (`overgeared:grindstones` = meule vanilla). Sinon elle reste « non polie » et sa qualité maximale baisse | `need_quenching`, `has_polishing`, tags `overgeared:grindable` et `overgeared:grinded` |
-| **Assemblage** | Tête + bâton à l'établi, recette `overgeared:crafting_shapeless` qui **reporte la qualité** de la tête sur l'outil | `minecraft/recipe/iron_pickaxe.json` |
-| **Acier** | Four à alliage en briques (`overgeared:alloy_furnace` = haut fourneau entouré de briques) : 3 lingots de fer + 1 charbon → 4 aciers bruts. On les chauffe au haut fourneau, on les martèle (3 coups) en acier chaud, puis on les refroidit en lingots d'acier | `crude_steel_from_alloying.json`, `heated_steel_ingot.json`, `steel_ingot_from_cooling.json` |
-| **Armures** | Plaques forgées (`overgeared:iron_plate`, `copper_plate`, `steel_plate`, 3 coups, sans qualité), puis armure forgée avec qualité (5 coups) | `iron_chestplate.json`, `iron_plate.json` |
-| **Diamant** | Plus aucune recette d'outil en diamant à l'établi : elles donnent de l'air. Il faut l'objet en acier, un diamant et le **gabarit d'amélioration en diamant** à la table de forgeron. Le gabarit se trouve dans des coffres et se copie avec 7 diamants et 1 acier (on en obtient 2) | `steel_*_to_diamond_*.json`, `diamond_upgrade_smithing_template.json`, `loot_modifiers/diamond_upgrade_from_*.json` |
-| **Netherite** | Alliage au four à alliage du Nether (briques du Nether : 4 débris + 4 or), puis martelage de niveau maître (en cas d'échec : 4 débris) | `heated_netherite_alloy.json`, `minecraft/recipe/netherite_ingot.json` |
-| **Moules** | Moule d'argile cuit au fourneau. On le remplit de pépites ou de lingots (barème `material_settings`) et on le cuit au fourneau ou au haut fourneau (`cast_smelting`, `cast_blasting`). La tête qui sort perd en qualité. Le moule du Nether et le **fourneau de coulée** (briques du Nether rouges + 1 diamant) sont pour la fin de partie | `casting_furnace.json`, `*_from_cast_*.json`, config `castingToggle = true` |
-| **Plans** | Papier ×3 + teinture bleue → plan vierge ; plan vierge + établi → **table à dessin**. Sur la table, le plan vierge devient un plan d'un type d'outil, qui fixe la **qualité maximale** du résultat. Le plan monte de qualité à l'usage (`poorMaxUse`, `wellMaxUse`, `expertMaxUse`). Plan vierge + plan → copie de moindre qualité | `empty_blueprint.json`, `drafting_table.json`, `blueprint_cloning/*.json`, composant `overgeared:blueprint_data` {quality, tool_type, uses} |
-| **Flèches** | La table d'empennage reçoit une interface (`overgeared:fletching`) : flèches en fer, en acier, en diamant, trempées ou persistantes | `minecraft/recipe/arrow.json` |
-| **Objets cassés** | À 0 de durabilité, un objet peut rester « cassé » au lieu de disparaître, selon sa qualité (de 50 % à 75 % pour well et expert ; autres valeurs dans la config) | config `enableQualityBreakSystem = true`, `BrokenHelper` |
-| **Réparation** | La meule répare : +10 % de durabilité par passage, −5 % de durabilité maximale | config `grindingToggle`, `damageRestore = 0.1`, `durabilityReduce = 0.05` |
+| **Flint and stone** | Right-click with flint on stone: you get a pebble (`overgeared:knappable_rock`). The stone becomes chiseled stone and the flint may break | `rock_interactions/flint_on_stone.json` (30% chance of getting the pebble, 15% of breaking the flint) |
+| **Knapping** | Stone tool heads are knapped in a 3 × 3 grid (`overgeared:rock_knapping`), then head + stick = vanilla stone tool | `recipe/stone_*_head.json`, `minecraft/recipe/stone_pickaxe.json` |
+| **Stone anvil** | Sneak right-click on `minecraft:stone` with a hammer → stone anvil, "stone" tier, which rises at most to "Well Forged" and wears out (`max_uses`) | tag `overgeared:stone_anvil_bases` = `minecraft:stone` |
+| **Hammer** | The copper hammer is crafted at the crafting table (copper + sticks) or with a cast head. The steel hammer comes from a forged head | `copper_smithing_hammer_2.json`, `smithing_hammer.json` |
+| **Smith's anvil** | Sneak right-click on a **vanilla anvil** `minecraft:anvil` (31 iron) with a hammer → `overgeared:smithing_anvil`, "iron" tier. It **falls** like the vanilla anvil (class `Fallable`) and **displays the placed items in 3D** (`SmithingAnvilBlockEntityRenderer`) | tag `overgeared:iron_anvil_bases` = `minecraft:anvil` only (neither chipped nor damaged) |
+| **Heating** | Iron: **blast furnace only** (ore, raw iron or ingot → `heated_iron_ingot`). The vanilla blast furnace no longer gives a cold iron ingot. Copper and silver: furnace or blast furnace. Crude steel: blast furnace | `heated_*_from_blasting_*.json`, `minecraft/recipe/iron_ingot_from_blasting_*.json` (condition `neoforge:false`) |
+| **Hot metal** | Hot metal burns if held without tongs (wooden tongs with sticks, iron or steel). It cools in 1200 ticks (60 s) in the inventory or instantly in water. It smokes and also burns creatures | config `heatedItemCooldownTicks = 1200`, tags `overgeared:heated_metals` and `overgeared:tongs`, recipes `overgeared:cooling` |
+| **Hammering** | Ingredients are placed in the anvil's 3 × 3 grid, with the blueprint in its slot if there is one. Right-click with the hammer to start the **mini-game**: an arrow, a shrinking perfect zone, a number of blows (`hammering`). The score gives the quality | `ForgingRecipe$Serializer`, config `perfectQualityScore = 0.9`, `expert = 0.6`, `well = 0.3`, `masterQualityChance = 0.05` |
+| **Quenching and polishing** | A hot head must be quenched (water) then polished at the grindstone (`overgeared:grindstones` = vanilla grindstone). Otherwise it stays "unpolished" and its maximum quality drops | `need_quenching`, `has_polishing`, tags `overgeared:grindable` and `overgeared:grinded` |
+| **Assembly** | Head + stick at the crafting table, recipe `overgeared:crafting_shapeless` which **carries over the quality** of the head to the tool | `minecraft/recipe/iron_pickaxe.json` |
+| **Steel** | Brick alloy furnace (`overgeared:alloy_furnace` = blast furnace surrounded by bricks): 3 iron ingots + 1 coal → 4 crude steel. They are heated in the blast furnace, hammered (3 blows) into hot steel, then cooled into steel ingots | `crude_steel_from_alloying.json`, `heated_steel_ingot.json`, `steel_ingot_from_cooling.json` |
+| **Armor** | Forged plates (`overgeared:iron_plate`, `copper_plate`, `steel_plate`, 3 blows, no quality), then forged armor with quality (5 blows) | `iron_chestplate.json`, `iron_plate.json` |
+| **Diamond** | No more diamond tool recipe at the crafting table: they yield air. The steel item, a diamond and the **diamond upgrade template** at the smithing table are needed. The template is found in chests and is copied with 7 diamonds and 1 steel (yielding 2) | `steel_*_to_diamond_*.json`, `diamond_upgrade_smithing_template.json`, `loot_modifiers/diamond_upgrade_from_*.json` |
+| **Netherite** | Alloy in the Nether alloy furnace (Nether bricks: 4 debris + 4 gold), then master-level hammering (on failure: 4 debris) | `heated_netherite_alloy.json`, `minecraft/recipe/netherite_ingot.json` |
+| **Molds** | Clay mold fired in the furnace. It is filled with nuggets or ingots (`material_settings` scale) and fired in the furnace or blast furnace (`cast_smelting`, `cast_blasting`). The head that comes out loses quality. The Nether mold and the **casting furnace** (red Nether bricks + 1 diamond) are for the end game | `casting_furnace.json`, `*_from_cast_*.json`, config `castingToggle = true` |
+| **Blueprints** | Paper ×3 + blue dye → blank blueprint; blank blueprint + crafting table → **drafting table**. On the table, the blank blueprint becomes a blueprint of a tool type, which sets the **maximum quality** of the result. The blueprint rises in quality with use (`poorMaxUse`, `wellMaxUse`, `expertMaxUse`). Blank blueprint + blueprint → lower-quality copy | `empty_blueprint.json`, `drafting_table.json`, `blueprint_cloning/*.json`, component `overgeared:blueprint_data` {quality, tool_type, uses} |
+| **Arrows** | The fletching table gets an interface (`overgeared:fletching`): iron, steel, diamond, tipped or lingering arrows | `minecraft/recipe/arrow.json` |
+| **Broken items** | At 0 durability, an item can stay "broken" instead of disappearing, depending on its quality (50% to 75% for well and expert; other values in the config) | config `enableQualityBreakSystem = true`, `BrokenHelper` |
+| **Repair** | The grindstone repairs: +10% durability per pass, −5% maximum durability | config `grindingToggle`, `damageRestore = 0.1`, `durabilityReduce = 0.05` |
 
-Les objets vanilla passés par la forge (`data/minecraft/recipe/`) :
-- outils et armures en fer, en or et en pierre ;
-- les recettes de diamant, désactivées ;
-- seau (3 fers, enclume de pierre suffit), chaudron (**plaques d'acier**), cisailles ;
-- **briquet** (silex + lingot d'acier) ;
-- flèches, flèches spectrales et flèches trempées ;
-- lingot de netherite.
+Vanilla items routed through the forge (`data/minecraft/recipe/`):
+- iron, gold and stone tools and armor;
+- diamond recipes, disabled;
+- bucket (3 iron, stone anvil is enough), cauldron (**steel plates**), shears;
+- **flint and steel** (flint + steel ingot);
+- arrows, spectral arrows and tipped arrows;
+- netherite ingot.
 
-### 1.3 Paliers des outils (tags du jar)
+### 1.3 Tool tiers (jar tags)
 
-| Palier | Peut miner | Preuve |
+| Tier | Can mine | Evidence |
 |---|---|---|
-| Bois, pierre, or | **pas le minerai de fer** (`overgeared:needs_copper_tool` = minerais de fer et blocs de fer) | `minecraft/tags/block/incorrect_for_stone_tool.json` |
-| Cuivre (nouveau) | le fer, mais pas `minecraft:needs_iron_tool` : diamant, or, redstone et **zinc de Create** | `incorrect_for_copper_tool.json` ; Create : `needs_iron_tool` = minerai de zinc |
-| Fer | tout, sauf `overgeared:needs_steel_tool` (obsidienne, obsidienne pleureuse) | `incorrect_for_iron_tool.json` |
-| Acier | tout, sauf `minecraft:needs_diamond_tool` | `incorrect_for_steel_tool.json` |
+| Wood, stone, gold | **not iron ore** (`overgeared:needs_copper_tool` = iron ores and iron blocks) | `minecraft/tags/block/incorrect_for_stone_tool.json` |
+| Copper (new) | iron, but not `minecraft:needs_iron_tool`: diamond, gold, redstone and **Create's zinc** | `incorrect_for_copper_tool.json`; Create: `needs_iron_tool` = zinc ore |
+| Iron | everything, except `overgeared:needs_steel_tool` (obsidian, crying obsidian) | `incorrect_for_iron_tool.json` |
+| Steel | everything, except `minecraft:needs_diamond_tool` | `incorrect_for_steel_tool.json` |
 
-Déduit : **le zinc, donc le laiton de Create, demande une pioche en fer forgée.** C'est un verrou naturel « forge avant Create », sans script.
+Deduced: **zinc, hence Create's brass, requires a forged iron pickaxe.** This is a natural "forge before Create" lock, without a script.
 
-### 1.4 Qualité : données et effets
+### 1.4 Quality: data and effects
 
-- Le composant `overgeared:forging_quality` est une énumération `StringRepresentable` : `poor`, `well`, `expert`, `perfect`, `master`. Source : `ModComponents`, `ForgingQuality`.
-- Les autres composants : `heated`, `polished`, `blueprint_data`, `cast_data`, `creator` (le nom du forgeron dans la description), `failed_result`, `blueprint_required`, `heated_time`, `tipped_uses`, `reduced_grind_count`, `lingering_status`.
-- **Les attributs par qualité se règlent en données** (`data/<ns>/quality_attributes/*.json`).
-  - Cibles possibles : `weapon` (toute classe `TieredItem` ou `ProjectileWeaponItem`), `armor` (`ArmorItem`), `item`, `item_tag`, `item_all`.
-  - Opérations : `add`, `mult_base`, `mult_total`.
-  - Source : `QualityTarget$TargetType`, `QualityAttributeHandler` (`ItemAttributeModifierEvent`).
-  - Valeurs par défaut :
-    - dégâts : de −1 (poor) à +3 (master) ;
-    - armure : de −1 à +2 ;
-    - durabilité : ×0,7 à ×1,6 ;
-    - vitesse de minage : ×0,7 à ×1,5.
-- **La qualité marche sur les objets de n'importe quel mod**, dès que le composant est présent.
-- **Butin** : le modificateur global `overgeared:all_tools_give_quality`, sans condition, donne une qualité tirée au hasard à **tout objet qui s'use et sort d'une table de butin**. Cela vaut pour les coffres, Lootr et les créatures, et donc aussi pour les objets de boss de Mowzie's (tables `mowziesmobs:entities/ferrous_wroughtnaut`, `umvuthi`, `frostmaw`) et le butin des ruines de NML.
-  - Poids par défaut : poor 50, well 30, et ainsi de suite.
-  - Exclusions : tag `overgeared:quality_blacklist`.
-  - Source : `QualityLootModifier`, `global_loot_modifiers.json`.
-- **Butin en plus** :
-  - `steel_ingot_from_*` et `diamond_upgrade_from_*` dans les coffres vanilla : mineshaft, donjon, stronghold, pyramide du désert, épave, manoir, temple de la jungle, cité antique, avant-poste, trésor enfoui ;
-  - flèches en fer dans le distributeur du temple de la jungle.
-- **Échanges** :
-  - armurier, forgeron d'outils et forgeron d'armes : échanges vanilla enveloppés avec une qualité, plus des échanges d'objets forgés et d'acier contre des émeraudes ;
-  - marchand ambulant : vend des plans.
-  - Source : `ModEvents.onVillagerTrades`, `onWanderingTraderTrades`.
+- The `overgeared:forging_quality` component is a `StringRepresentable` enumeration: `poor`, `well`, `expert`, `perfect`, `master`. Source: `ModComponents`, `ForgingQuality`.
+- The other components: `heated`, `polished`, `blueprint_data`, `cast_data`, `creator` (the smith's name in the description), `failed_result`, `blueprint_required`, `heated_time`, `tipped_uses`, `reduced_grind_count`, `lingering_status`.
+- **Per-quality attributes are tuned through data** (`data/<ns>/quality_attributes/*.json`).
+  - Possible targets: `weapon` (any `TieredItem` or `ProjectileWeaponItem` class), `armor` (`ArmorItem`), `item`, `item_tag`, `item_all`.
+  - Operations: `add`, `mult_base`, `mult_total`.
+  - Source: `QualityTarget$TargetType`, `QualityAttributeHandler` (`ItemAttributeModifierEvent`).
+  - Default values:
+    - damage: from −1 (poor) to +3 (master);
+    - armor: from −1 to +2;
+    - durability: ×0.7 to ×1.6;
+    - mining speed: ×0.7 to ×1.5.
+- **Quality works on items from any mod**, as soon as the component is present.
+- **Loot**: the global modifier `overgeared:all_tools_give_quality`, unconditional, gives a randomly drawn quality to **every item that wears out and comes from a loot table**. This applies to chests, Lootr and creatures, and therefore also to Mowzie's boss items (tables `mowziesmobs:entities/ferrous_wroughtnaut`, `umvuthi`, `frostmaw`) and NML ruin loot.
+  - Default weights: poor 50, well 30, and so on.
+  - Exclusions: tag `overgeared:quality_blacklist`.
+  - Source: `QualityLootModifier`, `global_loot_modifiers.json`.
+- **Extra loot**:
+  - `steel_ingot_from_*` and `diamond_upgrade_from_*` in vanilla chests: mineshaft, dungeon, stronghold, desert pyramid, shipwreck, mansion, jungle temple, ancient city, outpost, buried treasure;
+  - iron arrows in the jungle temple dispenser.
+- **Trades**:
+  - armorer, toolsmith and weaponsmith: vanilla trades wrapped with a quality, plus trades of forged items and steel for emeralds;
+  - wandering trader: sells blueprints.
+  - Source: `ModEvents.onVillagerTrades`, `onWanderingTraderTrades`.
 
-### 1.5 Ce qui se règle en données (sans code)
+### 1.5 What is tuned through data (no code)
 
-| Dossier ou tag | Rôle |
+| Folder or tag | Role |
 |---|---|
-| `data/<ns>/recipe/` | 21 sérialiseurs : `forging`, `rock_knapping`, `alloy_smelting`, `shaped_alloy_smelting`, `nether_alloy_smelting`, `shaped_nether_alloy_smelting`, `casting`, `cast_smelting`, `cast_blasting`, `nbt_smelting`, `nbt_blasting`, `cooling`, `grinding`, `fletching`, `item_to_tooltype`, `crafting_shapeless`, `crafting_cloning`, `crafting_cast`, `crafting_initial_cast`, `campfire_heating` (`ModRecipeSerializers`) |
-| `data/overgeared/blueprint_tooltypes/` | types de plans en plus (`{"tooltypes":[…]}`) |
-| `casting_tooltypes/`, `material_settings/` | quantités des moules et valeur des matériaux |
-| `quality_attributes/` | effets de la qualité |
-| `rock_interactions/` | clic droit d'un objet sur un bloc → un objet tombe (le caillou) |
-| `knapping_resources/` | ce qu'on peut tailler, avec sa texture et son son |
+| `data/<ns>/recipe/` | 21 serializers: `forging`, `rock_knapping`, `alloy_smelting`, `shaped_alloy_smelting`, `nether_alloy_smelting`, `shaped_nether_alloy_smelting`, `casting`, `cast_smelting`, `cast_blasting`, `nbt_smelting`, `nbt_blasting`, `cooling`, `grinding`, `fletching`, `item_to_tooltype`, `crafting_shapeless`, `crafting_cloning`, `crafting_cast`, `crafting_initial_cast`, `campfire_heating` (`ModRecipeSerializers`) |
+| `data/overgeared/blueprint_tooltypes/` | extra blueprint types (`{"tooltypes":[…]}`) |
+| `casting_tooltypes/`, `material_settings/` | mold quantities and material value |
+| `quality_attributes/` | quality effects |
+| `rock_interactions/` | right-click of an item on a block → an item drops (the pebble) |
+| `knapping_resources/` | what can be knapped, with its texture and sound |
 | `durability_blacklist/`, `grinding_blacklist/`, `broken_blacklist/` | exclusions |
-| tags d'objets | `heated_metals`, `hot_items`, `tongs`, `smithing_hammers` (et `stone_`, `iron_`, `tier_a_`, `tier_b_smithing_hammers`), `tool_parts`, `quality_blacklist`, `knappables`, `grindable`, `grinded` |
-| tags de blocs | `smithing_anvil`, `stone_anvil_bases`, `iron_anvil_bases`, `tier_a_anvil_bases`, `tier_b_anvil_bases`, `grindstones`, `needs_copper_tool`, `needs_steel_tool` |
+| item tags | `heated_metals`, `hot_items`, `tongs`, `smithing_hammers` (and `stone_`, `iron_`, `tier_a_`, `tier_b_smithing_hammers`), `tool_parts`, `quality_blacklist`, `knappables`, `grindable`, `grinded` |
+| block tags | `smithing_anvil`, `stone_anvil_bases`, `iron_anvil_bases`, `tier_a_anvil_bases`, `tier_b_anvil_bases`, `grindstones`, `needs_copper_tool`, `needs_steel_tool` |
 
-**Champs d'une recette `overgeared:forging`** (sérialiseur et doc officielle) :
-- `pattern`, `key` : chaque clé est un ingrédient, avec `requires_heated` et `transfer_nbt` en option ;
-- `result` et `result_failed` (en 1.21.1, `{"id": …}` et non `{"item": …}`) ;
-- `hammering`, `tier` (`stone`, `iron`, `above_a`, `above_b` ; `iron` par défaut) ;
-- `blueprint` (liste de types), `requires_blueprint` ;
-- `has_quality`, `minimum_quality` (clé lue dans le jar : `minimumQuality`), `quality_difficulty` ;
-- `needs_minigame`, `has_polishing`, `need_quenching` ;
+**Fields of an `overgeared:forging` recipe** (serializer and official doc):
+- `pattern`, `key`: each key is an ingredient, with optional `requires_heated` and `transfer_nbt`;
+- `result` and `result_failed` (in 1.21.1, `{"id": …}` and not `{"item": …}`);
+- `hammering`, `tier` (`stone`, `iron`, `above_a`, `above_b`; `iron` by default);
+- `blueprint` (list of types), `requires_blueprint`;
+- `has_quality`, `minimum_quality` (key read in the jar: `minimumQuality`), `quality_difficulty`;
+- `needs_minigame`, `has_polishing`, `need_quenching`;
 - `category` (`TOOL_HEADS`, `ARMORS`, `misc`…), `show_notification`.
 
-**Types de plans** : config `availableToolTypes` (épée, hache, pioche, pelle, houe) et `hiddenToolTypes`. Un type caché existe mais **n'apparaît pas sur la table à dessin**, d'après le commentaire de la config. Il faut aussi la clé de langue `tooltype.overgeared.<type>`.
+**Blueprint types**: config `availableToolTypes` (sword, axe, pickaxe, shovel, hoe) and `hiddenToolTypes`. A hidden type exists but **does not appear on the drafting table**, according to the config comment. The language key `tooltype.overgeared.<type>` is also needed.
 
-Les autres réglages utiles, avec leur valeur par défaut :
-- `enableMinigame = true` ;
-- `enableBlueprintForging = true` ;
-- `ingredientsDefineQuality` (la qualité d'un ingrédient limite celle du résultat) ;
-- `maxAnvilDistance` ;
-- `enableTieredHammerForging = false`, `enableTierA = false`, `enableTierB = false` ;
-- `coolingBlockEntityBlacklist` (fourneau et haut fourneau vanilla) ;
-- `enableLootQuality = true` et ses poids ;
+Other useful settings, with their default value:
+- `enableMinigame = true`;
+- `enableBlueprintForging = true`;
+- `ingredientsDefineQuality` (an ingredient's quality limits the result's);
+- `maxAnvilDistance`;
+- `enableTieredHammerForging = false`, `enableTierA = false`, `enableTierB = false`;
+- `coolingBlockEntityBlacklist` (vanilla furnace and blast furnace);
+- `enableLootQuality = true` and its weights;
 - `failOnWellQualityChance = 0.1`, `failOnExpertQualityChance = 0.05`.
 
-### 1.6 Intégrations présentes dans le jar
+### 1.6 Integrations present in the jar
 
-| Intégration | Présente ? | Preuve |
+| Integration | Present? | Evidence |
 |---|---|---|
-| **EMI** | **Oui** : forge, taille, alliages, coulée, refroidissement, meule, empennage, table à dessin, copie de plans, moules | `compat/emi/` (30 classes, dont `OvergearedEmiPlugin`). Depuis 1.6.16, les paliers A et B sont cachés dans EMI par défaut |
-| JEI | **Non** en 1.21.1. Les clés `jei.*` du fichier de langue sont des restes. Le chapitre 06 (« plugin natif JEI dans Overgeared ») est faux, mais EMI est retenu de toute façon | aucune classe JEI ; changelog beta-v2 : « I switched over to EMI instead of JEI » |
-| KubeJS | Non (aucun plugin). Les recettes s'écrivent avec `event.custom({...})`, ou en JSON dans `kubejs/data/` | aucune classe `kubejs` |
-| Create | Non. Seuls des tags `c:` sont partagés (§2.1) | — |
-| Quark | Remplace les 5 recettes de Quark « Better Stone Tools » par tête + bâton | `data/quark/recipe/tweaks/crafting/utility/better_stone_tools/` |
-| Sable / Aeronautics | Oui (refroidissement dans l'eau sur une structure Sable) | `compat/sable/SableCompat`, jarjar `sable-companion` |
-| Polymorph, Dragon Survival | Oui (mods hors du pack) | `compat/polymorph/` |
-| Capacité d'objets (`Capabilities.ItemHandler.BLOCK`) | Exposée sur le four à alliage, le four à alliage du Nether et **les 4 enclumes** : entonnoirs, entonnoirs de Create et bras mécaniques peuvent les remplir et les vider | `ModCapabilities` |
+| **EMI** | **Yes**: forging, knapping, alloys, casting, cooling, grindstone, fletching, drafting table, blueprint copying, molds | `compat/emi/` (30 classes, including `OvergearedEmiPlugin`). Since 1.6.16, tiers A and B are hidden in EMI by default |
+| JEI | **No** in 1.21.1. The `jei.*` keys in the language file are leftovers. Chapter 06 ("native JEI plugin in Overgeared") is wrong, but EMI is retained anyway | no JEI class; beta-v2 changelog: "I switched over to EMI instead of JEI" |
+| KubeJS | No (no plugin). Recipes are written with `event.custom({...})`, or in JSON in `kubejs/data/` | no `kubejs` class |
+| Create | No. Only `c:` tags are shared (§2.1) | — |
+| Quark | Replaces Quark's 5 "Better Stone Tools" recipes with head + stick | `data/quark/recipe/tweaks/crafting/utility/better_stone_tools/` |
+| Sable / Aeronautics | Yes (cooling in water on a Sable structure) | `compat/sable/SableCompat`, jarjar `sable-companion` |
+| Polymorph, Dragon Survival | Yes (mods outside the pack) | `compat/polymorph/` |
+| Item capability (`Capabilities.ItemHandler.BLOCK`) | Exposed on the alloy furnace, the Nether alloy furnace and **the 4 anvils**: hoppers, Create funnels and mechanical arms can fill and empty them | `ModCapabilities` |
 
 ---
 
-## 2. Les liens concrets à construire
+## 2. The concrete links to build
 
-Les noms de fichiers suivent l'arborescence du chapitre 07.
+File names follow the tree of chapter 07.
 
-### 2.1 Create : qui fait quoi
+### 2.1 Create: who does what
 
-**Principe** : le **martelage reste manuel**, et c'est le mod qui l'impose. Le mini-jeu se joue côté client et la qualité vient du score (changelog beta-v9 : le mini-jeu démarre côté serveur, mais se joue côté client). Aucune machine ne peut produire une qualité. Create peut en revanche prendre en charge tout ce qui est **quantité et chaleur**.
+**Principle**: **hammering stays manual**, and the mod enforces it. The mini-game is played client-side and the quality comes from the score (beta-v9 changelog: the mini-game starts server-side, but is played client-side). No machine can produce a quality. Create can, however, take over everything that is **quantity and heat**.
 
-| Lien | Quoi | Outil |
+| Link | What | Tool |
 |---|---|---|
-| **Chauffe industrielle** | Le **traitement en masse « blasting » de Create** (ventilateur devant de la lave ou un brûleur) lit les recettes `minecraft:smelting` **et** `minecraft:blasting`. Un lingot de fer ou du fer brut devant le ventilateur devient donc un `heated_iron_ingot`, et l'acier brut un acier brut chaud. Rien à écrire. *Preuve : `AllFanProcessingTypes$BlastingType` lit `RecipeType.SMELTING` et `RecipeType.BLASTING`.* | Aucun. Pour l'interdire, recréer ces recettes de chauffe avec un id qui finit par **`_manual_only`** : Create les ignore dans toutes ses machines (`AllRecipeTypes.CAN_BE_AUTOMATED`, chaîne `_manual_only` confirmée dans le jar) |
-| **Acier en masse** | Mélangeur chauffé : 3 lingots de fer + 1 charbon → 4 aciers bruts (même rapport que le four à alliage). Avec un brûleur surchauffé, on peut sortir directement de l'acier chaud | `recipes/forge_create.js` : `event.recipes.create.mixing('4x overgeared:crude_steel', ['3x minecraft:iron_ingot','minecraft:coal']).heated()` (KubeJS Create) |
-| **Four à alliage automatisé** | Un entonnoir ou un bras mécanique nourrit le four à alliage, qui expose sa capacité d'objets | Aucun. À tester (§5) |
-| **Laiton** (plan 03 §3.4 : « d'abord à la fonderie Overgeared ») | Overgeared n'en fait pas. On ajoute une recette `overgeared:alloy_smelting` : 3 cuivres + 1 zinc → 4 `create:brass_ingot`, avec un temps de cuisson long. Le mélangeur reste la voie rapide | `event.custom({type:'overgeared:alloy_smelting', ingredients:[…], result:{id:'create:brass_ingot', count:4}, cookingtime:300})` |
-| **Plaques** | `#c:plates/iron` contient `create:iron_sheet` (tag de Create) **et** `overgeared:iron_plate` (tag d'Overgeared). Les 16 recettes de Create qui demandent `#c:plates/iron` acceptent donc déjà les plaques forgées à la main. Dans l'autre sens, les armures d'Overgeared demandent l'objet exact `overgeared:iron_plate` | Option conseillée : réécrire les 4 armures en fer, les 4 en cuivre et les 4 en acier avec `{"tag":"c:plates/iron"}` (puis copper, steel). La **presse fait les plaques** (quantité), l'enclume fait **l'armure** (qualité). `event.replaceInput({type:'overgeared:forging'}, 'overgeared:iron_plate', '#c:plates/iron')`, à vérifier : `replaceInput` doit traverser les clés de ce type personnalisé, sinon réécrire en `event.custom` |
-| **Plaques d'acier à la presse** | `create:pressing` : `#c:ingots/steel` → `overgeared:steel_plate`. Create ne le fait que pour Immersive Engineering (`compat/immersiveengineering/plate_steel.json`, condition `mod_loaded`) | `event.recipes.create.pressing('overgeared:steel_plate', '#c:ingots/steel')` |
-| **Moteur à vapeur, rails** (`progression.js`) | `#c:plates/steel` et `#c:nuggets/steel` **existent bien** (tags d'Overgeared). Les lignes du brouillon sont justes | — |
-| **Pièces critiques avec une qualité minimale** | Une forge `overgeared:forging` avec `has_quality: true` sur les objets KubeJS `fallow:rivet_forge`, `fallow:essieu_forge`, `fallow:pale_helice_forgee`… les marque du composant `overgeared:forging_quality`. Dans la recette Create ou à l'établi, l'ingrédient filtre la qualité avec l'ingrédient NeoForge **`neoforge:components`** (`{"type":"neoforge:components","items":"fallow:pale_helice_forgee","components":{"overgeared:forging_quality":"perfect"},"strict":false}`). Pour « au moins excellent », regrouper plusieurs valeurs dans `neoforge:compound` | Datapack ou `event.custom`. À vérifier : qu'EMI et l'assemblage séquencé de Create affichent et acceptent ces ingrédients (déduit : Create 6 lit le codec vanilla `Ingredient`, qui comprend les ingrédients NeoForge) |
-| **Déployeur sur l'enclume** | Une recette sans qualité ni mini-jeu (plaques, seau) avance au clic droit au marteau (`increaseForgingProgress`). Un déployeur muni d'un marteau pourrait donc forger les plaques tout seul | À tester. S'il faut l'interdire : `BlockEvents.rightClicked` en KubeJS, annuler si `event.player.isFake()` et que le bloc est dans `#overgeared:smithing_anvil` |
-| **Outils fabriqués par Create** | Aucune recette de Create ne fabrique d'outil en métal (analyse du jar Create 6.0.10 : seulement clé à molette, lunettes, scaphandre en cuivre, épée en carton) | — |
+| **Industrial heating** | Create's **"blasting" bulk processing** (fan in front of lava or a burner) reads the `minecraft:smelting` **and** `minecraft:blasting` recipes. An iron ingot or raw iron in front of the fan therefore becomes a `heated_iron_ingot`, and crude steel a hot crude steel. Nothing to write. *Evidence: `AllFanProcessingTypes$BlastingType` reads `RecipeType.SMELTING` and `RecipeType.BLASTING`.* | None. To forbid it, recreate these heating recipes with an id ending in **`_manual_only`**: Create ignores them in all its machines (`AllRecipeTypes.CAN_BE_AUTOMATED`, `_manual_only` string confirmed in the jar) |
+| **Steel in bulk** | Heated mixer: 3 iron ingots + 1 coal → 4 crude steel (same ratio as the alloy furnace). With a superheated burner, hot steel can come out directly | `recipes/forge_create.js`: `event.recipes.create.mixing('4x overgeared:crude_steel', ['3x minecraft:iron_ingot','minecraft:coal']).heated()` (KubeJS Create) |
+| **Automated alloy furnace** | A hopper or mechanical arm feeds the alloy furnace, which exposes its item capability | None. To test (§5) |
+| **Brass** (plan 03 §3.4: "first at the Overgeared foundry") | Overgeared does not make any. An `overgeared:alloy_smelting` recipe is added: 3 copper + 1 zinc → 4 `create:brass_ingot`, with a long cooking time. The mixer remains the fast route | `event.custom({type:'overgeared:alloy_smelting', ingredients:[…], result:{id:'create:brass_ingot', count:4}, cookingtime:300})` |
+| **Plates** | `#c:plates/iron` contains `create:iron_sheet` (Create tag) **and** `overgeared:iron_plate` (Overgeared tag). The 16 Create recipes that require `#c:plates/iron` therefore already accept hand-forged plates. In the other direction, Overgeared's armors require the exact item `overgeared:iron_plate` | Recommended option: rewrite the 4 iron, 4 copper and 4 steel armors with `{"tag":"c:plates/iron"}` (then copper, steel). The **press makes the plates** (quantity), the anvil makes the **armor** (quality). `event.replaceInput({type:'overgeared:forging'}, 'overgeared:iron_plate', '#c:plates/iron')`, to check: `replaceInput` must traverse the keys of this custom type, otherwise rewrite as `event.custom` |
+| **Steel plates at the press** | `create:pressing`: `#c:ingots/steel` → `overgeared:steel_plate`. Create only does this for Immersive Engineering (`compat/immersiveengineering/plate_steel.json`, condition `mod_loaded`) | `event.recipes.create.pressing('overgeared:steel_plate', '#c:ingots/steel')` |
+| **Steam engine, rails** (`progression.js`) | `#c:plates/steel` and `#c:nuggets/steel` **do exist** (Overgeared tags). The draft's lines are correct | — |
+| **Critical parts with a minimum quality** | An `overgeared:forging` recipe with `has_quality: true` on the KubeJS items `fallow:rivet_forge`, `fallow:essieu_forge`, `fallow:pale_helice_forgee`… marks them with the `overgeared:forging_quality` component. In the Create or crafting table recipe, the ingredient filters the quality with the NeoForge ingredient **`neoforge:components`** (`{"type":"neoforge:components","items":"fallow:pale_helice_forgee","components":{"overgeared:forging_quality":"perfect"},"strict":false}`). For "at least excellent", group several values in `neoforge:compound` | Datapack or `event.custom`. To check: that EMI and Create's sequenced assembly display and accept these ingredients (deduced: Create 6 reads the vanilla `Ingredient` codec, which understands NeoForge ingredients) |
+| **Deployer on the anvil** | A recipe without quality or mini-game (plates, bucket) advances with a hammer right-click (`increaseForgingProgress`). A deployer holding a hammer could therefore forge plates on its own | To test. If it must be forbidden: `BlockEvents.rightClicked` in KubeJS, cancel if `event.player.isFake()` and the block is in `#overgeared:smithing_anvil` |
+| **Tools made by Create** | No Create recipe makes a metal tool (analysis of the Create 6.0.10 jar: only wrench, goggles, copper diving gear, cardboard sword) | — |
 
 ### 2.2 Create Ore Excavation
 
-Le mod n'est pas encore dans le pack : identifiants à lire dans son jar au moment de l'ajout.
-- La foreuse peut exiger une tête forgée : `overgeared:steel_pickaxe_head` filtrée par qualité avec `neoforge:components` (§2.1), plutôt qu'un nouvel objet `fallow:tete_foreuse_forgee`. On réutilise ainsi la vraie tête de pioche, et sa qualité.
-- Déduit : si les foreuses de COE s'usent, une foreuse issue d'une forge `has_quality: true` gagne le **bonus de durabilité** de sa qualité. Le mixin `IItemStackExtensionMixin` agit sur tout objet qui s'use et porte le composant. À tester.
-- Le minerai brut extrait passe ensuite par la chaîne normale : haut fourneau ou ventilateur, puis enclume.
+The mod is not yet in the pack: identifiers to be read in its jar when it is added.
+- The drill can require a forged head: `overgeared:steel_pickaxe_head` filtered by quality with `neoforge:components` (§2.1), rather than a new item `fallow:tete_foreuse_forgee`. The real pickaxe head, and its quality, are thus reused.
+- Deduced: if COE drills wear out, a drill coming from a `has_quality: true` forging gains the **durability bonus** of its quality. The `IItemStackExtensionMixin` mixin acts on any item that wears out and carries the component. To test.
+- The extracted raw ore then goes through the normal chain: blast furnace or fan, then anvil.
 
-### 2.3 Create Aeronautics et Sable
+### 2.3 Create Aeronautics and Sable
 
-- La compatibilité est dans le mod (1.6.13 et 1.6.14 : on peut refroidir dans l'eau ou dans un chaudron posé sur une structure Sable).
-- Les pales d'hélice « qualité excellente » du chapitre 03 se font comme les pièces critiques (§2.1).
-- Risque : l'enclume de forgeron **tombe** comme une enclume. Sur un engin assemblé, voir si elle chute ou blesse (§5).
+- Compatibility is in the mod (1.6.13 and 1.6.14: cooling in water or in a cauldron placed on a Sable structure is possible).
+- The "excellent quality" propeller blades of chapter 03 are made like critical parts (§2.1).
+- Risk: the smith's anvil **falls** like an anvil. On an assembled contraption, check whether it drops or injures (§5).
 
-### 2.4 La Lanterne de clairière (palier 32, §10.3)
+### 2.4 The Clearing Lantern (tier 32, §10.3)
 
-On remplace « pièces forgées chez Overgeared » par une vraie recette de forge qui donne directement le bloc KubeJS :
-- **Startup** : le bloc `fallow:lanterne_de_clairiere` est déjà dans `clairieres.js`.
-- **Config** `overgeared-common.toml` :
-  - `availableToolTypes = ["sword","axe","pickaxe","shovel","hoe","lanterne"]` ;
-  - `hiddenToolTypes = ["lanterne"]`, pour qu'aucune table à dessin ne la produise.
-- **Langue** : `kubejs/assets/overgeared/lang/fr_fr.json` → `"tooltype.overgeared.lanterne": "Lanterne de clairière"`.
-- **Recette** (`recipes/forge_fallow.js`, `event.custom`) :
+"Parts forged at Overgeared" is replaced by a real forging recipe that directly gives the KubeJS block:
+- **Startup**: the block `fallow:lanterne_de_clairiere` is already in `clairieres.js`.
+- **Config** `overgeared-common.toml`:
+  - `availableToolTypes = ["sword","axe","pickaxe","shovel","hoe","lanterne"]`;
+  - `hiddenToolTypes = ["lanterne"]`, so that no drafting table produces it.
+- **Language**: `kubejs/assets/overgeared/lang/fr_fr.json` → `"tooltype.overgeared.lanterne": "Lanterne de clairière"`.
+- **Recipe** (`recipes/forge_fallow.js`, `event.custom`):
 
 ```json
 {
@@ -221,19 +221,19 @@ On remplace « pièces forgées chez Overgeared » par une vraie recette de forg
 }
 ```
 
-- **Le plan** : `zoo.js` (§10.10, après 25 espèces) donne un `overgeared:blueprint` avec le composant `overgeared:blueprint_data = {quality:"poor", tool_type:"lanterne", uses:0}`. On peut aussi le cacher dans une ruine (§2.5).
-- **Ce que le joueur ressent** : une enclume de forgeron (31 fers), de l'acier, un mini-jeu réussi, un plan gagné. C'est un vrai palier.
+- **The blueprint**: `zoo.js` (§10.10, after 25 species) gives an `overgeared:blueprint` with the component `overgeared:blueprint_data = {quality:"poor", tool_type:"lanterne", uses:0}`. It can also be hidden in a ruin (§2.5).
+- **What the player feels**: a smith's anvil (31 iron), steel, a successful mini-game, a blueprint earned. It is a real tier.
 
-### 2.5 Les plans trouvés dans les ruines (§10.10)
+### 2.5 Blueprints found in the ruins (§10.10)
 
-Proposition : **séparer** deux familles de plans.
-- **Ce qui se forge** (pièces critiques, lanterne, têtes spéciales) : **plans d'Overgeared de types cachés**, un type par plan : `atelier`, `rail`, `aerostat`, `helice`, `lanterne`…
-  - La recette `overgeared:forging` les exige (`requires_blueprint: true`).
-  - Le plan **fixe la qualité maximale**, ce qui récompense l'exploration, et il **monte de qualité à l'usage**.
-  - Il **se copie** (plan vierge + plan) en perdant un niveau : on peut le partager entre amis.
-  - Les machines Create qui demandent ces pièces sont verrouillées **en cascade**. On n'a plus besoin de `doLimitedCrafting`, de `recipe give/take` ni de couper « Automatic Recipe Unlock » de Quark.
-- **Ce qui ne se forge pas** : `plans_ingenieur.js` ne reste utile que si une recette d'établi doit être verrouillée sans pièce forgée.
-- **Butin** : LootJS (`loot/butin.js`), par exemple :
+Proposal: **separate** two families of blueprints.
+- **What is forged** (critical parts, lantern, special heads): **Overgeared blueprints of hidden types**, one type per blueprint: `atelier`, `rail`, `aerostat`, `helice`, `lanterne`…
+  - The `overgeared:forging` recipe requires them (`requires_blueprint: true`).
+  - The blueprint **sets the maximum quality**, which rewards exploration, and it **rises in quality with use**.
+  - It **can be copied** (blank blueprint + blueprint) while losing a level: it can be shared among friends.
+  - The Create machines that require these parts are locked **in cascade**. There is no more need for `doLimitedCrafting`, `recipe give/take` or disabling Quark's "Automatic Recipe Unlock".
+- **What is not forged**: `plans_ingenieur.js` remains useful only if a crafting table recipe must be locked without a forged part.
+- **Loot**: LootJS (`loot/butin.js`), for example:
 
 ```js
 LootJS.lootTables(event => {
@@ -244,212 +244,212 @@ LootJS.lootTables(event => {
 })
 ```
 
-La syntaxe exacte de LootJS 3 est à valider. Repli sans LootJS : un `neoforge:add_table` qui pointe vers une petite table avec `minecraft:set_components`. Les tables de NML existent (lues dans le jar 1.5.12) :
-- `nomansland:chests/small_dungeon_core`, `dungeon_garbage`, `dungeon_kitchen`, `redstone_parts`, `water_well` ;
-- `alchemist_pot_*`, `ancient_pot_cave`, `sniffer_monument` ;
+The exact LootJS 3 syntax is to be validated. Fallback without LootJS: a `neoforge:add_table` pointing to a small table with `minecraft:set_components`. The NML tables exist (read in the 1.5.12 jar):
+- `nomansland:chests/small_dungeon_core`, `dungeon_garbage`, `dungeon_kitchen`, `redstone_parts`, `water_well`;
+- `alchemist_pot_*`, `ancient_pot_cave`, `sniffer_monument`;
 - `nomansland:archaeology/remains_dungeon`.
 
-**Le gabarit d'amélioration en diamant** doit lui aussi entrer dans ces tables. Overgeared ne l'ajoute qu'aux structures vanilla, dont plusieurs sont retirées par le plan : strongholds (décision 0004) et donjons (`remove_dungeons.json`).
+**The diamond upgrade template** must also enter these tables. Overgeared only adds it to vanilla structures, several of which are removed by the plan: strongholds (decision 0004) and dungeons (`remove_dungeons.json`).
 
-### 2.6 Outils et armures des autres mods : par la forge ou pas ?
+### 2.6 Tools and armor from other mods: through the forge or not?
 
-Je n'ai regardé que les recettes qui donnent un outil, une arme ou une armure (script de scan, jars du pack).
+Only the recipes that yield a tool, weapon or armor were examined (scan script, pack jars).
 
-| Mod | Objet | Ce qui se passe | Proposition |
+| Mod | Item | What happens | Proposal |
 |---|---|---|---|
-| Kaleidoscope Cookery | couteaux de cuisine en fer, en or et en diamant, `kitchen_shovel`, bottes et jambières de fermier (fer) | à l'établi, avec des lingots | **À la forge** : retirer la recette d'établi et ajouter une `overgeared:forging` (fer chaud + bâton, `has_quality: true`). Les couteaux sont sans doute des `TieredItem` : ils prendraient alors la qualité et ses dégâts (déduit). Pour le diamant, garder l'établi avec un couteau en fer forgé au centre, ou une table de forgeron. C'est le lien le plus visible entre la cuisine et la forge |
-| Mowzie's Mobs | `naga_fang_dagger` (fer + croc de naga) ; boss : hache et casque du Wroughtnaut, Sol Visage… | établi ; butin des boss par tables d'entités | Dague : laisser à l'établi (le croc est le trophée) ou la forger, au choix. Boss : ils reçoivent **déjà** une qualité au hasard par le modificateur global. Les ajouter à `overgeared:quality_blacklist` si on ne veut pas d'un « Poorly Forged » sur un trophée de boss |
-| Alex's Mobs | coiffe d'élan (fer), plastron de crocodile, bottes de géocoucou, bouclier des profondeurs… | établi, à partir de morceaux de créatures | Laisser : ce sont des trophées, pas du travail du métal |
-| Friends & Foes | couronne du Wildfire ; récompense du Rascal (outils vanilla) | établi ; table de butin | La récompense prend une qualité toute seule. Rien à faire |
-| Cold Sweat | armures en fourrure de chèvre, en peau de hoglin, en caméléon | établi, sans métal | Laisser |
-| Hybrid Aquatic | outils en corail et en coquillage, **scaphandre en cuivre** | établi | Outils : laisser. Scaphandre : à la forge si on veut être cohérent avec le cuivre (optionnel) |
-| Create | casque et bottes de plongée en cuivre | établi | Laisser (équipement d'atelier) ou forger, au choix |
-| Critters & Companions | armure de libellule en fer, en or et en diamant | établi | Laisser (armure d'animal) |
-| Adorable Hamster Pets | armures de hamster par gabarits | établi et table de forgeron | Laisser |
-| Companions | équipement « crystallized blood » (à partir de netherite), chapeau de mage (à partir d'un casque en diamant), `netherite_dagger` | établi | Avec le Nether fermé, ce qui demande de la netherite est **inaccessible**. Le cacher dans EMI ou le réassigner. Le chapeau de mage passe déjà par un casque en diamant, donc par la forge |
-| Quark | marteau expérimental | catégorie expérimentale coupée | — |
+| Kaleidoscope Cookery | iron, gold and diamond kitchen knives, `kitchen_shovel`, farmer's boots and leggings (iron) | at the crafting table, with ingots | **At the forge**: remove the crafting table recipe and add an `overgeared:forging` (hot iron + stick, `has_quality: true`). The knives are probably `TieredItem`s: they would then take the quality and its damage (deduced). For diamond, keep the crafting table with a forged iron knife in the center, or a smithing table. This is the most visible link between cooking and the forge |
+| Mowzie's Mobs | `naga_fang_dagger` (iron + naga fang); bosses: Wroughtnaut axe and helmet, Sol Visage… | crafting table; boss loot through entity tables | Dagger: leave at the crafting table (the fang is the trophy) or forge it, as desired. Bosses: they **already** receive a random quality through the global modifier. Add them to `overgeared:quality_blacklist` if a "Poorly Forged" on a boss trophy is unwanted |
+| Alex's Mobs | moose headgear (iron), crocodile chestplate, roadrunner boots, depths shield… | crafting table, from creature parts | Leave: these are trophies, not metalwork |
+| Friends & Foes | Wildfire crown; Rascal reward (vanilla tools) | crafting table; loot table | The reward takes a quality on its own. Nothing to do |
+| Cold Sweat | goat fur, hoglin hide and chameleon armors | crafting table, no metal | Leave |
+| Hybrid Aquatic | coral and shell tools, **copper diving gear** | crafting table | Tools: leave. Diving gear: at the forge if consistency with copper is wanted (optional) |
+| Create | copper diving helmet and boots | crafting table | Leave (workshop equipment) or forge, as desired |
+| Critters & Companions | dragonfly armor in iron, gold and diamond | crafting table | Leave (animal armor) |
+| Adorable Hamster Pets | hamster armors by templates | crafting table and smithing table | Leave |
+| Companions | "crystallized blood" equipment (from netherite), mage hat (from a diamond helmet), `netherite_dagger` | crafting table | With the Nether closed, anything requiring netherite is **inaccessible**. Hide it in EMI or reassign it. The mage hat already goes through a diamond helmet, hence through the forge |
+| Quark | experimental hammer | experimental category disabled | — |
 
-**Règle proposée** : passent par la forge les armes, les outils et les armures **en métal destinés au joueur**. Les trophées de créatures, les armures d'animaux et les vêtements restent à l'établi. Leur qualité, quand ils en ont une, vient du butin.
+**Proposed rule**: **metal** weapons, tools and armor **intended for the player** go through the forge. Creature trophies, animal armor and clothing stay at the crafting table. Their quality, when they have one, comes from loot.
 
 ### 2.7 FallingTree
 
-- Le jar de FallingTree 1.21.1.11 détecte les haches par `instanceof AxeItem` (`ItemWrapper.isAxe`).
-- Les haches d'Overgeared (`steel_axe`, `copper_axe`) sont des **`AxeItem` vanilla** (`ModItems` : 2 × `new AxeItem`), et les haches vanilla en fer ou en or viennent de têtes forgées. **Toutes comptent**, sans tag.
-- Lien automatique : chaque bûche coûte de la durabilité, et la qualité multiplie la durabilité. Une hache « Masterwork » abat plus d'arbres (déduit).
-- Point à tester : une hache à l'état « cassé » d'Overgeared.
+- The FallingTree 1.21.1.11 jar detects axes by `instanceof AxeItem` (`ItemWrapper.isAxe`).
+- Overgeared's axes (`steel_axe`, `copper_axe`) are **vanilla `AxeItem`s** (`ModItems`: 2 × `new AxeItem`), and vanilla iron or gold axes come from forged heads. **They all count**, without a tag.
+- Automatic link: each log costs durability, and quality multiplies durability. A "Masterwork" axe fells more trees (deduced).
+- Point to test: an axe in Overgeared's "broken" state.
 
-### 2.8 Cold Sweat : la forge réchauffe
+### 2.8 Cold Sweat: the forge warms
 
-- **Haut fourneau, fourneau, fumoir allumés** : Cold Sweat les gère déjà (`FurnaceBlockTemp` vise `AbstractFurnaceBlock` avec `LIT`). Rien à faire.
-- **Four à alliage et fourneau de coulée** : ils ne dérivent pas de `AbstractFurnaceBlock` (classe `BaseEntityBlock`), mais leur bloc a l'état `lit` (blockstate). Deux façons de les ajouter :
-  - en datapack, dans `data/fallow/cold_sweat/block/block_temp/forge.json` (dossier de registre `block/block_temp` confirmé dans `ModRegistries`). Champs : `block` (avec l'état `lit: true`), `temperature`, `range`, `max_effect`, `fade`, `units`. Le format exact du sous-objet `block` est à recopier du wiki de Cold Sweat ;
-  - en KubeJS : `ColdSweatEvents.registries(e => e.addBlockTemperature(temp, 'F', b => b.blocks('overgeared:alloy_furnace','overgeared:casting_furnace').state('lit', true).range(5).maxEffect(…)))`. La signature `addBlockTemperature(double, String, Consumer)` et le constructeur sont lus dans `ModRegistriesEventJS` et `BlockTempBuilderJS`.
-- **Lingot chaud tenu en main** : registre `item/item_temp`. Le tag `#overgeared:heated_metals` peut réchauffer un peu le joueur qui le porte. C'est un joli détail : forger au froid, l'hiver, devient un abri.
-- **Armures en acier et en cuivre** : Cold Sweat ne les connaît pas. Les ajouter dans `item/insulator` comme l'armure en fer (à régler).
+- **Lit blast furnace, furnace, smoker**: Cold Sweat already handles them (`FurnaceBlockTemp` targets `AbstractFurnaceBlock` with `LIT`). Nothing to do.
+- **Alloy furnace and casting furnace**: they do not derive from `AbstractFurnaceBlock` (class `BaseEntityBlock`), but their block has the `lit` state (blockstate). Two ways to add them:
+  - in a datapack, in `data/fallow/cold_sweat/block/block_temp/forge.json` (registry folder `block/block_temp` confirmed in `ModRegistries`). Fields: `block` (with the state `lit: true`), `temperature`, `range`, `max_effect`, `fade`, `units`. The exact format of the `block` sub-object is to be copied from the Cold Sweat wiki;
+  - in KubeJS: `ColdSweatEvents.registries(e => e.addBlockTemperature(temp, 'F', b => b.blocks('overgeared:alloy_furnace','overgeared:casting_furnace').state('lit', true).range(5).maxEffect(…)))`. The signature `addBlockTemperature(double, String, Consumer)` and the constructor are read in `ModRegistriesEventJS` and `BlockTempBuilderJS`.
+- **Hot ingot held in hand**: registry `item/item_temp`. The tag `#overgeared:heated_metals` can warm the player carrying it a little. A nice detail: forging in the cold, in winter, becomes a refuge.
+- **Steel and copper armor**: Cold Sweat does not know them. Add them to `item/insulator` like iron armor (to tune).
 
-### 2.9 Supplementaries et Amendments
+### 2.9 Supplementaries and Amendments
 
-- **Le soufflet** (activé dans `supplementaries-common.toml`) accélère les blocs du tag `supplementaries:bellows_tickable`, qui contient déjà le haut fourneau.
-  - Ajouter `overgeared:alloy_furnace` et `overgeared:casting_furnace` à ce tag en datapack. Le soufflet devient la pièce visible de la forge (à tester : `tickFurnaces` doit appeler le ticker d'un bloc d'un autre mod).
-  - Source : `data/supplementaries/tags/block/bellows_tickable.json`, `BellowsBlockTile.tickFurnaces`.
-- **Le robinet** remplit le chaudron de trempe. Mais le chaudron exige des **plaques d'acier** forgées. Avant cela, on trempe dans un bloc d'eau.
-- **Piédestal et étagère** : on y expose les pièces de maître. C'est la vitrine du forgeron.
-- **Amendments** dessine les lanternes vanilla en 3D. Déduit : un bloc KubeJS de type simple ne recevra pas ce rendu. Si la Lanterne de clairière doit se balancer comme une lanterne, il faut un bloc KubeJS qui hérite de `LanternBlock`. À vérifier dans les types de blocs de KubeJS 2101, sinon le modèle reste statique.
+- **The bellows** (enabled in `supplementaries-common.toml`) speed up the blocks of the tag `supplementaries:bellows_tickable`, which already contains the blast furnace.
+  - Add `overgeared:alloy_furnace` and `overgeared:casting_furnace` to this tag in a datapack. The bellows become the visible piece of the forge (to test: `tickFurnaces` must call the ticker of a block from another mod).
+  - Source: `data/supplementaries/tags/block/bellows_tickable.json`, `BellowsBlockTile.tickFurnaces`.
+- **The faucet** fills the quenching cauldron. But the cauldron requires forged **steel plates**. Before that, quenching is done in a block of water.
+- **Pedestal and shelf**: masterpieces are displayed there. This is the smith's showcase.
+- **Amendments** draws vanilla lanterns in 3D. Deduced: a simple-type KubeJS block will not receive this rendering. If the Clearing Lantern must sway like a lantern, a KubeJS block inheriting from `LanternBlock` is needed. To check among KubeJS 2101 block types, otherwise the model stays static.
 
 ### 2.10 Traveler's Backpack
 
-- Les emplacements d'outils acceptent `travelersbackpack:acceptable_tools` = `#c:tools` + pioche en diamant. Overgeared range dans `c:tools` ses outils en acier et en cuivre, ses **marteaux** et ses **pinces**. Tout entre, sans réglage.
-- **Amélioration « haut fourneau » du sac** : elle permet de chauffer du fer **en voyage**. Il faut choisir :
-  - soit c'est voulu (forge de campagne) ;
-  - soit on l'interdit, en retirant sa recette ou en l'empêchant d'accepter le fer.
+- The tool slots accept `travelersbackpack:acceptable_tools` = `#c:tools` + diamond pickaxe. Overgeared puts its steel and copper tools, its **hammers** and its **tongs** in `c:tools`. Everything fits, without tuning.
+- **"Blast furnace" upgrade** of the backpack: it allows heating iron **while traveling**. A choice must be made:
+  - either it is intended (field forge);
+  - or it is forbidden, by removing its recipe or preventing it from accepting iron.
 
-  Le refroidissement dans un conteneur (mixin `ContainerCoolingMixin`) fera refroidir les lingots dans le sac (déduit).
+  Cooling in a container (`ContainerCoolingMixin` mixin) will make ingots cool in the backpack (deduced).
 
 ### 2.11 Quark
 
-- Overgeared remplace les recettes « Better Stone Tools » de Quark. Rien à faire.
-- **Variant Furnaces** (activé) : les fourneaux en ardoise des abîmes et en pierre noire ont leur propre type d'entité de bloc. Il manque peut-être dans `coolingBlockEntityBlacklist`, qui ne liste que `minecraft:furnace` et `minecraft:blast_furnace` : un lingot de cuivre chaud refroidirait dans le fourneau. Ajouter son id dans la config, à lire en jeu.
-- **Automatic Tool Restock** (que le §11.3 veut activer) : avec le système « cassé » d'Overgeared, l'outil à 0 de durabilité **ne disparaît pas toujours**. Le réapprovisionnement, qui se déclenche quand l'outil casse, risque de ne pas suivre (§5).
-- **Automatic Recipe Unlock** : inutile à couper si on suit le §2.5 (plans d'Overgeared).
+- Overgeared replaces Quark's "Better Stone Tools" recipes. Nothing to do.
+- **Variant Furnaces** (enabled): the deepslate and blackstone furnaces have their own block entity type. They may be missing from `coolingBlockEntityBlacklist`, which lists only `minecraft:furnace` and `minecraft:blast_furnace`: a hot copper ingot would cool in the furnace. Add its id to the config, to be read in game.
+- **Automatic Tool Restock** (which §11.3 wants to enable): with Overgeared's "broken" system, the tool at 0 durability **does not always disappear**. The restock, which triggers when the tool breaks, may not follow (§5).
+- **Automatic Recipe Unlock**: no need to disable it if §2.5 is followed (Overgeared blueprints).
 
 ### 2.12 EMI
 
-- Natif (§1.6). Les recettes ajoutées par datapack ou `event.custom` du même type s'affichent toutes seules : le plugin lit le gestionnaire de recettes par type (déduit).
-- Cacher dans EMI ce qui n'existe pas dans Fallow : netherite, four à alliage du Nether, moule du Nether, outils en diamant à l'établi (recettes d'air).
-- Réglage : `kubejs/client_scripts`, `RecipeViewerEvents.removeEntries` (KubeJS 2101), à valider.
+- Native (§1.6). Recipes added by datapack or `event.custom` of the same type display on their own: the plugin reads the recipe manager by type (deduced).
+- Hide in EMI what does not exist in Fallow: netherite, Nether alloy furnace, Nether mold, diamond tools at the crafting table (air recipes).
+- Setting: `kubejs/client_scripts`, `RecipeViewerEvents.removeEntries` (KubeJS 2101), to validate.
 
-### 2.13 Sons, Particular, Subtle Effects : les étincelles
+### 2.13 Sounds, Particular, Subtle Effects: the sparks
 
-- Les coups de marteau d'Overgeared font jaillir des particules **`CRIT`** : des étoiles blanches, comme un coup critique. Ce n'est pas « Realism Craft ». *Preuve : `ParticleUtils`, `BaseSmithingAnvilBlock` ne citent que `ParticleTypes.CRIT` ; le métal chaud fume (`SMOKE`) ; les fours à alliage font flamme et fumée.*
-- Subtle Effects a « Anvil Use Particles », « Grindstone Use Particles » et « Smithing Table Use Particles ». Déduit : ces options suivent les usages vanilla (le menu de l'enclume, le menu de la meule), pas le martelage ni le polissage d'Overgeared, qui passent par un paquet réseau et un clic sur le bloc. Les **étincelles de fourneau** (`furnaceSparks`) marchent sur le haut fourneau vanilla, donc sur la forge.
-- KubeJS ne peut pas intercepter les coups du mini-jeu : ils passent par le paquet `PacketSendCounterC2SPacket`, pas par un clic sur le bloc.
-- **Petit mod custom (optionnel)** : un mixin client sur la création des particules de l'enclume remplacerait `CRIT` par des étincelles (`minecraft:lava`, `small_flame`) et des escarbilles, et pourrait jouer un son du mod Sounds. Une cinquantaine de lignes. C'est **le seul lien qui demande du code**.
-- Polytone pourrait recolorer `CRIT` en orange, mais **partout**, y compris en combat. À éviter.
-- Sounds (IMB11) : aucun conflit attendu. Overgeared a ses propres sons (`overgeared:anvil_hit`, `forging_complete`, `forging_failed`), que Sounds ne touche pas.
+- Overgeared's hammer blows make **`CRIT`** particles spurt: white stars, like a critical hit. This is not "Realism Craft". *Evidence: `ParticleUtils`, `BaseSmithingAnvilBlock` cite only `ParticleTypes.CRIT`; hot metal smokes (`SMOKE`); the alloy furnaces produce flame and smoke.*
+- Subtle Effects has "Anvil Use Particles", "Grindstone Use Particles" and "Smithing Table Use Particles". Deduced: these options follow vanilla uses (the anvil menu, the grindstone menu), not Overgeared's hammering or polishing, which go through a network packet and a click on the block. The **furnace sparks** (`furnaceSparks`) work on the vanilla blast furnace, hence on the forge.
+- KubeJS cannot intercept the mini-game blows: they go through the packet `PacketSendCounterC2SPacket`, not through a click on the block.
+- **Small custom mod (optional)**: a client mixin on the creation of the anvil's particles would replace `CRIT` with sparks (`minecraft:lava`, `small_flame`) and embers, and could play a sound from the Sounds mod. About fifty lines. It is **the only link that requires code**.
+- Polytone could recolor `CRIT` to orange, but **everywhere**, including in combat. To avoid.
+- Sounds (IMB11): no conflict expected. Overgeared has its own sounds (`overgeared:anvil_hit`, `forging_complete`, `forging_failed`), which Sounds does not touch.
 
-### 2.14 Visual Workbench et Easy Anvils
+### 2.14 Visual Workbench and Easy Anvils
 
-- **Visual Workbench** (jar 21.1.2) : il convertit le bloc d'établi en son propre bloc à inventaire (`BlockConversionHandler`, `CraftingTableWithInventoryBlock`). Overgeared ne dépend pas du bloc d'établi : la table à dessin se fabrique avec l'**objet** `minecraft:crafting_table`, qui ne change pas. **Pas de conflit.**
-- **Easy Anvils** : **conflit réel** (§3.1).
+- **Visual Workbench** (jar 21.1.2): it converts the crafting table block into its own inventory block (`BlockConversionHandler`, `CraftingTableWithInventoryBlock`). Overgeared does not depend on the crafting table block: the drafting table is crafted with the **item** `minecraft:crafting_table`, which does not change. **No conflict.**
+- **Easy Anvils**: **real conflict** (§3.1).
 
-### 2.15 Ce qu'il faut traduire et documenter
+### 2.15 What to translate and document
 
-- `kubejs/assets/overgeared/lang/fr_fr.json` : les 294 clés de `en_us.json`, plus les types de plans cachés.
-- Le carnet du colon (Modonomicon), chapitre « Forge » :
-  - le caillou ;
-  - l'enclume de pierre ;
-  - le marteau de cuivre ;
-  - le fer qui exige une pioche en cuivre ;
-  - le haut fourneau, les pinces, la trempe, la meule ;
-  - l'enclume de forgeron ;
-  - l'acier ;
-  - les plans.
+- `kubejs/assets/overgeared/lang/fr_fr.json`: the 294 keys of `en_us.json`, plus the hidden blueprint types.
+- The settler's notebook (Modonomicon), "Forge" chapter:
+  - the pebble;
+  - the stone anvil;
+  - the copper hammer;
+  - iron requiring a copper pickaxe;
+  - the blast furnace, tongs, quenching, the grindstone;
+  - the smith's anvil;
+  - steel;
+  - blueprints.
 
 ---
 
-## 3. Conflits et risques
+## 3. Conflicts and risks
 
 ### 3.1 Easy Anvils (§11.3)
 
-- Easy Anvils 21.1.0 **remplace chaque bloc `AnvilBlock`** par une copie à inventaire, enregistrée sous `easyanvils:<namespace>/<chemin>`, donc `easyanvils:minecraft/anvil`. L'objet d'enclume vanilla pose ensuite ce nouveau bloc, et les enclumes déjà posées sont converties dès qu'on les utilise. *Preuve : `BlockConversionHandler.onRegistryEntryAdded` (`instanceof AnvilBlock`, id construit avec `"\u0001/\u0001"`), `onUseBlock`, `AnvilWithInventoryBlock`.*
-- Or **Overgeared ne transforme en enclume de forgeron que les blocs du tag `overgeared:iron_anvil_bases` = `minecraft:anvil`**. Avec Easy Anvils, le joueur pose une enclume, la frappe au marteau… et rien ne se passe. **Il ne peut plus obtenir l'enclume de forgeron.**
-- Correctif possible : ajouter `easyanvils:minecraft/anvil` au tag (datapack). Restent deux inconnues : quel mod garde le clic droit accroupi avec un marteau, et ce que deviennent les objets stockés dans l'enclume d'Easy Anvils quand Overgeared remplace le bloc.
-- **Ce qu'Easy Anvils apporte est déjà dans Overgeared** :
-  - l'enclume de forgeron montre déjà ses objets en 3D (`SmithingAnvilBlockEntityRenderer`) ;
-  - la réparation passe par la meule.
+- Easy Anvils 21.1.0 **replaces every `AnvilBlock`** with an inventory copy, registered under `easyanvils:<namespace>/<path>`, hence `easyanvils:minecraft/anvil`. The vanilla anvil item then places this new block, and already-placed anvils are converted as soon as they are used. *Evidence: `BlockConversionHandler.onRegistryEntryAdded` (`instanceof AnvilBlock`, id built with `"\u0001/\u0001"`), `onUseBlock`, `AnvilWithInventoryBlock`.*
+- Yet **Overgeared only turns into a smith's anvil the blocks of the tag `overgeared:iron_anvil_bases` = `minecraft:anvil`**. With Easy Anvils, the player places an anvil, strikes it with a hammer… and nothing happens. **They can no longer obtain the smith's anvil.**
+- Possible fix: add `easyanvils:minecraft/anvil` to the tag (datapack). Two unknowns remain: which mod keeps the sneak right-click with a hammer, and what happens to the items stored in Easy Anvils' anvil when Overgeared replaces the block.
+- **What Easy Anvils brings is already in Overgeared**:
+  - the smith's anvil already shows its items in 3D (`SmithingAnvilBlockEntityRenderer`);
+  - repair goes through the grindstone.
 
-  Il ne resterait que le renommage et la fin du « trop cher » sur l'enclume vanilla, qui n'est plus qu'une étape vers l'enclume de forgeron.
-- **Recommandation : retirer Easy Anvils du §11.3.** Si on le garde, ajouter le tag et passer un test dédié.
-- L'enclume de forgeron d'Overgeared n'est pas une `AnvilBlock` (elle hérite de `BaseEntityBlock`) : Easy Anvils ne la touche pas.
+  Only renaming and the end of "too expensive" on the vanilla anvil would remain, which is now only a step toward the smith's anvil.
+- **Recommendation: remove Easy Anvils from §11.3.** If it is kept, add the tag and run a dedicated test.
+- Overgeared's smith's anvil is not an `AnvilBlock` (it inherits from `BaseEntityBlock`): Easy Anvils does not touch it.
 
-### 3.2 Le Nether fermé (décision 10.12-9)
+### 3.2 The closed Nether (decision 10.12-9)
 
-Plusieurs pièces deviennent impossibles à fabriquer :
-- **four à alliage du Nether** (briques du Nether) ;
-- **fourneau de coulée** (briques du Nether rouges + diamant) ;
-- **moule du Nether** ;
-- **alliage de netherite** et **lingot de netherite** ;
-- l'équipement « crystallized blood » de Companions.
+Several pieces become impossible to craft:
+- **Nether alloy furnace** (Nether bricks);
+- **casting furnace** (red Nether bricks + diamond);
+- **Nether mold**;
+- **netherite alloy** and **netherite ingot**;
+- Companions' "crystallized blood" equipment.
 
-Ce qu'on fait :
-- les moules d'argile cuisent au fourneau et au haut fourneau, donc la coulée reste possible sans fourneau de coulée ;
-- réassigner la recette du fourneau de coulée à des matériaux du monde normal (briques de boue, briques d'ardoise des abîmes) ou la cacher ;
-- cacher le four du Nether (l'acier brut se fait déjà au four en briques) et la netherite.
+What is done:
+- clay molds fire in the furnace and blast furnace, so casting remains possible without a casting furnace;
+- reassign the casting furnace recipe to overworld materials (mud bricks, deepslate bricks) or hide it;
+- hide the Nether furnace (crude steel is already made in the brick furnace) and netherite.
 
-### 3.3 Les forgerons villageois (`survivants.js`)
+### 3.3 Village smiths (`survivants.js`)
 
-- Overgeared **ajoute** des échanges d'objets forgés et d'acier, et **enveloppe** les échanges vanilla des armuriers, forgerons d'outils et forgerons d'armes (`VillagerTradesEvent`).
-- `MoreJSEvents.villagerTrades` avec `removeVanillaTrades` peut ne pas toucher aux échanges ajoutés par Overgeared, selon l'ordre des écouteurs. Vérifier en jeu, et utiliser au besoin `removeModdedTrades` ou un `removeTrades` filtré.
-- Le marchand ambulant vend des plans, mais il est coupé (`doTraderSpawning false`). Rien à faire.
+- Overgeared **adds** trades of forged items and steel, and **wraps** the vanilla trades of armorers, toolsmiths and weaponsmiths (`VillagerTradesEvent`).
+- `MoreJSEvents.villagerTrades` with `removeVanillaTrades` may not touch the trades added by Overgeared, depending on the listener order. Check in game, and use `removeModdedTrades` or a filtered `removeTrades` if needed.
+- The wandering trader sells blueprints, but it is disabled (`doTraderSpawning false`). Nothing to do.
 
-### 3.4 Qualité aléatoire sur tout le butin
+### 3.4 Random quality on all loot
 
-- Toute table de butin donne une qualité aux objets qui s'usent : coffres, Lootr, boss, la récompense du Rascal.
-- C'est cohérent, mais un plastron « Perfectly Forged » trouvé tôt court-circuite la forge.
-- Régler les poids de qualité du butin (favoriser poor et well) et mettre les trophées de boss dans `overgeared:quality_blacklist` si on le souhaite.
+- Every loot table gives a quality to items that wear out: chests, Lootr, bosses, the Rascal reward.
+- This is consistent, but a "Perfectly Forged" chestplate found early short-circuits the forge.
+- Tune the loot quality weights (favor poor and well) and put boss trophies in `overgeared:quality_blacklist` if desired.
 
-### 3.5 Début de partie plus long que prévu
+### 3.5 A longer early game than planned
 
-- Le minerai de fer demande une **pioche en cuivre**.
-- Le seau, les cisailles et le chaudron passent par l'enclume. Le briquet et le chaudron demandent de l'**acier**.
-- Le feu de veille (palier 1, « à la main ») ne doit donc pas demander de briquet. Les feux de camp se posent allumés.
-- Les mods qui demandent un seau (Thirst, Kaleidoscope Cookery) attendent la première enclume de pierre.
+- Iron ore requires a **copper pickaxe**.
+- The bucket, shears and cauldron go through the anvil. The flint and steel and the cauldron require **steel**.
+- The standby fire (tier 1, "by hand") must therefore not require a flint and steel. Campfires are placed lit.
+- Mods that require a bucket (Thirst, Kaleidoscope Cookery) wait for the first stone anvil.
 
-### 3.6 Divers
+### 3.6 Miscellaneous
 
-- **Chauffe par ventilateur** : des lingots chauds sur un tapis roulant de Create. Le refroidissement des objets transportés n'est pas couvert par les mixins d'Overgeared (`ItemEntity`, conteneurs, inventaire) : ils resteraient chauds sur le tapis (déduit). Et les ramasser sans pinces fait mal.
-- **Enclume qui tombe**, sur un engin Sable ou sous un pont : risque de dégâts et de casse (`onLand`, `getFallDamageSource`).
-- **Doublons de plaques** : `overgeared:iron_plate` et `create:iron_sheet`, la plaque de cuivre et la feuille de cuivre. Sans Almost Unified (retiré au §10.5), les deux existent ; le tag `c:plates/*` les relie. Les cacher dans EMI ne s'impose pas.
-- **Pierre de base** : `stone_anvil_bases` = `minecraft:stone` seul. Les pierres de NML ou de Quark (calcaire, jaspe…) ne donnent pas d'enclume. Accepter, ou étendre le tag.
-- **Mises à jour** : le mod demande de **supprimer la config après une mise à jour** si quelque chose casse (page Modrinth). Livrer notre `overgeared-common.toml` dans `pack/config/` et le comparer à chaque version.
+- **Fan heating**: hot ingots on a Create conveyor belt. Cooling of transported items is not covered by Overgeared's mixins (`ItemEntity`, containers, inventory): they would stay hot on the belt (deduced). And picking them up without tongs hurts.
+- **Falling anvil**, on a Sable contraption or under a bridge: risk of damage and breakage (`onLand`, `getFallDamageSource`).
+- **Plate duplicates**: `overgeared:iron_plate` and `create:iron_sheet`, the copper plate and the copper sheet. Without Almost Unified (removed in §10.5), both exist; the `c:plates/*` tag links them. Hiding them in EMI is not required.
+- **Base stone**: `stone_anvil_bases` = `minecraft:stone` alone. NML or Quark stones (limestone, jasper…) do not give an anvil. Accept, or extend the tag.
+- **Updates**: the mod asks to **delete the config after an update** if something breaks (Modrinth page). Ship our `overgeared-common.toml` in `pack/config/` and compare it at each version.
 
 ---
 
-## 4. Ce qu'il faut adapter, supprimer ou ajouter dans le plan
+## 4. What to adapt, remove or add in the plan
 
-| Endroit | Changement | Raison |
+| Place | Change | Reason |
 |---|---|---|
-| 03 §3.1 et §3.4, âge 1 | « Enclume de pierre, forge, premier fer forgé, **bronze** » → « silex et caillou, enclume de pierre, marteau de cuivre, **pioche en cuivre pour le fer**, haut fourneau et pinces, enclume de forgeron, **acier** » | Pas de bronze ni d'étain dans Overgeared (§1.2) |
-| 03 §3.4, âge 3 | « Laiton d'abord à la fonderie Overgeared » : garder l'idée, mais écrire la recette `overgeared:alloy_smelting` (§2.1) | Overgeared n'a pas de laiton |
-| 02, tableau du butin ; 03 §3.6 et §3.9 | « Modèle de forge d'acier » → « **gabarit d'amélioration en diamant** » (`overgeared:diamond_upgrade_smithing_template`), à ajouter aux tables de NML | C'est l'amélioration acier → diamant. L'acier n'a pas de modèle |
-| 03 §3.9, ligne Overgeared ; `progression.js`, âge 0-1 | Supprimer « recettes d'outils vanilla en métal retirées (config ou KubeJS) » et la boucle `event.remove(... crafting_shaped)` | Overgeared le fait déjà. Les outils vanilla en fer et en or **restent** comme objets forgés. Aucune option de config ne fait ça |
-| 06, tableau des socles (JEI) | « plugin natif dans … Overgeared » : faux pour JEI ; plugin **EMI** | §1.6 |
-| 07, incertitudes et `overgeared_pieces.js` | Remplir : composant `overgeared:forging_quality` ; types de recette (§1.5) ; KubeJS via `event.custom` | §1.4 et §1.5 |
-| 08, étape 11 | Fermée : composant, types de recette, outils vanilla, étain (absent), butin du gabarit, Nether (§3.2) | — |
-| `objets_fallow.js` | Garder `fallow:rivet_forge`, `essieu_forge`, `pale_helice_forgee`… comme **produits d'une forge `has_quality: true`**. Remplacer `fallow:tete_foreuse_forgee` par `overgeared:steel_pickaxe_head`, filtrée par qualité. Les objets `fallow:plan_*` deviennent des **plans d'Overgeared de types cachés** (§2.5) | Réutiliser les mécaniques du mod au lieu de les doubler |
-| `plans_ingenieur.js` | Réduire à rien, ou au seul cas d'une recette d'établi sans pièce forgée. Le verrou passe par `requires_blueprint` | Plus robuste que `recipe give/take` et `doLimitedCrafting` |
-| `zoo.js` (§10.10) | Récompense des 25 espèces = `overgeared:blueprint` de type `lanterne` | §2.4 |
-| §10.3, palier 2 | « Pièces forgées chez Overgeared » → « forgée sur l'**enclume de forgeron** à partir d'un plan de lanterne, de plaques et d'acier chaud » (§2.4) | Une recette précise |
-| §10.7, « La chaleur » | Ajouter : haut fourneau (déjà géré) et four à alliage (datapack Cold Sweat) ; lingots chauds en main (`item_temp`) | §2.8 |
-| §10.7, nouveau lien « La forge » | Haut fourneau + soufflet (tag `bellows_tickable`) + enclume + eau ou chaudron + meule ; ventilateur de Create pour la chauffe ; mélangeur pour l'acier ; presse pour les plaques ; qualité des pièces lue par `neoforge:components` | §2.1, §2.9 |
-| §10.7, « L'arbre » | Confirmé : toutes les haches (`AxeItem`) comptent, sans tag | §2.7 |
-| §11.3 | **Retirer Easy Anvils**, ou le garder avec le tag `overgeared:iron_anvil_bases` et un test | §3.1 |
-| §11.3, Quark Automatic Tool Restock | Activer, mais le tester avec l'état « cassé » d'Overgeared | §2.11 |
-| Nouveau `pack/config/overgeared-common.toml` | Types de plans cachés ; poids de la qualité du butin ; `coolingBlockEntityBlacklist` (+ fourneaux de Quark) ; `enableQualityBreakSystem` à décider | §1.5 |
-| Nouveau `kubejs/assets/overgeared/lang/fr_fr.json` | Traduction française | §1.1 |
-| Nouveau `recipes/forge_create.js` | Mélangeur → acier brut ; presse → plaque d'acier ; laiton au four à alliage ; armures acceptant `#c:plates/*` ; option `_manual_only` | §2.1 |
-| Nouveau `recipes/forge_fallow.js` | Lanterne, pièces critiques, couteaux de Kaleidoscope Cookery à la forge | §2.4, §2.6 |
-| Nouveau `data/fallow/cold_sweat/block/block_temp/forge.json` et tag `supplementaries:bellows_tickable` | Chaleur et soufflet | §2.8, §2.9 |
-| Décisions | Une fiche `docs/decisions/00xx-overgeared.md` : forge manuelle et chaleur industrielle ; plans d'Overgeared ; Easy Anvils ; Nether | Règle du dépôt |
+| 03 §3.1 and §3.4, age 1 | "Stone anvil, forge, first forged iron, **bronze**" → "flint and pebble, stone anvil, copper hammer, **copper pickaxe for iron**, blast furnace and tongs, smith's anvil, **steel**" | No bronze or tin in Overgeared (§1.2) |
+| 03 §3.4, age 3 | "Brass first at the Overgeared foundry": keep the idea, but write the `overgeared:alloy_smelting` recipe (§2.1) | Overgeared has no brass |
+| 02, loot table; 03 §3.6 and §3.9 | "Steel forge pattern" → "**diamond upgrade template**" (`overgeared:diamond_upgrade_smithing_template`), to add to NML tables | It is the steel → diamond upgrade. Steel has no pattern |
+| 03 §3.9, Overgeared row; `progression.js`, age 0-1 | Remove "vanilla metal tool recipes removed (config or KubeJS)" and the `event.remove(... crafting_shaped)` loop | Overgeared already does it. Vanilla iron and gold tools **remain** as forged items. No config option does that |
+| 06, foundation table (JEI) | "native plugin in … Overgeared": false for JEI; **EMI** plugin | §1.6 |
+| 07, uncertainties and `overgeared_pieces.js` | Fill in: component `overgeared:forging_quality`; recipe types (§1.5); KubeJS via `event.custom` | §1.4 and §1.5 |
+| 08, step 11 | Closed: component, recipe types, vanilla tools, tin (absent), template loot, Nether (§3.2) | — |
+| `objets_fallow.js` | Keep `fallow:rivet_forge`, `essieu_forge`, `pale_helice_forgee`… as **products of a `has_quality: true` forging**. Replace `fallow:tete_foreuse_forgee` with `overgeared:steel_pickaxe_head`, filtered by quality. The `fallow:plan_*` items become **Overgeared blueprints of hidden types** (§2.5) | Reuse the mod's mechanics instead of duplicating them |
+| `plans_ingenieur.js` | Reduce to nothing, or to the sole case of a crafting table recipe without a forged part. The lock goes through `requires_blueprint` | More robust than `recipe give/take` and `doLimitedCrafting` |
+| `zoo.js` (§10.10) | Reward for the 25 species = `overgeared:blueprint` of type `lanterne` | §2.4 |
+| §10.3, tier 2 | "Parts forged at Overgeared" → "forged on the **smith's anvil** from a lantern blueprint, plates and hot steel" (§2.4) | A precise recipe |
+| §10.7, "Heat" | Add: blast furnace (already handled) and alloy furnace (Cold Sweat datapack); hot ingots in hand (`item_temp`) | §2.8 |
+| §10.7, new link "The forge" | Blast furnace + bellows (tag `bellows_tickable`) + anvil + water or cauldron + grindstone; Create fan for heating; mixer for steel; press for plates; part quality read by `neoforge:components` | §2.1, §2.9 |
+| §10.7, "The tree" | Confirmed: all axes (`AxeItem`) count, without a tag | §2.7 |
+| §11.3 | **Remove Easy Anvils**, or keep it with the tag `overgeared:iron_anvil_bases` and a test | §3.1 |
+| §11.3, Quark Automatic Tool Restock | Enable, but test it with Overgeared's "broken" state | §2.11 |
+| New `pack/config/overgeared-common.toml` | Hidden blueprint types; loot quality weights; `coolingBlockEntityBlacklist` (+ Quark furnaces); `enableQualityBreakSystem` to decide | §1.5 |
+| New `kubejs/assets/overgeared/lang/fr_fr.json` | French translation | §1.1 |
+| New `recipes/forge_create.js` | Mixer → crude steel; press → steel plate; brass at the alloy furnace; armors accepting `#c:plates/*`; `_manual_only` option | §2.1 |
+| New `recipes/forge_fallow.js` | Lantern, critical parts, Kaleidoscope Cookery knives at the forge | §2.4, §2.6 |
+| New `data/fallow/cold_sweat/block/block_temp/forge.json` and tag `supplementaries:bellows_tickable` | Heat and bellows | §2.8, §2.9 |
+| Decisions | A record `docs/decisions/00xx-overgeared.md`: manual forging and industrial heat; Overgeared blueprints; Easy Anvils; Nether | Repository rule |
 
-**Faut-il un mod custom ?** **Non** pour les liens de jeu : datapack, config, tags et KubeJS (`event.custom`, KubeJS Create, LootJS, l'API KubeJS de Cold Sweat) couvrent tout. **Oui, en option**, pour un seul détail de finition : un petit mod client qui remplace les étincelles `CRIT` du martelage par des escarbilles et des étincelles orange (§2.13). Si un jour il faut qu'une machine Create produise un objet avec une qualité imposée, et que Create ne sait pas mettre de composant dans ses résultats, ce mod pourrait aussi s'en charger. Ce n'est pas nécessaire avec le principe du §2.1.
+**Is a custom mod needed?** **No** for the gameplay links: datapack, config, tags and KubeJS (`event.custom`, KubeJS Create, LootJS, Cold Sweat's KubeJS API) cover everything. **Yes, optionally**, for a single finishing detail: a small client mod that replaces the hammering `CRIT` sparks with embers and orange sparks (§2.13). If one day a Create machine must produce an item with an imposed quality, and Create cannot put a component into its results, this mod could also handle it. It is not necessary with the principle of §2.1.
 
 ---
 
-## 5. Questions qui demandent un test en jeu
+## 5. Questions that need an in-game test
 
-1. **Lanterne avec plan caché** : un type ajouté à `availableToolTypes` et à `hiddenToolTypes` est-il reconnu ? Une recette avec `requires_blueprint: true` et `has_quality: false` exige-t-elle bien le plan ? Le plan donné par commande ou par butin avec `blueprint_data` fonctionne-t-il ?
-2. **Le composant de qualité** s'écrit-il `overgeared:forging_quality="expert"` ? L'ingrédient `neoforge:components` est-il accepté et affiché par l'établi, l'assemblage séquencé de Create et EMI ?
-3. **Chauffe au ventilateur de Create** : du fer devant de la lave donne-t-il bien `heated_iron_ingot` ? Refroidit-il sur un tapis, dans un dépôt, dans un entonnoir ? Le suffixe `_manual_only` bloque-t-il ce traitement ?
-4. **Déployeur avec un marteau** sur l'enclume (recette de plaque) : la forge avance-t-elle ? Les entonnoirs et bras mécaniques remplissent-ils l'enclume et le four à alliage ?
-5. **Easy Anvils** (si on le garde) : avec le tag élargi, la conversion en enclume de forgeron marche-t-elle ? Quel mod garde le clic accroupi ? Les objets dans l'enclume sont-ils perdus ?
-6. **`event.replaceInput`** traverse-t-il les clés d'une `overgeared:forging` (plaques → `#c:plates/iron`) ?
-7. **Soufflet** sur le four à alliage (après ajout au tag) : accélère-t-il vraiment ?
-8. **Cold Sweat** : la chaleur du four à alliage et des lingots chauds en main ; l'isolation des armures en acier et en cuivre.
-9. **Quark Automatic Tool Restock** avec un outil qui passe à l'état « cassé » au lieu de disparaître. **FallingTree** avec une hache cassée.
-10. **Fourneaux de Quark** : un lingot de cuivre chaud y refroidit-il ? Quel est l'id de leur entité de bloc pour `coolingBlockEntityBlacklist` ?
-11. **Échanges des forgerons** : après `survivants.js`, l'armurier et le forgeron d'outils vendent-ils encore des objets forgés par Overgeared ?
-12. **Engin Sable** : poser une enclume de forgeron, forger en vol, tremper dans un chaudron à bord ; l'enclume tombe-t-elle au désassemblage ?
-13. **Amélioration « haut fourneau » de Traveler's Backpack** : chauffe-t-elle le fer, et les lingots refroidissent-ils dans le sac ?
-14. **Mini-jeu à plusieurs** : `maxAnvilDistance`, enclume occupée par un autre joueur. Un ami peut-il regarder sans gêner ?
-15. **Couteaux de Kaleidoscope Cookery** passés à la forge : prennent-ils la qualité (classe `TieredItem`) et gardent-ils leur fonction de découpe ?
+1. **Lantern with a hidden blueprint**: is a type added to `availableToolTypes` and `hiddenToolTypes` recognized? Does a recipe with `requires_blueprint: true` and `has_quality: false` really require the blueprint? Does the blueprint given by command or loot with `blueprint_data` work?
+2. **The quality component**: is it written `overgeared:forging_quality="expert"`? Is the `neoforge:components` ingredient accepted and displayed by the crafting table, Create's sequenced assembly and EMI?
+3. **Heating with a Create fan**: does iron in front of lava really give `heated_iron_ingot`? Does it cool on a belt, in a depot, in a funnel? Does the `_manual_only` suffix block this processing?
+4. **Deployer with a hammer** on the anvil (plate recipe): does the forging advance? Do hoppers and mechanical arms fill the anvil and the alloy furnace?
+5. **Easy Anvils** (if kept): with the extended tag, does the conversion to a smith's anvil work? Which mod keeps the sneak click? Are the items in the anvil lost?
+6. **`event.replaceInput`**: does it traverse the keys of an `overgeared:forging` (plates → `#c:plates/iron`)?
+7. **Bellows** on the alloy furnace (after adding to the tag): does it really speed it up?
+8. **Cold Sweat**: the heat of the alloy furnace and of hot ingots in hand; the insulation of steel and copper armor.
+9. **Quark Automatic Tool Restock** with a tool that goes to the "broken" state instead of disappearing. **FallingTree** with a broken axe.
+10. **Quark furnaces**: does a hot copper ingot cool in them? What is the id of their block entity for `coolingBlockEntityBlacklist`?
+11. **Smith trades**: after `survivants.js`, do the armorer and toolsmith still sell items forged by Overgeared?
+12. **Sable contraption**: place a smith's anvil, forge in flight, quench in a cauldron on board; does the anvil fall on disassembly?
+13. **Traveler's Backpack "blast furnace" upgrade**: does it heat iron, and do ingots cool in the backpack?
+14. **Multiplayer mini-game**: `maxAnvilDistance`, anvil occupied by another player. Can a friend watch without getting in the way?
+15. **Kaleidoscope Cookery knives** moved to the forge: do they take the quality (class `TieredItem`) and keep their cutting function?

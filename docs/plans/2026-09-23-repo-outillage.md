@@ -1,60 +1,60 @@
-# Fallow — Repo & outillage : plan d'implémentation
+# Fallow — Repo & tooling: implementation plan
 
 
-**Goal:** Transformer le repo `salvagedisc/fallow` en source de vérité packwiz du modpack Fallow, avec pack de base, documentation, script de synchronisation depuis le Modrinth App et CI qui produit/publie le `.mrpack`.
+**Goal:** Turn the `salvagedisc/fallow` repo into the packwiz source of truth of the Fallow modpack, with a base pack, documentation, a synchronisation script from the Modrinth App and CI that produces/publishes the `.mrpack`.
 
-**Architecture:** Le pack vit dans `pack/` (racine packwiz). Un script Node.js sans dépendance (`scripts/sync/`) compare l'instance de test du Modrinth App au pack via l'API Modrinth et pilote `packwiz`. Deux workflows GitHub Actions : `build.yml` (vérif + export à chaque push) et `release.yml` (release sur tag, étape Modrinth désactivée par défaut).
+**Architecture:** The pack lives in `pack/` (packwiz root). A dependency-free Node.js script (`scripts/sync/`) compares the Modrinth App test instance with the pack via the Modrinth API and drives `packwiz`. Two GitHub Actions workflows: `build.yml` (check + export on every push) and `release.yml` (release on tag, Modrinth step disabled by default).
 
-**Tech Stack:** packwiz (Go, commit épinglé), Minecraft 1.21.1, NeoForge 21.1.251, Node.js ≥ 20 (`node:test`, `fetch`, `crypto` natifs), GitHub Actions, API Modrinth v2.
+**Tech Stack:** packwiz (Go, pinned commit), Minecraft 1.21.1, NeoForge 21.1.251, Node.js ≥ 20 (native `node:test`, `fetch`, `crypto`), GitHub Actions, Modrinth API v2.
 
 **Spec:** `docs/specs/2026-09-23-repo-outillage-design.md`
 
 ## Global Constraints
 
-- Minecraft **1.21.1**, loader **NeoForge 21.1.251** (figé dans `pack/pack.toml`).
-- Tout mod doit provenir de **Modrinth** et exister pour 1.21.1 NeoForge ; un mod indisponible est signalé, jamais remplacé par une source tierce.
-- Seul `pack/` finit dans le `.mrpack` ; doc, scripts et CI jamais.
-- Données datapack dans `pack/kubejs/data/fallow/`, pas de dossier `datapacks/`.
-- Mises à jour de mods une par une ; jamais `packwiz update --all`.
-- Messages de commit : `feat(mods): add <Nom>`, `chore(mods): update <Nom> x → y`, `feat(mods)!: remove <Nom>`, `docs: …`, `ci: …`, `feat(sync): …`.
-- Le script de sync **ne modifie jamais** l'instance du Modrinth App.
-- Aucun jeton n'est manipulé par l'agent : `MODRINTH_TOKEN` est créé et saisi par l'utilisateur.
-- packwiz épinglé sur le commit `ef87d964f8cbd52b3b13ea42453ef322290e2b9e`.
-- Docs et messages utilisateur en français ; identifiants de code en anglais.
+- Minecraft **1.21.1**, loader **NeoForge 21.1.251** (pinned in `pack/pack.toml`).
+- Every mod must come from **Modrinth** and exist for 1.21.1 NeoForge; an unavailable mod is flagged, never replaced by a third-party source.
+- Only `pack/` ends up in the `.mrpack`; docs, scripts and CI never do.
+- Datapack data in `pack/kubejs/data/fallow/`, no `datapacks/` folder.
+- Mod updates one by one; never `packwiz update --all`.
+- Commit messages: `feat(mods): add <Name>`, `chore(mods): update <Name> x → y`, `feat(mods)!: remove <Name>`, `docs: …`, `ci: …`, `feat(sync): …`.
+- The sync script **never modifies** the Modrinth App instance.
+- No token is handled by the scripts or the setup: `MODRINTH_TOKEN` is created and entered by the maintainer.
+- packwiz pinned to commit `ef87d964f8cbd52b3b13ea42453ef322290e2b9e`.
+- Docs and user messages in French; code identifiers in English.
 
 ## Review Focus
 
-- **Mod désactivé dans le Modrinth App** (`xxx.jar.disabled`) : doit être considéré comme absent de l'instance, pas comme un mod à ajouter. → test Task 5.
-- **Jar absent de Modrinth** (mod importé à la main) : doit être listé comme « inconnu / non conforme » et ne déclencher ni ajout ni retrait. → test Task 6.
-- **Même projet, autre version** : doit apparaître comme un changement de version unique, pas comme un retrait + un ajout de deux mods différents. → test Task 6.
-- **Chemin d'instance avec espaces et accents** (`C:\Users\l'équipe\…\profiles\Fallow test`) : le script doit le trouver et le lire. → test Task 5.
-- **Échec réseau / API Modrinth** : le script s'arrête avant toute commande packwiz (aucune application partielle). → test Task 7.
+- **Mod disabled in the Modrinth App** (`xxx.jar.disabled`): must be considered absent from the instance, not a mod to add. → Task 5 test.
+- **Jar absent from Modrinth** (mod imported by hand): must be listed as "unknown / non-compliant" and trigger neither an addition nor a removal. → Task 6 test.
+- **Same project, other version**: must appear as a single version change, not as a removal + an addition of two different mods. → Task 6 test.
+- **Instance path with spaces and accents** (`C:\Users\Prénom Nom\…\profiles\Fallow test`): the script must find and read it. → Task 5 test.
+- **Network / Modrinth API failure**: the script stops before any packwiz command (no partial application). → Task 7 test.
 
 ---
 
-## Structure des fichiers
+## File structure
 
 ```
-.gitattributes                 ← normalisation LF (évite les warnings CRLF)
+.gitattributes                 ← LF normalisation (avoids CRLF warnings)
 .gitignore                     ← dist/, node_modules/
-package.json                   ← "type": "module", script "test"
+package.json                   ← "type": "module", "test" script
 pack/
   pack.toml, index.toml        ← packwiz
-  .packwizignore               ← exclut .gitkeep
+  .packwizignore               ← excludes .gitkeep
   mods/*.pw.toml
   config/.gitkeep, defaultconfigs/.gitkeep
   kubejs/{startup_scripts,server_scripts,client_scripts}/.gitkeep
   kubejs/data/fallow/.gitkeep
 scripts/
-  sync-from-instance.mjs       ← CLI (parsing des arguments, confirmation, orchestration)
+  sync-from-instance.mjs       ← CLI (argument parsing, confirmation, orchestration)
   sync/
-    pwtoml.mjs                 ← lecture des .pw.toml du pack
-    instance.mjs               ← localisation de l'instance + hash des jars
-    modrinth.mjs               ← appels API Modrinth (fetch injectable)
-    diff.mjs                   ← diff instance ↔ pack
-    commands.mjs               ← diff → arguments packwiz
-    configs.mjs                ← diff/copie des configs
-  test/*.test.mjs              ← tests node:test
+    pwtoml.mjs                 ← reading the pack's .pw.toml files
+    instance.mjs               ← instance location + jar hashing
+    modrinth.mjs               ← Modrinth API calls (injectable fetch)
+    diff.mjs                   ← instance ↔ pack diff
+    commands.mjs               ← diff → packwiz arguments
+    configs.mjs                ← config diff/copy
+  test/*.test.mjs              ← node:test tests
 docs/vision.md, docs/mods.md, docs/decisions/0001-nml-vs-terralith.md
 README.md, CHANGELOG.md
 .github/workflows/build.yml, .github/workflows/release.yml
@@ -62,42 +62,42 @@ README.md, CHANGELOG.md
 
 ---
 
-### Task 1 : Installer packwiz localement
+### Task 1: Install packwiz locally
 
-**Files:** aucun (outillage machine).
+**Files:** none (machine tooling).
 
 **Interfaces:**
-- Produces : commande `packwiz` disponible dans le PATH.
+- Produces: `packwiz` command available in the PATH.
 
-- [ ] **Step 1 : Demander l'accord de l'utilisateur** pour installer Go via scoop (`scoop install go`, ~70 Mo, bucket `main`) puis compiler packwiz depuis `github.com/packwiz/packwiz`. Ne rien télécharger sans « oui » explicite.
+- [ ] **Step 1: Ask the maintainer for approval** to install Go via scoop (`scoop install go`, ~70 MB, bucket `main`) then compile packwiz from `github.com/packwiz/packwiz`. Download nothing without an explicit "yes".
 
-- [ ] **Step 2 : Installer**
+- [ ] **Step 2: Install**
 
 ```bash
 scoop install go
 go install github.com/packwiz/packwiz@ef87d964f8cbd52b3b13ea42453ef322290e2b9e
 ```
 
-- [ ] **Step 3 : Vérifier**
+- [ ] **Step 3: Verify**
 
-Run : `"$(go env GOPATH)/bin/packwiz" --help`
-Expected : affiche l'aide avec les sous-commandes `init`, `modrinth`, `refresh`, `remove`.
-Si `packwiz` n'est pas trouvé directement, ajouter `%USERPROFILE%\go\bin` au PATH utilisateur (demander à l'utilisateur) et rouvrir le shell.
+Run: `"$(go env GOPATH)/bin/packwiz" --help`
+Expected: displays the help with the subcommands `init`, `modrinth`, `refresh`, `remove`.
+If `packwiz` is not found directly, add `%USERPROFILE%\go\bin` to the user PATH (ask the maintainer) and reopen the shell.
 
 ---
 
-### Task 2 : Squelette du repo et du pack
+### Task 2: Repo and pack skeleton
 
 **Files:**
-- Create : `.gitattributes`, `.gitignore`, `package.json`, `pack/.packwizignore`, `pack/pack.toml` (via packwiz), `pack/index.toml` (via packwiz), les `.gitkeep` listés ci-dessus.
+- Create: `.gitattributes`, `.gitignore`, `package.json`, `pack/.packwizignore`, `pack/pack.toml` (via packwiz), `pack/index.toml` (via packwiz), the `.gitkeep` files listed above.
 
 **Interfaces:**
-- Consumes : `packwiz` (Task 1).
-- Produces : `pack/pack.toml` avec `name = "Fallow"`, `version = "0.1.0"`, `[versions] minecraft = "1.21.1"`, `neoforge = "21.1.251"`.
+- Consumes: `packwiz` (Task 1).
+- Produces: `pack/pack.toml` with `name = "Fallow"`, `version = "0.1.0"`, `[versions] minecraft = "1.21.1"`, `neoforge = "21.1.251"`.
 
-- [ ] **Step 1 : Fichiers de repo**
+- [ ] **Step 1: Repo files**
 
-`.gitattributes` :
+`.gitattributes`:
 ```
 * text=auto eol=lf
 *.jar binary
@@ -105,14 +105,14 @@ Si `packwiz` n'est pas trouvé directement, ajouter `%USERPROFILE%\go\bin` au PA
 *.png binary
 ```
 
-`.gitignore` :
+`.gitignore`:
 ```
 dist/
 node_modules/
 *.mrpack
 ```
 
-`package.json` :
+`package.json`:
 ```json
 {
   "name": "fallow-tools",
@@ -126,36 +126,36 @@ node_modules/
 }
 ```
 
-- [ ] **Step 2 : Initialiser packwiz**
+- [ ] **Step 2: Initialise packwiz**
 
 ```bash
 mkdir -p pack && cd pack
 packwiz init --name "Fallow" --author "salvagedisc" --version "0.1.0" \
   --mc-version 1.21.1 --modloader neoforge --neoforge-version 21.1.251 -r
 ```
-Expected : `pack/pack.toml` et `pack/index.toml` créés. Ouvrir `pack.toml` et vérifier la présence de `minecraft = "1.21.1"` et `neoforge = "21.1.251"` sous `[versions]`.
+Expected: `pack/pack.toml` and `pack/index.toml` created. Open `pack.toml` and check that `minecraft = "1.21.1"` and `neoforge = "21.1.251"` are present under `[versions]`.
 
-- [ ] **Step 3 : Arborescence et exclusions**
+- [ ] **Step 3: Directory tree and exclusions**
 
 ```bash
 mkdir -p pack/config pack/defaultconfigs pack/kubejs/startup_scripts pack/kubejs/server_scripts pack/kubejs/client_scripts pack/kubejs/data/fallow
 for d in config defaultconfigs kubejs/startup_scripts kubejs/server_scripts kubejs/client_scripts kubejs/data/fallow; do touch "pack/$d/.gitkeep"; done
 ```
 
-`pack/.packwizignore` :
+`pack/.packwizignore`:
 ```
 **/.gitkeep
 ```
 
-- [ ] **Step 4 : Vérifier l'export**
+- [ ] **Step 4: Verify the export**
 
 ```bash
 cd pack && packwiz refresh && packwiz mr export -o ../dist/test.mrpack && cd ..
 unzip -p dist/test.mrpack modrinth.index.json
 ```
-Expected : JSON contenant `"minecraft": "1.21.1"` et `"neoforge": "21.1.251"` dans `dependencies`, `"files": []`, et `unzip -l dist/test.mrpack` ne liste **aucun** `.gitkeep`.
+Expected: JSON containing `"minecraft": "1.21.1"` and `"neoforge": "21.1.251"` in `dependencies`, `"files": []`, and `unzip -l dist/test.mrpack` lists **no** `.gitkeep`.
 
-- [ ] **Step 5 : Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add -A && git commit -m "chore: scaffold packwiz pack (MC 1.21.1, NeoForge 21.1.251)"
@@ -163,16 +163,16 @@ git add -A && git commit -m "chore: scaffold packwiz pack (MC 1.21.1, NeoForge 2
 
 ---
 
-### Task 3 : Pack de base (mods retenus)
+### Task 3: Base pack (retained mods)
 
 **Files:**
-- Create : `pack/mods/*.pw.toml` (générés par packwiz), `pack/index.toml` (mis à jour).
+- Create: `pack/mods/*.pw.toml` (generated by packwiz), `pack/index.toml` (updated).
 
 **Interfaces:**
-- Consumes : pack initialisé (Task 2).
-- Produces : un `.pw.toml` par mod avec `[update.modrinth] mod-id` et `version`, utilisés par `pwtoml.mjs` (Task 5).
+- Consumes: initialised pack (Task 2).
+- Produces: one `.pw.toml` per mod with `[update.modrinth] mod-id` and `version`, used by `pwtoml.mjs` (Task 5).
 
-Slugs Modrinth vérifiés le 2026-09-23 (tous disponibles en 1.21.1 NeoForge) :
+Modrinth slugs verified on 2026-09-23 (all available for 1.21.1 NeoForge):
 
 | Mod | Slug |
 |---|---|
@@ -181,7 +181,7 @@ Slugs Modrinth vérifiés le 2026-09-23 (tous disponibles en 1.21.1 NeoForge) :
 | Create | `create` |
 | Create Aeronautics | `create-aeronautics` |
 | Sable | `sable` |
-| Steam 'n' Rails (port NeoForge) | `create-steam-n-rails-1.21.1` |
+| Steam 'n' Rails (NeoForge port) | `create-steam-n-rails-1.21.1` |
 | Kaleidoscope Cookery | `kaleidoscope-cookery` |
 | Antique Atlas 4 | `antique-atlas-4` |
 | Surveyor Map Framework | `surveyor` |
@@ -189,7 +189,7 @@ Slugs Modrinth vérifiés le 2026-09-23 (tous disponibles en 1.21.1 NeoForge) :
 | Thirst Was Reclaimed | `thirst-was-reclaimed` |
 | KubeJS | `kubejs` |
 
-- [ ] **Step 1 : Ajouter chaque mod, un commit par mod**
+- [ ] **Step 1: Add each mod, one commit per mod**
 
 ```bash
 cd pack
@@ -200,177 +200,177 @@ for slug in create sable create-aeronautics create-steam-n-rails-1.21.1 no-mans-
 done
 cd ..
 ```
-`-y` accepte automatiquement les dépendances requises ; elles sont incluses dans le commit du mod qui les tire. En cas d'échec d'un slug : s'arrêter et signaler le mod à l'utilisateur (ne pas chercher d'alternative).
+`-y` automatically accepts required dependencies; they are included in the commit of the mod that pulls them in. If a slug fails: stop and report the mod to the maintainer (do not look for an alternative).
 
-- [ ] **Step 2 : Vérifier les côtés**
+- [ ] **Step 2: Verify the sides**
 
-Run : `grep -H '^side' pack/mods/*.pw.toml`
-Expected : chaque mod a `side = "both"`, `"client"` ou `"server"`. Aucun des mods retenus n'est censé être `client` seul ; si c'est le cas, le signaler.
+Run: `grep -H '^side' pack/mods/*.pw.toml`
+Expected: each mod has `side = "both"`, `"client"` or `"server"`. None of the retained mods is supposed to be `client` only; if one is, report it.
 
-- [ ] **Step 3 : Vérifier la cohérence de l'index**
+- [ ] **Step 3: Verify index consistency**
 
-Run : `cd pack && packwiz refresh && git status --porcelain`
-Expected : aucune sortie de `git status`.
+Run: `cd pack && packwiz refresh && git status --porcelain`
+Expected: no output from `git status`.
 
-- [ ] **Step 4 : Export et test de lancement (manuel, utilisateur)**
+- [ ] **Step 4: Export and launch test (manual, maintainer)**
 
 ```bash
 cd pack && packwiz mr export -o ../dist/Fallow-0.1.0-dev.mrpack && cd ..
 ```
-Demander à l'utilisateur : Modrinth App → « + » → *Import from file* → `dist/Fallow-0.1.0-dev.mrpack`, nommer l'instance **`Fallow test`**, lancer, créer un monde, marcher 2 minutes. Il rapporte : lancement OK / crash (fournir `logs/latest.log` ou le crash report).
-Expected : monde créé sans crash. En cas de crash : lire le log, identifier le mod fautif, le signaler — ne pas corriger en changeant de version sans accord.
+Ask the maintainer: Modrinth App → "+" → *Import from file* → `dist/Fallow-0.1.0-dev.mrpack`, name the instance **`Fallow test`**, launch, create a world, walk for 2 minutes. They report: launch OK / crash (provide `logs/latest.log` or the crash report).
+Expected: world created without a crash. In case of a crash: read the log, identify the faulty mod, report it — do not fix by changing version without approval.
 
 ---
 
-### Task 4 : Documentation
+### Task 4: Documentation
 
 **Files:**
-- Create : `docs/vision.md`, `docs/mods.md`, `docs/decisions/0001-nml-vs-terralith.md`, `README.md`, `CHANGELOG.md`.
+- Create: `docs/vision.md`, `docs/mods.md`, `docs/decisions/0001-nml-vs-terralith.md`, `README.md`, `CHANGELOG.md`.
 
-**Interfaces:** aucune (texte).
+**Interfaces:** none (text).
 
-- [ ] **Step 1 : `docs/vision.md`**
+- [ ] **Step 1: `docs/vision.md`**
 
 ```markdown
 # Fallow — Vision
 
 ## Pitch
-Un monde immense, humide et presque abandonné. Une poignée de joueurs y arrive, s'installe, puis repousse lentement la frontière : cabane, ferme, hameau, voie ferrée, usine, aérodrome, colonies lointaines. Il n'y a pas de fin : le monde permanent sert à perfectionner ses installations.
+A huge, damp and almost abandoned world. A handful of players arrive, settle, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. There is no end: the permanent world is for perfecting one's installations.
 
-## Direction artistique
-- Brume, distance, silhouettes : le monde est difficile à lire de loin.
-- Solitude et étrangeté diffuse, **sans horreur** ni jumpscare.
-- La base est un îlot de lumière ; s'en éloigner, c'est perdre ses repères.
-- Pas de shader imposé (Create Aeronautics a des problèmes connus avec Iris) : l'ambiance vient du worldgen, du brouillard, des sons et de l'éclairage.
+## Art direction
+- Mist, distance, silhouettes: the world is hard to read from afar.
+- Solitude and diffuse strangeness, **without horror** or jumpscares.
+- The base is an island of light; moving away from it means losing one's bearings.
+- No imposed shader (Create Aeronautics has known problems with Iris): the atmosphere comes from worldgen, fog, sounds and lighting.
 
-## Trois piliers
-1. **Exploration** — « Je me demande ce qu'il y a là-bas », pas « il me faut X diamants ». Inspiration : Zelda Breath of the Wild. Pas de coordonnées : la carte se construit (Antique Atlas).
-2. **Civilisation** — Artisanat (Overgeared) → atelier → industrie (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics).
-3. **Vie quotidienne** — Eau → agriculture → élevage → cuisine (Kaleidoscope Cookery) → conservation → expédition.
+## Three pillars
+1. **Exploration** — "I wonder what's over there", not "I need X diamonds". Inspiration: Zelda Breath of the Wild. No coordinates: the map is built (Antique Atlas).
+2. **Civilisation** — Crafting (Overgeared) → workshop → industry (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics).
+3. **Daily life** — Water → farming → animal husbandry → cooking (Kaleidoscope Cookery) → preservation → expedition.
 
-## Survie
-Plus dure par l'environnement (température, soif, saisons à l'étude), pas par le combat. Peu de créatures hostiles, rares, territoriales et soignées (modèles et animations de qualité). Aucun monstre vanilla.
+## Survival
+Harder through the environment (temperature, thirst, seasons under study), not through combat. Few hostile creatures, rare, territorial and polished (quality models and animations). No vanilla monsters.
 
-## Interdits
-- Minimap, waypoints, téléportation.
-- Monstres vanilla hostiles, difficulté par hordes.
+## Prohibitions
+- Minimap, waypoints, teleportation.
+- Hostile vanilla monsters, difficulty through hordes.
 - End / Elytra (probable).
-- Empilement d'addons Create ou de mods de nourriture qui se chevauchent.
+- Stacking Create addons or overlapping food mods.
 
-## Règles de travail
-- Chaque suggestion est une hypothèse : on compare réellement avant de trancher.
-- Filtre des 5 questions pour tout mod : change-t-il le gameplay ? s'intègre-t-il aux autres systèmes ? reste-t-il intéressant après 100 h ? apporte-t-il une mécanique plutôt que du contenu ? évite-t-il les doublons ?
-- « Ajoute 200 objets » n'est pas un argument ; « transforme une activité en métier » en est un.
+## Working rules
+- Every suggestion is a hypothesis: we really compare before deciding.
+- 5-question filter for any mod: does it change gameplay? does it integrate with the other systems? does it stay interesting after 100 h? does it bring a mechanic rather than content? does it avoid duplicates?
+- "Add 200 items" is not an argument; "turns an activity into a craft" is.
 ```
 
-- [ ] **Step 2 : `docs/mods.md`**
+- [ ] **Step 2: `docs/mods.md`**
 
 ```markdown
-# Registre des mods
+# Mod registry
 
-Statuts : ✅ retenu (dans `pack/mods/`) · 🟡 à tester · ❌ écarté.
-Côté : C = client, S = serveur, CS = les deux.
+Statuses: ✅ retained (in `pack/mods/`) · 🟡 to test · ❌ rejected.
+Side: C = client, S = server, CS = both.
 
-## Socle
-| Mod | Statut | Côté | Rôle | Justification |
+## Foundation
+| Mod | Status | Side | Role | Rationale |
 |---|---|---|---|---|
-| No Man's Land | ✅ | CS | Worldgen | Ambiance sauvage et cohérente, meilleure pour la solitude (voir décision 0001) |
-| Overgeared | ✅ | CS | Artisanat | Forge, plans, alliages : fabrication physique et progressive |
-| Create | ✅ | CS | Industrie | Colonne vertébrale technologique |
-| Create Aeronautics + Sable | ✅ | CS | Aviation | Pilier civilisation ; impose 1.21.1 NeoForge |
-| Create: Steam 'n' Rails | ✅ | CS | Rail | Infrastructure ferroviaire complète |
-| Kaleidoscope Cookery | ✅ | CS | Cuisine | Cuisine immersive, système alimentaire principal |
-| Antique Atlas 4 + Surveyor | ✅ | CS | Carte | Carte qui se construit, remplace coordonnées et minimap |
-| Cold Sweat | ✅ | CS | Température | Survie environnementale |
-| Thirst Was Reclaimed | ✅ | CS | Soif | Survie environnementale |
-| KubeJS | ✅ | CS | Règles | Couche de cohérence (scripts + données datapack) |
+| No Man's Land | ✅ | CS | Worldgen | Wild and coherent atmosphere, better for solitude (see decision 0001) |
+| Overgeared | ✅ | CS | Crafting | Forge, blueprints, alloys: physical and progressive fabrication |
+| Create | ✅ | CS | Industry | Technological backbone |
+| Create Aeronautics + Sable | ✅ | CS | Aviation | Civilisation pillar; requires 1.21.1 NeoForge |
+| Create: Steam 'n' Rails | ✅ | CS | Rail | Complete railway infrastructure |
+| Kaleidoscope Cookery | ✅ | CS | Cooking | Immersive cooking, main food system |
+| Antique Atlas 4 + Surveyor | ✅ | CS | Map | Map that builds itself, replaces coordinates and minimap |
+| Cold Sweat | ✅ | CS | Temperature | Environmental survival |
+| Thirst Was Reclaimed | ✅ | CS | Thirst | Environmental survival |
+| KubeJS | ✅ | CS | Rules | Coherence layer (scripts + datapack data) |
 
-## À tester
-| Mod | Rôle | Question à trancher |
+## To test
+| Mod | Role | Question to settle |
 |---|---|---|
-| Thirst Canteen | Gourde | Utile avec Thirst Was Reclaimed ? |
-| Serene Seasons | Saisons | Interaction avec Cold Sweat, NML et Kaleidoscope |
-| Naturalist | Faune | Concurrent d'Alex's Mobs Continued, pas un ajout automatique |
-| Alex's Mobs Continued | Faune | Idem |
-| Mowzie's Mobs (+ Integrated Mowzie's Mobs) | Créatures rares | Couche « anomalies » rares |
-| Create: Copycats+ | Construction | Probable |
-| Create: Connected | QoL Create | Probable |
-| Distant Horizons | Rendu lointain | Performance client et serveur |
-| Terralith + Streams Reflowing | Worldgen | Preset concurrent de NML (décision 0001) |
-| Farm & Charm / autres Let's Do | Agriculture | Prochaine étape de design : agriculture |
-| Create: Power Loader | Chunkloading | Risque de casser la logique d'entretien des infrastructures |
+| Thirst Canteen | Canteen | Useful with Thirst Was Reclaimed? |
+| Serene Seasons | Seasons | Interaction with Cold Sweat, NML and Kaleidoscope |
+| Naturalist | Fauna | Competitor of Alex's Mobs Continued, not an automatic addition |
+| Alex's Mobs Continued | Fauna | Same |
+| Mowzie's Mobs (+ Integrated Mowzie's Mobs) | Rare creatures | Rare "anomalies" layer |
+| Create: Copycats+ | Building | Probable |
+| Create: Connected | Create QoL | Probable |
+| Distant Horizons | Distant rendering | Client and server performance |
+| Terralith + Streams Reflowing | Worldgen | Competing preset to NML (decision 0001) |
+| Farm & Charm / other Let's Do | Farming | Next design step: farming |
+| Create: Power Loader | Chunk loading | Risk of breaking the infrastructure upkeep logic |
 
-## Écartés
-| Mod | Raison |
+## Rejected
+| Mod | Reason |
 |---|---|
-| Tectonic | Remplacé par la comparaison NML vs Terralith |
-| Downhill Rivers | Idem |
-| Prehistorum | Modèles de mauvaise qualité |
-| Farmer's Delight (+ addons Create FD) | Kaleidoscope Cookery est le système alimentaire principal |
-| Legendary Survival Overhaul | Cold Sweat + Thirst Was Reclaimed retenus |
-| Minimaps / waypoints | Contraire à la vision |
+| Tectonic | Replaced by the NML vs Terralith comparison |
+| Downhill Rivers | Same |
+| Prehistorum | Poor-quality models |
+| Farmer's Delight (+ Create FD addons) | Kaleidoscope Cookery is the main food system |
+| Legendary Survival Overhaul | Cold Sweat + Thirst Was Reclaimed retained |
+| Minimaps / waypoints | Contrary to the vision |
 ```
 
-- [ ] **Step 3 : `docs/decisions/0001-nml-vs-terralith.md`**
+- [ ] **Step 3: `docs/decisions/0001-nml-vs-terralith.md`**
 
 ```markdown
-# 0001 — Worldgen : No Man's Land vs Terralith + Streams Reflowing
+# 0001 — Worldgen: No Man's Land vs Terralith + Streams Reflowing
 
-- **Date** : 2026-09 (conception préalable)
-- **Statut** : NML retenu ; Terralith + Streams Reflowing à tester comme preset concurrent
+- **Date**: 2026-09 (preliminary design)
+- **Status**: NML retained; Terralith + Streams Reflowing to test as a competing preset
 
-## Contexte
-Le worldgen porte l'ambiance (solitude, étrangeté) et l'exploration. Tectonic et Downhill Rivers ont été écartés au profit de cette comparaison. Les deux options ne sont pas combinées : ce sont deux presets concurrents.
+## Context
+Worldgen carries the atmosphere (solitude, strangeness) and exploration. Tectonic and Downhill Rivers were rejected in favour of this comparison. The two options are not combined: they are two competing presets.
 
-## Comparaison
-| Critère | NML | Terralith + Streams |
+## Comparison
+| Criterion | NML | Terralith + Streams |
 |---|---|---|
-| Ambiance inquiétante / solitude | ★★★★★ | ★★★★☆ |
-| Cohérence esthétique | ★★★★★ | ★★★★☆ |
-| Diversité / spectaculaire | ★★★★☆ | ★★★★★ |
-| Réalisme géographique, rivières | ★★★☆☆ | ★★★★★ |
-| Simplicité du stack | ★★★★★ | ★★★★☆ |
+| Unsettling atmosphere / solitude | ★★★★★ | ★★★★☆ |
+| Aesthetic coherence | ★★★★★ | ★★★★☆ |
+| Diversity / spectacle | ★★★★☆ | ★★★★★ |
+| Geographic realism, rivers | ★★★☆☆ | ★★★★★ |
+| Stack simplicity | ★★★★★ | ★★★★☆ |
 
-## Décision
-NML gagne sur l'expérience recherchée (« je suis quelque part où je ne devrais peut-être pas être »). Terralith + Streams Reflowing gagne sur la géographie : rivières cohérentes utiles à Create, courants compatibles Sable/Aeronautics. À réévaluer en test réel sur une branche `test/terralith-vs-nml`.
+## Decision
+NML wins on the experience sought ("I am somewhere I perhaps should not be"). Terralith + Streams Reflowing wins on geography: coherent rivers useful to Create, currents compatible with Sable/Aeronautics. To be re-evaluated in a real test on a `test/terralith-vs-nml` branch.
 ```
 
-- [ ] **Step 4 : `CHANGELOG.md`**
+- [ ] **Step 4: `CHANGELOG.md`**
 
 ```markdown
 # Changelog
 
-Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions : `0.x` prototype, `1.0.0` lancement du monde permanent.
+Format: [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions: `0.x` prototype, `1.0.0` launch of the permanent world.
 
 ## [Unreleased]
 
 ## [0.1.0]
-### Ajouté
-- Pack de base : No Man's Land, Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
+### Added
+- Base pack: No Man's Land, Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
 ```
 
-- [ ] **Step 5 : `README.md`**
+- [ ] **Step 5: `README.md`**
 
 ````markdown
 # Fallow
 
-Modpack Minecraft **1.21.1 / NeoForge** pour un monde permanent entre amis : exploration dans la brume, colonies, Create et aviation, agriculture sur le long terme.
+**Minecraft 1.21.1 / NeoForge** modpack for a permanent world among friends: exploration in the mist, colonies, Create and aviation, long-term farming.
 
-## Jouer
-1. Installer le [Modrinth App](https://modrinth.com/app).
-2. Accepter l'invitation *Share* reçue, **ou** télécharger le `.mrpack` de la dernière [release](../../releases) puis *+ → Import from file*.
+## Play
+1. Install the [Modrinth App](https://modrinth.com/app).
+2. Accept the *Share* invitation received, **or** download the `.mrpack` of the latest [release](../../releases) then *+ → Import from file*.
 
-## Développer
-- Pack : `pack/` (géré par [packwiz](https://packwiz.infra.link/)).
-- Vision : `docs/vision.md` · Registre des mods : `docs/mods.md` · Décisions : `docs/decisions/`.
-- Rapatrier les mods testés dans l'instance « Fallow test » :
+## Develop
+- Pack: `pack/` (managed by [packwiz](https://packwiz.infra.link/)).
+- Vision: `docs/vision.md` · Mod registry: `docs/mods.md` · Decisions: `docs/decisions/`.
+- Bring back the mods tested in the "Fallow test" instance:
 
 ```bash
 npm run sync -- --instance "Fallow test"
 ```
 ````
 
-- [ ] **Step 6 : Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add docs README.md CHANGELOG.md && git commit -m "docs: add vision, mod registry, decision 0001, README and changelog"
@@ -378,21 +378,21 @@ git add docs README.md CHANGELOG.md && git commit -m "docs: add vision, mod regi
 
 ---
 
-### Task 5 : Sync — lecture du pack et de l'instance
+### Task 5: Sync — reading the pack and the instance
 
 **Files:**
-- Create : `scripts/sync/pwtoml.mjs`, `scripts/sync/instance.mjs`, `scripts/test/pwtoml.test.mjs`, `scripts/test/instance.test.mjs`
+- Create: `scripts/sync/pwtoml.mjs`, `scripts/sync/instance.mjs`, `scripts/test/pwtoml.test.mjs`, `scripts/test/instance.test.mjs`
 
 **Interfaces:**
-- Produces :
+- Produces:
   - `parsePwToml(text: string) → { name: string, filename: string, side: string, hashFormat: string, hash: string, projectId: string|null, versionId: string|null }`
-  - `readPackMods(packDir: string) → Promise<Array<PackMod>>` où `PackMod = parsePwToml(...) & { key: string }` (`key` = nom du fichier sans `.pw.toml`, utilisé par `packwiz remove`).
+  - `readPackMods(packDir: string) → Promise<Array<PackMod>>` where `PackMod = parsePwToml(...) & { key: string }` (`key` = file name without `.pw.toml`, used by `packwiz remove`).
   - `resolveInstanceDir(nameOrPath: string, env = process.env) → string`
-  - `readInstanceJars(instanceDir: string) → Promise<Array<{ filename: string, sha512: string }>>` (ignore tout ce qui ne finit pas par `.jar`, donc `*.jar.disabled`).
+  - `readInstanceJars(instanceDir: string) → Promise<Array<{ filename: string, sha512: string }>>` (ignores anything that does not end in `.jar`, hence `*.jar.disabled`).
 
-- [ ] **Step 1 : Tests (échouent)**
+- [ ] **Step 1: Tests (fail)**
 
-`scripts/test/pwtoml.test.mjs` :
+`scripts/test/pwtoml.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -441,7 +441,7 @@ test('readPackMods reads every .pw.toml with its key', async () => {
 });
 ```
 
-`scripts/test/instance.test.mjs` :
+`scripts/test/instance.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -452,10 +452,10 @@ import { createHash } from 'node:crypto';
 import { resolveInstanceDir, readInstanceJars } from '../sync/instance.mjs';
 
 test('resolveInstanceDir maps a name to the Modrinth App profiles folder', () => {
-  const env = { APPDATA: 'C:\\Users\\l'équipe\\AppData\\Roaming' };
+  const env = { APPDATA: 'C:\\Users\\Prénom Nom\\AppData\\Roaming' };
   assert.equal(
     resolveInstanceDir('Fallow test', env),
-    join('C:\\Users\\l'équipe\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Fallow test'),
+    join('C:\\Users\\Prénom Nom\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Fallow test'),
   );
 });
 
@@ -474,14 +474,14 @@ test('readInstanceJars hashes .jar files and skips disabled ones (path with spac
 });
 ```
 
-- [ ] **Step 2 : Vérifier l'échec**
+- [ ] **Step 2: Verify the failure**
 
-Run : `npm test`
-Expected : FAIL (`Cannot find module '../sync/pwtoml.mjs'`).
+Run: `npm test`
+Expected: FAIL (`Cannot find module '../sync/pwtoml.mjs'`).
 
-- [ ] **Step 3 : Implémentation**
+- [ ] **Step 3: Implementation**
 
-`scripts/sync/pwtoml.mjs` :
+`scripts/sync/pwtoml.mjs`:
 ```js
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -518,7 +518,7 @@ export async function readPackMods(packDir) {
 }
 ```
 
-`scripts/sync/instance.mjs` :
+`scripts/sync/instance.mjs`:
 ```js
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
@@ -545,12 +545,12 @@ export async function readInstanceJars(instanceDir) {
 }
 ```
 
-- [ ] **Step 4 : Vérifier le succès**
+- [ ] **Step 4: Verify success**
 
-Run : `npm test`
-Expected : PASS (6 tests).
+Run: `npm test`
+Expected: PASS (6 tests).
 
-- [ ] **Step 5 : Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add scripts package.json && git commit -m "feat(sync): read pack mods and instance jars"
@@ -558,21 +558,21 @@ git add scripts package.json && git commit -m "feat(sync): read pack mods and in
 
 ---
 
-### Task 6 : Sync — API Modrinth et diff
+### Task 6: Sync — Modrinth API and diff
 
 **Files:**
-- Create : `scripts/sync/modrinth.mjs`, `scripts/sync/diff.mjs`, `scripts/test/modrinth.test.mjs`, `scripts/test/diff.test.mjs`
+- Create: `scripts/sync/modrinth.mjs`, `scripts/sync/diff.mjs`, `scripts/test/modrinth.test.mjs`, `scripts/test/diff.test.mjs`
 
 **Interfaces:**
-- Consumes : `readInstanceJars` → `{filename, sha512}[]`, `readPackMods` → `PackMod[]` (Task 5).
-- Produces :
-  - `lookupVersions(sha512s: string[], { fetch }) → Promise<Map<sha512, { projectId, versionId, versionNumber }>>` (lève une erreur si la réponse HTTP n'est pas 2xx).
+- Consumes: `readInstanceJars` → `{filename, sha512}[]`, `readPackMods` → `PackMod[]` (Task 5).
+- Produces:
+  - `lookupVersions(sha512s: string[], { fetch }) → Promise<Map<sha512, { projectId, versionId, versionNumber }>>` (throws an error if the HTTP response is not 2xx).
   - `lookupProjects(ids: string[], { fetch }) → Promise<Map<id, { slug, title }>>`
-  - `diffMods(instanceMods, packMods) → { added: InstMod[], removed: PackMod[], changed: Array<{ from: PackMod, to: InstMod }>, unknown: Array<{filename}>, unchanged: PackMod[] }` où `InstMod = { filename, sha512, projectId, versionId, versionNumber }` et `projectId === null` pour un jar inconnu de Modrinth.
+  - `diffMods(instanceMods, packMods) → { added: InstMod[], removed: PackMod[], changed: Array<{ from: PackMod, to: InstMod }>, unknown: Array<{filename}>, unchanged: PackMod[] }` where `InstMod = { filename, sha512, projectId, versionId, versionNumber }` and `projectId === null` for a jar unknown to Modrinth.
 
-- [ ] **Step 1 : Tests (échouent)**
+- [ ] **Step 1: Tests (fail)**
 
-`scripts/test/modrinth.test.mjs` :
+`scripts/test/modrinth.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -604,7 +604,7 @@ test('lookupProjects maps ids to slug/title', async () => {
 });
 ```
 
-`scripts/test/diff.test.mjs` :
+`scripts/test/diff.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -633,14 +633,14 @@ test('pack mods without modrinth id are never marked removed', () => {
 });
 ```
 
-- [ ] **Step 2 : Vérifier l'échec**
+- [ ] **Step 2: Verify the failure**
 
-Run : `npm test`
-Expected : FAIL (modules introuvables).
+Run: `npm test`
+Expected: FAIL (modules not found).
 
-- [ ] **Step 3 : Implémentation**
+- [ ] **Step 3: Implementation**
 
-`scripts/sync/modrinth.mjs` :
+`scripts/sync/modrinth.mjs`:
 ```js
 const API = 'https://api.modrinth.com/v2';
 const HEADERS = { 'User-Agent': 'salvagedisc/fallow sync-from-instance', 'Content-Type': 'application/json' };
@@ -665,7 +665,7 @@ export async function lookupProjects(ids, { fetch = globalThis.fetch } = {}) {
 }
 ```
 
-`scripts/sync/diff.mjs` :
+`scripts/sync/diff.mjs`:
 ```js
 export function diffMods(instanceMods, packMods) {
   const packById = new Map(packMods.filter((m) => m.projectId).map((m) => [m.projectId, m]));
@@ -684,12 +684,12 @@ export function diffMods(instanceMods, packMods) {
 }
 ```
 
-- [ ] **Step 4 : Vérifier le succès**
+- [ ] **Step 4: Verify success**
 
-Run : `npm test`
-Expected : PASS (11 tests).
+Run: `npm test`
+Expected: PASS (11 tests).
 
-- [ ] **Step 5 : Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add scripts && git commit -m "feat(sync): identify instance mods via Modrinth API and diff with pack"
@@ -697,22 +697,22 @@ git add scripts && git commit -m "feat(sync): identify instance mods via Modrint
 
 ---
 
-### Task 7 : Sync — commandes packwiz, configs et CLI
+### Task 7: Sync — packwiz commands, configs and CLI
 
 **Files:**
-- Create : `scripts/sync/commands.mjs`, `scripts/sync/configs.mjs`, `scripts/sync-from-instance.mjs`, `scripts/test/commands.test.mjs`, `scripts/test/configs.test.mjs`, `scripts/test/cli.test.mjs`
+- Create: `scripts/sync/commands.mjs`, `scripts/sync/configs.mjs`, `scripts/sync-from-instance.mjs`, `scripts/test/commands.test.mjs`, `scripts/test/configs.test.mjs`, `scripts/test/cli.test.mjs`
 
 **Interfaces:**
-- Consumes : tout ce qui précède.
-- Produces :
-  - `toPackwizCommands(diff) → string[][]` (chaque entrée = arguments passés à `packwiz`).
+- Consumes: everything above.
+- Produces:
+  - `toPackwizCommands(diff) → string[][]` (each entry = arguments passed to `packwiz`).
   - `diffConfigs(srcDir, dstDir) → Promise<Array<{ rel: string, status: 'new'|'modified' }>>`
   - `copyConfigs(srcDir, dstDir, entries) → Promise<void>`
-  - `run({ argv, env, fetch, exec, confirm, log, packDir }) → Promise<number>` (code de sortie ; toutes les dépendances injectables pour les tests).
+  - `run({ argv, env, fetch, exec, confirm, log, packDir }) → Promise<number>` (exit code; all dependencies injectable for tests).
 
-- [ ] **Step 1 : Tests (échouent)**
+- [ ] **Step 1: Tests (fail)**
 
-`scripts/test/commands.test.mjs` :
+`scripts/test/commands.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -734,7 +734,7 @@ test('builds remove then add commands, pinning exact versions', () => {
 });
 ```
 
-`scripts/test/configs.test.mjs` :
+`scripts/test/configs.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -763,7 +763,7 @@ test('detects new and modified config files recursively, then copies them', asyn
 });
 ```
 
-`scripts/test/cli.test.mjs` :
+`scripts/test/cli.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -826,14 +826,14 @@ test('--dry-run prints commands without running them', async () => {
 });
 ```
 
-- [ ] **Step 2 : Vérifier l'échec**
+- [ ] **Step 2: Verify the failure**
 
-Run : `npm test`
-Expected : FAIL (modules introuvables).
+Run: `npm test`
+Expected: FAIL (modules not found).
 
-- [ ] **Step 3 : Implémentation**
+- [ ] **Step 3: Implementation**
 
-`scripts/sync/commands.mjs` :
+`scripts/sync/commands.mjs`:
 ```js
 const versionUrl = (m) => `https://modrinth.com/mod/${m.projectId}/version/${m.versionId}`;
 
@@ -848,7 +848,7 @@ export function toPackwizCommands(diff) {
 }
 ```
 
-`scripts/sync/configs.mjs` :
+`scripts/sync/configs.mjs`:
 ```js
 import { copyFile, mkdir, readdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -887,7 +887,7 @@ export async function copyConfigs(srcDir, dstDir, entries) {
 }
 ```
 
-`scripts/sync-from-instance.mjs` :
+`scripts/sync-from-instance.mjs`:
 ```js
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
@@ -982,18 +982,18 @@ if (isMain) {
 ```
 
 
-- [ ] **Step 4 : Vérifier le succès**
+- [ ] **Step 4: Verify success**
 
-Run : `npm test`
-Expected : PASS (16 tests).
+Run: `npm test`
+Expected: PASS (16 tests).
 
-- [ ] **Step 5 : Test réel contre l'instance « Fallow test » (Task 3)**
+- [ ] **Step 5: Real test against the "Fallow test" instance (Task 3)**
 
-Demander à l'utilisateur d'ajouter un mod quelconque (ex. `Create: Copycats+`) dans l'instance via le Modrinth App.
-Run : `npm run sync -- --instance "Fallow test" --dry-run`
-Expected : une ligne `+ Create: Copycats+ …`, `= 12+ mod(s) inchangé(s)` (+ dépendances), aucun `-`. Puis sans `--dry-run`, répondre `o` et vérifier que `pack/mods/copycats.pw.toml` apparaît. Si `packwiz modrinth add <url de version>` n'est pas accepté par la version épinglée, remplacer l'URL par `--project-id <P> --version-id <V>` dans `commands.mjs` et son test. **Annuler ensuite ce mod de test** (`git checkout -- pack && git clean -fd pack`) : il n'est pas retenu.
+Ask the maintainer to add any mod (e.g. `Create: Copycats+`) to the instance via the Modrinth App.
+Run: `npm run sync -- --instance "Fallow test" --dry-run`
+Expected: a line `+ Create: Copycats+ …`, `= 12+ mod(s) inchangé(s)` (+ dependencies), no `-`. Then without `--dry-run`, answer `o` and check that `pack/mods/copycats.pw.toml` appears. If `packwiz modrinth add <version url>` is not accepted by the pinned version, replace the URL with `--project-id <P> --version-id <V>` in `commands.mjs` and its test. **Then undo this test mod** (`git checkout -- pack && git clean -fd pack`): it is not retained.
 
-- [ ] **Step 6 : Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add scripts && git commit -m "feat(sync): add sync-from-instance CLI with packwiz commands and config copy"
@@ -1001,15 +1001,15 @@ git add scripts && git commit -m "feat(sync): add sync-from-instance CLI with pa
 
 ---
 
-### Task 8 : CI `build.yml`
+### Task 8: CI `build.yml`
 
 **Files:**
-- Create : `.github/workflows/build.yml`
+- Create: `.github/workflows/build.yml`
 
 **Interfaces:**
-- Produces : artefact `Fallow-<version>-<sha7>` contenant le `.mrpack`.
+- Produces: artifact `Fallow-<version>-<sha7>` containing the `.mrpack`.
 
-- [ ] **Step 1 : Workflow**
+- [ ] **Step 1: Workflow**
 
 ```yaml
 name: build
@@ -1058,26 +1058,26 @@ jobs:
           path: dist/*.mrpack
 ```
 
-- [ ] **Step 2 : Push et vérifier**
+- [ ] **Step 2: Push and verify**
 
 ```bash
 git add .github && git commit -m "ci: build and export .mrpack on every push"
 git push
 gh run watch --exit-status
 ```
-Expected : run verte ; `gh run view --log` montre `npm test` OK et l'artefact `Fallow-0.1.0-xxxxxxx` est listé par `gh run view`.
+Expected: green run; `gh run view --log` shows `npm test` OK and the artifact `Fallow-0.1.0-xxxxxxx` is listed by `gh run view`.
 
 ---
 
-### Task 9 : CI `release.yml` et release v0.1.0
+### Task 9: CI `release.yml` and release v0.1.0
 
 **Files:**
-- Create : `.github/workflows/release.yml`
+- Create: `.github/workflows/release.yml`
 
 **Interfaces:**
-- Consumes : `CHANGELOG.md` (section `## [X.Y.Z]`), `pack/pack.toml` (`version`).
+- Consumes: `CHANGELOG.md` (section `## [X.Y.Z]`), `pack/pack.toml` (`version`).
 
-- [ ] **Step 1 : Workflow**
+- [ ] **Step 1: Workflow**
 
 ```yaml
 name: release
@@ -1122,9 +1122,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Fallow ${{ steps.meta.outputs.version }}" --notes-file notes.md
 
-      # Désactivé tant que le projet Modrinth n'existe pas : définir la variable MODRINTH_PROJECT_ID
-      # et le secret MODRINTH_TOKEN (créés par l'utilisateur) pour l'activer.
-      # Avant activation, vérifier les champs attendus pour un modpack : https://docs.modrinth.com/api/operations/createversion/
+      # Disabled until the Modrinth project exists: define the variable MODRINTH_PROJECT_ID
+      # and the secret MODRINTH_TOKEN (created by the maintainer) to enable it.
+      # Before enabling, check the expected fields for a modpack: https://docs.modrinth.com/api/operations/createversion/
       - name: Publish to Modrinth
         if: env.MODRINTH_TOKEN != '' && env.MODRINTH_PROJECT_ID != ''
         run: |
@@ -1140,24 +1140,24 @@ jobs:
             -F "file=@dist/Fallow-${version}.mrpack;type=application/x-modrinth-modpack+zip"
 ```
 
-- [ ] **Step 2 : Commit et push**
+- [ ] **Step 2: Commit and push**
 
 ```bash
 git add .github && git commit -m "ci: release workflow (GitHub release + optional Modrinth publish)"
 git push && gh run watch --exit-status
 ```
 
-- [ ] **Step 3 : Tag v0.1.0 — uniquement si le test de lancement de la Task 3 a réussi**
+- [ ] **Step 3: Tag v0.1.0 — only if the launch test of Task 3 succeeded**
 
-Demander confirmation à l'utilisateur, puis :
+Ask the maintainer for confirmation, then:
 ```bash
 git tag -a v0.1.0 -m "Fallow 0.1.0 — pack de base"
 git push origin v0.1.0
 gh run watch --exit-status
 gh release view v0.1.0
 ```
-Expected : release `Fallow 0.1.0` avec `Fallow-0.1.0.mrpack` et les notes du CHANGELOG ; l'étape « Publish to Modrinth » apparaît **skipped**.
+Expected: release `Fallow 0.1.0` with `Fallow-0.1.0.mrpack` and the CHANGELOG notes; the "Publish to Modrinth" step appears **skipped**.
 
-- [ ] **Step 4 : Mettre à jour le CHANGELOG**
+- [ ] **Step 4: Update the CHANGELOG**
 
-Vérifier que `## [Unreleased]` est bien présent en tête (déjà le cas) ; rien à committer si inchangé.
+Check that `## [Unreleased]` is indeed present at the top (already the case); nothing to commit if unchanged.

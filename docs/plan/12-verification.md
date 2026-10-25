@@ -1,176 +1,176 @@
-# 12. Vérification complète du 2026-10-18
+# 12. Full verification of 2026-10-18
 
-> Demandée par l'équipe : tout revoir pour adapter, modifier, supprimer ou ajouter, en cherchant à fond **comment relier les mods**, surtout Overgeared et Kaleidoscope. Si les scripts ne suffisent pas, on peut écrire des mods custom.
+> Requested by the maintainer: review everything to adapt, modify, remove or add, looking in depth at **how to link the mods**, especially Overgeared and Kaleidoscope. If scripts are not enough, custom mods can be written.
 >
-> Ce chapitre **corrige les chapitres 10 et 11** là où ils se contredisent. Les preuves (jars ouverts, versions Modrinth, tickets) sont dans les six rapports de `recherche/verif-2026-10-18/` :
-> [1 Overgeared](recherche/verif-2026-10-18/1-overgeared.md) · [2 Kaleidoscope, saisons, chaleur, soif](recherche/verif-2026-10-18/2-kaleidoscope.md) · [3 rendu, caméra, interface](recherche/verif-2026-10-18/3-client.md) · [4 monde, faune, objectifs](recherche/verif-2026-10-18/4-monde-et-objectifs.md) · [5 Create, construction, scripts](recherche/verif-2026-10-18/5-create-construction.md) · [6 gardiens des monuments](recherche/verif-2026-10-18/6-gardiens.md)
+> This chapter **corrects chapters 10 and 11** where they contradict each other. The evidence (opened jars, Modrinth versions, tickets) is in the six reports in `recherche/verif-2026-10-18/`:
+> [1 Overgeared](recherche/verif-2026-10-18/1-overgeared.md) · [2 Kaleidoscope, seasons, heat, thirst](recherche/verif-2026-10-18/2-kaleidoscope.md) · [3 rendering, camera, interface](recherche/verif-2026-10-18/3-client.md) · [4 world, fauna, goals](recherche/verif-2026-10-18/4-monde-et-objectifs.md) · [5 Create, building, scripts](recherche/verif-2026-10-18/5-create-construction.md) · [6 monument guardians](recherche/verif-2026-10-18/6-gardiens.md)
 >
-> Rien n'a été testé en jeu : chaque rapport finit par sa liste de tests.
+> Nothing has been tested in game: each report ends with its list of tests.
 
-## 12.1 Ce que la vérification change
+## 12.1 What the verification changes
 
-### Ce qui sort
+### What goes out
 
-| Mod ou fonction | Pourquoi | Preuve |
+| Mod or feature | Why | Evidence |
 |---|---|---|
-| **Freeze It and Heat It** | Retiré par l'équipe le 2026-10-18 : pas de conservation de la nourriture | — |
-| **Easy Anvils** | Il remplace l'enclume vanilla par la sienne, or Overgeared ne transforme que `minecraft:anvil` en enclume de forgeron : on ne pourrait plus forger. L'enclume d'Overgeared montre déjà ses objets en 3D | Rapport 1 |
-| **Leaves Be Gone** | Sur la liste noire d'Aeronautics, et FallingTree casse déjà les feuilles | Rapport 5 |
-| **Dynamic Surroundings** | Il touche le moteur de son comme Sound Physics (risque fort), ses pas ne valent pas Presence Footsteps, le reste fait doublon. Auroras reste en repli pour l'aurore | Rapport 3 |
-| **Entity Culling** | Trois tickets ouverts sans réponse chez Aeronautics et Sable. Le rapport 5 note un correctif des block entities depuis 1.11.0 : un dernier test avec la 1.11.3 sur un dirigeable assemblé, puis retrait s'il casse | Rapports 3 et 5 |
-| **La lightmap de Polytone** | Elle coupe More Darkness, la teinte des lunes d'Enhanced Celestials et la nuit de NML, et n'existe pas par biome en 1.21.1. Polytone ne garde que l'herbe, les feuilles et l'eau | Rapport 3 |
-| **Quark « Variant Animal Textures »** | Doublon des variantes de NML, et décale les textures de Fresh Animations | Rapport 3 |
-| **Quark « Thatch » et « Variant Bookshelves »** | NML a les mêmes blocs avec la même recette | Rapport 5 |
-| **Le brouillard propre à NML** | ATMOSPHERICS en est le seul responsable (`nomansland-client.toml`, `[fog_modifiers]`) | Rapports 3 et 4 |
-| **Les biomes d'Hybrid Aquatic** | 9 biomes, dont une rivière tropicale qui remplace la rivière vanilla, contre la décision 0003 : coupés par sa config | Rapport 4 |
-| **L'Analyzer de Wildex** | Un raccourci qui révèle les créatures sans les avoir vues | Rapport 4 |
-| **`doLimitedCrafting`** | Trois fuites : les 1 071 succès de Create rendent les recettes, la grille du sac l'ignore, les machines Create n'ont pas de joueur | Rapport 5 |
-| Améliorations four, fumoir et alimentation du sac | Contournent la cuisine et la forge | Rapport 2 |
+| **Freeze It and Heat It** | Removed by the maintainer on 2026-10-18: no food preservation | — |
+| **Easy Anvils** | It replaces the vanilla anvil with its own, but Overgeared only turns `minecraft:anvil` into a smith's anvil: forging would no longer be possible. The Overgeared anvil already shows its items in 3D | Report 1 |
+| **Leaves Be Gone** | On the Aeronautics blacklist, and FallingTree already breaks leaves | Report 5 |
+| **Dynamic Surroundings** | It touches the sound engine like Sound Physics (high risk), its footsteps are no match for Presence Footsteps, the rest is redundant. Auroras stays as a fallback for the aurora | Report 3 |
+| **Entity Culling** | Three open tickets without a reply at Aeronautics and Sable. Report 5 notes a fix for block entities since 1.11.0: one last test with 1.11.3 on an assembled airship, then removal if it breaks | Reports 3 and 5 |
+| **The Polytone lightmap** | It cuts More Darkness, the moon tint of Enhanced Celestials and the NML night, and does not exist per biome in 1.21.1. Polytone only keeps grass, leaves and water | Report 3 |
+| **Quark "Variant Animal Textures"** | Duplicate of the NML variants, and shifts the Fresh Animations textures | Report 3 |
+| **Quark "Thatch" and "Variant Bookshelves"** | NML has the same blocks with the same recipe | Report 5 |
+| **NML's own fog** | ATMOSPHERICS is the only thing responsible for it (`nomansland-client.toml`, `[fog_modifiers]`) | Reports 3 and 4 |
+| **The Hybrid Aquatic biomes** | 9 biomes, including a tropical river that replaces the vanilla river, against decision 0003: cut through its config | Report 4 |
+| **The Wildex Analyzer** | A shortcut that reveals creatures without having seen them | Report 4 |
+| **`doLimitedCrafting`** | Three leaks: Create's 1,071 advancements return the recipes, the backpack grid ignores it, Create machines have no player | Report 5 |
+| Furnace, smoker and backpack feeding upgrades | Bypass cooking and the forge | Report 2 |
 
-### Ce qui s'ajoute
+### What is added
 
-| Ajout | Rôle |
+| Addition | Role |
 |---|---|
-| **JEI, caché** | Pont pour EMI : Create, Aeronautics, Cold Sweat, Ecliptic, Quark, Exposure, Alex's Mobs et Farm & Charm n'ont qu'un plugin JEI (rapport 3). Overgeared et Kaleidoscope ont déjà un plugin EMI |
-| **AA4 Atlas** | Confirmé : l'atlas devient un objet (rapport 4) |
-| Bibliothèques Puzzles Lib, Balm, Configurable, MRU, Cloth Config | Demandées par les ajouts du chapitre 11 (rapports 3 et 5) |
-| **Un mod custom `fallow`** | Ce que les scripts ne savent pas faire (12.4) |
-| Traduction française d'Overgeared (`fr_fr.json`) | Le mod n'en a pas (rapport 1) |
+| **JEI, hidden** | Bridge for EMI: Create, Aeronautics, Cold Sweat, Ecliptic, Quark, Exposure, Alex's Mobs and Farm & Charm only have a JEI plugin (report 3). Overgeared and Kaleidoscope already have an EMI plugin |
+| **AA4 Atlas** | Confirmed: the atlas becomes an item (report 4) |
+| Libraries Puzzles Lib, Balm, Configurable, MRU, Cloth Config | Required by the additions of chapter 11 (reports 3 and 5) |
+| **A custom `fallow` mod** | What scripts cannot do (12.4) |
+| French translation of Overgeared (`fr_fr.json`) | The mod has none (report 1) |
 
-### Ce que le plan disait de faux
+### What the plan got wrong
 
-| Où | Faux | Vrai |
+| Where | Wrong | Right |
 |---|---|---|
-| 10.3, 10.10 | Une « forge » et des alliages (bronze, laiton) dans Overgeared | Pas de bloc forge : on chauffe au haut fourneau vanilla, on martèle sur l'enclume (mini-jeu), on trempe, on polit. Le seul alliage est l'acier. Le plan d'Overgeared trouvé en ruine sert à passer au diamant |
-| 06 | Overgeared a un plugin JEI | Il a un plugin EMI, et la compatibilité Sable/Aeronautics |
-| 10.5 | Kaleidoscope Compat fusionne les doublons | Il les rend interchangeables ; son mode « UNITE » casse le bacon, les pâtes et les oignons de Farm & Charm |
-| 10.7 | Freeze It and Heat It a des tags de saison | Il se règle par listes d'identifiants dans sa config, sans API KubeJS ; la saison passe par Cold Sweat |
-| `saisons_cold_sweat.js` | — | Mauvaise API : le bon schéma est `addTempModifier` + `gatherDefaultModifiers('world')` (code dans le rapport 2) |
-| 10.4 | La récompense « Spyglass Pulse » de Wildex est coupée | Il n'y a pas d'interrupteur : l'accepter, ou un petit mixin dans `fallow` |
-| 11.1 | Polytone fait une lumière plus chaude dans les clairières | Pas de lightmap par biome en 1.21.1 |
-| 11.7 | EMI regroupe les objets, et ne cache pas les recettes joueur par joueur | EMI 1.1.24 n'a pas de groupes (rapport 3 ; le rapport 5 pense que KubeJS sait le faire : à tester). AStages cache bien par joueur, mais sa licence est fermée et il touche le rendu des chunks |
-| 11.8 | Un marchand ambulant laisse les fragments du codex de Monoliths | Il n'existe pas. Seule source : 0,2 % par mob tué |
-| 11.8 | Les monuments ont des gardiens | Ce sont des spawners de breeze, que Fallow bannit. Le rapport 6 propose des gardiens tirés des mods déjà présents |
-| 11.8 | Les biomes des monuments se règlent par datapack | Par la config `config/obscuria/ancient_remnants-common.toml` ; un datapack peut ajouter, pas retirer. Sparse Structures ne les espace pas |
-| 11.7 | Ordre des caméras : Spatial GUI, Camera Overhaul, Shoulder Surfing, Real Camera | Spatial GUI, **Shoulder Surfing** (Sable a 5 mixins écrits pour lui), Camera Overhaul en première personne seulement et à 0 dans les véhicules, Real Camera en dernier (il touche la visée comme Shoulder Surfing) |
-| 10.6, 11.2 | NML remodèle cochons, vaches et calmars | 8 espèces (cochon, vache, mooshroom, poulet, mouton, lapin, calmar, calmar luisant), via Mixed Litter qu'il embarque ; on choisit espèce par espèce dans `mixed_litter-startup.toml` lesquelles laisser à Fresh Animations |
+| 10.3, 10.10 | A "forge" and alloys (bronze, brass) in Overgeared | No forge block: ingots are heated in the vanilla blast furnace, hammered on the anvil (mini-game), quenched, polished. The only alloy is steel. The Overgeared blueprint found in ruins is used to move on to diamond |
+| 06 | Overgeared has a JEI plugin | It has an EMI plugin, and Sable/Aeronautics compatibility |
+| 10.5 | Kaleidoscope Compat merges duplicates | It makes them interchangeable; its "UNITE" mode breaks Farm & Charm's bacon, pasta and onions |
+| 10.7 | Freeze It and Heat It has season tags | It is configured through lists of identifiers in its config, with no KubeJS API; the season goes through Cold Sweat |
+| `saisons_cold_sweat.js` | — | Wrong API: the right pattern is `addTempModifier` + `gatherDefaultModifiers('world')` (code in report 2) |
+| 10.4 | The Wildex "Spyglass Pulse" reward is cut | There is no switch: accept it, or a small mixin in `fallow` |
+| 11.1 | Polytone makes a warmer light in the clearings | No per-biome lightmap in 1.21.1 |
+| 11.7 | EMI groups items, and does not hide recipes player by player | EMI 1.1.24 has no groups (report 3; report 5 thinks KubeJS can do it: to be tested). AStages does hide per player, but its licence is closed and it touches chunk rendering |
+| 11.8 | A wandering trader leaves the Monoliths codex fragments | It does not exist. Only source: 0.2% per mob killed |
+| 11.8 | The monuments have guardians | They are breeze spawners, which Fallow bans. Report 6 proposes guardians drawn from the mods already present |
+| 11.8 | The monument biomes are set by datapack | Through the config `config/obscuria/ancient_remnants-common.toml`; a datapack can add, not remove. Sparse Structures does not space them |
+| 11.7 | Camera order: Spatial GUI, Camera Overhaul, Shoulder Surfing, Real Camera | Spatial GUI, **Shoulder Surfing** (Sable has 5 mixins written for it), Camera Overhaul in first person only and at 0 in vehicles, Real Camera last (it touches aiming like Shoulder Surfing) |
+| 10.6, 11.2 | NML remodels pigs, cows and squids | 8 species (pig, cow, mooshroom, chicken, sheep, rabbit, squid, glow squid), through Mixed Litter which it bundles; which ones to leave to Fresh Animations is chosen species by species in `mixed_litter-startup.toml` |
 
-## 12.2 Les liens, système par système
+## 12.2 The links, system by system
 
-Chaque ligne est une config, un tag, un datapack ou un script ; le rapport cité donne le détail.
+Each line is a config, a tag, a datapack or a script; the cited report gives the detail.
 
-### La forge (Overgeared), rapport 1
+### The forge (Overgeared), report 1
 
-- **Le martelage reste manuel** : la qualité (`poor` à `master`) vient du mini-jeu. Create apporte la chaleur et la quantité : la presse fait les plaques, le mélangeur l'acier. On interdit le chauffage des lingots au ventilateur sur lave (suffixe `_manual_only`).
-- **Verrou gratuit** : le fer demande une pioche en cuivre, le zinc de Create une pioche en fer. Le laiton passe donc après la forge sans script.
-- **Pièces critiques** : un essieu ou une pale d'hélice peut exiger une qualité minimale (ingrédient NeoForge `neoforge:components`).
-- **Les plans** : les plans d'Overgeared d'un type caché (`lanterne`, `rail`, `aerostat`…) deviennent la condition pour forger les pièces qui verrouillent les machines. La Lanterne de clairière en devient une (recette dans le rapport 1).
-- **Nether fermé** : le four du Nether, le fourneau de coulée et la netherite sont cachés ; le gabarit diamant entre dans le butin des ruines de NML.
-- **Chaleur** : le haut fourneau réchauffe déjà pour Cold Sweat ; le four à alliage s'ajoute. Le soufflet de Supplementaries accélère le haut fourneau.
-- **L'équipement des autres mods** en métal (couteaux de Kaleidoscope compris) passe par la forge ; les trophées de créatures restent à l'établi.
+- **Hammering stays manual**: quality (`poor` to `master`) comes from the mini-game. Create brings heat and quantity: the press makes the plates, the mixer makes steel. Heating ingots with a fan over lava is forbidden (suffix `_manual_only`).
+- **Free lock**: iron requires a copper pickaxe, Create's zinc an iron pickaxe. Brass therefore comes after the forge without any script.
+- **Critical parts**: a shaft or a propeller blade can require a minimum quality (NeoForge ingredient `neoforge:components`).
+- **Blueprints**: Overgeared blueprints of a hidden type (`lanterne`, `rail`, `aerostat`…) become the condition for forging the parts that lock the machines. The Clearing Lantern becomes one (recipe in report 1).
+- **Nether closed**: the Nether furnace, the casting furnace and netherite are hidden; the diamond template enters the loot of NML ruins.
+- **Heat**: the blast furnace already heats for Cold Sweat; the alloy furnace is added. The Supplementaries bellows speeds up the blast furnace.
+- **Metal equipment from other mods** (Kaleidoscope knives included) goes through the forge; creature trophies stay at the workbench.
 
-### La cuisine, les saisons et le corps (Kaleidoscope et les autres), rapport 2
+### Cooking, seasons and the body (Kaleidoscope and the others), report 2
 
-- **Chaleur** : un feu de camp ou un fourneau Farm & Charm chauffe le wok, la marmite, le cuiseur et la théière de Kaleidoscope. Cold Sweat ne compte pas ces fourneaux : on les ajoute avec un effet faible. Le Feu de veille des clairières reçoit le tag de chaleur de Kaleidoscope et une entrée Cold Sweat : on peut y cuisiner et s'y réchauffer.
-- **Saisons** : les fichiers de saison de Farm & Charm sont au mauvais endroit, ses cultures poussent toute l'année. On pose les tags `eclipticseasons:crops/*`. Celles de Kaleidoscope sont déjà saisonnières.
-- **Un seul pont saison vers Cold Sweat** donne la saison aux joueurs et à la soif de Thirst Was Taken, qui lit la température du corps.
-- **Doublons** : on garde les tomates, la laitue, la farine et la pâte de Kaleidoscope, le four de Farm & Charm ; la rôtissoire Farm & Charm et l'épouvantail Kaleidoscope sortent ; la marmite Farm & Charm aussi, ses recettes passent dans celle de Kaleidoscope. Farm & Charm reste en 1.1.25 (la 1.1.27 ajoute une planche à découper et des hachoirs en double).
-- **Animaux** : leur nourriture se règle par tags, leur reproduction par saison avec `eclipticseasons:breed/*`.
-- **Le sac** : son tuyau ne désaltère pas avec Thirst Was Taken ; seul du Java le corrige (12.4). Freeze It and Heat It étant retiré, la nourriture ne se gâte nulle part, ce qui règle aussi le « sac réfrigérateur ».
+- **Heat**: a campfire or a Farm & Charm stove heats the Kaleidoscope wok, pot, cooker and teapot. Cold Sweat does not count these stoves: they are added with a weak effect. The clearings' Vigil Fire receives the Kaleidoscope heat tag and a Cold Sweat entry: you can cook and warm up there.
+- **Seasons**: Farm & Charm's season files are in the wrong place, its crops grow all year round. The `eclipticseasons:crops/*` tags are applied. Kaleidoscope's are already seasonal.
+- **A single season bridge to Cold Sweat** gives the season to players and to the thirst of Thirst Was Taken, which reads body temperature.
+- **Duplicates**: we keep Kaleidoscope's tomatoes, lettuce, flour and dough, and Farm & Charm's oven; the Farm & Charm rotisserie and the Kaleidoscope scarecrow go out; so does the Farm & Charm pot, its recipes moving into Kaleidoscope's. Farm & Charm stays on 1.1.25 (1.1.27 adds a duplicate cutting board and choppers).
+- **Animals**: their food is set by tags, their breeding by season with `eclipticseasons:breed/*`.
+- **The backpack**: its hose does not quench thirst with Thirst Was Taken; only Java fixes it (12.4). With Freeze It and Heat It removed, food does not spoil anywhere, which also settles the "refrigerator backpack".
 
-### Le monde et les objectifs, rapport 4
+### The world and the goals, report 4
 
-- **Clairières** : `/fillbiome` alignée sur 4 blocs et sur toute la hauteur (8×336×8). Trois variantes du biome (froide, tempérée, chaude) pour qu'Ecliptic garde les saisons, une liste explicite des biomes NML convertibles, les spawns réglés par les tags `naturalist:has_*` et une règle In Control! contre les hostiles. La brume ne se met à jour que quand le joueur change de cellule de 4 blocs (rapport 3).
-- **Monoliths** :
-  - les 6 monuments sont rattachés à des biomes NML, avec un espacement de 64 à 80 chunks ;
-  - l'Elderheart est une entité sans événement. Un script qui le surveille lance la clairière autour du monument réveillé ;
-  - les bénédictions sont permanentes, une à la fois, gardées à la mort. Celle du guerrier est presque nulle dans Fallow et peut être remplacée par une autre via son tag ;
-  - les fragments du codex entrent dans le butin des ruines NML (coffres et archéologie), et la photo d'un monument avec Exposure en donne un. On peut ajouter des pages Fallow au codex par datapack.
-- **Zoo** :
-  - **transport** : laisse, bateau pour les petits animaux, et surtout le **siège Create**, sur un train ou un dirigeable, qui accepte n'importe quel animal ;
-  - **réglages** : la charrette d'Icy's passe en 2.1.4. Les animaux d'Hybrid Aquatic n'ont pas de seau, et le lion attaque les chevaux ;
-  - **plaque d'enclos** : Wildex ne reconnaît pas d'enclos. Une plaque KubeJS compte les espèces présentes et se branche sur le rappel `onDiscoveryChanged` de Wildex pour les paliers ;
-  - **complétion** : sans liste d'exclusions (Nether, End, monstres bannis, doublons coupés), le bestiaire ne peut pas être complété.
-- **Doublons de faune** : environ 14 espèces existent en double. Le rapport 4 dit laquelle garder, par config ou biome modifier, sans retirer aucun mod (décision de l'équipe).
-- **Autres réglages** : la Friend Moon de NML entre en concurrence avec Enhanced Celestials, les spawners vanilla des donjons NML tourneront à vide, et les jarres NML se regarnissent. `spreadFactor 3` risque de rendre les ruines NML très rares.
+- **Clearings**: `/fillbiome` aligned to 4 blocks and across the whole height (8×336×8). Three biome variants (cold, temperate, warm) so that Ecliptic keeps the seasons, an explicit list of convertible NML biomes, spawns set by the `naturalist:has_*` tags and an In Control! rule against hostiles. The mist only updates when the player changes 4-block cell (report 3).
+- **Monoliths**:
+  - the 6 monuments are tied to NML biomes, with a spacing of 64 to 80 chunks;
+  - the Elderheart is an entity with no event. A script that watches it starts the clearing around the awakened monument;
+  - blessings are permanent, one at a time, kept on death. The warrior's is almost null in Fallow and can be replaced by another through its tag;
+  - the codex fragments enter the loot of NML ruins (chests and archaeology), and a photo of a monument with Exposure gives one. Fallow pages can be added to the codex by datapack.
+- **Zoo**:
+  - **transport**: lead, boat for small animals, and above all the **Create seat**, on a train or an airship, which accepts any animal;
+  - **settings**: the Icy's cart moves to 2.1.4. Hybrid Aquatic animals have no bucket, and the lion attacks horses;
+  - **enclosure plaque**: Wildex does not recognise enclosures. A KubeJS plaque counts the species present and hooks into Wildex's `onDiscoveryChanged` callback for the tiers;
+  - **completion**: without an exclusion list (Nether, End, banned monsters, cut duplicates), the bestiary cannot be completed.
+- **Fauna duplicates**: about 14 species exist twice. Report 4 says which to keep, by config or biome modifier, without removing any mod (maintainer's decision).
+- **Other settings**: NML's Friend Moon competes with Enhanced Celestials, the vanilla spawners of NML dungeons will run empty, and NML jars refill. `spreadFactor 3` risks making NML ruins very rare.
 
-### Les gardiens des monuments, rapport 6
+### The monument guardians, report 6
 
-Freeze It and Heat It sorti, il fallait remplacer les spawners de breeze d'Ancient Remnants. **Aucun mod à ajouter** : Mowzie's Mobs et Companions! ont déjà des gardiens endormis qui vont avec le ton.
+With Freeze It and Heat It gone, the Ancient Remnants breeze spawners had to be replaced. **No mod to add**: Mowzie's Mobs and Companions! already have sleeping guardians that fit the tone.
 
-| Monument | Gardien | Pourquoi |
+| Monument | Guardian | Why |
 |---|---|---|
-| Monolithe guerrier | **Ferrous Wroughtnaut** (Mowzie's) | Une armure de héros immobile tant qu'on ne la frappe pas, qui revient à sa place |
-| Monument des conifères | **Frostmaw** (Mowzie's) | Un géant des neiges endormi, invoqué avec son cristal et sans disparition |
-| Monolithe chasseur | **Tongbi, le Sculpteur** (Mowzie's) | Une épreuve d'agilité chronométrée plutôt qu'un combat, comme la bénédiction « agilité et précision ». Il lui faut le ciel ouvert |
-| Monument du chêne | **Sacred Pontiff** (Companions!) | Un prêtre de mousse qu'on réveille de la main, boss en deux phases, qui se pétrifie en mourant |
-| Monument du cerisier, monolithe sentinelle | Aucun | Le monument de la vie et les moines pacifiques, comme le dit le texte du mod |
+| Warrior monolith | **Ferrous Wroughtnaut** (Mowzie's) | A suit of hero's armour that stays still until struck, and returns to its place |
+| Conifer monument | **Frostmaw** (Mowzie's) | A sleeping snow giant, summoned with its crystal and without despawning |
+| Hunter monolith | **Tongbi, the Sculptor** (Mowzie's) | A timed agility trial rather than a fight, like the "agility and precision" blessing. It needs an open sky |
+| Oak monument | **Sacred Pontiff** (Companions!) | A moss priest awakened by hand, two-phase boss, who petrifies as he dies |
+| Cherry monument, sentinel monolith | None | The monument of life and the peaceful monks, as the mod's text says |
 
-- **La bénédiction attend la victoire** : l'Elderheart ne donne rien sans sa donnée `Blessing`. Le script la retire à la création, fait apparaître le gardien une fois quand un joueur approche, puis la rend à sa mort (ou quand le Sculpteur part après l'épreuve). Il ouvre alors la clairière et donne la page du codex. C'est le même script que celui de la clairière.
-- **Les spawners sortent par datapack** : les deux listes de processeurs du mod (`monolith`, `monument`) remplacent le spawner par du tuf ciselé.
-- **Les gardiens restent uniques** : les apparitions naturelles du Wroughtnaut, du Frostmaw et du Sculpteur sont coupées par datapack, sinon on croiserait une salle de Wroughtnaut tous les 15 chunks environ.
-- Les salles des Elderhearts sont étroites : chaque boss se pose au sol, à l'extérieur.
-- **Si l'équipe préfère un vrai combat au Sculpteur** : Bosses of Mass Destruction (1,95 Mo), dont on ne garde que l'Obsidilith, un monolithe d'obsidienne vivant ; ses structures se coupent par datapack. Réserve : il pose de l'obsidienne et son ambiance violette rappelle l'End. Legendary Monsters irait bien au thème mais pèse 44,75 Mo pour 37 créatures : écarté.
+- **The blessing waits for victory**: the Elderheart gives nothing without its `Blessing` data. The script removes it on creation, spawns the guardian once when a player approaches, then gives it back on its death (or when the Sculptor leaves after the trial). It then opens the clearing and gives the codex page. It is the same script as the clearing one.
+- **The spawners go out by datapack**: the mod's two processor lists (`monolith`, `monument`) replace the spawner with chiseled tuff.
+- **The guardians stay unique**: the natural spawns of the Wroughtnaut, the Frostmaw and the Sculptor are cut by datapack, otherwise you would come across a Wroughtnaut room about every 15 chunks.
+- The Elderheart rooms are narrow: each boss is placed on the ground, outside.
+- **If the maintainer prefers a real fight for the Sculptor**: Bosses of Mass Destruction (1.95 MB), of which only the Obsidilith is kept, a living obsidian monolith; its structures are cut by datapack. Caveat: it places obsidian and its purple atmosphere recalls the End. Legendary Monsters would suit the theme but weighs 44.75 MB for 37 creatures: rejected.
 
-### Create et la construction, rapport 5
+### Create and building, report 5
 
-- **Les plans d'ingénieur, nouvelle méthode** : le plan est un **ingrédient gardé** de la recette (`keepIngredient`). Il reste dans la grille, se voit posé sur l'établi grâce à Visual Workbench, marche dans les machines Create, se prête et peut se perdre. Les plans d'Overgeared couvrent les pièces forgées. Le savoir n'est plus personnel mais physique, ce qui va bien avec un monde permanent entre amis.
-- **Le bois** : les recettes de scie de NML ne se chargent pas (mauvais dossier). Un `bois.js` en écrit 16. FallingTree reconnaît déjà les haches d'Overgeared ; sa taille maximale (100) monte pour les grands arbres de NML.
-- **Doublons de construction** : règle « le style de NML d'abord ». Le tableau 2.2 du rapport 5 tranche bloc par bloc (briques, chaume, bibliothèques, appliques, galets…). La rhyolite de Twigs, générée dans tout l'Overworld, est coupée.
-- **Every Compat** : liste noire pour les bois Quark désactivés (Ancient, Azalea, Blossom), qui génèrent quand même environ 150 blocs, et pour son module Twigs. Les mods de construction ajoutent environ 1 850 blocs, à mesurer avec spark.
-- **Dirigeables** :
-  - les coffres Lootr sont marqués immobiles ;
-  - le mobilier et le sac reçoivent une masse Sable par tags ;
-  - le message de coordonnées du sac à la mort est coupé ;
-  - la tombe GraveStone d'une mort en vol flotte probablement dans le ciel : à tester.
-- **Le Dissipateur** : KubeJS Create ne crée pas de bloc cinétique. Un prototype KubeJS, une tête posée devant un ventilateur Create qui lit sa vitesse (c'est le ventilateur qui consomme le stress), permet de juger l'idée. Le vrai bloc va dans `fallow`.
-- **Scripts à corriger** : le groupe MoreJS s'appelle `MoreJS` ; LootJS 3 n'a plus `.when()` ; `NativeEvents.onEvent` attend une classe ; il faut supprimer les 15 gisements par défaut de Create Ore Excavation.
+- **Engineer's blueprints, new method**: the blueprint is a **kept ingredient** of the recipe (`keepIngredient`). It stays in the grid, is visible placed on the workbench thanks to Visual Workbench, works in Create machines, can be lent and can be lost. Overgeared blueprints cover forged parts. Knowledge is no longer personal but physical, which suits a permanent world among friends.
+- **Wood**: the NML saw recipes do not load (wrong folder). A `bois.js` writes 16 of them. FallingTree already recognises Overgeared axes; its maximum size (100) goes up for NML's large trees.
+- **Building duplicates**: rule "NML style first". Table 2.2 of report 5 decides block by block (bricks, thatch, bookshelves, wall lamps, pebbles…). Twigs' rhyolite, generated across the whole Overworld, is cut.
+- **Every Compat**: blacklist for the disabled Quark woods (Ancient, Azalea, Blossom), which still generate about 150 blocks, and for its Twigs module. The building mods add about 1,850 blocks, to be measured with spark.
+- **Airships**:
+  - Lootr chests are marked immovable;
+  - furniture and the backpack receive a Sable mass through tags;
+  - the backpack's coordinates message on death is cut;
+  - the GraveStone grave of a death in flight probably floats in the sky: to be tested.
+- **The Dissipator**: KubeJS Create does not create a kinetic block. A KubeJS prototype, a head placed in front of a Create fan that reads its speed (the fan is what consumes the stress), makes it possible to judge the idea. The real block goes into `fallow`.
+- **Scripts to fix**: the MoreJS group is called `MoreJS`; LootJS 3 no longer has `.when()`; `NativeEvents.onEvent` expects a class; the 15 default deposits of Create Ore Excavation must be removed.
 
-### Le rendu, rapport 3
+### Rendering, report 3
 
-- **ATMOSPHERICS efface le ciel des autres mods** : la lune d'Enhanced Celestials (donc la lune blanche) et les soleils doubles de NML ne se voient plus. C'est le plus gros trou trouvé côté client.
-- **Ses presets** : les biomes NML doivent y être nommés un par un, et le fichier renommé à chaque version (`fallow_v1`, `fallow_v2`…) pour être réappliqué.
-- **Polytone** : il ne garde que l'herbe, les feuilles et l'eau. Sa 5.x modifie le rendu des chunks de Sodium : on la fige après test, ou on prend la 4.5.3.
-- **Petits réglages** :
-  - MB-3D passe sous Amendments, pour ses lanternes ;
-  - Particular n'a pas d'entrée pour les feuilles de NML, qu'il faut ajouter ;
-  - Sodium efface le fond de Seamless Loading Screen (cosmétique ; le mod n'est plus maintenu).
+- **ATMOSPHERICS erases the sky of other mods**: the Enhanced Celestials moon (hence the white moon) and the NML double suns are no longer visible. This is the biggest gap found on the client side.
+- **Its presets**: the NML biomes must be named there one by one, and the file renamed at each version (`fallow_v1`, `fallow_v2`…) to be reapplied.
+- **Polytone**: it only keeps grass, leaves and water. Its 5.x modifies Sodium's chunk rendering: pin it after testing, or take 4.5.3.
+- **Small settings**:
+  - MB-3D goes below Amendments, for its lanterns;
+  - Particular has no entry for NML leaves, which must be added;
+  - Sodium erases the background of Seamless Loading Screen (cosmetic; the mod is no longer maintained).
 
-## 12.3 Versions à monter avant de figer le monde
+## 12.3 Versions to upgrade before pinning the world
 
-NML 1.6.1, Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, Kaleidoscope Cookery 1.6.0, Ecliptic 0.15.4.1, Icy's Better Horses 2.1.4, Friends & Foes. Cold Sweat reste en 2.4.3.1 et Farm & Charm en 1.1.25 jusqu'à test. Supplementaries 4.0.2 est une nouvelle version majeure : relire sa config avant de monter. KubeJS Create et Steam 'n' Rails sont en bêta.
+NML 1.6.1, Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, Kaleidoscope Cookery 1.6.0, Ecliptic 0.15.4.1, Icy's Better Horses 2.1.4, Friends & Foes. Cold Sweat stays on 2.4.3.1 and Farm & Charm on 1.1.25 until tested. Supplementaries 4.0.2 is a new major version: reread its config before upgrading. KubeJS Create and Steam 'n' Rails are in beta.
 
-## 12.4 Le mod custom `fallow`
+## 12.4 The custom `fallow` mod
 
-Les scripts et les données couvrent presque tout. Ce qui reste demande du Java. Je propose **un seul mod `fallow`** (NeoForge 1.21.1), découpé en modules qu'on active un par un, plutôt que plusieurs petits mods.
+Scripts and data cover almost everything. What remains requires Java. Proposed: **a single `fallow` mod** (NeoForge 1.21.1), split into modules enabled one by one, rather than several small mods.
 
-| Module | Ce qu'il fait | Pourquoi pas en script | Taille | Priorité |
+| Module | What it does | Why not in a script | Size | Priority |
 |---|---|---|---|---|
-| **ciel** (client) | Redessine la lune d'Enhanced Celestials, donc la lune blanche, par-dessus le ciel d'ATMOSPHERICS ; vide le cache de brume après une conversion en clairière | ATMOSPHERICS remplace tout le dessin du ciel | 4 à 6 classes, des mixins | **Haute** : sinon la lune blanche est invisible |
-| **dissipateur** | Vrai bloc cinétique Create : consomme du stress, s'affiche aux lunettes d'ingénieur, a son Ponder, convertit le rayon de 64 | KubeJS Create ne crée pas de bloc cinétique | 8 à 12 classes | Moyenne : après le prototype KubeJS |
-| **sac** | Le tuyau de Traveler's Backpack désaltère (Thirst Was Taken) | Les deux mods ne se parlent pas, aucun événement exposé | 2 à 3 classes | Moyenne |
-| **tombe** | La tombe descend au sol quand on meurt en vol | GraveStone pose la tombe au point de mort | 2 classes | Seulement si le test échoue |
-| **voies** | Voies Steam 'n' Rails dans les bois de NML | Steam 'n' Rails ne génère que pour les bois qu'il connaît | 3 à 5 classes | Basse |
-| **plans** | Un savoir des plans propre à chaque joueur, sans fuite | KubeJS 2101 ne verrouille plus une recette par joueur | 7 à 10 classes | Seulement si l'équipe veut un savoir personnel plutôt que physique |
-| **finitions** | Vraies étincelles aux coups de marteau d'Overgeared ; couper le Spyglass Pulse de Wildex | Pas d'événement côté KubeJS | 2 à 4 classes | Basse |
+| **ciel** (client) | Redraws the Enhanced Celestials moon, hence the white moon, over the ATMOSPHERICS sky; empties the mist cache after a clearing conversion | ATMOSPHERICS replaces the whole sky rendering | 4 to 6 classes, mixins | **High**: otherwise the white moon is invisible |
+| **dissipateur** | Real Create kinetic block: consumes stress, shows on engineer's goggles, has its Ponder, converts the radius of 64 | KubeJS Create does not create a kinetic block | 8 to 12 classes | Medium: after the KubeJS prototype |
+| **sac** | The Traveler's Backpack hose quenches thirst (Thirst Was Taken) | The two mods do not talk to each other, no event exposed | 2 to 3 classes | Medium |
+| **tombe** | The grave drops to the ground when you die in flight | GraveStone places the grave at the point of death | 2 classes | Only if the test fails |
+| **voies** | Steam 'n' Rails tracks in NML woods | Steam 'n' Rails only generates for the woods it knows | 3 to 5 classes | Low |
+| **plans** | Blueprint knowledge specific to each player, without leaks | KubeJS 2101 no longer locks a recipe per player | 7 to 10 classes | Only if the maintainer wants personal rather than physical knowledge |
+| **finitions** | Real sparks on Overgeared hammer strikes; cut the Wildex Spyglass Pulse | No event on the KubeJS side | 2 to 4 classes | Low |
 
-Le mod se construit dans le dépôt, sous un dossier à part (`mods-custom/fallow/`), avec la CI GitHub pour le compiler. Il ne touche jamais au code des autres mods, seulement par mixins ciblés et par leurs API.
+The mod is built in the repository, in a separate folder (`mods-custom/fallow/`), with GitHub CI to compile it. It never touches the code of other mods, only through targeted mixins and their APIs.
 
-> **Suite.** Les modules `ciel` et `sac` existent en version 0.1.0, non testée en jeu : voir [mod-fallow.md](mod-fallow.md). Le mod du pack étant Thirst Was Reclaimed, c'est lui que vise `sac`.
+> **Follow-up.** The `ciel` and `sac` modules exist in version 0.1.0, untested in game: see [mod-fallow.md](mod-fallow.md). Since the pack's mod is Thirst Was Reclaimed, that is the one `sac` targets.
 
-## 12.5 Décisions qui s'ajoutent (suite du 10.12)
+## 12.5 Decisions that are added (continuing 10.12)
 
-| # | Sujet | Défaut retenu | Alternative |
+| # | Subject | Default retained | Alternative |
 |---|---|---|---|
-| 14 | Plans d'ingénieur | Plan physique, gardé dans la recette, plus les plans d'Overgeared pour les pièces forgées | Savoir personnel par joueur (module `plans`) |
-| 15 | Gardiens des monuments | Wroughtnaut, Frostmaw, Sculpteur et Sacred Pontiff, tirés des mods présents ; la bénédiction attend leur défaite (rapport 6) | Obsidilith de Bosses of Mass Destruction à la place du Sculpteur, ou des monuments vides |
-| 16 | Lune blanche visible | Module `ciel` du mod `fallow` | Abandonner la lune blanche |
-| 17 | Mod custom `fallow` | Oui, modules `ciel`, `dissipateur` et `sac` d'abord | Seulement des scripts, en acceptant les trous listés |
-| 18 | Boire au tuyau du sac | Module `sac` | Le réservoir du sac ne sert qu'à transporter de l'eau |
+| 14 | Engineer's blueprints | Physical blueprint, kept in the recipe, plus Overgeared blueprints for forged parts | Personal knowledge per player (`plans` module) |
+| 15 | Monument guardians | Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff, drawn from the present mods; the blessing waits for their defeat (report 6) | Obsidilith from Bosses of Mass Destruction in place of the Sculptor, or empty monuments |
+| 16 | Visible white moon | `ciel` module of the `fallow` mod | Give up the white moon |
+| 17 | Custom `fallow` mod | Yes, `ciel`, `dissipateur` and `sac` modules first | Scripts only, accepting the listed gaps |
+| 18 | Drinking from the backpack hose | `sac` module | The backpack tank only serves to carry water |
 
-## 12.6 Ordre de travail proposé
+## 12.6 Proposed order of work
 
-1. Monter les versions (12.3) sur une branche de test et lancer le pack tel quel.
-2. Faire les tests qui changent ce qu'on peut construire : le rappel Wildex, le déclenchement serveur d'Exposure, un gros animal assis pendant un vol, la lune avec ATMOSPHERICS, Entity Culling sur un dirigeable.
-3. Écrire les configs et les scripts corrigés (rapports 1, 2, 4 et 5), un système à la fois.
-4. Commencer `fallow` par le module `ciel`.
+1. Upgrade the versions (12.3) on a test branch and launch the pack as is.
+2. Run the tests that change what can be built: the Wildex callback, the Exposure server trigger, a large animal seated during a flight, the moon with ATMOSPHERICS, Entity Culling on an airship.
+3. Write the corrected configs and scripts (reports 1, 2, 4 and 5), one system at a time.
+4. Start `fallow` with the `ciel` module.

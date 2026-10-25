@@ -1,40 +1,40 @@
-# Le pack de ressources `fallow-interface`
+# The `fallow-interface` resource pack
 
-Demande de l'équipe du 2026-10-19 : adapter le ton de Kaleidoscope, Overgeared et Wildex à Dark Coffee GUI, qu'aucun pack ne couvre. Formats et couleurs lus dans les jars et les textures ; **rien n'a été vu en jeu.**
+Request from the maintainer on 2026-10-19: match the look of Kaleidoscope, Overgeared and Wildex to Dark Coffee GUI, which no pack covers. Formats and colours were read from the jars and the textures; **nothing has been seen in game.**
 
-> **Retiré du pack le 2026-10-19.** Ni la version recolorée ni celle aux éléments dessinés par Fallow n'ont convaincu l'équipe. Une version faite avec les éléments mêmes de Dark Coffee et Modded Coffee est proposée à leur auteur (RestlessPip, par les issues GitHub de `darkcoffeegui`) : Dark Coffee étant « tous droits réservés », elle n'entrera dans le pack que s'il l'intègre à Modded Coffee GUI ou nous autorise à la distribuer. En attendant, ces écrans gardent leur gris d'origine. La suite de cette page décrit la version retirée ; les licences et les limites restent valables.
+> **Removed from the pack on 2026-10-19.** Neither the recoloured version nor the one with Fallow-drawn elements won the maintainer over. A version made with the actual elements of Dark Coffee and Modded Coffee has been proposed to their author (RestlessPip, through the GitHub issues of `darkcoffeegui`): since Dark Coffee is "all rights reserved", it will only enter the pack if he integrates it into Modded Coffee GUI or allows us to distribute it. In the meantime, these screens keep their original grey. The rest of this page describes the removed version; the licences and limits remain valid.
 
-## Ce qu'il contient
+## What it contains
 
-`pack/resourcepacks/fallow-interface/`, 24 textures, mêmes tailles et même transparence que les originaux :
-- **Overgeared** (14) : les 9 écrans (enclumes, fours, table d'empennage, établi à plans, taille de la pierre), la barre du mini-jeu de forge, le fond EMI de l'enclume et les 4 boutons de filtre du livre de recettes ;
-- **Kaleidoscope** (8) : les fonds de recettes affichés dans EMI ; seules les cases et les flèches changent, les dessins des blocs restent ;
-- **Wildex** (2) : le fond du livre (thème VINTAGE, par défaut) et le fond rouge des trophées.
+`pack/resourcepacks/fallow-interface/`, 24 textures, same sizes and same transparency as the originals:
+- **Overgeared** (14): the 9 screens (anvils, furnaces, fletching table, blueprint workbench, stonecutting), the forging mini-game bar, the EMI anvil background and the 4 filter buttons of the recipe book;
+- **Kaleidoscope** (8): the recipe backgrounds shown in EMI; only the slots and arrows change, the block drawings stay;
+- **Wildex** (2): the book background (VINTAGE theme, the default) and the red trophy background.
 
-**Éléments dessinés** (2026-10-19, à la demande de l'équipe, pour aller au-delà des couleurs) : une petite bibliothèque d'éléments propres à Fallow, appliqués à chaque écran d'Overgeared et aux fonds de Kaleidoscope, au pixel près de la disposition d'origine :
-- case 18×18 et grande case 26×26 en creux : bord sombre en haut et à gauche, bord clair en bas et à droite, ombre intérieure de 2 px, coins coupés ;
-- flèche de progression à queue arrondie, arête claire en haut et sombre en bas ; la flèche pleine suit le même masque ;
-- fond à courtes fibres horizontales et quelques points sombres ;
-- cadre à contour sombre, liseré clair en haut et à gauche, ombre en bas et à droite ;
-- rainure de 2 px entre l'écran et l'inventaire du joueur.
+**Drawn elements** (2026-10-19, at the maintainer's request, to go beyond colours): a small library of elements specific to Fallow, applied to every Overgeared screen and to the Kaleidoscope backgrounds, pixel-exact to the original layout:
+- recessed 18×18 slot and large 26×26 slot: dark edge at the top and left, light edge at the bottom and right, 2 px inner shadow, cut corners;
+- progress arrow with a rounded tail, light ridge on top and dark on the bottom; the filled arrow follows the same mask;
+- background with short horizontal fibres and a few dark dots;
+- frame with a dark outline, light trim at the top and left, shadow at the bottom and right;
+- 2 px groove between the screen and the player inventory.
 
-Dark Coffee est « tous droits réservés » : rien de ses textures n'est copié. Ses cases sont des pastilles en relief aux coins ronds, sa flèche un losange orné, son fond des grains de café ; les nôtres en reprennent l'esprit sans les reproduire (15 % des pixels hors aplats coïncident sur un four comparé au nôtre, aucun bloc de 6×6 commun). Vérifié par script : mêmes tailles et même transparence que les originaux, chaque case de l'original couverte par une case dessinée au même rectangle, aucune case ajoutée ni déplacée, flèches vide et pleine superposées. Sur les fonds transparents de Kaleidoscope et d'EMI, les flèches gardent leur silhouette d'origine avec notre ombrage, et les dessins des blocs sont identiques à l'octet près. Les cases restent jointives dans les grilles : les espacer les déplacerait.
+Dark Coffee is "all rights reserved": none of its textures is copied. Its slots are raised pads with rounded corners, its arrow an ornate diamond, its background coffee beans; ours take up the spirit without reproducing them (15% of the pixels outside flat areas coincide on a furnace compared with ours, no 6×6 block in common). Checked by script: same sizes and same transparency as the originals, every slot of the original covered by a drawn slot at the same rectangle, no slot added or moved, empty and filled arrows superimposed. On the transparent Kaleidoscope and EMI backgrounds, the arrows keep their original silhouette with our shading, and the block drawings are byte-identical. Slots stay contiguous in the grids: spacing them out would move them.
 
-Correspondance des couleurs, reprise de Dark Coffee (des valeurs, aucun pixel) : fond `#C6C6C6` → `#451D21`, contour → `#2A0614`, biseaux → liseré `#B18469`, intérieur des cases `#8B8B8B` → `#815648` (ombre `#693F35`), bord bas des cases → `#582E2B`, flèche de progression → `#F1BA75`. Sur le livre de Wildex, l'acier devient du laiton et le bois tire vers le brun ; les pages restent claires, parce que son texte est écrit en `#2B1A10` dans le code.
+Colour mapping, taken from Dark Coffee (values, no pixels): background `#C6C6C6` → `#451D21`, outline → `#2A0614`, bevels → trim `#B18469`, slot interior `#8B8B8B` → `#815648` (shadow `#693F35`), slot bottom edge → `#582E2B`, progress arrow → `#F1BA75`. On the Wildex book, steel becomes brass and the wood leans towards brown; the pages stay light, because its text is written in `#2B1A10` in the code.
 
-Les flammes, la barre jaune et les zones vertes du mini-jeu ne changent pas : elles doivent rester lisibles.
+The flames, the yellow bar and the green zones of the mini-game do not change: they must stay readable.
 
 ## Licences
 
-Les trois mods permettent de publier des textures modifiées : Kaleidoscope en CC BY-NC-SA 4.0 (nos fichiers sous la même licence), Overgeared en MIT, Wildex en CC BY-NC 4.0. Le détail et l'avis MIT sont dans `CREDITS.md` du pack. Les clauses « NC » interdisent tout usage commercial : pas de monétisation de Fallow sur Modrinth tant que ces textures sont dans le pack. Le titulaire exact de la licence MIT d'Overgeared n'a pas pu être vérifié (aucun fichier LICENSE dans le jar) ; l'auteur déclaré est StirDrem.
+All three mods allow publishing modified textures: Kaleidoscope under CC BY-NC-SA 4.0 (our files under the same licence), Overgeared under MIT, Wildex under CC BY-NC 4.0. The details and the MIT notice are in the pack's `CREDITS.md`. The "NC" clauses forbid any commercial use: no monetisation of Fallow on Modrinth as long as these textures are in the pack. The exact holder of Overgeared's MIT licence could not be verified (no LICENSE file in the jar); the declared author is StirDrem.
 
-## Ordre
+## Order
 
-Default Options l'active au premier lancement, après Dark Coffee et Modded Coffee et avant `fallow-ambiance`. Il n'a aucun fichier en commun avec eux. Il ne contient pas de shader : il remplacerait celui de Dark Coffee, qui recolore les titres.
+Default Options enables it on first launch, after Dark Coffee and Modded Coffee and before `fallow-ambiance`. It shares no file with them. It contains no shader: it would replace the Dark Coffee one, which recolours the titles.
 
-## Limites et tests en jeu
+## Limits and in-game tests
 
-1. **Titres des écrans.** Ils sont écrits en `0x404040` par le code. Le shader de texte de Dark Coffee les passe en `#B08569`, mais il cherche une valeur un peu différente (0,248 contre 0,251) ; s'il les manque, les titres sont illisibles sur le fond brun, sur les écrans vanilla comme sur ceux d'Overgeared. Ouvrir un four suffit à le voir.
-2. **Texte de Kaleidoscope dans EMI** : `#555555` sur le fond brun, peu lisible. Aucune texture ne le corrige.
-3. **Wildex** : sa palette et ses remplissages sont écrits dans le code ; seul le fond change. Autre piste sans texture : `designStyle = "STEAMPUNK"` dans sa config client, un thème déjà en laiton et brun.
-4. À chaque mise à jour de ces mods, comparer leurs textures d'interface aux nôtres : une texture qui change de taille ou de disposition doit être refaite.
+1. **Screen titles.** They are written in `0x404040` by the code. The Dark Coffee text shader turns them into `#B08569`, but it looks for a slightly different value (0.248 versus 0.251); if it misses them, the titles are unreadable on the brown background, on vanilla screens as on Overgeared ones. Opening a furnace is enough to see it.
+2. **Kaleidoscope text in EMI**: `#555555` on the brown background, hard to read. No texture fixes it.
+3. **Wildex**: its palette and fills are written in the code; only the background changes. Another option without textures: `designStyle = "STEAMPUNK"` in its client config, a theme that is already brass and brown.
+4. At each update of these mods, compare their interface textures with ours: a texture that changes size or layout must be redone.

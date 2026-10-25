@@ -1,254 +1,254 @@
-# 6 — Un gardien pour les monuments d'Ancient Remnants: Monoliths
+# 6 — A guardian for the Ancient Remnants: Monoliths monuments
 
-Vérification du 2026-10-18. Périmètre : remplacer les spawners de `minecraft:breeze` d'Ancient Remnants 1.5.2 (AR) par un gardien conforme à Fallow (décision 0003 : hostiles rares et territoriaux, pas d'horreur).
+Check of 2026-10-18. Scope: replace the `minecraft:breeze` spawners of Ancient Remnants 1.5.2 (AR) with a guardian consistent with Fallow (decision 0003: rare, territorial hostiles, no horror).
 
-Méthode :
-- jar AR 1.5.2 déjà extrait (`scratchpad/jars/ar/x`) : les 41 fichiers `.nbt` ont été lus avec un petit lecteur NBT écrit pour l'occasion (Python `-I`) ;
-- jars du pack (`origin/main`, extraits dans `scratchpad/jars/c-*`) inspectés au `javap` : Mowzie's Mobs 1.8.2, Companions! 1.3.4, Friends & Foes 4.0.27, Alex's Mobs Continued 2.2.2, Hybrid Aquatic 1.7.3, Ghost 1.3.4, Quark, NML 1.5.12, KubeJS 2101.7, In Control ;
-- API Modrinth (recherche NeoForge 1.21.1, environ 60 requêtes) ; jars téléchargés et ouverts pour Bosses of Mass Destruction, Legendary Monsters, EEEAB's Mobs [Unofficial], LAir's Bosses et The Gadyn.
+Method:
+- AR 1.5.2 jar already extracted (`<work dir>/jars/ar/x`): the 41 `.nbt` files were read with a small NBT reader written for the purpose (Python `-I`);
+- pack jars (`origin/main`, extracted into `<work dir>/jars/c-*`) inspected with `javap`: Mowzie's Mobs 1.8.2, Companions! 1.3.4, Friends & Foes 4.0.27, Alex's Mobs Continued 2.2.2, Hybrid Aquatic 1.7.3, Ghost 1.3.4, Quark, NML 1.5.12, KubeJS 2101.7, In Control;
+- Modrinth API (NeoForge 1.21.1 search, about 60 requests); jars downloaded and opened for Bosses of Mass Destruction, Legendary Monsters, EEEAB's Mobs [Unofficial], LAir's Bosses and The Gadyn.
 
-Rien n'a été modifié dans le dépôt.
-
----
-
-## Résumé
-
-- **Il y a un spawner de breeze par monument, sauf au monolithe sentinelle.** Il est placé dans un couloir ou sur un socle, à 9 à 18 blocs de l'Elderheart. Au monolithe chasseur, le couloir ne mesure que 2 blocs de haut, et les salles des Elderhearts sont étroites : les boss doivent être posés au sol, à l'extérieur.
-- **L'Elderheart peut être « scellé ».** S'il n'a plus de clé NBT `Blessing`, il ne donne rien (bytecode de `tick()`). Un script peut donc retirer la bénédiction, puis la rendre quand le gardien tombe. C'est ce qui donne un sens au gardien : sans cela, on passe à côté de lui et la bénédiction arrive à 16 blocs.
-- **Il n'est pas nécessaire d'ajouter un mod.** Mowzie's Mobs et Companions!, déjà dans le pack, ont des gardiens endormis tout à fait dans le ton : une armure de héros qui s'éveille quand on la frappe, un géant de glace endormi, un sculpteur-moine qui met à l'épreuve, un pontife de mousse qu'on réveille de la main.
-- **La meilleure méthode est un script KubeJS**, qui prolonge le polling déjà prévu pour la clairière (rapport 4, §2.3). Il fait apparaître le gardien une seule fois, scelle l'Elderheart et le libère à la mort du gardien. Il ouvre alors la clairière et donne la page du codex. Il faut en plus une petite surcharge de datapack qui retire les spawners.
-- **Si l'on veut vraiment un nouveau mod**, le premier choix est **Bosses of Mass Destruction** (Forge/NeoForge 1.3.3, 1,95 Mo), dont on ne garderait que l'**Obsidilith** : un monolithe d'obsidienne vivant, ses quatre structures étant désactivées par tags. C'est une option, pas un besoin.
+Nothing was modified in the repository.
 
 ---
 
-## 1. Ce qui est confirmé
+## Summary
 
-### 1.1 Où sont les spawners et l'Elderheart [`.nbt` d'AR 1.5.2]
+- **There is one breeze spawner per monument, except at the sentinel monolith.** It is placed in a corridor or on a pedestal, 9 to 18 blocks from the Elderheart. At the hunter monolith, the corridor is only 2 blocks high, and the Elderheart rooms are narrow: bosses must be placed on the ground, outside.
+- **The Elderheart can be "sealed".** If it no longer has an NBT key `Blessing`, it gives nothing (bytecode of `tick()`). A script can therefore remove the blessing, then give it back when the guardian falls. This is what gives the guardian meaning: without it, you walk past it and the blessing arrives at 16 blocks.
+- **There is no need to add a mod.** Mowzie's Mobs and Companions!, already in the pack, have sleeping guardians fully in tone: a hero's armor that awakens when struck, a sleeping ice giant, a sculptor-monk who sets a trial, a moss pontiff awakened by hand.
+- **The best method is a KubeJS script**, which extends the polling already planned for the clearing (report 4, §2.3). It spawns the guardian only once, seals the Elderheart and releases it when the guardian dies. It then opens the clearing and gives the codex page. A small datapack override that removes the spawners is also needed.
+- **If a new mod is really wanted**, the first choice is **Bosses of Mass Destruction** (Forge/NeoForge 1.3.3, 1.95 MB), of which only the **Obsidilith** would be kept: a living obsidian monolith, its four structures being disabled by tags. It is an option, not a need.
 
-Les six structures sont des jigsaws. Leurs pièces utilisent deux processor_list partagées : `ancient_remnants:monolith` pour les trois monolithes, `ancient_remnants:monument` pour les trois monuments. Chacune ne contient qu'un `block_ignore` (air, structure_block). Chaque pool contient une seule pièce, et aucune n'a de `spawn_overrides`.
+---
 
-| Monument | Pièce qui contient le spawner | Spawner (pos. dans la pièce) | Elderheart (pièce, pos.) | Écart |
+## 1. What is confirmed
+
+### 1.1 Where the spawners and the Elderheart are [AR 1.5.2 `.nbt`]
+
+The six structures are jigsaws. Their pieces use two shared processor_lists: `ancient_remnants:monolith` for the three monoliths, `ancient_remnants:monument` for the three monuments. Each contains only a `block_ignore` (air, structure_block). Each pool contains a single piece, and none has `spawn_overrides`.
+
+| Monument | Piece containing the spawner | Spawner (pos. in the piece) | Elderheart (piece, pos.) | Distance |
 |---|---|---|---|---|
-| hunter_monolith | `hunter_monolith/middle` | (5, 18, 2) | même pièce, (5, 18, 15) | 13 blocs |
-| warrior_monolith | `warrior_monolith/middle` | (5, 42, 8), `Delay 601` | même pièce, (7, 37, 16) | environ 9,6 blocs |
-| sentinel_monolith | **aucun spawner** | — | `sentinel_monolith/middle`, (6, 42, 16) | — |
-| cherry_monument | `cherry_monument/top_3` | (4, 11, 29) | même pièce, (18, 21, 29) | environ 17 blocs |
-| oakwood_monument | `oakwood_monument/top_0` | (8, 13, 1) | même pièce, (21, 25, 1) | environ 17,7 blocs |
-| coniferous_monument | `coniferous_monument/bottom_1` | (24, 36, 14) | autre pièce : `top_3`, (23, 28, 29) | sur une autre pièce |
+| hunter_monolith | `hunter_monolith/middle` | (5, 18, 2) | same piece, (5, 18, 15) | 13 blocks |
+| warrior_monolith | `warrior_monolith/middle` | (5, 42, 8), `Delay 601` | same piece, (7, 37, 16) | about 9.6 blocks |
+| sentinel_monolith | **no spawner** | — | `sentinel_monolith/middle`, (6, 42, 16) | — |
+| cherry_monument | `cherry_monument/top_3` | (4, 11, 29) | same piece, (18, 21, 29) | about 17 blocks |
+| oakwood_monument | `oakwood_monument/top_0` | (8, 13, 1) | same piece, (21, 25, 1) | about 17.7 blocks |
+| coniferous_monument | `coniferous_monument/bottom_1` | (24, 36, 14) | other piece: `top_3`, (23, 28, 29) | in another piece |
 
-- **NBT de chaque spawner** : `SpawnData.entity.id = minecraft:breeze`, `SpawnCount 4`, `MaxNearbyEntities 6`, `RequiredPlayerRange 16`, `MinSpawnDelay 200`, `MaxSpawnDelay 800`, `SpawnRange 4`, `SpawnPotentials []`.
-- **Volume libre** autour du spawner du monolithe chasseur : un couloir de 2 blocs de haut, entre le sol (`cracked_deepslate_tiles`) et le plafond (vue en coupe du `.nbt`).
-- **Les spawners des monuments** sont posés sur un socle de `chiseled_tuff_bricks`.
-- **Les salles des Elderhearts** ont 11 à 23 blocs de hauteur libre, mais seulement 3 à 9 blocs de large à hauteur d'homme (calcul sur le `.nbt`).
-- **Conséquence : un boss ne tient ni à la place du spawner, ni au cœur de la salle.** Il faut le poser au sol, au pied ou à l'entrée du monument [déduit].
-- **Les monolithes flottent** (`start_height absolute 20`, projeté sur `WORLD_SURFACE_WG`). Les monuments partent de `absolute -24`.
-- **Le lore du jar (lang `en_us`)** donne le ton de chaque lieu :
-  - chasseur : tribus de chasseurs du désert, agilité et précision ;
-  - guerrier : force des héros, présent dans les mythes ;
-  - sentinelle : des moines qui fuyaient les combats inutiles ;
-  - cerisier : un don de jumeaux divins, des sources de vie, la guérison ;
-  - chêne : des manuscrits elfiques, la fertilité ;
-  - conifères : un temple bâti par les nains de la taïga et des montagnes, l'architecture et la mine.
+- **NBT of each spawner**: `SpawnData.entity.id = minecraft:breeze`, `SpawnCount 4`, `MaxNearbyEntities 6`, `RequiredPlayerRange 16`, `MinSpawnDelay 200`, `MaxSpawnDelay 800`, `SpawnRange 4`, `SpawnPotentials []`.
+- **Free volume** around the hunter monolith's spawner: a corridor 2 blocks high, between the floor (`cracked_deepslate_tiles`) and the ceiling (cross-section view of the `.nbt`).
+- **The monuments' spawners** are placed on a `chiseled_tuff_bricks` pedestal.
+- **The Elderheart rooms** have 11 to 23 blocks of free height, but only 3 to 9 blocks of width at human height (computed on the `.nbt`).
+- **Consequence: a boss fits neither in the spawner's place, nor in the heart of the room.** It must be placed on the ground, at the foot or entrance of the monument [deduced].
+- **The monoliths float** (`start_height absolute 20`, projected onto `WORLD_SURFACE_WG`). The monuments start from `absolute -24`.
+- **The jar's lore (lang `en_us`)** gives the tone of each place:
+  - hunter: desert hunter tribes, agility and precision;
+  - warrior: the strength of heroes, present in myths;
+  - sentinel: monks who fled needless fighting;
+  - cherry: a gift of divine twins, springs of life, healing;
+  - oak: elven manuscripts, fertility;
+  - conifers: a temple built by the dwarves of the taiga and mountains, architecture and mining.
 
-### 1.2 L'Elderheart se laisse sceller [bytecode `Elderheart` d'AR 1.5.2]
+### 1.2 The Elderheart can be sealed [AR 1.5.2 `Elderheart` bytecode]
 
-- `tick()` : `if (tickCount % 100 == 0 && blessing != null)`, puis il cherche `getNearestPlayer(this, 16.0)` et appelle `setBlessing`. **Si `blessing` vaut `null`, il ne donne rien.**
-- `readAdditionalSaveData` lit `PossibleBlessings` (un tag) et `Blessing`. `CompoundTagAdapter.readValue` renvoie `null` si la clé est absente (`contains`, sinon `aconst_null`).
-- La bénédiction est tirée **une fois**, dans `finalizeSpawn`, que le mixin `MixinStructureTemplate` appelle à la pose de la structure. Elle est ensuite stockée dans le NBT `Blessing`.
-- KubeJS 2101.7 expose `entity.nbt` en lecture et en écriture (`kjs$getNbt` / `kjs$setNbt`, ce qui appelle `load`), `persistentData`, `EntityEvents.spawned` et `EntityEvents.death` [jar KubeJS : `EntityKJS`, `EntityEvents`].
-- **Donc** : retirer `Blessing` scelle l'Elderheart, et la remettre le libère. `PossibleBlessings` (`ancient_remnants:<monument>`) dit au script de quel type de monument il s'agit.
+- `tick()`: `if (tickCount % 100 == 0 && blessing != null)`, then it looks for `getNearestPlayer(this, 16.0)` and calls `setBlessing`. **If `blessing` is `null`, it gives nothing.**
+- `readAdditionalSaveData` reads `PossibleBlessings` (a tag) and `Blessing`. `CompoundTagAdapter.readValue` returns `null` if the key is absent (`contains`, otherwise `aconst_null`).
+- The blessing is drawn **once**, in `finalizeSpawn`, which the `MixinStructureTemplate` mixin calls when the structure is placed. It is then stored in the `Blessing` NBT.
+- KubeJS 2101.7 exposes `entity.nbt` for reading and writing (`kjs$getNbt` / `kjs$setNbt`, which calls `load`), `persistentData`, `EntityEvents.spawned` and `EntityEvents.death` [KubeJS jar: `EntityKJS`, `EntityEvents`].
+- **Hence**: removing `Blessing` seals the Elderheart, and putting it back releases it. `PossibleBlessings` (`ancient_remnants:<monument>`) tells the script which type of monument it is.
 
-### 1.3 Les candidats dans le pack actuel
+### 1.3 The candidates in the current pack
 
-Statut dans Fallow (`origin/main`) : aucun de ces mobs n'est dans `bannedVanilla` (qui ne liste que du vanilla). Aucune config de ces mods n'est dans `pack/config` (seuls `quark-common.toml` et `supplementaries-common.toml` y figurent). Les seules règles existantes sont les brouillons In Control (`plan/kubejs-brouillons/config/incontrol/spawn.json`) :
-- Mowzie's : `minlight 8` → refus, `maxdist 40` → refus, au plus 2 par joueur ;
-- Guster d'Alex's Mobs : `minlight 8` → refus, au plus 3 ;
-- Mauler : 60 % refusé.
+Status in Fallow (`origin/main`): none of these mobs is in `bannedVanilla` (which lists only vanilla). No config for these mods is in `pack/config` (only `quark-common.toml` and `supplementaries-common.toml` are there). The only existing rules are the In Control drafts (`plan/kubejs-brouillons/config/incontrol/spawn.json`):
+- Mowzie's: `minlight 8` → deny, `maxdist 40` → deny, at most 2 per player;
+- Alex's Mobs Guster: `minlight 8` → deny, at most 3;
+- Mauler: 60% denied.
 
-**Ces règles ne s'appliquent pas à une invocation par commande.** In Control lit `"when"`, qui vaut `POSITION` par défaut (`SpawnRule` du jar In Control). Le cas `POSITION` correspond à l'événement `MobSpawnEvent.PositionCheck`, que le spawn naturel et les spawners déclenchent, mais pas `/summon` [déduit du code d'In Control et de NeoForge].
+**These rules do not apply to a summon by command.** In Control reads `"when"`, which is `POSITION` by default (`SpawnRule` in the In Control jar). The `POSITION` case corresponds to the `MobSpawnEvent.PositionCheck` event, which natural spawning and spawners trigger, but not `/summon` [deduced from the In Control and NeoForge code].
 
-#### Les gardiens retenus
+#### The retained guardians
 
 **Ferrous Wroughtnaut** (Mowzie's, `mowziesmobs:ferrous_wroughtnaut`)
-- **Allure et ton** : une armure de fer géante qui tient une hache. Elle reste immobile tant qu'on ne la frappe pas, puis revient à sa place. Ce n'est pas un monstre : c'est le gardien d'une salle ancienne.
-- **Boss** : oui. Clé `ferrous_wroughtnaut.has_boss_bar` ; aussi `heals_out_of_battle` et `reset_health_when_respawn` [config du jar]. 40 PV, 30 dégâts [`createAttributes`]. Il n'est vulnérable que dans certaines phases [wiki Mowzie's].
-- **Dans Fallow** : présent, aucune config. Mob « anomalie » de 0003.
-- **Comment il apparaît** : par une structure `wrought_chamber`, qui contient l'entité dans le `.nbt` (`spacing 15`, `separation 5`, tag `has_mowzie_structure` = `#c:is_overworld`). On peut aussi utiliser `/summon`.
-- **Lié à un seul monument** : oui.
-  - Il revient à sa place grâce au NBT `restPos`, et il est en sommeil tant que `active` est faux (`addAdditionalSaveData`).
-  - `requiresCustomPersistence()` renvoie `true` : il ne disparaît jamais.
+- **Look and tone**: a giant iron armor holding an axe. It stays motionless until struck, then returns to its place. It is not a monster: it is the guardian of an ancient room.
+- **Boss**: yes. Key `ferrous_wroughtnaut.has_boss_bar`; also `heals_out_of_battle` and `reset_health_when_respawn` [jar config]. 40 HP, 30 damage [`createAttributes`]. It is vulnerable only in certain phases [Mowzie's wiki].
+- **In Fallow**: present, no config. An "anomaly" mob of 0003.
+- **How it appears**: through a `wrought_chamber` structure, which contains the entity in the `.nbt` (`spacing 15`, `separation 5`, tag `has_mowzie_structure` = `#c:is_overworld`). `/summon` can also be used.
+- **Tied to a single monument**: yes.
+  - It returns to its place thanks to the `restPos` NBT, and it is dormant as long as `active` is false (`addAdditionalSaveData`).
+  - `requiresCustomPersistence()` returns `true`: it never despawns.
 
 **Frostmaw** (Mowzie's, `mowziesmobs:frostmaw`)
-- **Allure et ton** : un grand yéti des neiges, qui dort jusqu'à ce qu'on le dérange. C'est une bête de légende, pas un monstre d'horreur.
-- **Boss** : oui. Clé `frostmaw.has_boss_bar` ; aussi `stealable_ice_crystal`. 250 PV, 10 dégâts, portée de suivi de 50 blocs.
-- **Dans Fallow** : présent, aucune config. Le plan 05 propose un multiplicateur ×0,2.
-- **Comment il apparaît** : par la structure `frostmaw_spawn`, dont le `.nbt` contient `{"id":"mowziesmobs:frostmaw","has_crystal":1}`, ou par `/summon`.
-- **Lié à un seul monument** : oui, avec une réserve.
-  - `requiresCustomPersistence()` renvoie `getHasCrystal()` : il ne reste persistant **que s'il a son cristal**.
-  - Il faut donc l'invoquer avec `PersistenceRequired:1b`.
+- **Look and tone**: a great snow yeti, which sleeps until disturbed. It is a legendary beast, not a horror monster.
+- **Boss**: yes. Key `frostmaw.has_boss_bar`; also `stealable_ice_crystal`. 250 HP, 10 damage, tracking range of 50 blocks.
+- **In Fallow**: present, no config. Plan 05 proposes a ×0.2 multiplier.
+- **How it appears**: through the `frostmaw_spawn` structure, whose `.nbt` contains `{"id":"mowziesmobs:frostmaw","has_crystal":1}`, or through `/summon`.
+- **Tied to a single monument**: yes, with a reservation.
+  - `requiresCustomPersistence()` returns `getHasCrystal()`: it stays persistent **only if it has its crystal**.
+  - It must therefore be summoned with `PersistenceRequired:1b`.
 
-**Tongbi, le Sculpteur** (Mowzie's, `mowziesmobs:sculptor`)
-- **Allure et ton** : un moine-sculpteur de pierre. Contre un objet, il propose une épreuve : grimper en un temps limité un parcours de rochers qu'il fait surgir. Il ne se bat que si on l'attaque. Il est énigmatique et ancien, et c'est une épreuve, pas un combat.
-- **Boss** : oui (`has_boss_bar`), avec une minuterie d'épreuve. 140 PV.
-- **Réglages** [config du jar] :
-  - `test_height` : 60 par défaut, de 1 à 500 ;
-  - `test_time_limit` : 400 s ;
-  - `trade_which_item` et `trade_how_many` (1 à 64) ;
-  - `disappear_after_reward` : il disparaît après la récompense ;
+**Tongbi, the Sculptor** (Mowzie's, `mowziesmobs:sculptor`)
+- **Look and tone**: a stone-sculptor monk. In exchange for an item, he proposes a trial: climbing within a time limit a course of rocks that he makes rise. He fights only if attacked. He is enigmatic and ancient, and it is a trial, not a fight.
+- **Boss**: yes (`has_boss_bar`), with a trial timer. 140 HP.
+- **Settings** [jar config]:
+  - `test_height`: 60 by default, from 1 to 500;
+  - `test_time_limit`: 400 s;
+  - `trade_which_item` and `trade_how_many` (1 to 64);
+  - `disappear_after_reward`: he disappears after the reward;
   - `heals_out_of_battle`.
-- **Récompense** : la table `mowziesmobs:entities/sculptor_test` (Earthrend Gauntlet), qu'on peut surcharger.
-- **Dans Fallow** : présent, aucune config.
-- **Comment il apparaît** : par la structure `monastery` (pilier de montagne), ou par `/summon`.
-- **Lié à un seul monument** : oui, persistant (`requiresCustomPersistence` = `true`). Il lui faut le ciel ouvert sur la hauteur de l'épreuve (message « Test is blocked! »).
+- **Reward**: the table `mowziesmobs:entities/sculptor_test` (Earthrend Gauntlet), which can be overridden.
+- **In Fallow**: present, no config.
+- **How he appears**: through the `monastery` structure (mountain pillar), or through `/summon`.
+- **Tied to a single monument**: yes, persistent (`requiresCustomPersistence` = `true`). He needs open sky over the trial height (message "Test is blocked!").
 
 **Sacred Pontiff / His Holiness** (Companions!, `companions:sacred_pontiff`)
-- **Allure et ton** : un grand prêtre en robe de mousse verte, avec une couronne et un masque d'or et un bâton de bois (texture `sacred_pontiff_0.png`). Il reste **inerte** (état 0) jusqu'à ce qu'**un joueur le touche de la main** : `mobInteract` déclenche alors `cycleState` et le son `PONTIFF_ACTIVATE`. Sa seconde forme se **pétrifie** en mourant (textures `his_holiness_petrification0..20`). On croirait une statue de temple qui s'éveille.
-- **Boss** : oui, barre rouge `TrackedServerBossEvent`, en deux phases. `setDarkenScreen(true)` et `setCreateWorldFog(true)` sont **codés en dur**. Il a une musique de boss (`IBossMusicProvider`, sans clé de config dans `KnightLibConfig`).
-- **Points de vie par défaut** : environ 225 puis 350 (champs `SACRED_PONTIFF_MAX_LIFE` / `HIS_HOLINESS_MAX_LIFE` de `CompanionsConfig` ; l'ordre est déduit).
-- **Dans Fallow** : présent. Selon 0003, les boss de Companions! sont « à désactiver ou à rendre très rares ». Un exemplaire par monument, c'est « très rare ».
-- **Comment il apparaît** : par la structure `companions_monkey_temple` (entité dans le `.nbt` ; biomes `MONKEY_TEMPLE_STRUCTURE_BIOMES = "minecraft:jungle"`), ou par `/summon`.
-- **Lié à un seul monument** : oui (`removeWhenFarAway` renvoie `false`).
+- **Look and tone**: a high priest in a green moss robe, with a gold crown and mask and a wooden staff (texture `sacred_pontiff_0.png`). He stays **inert** (state 0) until **a player touches him by hand**: `mobInteract` then triggers `cycleState` and the `PONTIFF_ACTIVATE` sound. His second form **petrifies** on dying (textures `his_holiness_petrification0..20`). It looks like a temple statue awakening.
+- **Boss**: yes, red bar `TrackedServerBossEvent`, in two phases. `setDarkenScreen(true)` and `setCreateWorldFog(true)` are **hard-coded**. He has boss music (`IBossMusicProvider`, no config key in `KnightLibConfig`).
+- **Default hit points**: about 225 then 350 (fields `SACRED_PONTIFF_MAX_LIFE` / `HIS_HOLINESS_MAX_LIFE` of `CompanionsConfig`; the order is deduced).
+- **In Fallow**: present. According to 0003, the Companions! bosses are "to disable or make very rare". One per monument is "very rare".
+- **How he appears**: through the `companions_monkey_temple` structure (entity in the `.nbt`; biomes `MONKEY_TEMPLE_STRUCTURE_BIOMES = "minecraft:jungle"`), or through `/summon`.
+- **Tied to a single monument**: yes (`removeWhenFarAway` returns `false`).
 
-#### Les candidats écartés
+#### The rejected candidates
 
-**Umvuthi, l'Oiseau-Soleil** (Mowzie's)
-- **Allure et ton** : un chef de tribu masquée, avec des Umvuthana. Caricature tribale ; le plan 08 en fait déjà une question de direction artistique.
-- **Boss** : oui (`has_boss_bar`).
-- **Dans Fallow** : présent, et la question reste ouverte (08, ligne 10).
-- **Comment il apparaît** : par la structure `umvuthana_grove`.
-- **Verdict : écarté** pour le ton.
+**Umvuthi, the Sun Bird** (Mowzie's)
+- **Look and tone**: a chief of a masked tribe, with Umvuthana. Tribal caricature; plan 08 already makes it an art direction question.
+- **Boss**: yes (`has_boss_bar`).
+- **In Fallow**: present, and the question remains open (08, row 10).
+- **How it appears**: through the `umvuthana_grove` structure.
+- **Verdict: rejected** for tone.
 
 **Naga, Foliaath, Grottol, Lantern** (Mowzie's)
-- **Allure et ton** :
-  - Naga : serpent volant des falaises ;
-  - Foliaath : plante carnivore de jungle ;
-  - Grottol et Lantern : petites créatures pacifiques.
-- **Boss** : non.
-- **Dans Fallow** : présents.
-- **Comment ils apparaissent** : spawn naturel.
-- **Verdict : écartés**, ce ne sont pas des gardiens. Le Grottol (qui mange les minerais) ferait un clin d'œil au monument des nains, rien de plus.
+- **Look and tone**:
+  - Naga: flying cliff serpent;
+  - Foliaath: jungle carnivorous plant;
+  - Grottol and Lantern: small peaceful creatures.
+- **Boss**: no.
+- **In Fallow**: present.
+- **How they appear**: natural spawning.
+- **Verdict: rejected**, they are not guardians. The Grottol (which eats ores) would be a nod to the dwarf monument, nothing more.
 
 **Guster** (Alex's Mobs)
-- **Allure et ton** : une petite tornade de sable du désert. C'est l'équivalent le plus proche de la breeze.
-- **Boss** : non.
-- **Dans Fallow** : limité par In Control.
-- **Comment il apparaît** : naturellement ; on pourrait aussi en mettre un dans le spawner.
-- **Verdict : variante possible** pour le monolithe chasseur, mais en spawner (il réapparaît) et non en gardien unique.
+- **Look and tone**: a small desert sand tornado. It is the closest equivalent to the breeze.
+- **Boss**: no.
+- **In Fallow**: limited by In Control.
+- **How it appears**: naturally; one could also put one in the spawner.
+- **Verdict: possible variant** for the hunter monolith, but as a spawner (it respawns) and not as a unique guardian.
 
 **Spectre, Farseer, Murmur, Skreecher** (Alex's Mobs)
-- **Verdict : écartés**, ton horrifique.
+- **Verdict: rejected**, horror tone.
 
 **Underminer** (Alex's Mobs)
-- **Allure et ton** : un fantôme de mineur nain [déduit du nom et du wiki].
-- **Boss** : non. Pacifique.
-- **Verdict : écarté comme gardien.** On pourrait le garder en présence ambiante près du monument des conifères.
+- **Look and tone**: a ghost of a dwarf miner [deduced from the name and the wiki].
+- **Boss**: no. Peaceful.
+- **Verdict: rejected as a guardian.** It could be kept as an ambient presence near the conifer monument.
 
 **Tuff Golem** (Friends & Foes)
-- **Allure et ton** : une statue de tuf qui s'anime, pacifique. Les monuments sont en tuf.
-- **Boss** : non.
-- **Dans Fallow** : n'apparaît que dans les strongholds, qui sont supprimés (plan 05).
-- **Verdict : à garder comme décor vivant**, pas comme gardien.
+- **Look and tone**: a tuff statue that comes alive, peaceful. The monuments are made of tuff.
+- **Boss**: no.
+- **In Fallow**: appears only in strongholds, which are removed (plan 05).
+- **Verdict: to keep as living decor**, not as a guardian.
 
 **Wildfire, Iceologer, Illusioner** (Friends & Foes)
-- **Boss** : Wildfire, oui.
-- **Dans Fallow** : déjà à désactiver (0003).
-- **Verdict : écartés.**
+- **Boss**: Wildfire, yes.
+- **In Fallow**: already to be disabled (0003).
+- **Verdict: rejected.**
 
 **Karkinos** (Hybrid Aquatic, `hybrid_aquatic:karkinos`)
-- **Allure et ton** : un crabe géant (dossier `entity/miniboss`) qui invoque des larbins (`Summoning`).
-- **Boss** : mini-boss avec barre (`BossEvent` dans `KarkinosEntity`).
-- **Dans Fallow** : présent.
-- **Comment il apparaît** : par `/summon`.
-- **Verdict : option** pour le monolithe sentinelle (sous l'eau). La sentinelle et son égide vont avec une carapace ; mais le lore des moines dit plutôt « pas de combat ».
+- **Look and tone**: a giant crab (folder `entity/miniboss`) that summons minions (`Summoning`).
+- **Boss**: mini-boss with a bar (`BossEvent` in `KarkinosEntity`).
+- **In Fallow**: present.
+- **How it appears**: through `/summon`.
+- **Verdict: option** for the sentinel monolith (underwater). The sentinel and its aegis go with a carapace; but the monks' lore rather says "no fighting".
 
 **Kodama** (Ghost)
-- **Allure et ton** : de petits esprits des arbres, japonais [nom ; spawn codé dans `ghosts_mob_spawns`].
-- **Boss** : non.
-- **Verdict : présence douce** possible au monument du cerisier, à vérifier en jeu.
+- **Look and tone**: small tree spirits, Japanese [name; spawn hard-coded in `ghosts_mob_spawns`].
+- **Boss**: no.
+- **Verdict: gentle presence** possible at the cherry monument, to check in game.
 
 **Living pot, living urn, buried** (NML)
-- **Allure et ton** : de petits mobs des ruines d'alchimiste [noms d'entités].
-- **Verdict : écartés**, trop petits pour un gardien.
+- **Look and tone**: small mobs of the alchemist ruins [entity names].
+- **Verdict: rejected**, too small for a guardian.
 
 **Forgotten** (Quark)
-- **Allure et ton** : un squelette fantôme.
-- **Verdict : écarté**, mort-vivant.
+- **Look and tone**: a ghost skeleton.
+- **Verdict: rejected**, undead.
 
-### 1.4 Les mods nouveaux vérifiés [Modrinth, NeoForge 1.21.1]
+### 1.4 The new mods checked [Modrinth, NeoForge 1.21.1]
 
 **Bosses of Mass Destruction (Forge/NeoForge)**
-- **Version** : 1.3.3 (2026-07-17), `BOMD-NeoForge-1.21-1.3.3.jar`, 1,95 Mo.
-- **Dépendances** : `cerbons-api` 1.3.0 (0,25 Mo), `cloth-config` 15.0.140 (1,16 Mo), GeckoLib (déjà présent).
-- **Ce qu'il ajoute** : 4 boss (Night Lich, Obsidilith, Nether Gauntlet, Void Blossom) et 4 structures.
-  - Les biomes des structures sont des **tags de datapack** (`has_structure/<id>.json`) : on peut tout désactiver.
-  - L'Obsidilith est un obélisque d'obsidienne à runes violettes (texture du jar).
-  - Réglages (`ObsidilithConfig`) : 300 PV, 14 d'armure, 16 dégâts, 1 000 XP, `spawnPillarOnDeath` (vrai par défaut), `anvilAttackExplosionStrength` (4).
-  - **Il pose de l'obsidienne** : `PillarAction` appelle `setBlockAndUpdate(OBSIDIAN)`.
-  - Il ne disparaît pas (`preventDespawnExceptPeaceful`).
-- **Verdict** : **premier choix si l'on ajoute un mod**. On n'en garde que l'Obsidilith, comme gardien-monolithe. Réserve : couleur violette, ambiance de l'End, et des blocs posés dans le monument.
+- **Version**: 1.3.3 (2026-07-17), `BOMD-NeoForge-1.21-1.3.3.jar`, 1.95 MB.
+- **Dependencies**: `cerbons-api` 1.3.0 (0.25 MB), `cloth-config` 15.0.140 (1.16 MB), GeckoLib (already present).
+- **What it adds**: 4 bosses (Night Lich, Obsidilith, Nether Gauntlet, Void Blossom) and 4 structures.
+  - The structures' biomes are **datapack tags** (`has_structure/<id>.json`): everything can be disabled.
+  - The Obsidilith is an obsidian obelisk with purple runes (jar texture).
+  - Settings (`ObsidilithConfig`): 300 HP, 14 armor, 16 damage, 1,000 XP, `spawnPillarOnDeath` (true by default), `anvilAttackExplosionStrength` (4).
+  - **It places obsidian**: `PillarAction` calls `setBlockAndUpdate(OBSIDIAN)`.
+  - It does not despawn (`preventDespawnExceptPeaceful`).
+- **Verdict**: **first choice if a mod is added**. Only the Obsidilith is kept, as a monolith guardian. Reservation: purple color, End atmosphere, and blocks placed in the monument.
 
 **Legendary Monsters**
-- **Version** : 2.2.3 (2026-09-17), 44,75 Mo, aucune dépendance, licence ARR.
-- **Ce qu'il ajoute** : environ 37 entités et 14 structures. Parmi elles, Overgrown Colossus (temple moussu), Frostbitten Golem, Dune Sentinel et Ancient Guardian sont thématiquement idéaux. Il contient aussi des chevaliers décapités et des abominations.
-- **Désactivable ?** Oui en théorie : structures par tags `has_structure/*`, spawns par les biome_modifier `bomber` et `chorusling`.
-- **Verdict : écarté.** C'est exactement le cas « 20 boss et des donjons » : trop lourd.
+- **Version**: 2.2.3 (2026-09-17), 44.75 MB, no dependency, ARR license.
+- **What it adds**: about 37 entities and 14 structures. Among them, Overgrown Colossus (mossy temple), Frostbitten Golem, Dune Sentinel and Ancient Guardian are thematically ideal. It also contains headless knights and abominations.
+- **Disableable?** Yes in theory: structures through `has_structure/*` tags, spawns through the `bomber` and `chorusling` biome_modifiers.
+- **Verdict: rejected.** It is exactly the "20 bosses and dungeons" case: too heavy.
 
 **Ivar's Bosses**
-- **Version** : 1.0.0 (2026-07-12), 0,84 Mo, MIT, une seule version.
-- **Ce qu'il ajoute** : Fang, « gardien de la forêt » invoqué par rituel. Mais aussi Spider Mother, Fenrir et Dracula, et des refontes du Warden et du Dragon.
-- **Verdict : écarté** (horreur, rituels).
+- **Version**: 1.0.0 (2026-07-12), 0.84 MB, MIT, a single version.
+- **What it adds**: Fang, "guardian of the forest" summoned by ritual. But also Spider Mother, Fenrir and Dracula, and reworks of the Warden and the Dragon.
+- **Verdict: rejected** (horror, rituals).
 
 **LAir's Bosses**
-- **Version** : 1.0.0 (2024-12-08), 0,43 Mo, fait avec MCreator.
-- **Ce qu'il ajoute** : l'Esprit de la forêt, déclenché par un « éco-score », et Zeus avec la structure Olympe.
-- **Verdict : écarté** (abandonné, MCreator).
+- **Version**: 1.0.0 (2024-12-08), 0.43 MB, made with MCreator.
+- **What it adds**: the Forest Spirit, triggered by an "eco-score", and Zeus with the Olympus structure.
+- **Verdict: rejected** (abandoned, MCreator).
 
 **The Gadyn**
-- **Version** : 1.0.0, 0,28 Mo, MCreator, licence ARR.
-- **Ce qu'il ajoute** : un titan neutre qui apparaît naturellement (biome_modifier).
-- **Verdict : écarté** (qualité inconnue).
+- **Version**: 1.0.0, 0.28 MB, MCreator, ARR license.
+- **What it adds**: a neutral titan that appears naturally (biome_modifier).
+- **Verdict: rejected** (unknown quality).
 
 **WhirlWind**
-- **Version** : 1.21.1 (2024-12-23).
-- **Ce qu'il ajoute** : une variante de la breeze.
-- **Verdict : écarté**, il a le même défaut que la breeze.
+- **Version**: 1.21.1 (2024-12-23).
+- **What it adds**: a breeze variant.
+- **Verdict: rejected**, it has the same flaw as the breeze.
 
 **EEEAB's Mobs [Unofficial]**
-- **Version** : 1.0.2 (2026-09-04), 29,3 Mo.
-- **Ce qu'il ajoute** : Nameless Guardian, mais aussi des cadavres, du sang et des « Bloody Acolyte » (lang du jar).
-- **Verdict : écarté** (gore, et c'est un portage non officiel).
+- **Version**: 1.0.2 (2026-09-04), 29.3 MB.
+- **What it adds**: Nameless Guardian, but also corpses, blood and "Bloody Acolytes" (jar lang).
+- **Verdict: rejected** (gore, and it is an unofficial port).
 
 **Mebahel's Creatures – Dwarven Automatons**
-- **Version** : 1.4.0 (2026-10-06), un jar **Fabric**, utilisable sur NeoForge par Connector.
-- **Dépendances** : Mebahel's API et Mebahel's Elder Scrolls Core.
-- **Ce qu'il ajoute** : une faction entière d'automates nains, des ruines, de l'équipement.
-- **Verdict : écarté** (trop de contenu, licence ARR), alors que le thème colle (« les machines d'une civilisation perdue gardent ses ruines »).
+- **Version**: 1.4.0 (2026-10-06), a **Fabric** jar, usable on NeoForge through Connector.
+- **Dependencies**: Mebahel's API and Mebahel's Elder Scrolls Core.
+- **What it adds**: a whole faction of dwarven automatons, ruins, equipment.
+- **Verdict: rejected** (too much content, ARR license), although the theme fits ("the machines of a lost civilization guard its ruins").
 
 **L_Ender's Cataclysm, Bosses'Rise, Aquamirae**
-- **Verdict : écartés.** Ce sont des dizaines de boss et de donjons, et Aquamirae a une ambiance horrifique.
+- **Verdict: rejected.** These are dozens of bosses and dungeons, and Aquamirae has a horror atmosphere.
 
 ---
 
-## 2. Les liens concrets à construire
+## 2. The concrete links to build
 
-### 2.1 Quel gardien pour quel monument
+### 2.1 Which guardian for which monument
 
-Un gardien différent par type est cohérent, puisque le lore d'AR donne une identité à chaque lieu.
+A different guardian per type is consistent, since AR's lore gives each place an identity.
 
-| Monument | Gardien | Pourquoi | Bénédiction scellée ? |
+| Monument | Guardian | Why | Blessing sealed? |
 |---|---|---|---|
-| warrior_monolith | **Ferrous Wroughtnaut** | « Le monolithe des héros » : l'armure d'un guerrier d'autrefois veille encore. Il dort jusqu'au premier coup et revient à sa place. | oui, jusqu'à sa mort |
-| coniferous_monument | **Frostmaw** | Le temple des nains de la taïga et des montagnes ; le Frostmaw est la bête des neiges, endormie. | oui, jusqu'à sa mort |
-| hunter_monolith | **Tongbi, le Sculpteur** | « Agilité et précision » : son épreuve est une course d'agilité, pas un combat. | oui, jusqu'à l'épreuve réussie (il disparaît) ou sa mort |
-| oakwood_monument | **Sacred Pontiff** | Un prêtre de mousse, au temple elfique moussu. On choisit de le réveiller. Il se pétrifie en mourant. | oui, jusqu'à sa mort |
-| cherry_monument | **aucun gardien de combat** (éventuellement des Kodamas) | « Monument de la vie », qui guérit. Un boss y contredirait le texte. | non |
-| sentinel_monolith | **aucun** (option : Karkinos) | Il n'a pas de spawner, et ses moines « fuyaient les combats inutiles ». | non |
+| warrior_monolith | **Ferrous Wroughtnaut** | "The monolith of heroes": the armor of a warrior of old still keeps watch. He sleeps until the first blow and returns to his place. | yes, until his death |
+| coniferous_monument | **Frostmaw** | The temple of the dwarves of the taiga and mountains; the Frostmaw is the beast of the snows, sleeping. | yes, until his death |
+| hunter_monolith | **Tongbi, the Sculptor** | "Agility and precision": his trial is an agility course, not a fight. | yes, until the trial is passed (he disappears) or his death |
+| oakwood_monument | **Sacred Pontiff** | A moss priest, in the mossy elven temple. One chooses to awaken him. He petrifies on dying. | yes, until his death |
+| cherry_monument | **no combat guardian** (possibly Kodamas) | "Monument of life", which heals. A boss there would contradict the text. | no |
+| sentinel_monolith | **none** (option: Karkinos) | It has no spawner, and its monks "fled needless fighting". | no |
 
-Cela fait 4 gardiens au plus, tous uniques, endormis ou passifs jusqu'à ce qu'on les provoque, et qui ne quittent pas leur monument. C'est la définition de « rares et territoriaux » (0003).
+That makes 4 guardians at most, all unique, asleep or passive until provoked, and who do not leave their monument. This is the definition of "rare and territorial" (0003).
 
-### 2.2 Retirer les spawners de breeze (datapack)
+### 2.2 Removing the breeze spawners (datapack)
 
-**Surcharger les deux processor_list au même chemin** : `data/ancient_remnants/worldgen/processor_list/monolith.json` et `monument.json`. On garde le `block_ignore` d'origine et on remplace le spawner par un bloc de la palette du monument :
+**Override the two processor_lists at the same path**: `data/ancient_remnants/worldgen/processor_list/monolith.json` and `monument.json`. The original `block_ignore` is kept and the spawner is replaced with a block from the monument's palette:
 
 ```json
 {
@@ -265,16 +265,16 @@ Cela fait 4 gardiens au plus, tous uniques, endormis ou passifs jusqu'à ce qu'o
 }
 ```
 
-- Le NBT du spawner reste attaché au bloc, mais `chiseled_tuff` n'a pas d'entité de bloc : il est ignoré à la pose [déduit de `StructureTemplate`].
-- Ne pas utiliser un simple `block_ignore` du spawner : le bloc de terrain d'avant resterait à sa place, et laisserait un trou ou de la pierre au milieu du pilier [déduit].
-- À faire **avant** de générer le monde : les monuments déjà générés gardent leurs spawners.
+- The spawner's NBT stays attached to the block, but `chiseled_tuff` has no block entity: it is ignored on placement [deduced from `StructureTemplate`].
+- Do not use a simple `block_ignore` of the spawner: the terrain block from before would stay in place, and would leave a hole or stone in the middle of the pillar [deduced].
+- To be done **before** generating the world: monuments already generated keep their spawners.
 
-### 2.3 Faire apparaître le gardien, sceller et libérer (KubeJS)
+### 2.3 Spawning the guardian, sealing and releasing (KubeJS)
 
-C'est la méthode recommandée. Elle fusionne avec `clairieres_elderheart.js` (rapport 4, §2.3) et ne demande ni fichier binaire modifié, ni mod custom.
+This is the recommended method. It merges with `clairieres_elderheart.js` (report 4, §2.3) and requires neither a modified binary file nor a custom mod.
 
 ```js
-// server_scripts/gardiens_monuments.js — ESQUISSE à tester (KubeJS 2101.7)
+// server_scripts/gardiens_monuments.js — SKETCH to test (KubeJS 2101.7)
 const UUID = Java.loadClass('java.util.UUID')
 const GARDIENS = {
   'ancient_remnants:warrior_monolith':    { id: 'mowziesmobs:ferrous_wroughtnaut', nbt: '' },
@@ -283,10 +283,10 @@ const GARDIENS = {
   'ancient_remnants:oakwood_monument':    { id: 'companions:sacred_pontiff',       nbt: '' }
 }
 
-// (1) Sceller : dès que l'Elderheart entre dans le monde (pose de la structure ou chargement du chunk)
+// (1) Seal: as soon as the Elderheart enters the world (structure placement or chunk load)
 EntityEvents.spawned('ancient_remnants:elderheart', event => {
   const e = event.entity, pd = e.persistentData
-  if (pd.contains('fallow_type')) return                     // déjà traité
+  if (pd.contains('fallow_type')) return                     // already handled
   const nbt = e.nbt
   const type = String(nbt.getString('PossibleBlessings'))
   pd.putString('fallow_type', type)
@@ -295,7 +295,7 @@ EntityEvents.spawned('ancient_remnants:elderheart', event => {
   event.server.scheduleInTicks(1, () => { const n = e.nbt; n.remove('Blessing'); e.nbt = n })
 })
 
-// (2) Réveiller : la première fois qu'un joueur passe à moins de 48 blocs
+// (2) Awaken: the first time a player comes within 48 blocks
 ServerEvents.tick(event => {
   if (event.server.tickCount % 100 !== 0) return
   event.server.players.forEach(p => {
@@ -304,20 +304,20 @@ ServerEvents.tick(event => {
       const pd = e.persistentData, g = GARDIENS[String(pd.getString('fallow_type'))]
       if (!g) return
       if (!pd.contains('fallow_gardien')) {
-        const pos = global.fallowSolDuGardien(p.level, e.blockPosition(), g.cielOuvert) // sol au pied du monument
+        const pos = global.fallowSolDuGardien(p.level, e.blockPosition(), g.cielOuvert) // ground at the foot of the monument
         const lien = 'fallow_g_' + e.uuid.toString().substring(0, 8)
         event.server.runCommandSilent(`execute in ${p.level.dimension} run summon ${g.id} ${pos.x} ${pos.y} ${pos.z} {${g.nbt}PersistenceRequired:1b,Tags:["fallow_gardien","${lien}"]}`)
         const garde = p.level.getEntitiesWithin(AABB.ofSize(pos, 8, 8, 8)).find(x => x.tags.contains(lien))
         if (garde) { garde.persistentData.putString('fallow_elderheart', e.uuid.toString()); pd.putString('fallow_gardien', garde.uuid.toString()) }
       } else if (pd.contains('fallow_benediction') && g.cielOuvert) {
-        // Sculpteur : disparu après la récompense, sans mourir → épreuve réussie
+        // Sculptor: disappeared after the reward, without dying → trial passed
         if (!p.level.getEntity(UUID.fromString(pd.getString('fallow_gardien')))) global.fallowLibererElderheart(e, p)
       }
     })
   })
 })
 
-// (3) Libérer : à la mort du gardien
+// (3) Release: on the guardian's death
 EntityEvents.death(event => {
   const g = event.entity
   if (!g.tags.contains('fallow_gardien')) return
@@ -330,142 +330,142 @@ global.fallowLibererElderheart = (eh, joueur) => {
   if (!pd.contains('fallow_benediction')) return
   const n = eh.nbt; n.putString('Blessing', pd.getString('fallow_benediction')); eh.nbt = n
   pd.remove('fallow_benediction')
-  global.fallowOuvrirClairiere(eh.level, eh.blockPosition(), 32, joueur)   // rapport 4, §2.3
+  global.fallowOuvrirClairiere(eh.level, eh.blockPosition(), 32, joueur)   // report 4, §2.3
   eh.block.popItem(Item.of('ancient_remnants:research_scrap',
-    `[ancient_remnants:stored_research=["${pd.getString('fallow_type')}"]]`)) // la page de ce monument
+    `[ancient_remnants:stored_research=["${pd.getString('fallow_type')}"]]`)) // this monument's page
 }
 ```
 
-Ce que relie ce script :
-- **la brume** : la clairière s'ouvre quand le gardien tombe, et non à la simple approche. Pour le cerisier et la sentinelle, sans gardien, on garde le déclencheur d'approche du rapport 4. Le Pontiff assombrit le ciel et épaissit le brouillard pendant le combat (codé en dur) : la brume qui se lève à sa mort en devient un moment fort ;
-- **le codex** : la page du monument en récompense (composant `ancient_remnants:stored_research`, rapport 4 §1.3) ;
-- **l'Elderheart** : la bénédiction devient le prix du gardien.
+What this script ties together:
+- **the mist**: the clearing opens when the guardian falls, not on mere approach. For the cherry and the sentinel, with no guardian, the approach trigger of report 4 is kept. The Pontiff darkens the sky and thickens the fog during the fight (hard-coded): the mist lifting at his death becomes a high point;
+- **the codex**: the monument's page as a reward (component `ancient_remnants:stored_research`, report 4 §1.3);
+- **the Elderheart**: the blessing becomes the guardian's prize.
 
-`global.fallowSolDuGardien` est à écrire :
-- tester 16 directions à 10–20 blocs de l'Elderheart ;
-- prendre `level.getHeight('motion_blocking_no_leaves', x, z)` ;
-- vérifier 4 blocs d'air au-dessus, et `canSeeSky` pour le Sculpteur ;
-- retomber sur la position de l'Elderheart moins 4 blocs si rien ne convient [déduit].
+`global.fallowSolDuGardien` remains to be written:
+- test 16 directions at 10–20 blocks from the Elderheart;
+- take `level.getHeight('motion_blocking_no_leaves', x, z)`;
+- check 4 blocks of air above, and `canSeeSky` for the Sculptor;
+- fall back to the Elderheart's position minus 4 blocks if nothing fits [deduced].
 
-### 2.4 Configs et datapack qui accompagnent les gardiens
+### 2.4 Configs and datapack accompanying the guardians
 
-**Mowzie's Mobs** (config commune) :
-- `ferrous_wroughtnaut`, `frostmaw` et `sculptor` : `has_boss_bar` à true, `heals_out_of_battle` à true, `reset_health_when_respawn` à true ;
-- `sculptor.test_height` à environ 30 (au lieu de 60) ; `test_time_limit` à garder ;
-- `sculptor.trade_which_item` : proposer un objet de l'histoire du lieu, par exemple `minecraft:amethyst_shard` (déjà dans la recette du codex). On peut tenter `ancient_remnants:research_scrap`, mais l'objet est consommé : à tester ;
-- `sculptor.disappear_after_reward` à **true**. Le script s'en sert pour détecter l'épreuve réussie.
+**Mowzie's Mobs** (common config):
+- `ferrous_wroughtnaut`, `frostmaw` and `sculptor`: `has_boss_bar` to true, `heals_out_of_battle` to true, `reset_health_when_respawn` to true;
+- `sculptor.test_height` to about 30 (instead of 60); `test_time_limit` to keep;
+- `sculptor.trade_which_item`: propose an item from the place's story, for example `minecraft:amethyst_shard` (already in the codex recipe). `ancient_remnants:research_scrap` can be tried, but the item is consumed: to test;
+- `sculptor.disappear_after_reward` to **true**. The script uses it to detect the passed trial.
 
-**Rendre les gardiens uniques** (datapack) :
-- surcharger `data/mowziesmobs/worldgen/structure/wrought_chamber.json` et `frostmaw_spawn.json` avec `"biomes": "#fallow:aucun"`, un tag vide ;
-- faire de même pour `monastery.json`, si le Sculpteur ne doit exister qu'au monolithe ;
-- Companions! : mettre `MONKEY_TEMPLE_STRUCTURE_BIOMES` sur un biome inexistant, à tester (la valeur est une chaîne, `"minecraft:jungle"` par défaut) ;
-- sinon, le pack aura aussi des Wroughtnauts en salles souterraines, environ tous les 15 chunks (`wrought_chambers`, `spacing 15`).
+**Making the guardians unique** (datapack):
+- override `data/mowziesmobs/worldgen/structure/wrought_chamber.json` and `frostmaw_spawn.json` with `"biomes": "#fallow:aucun"`, an empty tag;
+- do the same for `monastery.json`, if the Sculptor should exist only at the monolith;
+- Companions!: set `MONKEY_TEMPLE_STRUCTURE_BIOMES` to a nonexistent biome, to test (the value is a string, `"minecraft:jungle"` by default);
+- otherwise, the pack will also have Wroughtnauts in underground rooms, about every 15 chunks (`wrought_chambers`, `spacing 15`).
 
-**Récompenses** (loot tables, facultatif) :
-- surcharger `mowziesmobs:entities/sculptor_test` si l'on ne veut pas de l'Earthrend Gauntlet ;
-- `ferrous_wroughtnaut` donne le Wrought Helm et la hache ; `frostmaw` donne un ice_crystal et un disque.
+**Rewards** (loot tables, optional):
+- override `mowziesmobs:entities/sculptor_test` if the Earthrend Gauntlet is not wanted;
+- `ferrous_wroughtnaut` gives the Wrought Helm and the axe; `frostmaw` gives an ice_crystal and a disc.
 
-**Wildex, Exposure** :
-- une page de bestiaire par gardien ;
-- l'advancement `exposure:frame_exposed` (`entities_in_frame`), par exemple « photographier le Pontife éveillé ».
-
----
-
-## 3. Conflits et risques
-
-1. **Contourner le gardien.** Sans le sceau, on passe à 16 blocs de l'Elderheart et on reçoit la bénédiction sans rien faire. Le Wroughtnaut ne bouge pas tant qu'on ne le frappe pas, et le Pontiff tant qu'on ne le touche pas. Le sceau (§2.3) règle ce point.
-2. **La place.** Les boss ne tiennent pas dans les couloirs de 2 blocs où sont les spawners (§1.1). On les pose au sol, à l'extérieur, et il faut ajuster les décalages type par type en jeu.
-3. **La persistance du Frostmaw.** Il n'est persistant qu'avec son cristal. `PersistenceRequired:1b` est donc obligatoire, sinon le gardien peut disparaître sans mourir, et le sceau reste fermé à jamais.
-   - Garde-fou à ajouter : une commande op `/function fallow:liberer_elderheart`, ou un test « gardien introuvable depuis plus de N jours ».
-4. **`setNbt` sur l'Elderheart.** Cela appelle `Entity.load` sur une entité vivante. À tester : position, UUID, son, et la bénédiction réellement nulle.
-5. **`EntityEvents.spawned`.** Il faut vérifier qu'il est bien levé pour une entité **chargée depuis le disque**, ou au premier chargement d'un chunk prégénéré par Chunky. Sinon, il faut faire le sceau dans le polling, avec un rayon d'au moins 48 blocs, car un joueur au sprint parcourt environ 28 blocs en 5 s.
-6. **Le Sacred Pontiff est lourd.**
-   - Écran assombri, brouillard et musique de boss non réglables. Pour couper la musique, il faut un resource pack avec un son vide.
-   - Environ 575 PV au total, en deux phases.
-   - Pour un début de partie, c'est dur : à équilibrer avec `SACRED_PONTIFF_MAX_LIFE` / `HIS_HOLINESS_MAX_LIFE`.
-7. **Le Sculpteur a besoin de ciel ouvert** sur toute la hauteur de l'épreuve. Ses géomancies créent des entités de rochers : vérifier qu'elles ne cassent pas de blocs du monolithe. Aucun `setBlock` n'a été trouvé dans les classes du Sculpteur, du Wroughtnaut ni du Frostmaw.
-8. **Dégâts au monument.** Aucun `setBlock` n'a été trouvé dans les classes du Pontiff (anneaux de feu compris). Il faut tout de même vérifier les feuilles du monument du chêne et le feu.
-   - L'Obsidilith (si on ajoute BoMD) **pose de l'obsidienne** : `spawnPillarOnDeath=false` et `anvilAttackExplosionStrength=0` limitent les dégâts, sans les supprimer.
-9. **In Control.** Si l'on choisissait plutôt un spawner (variante B, §4), le spawn passerait par `PositionCheck`, et les règles Mowzie's des brouillons le bloqueraient (`minlight 8` dans un monument éclairé). Avec `/summon`, ce n'est pas le cas (§1.3).
-10. **Les mises à jour d'AR.** Le script dépend de `PossibleBlessings`, de `Blessing` et de l'id `ancient_remnants:elderheart`, et la processor_list des chemins actuels. Si AR change ses pièces, il suffit de revérifier ces points ; aucun `.nbt` n'est copié dans Fallow.
-11. **Le multijoueur.** Il y a un gardien par monument, une seule fois. Après sa mort, la bénédiction est libre pour tous, ce qui est cohérent avec un monde permanent.
+**Wildex, Exposure**:
+- one bestiary page per guardian;
+- the advancement `exposure:frame_exposed` (`entities_in_frame`), for example "photograph the awakened Pontiff".
 
 ---
 
-## 4. À adapter, supprimer ou ajouter dans le plan
+## 3. Conflicts and risks
 
-**À remplacer**
-- **Rapport 4, §2.2 (options A, B, C)** : remplacer par « processor_list qui remplace les spawners + gardien unique par KubeJS + sceau de l'Elderheart » (§2.2 et 2.3 ici).
-  - L'option A (garder la breeze) est à abandonner : elle contredit la liste d'exclusion et la direction artistique.
-  - L'option C (aucun gardien) ne reste vraie que pour le cerisier et la sentinelle.
-- **Rapport 4, §2.3** : la clairière s'ouvre à la **libération** de l'Elderheart, et non à la première approche, quand le monument a un gardien.
-- **Chapitre 12, ligne 15 du tableau** (« Gardiens : aucun ») : mettre « 4 gardiens uniques, pris dans Mowzie's et Companions! ».
-- **Chapitre 11 §11.8** : « Au centre, un Elderheart gardé par des créatures » devient « gardé, selon le monument, par un gardien unique qu'il faut vaincre ou dont il faut réussir l'épreuve ».
-
-**À ajouter**
-- **Plan 05 §5.3 (Mowzie's)** : désactiver la génération naturelle de `wrought_chamber`, `frostmaw_spawn` et, éventuellement, `monastery` (§2.4). Les figures de Mowzie's deviennent alors des gardiens de monuments, plus seulement des anomalies.
-- **Décision 0003** : ajouter une ligne « Gardiens des monuments AR : Wroughtnaut, Frostmaw, Sculpteur (Mowzie's), Sacred Pontiff (Companions!) ; un par monument, jamais en spawn naturel ».
-- **Configs** à créer dans `pack/config` : la config commune de Mowzie's (§2.4) et celle de Companions! (points de vie du Pontiff, biomes du temple).
-- **Datapack** `kubejs/data/` :
-  - `ancient_remnants/worldgen/processor_list/{monolith,monument}.json` ;
-  - les surcharges de `mowziesmobs/worldgen/structure/*.json` ;
-  - le tag vide `fallow:aucun`.
-
-**À ne pas faire**
-- Pas de nouveau mod. Si l'équipe veut un « vrai » boss au monolithe chasseur à la place de l'épreuve du Sculpteur, on ajoute BoMD (Obsidilith seul, quatre structures désactivées par tags).
-
-**Variantes, si le script devait échouer**
-- **B, sans script** :
-  - surcharger les 5 template_pools qui contiennent un spawner (`cherry_monument/top_3`, `coniferous_monument/bottom_1`, `hunter_monolith/middle`, `oakwood_monument/top_0`, `warrior_monolith/middle`) pour qu'ils pointent vers une processor_list propre à chaque type ;
-  - dans chacune, une règle `spawner` → `spawner` avec `block_entity_modifier` `minecraft:append_static` (`SpawnData`, `SpawnCount 1`, `MaxNearbyEntities 1`) ;
-  - limite : un spawner fait **réapparaître le mob sans fin**. C'est acceptable pour un petit gardien (des Gusters au monolithe chasseur), pas pour un boss.
-- **C, entité dans le `.nbt`** (comme le fait Mowzie's) : réécrire 5 `.nbt` d'AR. Cela pose trois problèmes : un binaire à maintenir, la licence OML d'Obscuria, et des salles trop étroites. Non recommandé.
-- **D, trial spawner** posé par processor : c'est presque un « une seule fois » vanilla, mais avec la cage des chambres d'épreuves, un délai de réarmement et des clés de butin. Il casse la direction artistique. Non recommandé.
-- **Mod custom** : inutile ici. KubeJS suffit, car l'Elderheart se scelle par NBT.
+1. **Bypassing the guardian.** Without the seal, you walk within 16 blocks of the Elderheart and receive the blessing without doing anything. The Wroughtnaut does not move until struck, and the Pontiff until touched. The seal (§2.3) settles this point.
+2. **Space.** Bosses do not fit in the 2-block corridors where the spawners are (§1.1). They are placed on the ground, outside, and the offsets must be adjusted type by type in game.
+3. **The Frostmaw's persistence.** It is persistent only with its crystal. `PersistenceRequired:1b` is therefore mandatory, otherwise the guardian may disappear without dying, and the seal stays closed forever.
+   - Safeguard to add: an op command `/function fallow:liberer_elderheart`, or a test "guardian not found for more than N days".
+4. **`setNbt` on the Elderheart.** This calls `Entity.load` on a living entity. To test: position, UUID, sound, and the blessing actually null.
+5. **`EntityEvents.spawned`.** It must be verified that it is raised for an entity **loaded from disk**, or at the first load of a chunk pregenerated by Chunky. Otherwise, the seal must be done in the polling, with a radius of at least 48 blocks, since a sprinting player covers about 28 blocks in 5 s.
+6. **The Sacred Pontiff is heavy.**
+   - Darkened screen, fog and boss music are not adjustable. To cut the music, a resource pack with an empty sound is needed.
+   - About 575 HP in total, in two phases.
+   - For an early game, it is hard: to balance with `SACRED_PONTIFF_MAX_LIFE` / `HIS_HOLINESS_MAX_LIFE`.
+7. **The Sculptor needs open sky** over the whole height of the trial. His geomancies create rock entities: check that they do not break monolith blocks. No `setBlock` was found in the Sculptor, Wroughtnaut or Frostmaw classes.
+8. **Damage to the monument.** No `setBlock` was found in the Pontiff's classes (including the fire rings). The oak monument's leaves and fire must still be checked.
+   - The Obsidilith (if BoMD is added) **places obsidian**: `spawnPillarOnDeath=false` and `anvilAttackExplosionStrength=0` limit the damage, without eliminating it.
+9. **In Control.** If a spawner were chosen instead (variant B, §4), spawning would go through `PositionCheck`, and the Mowzie's rules in the drafts would block it (`minlight 8` in a lit monument). With `/summon`, this is not the case (§1.3).
+10. **AR updates.** The script depends on `PossibleBlessings`, `Blessing` and the id `ancient_remnants:elderheart`, and on the processor_list of the current paths. If AR changes its pieces, it is enough to recheck these points; no `.nbt` is copied into Fallow.
+11. **Multiplayer.** There is one guardian per monument, once. After its death, the blessing is free for everyone, which is consistent with a permanent world.
 
 ---
 
-## 5. Questions à tester en jeu
+## 4. To adapt, remove or add in the plan
 
-1. `EntityEvents.spawned('ancient_remnants:elderheart')` est-il levé au premier chargement d'un monument, et aussi après un prégénérage par Chunky ? Le sceau (`e.nbt = n` sans `Blessing`) empêche-t-il vraiment le titre « Blessing Acquired » ?
-2. La bénédiction est-elle bien rendue à la mort du gardien, et l'Elderheart reste-t-il intact (son, rayons, position) après les deux `setNbt` ?
-3. Positions de pose au pied des 4 monuments gardés : le boss tient-il ? Le Wroughtnaut fixe-t-il son `restPos` quand on l'invoque par `/summon` ? Le Frostmaw dort-il en arrivant (essayer `active:0b`) ?
-4. Le Sculpteur près du monolithe chasseur, avec `test_height` 30 : l'épreuve démarre-t-elle (pas de « Test is blocked! ») ? `disappear_after_reward` déclenche-t-il bien la libération ?
-5. Sacred Pontiff près du monument du chêne :
-   - équilibre en début et milieu de partie ;
-   - rendu de l'écran assombri avec More Darkness et ATMOSPHERICS ;
-   - feu sur les feuilles ;
-   - musique.
-6. Les règles In Control (brouillons) et `spawns_safety.js` laissent-elles passer les quatre invocations (attendu : oui) ?
-7. Avec les structures naturelles de Mowzie's désactivées par `#fallow:aucun`, plus aucune salle de Wroughtnaut ni aucun Frostmaw sauvage n'apparaît-il (`/locate structure`) ?
-8. Le spawner remplacé par `chiseled_tuff` : rendu correct dans les 5 pièces (pas de trou, pas de bloc de terrain) ?
+**To replace**
+- **Report 4, §2.2 (options A, B, C)**: replace with "processor_list that replaces the spawners + unique guardian through KubeJS + Elderheart seal" (§2.2 and 2.3 here).
+  - Option A (keep the breeze) is to be abandoned: it contradicts the exclusion list and the art direction.
+  - Option C (no guardian) remains true only for the cherry and the sentinel.
+- **Report 4, §2.3**: the clearing opens at the **release** of the Elderheart, and not at the first approach, when the monument has a guardian.
+- **Chapter 12, row 15 of the table** ("Guardians: none"): put "4 unique guardians, taken from Mowzie's and Companions!".
+- **Chapter 11 §11.8**: "At the center, an Elderheart guarded by creatures" becomes "guarded, depending on the monument, by a unique guardian that must be defeated or whose trial must be passed".
+
+**To add**
+- **Plan 05 §5.3 (Mowzie's)**: disable the natural generation of `wrought_chamber`, `frostmaw_spawn` and, possibly, `monastery` (§2.4). Mowzie's figures then become monument guardians, no longer just anomalies.
+- **Decision 0003**: add a line "Guardians of the AR monuments: Wroughtnaut, Frostmaw, Sculptor (Mowzie's), Sacred Pontiff (Companions!); one per monument, never in natural spawning".
+- **Configs** to create in `pack/config`: Mowzie's common config (§2.4) and Companions!'s (Pontiff hit points, temple biomes).
+- **Datapack** `kubejs/data/`:
+  - `ancient_remnants/worldgen/processor_list/{monolith,monument}.json`;
+  - the overrides of `mowziesmobs/worldgen/structure/*.json`;
+  - the empty tag `fallow:aucun`.
+
+**Not to do**
+- No new mod. If the maintainer wants a "real" boss at the hunter monolith instead of the Sculptor's trial, BoMD is added (Obsidilith only, four structures disabled by tags).
+
+**Variants, if the script were to fail**
+- **B, without a script**:
+  - override the 5 template_pools that contain a spawner (`cherry_monument/top_3`, `coniferous_monument/bottom_1`, `hunter_monolith/middle`, `oakwood_monument/top_0`, `warrior_monolith/middle`) so that they point to a processor_list specific to each type;
+  - in each, a `spawner` → `spawner` rule with `block_entity_modifier` `minecraft:append_static` (`SpawnData`, `SpawnCount 1`, `MaxNearbyEntities 1`);
+  - limit: a spawner makes the mob **respawn endlessly**. This is acceptable for a small guardian (Gusters at the hunter monolith), not for a boss.
+- **C, entity in the `.nbt`** (as Mowzie's does): rewrite 5 AR `.nbt` files. This poses three problems: a binary to maintain, Obscuria's OML license, and rooms that are too narrow. Not recommended.
+- **D, trial spawner** placed by a processor: it is almost a vanilla "only once", but with the trial chamber cage, a rearm delay and loot keys. It breaks the art direction. Not recommended.
+- **Custom mod**: unnecessary here. KubeJS is enough, since the Elderheart is sealed through NBT.
 
 ---
 
-## Recommandation
+## 5. Questions to test in game
 
-**Premier choix parmi les mods actuels : rien à ajouter.** On utilise un gardien différent par type de monument, pris dans Mowzie's Mobs 1.8.2 et Companions! 1.3.4, qui sont déjà dans le pack :
-- **Ferrous Wroughtnaut** au monolithe guerrier (armure endormie, barre de boss, revient à sa place) ;
-- **Frostmaw** au monument des conifères (bête des neiges endormie, invoquée avec `has_crystal` et `PersistenceRequired`) ;
-- **Tongbi le Sculpteur** au monolithe chasseur (une épreuve d'agilité plutôt qu'un combat) ;
-- **Sacred Pontiff** au monument du chêne (statue de mousse qu'on choisit d'éveiller, et qui se pétrifie en mourant) ;
-- **aucun gardien** au cerisier ni à la sentinelle, comme le veut leur lore.
+1. Is `EntityEvents.spawned('ancient_remnants:elderheart')` raised at the first load of a monument, and also after Chunky pregeneration? Does the seal (`e.nbt = n` without `Blessing`) really prevent the "Blessing Acquired" title?
+2. Is the blessing properly returned at the guardian's death, and does the Elderheart stay intact (sound, rays, position) after the two `setNbt` calls?
+3. Placement positions at the foot of the 4 guarded monuments: does the boss fit? Does the Wroughtnaut set its `restPos` when summoned by `/summon`? Does the Frostmaw sleep on arrival (try `active:0b`)?
+4. The Sculptor near the hunter monolith, with `test_height` 30: does the trial start (no "Test is blocked!")? Does `disappear_after_reward` properly trigger the release?
+5. Sacred Pontiff near the oak monument:
+   - balance in early and mid game;
+   - rendering of the darkened screen with More Darkness and ATMOSPHERICS;
+   - fire on the leaves;
+   - music.
+6. Do the In Control rules (drafts) and `spawns_safety.js` let the four summons through (expected: yes)?
+7. With Mowzie's natural structures disabled by `#fallow:aucun`, does no Wroughtnaut room or wild Frostmaw appear any more (`/locate structure`)?
+8. The spawner replaced by `chiseled_tuff`: correct rendering in the 5 pieces (no hole, no terrain block)?
 
-Les preuves sont au §1.3 : NBT `active`, `restPos` et `has_crystal`, `requiresCustomPersistence`, les clés `has_boss_bar`, `test_height`, `disappear_after_reward`, `mobInteract` du Pontiff, et ses textures de pétrification.
+---
 
-**Méthode** :
-- une **processor_list** qui remplace les spawners de breeze par du tuf ciselé (datapack) ;
-- un **script KubeJS** qui :
-  - scelle l'Elderheart en retirant `Blessing` (il ne donne rien si `blessing == null`, d'après le bytecode de `tick()`) ;
-  - fait apparaître le gardien une seule fois quand un joueur approche ;
-  - libère la bénédiction à la mort du gardien, ou quand l'épreuve est réussie ;
-  - ouvre alors la clairière et donne la page du codex du monument.
+## Recommendation
 
-C'est la seule méthode qui garantit un gardien unique par monument sans réécrire les `.nbt` d'AR, qui contourne les règles In Control, et qui relie gardien, bénédiction, brume et codex en un seul moment de jeu.
+**First choice among the current mods: nothing to add.** A different guardian is used per monument type, taken from Mowzie's Mobs 1.8.2 and Companions! 1.3.4, which are already in the pack:
+- **Ferrous Wroughtnaut** at the warrior monolith (sleeping armor, boss bar, returns to his place);
+- **Frostmaw** at the conifer monument (sleeping snow beast, summoned with `has_crystal` and `PersistenceRequired`);
+- **Tongbi the Sculptor** at the hunter monolith (an agility trial rather than a fight);
+- **Sacred Pontiff** at the oak monument (a moss statue that one chooses to awaken, and that petrifies on dying);
+- **no guardian** at the cherry or the sentinel, as their lore requires.
 
-**Premier choix de mod nouveau, s'il en faut un** : **Bosses of Mass Destruction (Forge/NeoForge) 1.3.3** (1,95 Mo, avec cerbons-api et cloth-config), réduit à l'**Obsidilith** :
-- ses 4 structures se désactivent par tags de datapack ;
-- c'est un monolithe d'obsidienne vivant, en accord littéral avec le thème, avec une barre de boss et 300 PV ;
-- il ne disparaît pas.
+The evidence is in §1.3: NBT `active`, `restPos` and `has_crystal`, `requiresCustomPersistence`, the keys `has_boss_bar`, `test_height`, `disappear_after_reward`, the Pontiff's `mobInteract`, and his petrification textures.
 
-Réserves : il pose de l'obsidienne, il a une teinte violette de l'End, et ses trois autres boss (dont une liche mort-vivante) restent dans le jar. Je ne le recommande que si l'équipe préfère un vrai combat à l'épreuve du Sculpteur. Legendary Monsters serait thématiquement idéal (Overgrown Colossus, Dune Sentinel, Frostbitten Golem), mais ses 44,75 Mo et ses 14 structures en font exactement le mod « 20 boss et donjons » qu'on veut éviter.
+**Method**:
+- a **processor_list** that replaces the breeze spawners with chiseled tuff (datapack);
+- a **KubeJS script** that:
+  - seals the Elderheart by removing `Blessing` (it gives nothing if `blessing == null`, according to the bytecode of `tick()`);
+  - spawns the guardian only once when a player approaches;
+  - releases the blessing at the guardian's death, or when the trial is passed;
+  - then opens the clearing and gives the monument's codex page.
+
+This is the only method that guarantees a unique guardian per monument without rewriting AR's `.nbt` files, that bypasses the In Control rules, and that ties guardian, blessing, mist and codex into a single gameplay moment.
+
+**First choice of new mod, if one is needed**: **Bosses of Mass Destruction (Forge/NeoForge) 1.3.3** (1.95 MB, with cerbons-api and cloth-config), reduced to the **Obsidilith**:
+- its 4 structures are disabled by datapack tags;
+- it is a living obsidian monolith, literally in line with the theme, with a boss bar and 300 HP;
+- it does not despawn.
+
+Reservations: it places obsidian, it has a purple End tint, and its three other bosses (including an undead lich) remain in the jar. It is recommended only if the maintainer prefers a real fight to the Sculptor's trial. Legendary Monsters would be thematically ideal (Overgrown Colossus, Dune Sentinel, Frostbitten Golem), but its 44.75 MB and 14 structures make it exactly the "20 bosses and dungeons" mod to be avoided.

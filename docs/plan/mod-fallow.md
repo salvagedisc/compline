@@ -1,184 +1,184 @@
-# Le mod custom `fallow`
+# The custom `fallow` mod
 
-Le mod proposé au [12.4](12-verification.md#124-le-mod-custom-fallow) et retenu par la décision 17 du [12.5](12-verification.md#125-décisions-qui-sajoutent-suite-du-1012). Il est fait de modules qu'on active un par un. La version 0.2.1 contient les modules **ciel**, **sac** et **xp**.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.2.1 contains the **ciel** (sky), **sac** (bag) and **xp** modules.
 
-> **État au 2026-10-19.** La version 0.2.1 compile (`./gradlew build`, contre Enhanced Celestials 2), mais **rien n'a été testé en jeu**. Tout ce qui suit vient de la lecture du code des mods visés (jars ouverts avec `javap`). La liste des [tests en jeu](#tests-en-jeu) dit ce qu'il faut vérifier avant de s'y fier.
+> **Status as of 2026-10-19.** Version 0.2.1 compiles (`./gradlew build`, against Enhanced Celestials 2), but **nothing has been tested in game**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
-## Construire et mettre à jour
+## Building and updating
 
-| Quoi | Où |
+| What | Where |
 |---|---|
-| Sources | `mods-custom/fallow/` : MDK officiel ModDevGradle 1.21.1, wrapper Gradle 9.2.1, Java 21 |
-| Paquet Java | `io.github.salvagedisc.fallow` |
-| Jar dans le pack | `pack/mods/fallow-<version>.jar`, un jar brut (pas de `.pw.toml`) |
-| CI | job `mod-fallow` de `.github/workflows/build.yml` : il compile le mod et garde le jar en artefact |
+| Sources | `mods-custom/fallow/`: official ModDevGradle 1.21.1 MDK, Gradle wrapper 9.2.1, Java 21 |
+| Java package | `io.github.salvagedisc.fallow` |
+| Jar in the pack | `pack/mods/fallow-<version>.jar`, a raw jar (no `.pw.toml`) |
+| CI | `mod-fallow` job of `.github/workflows/build.yml`: it compiles the mod and keeps the jar as an artifact |
 
-Pour sortir une version :
+To release a version:
 
 ```sh
 cd mods-custom/fallow
-./gradlew build                     # jar dans build/libs/fallow-<version>.jar
-cp build/libs/fallow-<version>.jar ../../pack/mods/   # retirer l'ancien jar
+./gradlew build                     # jar in build/libs/fallow-<version>.jar
+cp build/libs/fallow-<version>.jar ../../pack/mods/   # remove the old jar
 cd ../../pack && packwiz refresh
 ```
 
-La version se règle dans `gradle.properties` (`mod_version`). Les mods visés ne servent qu'à la compilation (`compileOnly`, dépôt Maven de Modrinth). `build.gradle` lit leur version dans `pack/mods/<slug>.pw.toml` : le mod se compile toujours contre les versions exactes du pack, et une mise à jour d'un de ces mods se voit à la compilation suivante.
+The version is set in `gradle.properties` (`mod_version`). The targeted mods are used only at compile time (`compileOnly`, Modrinth Maven repository). `build.gradle` reads their version from `pack/mods/<slug>.pw.toml`: the mod is always compiled against the exact versions in the pack, and an update of one of these mods shows up at the next compilation.
 
-## Principes
+## Principles
 
-- **Un module = un interrupteur.** Chaque module a son booléen `enabled` dans la config : `config/fallow-client.toml` pour `ciel`, `config/fallow-common.toml` pour `sac` et `xp`. Les valeurs sont relues à chaque usage, donc un changement en jeu prend effet tout de suite.
-- **Un module ne charge que si ses mods sont là.** Au démarrage, `Fallow` vérifie avec `ModList` les mods dont dépend chaque module. Il écrit « Module X chargé » ou « Module X ignoré » dans le log. Les mixins passent par `FallowMixinPlugin`, qui ne les applique que si les mods visés sont dans `LoadingModList`. La seule dépendance dure est NeoForge.
-- **Pas de code recopié.** Le mod passe par les API publiques des mods visés et par des mixins ciblés, sur du code vanilla quand c'est possible.
+- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/fallow-client.toml` for `ciel`, `config/fallow-common.toml` for `sac` and `xp`. The values are re-read at each use, so a change in game takes effect immediately.
+- **A module loads only if its mods are present.** At startup, `Fallow` checks with `ModList` the mods each module depends on. It writes "Module X chargé" or "Module X ignoré" to the log. Mixins go through `FallowMixinPlugin`, which applies them only if the targeted mods are in `LoadingModList`. The only hard dependency is NeoForge.
+- **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible.
 
-| Module | Côté | Mods demandés | Mixins |
+| Module | Side | Required mods | Mixins |
 |---|---|---|---|
-| `ciel` | client | ATMOSPHERICS ; Enhanced Celestials pour la lune | 4, tous client |
-| `sac` | les deux (l'effet s'exécute sur le serveur) | Traveler's Backpack et Thirst Was Reclaimed | aucun |
-| `xp` | les deux (l'enclume des deux côtés, la barre chez le client) | aucun | 1, commun (`xp.AnvilMenuMixin`, sur du code vanilla) |
+| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client |
+| `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
+| `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 
-## Module `ciel`
+## `ciel` module
 
-### La lune d'Enhanced Celestials sous ATMOSPHERICS
+### Enhanced Celestials' moon under ATMOSPHERICS
 
-**Le problème.** ATMOSPHERICS annule `LevelRenderer.renderSky` (injection au début) et redessine tout le ciel. Sa lune utilise toujours la texture vanilla `moon_phases.png`, de taille 20 et en blanc. Les mixins d'Enhanced Celestials sur `renderSky` ne s'exécutent donc plus : la lune blanche, la lune de sang et les autres évènements gardent l'aspect de la lune vanilla. La lune blanche est d'ailleurs plus petite (14) que la lune vanilla : la redessiner par-dessus ne suffit pas, il faut d'abord cacher celle d'ATMOSPHERICS.
+**The problem.** ATMOSPHERICS cancels `LevelRenderer.renderSky` (injection at the start) and redraws the whole sky. Its moon still uses the vanilla `moon_phases.png` texture, at size 20 and in white. Enhanced Celestials' mixins on `renderSky` therefore no longer run: the white moon, the blood moon and the other events keep the appearance of the vanilla moon. The white moon is also smaller (14) than the vanilla moon: redrawing it on top is not enough, ATMOSPHERICS' moon must be hidden first.
 
-**Le mécanisme** (`MoonOverlay` et trois mixins) :
+**The mechanism** (`MoonOverlay` and three mixins):
 
-1. `LevelRendererMixin` entoure l'appel à `renderSky` dans `renderLevel` (`@WrapOperation`). Juste avant l'appel, le module s'arme si la dimension a des données lunaires Enhanced Celestials.
-2. Le même mixin repère le premier `Runnable.run()` de `renderSky` : c'est le réglage du brouillard, au début du corps vanilla. S'il s'exécute, ATMOSPHERICS n'a pas pris la main (il ne le fait pas dans les dimensions de No Man's Land ni pendant la Friend Moon) ; Enhanced Celestials dessine alors sa lune lui-même, et `fallow` ne touche à rien.
-3. Sinon, `RenderSystemMixin` remplace, pendant le seul ciel d'ATMOSPHERICS, la texture `moon_phases.png` par une texture transparente (`fallow:textures/environment/hidden_moon.png`). Le quad de lune d'ATMOSPHERICS ne dessine plus rien.
-4. Après `renderSky`, si la lune a bien été cachée, `fallow` dessine celle d'Enhanced Celestials au même endroit, avec les mêmes matrices :
-   - la texture de l'évènement en cours ;
-   - la taille fondue entre l'évènement précédent et l'actuel, comme le fait Enhanced Celestials ;
-   - la couleur, par `ECWorldRenderer.changeMoonColor`, la fonction qu'Enhanced Celestials appelle dans le ciel vanilla (elle gère aussi l'effacement par la pluie) ;
-   - l'échelle (`moonTextureScale`) et la rotation (`moonTextureRotation`) réglées dans la config d'ATMOSPHERICS.
+1. `LevelRendererMixin` wraps the call to `renderSky` in `renderLevel` (`@WrapOperation`). Just before the call, the module arms itself if the dimension has Enhanced Celestials lunar data.
+2. The same mixin spots the first `Runnable.run()` of `renderSky`: this is the fog setup, at the start of the vanilla body. If it runs, ATMOSPHERICS has not taken over (it does not do so in No Man's Land dimensions or during the Friend Moon); Enhanced Celestials then draws its moon itself, and `fallow` touches nothing.
+3. Otherwise, `RenderSystemMixin` replaces, during ATMOSPHERICS' sky only, the `moon_phases.png` texture with a transparent texture (`fallow:textures/environment/hidden_moon.png`). ATMOSPHERICS' moon quad no longer draws anything.
+4. After `renderSky`, if the moon was indeed hidden, `fallow` draws the Enhanced Celestials one at the same place, with the same matrices:
+   - the texture of the current event;
+   - the size blended between the previous and the current event, as Enhanced Celestials does;
+   - the color, through `ECWorldRenderer.changeMoonColor`, the function Enhanced Celestials calls in the vanilla sky (it also handles fading by rain);
+   - the scale (`moonTextureScale`) and rotation (`moonTextureRotation`) set in the ATMOSPHERICS config.
 
-Si une étape manque (ATMOSPHERICS ne dessine pas de lune, Enhanced Celestials absent…), rien n'est caché et rien n'est dessiné. Une erreur de dessin est notée une seule fois dans le log, sans faire planter le rendu.
+If a step is missing (ATMOSPHERICS does not draw a moon, Enhanced Celestials absent…), nothing is hidden and nothing is drawn. A drawing error is logged once, without crashing the rendering.
 
-Config : `ciel.redrawMoon` (vrai par défaut).
+Config: `ciel.redrawMoon` (true by default).
 
-**Limites connues.**
-- La lune redessinée passe après tout le ciel d'ATMOSPHERICS, donc par-dessus ses nuages ou son voile de ciel s'il en dessine après la lune. À regarder en jeu.
-- Elle n'est pas dessinée quand elle est sous l'horizon (test sur l'heure, avec une marge pour les grosses lunes).
+**Known limitations.**
+- The redrawn moon comes after all of ATMOSPHERICS' sky, hence on top of its clouds or its sky veil if it draws any after the moon. To be checked in game.
+- It is not drawn when it is below the horizon (time-based test, with a margin for large moons).
 
-### Vider le cache de brume d'ATMOSPHERICS
+### Clearing ATMOSPHERICS' mist cache
 
-ATMOSPHERICS calcule la brume à partir des biomes autour du joueur. Il garde le résultat en cache (`BiomeBlendUtil`) tant que le joueur reste dans la même cellule de 4 blocs. Si les biomes changent sous un joueur immobile (conversion en clairière, `/fillbiome`), la brume ne réagit qu'au prochain déplacement.
+ATMOSPHERICS computes the mist from the biomes around the player. It keeps the result in a cache (`BiomeBlendUtil`) as long as the player stays in the same 4-block cell. If the biomes change under a stationary player (conversion into a clearing, `/fillbiome`), the mist only reacts on the next movement.
 
-- **Automatique** : `ClientPacketListenerMixin` vide le cache chaque fois que le serveur envoie de nouveaux biomes (paquet `ClientboundChunksBiomesPacket`, celui que produit `/fillbiome`). Config : `ciel.clearFogOnBiomeUpdate` (vrai par défaut).
-- **À la main** : une méthode statique publique, utilisable plus tard depuis KubeJS (scripts client) :
+- **Automatic**: `ClientPacketListenerMixin` clears the cache every time the server sends new biomes (`ClientboundChunksBiomesPacket`, the one `/fillbiome` produces). Config: `ciel.clearFogOnBiomeUpdate` (true by default).
+- **By hand**: a public static method, usable later from KubeJS (client scripts):
 
   ```js
   Java.loadClass('io.github.salvagedisc.fallow.api.FallowSky').clearFogCache()
   ```
 
-  Elle renvoie `true` si le cache a été vidé, ou programmé pour l'être sur le fil de rendu. Elle renvoie `false` si ATMOSPHERICS est absent, si le module est coupé ou si on est sur un serveur. `FallowSky.isFogCacheAvailable()` répond à la même question sans rien vider. KubeJS peut demander d'autoriser la classe dans son filtre de classes. Un script serveur qui veut déclencher le vidage chez les joueurs doit leur envoyer un paquet, par exemple avec `NetworkEvents.dataReceived` côté client.
+  It returns `true` if the cache was cleared, or scheduled to be cleared on the render thread. It returns `false` if ATMOSPHERICS is absent, if the module is off or if we are on a server. `FallowSky.isFogCacheAvailable()` answers the same question without clearing anything. KubeJS may require the class to be allowed in its class filter. A server script that wants to trigger the clearing on players' machines must send them a packet, for example with `NetworkEvents.dataReceived` on the client side.
 
-Le cache est vidé par `BiomeBlendUtil.resetCache()`, une méthode privée d'ATMOSPHERICS, atteinte par un accesseur mixin (`@Invoker`).
+The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS method, reached through a mixin accessor (`@Invoker`).
 
-## Module `sac`
+## `sac` module
 
-**Le mécanisme.** Traveler's Backpack a une API d'effets de fluide (`api.fluids.EffectFluid`). Chaque effet enregistré pour un fluide s'exécute quand le joueur boit ce fluide au tuyau. `fallow` ajoute l'effet `fallow:thirst_water` sur l'eau, à côté de celui du sac, qui éteint le feu. Le sac vide son registre d'effets pendant son initialisation commune : l'effet de `fallow` est donc enregistré à la fin du chargement (`FMLLoadCompleteEvent`). Le log l'annonce par « sac : effet fallow:thirst_water enregistré ». Le module n'a aucun mixin.
+**The mechanism.** Traveler's Backpack has a fluid effect API (`api.fluids.EffectFluid`). Each effect registered for a fluid runs when the player drinks that fluid through the hose. `fallow` adds the `fallow:thirst_water` effect on water, next to the backpack's own, which puts out fire. The backpack empties its effect registry during its common initialization: the `fallow` effect is therefore registered at the end of loading (`FMLLoadCompleteEvent`). The log announces it with "sac : effet fallow:thirst_water enregistré". The module has no mixin.
 
-À chaque gorgée, sur le serveur :
+At each sip, on the server:
 
-1. la pureté de l'eau du réservoir est lue par l'API de Thirst Was Reclaimed (`WaterPurity.getPurity`) ;
-2. les effets de cette pureté s'appliquent (`WaterPurity.givePurityEffects` : nausée, poison, selon la config de TWR). Si l'eau rend malade et que TWR ne désaltère pas dans ce cas (`quenchThirstWhenDebuffed`), on s'arrête là ;
-3. sinon le joueur gagne l'hydratation et la désaltération d'une bouteille d'eau (`minecraft:potion`) selon TWR (6 d'hydratation par défaut), multipliées par `sac.bottlesPerDrink`.
+1. the purity of the tank's water is read through the Thirst Was Reclaimed API (`WaterPurity.getPurity`);
+2. the effects of that purity apply (`WaterPurity.givePurityEffects`: nausea, poison, depending on the TWR config). If the water makes the player sick and TWR does not quench thirst in that case (`quenchThirstWhenDebuffed`), we stop there;
+3. otherwise the player gains the hydration and thirst quenching of a bottle of water (`minecraft:potion`) according to TWR (6 hydration by default), multiplied by `sac.bottlesPerDrink`.
 
-Config : `sac.enabled` (vrai par défaut) et `sac.bottlesPerDrink` (1 à 4, défaut 1).
+Config: `sac.enabled` (true by default) and `sac.bottlesPerDrink` (1 to 4, default 1).
 
-### Ce qui est déduit du code
+### What is deduced from the code
 
-La pureté de l'eau du réservoir existe bien : TWR la range dans le composant `thirst:purity` du `FluidStack`, de 0 (sale) à 3 (purifiée). Ce que montrent les jars :
+The purity of the tank's water does exist: TWR stores it in the `thirst:purity` component of the `FluidStack`, from 0 (dirty) to 3 (purified). What the jars show:
 
-- **Une gorgée retire 1000 mB.** Le tuyau retire la plus grande quantité demandée par les effets du fluide (1000 pour l'eau). Avec moins de 1000 mB dans le réservoir, il ne se passe rien.
-- **Un seau garde sa pureté.** Le sac remplit ses réservoirs avec `FluidUtil` ; TWR réécrit le passage par `FluidBucketWrapper` et y ajoute la pureté du seau.
-- **Un mélange garde la pureté la plus basse.** Les réservoirs du sac sont des `FluidTank` NeoForge, que TWR modifie aussi.
-- **L'eau aspirée au tuyau dans le monde compte comme purifiée.** Le mode aspiration remplit le réservoir avec `new FluidStack(eau, 1000)`, sans composant de pureté. Or TWR lit un composant absent comme une eau purifiée (`MISSING_COMPONENT_PURITY = 3`). Il retire même le composant quand il vaut 3, donc « absent » et « purifiée » ne se distinguent pas. Le module suit la règle de TWR : **l'eau aspirée directement à une source est propre**. C'est un raccourci qui évite de purifier l'eau, à trancher après le test en jeu. Correction possible : un mixin ciblé sur l'aspiration du tuyau, qui donnerait à l'eau la pureté du bloc aspiré.
+- **A sip removes 1000 mB.** The hose removes the largest amount requested by the fluid's effects (1000 for water). With less than 1000 mB in the tank, nothing happens.
+- **A bucket keeps its purity.** The backpack fills its tanks with `FluidUtil`; TWR rewrites the passage through `FluidBucketWrapper` and adds the bucket's purity there.
+- **A mixture keeps the lowest purity.** The backpack's tanks are NeoForge `FluidTank`s, which TWR also modifies.
+- **Water drawn by the hose in the world counts as purified.** The suction mode fills the tank with `new FluidStack(water, 1000)`, with no purity component. But TWR reads a missing component as purified water (`MISSING_COMPONENT_PURITY = 3`). It even removes the component when it equals 3, so "missing" and "purified" cannot be told apart. The module follows TWR's rule: **water drawn directly from a source is clean**. This is a shortcut that avoids purifying water, to be settled after the in-game test. Possible fix: a mixin targeted at the hose's suction, which would give the water the purity of the block drawn.
 
-## Module `xp`
+## `xp` module
 
-Fallow n'a plus d'expérience ([xp.md](xp.md)). Les orbes et les gains de points sont coupés par `pack/kubejs/server_scripts/sans_xp.js`. Le module fait les deux choses que KubeJS ne sait pas faire proprement.
+Fallow no longer has experience ([xp.md](xp.md)). Orbs and point gains are disabled by `pack/kubejs/server_scripts/sans_xp.js`. The module does the two things KubeJS cannot do cleanly.
 
-**L'enclume sans niveaux.** Vanilla ne rend l'objet que si `player.experienceLevel >= coût` et `coût > 0` (`AnvilMenu.mayPickup`). `AnvilMenuMixin` remplace, dans cette seule méthode, la lecture de `experienceLevel` par `Integer.MAX_VALUE` (`@ModifyExpressionValue` de MixinExtras). Le reste du calcul ne change pas :
+**The anvil without levels.** Vanilla only returns the item if `player.experienceLevel >= cost` and `cost > 0` (`AnvilMenu.mayPickup`). `AnvilMenuMixin` replaces, in that method only, the read of `experienceLevel` with `Integer.MAX_VALUE` (MixinExtras `@ModifyExpressionValue`). The rest of the computation does not change:
 
-- le coût vaut toujours au moins 1, et la limite de 40 posée par `createResult` reste. Elle devient une **usure** : « Usure : n », puis « Trop usé ! » (clés vanilla `container.repair.cost` et `container.repair.expensive`, traduites dans `pack/kubejs/assets/minecraft/lang/`) ;
-- les matériaux (lingots, objet sacrifié) sont toujours pris ; `onTake` retire encore `coût` niveaux, ce qui ne fait rien à 0 ;
-- la lune bleue d'Enhanced Celestials, qui divise le coût dans `createResult`, réduit donc l'usure.
+- the cost is still at least 1, and the limit of 40 set by `createResult` remains. It becomes **wear**: "Usure : n" (wear: n), then "Trop usé !" (too worn!) (vanilla keys `container.repair.cost` and `container.repair.expensive`, translated in `pack/kubejs/assets/minecraft/lang/`);
+- the materials (ingots, sacrificed item) are still taken; `onTake` still removes `cost` levels, which does nothing at 0;
+- Enhanced Celestials' blue moon, which divides the cost in `createResult`, therefore reduces wear.
 
-Le mixin s'applique des deux côtés : le client refuse lui aussi de prendre l'objet s'il croit que les niveaux manquent, et il colore le coût en rouge. Client et serveur doivent avoir la même version du mod et la même valeur de `xp.enabled`. Aucun mod du pack ne patche `mayPickup`.
+The mixin applies on both sides: the client also refuses to take the item if it thinks the levels are missing, and it colors the cost red. Client and server must have the same version of the mod and the same `xp.enabled` value. No mod in the pack patches `mayPickup`.
 
-**La fusion d'enchantements (facultatif).** Avec `xp.blockEnchantMerge`, `XpModule` annule `AnvilUpdateEvent` quand l'objet de droite porte des enchantements (livre enchanté ou objet enchanté) : l'enclume ne donne pas de résultat, l'enchantement passe par la table. Coupé par défaut : L'équipe garde la fusion.
+**Enchantment merging (optional).** With `xp.blockEnchantMerge`, `XpModule` cancels `AnvilUpdateEvent` when the right-hand item carries enchantments (enchanted book or enchanted item): the anvil gives no result, and enchanting goes through the table. Off by default: the maintainer keeps merging.
 
-**La barre cachée.** Chez le client, `XpClient` annule les couches `VanillaGuiLayers.EXPERIENCE_BAR` et `EXPERIENCE_LEVEL` dans `RenderGuiLayerEvent.Pre`. La jauge de saut à cheval (`JUMP_METER`) est une autre couche et reste. Les cœurs et la faim gardent leur hauteur : un petit vide reste à la place de la barre.
+**The hidden bar.** On the client, `XpClient` cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump meter (`JUMP_METER`) is another layer and stays. Hearts and hunger keep their height: a small gap remains where the bar was.
 
-Config (`fallow-common.toml`, section `[xp]`) : `enabled` (vrai), `hideBar` (vrai), `blockEnchantMerge` (faux). Les deux derniers ne jouent que si `enabled` est vrai. Revenir en arrière : `enabled = false` et supprimer `sans_xp.js`.
+Config (`fallow-common.toml`, `[xp]` section): `enabled` (true), `hideBar` (true), `blockEnchantMerge` (false). The last two only matter if `enabled` is true. To roll back: `enabled = false` and delete `sans_xp.js`.
 
-## Tests en jeu
+## In-game tests
 
-Rien de ceci n'a été fait. À passer sur une instance du pack, puis à cocher ici.
+None of this has been done. To be run on an instance of the pack, then ticked off here.
 
-### Ciel
+### Sky
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| C1 | Nuit claire normale, dans l'Overworld | Une seule lune, à sa place, avec la bonne phase. Pareil avec une échelle et une rotation changées dans la config d'ATMOSPHERICS |
-| C2 | `/setLunarEvent` vers la lune blanche (peut demander un ciel dégagé) | La lune blanche visible, plus petite, sans la lune vanilla derrière |
-| C3 | Lune de sang, lune bleue, lune des moissons, super lune (taille 40) | Couleur et taille propres à chaque évènement, et fondu à la transition |
-| C4 | Pluie, puis orage | La lune s'efface avec la pluie, comme le reste du ciel |
-| C5 | Sous l'eau, dans la neige poudreuse, avec cécité | Pas de double lune ni de lune qui disparaît |
-| C6 | Dimension de No Man's Land, Friend Moon | Le ciel de ces cas reste celui de leur mod (log sans erreur `fallow`) |
-| C7 | `ciel.redrawMoon = false`, puis `ciel.enabled = false` | Retour à la lune vanilla d'ATMOSPHERICS |
-| C8 | `/fillbiome` autour d'un joueur immobile, avec `clearFogOnBiomeUpdate` vrai puis faux | La brume change tout de suite, puis seulement après un pas |
-| C9 | Appel KubeJS de `FallowSky.clearFogCache()` | Renvoie `true`, la brume se recalcule |
-| C10 | Log au démarrage | « Module ciel chargé », aucun avertissement de mixin `fallow` |
-| C11 | Images par seconde la nuit, avec et sans le module | Pas d'écart visible |
-| C12 | Instance sans Enhanced Celestials, puis sans ATMOSPHERICS | Le jeu démarre ; mixins de la lune non appliqués, ou module ignoré |
+| C1 | Normal clear night, in the Overworld | A single moon, in its place, with the right phase. Same with a scale and rotation changed in the ATMOSPHERICS config |
+| C2 | `/setLunarEvent` to the white moon (may require a clear sky) | The white moon visible, smaller, without the vanilla moon behind it |
+| C3 | Blood moon, blue moon, harvest moon, super moon (size 40) | Color and size specific to each event, and fade at the transition |
+| C4 | Rain, then thunderstorm | The moon fades with the rain, like the rest of the sky |
+| C5 | Underwater, in powder snow, with blindness | No double moon and no vanishing moon |
+| C6 | No Man's Land dimension, Friend Moon | The sky in these cases stays that of their mod (log without `fallow` error) |
+| C7 | `ciel.redrawMoon = false`, then `ciel.enabled = false` | Back to ATMOSPHERICS' vanilla moon |
+| C8 | `/fillbiome` around a stationary player, with `clearFogOnBiomeUpdate` true then false | The mist changes immediately, then only after a step |
+| C9 | KubeJS call of `FallowSky.clearFogCache()` | Returns `true`, the mist is recomputed |
+| C10 | Log at startup | "Module ciel chargé", no `fallow` mixin warning |
+| C11 | Frames per second at night, with and without the module | No visible difference |
+| C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
 
-### Sac
+### Bag
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| S1 | Seau d'eau sale (rempli à une source) vidé dans le réservoir, puis bu au tuyau | Effets de l'eau sale de TWR ; désaltère ou non selon sa config |
-| S2 | Seau d'eau purifiée (four ou feu de camp) | Désaltère, sans effet négatif |
-| S3 | Eau aspirée au tuyau dans un lac | Désaltère comme une eau purifiée (raccourci à trancher, voir plus haut) |
-| S4 | Mélange d'eau sale et d'eau purifiée dans un réservoir | La pureté la plus basse l'emporte |
-| S5 | Une gorgée, avec `bottlesPerDrink` à 1 puis à 3 | 1000 mB retirés ; 6 puis 18 d'hydratation (valeurs par défaut de TWR) |
-| S6 | Boire en feu | Le feu s'éteint toujours (effet du sac) |
-| S7 | Serveur dédié | La barre de soif se met à jour chez le joueur |
-| S8 | `sac.enabled = false` | Le tuyau ne désaltère plus |
-| S9 | Log au démarrage | « Module sac chargé » puis « sac : effet fallow:thirst_water enregistré » |
-| S10 | Réservoir avec moins de 1000 mB | Rien ne se passe, comme avant |
+| S1 | Bucket of dirty water (filled at a source) emptied into the tank, then drunk through the hose | TWR's dirty water effects; quenches thirst or not depending on its config |
+| S2 | Bucket of purified water (furnace or campfire) | Quenches thirst, without negative effect |
+| S3 | Water drawn by the hose from a lake | Quenches thirst like purified water (shortcut to settle, see above) |
+| S4 | Mixture of dirty and purified water in a tank | The lowest purity wins |
+| S5 | One sip, with `bottlesPerDrink` at 1 then at 3 | 1000 mB removed; 6 then 18 hydration (TWR defaults) |
+| S6 | Drinking while on fire | The fire is still put out (backpack effect) |
+| S7 | Dedicated server | The thirst bar updates on the player's side |
+| S8 | `sac.enabled = false` | The hose no longer quenches thirst |
+| S9 | Log at startup | "Module sac chargé" then "sac : effet fallow:thirst_water enregistré" |
+| S10 | Tank with less than 1000 mB | Nothing happens, as before |
 
 ### XP
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| X1 | Log au démarrage | « Module xp chargé (aucun mod requis) », aucun avertissement de mixin `fallow` |
-| X2 | À 0 niveau : nommer une étiquette, réparer une pioche avec des lingots, fusionner deux pioches enchantées | Coût en vert (« Usure : n »), l'objet se prend, les matériaux partent |
-| X3 | Réparer le même objet jusqu'à l'usure 40 | « Trop usé ! », pas de résultat (sauf en créatif) |
-| X4 | Serveur dédié | Le client prend l'objet sans retour en arrière de l'emplacement |
-| X5 | `xp.enabled = false` | L'enclume redemande des niveaux, la barre revient |
-| X6 | `xp.blockEnchantMerge = true`, livre enchanté à droite | Pas de résultat ; une réparation aux lingots marche toujours |
-| X7 | À pied, à cheval, en visant au canon de Supplementaries | Ni barre ni chiffre d'XP ; la jauge de saut reste à cheval |
-| X8 | Lune bleue d'Enhanced Celestials | Le coût affiché baisse |
+| X1 | Log at startup | "Module xp chargé (aucun mod requis)", no `fallow` mixin warning |
+| X2 | At level 0: naming a tag, repairing a pickaxe with ingots, merging two enchanted pickaxes | Cost in green ("Usure : n"), the item can be taken, the materials are consumed |
+| X3 | Repairing the same item up to wear 40 | "Trop usé !", no result (except in creative) |
+| X4 | Dedicated server | The client takes the item without the slot rolling back |
+| X5 | `xp.enabled = false` | The anvil asks for levels again, the bar returns |
+| X6 | `xp.blockEnchantMerge = true`, enchanted book on the right | No result; a repair with ingots still works |
+| X7 | On foot, on horseback, aiming a Supplementaries cannon | No XP bar or number; the jump meter stays on horseback |
+| X8 | Enhanced Celestials blue moon | The displayed cost goes down |
 
-## Entretien
+## Maintenance
 
-À chaque mise à jour d'ATMOSPHERICS, d'Enhanced Celestials, de Traveler's Backpack, de Thirst Was Reclaimed ou de NeoForge :
+At each update of ATMOSPHERICS, Enhanced Celestials, Traveler's Backpack, Thirst Was Reclaimed or NeoForge:
 
-1. recompiler le mod (la CI le fait). Une erreur montre qu'une API a changé ;
-2. lancer le jeu et lire le log : un mixin qui ne trouve plus sa cible y laisse un avertissement ;
-3. repasser les tests du module concerné.
+1. recompile the mod (the CI does it). An error shows that an API has changed;
+2. launch the game and read the log: a mixin that no longer finds its target leaves a warning there;
+3. rerun the tests of the module concerned.
 
-Points fragiles connus :
-- ATMOSPHERICS : son mixin en tête de `renderSky`, la texture `moon_phases.png`, le nom de `BiomeBlendUtil.resetCache` ;
-- Enhanced Celestials 2 : `ECWorldRenderer.changeMoonColor`, `LunarEvent.getMoonTextureLocation` et `getMoonSize` (mod id `enhancedcelestials2core`) ;
-- Traveler's Backpack : le constructeur d'`EffectFluid` et le moment où il vide son registre ;
-- Thirst Was Reclaimed : `WaterPurity` et `ThirstHelper`.
-- Minecraft et NeoForge : la lecture de `Player.experienceLevel` dans `AnvilMenu.mayPickup`, les noms des couches `EXPERIENCE_BAR` et `EXPERIENCE_LEVEL`, l'annulation de `AnvilUpdateEvent`.
+Known fragile points:
+- ATMOSPHERICS: its mixin at the head of `renderSky`, the `moon_phases.png` texture, the name of `BiomeBlendUtil.resetCache`;
+- Enhanced Celestials 2: `ECWorldRenderer.changeMoonColor`, `LunarEvent.getMoonTextureLocation` and `getMoonSize` (mod id `enhancedcelestials2core`);
+- Traveler's Backpack: the `EffectFluid` constructor and the moment it empties its registry;
+- Thirst Was Reclaimed: `WaterPurity` and `ThirstHelper`.
+- Minecraft and NeoForge: the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers, the cancellation of `AnvilUpdateEvent`.
 
-## Modules suivants
+## Next modules
 
-Dans l'ordre du [12.4](12-verification.md#124-le-mod-custom-fallow) : **dissipateur** (bloc cinétique Create, après le prototype KubeJS), puis, selon les tests, tombe, voies, plans et finitions. Chacun aura sa section ici, son interrupteur et ses tests.
+In the order of [12.4](12-verification.md#124-the-custom-fallow-mod): **dissipator** (Create kinetic block, after the KubeJS prototype), then, depending on the tests, grave, tracks, blueprints and finishing touches. Each will have its section here, its switch and its tests.

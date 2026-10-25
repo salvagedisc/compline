@@ -1,93 +1,93 @@
-# Doublons de faune : un seul modèle par espèce
+# Wildlife duplicates: one model per species
 
-Demande de l'équipe du 2026-10-19 : quand deux mods ont la même espèce, comparer les modèles et garder le meilleur. Aucune coupe pour raison de style : Companions! reste en entier. Untitled Duck Mod est retiré. Comparaison faite sur les jars (modèles reconstruits et rendus à la même échelle, os, animations, seaux, apparitions), sans les exécuter. **Rien n'a été testé en jeu.** Elle remplace les choix de doublons du [5.3](05-faune-et-ambiance.md) et du [5.7](05-faune-et-ambiance.md).
+Request from the maintainer, 2026-10-19: when two mods have the same species, compare the models and keep the best one. No cuts for reasons of style: Companions! stays in full. Untitled Duck Mod is removed. The comparison was made on the jars (models rebuilt and rendered at the same scale, bones, animations, buckets, spawns), without running them. **Nothing has been tested in game.** It replaces the duplicate choices in [5.3](05-faune-et-ambiance.md) and [5.7](05-faune-et-ambiance.md).
 
-Fresh Animations n'anime aucune créature moddée : la cohérence avec le vanilla se juge sur les proportions et le type d'animation. Naturalist 2.0 anime par images clés, comme le vanilla 1.21 ; Alex's Mobs surtout par sinusoïdes. Pour le zoo, à modèle égal, la version qui se met en seau l'emporte (Hybrid Aquatic n'a aucun seau à poisson).
+Fresh Animations animates no modded creature: consistency with vanilla is judged on proportions and type of animation. Naturalist 2.0 animates with keyframes, like vanilla 1.21; Alex's Mobs mostly with sinusoids. For the zoo, with equal models, the version that can be put in a bucket wins (Hybrid Aquatic has no fish bucket).
 
 ## Verdicts
 
-| Espèce | Gardé | Coupé | Raison |
+| Species | Kept | Cut | Reason |
 |---|---|---|---|
-| Ours brun | Naturalist | Alex's Mobs (grizzly) | 12 animations, états (sommeil, flair), style vanilla 1.21 |
-| Tigre | Naturalist | Alex's Mobs | Proportions, palette, variantes, animations |
-| Éléphant | Naturalist | Alex's Mobs | Plus d'os et d'animations ; il a aussi selle et coffre |
-| Rhinocéros | Naturalist | Alex's Mobs | Deux cornes, charge animée |
-| Varan de Komodo | Naturalist | Alex's Mobs | Animations à images clés |
-| Crocodilien | Naturalist (alligator) | Alex's Mobs (crocodile) | Même rôle dans les marais ; le caïman d'Alex's Mobs, autre espèce, reste |
-| Serpent à sonnette | Naturalist | Alex's Mobs | 10 animations contre une |
-| Geai bleu | Naturalist (variante d'oiseau) | Alex's Mobs | Échelle cohérente avec ses autres passereaux |
-| Poisson-chat | Naturalist | Alex's Mobs | Échelle vanilla, seau |
-| Baudroie | Naturalist | Hybrid Aquatic | Modèle plus soigné, leurre animé, seau |
-| Blobfish | Naturalist | Alex's Mobs, Hybrid Aquatic | Silhouette la plus lisible, seau |
-| Isopode géant | Naturalist | Hybrid Aquatic | Plus d'os et d'animations, seau |
-| Piranha | Naturalist | Hybrid Aquatic | Palette naturelle, seau |
-| Raie | Naturalist (3 espèces) | Hybrid Aquatic (pastenague) | Seau, s'enfouit ; la raie manta d'Hybrid Aquatic, autre espèce, reste |
-| Grand requin blanc | Hybrid Aquatic | Naturalist | Silhouette fuselée, cohérent avec ses autres requins |
-| Requin-marteau | Hybrid Aquatic | Alex's Mobs | Plus détaillé, même famille |
-| Méduse | Hybrid Aquatic | Naturalist | Fine, translucide, série cohérente |
-| Cténophore | Hybrid Aquatic | Alex's Mobs | Texture animée irisée |
-| Étoile de mer | Hybrid Aquatic | Naturalist | Proportions, trois espèces ; on perd les 4 blocs d'étoile de Naturalist |
-| Orque | Hybrid Aquatic | Alex's Mobs | Bébé, variantes, images clés |
-| Homard | Hybrid Aquatic | Alex's Mobs | Plus détaillé (à vérifier en jeu : sa texture est une carte de teintes) |
-| Poisson volant | Hybrid Aquatic | Alex's Mobs | Plus fin, proche du vanilla |
-| Pupfish | Hybrid Aquatic | Alex's Mobs | Échelle de la morue vanilla |
-| Poulpe | Hybrid Aquatic | Alex's Mobs (poulpe mimétique) | Plus soigné |
-| Requin lézard | Alex's Mobs | Hybrid Aquatic | Plus expressif, seau |
-| Calmar géant | Alex's Mobs | Hybrid Aquatic | Modèles proches ; celui d'Alex's Mobs vit dans les océans profonds vanilla, celui d'Hybrid Aquatic seulement dans ses fosses, dont la coupe est prévue (12.1) |
-| Loutre | Critters and Companions | Hybrid Aquatic | Plus d'animations, meilleure silhouette |
-| Poulpe Dumbo | Critters and Companions | Hybrid Aquatic | Celui d'Hybrid Aquatic n'apparaît nulle part |
-| Libellule | Naturalist | Critters and Companions | Échelle (celle de C&C fait deux blocs d'envergure) |
-| Escargot | Naturalist | Critters and Companions | Plus discret et plus animé |
-| Papillon | Longwings | Naturalist (et sa chenille) | Silhouettes lisibles, 70 espèces à collectionner |
-| Crabe | Friends & Foes, crabes d'Hybrid Aquatic | Naturalist | Design du vote Mojang ; les crabes d'Hybrid Aquatic sont d'autres espèces |
-| Canard | Naturalist | — | Seul canard depuis le retrait d'Untitled Duck Mod |
+| Brown bear | Naturalist | Alex's Mobs (grizzly) | 12 animations, states (sleep, sniffing), vanilla 1.21 style |
+| Tiger | Naturalist | Alex's Mobs | Proportions, palette, variants, animations |
+| Elephant | Naturalist | Alex's Mobs | More bones and animations; it also has a saddle and a chest |
+| Rhinoceros | Naturalist | Alex's Mobs | Two horns, animated charge |
+| Komodo dragon | Naturalist | Alex's Mobs | Keyframe animations |
+| Crocodilian | Naturalist (alligator) | Alex's Mobs (crocodile) | Same role in the swamps; Alex's Mobs' caiman, a different species, stays |
+| Rattlesnake | Naturalist | Alex's Mobs | 10 animations against one |
+| Blue jay | Naturalist (bird variant) | Alex's Mobs | Scale consistent with its other songbirds |
+| Catfish | Naturalist | Alex's Mobs | Vanilla scale, bucket |
+| Anglerfish | Naturalist | Hybrid Aquatic | More polished model, animated lure, bucket |
+| Blobfish | Naturalist | Alex's Mobs, Hybrid Aquatic | Most readable silhouette, bucket |
+| Giant isopod | Naturalist | Hybrid Aquatic | More bones and animations, bucket |
+| Piranha | Naturalist | Hybrid Aquatic | Natural palette, bucket |
+| Ray | Naturalist (3 species) | Hybrid Aquatic (stingray) | Bucket, burrows into the sand; Hybrid Aquatic's manta ray, a different species, stays |
+| Great white shark | Hybrid Aquatic | Naturalist | Streamlined silhouette, consistent with its other sharks |
+| Hammerhead shark | Hybrid Aquatic | Alex's Mobs | More detailed, same family |
+| Jellyfish | Hybrid Aquatic | Naturalist | Thin, translucent, consistent series |
+| Comb jelly | Hybrid Aquatic | Alex's Mobs | Iridescent animated texture |
+| Starfish | Hybrid Aquatic | Naturalist | Proportions, three species; Naturalist's 4 starfish blocks are lost |
+| Orca | Hybrid Aquatic | Alex's Mobs | Baby, variants, keyframes |
+| Lobster | Hybrid Aquatic | Alex's Mobs | More detailed (to check in game: its texture is a tint map) |
+| Flying fish | Hybrid Aquatic | Alex's Mobs | Thinner, close to vanilla |
+| Pupfish | Hybrid Aquatic | Alex's Mobs | Scale of the vanilla cod |
+| Octopus | Hybrid Aquatic | Alex's Mobs (mimic octopus) | More polished |
+| Frilled shark | Alex's Mobs | Hybrid Aquatic | More expressive, bucket |
+| Giant squid | Alex's Mobs | Hybrid Aquatic | Similar models; Alex's Mobs' lives in the vanilla deep oceans, Hybrid Aquatic's only in its trenches, which are due to be cut (12.1) |
+| Otter | Critters and Companions | Hybrid Aquatic | More animations, better silhouette |
+| Dumbo octopus | Critters and Companions | Hybrid Aquatic | Hybrid Aquatic's does not spawn anywhere |
+| Dragonfly | Naturalist | Critters and Companions | Scale (C&C's has a two-block wingspan) |
+| Snail | Naturalist | Critters and Companions | More discreet and more animated |
+| Butterfly | Longwings | Naturalist (and its caterpillar) | Readable silhouettes, 70 species to collect |
+| Crab | Friends & Foes, Hybrid Aquatic's crabs | Naturalist | Design from the Mojang vote; Hybrid Aquatic's crabs are other species |
+| Duck | Naturalist | — | Only duck since Untitled Duck Mod was removed |
 
-Gardés malgré un rôle proche, parce que ce sont des espèces différentes : baleine de Naturalist et cachalot d'Alex's Mobs, fourmi et fourmi coupe-feuille, autruche et émeu, koï de C&C et carpe d'Hybrid Aquatic, limaces de mer, lézard et caméléon de Cold Sweat, sanglier et tusklin, glare et lantern, les tortues.
+Kept despite a similar role, because they are different species: Naturalist's whale and Alex's Mobs' sperm whale, ant and leafcutter ant, ostrich and emu, C&C's koi and Hybrid Aquatic's carp, sea slugs, Cold Sweat's lizard and chameleon, boar and tusklin, glare and lantern, the turtles.
 
-## Comment
+## How
 
-| Mod | Où | Comment |
+| Mod | Where | How |
 |---|---|---|
-| Naturalist | `pack/config/naturalist-server.toml` | `_removed = true` par espèce, en sections (`aquatic_mobs`, `land_mobs`, `bugs`) ; l'espèce n'apparaît plus et disparaît du monde. Les lapins des forêts que Naturalist ajoute sont coupés aussi |
-| Hybrid Aquatic | `pack/kubejs/data/hybrid_aquatic/neoforge/biome_modifier/` | ses 25 fichiers d'apparition par espèce remplacés par `neoforge:none` |
-| Alex's Mobs, Critters and Companions | `pack/kubejs/data/fallow/neoforge/biome_modifier/doublons.json` | `neoforge:remove_spawns` sur `#minecraft:is_overworld` ; pas de config partielle, leurs formats (CodxLib, YACL) n'ont pas été testés avec un fichier incomplet |
-| Tous | `pack/kubejs/server_scripts/doublons.js` | entrée dans le monde annulée pour les créatures coupées (grottes luxuriantes de C&C, biomes hors du tag) ; 78 objets sans source retirés des recettes et des butins (dont le seau de homard du phoque) |
-| Tous | `pack/kubejs/client_scripts/doublons.js` | les mêmes objets cachés d'EMI |
-| Wildex | `pack/config/wildex/wildex-common.toml` | créatures coupées exclues, sinon le bestiaire ne se complète pas |
-| Alex's Mobs | `pack/kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json` | le grand coureur chasse le serpent de Naturalist, comme il chassait le serpent à sonnette d'Alex's Mobs |
+| Naturalist | `pack/config/naturalist-server.toml` | `_removed = true` per species, in sections (`aquatic_mobs`, `land_mobs`, `bugs`); the species no longer spawns and disappears from the world. The forest rabbits that Naturalist adds are cut as well |
+| Hybrid Aquatic | `pack/kubejs/data/hybrid_aquatic/neoforge/biome_modifier/` | its 25 per-species spawn files replaced by `neoforge:none` |
+| Alex's Mobs, Critters and Companions | `pack/kubejs/data/fallow/neoforge/biome_modifier/doublons.json` | `neoforge:remove_spawns` on `#minecraft:is_overworld`; no partial config, since their formats (CodxLib, YACL) have not been tested with an incomplete file |
+| All | `pack/kubejs/server_scripts/doublons.js` | joining the world cancelled for the cut creatures (C&C's lush caves, biomes outside the tag); 78 items with no source removed from recipes and loot (including the seal's lobster bucket) |
+| All | `pack/kubejs/client_scripts/doublons.js` | the same items hidden from EMI |
+| Wildex | `pack/config/wildex/wildex-common.toml` | cut creatures excluded, otherwise the bestiary cannot be completed |
+| Alex's Mobs | `pack/kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json` | the roadrunner hunts Naturalist's snake, as it used to hunt Alex's Mobs' rattlesnake |
 
-Un test (`scripts/test/kubejs-lists.test.mjs`) vérifie que les objets retirés côté serveur et cachés côté client sont les mêmes.
+A test (`scripts/test/kubejs-lists.test.mjs`) checks that the items removed server-side and hidden client-side are the same.
 
-Conséquences : trois sources de boules de slime disparaissent (crachat du Komodo, méduse de Naturalist, fiole de bave de C&C) ; l'escargot de Naturalist en lâche encore.
+Consequences: three sources of slimeballs disappear (Komodo spit, Naturalist's jellyfish, C&C's slime vial); Naturalist's snail still drops them.
 
-## Autres créatures retirées
+## Other creatures removed
 
-Décisions anciennes du plan, confirmées par l'équipe le 2026-10-19 :
-- Alex's Mobs : Murmur, Farseer, Skelewag, mouche, cafard (direction artistique, 5.3) ;
-- Friends & Foes : iceologer, illusioner, wildfire (hostiles, décision 0003), et leurs quatre structures (cabane de l'iceologer, cabane et terrain d'entraînement de l'illusioner, citadelle du wildfire), dont les tags de biomes sont vidés ;
-- Naturalist : mammouth (préhistoire écartée, 0003).
+Older decisions of the plan, confirmed by the maintainer on 2026-10-19:
+- Alex's Mobs: Murmur, Farseer, Skelewag, fly, cockroach (art direction, 5.3);
+- Friends & Foes: iceologer, illusioner, wildfire (hostiles, decision 0003), and their four structures (iceologer's cabin, illusioner's cabin and training ground, wildfire's citadel), whose biome tags are emptied;
+- Naturalist: mammoth (prehistory ruled out, 0003).
 
-Même méthode que pour les doublons : `naturalist-server.toml`, `pack/kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (serveur et client, 22 objets dont le fouet en tendon, la table de transmutation et la couronne de wildfire, qui ne se fabriquent qu'à partir d'objets de ces créatures), exclusion du Wildex. Les succès d'Alex's Mobs liés à ces créatures restent dans leur onglet sans pouvoir s'obtenir : certains sont parents d'autres succès encore possibles.
+Same method as for the duplicates: `naturalist-server.toml`, `pack/kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (server and client, 22 items including the sinew whip, the transmutation table and the wildfire crown, which can only be crafted from items dropped by these creatures), Wildex exclusion. The Alex's Mobs advancements tied to these creatures stay in their tab without being obtainable: some are parents of other advancements that can still be earned.
 
-## Biomes d'Hybrid Aquatic (2026-10-19)
+## Hybrid Aquatic biomes (2026-10-19)
 
-Ils fonctionnent avec NML : comme lui, Hybrid Aquatic les place par Biolith. Le 12.1 voulait les couper au nom de la décision 0003 (pas de biomes qui changent le visage du monde). Décision de l'équipe : on garde ses 13 autres biomes, presque tous sous l'eau (récifs, fosses, herbiers, prairie rouge, océan chaud profond, flaques de marée, grottes sulfureuses), avec les 34 espèces qui n'apparaissent que là, et on coupe seulement la **rivière tropicale**, qui remplaçait une partie des rivières vanilla, jusque dans les taïgas.
+They work with NML: like NML, Hybrid Aquatic places them through Biolith. 12.1 wanted to cut them in the name of decision 0003 (no biomes that change the face of the world). Decision of the maintainer: keep its other 13 biomes, almost all underwater (reefs, trenches, seagrass beds, red meadow, deep warm ocean, tide pools, sulphurous caves), with the 34 species that only spawn there, and cut only the **tropical river**, which replaced part of the vanilla rivers, as far as the taigas.
 
-`pack/config/hybrid_aquatic.json` : `generateTropicalRiver = false`. Le mod lit ce fichier par un codec qui exige tous les champs et la version de données 8 (sinon il le sauvegarde et le remplace par ses valeurs par défaut) : le fichier est donc complet, avec les valeurs par défaut lues dans le jar 1.7.3. `spawn_configuration` est vide : la liste ne sert qu'à la génération des données du mod, pas en jeu. À chaque mise à jour du mod, vérifier `data_version`.
+`pack/config/hybrid_aquatic.json`: `generateTropicalRiver = false`. The mod reads this file through a codec that requires all fields and data version 8 (otherwise it saves the file and replaces it with its default values): the file is therefore complete, with default values read from the 1.7.3 jar. `spawn_configuration` is empty: the list is only used for the mod's data generation, not in game. At every mod update, check `data_version`.
 
-## Tests en jeu
+## In-game tests
 
-Sur un monde neuf.
+On a new world.
 
-| # | Test | Attendu |
+| # | Test | Expected |
 |---|---|---|
-| D1 | Logs au lancement | Aucune erreur sur `naturalist-server.toml`, `doublons.json`, les biome modifiers d'Hybrid Aquatic, `doublons.js` |
-| D2 | Forêt, taïga, savane, jungle, marais, rivières | Ours, tigre, éléphant, rhinocéros, Komodo, alligator, serpent de Naturalist ; aucun de leurs doubles d'Alex's Mobs |
-| D3 | Océans, récifs, fosses | Requins, méduses, orques, poulpes d'Hybrid Aquatic ; baudroie, blobfish, isopode, raie de Naturalist ; calmar géant d'Alex's Mobs |
-| D4 | Grottes luxuriantes, rivières | Ni libellule ni escargot de C&C ; loutre de C&C |
-| D5 | Prairies fleuries | Papillons de Longwings seulement |
-| D6 | EMI : « crocodile », « homard », « étoile de mer », « libellule » | Rien des créatures coupées |
-| D7 | Wildex | Aucune entrée des créatures coupées |
-| D8 | Homard d'Hybrid Aquatic | Texture correcte (la carte de teintes n'a pas pu être rendue hors du jeu) |
-| D9 | Biomes enneigés, forêts sombres, Nether | Ni iceologer, ni illusioner, ni wildfire, ni leurs structures ; ni Murmur, Farseer, Skelewag, mouche ou cafard ; pas de mammouth |
-| D10 | `/locate biome hybrid_aquatic:tropical_river` ; `/locate biome hybrid_aquatic:coral_reef` | Introuvable ; trouvé |
+| D1 | Logs at launch | No error on `naturalist-server.toml`, `doublons.json`, Hybrid Aquatic's biome modifiers, `doublons.js` |
+| D2 | Forest, taiga, savanna, jungle, swamp, rivers | Naturalist's bear, tiger, elephant, rhinoceros, Komodo, alligator, snake; none of their Alex's Mobs doubles |
+| D3 | Oceans, reefs, trenches | Hybrid Aquatic's sharks, jellyfish, orcas, octopuses; Naturalist's anglerfish, blobfish, isopod, ray; Alex's Mobs' giant squid |
+| D4 | Lush caves, rivers | Neither C&C's dragonfly nor snail; C&C's otter |
+| D5 | Flower meadows | Longwings butterflies only |
+| D6 | EMI: "crocodile", "lobster", "starfish", "dragonfly" | Nothing from the cut creatures |
+| D7 | Wildex | No entry for the cut creatures |
+| D8 | Hybrid Aquatic's lobster | Correct texture (the tint map could not be rendered outside the game) |
+| D9 | Snowy biomes, dark forests, Nether | No iceologer, illusioner or wildfire, nor their structures; no Murmur, Farseer, Skelewag, fly or cockroach; no mammoth |
+| D10 | `/locate biome hybrid_aquatic:tropical_river`; `/locate biome hybrid_aquatic:coral_reef` | Not found; found |

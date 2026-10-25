@@ -1,108 +1,108 @@
-# La tannerie
+# The tannery
 
-Idée 4 tirée de Wayfarer ([recherche](recherche/2026-10-19/wayfarer.md), recommandation 4). Le cuir ne tombe plus tout fait des animaux : il faut une peau, des cendres et du temps. Le cuir devient un petit métier lié à la faune, à l'élevage et à la météo.
+Idea 4 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, ashes and time. Leather becomes a small trade tied to wildlife, livestock and weather.
 
-État : validé sur le serveur de test le 2026-10-19 (scripts sans erreur, butin vérifié avec `/loot spawn`, recettes : 4 ajoutées, 5 retirées). Pas encore testé avec un client : infobulles, plateau, EMI. Kaleidoscope Cookery 1.6.0 garde le même format de plateau.
+Status: validated on the test server on 2026-10-19 (scripts error-free, loot checked with `/loot spawn`, recipes: 4 added, 5 removed). Not yet tested with a client: tooltips, tray, EMI. Kaleidoscope Cookery 1.6.0 keeps the same tray format.
 
-## La chaîne, pour un joueur
+## The chain, for a player
 
-1. **Récupérer une peau.** Une vache, un cheval, un cerf, un élan ou un zèbre ne lâche plus de cuir mais une **peau brute**. L'infobulle dit quoi en faire.
-2. **Trouver des cendres.** Les cendres de Supplementaries restent quand un bloc de bois brûle, ou quand une créature meurt dans le feu. Le plus simple : poser du **charbon de bois sur un feu de camp**, qui donne une poignée de cendres au bout de 30 secondes.
-3. **Écharner et saler.** À l'établi, une peau brute et des cendres donnent une **peau préparée**.
-4. **Faire tremper.** On pose la peau préparée sur un **plateau en bambou** (Kaleidoscope Cookery) et on la laisse tremper. Le plateau mouille ce qu'il porte **sous la pluie**, ou **sous un stalactite de pierre de goutte** quand un bloc d'eau se trouve au-dessus, comme pour remplir un chaudron. Au bout de 5 minutes de trempage, la peau devient du **cuir**. Une pile entière trempe d'un coup.
+1. **Get a hide.** A cow, horse, deer, moose or zebra no longer drops leather but a **raw hide**. The tooltip says what to do with it.
+2. **Find ashes.** Supplementaries ashes are left behind when a wooden block burns, or when a creature dies in fire. The simplest way: put **charcoal on a campfire**, which yields a handful of ashes after 30 seconds.
+3. **Flesh and salt.** At the crafting table, a raw hide and ashes give a **prepared hide**.
+4. **Soak.** The prepared hide is placed on a **bamboo tray** (Kaleidoscope Cookery) and left to soak. The tray wets what it holds **in the rain**, or **under a dripstone stalactite** when a block of water lies above it, as when filling a cauldron. After 5 minutes of soaking, the hide becomes **leather**. A whole stack soaks at once.
 
-Pour tanner toute l'année, on construit une petite tannerie : de l'eau, en dessous un bloc de pierre de goutte avec un stalactite, puis le plateau. Sinon, on attend la pluie, qui dépend de la saison (Ecliptic Seasons).
+To tan all year round, build a small tannery: water, below it a dripstone block with a stalactite, then the tray. Otherwise, wait for rain, which depends on the season (Ecliptic Seasons).
 
-Le lapin est retiré du jeu depuis le 2026-10-19 ([faune-nml](faune-nml.md)) : il n'y a plus de cuir de peaux de lapin.
+The rabbit has been removed from the game since 2026-10-19 ([faune-nml](faune-nml.md)): there is no more rabbit hide leather.
 
-## Les animaux concernés
+## The animals concerned
 
-Le cuir, ou la peau qui cuisait en cuir au four, devient une peau brute. Les quantités et le bonus de Butin d'origine restent les mêmes.
+The leather, or the hide that used to smelt into leather, becomes a raw hide. The original quantities and Looting bonus stay the same.
 
-| Mod | Animaux | Table de butin |
+| Mod | Animals | Loot table |
 |---|---|---|
-| Vanilla | vache, champimeuh, cheval, âne, mule, lama, lama de marchand | `minecraft:entities/cow`, `mooshroom`, `horse`, `donkey`, `mule`, `llama`, `trader_llama` |
-| Vanilla | hoglin (Nether fermé, sans effet) | `minecraft:entities/hoglin` |
-| Icy's Better Horses | les 15 races de chevaux | leurs tables renvoient vers `minecraft:entities/horse` |
-| No Man's Land | élan | `nomansland:entities/moose` |
-| No Man's Land | cerf (ne lâchait pas de cuir : peau ajoutée, 0 ou 1, plus 0 à 1 par niveau de Butin) | `nomansland:entities/deer` |
-| Naturalist | cerf, zèbre (cuir) | `naturalist:entities/deer`, `zebra` |
-| Naturalist | sanglier, éléphant, rhinocéros, dragon de Komodo (peau « hide ») | `naturalist:entities/boar`, `elephant`, `rhino`, `komodo_dragon` |
-| Hybrid Aquatic | dugong, lamantin | `hybrid_aquatic:entities/dugong`, `manatee` |
-| Friends & Foes | lumimeuh | `friendsandfoes:entities/moobloom` |
-| Quark | renard de feu (Nether, sans effet) | `quark:entities/foxhound` |
-| Alex's Mobs | kangourou : garde sa peau, mais deux peaux de kangourou donnent une peau brute au lieu d'un cuir | recette |
+| Vanilla | cow, mooshroom, horse, donkey, mule, llama, trader llama | `minecraft:entities/cow`, `mooshroom`, `horse`, `donkey`, `mule`, `llama`, `trader_llama` |
+| Vanilla | hoglin (Nether closed, no effect) | `minecraft:entities/hoglin` |
+| Icy's Better Horses | all 15 horse breeds | their tables point to `minecraft:entities/horse` |
+| No Man's Land | moose | `nomansland:entities/moose` |
+| No Man's Land | deer (did not drop leather: hide added, 0 or 1, plus 0 to 1 per Looting level) | `nomansland:entities/deer` |
+| Naturalist | deer, zebra (leather) | `naturalist:entities/deer`, `zebra` |
+| Naturalist | boar, elephant, rhinoceros, Komodo dragon ("hide") | `naturalist:entities/boar`, `elephant`, `rhino`, `komodo_dragon` |
+| Hybrid Aquatic | dugong, manatee | `hybrid_aquatic:entities/dugong`, `manatee` |
+| Friends & Foes | Moobloom | `friendsandfoes:entities/moobloom` |
+| Quark | foxhound (Nether, no effect) | `quark:entities/foxhound` |
+| Alex's Mobs | kangaroo: keeps its hide, but two kangaroo hides give a raw hide instead of leather | recipe |
 
-Vérifié sans cuir, donc sans changement : Critters and Companions, Adorable Hamster Pets, Mowzie's Mobs, Companions!, Ghost, Longwings, et le reste d'Alex's Mobs (le bison et l'ours donnent de la fourrure, qui ne servait pas au cuir). Les fourrures de Naturalist (ours, lion, tigre, mammouth…) restent aussi.
+Checked and found to have no leather, hence unchanged: Critters and Companions, Adorable Hamster Pets, Mowzie's Mobs, Companions!, Ghost, Longwings, and the rest of Alex's Mobs (the bison and the bear give fur, which was not used for leather). Naturalist furs (bear, lion, tiger, mammoth…) also stay.
 
-Le script écrit dans le journal du serveur toute table de créature qui lâche encore du cuir (`[tannerie] créature qui lâche encore du cuir`). Un nouveau mod de faune s'y verra tout de suite.
+The script writes to the server log any creature table that still drops leather (`[tannerie] créature qui lâche encore du cuir`, i.e. "creature that still drops leather"). A new wildlife mod will show up there immediately.
 
-## Les recettes
+## The recipes
 
-Ajoutées (`pack/kubejs/server_scripts/tannerie.js`) :
+Added (`pack/kubejs/server_scripts/tannerie.js`):
 
-| Identifiant | Où | Recette |
+| Identifier | Where | Recipe |
 |---|---|---|
-| `fallow:tannerie/echarner_et_saler` | établi | peau brute (tag `#fallow:peaux_brutes`) + cendres (`#c:dusts/ash`) → peau préparée |
-| `fallow:tannerie/tremper` | plateau en bambou, humidification | peau préparée → cuir, 6000 ticks |
-| `fallow:tannerie/cendres_de_charbon` | feu de camp | charbon de bois → cendres, 600 ticks |
-| `fallow:tannerie/peau_de_kangourou` | établi | 2 peaux de kangourou → peau brute |
-| `fallow:tannerie/fumer` (éteinte) | feu de camp | peau préparée → cuir, 2400 ticks ; secours si le bambou est trop rare, à allumer avec `TANNERIE_SECOURS_FUMAGE = true` |
+| `fallow:tannerie/echarner_et_saler` | crafting table | raw hide (tag `#fallow:peaux_brutes`) + ashes (`#c:dusts/ash`) → prepared hide |
+| `fallow:tannerie/tremper` | bamboo tray, wetting | prepared hide → leather, 6000 ticks |
+| `fallow:tannerie/cendres_de_charbon` | campfire | charcoal → ashes, 600 ticks |
+| `fallow:tannerie/peau_de_kangourou` | crafting table | 2 kangaroo hides → raw hide |
+| `fallow:tannerie/fumer` (switched off) | campfire | prepared hide → leather, 2400 ticks; fallback if bamboo is too rare, to be switched on with `TANNERIE_SECOURS_FUMAGE = true` |
 
-Le tag `#fallow:peaux_brutes` (`pack/kubejs/data/fallow/tags/item/peaux_brutes.json`) contient la peau brute et la peau de Naturalist, pour que les peaux de Naturalist d'un monde existant servent encore.
+The `#fallow:peaux_brutes` tag (`pack/kubejs/data/fallow/tags/item/peaux_brutes.json`) contains the raw hide and the Naturalist hide, so that Naturalist hides from an existing world still work.
 
-Retirées, parce qu'elles donnaient du cuir trop facilement ou hors de la chaîne :
+Removed, because they gave leather too easily or outside the chain:
 
-| Recette | Ce qu'elle faisait |
+| Recipe | What it did |
 |---|---|
-| `kaleidoscope_cookery:bamboo_tray/drying/rotten_flesh_to_leather` | chair putréfiée séchée au soleil → cuir |
-| `envelope:mailing/automated_supply_service/leather` | 6 chairs putréfiées envoyées par pigeon → cuir |
-| `naturalist:leather_from_smelting_hide` | peau de Naturalist au four → cuir en 10 secondes |
-| `alexsmobs:kangaroo_hide_to_leather` | 2 peaux de kangourou → cuir (remplacée, voir plus haut) |
-| `kaleidoscope_cookery:bamboo_tray/wetting/leather_to_rotten_flesh` | le cuir mouillé pourrit en chair putréfiée. Ce n'est pas une source, mais le plateau rendait le cuir tanné à la pluie suivante s'il restait dessus |
+| `kaleidoscope_cookery:bamboo_tray/drying/rotten_flesh_to_leather` | rotten flesh dried in the sun → leather |
+| `envelope:mailing/automated_supply_service/leather` | 6 rotten flesh sent by pigeon → leather |
+| `naturalist:leather_from_smelting_hide` | Naturalist hide in the furnace → leather in 10 seconds |
+| `alexsmobs:kangaroo_hide_to_leather` | 2 kangaroo hides → leather (replaced, see above) |
+| `kaleidoscope_cookery:bamboo_tray/wetting/leather_to_rotten_flesh` | wet leather rots into rotten flesh. This is not a source, but the tray gave back tanned leather at the next rain if it stayed on it |
 
-Gardées, parce qu'elles recyclent du cuir déjà fait ou viennent d'un butin rare :
-- quatre peaux de lapin → cuir (vanilla, recette reprise à l'identique par Naturalist), sans effet depuis le retrait du lapin ;
-- Create : selle au moulin, armures de cheval au concasseur ; Farm & Charm : armure de cheval en cuir au hachoir ; Quark : bloc de cuir lié → 9 cuirs ;
-- Cold Sweat : peau de hoglin → 2 cuirs (le Nether est fermé, la peau est introuvable) ;
-- cuir dans quelques coffres : lettres perdues d'Envelope, pots des alchimistes de NML, grenier de la cabane de l'illusionniste (Friends & Foes), pêche vanilla.
+Kept, because they recycle leather that already exists or come from rare loot:
+- four rabbit hides → leather (vanilla, recipe copied identically by Naturalist), no effect since the rabbit was removed;
+- Create: saddle at the mill, horse armours at the crusher; Farm & Charm: leather horse armour at the chopper; Quark: bound leather block → 9 leathers;
+- Cold Sweat: hoglin hide → 2 leathers (the Nether is closed, the hide cannot be found);
+- leather in a few chests: lost Envelope letters, NML alchemists' pots, the loft of the illusioner's shack (Friends & Foes), vanilla fishing.
 
-## Les usages du cuir
+## Uses of leather
 
-Tous gardent `minecraft:leather` et ne changent pas : Traveler's Backpack (52 recettes, dont les sacs et les améliorations), Supplementaries (soufflet), les livres vanilla, le bestiaire Wildex, Quark (sac à graines, sac à dos), Alex's Mobs, Cold Sweat (outre), Hybrid Aquatic, Icy's Better Horses, Kaleidoscope Cookery (tenue de fermier, sac-repas), Companions!, Create (boîte à outils), Aeronautics (lunettes d'aviateur), NML (bourse, lit de paille). Aucune ne dépend d'une source de cuir retirée.
+All keep `minecraft:leather` and do not change: Traveler's Backpack (52 recipes, including the bags and upgrades), Supplementaries (bellows), vanilla books, the Wildex bestiary, Quark (seed pouch, backpack), Alex's Mobs, Cold Sweat (waterskin), Hybrid Aquatic, Icy's Better Horses, Kaleidoscope Cookery (farmer's outfit, lunch bag), Companions!, Create (toolbox), Aeronautics (aviator goggles), NML (pouch, straw bed). None depends on a removed leather source.
 
-Overgeared 1.6.19 n'a **aucune recette au cuir** : ses armures se forgent avec des plaques de métal. Les « armures plaquées » sur une base de cuir sont une idée de Wayfarer, pas d'Overgeared.
+Overgeared 1.6.19 has **no leather recipe**: its armours are forged from metal plates. "Plated armours" on a leather base are a Wayfarer idea, not an Overgeared one.
 
-Le cuir est demandé tôt : le bestiaire Wildex (2 cuirs) et le premier livre. C'est la raison du secours éteint décrit plus haut.
+Leather is needed early: the Wildex bestiary (2 leathers) and the first book. This is the reason for the switched-off fallback described above.
 
-## Pourquoi le plateau en bambou
+## Why the bamboo tray
 
-Le plateau de Kaleidoscope Cookery est le seul contenant du pack qui fait passer du temps sur un objet posé, avec deux modes : il sèche ce qu'il porte au soleil et le mouille sous la pluie ou sous un stalactite. Il faisait déjà du cuir (avec de la chair putréfiée). Il ne demande aucun nouveau mod, se branche sur la météo et les saisons, et une tannerie à stalactite est une petite construction. Les autres voies sont moins bonnes : un clic sur un chaudron d'eau est instantané, le lavage et le dépôt de Create arrivent trop tard dans la progression, le silo de Farm & Charm ne fait que sécher.
+The Kaleidoscope Cookery tray is the only container in the pack that makes time pass on a placed item, with two modes: it dries what it holds in the sun and wets it in the rain or under a stalactite. It already made leather (with rotten flesh). It needs no new mod, ties into the weather and the seasons, and a stalactite tannery is a small build. The other routes are worse: a click on a water cauldron is instantaneous, Create's washing and depot come too late in the progression, and the Farm & Charm silo only dries.
 
-## Fichiers
+## Files
 
-- `pack/kubejs/startup_scripts/tannerie.js` : les objets `fallow:peau_brute` et `fallow:peau_preparee` (texture vanilla `minecraft:item/rabbit_hide`, teinte rosée ou grise, aucun PNG).
-- `pack/kubejs/server_scripts/tannerie.js` : recettes, retraits, infobulles, contrôle des recettes de cuir restantes.
-- `pack/kubejs/server_scripts/tannerie_butin.js` : le butin (LootJS).
-- `pack/kubejs/data/fallow/tags/item/peaux_brutes.json` : le tag des peaux brutes.
-- Textes : noms et infobulles en français et en anglais, à fusionner dans `pack/kubejs/assets/fallow/lang/`.
+- `pack/kubejs/startup_scripts/tannerie.js`: the `fallow:peau_brute` and `fallow:peau_preparee` items (vanilla texture `minecraft:item/rabbit_hide`, pinkish or grey tint, no PNG).
+- `pack/kubejs/server_scripts/tannerie.js`: recipes, removals, tooltips, check of the remaining leather recipes.
+- `pack/kubejs/server_scripts/tannerie_butin.js`: the loot (LootJS).
+- `pack/kubejs/data/fallow/tags/item/peaux_brutes.json`: the raw hide tag.
+- Texts: names and tooltips in French and English, to be merged into `pack/kubejs/assets/fallow/lang/`.
 
-## Ce qui reste à tester
+## What remains to be tested
 
-Au démarrage du serveur de test (journal KubeJS) :
-- les deux objets s'enregistrent avec `.texture()` et `.color(0, …)` (KubeJS 7) ; la langue fusionnée l'emporte sur le nom anglais que KubeJS génère ;
-- `LootJS.lootTables`, `hasLootTable`, `getLootTable(...).replaceItem(...)`, `createPool`, `LootEntry.of(...).setCount([0, 1]).applyEnchantmentBonus([0, 1])` passent sans erreur, et aucune ligne `table absente` n'apparaît ;
-- les lignes `[tannerie] recette donnant du cuir` ne listent plus que les recettes gardées ci-dessus, et `créature qui lâche encore du cuir` ne liste rien ;
-- `event.custom` accepte la recette `kaleidoscope_cookery:bamboo_tray` et `event.campfireCooking(...).cookingTime(...)` passe ;
-- `ItemEvents.modifyTooltips` dans un script serveur arrive bien au client (KubeJS 7 synchronise ces infobulles) ; `Text.gray(Text.translatable(...))` s'affiche traduit.
+At test server startup (KubeJS log):
+- the two items register with `.texture()` and `.color(0, …)` (KubeJS 7); the merged language file takes precedence over the English name that KubeJS generates;
+- `LootJS.lootTables`, `hasLootTable`, `getLootTable(...).replaceItem(...)`, `createPool`, `LootEntry.of(...).setCount([0, 1]).applyEnchantmentBonus([0, 1])` pass without error, and no `table absente` ("table missing") line appears;
+- the `[tannerie] recette donnant du cuir` ("recipe giving leather") lines list only the recipes kept above, and `créature qui lâche encore du cuir` lists nothing;
+- `event.custom` accepts the `kaleidoscope_cookery:bamboo_tray` recipe and `event.campfireCooking(...).cookingTime(...)` passes;
+- `ItemEvents.modifyTooltips` in a server script does reach the client (KubeJS 7 synchronises these tooltips); `Text.gray(Text.translatable(...))` displays translated.
 
-En jeu :
-- tuer une vache, un cheval d'Icy's Better Horses et un cerf de NML : chacun lâche une peau brute, avec Butin III aussi ;
-- l'établi accepte la peau brute et les cendres, et aussi une peau de Naturalist ;
-- le charbon de bois sur un feu de camp donne des cendres ;
-- la peau préparée devient du cuir sur le plateau sous la pluie, puis sous un stalactite alimenté en eau ; le cuir ne pourrit plus quand il reste sur le plateau ;
-- le plateau accepte une pile entière et rend autant de cuirs ;
-- EMI montre les deux étapes et plus les recettes retirées ;
-- vérifier que le bambou se trouve sans trop chercher dans un monde NML (jungles de bambou), et que la pierre de goutte existe dans les grottes. Si le bambou est trop rare, allumer `TANNERIE_SECOURS_FUMAGE` ;
-- après la montée de Kaleidoscope Cookery en 1.6.0, vérifier que le type `kaleidoscope_cookery:bamboo_tray` et le champ `subtype` n'ont pas changé ;
-- régler `TANNERIE_DUREE_TREMPAGE` (5 minutes) une fois joué.
+In game:
+- kill a cow, an Icy's Better Horses horse and an NML deer: each drops a raw hide, with Looting III too;
+- the crafting table accepts the raw hide and ashes, and also a Naturalist hide;
+- charcoal on a campfire gives ashes;
+- the prepared hide becomes leather on the tray in the rain, then under a water-fed stalactite; the leather no longer rots when it stays on the tray;
+- the tray accepts a whole stack and returns as many leathers;
+- EMI shows both steps and no longer the removed recipes;
+- check that bamboo can be found without searching too long in an NML world (bamboo jungles), and that dripstone exists in the caves. If bamboo is too rare, switch on `TANNERIE_SECOURS_FUMAGE`;
+- after the Kaleidoscope Cookery upgrade to 1.6.0, check that the `kaleidoscope_cookery:bamboo_tray` type and the `subtype` field have not changed;
+- tune `TANNERIE_DUREE_TREMPAGE` (5 minutes) once played.

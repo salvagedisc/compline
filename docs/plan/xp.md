@@ -1,129 +1,129 @@
-# Supprimer l'XP : étude et plan de retrait
+# Removing XP: study and removal plan
 
-Idée 5 de Wayfarer ([recherche](recherche/2026-10-19/wayfarer.md), recommandation 5). L'équipe a demandé une étude avant tout retrait, puis a choisi de **retirer l'XP**.
+Idea 5 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 5). The maintainer asked for a study before any removal, then chose to **remove XP**.
 
-> **État au 2026-10-19 : appliqué, pas encore testé en jeu.** Le plan de retrait est écrit dans `pack/` et dans le mod `fallow` 0.2.0, qui compile. Ce qui a été fait, ce qui s'écarte du plan et ce qui reste à vérifier sont dans [Application](#application-2026-10-19). L'étude qui suit vient de la lecture des jars du pack (`.cache/jars/`, `javap`), du code de Minecraft 1.21.1 patché par NeoForge 21.1.251 (cache Gradle du mod `fallow`) et de l'API Modrinth.
+> **Status as of 2026-10-19: applied, not yet tested in game.** The removal plan is written in `pack/` and in the `fallow` mod 0.2.0, which compiles. What was done, what deviates from the plan and what remains to be verified are in [Application](#application-2026-10-19). The study below comes from reading the pack's jars (`.cache/jars/`, `javap`), the Minecraft 1.21.1 code patched by NeoForge 21.1.251 (Gradle cache of the `fallow` mod) and the Modrinth API.
 
-## Résumé
+## Summary
 
-1. L'XP n'a plus que **quatre usages** dans Fallow : l'enclume, la copie et la transmutation des livres anciens d'Immersive Enchanting, et l'adresse d'une boîte aux lettres d'Envelope. L'enchantement lui-même se paie déjà en matériaux.
-2. Trois se règlent par des données ou une config. **L'enclume, non** : Minecraft refuse de rendre l'objet si le joueur a moins de niveaux que le coût, et ce coût vaut toujours au moins 1. Il faut un petit mixin dans le mod `fallow`.
-3. Couper l'XP se fait en un seul endroit : annuler l'apparition des orbes et tout gain de points (KubeJS et MoreJS). La barre se cache dans le même module du mod `fallow`. Aucun mod de Modrinth ne le fait proprement en français.
-4. Le joueur perd une jauge et une monnaie invisible. Il perd aussi quelques bonus mineurs : la lune bleue (XP ×2), le sac en lapis, les pépites de Create et les 5 XP par espèce de Wildex. Aucun mod lu ne plante à 0 XP : tout joueur neuf commence à 0.
-5. **Recommandation : retirer entièrement l'XP**, en une seule version, dès que le module `xp` du mod `fallow` est écrit et testé. Le retrait touche **16 fichiers indispensables**, plus 3 réglages facultatifs et 5 pages de doc.
+1. XP now has only **four uses** in Fallow: the anvil, the copying and transmutation of Immersive Enchanting ancient books, and the address of an Envelope mailbox. Enchanting itself is already paid for in materials.
+2. Three are handled by data or config. **The anvil is not**: Minecraft refuses to hand over the item if the player has fewer levels than the cost, and this cost is always at least 1. A small mixin is needed in the `fallow` mod.
+3. Cutting XP is done in a single place: cancel the spawning of orbs and every point gain (KubeJS and MoreJS). The bar is hidden in the same module of the `fallow` mod. No Modrinth mod does it cleanly in French.
+4. The player loses a gauge and an invisible currency. They also lose a few minor bonuses: the blue moon (XP ×2), the lapis backpack, Create's nuggets and the 5 XP per Wildex species. No mod read crashes at 0 XP: every new player starts at 0.
+5. **Recommendation: remove XP entirely**, in a single version, as soon as the `xp` module of the `fallow` mod is written and tested. The removal touches **16 essential files**, plus 3 optional settings and 5 doc pages.
 
-## Comment l'étude a été faite
+## How the study was done
 
-- Les 124 jars de `pack/mods/` (plus leurs jars imbriqués) ont été parcourus pour les symboles de l'XP : `ExperienceOrb`, `giveExperiencePoints`, `giveExperienceLevels`, `experienceLevel`, `xpReward`, `popExperience`, `getExpDrop`, `VanillaGuiLayers.EXPERIENCE_BAR`. 35 mods y font référence. Chaque cas utile a été ouvert avec `javap`.
-- Les données des jars (recettes, tables de butin, succès, fichiers de langue) ont été lues pour `experience`, `experience_nugget` et `experience_bottle`.
-- Le code de l'enclume, de la meule, de l'interface et du joueur vient des sources de Minecraft patchées par NeoForge 21.1.251.
-- Les noms d'événements KubeJS, MoreJS et LootJS ont été lus dans leurs jars (KubeJS 2101.7.2-build.377, MoreJS 0.16.0, LootJS 3.7.0).
+- The 124 jars of `pack/mods/` (plus their nested jars) were scanned for XP symbols: `ExperienceOrb`, `giveExperiencePoints`, `giveExperienceLevels`, `experienceLevel`, `xpReward`, `popExperience`, `getExpDrop`, `VanillaGuiLayers.EXPERIENCE_BAR`. 35 mods reference them. Each useful case was opened with `javap`.
+- The jar data (recipes, loot tables, advancements, language files) was read for `experience`, `experience_nugget` and `experience_bottle`.
+- The code of the anvil, the grindstone, the interface and the player comes from the Minecraft sources patched by NeoForge 21.1.251.
+- The KubeJS, MoreJS and LootJS event names were read in their jars (KubeJS 2101.7.2-build.377, MoreJS 0.16.0, LootJS 3.7.0).
 
-## Qui produit de l'XP
+## Who produces XP
 
-Une fois les orbes annulées et les gains bloqués (étape 2 du plan), **toutes ces sources s'éteignent d'un coup**. Le tableau dit seulement ce qui disparaît et s'il faut un réglage en plus.
+Once the orbs are cancelled and the gains blocked (step 2 of the plan), **all these sources go out at once**. The table only says what disappears and whether an extra setting is needed.
 
-| Source | Comment l'XP arrive | Ce que la suppression change | Remplacement ou réglage | Fichier ou clé |
+| Source | How the XP arrives | What removal changes | Replacement or setting | File or key |
 |---|---|---|---|---|
-| Minage (vanilla) | Orbes des minerais de charbon, diamant, émeraude, lapis, redstone, quartz, des blocs de sculk et des générateurs | Plus rien | Aucun | — |
-| Fonte (vanilla) | Champ `experience` de chaque recette de four, de fumoir et de haut fourneau, rendu en orbes à la sortie | Plus rien | Aucun | — |
-| Créatures tuées | `xpReward` et `LivingExperienceDropEvent` : Mowzie's Mobs (13 créatures), Alex's Mobs, Friends & Foes, Adorable Hamster Pets | Plus rien | Aucun | — |
-| Élevage | Orbes à la reproduction : vanilla, Alex's Mobs (caïman, crocodile, ornithorynque, tortue), Naturalist (pondeurs), No Man's Land (tortue), Hybrid Aquatic (`hapi`), Friends & Foes (crabe) | Plus rien | Aucun | — |
-| Pêche, commerce, meule | Orbes de la pêche, des échanges avec les villageois et du désenchantement à la meule | Plus rien | Aucun | — |
-| Succès | Récompense `experience` : Icy's Better Horses (250, 100, 100), Exposure (`wildlife_archivist`, 150), succès « défi » vanilla | Plus rien ; le succès reste | Aucun | — |
-| Fioles d'expérience | Trouvées dans le butin : Twigs, Critters and Companions (fouille du furet), Envelope (`valuables`), Hybrid Aquatic (caisse), Supplementaries (coffre-fort), coffres vanilla | La fiole lancée ne donne plus rien : un objet mort | Retirer la fiole de tous les butins | LootJS, `pack/kubejs/server_scripts/sans_xp.js` |
-| **Create** 6.0.10 | **Pépite d'expérience** : 75 % de chance dans **160 recettes de broyage** (29 se chargent dans ce pack) (minerais et blocs bruts) ; la pépite s'utilise pour des orbes. **Bloc d'expérience** : 9 pépites. Perceuses et scies : orbes des blocs cassés (`BlockHelper.popExperience`). **Pas d'XP liquide** dans cette version (c'est Create: Enchantment Industry, absent du pack) | La pépite devient un objet qui se consomme pour rien | Retirer la pépite des 160 sorties de broyage, et les deux recettes du bloc | `ServerEvents.recipes`, `sans_xp.js` |
-| Overgeared | Fonderie d'alliage, fonderie de moulage et fonderie du Nether : `giveExperiencePoints` et orbes à la sortie | Plus rien | Aucun | — |
-| Farm & Charm | Le fourneau (`StoveBlockEntity`) rend des orbes ; l'effet « Reposé » dit « Augmente les points d'expérience gagnés » | Plus d'orbes. L'effet n'a aucun code (`RestedEffect` est vide) : seule sa description ment | Nouvelle description | Clé `effect.farm_and_charm.rested.description` dans `pack/kubejs/assets/farm_and_charm/lang/fr_fr.json` |
-| Kaleidoscope Cookery | Aucune référence à l'XP | Rien | — | — |
-| Exposure | Chambre noire : 2, 4 ou 5 points par photo tirée | Plus rien | Facultatif : mettre à 0 | `pack/defaultconfigs/exposure-server.toml`, `[lightroom]` `experience_black_and_white`, `experience_color`, `experience_chromatic` = 0 |
-| Wildex | 5 points par nouvelle espèce (`newEntryRewardsXp = true`, `newEntryXpAmount = 5`) | Plus rien | Facultatif : couper ; la récompense viendra du script du zoo ([07](07-kubejs-et-datapack.md), ligne 18) | `pack/config/wildex/wildex-common.toml`, `[general]` `newEntryRewardsXp = false` |
-| Envelope | Colis du service d'artisanat (`PACKAGE_EXPERIENCE`), rendus en orbes à l'ouverture | Plus rien | Aucun | — |
-| Enhanced Celestials | Lune bleue : XP ×2 ; super lune bleue : ×4 (`xp_amplifier`) | Le bonus d'XP disparaît. La lune garde la chance (`minecraft:luck`) et la portée de balise ×1,5 | Aucun ; voir l'enclume plus bas | — |
-| Traveler's Backpack | Sac en lapis : 15 % de chance de doubler l'XP ramassée | Capacité morte | Facultatif : la retirer de la liste | `pack/defaultconfigs/travelersbackpack-server.toml`, `[server.backpackAbilities]` `allowedAbilities`, sans `travelersbackpack:lapis` |
-| Supplementaries | Robinet sur un bocal d'XP, Marchand rouge | Plus rien | Aucun | — |
-| No Man's Land | Pots, grandes jarres, ancre (`getExpDrop`) | Plus rien | Aucun | — |
-| Autres | Ghost, furet de Critters and Companions, pioche fantôme d'Alex's Mobs, Curios, Moonlight, commande `/xp` | Plus rien | Aucun | — |
-| **Clumps** | Ce mod regroupe les orbes | Il ne sert plus à rien | **Le retirer du pack** | Supprimer `pack/mods/clumps.pw.toml` |
+| Mining (vanilla) | Orbs from coal, diamond, emerald, lapis, redstone, quartz ores, sculk blocks and spawners | Nothing left | None | — |
+| Smelting (vanilla) | `experience` field of each furnace, smoker and blast furnace recipe, returned as orbs at the output | Nothing left | None | — |
+| Creatures killed | `xpReward` and `LivingExperienceDropEvent`: Mowzie's Mobs (13 creatures), Alex's Mobs, Friends & Foes, Adorable Hamster Pets | Nothing left | None | — |
+| Husbandry | Orbs on breeding: vanilla, Alex's Mobs (caiman, crocodile, platypus, turtle), Naturalist (egg layers), No Man's Land (turtle), Hybrid Aquatic (`hapi`), Friends & Foes (crab) | Nothing left | None | — |
+| Fishing, trading, grindstone | Orbs from fishing, villager trades and grindstone disenchanting | Nothing left | None | — |
+| Advancements | `experience` reward: Icy's Better Horses (250, 100, 100), Exposure (`wildlife_archivist`, 150), vanilla "challenge" advancements | Nothing left; the advancement stays | None | — |
+| Experience bottles | Found in loot: Twigs, Critters and Companions (ferret digging), Envelope (`valuables`), Hybrid Aquatic (crate), Supplementaries (safe), vanilla chests | The thrown bottle gives nothing: a dead item | Remove the bottle from all loot | LootJS, `pack/kubejs/server_scripts/sans_xp.js` |
+| **Create** 6.0.10 | **Experience nugget**: 75% chance in **160 crushing recipes** (29 load in this pack) (ores and raw blocks); the nugget is used for orbs. **Experience block**: 9 nuggets. Drills and saws: orbs from broken blocks (`BlockHelper.popExperience`). **No liquid XP** in this version (that is Create: Enchantment Industry, absent from the pack) | The nugget becomes an item that is consumed for nothing | Remove the nugget from the 160 crushing outputs, and the two recipes of the block | `ServerEvents.recipes`, `sans_xp.js` |
+| Overgeared | Alloy foundry, casting foundry and Nether foundry: `giveExperiencePoints` and orbs at the output | Nothing left | None | — |
+| Farm & Charm | The stove (`StoveBlockEntity`) returns orbs; the "Rested" effect says "Increases experience points gained" | No more orbs. The effect has no code (`RestedEffect` is empty): only its description lies | New description | Key `effect.farm_and_charm.rested.description` in `pack/kubejs/assets/farm_and_charm/lang/fr_fr.json` |
+| Kaleidoscope Cookery | No reference to XP | Nothing | — | — |
+| Exposure | Darkroom: 2, 4 or 5 points per photo printed | Nothing left | Optional: set to 0 | `pack/defaultconfigs/exposure-server.toml`, `[lightroom]` `experience_black_and_white`, `experience_color`, `experience_chromatic` = 0 |
+| Wildex | 5 points per new species (`newEntryRewardsXp = true`, `newEntryXpAmount = 5`) | Nothing left | Optional: cut; the reward will come from the zoo script ([07](07-kubejs-et-datapack.md), line 18) | `pack/config/wildex/wildex-common.toml`, `[general]` `newEntryRewardsXp = false` |
+| Envelope | Crafting service parcels (`PACKAGE_EXPERIENCE`), returned as orbs on opening | Nothing left | None | — |
+| Enhanced Celestials | Blue moon: XP ×2; super blue moon: ×4 (`xp_amplifier`) | The XP bonus disappears. The moon keeps the luck (`minecraft:luck`) and the beacon range ×1.5 | None; see the anvil below | — |
+| Traveler's Backpack | Lapis backpack: 15% chance to double the XP picked up | Dead ability | Optional: remove it from the list | `pack/defaultconfigs/travelersbackpack-server.toml`, `[server.backpackAbilities]` `allowedAbilities`, without `travelersbackpack:lapis` |
+| Supplementaries | Tap on an XP jar, Red Merchant | Nothing left | None | — |
+| No Man's Land | Pots, large jars, anchor (`getExpDrop`) | Nothing left | None | — |
+| Others | Ghost, Critters and Companions ferret, Alex's Mobs phantom pickaxe, Curios, Moonlight, `/xp` command | Nothing left | None | — |
+| **Clumps** | This mod groups orbs together | It is no longer of any use | **Remove it from the pack** | Delete `pack/mods/clumps.pw.toml` |
 
-## Qui consomme de l'XP
+## Who consumes XP
 
-| Source | Ce qui casse sans XP | Remplacement | Fichier, clé, valeur |
+| Source | What breaks without XP | Replacement | File, key, value |
 |---|---|---|---|
-| **Enclume** (vanilla) : renommer, réparer, combiner | **Tout.** `AnvilMenu.mayPickup` demande `experienceLevel >= coût` et `coût > 0`. Renommer coûte au moins 1 niveau : à 0 niveau, on ne peut plus nommer une étiquette pour un animal, ni réparer | **Module `xp` du mod `fallow`** : un mixin sur `mayPickup` ignore les niveaux. L'enclume garde son coût en matériaux (lingots, objet sacrifié) et sa limite « Trop cher ! » (40), qui devient une **usure** : un objet réparé trop souvent ne passe plus à l'enclume, il faut la meule ou la forge d'Overgeared. Le libellé change : « Usure : %1$s » et « Trop usé ! ». Facultatif : refuser la fusion d'enchantements (événement `AnvilUpdateEvent`), pour que l'enchantement reste à la table | `mods-custom/fallow/…/mixin/xp/AnvilMenuMixin.java` ; clés `container.repair.cost` et `container.repair.expensive` dans `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
-| Meule (vanilla) | Rien : elle donne de l'XP, elle n'en prend pas | **À garder.** Overgeared s'en sert pour rendre de la durabilité (`grindingToggle`), sans XP | — |
-| Table d'enchantement | Rien : Immersive Enchanting remplace le menu vanilla. Les 43 fichiers de coût des enchantements vanilla n'ont **aucun** `xp_levels` : on paie un matériau et du lapis | **À garder** | — |
-| **Immersive Enchanting** : copier un livre ancien | `replicate.json` : livre et plume **+ 10 niveaux**. `Cost.test` exige `experienceLevel >= xp_levels` : plus personne ne copie. Or la recherche sur l'enchantement compte dessus pour transmettre un savoir à un ami | Livre et plume seul, `xp_levels` à 0. Le prix reste le carburant (1 lapis) et le fait d'avoir le livre rangé. On ne peut mettre qu'un objet par emplacement de coût | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json` : `{"levels": {"1": [{"item_cost": {"item": "minecraft:writable_book", "count": 1}}]}}` |
-| **Immersive Enchanting** : transmuter un livre ancien | `transmute.json` : rien (`minecraft:air`) **+ 10 niveaux**. Même blocage | Un matériau à la place, par exemple 4 éclats d'améthyste (valeur de départ, à régler en jeu) | `…/immersiveenchanting/transmute.json` : `{"levels": {"1": [{"item_cost": {"item": "minecraft:amethyst_shard", "count": 4}}]}}` |
-| **Envelope** : nommer ou renommer une boîte aux lettres | 3 niveaux par défaut (`address_experience_levels_cost`, de 0 à 128). Sans niveaux, plus d'adresse, donc plus de courrier | Mettre à 0. Le jeu teste alors « 0 niveau ou plus » : c'est toujours vrai, et l'écran n'affiche plus de coût (il ne le dessine que si le coût est positif) | `pack/defaultconfigs/envelope-server.toml` : `[mailbox]` `address_experience_levels_cost = 0` |
-| Quark 4.1-485 | Rien. Les modules qui touchent à l'XP sont coupés : Matrix Enchanting (`oddities = false`), Ancient Tomes, Color Runes, Ancient Wood (le fruit qui donne de l'XP), Game Nerfs (`experimental = false`). Hotbar Changer se dessine seulement au-dessus de la barre | **À garder** | `pack/config/quark-common.toml`, rien à changer |
-| Create 6.0.10 | Rien ne consomme l'XP. Pas d'XP liquide ni de bec verseur d'XP | Voir les producteurs (pépites) | — |
-| Supplementaries 3.9.9 | « Mettre l'XP en fiole » sur une table d'enchantement (`[tweaks.bottle_xp]`) : **coupé par défaut** (`enabled = false`) et absent de notre config. Le canon cache déjà la barre quand on vise | **À garder** coupé | `pack/config/supplementaries-common.toml`, ne pas ajouter `bottle_xp` |
-| Overgeared 1.6.19 | Rien. Les enclumes de forge, le martelage, la trempe, les plans et les paliers d'expertise n'utilisent pas l'XP | **À garder** | — |
-| Ancient Remnants 1.5.2 (bénédictions) | Rien. Ni les classes ni les données du jar ne parlent d'XP | **À garder** | — |
-| Traveler's Backpack | Rien ne consomme. Seul le sac en lapis gagne de l'XP (voir les producteurs) | **À garder** | — |
-| Wildex 3.0.0 | Rien ne consomme. La fiche d'une créature affiche « XP : » pour ce qu'elle rapporte | **À garder** ; détail d'affichage | — |
-| Exposure 1.9.19 | Rien ne consomme | **À garder** | — |
-| Alex's Mobs : table de transmutation | Coûte des niveaux, mais sa recette demande une **étoile du Nether**, et le Nether est fermé | **À garder** : introuvable | — |
-| Enhanced Celestials | La lune bleue divise par 2 le coût de l'enclume (par 4 pour la super lune bleue) | **À garder** : avec le module `xp`, elle **réduit l'usure** de l'enclume. Elle a encore un rôle | — |
-| Raccommodage | Il répare avec les orbes | Déjà désactivé ([0008](../decisions/0008-enchantement.md)) | — |
-| Mort | Le joueur perd ses niveaux et lâche des orbes | Plus rien à perdre. L'écran de mort affiche toujours « Score : 0 » | Facultatif : vider `deathScreen.score.value` dans `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
-| Commandes | `/xp`, `/enchant` (opérateurs) | `/xp add … points` est bloqué par le script ; `/xp add … levels` passe encore (événement `LevelChange`, non couvert par MoreJS) | Rien, sauf si l'on veut bloquer aussi les niveaux (voir l'étape 2) |
-| Livres et guides | Le guide des hamsters parle d'« enclumes et livres enchantés » ; la page « Objectifs » du manuel d'Icy's Better Horses a une fiole d'expérience pour icône ; l'infobulle du sac en lapis parle d'expérience | Rien ne casse ; ce sont des textes | À reprendre seulement s'ils gênent en jeu |
-| Cold Sweat, GeckoLib, Spatial GUI, ModernFix, Polytone, Steam 'n' Rails | Ils lisent ou déplacent la barre (mise en page de la barre d'action, rendu, couleur des orbes) | Rien ne casse : à 0, ces chemins sont ceux d'un joueur neuf | — |
+| **Anvil** (vanilla): rename, repair, combine | **Everything.** `AnvilMenu.mayPickup` requires `experienceLevel >= cost` and `cost > 0`. Renaming costs at least 1 level: at level 0, you can no longer name a tag for an animal, nor repair | **`xp` module of the `fallow` mod**: a mixin on `mayPickup` ignores levels. The anvil keeps its cost in materials (ingots, sacrificed item) and its "Too expensive!" limit (40), which becomes **wear**: an item repaired too often no longer goes through the anvil, the grindstone or Overgeared's forge is needed. The label changes: "Usure : %1$s" ("Wear") and "Trop usé !" ("Too worn!"). Optional: refuse the merging of enchantments (`AnvilUpdateEvent` event), so that enchanting stays at the table | `mods-custom/fallow/…/mixin/xp/AnvilMenuMixin.java`; keys `container.repair.cost` and `container.repair.expensive` in `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
+| Grindstone (vanilla) | Nothing: it gives XP, it does not take any | **Keep.** Overgeared uses it to restore durability (`grindingToggle`), without XP | — |
+| Enchanting table | Nothing: Immersive Enchanting replaces the vanilla menu. The 43 cost files of the vanilla enchantments have **no** `xp_levels`: a material and lapis are paid | **Keep** | — |
+| **Immersive Enchanting**: copy an ancient book | `replicate.json`: book and quill **+ 10 levels**. `Cost.test` requires `experienceLevel >= xp_levels`: nobody copies any more. Yet enchanting research counts on it to pass knowledge on to a friend | Book and quill alone, `xp_levels` at 0. The price remains the fuel (1 lapis) and having the book put away. Only one item can be put per cost slot | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json`: `{"levels": {"1": [{"item_cost": {"item": "minecraft:writable_book", "count": 1}}]}}` |
+| **Immersive Enchanting**: transmute an ancient book | `transmute.json`: nothing (`minecraft:air`) **+ 10 levels**. Same blockage | A material instead, for example 4 amethyst shards (starting value, to be tuned in game) | `…/immersiveenchanting/transmute.json`: `{"levels": {"1": [{"item_cost": {"item": "minecraft:amethyst_shard", "count": 4}}]}}` |
+| **Envelope**: name or rename a mailbox | 3 levels by default (`address_experience_levels_cost`, from 0 to 128). Without levels, no address, hence no mail | Set to 0. The game then tests "0 levels or more": it is always true, and the screen no longer displays a cost (it only draws it if the cost is positive) | `pack/defaultconfigs/envelope-server.toml`: `[mailbox]` `address_experience_levels_cost = 0` |
+| Quark 4.1-485 | Nothing. The modules that touch XP are cut: Matrix Enchanting (`oddities = false`), Ancient Tomes, Color Runes, Ancient Wood (the fruit that gives XP), Game Nerfs (`experimental = false`). Hotbar Changer is only drawn above the bar | **Keep** | `pack/config/quark-common.toml`, nothing to change |
+| Create 6.0.10 | Nothing consumes XP. No liquid XP or XP spout | See the producers (nuggets) | — |
+| Supplementaries 3.9.9 | "Bottle XP" on an enchanting table (`[tweaks.bottle_xp]`): **off by default** (`enabled = false`) and absent from our config. The cannon already hides the bar when aiming | **Keep** off | `pack/config/supplementaries-common.toml`, do not add `bottle_xp` |
+| Overgeared 1.6.19 | Nothing. Forge anvils, hammering, quenching, blueprints and expertise tiers do not use XP | **Keep** | — |
+| Ancient Remnants 1.5.2 (blessings) | Nothing. Neither the classes nor the data of the jar mention XP | **Keep** | — |
+| Traveler's Backpack | Nothing consumes. Only the lapis backpack gains XP (see the producers) | **Keep** | — |
+| Wildex 3.0.0 | Nothing consumes. A creature's sheet displays "XP:" for what it yields | **Keep**; display detail | — |
+| Exposure 1.9.19 | Nothing consumes | **Keep** | — |
+| Alex's Mobs: transmutation table | Costs levels, but its recipe requires a **Nether star**, and the Nether is closed | **Keep**: unobtainable | — |
+| Enhanced Celestials | The blue moon halves the anvil cost (divides by 4 for the super blue moon) | **Keep**: with the `xp` module, it **reduces the wear** of the anvil. It still has a role | — |
+| Mending | It repairs with orbs | Already disabled ([0008](../decisions/0008-enchantement.md)) | — |
+| Death | The player loses their levels and drops orbs | Nothing left to lose. The death screen still shows "Score: 0" | Optional: empty `deathScreen.score.value` in `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
+| Commands | `/xp`, `/enchant` (operators) | `/xp add … points` is blocked by the script; `/xp add … levels` still goes through (`LevelChange` event, not covered by MoreJS) | Nothing, unless levels are to be blocked too (see step 2) |
+| Books and guides | The hamster guide mentions "anvils and enchanted books"; the "Goals" page of the Icy's Better Horses manual has an experience bottle as its icon; the lapis backpack tooltip mentions experience | Nothing breaks; these are texts | Only to be revised if they get in the way in game |
+| Cold Sweat, GeckoLib, Spatial GUI, ModernFix, Polytone, Steam 'n' Rails | They read or move the bar (action bar layout, rendering, orb colour) | Nothing breaks: at 0, these paths are those of a new player | — |
 
-## Comment supprimer l'XP proprement
+## How to remove XP cleanly
 
-### Empêcher l'XP d'arriver
+### Stop XP from arriving
 
-Il n'existe **aucune règle de jeu** (gamerule) pour l'XP : `doMobLoot` couperait aussi le butin. Deux verrous suffisent, tous deux dans `pack/kubejs/server_scripts/sans_xp.js` :
+There is **no gamerule** for XP: `doMobLoot` would also cut loot. Two locks are enough, both in `pack/kubejs/server_scripts/sans_xp.js`:
 
-1. **Annuler les orbes.** `EntityEvents.spawned('minecraft:experience_orb', event => event.cancel())`. L'événement de KubeJS 7 vient de `EntityJoinLevelEvent` ; il est ciblé par type et annulable (`hasResult`). Il ne s'exécute que pour les orbes : son coût est négligeable. Il couvre le minage, la fonte, les créatures, l'élevage, la pêche, la meule, les fioles, les pépites et les mods.
-2. **Bloquer les gains directs.** Certains mods donnent l'XP sans orbe : Wildex, Overgeared, les succès, `/xp`. MoreJS relaie l'événement NeoForge `PlayerXpEvent.XpChange`, que `Player.giveExperiencePoints` envoie avant tout gain : `MoreJS.playerXpChange(event => { if (event.amount > 0) event.cancel() })`. Le groupe d'événements s'appelle `MoreJS` dans le jar ; c'est un événement serveur, annulable. On ne bloque **que** les gains positifs : une dépense (négative) doit rester possible.
+1. **Cancel the orbs.** `EntityEvents.spawned('minecraft:experience_orb', event => event.cancel())`. The KubeJS 7 event comes from `EntityJoinLevelEvent`; it is targeted by type and cancellable (`hasResult`). It only runs for orbs: its cost is negligible. It covers mining, smelting, creatures, husbandry, fishing, the grindstone, bottles, nuggets and mods.
+2. **Block direct gains.** Some mods give XP without an orb: Wildex, Overgeared, advancements, `/xp`. MoreJS relays the NeoForge event `PlayerXpEvent.XpChange`, which `Player.giveExperiencePoints` sends before any gain: `MoreJS.playerXpChange(event => { if (event.amount > 0) event.cancel() })`. The event group is called `MoreJS` in the jar; it is a server event, cancellable. **Only** positive gains are blocked: a spend (negative) must remain possible.
 
-Pour les niveaux donnés d'un coup (`/xp add … levels`), seul l'événement natif `PlayerXpEvent$LevelChange` les arrête : `NativeEvents.onEvent(...)` de KubeJS sait l'écouter. Ce n'est utile que contre les commandes : à garder en réserve.
+For levels given all at once (`/xp add … levels`), only the native event `PlayerXpEvent$LevelChange` stops them: KubeJS's `NativeEvents.onEvent(...)` can listen to it. This is only useful against commands: to keep in reserve.
 
-### Cacher la barre
+### Hide the bar
 
-Le niveau reste à 0, donc le chiffre vert ne s'affiche jamais (`renderExperienceLevel` ne dessine que si le niveau est positif). Il reste la barre vide.
+The level stays at 0, so the green number is never displayed (`renderExperienceLevel` only draws if the level is positive). The empty bar remains.
 
-- **Choix retenu : le module `xp` du mod `fallow`.** Il annule les couches `VanillaGuiLayers.EXPERIENCE_BAR` et `EXPERIENCE_LEVEL` dans `RenderGuiLayerEvent.Pre`. La jauge de saut à cheval est une autre couche (`JUMP_METER`) : elle reste. Le module contient déjà le mixin de l'enclume, et le mod est installé des deux côtés.
-- Repli sans Java : un script `pack/kubejs/client_scripts/` avec `NativeEvents.onEvent('net.neoforged.neoforge.client.event.RenderGuiLayerEvent$Pre', …)`. Il marche, mais il passe dans le JavaScript à chaque couche et à chaque image.
-- Mods cherchés sur Modrinth pour NeoForge 1.21.1 (API `/project/<slug>/version`, le 2026-10-19). **Aucun ne convient**, et aucun n'a le français :
+- **Chosen: the `xp` module of the `fallow` mod.** It cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump gauge is another layer (`JUMP_METER`): it stays. The module already contains the anvil mixin, and the mod is installed on both sides.
+- Fallback without Java: a script in `pack/kubejs/client_scripts/` with `NativeEvents.onEvent('net.neoforged.neoforge.client.event.RenderGuiLayerEvent$Pre', …)`. It works, but it goes through JavaScript at every layer and every frame.
+- Mods searched on Modrinth for NeoForge 1.21.1 (API `/project/<slug>/version`, on 2026-10-19). **None is suitable**, and none has French:
 
-| Mod | Version | Langues | Pourquoi non |
+| Mod | Version | Languages | Why not |
 |---|---|---|---|
-| HideHUD (`hidehud`) | 1.3fix (2026-06-07) | Aucun fichier de langue ; touches nommées en anglais dans le code (« Toogle HideHUD ») | Il ne cache la barre que lorsque l'on a basculé l'interface (`ToggleHUDProcedure.isGuiHidden`) |
-| HUD Manager (`hud-manager`) | 1.5.1 | Anglais, chinois | Pas de réglage pour la seule barre d'XP (« Hotbar Group ») |
-| Hudless (`hudless`) | 2.0.6 | Anglais, japonais, russe | Cache l'interface selon des conditions, avec une animation ; licence CC-BY-ND |
-| Fixed Anvil Repair Cost (`fixed-anvil-repair-cost`) | 3.6 | — | Pour l'enclume : « une valeur de 0 garde le comportement vanilla », donc il coûte toujours des niveaux ; licence ARR et dépend de Collective |
+| HideHUD (`hidehud`) | 1.3fix (2026-06-07) | No language file; keys named in English in the code ("Toogle HideHUD") | It only hides the bar when the interface has been toggled (`ToggleHUDProcedure.isGuiHidden`) |
+| HUD Manager (`hud-manager`) | 1.5.1 | English, Chinese | No setting for the XP bar alone ("Hotbar Group") |
+| Hudless (`hudless`) | 2.0.6 | English, Japanese, Russian | Hides the interface according to conditions, with an animation; CC-BY-ND licence |
+| Fixed Anvil Repair Cost (`fixed-anvil-repair-cost`) | 3.6 | — | For the anvil: "a value of 0 keeps the vanilla behaviour", so it still costs levels; ARR licence and depends on Collective |
 
-Effet visible : les cœurs et la faim restent à leur hauteur, et un petit vide reste à la place de la barre. On peut abaisser ces jauges (`Gui.leftHeight` et `rightHeight` de NeoForge) : c'est une finition, à essayer en jeu.
+Visible effect: hearts and hunger stay at their height, and a small gap remains in place of the bar. These gauges can be lowered (NeoForge's `Gui.leftHeight` and `rightHeight`): this is a finishing touch, to try in game.
 
-### Les niveaux existants
+### Existing levels
 
-Les mondes 0.x sont jetables ([CONTRIBUTING](../../CONTRIBUTING.md)). Pour un monde de test qui a déjà de l'XP, le script remet tout à zéro à la connexion : `PlayerEvents.loggedIn(event => event.player.setXp(0))`. Dans KubeJS 7, `setXp` remet à 0 le total, la progression et le niveau, puis ajoute 0 point. Rien n'est à convertir : une fois l'enclume, Immersive Enchanting et Envelope réglés, un niveau ne sert plus à rien.
+0.x worlds are disposable ([CONTRIBUTING](../../CONTRIBUTING.md)). For a test world that already has XP, the script resets everything to zero on login: `PlayerEvents.loggedIn(event => event.player.setXp(0))`. In KubeJS 7, `setXp` resets the total, the progress and the level to 0, then adds 0 points. Nothing needs to be converted: once the anvil, Immersive Enchanting and Envelope are settled, a level is of no further use.
 
-## Plan de retrait
+## Removal plan
 
-Chaque étape dit les fichiers touchés. Les étapes 1 et 2 doivent sortir **dans la même version** : sans le module, l'enclume ne marche plus.
+Each step lists the files touched. Steps 1 and 2 must come out **in the same version**: without the module, the anvil no longer works.
 
-1. **Module `xp` du mod `fallow`** (version 0.2.0).
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` (nouveau) : dans `AnvilMenu.mayPickup`, ignorer `player.experienceLevel` quand le module est actif. Garder le test « coût > 0 » et la limite de 40. Le mixin touche du code vanilla. Il ne gêne pas celui d'Enhanced Celestials, qui vise `createResult` (calcul du coût).
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/xp/XpModule.java` (nouveau) : côté client, annuler les deux couches de la barre. Facultatif côté serveur : refuser dans `AnvilUpdateEvent` la fusion de deux objets enchantés, pour que l'enchantement passe par la table.
-   - `mods-custom/fallow/src/main/resources/fallow.mixins.json` : ajouter `xp.AnvilMenuMixin` à la liste `mixins` (les deux côtés). Ce mixin ne vise aucun mod : rien à ajouter dans `FallowMixinPlugin`.
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowModule.java` : entrée `XP("xp", null, …)`, sans mod requis.
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowConfig.java` : `xp.enabled` (vrai), `xp.hideBar` (vrai), `xp.blockEnchantMerge` (à décider), dans `fallow-common.toml`.
-   - `mods-custom/fallow/gradle.properties` : `mod_version=0.2.0`.
-   - `pack/mods/fallow-0.1.0.jar` remplacé par `pack/mods/fallow-0.2.0.jar`.
-2. **Couper les sources** : `pack/kubejs/server_scripts/sans_xp.js` (nouveau). Brouillon, à vérifier sur le serveur de test :
+1. **`xp` module of the `fallow` mod** (version 0.2.0).
+   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` (new): in `AnvilMenu.mayPickup`, ignore `player.experienceLevel` when the module is active. Keep the "cost > 0" test and the limit of 40. The mixin touches vanilla code. It does not interfere with that of Enhanced Celestials, which targets `createResult` (cost calculation).
+   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/xp/XpModule.java` (new): client side, cancel the two bar layers. Optional on the server side: refuse in `AnvilUpdateEvent` the merging of two enchanted items, so that enchanting goes through the table.
+   - `mods-custom/fallow/src/main/resources/fallow.mixins.json`: add `xp.AnvilMenuMixin` to the `mixins` list (both sides). This mixin targets no mod: nothing to add in `FallowMixinPlugin`.
+   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowModule.java`: entry `XP("xp", null, …)`, no required mod.
+   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowConfig.java`: `xp.enabled` (true), `xp.hideBar` (true), `xp.blockEnchantMerge` (to be decided), in `fallow-common.toml`.
+   - `mods-custom/fallow/gradle.properties`: `mod_version=0.2.0`.
+   - `pack/mods/fallow-0.1.0.jar` replaced by `pack/mods/fallow-0.2.0.jar`.
+2. **Cut the sources**: `pack/kubejs/server_scripts/sans_xp.js` (new). Draft, to be verified on the test server:
    ```js
-   // Plus d'orbes d'expérience, plus de gain de points.
+   // No more experience orbs, no more point gains.
    EntityEvents.spawned('minecraft:experience_orb', event => event.cancel())
    MoreJS.playerXpChange(event => { if (event.amount > 0) event.cancel() })
    PlayerEvents.loggedIn(event => event.player.setXp(0))
 
-   // Les pépites d'expérience de Create ne sortent plus du broyage.
+   // Create's experience nuggets no longer come out of crushing.
    ServerEvents.recipes(event => {
      const filtre = { type: 'create:crushing', output: 'create:experience_nugget' }
      const recettes = []
@@ -137,135 +137,135 @@ Chaque étape dit les fichiers touchés. Les étapes 1 et 2 doivent sortir **dan
      event.remove({ id: 'create:crafting/materials/experience_nugget_from_block' })
    })
 
-   // Plus de fioles d'expérience dans les coffres et les butins.
+   // No more experience bottles in chests and loot.
    LootJS.modifiers(event => {
      event.addTableModifier(/.*/).removeLoot('minecraft:experience_bottle')
    })
    ```
-   La partie Create recopie chaque recette sans la pépite. Vérifier en jeu que les 29 recettes gardent leurs autres sorties et leur durée. Si la recopie échoue, le repli est de laisser la pépite et de la cacher dans EMI ; elle resterait un objet inutile.
-3. **Remplacer les consommateurs.**
-   - `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json` (nouveau) : livre et plume, sans niveaux.
-   - `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/transmute.json` (nouveau) : 4 éclats d'améthyste, sans niveaux.
-   - `pack/defaultconfigs/envelope-server.toml` : `[mailbox]` `address_experience_levels_cost = 0`. Si l'agent d'Envelope a déjà créé ce fichier, on ajoute seulement la clé.
-4. **Textes** (passés au coordinateur dans `wayfarer-impl/xp-lang.json`, jamais écrits directement dans `pack/kubejs/assets/`) :
-   - `pack/kubejs/assets/minecraft/lang/fr_fr.json` et `en_us.json` (nouveaux) : `container.repair.cost` → « Usure : %1$s » ; `container.repair.expensive` → « Trop usé ! » ; facultatif : `deathScreen.score.value` vide.
-   - `pack/kubejs/assets/farm_and_charm/lang/fr_fr.json` (existe déjà) : `effect.farm_and_charm.rested.description` → par exemple « Un bon repos. » (l'effet n'a aucun code).
-   - Les libellés de config du module `xp`, si le menu de config de NeoForge les affiche.
-5. **Retirer Clumps** : supprimer `pack/mods/clumps.pw.toml`, puis `packwiz refresh` (met à jour `pack/index.toml`) et `npm run check-deps`.
-6. **Réglages facultatifs**, propres mais couverts par l'étape 2 :
-   - `pack/config/wildex/wildex-common.toml` : `[general]` `newEntryRewardsXp = false` (le fichier vit dans le sous-dossier `wildex/`) ;
-   - `pack/defaultconfigs/exposure-server.toml` : `[lightroom]` les trois `experience_*` à 0 ;
-   - `pack/defaultconfigs/travelersbackpack-server.toml` : `[server.backpackAbilities]` `allowedAbilities` sans `travelersbackpack:lapis`.
-7. **Documentation** : `docs/mods.md` (Clumps sort, le mod `fallow` gagne le module `xp`), `docs/plan/mod-fallow.md` (module `xp` et ses tests), `CHANGELOG.md`, une décision `docs/decisions/0009-xp.md`, et l'état de cette page.
-8. **Tests en jeu**, à deux :
-   - miner du charbon, fondre du fer, tuer une créature, élever deux vaches : aucune orbe ;
-   - ouvrir un coffre de ruine : pas de fiole d'expérience ;
-   - nommer une étiquette et réparer une pioche à l'enclume, à 0 niveau ; voir « Usure » monter jusqu'à « Trop usé ! » ;
-   - copier et transmuter un livre ancien ;
-   - nommer une boîte aux lettres d'Envelope ;
-   - broyer du minerai de fer avec Create : pas de pépite, les autres sorties sont là ;
-   - découvrir une espèce dans Wildex, tirer une photo, obtenir un succès d'Icy's Better Horses : la barre ne bouge pas ;
-   - vérifier que la barre a disparu, à pied, à cheval (la jauge de saut reste) et en visant au canon de Supplementaries.
+   The Create part copies each recipe without the nugget. Check in game that the 29 recipes keep their other outputs and their duration. If the copying fails, the fallback is to leave the nugget and hide it in EMI; it would remain a useless item.
+3. **Replace the consumers.**
+   - `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json` (new): book and quill, no levels.
+   - `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/transmute.json` (new): 4 amethyst shards, no levels.
+   - `pack/defaultconfigs/envelope-server.toml`: `[mailbox]` `address_experience_levels_cost = 0`. If this file already exists, only the key is added.
+4. **Texts** (kept in a separate language file and merged afterwards, never written directly into `pack/kubejs/assets/`):
+   - `pack/kubejs/assets/minecraft/lang/fr_fr.json` and `en_us.json` (new): `container.repair.cost` → "Usure : %1$s" (Wear); `container.repair.expensive` → "Trop usé !" (Too worn!); optional: `deathScreen.score.value` empty.
+   - `pack/kubejs/assets/farm_and_charm/lang/fr_fr.json` (already exists): `effect.farm_and_charm.rested.description` → for example "Un bon repos." (A good rest) (the effect has no code).
+   - The config labels of the `xp` module, if NeoForge's config menu displays them.
+5. **Remove Clumps**: delete `pack/mods/clumps.pw.toml`, then `packwiz refresh` (updates `pack/index.toml`) and `npm run check-deps`.
+6. **Optional settings**, tidy but covered by step 2:
+   - `pack/config/wildex/wildex-common.toml`: `[general]` `newEntryRewardsXp = false` (the file lives in the `wildex/` subfolder);
+   - `pack/defaultconfigs/exposure-server.toml`: `[lightroom]` the three `experience_*` at 0;
+   - `pack/defaultconfigs/travelersbackpack-server.toml`: `[server.backpackAbilities]` `allowedAbilities` without `travelersbackpack:lapis`.
+7. **Documentation**: `docs/mods.md` (Clumps goes out, the `fallow` mod gains the `xp` module), `docs/plan/mod-fallow.md` (`xp` module and its tests), `CHANGELOG.md`, a decision `docs/decisions/0009-xp.md`, and the status of this page.
+8. **In-game tests**, with two players:
+   - mine coal, smelt iron, kill a creature, breed two cows: no orbs;
+   - open a ruin chest: no experience bottle;
+   - name a tag and repair a pickaxe at the anvil, at level 0; watch "Usure" (Wear) climb up to "Trop usé !" (Too worn!);
+   - copy and transmute an ancient book;
+   - name an Envelope mailbox;
+   - crush iron ore with Create: no nugget, the other outputs are there;
+   - discover a species in Wildex, take a photo, earn an Icy's Better Horses advancement: the bar does not move;
+   - check that the bar has disappeared, on foot, on horseback (the jump gauge stays) and when aiming with the Supplementaries cannon.
 
-Bilan : **16 fichiers indispensables** (7 dans `pack/` avec `index.toml`, 3 de langue, 6 dans le mod `fallow`), 3 réglages facultatifs, 5 pages de doc.
+Total: **16 essential files** (7 in `pack/` with `index.toml`, 3 language files, 6 in the `fallow` mod), 3 optional settings, 5 doc pages.
 
-## Ce que le joueur gagne et perd
+## What the player gains and loses
 
-**Il gagne :**
-- un écran plus calme : une jauge de moins, sous des jauges qui comptent déjà (température, soif, saisons) ;
-- un monde moins « jeu vidéo » : on ne tue plus et on ne mine plus pour une barre verte ; miner sert à miner, fondre sert à fondre ;
-- un savoir qui pèse : l'enchantement tient tout entier dans les livres trouvés et les matériaux du monde, comme le veut la [décision 0008](../decisions/0008-enchantement.md) ;
-- une enclume plus simple : on renomme et on répare avec du métal, sans calcul de niveaux. Son « usure » donne une durée de vie aux objets et renvoie vers la forge d'Overgeared.
+**They gain:**
+- a calmer screen: one fewer gauge, below gauges that already matter (temperature, thirst, seasons);
+- a less "video game" world: you no longer kill and mine for a green bar; mining is for mining, smelting is for smelting;
+- knowledge that carries weight: enchanting rests entirely on the books found and the materials of the world, as [decision 0008](../decisions/0008-enchantement.md) wants;
+- a simpler anvil: you rename and repair with metal, without level calculations. Its "wear" gives items a lifespan and sends you back to Overgeared's forge.
 
-**Il perd :**
-- la réparation « gratuite » à l'enclume pour qui avait des niveaux : elle reste limitée par l'usure ;
-- le bonus d'XP de la lune bleue (elle garde la chance et, grâce au module, allège l'usure) ;
-- la capacité du sac en lapis ;
-- les pépites et le bloc d'expérience de Create (le bloc était une décoration lumineuse) ;
-- les 5 XP par espèce de Wildex, qui seront remplacés par les récompenses du zoo ;
-- le petit plaisir des orbes qui tintent. C'est un son connu du jeu : son absence se remarquera les premières heures.
+**They lose:**
+- the "free" anvil repair for those who had levels: it remains limited by wear;
+- the blue moon's XP bonus (it keeps the luck and, thanks to the module, eases wear);
+- the lapis backpack's ability;
+- Create's nuggets and the experience block (the block was a luminous decoration);
+- the 5 XP per Wildex species, which will be replaced by zoo rewards;
+- the small pleasure of tinkling orbs. It is a familiar sound of the game: its absence will be noticed for the first few hours.
 
-## Risques
+## Risks
 
-- **Le mixin de l'enclume** est le seul vrai risque. Il touche du code vanilla et doit tourner des deux côtés : le client refuse aussi de prendre l'objet s'il croit que le joueur n'a pas assez de niveaux. Client et serveur doivent donc avoir la même version du mod `fallow`. Aucun mod du pack ne patche `mayPickup`. Enhanced Celestials patche `createResult`, une autre méthode. Easy Anvils est déjà écarté.
-- **Les noms de l'API.** `EntityEvents.spawned`, `MoreJS.playerXpChange`, `PlayerEvents.loggedIn`, `findRecipes` et `LootJS.modifiers` sont lus dans les jars, pas encore essayés. Le format de la recette recopiée par `event.custom` est la partie la plus fragile.
-- **Les mods qui plantent à 0 XP** : aucun trouvé. Tout joueur neuf est à 0 niveau, donc ces chemins sont les plus joués. Le calcul `getXpNeededForNextLevel` vaut 7 au niveau 0, jamais 0 : pas de division par zéro.
-- **Les fermes** : une ferme à XP ne sert plus à rien, ce qui va dans le sens de Fallow. Les fermes à butin (laine, viande, cultures) ne changent pas. Le seul vrai producteur automatique était le broyage de Create.
-- **Un mod ajouté plus tard** qui paie en niveaux (enchantement, réparation, téléportation) deviendrait inutilisable. Le filtre d'ajout doit poser la question : « paie-t-il en XP ? ».
-- **Revenir en arrière** est facile : supprimer `sans_xp.js` et passer `xp.enabled = false`. Les niveaux reviennent avec le jeu, rien n'est perdu dans le monde.
-- **Faille déjà présente, sans lien avec l'XP** : l'enclume accepte un livre ancien d'Immersive Enchanting comme livre (elle teste le composant `stored_enchantments`), mais elle lit les enchantements par `EnchantmentHelper.getEnchantmentsForCrafting`, qui ne lit ce composant que sur le livre enchanté vanilla. L'enclume ne devrait donc rien appliquer. C'est déduit du code : à vérifier en jeu, avec ou sans XP.
+- **The anvil mixin** is the only real risk. It touches vanilla code and must run on both sides: the client also refuses to take the item if it thinks the player does not have enough levels. Client and server must therefore have the same version of the `fallow` mod. No mod in the pack patches `mayPickup`. Enhanced Celestials patches `createResult`, a different method. Easy Anvils is already rejected.
+- **API names.** `EntityEvents.spawned`, `MoreJS.playerXpChange`, `PlayerEvents.loggedIn`, `findRecipes` and `LootJS.modifiers` are read in the jars, not yet tried. The format of the recipe copied by `event.custom` is the most fragile part.
+- **Mods that crash at 0 XP**: none found. Every new player is at level 0, so these paths are the most played. The `getXpNeededForNextLevel` calculation is 7 at level 0, never 0: no division by zero.
+- **Farms**: an XP farm is no longer of any use, which goes in the direction of Fallow. Loot farms (wool, meat, crops) do not change. The only real automatic producer was Create's crushing.
+- **A mod added later** that pays in levels (enchanting, repair, teleportation) would become unusable. The adding filter must ask the question: "does it pay in XP?".
+- **Going back** is easy: delete `sans_xp.js` and set `xp.enabled = false`. The levels come back with the game, nothing is lost in the world.
+- **Flaw already present, unrelated to XP**: the anvil accepts an Immersive Enchanting ancient book as a book (it tests the `stored_enchantments` component), but it reads the enchantments through `EnchantmentHelper.getEnchantmentsForCrafting`, which only reads this component on the vanilla enchanted book. The anvil should therefore apply nothing. This is deduced from the code: to be verified in game, with or without XP.
 
-## Recommandation
+## Recommendation
 
-**Retirer entièrement l'XP** : orbes, gains, barre, et les quatre consommateurs remplacés.
+**Remove XP entirely**: orbs, gains, bar, and the four consumers replaced.
 
-- « Retirer seulement la barre et les orbes » ne tient pas. Les gains directs (succès, Wildex, Overgeared) rempliraient une jauge invisible. L'enclume et Envelope marcheraient ou non, sans que le joueur sache pourquoi.
-- « Garder » ne coûte rien, mais l'XP n'a plus de rôle : l'enchantement est déjà payé en matériaux. Elle reste une récompense de grind, contraire à l'exploration voulue par la [vision](../vision.md).
-- Le coût réel est faible : un module de deux classes dans le mod `fallow`, un script, deux fichiers de données et une ligne de config. Le seul point délicat, l'enclume, en sort amélioré.
+- "Remove only the bar and the orbs" does not hold. Direct gains (advancements, Wildex, Overgeared) would fill an invisible gauge. The anvil and Envelope would or would not work, without the player knowing why.
+- "Keep" costs nothing, but XP no longer has a role: enchanting is already paid for in materials. It remains a grind reward, contrary to the exploration wanted by the [vision](../vision.md).
+- The real cost is low: a two-class module in the `fallow` mod, a script, two data files and a config line. The only delicate point, the anvil, comes out improved.
 
-Ordre conseillé : écrire et tester le module `xp`, puis sortir les étapes 1 à 5 dans la même version 0.x.
+Advised order: write and test the `xp` module, then release steps 1 to 5 in the same 0.x version.
 
-### Décisions de l'équipe
+### Maintainer's decisions
 
-1. L'enclume **peut toujours fusionner** deux objets enchantés : `xp.blockEnchantMerge = false` (le réglage existe, coupé). La limite « Trop cher ! » (40) devient une usure.
-2. La transmutation d'un livre ancien coûte **4 éclats d'améthyste**.
-3. Le coût de l'enclume s'appelle « **Usure : %1$s** », sa limite « **Trop usé !** ».
+1. The anvil **can still merge** two enchanted items: `xp.blockEnchantMerge = false` (the setting exists, off). The "Too expensive!" limit (40) becomes wear.
+2. Transmuting an ancient book costs **4 amethyst shards**.
+3. The anvil cost is called "**Usure : %1$s**" (Wear), its limit "**Trop usé !**" (Too worn!).
 
 ## Application (2026-10-19)
 
-### Fichiers écrits
+### Files written
 
-| Étape | Fichier | Contenu |
+| Step | File | Contents |
 |---|---|---|
-| 1 | `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` | `@ModifyExpressionValue` (MixinExtras) sur la lecture de `player.experienceLevel` dans `AnvilMenu.mayPickup` : vaut `Integer.MAX_VALUE` quand `xp.enabled`. Le test « coût > 0 » et la limite de 40 (dans `createResult`) ne bougent pas |
-| 1 | `…/fallow/xp/XpModule.java`, `…/fallow/xp/XpClient.java` | `AnvilUpdateEvent` annulé si `xp.blockEnchantMerge` et que l'objet de droite porte des enchantements ; chez le client, `RenderGuiLayerEvent.Pre` annulé pour `EXPERIENCE_BAR` et `EXPERIENCE_LEVEL` si `xp.hideBar` |
-| 1 | `FallowModule.java`, `FallowConfig.java`, `Fallow.java`, `fallow.mixins.json`, `neoforge.mods.toml`, `gradle.properties` | Module `XP("xp", null, …)` sans mod requis ; `[xp]` `enabled = true`, `hideBar = true`, `blockEnchantMerge = false` dans `fallow-common.toml` ; `xp.AnvilMenuMixin` dans `mixins` (les deux côtés) ; version 0.2.0 |
-| 1 | `pack/mods/fallow-0.2.0.jar` (remplace `fallow-0.1.0.jar`) | Jar de `./gradlew build`. Son entrée de `pack/index.toml` (nom et sha256) est mise à jour à la main |
-| 2 | `pack/kubejs/server_scripts/sans_xp.js` | Orbes annulées, gains positifs bloqués, XP remise à 0 à la connexion, pépites retirées du broyage de Create, recettes du bloc d'expérience retirées, fioles retirées de toutes les tables de butin |
-| 3 | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json`, `transmute.json` | Livre et plume sans niveaux ; 4 éclats d'améthyste sans niveaux (`xp_levels` vaut 0 par défaut dans le codec `Cost`) |
-| 3 | `pack/defaultconfigs/envelope-server.toml` | `[mailbox]` `address_experience_levels_cost = 0` (clé lue dans `Config$Server` d'Envelope 0.7.5, config `SERVER`) |
-| 4 | `wayfarer-impl/xp-lang.json` (fusionné par le coordinateur) | `container.repair.cost`, `container.repair.expensive`, `effect.farm_and_charm.rested.description`, en français et en anglais. Les clés de langue sont globales : les deux premières vont dans `pack/kubejs/assets/minecraft/lang/`, la troisième dans `pack/kubejs/assets/farm_and_charm/lang/` |
-| 6 | `pack/config/wildex/wildex-common.toml` (nouveau, partiel) | `[general]` `newEntryRewardsXp = false` |
-| 6 | `pack/defaultconfigs/exposure-server.toml` (nouveau, partiel) | `[lightroom]` les trois `experience_*` à 0 |
-| 6 | `pack/defaultconfigs/travelersbackpack-server.toml` (nouveau, partiel) | `[server.backpackAbilities]` `allowedAbilities` : la liste par défaut de la 10.1.39, sans `travelersbackpack:lapis` |
+| 1 | `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` | `@ModifyExpressionValue` (MixinExtras) on the read of `player.experienceLevel` in `AnvilMenu.mayPickup`: equals `Integer.MAX_VALUE` when `xp.enabled`. The "cost > 0" test and the limit of 40 (in `createResult`) do not move |
+| 1 | `…/fallow/xp/XpModule.java`, `…/fallow/xp/XpClient.java` | `AnvilUpdateEvent` cancelled if `xp.blockEnchantMerge` and the right-hand item carries enchantments; on the client, `RenderGuiLayerEvent.Pre` cancelled for `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` if `xp.hideBar` |
+| 1 | `FallowModule.java`, `FallowConfig.java`, `Fallow.java`, `fallow.mixins.json`, `neoforge.mods.toml`, `gradle.properties` | Module `XP("xp", null, …)` with no required mod; `[xp]` `enabled = true`, `hideBar = true`, `blockEnchantMerge = false` in `fallow-common.toml`; `xp.AnvilMenuMixin` in `mixins` (both sides); version 0.2.0 |
+| 1 | `pack/mods/fallow-0.2.0.jar` (replaces `fallow-0.1.0.jar`) | Jar from `./gradlew build`. Its entry in `pack/index.toml` (name and sha256) is updated by hand |
+| 2 | `pack/kubejs/server_scripts/sans_xp.js` | Orbs cancelled, positive gains blocked, XP reset to 0 on login, nuggets removed from Create crushing, experience block recipes removed, bottles removed from all loot tables |
+| 3 | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json`, `transmute.json` | Book and quill without levels; 4 amethyst shards without levels (`xp_levels` is 0 by default in the `Cost` codec) |
+| 3 | `pack/defaultconfigs/envelope-server.toml` | `[mailbox]` `address_experience_levels_cost = 0` (key read in `Config$Server` of Envelope 0.7.5, `SERVER` config) |
+| 4 | separate language file (merged afterwards) | `container.repair.cost`, `container.repair.expensive`, `effect.farm_and_charm.rested.description`, in French and English. Language keys are global: the first two go into `pack/kubejs/assets/minecraft/lang/`, the third into `pack/kubejs/assets/farm_and_charm/lang/` |
+| 6 | `pack/config/wildex/wildex-common.toml` (new, partial) | `[general]` `newEntryRewardsXp = false` |
+| 6 | `pack/defaultconfigs/exposure-server.toml` (new, partial) | `[lightroom]` the three `experience_*` at 0 |
+| 6 | `pack/defaultconfigs/travelersbackpack-server.toml` (new, partial) | `[server.backpackAbilities]` `allowedAbilities`: the default list of 10.1.39, without `travelersbackpack:lapis` |
 
-Les fichiers de config partiels suivent l'usage du pack (`supplementaries-common.toml`, `nomansland-common.toml`) : NeoForge ajoute les clés absentes au premier lancement.
+The partial config files follow the pack's practice (`supplementaries-common.toml`, `nomansland-common.toml`): NeoForge adds the missing keys on first launch.
 
-### Écarts au plan
+### Deviations from the plan
 
-- **Pépites de Create** : le script parcourt toutes les recettes `create:crushing` (`forEachRecipe`) et lit leur JSON, au lieu du filtre `output`, dont la prise en charge par le schéma de KubeJS Create n'est pas sûre. Il retire d'abord chaque recette, puis la recrée sous le même identifiant sans la pépite et sans `neoforge:conditions` (KubeJS 7 range les recettes ajoutées après les originales : l'identifiant ne se perd pas). Une recette qui n'aurait que la pépite serait seulement retirée ; Create 6.0.10 n'en a aucune (160 recettes lues, toutes avec une autre sortie).
-- **Fioles** : retirées des tables elles-mêmes (`LootJS.lootTables`, `forEachTable`, `removeItem`), comme le fait `tannerie_butin.js`, au lieu d'un modificateur appliqué à chaque tirage.
-- **Libellé de l'enclume** : il passe par les clés vanilla, donc il reste « Usure » même avec `xp.enabled = false`. Le mod `fallow` n'a pas de fichier de langue (pas d'écran de config enregistré) : rien à traduire dans le mod.
-- **Écran de mort** : `deathScreen.score.value` n'est pas vidé. Une valeur sans `%s` ferait échouer `npm run check-fr` (contrôle des variables) ; « Score : 0 » reste.
-- **Fait par le coordinateur** : Clumps retiré et `packwiz refresh` lancé (étape 5). **Reste** : `docs/mods.md`, `CHANGELOG.md` et la décision `docs/decisions/0009-xp.md` (étape 7).
+- **Create nuggets**: the script goes through all `create:crushing` recipes (`forEachRecipe`) and reads their JSON, instead of the `output` filter, whose support by the KubeJS Create schema is uncertain. It first removes each recipe, then recreates it under the same identifier without the nugget and without `neoforge:conditions` (KubeJS 7 places the added recipes after the originals: the identifier is not lost). A recipe that had only the nugget would simply be removed; Create 6.0.10 has none (160 recipes read, all with another output).
+- **Bottles**: removed from the tables themselves (`LootJS.lootTables`, `forEachTable`, `removeItem`), as `tannerie_butin.js` does, instead of a modifier applied to each roll.
+- **Anvil label**: it goes through the vanilla keys, so it stays "Usure" (Wear) even with `xp.enabled = false`. The `fallow` mod has no language file (no registered config screen): nothing to translate in the mod.
+- **Death screen**: `deathScreen.score.value` is not emptied. A value without `%s` would make `npm run check-fr` fail (variable check); "Score : 0" stays.
+- **Done separately**: Clumps removed and `packwiz refresh` run (step 5). **Remaining**: `docs/mods.md`, `CHANGELOG.md` and the decision `docs/decisions/0009-xp.md` (step 7).
 
-### Reste à tester en jeu
+### Remaining to test in game
 
-Sur le serveur de test, puis à deux (liste de l'étape 8) :
+On the test server, then with two players (list of step 8):
 
-1. **Démarrage** : log « Module xp chargé (aucun mod requis) », aucun avertissement de mixin `fallow` (`AnvilMenuMixin` doit trouver sa cible) ; log KubeJS sans erreur dans `sans_xp.js`, avec « [sans_xp] 29 recettes de broyage recopiées sans pépite d'expérience » (voir [Serveur de test](#serveur-de-test-2026-10-19)).
-2. **Enclume à 0 niveau** : nommer une étiquette, réparer une pioche avec des lingots, fusionner deux pioches enchantées. Le coût s'affiche en vert (« Usure : n ») et l'objet se prend ; à 40, « Trop usé ! ». Avec `xp.enabled = false`, l'enclume redemande des niveaux. Avec `xp.blockEnchantMerge = true`, un livre enchanté à droite ne donne plus de résultat.
-3. **Sources coupées** : miner du charbon, fondre du fer, tuer une créature, élever deux vaches, pêcher : aucune orbe. `/xp add @s 10 points` : rien ne change. Wildex, chambre noire d'Exposure, succès d'Icy's Better Horses : la barre ne bouge pas.
-4. **Create** : broyer du minerai de fer brut ; pas de pépite, les autres sorties et la durée sont là ; EMI ne montre plus la pépite dans le broyage, ni de recette pour le bloc d'expérience. Point le plus fragile : la recopie par `event.custom`.
-5. **Butin** : coffres de ruine, caisse d'Hybrid Aquatic, coffre-fort de Supplementaries, colis `valuables` d'Envelope, fouille du furet : pas de fiole d'expérience. Une fiole venue d'ailleurs (marchand) ne donne rien.
-6. **Immersive Enchanting** : copier un livre ancien (livre et plume, sans niveaux) ; le transmuter avec 4 éclats d'améthyste dans l'emplacement de coût.
-7. **Envelope** : nommer une boîte aux lettres dans un monde neuf (`serverconfig/envelope-server.toml` copié depuis `defaultconfigs`), sans coût affiché.
-8. **Interface** : plus de barre ni de chiffre, à pied, à cheval (la jauge de saut reste) et en visant au canon de Supplementaries. Regarder le petit vide sous les cœurs et la faim (finition possible : abaisser `Gui.leftHeight` et `rightHeight`).
-9. **Monde de test avec de l'XP** : à la connexion, niveaux remis à 0.
-10. **Sac en lapis** : plus de capacité (`allowedAbilities` lu depuis le monde neuf).
+1. **Startup**: log "Module xp chargé (aucun mod requis)", no `fallow` mixin warning (`AnvilMenuMixin` must find its target); KubeJS log with no error in `sans_xp.js`, with "[sans_xp] 29 recettes de broyage recopiées sans pépite d'expérience" (see [Test server](#test-server-2026-10-19)).
+2. **Anvil at level 0**: name a tag, repair a pickaxe with ingots, merge two enchanted pickaxes. The cost is displayed in green ("Usure : n") and the item can be taken; at 40, "Trop usé !". With `xp.enabled = false`, the anvil asks for levels again. With `xp.blockEnchantMerge = true`, an enchanted book on the right no longer gives a result.
+3. **Sources cut**: mine coal, smelt iron, kill a creature, breed two cows, fish: no orbs. `/xp add @s 10 points`: nothing changes. Wildex, Exposure darkroom, Icy's Better Horses advancements: the bar does not move.
+4. **Create**: crush raw iron ore; no nugget, the other outputs and the duration are there; EMI no longer shows the nugget in crushing, nor a recipe for the experience block. Most fragile point: the copying by `event.custom`.
+5. **Loot**: ruin chests, Hybrid Aquatic crate, Supplementaries safe, Envelope `valuables` parcel, ferret digging: no experience bottle. A bottle coming from elsewhere (trader) gives nothing.
+6. **Immersive Enchanting**: copy an ancient book (book and quill, no levels); transmute it with 4 amethyst shards in the cost slot.
+7. **Envelope**: name a mailbox in a new world (`serverconfig/envelope-server.toml` copied from `defaultconfigs`), with no cost displayed.
+8. **Interface**: no more bar or number, on foot, on horseback (the jump gauge stays) and when aiming with the Supplementaries cannon. Look at the small gap under the hearts and hunger (possible finishing touch: lower `Gui.leftHeight` and `rightHeight`).
+9. **Test world with XP**: on login, levels reset to 0.
+10. **Lapis backpack**: no more ability (`allowedAbilities` read from the new world).
 
-### Serveur de test (2026-10-19)
+### Test server (2026-10-19)
 
-Serveur dédié sans joueur (NeoForge 21.1.251, monde neuf, 98 jars, Clumps retiré), lancé par `boot.sh --fresh --keep` puis arrêté. Ce qu'on peut vérifier sans joueur :
+Dedicated server without a player (NeoForge 21.1.251, new world, 98 jars, Clumps removed), launched with `boot.sh --fresh --keep` then stopped. What can be verified without a player:
 
-| Vérification | Résultat |
+| Check | Result |
 |---|---|
-| Démarrage | « Done » en 17 s. « Module xp chargé (aucun mod requis) », puis « xp : enclume sans niveaux… ». Aucun avertissement de mixin `fallow`. `AnvilMenu` est chargé dès le démarrage (`MenuType.ANVIL`) : avec `required` et `defaultRequire: 1`, un `AnvilMenuMixin` raté aurait fait planter le serveur |
-| Scripts KubeJS | `startup.log` : 2/2 scripts, 0 erreur. `server.log` : 6/6 scripts, 0 erreur, 0 avertissement ; « Reloaded with no KubeJS errors » après `/reload`. Les 81 avertissements de `server.log` sont des recettes d'autres mods qu'il ne sait pas lire (« Falling back to vanilla »), sans lien avec `sans_xp.js` |
-| Broyage de Create | « 29 recettes de broyage recopiées », « 0 failed recipes ». **29 et non 160** : les 131 autres recettes à pépite de Create 6.0.10 portent une condition `neoforge:tag_empty` (minerais d'autres mods) et ne se chargent pas dans ce pack. L'export (`/kubejs export debug`) montre `raw_iron` avec la seule sortie `create:crushed_raw_iron` et la même durée (400). Pour `deepslate_gold_ore` et `nether_quartz_ore`, les sorties et la durée sont celles d'origine, moins la pépite. Aucune recette exportée ne contient `experience_nugget`. Les deux recettes du bloc d'expérience sont retirées |
-| Orbes | `summon minecraft:experience_orb … {Value:10}` répond « Summoned », mais aucune orbe n'existe ensuite (`execute if entity @e[type=experience_orb]` : échec). Pareil pour une fiole d'expérience lancée par `summon` |
-| Fioles dans les butins | 40 tirages chacun de `minecraft:chests/shipwreck_treasure`, `crittersandcompanions:gameplay/digging/common` et `envelope:packages/lost_mail/valuables` (`loot spawn`) : 687 objets dont 92 émeraudes, **aucune** fiole d'expérience |
-| Configs | `envelope-server.toml` : `address_experience_levels_cost = 0` ; `exposure-server.toml` : les trois `experience_*` à 0 ; `travelersbackpack-server.toml` : `allowedAbilities` sans `lapis` ; `wildex/wildex-common.toml` : `newEntryRewardsXp = false`. NeoForge a complété les fichiers partiels (avertissements « Incorrect key », attendus) sans toucher aux valeurs écrites. Dans ce serveur, NeoForge 21.1 range les configs serveur dans `config/`, non dans `world/serverconfig/` |
-| `/xp add @a 10 points` | « No player was found » : à refaire avec un joueur |
+| Startup | "Done" in 17 s. "Module xp chargé (aucun mod requis)", then "xp : enclume sans niveaux…". No `fallow` mixin warning. `AnvilMenu` is loaded at startup (`MenuType.ANVIL`): with `required` and `defaultRequire: 1`, a failed `AnvilMenuMixin` would have crashed the server |
+| KubeJS scripts | `startup.log`: 2/2 scripts, 0 errors. `server.log`: 6/6 scripts, 0 errors, 0 warnings; "Reloaded with no KubeJS errors" after `/reload`. The 81 warnings in `server.log` are recipes from other mods that it cannot read ("Falling back to vanilla"), unrelated to `sans_xp.js` |
+| Create crushing | "29 recettes de broyage recopiées", "0 failed recipes". **29 and not 160**: the other 131 nugget recipes in Create 6.0.10 carry a `neoforge:tag_empty` condition (ores from other mods) and do not load in this pack. The export (`/kubejs export debug`) shows `raw_iron` with the single output `create:crushed_raw_iron` and the same duration (400). For `deepslate_gold_ore` and `nether_quartz_ore`, the outputs and the duration are the original ones, minus the nugget. No exported recipe contains `experience_nugget`. The two experience block recipes are removed |
+| Orbs | `summon minecraft:experience_orb … {Value:10}` answers "Summoned", but no orb exists afterwards (`execute if entity @e[type=experience_orb]`: fails). Same for an experience bottle thrown by `summon` |
+| Bottles in loot | 40 rolls each of `minecraft:chests/shipwreck_treasure`, `crittersandcompanions:gameplay/digging/common` and `envelope:packages/lost_mail/valuables` (`loot spawn`): 687 items including 92 emeralds, **no** experience bottle |
+| Configs | `envelope-server.toml`: `address_experience_levels_cost = 0`; `exposure-server.toml`: the three `experience_*` at 0; `travelersbackpack-server.toml`: `allowedAbilities` without `lapis`; `wildex/wildex-common.toml`: `newEntryRewardsXp = false`. NeoForge completed the partial files ("Incorrect key" warnings, expected) without touching the written values. On this server, NeoForge 21.1 stores server configs in `config/`, not in `world/serverconfig/` |
+| `/xp add @a 10 points` | "No player was found": to be redone with a player |
 
-**Reste à tester avec un joueur** : l'enclume à 0 niveau (renommer, réparer, fusionner, « Usure », « Trop usé ! » à 40) ; `/xp add … points` et les gains directs (succès, Wildex, chambre noire) ; la remise à 0 à la connexion ; une créature tuée par un joueur ; la copie et la transmutation d'Immersive Enchanting (les fichiers suivent le codec du jar, mais le mod n'écrit rien au chargement) ; l'adresse d'une boîte Envelope ; la barre cachée chez le client.
+**Remaining to test with a player**: the anvil at level 0 (rename, repair, merge, "Usure" (Wear), "Trop usé !" (Too worn!) at 40); `/xp add … points` and direct gains (advancements, Wildex, darkroom); the reset to 0 on login; a creature killed by a player; the copying and transmutation of Immersive Enchanting (the files follow the jar's codec, but the mod writes nothing at load); the address of an Envelope mailbox; the bar hidden on the client.

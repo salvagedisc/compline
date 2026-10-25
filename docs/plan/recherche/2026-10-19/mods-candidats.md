@@ -1,355 +1,355 @@
-# Mods candidats du 2026-10-19
+# Candidate mods of 2026-10-19
 
-Mission : L'équipe a proposé huit mods. Pour chacun : faut-il l'intégrer, comment, que garder et que couper pour éviter les doublons et la surcharge. Questions précises : peut-on adapter Identity Mask à NeoForge, est-il compatible avec Fresh Animations, et peut-on n'activer que certaines fonctions de Kingdoms: Villager Retaliation ?
+Mission: The maintainer proposed eight mods. For each one: should it be integrated, how, what to keep and what to cut to avoid duplicates and overload. Specific questions: can Identity Mask be adapted to NeoForge, is it compatible with Fresh Animations, and can only some features of Kingdoms: Villager Retaliation be enabled?
 
-Méthode : API Modrinth (NeoForge 1.21.1), page CurseForge, fichiers téléchargés et lus (`unzip`, `javap`, JSON, NBT) sans rien exécuter, wikis des mods. **Rien n'a été testé en jeu.** Chaque affirmation porte sa source : [Modrinth], [CF], [jar], [wiki], [web], [déduit].
+Method: Modrinth API (NeoForge 1.21.1), CurseForge page, downloaded files read (`unzip`, `javap`, JSON, NBT) without running anything, mod wikis. **Nothing was tested in game.** Each claim carries its source: [Modrinth], [CF], [jar], [wiki], [web], [inferred].
 
-## En bref
+## In brief
 
-| Mod | Disponible en NeoForge 1.21.1 | Verdict | Raison principale |
+| Mod | Available for NeoForge 1.21.1 | Verdict | Main reason |
 |---|---|---|---|
-| Identity Mask | Non : CurseForge seulement, Forge 1.20.1, ARR | Ne pas intégrer, ni porter, ni réécrire | Mécanique tournée contre les monstres vanilla et les villages vivants, que le pack retire |
-| Kingdoms: Villager Retaliation | Oui, bêta (`1.0.0-beta.13-hotfix.1`), + `owo-lib` et `toucan` | À tester en mode réduit, avec critère d'abandon | Donne une valeur à chaque survivant et bloque la reproduction par la config ; mais l'embauche, le groupe, les quêtes et l'économie ne se coupent pas par la config |
-| Dreamshift | Non : Forge et Fabric 1.20.1, demande Immersive Portals | Ne pas intégrer | Mod d'horreur ; le rêve de No Man's Land tient déjà ce rôle |
-| Animalia Exotica | Oui (1.0.3) | Ne pas intégrer | 4 espèces sur 6 en doublon, biomes vanilla écrits en dur |
-| Fish'n'Ships | Oui (`mc1.21.1-1.1.0-neoforge`), aucune dépendance nouvelle | À tester | Vraie mécanique de transport sur l'eau avant Create ; navire et chalut à trancher |
-| Sunken Spires | Oui (`1.0+mod`) | Ne pas intégrer en l'état | Les 11 structures font apparaître gardiens et noyés ; une variante filtrée est possible |
-| Trek | Oui (bêta B0.6.2) | Ne pas intégrer (0004 confirmé) | 113 structures, pillards, aucun biome NML, remplace les villages et le stronghold |
-| Creature Feature | Oui (1.2.3.3), + Blueprint | Ne pas intégrer | 23 monstres, ton inquiétant, aucune option pour couper les apparitions |
+| Identity Mask | No: CurseForge only, Forge 1.20.1, ARR | Do not integrate, port or rewrite | Mechanic turned against vanilla monsters and living villages, which the pack removes |
+| Kingdoms: Villager Retaliation | Yes, beta (`1.0.0-beta.13-hotfix.1`), + `owo-lib` and `toucan` | Test in reduced mode, with an abandonment criterion | Gives value to each survivor and blocks breeding through the config; but hiring, party, quests and economy cannot be switched off through the config |
+| Dreamshift | No: Forge and Fabric 1.20.1, requires Immersive Portals | Do not integrate | Horror mod; No Man's Land's dream already plays this role |
+| Animalia Exotica | Yes (1.0.3) | Do not integrate | 4 species out of 6 are duplicates, vanilla biomes hard-coded |
+| Fish'n'Ships | Yes (`mc1.21.1-1.1.0-neoforge`), no new dependency | To test | Real water transport mechanic before Create; ship and trawl to be decided |
+| Sunken Spires | Yes (`1.0+mod`) | Do not integrate as is | All 11 structures spawn guardians and drowned; a filtered variant is possible |
+| Trek | Yes (beta B0.6.2) | Do not integrate (0004 confirmed) | 113 structures, pillagers, no NML biome, replaces villages and the stronghold |
+| Creature Feature | Yes (1.2.3.3), + Blueprint | Do not integrate | 23 monsters, unsettling tone, no option to turn off spawns |
 
-**Identity Mask sur NeoForge.** Pas possible proprement. La licence (« All rights reserved ») interdit de forker ou de redistribuer sans l'accord écrit de l'auteur, et aucun code source n'est publié. Le mod compte 216 classes et 40 mixins écrits pour Forge 1.20.1 : le passage en 1.21.1 serait une réécriture. Sinytra Connector ne charge que des mods Fabric. On pourrait réécrire l'idée dans le mod `fallow`, mais elle ne sert qu'à tromper des monstres vanilla et des villageois vivants, absents de Fallow.
+**Identity Mask on NeoForge.** Not possible cleanly. The licence ("All rights reserved") forbids forking or redistributing without the author's written consent, and no source code is published. The mod has 216 classes and 40 mixins written for Forge 1.20.1: moving to 1.21.1 would be a rewrite. Sinytra Connector only loads Fabric mods. The idea could be rewritten in the `fallow` mod, but it only serves to fool vanilla monsters and living villagers, which are absent from Fallow.
 
-**Identity Mask et Fresh Animations.** Rien à tester en 1.21.1. D'après le code, le masque se dessine comme une couche sur la tête du modèle joueur et devrait suivre l'animation de FA Player Extension ; mais ses mixins touchent les mêmes couches (armure, tête, cape, objet en main, animations) qu'EMF et FA Player Extension, et 3D Skin Layers ne suivrait sans doute pas le skin emprunté [déduit].
+**Identity Mask and Fresh Animations.** Nothing to test in 1.21.1. From the code, the mask is drawn as a layer on the head of the player model and should follow the FA Player Extension animation; but its mixins touch the same layers (armour, head, cape, held item, animations) as EMF and FA Player Extension, and 3D Skin Layers would probably not follow the borrowed skin [inferred].
 
-**Villager Retaliation, fonction par fonction.** Un seul fichier, `config/villagerretaliation.json5`, commun au client et au serveur. Se coupent un par un : riposte, réputation, attaque à vue, butin, noms et HUD, notifications, chaque effet de dialogue, cadeaux, humeurs, étude, duels, raids du joueur, combat des villageois, état « à terre », commerce enrichi, et la reproduction (`social.enableVanillaVillagerBreeding=false`). Ne se coupent pas par la config : l'embauche (13 métiers et un bâtisseur), le groupe, les quêtes (seulement par datapack) et l'économie (seulement en retirant des recettes). Détails et valeurs à livrer en 2.1.
+**Villager Retaliation, feature by feature.** A single file, `config/villagerretaliation.json5`, shared by client and server. Can be switched off one by one: retaliation, reputation, attack on sight, loot, names and HUD, notifications, each dialogue effect, gifts, moods, study, duels, player raids, villager combat, "downed" state, enriched trading, and breeding (`social.enableVanillaVillagerBreeding=false`). Cannot be switched off through the config: hiring (13 professions and a builder), the party, quests (only by datapack) and the economy (only by removing recipes). Details and values to ship in 2.1.
 
-## Que faire ensuite
+## What to do next
 
-- Fish'n'Ships : branche `test/fish-n-ships` ; garder canoë, voilier, radeaux et dinghy ; décider du navire (doublon d'Aeronautics) et du chalut (pêche passive avec livres enchantés, qui court-circuite [0008](../../../decisions/0008-enchantement.md)).
-- Villager Retaliation : branche `test/villageois` avec la config réduite de 2.1 ; abandon si l'embauche et le HUD restent présents. Le blocage de la reproduction et le filtre des échanges restent faisables en KubeJS ([0004](../../../decisions/0004-structures.md)).
-- Sunken Spires : seulement si l'on veut des ruines sous-marines silencieuses, avec la variante filtrée de 3.3.
-- Les cinq autres : une ligne dans « Sortis ou écartés » du [registre](../../../mods.md) quand l'équipe aura tranché.
+- Fish'n'Ships: branch `test/fish-n-ships`; keep canoe, sailboat, rafts and dinghy; decide on the ship (duplicates Aeronautics) and the trawl (passive fishing with enchanted books, which short-circuits [0008](../../../decisions/0008-enchantement.md)).
+- Villager Retaliation: branch `test/villageois` with the reduced config of 2.1; abandon if hiring and the HUD remain present. Blocking breeding and filtering trades remain doable in KubeJS ([0004](../../../decisions/0004-structures.md)).
+- Sunken Spires: only if silent underwater ruins are wanted, with the filtered variant of 3.3.
+- The other five: one line in "Removed or ruled out" of the [register](../../../mods.md) once the maintainer has decided.
 
-## 1. Identity Mask et Creature Feature
+## 1. Identity Mask and Creature Feature
 ### 1.1 Identity Mask
 
-#### Identité
+#### Identity
 
-- Auteur : RetroParadox (CurseForge, id 1666070), créé le 2026-08-28, un seul fichier : `id_mask-1.0.0.jar`, bêta, environ 17 500 téléchargements. [CF]
-- Chargeur et version : **Forge 1.20.1 uniquement** (`loaderVersion="[47,)"`, `minecraft [1.20.1,1.21)`). Pas de version Fabric, pas de NeoForge, pas de 1.21.1. [jar] [CF]
-- Licence : **All rights reserved** (`license="All rights reserved"` dans `mods.toml`). [jar]
-- Code source : aucun dépôt trouvé. La page CurseForge ne donne aucun lien source ; la recherche web ne trouve rien ; la recherche GitHub n'a pas pu être faite (API bloquée dans cette session). [CF] [web]
-- Modrinth : **absent**. La page CurseForge renvoie vers `modrinth.com/mod/identity-mask`, mais l'API répond 404 (pas publié, ou pas encore approuvé). La recherche « identity mask » ne le trouve pas. Le seul projet Modrinth de l'auteur est `alien-evolution-first-person-model` (Forge 1.20.1, ARR). [Modrinth]
+- Author: RetroParadox (CurseForge, id 1666070), created 2026-08-28, a single file: `id_mask-1.0.0.jar`, beta, about 17,500 downloads. [CF]
+- Loader and version: **Forge 1.20.1 only** (`loaderVersion="[47,)"`, `minecraft [1.20.1,1.21)`). No Fabric version, no NeoForge, no 1.21.1. [jar] [CF]
+- Licence: **All rights reserved** (`license="All rights reserved"` in `mods.toml`). [jar]
+- Source code: no repository found. The CurseForge page gives no source link; the web search finds nothing; the GitHub search could not be done (API blocked during this research pass). [CF] [web]
+- Modrinth: **absent**. The CurseForge page points to `modrinth.com/mod/identity-mask`, but the API answers 404 (not published, or not yet approved). The search "identity mask" does not find it. The author's only Modrinth project is `alien-evolution-first-person-model` (Forge 1.20.1, ARR). [Modrinth]
 
-#### Ce que fait le mod
+#### What the mod does
 
-- Un masque (objet `id_mask`, casque ou emplacement de tête Curios) projette un **hologramme** : le joueur ressemble à un autre joueur (skin téléchargé depuis l'API Mojang) ou à une créature. Santé, hitbox, portée et vitesse ne changent pas. [CF] [jar]
-- Créatures projetables : **zombie, villageois, enderman** seulement (« alien » verrouillé, attend le mod Alien Evolution). [jar] (chaînes de `Projections`, `MobTransformRenderer`)
-- Effets : en zombie, les monstres ne vous ciblent plus ; en villageois, réductions de commerce ; « mode act » (bruits de pas, sons et mouvements de la créature) ; barre de soupçon au-dessus des mobs « malins » ; fausse armure visible. [CF]
-- Mobs malins par défaut : creeper, witch, enderman, pillager, vindicator, evoker, illusioner, piglin, piglin brute ; liste extensible en config (`extraSmartMobs`). Les mobs d'autres mods sont trompés « sans réglage ». [jar] [CF]
-- Obtention : un « masked chicken » apparaît dans les villages autour du joueur et lâche un masque cassé, réparé à l'enclume ; un « face mask » se fabrique. [jar] (`VillageMaskedChickenSpawner`, `AnvilRepairHandler`, `DeathDropHandler`)
-- Ton : « technologie holographique avancée », aliens, panneau Discord dans le menu. [CF] [jar]
+- A mask (item `id_mask`, helmet or Curios head slot) projects a **hologram**: the player looks like another player (skin downloaded from the Mojang API) or like a creature. Health, hitbox, reach and speed do not change. [CF] [jar]
+- Projectable creatures: **zombie, villager, enderman** only ("alien" locked, waiting for the Alien Evolution mod). [jar] (strings of `Projections`, `MobTransformRenderer`)
+- Effects: as a zombie, monsters no longer target you; as a villager, trade discounts; "act mode" (footsteps, sounds and movements of the creature); suspicion bar above "smart" mobs; visible fake armour. [CF]
+- Smart mobs by default: creeper, witch, enderman, pillager, vindicator, evoker, illusioner, piglin, piglin brute; list extensible in the config (`extraSmartMobs`). Mobs from other mods are fooled "without configuration". [jar] [CF]
+- Obtaining it: a "masked chicken" spawns in villages around the player and drops a broken mask, repaired at the anvil; a "face mask" can be crafted. [jar] (`VillageMaskedChickenSpawner`, `AnvilRepairHandler`, `DeathDropHandler`)
+- Tone: "advanced holographic technology", aliens, Discord panel in the menu. [CF] [jar]
 
-#### (a) Portage ou adaptation vers NeoForge 1.21.1
+#### (a) Port or adaptation to NeoForge 1.21.1
 
-- **Licence** : ARR interdit de forker, décompiler pour republier ou redistribuer sans accord écrit de l'auteur. Un portage public n'est possible qu'avec sa permission. [jar] [déduit]
-- **Taille** : 216 classes, environ 1 Mo de bytecode, **40 mixins** (20 communs sur l'IA de visée : squelette, blaze, ghast, wither, sorcière, arbalète, `LineOfSight`, `LookControl` ; 20 client sur le rendu : couches d'armure, de tête, de cape, d'objet en main, `AnimationUtils`, skin du joueur, `GameRenderer`), shaders et effets d'écran. Embarque MixinExtras 0.3.5. Dépendance optionnelle : Curios. [jar]
-- **Écart 1.20.1 → 1.21.1** : NBT d'ItemStack remplacé par les data components, réseau réécrit (payloads), `getSkinTextureLocation` remplacé par `getSkin()`, packages `net.minecraftforge` → `net.neoforged`, cibles de mixins à recaler. Pour un mod aussi dépendant des mixins, c'est une réécriture plus qu'un portage. [jar] [déduit]
-- **Sinytra Connector** : ne charge que des mods **Fabric**. Identity Mask est un mod Forge 1.20.1 : Connector ne peut rien en faire. Le pack s'interdit d'ailleurs tout mod Fabric hors de la famille Surveyor (`docs/plan/06-technique-et-serveur.md`). [jar] [déduit]
-- **Réimplémentation dans `mods-custom/fallow/`** : l'idée n'est pas protégée, seul le code l'est ; on peut écrire une version propre sans reprendre le code. Mais l'intérêt du mod repose sur les monstres vanilla (les tromper, les rendre soupçonneux) et sur les villages vivants, deux choses que Fallow supprime (aucun monstre vanilla, villages en ruines vides). Il resterait une projection cosmétique de joueur ou de villageois et un effet de furtivité contre les rares hostiles moddés, ce qui affaiblirait justement les créatures territoriales voulues par la vision. Le coût (IA de visée de chaque mob, rendu, réseau) est hors de proportion. [déduit]
-- Pour Fallow, la question du portage est donc théorique : même porté, le mod échoue au filtre (pas d'intégration aux systèmes du pack, mécanique tournée contre des mobs absents, ton « hologramme/alien » contraire à la DA). [déduit]
+- **Licence**: ARR forbids forking, or decompiling in order to republish or redistribute, without the author's written consent. A public port is only possible with their permission. [jar] [inferred]
+- **Size**: 216 classes, about 1 MB of bytecode, **40 mixins** (20 common ones on aiming AI: skeleton, blaze, ghast, wither, witch, crossbow, `LineOfSight`, `LookControl`; 20 client ones on rendering: armour, head, cape and held-item layers, `AnimationUtils`, player skin, `GameRenderer`), shaders and screen effects. Embeds MixinExtras 0.3.5. Optional dependency: Curios. [jar]
+- **Gap 1.20.1 → 1.21.1**: ItemStack NBT replaced by data components, networking rewritten (payloads), `getSkinTextureLocation` replaced by `getSkin()`, packages `net.minecraftforge` → `net.neoforged`, mixin targets to be readjusted. For a mod so dependent on mixins, this is a rewrite rather than a port. [jar] [inferred]
+- **Sinytra Connector**: only loads **Fabric** mods. Identity Mask is a Forge 1.20.1 mod: Connector can do nothing with it. The pack also forbids any Fabric mod outside the Surveyor family (`docs/plan/06-technique-et-serveur.md`). [jar] [inferred]
+- **Reimplementation in `mods-custom/fallow/`**: the idea is not protected, only the code is; a clean version can be written without reusing the code. But the mod's appeal rests on vanilla monsters (fooling them, making them suspicious) and on living villages, two things that Fallow removes (no vanilla monsters, empty ruined villages). What would remain is a cosmetic projection of a player or villager and a stealth effect against the rare modded hostiles, which would weaken precisely the territorial creatures the vision calls for. The cost (aiming AI of every mob, rendering, networking) is out of proportion. [inferred]
+- For Fallow, the question of the port is therefore theoretical: even ported, the mod fails the filter (no integration with the pack's systems, mechanic turned against absent mobs, "hologram/alien" tone contrary to the art direction). [inferred]
 
-#### (b) Compatibilité avec Fresh Animations (EMF/ETF)
+#### (b) Compatibility with Fresh Animations (EMF/ETF)
 
-Aucun test possible : le mod n'existe pas pour 1.21.1. Points relevés dans le code :
-- Le masque est rendu par une couche propre (`MaskHeadLayer`, modèle d'objet sur la tête du `PlayerModel`) ou via Curios. EMF anime les parties du modèle joueur ; une couche qui suit `head` devrait suivre la tête animée de FA Player Extension, sans garantie. [jar] [déduit]
-- La projection en joueur remplace la texture renvoyée par `AbstractClientPlayer` : FA Player Extension garderait son modèle avec l'autre skin. 3D Skin Layers lit la texture du skin pour construire ses couches en relief ; risque de couches décalées ou de l'ancien skin. [jar] [déduit]
-- La projection en créature annule `RenderPlayerEvent.Pre` et dessine un mob « proxy » ; si ce proxy passe par le rendu vanilla, EMF lui appliquerait FA. [jar] [déduit]
-- Mixins sur `HumanoidArmorLayer`, `CustomHeadLayer`, `CapeLayer`, `ItemInHandLayer`, `AnimationUtils` : mêmes zones que celles touchées par EMF et FA Player Extension ; conflits plausibles. [jar] [déduit]
+No test possible: the mod does not exist for 1.21.1. Points noted in the code:
+- The mask is rendered by its own layer (`MaskHeadLayer`, item model on the head of the `PlayerModel`) or via Curios. EMF animates the parts of the player model; a layer that follows `head` should follow the animated head of FA Player Extension, with no guarantee. [jar] [inferred]
+- The projection as a player replaces the texture returned by `AbstractClientPlayer`: FA Player Extension would keep its model with the other skin. 3D Skin Layers reads the skin texture to build its relief layers; risk of misaligned layers or of the old skin. [jar] [inferred]
+- The projection as a creature cancels `RenderPlayerEvent.Pre` and draws a "proxy" mob; if that proxy goes through vanilla rendering, EMF would apply FA to it. [jar] [inferred]
+- Mixins on `HumanoidArmorLayer`, `CustomHeadLayer`, `CapeLayer`, `ItemInHandLayer`, `AnimationUtils`: the same areas touched by EMF and FA Player Extension; conflicts plausible. [jar] [inferred]
 
-#### Recommandation : ne pas intégrer
+#### Recommendation: do not integrate
 
-- Absent de Modrinth, Forge 1.20.1 seulement, ARR, aucune source : bloquant selon `CONTRIBUTING.md`.
-- Ne pas le porter ni le réimplémenter : la mécanique vise des monstres et des villages que le pack retire.
-- Rien à configurer. Si l'envie est seulement cosmétique (prendre l'apparence d'un autre joueur), deux pistes Modrinth NeoForge 1.21.1 existent, non étudiées ici : `disguiseheads` (tr7zw, auteur de 3D Skin Layers, client seul, licence propriétaire de tr7zw) et `player-disguise` (MPL-2.0, 893 téléchargements). [Modrinth]
-- À ajouter à « Sortis ou écartés » de `docs/mods.md` si l'on veut garder la trace : « Identity Mask : CurseForge seulement, Forge 1.20.1, ARR ; mécanique tournée contre les monstres vanilla ».
+- Absent from Modrinth, Forge 1.20.1 only, ARR, no source: blocking according to `CONTRIBUTING.md`.
+- Do not port or reimplement it: the mechanic targets monsters and villages that the pack removes.
+- Nothing to configure. If the wish is only cosmetic (taking on another player's appearance), two Modrinth NeoForge 1.21.1 leads exist, not studied here: `disguiseheads` (tr7zw, author of 3D Skin Layers, client only, tr7zw proprietary licence) and `player-disguise` (MPL-2.0, 893 downloads). [Modrinth]
+- To add to "Removed or ruled out" in `docs/mods.md` if a record is wanted: "Identity Mask: CurseForge only, Forge 1.20.1, ARR; mechanic turned against vanilla monsters".
 
 ### 1.2 Creature Feature
 
-#### Identité
+#### Identity
 
-- Slug `creature-feature`, auteur AtiredDev (avec « Team Galena »), licence **MIT**, source annoncée `github.com/TerriblyBadCoder/creaturefeature` (non vérifiée : GitHub inaccessible ici). [Modrinth] [jar]
-- **NeoForge 1.21.1 uniquement**, côté CS (client et serveur requis). Dernière version **1.2.3.3** (2026-08-27), 6 versions en août, environ 46 000 téléchargements. [Modrinth]
-- Dépendances : **Blueprint** (`blueprint`, requis, absent du pack) ; **Sable** optionnel (déjà dans le pack). Compat optionnelle avec Oreganized et Caverns & Chasms (butin). NeoForge ≥ 21.1.228 : compatible avec 21.1.251. [Modrinth] [jar]
+- Slug `creature-feature`, author AtiredDev (with "Team Galena"), licence **MIT**, source announced as `github.com/TerriblyBadCoder/creaturefeature` (not verified: GitHub unreachable during this research pass). [Modrinth] [jar]
+- **NeoForge 1.21.1 only**, side CS (client and server required). Latest version **1.2.3.3** (2026-08-27), 6 versions in August, about 46,000 downloads. [Modrinth]
+- Dependencies: **Blueprint** (`blueprint`, required, absent from the pack); **Sable** optional (already in the pack). Optional compat with Oreganized and Caverns & Chasms (loot). NeoForge ≥ 21.1.228: compatible with 21.1.251. [Modrinth] [jar]
 
-#### Contenu
+#### Content
 
-- Le titre et `mods.toml` le disent : « **23 Hostile creatures** ». Toutes les entités vivantes sont enregistrées en catégorie `MONSTER`. [Modrinth] [jar]
-- Créatures et apparitions (biome modifiers du jar) : [jar] [Modrinth]
-  - Surface : Minds (zombie au cerveau géant, savanes), Blossom (zombie-fleur, jungles), Fend (fleurs, 3 variantes dont archer), Coat of Arms (marais, tir en rafale), Mockingbird (montagnes, « étrangement humanoïde »), Vertigo (forêt sombre, taïgas), Runaway (plages), Stained Glass (déserts), Toadstool (plaines, **activé seulement si Sable est présent**, donc actif dans Fallow).
-  - Grottes et tout l'Overworld (`#c:is_overworld`) : Sinister (masse et miroir), Detritus (zombie qui crée des copies dégradées de lui-même), Canary, Beauty (grottes luxuriantes), Pathogen (soigne les morts-vivants).
-  - Nether et End : Machination, Fiend, Friend, Eeper, Blitz, MinedFlayer, NoThing, Dreamweaver, Saint Solis. L'End est supprimé dans Fallow.
-- Ton : étrange et souvent inquiétant (NoThing, silhouette floue qui hurle puis fonce ; Detritus « a normal person » ; Friend « your friend, that is »), shaders de post-traitement, mixins sur la caméra et l'interface (`CameraMixin`, `CFPostChainMixin`, `IamActivelyHavingaMigraineMixin`), effets qui forcent la troisième personne ou font tourner la caméra. C'est du horror léger ou du « weird », proche de ce que la vision exclut. [Modrinth] [jar]
-- Ajoute aussi environ 47 recettes (blocs de carapace, tuiles, plumes, flintlock, hache lourde, matériaux d'armure trim), 2 disques de musique, des avancements. [jar]
+- The title and `mods.toml` say it: "**23 Hostile creatures**". All living entities are registered in the `MONSTER` category. [Modrinth] [jar]
+- Creatures and spawns (biome modifiers in the jar): [jar] [Modrinth]
+  - Surface: Minds (zombie with a giant brain, savannas), Blossom (flower zombie, jungles), Fend (flowers, 3 variants including an archer), Coat of Arms (swamps, burst fire), Mockingbird (mountains, "strangely humanoid"), Vertigo (dark forest, taigas), Runaway (beaches), Stained Glass (deserts), Toadstool (plains, **enabled only if Sable is present**, hence active in Fallow).
+  - Caves and the whole Overworld (`#c:is_overworld`): Sinister (mass and mirror), Detritus (zombie that creates degraded copies of itself), Canary, Beauty (lush caves), Pathogen (heals the undead).
+  - Nether and End: Machination, Fiend, Friend, Eeper, Blitz, MinedFlayer, NoThing, Dreamweaver, Saint Solis. The End is removed in Fallow.
+- Tone: strange and often unsettling (NoThing, a blurry silhouette that screams then charges; Detritus "a normal person"; Friend "your friend, that is"), post-processing shaders, mixins on the camera and interface (`CameraMixin`, `CFPostChainMixin`, `IamActivelyHavingaMigraineMixin`), effects that force third person or spin the camera. This is light horror or "weird", close to what the vision excludes. [Modrinth] [jar]
+- Also adds about 47 recipes (shell blocks, tiles, feathers, flintlock, heavy axe, armour trim materials), 2 music discs, advancements. [jar]
 
-#### Configurabilité
+#### Configurability
 
-- La config ne permet **pas** de désactiver une créature ni ses apparitions : elle ne propose que des remodèles (Friend, Mockingbird), un correctif de post-traitement, et des réglages de Dreamweaver, Pathogen, Saint Solis et Fiend. [jar] (`Config`)
-- On peut couper les apparitions par datapack (surcharger les 27 fichiers `data/creaturefeature/neoforge/biome_modifier/*.json` par `neoforge:none` dans `pack/kubejs/data/creaturefeature/`) ou par In Control!. Les entités, objets et recettes restent enregistrés. [jar] [déduit]
+- The config does **not** allow disabling a creature or its spawns: it only offers remodels (Friend, Mockingbird), a post-processing fix, and settings for Dreamweaver, Pathogen, Saint Solis and Fiend. [jar] (`Config`)
+- Spawns can be cut by datapack (override the 27 files `data/creaturefeature/neoforge/biome_modifier/*.json` with `neoforge:none` in `pack/kubejs/data/creaturefeature/`) or by In Control!. Entities, items and recipes remain registered. [jar] [inferred]
 
-#### Recoupements et rendu
+#### Overlaps and rendering
 
-- Pas de doublon d'espèce avec Naturalist, Alex's Mobs Continued, Critters and Companions ou Friends & Foes : ce sont des monstres inventés, pas des animaux. Mais il **ajoute 23 hostiles**, à l'opposé de « peu d'hostiles, rares, territoriaux » ; plusieurs sont des variantes de zombie, alors que les zombies vanilla sont retirés. [Modrinth] [déduit]
-- Pas de GeckoLib : modèles Java (`ModelLayerLocation`, `ModelPart`), aucun fichier `geo` ni animation Bedrock. [jar]
-- Fresh Animations ne couvre que les mobs vanilla : rien pour ces créatures. EMF pourrait leur appliquer des modèles OptiFine-CEM écrits exprès, mais il n'en existe pas. Sans intérêt pour FA. [jar] [déduit]
+- No species duplicate with Naturalist, Alex's Mobs Continued, Critters and Companions or Friends & Foes: these are invented monsters, not animals. But it **adds 23 hostiles**, the opposite of "few hostiles, rare, territorial"; several are zombie variants, whereas vanilla zombies are removed. [Modrinth] [inferred]
+- No GeckoLib: Java models (`ModelLayerLocation`, `ModelPart`), no `geo` file or Bedrock animation. [jar]
+- Fresh Animations only covers vanilla mobs: nothing for these creatures. EMF could apply purpose-written OptiFine-CEM models to them, but none exist. Of no interest to FA. [jar] [inferred]
 
-#### Recommandation : ne pas intégrer
+#### Recommendation: do not integrate
 
-- Échoue au filtre : contenu (23 monstres) plutôt que mécanique ; hostiles nombreux et répartis dans tout l'Overworld au lieu de rares et territoriaux ; ton qui frôle l'horreur ; un tiers du contenu dans l'End supprimé ; une dépendance de plus (Blueprint) ; mixins caméra et post-traitement qui peuvent heurter ATMOSPHERICS, Shoulder Surfing et Camera Overhaul [déduit].
-- Si l'on voulait malgré tout une ou deux créatures (par exemple Vertigo en forêt sombre ou Mockingbird en montagne comme hostile rare et territorial) : `packwiz mr add creature-feature` (côté both) avec `blueprint`, puis surcharger tous les biome modifiers sauf ceux retenus, baisser leur poids (Vertigo 18, Mockingbird 22 aujourd'hui) et les cantonner par In Control!. Il faudrait aussi masquer les recettes et objets inutiles dans EMI. À ce prix, autant ne pas l'ajouter.
-- À ajouter à « Sortis ou écartés » : « Creature Feature : 23 monstres, ton inquiétant, aucune option pour couper les apparitions ».
+- Fails the filter: content (23 monsters) rather than mechanic; numerous hostiles spread across the whole Overworld instead of rare and territorial ones; a tone that borders on horror; a third of the content in the removed End; one more dependency (Blueprint); camera and post-processing mixins that may clash with ATMOSPHERICS, Shoulder Surfing and Camera Overhaul [inferred].
+- If one or two creatures were wanted anyway (for example Vertigo in the dark forest or Mockingbird in the mountains as a rare, territorial hostile): `packwiz mr add creature-feature` (side both) with `blueprint`, then override all biome modifiers except the chosen ones, lower their weight (Vertigo 18, Mockingbird 22 today) and confine them with In Control!. The unneeded recipes and items would also have to be hidden in EMI. At that price, better not to add it.
+- To add to "Removed or ruled out": "Creature Feature: 23 monsters, unsettling tone, no option to turn off spawns".
 
-## 2. Kingdoms: Villager Retaliation et Dreamshift
+## 2. Kingdoms: Villager Retaliation and Dreamshift
 ### 2.1 Kingdoms: Villager Retaliation! (`villager-retaliation`)
 
-#### Versions et dépendances
-- Seul NeoForge 1.21.1 est publié. Dernière version : `1.0.0-beta.13-hotfix.1` (2026-08-18), 17 versions, **toutes en bêta**. Licence ARR, mais l'auteur autorise l'usage en modpack. Côté client **et** serveur [Modrinth].
-- La bêta 13 change l'IA et le format de sauvegarde : l'auteur demande de sauvegarder le monde avant la mise à jour. Il n'ajoutera pas de patchs de compatibilité avant la 1.0.0 [Modrinth]. C'est un risque pour un monde permanent.
-- Requis : NeoForge ≥ 21.1.238 (le pack est en 21.1.251, donc compatible), **oωo-lib** (`owo-lib`, ≥ 0.12.15.1-beta.6 ; version actuelle `0.12.15.6-beta.1+1.21`, en bêta), **toucanLib** (`toucan`, ≥ 0.5.0) et Architectury (déjà dans le pack) [jar `neoforge.mods.toml`, Modrinth, repo]. owo-lib et toucanLib seraient deux nouvelles bibliothèques.
-- Optionnels : EMI, JEI, REI, Curios, Accessories, EMF/ETF, Second Wind [jar].
+#### Versions and dependencies
+- Only NeoForge 1.21.1 is published. Latest version: `1.0.0-beta.13-hotfix.1` (2026-08-18), 17 versions, **all beta**. Licence ARR, but the author allows use in a modpack. Client **and** server side [Modrinth].
+- Beta 13 changes the AI and the save format: the author asks to back up the world before updating. They will not add compatibility patches before 1.0.0 [Modrinth]. This is a risk for a permanent world.
+- Required: NeoForge ≥ 21.1.238 (the pack is on 21.1.251, hence compatible), **oωo-lib** (`owo-lib`, ≥ 0.12.15.1-beta.6; current version `0.12.15.6-beta.1+1.21`, in beta), **toucanLib** (`toucan`, ≥ 0.5.0) and Architectury (already in the pack) [jar `neoforge.mods.toml`, Modrinth, repo]. owo-lib and toucanLib would be two new libraries.
+- Optional: EMI, JEI, REI, Curios, Accessories, EMF/ETF, Second Wind [jar].
 
-#### Fonctions
-Le mod étend le villageois vanilla sans remplacer l'entité. Il pose 39 mixins serveur et 20 mixins client sur le cerveau du villageois, le commerce, la panique, la cloche, la reproduction, la navigation et l'écran de marchand [jar, Modrinth].
-1. **Riposte** : villageois et golems attaquent le joueur fautif. Les « Despised » sont attaqués à vue [Modrinth, jar].
-2. **Réputation** par villageois et par joueur, en 9 paliers, avec commérages, humeurs et mémoire du village [Modrinth].
-3. **Écran d'interaction** : dialogues, caméra qui zoome, bandes cinéma, voix en « blips » [jar].
-4. **Cadeaux** et souvenirs [jar].
-5. **Embauche** : 13 métiers (combat, chasse, mine, bûcheron, ferme, pêche, alchimie, artisan, élevage, cuisine, fonte, coursier, nitwit) et un bâtisseur qui suit des plans. Le tout se gère au presse-papiers, avec salaires [Modrinth].
-6. **Économie** : bourse personnelle de chaque villageois, Payment Box, Sell Box à prix journaliers [Modrinth].
-7. **Groupe** de 4 villageois maximum : suivre, rester, garder, ramasser. Ils peuvent monter des chevaux [Modrinth].
-8. **Raids menés par le joueur** (bannière sinistre portée en casque et corne de chèvre) et **duels** [Modrinth].
-9. **Quêtes** : 85 annoncées, 278 fichiers. Journal sur J, suivi sur K [Modrinth, jar].
-10. **Étude** d'un villageois, avec récompense [jar].
-11. **État « à terre »** : le villageois tombe au lieu de mourir, puis se relève [jar].
-12. **Combat des villageois** : ils frappent les hostiles, ramassent des armes, et les clercs lancent des potions [jar].
-13. **Butin** à la mort des villageois et des marchands ambulants, et messages de mort [jar].
+#### Features
+The mod extends the vanilla villager without replacing the entity. It places 39 server mixins and 20 client mixins on the villager's brain, trading, panic, the bell, breeding, navigation and the merchant screen [jar, Modrinth].
+1. **Retaliation**: villagers and golems attack the offending player. The "Despised" are attacked on sight [Modrinth, jar].
+2. **Reputation** per villager and per player, in 9 tiers, with gossip, moods and village memory [Modrinth].
+3. **Interaction screen**: dialogues, zooming camera, cinema bars, "blip" voices [jar].
+4. **Gifts** and keepsakes [jar].
+5. **Hiring**: 13 professions (combat, hunting, mining, lumberjack, farming, fishing, alchemy, craftsman, livestock, cooking, smelting, courier, nitwit) and a builder that follows blueprints. All managed with a clipboard, with wages [Modrinth].
+6. **Economy**: each villager's personal purse, Payment Box, Sell Box with daily prices [Modrinth].
+7. **Party** of up to 4 villagers: follow, stay, guard, pick up. They can ride horses [Modrinth].
+8. **Player-led raids** (ominous banner worn as a helmet and goat horn) and **duels** [Modrinth].
+9. **Quests**: 85 announced, 278 files. Journal on J, tracking on K [Modrinth, jar].
+10. **Study** of a villager, with a reward [jar].
+11. **"Downed" state**: the villager falls instead of dying, then gets back up [jar].
+12. **Villager combat**: they hit hostiles, pick up weapons, and clerics throw potions [jar].
+13. **Loot** on the death of villagers and wandering traders, and death messages [jar].
 
-#### Peut-on n'activer que certaines fonctions ? En partie seulement.
-**Fichier** : un seul, `config/villagerretaliation.json5`, au format oωo (`@Config(name="villagerretaliation")`) [jar]. Le nom du fichier vient de la convention oωo [déduit]. Ce fichier n'est ni client ni serveur : il sert aux deux, et le serveur pousse ses valeurs aux joueurs connectés (`syncServerConfigToConnectedPlayers`). Au premier lancement, le mod migre les anciens `villagerretaliation-common.toml` et `-client.toml` [jar]. Les sections sont imbriquées (`"general": { ... }`). Défauts lus dans les constructeurs [jar] :
+#### Can only some features be enabled? Only partly.
+**File**: a single one, `config/villagerretaliation.json5`, in oωo format (`@Config(name="villagerretaliation")`) [jar]. The file name comes from the oωo convention [inferred]. This file is neither client nor server: it serves both, and the server pushes its values to connected players (`syncServerConfigToConnectedPlayers`). On first launch, the mod migrates the old `villagerretaliation-common.toml` and `-client.toml` [jar]. The sections are nested (`"general": { ... }`). Defaults read in the constructors [jar]:
 
-| Fonction | Interrupteur (défaut) | Indépendant ? |
+| Feature | Switch (default) | Independent? |
 |---|---|---|
-| Riposte | `general.enableVillagerRetaliation` (true) ; détails dans `retaliation.*` | Oui |
-| Réputation | `general.enableVillagerReputation` (true) ; `reputation.reputationDecayEnabled` (true) ; `reputation.enableReputationTradePricing` (true) | Oui |
-| Lien avec les ragots vanilla | `general.enableVanillaGossipIntegration` (true) | Oui |
-| Attaque à vue des « Despised » | `general.enableDespisedKillOnSight` (true) | Oui |
-| Butin et messages de mort | `general.enableVillagerDrops`, `enableWanderingTraderDrops`, `enableVillagerDeathMessages` (true) ; `wanderer.*` | Oui |
-| Noms au-dessus des têtes, icône dans l'écran de commerce | `general.showVillagerNameTags` (true), `showTradeGuiReputationIcon` (true), `reputationChangeDisplayMode` (HUD) | Oui |
-| Textes flottants et murmures | `notifications.enableWorldTextNotifications`, `enableAmbientMurmurs`, `enableSleepIndicators`, `enableDamageAlerts`, `enableCombatAlerts`, `enableTradeAndGiftWorldText` (tous true) | Oui |
-| Écran d'interaction | `dialogue.enableInteractionScreen` (true). Les effets se coupent un par un : `enableDialogueCameraFocus`, `enableNormalDialogueCameraFocus`, `enableDialogueCinematicBars`, `enableForcedDialogue`, `enableContainerForcedDialogue`, `enableRetaliationForcedDialogue`, `enableDialogueBlipAudio`, `freezeVillagerDuringDialogue` (true) | Oui |
-| Cadeaux | `gifts.enableVillagerGifts`, `enableHighReputationGifts`, `enableGiftKeepsakes` (true) | Oui |
-| Social, humeurs | `social.enableVillagerSocialGraph`, `enableVillagerMoods`, `enableSocialAttribute*` (true) | Oui |
-| **Reproduction** | `social.enableVanillaVillagerBreeding` (true). À false, toute reproduction est bloquée (`BREEDING_DISABLED`, mixin `VillagerMakeLoveMixin`) [jar] | Oui |
-| Étude | `study.enabled` (true) | Oui |
-| Duels | `duels.enabled` (true) | Oui |
-| Raids du joueur | `playerRaids.enabled` (true) | Oui |
-| État « à terre » | `combat.enableVillagerDownedState` (true) ; `allVillagersUseDownedState` (false) ; `partyVillagersUseDownedState` (true) | Oui |
-| Combat des villageois | `combat.villagersTargetHostileMobs`, `villagersRetaliateAgainstHostileMobs`, `villagersStandGroundAgainstHostileMobs`, `*FightBack` par métier, `clericsUsePotions`, `hostileTierHarassThrowEnabled`, `villagersPickUpGroundWeapons` (tous true) | Oui |
-| Commerce enrichi | `trade.enableSkillTradeOverhaul` (**false**) : équipement de haut rang, enchantements jusqu'au niveau 3 ; `trade.enableSpecialOrders` (true) ; `trade.disableVillagerWalletLimit` (false) | Oui |
-| Faim, famine | `balance.hungerEffectAffectsVillagers` (true), `enableVillagerStarvationDamage` (false) | Oui |
-| **Embauche (13 métiers, bâtisseur)** | **Aucun interrupteur** ; seulement `balance.hiredContract*` (coûts) et `enableHiredWorkSkillGrowth` | **Non** |
-| **Groupe** | **Aucun interrupteur** | **Non** |
-| **Quêtes** | Seuls les indicateurs se coupent : `quest.showQuestIndicators`, `enableQuestItemShaderHighlights`. Pour retirer les offres, un datapack retire le pool `villagerretaliation:quest_board` (`remove: true` avec `id`, [wiki]) ou remplace son fichier avec `"enabled": false` (le champ existe [jar], effet à tester) | Par datapack seulement |
-| **Économie (Payment Box, Sell Box)** | Aucun interrupteur. On retire les recettes (`data/villagerretaliation/recipe/payment_box.json`, `sell_box.json`) en KubeJS, et on désactive les prix fichier par fichier avec `enabled: false` [wiki] | Par KubeJS et datapack |
+| Retaliation | `general.enableVillagerRetaliation` (true); details in `retaliation.*` | Yes |
+| Reputation | `general.enableVillagerReputation` (true); `reputation.reputationDecayEnabled` (true); `reputation.enableReputationTradePricing` (true) | Yes |
+| Link with vanilla gossip | `general.enableVanillaGossipIntegration` (true) | Yes |
+| Attack on sight of the "Despised" | `general.enableDespisedKillOnSight` (true) | Yes |
+| Loot and death messages | `general.enableVillagerDrops`, `enableWanderingTraderDrops`, `enableVillagerDeathMessages` (true); `wanderer.*` | Yes |
+| Names above heads, icon in the trade screen | `general.showVillagerNameTags` (true), `showTradeGuiReputationIcon` (true), `reputationChangeDisplayMode` (HUD) | Yes |
+| Floating texts and murmurs | `notifications.enableWorldTextNotifications`, `enableAmbientMurmurs`, `enableSleepIndicators`, `enableDamageAlerts`, `enableCombatAlerts`, `enableTradeAndGiftWorldText` (all true) | Yes |
+| Interaction screen | `dialogue.enableInteractionScreen` (true). Effects can be switched off one by one: `enableDialogueCameraFocus`, `enableNormalDialogueCameraFocus`, `enableDialogueCinematicBars`, `enableForcedDialogue`, `enableContainerForcedDialogue`, `enableRetaliationForcedDialogue`, `enableDialogueBlipAudio`, `freezeVillagerDuringDialogue` (true) | Yes |
+| Gifts | `gifts.enableVillagerGifts`, `enableHighReputationGifts`, `enableGiftKeepsakes` (true) | Yes |
+| Social, moods | `social.enableVillagerSocialGraph`, `enableVillagerMoods`, `enableSocialAttribute*` (true) | Yes |
+| **Breeding** | `social.enableVanillaVillagerBreeding` (true). When false, all breeding is blocked (`BREEDING_DISABLED`, mixin `VillagerMakeLoveMixin`) [jar] | Yes |
+| Study | `study.enabled` (true) | Yes |
+| Duels | `duels.enabled` (true) | Yes |
+| Player raids | `playerRaids.enabled` (true) | Yes |
+| "Downed" state | `combat.enableVillagerDownedState` (true); `allVillagersUseDownedState` (false); `partyVillagersUseDownedState` (true) | Yes |
+| Villager combat | `combat.villagersTargetHostileMobs`, `villagersRetaliateAgainstHostileMobs`, `villagersStandGroundAgainstHostileMobs`, `*FightBack` per profession, `clericsUsePotions`, `hostileTierHarassThrowEnabled`, `villagersPickUpGroundWeapons` (all true) | Yes |
+| Enriched trading | `trade.enableSkillTradeOverhaul` (**false**): high-tier equipment, enchantments up to level 3; `trade.enableSpecialOrders` (true); `trade.disableVillagerWalletLimit` (false) | Yes |
+| Hunger, famine | `balance.hungerEffectAffectsVillagers` (true), `enableVillagerStarvationDamage` (false) | Yes |
+| **Hiring (13 professions, builder)** | **No switch**; only `balance.hiredContract*` (costs) and `enableHiredWorkSkillGrowth` | **No** |
+| **Party** | **No switch** | **No** |
+| **Quests** | Only the indicators can be switched off: `quest.showQuestIndicators`, `enableQuestItemShaderHighlights`. To remove the offers, a datapack removes the `villagerretaliation:quest_board` pool (`remove: true` with `id`, [wiki]) or replaces its file with `"enabled": false` (the field exists [jar], effect to be tested) | By datapack only |
+| **Economy (Payment Box, Sell Box)** | No switch. The recipes are removed (`data/villagerretaliation/recipe/payment_box.json`, `sell_box.json`) in KubeJS, and prices are disabled file by file with `enabled: false` [wiki] | By KubeJS and datapack |
 
-- Aucune gamerule n'est ajoutée [jar].
-- Tags datapack [jar] : `watched_containers`, `village_terrain`, `currency` (émeraude), `assignable_mounts`, `protected_civilians`, `village_allegiance_holders` (villageois, villageois zombie, golem de fer), `allegiance_exempt`, `#villagerretaliation:village_footprint` (= `#minecraft:village`). Les dialogues, noms, cadeaux, prix et quêtes viennent tous de JSON et se remplacent par datapack [jar, wiki].
-- Couper `dialogue.enableInteractionScreen` rend le clic droit vanilla et coupe aussi les interactions au presse-papiers, aux plans et aux filtres [jar]. Le joueur n'aurait donc plus accès à l'embauche, au groupe, aux quêtes ni aux cadeaux [déduit, à tester]. Les boutons Embauche et Groupe sont écrits dans l'écran Java, pas dans des données [jar].
+- No gamerule is added [jar].
+- Datapack tags [jar]: `watched_containers`, `village_terrain`, `currency` (emerald), `assignable_mounts`, `protected_civilians`, `village_allegiance_holders` (villager, zombie villager, iron golem), `allegiance_exempt`, `#villagerretaliation:village_footprint` (= `#minecraft:village`). Dialogues, names, gifts, prices and quests all come from JSON and are replaced by datapack [jar, wiki].
+- Turning off `dialogue.enableInteractionScreen` restores the vanilla right click and also cuts the clipboard, blueprint and filter interactions [jar]. The player would then no longer have access to hiring, the party, quests or gifts [inferred, to be tested]. The Hire and Party buttons are written in the Java screen, not in data [jar].
 
-#### Ce qui heurte la vision
-- **Les quêtes font apparaître des monstres vanilla.** Les rencontres `quests/_shared/encounters/*.json` créent des araignées, des squelettes et des pillards. Des quêtes demandent d'en tuer (`mob_kill` sur `minecraft:pillager`) ou d'aller dans l'End (`end_survey`, `end_city_margin`, `end_city_survey`, `ender_freight`) [jar]. In Control! ne bloque peut-être pas ces apparitions scriptées [déduit].
-- **Riposte, attaque à vue, raids du joueur et duels** font du combat et de la tension sociale. Le pack veut une survie par l'environnement.
-- **L'embauche** automatise mine, bûcheronnage, ferme et cuisine. Elle double Create et KC-Automation, et ressemble à Create Villager Labor, déjà écarté [repo].
-- **L'interface est chargée** : HUD de réputation, noms, textes flottants, surbrillance des objets de quête, caméra de dialogue. Elle casse le mystère pour la même raison que Jade [repo]. La caméra de dialogue risque aussi de se battre avec Shoulder Surfing et Camera Overhaul [déduit].
-- **Récompenses en XP** des quêtes [wiki] et mixin `ExperienceOrbMixin` : la barre d'XP n'existe plus dans le pack ([0009]) [jar, repo].
-- **Ce qui sert les « survivants »** : un villageois avec un nom, une mémoire et une relation devient une personne, et chaque survivant compte. Le blocage natif de la reproduction règle le point 4 de [0004] sans script. L'état « à terre » pour tous protège ces villageois précieux. Le groupe (« Suivre ») et les montures aident au point 3 (les ramener), mais le groupe ne se désactive pas [jar, déduit].
-- **Villages en ruine** : sans villageois, la riposte et la surveillance des coffres n'ont rien à faire. Le mod reconnaît un village par ses membres (`VillageMembership` : centre, rayon, membres, `vanillaVillageAtOrigin`), donc la colonie de survivants deviendrait sans doute un « village » suivi [jar, déduit, à tester].
+#### What clashes with the vision
+- **Quests spawn vanilla monsters.** The encounters in `quests/_shared/encounters/*.json` create spiders, skeletons and pillagers. Quests ask to kill some (`mob_kill` on `minecraft:pillager`) or to go to the End (`end_survey`, `end_city_margin`, `end_city_survey`, `ender_freight`) [jar]. In Control! may not block these scripted spawns [inferred].
+- **Retaliation, attack on sight, player raids and duels** create combat and social tension. The pack wants survival through the environment.
+- **Hiring** automates mining, lumberjacking, farming and cooking. It duplicates Create and KC-Automation, and resembles Create Villager Labor, already ruled out [repo].
+- **The interface is heavy**: reputation HUD, names, floating texts, quest item highlighting, dialogue camera. It breaks the mystery for the same reason as Jade [repo]. The dialogue camera also risks fighting with Shoulder Surfing and Camera Overhaul [inferred].
+- **XP rewards** from quests [wiki] and mixin `ExperienceOrbMixin`: the XP bar no longer exists in the pack ([0009]) [jar, repo].
+- **What serves the "survivors"**: a villager with a name, a memory and a relationship becomes a person, and every survivor counts. The native breeding block settles point 4 of [0004] without a script. The "downed" state for all protects these precious villagers. The party ("Follow") and mounts help with point 3 (bringing them back), but the party cannot be disabled [jar, inferred].
+- **Ruined villages**: without villagers, retaliation and chest monitoring have nothing to do. The mod recognises a village by its members (`VillageMembership`: centre, radius, members, `vanillaVillageAtOrigin`), so the survivors' colony would probably become a tracked "village" [jar, inferred, to be tested].
 
-#### Conflits avec le pack
-- **Quark** : `Villagers Follow Emeralds = true` [repo]. Le mod réécrit aussi le capteur d'objets et le tick du cerveau (`NearestItemSensorMixin`, `VillagerBrainTickMixin`). Les deux peuvent se gêner, et « Suivre » double l'émeraude [déduit, à tester].
-- **Lootr** : `watched_containers` ne contient que les blocs vanilla. Les coffres Lootr ne sont donc pas surveillés contre le vol [jar, déduit]. C'est sans effet dans des ruines vides ; il suffit d'un tag si besoin.
-- **Overgeared** et filtre des échanges (KubeJS) : garder `trade.enableSkillTradeOverhaul=false`, sinon le mod vend de l'équipement de haut rang enchanté. Les métiers artisan et fonte pourraient fabriquer sans la forge d'Overgeared s'ils passent par les recettes vanilla [jar, déduit]. Les mixins de l'écran de marchand et de la bourse touchent la zone des échanges filtrés par MoreJS [jar, à tester].
-- **Friends & Foes** : le golem de cuivre n'est pas dans `village_allegiance_holders`, et le métier d'apiculteur prendrait les dialogues génériques [déduit]. Pas de conflit dur connu.
-- **Companions!, Mowzie's Mobs** : avec `villagersTargetHostileMobs=true`, les villageois iraient attaquer ces créatures et mourraient [déduit].
-- **Supplementaries** : aucun recouvrement trouvé ; le jar de Supplementaries n'a pas été lu [déduit].
+#### Conflicts with the pack
+- **Quark**: `Villagers Follow Emeralds = true` [repo]. The mod also rewrites the item sensor and the brain tick (`NearestItemSensorMixin`, `VillagerBrainTickMixin`). The two may get in each other's way, and "Follow" doubles the emerald [inferred, to be tested].
+- **Lootr**: `watched_containers` only contains vanilla blocks. Lootr chests are therefore not monitored against theft [jar, inferred]. This has no effect in empty ruins; a tag is enough if needed.
+- **Overgeared** and the trade filter (KubeJS): keep `trade.enableSkillTradeOverhaul=false`, otherwise the mod sells enchanted high-tier equipment. The craftsman and smelting professions could craft without Overgeared's forge if they go through vanilla recipes [jar, inferred]. The merchant screen and purse mixins touch the area of the trades filtered by MoreJS [jar, to be tested].
+- **Friends & Foes**: the copper golem is not in `village_allegiance_holders`, and the beekeeper profession would take the generic dialogues [inferred]. No known hard conflict.
+- **Companions!, Mowzie's Mobs**: with `villagersTargetHostileMobs=true`, villagers would go and attack these creatures and die [inferred].
+- **Supplementaries**: no overlap found; the Supplementaries jar was not read [inferred].
 
-#### Recommandation : à tester, en mode réduit, avec un critère d'abandon
-Le mod ne passe le filtre qu'en partie. Il apporte une mécanique (la mémoire et la valeur de chaque villageois), mais il double Create (embauche), il ajoute du combat et du contenu (quêtes), et ce sont justement les parties qu'on ne peut pas couper par la config. Le tester sur une branche `test/villageois` :
-- packwiz : `packwiz mr add villager-retaliation` ; dépendances `owo-lib` et `toucan` ; côté **CS**.
-- `config/villagerretaliation.json5` : seules les clés à changer.
-  - `general` : `enableVillagerRetaliation=false`, `enableDespisedKillOnSight=false`, `showVillagerNameTags=false`, `showTradeGuiReputationIcon=false`, `reputationChangeDisplayMode="OFF"` (valeurs : HUD, CHAT, OFF), `enableVillagerDrops=false`, `enableWanderingTraderDrops=false`.
-  - `notifications` : les six clés `enable*` à false.
-  - `quest` : `showQuestIndicators=false`, `enableQuestItemShaderHighlights=false`.
-  - `dialogue` : `enableDialogueCameraFocus=false`, `enableNormalDialogueCameraFocus=false`, `enableDialogueCinematicBars=false`, `enableContainerForcedDialogue=false`, `enableRetaliationForcedDialogue=false`.
-  - `social` : `enableVanillaVillagerBreeding=false`.
-  - `combat` : `allVillagersUseDownedState=true`, `villagersTargetHostileMobs=false`, `villagersStandGroundAgainstHostileMobs=false`, `hostileTierHarassThrowEnabled=false`, `villagersPickUpGroundWeapons=false`, `wanderingTradersTargetHostileMobs=false`.
-  - `duels.enabled=false`, `playerRaids.enabled=false`, `study.enabled=false` (il donne des récompenses), `trade.enableSkillTradeOverhaul=false` (défaut, à figer), `trade.enableSpecialOrders=false`.
-- Datapack : retirer le pool `villagerretaliation:quest_board`. KubeJS : retirer les recettes `payment_box`, `sell_box`, `clipboard` et `blueprint_checklist`. Retirer `clipboard` rend sans doute l'embauche inutilisable, puisqu'elle se gère au presse-papiers [déduit, à tester].
-- Le garder si le test montre des survivants qui ont une personnalité, sans HUD ni combat, et une embauche hors d'atteinte. Sinon, **ne pas intégrer** : bloquer la reproduction et filtrer les échanges restent faisables en KubeJS, comme le prévoit [0004].
+#### Recommendation: to be tested, in reduced mode, with an abandonment criterion
+The mod only partly passes the filter. It brings a mechanic (the memory and value of each villager), but it duplicates Create (hiring), adds combat and content (quests), and these are precisely the parts that cannot be switched off through the config. Test it on a `test/villageois` branch:
+- packwiz: `packwiz mr add villager-retaliation`; dependencies `owo-lib` and `toucan`; side **CS**.
+- `config/villagerretaliation.json5`: only the keys to change.
+  - `general`: `enableVillagerRetaliation=false`, `enableDespisedKillOnSight=false`, `showVillagerNameTags=false`, `showTradeGuiReputationIcon=false`, `reputationChangeDisplayMode="OFF"` (values: HUD, CHAT, OFF), `enableVillagerDrops=false`, `enableWanderingTraderDrops=false`.
+  - `notifications`: the six `enable*` keys set to false.
+  - `quest`: `showQuestIndicators=false`, `enableQuestItemShaderHighlights=false`.
+  - `dialogue`: `enableDialogueCameraFocus=false`, `enableNormalDialogueCameraFocus=false`, `enableDialogueCinematicBars=false`, `enableContainerForcedDialogue=false`, `enableRetaliationForcedDialogue=false`.
+  - `social`: `enableVanillaVillagerBreeding=false`.
+  - `combat`: `allVillagersUseDownedState=true`, `villagersTargetHostileMobs=false`, `villagersStandGroundAgainstHostileMobs=false`, `hostileTierHarassThrowEnabled=false`, `villagersPickUpGroundWeapons=false`, `wanderingTradersTargetHostileMobs=false`.
+  - `duels.enabled=false`, `playerRaids.enabled=false`, `study.enabled=false` (it gives rewards), `trade.enableSkillTradeOverhaul=false` (default, to be frozen), `trade.enableSpecialOrders=false`.
+- Datapack: remove the `villagerretaliation:quest_board` pool. KubeJS: remove the `payment_box`, `sell_box`, `clipboard` and `blueprint_checklist` recipes. Removing `clipboard` probably makes hiring unusable, since it is managed with the clipboard [inferred, to be tested].
+- Keep it if the test shows survivors with a personality, without HUD or combat, and hiring out of reach. Otherwise, **do not integrate**: blocking breeding and filtering trades remain doable in KubeJS, as [0004] provides.
 
 ### 2.2 Dreamshift (`dreamshift`)
 
-- **Pas de version NeoForge 1.21.1.** Le mod n'existe que pour Forge et Fabric **1.20.1** (dernière version `0.1.4.3.1`, 2026-08-27). ARR, CS [Modrinth].
-- Requis : Architectury, Cloth Config et **Immersive Portals** 5.2.x [jar `mods.toml`]. Immersive Portals n'a aucune version NeoForge 1.21.1 sur Modrinth [Modrinth]. Le mod est donc **inutilisable dans Fallow**.
-- Ce qu'il fait : il se décrit comme un « atmospheric horror mod » [Modrinth]. Il ajoute des « slips » (chute à la manière des backrooms, au hasard ou depuis le vide), des « slippages » (fissures dans les murs, avec des visages) et des outils fracturés (après un usage intensif de l'établi ou du four). Tout cela mène vers 36 « Dreamspaces » (dreamcore, espaces liminaux, Route 66, Level 7 Flooded…) dans deux dimensions, `dreamspace` et `deep_dreamspace` [Modrinth, jar].
-- Horreur : l'entité `still_life` bouge quand on ne la regarde pas, corrompt la peau du joueur et peut devenir agressive (désactivé par défaut). Il y a aussi un observateur, une « jambe de plafond » et un zombie pigman. Une « mémoire » retient les chunks et les objets du joueur. Le mod change aussi l'écran titre [jar].
-- Config : `config/dreamshift.json` (AutoConfig) [jar]. Défauts : `enableRealitySlips=true`, `allowSlipFromRandom=true`, `randomSlipBaseChance=0.0025` toutes les 200 ticks, `stillLifeEnabled=true`, `stillLifeCanBecomeAggressive=false`, `enableComplexMemory=true`, `enableSlippageFaces=true`, `enableFracturedTool=true`, `enableMainMenuTheme=true`, `enableDebugCommands=true` [jar].
-- Le sommeil n'est pas le déclencheur. Les mixins sur le lit ne servent qu'à l'intérieur des Dreamspaces [jar]. Il n'y a donc pas de recouvrement direct avec le sac de couchage de Traveler's Backpack. Le recouvrement est avec No Man's Land, qui a déjà une dimension de rêve, celle du rêve de la Lune Amie ([lune-amie]). Il n'y en a pas avec Enhanced Celestials [repo, déduit].
-- Vision : c'est le contraire de « sans horreur ni jumpscare ». Il casse l'immersion (téléportation involontaire, espaces modernes et liminaux) et il ferait doublon avec le rêve de NML. Sanity: Renewed et TheWatcher ont été écartés pour la même raison [repo].
+- **No NeoForge 1.21.1 version.** The mod only exists for Forge and Fabric **1.20.1** (latest version `0.1.4.3.1`, 2026-08-27). ARR, CS [Modrinth].
+- Required: Architectury, Cloth Config and **Immersive Portals** 5.2.x [jar `mods.toml`]. Immersive Portals has no NeoForge 1.21.1 version on Modrinth [Modrinth]. The mod is therefore **unusable in Fallow**.
+- What it does: it describes itself as an "atmospheric horror mod" [Modrinth]. It adds "slips" (falling in the manner of the backrooms, at random or from the void), "slippages" (cracks in walls, with faces) and fractured tools (after heavy use of the crafting table or furnace). All of this leads to 36 "Dreamspaces" (dreamcore, liminal spaces, Route 66, Level 7 Flooded…) in two dimensions, `dreamspace` and `deep_dreamspace` [Modrinth, jar].
+- Horror: the `still_life` entity moves when not looked at, corrupts the player's skin and can become aggressive (disabled by default). There is also an observer, a "ceiling leg" and a zombie pigman. A "memory" retains the player's chunks and items. The mod also changes the title screen [jar].
+- Config: `config/dreamshift.json` (AutoConfig) [jar]. Defaults: `enableRealitySlips=true`, `allowSlipFromRandom=true`, `randomSlipBaseChance=0.0025` every 200 ticks, `stillLifeEnabled=true`, `stillLifeCanBecomeAggressive=false`, `enableComplexMemory=true`, `enableSlippageFaces=true`, `enableFracturedTool=true`, `enableMainMenuTheme=true`, `enableDebugCommands=true` [jar].
+- Sleep is not the trigger. The bed mixins only serve inside the Dreamspaces [jar]. There is therefore no direct overlap with Traveler's Backpack's sleeping bag. The overlap is with No Man's Land, which already has a dream dimension, that of the Friendly Moon's dream ([lune-amie]). There is none with Enhanced Celestials [repo, inferred].
+- Vision: it is the opposite of "no horror or jumpscares". It breaks immersion (involuntary teleportation, modern and liminal spaces) and would duplicate NML's dream. Sanity: Renewed and TheWatcher were ruled out for the same reason [repo].
 
-#### Recommandation : ne pas intégrer
-Il ne tourne pas sur NeoForge 1.21.1, sa dépendance Immersive Portals n'est pas portée, et c'est un mod d'horreur. À ajouter aux écartés de `docs/mods.md` : « Mod d'horreur, 1.20.1 seulement, demande Immersive Portals ; le rêve de NML couvre ce rôle ».
+#### Recommendation: do not integrate
+It does not run on NeoForge 1.21.1, its Immersive Portals dependency is not ported, and it is a horror mod. To add to the ruled-out list in `docs/mods.md`: "Horror mod, 1.20.1 only, requires Immersive Portals; NML's dream covers this role".
 
 ## 3. Animalia Exotica, Fish'n'Ships, Sunken Spires, Trek
-### Synthèse
+### Summary
 
-| Mod | 1.21.1 NeoForge | Poids | Verdict |
+| Mod | 1.21.1 NeoForge | Size | Verdict |
 |---|---|---|---|
-| Animalia Exotica | 1.0.3 (2026-09-07) | 4,2 Mo | **Ne pas intégrer** : 4 espèces sur 6 en doublon, biomes vanilla codés en dur |
-| Fish'n'Ships | 1.1.0 (2026-09-12) | 1,4 Mo | **À tester** : mécanique de transport réelle, aucune dépendance nouvelle |
-| Sunken Spires | 1.0+mod (2025-10-19) | 0,76 Mo | **Ne pas intégrer en l'état** ; à tester seulement en version filtrée |
-| Trek | B0.6.2+mod (bêta, 2026-06-16) | 12,5 Mo | **Ne pas intégrer** : le rejet de 0004 tient |
+| Animalia Exotica | 1.0.3 (2026-09-07) | 4.2 MB | **Do not integrate**: 4 species out of 6 are duplicates, vanilla biomes hard-coded |
+| Fish'n'Ships | 1.1.0 (2026-09-12) | 1.4 MB | **To test**: real transport mechanic, no new dependency |
+| Sunken Spires | 1.0+mod (2025-10-19) | 0.76 MB | **Do not integrate as is**; to be tested only in filtered form |
+| Trek | B0.6.2+mod (beta, 2026-06-16) | 12.5 MB | **Do not integrate**: the rejection in 0004 stands |
 
 ---
 
 ### 3.1 Animalia Exotica (`animalia-exotica`, modId `animalia`)
 
-**Versions et dépendances.** 1.0.2 et 1.0.3, NeoForge seulement, 1.21.1 [Modrinth]. Dépend de GeckoLib `[4.9.2,5.0)` et de NeoForge `>= 21.1.249` [jar]. GeckoLib 4.9.3 est déjà dans le pack. Licence ARR, environ 4 500 téléchargements, le premier fichier 1.21.1 date du 2026-09-04 [Modrinth]. Le projet est très jeune.
+**Versions and dependencies.** 1.0.2 and 1.0.3, NeoForge only, 1.21.1 [Modrinth]. Depends on GeckoLib `[4.9.2,5.0)` and NeoForge `>= 21.1.249` [jar]. GeckoLib 4.9.3 is already in the pack. ARR licence, about 4,500 downloads, the first 1.21.1 file dates from 2026-09-04 [Modrinth]. The project is very young.
 
-**Contenu** [jar] :
-- 6 créatures : éléphant, jaguar, crocodile, hippopotame, rhinocéros, moho (oiseau, catégorie AMBIENT, pond des œufs).
-- Objets : ivoire et sa gamme de blocs (briques, piliers, dalles, murs), figurines, corne de rhinocéros décorée, peau et cape de jaguar, tapis de peau, bottes en peau d'hippopotame, sueur d'hippopotame en bouteille, dent et œuf de crocodile, « water dagger », 3 tableaux (Linné, Darwin), 26 succès.
-- La description annonce plus de 50 animaux à venir (girafe, autruche, ours, varan de Komodo, python, tigre, bison…) [Modrinth]. Presque tous existent déjà dans Naturalist ou Alex's Mobs.
+**Content** [jar]:
+- 6 creatures: elephant, jaguar, crocodile, hippopotamus, rhinoceros, moho (bird, AMBIENT category, lays eggs).
+- Items: ivory and its range of blocks (bricks, pillars, slabs, walls), figurines, decorated rhinoceros horn, jaguar hide and cape, hide rug, hippopotamus hide boots, bottled hippopotamus sweat, crocodile tooth and egg, "water dagger", 3 paintings (Linnaeus, Darwin), 26 achievements.
+- The description announces more than 50 animals to come (giraffe, ostrich, bear, Komodo dragon, python, tiger, bison…) [Modrinth]. Almost all already exist in Naturalist or Alex's Mobs.
 
-**Hostilité.** Pas d'horreur. Le crocodile a des objectifs de chasse et d'attaque (`CrocodileMeleeAttackGoal`, `NearestAttackableTargetGoal`) ; l'hippopotame se met en colère (succès `anger_hippo` et `pacify_hippo`) [jar]. L'éléphant poursuit et casse des blocs (`ElephantChaseBlockBreaker`, tag `elephant_breakable`), le rhinocéros aussi (tag `rhinoceros_breakable`) [jar]. Ça pose un risque de dégâts sur les bases, à vérifier.
+**Hostility.** No horror. The crocodile has hunting and attack goals (`CrocodileMeleeAttackGoal`, `NearestAttackableTargetGoal`); the hippopotamus gets angry (achievements `anger_hippo` and `pacify_hippo`) [jar]. The elephant chases and breaks blocks (`ElephantChaseBlockBreaker`, tag `elephant_breakable`), as does the rhinoceros (tag `rhinoceros_breakable`) [jar]. This poses a risk of damage to bases, to be checked.
 
-**Apparition.** Elle passe par `neoforge:add_spawns` avec des **identifiants de biomes vanilla écrits un par un** (`minecraft:savanna`, `jungle`, `desert`, `mangrove_swamp`, `beach`, `warm_ocean`…), plus un modificateur codé qui s'appuie sur la classe `Biomes` vanilla [jar]. Il n'utilise aucun tag. Les biomes de NML (bayou, prairie, tropical_beach…) ne reçoivent donc rien. Les biomes vanilla restent dans le monde avec NML, donc les animaux apparaissent quand même en savane et en jungle [déduit, d'après le rapport verif-2026-10-18/4]. Les poids sont élevés : crocodile 20 en savane, moho 25 en jungle.
+**Spawning.** It goes through `neoforge:add_spawns` with **vanilla biome identifiers written one by one** (`minecraft:savanna`, `jungle`, `desert`, `mangrove_swamp`, `beach`, `warm_ocean`…), plus a coded modifier that relies on the vanilla `Biomes` class [jar]. It uses no tag. NML biomes (bayou, prairie, tropical_beach…) therefore receive nothing. Vanilla biomes remain in the world with NML, so the animals still appear in savannas and jungles [inferred, from report verif-2026-10-18/4]. Weights are high: crocodile 20 in savanna, moho 25 in jungle.
 
-**Configuration.** Config commune `ENABLE_<ESPÈCE>_SPAWNING` par espèce, un poids par habitat (0 coupe cet habitat), et une option client contre les secousses de caméra de l'éléphant [jar]. Ces options ne règlent que l'apparition naturelle : les entités, objets et recettes restent.
+**Configuration.** Common config `ENABLE_<SPECIES>_SPAWNING` per species, one weight per habitat (0 turns that habitat off), and a client option against the elephant's camera shake [jar]. These options only govern natural spawning: entities, items and recipes remain.
 
-**Doublons avec le pack.**
-| Animalia | Déjà couvert par | Choix déjà fait (plan 05 (`docs/plan/05-faune-et-ambiance.md`)) |
+**Duplicates with the pack.**
+| Animalia | Already covered by | Choice already made (plan 05 (`docs/plan/05-faune-et-ambiance.md`)) |
 |---|---|---|
-| Éléphant | Alex's Mobs, Naturalist | AM garde l'éléphant (caravane), celui de Naturalist est coupé |
-| Rhinocéros | Naturalist, AM | Naturalist |
-| Hippopotame | Naturalist | Naturalist |
-| Crocodile | alligator de Naturalist, crocodile et caïman d'AM | alligator de Naturalist |
-| Jaguar | aucun (AM a tigre et panthère des neiges, Naturalist a le lion) | nouveau |
-| Moho | aucun | nouveau |
+| Elephant | Alex's Mobs, Naturalist | AM keeps the elephant (caravan), Naturalist's is cut |
+| Rhinoceros | Naturalist, AM | Naturalist |
+| Hippopotamus | Naturalist | Naturalist |
+| Crocodile | Naturalist alligator, AM crocodile and caiman | Naturalist alligator |
+| Jaguar | none (AM has tiger and snow leopard, Naturalist has the lion) | new |
+| Moho | none | new |
 
-**Filtre des 5 questions.** Gameplay : faible. Intégration : faible (biomes en dur, pas de tags NML). 100 h : non. Mécanique : non, c'est du contenu (« ajoute des animaux »). Doublons : 4 sur 6.
+**The 5-question filter.** Gameplay: low. Integration: low (hard-coded biomes, no NML tags). 100 h: no. Mechanic: no, it is content ("adds animals"). Duplicates: 4 out of 6.
 
-**Recommandation : ne pas intégrer.** Il ne resterait que le jaguar et le moho, au prix d'un mod ARR très jeune, de 4 espèces à désactiver et d'objets en ivoire en trop. À revoir seulement si une future version apporte une espèce sans équivalent et une vraie mécanique. Le cas échéant : `animalia-exotica`, côté CS, `ENABLE_ELEPHANT/RHINOCEROS/HIPPO/CROCODILE_SPAWNING = false`, et retrait en KubeJS des recettes d'ivoire et des œufs d'apparition.
+**Recommendation: do not integrate.** Only the jaguar and moho would remain, at the price of a very young ARR mod, 4 species to disable and surplus ivory items. To be revisited only if a future version brings a species with no equivalent and a real mechanic. If so: `animalia-exotica`, side CS, `ENABLE_ELEPHANT/RHINOCEROS/HIPPO/CROCODILE_SPAWNING = false`, and removal in KubeJS of the ivory recipes and spawn eggs.
 
 ---
 
 ### 3.2 Fish'n'Ships (`fish-n-ships`, modId `fish_n_ships`)
 
-**Versions et dépendances.** `mc1.21.1-1.1.0-neoforge` (2026-09-12) et 1.0.0 [Modrinth]. Dépend de GeckoLib `>= 4.7.4`, Hybrid API (`hapi`) `>= 1.1.0`, Kotlin for Forge (loader `[4,)`), NeoForge `>= 21.1.150` [jar]. **Tout est déjà dans le pack** : GeckoLib 4.9.3, Hybrid API 1.1.2, Kotlin for Forge 5.12.0. Même studio que Hybrid Aquatic (Hybrid Labs). Licence ARR, environ 23 700 téléchargements.
+**Versions and dependencies.** `mc1.21.1-1.1.0-neoforge` (2026-09-12) and 1.0.0 [Modrinth]. Depends on GeckoLib `>= 4.7.4`, Hybrid API (`hapi`) `>= 1.1.0`, Kotlin for Forge (loader `[4,)`), NeoForge `>= 21.1.150` [jar]. **Everything is already in the pack**: GeckoLib 4.9.3, Hybrid API 1.1.2, Kotlin for Forge 5.12.0. Same studio as Hybrid Aquatic (Hybrid Labs). ARR licence, about 23,700 downloads.
 
-**Contenu** [Modrinth, jar] :
-- **Canoë** : 3 places, ou 2 places et un coffre, ou 1 place et un double coffre.
-- **Voilier** : une bannière sert de voile. Voile baissée, il avance seul, même sans passager. On peut ainsi envoyer des colis ou des animaux sur l'eau.
-- **Radeau** : 4 places, ne se dirige pas, se tire en laisse. **Radeau de ravitaillement** : 66 piles, sans passager.
-- **Dinghy** (1.1.0) : 5 places, ou 3 places et un double coffre. Dans le jar, seule la variante en bois flotté a une recette ; les autres bois ont un objet mais pas de recette [jar]. C'est sans doute un oubli de l'auteur [déduit].
-- **Navire** : grand bateau où l'on peut marcher, rangement intégré. Il brûle du combustible de four (charbon, charbon de bois). Recette : cuivre, haut fourneau, bateau à coffre, fer et planches.
-- Améliorations du navire : **brise-glace** (casse `hapi:breakable_ice`) et **chalut**. Le chalut pêche tout seul avec la table de butin **vanilla `FISHING`** [jar].
-- Bateaux en bois carmin et biscornu ; toutes les variantes en bois flotté de Hybrid Aquatic.
-- Bois pris en charge : les 10 bois vanilla et le bois flotté. **Pas de bois NML.** Every Compat 2.11.54 n'a pas de module Fish'n'Ships [jar].
+**Content** [Modrinth, jar]:
+- **Canoe**: 3 seats, or 2 seats and a chest, or 1 seat and a double chest.
+- **Sailboat**: a banner serves as the sail. With the sail lowered, it moves on its own, even without a passenger. Parcels or animals can thus be sent over the water.
+- **Raft**: 4 seats, cannot be steered, towed on a lead. **Supply raft**: 66 stacks, no passenger.
+- **Dinghy** (1.1.0): 5 seats, or 3 seats and a double chest. In the jar, only the driftwood variant has a recipe; the other woods have an item but no recipe [jar]. This is probably an oversight by the author [inferred].
+- **Ship**: large boat on which you can walk, built-in storage. It burns furnace fuel (coal, charcoal). Recipe: copper, blast furnace, chest boat, iron and planks.
+- Ship upgrades: **icebreaker** (breaks `hapi:breakable_ice`) and **trawl**. The trawl fishes by itself using the **vanilla `FISHING`** loot table [jar].
+- Crimson and warped wood boats; all Hybrid Aquatic driftwood variants.
+- Supported woods: the 10 vanilla woods and driftwood. **No NML wood.** Every Compat 2.11.54 has no Fish'n'Ships module [jar].
 
-**Hostilité.** Aucune. Pas de worldgen, pas de créature.
+**Hostility.** None. No worldgen, no creature.
 
-**Configuration.** Le jar ne contient aucun fichier de config [jar]. Le seul réglage possible passe par les recettes, en KubeJS.
+**Configuration.** The jar contains no config file [jar]. The only possible tuning goes through recipes, in KubeJS.
 
-**Intégration et doublons.**
-- Pour le zoo et le transport d'animaux (plan 10 (`docs/plan/10-recentrage.md`), lune-amie (`docs/plan/lune-amie.md`)) : le radeau en laisse et le canoë transportent des animaux sur l'eau avant Create. C'est le chaînon « bateau » de la boucle zoo.
-- Le voilier automatique ouvre une petite logistique de début de partie, entre le bateau vanilla et Create.
-- **Recouvrement avec Create Aeronautics et Sable** : le navire est un véhicule tout fait, motorisé au charbon. Il fait concurrence aux bateaux que les joueurs construisent avec Aeronautics [déduit]. Personne n'a testé ces entités sur une sous-structure Sable (radeau tiré depuis un dirigeable, canoë posé sur un navire Sable).
-- **Chalut** : il donne une pêche passive avec la table vanilla, qui contient des livres enchantés. Ça court-circuite la boucle « livres trouvés » d'Immersive Enchanting (0008 (`docs/decisions/0008-enchantement.md`)) et rend la pêche automatique [déduit].
-- Hybrid Aquatic : la compatibilité est prévue par l'auteur (bois flotté) [Modrinth changelog].
+**Integration and duplicates.**
+- For the zoo and animal transport (plan 10 (`docs/plan/10-recentrage.md`), lune-amie (`docs/plan/lune-amie.md`)): the towed raft and the canoe carry animals over water before Create. This is the "boat" link of the zoo loop.
+- The automatic sailboat opens up a small early-game logistics, between the vanilla boat and Create.
+- **Overlap with Create Aeronautics and Sable**: the ship is a ready-made vehicle, coal-powered. It competes with the boats that players build with Aeronautics [inferred]. Nobody has tested these entities on a Sable sub-structure (raft towed from an airship, canoe placed on a Sable ship).
+- **Trawl**: it gives passive fishing with the vanilla table, which contains enchanted books. This short-circuits the "found books" loop of Immersive Enchanting (0008 (`docs/decisions/0008-enchantement.md`)) and makes fishing automatic [inferred].
+- Hybrid Aquatic: compatibility is planned by the author (driftwood) [Modrinth changelog].
 
-**Filtre des 5 questions.** Gameplay : oui (traverser, transporter). Intégration : bonne (zoo, Hybrid Aquatic, aucune dépendance nouvelle). 100 h : moyen (outil de début et de milieu de partie, relayé ensuite par Aeronautics). Mécanique : oui (voilier autonome, radeau en laisse). Doublons : partiel, surtout le navire.
+**The 5-question filter.** Gameplay: yes (crossing, transporting). Integration: good (zoo, Hybrid Aquatic, no new dependency). 100 h: medium (early and mid-game tool, later relayed by Aeronautics). Mechanic: yes (autonomous sailboat, towed raft). Duplicates: partial, mostly the ship.
 
-**Recommandation : à tester**, sur une branche `test/fish-n-ships`.
-- Slug `fish-n-ships`, version `mc1.21.1-1.1.0-neoforge`, côté CS.
-- À garder : canoë, voilier, radeau, radeau de ravitaillement, dinghy.
-- À trancher en test, avec retrait de recette en KubeJS si besoin : le **navire** (doublon d'Aeronautics), le **chalut** (pêche passive ; ou bien filtrer la table `minecraft:gameplay/fishing` avec LootJS, déjà présent), et le **brise-glace**.
-- Points de test : véhicules sur une sous-structure Sable ou près d'elle, transport d'un animal en radeau, comportement dans les rivières NML, conflit éventuel avec ItemPhysic et Camera Overhaul en canoë.
+**Recommendation: to be tested**, on a `test/fish-n-ships` branch.
+- Slug `fish-n-ships`, version `mc1.21.1-1.1.0-neoforge`, side CS.
+- To keep: canoe, sailboat, raft, supply raft, dinghy.
+- To be decided in testing, with recipe removal in KubeJS if needed: the **ship** (duplicates Aeronautics), the **trawl** (passive fishing; or else filter the `minecraft:gameplay/fishing` table with LootJS, already present), and the **icebreaker**.
+- Test points: vehicles on or near a Sable sub-structure, transporting an animal by raft, behaviour in NML rivers, possible conflict with ItemPhysic and Camera Overhaul in a canoe.
 
 ---
 
 ### 3.3 Sunken Spires (`sunken-spires`)
 
-**Versions.** Deux fichiers 1.0 du 2025-10-19, compatibles 1.21 à 1.21.10, dont 1.21.1 : un datapack `Sunken_Spires_1.21.zip` et une **version mod `1.0+mod`** pour NeoForge, Forge, Fabric et Quilt [Modrinth]. La version mod est un datapack emballé dans un jar par Modrinth (« Generated by Modrinth »). Elle ne contient aucune classe et ses données sont identiques à celles du zip (`diff -r` vide) [jar]. `pack_format` 48, donc valable en 1.21.1. Pas de dépendance. Licence ARR, environ 790 000 téléchargements.
-**Livraison.** Pas besoin de KubeJS : packwiz référence `sunken-spires` (fichier `1.0+mod`) comme un mod, côté CS (le serveur intégré du solo en a besoin). La voie `pack/kubejs/data/` (CONTRIBUTING) reste possible en recopiant les données, mais c'est inutile et la licence ARR s'y prête mal.
+**Versions.** Two 1.0 files from 2025-10-19, compatible with 1.21 to 1.21.10, including 1.21.1: a datapack `Sunken_Spires_1.21.zip` and a **mod version `1.0+mod`** for NeoForge, Forge, Fabric and Quilt [Modrinth]. The mod version is a datapack packed into a jar by Modrinth ("Generated by Modrinth"). It contains no class and its data is identical to that of the zip (empty `diff -r`) [jar]. `pack_format` 48, hence valid in 1.21.1. No dependency. ARR licence, about 790,000 downloads.
+**Delivery.** No need for KubeJS: packwiz references `sunken-spires` (file `1.0+mod`) as a mod, side CS (single-player's integrated server needs it). The `pack/kubejs/data/` route (CONTRIBUTING) remains possible by copying the data, but it is pointless and the ARR licence suits it poorly.
 
-**Contenu.** 11 structures dans l'espace de noms `joshie`, chacune dans son propre structure set (espacement/séparation en chunks) [jar] :
-| Structure | Espacement | Contenu notable |
+**Content.** 11 structures in the `joshie` namespace, each in its own structure set (spacing/separation in chunks) [jar]:
+| Structure | Spacing | Notable content |
 |---|---|---|
-| colossuem (sic) | 96/32 | coffres, mini-boss noyé équipé (casque unique) |
-| conduit_ruins | 64/16 | conduit et anneaux de prismarine |
-| floating_spikes | 80/24 | cercle d'anneaux |
-| large_fossil | 180/32 | cage thoracique, conduit actif |
-| ocean_temple | 96/24 | 4 coffres |
-| prismarine_forge | 72/34 | 2 coffres, **gardien ancien**, débris antiques |
-| prismarine_trial_chamber | 108/32 | **17 générateurs d'épreuve**, 18 coffres-forts, noyés, gardiens, gardiens anciens |
-| small_fossil | 120/24 | archéologie |
-| spires | 250/30 | archéologie, un coffre |
-| sunken_city | 160/24 | 5 maisons, coffres |
-| trident_shrine | 180/80 | un trident |
+| colossuem (sic) | 96/32 | chests, equipped drowned mini-boss (unique helmet) |
+| conduit_ruins | 64/16 | conduit and prismarine rings |
+| floating_spikes | 80/24 | circle of rings |
+| large_fossil | 180/32 | rib cage, active conduit |
+| ocean_temple | 96/24 | 4 chests |
+| prismarine_forge | 72/34 | 2 chests, **elder guardian**, ancient debris |
+| prismarine_trial_chamber | 108/32 | **17 trial spawners**, 18 vaults, drowned, guardians, elder guardians |
+| small_fossil | 120/24 | archaeology |
+| spires | 250/30 | archaeology, one chest |
+| sunken_city | 160/24 | 5 houses, chests |
+| trident_shrine | 180/80 | a trident |
 
-**Hostilité.** C'est le défaut majeur. **Les 11 structures** ont un `spawn_overrides` « monster » qui fait apparaître **gardiens et noyés** dans toute leur emprise (cité : poids 120/220, groupes de 3 à 5) [jar]. Des noyés, gardiens et gardiens anciens sont aussi placés dans les NBT [jar]. Le pack interdit les monstres vanilla, et le plan 02 (`docs/plan/02-exploration.md`) précise qu'« aucune structure ne produit de créature hostile » et que les chambres d'épreuves sont à désactiver. Pas d'horreur au sens strict : l'ambiance est « civilisation disparue », plutôt dans le ton du pack.
+**Hostility.** This is the major flaw. **All 11 structures** have a "monster" `spawn_overrides` that spawns **guardians and drowned** across their whole footprint (city: weight 120/220, groups of 3 to 5) [jar]. Drowned, guardians and elder guardians are also placed in the NBT [jar]. The pack forbids vanilla monsters, and plan 02 (`docs/plan/02-exploration.md`) specifies that "no structure produces a hostile creature" and that trial chambers are to be disabled. No horror in the strict sense: the atmosphere is "vanished civilisation", rather in the pack's tone.
 
-**Biomes.** Toutes les structures utilisent un seul tag, `#joshie:has_structure/conduit_ruins`. Il contient `#minecraft:is_ocean` plus des tags optionnels Terralith, BoP, BYG… [jar]. NML n'ajoute pas d'océan, donc les océans restent vanilla et le tag fonctionne [déduit, d'après le rapport verif-2026-10-18/4]. Hybrid Aquatic garde ses biomes coupés, donc aucun conflit.
+**Biomes.** All structures use a single tag, `#joshie:has_structure/conduit_ruins`. It contains `#minecraft:is_ocean` plus optional Terralith, BoP, BYG… tags [jar]. NML adds no ocean, so oceans stay vanilla and the tag works [inferred, from report verif-2026-10-18/4]. Hybrid Aquatic keeps its biomes cut, so no conflict.
 
-**Configuration.** Il n'y a pas de config. Sparse Structures s'applique, car les sets sont en `random_spread` : avec un `spreadFactor` global de 3, la cité passe d'environ 160 à environ 480 chunks [déduit]. Pour couper une structure, le tag partagé ne suffit pas. Il faut surcharger dans `pack/kubejs/data/joshie/worldgen/structure/sunken_spires/<nom>.json` le champ `biomes` (tag vide) **et** `spawn_overrides` (supprimé). Il faut aussi retirer les entités placées dans les NBT, par le filet KubeJS ou In Control! prévu au plan 05 pour les monstres vanilla [déduit].
+**Configuration.** There is no config. Sparse Structures applies, since the sets are `random_spread`: with a global `spreadFactor` of 3, the city goes from about 160 to about 480 chunks [inferred]. To cut a structure, the shared tag is not enough. The `biomes` field (empty tag) **and** `spawn_overrides` (removed) must be overridden in `pack/kubejs/data/joshie/worldgen/structure/sunken_spires/<name>.json`. The entities placed in the NBT must also be removed, through the KubeJS safety net or In Control! planned in plan 05 for vanilla monsters [inferred].
 
-**Doublons.** Les monuments océaniques vanilla deviennent des « ruines sans gardiens » (plan 02). Trois structures de Sunken Spires en sont des variantes en prismarine (temple, forge, chambre d'épreuve). Les chambres d'épreuves vanilla doivent aussi être coupées. Hybrid Aquatic couvre la faune marine.
+**Duplicates.** Vanilla ocean monuments become "ruins without guardians" (plan 02). Three Sunken Spires structures are prismarine variants of them (temple, forge, trial chamber). Vanilla trial chambers must also be cut. Hybrid Aquatic covers marine wildlife.
 
-**Filtre des 5 questions.** Gameplay : faible (butin, archéologie). Intégration : moyenne (océans vanilla, archéologie en commun avec NML). 100 h : les ruines silencieuses le sont, les arènes non. Mécanique : non. Doublons : avec les monuments.
+**The 5-question filter.** Gameplay: low (loot, archaeology). Integration: medium (vanilla oceans, archaeology shared with NML). 100 h: the silent ruins are, the arenas are not. Mechanic: no. Duplicates: with the monuments.
 
-**Recommandation : ne pas intégrer en l'état.** Variante **à tester** si l'on veut des découvertes sous-marines silencieuses :
-- slug `sunken-spires`, fichier `1.0+mod`, CS ;
-- garder **conduit_ruins, floating_spikes, large_fossil, small_fossil, spires, trident_shrine**, et éventuellement sunken_city et ocean_temple, toutes sans `spawn_overrides` ;
-- couper **colossuem, prismarine_forge, prismarine_trial_chamber** (boss, gardien ancien, générateurs d'épreuve) ;
-- ce sont environ 11 fichiers de surcharge, plus le filet anti-hostiles. Le coût est réel pour un pack de 0,76 Mo.
-
----
-
-### 3.4 Trek (`trek`) : réexamen
-
-**Versions.** B0.6.2 (bêta), datapack et `B0.6.2+mod` (jar Modrinth sans code), un seul fichier pour 1.21 à 26.2, `pack_format` 48 à 107, sans overlay [Modrinth, jar]. Les mêmes JSON servent de 1.21.1 à 26.x : il faut vérifier au chargement que rien ne casse en 1.21.1 [déduit]. Licence MIT, 12,5 Mo.
-
-**Contenu** [jar] :
-- **113 structures de surface** dans 5 sets : very_common 16/8 (rochers, plaines), common 24/12 (13 structures), **medium 30/12 (76 structures)**, rare 48/24 (16), very_rare 96/48 (3). Exemples : camps, maisons, tours, forts, églises, cimetière, « haunted_house », autel fumant, dragon d'os, îles volantes, château, pyramide d'Anubis, cité engloutie, marchands ambulants.
-- **7 villages Trek** (plaines, désert, savane, neige, taïga, marais, cerisaie) ajoutés au set `minecraft:villages`, qui est **remplacé** (espacement 48/20).
-- **Surcharges vanilla** : avant-postes de pillards, manoirs, `stronghold` (« stronghold_big », tag `eye_of_ender_located`), villes de l'End. `monster_room` et `monster_room_deep` sont mis à `count 0` et remplacés par des structures Trek à générateurs, en sets d'espacement 1.
-- Structures du Nether et de l'End.
-
-**Hostilité.** Des `spawn_overrides` ajoutent pillards (11 structures), vindicateurs (6), vagabonds, husks, sorcière, illusionniste, squelette, slime. Les NBT placent villageois, zombies, ravageur, évocateur et 5 générateurs [jar]. Plusieurs structures sont typées pillards (`base_pillager`, `ship_pillager`, `pillager_mansion`…).
-
-**Biomes et NML.** Les tags Trek sont des **listes explicites** de biomes vanilla, Terralith, BoP, Nature's Spirit et Regions Unexplored. Ils n'utilisent ni `#minecraft:is_forest` ni les tags `c:`, et **ne citent aucun biome NML** (0 occurrence) [jar]. Le wiki le confirme : sans compatibilité ajoutée à la main, « les structures Trek n'apparaîtront tout simplement pas dans les nouveaux biomes » [web]. Avec NML, Trek ne peuple que les biomes vanilla restants. Il n'y a pas de casse, mais la répartition est incohérente : rien dans les forêts NML, tout dans les plaines et savanes vanilla [déduit].
-
-**Configurabilité.** Il n'y a pas de config. Les 113 structures se partagent 58 tags de biome, si bien que vider un tag coupe plusieurs structures [jar]. Pour garder une sélection, il faut surcharger les **5 fichiers `trek/worldgen/structure_set/overworld/*.json`** avec une liste blanche. Il faut aussi : rendre `minecraft:villages`, les avant-postes et les strongholds au plan 0004, rétablir ou supprimer les `monster_room`, et neutraliser les `spawn_overrides` des structures gardées. Sparse Structures agit sur ces sets `random_spread`. En revanche, les sets de salles à monstres d'espacement 1 restent denses [déduit].
-
-**Conflits avec le pack.** Trek remplace le set des villages, alors que 0004 veut des villages en ruine en surchargeant les centres vanilla. Il surcharge le stronghold et l'End, que le pack supprime : il faudra s'assurer que les données KubeJS passent après celles de Trek [déduit]. Son ton (marchands, villages vivants, pillards, « haunted house ») va contre le concept « survivants » et l'absence d'hostiles.
-
-**Recommandation : ne pas intégrer.** Le rejet de 0004 (volume) se confirme. Une sélection reste possible, mais il faudrait réécrire 5 sets, contrer 4 surcharges vanilla, réattribuer à la main les biomes NML et nettoyer les apparitions. Le coût est disproportionné pour 12,5 Mo de contenu sans mécanique. Si l'on cherche quelques petites ruines d'ambiance, NML et Ancient Remnants les fournissent déjà.
+**Recommendation: do not integrate as is.** Variant **to be tested** if silent underwater discoveries are wanted:
+- slug `sunken-spires`, file `1.0+mod`, CS;
+- keep **conduit_ruins, floating_spikes, large_fossil, small_fossil, spires, trident_shrine**, and possibly sunken_city and ocean_temple, all without `spawn_overrides`;
+- cut **colossuem, prismarine_forge, prismarine_trial_chamber** (boss, elder guardian, trial spawners);
+- that is about 11 override files, plus the anti-hostile safety net. The cost is real for a 0.76 MB pack.
 
 ---
 
-### Points non vérifiés
-- Le comportement réel des véhicules Fish'n'Ships près des sous-structures Sable.
-- Le chargement de Trek en 1.21.1, puisque le même JSON sert jusqu'à 26.2.
-- La capacité d'In Control! ou de KubeJS à bloquer les entités placées par les NBT de structure (noyés, gardiens) : la piste est à confirmer en jeu.
-- Le comportement de casse de blocs de l'éléphant et du rhinocéros d'Animalia (seuls les noms de classes et de tags l'indiquent).
+### 3.4 Trek (`trek`): reassessment
+
+**Versions.** B0.6.2 (beta), datapack and `B0.6.2+mod` (code-free Modrinth jar), a single file for 1.21 to 26.2, `pack_format` 48 to 107, no overlay [Modrinth, jar]. The same JSON serves 1.21.1 to 26.x: it must be checked at load that nothing breaks in 1.21.1 [inferred]. MIT licence, 12.5 MB.
+
+**Content** [jar]:
+- **113 surface structures** in 5 sets: very_common 16/8 (rocks, plains), common 24/12 (13 structures), **medium 30/12 (76 structures)**, rare 48/24 (16), very_rare 96/48 (3). Examples: camps, houses, towers, forts, churches, cemetery, "haunted_house", smoking altar, bone dragon, floating islands, castle, Anubis pyramid, sunken city, wandering traders.
+- **7 Trek villages** (plains, desert, savanna, snow, taiga, swamp, cherry grove) added to the `minecraft:villages` set, which is **replaced** (spacing 48/20).
+- **Vanilla overrides**: pillager outposts, mansions, `stronghold` ("stronghold_big", tag `eye_of_ender_located`), End cities. `monster_room` and `monster_room_deep` are set to `count 0` and replaced by Trek structures with spawners, in sets with spacing 1.
+- Nether and End structures.
+
+**Hostility.** `spawn_overrides` add pillagers (11 structures), vindicators (6), strays, husks, witch, illusioner, skeleton, slime. The NBT place villagers, zombies, ravager, evoker and 5 spawners [jar]. Several structures are pillager-themed (`base_pillager`, `ship_pillager`, `pillager_mansion`…).
+
+**Biomes and NML.** The Trek tags are **explicit lists** of vanilla, Terralith, BoP, Nature's Spirit and Regions Unexplored biomes. They use neither `#minecraft:is_forest` nor the `c:` tags, and **cite no NML biome** (0 occurrences) [jar]. The wiki confirms it: without hand-added compatibility, "Trek structures will simply not appear in the new biomes" [web]. With NML, Trek only populates the remaining vanilla biomes. Nothing breaks, but the distribution is incoherent: nothing in NML forests, everything in vanilla plains and savannas [inferred].
+
+**Configurability.** There is no config. The 113 structures share 58 biome tags, so emptying one tag cuts several structures [jar]. To keep a selection, the **5 files `trek/worldgen/structure_set/overworld/*.json`** must be overridden with a whitelist. It is also necessary to: restore `minecraft:villages`, the outposts and the strongholds to plan 0004, restore or delete the `monster_room`s, and neutralise the `spawn_overrides` of the structures kept. Sparse Structures acts on these `random_spread` sets. On the other hand, the monster-room sets with spacing 1 remain dense [inferred].
+
+**Conflicts with the pack.** Trek replaces the village set, whereas 0004 wants ruined villages by overriding the vanilla centres. It overrides the stronghold and the End, which the pack removes: it will be necessary to ensure that the KubeJS data comes after Trek's [inferred]. Its tone (merchants, living villages, pillagers, "haunted house") goes against the "survivors" concept and the absence of hostiles.
+
+**Recommendation: do not integrate.** The rejection in 0004 (volume) is confirmed. A selection remains possible, but 5 sets would have to be rewritten, 4 vanilla overrides countered, NML biomes reassigned by hand and spawns cleaned up. The cost is disproportionate for 12.5 MB of content with no mechanic. If a few small ambience ruins are wanted, NML and Ancient Remnants already provide them.
+
+---
+
+### Unverified points
+- The real behaviour of Fish'n'Ships vehicles near Sable sub-structures.
+- Trek loading in 1.21.1, since the same JSON serves up to 26.2.
+- The ability of In Control! or KubeJS to block entities placed by structure NBT (drowned, guardians): the lead is to be confirmed in game.
+- The block-breaking behaviour of Animalia's elephant and rhinoceros (only class and tag names indicate it).

@@ -1,126 +1,126 @@
-# 4. Vie quotidienne : eau, champs, troupeau, cuisine, réserves
+# 4. Daily life: water, fields, herd, cooking, stores
 
-Ce qui existe déjà (0002) : Kaleidoscope Cookery (seul système de cuisine), Farm & Charm (infrastructure de ferme), Ecliptic Seasons, KaleidoscopeCookery-Automation, Cold Sweat, Thirst Was Reclaimed. La décision 0002 laissait deux trous : un **élevage exigeant** sans Animal Husbandry et une **conservation** sans Spoiled. Ce chapitre les comble, et règle la cohabitation Farm & Charm / Kaleidoscope Cookery.
+What already exists (0002): Kaleidoscope Cookery (the only cooking system), Farm & Charm (farm infrastructure), Ecliptic Seasons, KaleidoscopeCookery-Automation, Cold Sweat, Thirst Was Reclaimed. Decision 0002 left two gaps: **demanding animal husbandry** without Animal Husbandry and **food preservation** without Spoiled. This chapter fills them, and settles how Farm & Charm and Kaleidoscope Cookery coexist.
 
-Détail, preuves et clés : [recherche/research-vie.md](recherche/research-vie.md).
+Details, evidence and keys: [recherche/research-vie.md](recherche/research-vie.md).
 
-## 4.1 La boucle de jeu
+## 4.1 The gameplay loop
 
-Eau sûre → champs saisonniers → fourrage → troupeau nourri, abrité, avec des couples → produits → cuisine KC → conservation → rations d'expédition (gourde, sac à provisions, sac de couchage) → exploration. L'hiver, ce qu'on n'a pas mis de côté manque.
+Safe water → seasonal fields → fodder → a herd that is fed, sheltered and kept in pairs → products → KC cooking → preservation → expedition rations (canteen, provisions bag, sleeping bag) → exploration. In winter, whatever was not set aside runs short.
 
-## 4.2 Ce que les mods retenus font déjà
+## 4.2 What the selected mods already do
 
-À ne pas racheter ailleurs (vérifié dans le code source) :
-- **Kaleidoscope Cookery** fournit déjà les **tags de saison** (Serene Seasons, humidité d'Ecliptic) et de nutrition pour ses cultures, et un **plateau en bambou** qui sèche au soleil et humidifie sous la pluie. Il a ses propres schémas KubeJS : `bamboo_tray`, `chopping_board`, `millstone`, `pot`, `steamer`, `stockpot`.
-- **Ecliptic Seasons** gère la durée du jour, la **reproduction saisonnière** (`EnableSeasonalBreed`), les **abeilles saisonnières** et la **pêche saisonnière**. Il expose à KubeJS `EclipticSeasonsApi` (`getSeason`, `getSubSeason`, `getSolarTerm`, `getAdjustedHumidity`…). Son `HeatStroke` fait doublon avec Cold Sweat : **à désactiver**.
-- **Cold Sweat 2.4** expose à KubeJS `coldsweat.getTemperatureAt`, `createModifier`, `addModifier`… Il a une glacière et une chaudière, et une compat native avec Thirst Was Reclaimed, Supplementaries, Sable et Aeronautics.
-- **Thirst Was Reclaimed** : quatre niveaux de pureté, maladie, purification au feu de camp et au four, **filtre à sable Create**.
-- **Farm & Charm** : attention, sa **mangeoire met les animaux en amour automatiquement** : c'est la reproduction autonome que la décision 0002 refuse.
+Not to be bought again elsewhere (checked in the source code):
+- **Kaleidoscope Cookery** already provides the **season tags** (Serene Seasons, Ecliptic humidity) and nutrition tags for its crops, and a **bamboo tray** that dries in the sun and gets damp in the rain. It has its own KubeJS schemas: `bamboo_tray`, `chopping_board`, `millstone`, `pot`, `steamer`, `stockpot`.
+- **Ecliptic Seasons** handles day length, **seasonal breeding** (`EnableSeasonalBreed`), **seasonal bees** and **seasonal fishing**. It exposes `EclipticSeasonsApi` to KubeJS (`getSeason`, `getSubSeason`, `getSolarTerm`, `getAdjustedHumidity`...). Its `HeatStroke` duplicates Cold Sweat: **to be disabled**.
+- **Cold Sweat 2.4** exposes `coldsweat.getTemperatureAt`, `createModifier`, `addModifier`... to KubeJS. It has an icebox and a boiler, and native compatibility with Thirst Was Reclaimed, Supplementaries, Sable and Aeronautics.
+- **Thirst Was Reclaimed**: four purity levels, sickness, purification over a campfire and in a furnace, **Create sand filter**.
+- **Farm & Charm**: note that its **feeder puts animals in love automatically**: this is the autonomous breeding that decision 0002 rejects.
 
-## 4.3 Mods proposés
+## 4.3 Proposed mods
 
-| Mod | Rôle | Dispo 1.21.1 NeoForge Modrinth | Statut proposé |
+| Mod | Role | Availability 1.21.1 NeoForge Modrinth | Proposed status |
 |---|---|---|---|
-| **Kaleidoscope Compat** | Fusionne les doublons KC ↔ Farm & Charm par tags `c:` ; rejoue les recettes de la marmite F&C dans le stockpot KC ; option qui coupe la marmite F&C. **C'est la condition de 0002, toute prête** | oui (2.9.7) | socle |
-| **Cattlestrophic!** | Faim et vieillesse des animaux ; sauvages (peu de butin, pas de laisse) et domestiques (meurent de faim s'ils ne sont pas nourris) | oui (1.3.0) | socle, à tester |
-| **Salt's Animal Farm** | Confort, abri, poids caché, maladie par négligence, panique. Aucun objet ajouté : l'étable de F&C et la paille deviennent du gameplay | oui (0.2) | socle, à tester longtemps (jeune) |
-| **Animal Genders** | Un mâle et une femelle pour se reproduire ; seules les femelles pondent ou donnent du lait | oui (1.2.0) | recommandé |
-| **Freeze It and Heat It** | Addon Cold Sweat : la nourriture gèle au froid ou se gâte à la chaleur, réparable à la glacière ou à la chaudière | oui (4.1.0) | socle, s'il charge avec Cold Sweat 2.4.3.1 |
-| **Script « Garde-manger »** | Péremption lente en KubeJS (voir 4.5) | — | socle (script) |
-| **Kaleidoscope Tavern** | Même équipe que KC : vigne, foulage, tonneaux à 7 niveaux de qualité, cave, vieillissement | oui (1.2.0) | recommandé, **à la place de Vinery** |
-| **Thirst Canteen** | Gourdes pour Thirst Was Reclaimed | oui (3.7) | recommandé |
-| **Tide** (+ Tide Extra Compatibility) | Pêche par espèce selon biome, profondeur, heure et météo ; appâts ; journal | oui (2.1.1) | recommandé |
-| **Nutritional Balance** | Nutriments par tags, malnutrition et excès : la variété de KC devient utile | oui (7.0.3) | recommandé |
-| **Hardcore Revival** | À terre au lieu de mort ; les coéquipiers réaniment | oui | recommandé |
-| **Comforts** | Sacs de couchage et hamacs (déjà proposé en [2](02-exploration.md)) | oui | recommandé |
-| **AppleSkin** | Aperçu faim et saturation (déjà proposé en [6](06-technique-et-serveur.md)) | oui | recommandé |
+| **Kaleidoscope Compat** | Merges KC ↔ Farm & Charm duplicates through `c:` tags; replays the F&C cooking pot recipes in the KC stockpot; option that turns off the F&C pot. **This is the condition of 0002, ready-made** | yes (2.9.7) | foundation |
+| **Cattlestrophic!** | Hunger and old age for animals; wild (little loot, no leash) and domestic (starve if not fed) | yes (1.3.0) | foundation, to be tested |
+| **Salt's Animal Farm** | Comfort, shelter, hidden weight, sickness from neglect, panic. Adds no items: the F&C barn and straw become gameplay | yes (0.2) | foundation, to be tested over a long period (young mod) |
+| **Animal Genders** | One male and one female are needed to breed; only females lay eggs or give milk | yes (1.2.0) | recommended |
+| **Freeze It and Heat It** | Cold Sweat addon: food freezes in the cold or spoils in the heat, repairable at the icebox or the boiler | yes (4.1.0) | foundation, if it loads with Cold Sweat 2.4.3.1 |
+| **"Pantry" script** | Slow spoilage in KubeJS (see 4.5) | — | foundation (script) |
+| **Kaleidoscope Tavern** | Same team as KC: vines, treading, barrels with 7 quality levels, cellar, ageing | yes (1.2.0) | recommended, **in place of Vinery** |
+| **Thirst Canteen** | Canteens for Thirst Was Reclaimed | yes (3.7) | recommended |
+| **Tide** (+ Tide Extra Compatibility) | Fishing by species according to biome, depth, time and weather; baits; journal | yes (2.1.1) | recommended |
+| **Nutritional Balance** | Nutrients by tag, malnutrition and excess: KC's variety becomes useful | yes (7.0.3) | recommended |
+| **Hardcore Revival** | Downed instead of dead; teammates revive | yes | recommended |
+| **Comforts** | Sleeping bags and hammocks (already proposed in [2](02-exploration.md)) | yes | recommended |
+| **AppleSkin** | Hunger and saturation preview (already proposed in [6](06-technique-et-serveur.md)) | yes | recommended |
 
-**Optionnels** :
-- River Fishing : un vrai simulateur d'eau douce (canne assemblée, surpêche, pêche sous la glace), mais il ajoute un PNJ pêcheur. À comparer à Tide sur une branche ; n'en garder qu'un.
-- Fisherman's Trap : nasse à appât.
-- Butchery : carcasses, saignée, séchoir à peaux (sortie réglée sur vanilla).
-- Aquatic Breeding : la seule vraie génétique trouvée en 1.21.1 (poissons tropicaux).
-- Kaleidoscope Contraption : cuisine KC sur les engins Create, donc un wagon-restaurant (sur les dirigeables, à vérifier avec Sable).
-- Kaleidoscope Orchard : arbres fruitiers exigeants, encore très jeune (0.0.2).
-- Kaleidoscope Grilling : plus tard.
-- Complicated Bees : génétique des abeilles, sans les espèces qui produisent du minerai.
-- Nourished : alternative à Nutritional Balance.
-- Sleep Quality ou Healthy Sleep : un seul des deux.
-- Animal Weights : repli si Salt's s'avère instable.
+**Optional**:
+- River Fishing: a true freshwater simulator (assembled rod, overfishing, ice fishing), but it adds a fisherman NPC. To be compared with Tide on a branch; keep only one.
+- Fisherman's Trap: bait trap.
+- Butchery: carcasses, bleeding, hide drying rack (output tuned to vanilla).
+- Aquatic Breeding: the only real genetics found for 1.21.1 (tropical fish).
+- Kaleidoscope Contraption: KC cooking on Create contraptions, hence a dining car (on airships, to be checked with Sable).
+- Kaleidoscope Orchard: demanding fruit trees, still very young (0.0.2).
+- Kaleidoscope Grilling: later.
+- Complicated Bees: bee genetics, without the species that produce ore.
+- Nourished: alternative to Nutritional Balance.
+- Sleep Quality or Healthy Sleep: only one of the two.
+- Animal Weights: fallback if Salt's proves unstable.
 
-**Écartés** :
-- Let's Do Vinery : doublon de Kaleidoscope Tavern.
-- Animania Reborn : CurseForge seulement, à surveiller.
-- ShelfLife : GitHub seulement.
-- SpoiledZ, Food Spoiling : pas de version 1.21.1.
-- Diet : bloqué en 1.20.1 ; Spice of Life: Onion.
-- Hourglass : pas de 1.21.1, et Ecliptic gère déjà la durée du jour.
-- Create Wells, Just a Well : doublons du puits F&C.
-- First Aid New : config lourde, en concurrence avec Hardcore Revival.
-- Butchercraft (dépend d'Extra Delight), Barnyard Buddies (contenu), Animal Feeding Trough (reproduction autonome).
-- Serene Seasons API Stub (Ecliptic Seasons Bridge) : il ferait voir les saisons d'Ecliptic à Cold Sweat sans script, mais il n'est que sur CurseForge.
+**Ruled out**:
+- Let's Do Vinery: duplicate of Kaleidoscope Tavern.
+- Animania Reborn: CurseForge only, to be watched.
+- ShelfLife: GitHub only.
+- SpoiledZ, Food Spoiling: no 1.21.1 version.
+- Diet: stuck on 1.20.1; Spice of Life: Onion.
+- Hourglass: no 1.21.1 version, and Ecliptic already handles day length.
+- Create Wells, Just a Well: duplicates of the F&C well.
+- First Aid New: heavy config, competes with Hardcore Revival.
+- Butchercraft (depends on Extra Delight), Barnyard Buddies (content), Animal Feeding Trough (autonomous breeding).
+- Serene Seasons API Stub (Ecliptic Seasons Bridge): it would let Cold Sweat see Ecliptic's seasons without a script, but it is only on CurseForge.
 
-## 4.4 Qui fait quoi
+## 4.4 Who does what
 
-| Fonction | Mods | Ce qu'on coupe |
+| Function | Mods | What is switched off |
 |---|---|---|
-| Climat | Ecliptic + pont KubeJS vers Cold Sweat | `HeatStroke = false` |
-| Eau | Thirst Was Reclaimed + Thirst Canteen + puits F&C ; filtre à sable Create à l'ère industrielle | — |
-| Champs | KC + F&C + saisons et humidité d'Ecliptic | `enableRainGrowthEffect` réduit (cumul avec l'humidité d'Ecliptic) |
-| Cuisine | KC seul (avec Kaleidoscope Compat) | Postes et plats de F&C |
-| Boissons | Kaleidoscope Tavern | Vinery, cocktail Molotov |
-| Élevage | Cattlestrophic + Salt's + Animal Genders + reproduction saisonnière d'Ecliptic + bâtiments F&C | Reproduction automatique par la mangeoire F&C ; mangeoire de Quark (déjà coupée) |
-| Pêche | Tide (ou River Fishing après comparaison) | Pêche saisonnière d'Ecliptic à régler pour ne pas cumuler |
-| Abeilles | Ecliptic (+ Complicated Bees en option) | — |
-| Conservation | Freeze It and Heat It + Garde-manger (séchage KC, cave, glacière, tonneaux Tavern) | — |
+| Climate | Ecliptic + KubeJS bridge to Cold Sweat | `HeatStroke = false` |
+| Water | Thirst Was Reclaimed + Thirst Canteen + F&C well; Create sand filter in the industrial era | — |
+| Fields | KC + F&C + Ecliptic seasons and humidity | `enableRainGrowthEffect` reduced (it stacks with Ecliptic's humidity) |
+| Cooking | KC alone (with Kaleidoscope Compat) | F&C stations and dishes |
+| Drinks | Kaleidoscope Tavern | Vinery, Molotov cocktail |
+| Livestock | Cattlestrophic + Salt's + Animal Genders + Ecliptic seasonal breeding + F&C buildings | Automatic breeding by the F&C feeder; Quark feeder (already off) |
+| Fishing | Tide (or River Fishing after comparison) | Ecliptic seasonal fishing to be tuned so the two do not stack |
+| Bees | Ecliptic (+ Complicated Bees as an option) | — |
+| Preservation | Freeze It and Heat It + Pantry (KC drying, cellar, icebox, Tavern barrels) | — |
 | Nutrition | Nutritional Balance + AppleSkin | — |
-| Santé et repos | Hardcore Revival + Comforts | — |
+| Health and rest | Hardcore Revival + Comforts | — |
 
-## 4.5 Le « Garde-manger » (script KubeJS)
+## 4.5 The "Pantry" (KubeJS script)
 
-Faute de mod fiable sur Modrinth, la péremption lente est écrite en KubeJS, sur le modèle de ShelfLife :
-1. Tags `fallow:perishable/fast`, `fallow:perishable/medium`, `fallow:perishable/slow` et `fallow:preserved`.
-2. La date de fabrication est arrondie **au jour** (`custom_data.fallow_day`), pour que les piles d'un même jour fusionnent.
-3. Le calcul ne se fait qu'à l'ouverture d'un conteneur, au ramassage, et environ toutes les 30 s pour l'inventaire du joueur : aucun coût par tick.
-4. Le lieu compte : température du conteneur via `coldsweat.getTemperatureAt` (cave froide ×0,3, glacière ×0,1), plus vite en été via `EclipticSeasonsApi`.
-5. Un aliment périmé devient de la chair putréfiée ou du compost, qui retourne aux engrais de F&C.
-6. Infobulle sobre (« frais », « à consommer bientôt », « avarié »), sans compte à rebours précis.
-7. La transformation est récompensée : séché au plateau en bambou de KC (ciel ouvert, sans pluie, donc saisonnier), salé, mis en tonneau, l'aliment passe dans `fallow:preserved`.
+With no reliable mod on Modrinth, slow spoilage is written in KubeJS, modelled on ShelfLife:
+1. Tags `fallow:perishable/fast`, `fallow:perishable/medium`, `fallow:perishable/slow` and `fallow:preserved`.
+2. The production date is rounded **to the day** (`custom_data.fallow_day`), so that stacks from the same day merge.
+3. The calculation only runs when a container is opened, on pickup, and roughly every 30 s for the player's inventory: no per-tick cost.
+4. Location matters: container temperature via `coldsweat.getTemperatureAt` (cold cellar ×0.3, icebox ×0.1), faster in summer via `EclipticSeasonsApi`.
+5. Spoiled food becomes rotten flesh or compost, which goes back into F&C's fertilisers.
+6. Plain tooltip ("fresh", "to be eaten soon", "spoiled"), with no precise countdown.
+7. Processing is rewarded: dried on KC's bamboo tray (open sky, no rain, hence seasonal), salted, put in a barrel, the food moves into `fallow:preserved`.
 
-**Mise en place progressive** : commencer par les seules **rations d'expédition**, puis étendre si la mécanique plaît.
+**Gradual rollout**: start with the **expedition rations** only, then extend if the mechanic works out.
 
-## 4.6 Pont Ecliptic Seasons → Cold Sweat
+## 4.6 Ecliptic Seasons → Cold Sweat bridge
 
-Premier script du sous-projet 3 (décision 0002). Ecliptic expose la saison et le terme solaire, Cold Sweat expose la création de modificateurs de température. Le script lit le sous-terme une fois par minute de jeu et applique au joueur un modificateur saisonnier (par exemple −0,4 en plein hiver, +0,3 au cœur de l'été, en unités Cold Sweat à étalonner). Le brouillon est dans [kubejs-brouillons/server_scripts/saisons_cold_sweat.js](kubejs-brouillons/server_scripts/saisons_cold_sweat.js). Si le pont échoue en jeu, le repli reste Serene Seasons (intégration native avec Cold Sweat).
+First script of sub-project 3 (decision 0002). Ecliptic exposes the season and the solar term, Cold Sweat exposes the creation of temperature modifiers. The script reads the sub-term once per game minute and applies a seasonal modifier to the player (for example −0.4 in deep winter, +0.3 at the height of summer, in Cold Sweat units to be calibrated). The draft is in [kubejs-brouillons/server_scripts/saisons_cold_sweat.js](kubejs-brouillons/server_scripts/saisons_cold_sweat.js). If the bridge fails in game, the fallback remains Serene Seasons (native integration with Cold Sweat).
 
-## 4.7 Réglages à appliquer
+## 4.7 Settings to apply
 
-| Mod | Réglage | Raison |
+| Mod | Setting | Reason |
 |---|---|---|
-| Ecliptic Seasons | `HeatStroke = false` ; `EnableSeasonalBreed = true` ; `EnableSeasonalFishing` à régler avec Tide | Pas de doublon avec Cold Sweat ; élevage saisonnier |
-| Kaleidoscope Compat | `farm_and_charm_compat_enabled = true`, `cooking_pot_recipes_disabled = true` | KC seul système de cuisine (0002) |
-| Farm & Charm | Recette de la mangeoire retirée, ou mise en amour annulée en KubeJS ; `enableRainGrowthEffect` réduit | Pas de reproduction autonome |
-| Cattlestrophic | `acceptedFoodItems` avec l'orge, l'avoine, le maïs, le fourrage et le grain de F&C et le riz de KC ; JSON pour Untitled Duck Mod ; décider du statut des animaux déjà présents | Boucle champ → fourrage → troupeau |
-| Salt's Animal Farm | Liste des mobs effrayants réécrite avec les prédateurs Naturalist et Alex's Mobs ; blocs moelleux : paille KC, sol d'étable F&C | Les hostiles vanilla n'existent plus |
-| Animal Genders | Exclure les hamsters (génétique propre) ; vérifier le poulailler F&C | — |
-| Freeze It and Heat It | Liste blanche alignée sur `fallow:perishable/*` ; les aliments séchés exemptés | Une seule logique de conservation |
-| Kaleidoscope Tavern | Cocktail Molotov désactivé | Pas d'arme incendiaire |
-| Thirst Was Reclaimed | `item-settings.toml` : boissons de KC et de Tavern ; eau du puits F&C « acceptable », pluie récoltée « purifiée » | Eau cohérente |
-| Nutritional Balance | Vérifier qu'il déduit bien les nutriments des recettes KC ; taguer sinon | — |
-| Complicated Bees (si retenu) | Espèces à minerais retirées | Équilibre Overgeared |
+| Ecliptic Seasons | `HeatStroke = false`; `EnableSeasonalBreed = true`; `EnableSeasonalFishing` to be tuned together with Tide | No overlap with Cold Sweat; seasonal breeding |
+| Kaleidoscope Compat | `farm_and_charm_compat_enabled = true`, `cooking_pot_recipes_disabled = true` | KC is the only cooking system (0002) |
+| Farm & Charm | Feeder recipe removed, or love mode cancelled in KubeJS; `enableRainGrowthEffect` reduced | No autonomous breeding |
+| Cattlestrophic | `acceptedFoodItems` with F&C's barley, oats, corn, fodder and grain and KC's rice; JSON for Untitled Duck Mod; decide the status of animals already present | Field → fodder → herd loop |
+| Salt's Animal Farm | List of frightening mobs rewritten with the Naturalist and Alex's Mobs predators; soft blocks: KC straw, F&C barn floor | Vanilla hostiles no longer exist |
+| Animal Genders | Exclude hamsters (own genetics); check the F&C henhouse | — |
+| Freeze It and Heat It | Whitelist aligned with `fallow:perishable/*`; dried foods exempted | A single preservation logic |
+| Kaleidoscope Tavern | Molotov cocktail disabled | No incendiary weapon |
+| Thirst Was Reclaimed | `item-settings.toml`: KC and Tavern drinks; F&C well water "acceptable", collected rain "purified" | Consistent water |
+| Nutritional Balance | Check that it correctly derives nutrients from KC recipes; tag them otherwise | — |
+| Complicated Bees (if kept) | Ore species removed | Overgeared balance |
 
-**Régénération naturelle** (décision 12 du [8.4](08-mise-en-place.md#84-décisions-à-valider-ensemble)) : défaut proposé, la **garder** (`naturalRegeneration true`). Hardcore Revival, la faim et la soif suffisent à rendre la survie exigeante sans transformer chaque blessure en corvée.
+**Natural regeneration** (decision 12 of [8.4](08-mise-en-place.md#84-decisions-to-validate-together)): proposed default, **keep it** (`naturalRegeneration true`). Hardcore Revival, hunger and thirst are enough to make survival demanding without turning every injury into a chore.
 
-## 4.8 À vérifier dans les .jar
+## 4.8 To check in the .jar files
 
-1. Freeze It and Heat It : versions de Cold Sweat acceptées, conteneurs pris en compte, clés.
-2. Salt's Animal Farm : clés, animaux des autres mods, performance, cumul avec Cattlestrophic.
-3. Cattlestrophic : identifiant de sa mangeoire, animaux préexistants, canards.
-4. Animal Genders : poulailler F&C, exclusions.
-5. Kaleidoscope Compat : liste des objets fusionnés, compatibilité avec KC 1.5.1 (ou passage en 1.6.0).
-6. KC 1.5.1 : contient-il déjà les tags de saison, ou faut-il la 1.6.0 ?
-7. Kaleidoscope Tavern : cave, Molotov, soif.
-8. Tide ou River Fishing : doublons avec Hybrid Aquatic, PNJ pêcheur.
-9. Thirst Canteen 3.7 avec TWR 3.0.6.
-10. Ecliptic : `ForceCompatMode` avec F&C ; cumul de la reproduction saisonnière avec la mangeoire.
-11. Puits F&C : pureté de l'eau pour TWR.
+1. Freeze It and Heat It: accepted Cold Sweat versions, containers supported, keys.
+2. Salt's Animal Farm: keys, animals from other mods, performance, stacking with Cattlestrophic.
+3. Cattlestrophic: identifier of its feeder, pre-existing animals, ducks.
+4. Animal Genders: F&C henhouse, exclusions.
+5. Kaleidoscope Compat: list of merged items, compatibility with KC 1.5.1 (or move to 1.6.0).
+6. KC 1.5.1: does it already contain the season tags, or is 1.6.0 needed?
+7. Kaleidoscope Tavern: cellar, Molotov, thirst.
+8. Tide or River Fishing: duplicates with Hybrid Aquatic, fisherman NPC.
+9. Thirst Canteen 3.7 with TWR 3.0.6.
+10. Ecliptic: `ForceCompatMode` with F&C; stacking of seasonal breeding with the feeder.
+11. F&C well: water purity for TWR.

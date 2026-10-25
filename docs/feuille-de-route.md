@@ -34,7 +34,7 @@ Status as of 2026-10-18. The project is split into sub-projects, each with its o
 - [ ] A mod that replaces vanilla structures with Create-integrated versions; candidates: Create: Let The Adventure Begin, Create Aeronautics Structures, Create: Structures Arise, Create Rustic Structures ([0004](decisions/0004-structures.md)).
 - [ ] Real-world comparison of NML vs Terralith + Streams Reflowing on `test/terralith-vs-nml` ([0001](decisions/0001-nml-vs-terralith.md)).
 - [ ] Distant Horizons, Separate Sable Render Distance, Particle Rain ([0007](decisions/0007-ambiance-performance.md)).
-- [ ] Other "to test" candidates from the [registry](mods.md#à-tester).
+- [ ] Other "to test" candidates from the [registry](mods.md).
 
 ### Watch list
 - Sinytra Connector (beta) runs Antique Atlas 4 and Surveyor, two Fabric mods: keep an eye on it at every update.
