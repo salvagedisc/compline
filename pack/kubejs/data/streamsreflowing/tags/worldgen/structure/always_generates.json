@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "ancient_remnants:cherry_monument",
+    "ancient_remnants:coniferous_monument",
+    "ancient_remnants:oakwood_monument",
+    "ancient_remnants:hunter_monolith",
+    "ancient_remnants:sentinel_monolith",
+    "ancient_remnants:warrior_monolith"
+  ]
+}
