@@ -1,0 +1,12 @@
+{
+  "itemGroup.sablephysicscompat": "Onglet du mod d'exemple",
+  "block.sablephysicscompat.example_block": "Bloc d'exemple",
+  "item.sablephysicscompat.example_item": "Objet d'exemple",
+  "sablephysicscompat.configuration.title": "Sable : configuration de Physics Compat",
+  "sablephysicscompat.configuration.section.sablephysicscompat.common.toml": "Sable : configuration de Physics Compat",
+  "sablephysicscompat.configuration.section.sablephysicscompat.common.toml.title": "Sable : configuration de Physics Compat",
+  "sablephysicscompat.configuration.items": "Liste d'objets",
+  "sablephysicscompat.configuration.logDirtBlock": "Journaliser le bloc de terre",
+  "sablephysicscompat.configuration.magicNumberIntroduction": "Texte du nombre magique",
+  "sablephysicscompat.configuration.magicNumber": "Nombre magique"
+}
