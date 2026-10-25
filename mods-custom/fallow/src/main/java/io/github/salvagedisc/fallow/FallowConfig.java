@@ -14,6 +14,8 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
+    private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
+    private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
     private static final ModConfigSpec.BooleanValue SAC_ENABLED;
     private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
     private static final ModConfigSpec.BooleanValue XP_ENABLED;
@@ -34,6 +36,17 @@ public final class FallowConfig {
                 .comment("Vider le cache de brume d'ATMOSPHERICS dès que le serveur change des biomes",
                         "(/fillbiome, conversion en clairière), pour que la brume réagisse sans que le joueur bouge.")
                 .define("clearFogOnBiomeUpdate", true);
+        client.pop();
+
+        client.comment("Module horizon (client) : le paysage lointain de Distant Horizons suit la brume du terrain.").push("horizon");
+        HORIZON_ENABLED = client
+                .comment("Interrupteur du module. Vrai : dans la brume, les LOD restent cachés ; là où elle se lève,",
+                        "le paysage lointain apparaît. Faux : Distant Horizons garde le brouillard de sa config",
+                        "(celle du pack cache tous les LOD).")
+                .define("enabled", true);
+        HORIZON_SKIP_HIDDEN_LODS = client
+                .comment("Ne pas dessiner du tout les LOD quand la brume les cache entièrement (gain de performance).")
+                .define("skipHiddenLods", true);
         client.pop();
         CLIENT_SPEC = client.build();
 
@@ -80,6 +93,14 @@ public final class FallowConfig {
 
     public static boolean cielClearFogOnBiomeUpdate() {
         return cielEnabled() && read(CLIENT_SPEC, CIEL_CLEAR_FOG_ON_BIOME_UPDATE);
+    }
+
+    public static boolean horizonEnabled() {
+        return read(CLIENT_SPEC, HORIZON_ENABLED);
+    }
+
+    public static boolean horizonSkipHiddenLods() {
+        return horizonEnabled() && read(CLIENT_SPEC, HORIZON_SKIP_HIDDEN_LODS);
     }
 
     public static boolean sacEnabled() {

@@ -17,7 +17,9 @@ public enum FallowModule {
     /** Boire au tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed (client et serveur). */
     SAC("sac", null, bus -> io.github.salvagedisc.fallow.sac.SacModule.start(bus), ModIds.TRAVELERS_BACKPACK, ModIds.THIRST),
     /** Plus d'expérience : l'enclume sans niveaux, la barre cachée (client et serveur). Aucun mod requis. */
-    XP("xp", null, bus -> io.github.salvagedisc.fallow.xp.XpModule.start(bus));
+    XP("xp", null, bus -> io.github.salvagedisc.fallow.xp.XpModule.start(bus)),
+    /** Le paysage lointain de Distant Horizons suit la brume : caché dans la brume, visible là où elle se lève (client et serveur). */
+    HORIZON("horizon", null, bus -> io.github.salvagedisc.fallow.horizon.HorizonModule.start(bus), ModIds.DISTANT_HORIZONS);
 
     private final String id;
     private final Dist side;

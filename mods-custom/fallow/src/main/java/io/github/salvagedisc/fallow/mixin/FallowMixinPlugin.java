@@ -21,7 +21,10 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             "ciel.LevelRendererMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
             "ciel.RenderSystemMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
             "ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS),
-            "ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS));
+            "ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS),
+            "horizon.FogRendererMixin", List.of(ModIds.DISTANT_HORIZONS),
+            "horizon.GLStateMixin", List.of(ModIds.DISTANT_HORIZONS),
+            "horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY));
 
     @Override
     public void onLoad(String mixinPackage) {

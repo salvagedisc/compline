@@ -5,13 +5,16 @@
   "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "horizon.ChunkyAccessorMixin",
     "xp.AnvilMenuMixin"
   ],
   "client": [
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",
     "ciel.LevelRendererMixin",
-    "ciel.RenderSystemMixin"
+    "ciel.RenderSystemMixin",
+    "horizon.FogRendererMixin",
+    "horizon.GLStateMixin"
   ],
   "injectors": {
     "defaultRequire": 1

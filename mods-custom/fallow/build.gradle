@@ -83,6 +83,9 @@ dependencies {
     // Module sac
     compileOnly modrinth('travelersbackpack')
     compileOnly modrinth('thirst-was-reclaimed')
+
+    // Module horizon
+    compileOnly modrinth('distanthorizons')
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
