@@ -1,6 +1,10 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/DistantHorizons.toml"
+hash = "50e58d2b37f477943ffd1ecadcd99cb5ff6b5a1e90e34f36fcd9614dc78b6f96"
+
+[[files]]
 file = "config/cameraoverhaul.toml"
 hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
@@ -69,12 +73,24 @@ file = "config/shouldersurfing-client.toml"
 hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
 
 [[files]]
+file = "config/streamsreflowing-client.properties"
+hash = "b3cbcd608c06f1eda2dbe212398184f68908f0768261c2db0b3c28636db507de"
+
+[[files]]
+file = "config/streamsreflowing.properties"
+hash = "cf840fe6094d1966dee70ec491613debd884af12c0f216e7ef253342746e72e9"
+
+[[files]]
 file = "config/supplementaries-client.toml"
 hash = "8f39475f5d53b1244325fcc7b0dda74e86ca436542ef83ebf94777d049c01d1a"
 
 [[files]]
 file = "config/supplementaries-common.toml"
 hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
+
+[[files]]
+file = "config/tectonic.json"
+hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
 file = "config/wildex/wildex-common.toml"
@@ -589,6 +605,10 @@ file = "kubejs/assets/defaultoptions/lang/fr_fr.json"
 hash = "d9a2ca8642587dc2a19d5bc33856da36e26af74326bd4836b4f84123ea4ba391"
 
 [[files]]
+file = "kubejs/assets/distanthorizons/lang/fr_fr.json"
+hash = "15306e269324328ca774459385fe69208bed01f4b094d0f2e7c9238612a6e4a0"
+
+[[files]]
 file = "kubejs/assets/eclipticseasons/lang/fr_fr.json"
 hash = "d891f8bac94499bd52a3b4a8e5f61068b989d485f49c64a06d19e702ed8fac21"
 
@@ -899,6 +919,10 @@ hash = "d81dc6007832792071632097c0cd10da30bdd621fc00bac6e8758bb07c2f794b"
 [[files]]
 file = "kubejs/assets/supplementaries/lang/fr_fr.json"
 hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
+
+[[files]]
+file = "kubejs/assets/tectonic/lang/fr_fr.json"
+hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
 file = "kubejs/assets/travelersbackpack/lang/fr_fr.json"
@@ -1245,6 +1269,10 @@ file = "kubejs/data/nomansland/tags/worldgen/biome/entity/spawns_timber_wolves.j
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
+file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
+hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
+
+[[files]]
 file = "kubejs/server_scripts/doublons.js"
 hash = "5d725b75487d5da8d2e7a411b6695e348f42b71363cfc4f827e1bb21e0c54d5e"
 
@@ -1487,6 +1515,11 @@ hash = "a6967d761dde867ccc1af53dc9f4e530eb9917a9cb21d0fc15708e8cd2c0f2ba"
 metafile = true
 
 [[files]]
+file = "mods/distanthorizons.pw.toml"
+hash = "0c20fea3407ed0db85b4b171f1820a24987f2659946fadd30bae044205041b09"
+metafile = true
+
+[[files]]
 file = "mods/dripsounds.pw.toml"
 hash = "206ca58e8978bb012e8469ea9813c64335984bc7ec93b88bc3f0d573f432ab9c"
 metafile = true
@@ -1537,8 +1570,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.2.1.jar"
-hash = "c06e31fa02c69df77d4b895f0e038ec66d5c5d9879e1b59a2c428a4447dbe46d"
+file = "mods/fallow-0.3.0.jar"
+hash = "54a60b83897947beec2a670353f1e6d0a95dd8dd10019dfc230809a5eafee9f3"
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"
@@ -1703,11 +1736,6 @@ metafile = true
 [[files]]
 file = "mods/mcqoy.pw.toml"
 hash = "604b7674b96d10b2c9f03e47a91ec50b448e8193de56f36fca93b5ff0f3132f6"
-metafile = true
-
-[[files]]
-file = "mods/mezzconfig.pw.toml"
-hash = "cf5d87f046590b99d92096a79f6ea2f456290ba5d423c256f06674d2d10a1592"
 metafile = true
 
 [[files]]
@@ -1881,6 +1909,11 @@ hash = "39eac2df2b472e75842d065f3220cfedc4a1c28979e1c82ae5e3f8955c54c7de"
 metafile = true
 
 [[files]]
+file = "mods/streams-reflowing.pw.toml"
+hash = "814062f207d8837246db5699198c5381e0b094866d112e7dd20b1f83c8dd6e17"
+metafile = true
+
+[[files]]
 file = "mods/structure-layout-optimizer.pw.toml"
 hash = "20d767f7f803fd43e7b539046878bf97a27458595a1beff0b28002aca1b671de"
 metafile = true
@@ -1898,6 +1931,11 @@ metafile = true
 [[files]]
 file = "mods/surveyor.pw.toml"
 hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
+metafile = true
+
+[[files]]
+file = "mods/tectonic.pw.toml"
+hash = "dd46fad79cf33a00123be0a74c73581da72cd98503ef23822a624a08f4b10ff2"
 metafile = true
 
 [[files]]
@@ -1975,8 +2013,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v2.json"
-hash = "1ee7404f8162125ee40876e318d9c5f754da83aace4790166e4c67bea2a249f4"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v3.json"
+hash = "dfd9f16edf2db96bd9785ec17badada38f61120d308336f8143430067c5984ba"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
