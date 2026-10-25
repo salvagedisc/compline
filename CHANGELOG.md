@@ -57,6 +57,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 
 ### Changed
+- Documentation brought up to date on 2026-10-25: feature overview in the README, vision rewritten around the mist that lifts and the long-term goals, roadmap with the updates held until the tests, every in-game test gathered by play session in `docs/tests-en-jeu.md`.
 - Low-risk updates: Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, No Man's Land 1.6.3, Ecliptic Seasons 0.15.5, Contraption Lights 1.5.5, CreativeCore 2.13.51, ModernFix 5.27.27, ImmediatelyFast 1.6.15, Knight Lib 2.0.5, Companions! 1.3.6, Hybrid Aquatic 1.7.4 and Hybrid API 1.1.3, Naturalist 2.0.7, Alex's Mobs Continued 2.2.4, Traveler's Backpack 10.1.40, AmbientSounds 6.3.11, Lithostitched 1.8.1, Puzzles Lib, Modonomicon, Forgified Fabric API, Every Compat, Subtle Effects 1.15.1, Sound Physics Remastered 1.5.2; NeoForge 21.1.265.
 - Ecliptic Seasons set to farming only (`AGRICULTURE`), heat stroke and chat notices off.
 - Friends & Foes: Iceologer, Illusioner, Wildfire, their structures and the zombie horse trap disabled by config; fewer Maulers, crabs and Mooblooms.

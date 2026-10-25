@@ -172,7 +172,7 @@ Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM 
 
 ## In-game tests
 
-None of this has been done. To be run on an instance of the pack, then ticked off here.
+None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
 
 ### Sky
 

@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the **target** pack, updated on 2026-10-25 with the team's choices: what is already in `pack/mods/`, what the plan adds, what remains to be tested and what is dropped. The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
+Complete list of the pack, updated on 2026-10-25 (late evening, after PRs #1 to #3): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -9,7 +9,7 @@ Statuses:
 - ⚪ optional;
 - ❌ leaves the pack.
 
-Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoForge 1.21.1 on 2026-10-18.
+Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoForge 1.21.1 on 2026-10-25.
 
 ## World and exploration
 
@@ -25,7 +25,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
 | Antique Transport | `antique-transport` | ✅ (added 2026-10-25) | CS | Create trains, tracks, stations and Sable ships appear on the atlas |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Shared exploration for the atlas |
-| Icy's Better Horses | `icys-better-horses` | ✅ (upgrade to 2.1.4) | CS | Horses, breeds, bond, carts |
+| Icy's Better Horses | `icys-better-horses` | ✅ (2.0.1; 2.1.x held, see the roadmap) | CS | Horses, breeds, bond, carts |
 
 ## Long-term goals
 

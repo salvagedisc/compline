@@ -2,15 +2,33 @@
 
 [![build](https://github.com/salvagedisc/fallow/actions/workflows/build.yml/badge.svg)](https://github.com/salvagedisc/fallow/actions/workflows/build.yml)
 
-A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends: exploration through the mist, settlements, Create and aviation, long-term farming and animal husbandry. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment.
+A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends, in the spirit of the No Man's Land trailer: an almost empty, enigmatic world under the mist, which lifts wherever the players bring life back. Exploration, Create and aviation, farming and cooking, a bestiary and a zoo as long-term goals. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment. Everything that can be read in game is in French.
 
 | | |
 |---|---|
 | Minecraft | 1.21.1 |
-| Loader | NeoForge 21.1.251 |
+| Loader | NeoForge 21.1.265 |
 | Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
-| Version | `0.x` (prototype, disposable worlds); `1.0.0` = launch of the permanent world |
+| Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
+| Status (2026-10-25) | 110 mods plus 31 libraries, 10 resource packs, custom mod `fallow` 0.4.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
 | Content | see the [mod registry](docs/mods.md) |
+
+## What the pack does today
+
+| Area | In game |
+|---|---|
+| The world | No Man's Land biomes on Tectonic terrain (continents, ranges, valleys) with Streams Reflowing streams; sparse structures, six Monoliths monuments with a codex to piece together; End removed and Nether closed |
+| The mist | ATMOSPHERICS mist per biome (`fallow_v3` preset); Distant Horizons hidden in the mist and revealed where it lifts |
+| Clearings | Vigil fire (radius 16), clearing lantern (32) and the Create **dissipator** (64) turn the land around them into a clearing for good: light mist, vivid grass, far view, its own music |
+| Exploration | Hand-drawn Antique Atlas without coordinates, trains and ships on it; Lootr chests; the Friendly Moon of No Man's Land as a main thread; Exposure photography and astrophotography |
+| Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; no experience at all (anvil by wear, enchanting through found books) |
+| Daily life | Kaleidoscope Cookery and Farm & Charm, tannery (raw hide, ash, bamboo tray), Traveler's Backpack whose hose quenches thirst, mail by pigeon (Envelope) |
+| Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
+| Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player; Wildex bestiary |
+| Finish | Shoulder camera, 3D menus, animated arms, items with physics, coloured light without shaders, particles, wakes, puddles, adaptive music with long silences |
+| Safety | Hourly backups, crashing entities stopped instead of the world, crash assistant |
+
+The full list, with what was dropped and why, is in the [mod registry](docs/mods.md); what is planned next is in the [roadmap](docs/feuille-de-route.md).
 
 ## Play
 
@@ -29,11 +47,13 @@ fallow/
 │   ├── defaultconfigs/    ← configs applied to every new world
 │   └── kubejs/            ← rules layer: startup/server/client scripts
 │       └── data/fallow/   ← datapack data loaded by KubeJS
+├── mods-custom/fallow/    ← sources of the custom `fallow` mod (jar copied to pack/mods/)
 ├── scripts/               ← dependency-free Node.js tooling (+ tests)
 ├── docs/
 │   ├── vision.md          ← philosophy of the pack
 │   ├── mods.md            ← registry: kept, to test, rejected
 │   ├── feuille-de-route.md ← sub-projects and open work items
+│   ├── tests-en-jeu.md    ← in-game tests to run, grouped by play session
 │   ├── plan/              ← full modpack plan (mods, configs, scripts)
 │   ├── decisions/         ← one record per settled decision
 │   └── conception/        ← specs and implementation plans
