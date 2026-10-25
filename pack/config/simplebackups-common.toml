@@ -1,0 +1,6 @@
+# Permanent world: one backup per hour of play, the last 24 kept, plus one when everybody has left.
+backupType = "FULL_BACKUPS"
+timer = 60
+backupsToKeep = 24
+noPlayerBackups = true
+noPlayerBackupCount = 1
