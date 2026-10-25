@@ -1,5 +1,7 @@
 # 7. Rules layer: KubeJS scripts and datapack data
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 Everything that ties the mods together goes through KubeJS (already in the pack) and through data loaded from `pack/kubejs/data/` (KubeJS loads it as an active datapack on all worlds). The **drafts** are in [kubejs-brouillons/](kubejs-brouillons/), laid out as in `pack/kubejs/`: they show the form and the logic, but **no identifier is guaranteed** until the .jar files have been read. That is the job of the .jar study session ([8.3](08-mise-en-place.md#83-what-to-read-in-the-jar-files)).
 
 ## 7.1 Organisation

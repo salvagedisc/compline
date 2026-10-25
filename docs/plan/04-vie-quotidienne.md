@@ -1,5 +1,7 @@
 # 4. Daily life: water, fields, herd, cooking, stores
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 What already exists (0002): Kaleidoscope Cookery (the only cooking system), Farm & Charm (farm infrastructure), Ecliptic Seasons, KaleidoscopeCookery-Automation, Cold Sweat, Thirst Was Reclaimed. Decision 0002 left two gaps: **demanding animal husbandry** without Animal Husbandry and **food preservation** without Spoiled. This chapter fills them, and settles how Farm & Charm and Kaleidoscope Cookery coexist.
 
 Details, evidence and keys: [recherche/research-vie.md](recherche/research-vie.md).

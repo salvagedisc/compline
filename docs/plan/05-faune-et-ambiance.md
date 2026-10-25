@@ -1,5 +1,7 @@
 # 5. Wildlife, ecology and ambience
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 What already exists (decisions 0003 and 0007): Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, six companion mods and Companion; ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights, More Darkness. The bestiary is more than sufficient. What is missing is the **chain that removes vanilla monsters**, the **control of modded creatures** once the space is freed, and a few touches of ambience.
 
 Details, evidence and keys: [recherche/research-faune-ambiance.md](recherche/research-faune-ambiance.md).

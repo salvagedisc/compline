@@ -1,5 +1,7 @@
 # 2. Exploration: "I wonder what's over there"
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 What already exists: No Man's Land (worldgen and atmospheric places), Sparse Structures, Antique Atlas 4 + Surveyor, Icy's Better Horses, Supplementaries (rope, pulley, hand-placed signs, antique ink), Quark (essential). This chapter adds **Breath of the Wild-style traversal**, **places of lost civilisation**, **rewards that are knowledge**, and **navigation without coordinates**.
 
 Mod-by-mod detail, evidence and keys: [recherche/research-exploration.md](recherche/research-exploration.md).

@@ -1,5 +1,7 @@
 # 6. Technical foundation, comfort and server
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 What already exists (0007): Sodium 0.8.13, ImmediatelyFast, Entity Culling, ModernFix, FerriteCore, Lithium, Clumps, Structure Layout Optimizer, Chunky, spark; Sinytra Connector + Forgified Fabric API for Antique Atlas and Surveyor. This chapter adds the **stability of a permanent world**, **comfort compatible with the vision**, the **KubeJS tooling** and the **server configuration**.
 
 Detail, evidence and keys: [recherche/research-technique.md](recherche/research-technique.md).

@@ -9,6 +9,7 @@ Working conventions for the repository. They apply to everyone who contributes.
 - **Every mod comes from Modrinth** and exists for Minecraft 1.21.1 / NeoForge. An unavailable mod is flagged, never replaced by a third-party source.
 - **Only `pack/` ends up in the `.mrpack`**: docs, scripts and CI never go into it.
 - Docs, commit messages and code identifiers in **English**; in-game text stays in the language of each translation file.
+- Documentation file names may stay in French (`feuille-de-route.md`, `tannerie.md`…): they name the systems as the team says them in game. New files follow the same rule; do not rename existing ones, links depend on them.
 
 ## Where to put what
 

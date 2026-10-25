@@ -45,7 +45,6 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Safety net for the permanent world: Simple Backups (one backup per hour of play, last 24 kept), Neruina (+ Configurable: a crashing entity is stopped instead of the world), Crash Assistant, Dynamic FPS.
 - End removed and Nether closed: no ender eyes, no end crystals, Nether portals do not light, no travel to either dimension, no strongholds ([0004](docs/decisions/0004-structures.md)).
 - In Control!: at most 8 hostile creatures per player; Mowzie's Mobs and the cave creatures of Alex's Mobs only in the dark.
-
 - Clearings, the mist that lifts: `fallow` 0.4.0 adds the vigil fire (radius 16), the clearing lantern (32) and the dissipator, a Create kinetic block (64, 32 RPM, 8 stress units per RPM). They turn the biomes around them into `fallow:clairiere` (cold and warm variants) for good: light mist, vivid grass, clearing music, far view. Operators: `/fallow clairiere <radius>`.
 - Ideas of the review of 2026-10-25: Cold Sweat: Altitude, Antique Transport, Create Aeronautics: Automated Logistics, Sable: Physics Compat, Aeronautics Wind Sound, Exposure: Space, all translated into French.
 

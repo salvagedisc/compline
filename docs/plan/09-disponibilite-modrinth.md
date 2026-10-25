@@ -1,5 +1,7 @@
 # 9. Availability on Modrinth
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 Checked on 2026-10-10 against the Modrinth API (`/v2/project`, then `/v2/project/{id}/version?loaders=["neoforge"]&game_versions=["1.21.1"]`). The version shown is the most recent one for NeoForge 1.21.1 at that date; it does not replace `packwiz mr add`, which pins the version at the time of adding.
 
 ## Result

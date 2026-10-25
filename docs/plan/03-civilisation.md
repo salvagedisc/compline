@@ -1,5 +1,7 @@
 # 3. Civilisation: from the forge to the airship, then to the colonies
 
+> **History (plan v1, 2026-10-10).** Superseded by chapters [10](10-recentrage.md) to [12](12-verification.md), the [registry](../mods.md) and the [decisions](../decisions/README.md): several mods listed here have since been dropped. Kept for its reasoning.
+
 What already exists: Overgeared, Create 6.0.10, Create Aeronautics 1.3.2 + Sable, Steam 'n' Rails (NeoForge beta port), KaleidoscopeCookery-Automation, Supplementaries and Quark (essentials). This chapter sets **who does what** between the craftsman and the factory, picks a small number of Create addons without stacking, and proposes a **progression tree** locked in KubeJS.
 
 Mod-by-mod detail, evidence and keys: [recherche/research-civilisation.md](recherche/research-civilisation.md).
