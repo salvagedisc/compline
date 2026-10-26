@@ -15,7 +15,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 ## Session 1: first launch and first steps
 
 - [ ] The game is in French, the Fresh Animations, Dark Coffee and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
-- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac chargé » (bag module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
+- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] Menu titles are readable on the brown background (opening a furnace is enough) [I1].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
@@ -54,7 +54,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 4: survival (thirst, anvil, leather, health, altitude)
 
-- [ ] **Bag**: dirty water in the tank then drunk from the pipe (dirty-water effects), purified water (nothing negative), water pumped from a lake (counts as purified for now), a mix (the dirtiest wins), tank under 1000 mB (nothing), drinking while on fire (the fire goes out) [S1 to S6, S10].
+- [ ] **Bag** (Reliable Backpacks): craft it from 8 tanned leather, wear it on the back (Curios slot, not the chestplate), look at it with Fresh Animations, 3D Skin Layers and the shoulder view, place it on the ground and on an airship, dye it [B1 to B4].
+- [ ] **Stacks**: logs and ingots stop at 16, planks and stone at 32, seeds at 64, chests at 8, Create machines at 4, water bottles at 8; tools never stack. A Kaleidoscope pot (9 dishes) and the Create crusher (18 nuggets) empty without losing anything. Compare `config/sensible_stackables/config.toml` with the generated file [P1 to P5].
+- [ ] **Sleeping bag** (Comforts): sleep in it, the spawn point does not move; is it cold in the snow (Cold Sweat)?
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
@@ -62,6 +64,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s fallow:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
+- [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
 
 ## Session 5: wildlife tour
 
@@ -128,5 +131,6 @@ Once the results are in:
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | T | [plan/tannerie.md](plan/tannerie.md#what-remains-to-be-tested) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
+| B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).

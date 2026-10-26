@@ -18,6 +18,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset, Polytone colours, chosen values and settings to adjust in game |
 | [fallow-interface.md](fallow-interface.md) | The Kaleidoscope, Overgeared and Wildex screens in Dark Coffee colours: withdrawn, proposed to the author of Dark Coffee; licences and limits |
 | [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.0 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere` and `dissipateur`): how it works, what is deduced from the code, in-game tests |
+| [modules-fallow.md](modules-fallow.md) | The eight planned modules of the `fallow` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Fallow takes |
 | [lune-amie.md](lune-amie.md) | The Friendly Moon from No Man's Land as the main thread: the path to the Meeting Point, coexistence with Enhanced Celestials, the removed blood moons |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring |
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |
@@ -27,6 +28,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |
 | [traduction.md](traduction.md) | The French translation: where our texts live, the `check-fr` check, the glossary, what stays in English |
 | [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | The six verification reports (the sixth covers the monument guardians), with the evidence (opened jars, versions, tickets) and the list of in-game tests |
+| [recherche/2026-10-26/](recherche/2026-10-26/) | Eight research reports of 2026-10-26: what is done elsewhere for each next module, animations of survivors and echoes, seasons and day length, the quest book, stacks and bags |
 | [kubejs-brouillons/](kubejs-brouillons/) | Draft scripts and data, laid out like `pack/kubejs/`; to be corrected according to chapter 12 before use |
 
 ## History (v1 of 2026-10-10)

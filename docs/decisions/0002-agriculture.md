@@ -36,3 +36,6 @@ Lets Create's mechanical arm feed KC's stations. Locking automation behind progr
 - Let's Do Meadow: adds biomes, likely conflict with No Man's Land.
 - Graze, automatic drinking troughs: make animal husbandry self-sufficient, the opposite of B.
 - Vinery, Kaleidoscope Tavern: extensions to revisit once the foundation is validated.
+
+## Corrections (2026-10-26)
+Read in the Ecliptic Seasons 0.15.5 jar for [0012](0012-sacs-piles-jours.md): in the `AGRICULTURE` mode the pack uses, crop humidity is off, so C's "season + humidity" is only "season + greenhouses" here. The day length changes by solar term only while `DynamicDaylightDuration` is true (its default); the pack turns it off, Better Days sets the day length.

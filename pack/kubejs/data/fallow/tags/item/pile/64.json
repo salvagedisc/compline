@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#c:seeds",
+      "required": false
+    },
+    {
+      "id": "#c:nuggets",
+      "required": false
+    },
+    {
+      "id": "#c:dyes",
+      "required": false
+    },
+    {
+      "id": "#c:strings",
+      "required": false
+    },
+    {
+      "id": "#c:rods/wooden",
+      "required": false
+    },
+    {
+      "id": "#c:dusts",
+      "required": false
+    },
+    {
+      "id": "#c:feathers",
+      "required": false
+    },
+    {
+      "id": "#c:gunpowders",
+      "required": false
+    },
+    {
+      "id": "minecraft:flint",
+      "required": false
+    },
+    {
+      "id": "minecraft:paper",
+      "required": false
+    },
+    {
+      "id": "minecraft:bone_meal",
+      "required": false
+    },
+    {
+      "id": "minecraft:sugar",
+      "required": false
+    }
+  ]
+}

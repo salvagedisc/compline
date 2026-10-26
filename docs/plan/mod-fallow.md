@@ -81,6 +81,8 @@ The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS me
 
 ## `sac` module
 
+> **Inactive since 2026-10-26.** Traveler's Backpack left the pack for Reliable Backpacks ([0012](../decisions/0012-sacs-piles-jours.md)). The module switches itself off ("Module sac ignoré") and is removed in 0.5.0, with its tests S1 to S9.
+
 **The mechanism.** Traveler's Backpack has a fluid effect API (`api.fluids.EffectFluid`). Each effect registered for a fluid runs when the player drinks that fluid through the hose. `fallow` adds the `fallow:thirst_water` effect on water, next to the backpack's own, which puts out fire. The backpack empties its effect registry during its common initialization: the `fallow` effect is therefore registered at the end of loading (`FMLLoadCompleteEvent`). The log announces it with "sac : effet fallow:thirst_water enregistré". The module has no mixin.
 
 At each sip, on the server:
@@ -288,4 +290,4 @@ Known fragile points:
 
 ## Next modules
 
-In the order of [12.4](12-verification.md#124-the-custom-fallow-mod), depending on the tests: a Ponder scene for the dissipator, then grave, tracks, blueprints and finishing touches. Each will have its section here, its switch and its tests.
+Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-fallow.md](modules-fallow.md), with their order of work. The modules of [12.4](12-verification.md#124-the-custom-fallow-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.

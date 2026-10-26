@@ -112,7 +112,7 @@ Each age opens a chapter of the **settler's notebook** ([3.7](#37-guiding-withou
 
 ## 3.7 Guiding without quests
 
-FTB Quests exists only on CurseForge; Heracles and Odyssey have no 1.21.1 version. I propose a **settler's notebook** under **Modonomicon** (already present as a dependency), with one chapter per age: Forge, Workshop, Steam, Logistics, Rail, Combustion, Aviation, Colonies. Each chapter opens with a **custom advancement** in a datapack. The Ponder scenes of Create and Kaleidoscope Cookery serve as in-game tutorials. No mod to add. Better Advancements is optional for display.
+FTB Quests exists only on CurseForge. (Correction of 2026-10-26: Heracles and Odyssey Quests do exist for 1.21.1 NeoForge, see [livre-de-quetes](recherche/2026-10-26/livre-de-quetes.md); Modonomicon stays the choice.) I propose a **settler's notebook** under **Modonomicon** (already present as a dependency), with one chapter per age: Forge, Workshop, Steam, Logistics, Rail, Combustion, Aviation, Colonies. Each chapter opens with a **custom advancement** in a datapack. The Ponder scenes of Create and Kaleidoscope Cookery serve as in-game tutorials. No mod to add. Better Advancements is optional for display.
 
 ## 3.8 The Nether: closed by default
 

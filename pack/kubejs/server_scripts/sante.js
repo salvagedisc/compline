@@ -3,8 +3,8 @@
 // trouvé en explorant, en rend un. Voir docs/plan/sante.md.
 //
 // Le script ne touche qu'à SON modificateur (SANTE_MODIFICATEUR) de l'attribut
-// minecraft:generic.max_health. Les autres sources (effet Bonus de vie, sac à dos du
-// Warden de Traveler's Backpack, etc.) gardent leurs propres modificateurs et s'ajoutent.
+// minecraft:generic.max_health. Les autres sources (effet Bonus de vie, etc.) gardent
+// leurs propres modificateurs et s'ajoutent.
 //
 // Persistance : le nombre de cœurs perdus vit dans les données persistantes KubeJS du
 // joueur (sauvegardées avec le joueur, recopiées par KubeJS à chaque réapparition).
