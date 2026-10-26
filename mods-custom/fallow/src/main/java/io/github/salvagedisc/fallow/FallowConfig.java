@@ -16,6 +16,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
     private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
+    private static final ModConfigSpec.BooleanValue TITRES_ENABLED;
     private static final ModConfigSpec.BooleanValue SAC_ENABLED;
     private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
     private static final ModConfigSpec.BooleanValue XP_ENABLED;
@@ -49,6 +50,12 @@ public final class FallowConfig {
         HORIZON_SKIP_HIDDEN_LODS = client
                 .comment("Ne pas dessiner du tout les LOD quand la brume les cache entièrement (gain de performance).")
                 .define("skipHiddenLods", true);
+        client.pop();
+
+        client.comment("Module titres (client) : le titre des écrans vanilla sur une plaque au-dessus du panneau.").push("titres");
+        TITRES_ENABLED = client
+                .comment("Interrupteur du module. Faux : le jeu écrit de nouveau les titres dans les panneaux, à ses places.")
+                .define("enabled", true);
         client.pop();
         CLIENT_SPEC = client.build();
 
@@ -113,6 +120,10 @@ public final class FallowConfig {
 
     public static boolean horizonSkipHiddenLods() {
         return horizonEnabled() && read(CLIENT_SPEC, HORIZON_SKIP_HIDDEN_LODS);
+    }
+
+    public static boolean titresEnabled() {
+        return read(CLIENT_SPEC, TITRES_ENABLED);
     }
 
     public static boolean sacEnabled() {

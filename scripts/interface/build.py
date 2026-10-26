@@ -7,17 +7,19 @@ vanilla and the mods of the pack, and adapts them to Fallow:
 
 - recolour: GUI Revision's greys become Fallow's mist, sage and moss;
 - titles: the names drawn in the textures (plates, banners) are removed,
-  since they cannot follow the game's language; the game writes its own, in
-  French, recoloured moss green by the text shader, and no ornament or frame
-  lies under them;
+  since they cannot follow the game's language; the fallow mod writes vanilla
+  screens' titles on a plaque above the panel, the inventory label is blank,
+  and the texts the game still writes are recoloured moss green by the text
+  shader, with no ornament or frame under them;
 - screens GUI Revision paints in wood or purple are greyed first, so that
   they take the same palette;
 - slots: redrawn over their whole cell as wells with rounded corners and a
   soft shadow inside; deeper wells with a fine grain where creatures stand;
   the crafting table's frame around every 2x2 and 3x3 grid with room for it;
 - arrows: one slim engraved arrow, the progress one in lantern light, mods'
-  own arrows found by shape and redrawn alike; each on an engraved leaf, each
-  plus on a seal, and slots used together ringed with a groove;
+  own arrows found by shape and redrawn alike; each on an engraved oval, each
+  plus on a round seal sharing its centre, and slots used together ringed
+  with a groove;
 - details: the crafting table's ornaments (GUI Revision's corners and two
   curls from Hollow GUI's frieze) on every large panel, and one tight pattern
   of small leaves on a grid shared by all screens, passing under the slots;
@@ -325,42 +327,18 @@ WOOD_ARROWS = {
     "cartography_table.png": ((48, 38, 52, 46), (50, 42)),
 }
 
-# Vanilla screens whose top panel GUI Revision starts below the row the game
-# writes the title on: the panel's top edge is moved up to this row.
-RAISED = {"anvil.png": 3, "hopper.png": 3, "smithing.png": 3, "dispenser.png": 3, "shulker_box.png": 3}
-
-# Where the game writes the titles of vanilla screens (Minecraft 1.21.1's
-# screens): x and y, "left" when x is where the text starts or "centre" when
-# it is the text's middle, and the keys of the texts that can stand there
-# ("trader": a villager's profession and level); no ornament is laid under
-# them. The player's inventory label is found from the inventory's slots.
+# The fallow mod moves the titles of vanilla screens onto a plaque above the
+# panel, and the inventory label is blank (LANG): the texts the game still
+# writes on vanilla screens, x and y, "left" when x is where the text starts or
+# "centre" when it is the text's middle, and the keys of the texts that can
+# stand there; no ornament is laid under them.
 TITLES = {
-    "crafting_table.png": [(29, 6, "left", ("container.crafting",))],
-    "inventory.png": [(97, 6, "left", ("container.crafting",))],
-    "furnace.png": [(88, 6, "centre", ("container.furnace",))],
-    "blast_furnace.png": [(88, 6, "centre", ("container.blast_furnace",))],
-    "smoker.png": [(88, 6, "centre", ("container.smoker",))],
-    "brewing_stand.png": [(88, 6, "centre", ("container.brewing",))],
-    "crafter.png": [(88, 6, "centre", ("container.crafter",))],
-    "dispenser.png": [(88, 6, "centre", ("container.dispenser", "container.dropper"))],
-    "anvil.png": [(60, 6, "left", ("container.repair",))],
-    "smithing.png": [(44, 15, "left", ("container.upgrade",))],
-    "loom.png": [(8, 4, "left", ("container.loom",))],
-    "cartography_table.png": [(8, 4, "left", ("container.cartography_table",))],
-    "stonecutter.png": [(8, 5, "left", ("container.stonecutter",))],
-    "enchanting_table.png": [(8, 6, "left", ("container.enchant",))],
-    "grindstone.png": [(8, 6, "left", ("container.grindstone_title",))],
-    "hopper.png": [(8, 6, "left", ("container.hopper",))],
-    "generic_54.png": [(8, 6, "left", ("container.chest", "container.chestDouble", "container.enderchest",
-                                       "container.barrel"))],
-    "shulker_box.png": [(8, 6, "left", ("container.shulkerBox",))],
-    "horse.png": [(8, 6, "left", ("entity.minecraft.horse", "entity.minecraft.donkey", "entity.minecraft.llama"))],
-    "villager.png": [(187, 6, "centre", "trader"), (53, 6, "centre", ("merchant.trades",))],
     "beacon.png": [(62, 10, "centre", ("block.minecraft.beacon.primary",)),
                    (169, 10, "centre", ("block.minecraft.beacon.secondary",))],
 }
-# vanilla screens that write no inventory label over the player's inventory
-UNLABELLED = ("inventory.png", "beacon.png", "/creative_inventory/")
+# Texts blanked in every screen: the player's inventory label, and the
+# villager's trades label (the plaque carries the villager's name).
+LANG = {"container.inventory": " ", "merchant.trades": " "}
 # Mod screens: their title is taken to start in the top-left corner.
 MOD_TITLE = (8, 6, 60)
 # the creative inventory's tabs write their name in the corner (the survival
@@ -369,8 +347,8 @@ TITLES["tab_items.png"] = [(8, 6, "left", tuple(f"itemGroup.{k}" for k in (
     "buildingBlocks", "coloredBlocks", "natural", "functional", "redstone", "hotbar", "tools", "combat",
     "foodAndDrink", "ingredients", "spawnEggs", "op")))]
 TITLES["tab_item_search.png"] = [(8, 6, "left", ("itemGroup.search",))]
-# The colour the game writes titles in (0x404040), and Fallow's: a moss green,
-# set by the text shader.
+# The colour the game writes labels in (0x404040), and Fallow's: a moss green,
+# set by the text shader (and the plaque's ink in the fallow mod).
 TITLE_GREY = 0x40
 TITLE_INK = (60, 76, 56)
 
@@ -849,66 +827,72 @@ def panel_inside(im):
     return best and best[1]
 
 
-def raise_panel(im, top):
-    """Moves the top edge of a texture's first panel (its three rows) up to the given
-    row; the rows it leaves take the panel's sides and bare panel between."""
+# The plaque the fallow mod lays over the top edge of vanilla screens, their
+# title written on it in TITLE_INK (mods-custom/fallow, TitresClient).
+PLAQUE = ROOT / "mods-custom" / "fallow" / "src" / "main" / "resources" / "assets" / "fallow" / "textures" / \
+    "gui" / "sprites" / "plaque.png"
+
+
+# The vanilla screens the plaque goes on, by texture, and the game's name of
+# their class: the fallow mod reads in assets/fallow/plaque.json where each
+# panel's top edge lies, to lay the plaque on it.
+PLAQUE_SCREENS = {
+    "anvil": "AnvilScreen", "beacon": "BeaconScreen", "blast_furnace": "BlastFurnaceScreen",
+    "brewing_stand": "BrewingStandScreen", "cartography_table": "CartographyTableScreen",
+    "crafter": "CrafterScreen", "crafting_table": "CraftingScreen", "dispenser": "DispenserScreen",
+    "enchanting_table": "EnchantmentScreen", "furnace": "FurnaceScreen", "generic_54": "ContainerScreen",
+    "grindstone": "GrindstoneScreen", "hopper": "HopperScreen", "horse": "HorseInventoryScreen",
+    "loom": "LoomScreen", "shulker_box": "ShulkerBoxScreen", "smithing": "SmithingScreen",
+    "smoker": "SmokerScreen", "stonecutter": "StonecutterScreen", "villager": "MerchantScreen",
+}
+
+
+def draw_plaque():
+    """The plaque: the furnace panel's edges and corners (its top three rows, its
+    bottom four, four columns each side) around bare panel, a rivet at each end;
+    drawn by the game in nine slices. Also writes the top edge of each screen's
+    panel for the mod."""
+    panel = Image.open(OUT / "assets" / "minecraft" / "textures" / "gui" / "container" / "furnace.png")
+    src = panel.convert("RGBA").load()
+    w, h = 32, 18
+    rows = [3, 4, 5] + [159] * (h - 7) + [79, 80, 81, 82]
+    cols = [0, 1, 2, 3] + [88] * (w - 8) + [172, 173, 174, 175]
+    im = Image.new("RGBA", (w, h))
     px = im.load()
-    old = next(y for y in range(im.height) if any(px[x, y][3] for x in range(im.width)))
-    if old <= top:
-        return
-    span = [x for x in range(im.width) if px[x, old + 3][3]]
-    sides = set(span[:2] + span[-2:])
-    edge = [[px[x, old + k] for x in range(im.width)] for k in range(3)]
-    for y in range(top + 3, old + 3):
-        for x in span:
-            px[x, y] = px[x, old + 3] if x in sides else FILL + (255,)
-    for k in range(3):
-        for x in range(im.width):
-            px[x, top + k] = edge[k][x]
+    for y, sy in enumerate(rows):
+        for x, sx in enumerate(cols):
+            px[x, y] = src[sx, sy]
+    cy = 3 + (h - 7) // 2
+    for cx in (5, w - 6):
+        for dx, dy in ((0, -1), (-1, 0), (1, 0), (0, 1)):
+            px[cx + dx, cy + dy] = SLOT_FILL + (255,)
+        px[cx, cy] = ARROW_LIGHT + (255,)
+    tops = {}
+    for name, screen in PLAQUE_SCREENS.items():
+        texture = Image.open(OUT / "assets" / "minecraft" / "textures" / "gui" / "container" / f"{name}.png")
+        tops[screen] = texture.convert("RGBA").getchannel("A").getbbox()[1]
+    dest = OUT / "assets" / "fallow" / "plaque.json"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(tops, indent=2, sort_keys=True) + "\n")
+    PLAQUE.parent.mkdir(parents=True, exist_ok=True)
+    im.save(PLAQUE)
+    widgets.nine_slice(PLAQUE, w, h, {"left": 8, "top": 3, "right": 8, "bottom": 4})
 
 
-def label_boxes(path, im, cells=None):
-    """The boxes (x0, y0, x1, y1, inclusive) the game's texts take on a screen: the
-    titles of TITLES on vanilla screens, the top-left corner on mod screens, and
-    the inventory label above the player's inventory wherever there is one."""
+def label_boxes(path):
+    """The boxes (x0, y0, x1, y1, inclusive) the game's texts take on a screen: those
+    of TITLES on vanilla screens, the title in the top-left corner on mod screens."""
     texts, _ = game_text()
     name = path.rsplit("/", 1)[1]
     boxes = []
     if path.startswith("assets/minecraft/textures/gui/container/"):
         for x, y, align, keys in TITLES.get(name, []):
-            if keys == "trader":
-                jobs = [v for k, v in texts.items() if re.fullmatch(r"entity\.minecraft\.villager\.[a-z_]+", k)]
-                levels = [v for k, v in texts.items() if re.fullmatch(r"merchant\.level\.\d", k)]
-                w = max(map(text_width, jobs)) + text_width(" - ") + max(map(text_width, levels))
-            else:
-                w = max(text_width(texts.get(k, k)) for k in keys)
+            w = max(text_width(texts.get(k, k)) for k in keys)
             x0 = x if align == "left" else x - w // 2
             boxes.append((x0, y, x0 + w - 1, y + 8))
     elif titled(path):
         x, y, w = MOD_TITLE
         boxes.append((x, y, x + w - 1, y + 8))
-    # the player's inventory: three rows and the hotbar of nine slots; its label
-    # stands 11 pixels above the first row's cells (from the cells when given,
-    # else from the slots drawn)
-    w = text_width(texts["container.inventory"])
-    if cells is not None:
-        tops = {(x, y) for x, y, cw, ch in cells if (cw, ch) == (18, 18)}
-        rows = [(x0, y) for x0, y in tops if all((x0 + 18 * i, y + dy) in tops for i in range(9)
-                                                  for dy in (0, 18, 36, 58))]
-    else:
-        px = im.load()
-        found = [(x0, y) for y in range(12, im.height - 58) for x0 in range(0, im.width - 161)
-                 if all(px[x0 + 9 + 18 * i, y + dy][:3] == EDGE_TOP and px[x0 + 9 + 18 * i, y + dy - 1][:3] != EDGE_TOP
-                        for i in range(9) for dy in (0, 18, 36, 58))]
-        # the cells' top edge runs along most of their width: its middle is the cell
-        rows = []
-        for y in sorted({y for x, y in found}):
-            xs = sorted(x for x, v in found if v == y)
-            if rows and y - rows[-1][1] < 18:
-                continue
-            rows.append(((xs[0] + xs[-1]) // 2, y))
-    if not (path.startswith("assets/minecraft/") and any(k in path for k in UNLABELLED)):
-        boxes += [(x0 + 1, y - 11, x0 + w, y - 3) for x0, y in rows]
     return boxes
 
 
@@ -953,13 +937,16 @@ def add_ornaments(im, decoration, texts=()):
 
 
 # The arrows and pluses between ingredients and result sit on an engraved
-# medallion: a leaf for an arrow, the arrow lying along it as its midrib, a
-# round seal for a plus. Its ground is woven in chevrons, like a leaf's veins.
-EMBLEM_DEEP = (160, 166, 148)
-EMBLEM_MID = (178, 180, 160)
-# pluses the game's screens draw: their centre and the seal's radius
-PLUSES = {"assets/minecraft/textures/gui/container/anvil.png": [(59.5, 55, 8.5)],
-          "assets/minecraft/textures/gui/container/cartography_table.png": [(23.5, 41.5, 6.5)]}
+# medallion: an oval under an arrow, a round seal under a plus. Its rim and its
+# ground are each one flat tone, and it shares its centre with its mark, so that
+# the mark sits exactly in its middle; the arrow's engraved light is left off.
+EMBLEM_RIM = (151, 156, 139)
+EMBLEM_GROUND = (184, 186, 166)
+# The pluses of the game's screens, which GUI Revision draws as a small spike:
+# cleared (box x0, y0, x1, y1 inclusive) and drawn again as Fallow's plus centred
+# on (cx, cy), between pixels, with the seal's radius.
+PLUSES = {"assets/minecraft/textures/gui/container/anvil.png": ((55, 50, 63, 60), (59, 55), 7),
+          "assets/minecraft/textures/gui/container/cartography_table.png": ((18, 37, 26, 46), (23, 41), 7)}
 # Slots used together (the anvil's two inputs, the smithing table's three...):
 # the box of their cells (x0, y0, x1, y1 inclusive), ringed with an engraved
 # groove three pixels out.
@@ -969,75 +956,67 @@ GROUPS = {f"assets/minecraft/textures/gui/container/{k}.png": v for k, v in {
 }.items()}
 
 
-def leaf(cx, cy, half_length, half_height):
-    """The pixels of a leaf lying flat, its tips left and right, centred on (cx, cy)."""
-    return {(x, y) for y in range(int(cy - half_height) - 1, int(cy + half_height) + 2)
-            for x in range(int(cx - half_length) - 1, int(cx + half_length) + 2)
-            if abs(y + 0.5 - cy) <= half_height * (1 - ((x + 0.5 - cx) / half_length) ** 2)}
+def oval(cx, cy, rx, ry):
+    """The pixels of an oval centred on (cx, cy), a point between pixels or on one's
+    middle: the same on both sides of each axis."""
+    return {(x, y) for y in range(math.floor(cy - ry) - 1, math.ceil(cy + ry) + 1)
+            for x in range(math.floor(cx - rx) - 1, math.ceil(cx + rx) + 1)
+            if ((x + 0.5 - cx) / rx) ** 2 + ((y + 0.5 - cy) / ry) ** 2 <= 1}
 
 
-def seal(cx, cy, radius):
-    return {(x, y) for y in range(int(cy - radius) - 1, int(cy + radius) + 2)
-            for x in range(int(cx - radius) - 1, int(cx + radius) + 2)
-            if (x + 0.5 - cx) ** 2 + (y + 0.5 - cy) ** 2 <= radius ** 2}
-
-
-def draw_emblem(im, pts, cx, cy, mark):
-    """An engraved medallion under a mark (the arrow's or the plus's box, x0, y0,
-    x1, y1 inclusive, left as it is): a dark edge above and a light one below, a
-    soft inner ring and the woven ground; left out unless all of it, and a pixel
-    around, lies on bare panel or on the mark."""
+def draw_emblem(im, pts, mark):
+    """An engraved medallion (pts) under a mark (its pixels, drawn in ink over
+    it); left out unless all of it, and a pixel around, lies on bare panel or on
+    the mark."""
     px = im.load()
-    a, b, c, d = mark
-
-    def on_mark(x, y):
-        return a <= x <= c and b <= y <= d and px[x, y][:3] not in (FILL, LEAF_TONE)
-
     around = {(x + i, y + j) for x, y in pts for i in (-1, 0, 1) for j in (-1, 0, 1)}
     if not all(0 <= x < im.width and 0 <= y < im.height and px[x, y][3]
-               and (px[x, y][:3] in (FILL, LEAF_TONE) or on_mark(x, y)) for x, y in around):
+               and (px[x, y][:3] in (FILL, LEAF_TONE) or (x, y) in mark) for x, y in around):
         return False
-
-    def edge(p, shape):
-        x, y = p
-        return any(q not in shape for q in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
-
-    rim = {p for p in pts if edge(p, pts)}
-    inner = {p for p in pts - rim if edge(p, pts - rim)}
     for x, y in pts:
-        if on_mark(x, y):
-            continue
-        if (x, y) in rim:
-            light = (x, y + 1) not in pts or ((x, y - 1) in pts and y + 0.5 > cy)
-            colour = ARROW_LIGHT if light else ARROW_INK
-        elif (x, y) in inner:
-            colour = SOFT
-        else:
-            dx, dy = abs(math.floor(x + 0.5 - cx)), abs(math.floor(y + 0.5 - cy))
-            colour = EMBLEM_DEEP if (dx - dy) % 3 == 0 else EMBLEM_MID
-        px[x, y] = colour + (255,)
+        rim = any(q not in pts for q in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+        px[x, y] = (EMBLEM_RIM if rim else EMBLEM_GROUND) + (255,)
+    for p in mark:
+        px[p] = ARROW_INK + (255,)
     return True
 
 
 def add_emblems(im, path):
-    """A leaf under each of Fallow's arrows lying on a panel (shorter where the
+    """An oval under each of Fallow's arrows lying on a panel (smaller where the
     slots leave less room), a seal under each plus."""
     px = im.load()
-    for rows, sizes, (ox, oy) in ((ARROW, ((16.5, 7.5), (14.5, 7), (13.5, 7)), (11, 5)),
-                                  (SMALL_ARROW, ((12.5, 6), (11.5, 5.5)), (8.5, 4))):
+    for rows, sizes in ((ARROW, ((16, 7), (15, 7), (14, 6.5))), (SMALL_ARROW, ((12.5, 6), (11.5, 5.5)))):
         pts = shape(rows)
         w, h = len(rows[0]), len(rows)
         found = [(x, y) for y in range(im.height - h + 1) for x in range(im.width - w + 1)
                  if all(px[x + a, y + b][:3] == ARROW_INK for a, b in pts)]
         for x, y in found:
-            any(draw_emblem(im, leaf(x + ox, y + oy, hl, hh), x + ox, y + oy, (x, y, x + w - 1, y + h))
-                for hl, hh in sizes)
+            ink = {(x + a, y + b) for a, b in pts}
+            # the engraved light under the arrow (draw_arrow) gives way to the ground
+            mark = ink | {(x + a, y + b + 1) for a, b in pts if (a, b + 1) not in pts
+                          and px[x + a, y + b + 1][:3] == ARROW_LIGHT}
+            for rx, ry in sizes:
+                if draw_emblem(im, oval(x + w / 2, y + h / 2, rx, ry), mark):
+                    for p in mark - ink:
+                        if px[p][:3] == ARROW_LIGHT:
+                            px[p] = EMBLEM_GROUND + (255,)
+                    for p in ink:
+                        px[p] = ARROW_INK + (255,)
+                    break
     plus = shape(PLUS)
-    found = [(x + 5, y + 5) for y in range(im.height - 9) for x in range(im.width - 9)
+    seals = [((x + 5, y + 5), 8) for y in range(im.height - 9) for x in range(im.width - 9)
              if all(px[x + a, y + b][:3] == ARROW_INK for a, b in plus)]
-    for cx, cy, r in [(x, y, 8.5) for x, y in found] + PLUSES.get(path, []):
-        draw_emblem(im, seal(cx, cy, r), cx, cy, (math.floor(cx) - 5, math.floor(cy) - 5,
-                                                math.floor(cx) + 5, math.floor(cy) + 5))
+    if path in PLUSES:
+        (a, b, c, d), centre, r = PLUSES[path]
+        for y in range(b, d + 1):
+            for x in range(a, c + 1):
+                px[x, y] = FILL + (255,)
+        seals.append((centre, r))
+    for (cx, cy), r in seals:
+        mark = {(cx - 5 + a, cy - 5 + b) for a, b in plus}
+        if not draw_emblem(im, oval(cx, cy, r, r), mark):
+            for p in mark:
+                px[p] = ARROW_INK + (255,)
 
 
 def add_grooves(im, path):
@@ -1764,7 +1743,7 @@ def finish(decoration):
             add_pattern(im)
             add_grooves(im, path)
             add_emblems(im, path)
-            add_ornaments(im, decoration, label_boxes(path, im))
+            add_ornaments(im, decoration, label_boxes(path))
         if path == "assets/emi/textures/gui/widgets.png":
             # the filling arrow: the empty one, lit
             px = im.load()
@@ -2051,11 +2030,11 @@ def crafter(frame, decoration):
     touch_up(im, (3, 4, 173, 79), "fill")
     cells = [(25 + 18 * c, 16 + 18 * r, 18, 18) for r in range(3) for c in range(3)] + [(133, 34, 18, 18)]
     path = "assets/minecraft/textures/gui/container/crafter.png"
-    add_frames(im, cells, frame, label_boxes(path, im))
+    add_frames(im, cells, frame, label_boxes(path))
     for x, y, w, h in cells:
         draw_slot(im, x, y, w, h, cells=cells)
     add_pattern(im)
-    add_ornaments(im, decoration, label_boxes(path, im))
+    add_ornaments(im, decoration, label_boxes(path))
     return im
 
 
@@ -2082,7 +2061,7 @@ def dress_vanilla(im, n, frame, decoration):
     spaced = separate(slots + wells)
     slots, wells = spaced[:len(spaced) - len(wells)], spaced[len(spaced) - len(wells):]
     clear_leftovers(im, slots + wells)
-    add_frames(im, slots, frame, label_boxes(n, im, slots))
+    add_frames(im, slots, frame, label_boxes(n))
     for x, y, w, h in slots:
         clear = x == 0 or px[x - 1, y + h // 2][3] == 0
         draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,), cells=slots + wells)
@@ -2090,7 +2069,7 @@ def dress_vanilla(im, n, frame, decoration):
         draw_slot(im, x, y, w, h, "creature", cells=slots + wells)
     if big_panel(n, im):
         add_pattern(im)
-        add_ornaments(im, decoration, label_boxes(n, im))
+        add_ornaments(im, decoration, label_boxes(n))
     return True
 
 
@@ -2203,8 +2182,6 @@ def main():
                     px[x, y] = px[a - 2, y]
             drawn.append((cx - 11, cy - 4))
         recolour(im)
-        if vanilla_screen and name in RAISED:
-            raise_panel(im, RAISED[name])
         for x0, y0 in drawn:
             draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
         if "/sprites/" not in path:
@@ -2234,22 +2211,15 @@ def main():
         slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
         spaced = separate(slots + [w[:4] for w in wells])
         slots, wells = spaced[:len(spaced) - len(wells)], [c + w[4:] for c, w in zip(spaced[len(spaced) - len(wells):], wells)]
-        if vanilla_screen and name == "crafting_table.png":
-            # its own grid frame, drawn again by add_frames, slim under the title
-            px = im.load()
-            for y in range(12, 76):
-                for x in range(25, 87):
-                    if not (29 <= x < 83 and 16 <= y < 70):
-                        px[x, y] = FILL + (255,)
         clear_leftovers(im, slots + wells)
-        add_frames(im, slots, frame, label_boxes(path, im, slots) if vanilla_screen or titled(path) else ())
+        add_frames(im, slots, frame, label_boxes(path))
         for x, y, w, h in slots:
             draw_slot(im, x, y, w, h, cells=slots + wells)
         for x, y, w, h, kind in wells:
             draw_slot(im, x, y, w, h, kind, cells=slots + wells)
         if big_panel(path, im):
             add_pattern(im)
-            add_ornaments(im, decoration, label_boxes(path, im))
+            add_ornaments(im, decoration, label_boxes(path))
         save(path, im)
 
     # vanilla-grey screens of the mods without a compat
@@ -2293,11 +2263,16 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         panorama(face, rows).save(dest, optimize=True)
 
-    # the titles the game writes on screens in 0x404040, in Fallow's moss green:
-    # the game's text shader, recolouring that one grey
+    # the texts written on screens in 0x404040 (mod screens' titles, the beacon's
+    # labels), in Fallow's moss green: the game's text shader, recolouring that
+    # one grey; the plaque of vanilla screens is written in it by the fallow mod
+    lang = OUT / "assets" / "minecraft" / "lang"
+    lang.mkdir(parents=True, exist_ok=True)
+    for code in ("fr_fr", "en_us"):
+        (lang / f"{code}.json").write_text(json.dumps(LANG, indent=2) + "\n")
     shader = vanilla.read("assets/minecraft/shaders/core/rendertype_text.fsh").decode()
     grey, ink = TITLE_GREY / 255, ", ".join(f"{c / 255:.4f}" for c in TITLE_INK)
-    shader = shader.replace("    fragColor = ", f"""    // Fallow: the screens' titles, written in 0x404040, become moss green
+    shader = shader.replace("    fragColor = ", f"""    // Fallow: texts written in 0x404040 become moss green
     if (all(lessThan(abs(vertexColor.rgb - vec3({grey:.5f})), vec3(0.002)))) {{
         color.rgb = texture(Sampler0, texCoord0).rgb * vec3({ink}) * ColorModulator.rgb;
     }}
@@ -2309,6 +2284,7 @@ def main():
     draw_hud(OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "hud")
     finish(decoration)
     dress_sprites(vanilla)
+    draw_plaque()
     widgets.draw(OUT)
     draw_icon().save(OUT / "pack.png")
 
@@ -2322,7 +2298,7 @@ def main():
     # every coordinate table must still find its texture
     named = [*MOD_ARROWS, *REFRAMED, *MOD_SLOTS, *LEFTOVERS, *GREYED_COMPATS, *TOUCH_UPS, *SPRITE_MODES,
              *(k for k in WELLS if "/" in k)]
-    named += [container + k for k in (*GREYED, *PLATED, *EXTRA_SLOTS, *ENGRAVED, *WOOD_ARROWS, *RAISED,
+    named += [container + k for k in (*GREYED, *PLATED, *EXTRA_SLOTS, *ENGRAVED, *WOOD_ARROWS,
                                       *(k for k in WELLS if "/" not in k and k != "tab_inventory.png"))]
     lost = sorted(k for k in named if not (OUT / k).exists())
     if lost:

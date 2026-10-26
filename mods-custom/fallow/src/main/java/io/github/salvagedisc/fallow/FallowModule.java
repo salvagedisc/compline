@@ -23,7 +23,9 @@ public enum FallowModule {
     /** La brume se lève : feu de veille et lanterne de clairière changent les biomes autour d'eux (client et serveur). Aucun mod requis. */
     CLAIRIERE("clairiere", null, bus -> io.github.salvagedisc.fallow.clairiere.ClairiereModule.start(bus)),
     /** Le dissipateur, troisième palier des clairières : un bloc cinétique de Create (client et serveur). */
-    DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.fallow.dissipateur.DissipateurModule.start(bus), ModIds.CREATE);
+    DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.fallow.dissipateur.DissipateurModule.start(bus), ModIds.CREATE),
+    /** Le titre des écrans vanilla sur une plaque au-dessus du panneau (client). Aucun mod requis. */
+    TITRES("titres", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.titres.TitresModule.start(bus));
 
     private final String id;
     private final Dist side;
