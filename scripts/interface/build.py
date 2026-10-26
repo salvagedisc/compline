@@ -10,8 +10,8 @@ vanilla and the mods of the pack, and adapts them to Fallow:
   since they cannot follow the game's language;
 - screens GUI Revision paints in wood or purple are greyed first, so that
   they take the same palette;
-- slots: redrawn over their whole cell, square with rounded corners or round,
-  with a cast shadow; deep wells with a grid where creatures stand;
+- slots: redrawn over their whole cell as wells with rounded corners and a
+  soft shadow inside; deeper wells with a fine grain where creatures stand;
 - arrows: one slim engraved arrow, the progress one in lantern light;
 - details: Hollow GUI's frieze along the top of vanilla panels and a tight
   pattern of small leaves over every large panel;
@@ -110,16 +110,19 @@ LEAF = [
 ]
 LEAF_PITCH = (10, 8)
 
-# Slots: a rim dark at the top and left that fades towards the ends, the rim's
-# shadow cast on the top of the well, a light lip at the bottom and right.
-RIM = [(58, 68, 58), (74, 84, 72), (90, 100, 88)]
-SHADE = [(100, 111, 98), (110, 120, 104), (120, 130, 114)]
+# Slots: a recessed well with rounded corners. Its outline is a step darker at
+# the top and left than at the bottom and right, and the top casts a soft
+# two-row shadow inside the well; no light line, no hard black edge.
+EDGE_TOP = (100, 110, 96)
+EDGE_FADE = (112, 121, 106)
+EDGE_LOW = (160, 166, 148)
+SHADE = [(113, 123, 107), (121, 131, 114)]
 SLOT_FILL = (130, 140, 122)
-LIP = (224, 222, 202)
-LIP_DARK = (214, 212, 192)
-# deeper wells behind the player and the mounts, crossed by a fine grid
-WELL_FILL = (112, 122, 106)
-WELL_GRID = (120, 130, 113)
+# corner profile: how far each of the first rows is cut in, by slot size
+CORNERS = {18: [3, 1, 1], 30: [4, 2, 1, 1]}
+# deeper wells behind the player and the mounts, with a fine two-tone grain
+WELL_EDGE = (84, 94, 81)
+WELL_GRAIN = [(100, 110, 96), (106, 116, 101)]
 
 # The arrows between ingredients and result, engraved; the progress arrow in
 # the Questlog's lantern light.
@@ -194,14 +197,7 @@ EXTRA_SLOTS = {
     "loom.png": [(13, 26), (33, 26), (23, 45), (143, 58)],
     "cartography_table.png": [(15, 15), (15, 52), (145, 39)],
 }
-# Result slots, drawn round: item corner (x, y).
-RESULTS = {
-    "crafting_table.png": (124, 35), "inventory.png": (154, 28), "smithing.png": (98, 48),
-    "furnace.png": (116, 35), "blast_furnace.png": (116, 35), "smoker.png": (116, 35),
-    "stonecutter.png": (143, 33), "loom.png": (143, 58), "cartography_table.png": (145, 39),
-    "grindstone.png": (129, 34), "anvil.png": (134, 47), "villager.png": (220, 37),
-}
-# Large wells (cell x, y, w, h): where the player and the mount stand, crossed by a grid.
+# Large wells (cell x, y, w, h): where the player and the mount stand, with a fine grain.
 WELLS = {
     "inventory.png": [(25, 7, 51, 72, "creature")],
     "horse.png": [(26, 16, 53, 55, "creature"), (79, 16, 90, 55, "square")],
@@ -587,13 +583,13 @@ def find_slots(im):
 
 
 def find_vanilla_slots(im):
-    """Vanilla slots: 18x18 (26x26 for outputs), dark top-left edge, white bottom-right edge;
+    """Vanilla slots: 18x18 up to 32x32 (26x26 for outputs), dark top-left edge, white bottom-right edge;
     also flat 16x16 slot-grey cells drawn in a grid without those edges."""
     px = im.load()
     width, height = im.size
     dark, slot, white = (55, 55, 55), (139, 139, 139), (255, 255, 255)
     found = []
-    for n in (18, 26):
+    for n in range(18, 33):
         for y in range(height - n + 1):
             for x in range(width - n + 1):
                 if (px[x, y][:3] == dark and px[x + n - 2, y][:3] == dark and px[x + n - 1, y][:3] == slot
@@ -616,78 +612,59 @@ def find_vanilla_slots(im):
 
 
 def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
-    """Redraws the slot cell (x, y, w, h): a well with rounded corners ("square"), a
-    disc ("round") or a deep well crossed by a grid ("creature"). Its rim is dark at
-    the top and left and fades towards the ends, casts a shadow on the top of the
-    well, and a light lip runs along the bottom and right. A placeholder drawn
-    inside the slot (a banner, a dye, a blueprint) is kept."""
+    """Redraws the slot cell (x, y, w, h) as a well with rounded corners, or, for
+    "creature", a deeper well with a fine two-tone grain. The outline is darker at
+    the top and left, fading towards the ends, and the top casts a soft shadow
+    into the well. A placeholder drawn inside the slot (a banner, a dye, a
+    blueprint) is kept."""
     if x < 0 or y < 0 or x + w > im.width or y + h > im.height:
         return
     px = im.load()
     before = {(i, j): px[x + i, y + j] for j in range(h) for i in range(w)}
     ground = Counter(before.values()).most_common(1)[0][0]
-    r = 2 if max(w, h) <= 18 else 3 if max(w, h) <= 30 else 4
+    cut = CORNERS[18] if max(w, h) <= 18 else CORNERS[30]
+    inside = corner_mask(w, h, cut)
+    deep = shape == "creature"
+    edge_top = WELL_EDGE if deep else EDGE_TOP
 
-    def inside(i, j):
-        if not (0 <= i < w and 0 <= j < h):
-            return False
-        if shape == "round":
-            return (i + 0.5 - w / 2) ** 2 + (j + 0.5 - h / 2) ** 2 <= (w / 2) ** 2 - 0.3
-        dx = max(r - i, i - (w - 1 - r), 0)
-        dy = max(r - j, j - (h - 1 - r), 0)
-        return dx * dx + dy * dy <= r * r + 0.5
-
-    def run(i, j, di, dj):
-        k = 1
-        while inside(i + di * k, j + dj * k):
-            k += 1
-        return k
-
-    fill = WELL_FILL if shape == "creature" else SLOT_FILL
     for j in range(h):
         for i in range(w):
             if not inside(i, j):
-                px[x + i, y + j] = tuple(around)
+                near = sum(inside(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+                if near >= 2:  # soften the corner step
+                    edge = edge_top if j < h / 2 else EDGE_LOW
+                    c = tuple((e + g) // 2 for e, g in zip(edge, around[:3]))
+                    px[x + i, y + j] = c + (max(around[3], 160),)
+                else:
+                    px[x + i, y + j] = tuple(around)
                 continue
             up, left = not inside(i, j - 1), not inside(i - 1, j)
             down, right = not inside(i, j + 1), not inside(i + 1, j)
-            if up:
-                c = RIM[0] if i < w - 3 else RIM[1] if i < w - 1 else RIM[2]
-            elif left:
-                c = RIM[0] if j < h - 5 else RIM[1] if j < h - 3 else RIM[2]
-            elif right and j < 3:
-                c = RIM[2]
+            if up or left:
+                c = EDGE_FADE if (up and i >= w - 5) or (left and j >= h - 5) else edge_top
             elif down or right:
-                c = LIP_DARK if down and i < 3 else LIP
+                c = EDGE_LOW
+            elif not inside(i, j - 2):
+                c = SHADE[0]
+            elif not inside(i, j - 3):
+                c = SHADE[1]
+            elif deep:
+                c = WELL_GRAIN[(x + i + y + j) % 2]
+            elif before[i, j] != ground and max(w, h) <= 18:
+                c = before[i, j][:3]
             else:
-                d, dl, dr, db = run(i, j, 0, -1), run(i, j, -1, 0), run(i, j, 1, 0), run(i, j, 0, 1)
-                if d == 1:
-                    c = SHADE[0]
-                elif d == 2:
-                    c = SHADE[1]
-                elif d == 3 and (dl <= 2 or dr <= 2) or db == 1 and (dl == 1 or dr == 1):
-                    c = SHADE[2]
-                elif shape == "creature" and ((x + i) % 6 == 0 or (y + j) % 6 == 0):
-                    c = WELL_GRID
-                elif before[i, j] != ground and shape != "creature" and max(w, h) <= 18:
-                    c = before[i, j][:3]
-                else:
-                    c = fill
+                c = SLOT_FILL
             px[x + i, y + j] = c + (255,)
 
 
-def slot_shapes(cells, results=()):
-    """Round for the results and for the hotbar row (the lowest row of nine);
-    the large wells of a screen keep their square shape."""
-    rows = Counter(y for x, y, w, h in cells if w == 18)
-    hotbar = max((y for y, n in rows.items() if n >= 9), default=None)
-    shapes = []
-    for x, y, w, h in cells:
-        if (x + 1, y + 1) in results or 22 <= w <= 30 and w == h or y == hotbar and w == 18:
-            shapes.append("round")
-        else:
-            shapes.append("square")
-    return shapes
+def corner_mask(w, h, cut):
+    """Mask of a w x h rectangle whose corners are cut in by cut[k] on row k."""
+    def inside(i, j):
+        if not (0 <= i < w and 0 <= j < h):
+            return False
+        k = min(j, h - 1 - j)
+        return k >= len(cut) or cut[k] <= i <= w - 1 - cut[k]
+    return inside
 
 
 def find_black_wells(im):
@@ -734,11 +711,11 @@ def draw_bar(im, x0, y0, w, h):
         for i in range(w):
             if inside(i, j):
                 edge = any(not inside(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
-                c = RIM[0] if edge else (232, 229, 208) if not inside(i, j - 2) else \
+                c = WELL_EDGE if edge else (232, 229, 208) if not inside(i, j - 2) else \
                     (166, 170, 150) if not inside(i, j + 2) else FILL
                 px[x0 + i, y0 + j] = c + (255,)
             elif inside(i, j - 1):
-                px[x0 + i, y0 + j] = RIM[0] + (110,)
+                px[x0 + i, y0 + j] = WELL_EDGE + (110,)
 
 
 def draw_hud(hud):
@@ -752,7 +729,7 @@ def draw_hud(hud):
 
     sel = Image.new("RGBA", (24, 23))
     px = sel.load()
-    outer, inner = rounded(24, 23, 5), rounded(18, 18, 2)
+    outer, inner = rounded(24, 23, 5), corner_mask(18, 18, CORNERS[18])
     for j in range(23):
         for i in range(24):
             if not outer(i, j) or inner(i - 3, j - 3):
@@ -847,9 +824,8 @@ def main():
             draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
         if vanilla:
             add_frieze(im, mask)
-        shapes = slot_shapes(slots, [RESULTS[name]] if vanilla and name in RESULTS else [])
-        for (x, y, w, h), shape in zip(slots, shapes):
-            draw_slot(im, x, y, w, h, "square" if min(w, h) >= 30 else shape)
+        for x, y, w, h in slots:
+            draw_slot(im, x, y, w, h)
         if vanilla:
             for x, y, w, h, shape in WELLS.get(name, []):
                 draw_slot(im, x, y, w, h, shape)
@@ -879,10 +855,9 @@ def main():
                     for x0, y0 in drawn:
                         draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
                     px = im.load()
-                    shapes = slot_shapes(slots)
-                    for (x, y, w, h), shape in zip(slots, shapes):
+                    for x, y, w, h in slots:
                         clear = x == 0 or px[x - 1, y + h // 2][3] == 0
-                        draw_slot(im, x, y, w, h, shape, (0, 0, 0, 0) if clear else FILL + (255,))
+                        draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,))
                     for x, y, w, h in wells:
                         draw_slot(im, x, y, w, h, "creature")
                     if big_panel(n, im):
