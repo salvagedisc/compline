@@ -54,7 +54,7 @@ hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
 
 [[files]]
 file = "config/fancymenu/assets/fallow_logo.png"
-hash = "63b879f355fafab29618d6a922e377b0538688af1b4f09a5a02249420080f89c"
+hash = "43b9707829bb1252508b8dbf5bae6fa9bee1b0c1b64643a24d41c613872123fa"
 
 [[files]]
 file = "config/fancymenu/customizablemenus.txt"
@@ -62,11 +62,11 @@ hash = "070c2b267eb3b627dec3bd793b84d326d1b689457a741945eba43d50292eebb0"
 
 [[files]]
 file = "config/fancymenu/customization/fallow_loading_screen.txt"
-hash = "4f6145f4a54a616e3aa2d39cdd85606eb521c492ea63802ac523078a9170d0c5"
+hash = "d1cde0df949b48c728b51427771c39b50cb0a26c6a2dab161c7607db111d73ef"
 
 [[files]]
 file = "config/fancymenu/customization/fallow_title_screen.txt"
-hash = "6d22d7f927c633390e5cc30e1a8545b0e45286aa88a5ced20aea8cec31e8dc0e"
+hash = "873d68cf2634bbe66ba70272b79b0f90f4945e796b30c44236b9e5f5572abacf"
 
 [[files]]
 file = "config/fancymenu/options.txt"

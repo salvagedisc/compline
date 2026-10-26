@@ -1,5 +1,5 @@
-"""The Fallow logo: the word in worn stone capitals (the Metamorphous typeface by
-Sorkin Type, SIL Open Font License), bone fading to mist, with moss on their
+"""The Fallow logo: the word in worn stone uncials (the Uncial Antiqua typeface
+by Astigmatic, SIL Open Font License), bone fading to mist, with moss on their
 tops and vines hanging from them, and a lit lantern hanging on a chain inside
 the O, its light warming the stone around it.
 
@@ -13,8 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-FONT = ("https://raw.githubusercontent.com/google/fonts/main/ofl/metamorphous/Metamorphous-Regular.ttf",
-        "1c55f044447667f8dd883b571dd01c07ebc33b13")
+FONT = ("https://raw.githubusercontent.com/google/fonts/main/ofl/uncialantiqua/UncialAntiqua-Regular.ttf",
+        "7499d3790224f6d568ac37b267f4b4e02bbcc05d")
 CACHE = Path(__file__).resolve().parents[2] / ".cache" / "interface"
 
 OUTLINE = (26, 31, 28)
@@ -46,13 +46,13 @@ SCALE = 4
 
 def font_file():
     url, sha1 = FONT
-    path = CACHE / "Metamorphous-Regular.ttf"
+    path = CACHE / url.rsplit("/", 1)[1]
     if not path.exists() or hashlib.sha1(path.read_bytes()).hexdigest() != sha1:
         path.parent.mkdir(parents=True, exist_ok=True)
         with urllib.request.urlopen(url, timeout=120) as response:
             data = response.read()
         if hashlib.sha1(data).hexdigest() != sha1:
-            raise SystemExit("Metamorphous: checksum mismatch")
+            raise SystemExit(f"{path.name}: checksum mismatch")
         path.write_bytes(data)
     return path
 
