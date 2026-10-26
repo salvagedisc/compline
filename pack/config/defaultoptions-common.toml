@@ -3,8 +3,9 @@
 # plus prioritaire : les extensions de Fresh Animations passent au-dessus de lui,
 # Dark Coffee habille l'interface vanilla et Modded Coffee celle des mods,
 # Normal Hunger (Dark Coffee Extras) remet une barre de faim à la place des grains de café,
-# Supernova apporte trois morceaux du paquet musical, et fallow-ambiance
-# (dossier du pack) passe en dernier, au-dessus de tous.
+# fallow-interface (dossier du pack) remplace le HUD de Dark Coffee et habille le
+# journal Questlog, Supernova apporte trois morceaux du paquet musical, et
+# fallow-ambiance (dossier du pack) passe en dernier, au-dessus de tous.
 # Default Options ne sélectionne que les packs de cette liste : les ressources des
 # mods (mod_resources de NeoForge, fabric de Connector), absentes, étaient rajoutées
 # au-dessus de nos packs et passaient devant Fresh Animations. Elles sont donc
@@ -22,6 +23,7 @@ defaultResourcePacks = [
 	"file/CoffeeGUI_1.20.2-26.2_release_v2.2.1.zip",
 	"file/ModdedCoffeeGUI_Release_v1.16.0.zip",
 	"file/CoffeeGUI_NormalHunger.zip",
+	"file/fallow-interface",
 	"file/supernova-pack.zip",
 	"file/fallow-ambiance"
 ]

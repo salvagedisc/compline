@@ -51,6 +51,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Questlog: a book-style journal of quests and guides in French, four chapters and 16 quests that appear as the player progresses; its interface translated ([quetes](docs/plan/quetes.md)). It replaces the Modonomicon notebook of the same day.
 - Specification of the eight next modules of the `fallow` mod (`docs/plan/modules-fallow.md`) and the research of 2026-10-26 (`docs/plan/recherche/2026-10-26/`).
 
+- Interface: `fallow-interface` pack, drawn for Fallow in the spirit of Dark Coffee: Questlog journal in leather and parchment (search bar in French) and HUD (hotbar, lantern selection, hearts, bread, armour, air), active on first launch above Dark Coffee ([page](docs/plan/fallow-interface.md)).
 ### Removed
 - Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod switches itself off and goes in 0.5.0.
 - Drip Sounds (beta build for 1.21.8, duplicates AmbientSounds and Sounds) and Seamless Loading Screen (unmaintained, overwritten by Sodium).

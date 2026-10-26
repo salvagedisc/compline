@@ -26,7 +26,7 @@ hash = "48b83973132d41c7fe23f5861c1ff580b3734ee0397c62ae1031e2dd289284f2"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "09241b8157b80f5088839bc4864d1fbdf79e949f6fa8672b6f328d4ea508b77c"
+hash = "ba3bec8816639daa30de141d58c9d6f57e931a6145394ef386e4b0b720450de6"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
@@ -2420,6 +2420,282 @@ hash = "3c2c019418285ea52bc74666acc600d8577351cb89a1192ec3416a8dbfbc19e1"
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
 hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/CREDITS.md"
+hash = "c42976d5f27a61ff456350e350d3c40657cd0ace15ca22273e4c47b84c99ee29"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/air.png"
+hash = "0149bfc62af673b4490033b2e0d8cb429e3ba6c38431de1e56ce388532961019"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/air_bursting.png"
+hash = "f7accb72572599a90a579950863b46a18a550d8792b91a0527deb26abb04f7a5"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/armor_empty.png"
+hash = "863c49abc2a02ab9979bf520a840d3bb72ecc2c61430f33e8bc468f4727a755e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/armor_full.png"
+hash = "a2721d733921bd2a4843f903c1f65a7968f8fb1aa01aa7ab05c461cd636f51a8"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/armor_half.png"
+hash = "bb506904e0775fe4045ef9388e08979fe90f242fc06a32ac0f035f8126792759"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_empty.png"
+hash = "c74eacd44ed51423fc7dc96250b39ace0ad756d006866a691c40a106f01a568f"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_empty_hunger.png"
+hash = "68322c058601d46879a2f9b8476b8c938ef678da19af1e4d777efaebe80b9297"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_full.png"
+hash = "711b81d96782b0b241530dde7723acff2317285b0abccebc2fc816047d2b5669"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_full_hunger.png"
+hash = "316d4834ff3c70cc905294824951bffe9cc4b0b6b58e8d291cafaad0c158b036"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_half.png"
+hash = "ec194290af902e212bb0b5c9aaaf754880d67b4507656c224c9360f7716e28c9"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/food_half_hunger.png"
+hash = "8ec903b33a5e9bae70d861987b97c7586fa8173b4199f84e3bca9ffb162c2ed4"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_full.png"
+hash = "9d69a9e005d9ce787599d63bd731d3017823e6813c38f981e2f5a6e1fe00e348"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_full_blinking.png"
+hash = "b0981db845a64c843a21626057e3a16ae4c3d84c0c6c2a2f04d9c523fef219e2"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_half.png"
+hash = "0912ba9a6d4f16aa2760777fc2ea58fe0956a709a8f04c8cae285668125bff8c"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_half_blinking.png"
+hash = "d1076539394034c2f845cf29fce4cd4964ceeb15d74049b5f34171945d5c2bec"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_hardcore_full.png"
+hash = "96716e3ea395e4dc718e8c0c5b41ccfb4e4ac05becd75cd6439b3342b8684d28"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_hardcore_full_blinking.png"
+hash = "da5b7447f0f4527f7a3782dee29060a242c37bba744dc69623107e5483902dff"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_hardcore_half.png"
+hash = "8cfb13d81f12f9482234e9f1231cbba44f1216c03f34631d67ec6b67be5c3ffa"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/absorbing_hardcore_half_blinking.png"
+hash = "2f020ff1bf28128c1d562a263408a0814833a9640d898a224a256040efdebba2"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/container.png"
+hash = "58b7f67a10c30da40b5e25fa1adc17df228b30ec8b88d4a0ff766d0fd4d34d10"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/container_blinking.png"
+hash = "4093c666b1bd77138e72ffea614ce02aa1c645073d3368a4dc61914a7ec1ff01"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/container_hardcore.png"
+hash = "58b7f67a10c30da40b5e25fa1adc17df228b30ec8b88d4a0ff766d0fd4d34d10"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/container_hardcore_blinking.png"
+hash = "4093c666b1bd77138e72ffea614ce02aa1c645073d3368a4dc61914a7ec1ff01"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_full.png"
+hash = "95729274273c8c4c0443d61eab2913ac7c6973f5d7bf40d6bd4338ca012adab6"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_full_blinking.png"
+hash = "332f9f59b25d39b55b6ad6beac3c0ba0043f9275188c689dc359cd4c6bd16cd4"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_half.png"
+hash = "4e39975689b2381762d3b7498df4c3087b7246cfeca227a8195fb2dda9b3d46d"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_half_blinking.png"
+hash = "1b9542b44cea584dc580b74617f132fb96af38fced06862f110dd923278e54dc"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_hardcore_full.png"
+hash = "c56deec10514a0f2c8b650ce61b95a5a65f4c712fe26969035292e1c05eb2011"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_hardcore_full_blinking.png"
+hash = "3305961739cc10ba01a8c3c4b6d21a699810399a143d3424070cb5f7cecd66f8"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_hardcore_half.png"
+hash = "bc5bcedcb54d3f870553acf4ca315ebeae749bc3cc3838014a2cee93e17aa82d"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/frozen_hardcore_half_blinking.png"
+hash = "0712ce1775bbdc699230aaf7d9bea671c945f63569a91070a3277e9e081e5b9c"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/full.png"
+hash = "e0a69f57609a3849f60492548cc90cda1e49b74c2320c1b54c1efff53a65168f"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/full_blinking.png"
+hash = "d4d02aa7132b11545ecef32ace9141d937838ec248629ccdccc1474b07c1501f"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/half.png"
+hash = "c71a13eaf9197c01d1c1f8439c9b58ada3043edbf95f79332c1d352b9434bc21"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/half_blinking.png"
+hash = "5b15df8939195f5cb559b52cfd1d109ba078705bb20e2851d7eb72dbc573e760"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/hardcore_full.png"
+hash = "b7c168378f61ab6248f8cf3e437c02c1cb59f9e02741c71fdf1d41e5cb32b1fb"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/hardcore_full_blinking.png"
+hash = "4870f467a10bb478a00c13e966376b9c203239d13e852b32570d2b347a21d8e1"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/hardcore_half.png"
+hash = "704f7bd7fbd050d7cf7224285324bb1b573e28792e6909d01cf2541d647bd858"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/hardcore_half_blinking.png"
+hash = "f1d9aa8b07d6671739293fbef056adc80e3da7cae86416d22f30cdd08a2e7146"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_full.png"
+hash = "fec52b39e40e7db0ce754ab399d9fcd5a2fb1c1dda4a3ae48ba6f164d03cc2c4"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_full_blinking.png"
+hash = "1b87f970673c406b9a214cfebd408f8a5a2da386559ed5a82301e106a76c2f2e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_half.png"
+hash = "7b8a3032069d851531dbd4042e9be196801e54f393b70a090710f922f6855e85"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_half_blinking.png"
+hash = "4963a54b4ae5af5ca1d50f0f9150387ef6a466de0836a1c004bce48b9ab4e96a"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_hardcore_full.png"
+hash = "f0be6466ce997e3363d86612491ac479a9eca6dc7b6c2c75a025c1206e635a90"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_hardcore_full_blinking.png"
+hash = "43ac6b52a4eedd184079d92213b6c20224eb559c8ef0b8c5f35e67170bd1221a"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_hardcore_half.png"
+hash = "3754a93947d3ac5811870c1e198bd365ed25ec29aaeaffd86c57dbbece0d5565"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/poisoned_hardcore_half_blinking.png"
+hash = "e3ec20c31ec45d8e2bbc746a723a4356b31c3eceb9d5d52eb8f663e962528b74"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/vehicle_container.png"
+hash = "58b7f67a10c30da40b5e25fa1adc17df228b30ec8b88d4a0ff766d0fd4d34d10"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/vehicle_full.png"
+hash = "c682c9a9d7cf49f806ab8f95177e477029b7cb6b0b2467d58e8927d2f53851ec"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/vehicle_half.png"
+hash = "f08d14c73d13a2aa3f9ce48ece6b837064bb5cf80b31747f6b7739e68230db3e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_full.png"
+hash = "5bd8e0f816d427f1084a23bba048a59d1ec6cb0741f72c678254233267b84d09"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_full_blinking.png"
+hash = "8037d9df462124205b08b2685a198051c675b09fb964f011708a73290624835d"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_half.png"
+hash = "fe2705877d39ad289f124521dcf4352489b51380a0eeca3915bf4fb2bdf08950"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_half_blinking.png"
+hash = "86b22c01795789552b1e8edb010cebedad3ed76abb4e36481d890762a0621d6e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_hardcore_full.png"
+hash = "dc9c2193268f3a3d2975d858f21a9fb8e5a6a4fd5af5e58ae54d39758151abb2"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_hardcore_full_blinking.png"
+hash = "b0b4a9d250fb9964a900a827f0274ededb5179a346e1472725c3078bd41be808"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_hardcore_half.png"
+hash = "c6b5e342bd81468d30f3de5984766ab4ea6143d0687c9907e95f4b2442be107d"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/heart/withered_hardcore_half_blinking.png"
+hash = "455f5ffa12d238c4f4680e611c2ea61f2e433295771db5e7c1339e144fda8afc"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/hotbar.png"
+hash = "563355acbce84c3e0d8cbd6ad759b75aaa3fab99f5e25a1d42a61bd66609776c"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/hotbar_offhand_left.png"
+hash = "245d86c07cb372c48f89f3966a0de1e439f8e43ce98d996b78a14eed8f87582f"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/hotbar_offhand_right.png"
+hash = "d5d5d38b4e6fd2a4716befb7bdc73fee3cc342d38e139db8757a5f17aaf5d8fb"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/sprites/hud/hotbar_selection.png"
+hash = "71a9d7f6869699b703f207e450455368f3275f567caab8c99a11eee6e50fc3c8"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/quest_page.png"
+hash = "8ed5bf56dff022f8cd6fd11f6b08a44a3876b3d6618f9533311c441bab2c9c9f"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/quest_peripherals.png"
+hash = "851d47f775eb19907b9e8906755e0cb11d1d968ab7b39b823b9b9f9f6559f70e"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/questlog.png"
+hash = "d0c5a3e20c2dda9cfd5430d5a4c276cd44916a7863c34abffd7bfc7be9c4f4dd"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/questlog_button.png"
+hash = "19665f2290f68aca1c55e4712b43aa1c8c551ea471cfe5b7d0141f3a7e04530a"
+
+[[files]]
+file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/questlog_search_tab_buttons.png"
+hash = "f71c5579ed4b092dc0b9009dfaa3fb5a80b95d76d94d887ccd4a4fa452602f32"
+
+[[files]]
+file = "resourcepacks/fallow-interface/pack.mcmeta"
+hash = "af691f4b9d4e6c8c2347d6eabdbdc429b2ad094a8ff691d81b33344171afdc4f"
 
 [[files]]
 file = "resourcepacks/fresh-animations-details.pw.toml"

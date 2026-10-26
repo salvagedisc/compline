@@ -1,40 +1,38 @@
 # The `fallow-interface` resource pack
 
-Request from the maintainer on 2026-10-19: match the look of Kaleidoscope, Overgeared and Wildex to Dark Coffee GUI, which no pack covers. Formats and colours were read from the jars and the textures; **nothing has been seen in game.**
-
-> **Removed from the pack on 2026-10-19.** Neither the recoloured version nor the one with Fallow-drawn elements won the maintainer over. A version made with the actual elements of Dark Coffee and Modded Coffee has been proposed to their author (RestlessPip, through the GitHub issues of `darkcoffeegui`): since Dark Coffee is "all rights reserved", it will only enter the pack if he integrates it into Modded Coffee GUI or allows us to distribute it. In the meantime, these screens keep their original grey. The rest of this page describes the removed version; the licences and limits remain valid.
+Request from the maintainer on 2026-10-26: give Fallow its own interface "in the style of Dark Coffee GUI", starting with the Questlog journal and the HUD, since the author of Dark Coffee does not answer and the pack needs something it owns. **Nothing has been seen in game yet**: the previews were composed from the textures.
 
 ## What it contains
 
-`pack/resourcepacks/fallow-interface/`, 24 textures, same sizes and same transparency as the originals:
-- **Overgeared** (14): the 9 screens (anvils, furnaces, fletching table, blueprint workbench, stonecutting), the forging mini-game bar, the EMI anvil background and the 4 filter buttons of the recipe book;
-- **Kaleidoscope** (8): the recipe backgrounds shown in EMI; only the slots and arrows change, the block drawings stay;
-- **Wildex** (2): the book background (VINTAGE theme, the default) and the red trophy background.
+`pack/resourcepacks/fallow-interface/`, drawn by `scripts/interface/generate.py` (Python 3 + Pillow, authoring tool, not run by CI). Run it again after changing a shape or a colour, then `packwiz refresh` in `pack/`.
 
-**Drawn elements** (2026-10-19, at the maintainer's request, to go beyond colours): a small library of elements specific to Fallow, applied to every Overgeared screen and to the Kaleidoscope backgrounds, pixel-exact to the original layout:
-- recessed 18×18 slot and large 26×26 slot: dark edge at the top and left, light edge at the bottom and right, 2 px inner shadow, cut corners;
-- progress arrow with a rounded tail, light ridge on top and dark on the bottom; the filled arrow follows the same mask;
-- background with short horizontal fibres and a few dark dots;
-- frame with a dark outline, light trim at the top and left, shadow at the bottom and right;
-- 2 px groove between the screen and the player inventory.
+- **Questlog journal** (`assets/questlog/textures/gui/`): roasted-leather cover with a brass trim and parchment pages with ink corner flourishes (`questlog.png`, `quest_page.png`, nine-slice 275×166, border 16); parchment buttons that light up like a lantern when hovered; tapered ink rules; leather toast; wax-red "important" mark; linen and wine-leather chapter bookmarks; search bar labelled « Rechercher » (the original texture had "Search Quests" written in it); magnifying glass with misty glass; small leather journal as the inventory button.
+- **HUD** (`assets/minecraft/textures/gui/sprites/hud/`): leather hotbar with recessed slots and brass rivets, lantern-lit selection frame, off-hand slot; hearts in every state (normal, poisoned, withered, frozen, absorbing, hardcore with a stitched seam, blinking, mount); round loaves of bread for food (stale grey-green under Hunger); chestplates for armour; misty air bubbles.
 
-Dark Coffee is "all rights reserved": none of its textures is copied. Its slots are raised pads with rounded corners, its arrow an ornate diamond, its background coffee beans; ours take up the spirit without reproducing them (15% of the pixels outside flat areas coincide on a furnace compared with ours, no 6×6 block in common). Checked by script: same sizes and same transparency as the originals, every slot of the original covered by a drawn slot at the same rectangle, no slot added or moved, empty and filled arrows superimposed. On the transparent Kaleidoscope and EMI backgrounds, the arrows keep their original silhouette with our shading, and the block drawings are byte-identical. Slots stay contiguous in the grids: spacing them out would move them.
+Every UV region and drawable area follows the originals, read from the Questlog jar (`QuestlogGuiSet`, `QuestlogOpenButton`) and from vanilla 1.21.1, so text and items land where the code expects them.
 
-Colour mapping, taken from Dark Coffee (values, no pixels): background `#C6C6C6` → `#451D21`, outline → `#2A0614`, bevels → trim `#B18469`, slot interior `#8B8B8B` → `#815648` (shadow `#693F35`), slot bottom edge → `#582E2B`, progress arrow → `#F1BA75`. On the Wildex book, steel becomes brass and the wood leans towards brown; the pages stay light, because its text is written in `#2B1A10` in the code.
+## Style
 
-The flames, the yellow bar and the green zones of the mini-game do not change: they must stay readable.
+The palette is Fallow's own: leather `#482624` (dark `#321A1A`, light `#623832`), brass `#A07C58`, parchment `#D6C2A0` / `#E6D7BA`, ink `#3A2418`, lantern `#DEA250`, wine `#742824`, mist `#9CAAAC`. It sits next to Dark Coffee's wine-brown so the two packs can coexist while Dark Coffee still dresses the containers. Shapes differ on purpose: recessed slots instead of raised pads, continuous brass trim instead of corner ornaments, bread instead of coffee beans, a lantern frame for the selection.
+
+Questlog writes its text in black by default (`0xFF000000`), so the pages stay light. A quest can still change its colours with `text_color`, `title_color` and `progress_text_color`.
 
 ## Licences
 
-All three mods allow publishing modified textures: Kaleidoscope under CC BY-NC-SA 4.0 (our files under the same licence), Overgeared under MIT, Wildex under CC BY-NC 4.0. The details and the MIT notice are in the pack's `CREDITS.md`. The "NC" clauses forbid any commercial use: no monetisation of Fallow on Modrinth as long as these textures are in the pack. The exact holder of Overgeared's MIT licence could not be verified (no LICENSE file in the jar); the declared author is StirDrem.
+The textures are original. Questlog is Apache-2.0, which allows changing its look; Dark Coffee GUI is all rights reserved, so no pixel of it is reused (only the idea of a warm brown interface). The label « Rechercher » uses the letter shapes of Minecraft's font.
+
+GUI Revision (CC BY-NC-SA 4.0) and GUI Revision Compats (same licence, 140+ mods) were found as a fallback base that may legally be modified; their English titles are drawn into the textures and would need redrawing in French.
 
 ## Order
 
-Default Options enables it on first launch, after Dark Coffee and Modded Coffee and before `fallow-ambiance`. It shares no file with them. It contains no shader: it would replace the Dark Coffee one, which recolours the titles.
+Default Options enables it after Dark Coffee, Modded Coffee and Normal Hunger, and before Supernova and `fallow-ambiance`: its HUD therefore replaces the one of Dark Coffee and Normal Hunger.
 
-## Limits and in-game tests
+## Next steps
 
-1. **Screen titles.** They are written in `0x404040` by the code. The Dark Coffee text shader turns them into `#B08569`, but it looks for a slightly different value (0.248 versus 0.251); if it misses them, the titles are unreadable on the brown background, on vanilla screens as on Overgeared ones. Opening a furnace is enough to see it.
-2. **Kaleidoscope text in EMI**: `#555555` on the brown background, hard to read. No texture fixes it.
-3. **Wildex**: its palette and fills are written in the code; only the background changes. Another option without textures: `designStyle = "STEAMPUNK"` in its client config, a theme that is already brass and brown.
-4. At each update of these mods, compare their interface textures with ours: a texture that changes size or layout must be redone.
+1. In-game check: hotbar and hearts at GUI scales 2, 3 and 4; Questlog at the default and custom panel sizes (the edges of the nine-slice are stretched).
+2. If the style is kept: the containers (inventory, chests, furnaces, crafting) and the mod screens, to replace Dark Coffee and Modded Coffee entirely.
+3. Thirst Was Reclaimed and Cold Sweat draw their own HUD icons; to be matched once the style is settled.
+
+## History
+
+A first `fallow-interface` (2026-10-19) recoloured the Kaleidoscope, Overgeared and Wildex screens to Dark Coffee's colours, then added Fallow-drawn slots and arrows; neither convinced the maintainer and it was withdrawn the same day.

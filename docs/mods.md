@@ -219,7 +219,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
-| `fallow-interface` | Recoloured Kaleidoscope, Overgeared and Wildex screens; removed on 2026-10-19, a version using Dark Coffee's elements is being proposed to its author ([page](plan/fallow-interface.md)) |
+| `fallow-interface` | Fallow's own interface, in the spirit of Dark Coffee: Questlog journal and HUD (hotbar, hearts, food, armour, air) ([page](plan/fallow-interface.md)) |
 | Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([NML fauna](plan/faune-nml.md)) |
 | Traveler's Backpack, Sophisticated Backpacks | Too many upgrades and screens; Reliable Backpacks chosen on 2026-10-26 ([0012](decisions/0012-sacs-piles-jours.md)) |
 | ParCool! | Disabled at the team's request |
