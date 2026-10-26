@@ -6,15 +6,19 @@ The script downloads the pinned releases, keeps the files that concern
 vanilla and the mods of the pack, and adapts them to Fallow:
 
 - recolour: GUI Revision's greys become Fallow's mist, sage and moss;
-- titles: the titles drawn in the textures are redrawn in French with
-  the letters of GUI Revision's own plates;
+- titles: the names drawn in the textures (plates, banners) are removed,
+  since they cannot follow the game's language;
 - screens GUI Revision paints in wood or purple are greyed first, so that
   they take the same palette;
-- slots: redrawn as rounded, outlined wells, the hotbar's cells too;
-- details: Hollow GUI's frieze along the top of vanilla panels and a
-  regular pattern of small leaves on every large panel;
+- slots: redrawn over their whole cell, square with rounded corners or round,
+  with a cast shadow; deep wells with a grid where creatures stand;
+- arrows: one slim engraved arrow, the progress one in lantern light;
+- details: Hollow GUI's frieze along the top of vanilla panels and a tight
+  pattern of small leaves over every large panel;
+- HUD: the hotbar as a bar with rounded ends;
 - mods without a GUI Revision compat: their vanilla-grey screens, read from
-  the jars cached by `npm run check-fr`, take the same colours;
+  the jars cached by `npm run check-fr`, take the same colours, their own
+  drawings keep theirs;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
 Authoring tool, not run by CI: needs Python 3 and Pillow, and the jars in
@@ -92,34 +96,76 @@ VANILLA_EDGES = {(255, 255, 255): LUT[(218, 231, 230)], (0, 0, 0): LUT[(28, 28, 
 # frieze colours, one step from the panel
 SOFT = (188, 188, 167)
 ACCENT = (140, 149, 130)
-# Background pattern: one leaf with its midrib, repeated on a staggered grid,
-# tone on tone like the beans of a coffee sack.
-LEAF_TONE = (194, 193, 172)
+# Background pattern: one small leaf, repeated tone on tone over the whole panel
+# on a tight staggered grid, like the beans of a coffee sack.
+LEAF_TONE = (195, 194, 173)
 LEAF = [
-    ".....dd",
-    "...dddd",
-    "..ddd.d",
-    ".dd.dd.",
-    ".d.ddd.",
-    ".dddd..",
-    "d......",
+    ".....##",
+    "...####",
+    "..###.#",
+    ".##.##.",
+    ".#.###.",
+    ".####..",
+    "#......",
 ]
-LEAF_PITCH = 12
+LEAF_PITCH = (10, 8)
 
-# Rounded slots: outline, sunk top-left, lit bottom-right.
-SLOT_EDGE = (66, 76, 66)
-SLOT_SHADOW = (106, 117, 104)
-SLOT_SHADOW_2 = (118, 128, 112)
+# Slots: a rim dark at the top and left that fades towards the ends, the rim's
+# shadow cast on the top of the well, a light lip at the bottom and right.
+RIM = [(58, 68, 58), (74, 84, 72), (90, 100, 88)]
+SHADE = [(100, 111, 98), (110, 120, 104), (120, 130, 114)]
 SLOT_FILL = (130, 140, 122)
-SLOT_RIGHT = (140, 149, 130)
-SLOT_LIGHT = (152, 160, 140)
-ROUND = {2: [2, 1], 3: [3, 1, 1]}
+LIP = (224, 222, 202)
+LIP_DARK = (214, 212, 192)
+# deeper wells behind the player and the mounts, crossed by a fine grid
+WELL_FILL = (112, 122, 106)
+WELL_GRID = (120, 130, 113)
+
+# The arrows between ingredients and result, engraved; the progress arrow in
+# the Questlog's lantern light.
+ARROW = [
+    "..............#.......",
+    "..............##......",
+    "...............###....",
+    ".#..............####..",
+    "######################",
+    "######################",
+    ".#..............####..",
+    "...............###....",
+    "..............##......",
+    "..............#.......",
+]
+# Vanilla's wide arrow, as mods copy it in slot grey: found and replaced by ours.
+VANILLA_ARROW = [
+    "..............#.......",
+    "..............##......",
+    "..............###.....",
+    "..............####....",
+    "..............#####...",
+    "..............######..",
+    "#####################.",
+    "######################",
+    "#####################.",
+    "..............######..",
+    "..............#####...",
+    "..............####....",
+    "..............###.....",
+    "..............##......",
+    "..............#.......",
+]
+ARROW_INK = (106, 117, 104)
+ARROW_LIGHT = (232, 229, 208)
+LANTERN_D = (168, 106, 44)
+LANTERN = (226, 166, 78)
+LANTERN_L = (248, 214, 140)
+LANTERN_EDGE = (110, 70, 34)
 
 # Vanilla screens GUI Revision paints in colours (wood, purple): brought back to
 # its greys first so that they take Fallow's palette like the others.
 GREYED = {"crafting_table.png", "loom.png", "cartography_table.png", "enchanting_table.png", "shulker_box.png"}
 # Compat screens painted in colours: their own tones mapped to GUI Revision's greys,
-# the rest greyed by brightness; slot cells given by their corner and top colours.
+# the rest greyed by brightness; slot cells given by their corner and top colours;
+# `keep` boxes hold the mod's own drawings, left in their colours.
 GREYED_COMPATS = {
     "assets/chipped/textures/gui/container/workbench.png": {
         "fixed": {
@@ -128,6 +174,7 @@ GREYED_COMPATS = {
             (132, 103, 57): (109, 115, 115), (113, 88, 48): (85, 89, 89),
         },
         "cells": ((144, 113, 66), (113, 88, 48)),
+        "keep": [(0, 147, 76, 256)],  # the tool rack
     },
     # the backpack's leather pocket becomes a darker mist pocket with bone stitches
     "assets/quark/textures/misc/backpack_gui.png": {
@@ -135,43 +182,35 @@ GREYED_COMPATS = {
         "cells": ((135, 63, 33), (87, 41, 22)),
     },
 }
-# The traders' crimson and gold banner, in moss and bone.
-BANNER = {
-    (71, 8, 30): (38, 50, 37), (84, 10, 36): (46, 60, 44), (92, 11, 41): (54, 70, 51),
-    (111, 12, 46): (66, 84, 62), (133, 15, 50): (80, 100, 74),
-    (106, 60, 11): (122, 120, 96), (166, 105, 22): (176, 172, 146),
-    (227, 167, 43): (214, 210, 186), (255, 225, 122): (240, 236, 214),
-}
-# The gold frame of the selected hotbar slot and of the offhand slot, in the
-# Questlog's lantern light.
-LANTERN = {
-    (37, 34, 14): (58, 42, 26), (74, 68, 28): (110, 70, 34), (122, 108, 42): (168, 106, 44),
-    (162, 133, 52): (198, 136, 60), (210, 161, 55): (226, 166, 78), (236, 179, 9): (236, 186, 104),
-    (255, 207, 87): (248, 214, 140),
-}
-# Slots that are not drawn as GUI Revision slots: item corner (x, y) of 16x16 areas.
+# Screens whose title GUI Revision draws on a plate over the top edge.
+PLATED = {"furnace.png", "blast_furnace.png", "smoker.png", "crafting_table.png", "enchanting_table.png"}
+# The traders' banner ("TRADES") and Supplementaries' "TRADE OFFER" box.
+BANNERED = {"villager.png", "red_merchant.png", "orange_trader1.png"}
+OFFER = {"red_merchant.png", "orange_trader1.png"}
+# Slots that are not drawn as GUI Revision slots: item corner (x, y).
 EXTRA_SLOTS = {
     "crafting_table.png": [(30 + 18 * c, 17 + 18 * r) for r in range(3) for c in range(3)] + [(124, 35)],
     "shulker_box.png": [(8 + 18 * c, 18 + 18 * r) for r in range(3) for c in range(9)],
     "loom.png": [(13, 26), (33, 26), (23, 45), (143, 58)],
     "cartography_table.png": [(15, 15), (15, 52), (145, 39)],
 }
-
-# Titles drawn in GUI Revision's textures: French word, plate span, text rows.
-TITLES = {
-    "furnace.png": ("FOURNEAU", (56, 120), (4, 10)),
-    "blast_furnace.png": ("HAUT FOURNEAU", (48, 129), (4, 10)),
-    "smoker.png": ("FUMOIR", (59, 118), (4, 10)),
-    "crafting_table.png": ("ÉTABLI", (50, 128), (4, 10)),
-    "enchanting_table.png": ("ENCHANTEMENT", (44, 132), (3, 9)),
+# Result slots, drawn round: item corner (x, y).
+RESULTS = {
+    "crafting_table.png": (124, 35), "inventory.png": (154, 28), "smithing.png": (98, 48),
+    "furnace.png": (116, 35), "blast_furnace.png": (116, 35), "smoker.png": (116, 35),
+    "stonecutter.png": (143, 33), "loom.png": (143, 58), "cartography_table.png": (145, 39),
+    "grindstone.png": (129, 34), "anvil.png": (134, 47), "villager.png": (220, 37),
 }
-GLYPH_SOURCES = [
-    ("furnace.png", "FURNACE", (56, 120), (4, 10)),
-    ("blast_furnace.png", "BLAST FURNACE", (48, 129), (4, 10)),
-    ("smoker.png", "SMOKER", (59, 118), (4, 10)),
-    ("crafting_table.png", "CRAFTING TABLE", (50, 128), (4, 10)),
-    ("enchanting_table.png", "ENCHANTING TABLE", (44, 132), (3, 9)),
-]
+# Large wells (cell x, y, w, h): where the player and the mount stand, crossed by a grid.
+WELLS = {
+    "inventory.png": [(25, 7, 51, 72, "creature")],
+    "horse.png": [(26, 16, 53, 55, "creature"), (79, 16, 90, 55, "square")],
+}
+# Small arrows GUI Revision paints in wood: the box to clear, the arrow's centre.
+WOOD_ARROWS = {
+    "crafting_table.png": ((102, 39, 107, 48), (104, 43)),
+    "cartography_table.png": ((48, 38, 52, 46), (50, 42)),
+}
 
 # Container titles GUI Revision hides (its own en_us.json); hidden in French too.
 HIDDEN_TITLES = [
@@ -238,15 +277,38 @@ def recolour_vanilla(im):
                     px[x, y] = VANILLA_EDGES[(r, g, b)] + (a,)
                     changed = True
     if changed:
-        # other flat greys of the same screen (wells, frames) follow the panel's tones
-        count = Counter(p[:3] for p in im.get_flattened_data() if p[3])
-        for y in range(im.height):
-            for x in range(im.width):
+        # other flat greys of the screen follow the panel's tones, but only plain
+        # rectangles (wells, frames, buttons): a mod's drawings keep their colours
+        for region in flat_regions(im, src):
+            for x, y in region:
                 r, g, b, a = src[x, y]
-                if (a and max(r, g, b) - min(r, g, b) <= 3 and (r, g, b) not in VANILLA
-                        and (r, g, b) not in VANILLA_EDGES and count[(r, g, b)] >= 30):
-                    px[x, y] = tone(lum((r, g, b))) + (a,)
+                px[x, y] = tone(lum((r, g, b))) + (a,)
     return changed
+
+
+def flat_regions(im, src):
+    """Areas of one neutral grey, other than vanilla's, that nearly fill their bounding box."""
+    seen = set()
+    for y in range(im.height):
+        for x in range(im.width):
+            p = src[x, y]
+            if (x, y) in seen or not p[3] or max(p[:3]) - min(p[:3]) > 3 or p[:3] in VANILLA \
+                    or p[:3] in VANILLA_EDGES:
+                continue
+            region, todo = [], [(x, y)]
+            seen.add((x, y))
+            while todo:
+                i, j = todo.pop()
+                region.append((i, j))
+                for k, l in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
+                    if 0 <= k < im.width and 0 <= l < im.height and (k, l) not in seen and src[k, l] == p:
+                        seen.add((k, l))
+                        todo.append((k, l))
+            xs = [i for i, _ in region]
+            ys = [j for _, j in region]
+            w, h = max(xs) - min(xs) + 1, max(ys) - min(ys) + 1
+            if len(region) >= 24 and min(w, h) >= 3 and len(region) >= 0.85 * w * h:
+                yield region
 
 
 def tone(v):
@@ -263,147 +325,123 @@ def tone(v):
 
 # ---------------------------------------------------------------- titles
 
-def extract(im, word, box, rows):
-    """Cuts the letters of a plate into glyphs of roles d (stroke), m, l (light)."""
+def clear_plate(im):
+    """Removes the title plate drawn over the top edge: each of its columns takes
+    the column of the panel it hides (or the mirror of a frame running under it)."""
     px = im.load()
-    x0, x1 = box
-    bg = Counter(px[x, rows[0] + 2] for x in range(x0, x1)).most_common(1)[0][0]
-    base = lum(bg)
+    span = [x for x in range(176) if px[x, 0][3]]
+    if not span:
+        return
+    span = range(span[0] - 3, span[-1] + 4)
+    ref = 20  # a plain column of the top edge
+    rows, probe = range(0, 15), 15
 
-    def role(p):
-        if p[3] == 0 or p == bg:
-            return None
-        v = lum(p)
-        return "d" if v < base - 45 else "m" if v < base - 4 else "l"
+    def plain(c):
+        return px[c, probe] == px[ref, probe]
 
-    glyphs, cur = [], []
-    for x in range(x0, x1):
-        col = [role(px[x, y]) for y in range(*rows)]
-        if any(col):
-            cur.append(col)
-        elif cur:
-            glyphs.append(cur)
-            cur = []
-    if cur:
-        glyphs.append(cur)
-    letters = [c for c in word if c != " "]
-    if len(glyphs) != len(letters):
-        raise SystemExit(f"glyphs of {word}: {len(glyphs)} for {len(letters)} letters")
-    return dict(zip(letters, glyphs))
-
-
-def plate_palette(im, box, rows):
-    px = im.load()
-    x0, x1 = box
-    bg = Counter(px[x, rows[0] + 2] for x in range(x0, x1)).most_common(1)[0][0]
-    base = lum(bg)
-    roles = {"d": Counter(), "m": Counter(), "l": Counter()}
-    for y in range(*rows):
-        for x in range(x0, x1):
-            p = px[x, y]
-            if p == bg or p[3] == 0:
-                continue
-            v = lum(p)
-            roles["d" if v < base - 45 else "m" if v < base - 4 else "l"][p] += 1
-    pal = {r: (c.most_common(1)[0][0] if c else None) for r, c in roles.items()}
-    pal["d"] = pal["d"] or pal["m"]
-    pal["m"] = pal["m"] or pal["d"]
-    pal["l"] = pal["l"] or tuple(min(255, c + 25) for c in bg[:3]) + (255,)
-    return pal, bg
-
-
-def draw_word(im, glyphs, word, cx, y0, pal):
-    px = im.load()
-    width = sum(3 if c == " " else len(glyphs["E" if c == "É" else c]) + 1 for c in word) - 1
-    x = cx - width // 2
-    for c in word:
-        if c == " ":
-            x += 3
+    src = {}
+    for x in span:
+        if plain(x):
+            src[x] = ref
             continue
-        g = glyphs["E" if c == "É" else c]
-        for i, col in enumerate(g):
-            for j, r in enumerate(col):
-                if r:
-                    px[x + i, y0 + j] = pal[r]
-        if c == "É":
-            px[x + len(g) - 2, y0 - 1] = pal["d"]
-        x += len(g) + 1
+        g0 = g1 = x
+        while g0 > 2 and not plain(g0 - 1):
+            g0 -= 1
+        while g1 < 173 and not plain(g1 + 1):
+            g1 += 1
+        m = g0 + g1 - x
+        if m not in span:
+            src[x] = m
+        else:
+            inner = [c for c in range(g0 + 3, g1 - 2) if c not in span]
+            src[x] = min(inner, key=lambda c: abs(c - x)) if inner else ref
+    def column(c):
+        # a frame's own rows (the run touching the probe row) over the plain top edge
+        top = probe
+        while top > probe - 4 and px[c, top - 1] != px[ref, top - 1]:
+            top -= 1
+        return [px[c if y >= top else ref, y] for y in rows]
+
+    cols = {x: column(c) for x, c in src.items()}
+    for x, col in cols.items():
+        for y, p in zip(rows, col):
+            px[x, y] = p
 
 
-def retitle(name, im, glyphs, plate):
-    """Redraws the titles of a texture in French; returns the plates' boxes."""
+def clear_banner(im, name):
+    """Removes the traders' "TRADES" banner, and Supplementaries' "TRADE OFFER" box."""
     px = im.load()
-    boxes = []
-    if name in TITLES and name in GREYED:
-        # coloured plates were greyed with their panel: lay GUI Revision's plain plate instead
-        span = [x for x in range(im.width) if px[x, 0][3]]
-        draw_plate(im, plate, span[0], 0, span[-1] - span[0] + 1)
-    if name in TITLES:
-        word, box, rows = TITLES[name]
-        pal, bg = plate_palette(im, box, rows)
-        if name in GREYED:
-            rows = (4, 10)
-            pal = {"d": LUT[(85, 89, 89)] + (255,), "m": LUT[(85, 89, 89)] + (255,),
-                   "l": LUT[(218, 231, 230)] + (255,)}
-            bg = FILL + (255,)
-        top = rows[0] - 1 if "É" in word else rows[0]
-        for y in range(top, rows[1]):
-            for x in range(*box):
-                px[x, y] = bg
-        draw_word(im, glyphs, word, (box[0] + box[1]) // 2, rows[0], pal)
-        boxes.append((box[0] - 8, 0, box[1] + 8, 15))
-    if name in ("villager.png", "red_merchant.png", "orange_trader1.png"):
-        for y in range(24):
-            for x in range(100):
-                if px[x, y][:3] in BANNER:
-                    px[x, y] = BANNER[px[x, y][:3]] + (255,)
-        bg = BANNER[(133, 15, 50)] + (255,)
-        for y in range(5, 12):
-            for x in range(24, 78):
-                px[x, y] = bg
-        pal = {"d": BANNER[(255, 225, 122)] + (255,), "m": BANNER[(227, 167, 43)] + (255,),
-               "l": BANNER[(84, 10, 36)] + (255,)}
-        draw_word(im, glyphs, "ÉCHANGES", 51, 6, pal)
-    if name in ("red_merchant.png", "orange_trader1.png"):
-        boxes.append(offer(im, glyphs, plate))
-    return boxes
+    for y in range(3, 18):
+        for x in range(3, 99):
+            px[x, y] = px[x, 20]
+    if name in OFFER:
+        for y in range(4, 24):
+            for x in range(120, 249):
+                px[x, y] = (193, 198, 198, 255)
 
 
-def plate_template(furnace):
-    """GUI Revision's furnace title plate, recoloured, emptied of its letters."""
-    im = recolour(furnace.crop((53, 0, 123, 14)))
+# ---------------------------------------------------------------- arrows
+
+def template(im, box, bg):
     px = im.load()
-    for y in range(14):
-        for x in range(im.width):
-            if px[x, y][3] == 0:
-                px[x, y] = FILL + (255,)
+    return {(x - box[0], y - box[1]): px[x, y][:3] for y in range(box[1], box[3])
+            for x in range(box[0], box[2]) if px[x, y][3] and px[x, y][:3] != bg}
+
+
+def matches(im, tpl):
+    px = im.load()
+    width, height = im.size
+    k0 = min(tpl)
+    found = []
+    for y in range(height):
+        for x in range(width):
+            if not px[x, y][3] or px[x, y][:3] != tpl[k0]:
+                continue
+            ox, oy = x - k0[0], y - k0[1]
+            if all(0 <= ox + dx < width and 0 <= oy + dy < height and px[ox + dx, oy + dy][3]
+                   and px[ox + dx, oy + dy][:3] == c for (dx, dy), c in tpl.items()):
+                found.append((ox, oy))
+    return found
+
+
+def draw_arrow(im, x0, y0, ink, light, top=None):
+    """Fallow's arrow, 22x10, its tip to the right."""
+    px = im.load()
+    pts = {(x, y) for y, row in enumerate(ARROW) for x, c in enumerate(row) if c == "#"}
+    for x, y in pts:
+        if (x, y + 1) not in pts and light:
+            px[x0 + x, y0 + y + 1] = light + (255,)
+    for x, y in pts:
+        px[x0 + x, y0 + y] = (top if top and (x, y - 1) not in pts else ink) + (255,)
+
+
+def progress_arrow():
+    """The 24x16 progress sprite of furnaces: the arrow in lantern light."""
+    im = Image.new("RGBA", (24, 16))
+    draw_arrow(im, 1, 3, LANTERN, LANTERN_D, LANTERN_L)
     return im
 
 
-def draw_plate(im, plate, x0, y0, w):
-    """GUI Revision's title plate stretched to w pixels."""
+def replace_arrows(im, arrows):
+    """GUI Revision's arrows (a wide one, a small triangle) and the progress arrow
+    stored next to them become Fallow's arrow; returns where they were."""
     px = im.load()
-    tp = plate.load()
-    for x in range(w):
-        sx = x if x < 4 else plate.width - (w - x) if x >= w - 4 else 7
-        for y in range(14):
-            px[x0 + x, y0 + y] = tp[sx, y]
-
-
-def offer(im, glyphs, plate):
-    """Supplementaries' traders: the red "TRADE OFFER" box becomes a title plate "OFFRE"."""
-    px = im.load()
-    for y in range(4, 24):
-        for x in range(120, 249):
-            px[x, y] = FILL + (255,)
-    word = "OFFRE"
-    text = sum(len(glyphs[c]) + 1 for c in word) - 1
-    w = text + 28
-    x0, y0 = 183 - w // 2, 6
-    draw_plate(im, plate, x0, y0, w)
-    pal = {"d": LUT[(85, 89, 89)] + (255,), "m": LUT[(85, 89, 89)] + (255,), "l": LUT[(218, 231, 230)] + (255,)}
-    draw_word(im, glyphs, word, x0 + w // 2, y0 + 4, pal)
-    return (x0 - 2, y0 - 2, x0 + w + 2, y0 + 16)
+    big, small, filled = arrows
+    out = []
+    for tpl in (big, small):
+        for ox, oy in matches(im, tpl):
+            for dx, dy in tpl:
+                px[ox + dx, oy + dy] = (193, 198, 198, 255)
+            if tpl is big:
+                x0, y0 = ox - 4, oy + 1  # same place as the progress sprite's arrow
+            else:
+                x0, y0 = ox + 2 - 11, oy + 4 - 4
+            out.append((x0, y0))
+    for ox, oy in matches(im, filled):
+        for dx, dy in filled:
+            px[ox + dx, oy + dy] = (0, 0, 0, 0)
+        im.alpha_composite(progress_arrow(), (ox, oy))
+    return out
 
 
 # ---------------------------------------------------------------- details
@@ -423,52 +461,70 @@ def frieze_mask(hollow):
     return mask
 
 
-def add_frieze(im, mask):
-    """Along the top of a 176-wide panel, behind slots and plates."""
+def frieze_top(im):
+    """First row of a 176-wide panel, or None."""
     px = im.load()
     w = min(im.width, 180)
-    top = next((y for y in range(min(im.height, 40))
-                if 168 <= sum(px[x, y][3] > 0 for x in range(w)) <= 178), None)
+    return next((y for y in range(min(im.height, 40))
+                 if 168 <= sum(px[x, y][3] > 0 for x in range(w)) <= 178), None)
+
+
+def add_frieze(im, mask):
+    """Along the top of a 176-wide panel, behind the slots."""
+    px = im.load()
+    top = frieze_top(im)
     if top is None:
         return
-    plate = set()
-    for x in range(im.width):
-        if any(px[x, y][3] > 0 for y in range(top)):
-            plate.update(range(x - 2, x + 3))
     for (x, y), c in mask.items():
-        if x not in plate and px[x, y + top][:3] == FILL:
+        if px[x, y + top][:3] == FILL:
             px[x, y + top] = c + (255,)
 
 
+def frieze_band(im, vanilla):
+    top = frieze_top(im) if vanilla else None
+    return [] if top is None else [(0, top, 176, top + 14)]
+
+
 def add_pattern(im, skip=()):
-    """Leaves on a staggered grid, only where a whole leaf fits on bare panel."""
+    """The leaf repeated over every large stretch of bare panel, at the same spacing
+    everywhere; slots, wells and the frieze stay clear."""
     px = im.load()
-    h, w = len(LEAF), len(LEAF[0])
-    for gy in range(-LEAF_PITCH, im.height, LEAF_PITCH):
-        off = LEAF_PITCH // 2 if (gy // LEAF_PITCH) % 2 else 0
-        for gx in range(-LEAF_PITCH, im.width, LEAF_PITCH):
-            x0, y0 = gx + off, gy
-            if x0 < 1 or y0 < 1 or x0 + w + 1 > im.width or y0 + h + 1 > im.height:
+    width, height = im.size
+    seen = set()
+    pw, ph = LEAF_PITCH
+    for y in range(height):
+        for x in range(width):
+            if (x, y) in seen or px[x, y] != FILL + (255,):
                 continue
-            if any(a - 1 <= x0 + w and x0 - 1 <= c and b - 1 <= y0 + h and y0 - 1 <= d
-                   for a, b, c, d in skip):
+            region, todo = [], [(x, y)]
+            seen.add((x, y))
+            while todo:
+                i, j = todo.pop()
+                region.append((i, j))
+                for k, l in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
+                    if 0 <= k < width and 0 <= l < height and (k, l) not in seen and px[k, l] == FILL + (255,):
+                        seen.add((k, l))
+                        todo.append((k, l))
+            if len(region) < 300:
                 continue
-            if any(px[x, y][:3] != FILL for y in range(y0 - 1, y0 + h + 1) for x in range(x0 - 1, x0 + w + 1)):
-                continue
-            for j, row in enumerate(LEAF):
-                for i, ch in enumerate(row):
-                    if ch == "d":
-                        px[x0 + i, y0 + j] = LEAF_TONE + (255,)
+            for i, j in region:
+                if any(a <= i < c and b <= j < d for a, b, c, d in skip):
+                    continue
+                row = j // ph
+                u = (i - (pw // 2 if row % 2 else 0)) % pw
+                v = j % ph
+                if v < len(LEAF) and u < len(LEAF[0]) and LEAF[v][u] == "#":
+                    px[i, j] = LEAF_TONE + (255,)
 
 
 # ---------------------------------------------------------------- slots
 
-def greyify(im, fixed=None, rare=0):
+def greyify(im, fixed=None, rare=0, keep=()):
     """Maps a coloured screen onto GUI Revision's greys, its main colour to the panel grey.
 
     `fixed` maps a screen's own tones (its panel first) to given greys; otherwise the
     panel colour is read in the left margin. Colours seen fewer than `rare` times are
-    icons and keep their colour."""
+    icons and keep their colour, as does everything in the `keep` boxes."""
     greys = [g for g in LUT if g not in ((100, 107, 107), (125, 130, 130))]
     levels = [lum(g) for g in greys]
     px = im.load()
@@ -480,6 +536,8 @@ def greyify(im, fixed=None, rare=0):
     for y in range(im.height):
         for x in range(im.width):
             p = px[x, y]
+            if any(a <= x < c and b <= y < d for a, b, c, d in keep):
+                continue
             if p[3] and p[:3] in fixed:
                 px[x, y] = fixed[p[:3]] + (p[3],)
                 continue
@@ -557,48 +615,159 @@ def find_vanilla_slots(im):
     return found + flat
 
 
-def round_slot(im, x, y, w, h, around=None):
-    """Redraws a slot as a rounded, outlined well; its cut corners take the colour around it.
-
-    A placeholder drawn inside the slot (a banner or dye outline) is kept."""
+def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
+    """Redraws the slot cell (x, y, w, h): a well with rounded corners ("square"), a
+    disc ("round") or a deep well crossed by a grid ("creature"). Its rim is dark at
+    the top and left and fades towards the ends, casts a shadow on the top of the
+    well, and a light lip runs along the bottom and right. A placeholder drawn
+    inside the slot (a banner, a dye, a blueprint) is kept."""
+    if x < 0 or y < 0 or x + w > im.width or y + h > im.height:
+        return
     px = im.load()
-    if around is None:
-        around = px[x - 1, y + h // 2] if x > 0 else FILL + (255,)
-    ins = ROUND[2 if min(w, h) <= 18 else 3]
     before = {(i, j): px[x + i, y + j] for j in range(h) for i in range(w)}
     ground = Counter(before.values()).most_common(1)[0][0]
+    r = 2 if max(w, h) <= 18 else 3 if max(w, h) <= 30 else 4
 
     def inside(i, j):
         if not (0 <= i < w and 0 <= j < h):
             return False
-        k = 0
-        if j < len(ins):
-            k = ins[j]
-        if h - 1 - j < len(ins):
-            k = max(k, ins[h - 1 - j])
-        return k <= i < w - k
+        if shape == "round":
+            return (i + 0.5 - w / 2) ** 2 + (j + 0.5 - h / 2) ** 2 <= (w / 2) ** 2 - 0.3
+        dx = max(r - i, i - (w - 1 - r), 0)
+        dy = max(r - j, j - (h - 1 - r), 0)
+        return dx * dx + dy * dy <= r * r + 0.5
 
-    def edge(i, j):
-        return inside(i, j) and any(not inside(i + di, j + dj) for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+    def run(i, j, di, dj):
+        k = 1
+        while inside(i + di * k, j + dj * k):
+            k += 1
+        return k
 
+    fill = WELL_FILL if shape == "creature" else SLOT_FILL
     for j in range(h):
         for i in range(w):
             if not inside(i, j):
                 px[x + i, y + j] = tuple(around)
                 continue
-            if edge(i, j):
-                c = SLOT_EDGE
-            elif edge(i, j - 1):
-                c = SLOT_SHADOW
-            elif edge(i, j - 2) or edge(i - 1, j):
-                c = SLOT_SHADOW_2 if edge(i, j - 2) else SLOT_SHADOW
-            elif edge(i, j + 1):
-                c = SLOT_LIGHT
-            elif edge(i + 1, j):
-                c = SLOT_RIGHT
+            up, left = not inside(i, j - 1), not inside(i - 1, j)
+            down, right = not inside(i, j + 1), not inside(i + 1, j)
+            if up:
+                c = RIM[0] if i < w - 3 else RIM[1] if i < w - 1 else RIM[2]
+            elif left:
+                c = RIM[0] if j < h - 5 else RIM[1] if j < h - 3 else RIM[2]
+            elif right and j < 3:
+                c = RIM[2]
+            elif down or right:
+                c = LIP_DARK if down and i < 3 else LIP
             else:
-                c = before[i, j][:3] if before[i, j] != ground else SLOT_FILL
+                d, dl, dr, db = run(i, j, 0, -1), run(i, j, -1, 0), run(i, j, 1, 0), run(i, j, 0, 1)
+                if d == 1:
+                    c = SHADE[0]
+                elif d == 2:
+                    c = SHADE[1]
+                elif d == 3 and (dl <= 2 or dr <= 2) or db == 1 and (dl == 1 or dr == 1):
+                    c = SHADE[2]
+                elif shape == "creature" and ((x + i) % 6 == 0 or (y + j) % 6 == 0):
+                    c = WELL_GRID
+                elif before[i, j] != ground and shape != "creature" and max(w, h) <= 18:
+                    c = before[i, j][:3]
+                else:
+                    c = fill
             px[x + i, y + j] = c + (255,)
+
+
+def slot_shapes(cells, results=()):
+    """Round for the results and for the hotbar row (the lowest row of nine);
+    the large wells of a screen keep their square shape."""
+    rows = Counter(y for x, y, w, h in cells if w == 18)
+    hotbar = max((y for y, n in rows.items() if n >= 9), default=None)
+    shapes = []
+    for x, y, w, h in cells:
+        if (x + 1, y + 1) in results or 22 <= w <= 30 and w == h or y == hotbar and w == 18:
+            shapes.append("round")
+        else:
+            shapes.append("square")
+    return shapes
+
+
+def find_black_wells(im):
+    """Black rectangles of vanilla-style screens where a creature is shown."""
+    px = im.load()
+    seen = set()
+    wells = []
+    for y in range(im.height):
+        for x in range(im.width):
+            if (x, y) in seen or px[x, y] != (0, 0, 0, 255):
+                continue
+            region, todo = 0, [(x, y)]
+            seen.add((x, y))
+            x0 = x1 = x
+            y0 = y1 = y
+            while todo:
+                i, j = todo.pop()
+                region += 1
+                x0, x1, y0, y1 = min(x0, i), max(x1, i), min(y0, j), max(y1, j)
+                for k, l in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
+                    if 0 <= k < im.width and 0 <= l < im.height and (k, l) not in seen and px[k, l] == (0, 0, 0, 255):
+                        seen.add((k, l))
+                        todo.append((k, l))
+            w, h = x1 - x0 + 1, y1 - y0 + 1
+            if min(w, h) >= 30 and region >= 0.95 * w * h:
+                wells.append((x0 - 1, y0 - 1, w + 2, h + 2))  # with its bevel
+    return wells
+
+
+def rounded(w, h, r):
+    """Mask of a rectangle with corners of radius r."""
+    def inside(i, j):
+        dx = max(r - i, i - (w - 1 - r), 0)
+        dy = max(r - j, j - (h - 1 - r), 0)
+        return 0 <= i < w and 0 <= j < h and dx * dx + dy * dy <= r * r + 0.5
+    return inside
+
+
+def draw_bar(im, x0, y0, w, h):
+    """A mist bar with rounded ends, moss outline and a soft shadow under it."""
+    px = im.load()
+    inside = rounded(w, h, 5)
+    for j in range(h + 1):
+        for i in range(w):
+            if inside(i, j):
+                edge = any(not inside(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+                c = RIM[0] if edge else (232, 229, 208) if not inside(i, j - 2) else \
+                    (166, 170, 150) if not inside(i, j + 2) else FILL
+                px[x0 + i, y0 + j] = c + (255,)
+            elif inside(i, j - 1):
+                px[x0 + i, y0 + j] = RIM[0] + (110,)
+
+
+def draw_hud(hud):
+    """The hotbar as a bar with rounded ends and rounded slots; the selection and
+    the offhand slot to match, in the Questlog's lantern light."""
+    bar = Image.new("RGBA", (182, 22))
+    draw_bar(bar, 0, 0, 182, 21)
+    for i in range(9):
+        draw_slot(bar, 2 + 20 * i, 2, 18, 18, "square")
+    bar.save(hud / "hotbar.png")
+
+    sel = Image.new("RGBA", (24, 23))
+    px = sel.load()
+    outer, inner = rounded(24, 23, 5), rounded(18, 18, 2)
+    for j in range(23):
+        for i in range(24):
+            if not outer(i, j) or inner(i - 3, j - 3):
+                continue
+            edge = any(not outer(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+            ring = any(inner(i - 3 + a, j - 3 + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+            c = LANTERN_EDGE if edge else LANTERN_L if ring and j < 12 else LANTERN_D if ring else LANTERN
+            px[i, j] = c + (255,)
+    sel.save(hud / "hotbar_selection.png")
+
+    for name, x0 in (("hotbar_offhand_left.png", 0), ("hotbar_offhand_right.png", 7)):
+        im = Image.new("RGBA", (29, 24))
+        draw_bar(im, x0, 1, 22, 21)
+        draw_slot(im, x0 + 2, 3, 18, 18, "square")
+        im.save(hud / name)
 
 
 def big_panel(path, im):
@@ -628,13 +797,12 @@ def main():
                 files[f"assets/{m.group(1)}/{m.group(2)}"] = compats.read(n)
 
     container = "assets/minecraft/textures/gui/container/"
-    glyphs = {}
-    for name, word, box, rows in GLYPH_SOURCES:
-        for k, g in extract(png(files[container + name]), word, box, rows).items():
-            glyphs.setdefault(k, [[("d" if r == "m" and name.startswith("enchanting") else r) for r in col]
-                                  for col in g])
-
-    plate = plate_template(png(files[container + "furnace.png"]))
+    furnace = png(files[container + "furnace.png"])
+    anvil = png(files[container + "anvil.png"])
+    progress = png(files["assets/minecraft/textures/gui/sprites/container/furnace/burn_progress.png"])
+    grey = (193, 198, 198)
+    arrows = (template(furnace, (84, 36, 99, 49), grey), template(anvil, (110, 50, 115, 59), grey),
+              template(progress, (0, 0, 24, 16), None))
 
     if OUT.exists():
         shutil.rmtree(OUT / "assets", ignore_errors=True)
@@ -648,31 +816,46 @@ def main():
             continue
         im = png(data)
         name = path.rsplit("/", 1)[1]
+        vanilla = path.startswith(container)
+        if vanilla and name in PLATED:
+            clear_plate(im)
+        if (vanilla or path.startswith("assets/supplementaries/textures/gui/")) and name in BANNERED:
+            clear_banner(im, name)
         spec = GREYED_COMPATS.get(path, {})
         cells = find_cells(im, *spec["cells"]) if "cells" in spec else []
-        if (path.startswith(container) and name in GREYED) or spec:
-            greyify(im, spec.get("fixed"), rare=30 if spec else 0)
-        slots = find_slots(im) + cells
+        if (vanilla and name in GREYED) or spec:
+            greyify(im, spec.get("fixed"), rare=30 if spec else 0, keep=spec.get("keep", ()))
         if name == "anvil.png":  # GUI Revision's red mark under the name field
             px = im.load()
             for y in range(im.height):
                 for x in range(im.width):
                     if px[x, y] == (255, 0, 0, 255):
-                        px[x, y] = (193, 198, 198, 255)
+                        px[x, y] = grey + (255,)
+        slots = [(x - 1, y - 1, w + 2, h + 2) for x, y, w, h in find_slots(im) + cells]
+        if vanilla:
+            slots += [(x - 1, y - 1, 18, 18) for x, y in EXTRA_SLOTS.get(name, [])]
+        drawn = replace_arrows(im, arrows) if "/gui/" in path or "/misc/" in path else []
+        if vanilla and name in WOOD_ARROWS:
+            (a, b, c, d), (cx, cy) = WOOD_ARROWS[name]
+            px = im.load()
+            for y in range(b, d):
+                for x in range(a, c):
+                    px[x, y] = px[a - 2, y]
+            drawn.append((cx - 11, cy - 4))
         recolour(im)
-        plates = []
-        if path.startswith(container):
-            plates = retitle(name, im, glyphs, plate)
+        for x0, y0 in drawn:
+            draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
+        if vanilla:
             add_frieze(im, mask)
-        elif path.startswith("assets/supplementaries/textures/gui/"):
-            plates = retitle(name, im, glyphs, plate)
-        for x, y, w, h in slots:
-            round_slot(im, x, y, w, h)
-        if path.startswith(container):
-            for x, y in EXTRA_SLOTS.get(name, []):
-                round_slot(im, x, y, 16, 16)
+        shapes = slot_shapes(slots, [RESULTS[name]] if vanilla and name in RESULTS else [])
+        for (x, y, w, h), shape in zip(slots, shapes):
+            draw_slot(im, x, y, w, h, "square" if min(w, h) >= 30 else shape)
+        if vanilla:
+            for x, y, w, h, shape in WELLS.get(name, []):
+                draw_slot(im, x, y, w, h, shape)
+                slots.append((x, y, w, h))
         if big_panel(path, im):
-            add_pattern(im, plates + [(x, y, x + w, y + h) for x, y, w, h in slots])
+            add_pattern(im, [(x, y, x + w, y + h) for x, y, w, h in slots] + frieze_band(im, vanilla))
         im.save(dest)
 
     # vanilla-grey screens of the mods without a compat
@@ -684,13 +867,26 @@ def main():
                     continue
                 im = png(z.read(n))
                 slots = find_vanilla_slots(im)
+                wells = find_black_wells(im)
+                tpl = {(x, y): (139, 139, 139) for y, row in enumerate(VANILLA_ARROW)
+                       for x, c in enumerate(row) if c == "#"}
+                drawn = []
+                for ox, oy in matches(im, tpl):
+                    for dx, dy in tpl:
+                        im.putpixel((ox + dx, oy + dy), (198, 198, 198, 255))
+                    drawn.append((ox, oy + 3))
                 if recolour_vanilla(im):
+                    for x0, y0 in drawn:
+                        draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
                     px = im.load()
-                    for x, y, w, h in slots:
+                    shapes = slot_shapes(slots)
+                    for (x, y, w, h), shape in zip(slots, shapes):
                         clear = x == 0 or px[x - 1, y + h // 2][3] == 0
-                        round_slot(im, x, y, w, h, (0, 0, 0, 0) if clear else FILL + (255,))
+                        draw_slot(im, x, y, w, h, shape, (0, 0, 0, 0) if clear else FILL + (255,))
+                    for x, y, w, h in wells:
+                        draw_slot(im, x, y, w, h, "creature")
                     if big_panel(n, im):
-                        add_pattern(im, [(x, y, x + w, y + h) for x, y, w, h in slots])
+                        add_pattern(im, [(x, y, x + w, y + h) for x, y, w, h in slots + wells])
                     dest = OUT / n
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     im.save(dest)
@@ -701,27 +897,7 @@ def main():
     for code in ("fr_fr", "en_us"):
         (lang / f"{code}.json").write_text(json.dumps(blank, indent=2, ensure_ascii=False) + "\n")
 
-    hud = OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "hud"
-    for name in ("hotbar_selection.png", "hotbar_offhand_left.png", "hotbar_offhand_right.png"):
-        im = Image.open(hud / name).convert("RGBA")
-        px = im.load()
-        for y in range(im.height):
-            for x in range(im.width):
-                if px[x, y][3] and px[x, y][:3] in LANTERN:
-                    px[x, y] = LANTERN[px[x, y][:3]] + (px[x, y][3],)
-        im.save(hud / name)
-    # rounded hotbar cells: the frame fills their corners
-    im = Image.open(hud / "hotbar.png").convert("RGBA")
-    px = im.load()
-    frame = px[2, 10]
-    for i in range(9):
-        x0, y0 = 3 + 20 * i, 3
-        for j, k in enumerate(ROUND[2]):
-            for i2 in range(k):
-                for x, y in ((x0 + i2, y0 + j), (x0 + 15 - i2, y0 + j),
-                             (x0 + i2, y0 + 15 - j), (x0 + 15 - i2, y0 + 15 - j)):
-                    px[x, y] = frame
-    im.save(hud / "hotbar.png")
+    draw_hud(OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "hud")
 
     questlog.draw(OUT)
     for f in (OUT / "assets" / "questlog" / "textures" / "gui").glob("*.png"):
