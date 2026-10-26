@@ -131,6 +131,9 @@ LUT = {
     (131, 139, 139): (130, 140, 122),
     (162, 166, 166): (166, 170, 150),
     (193, 198, 198): (203, 202, 182),
+    # one step off the panel grey, left in a few compats
+    (193, 197, 197): (203, 202, 182),
+    (194, 198, 198): (203, 202, 182),
     (218, 231, 230): (232, 229, 208),
 }
 FILL = LUT[(193, 198, 198)]
@@ -440,6 +443,19 @@ TOUCH_UPS = {
         ((3, y0, 4, y1), {(166, 170, 150): (130, 140, 122)}), ((172, y0, 173, y1), {(166, 170, 150): (130, 140, 122)})]
        for n, y0, y1 in (("inventory", 84, 136), ("horse", 84, 136), ("hopper", 51, 103))},
 }
+# Fixes found by the review of every screen: the greys a compat left cool
+# (Immersive Enchanting's slot strip, Curios' arrows), the bevel bars left beside
+# Farm & Charm's redrawn bowl slots, the inventory's grid frame filled at its
+# bottom corners.
+for _path, _fixes in {
+    "assets/immersiveenchanting/textures/gui/container/enchanting_table.png": [((227, 126, 256, 222), "neutral")],
+    "assets/curios/textures/gui/curios/inventory.png": [((32, 24, 54, 51), "neutral"), ((76, 0, 81, 8), "neutral")],
+    "assets/farm_and_charm/textures/gui/stove_gui.png": [((37, 47, 41, 65), "fill")],
+    "assets/farm_and_charm/textures/gui/pot_gui.png": [((90, 54, 95, 71), "fill")],
+    "assets/farm_and_charm/textures/gui/roaster_gui.png": [((90, 54, 95, 71), "fill")],
+    "assets/minecraft/textures/gui/container/inventory.png": [((93, 54, 95, 55), "fill"), ((135, 54, 137, 55), "fill")],
+}.items():
+    TOUCH_UPS.setdefault(_path, []).extend(_fixes)
 # Mod screens drawn without a title: their top-left corner keeps its ornament.
 UNTITLED = ("/jei/", "/emi/", "/sprites/")
 
@@ -899,11 +915,21 @@ def add_plates(im, path):
         if entry[4:] == ("bare",):
             continue
         x0, y0, x1, y1 = plate_box(entry)
+        # a well, a frame or a groove right under the plate is its bottom edge
+        lid = any(px[x, y1 + 1][3] and px[x, y1 + 1][:3] not in (FILL, LEAF_TONE) for x in range(x0 + 2, x1 - 1))
+        if lid:
+            y1 -= 1
         for y in range(y0, y1 + 1):
-            cut = max(0, 2 - (y - y0), 2 - (y1 - y))  # the ends' corners cut off
+            cut = max(0, 2 - (y - y0), 0 if lid else 2 - (y1 - y))  # the ends' corners cut off
             for x in range(x0 + cut, x1 - cut + 1):
-                edge = x in (x0 + cut, x1 - cut) or y in (y0, y1)
-                px[x, y] = (PLATE_EDGE if edge else PLATE_SHADE if y == y1 - 1 else PLATE) + (255,)
+                edge = x in (x0 + cut, x1 - cut) or y == y0 or (y == y1 and not lid)
+                shade = y == (y1 if lid else y1 - 1)
+                px[x, y] = (PLATE_EDGE if edge else PLATE_SHADE if shade else PLATE) + (255,)
+            # stubs of the panel's bone bevel left between a band's ends and the frame
+            for x in (*range(x0 + cut - 3, x0 + cut), *range(x1 - cut + 1, x1 - cut + 4)) \
+                    if entry[4:] == ("band",) else ():
+                if 0 <= x < im.width and px[x, y][3] and px[x, y][:3] == ARROW_LIGHT:
+                    px[x, y] = FILL + (255,)
 
 
 def add_corners(im, path):
@@ -1794,6 +1820,10 @@ def finish_vanilla(c):
     sprite.save(c.parent / "sprites" / "container" / "brewing_stand" / "brew_progress.png")
 
 
+JEI_ARROWS = ("assets/jei/textures/jei/atlas/gui/recipe_arrow.png",
+              "assets/jei/textures/jei/atlas/gui/recipe_arrow_filled.png")
+
+
 def finish():
     """The passes run on the built textures: sprites retoned, single touch-ups,
     the outer rings of panels, vanilla greys a compat left, then the leaves, the
@@ -1822,6 +1852,13 @@ def finish():
             if path.startswith("assets/minecraft/textures/gui/container/"):
                 add_plates(im, path)
             add_corners(im, path)
+        if path in JEI_ARROWS:
+            # JEI's recipe arrow, empty and filled, on the same rows
+            im = Image.new("RGBA", im.size)
+            if path.endswith("_filled.png"):
+                draw_arrow(im, 0, 3, LANTERN, LANTERN_D, LANTERN_L)
+            else:
+                draw_arrow(im, 0, 3, ARROW_INK, ARROW_LIGHT)
         if path == "assets/emi/textures/gui/widgets.png":
             # the filling arrow: the empty one, lit
             px = im.load()
