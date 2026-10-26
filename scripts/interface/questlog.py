@@ -352,11 +352,12 @@ def tab_buttons():
         label(cv, bx + 44, oy + 25, "Rechercher", RUST if hot else (64, 64, 64), SLATE_L)
         paint(cv, rr(bx + 112, oy + 23, bx + 197, oy + 34, 2), PAGE_L, EDGE, PAGE_D, None)
         lens(cv, bx + 204, oy + 22, hot)
-    left = ["......EE", "....EElE", "..EElLLE", "EElLLLLE", "..EEdLLE", "....EEdE", "......EE"]
+    left = [".....EE", "....ElE", "...ElLE", "..ElLLE", ".ElLLLE", "ElLLLLE",
+            ".EdLLLE", "..EdLLE", "...EdLE", "....EdE", ".....EE"]
     for hot, ox in ((False, 2), (True, 32)):
         cols = {"E": EDGE, "l": LANTERN_L if hot else TILE_H, "L": LANTERN if hot else TILE, "d": LANTERN_D if hot else TILE_D}
-        cv.blit_map(ox + 9, 173 + 10, left, cols)
-        cv.blit_map(ox + 10, 202 + 10, [r[::-1] for r in left], cols)
+        cv.blit_map(ox + 9, 173 + 8, left, cols)
+        cv.blit_map(ox + 10, 202 + 8, [r[::-1] for r in left], cols)
     for (u, fill, light, dark) in ((62, TILE, TILE_L, TILE_D), (118, RUST, RUST_L, RUST_D)):
         chapter_tab(cv, u, 174, 22, fill, light, dark)
         chapter_tab(cv, u, 208, 28, fill, light, dark)

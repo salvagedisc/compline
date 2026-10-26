@@ -22,10 +22,18 @@ vanilla and the mods of the pack, and adapts them to Fallow:
 - mods without a GUI Revision compat: their vanilla-grey screens, read from
   the jars cached by `npm run check-fr`, take the same colours, their own
   drawings keep theirs;
+- sprites: buttons, tabs, lists and toasts follow the same tones by
+  brightness, highlights in lantern light; vanilla textures GUI Revision
+  lacks (the crafter, text fields, checkboxes...) are added from the game's
+  own jar and dressed alike;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
-Authoring tool, not run by CI: needs Python 3 and Pillow, and the jars in
-.cache/jars (run `npm run check-fr` once first).
+Only textures the game or a mod of the pack reads are kept: compat files
+made for other versions of a mod, OptiFine's and those left as they were
+are dropped.
+
+Authoring tool, not run by CI: needs Python 3 and Pillow 12.1 or newer, and
+the jars in .cache/jars (run `npm run check-fr` once first).
     python3 scripts/interface/build.py
 """
 import hashlib
@@ -54,6 +62,10 @@ SOURCES = {
                              "3b271708462e750579eff55c86509bd76a8c1997"),
     "hollow-gui": ("https://cdn.modrinth.com/data/P3pQmBmF/versions/x0WWXDjf/HollowGUI.zip",
                    "77951b6430bb5e14c2ad7d97d8e3ed78205dae09"),
+    # Minecraft 1.21.1's client: the reference for what vanilla reads, and the
+    # source of the textures GUI Revision does not cover
+    "vanilla": ("https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
+                "30c73b1c5da787909b2f73340419fdf13b9def88"),
 }
 
 # Compats kept: the mods of the pack that GUI Revision Compats covers.
@@ -62,14 +74,17 @@ COMPAT_NAMESPACES = {
     "farm_and_charm", "immersiveenchanting", "jei", "naturalist", "overgeared", "quark",
     "supplementaries",
 }
-# Mods whose own screens are recoloured when they use vanilla's greys.
+# Mods whose own screens are recoloured when they use vanilla's greys, and
+# whose licence lets a modified copy be shared (credited in CREDITS.md).
 # Config libraries, books and mods with a style of their own (Create and its
-# addons) are left alone.
-RECOLOUR_MODS = {
-    "adorablehamsterpets", "alexsmobs", "ancient_remnants", "antique_atlas", "antique_transport",
-    "companions", "crittersandcompanions",
-    "eclipticseasons", "envelope", "exposure_space", "icys-better-horses", "kaleidoscope_cookery",
-    "lootr", "mowziesmobs", "nomansland", "thirst", "treechop", "longwings",
+# addons) are left alone, and so are the mods whose textures are all rights
+# reserved (Adorable Hamster Pets, Critters and Companions, Mowzie's Mobs,
+# No Man's Land).
+RECOLOUR_MODS = {"alexsmobs", "companions", "envelope", "kaleidoscope_cookery", "treechop"}
+# Compat files whose change does not suit the mod's version: its own texture stays.
+KEEP_ORIGINAL = {
+    "assets/supplementaries/textures/gui/sprites/present/overlay.png",
+    "assets/supplementaries/textures/gui/sprites/hud/selectable_item_overlay.png",
 }
 
 # GUI Revision's palette -> Fallow (outline, darks, sage slots, mist panels, bone light).
@@ -96,7 +111,7 @@ VANILLA = {
 }
 VANILLA_EDGES = {(255, 255, 255): LUT[(218, 231, 230)], (0, 0, 0): LUT[(28, 28, 31)]}
 
-# frieze colours, one step from the panel
+# the curls' colours, one step from the panel
 SOFT = (188, 188, 167)
 ACCENT = (140, 149, 130)
 # Background pattern: one small leaf, repeated tone on tone over the whole panel
@@ -195,6 +210,7 @@ MOD_ARROWS = {
     "assets/kaleidoscope_cookery/textures/gui/jei/steamer.png": [((90, 30, 111, 45), ("right", 90, 32))],
     "assets/kaleidoscope_cookery/textures/gui/jei/stockpot.png": [((127, 39, 157, 54), ("bent", 127, 40, 149, 53))],
     "assets/kaleidoscope_cookery/textures/gui/jei/teapot.png": [((90, 19, 144, 35), ("bent", 90, 20, 135, 34))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/bamboo_tray.png": [((96, 28, 112, 43), ("right", 95, 30))],
 }
 
 # Vanilla screens GUI Revision paints in colours (wood, purple): brought back to
@@ -238,6 +254,7 @@ WELLS = {
     "horse.png": [(26, 16, 53, 55, "creature"), (79, 16, 90, 55, "square")],
     "tab_inventory.png": [(72, 4, 34, 46, "creature")],
     "assets/quark/textures/misc/backpack_gui.png": [(27, 7, 48, 72, "creature")],
+    "assets/naturalist/textures/gui/container/elephant.png": [(7, 17, 72, 71, "creature")],
 }
 # Grids a compat draws in a frame of its own with buttons for cells: the frame is
 # cleared from its top-left pixel, the cells (x, y of each 18-pixel cell) are
@@ -250,6 +267,8 @@ REFRAMED = {
 MOD_SLOTS = {
     "assets/farm_and_charm/textures/gui/pot_gui.png": [(122, 26, 20, 20)],
     "assets/farm_and_charm/textures/gui/roaster_gui.png": [(122, 26, 20, 20)],
+    "assets/cold_sweat/textures/gui/screen/sewing_gui.png": [(42, 52, 18, 18)],
+    "assets/immersiveenchanting/textures/gui/container/enchanting_table.png": [(232, 168, 18, 20)],
 }
 # Marks GUI Revision embosses in light where the others are engraved (x0, y0, x1, y1):
 # the light becomes ink and the shadow under it light, like the arrows.
@@ -271,8 +290,67 @@ HIDDEN_TITLES = [
     "container.stonecutter", "container.upgrade", "container.dispenser", "container.shulkerBox",
     "container.hopper", "container.furnace", "container.smoker", "container.blast_furnace",
     "container.dropper", "container.chest", "container.chestDouble", "merchant.trades",
-    "container.enderchest",
+    "container.enderchest", "container.barrel", "container.crafter",
 ]
+
+# Sprites (under textures/gui/sprites) and screens whose greys follow Fallow's tones
+# by brightness; the colours a mod or the game gives meaning to (red crosses,
+# green ticks, pings, boss bars) are not greys and stay.
+RETONED = tuple("assets/minecraft/textures/gui/" + d for d in (
+    "container/", "sprites/widget/", "sprites/social_interactions/", "sprites/toast/",
+    "sprites/advancements/", "sprites/gamemode_switcher/", "sprites/container/",
+    "sprites/recipe_book/", "sprites/popup/", "sprites/hud/effect_background",
+    "sprites/server_list/", "sprites/transferable_list/", "sprites/world_list/", "advancements/",
+)) + (
+    "assets/amendments/textures/gui/sprites/widget/", "assets/supplementaries/textures/gui/sprites/present/",
+    "assets/supplementaries/textures/gui/sprites/trapped_present/", "assets/envelope/textures/gui/sprites/",
+    "assets/emi/textures/gui/buttons.png", "assets/emi/textures/gui/widgets.png",
+)
+# Sprites GUI Revision leaves in colours of their own (purple, wood, blue, gold):
+# "all" takes every pixel to Fallow's tones by brightness, "light" the same with
+# the sprite lifted to the panel's brightness (a button), "dim" a step darker (a
+# disabled state), "lantern" to the lantern's light, "glow" its pale light (a highlight).
+SPRITE_MODES = {f"assets/minecraft/textures/gui/sprites/{k}.png": v for k, v in {
+    "container/enchanting_table/enchantment_slot": "light",
+    "container/loom/pattern": "all", "container/loom/pattern_selected": "all", "container/loom/scroller": "all",
+    "container/beacon/button": "all", "container/beacon/button_disabled": "dim",
+    "advancements/box_unobtained": "all", "toast/system": "all", "hud/effect_background_ambient": "all",
+    "container/enchanting_table/enchantment_slot_highlighted": "glow",
+    "container/beacon/button_highlighted": "glow", "container/stonecutter/recipe_highlighted": "glow",
+    "container/loom/pattern_highlighted": "glow", "recipe_book/crafting_overlay_highlighted": "glow",
+    "recipe_book/furnace_overlay_highlighted": "glow", "advancements/box_obtained": "lantern",
+    "advancements/challenge_frame_obtained": "lantern", "advancements/goal_frame_obtained": "lantern",
+    "advancements/task_frame_obtained": "lantern", "gamemode_switcher/selection": "lantern",
+    "container/brewing_stand/fuel_length": "lantern",
+}.items()}
+# Last touches on single textures, once built: a box (x0, y0, x1, y1) and what it
+# becomes: "fill" (bare panel), "clear" (transparent), "grey" (its stray greys
+# cleared), a mode as above, a colour, or a map of colours.
+TOUCH_UPS = {
+    # pills of an older Cold Sweat under the hearth's and boiler's gauges
+    "assets/cold_sweat/textures/gui/screen/hearth_gui.png": [
+        ((60, 26, 75, 67), "fill"), ((101, 26, 117, 67), "fill")],
+    "assets/cold_sweat/textures/gui/screen/boiler_gui.png": [((108, 60, 141, 79), "fill")],
+    "assets/cold_sweat/textures/gui/screen/icebox_gui.png": [((108, 60, 141, 79), "fill")],
+    "assets/exposure/textures/gui/lightroom.png": [((176, 2, 199, 17), "grey")],
+    "assets/curios/textures/gui/curios/inventory.png": [((33, 38, 54, 49), {(255, 255, 255): (130, 140, 122)})],
+    "assets/companions/textures/gui/cornelius_gui_bottom.png": [
+        ((61, 171, 63, 253), {(0, 0, 0): (26, 31, 28), (255, 255, 255): (232, 229, 208)})],
+    "assets/quark/textures/gui/general_icons.png": [((0, 159, 17, 165), "lantern")],
+    # the crafter's lit arrow, laid over the panel's leaves
+    "assets/quark/textures/gui/container/crafter.png": [((176, 17, 192, 29), {FILL: None, LEAF_TONE: None})],
+    "assets/minecraft/textures/gui/sprites/social_interactions/background.png": [
+        ((7, 25, 8, 26), (130, 140, 122)), ((228, 25, 229, 26), (130, 140, 122))],
+    # GUI Revision's own corner marks, where the standard ornaments go instead
+    "assets/minecraft/textures/gui/container/crafting_table.png": [
+        ((4, 4, 14, 15), "fill"), ((163, 4, 173, 15), "fill"), ((3, 68, 14, 80), "fill"), ((162, 68, 173, 80), "fill")],
+    # the 3-row inventory's side bevel, as on the other screens
+    **{f"assets/minecraft/textures/gui/container/{n}.png": [
+        ((3, y0, 4, y1), {(166, 170, 150): (130, 140, 122)}), ((172, y0, 173, y1), {(166, 170, 150): (130, 140, 122)})]
+       for n, y0, y1 in (("inventory", 84, 136), ("horse", 84, 136), ("hopper", 51, 103))},
+}
+# Mod screens drawn without a title: their top-left corner keeps its ornament.
+UNTITLED = ("/jei/", "/emi/", "/sprites/")
 
 
 # ---------------------------------------------------------------- sources
@@ -282,7 +360,8 @@ def fetch(name):
     path = CACHE / f"{name}.zip"
     if not path.exists() or hashlib.sha1(path.read_bytes()).hexdigest() != sha1:
         CACHE.mkdir(parents=True, exist_ok=True)
-        data = urllib.request.urlopen(url).read()
+        with urllib.request.urlopen(url, timeout=300) as response:
+            data = response.read()
         if hashlib.sha1(data).hexdigest() != sha1:
             raise SystemExit(f"{name}: checksum mismatch")
         path.write_bytes(data)
@@ -440,10 +519,14 @@ def template(im, box, bg):
             for x in range(box[0], box[2]) if px[x, y][3] and px[x, y][:3] != bg}
 
 
-def matches(im, tpl):
+def matches(im, tpl, alone=False):
+    """Where the template's pixels all appear; alone, only where the rest of its
+    box is another colour (a shape standing out, not a patch of a flat area)."""
     px = im.load()
     width, height = im.size
     k0 = min(tpl)
+    tw = max(x for x, y in tpl) + 1
+    th = max(y for x, y in tpl) + 1
     found = []
     for y in range(height):
         for x in range(width):
@@ -451,7 +534,9 @@ def matches(im, tpl):
                 continue
             ox, oy = x - k0[0], y - k0[1]
             if all(0 <= ox + dx < width and 0 <= oy + dy < height and px[ox + dx, oy + dy][3]
-                   and px[ox + dx, oy + dy][:3] == c for (dx, dy), c in tpl.items()):
+                   and px[ox + dx, oy + dy][:3] == c for (dx, dy), c in tpl.items()) and not (alone and any(
+                    px[ox + dx, oy + dy][:3] == tpl[k0] for dy in range(th) for dx in range(tw)
+                    if (dx, dy) not in tpl)):
                 found.append((ox, oy))
     return found
 
@@ -540,8 +625,12 @@ def replace_arrows(im, arrows):
     out = []
     for tpl in (big, small):
         for ox, oy in matches(im, tpl):
+            tw, th = max(x for x, y in tpl) + 1, max(y for x, y in tpl) + 1
+            ring = [px[i, j] for i in range(ox - 2, ox + tw + 2) for j in range(oy - 2, oy + th + 2)
+                    if 0 <= i < im.width and 0 <= j < im.height and (i - ox, j - oy) not in tpl]
+            bare = sum(1 for q in ring if not q[3]) * 2 > len(ring)
             for dx, dy in tpl:
-                px[ox + dx, oy + dy] = (193, 198, 198, 255)
+                px[ox + dx, oy + dy] = (0, 0, 0, 0) if bare else (193, 198, 198, 255)
             if tpl is big:
                 x0, y0 = ox - 4, oy + 1  # same place as the progress sprite's arrow
             else:
@@ -572,7 +661,7 @@ def frieze_mask(hollow):
 
 
 def frieze_parts(mask):
-    """The frieze's ornaments (8-connected pieces of the mask), each with its mirror."""
+    """The frieze's ornaments: 8-connected pieces of the mask, left to right."""
     seen, parts = set(), []
     for p in sorted(mask):
         if p in seen:
@@ -590,7 +679,7 @@ def frieze_parts(mask):
                         todo.append(q)
         parts.append(part)
     parts.sort(key=min)
-    return [(part, parts[len(parts) - 1 - i]) for i, part in enumerate(parts)]
+    return parts
 
 
 def ornaments(crafting, mask):
@@ -603,7 +692,7 @@ def ornaments(crafting, mask):
     corner = {(x - 4, y - 5): px[x, y][:3] for y in range(5, 14) for x in range(4, 13)
               if px[x, y][:3] != FILL}
     pieces = frieze_parts(mask)
-    middle = pieces[len(pieces) // 2 - 1][0] + pieces[len(pieces) // 2][0]
+    middle = pieces[len(pieces) // 2 - 1] + pieces[len(pieces) // 2]
     left = min(x for x, y in middle)
     width = max(x for x, y in middle) - left + 1
     top = min(y for x, y in middle)
@@ -639,10 +728,11 @@ def panel_inside(im):
     return best and best[1]
 
 
-def add_ornaments(im, decoration):
+def add_ornaments(im, decoration, titled=False):
     """Lays each ornament where it finds bare panel (the leaf pattern counts as bare),
     with one pixel of panel kept clear around it; an ornament that would touch a
-    slot or an edge is left out whole."""
+    slot or an edge is left out whole. On a titled screen the top-left corner is
+    the title's."""
     inside = panel_inside(im)
     if inside is None:
         return
@@ -655,8 +745,10 @@ def add_ornaments(im, decoration):
         {(x1 - 2 - u, y0 + 1 + v): c for (u, v), c in corner.items()},
         {(x0 + 2 + u, y1 - 1 - v): c for (u, v), c in corner.items()},
         {(x1 - 2 - u, y1 - 1 - v): c for (u, v), c in corner.items()},
-        {((x0 + x1 + 1 - width) // 2 + u, y0 + v): c for (u, v), c in curls.items()},
+        {((x0 + x1 + 1 - width) // 2 + u, y0 + v + (3 if y0 < 2 else 0)): c for (u, v), c in curls.items()},
     ]
+    if titled:
+        placed[0] = {}
     if y1 - y0 < 2 * ch + 6:  # a low strip of panel: the curls only
         placed = placed[4:]
     px = im.load()
@@ -665,7 +757,7 @@ def add_ornaments(im, decoration):
     def free(p):
         return 0 <= p[0] < im.width and 0 <= p[1] < im.height and px[p][:3] in bare and px[p][3]
 
-    for stamp in placed:
+    for stamp in filter(None, placed):
         halo = {(x + a, y + b) for x, y in stamp for a in (-1, 0, 1) for b in (-1, 0, 1)} - set(stamp)
         if x1 - x0 < 2 * cw + 8 or not all(free(p) for p in stamp) or not all(
                 free(p) or p[1] < y0 for p in halo):
@@ -722,9 +814,9 @@ def greyify(im, fixed=None, rare=0, keep=()):
     levels = [lum(g) for g in greys]
     px = im.load()
     count = Counter(p[:3] for p in im.get_flattened_data() if p[3])
-    margin = Counter(px[x, y][:3] for x in range(3, 7) for y in range(20, 60) if px[x, y][3])
     fixed = fixed or {}
-    panel = next(iter(fixed), None) or margin.most_common(1)[0][0]
+    panel = next(iter(fixed), None) or Counter(
+        px[x, y][:3] for x in range(3, 7) for y in range(20, 60) if px[x, y][3]).most_common(1)[0][0]
     scale = lum(fixed.get(panel, (193, 198, 198))) / lum(panel)
     for y in range(im.height):
         for x in range(im.width):
@@ -808,7 +900,7 @@ def find_vanilla_slots(im):
     return found + flat
 
 
-def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,), cells=()):
+def draw_slot(im, x, y, w, h, kind="square", around=FILL + (255,), cells=()):
     """Redraws the slot cell (x, y, w, h) as a well with rounded corners, or, for
     "creature", a deeper well with a fine two-tone grain. The outline is darker at
     the top and left, fading towards the ends, and the top casts a soft shadow
@@ -839,7 +931,7 @@ def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,), cells=()):
     ground = Counter(before.values()).most_common(1)[0][0]
     cut = CORNERS[18] if max(w, h) <= 18 else CORNERS[30]
     inside = corner_mask(w, h, cut)
-    deep = shape == "creature"
+    deep = kind == "creature"
     edge_top = WELL_EDGE if deep else EDGE_TOP
 
     for j in range(h):
@@ -972,7 +1064,7 @@ def fill_gaps(im, cells, wells=()):
     small = [c for c in cells if c[2:] == (18, 18)]
     if not small:
         return cells
-    tone = Counter(px[x + 9, y + 9] for x, y, w, h in small).most_common(1)[0][0]
+    paint = Counter(px[x + 9, y + 9] for x, y, w, h in small).most_common(1)[0][0]
 
     def free(x, y):
         return all(x + 18 <= a or a + c <= x or y + 18 <= b or b + d <= y
@@ -984,9 +1076,9 @@ def fill_gaps(im, cells, wells=()):
         inner = [px[x + i, y + j] for j in range(3, 15) for i in range(3, 15)]
         sides = [[(x - 1, y + k) for k in range(18)], [(x + 18, y + k) for k in range(18)],
                  [(x + k, y - 1) for k in range(18)], [(x + k, y + 18) for k in range(18)]]
-        open_side = any(sum(0 <= i < im.width and 0 <= j < im.height and px[i, j] == tone for i, j in side) >= 14
+        open_side = any(sum(0 <= i < im.width and 0 <= j < im.height and px[i, j] == paint for i, j in side) >= 14
                         for side in sides)  # the place is part of a larger well, not a cell
-        return sum(p == tone for p in inner) >= 0.6 * len(inner) and not open_side
+        return sum(p == paint for p in inner) >= 0.6 * len(inner) and not open_side
 
     for axis in (0, 1):
         lines = {}
@@ -1116,23 +1208,285 @@ def big_panel(path, im):
                if px[x, y][:3] == FILL and px[x, y][3]) * 4 >= 1500
 
 
+# ---------------------------------------------------------------- finish
+
+FALLOW = set(LUT.values()) | {
+    FILL, LEAF_TONE, SOFT, ACCENT, EDGE_TOP, EDGE_FADE, EDGE_LOW, *SHADE, SLOT_FILL, WELL_EDGE, *WELL_GRAIN,
+    ARROW_INK, ARROW_LIGHT, LANTERN_D, LANTERN, LANTERN_L, LANTERN_EDGE}
+OUTLINE = LUT[(28, 28, 31)]
+BEVEL = LUT[(131, 139, 139)]
+# Brewing's arrow, pointing down: the small arrow turned, its shaft drawn out to 28 rows.
+BREW_ARROW = ({(c, r) for c in (3, 4) for r in range(22)} | {(2, 1), (5, 1)}
+              | {(y, x + 11) for x, y in shape(SMALL_ARROW) if x >= 11})
+
+
+def lantern_tone(v):
+    """The lantern's light for a pixel of luminance v."""
+    ramp = [(40, LANTERN_EDGE), (110, LANTERN_D), (170, LANTERN), (225, LANTERN_L)]
+    if v <= ramp[0][0]:
+        return ramp[0][1]
+    for (l0, c0), (l1, c1) in zip(ramp, ramp[1:]):
+        if v <= l1:
+            t = (v - l0) / (l1 - l0)
+            return tuple(round(a + (b - a) * t) for a, b in zip(c0, c1))
+    return ramp[-1][1]
+
+
+def retone(im, mode, box=None):
+    """Takes greys ("neutral"), every colour ("all"), every colour a step darker
+    ("dim") or to the lantern's light ("lantern") to Fallow's tones by brightness;
+    Fallow's own colours stay. "light" and "glow" first lift the sprite's main
+    colour to the panel's brightness or the lantern's pale light (a button, its
+    highlight). Returns whether a pixel changed."""
+    px = im.load()
+    x0, y0, x1, y1 = box or (0, 0, im.width, im.height)
+    shift = 0
+    if mode in ("light", "glow"):
+        main = Counter(px[x, y][:3] for y in range(y0, y1) for x in range(x0, x1) if px[x, y][3])
+        shift = (lum(FILL) - 10 if mode == "light" else 215) - lum(main.most_common(1)[0][0])
+        mode = "all" if mode == "light" else "lantern"
+    changed = False
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            r, g, b, a = px[x, y]
+            if not a or (mode in ("neutral", "all") and (r, g, b) in FALLOW):
+                continue
+            if mode == "neutral" and max(r, g, b) - min(r, g, b) > 16:
+                continue
+            v = lum((r, g, b)) + shift
+            new = lantern_tone(v) if mode == "lantern" else tone(v * 0.8) if mode == "dim" else tone(v)
+            if new != (r, g, b):
+                px[x, y] = new + (a,)
+                changed = True
+    return changed
+
+
+def touch_up(im, box, action):
+    px = im.load()
+    if isinstance(action, str) and action in ("neutral", "all", "dim", "lantern", "light", "glow"):
+        retone(im, action, box)
+        return
+    x0, y0, x1, y1 = box
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            p = px[x, y]
+            if action == "fill":
+                px[x, y] = FILL + (255,)
+            elif action == "clear" or (action == "grey" and p[3] and max(p[:3]) - min(p[:3]) <= 3):
+                px[x, y] = (0, 0, 0, 0)
+            elif isinstance(action, dict):
+                if p[3] and p[:3] in action:
+                    px[x, y] = action[p[:3]] + (p[3],) if action[p[:3]] else (0, 0, 0, 0)
+            elif isinstance(action, tuple):
+                px[x, y] = action + (255,)
+
+
+def edge_rings(im, corners):
+    """Pure black and white left on a panel's outer rings (within two pixels of its
+    edge) take the outline and the bone light; with corners, black left on a
+    rounded corner is cleared."""
+    src = im.copy().load()
+    px = im.load()
+    width, height = im.size
+
+    def out(i, j):
+        return not (0 <= i < width and 0 <= j < height) or not src[i, j][3]
+
+    for y in range(height):
+        for x in range(width):
+            p = src[x, y]
+            if not p[3] or p[:3] not in ((0, 0, 0), (255, 255, 255)):
+                continue
+            if not any(out(x + a, y + b) for a in range(-2, 3) for b in range(-2, 3)):
+                continue
+            if corners and p[:3] == (0, 0, 0) and sum(out(x + a, y + b) for a, b in (
+                    (1, 0), (-1, 0), (0, 1), (0, -1))) >= 2:
+                px[x, y] = (0, 0, 0, 0)
+            else:
+                px[x, y] = (OUTLINE if p[:3] == (0, 0, 0) else ARROW_LIGHT) + (p[3],)
+
+
+def finish_vanilla(c):
+    """Single vanilla screens: the enchanting table's double frame and marks, the
+    hopper's open right edge, the anvil's plus and the brewing stand's arrow."""
+    furnace = Image.open(c / "furnace.png").convert("RGBA").load()
+    im = Image.open(c / "enchanting_table.png").convert("RGBA")
+    px = im.load()
+    for y in range(3, 83):
+        for x in range(176):
+            if y in (3, 4, 5, 79, 80, 81, 82) or x in (0, 1, 174, 175):
+                px[x, y] = furnace[x, y]
+            elif x in (2, 3, 172, 173) or y in (6, 7) or (y in (76, 77, 78) and px[x, y][:3] not in (FILL, LEAF_TONE)):
+                px[x, y] = FILL + (255,)
+    for box in ((4, 8, 17, 21), (4, 62, 11, 79), (11, 70, 17, 79), (156, 8, 169, 13), (169, 8, 172, 23),
+                (169, 62, 172, 79), (156, 72, 169, 79), (59, 10, 62, 13)):
+        touch_up(im, box, "fill")
+    im.save(c / "enchanting_table.png")
+
+    im = Image.open(c / "hopper.png").convert("RGBA")
+    px = im.load()
+    for y in range(9, 50):
+        if px[175, y][:3] == BEVEL:
+            px[175, y] = OUTLINE + (255,)
+            if px[174, y][:3] in (FILL, LEAF_TONE):
+                px[174, y] = BEVEL + (255,)
+    im.save(c / "hopper.png")
+
+    im = Image.open(c / "anvil.png").convert("RGBA")
+    px = im.load()
+    plus = {(x, y) for y in range(51, 59) for x in range(56, 63) if px[x, y][:3] == LUT[(85, 89, 89)]}
+    touch_up(im, (55, 50, 64, 60), {ARROW_LIGHT: FILL})
+    draw_arrow(im, 0, 0, ARROW_INK, ARROW_LIGHT, pts=plus)
+    im.save(c / "anvil.png")
+
+    im = Image.open(c / "brewing_stand.png").convert("RGBA")
+    touch_up(im, (96, 15, 108, 46), "fill")
+    draw_arrow(im, 97, 16, ARROW_INK, ARROW_LIGHT, pts=BREW_ARROW)
+    im.save(c / "brewing_stand.png")
+    sprite = Image.new("RGBA", (9, 28))
+    sp = sprite.load()
+    for x, y in BREW_ARROW:
+        sp[x, y] = (LANTERN_L if (x - 1, y) not in BREW_ARROW else
+                    LANTERN_D if (x + 1, y) not in BREW_ARROW and y >= 22 else LANTERN) + (255,)
+    sprite.save(c.parent / "sprites" / "container" / "brewing_stand" / "brew_progress.png")
+
+
+def finish(decoration):
+    """The passes run on the built textures: sprites retoned, single touch-ups,
+    the outer rings of panels, vanilla greys a compat left, then the leaves and
+    ornaments again where the panel changed."""
+    finish_vanilla(OUT / "assets" / "minecraft" / "textures" / "gui" / "container")
+    for f in sorted((OUT / "assets").rglob("*.png")):
+        path = f.relative_to(OUT).as_posix()
+        if "/questlog/" in path or "/sprites/hud/hotbar" in path:
+            continue
+        im = Image.open(f).convert("RGBA")
+        before = im.tobytes()
+        if path in SPRITE_MODES:
+            retone(im, SPRITE_MODES[path])
+        if path.startswith(RETONED):
+            retone(im, "neutral")
+        for box, action in TOUCH_UPS.get(path, []):
+            touch_up(im, box, action)
+        namespace = path.split("/")[1]
+        if namespace in COMPAT_NAMESPACES:
+            touch_up(im, (0, 0, im.width, im.height), {k: v for k, v in VANILLA.items()})
+        if big_panel(path, im):
+            edge_rings(im, corners=namespace == "minecraft")
+            add_pattern(im)
+            add_ornaments(im, decoration, titled(path))
+        if path == "assets/emi/textures/gui/widgets.png":
+            # the filling arrow: the empty one, lit
+            px = im.load()
+            pts = {(x - 44, y) for y in range(17) for x in range(44, 68) if px[x, y][:3] == ARROW_INK}
+            for y in range(17):
+                for x in range(44, 68):
+                    px[x, y + 17] = px[x, y]
+            draw_arrow(im, 44, 17, LANTERN, LANTERN_D, LANTERN_L, pts=pts)
+        if im.tobytes() != before:
+            im.save(f)
+
+
+def titled(path):
+    return not path.startswith("assets/minecraft/") and not any(k in path for k in UNTITLED)
+
+
+def draw_icon():
+    """pack.png: a small panel with its leaves and the lantern arrow."""
+    im = Image.new("RGBA", (32, 32))
+    px = im.load()
+    inside = rounded(32, 32, 4)
+    for j in range(32):
+        for i in range(32):
+            if inside(i, j):
+                edge = any(not inside(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+                px[i, j] = (OUTLINE if edge else ARROW_LIGHT if not inside(i, j - 2) else
+                            BEVEL if not inside(i + 2, j) or not inside(i - 2, j) or not inside(i, j + 2) else
+                            FILL) + (255,)
+    add_pattern(im)
+    draw_arrow(im, 7, 12, LANTERN, LANTERN_D, LANTERN_L, rows=SMALL_ARROW)
+    return im.resize((128, 128), Image.NEAREST)
+
+
+def crafter(frame, decoration):
+    """The crafter's screen, on the crafting table's: its 3x3 grid framed at the
+    crafter's place, its result in a slot where the game draws it."""
+    im = Image.open(OUT / "assets" / "minecraft" / "textures" / "gui" / "container" / "crafting_table.png")
+    im = im.convert("RGBA")
+    touch_up(im, (3, 4, 173, 79), "fill")
+    cells = [(25 + 18 * c, 16 + 18 * r, 18, 18) for r in range(3) for c in range(3)] + [(133, 34, 18, 18)]
+    add_frames(im, cells, frame)
+    for x, y, w, h in cells:
+        draw_slot(im, x, y, w, h, cells=cells)
+    add_pattern(im)
+    add_ornaments(im, decoration)
+    return im
+
+
+def dress_vanilla(im, n, frame, decoration):
+    """A screen drawn in vanilla's greys (a mod's, or the game's where GUI Revision
+    has none) dressed like the others; returns whether it had vanilla's greys."""
+    slots = find_vanilla_slots(im)
+    wells = find_black_wells(im)
+    tpl = {(x, y): (139, 139, 139) for y, row in enumerate(VANILLA_ARROW)
+           for x, c in enumerate(row) if c == "#"}
+    drawn = []
+    for ox, oy in matches(im, tpl, alone=True):
+        for dx, dy in tpl:
+            im.putpixel((ox + dx, oy + dy), (198, 198, 198, 255))
+        drawn.append((ox, oy + 3))
+    if not recolour_vanilla(im):
+        return False
+    for x0, y0 in drawn:
+        draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
+    if "/sprites/" not in n:
+        reshape_arrows(im, n)
+    px = im.load()
+    slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
+    spaced = separate(slots + wells)
+    slots, wells = spaced[:len(spaced) - len(wells)], spaced[len(spaced) - len(wells):]
+    clear_leftovers(im, slots + wells)
+    add_frames(im, slots, frame)
+    for x, y, w, h in slots:
+        clear = x == 0 or px[x - 1, y + h // 2][3] == 0
+        draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,), cells=slots + wells)
+    for x, y, w, h in wells:
+        draw_slot(im, x, y, w, h, "creature", cells=slots + wells)
+    if big_panel(n, im):
+        add_pattern(im)
+        add_ornaments(im, decoration, titled(n))
+    return True
+
+
 # ---------------------------------------------------------------- build
 
 def main():
     rev = fetch("gui-revision")
     compats = fetch("gui-revision-compats")
     hollow = fetch("hollow-gui")
+    vanilla = fetch("vanilla")
     mask = frieze_mask(hollow)
+
+    # where each texture the game and the mods read comes from
+    origin = {n: vanilla for n in vanilla.namelist() if n.startswith("assets/minecraft/textures/")}
+    jars = [zipfile.ZipFile(j) for j in sorted(JARS.glob("*.jar"))]
+    for z in jars:
+        for n in z.namelist():
+            if n.startswith("assets/") and "/textures/" in n:
+                origin.setdefault(n, z)
 
     files = {}
     for n in rev.namelist():
-        if n.startswith("assets/minecraft/") and not n.endswith("/") and "/lang/" not in n:
+        if (n.startswith("assets/minecraft/") and not n.endswith("/") and "/lang/" not in n
+                and n.removesuffix(".mcmeta") in origin):
             files[n] = rev.read(n)
     for prefix in ("", "overlay_34/"):
         for n in compats.namelist():
             m = re.match(prefix + r"assets/([^/]+)/(.+)$", n)
-            if m and not n.endswith("/") and m.group(1) in COMPAT_NAMESPACES:
-                files[f"assets/{m.group(1)}/{m.group(2)}"] = compats.read(n)
+            path = m and f"assets/{m.group(1)}/{m.group(2)}"
+            if m and not n.endswith("/") and m.group(1) in COMPAT_NAMESPACES and path in origin \
+                    and path not in KEEP_ORIGINAL:
+                files[path] = compats.read(n)
 
     container = "assets/minecraft/textures/gui/container/"
     crafting = png(files[container + "crafting_table.png"])
@@ -1149,30 +1503,51 @@ def main():
               template(progress, (0, 0, 24, 16), None))
 
     if OUT.exists():
-        shutil.rmtree(OUT / "assets", ignore_errors=True)
+        shutil.rmtree(OUT / "assets")
     OUT.mkdir(parents=True, exist_ok=True)
+    written = {}
 
-    for path, data in sorted(files.items()):
+    def save(path, im):
+        """Writes a texture unless it is the original's twin, with the original's
+        metadata (a nine-slice, an animation) when the source had none."""
+        source = origin.get(path)
+        if source is not None:
+            first = png(source.read(path))
+            if first.size == im.size and first.tobytes() == im.tobytes():
+                return
+            meta = path + ".mcmeta"
+            if meta not in files and meta in source.namelist():
+                (OUT / meta).parent.mkdir(parents=True, exist_ok=True)
+                (OUT / meta).write_bytes(source.read(meta))
         dest = OUT / path
         dest.parent.mkdir(parents=True, exist_ok=True)
+        im.save(dest)
+        written[path] = True
+
+    chipped = GREYED_COMPATS["assets/chipped/textures/gui/container/workbench.png"]["fixed"]
+    for path, data in sorted(files.items()):
+        dest = OUT / path
         if not path.endswith(".png"):
+            dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(data)
             continue
         im = png(data)
         name = path.rsplit("/", 1)[1]
-        vanilla = path.startswith(container)
-        if vanilla and name in PLATED:
+        vanilla_screen = path.startswith(container)
+        if vanilla_screen and name in PLATED:
             clear_plate(im)
-        if (vanilla or path.startswith("assets/supplementaries/textures/gui/")) and name in BANNERED:
+        if (vanilla_screen or path.startswith("assets/supplementaries/textures/gui/")) and name in BANNERED:
             clear_banner(im, name)
         for x0, y0, x1, y1 in LEFTOVERS.get(path, []):
             for y in range(y0, y1):
                 for x in range(x0, x1):
                     im.putpixel((x, y), (0, 0, 0, 0))
         spec = GREYED_COMPATS.get(path, {})
+        if path.startswith("assets/chipped/textures/gui/sprites/"):  # buttons in the workbench's wood
+            spec = {"fixed": chipped, "rare": 0}
         cells = find_cells(im, *spec["cells"]) if "cells" in spec else []
-        if (vanilla and name in GREYED) or spec:
-            greyify(im, spec.get("fixed"), rare=30 if spec else 0, keep=spec.get("keep", ()))
+        if (vanilla_screen and name in GREYED) or spec:
+            greyify(im, spec.get("fixed"), rare=spec.get("rare", 30) if spec else 0, keep=spec.get("keep", ()))
         if name == "anvil.png":  # GUI Revision's red mark under the name field
             px = im.load()
             for y in range(im.height):
@@ -1180,11 +1555,11 @@ def main():
                     if px[x, y] == (255, 0, 0, 255):
                         px[x, y] = grey + (255,)
         slots = [(x - 1, y - 1, w + 2, h + 2) for x, y, w, h in find_slots(im) + cells]
-        if vanilla:
+        if vanilla_screen:
             slots += [(x - 1, y - 1, 18, 18) for x, y in EXTRA_SLOTS.get(name, [])]
         slots += MOD_SLOTS.get(path, [])
         drawn = replace_arrows(im, arrows) if "/gui/" in path or "/misc/" in path else []
-        if vanilla and name in WOOD_ARROWS:
+        if vanilla_screen and name in WOOD_ARROWS:
             (a, b, c, d), (cx, cy) = WOOD_ARROWS[name]
             px = im.load()
             for y in range(b, d):
@@ -1196,7 +1571,7 @@ def main():
             draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
         if "/sprites/" not in path:
             reshape_arrows(im, path)
-        if vanilla and name in ENGRAVED:
+        if vanilla_screen and name in ENGRAVED:
             a, b, c, d = ENGRAVED[name]
             px = im.load()
             for j in range(b, d):
@@ -1215,7 +1590,7 @@ def main():
                     px[i, j] = FILL + (255,)
                     todo += [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
             slots += [(x, y, 18, 18) for x, y in extra]
-        wells = WELLS.get(name, []) if vanilla else WELLS.get(path, [])
+        wells = WELLS.get(name, []) if vanilla_screen else WELLS.get(path, [])
         slots = [s for s in slots if all(s[0] + s[2] <= a or a + c <= s[0] or s[1] + s[3] <= b or b + d <= s[1]
                                           for a, b, c, d, _ in wells)]
         slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
@@ -1229,49 +1604,30 @@ def main():
             draw_slot(im, x, y, w, h, kind, cells=slots + wells)
         if big_panel(path, im):
             add_pattern(im)
-            add_ornaments(im, decoration)
-        im.save(dest)
+            add_ornaments(im, decoration, titled(path))
+        save(path, im)
 
     # vanilla-grey screens of the mods without a compat
-    for jar in sorted(JARS.glob("*.jar")):
-        with zipfile.ZipFile(jar) as z:
-            for n in z.namelist():
-                m = re.match(r"assets/([^/]+)/textures/gui/(.+\.png)$", n)
-                if not m or m.group(1) not in RECOLOUR_MODS:
-                    continue
+    for z in jars:
+        for n in z.namelist():
+            m = re.match(r"assets/([^/]+)/textures/gui/(.+\.png)$", n)
+            if m and m.group(1) in RECOLOUR_MODS and origin[n] is z:
                 im = png(z.read(n))
-                slots = find_vanilla_slots(im)
-                wells = find_black_wells(im)
-                tpl = {(x, y): (139, 139, 139) for y, row in enumerate(VANILLA_ARROW)
-                       for x, c in enumerate(row) if c == "#"}
-                drawn = []
-                for ox, oy in matches(im, tpl):
-                    for dx, dy in tpl:
-                        im.putpixel((ox + dx, oy + dy), (198, 198, 198, 255))
-                    drawn.append((ox, oy + 3))
-                if recolour_vanilla(im):
-                    for x0, y0 in drawn:
-                        draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
-                    if "/sprites/" not in n:
-                        reshape_arrows(im, n)
-                    px = im.load()
-                    slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
-                    spaced = separate(slots + wells)
-                    slots, wells = spaced[:len(spaced) - len(wells)], spaced[len(spaced) - len(wells):]
-                    clear_leftovers(im, slots + wells)
-                    add_frames(im, slots, frame)
-                    for x, y, w, h in slots:
-                        clear = x == 0 or px[x - 1, y + h // 2][3] == 0
-                        draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,),
-                                  cells=slots + wells)
-                    for x, y, w, h in wells:
-                        draw_slot(im, x, y, w, h, "creature", cells=slots + wells)
-                    if big_panel(n, im):
-                        add_pattern(im)
-                        add_ornaments(im, decoration)
-                    dest = OUT / n
-                    dest.parent.mkdir(parents=True, exist_ok=True)
-                    im.save(dest)
+                if dress_vanilla(im, n, frame, decoration):
+                    save(n, im)
+
+    # vanilla textures GUI Revision does not cover: the crafter's screen, dressed
+    # like the others, and the sprites of widgets and containers, retoned
+    for n in sorted(origin):
+        if origin[n] is not vanilla or not n.endswith(".png") or n in files:
+            continue
+        if n == container + "crafter.png":
+            save(n, crafter(frame, decoration))
+        elif n.startswith(tuple(f"assets/minecraft/textures/gui/sprites/{d}/" for d in (
+                "widget", "container", "popup", "social_interactions"))):
+            im = png(vanilla.read(n))
+            retone(im, "neutral")
+            save(n, im)
 
     lang = OUT / "assets" / "minecraft" / "lang"
     lang.mkdir(parents=True, exist_ok=True)
@@ -1280,12 +1636,23 @@ def main():
         (lang / f"{code}.json").write_text(json.dumps(blank, indent=2, ensure_ascii=False) + "\n")
 
     draw_hud(OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "hud")
+    finish(decoration)
+    draw_icon().save(OUT / "pack.png")
 
     questlog.draw(OUT)
     for f in (OUT / "assets" / "questlog" / "textures" / "gui").glob("*.png"):
         im = Image.open(f).convert("RGBA")
         add_pattern(im)
         im.save(f)
+
+    # every coordinate table must still find its texture
+    named = [*MOD_ARROWS, *REFRAMED, *MOD_SLOTS, *LEFTOVERS, *GREYED_COMPATS, *TOUCH_UPS, *SPRITE_MODES,
+             *(k for k in WELLS if "/" in k)]
+    named += [container + k for k in (*GREYED, *PLATED, *EXTRA_SLOTS, *ENGRAVED, *WOOD_ARROWS,
+                                      *(k for k in WELLS if "/" not in k and k != "tab_inventory.png"))]
+    lost = sorted(k for k in named if not (OUT / k).exists())
+    if lost:
+        raise SystemExit("textures not found: " + ", ".join(lost))
 
 
 if __name__ == "__main__":

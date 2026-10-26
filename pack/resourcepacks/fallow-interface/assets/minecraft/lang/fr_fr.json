@@ -19,5 +19,7 @@
   "container.chest": " ",
   "container.chestDouble": " ",
   "merchant.trades": " ",
-  "container.enderchest": " "
+  "container.enderchest": " ",
+  "container.barrel": " ",
+  "container.crafter": " "
 }
