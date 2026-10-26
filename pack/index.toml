@@ -9,6 +9,10 @@ file = "config/adorablehamsterpets/main.toml"
 hash = "c58df881614688ddaeb1dd84da064e77d406dbf3d29a7e6695cf19b20ccd196e"
 
 [[files]]
+file = "config/betterdays-common.toml"
+hash = "41b732b6d12bb2edff305a4008a07d0317e2efdb0a78929f9390e5f24431f74e"
+
+[[files]]
 file = "config/cameraoverhaul.toml"
 hash = "bc81523e93f04694d85ce281a833e8f33200cfbf596aa66f605ac0a4995633a7"
 
@@ -42,7 +46,7 @@ hash = "90e4475dd55830d818d487e39094c01af1c31a085209694ba24457cb27bcf616"
 
 [[files]]
 file = "config/eclipticseasons-common.toml"
-hash = "5e0d44996518210ceda50e522824f416612db0240ccfc861dd11ffa6cb397436"
+hash = "014e1994ef9a7a3c15db1c8a7f27b5c1cedc130c99c7599b19b34f1368c40039"
 
 [[files]]
 file = "config/enhancedcelestials2core/translations.json"
@@ -89,6 +93,14 @@ file = "config/quark-common.toml"
 hash = "890330b216be379ffbc8f2f553cfb82e5eb6ebee9b6f9532b1688ce15eb13bac"
 
 [[files]]
+file = "config/reliable_backpacks.json"
+hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
+
+[[files]]
+file = "config/sensible_stackables/config.toml"
+hash = "9440d305db415b30ac685f1c76f1f4d28c3ca56cdeebe230bd66bd99388d2175"
+
+[[files]]
 file = "config/shouldersurfing-client.toml"
 hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
 
@@ -131,10 +143,6 @@ hash = "8a8b8862f01f0d56077df808b9839cf3165ca0fa3844f4d86e94fd6ae6aada36"
 [[files]]
 file = "defaultconfigs/exposure-server.toml"
 hash = "a51b7d3e8ebbdaed9f4862cab55860b85b265bb31b345a956360783617173a96"
-
-[[files]]
-file = "defaultconfigs/travelersbackpack-server.toml"
-hash = "b0e9b10708e19ca15e5bd2b62876fdb9514655351dc1b2d02ee53106776361fd"
 
 [[files]]
 file = "kubejs/assets/adorablehamsterpets/lang/fr_fr.json"
@@ -601,6 +609,10 @@ file = "kubejs/assets/coldsweat_altitude/lang/fr_fr.json"
 hash = "dc93517ec0ff6b567c0a55bb8fe90c702ea6baaf706d85503e7cc9d32791ed1d"
 
 [[files]]
+file = "kubejs/assets/comforts/lang/fr_fr.json"
+hash = "fddaf40623ac3e4e3d744a9483d179e9234ffb39642f21500d9f25715c8d8f69"
+
+[[files]]
 file = "kubejs/assets/companion/lang/fr_fr.json"
 hash = "89002cecb184611e4e428a3b6e30d0facc78486573530d3477145c10cc4ff321"
 
@@ -917,6 +929,10 @@ file = "kubejs/assets/rainbows/lang/fr_fr.json"
 hash = "033a5c07f0ba91afdb9091db72bec61255bcfd96d9126473e0a4f9797c807d84"
 
 [[files]]
+file = "kubejs/assets/reliable_backpacks/lang/fr_fr.json"
+hash = "f298d71aa01b3176b7f53f97c68ba148e1f6c50331bc180a5f010b7c51c49f58"
+
+[[files]]
 file = "kubejs/assets/resourcefulconfig/lang/fr_fr.json"
 hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
 
@@ -927,6 +943,10 @@ hash = "cf5a6666f36aead1a480809375c301ea25e2a6c9569cce5bf04954502409c581"
 [[files]]
 file = "kubejs/assets/sablephysicscompat/lang/fr_fr.json"
 hash = "e6e82b9957d5c4004a6edd1c1fb9e223ae24afd4194033f4993315fb9e49499e"
+
+[[files]]
+file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
+hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
 
 [[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
@@ -961,6 +981,10 @@ file = "kubejs/assets/spatial-gui/lang/fr_fr.json"
 hash = "54922a5b633ef86128653d2199b5c22117abc8402ba975802b2bf6eedf3d8d5e"
 
 [[files]]
+file = "kubejs/assets/spectrelib/lang/fr_fr.json"
+hash = "e10eca48fde63c271d4b0626e6921a4d92f75ae9ef052cb79b070fce9bc8d598"
+
+[[files]]
 file = "kubejs/assets/structure_layout_optimizer/lang/fr_fr.json"
 hash = "d973329458bfcef4321e08457c64ca96e27c8c48237dd756d1b58d864ff1c65d"
 
@@ -975,10 +999,6 @@ hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
 [[files]]
 file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
-
-[[files]]
-file = "kubejs/assets/travelersbackpack/lang/fr_fr.json"
-hash = "5500e8ed970f6d003749dc7321cae05742aa398055fcbf01d32b7bcfdd017980"
 
 [[files]]
 file = "kubejs/assets/treechop/lang/fr_fr.json"
@@ -1007,6 +1027,10 @@ hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 [[files]]
 file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
+
+[[files]]
+file = "kubejs/assets/whitenoise/lang/fr_fr.json"
+hash = "7f3040fb17a7e8ad80e59920d5399da65e36a21b3d088f0b6e0495cad4f8114d"
 
 [[files]]
 file = "kubejs/assets/wildex/lang/fr_fr.json"
@@ -1067,6 +1091,22 @@ hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
 [[files]]
 file = "kubejs/data/fallow/tags/item/peaux_brutes.json"
 hash = "01293223c715bc17b280d45dce77d5f522bb67a5218c53e7cc8b8d179f8b7070"
+
+[[files]]
+file = "kubejs/data/fallow/tags/item/pile/16.json"
+hash = "6274996e7b94e7ce56eb627485b5f8b208b418158366bfde56535b28a01496d8"
+
+[[files]]
+file = "kubejs/data/fallow/tags/item/pile/4.json"
+hash = "e411f3f0eaf0c928a5337f8f23bb4a447e56fcd50d9ee2a6e460b7900f8160d9"
+
+[[files]]
+file = "kubejs/data/fallow/tags/item/pile/64.json"
+hash = "3b97d9b08ae27ab4d401aa6e7e22cd2ffcafab47385f984619f16779a9eb9cc7"
+
+[[files]]
+file = "kubejs/data/fallow/tags/item/pile/8.json"
+hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
 
 [[files]]
 file = "kubejs/data/fallow/tags/worldgen/biome/brumeux.json"
@@ -1471,6 +1511,11 @@ hash = "ff68a3c161324e02415d4f2b6806a3b3ebef9ea1c8fff6925ce65e6b8b9d1417"
 metafile = true
 
 [[files]]
+file = "mods/betterdays.pw.toml"
+hash = "f567df6f58cbb28cd6e28dfa72dde29ed8c787afc6e4694c797b0896fa07c8f6"
+metafile = true
+
+[[files]]
 file = "mods/biolith.pw.toml"
 hash = "cc79b689faf345a5aa19ead3423726b6f87c267d686fb5807738e0cd20756679"
 metafile = true
@@ -1513,6 +1558,11 @@ metafile = true
 [[files]]
 file = "mods/cold-sweat.pw.toml"
 hash = "3d30ac171f7b054e06a4efe45f22fc62d8e79d28c745c3ea9f0a32182500243a"
+metafile = true
+
+[[files]]
+file = "mods/comforts.pw.toml"
+hash = "36f2f6e74b7dbeccb504572d47006582207544fa234a095093b97adfc7ecd5ac"
 metafile = true
 
 [[files]]
@@ -1935,6 +1985,11 @@ hash = "fa3690cf88ce4dfd086e7cf677631a727ffe51d05929c682f1512092d2708839"
 metafile = true
 
 [[files]]
+file = "mods/reliable-backpacks.pw.toml"
+hash = "aa1f11c5c82e46adec78ef656dae8edb9aab6c18bb761697d9e89ca0f66f4889"
+metafile = true
+
+[[files]]
 file = "mods/resourceful-config.pw.toml"
 hash = "27721caca5a03b743bf25888e1d984142948069dace31453f103f94f7f24d2ce"
 metafile = true
@@ -1962,6 +2017,11 @@ metafile = true
 [[files]]
 file = "mods/searchables.pw.toml"
 hash = "ce9ddada6ffd55a512149cc474c6a453281a997a5fdf1b7b4a2cc73f875e704a"
+metafile = true
+
+[[files]]
+file = "mods/sensible-stackables.pw.toml"
+hash = "d68120fbb2e90e41b398c8168b87a8397fbe4b65e6771240f5ae2ef31ee2d5a6"
 metafile = true
 
 [[files]]
@@ -2042,11 +2102,6 @@ metafile = true
 [[files]]
 file = "mods/thirst-was-reclaimed.pw.toml"
 hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
-metafile = true
-
-[[files]]
-file = "mods/travelersbackpack.pw.toml"
-hash = "f59458b90f50d00d42d73f726e310322c9922dd75f935747564047bfed03143c"
 metafile = true
 
 [[files]]

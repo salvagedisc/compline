@@ -59,7 +59,10 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
 | Cold Sweat: Altitude | `cold-sweat-altitude` | ✅ (added 2026-10-25) | CS | Colder as you climb, sheltered areas, windproof lining; supports airships |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
-| Traveler's Backpack | `travelersbackpack` | ✅ | CS | Expedition bag and sleeping bag |
+| Reliable Backpacks | `reliable-backpacks` | ✅ (added 2026-10-26) | CS | A single simple bag, three rows, worn on the back (Curios), placeable ([0012](decisions/0012-sacs-piles-jours.md)) |
+| Comforts | `comforts` | ✅ (back on 2026-10-26) | CS | Sleeping bag and hammock ([0012](decisions/0012-sacs-piles-jours.md)) |
+| Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `fallow:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |
+| Better Days | `betterdays` | ✅ (added 2026-10-26) | CS | 30 minutes of day, 15 of night ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](plan/recherche/2026-10-19/wayfarer.md)) |
 
 ## Fauna
@@ -190,7 +193,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 | Dark Coffee GUI | `dark-coffe-gui` | ✅ | Vanilla interface in coffee brown |
 | Dark Coffee GUI - Extras (Normal Hunger) | `dark-coffee-extras` | ✅ | Hunger bar (chicken drumsticks in Coffee style) in place of the coffee beans |
-| Modded Coffee GUI | `modded-coffee-gui` | ✅ | The same style for EMI, Create, Quark, Supplementaries, Traveler's Backpack, Curios, Farm & Charm, Chipped |
+| Modded Coffee GUI | `modded-coffee-gui` | ✅ | The same style for EMI, Create, Quark, Supplementaries, Curios, Farm & Charm, Chipped |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Libraries
@@ -217,7 +220,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
 | `fallow-interface` | Recoloured Kaleidoscope, Overgeared and Wildex screens; removed on 2026-10-19, a version using Dark Coffee's elements is being proposed to its author ([page](plan/fallow-interface.md)) |
 | Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([NML fauna](plan/faune-nml.md)) |
-| Comforts | Duplicates Traveler's Backpack's sleeping bag |
+| Traveler's Backpack, Sophisticated Backpacks | Too many upgrades and screens; Reliable Backpacks chosen on 2026-10-26 ([0012](decisions/0012-sacs-piles-jours.md)) |
 | ParCool! | Disabled at the team's request |
 | Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
 | Jade, AppleSkin | Break the mystery |

@@ -3,7 +3,11 @@
 	SeasonalSimulationLevel = "AGRICULTURE"
 
 [Season]
-	LastingDaysOfEachTerm = 7
+	# Days are 2.25 times longer (Better Days, 30/15): 3 days per term keeps a term
+	# at about 2 h 15 of play and a year at about 54 h, close to vanilla's 7 days.
+	LastingDaysOfEachTerm = 3
+	# Better Days sets the length of day and night: Ecliptic must not change it.
+	DynamicDaylightDuration = false
 	EnableInform = false
 
 [Temperature]

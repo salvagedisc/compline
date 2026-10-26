@@ -1,0 +1,21 @@
+{
+  "sensible_stackables.config": "Réglages communs",
+  "sensible_stackables.client_config": "Réglages du client",
+  "sensible_stackables.config.items": "Taille des piles par objet",
+  "sensible_stackables.config.items.desc": "Modifiez ici la taille des piles des objets et des groupes d'objets.",
+  "sensible_stackables.config.splashPotionCooldown": "Délai entre deux lancers de potion jetable (secondes)",
+  "sensible_stackables.config.uncapStackSize": "Lever la limite des piles",
+  "sensible_stackables.config.uncapStackSize.desc": "Supprime la limite maximale de 99 objets par pile.",
+  "sensible_stackables.config.commonStackSize": "Taille de pile courante",
+  "sensible_stackables.config.commonStackSize.desc": "Change la taille maximale des piles de tous les objets qui s'empilent par 64 par défaut. Ce réglage est limité à 99, sauf si « Lever la limite des piles » est activé.",
+  "sensible_stackables.client_config.itemCountShortening": "Abréger le nombre d'objets",
+  "sensible_stackables.client_config.itemCountShortening.desc": "Si une pile dépasse 999 objets, abrège le nombre affiché (par exemple 1000 -> 1K, 1000000 -> 1M).",
+  "sensible_stackables.client_config.itemCountScaling": "Réduire le nombre d'objets affiché",
+  "sensible_stackables.client_config.itemCountScaling.desc": "Si le nombre affiché compte plus de 2 caractères (par exemple 999), réduit sa taille pour que le texte ne se chevauche pas.",
+  "sensible_stackables.client_config.itemCountTooltip": "Nombre exact dans l'infobulle",
+  "sensible_stackables.client_config.itemCountTooltip.desc": "Si une pile dépasse 999 objets et que « Abréger le nombre d'objets » est activé, affiche le nombre exact dans l'infobulle de l'objet.",
+  "text.sensible_stackables.item_count": "%s objets",
+  "tag.item.sensible_stackables.all_blocks": "Tous les blocs",
+  "tag.item.sensible_stackables.banner_patterns": "Motifs de bannière",
+  "tag.item.sensible_stackables.minecarts": "Wagonnets"
+}

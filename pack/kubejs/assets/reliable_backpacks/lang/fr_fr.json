@@ -1,0 +1,16 @@
+{
+  "block.reliable_backpacks.backpack": "Sac à dos",
+  "container.backpack": "Sac à dos",
+  "config.reliable_backpacks.category.general": "Général",
+  "config.reliable_backpacks.title": "Réglages de Reliable Backpacks",
+  "config.reliable_backpacks.enable_accessories_integration": "Activer la compatibilité avec Accessories",
+  "config.reliable_backpacks.enable_curios_integration": "Activer la compatibilité avec Curios",
+  "config.reliable_backpacks.enable_trinkets_integration": "Activer la compatibilité avec Trinkets",
+  "config.reliable_backpacks.enable_entity_stealing": "Permettre de fouiller le sac porté par un autre",
+  "config.reliable_backpacks.enable_chest_slot": "Porter le sac à la place du plastron",
+  "config.reliable_backpacks.backpack_rows": "Nombre de rangées du sac",
+  "subtitles.reliable_backpacks.backpack.place": "Sac à dos posé",
+  "subtitles.reliable_backpacks.backpack.open": "Sac à dos ouvert",
+  "subtitles.reliable_backpacks.backpack.close": "Sac à dos fermé",
+  "subtitles.reliable_backpacks.backpack.equip": "Sac à dos enfilé"
+}

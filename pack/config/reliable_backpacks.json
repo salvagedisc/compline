@@ -1,0 +1,8 @@
+{
+  "enableAccessoriesIntegration": true,
+  "enableCuriosIntegration": true,
+  "enableTrinketsIntegration": true,
+  "enableEntityStealing": false,
+  "enableChestSlot": false,
+  "backpackRows": 3
+}

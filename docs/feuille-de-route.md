@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-25. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
+Status as of 2026-10-26. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
@@ -20,13 +20,14 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-10-11 and 10-18 | Refocus on the No Man's Land trailer: an almost empty world, the mist that lifts, long-term goals, a polished and connected finish |
 | 2026-10-19 | The team's 57 choices applied; everything in French; Wayfarer ideas (Envelope, Friendly Moon, health, tannery, no XP); music; `fallow` 0.1.0 to 0.2.1 |
 | 2026-10-25 | Tectonic, Streams Reflowing and Distant Horizons (0011); safety net and 24 updates; six mods from the review; `fallow` 0.4.0 with clearings and the dissipator |
+| 2026-10-26 | Research on what is done elsewhere; eight next modules specified; simpler bag, stacks by kind of item, 30-minute days and 15-minute nights (0012) |
 
 ## Before the first release (`v0.1.0`)
 
 - [ ] Run the [in-game tests](tests-en-jeu.md) and fix what breaks.
 - [ ] Compare `pack/config/quark-common.toml` with the config generated on first launch (the keys were inferred from the Quark 4.1 classes, [decision 0005](decisions/0005-quark.md)).
 - [ ] Turn `[Unreleased]` in the changelog into `[0.1.0]` and place the tag.
-- [ ] Pregenerate the permanent world with Chunky once the terrain tests (W) pass.
+- [ ] Pregenerate the permanent world once the terrain tests (W) pass, with `/dh pregen` rather than Chunky (Chunky leaves holes in the far view; to confirm with H11).
 
 ## Updates held until the in-game tests
 
@@ -52,6 +53,8 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
 - [ ] **Monument guardians**: Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff at four Monoliths, blessing after their defeat (decision 15 of [12.5](plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); proposed, not written.
 - [ ] **The zoo**: a measurable long-term goal (species housed, aquariums), still without a mechanic.
+- [ ] **Traveler's Notebook** (*Carnet du voyageur*): a Modonomicon book of guides and quests unlocked by advancements, which explains the mechanics (clearings, dissipator, tannery, health, the future fanal) ([livre-de-quetes](plan/recherche/2026-10-26/livre-de-quetes.md)).
+- [ ] In Control!: `spawn.json` has no rule for villagers and wandering traders, unlike what the survivors plan assumes; to settle with the `survivants` module.
 - [ ] **White moon**: draft in [kubejs-brouillons/](plan/kubejs-brouillons/), needs a sound and texts; the `ciel` module already draws it.
 - [ ] Subtle Effects: turn off superfluous effects ([0007](decisions/0007-ambiance-performance.md)).
 - [x] Remove hostile vanilla monsters from the Overworld; spawn table per biome; Friends & Foes, hamsters and Companions! tamed by config; End removed and Nether closed ([0003](decisions/0003-faune.md), [0004](decisions/0004-structures.md)). To check in game.
@@ -59,8 +62,8 @@ These updates exist on Modrinth but change something that must first be seen in 
 
 ### Custom `fallow` mod
 - [ ] A Ponder scene for the dissipator.
-- [ ] Give hose-drawn water the purity of the block it comes from (`sac` module, [mod-fallow](plan/mod-fallow.md)).
-- [ ] Next modules from [12.4](plan/12-verification.md#124-the-custom-fallow-mod) (grave, tracks, blueprints, finishing touches), and new module proposals under discussion with the team.
+- [ ] Remove the `sac` module in 0.5.0: Traveler's Backpack has left the pack ([0012](decisions/0012-sacs-piles-jours.md)).
+- [ ] The eight modules approved on 2026-10-26, in this order: `voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants` ([modules-fallow](plan/modules-fallow.md)). The zoo and survivor items above are now these modules.
 
 ### Pending research (sub-project 2)
 - [ ] Demanding animal husbandry (needs, diseases, genetics): Animal Husbandry 0.6.0 to re-evaluate ([0002](decisions/0002-agriculture.md)).
