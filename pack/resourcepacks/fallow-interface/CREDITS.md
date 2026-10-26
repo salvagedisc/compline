@@ -1,8 +1,12 @@
 # Crédits de fallow-interface
 
-Toutes les images de ce pack sont dessinées pour Fallow par le script `scripts/interface/generate.py` du dépôt, avec la palette et les formes propres au pack (ardoise moussue semée de graines germées, filets couleur os, tuiles de lichen, lin, lumière de lanterne). Aucun pixel n'est repris de Dark Coffee GUI (tous droits réservés), ni des textures d'origine des mods.
+Ce pack est une adaptation pour Fallow de packs de ressources sous licence libre. Il est produit par le script `scripts/interface/build.py` du dépôt, qui télécharge les versions indiquées ci-dessous et les modifie.
 
-- `assets/questlog/` : habillage du journal de Questlog (Infernal Studios, licence Apache-2.0). Les tailles et les zones des images d'origine sont conservées pour que le mod place ses textes et ses boutons au même endroit.
-- `assets/minecraft/textures/gui/sprites/hud/` : barre d'action, cœurs, nourriture, armure et air.
+- **GUI Revision** 2.2.0, par Vixel (https://modrinth.com/resourcepack/gui-revision), licence CC BY-NC-SA 4.0 : interface du jeu de base et barre d'action.
+- **GUI Revision Compats** 43.0, par Fyoncle (https://modrinth.com/resourcepack/gui-revision-compats), licence CC BY-NC-SA 4.0 : écrans de Supplementaries, Amendments, Quark, Cold Sweat, Curios, EMI, JEI, Exposure, Farm & Charm, Immersive Enchanting, Overgeared, Chipped, Naturalist et Entity Texture Features.
+- **Hollow GUI** 2, par Melee (https://modrinth.com/resourcepack/hollow-gui), licence CC BY 4.0 : la frise du haut des panneaux.
+- **Questlog** (Infernal Studios, licence Apache-2.0) : le journal est redessiné pour Fallow dans le même style, aux tailles et aux zones des images d'origine.
 
-Le libellé « Rechercher » reprend la forme des lettres de la police de Minecraft.
+Modifications : couleurs de Fallow (brume, sauge, mousse), frise de Hollow GUI et motif de graines germées sur les panneaux, titres écrits dans les images refaits en français avec les lettres de GUI Revision, écrans gris de plusieurs mods recolorés dans les mêmes tons.
+
+Licence : comme GUI Revision, ce pack modifié est diffusé sous licence CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). Il ne peut pas être utilisé à des fins commerciales.

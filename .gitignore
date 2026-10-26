@@ -5,3 +5,4 @@ node_modules/
 mods-custom/fallow/build/
 mods-custom/fallow/run/
 .gradle/
+__pycache__/

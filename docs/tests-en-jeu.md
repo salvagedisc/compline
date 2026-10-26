@@ -14,7 +14,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, the Fresh Animations, Dark Coffee and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The game is in French, the Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
 - [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] Menu titles are readable on the brown background (opening a furnace is enough) [I1].

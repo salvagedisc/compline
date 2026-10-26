@@ -192,9 +192,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
-| Dark Coffee GUI | `dark-coffe-gui` | ✅ | Vanilla interface in coffee brown |
-| Dark Coffee GUI - Extras (Normal Hunger) | `dark-coffee-extras` | ✅ | Hunger bar (chicken drumsticks in Coffee style) in place of the coffee beans |
-| Modded Coffee GUI | `modded-coffee-gui` | ✅ | The same style for EMI, Create, Quark, Supplementaries, Curios, Farm & Charm, Chipped |
+| `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Fallow's interface, built from GUI Revision, GUI Revision Compats and Hollow GUI: vanilla screens, 14 mods' screens, HUD and Questlog journal in mist and sage, titles in French ([credits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Libraries
@@ -219,7 +217,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
-| `fallow-interface` | Fallow's own interface, in the spirit of Dark Coffee: Questlog journal and HUD (hotbar, hearts, food, armour, air) ([page](plan/fallow-interface.md)) |
+| Dark Coffee GUI, Dark Coffee GUI - Extras, Modded Coffee GUI | All rights reserved and the author does not answer; replaced on 2026-10-26 by `fallow-interface`, built from free-licensed packs |
 | Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([NML fauna](plan/faune-nml.md)) |
 | Traveler's Backpack, Sophisticated Backpacks | Too many upgrades and screens; Reliable Backpacks chosen on 2026-10-26 ([0012](decisions/0012-sacs-piles-jours.md)) |
 | ParCool! | Disabled at the team's request |

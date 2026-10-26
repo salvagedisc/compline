@@ -16,7 +16,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [11-rendu-et-confort.md](11-rendu-et-confort.md) | Rendering without shaders, camera, menus, EMI, Wildex, Ancient Remnants, Archie's Dinos |
 | [12-verification.md](12-verification.md) | **Full verification of 2026-10-18**: it corrects chapters 10 and 11, details the links between mods (Overgeared, Kaleidoscope, Create, world, rendering), proposes the custom `fallow` mod and decisions 14 to 18 |
 | [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset, Polytone colours, chosen values and settings to adjust in game |
-| [fallow-interface.md](fallow-interface.md) | Fallow's own interface: Questlog journal and HUD, palette, licences, next steps |
+| [fallow-interface.md](fallow-interface.md) | Fallow's interface built from GUI Revision: sources, licences, build script, next steps |
 | [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.0 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere` and `dissipateur`): how it works, what is deduced from the code, in-game tests |
 | [modules-fallow.md](modules-fallow.md) | The eight planned modules of the `fallow` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Fallow takes |
 | [lune-amie.md](lune-amie.md) | The Friendly Moon from No Man's Land as the main thread: the path to the Meeting Point, coexistence with Enhanced Celestials, the removed blood moons |
