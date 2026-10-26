@@ -30,8 +30,8 @@ vanilla and the mods of the pack, and adapts them to Fallow:
   drawn anew by widgets.py;
 - menus: their shading and separators in moss and bone, and the title
   screen's panorama, a pine forest in the mist, drawn here; the Fallow logo
-  and the FancyMenu and Drippy layouts of the title and loading screens are
-  written by menus.py;
+  (logo.py) and the FancyMenu and Drippy layouts of the title and loading
+  screens are written by menus.py;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
 Only textures the game or a mod of the pack reads are kept: compat files

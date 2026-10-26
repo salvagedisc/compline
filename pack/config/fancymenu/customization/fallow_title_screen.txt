@@ -37,10 +37,10 @@ element {
   auto_sizing_base_screen_height = 0
   sticky_anchor = false
   anchor_point = top-centered
-  x = -108
-  y = 23
-  width = 216
-  height = 50
+  x = -134
+  y = 18
+  width = 268
+  height = 64
   stretch_x = false
   stretch_y = false
   stay_on_screen = true
