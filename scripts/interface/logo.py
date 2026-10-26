@@ -41,6 +41,8 @@ PAD = (16, 16, 16, 22)
 GLOW = 30          # radius of the lantern's light, in pixels
 MOSS_TOP = 0.6     # share of the letters' top pixels under moss
 VINES = 0.07       # share of the letters' bottom pixels a vine hangs from
+DRIPS = 0.09       # share of their top pixels a vine drips from, over the stone
+DANGLE = 8         # how far a vine hangs below the stone, in pixels
 SCALE = 4
 
 
@@ -121,13 +123,19 @@ def draw():
                 px[x, y - 1] = MOSS[2] + (255,)
             if rnd.random() < 0.25 and (x, y - 2) not in solid:
                 px[x, y - 2] = MOSS[3] + (255,)
-    # vines hanging from the bottoms, leaves on alternate sides
-    for x, y in sorted(stone):
-        if (x, y + 1) in stone or rnd.random() >= VINES:
-            continue
-        vx, vy = x, y + 1
+    # vines as on the Friche concept: they hang from the letters' undersides and
+    # drip from their tops, cling to the stone as they fall, and only dangle a
+    # few pixels once they leave it; leaves on alternate sides
+    starts = [(x, y + 1) for x, y in sorted(stone) if (x, y + 1) not in stone and rnd.random() < VINES]
+    starts += [(x, y + 1) for x, y in sorted(stone)
+               if (x, y - 1) not in stone and (x, y + 1) in stone and rnd.random() < DRIPS]
+    for vx, vy in starts:
+        free = 0
         for k in range(rnd.randint(4, 14)):
             if not (0 <= vx < w and 0 <= vy < h - 1):
+                break
+            free = 0 if (vx, vy) in stone else free + 1
+            if free > DANGLE:
                 break
             px[vx, vy] = MOSS[1] + (255,)
             if k % 3 == 1:
@@ -137,7 +145,11 @@ def draw():
                     if 0 <= vx + lx < w and 0 <= vy + ly < h:
                         px[vx + lx, vy + ly] = c + (255,)
             vy += 1
-            vx += rnd.choice((0, 0, 0, 1, -1))
+            # a vine leaving the stone sways back towards it
+            steps = (0, 0, 0, 1, -1)
+            if (vx, vy) not in stone:
+                steps += tuple(d for d in (1, -1) if (vx + d, vy) in stone) * 3
+            vx += rnd.choice(steps)
 
     # the lantern in the O, on its chain from the top of the counter
     o = boxes[TEXT.index("O")]
