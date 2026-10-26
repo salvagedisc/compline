@@ -3,3 +3,9 @@
 # 0 : rien, 1 : particules, 2 : écran, 3 : les deux (défaut de Cold Sweat).
 [Preferences]
 	"Show Water Effect" = 1
+
+# Fallow : sans barre d'expérience, le mod fallow descend la vie et la faim de 5 pixels ;
+# l'icône de température du corps et son chiffre descendent d'autant pour rester alignés.
+[HUD]
+	"Body Temperature Icon Offset" = [0, 5]
+	"Body Temperature Readout Offset" = [0, 5]

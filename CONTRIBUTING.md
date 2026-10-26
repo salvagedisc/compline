@@ -23,7 +23,7 @@ Working conventions for the repository. They apply to everyone who contributes.
 | KubeJS script (display, JEI/EMI, tooltips) | `pack/kubejs/client_scripts/` |
 | French translation of a mod (language files, books) | `pack/kubejs/assets/<namespace>/` |
 | Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/fallow/` (or `data/<namespace>/` to override a mod) |
-| Tooling (Node.js, dependency-free) | `scripts/` + tests in `scripts/test/` |
+| Tooling (Node.js, dependency-free; the interface build is Python + Pillow) | `scripts/` + tests in `scripts/test/` |
 | Full modpack plan | `docs/plan/` |
 | Settled decision (comparison, choice) | `docs/decisions/NNNN-subject.md` |
 | Spec or implementation plan of a sub-project | `docs/conception/specs/`, `docs/conception/plans/` |
@@ -60,7 +60,7 @@ Other prefixes: `feat(config): …`, `feat(kubejs): …`, `feat(sync): …`, `do
 - `1.0.0`: launch of the permanent world.
 - After `1.0.0`, any change that removes blocks or items or modifies worldgen is a **major version** and requires a world backup before updating.
 
-To publish: move the `[Unreleased]` section of `CHANGELOG.md` under `[X.Y.Z]`, set the same version in `pack/pack.toml`, run `packwiz refresh`, then place the `vX.Y.Z` tag on `main`. The `release` workflow checks that they match, exports the `.mrpack` and creates the GitHub release. Publication to Modrinth stays disabled until `MODRINTH_PROJECT_ID` (variable) and `MODRINTH_TOKEN` (secret, entered by the owner) exist.
+To publish: move the `[Unreleased]` section of `CHANGELOG.md` under `[X.Y.Z]`, set the same version in `pack/pack.toml`, run `packwiz refresh`, then place the `vX.Y.Z` tag on `main`. The `release` workflow checks that they match, exports the `.mrpack` and creates the GitHub release. Publication to Modrinth stays disabled until `MODRINTH_PROJECT_ID` (variable) and `MODRINTH_TOKEN` (secret, entered by the owner) exist. The interface pack is CC BY-NC-SA, so the Modrinth project must keep monetisation off.
 
 ## Test instance
 
