@@ -26,6 +26,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 2: the mist and the clearings
 
+- [ ] **Traveler's Notebook**: in the inventory at first login; the four chapters in French; the tannery and machines pages open when a raw hide or a Create part is picked up; recipe pages of the clearing blocks [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
@@ -131,6 +132,7 @@ Once the results are in:
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | T | [plan/tannerie.md](plan/tannerie.md#what-remains-to-be-tested) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
+| N (notebook) | [plan/carnet.md](plan/carnet.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).

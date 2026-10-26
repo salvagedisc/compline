@@ -1,0 +1,8 @@
+{
+  "name": "book.fallow.carnet.survivre.name",
+  "description": "book.fallow.carnet.survivre.description",
+  "icon": {
+    "id": "minecraft:campfire"
+  },
+  "sort_number": 1
+}

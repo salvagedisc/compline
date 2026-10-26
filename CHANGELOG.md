@@ -48,6 +48,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Clearings, the mist that lifts: `fallow` 0.4.0 adds the vigil fire (radius 16), the clearing lantern (32) and the dissipator, a Create kinetic block (64, 32 RPM, 8 stress units per RPM). They turn the biomes around them into `fallow:clairiere` (cold and warm variants) for good: light mist, vivid grass, clearing music, far view. Operators: `/fallow clairiere <radius>`.
 - Ideas of the review of 2026-10-25: Cold Sweat: Altitude, Antique Transport, Create Aeronautics: Automated Logistics, Sable: Physics Compat, Aeronautics Wind Sound, Exposure: Space, all translated into French.
 - Team choices of 2026-10-26 ([0012](docs/decisions/0012-sacs-piles-jours.md)): Reliable Backpacks (a single bag on the back), Comforts (sleeping bag and hammock), Sensible Stackables with the `fallow:pile/N` tags (stacks of 64, 32, 16, 8 or 4 by kind of item), Better Days (30 minutes of day, 15 of night); all translated into French.
+- Traveler's Notebook (*Carnet du voyageur*): a Modonomicon book of guides in French, given at first login, with pages that open as the player progresses ([carnet](docs/plan/carnet.md)).
 - Specification of the eight next modules of the `fallow` mod (`docs/plan/modules-fallow.md`) and the research of 2026-10-26 (`docs/plan/recherche/2026-10-26/`).
 
 ### Removed

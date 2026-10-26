@@ -1,0 +1,30 @@
+{
+  "type": "modonomicon:content",
+  "id": "fallow:arriver/sac",
+  "category": "fallow:arriver",
+  "name": "book.fallow.carnet.arriver.sac.name",
+  "icon": {
+    "id": "reliable_backpacks:backpack"
+  },
+  "x": 4,
+  "y": 1,
+  "parents": [
+    {
+      "entry": "fallow:arriver/monde"
+    }
+  ],
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "id": "p1",
+      "title": "book.fallow.carnet.arriver.sac.p1.title",
+      "text": "book.fallow.carnet.arriver.sac.p1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "id": "p2",
+      "title": "book.fallow.carnet.arriver.sac.p2.title",
+      "text": "book.fallow.carnet.arriver.sac.p2.text"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "book.fallow.carnet.brume.name",
+  "description": "book.fallow.carnet.brume.description",
+  "icon": {
+    "id": "fallow:lanterne_de_clairiere"
+  },
+  "sort_number": 2
+}

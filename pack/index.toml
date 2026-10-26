@@ -750,7 +750,7 @@ hash = "beeba947c6faf2befd3a533729c53196134bc034f3ce47e055c0b101282daab9"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/fr_fr.json"
-hash = "041b5cae75f9e034a5323b76b68ee885715ddb2cc1a11f93f2e9b2e50e5ddd50"
+hash = "a7d57ecbcf36de4194fb3d9c7bba9c45732cee458ada5afe352e49d9673a281b"
 
 [[files]]
 file = "kubejs/assets/farm_and_charm/lang/en_us.json"
@@ -1077,6 +1077,102 @@ file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2cor
 hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
 
 [[files]]
+file = "kubejs/data/fallow/advancement/carnet/create.json"
+hash = "d374beb030ed72b94844f9da64b66b2e07a91a6466db0de9c880e2fb6c33f7b6"
+
+[[files]]
+file = "kubejs/data/fallow/advancement/carnet/peau.json"
+hash = "4f18594932e68a52600f51f5a4092948c42018c11225b8a428742631e3b374bc"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/book.json"
+hash = "97ee5f729f0ab19e8382c9b78b8f42ba531c8d340a9ad306c3fd84c341c4ef1a"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/categories/arriver.json"
+hash = "13df8d2d69c053ec8daa204dddae03728cb137c96136558cdf71259f566893d6"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/categories/brume.json"
+hash = "691753c1d126ced87ddb8c8584e01db328013c895abd0904df2d6ca10c57e52c"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/categories/metiers.json"
+hash = "3df0f5398df5327865b682f34f5aff344bf8bb9df085dfcd47e2ee9e39bcfc1c"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/categories/survivre.json"
+hash = "c7899b3ef9247ddd579e26df5e2dbbad8fe4c904399924b04c1ffac59f3d81bd"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/carnet.json"
+hash = "84e48afff19f29263cb3fef8ba0e02abf298b6808cfa6b71ca774fec90b840a4"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/journees.json"
+hash = "e15918c5de4eebb8dcde2e645246c59e27520f02dde977b6ac88bf992c58cda3"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/monde.json"
+hash = "b1084c2409a1499052a99288c2a7748cf496190aa203a82eba21517f9d86bb68"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/objectifs.json"
+hash = "9d8d42f57c7b7779908ba7c35e27e0d5fbee687760ea776ded9b22ae088c7d08"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sac.json"
+hash = "b49d57aaa2a388bea864916fd3d766e26dddcc29083250230111b6dd58fd2ae8"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sans_xp.json"
+hash = "6e9de317b8dec87dc24847f5cd7e710b04098dea2c90188a20171e34ad5338f1"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sante.json"
+hash = "8062fcd56c71f7b9702d0149359db03d5a335fbd9d4262cd29c36f6756bb4b30"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/brume.json"
+hash = "9078ba979b5abe061e8a0c4f521bb1b4f8253d221b554f17d1ae72937aef9350"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/clairieres.json"
+hash = "a311ccdeb0ace2c48195b98332b494841103b13ab8c28f01fb9efee648f2c11c"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/dissipateur.json"
+hash = "bfdbaec315159e421b08040c0f90bd08279aebeedd518f0e75fa3e68c988300b"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/feu_de_veille.json"
+hash = "30f6a7f8c4aa02bb1c52c76638438a96f07526c71793cfa8c96ccd1d7a0bc0ba"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/lanterne.json"
+hash = "11285b51cc2d4e9c7b64612d873ec4167a687d239a840949252a755aea4d9565"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/metiers/create.json"
+hash = "871811a2de7d072f5b0fafd5773cea5b33dad4a1b5d5452b44191e9150fa90f4"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/metiers/tannerie.json"
+hash = "4694ca7f95739d2fbe97d3aa9ba41f483b122a4e65e4be2e0f218c3f765d1a64"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/saisons.json"
+hash = "4fd5e141271e5b858cc203bbcc95e8d828ca37ac648a814fc17441ae4f59df97"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/soif.json"
+hash = "e877f141dcb52ba9d6d60bbe47a14be8172f0b8d336c3b1d634aaf39093fa8c5"
+
+[[files]]
+file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/temperature.json"
+hash = "0c053d48b9f45c890e8ad9d1e277d16cf85fbba92af0cbcf08a17018b75896be"
+
+[[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/doublons.json"
 hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
 
@@ -1363,6 +1459,10 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
+
+[[files]]
+file = "kubejs/server_scripts/carnet.js"
+hash = "96f3b92fc2aeb0c40572b81981de1ac98393f5415d1938312aa1d5745d4155e9"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
