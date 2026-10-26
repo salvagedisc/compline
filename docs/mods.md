@@ -152,6 +152,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |
 | Default Options | `default-options` | ✅ | C | Key bindings and video settings shipped with the pack |
 | Chat Heads | `chat-heads` | ✅ | C | Player head in the chat |
+| FancyMenu + Drippy Loading Screen | `fancymenu`, `drippy-loading-screen` (+ `konkrete`, `melody`) | ✅ (3.9.14, 3.1.5; added 2026-10-26, not seen in game) | C | Fallow title screen (logo) and loading screen (moss, lantern bar); layouts written by `scripts/interface/menus.py`, editor hidden ([interface](plan/fallow-interface.md)) |
 | Lamb Lanterns | `lamb-lanterns` | ✅ | CS | A lantern carried at the hip (Curios slot) gives light as if held in hand |
 
 ## Rules and scripts
