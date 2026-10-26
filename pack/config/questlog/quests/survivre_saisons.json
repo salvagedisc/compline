@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_survivre",
+  "sort_order": 8,
+  "title": "Les saisons",
+  "description": "Chaque culture a ses saisons. Hors saison, elle pousse mal, ou pas du tout. Une serre peut la protéger.\n\nUne saison dure quelques jours : prévoyez les semailles.",
+  "icon": {
+    "item": "minecraft:wheat"
+  },
+  "requirements": [
+    {
+      "type": "questlog:visit_dimension",
+      "dimension": "minecraft:overworld"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

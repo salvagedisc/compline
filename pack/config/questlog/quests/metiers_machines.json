@@ -1,0 +1,37 @@
+{
+  "chapter": "questlog:fallow_metiers",
+  "sort_order": 15,
+  "title": "Les machines",
+  "description": "Une roue à eau ou un moulin donne de la force. Arbres et engrenages la portent jusqu’aux machines.\n\nChaque machine en demande une part. Survolez un bloc et maintenez W : une scène montre comment le monter.",
+  "icon": {
+    "item": "create:cogwheel"
+  },
+  "requirements": [
+    {
+      "type": "questlog:or",
+      "objectives": [
+        {
+          "type": "questlog:item_obtain",
+          "item": "create:shaft",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "create:cogwheel",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "create:andesite_alloy",
+          "required_amount": 1
+        }
+      ]
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

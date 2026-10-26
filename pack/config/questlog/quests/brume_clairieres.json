@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_brume",
+  "sort_order": 12,
+  "title": "Les clairières",
+  "description": "Une clairière garde le climat du lieu : froide là où il neige, chaude là où il fait chaud. Les bêtes de la ferme s’y plaisent.\n\nD’une clairière à l’autre, le pays redevient habitable.",
+  "icon": {
+    "item": "minecraft:short_grass"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:brume_feu"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

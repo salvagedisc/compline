@@ -1,0 +1,26 @@
+{
+  "chapter": "questlog:fallow_brume",
+  "sort_order": 13,
+  "title": "Le dissipateur",
+  "description": "Une machine : un ventilateur, un boîtier en laiton, une hélice et deux mécanismes de précision.\n\nEntraînée à 32 tr/min ou plus pendant dix secondes, elle lève la brume sur 64 blocs.",
+  "icon": {
+    "item": "fallow:dissipateur"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:brume_lanterne"
+    },
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:metiers_machines"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:block_place",
+      "block": "fallow:dissipateur"
+    }
+  ],
+  "rewards": []
+}

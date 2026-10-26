@@ -38,7 +38,7 @@ Raw building blocks (stone, dirt, sand) stay at 32 so that building is not a cho
 - Better Days' `REALTIME` mode: 12 real hours of day and 12 of night, not tied to the server's clock.
 
 ## Conditions and tests
-The names and layouts of `sensible_stackables/config.toml` and `reliable_backpacks.json` were read in the jars: compare them with the files generated on first launch.
+The layout of `sensible_stackables/config.toml` was checked on a test server on 2026-10-26: `items` is a list of `[tag, size]` pairs under `version = 2` (a `[items]` table is rejected and the defaults are used). The layout of `reliable_backpacks.json` was read in the jar: compare it with the file generated on first launch.
 
 Bags:
 - B1. Craft from 8 tanned leather; the tannery sets the pace.

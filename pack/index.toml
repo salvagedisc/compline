@@ -93,12 +93,92 @@ file = "config/quark-common.toml"
 hash = "890330b216be379ffbc8f2f553cfb82e5eb6ebee9b6f9532b1688ce15eb13bac"
 
 [[files]]
+file = "config/questlog/chapters/fallow_arriver.json"
+hash = "1a3a7b7e9b52fdead0a6009c0af4d6585e7ccedaf9ac34398e9cebf20be8b9af"
+
+[[files]]
+file = "config/questlog/chapters/fallow_brume.json"
+hash = "fd9aa2fc5b11e71d108bf031af9ab03c801acb202a3bfa23c1fc9151ba13d988"
+
+[[files]]
+file = "config/questlog/chapters/fallow_metiers.json"
+hash = "aed425bcc4fde6bdbd1fc233888d8127bfeab55ea18aff92b2f0db92ff89d0c8"
+
+[[files]]
+file = "config/questlog/chapters/fallow_survivre.json"
+hash = "c738a2c7aec563c2d908c56cb21d15bcea05d5ad39e324a1f5148aaaf2fd58da"
+
+[[files]]
+file = "config/questlog/quests/arriver_bienvenue.json"
+hash = "87fba656734ecf25723169c7826f6ef4be85288d412d2031d87e99b19f7712f6"
+
+[[files]]
+file = "config/questlog/quests/arriver_coeurs.json"
+hash = "c5a906a4412c249102981994c9d9654919a5e1327e31def2962519e91bd1e800"
+
+[[files]]
+file = "config/questlog/quests/arriver_jour_nuit.json"
+hash = "de9055c13f594d3dc3044f1dd40e4c9f03b986b34775bc9721da7fb4148ebfd1"
+
+[[files]]
+file = "config/questlog/quests/arriver_long_cours.json"
+hash = "78aaf9e3e63c095838600c9d2550059efce4715c333e64ad2bb56ad9d82669f2"
+
+[[files]]
+file = "config/questlog/quests/arriver_sac.json"
+hash = "53dcd41508061b024988fabe95701beb65a08475fa33b017df86c68f34dfb1e4"
+
+[[files]]
+file = "config/questlog/quests/arriver_sans_xp.json"
+hash = "7ebb772a117ad1ba078047a94809386eb6cb181608b0513711e0e891ca4e3c73"
+
+[[files]]
+file = "config/questlog/quests/brume_brume.json"
+hash = "529233612112073e9528389e474eb45cb9157b51b2d90f1239c7ec3834d305c7"
+
+[[files]]
+file = "config/questlog/quests/brume_clairieres.json"
+hash = "a4c940298b7b336140d8c4f416f777197a9c4d2dcbd3fb7ada879123980e7609"
+
+[[files]]
+file = "config/questlog/quests/brume_dissipateur.json"
+hash = "e10b5d066cc3eba53e40ebf989da539b8db130702bef07e68bcd0ae908b94394"
+
+[[files]]
+file = "config/questlog/quests/brume_feu.json"
+hash = "3f85df76a52b0f3730337da933314464150591a39ff7820a1dd8eeccec7a5201"
+
+[[files]]
+file = "config/questlog/quests/brume_lanterne.json"
+hash = "e4cdcc4a942f90ce865ab62a6127951890958b88b23dbb815f33100c2336af23"
+
+[[files]]
+file = "config/questlog/quests/metiers_machines.json"
+hash = "c0e13fb57a9bd70342f3b2bf5f7e537a1745de0167ae67959de1fa918c858b0b"
+
+[[files]]
+file = "config/questlog/quests/metiers_tannerie.json"
+hash = "39cae8eab4e3ad1dc353dcb22a747e96af57c78a80ed254af3ce410e362874f9"
+
+[[files]]
+file = "config/questlog/quests/survivre_froid.json"
+hash = "296ddde8711e5afbbe567cf64a8f26702aa69951e73128732da39cb302c77310"
+
+[[files]]
+file = "config/questlog/quests/survivre_saisons.json"
+hash = "9a728bf80576f5b6dcaa5e292a184cfaf6d1bf2391799eb614455cc2eae9b6c0"
+
+[[files]]
+file = "config/questlog/quests/survivre_soif.json"
+hash = "29f07bb8978539976d71c5f3854722a24b3eccce012c620d6658983708a4c6a2"
+
+[[files]]
 file = "config/reliable_backpacks.json"
 hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
 
 [[files]]
 file = "config/sensible_stackables/config.toml"
-hash = "9440d305db415b30ac685f1c76f1f4d28c3ca56cdeebe230bd66bd99388d2175"
+hash = "9d1c94c8d9995a65f98550386db0d97d9713a2fce316f9f714856a6afa086087"
 
 [[files]]
 file = "config/shouldersurfing-client.toml"
@@ -750,7 +830,7 @@ hash = "beeba947c6faf2befd3a533729c53196134bc034f3ce47e055c0b101282daab9"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/fr_fr.json"
-hash = "a7d57ecbcf36de4194fb3d9c7bba9c45732cee458ada5afe352e49d9673a281b"
+hash = "041b5cae75f9e034a5323b76b68ee885715ddb2cc1a11f93f2e9b2e50e5ddd50"
 
 [[files]]
 file = "kubejs/assets/farm_and_charm/lang/en_us.json"
@@ -921,6 +1001,10 @@ file = "kubejs/assets/quark/lang/fr_fr.json"
 hash = "b15797c3311898390a26a37068b7748d15120d7a9604955459824e9ae4b9ddad"
 
 [[files]]
+file = "kubejs/assets/questlog/lang/fr_fr.json"
+hash = "a1d4ae23caf06f0167e1b4400b2de996dfb3692845b69400d5d55fec9bb2d4d3"
+
+[[files]]
 file = "kubejs/assets/railways/lang/fr_fr.json"
 hash = "2589790d55171c03e407d895854a63466034d03c512116795659844d90dd04ac"
 
@@ -1075,102 +1159,6 @@ hash = "ef3359093a5a8613d4641081bcbbee1d32626139c4abf07242a969be86e3cecd"
 [[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/super_blood_moon.json"
 hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
-
-[[files]]
-file = "kubejs/data/fallow/advancement/carnet/create.json"
-hash = "d374beb030ed72b94844f9da64b66b2e07a91a6466db0de9c880e2fb6c33f7b6"
-
-[[files]]
-file = "kubejs/data/fallow/advancement/carnet/peau.json"
-hash = "4f18594932e68a52600f51f5a4092948c42018c11225b8a428742631e3b374bc"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/book.json"
-hash = "97ee5f729f0ab19e8382c9b78b8f42ba531c8d340a9ad306c3fd84c341c4ef1a"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/categories/arriver.json"
-hash = "13df8d2d69c053ec8daa204dddae03728cb137c96136558cdf71259f566893d6"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/categories/brume.json"
-hash = "691753c1d126ced87ddb8c8584e01db328013c895abd0904df2d6ca10c57e52c"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/categories/metiers.json"
-hash = "3df0f5398df5327865b682f34f5aff344bf8bb9df085dfcd47e2ee9e39bcfc1c"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/categories/survivre.json"
-hash = "c7899b3ef9247ddd579e26df5e2dbbad8fe4c904399924b04c1ffac59f3d81bd"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/carnet.json"
-hash = "84e48afff19f29263cb3fef8ba0e02abf298b6808cfa6b71ca774fec90b840a4"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/journees.json"
-hash = "e15918c5de4eebb8dcde2e645246c59e27520f02dde977b6ac88bf992c58cda3"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/monde.json"
-hash = "b1084c2409a1499052a99288c2a7748cf496190aa203a82eba21517f9d86bb68"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/objectifs.json"
-hash = "9d8d42f57c7b7779908ba7c35e27e0d5fbee687760ea776ded9b22ae088c7d08"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sac.json"
-hash = "b49d57aaa2a388bea864916fd3d766e26dddcc29083250230111b6dd58fd2ae8"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sans_xp.json"
-hash = "6e9de317b8dec87dc24847f5cd7e710b04098dea2c90188a20171e34ad5338f1"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/arriver/sante.json"
-hash = "8062fcd56c71f7b9702d0149359db03d5a335fbd9d4262cd29c36f6756bb4b30"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/brume.json"
-hash = "9078ba979b5abe061e8a0c4f521bb1b4f8253d221b554f17d1ae72937aef9350"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/clairieres.json"
-hash = "a311ccdeb0ace2c48195b98332b494841103b13ab8c28f01fb9efee648f2c11c"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/dissipateur.json"
-hash = "bfdbaec315159e421b08040c0f90bd08279aebeedd518f0e75fa3e68c988300b"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/feu_de_veille.json"
-hash = "30f6a7f8c4aa02bb1c52c76638438a96f07526c71793cfa8c96ccd1d7a0bc0ba"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/brume/lanterne.json"
-hash = "11285b51cc2d4e9c7b64612d873ec4167a687d239a840949252a755aea4d9565"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/metiers/create.json"
-hash = "871811a2de7d072f5b0fafd5773cea5b33dad4a1b5d5452b44191e9150fa90f4"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/metiers/tannerie.json"
-hash = "4694ca7f95739d2fbe97d3aa9ba41f483b122a4e65e4be2e0f218c3f765d1a64"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/saisons.json"
-hash = "4fd5e141271e5b858cc203bbcc95e8d828ca37ac648a814fc17441ae4f59df97"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/soif.json"
-hash = "e877f141dcb52ba9d6d60bbe47a14be8172f0b8d336c3b1d634aaf39093fa8c5"
-
-[[files]]
-file = "kubejs/data/fallow/modonomicon/books/carnet/entries/survivre/temperature.json"
-hash = "0c053d48b9f45c890e8ad9d1e277d16cf85fbba92af0cbcf08a17018b75896be"
 
 [[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/doublons.json"
@@ -1459,10 +1447,6 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
-
-[[files]]
-file = "kubejs/server_scripts/carnet.js"
-hash = "96f3b92fc2aeb0c40572b81981de1ac98393f5415d1938312aa1d5745d4155e9"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
@@ -2077,6 +2061,11 @@ metafile = true
 [[files]]
 file = "mods/quark.pw.toml"
 hash = "6390e31a740d60ba3a66edaf86f5e2788b7d03ff18fd43580f12f665e25f73f9"
+metafile = true
+
+[[files]]
+file = "mods/questlog.pw.toml"
+hash = "f8d895c62092d3517e27db8ccbcf205ce2eec2238d2eda34e951a007f8e36320"
 metafile = true
 
 [[files]]
