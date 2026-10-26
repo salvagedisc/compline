@@ -1,5 +1,5 @@
-"""The Fallow logo: the word in worn stone capitals (the Metamorphous typeface by
-Sorkin Type, SIL Open Font License), bone fading to mist, with moss on their
+"""The Fallow logo: the word in worn stone uncials (the Uncial Antiqua typeface
+by Astigmatic, SIL Open Font License), bone fading to mist, with moss on their
 tops and vines hanging from them, and a lit lantern hanging on a chain inside
 the O, its light warming the stone around it.
 
@@ -13,8 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-FONT = ("https://raw.githubusercontent.com/google/fonts/main/ofl/metamorphous/Metamorphous-Regular.ttf",
-        "1c55f044447667f8dd883b571dd01c07ebc33b13")
+FONT = ("https://raw.githubusercontent.com/google/fonts/main/ofl/uncialantiqua/UncialAntiqua-Regular.ttf",
+        "7499d3790224f6d568ac37b267f4b4e02bbcc05d")
 CACHE = Path(__file__).resolve().parents[2] / ".cache" / "interface"
 
 OUTLINE = (26, 31, 28)
@@ -41,20 +41,18 @@ PAD = (16, 16, 16, 22)
 GLOW = 30          # radius of the lantern's light, in pixels
 MOSS_TOP = 0.6     # share of the letters' top pixels under moss
 VINES = 0.07       # share of the letters' bottom pixels a vine hangs from
-DRIPS = 0.09       # share of their top pixels a vine drips from, over the stone
-DANGLE = 8         # how far a vine hangs below the stone, in pixels
 SCALE = 4
 
 
 def font_file():
     url, sha1 = FONT
-    path = CACHE / "Metamorphous-Regular.ttf"
+    path = CACHE / url.rsplit("/", 1)[1]
     if not path.exists() or hashlib.sha1(path.read_bytes()).hexdigest() != sha1:
         path.parent.mkdir(parents=True, exist_ok=True)
         with urllib.request.urlopen(url, timeout=120) as response:
             data = response.read()
         if hashlib.sha1(data).hexdigest() != sha1:
-            raise SystemExit("Metamorphous: checksum mismatch")
+            raise SystemExit(f"{path.name}: checksum mismatch")
         path.write_bytes(data)
     return path
 
@@ -123,19 +121,13 @@ def draw():
                 px[x, y - 1] = MOSS[2] + (255,)
             if rnd.random() < 0.25 and (x, y - 2) not in solid:
                 px[x, y - 2] = MOSS[3] + (255,)
-    # vines as on the Friche concept: they hang from the letters' undersides and
-    # drip from their tops, cling to the stone as they fall, and only dangle a
-    # few pixels once they leave it; leaves on alternate sides
-    starts = [(x, y + 1) for x, y in sorted(stone) if (x, y + 1) not in stone and rnd.random() < VINES]
-    starts += [(x, y + 1) for x, y in sorted(stone)
-               if (x, y - 1) not in stone and (x, y + 1) in stone and rnd.random() < DRIPS]
-    for vx, vy in starts:
-        free = 0
+    # vines hanging from the bottoms, leaves on alternate sides
+    for x, y in sorted(stone):
+        if (x, y + 1) in stone or rnd.random() >= VINES:
+            continue
+        vx, vy = x, y + 1
         for k in range(rnd.randint(4, 14)):
             if not (0 <= vx < w and 0 <= vy < h - 1):
-                break
-            free = 0 if (vx, vy) in stone else free + 1
-            if free > DANGLE:
                 break
             px[vx, vy] = MOSS[1] + (255,)
             if k % 3 == 1:
@@ -145,11 +137,7 @@ def draw():
                     if 0 <= vx + lx < w and 0 <= vy + ly < h:
                         px[vx + lx, vy + ly] = c + (255,)
             vy += 1
-            # a vine leaving the stone sways back towards it
-            steps = (0, 0, 0, 1, -1)
-            if (vx, vy) not in stone:
-                steps += tuple(d for d in (1, -1) if (vx + d, vy) in stone) * 3
-            vx += rnd.choice(steps)
+            vx += rnd.choice((0, 0, 0, 1, -1))
 
     # the lantern in the O, on its chain from the top of the counter
     o = boxes[TEXT.index("O")]
