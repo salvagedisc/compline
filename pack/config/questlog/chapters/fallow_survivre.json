@@ -1,0 +1,9 @@
+{
+  "name": "Survivre",
+  "icon": {
+    "item": "minecraft:campfire"
+  },
+  "order": 1,
+  "default_chapter": false,
+  "hidden": false
+}

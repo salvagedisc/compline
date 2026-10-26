@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_arriver",
+  "sort_order": 2,
+  "title": "Un sac sur le dos",
+  "description": "Huit cuirs suffisent pour un sac à dos. Il se porte sur le dos, se pose au sol et se teint.\n\nTout ne s’empile plus par 64. Les petites choses vont par 64, la plupart des objets par 32, les lingots, les bûches, la viande et le poisson cuits par 16, les coffres et les bouteilles pleines par 8, les machines par 4.",
+  "icon": {
+    "item": "reliable_backpacks:backpack"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:arriver_bienvenue"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "reliable_backpacks:backpack",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

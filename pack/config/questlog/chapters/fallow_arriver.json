@@ -1,0 +1,9 @@
+{
+  "name": "Arriver",
+  "icon": {
+    "item": "minecraft:compass"
+  },
+  "order": 0,
+  "default_chapter": true,
+  "hidden": false
+}

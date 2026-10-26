@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_arriver",
+  "sort_order": 1,
+  "title": "Le jour et la nuit",
+  "description": "Une journée dure trente minutes, une nuit quinze. Les cultures, les fours et les machines gardent leur rythme habituel.\n\nQuand tout le monde dort, la nuit passe.",
+  "icon": {
+    "item": "minecraft:clock"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:arriver_bienvenue"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

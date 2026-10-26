@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_arriver",
+  "sort_order": 4,
+  "title": "Sans expérience",
+  "description": "Aucun orbe d’expérience ici. À l’enclume, chaque réparation ou fusion use l’objet : le coût s’affiche en vert, « Usure : n ».\n\nUn objet trop usé ne passe plus sur l’enclume.",
+  "icon": {
+    "item": "minecraft:anvil"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:arriver_jour_nuit"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

@@ -1,0 +1,22 @@
+{
+  "chapter": "questlog:fallow_brume",
+  "sort_order": 11,
+  "title": "Une lanterne de clairière",
+  "description": "Une lanterne, deux plaques de fer forgées et deux résines.\n\nElle lève la brume sur 32 blocs.",
+  "icon": {
+    "item": "fallow:lanterne_de_clairiere"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:brume_feu"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:block_place",
+      "block": "fallow:lanterne_de_clairiere"
+    }
+  ],
+  "rewards": []
+}

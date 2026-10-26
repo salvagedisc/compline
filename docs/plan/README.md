@@ -28,7 +28,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |
 | [traduction.md](traduction.md) | The French translation: where our texts live, the `check-fr` check, the glossary, what stays in English |
 | [recherche/verif-2026-10-18/](recherche/verif-2026-10-18/) | The six verification reports (the sixth covers the monument guardians), with the evidence (opened jars, versions, tickets) and the list of in-game tests |
-| [carnet.md](carnet.md) | The Traveler's Notebook: the Modonomicon guide book, its chapters and how to extend it |
+| [quetes.md](quetes.md) | Quests and guides with Questlog: chapters, how to write a quest, what comes next |
 | [recherche/2026-10-26/](recherche/2026-10-26/) | Eight research reports of 2026-10-26: what is done elsewhere for each next module, animations of survivors and echoes, seasons and day length, the quest book, stacks and bags |
 | [kubejs-brouillons/](kubejs-brouillons/) | Draft scripts and data, laid out like `pack/kubejs/`; to be corrected according to chapter 12 before use |
 

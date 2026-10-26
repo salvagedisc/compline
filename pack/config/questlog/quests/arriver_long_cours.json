@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_arriver",
+  "sort_order": 5,
+  "title": "Au long cours",
+  "description": "Le bestiaire se remplit à la longue-vue, espèce après espèce. L’atlas s’étend. Les clairières se rejoignent, par le rail puis par les airs.\n\nRien ne presse. Ce monde est fait pour durer.",
+  "icon": {
+    "item": "minecraft:spyglass"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:arriver_sac"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

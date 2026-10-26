@@ -1,0 +1,29 @@
+{
+  "chapter": "questlog:fallow_metiers",
+  "sort_order": 14,
+  "title": "La tannerie",
+  "description": "Un animal donne une peau brute.\n\nÀ l’établi, avec des cendres, elle devient une peau préparée. Posée sur un plateau en bambou, sous la pluie ou sous un stalactite qui goutte, elle devient du cuir en cinq minutes.\n\nDu charbon de bois brûlé sur un feu de camp donne des cendres.",
+  "icon": {
+    "item": "fallow:peau_brute"
+  },
+  "requirements": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "fallow:peau_brute",
+      "required_amount": 1
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "fallow:peau_preparee",
+      "required_amount": 1
+    },
+    {
+      "type": "questlog:item_obtain",
+      "item": "minecraft:leather",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

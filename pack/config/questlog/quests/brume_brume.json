@@ -1,0 +1,21 @@
+{
+  "chapter": "questlog:fallow_brume",
+  "sort_order": 9,
+  "title": "La brume",
+  "description": "Elle couvre presque tout. Elle cache le lointain et brouille les repères.\n\nLà où l’on ramène la vie, elle se lève pour de bon : l’herbe reverdit, la musique change et l’horizon apparaît.",
+  "icon": {
+    "item": "minecraft:light_gray_stained_glass"
+  },
+  "requirements": [
+    {
+      "type": "questlog:visit_dimension",
+      "dimension": "minecraft:overworld"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:read"
+    }
+  ],
+  "rewards": []
+}

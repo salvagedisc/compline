@@ -1,0 +1,22 @@
+{
+  "chapter": "questlog:fallow_brume",
+  "sort_order": 10,
+  "title": "Un feu de veille",
+  "description": "Un foyer de pierre et de braises : de la résine, deux charbons de bois, une bûche et trois pavés.\n\nPosé, il lève la brume pour de bon sur 16 blocs autour de lui. Le casser ne la ramène pas.",
+  "icon": {
+    "item": "fallow:feu_de_veille"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:brume_brume"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:block_place",
+      "block": "fallow:feu_de_veille"
+    }
+  ],
+  "rewards": []
+}

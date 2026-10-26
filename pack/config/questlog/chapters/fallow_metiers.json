@@ -1,0 +1,9 @@
+{
+  "name": "Métiers",
+  "icon": {
+    "item": "minecraft:leather"
+  },
+  "order": 3,
+  "default_chapter": false,
+  "hidden": false
+}
