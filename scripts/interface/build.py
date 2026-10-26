@@ -39,6 +39,8 @@ the jars in .cache/jars (run `npm run check-fr` once first).
 import hashlib
 import io
 import json
+import math
+import random
 import re
 import shutil
 import urllib.request
@@ -67,6 +69,17 @@ SOURCES = {
     "vanilla": ("https://piston-data.mojang.com/v1/objects/30c73b1c5da787909b2f73340419fdf13b9def88/client.jar",
                 "30c73b1c5da787909b2f73340419fdf13b9def88"),
 }
+
+# The title screen's panorama: a pine forest fading into the mist, drawn here.
+HAZE = (176, 180, 168)
+SKY_TOP = (128, 140, 138)
+SKY_LOW = (196, 198, 186)
+SUN = (236, 224, 192)
+PINE = (34, 44, 38)
+GROUND = (52, 62, 48)
+# Menu textures drawn behind and between the menus' lists, and the demo's panel.
+MENUS = ["menu_background", "inworld_menu_background", "menu_list_background", "inworld_menu_list_background",
+         "header_separator", "footer_separator", "inworld_header_separator", "inworld_footer_separator"]
 
 # Compats kept: the mods of the pack that GUI Revision Compats covers.
 COMPAT_NAMESPACES = {
@@ -1387,6 +1400,69 @@ def finish(decoration):
             im.save(f)
 
 
+def forest(seed=7, bins=4096):
+    """The skyline of the panorama's forest: four rows of pines, from the farthest,
+    lowest and most fogged to the nearest, which leaves two clearings. Each row is
+    the height of its treetops (degrees above the horizon) for each of `bins`
+    headings, with its fog and its foot."""
+    rnd = random.Random(seed)
+    rows = []
+    for count, foot, (h0, h1), slope, fog in [(140, 0.4, (2.0, 4.5), 0.30, 0.78),
+                                              (110, -0.6, (3.5, 7.0), 0.30, 0.62),
+                                              (70, -2.4, (6.0, 12.0), 0.28, 0.44),
+                                              (26, -6.0, (14.0, 30.0), 0.24, 0.22)]:
+        line = [foot] * bins
+        for _ in range(count):
+            centre = rnd.uniform(0, 360)
+            if len(rows) == 3 and (30 < centre < 80 or 200 < centre < 235):
+                continue
+            height = rnd.uniform(h0, h1)
+            half = height * slope
+            for k in range(int((centre - half) / 360 * bins), int((centre + half) / 360 * bins) + 1):
+                d = abs((k * 360 / bins - centre + 180) % 360 - 180)
+                tier = 1 - 0.12 * ((height - d / slope) % 2.2 < 0.5)  # the boughs' tiers
+                line[k % bins] = max(line[k % bins], foot + (height - d / slope) * tier)
+        rows.append((line, fog, foot))
+    return rows
+
+
+def forest_colour(yaw, pitch, rows):
+    """The colour seen at a heading and an elevation, in degrees."""
+    k = int(yaw / 360 * len(rows[0][0])) % len(rows[0][0])
+    for line, fog, foot in reversed(rows):
+        if pitch <= line[k]:
+            depth = min(1, max(0, (foot - pitch) / 30))
+            c = [a + (g - a) * depth * 0.6 for a, g in zip(PINE, GROUND)]
+            return tuple(round(a + (h - a) * fog) for a, h in zip(c, HAZE))
+    if pitch < 0:  # the ground between the trees, fogged
+        f = max(0.2, 0.75 + pitch / 40)
+        return tuple(round(a + (h - a) * f) for a, h in zip(GROUND, HAZE))
+    t = min(1, pitch / 70) ** 0.7
+    c = [a + (b - a) * t for a, b in zip(SKY_LOW, SKY_TOP)]
+    d = math.hypot(((yaw - 55 + 180) % 360 - 180) / 1.6, pitch - 14)  # a sun lost in the mist
+    g = max(0, 1 - d / 38) ** 2 * 0.55
+    return tuple(round(a + (w - a) * g) for a, w in zip(c, SUN))
+
+
+def panorama(face, rows, size=256):
+    """A face of the title screen's cube: 0 to 3 the sides, turning right, 4 the top
+    and 5 the bottom; drawn at `size` and scaled four times."""
+    im = Image.new("RGB", (size, size))
+    px = im.load()
+    for v in range(size):
+        for u in range(size):
+            x = (u + 0.5) / size * 2 - 1
+            y = (v + 0.5) / size * 2 - 1
+            if face < 4:
+                yaw = face * 90 + math.degrees(math.atan2(x, 1))
+                pitch = math.degrees(math.atan2(-y, math.hypot(x, 1)))
+            else:
+                yaw = math.degrees(math.atan2(x, -y if face == 4 else y))
+                pitch = math.degrees(math.atan2(1, math.hypot(x, y))) * (1 if face == 4 else -1)
+            px[u, v] = forest_colour(yaw % 360, pitch, rows)
+    return im.resize((size * 4, size * 4), Image.NEAREST)
+
+
 def titled(path):
     return not path.startswith("assets/minecraft/") and not any(k in path for k in UNTITLED)
 
@@ -1666,10 +1742,26 @@ def main():
         if n == container + "crafter.png":
             save(n, crafter(frame, decoration))
         elif n.startswith(tuple(f"assets/minecraft/textures/gui/sprites/{d}/" for d in (
-                "widget", "container", "popup", "social_interactions"))):
+                "widget", "container", "popup", "social_interactions", "statistics"))):
             im = png(vanilla.read(n))
             retone(im, "neutral")
             save(n, im)
+
+    # the menus: their shading and separators in moss and bone, the demo's panel
+    # dressed, the title screen's panorama a forest in the mist
+    gui = "assets/minecraft/textures/gui/"
+    for name in MENUS:
+        im = png(vanilla.read(gui + name + ".png"))
+        retone(im, "neutral")
+        save(gui + name + ".png", im)
+    im = png(vanilla.read(gui + "demo_background.png"))
+    dress_vanilla(im, gui + "demo_background.png", frame, decoration)
+    save(gui + "demo_background.png", im)
+    rows = forest()
+    for face in range(6):
+        dest = OUT / gui / "title" / "background" / f"panorama_{face}.png"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        panorama(face, rows).save(dest, optimize=True)
 
     lang = OUT / "assets" / "minecraft" / "lang"
     lang.mkdir(parents=True, exist_ok=True)
