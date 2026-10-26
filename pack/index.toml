@@ -1398,7 +1398,7 @@ hash = "218ef4b9a25d00f275730f1c9d59221eb8bc7d28cad14511f36516fa5fe874ff"
 
 [[files]]
 file = "kubejs/server_scripts/sante.js"
-hash = "3cf24f7229aae2b27012cf6f3508ea47e11d77b381ea86aa192f98c8dcdb8a2b"
+hash = "85b08f77dabb2a0e21298800fa59b7d6b1173c15690554caf566d9885a494952"
 
 [[files]]
 file = "kubejs/server_scripts/sante_butin.js"
