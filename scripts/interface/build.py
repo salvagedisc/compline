@@ -1391,28 +1391,36 @@ def titled(path):
     return not path.startswith("assets/minecraft/") and not any(k in path for k in UNTITLED)
 
 
-# The pack icon's lantern: moss metal, lit glass.
+# The pack icon's lantern, 14x20 so that it sits in the middle of the 32-pixel
+# panel: a ring, a two-tier moss cap lit from the left, the glass in lantern light
+# around a flame, a rim and two feet.
 LANTERN_ICON = [
-    "....OOOOO....",
-    "...O.....O...",
-    "...O.....O...",
-    "..OOOOOOOOO..",
-    ".OMmmmmmmmMO.",
-    ".OOOOOOOOOOO.",
-    "..OMDLLLDMO..",
-    "..OMLYYYLMO..",
-    "..OMLYHYLMO..",
-    "..OMLYHYLMO..",
-    "..OMLYYYLMO..",
-    "..OMDLLLDMO..",
-    ".OOOOOOOOOOO.",
-    ".OMmmmmmmmMO.",
-    "..OOOOOOOOO..",
+    "......OO......",
+    ".....O..O.....",
+    ".....O..O.....",
+    "......OO......",
+    "....OOOOOO....",
+    "...OmMMMMdO...",
+    "..OmMMMMMMdO..",
+    ".OOOOOOOOOOOO.",
+    "..OmDDDDDDdO..",
+    "..OmgYYYYLdO..",
+    "..OmgYFFYYdO..",
+    "..OmYFHHFYdO..",
+    "..OmYFHHFYdO..",
+    "..OmYYFFYYdO..",
+    "..OmLYYYYLdO..",
+    "..OmDLLLLDdO..",
+    ".OOOOOOOOOOOO.",
+    "..OmMMMMMMdO..",
+    "...OOOOOOOO...",
+    "...OO....OO...",
 ]
 
 
 def draw_icon():
-    """pack.png: a small panel with its leaves, and a lit lantern in its middle."""
+    """pack.png: a small panel with its leaves, and a lit lantern in its middle
+    casting a soft glow on it."""
     im = Image.new("RGBA", (32, 32))
     px = im.load()
     inside = rounded(32, 32, 4)
@@ -1424,15 +1432,16 @@ def draw_icon():
                             BEVEL if not inside(i + 2, j) or not inside(i - 2, j) or not inside(i, j + 2) else
                             FILL) + (255,)
     add_pattern(im)
-    colours = {"O": OUTLINE, "M": LUT[(85, 89, 89)], "m": BEVEL, "D": LANTERN_D, "L": LANTERN, "Y": LANTERN_L,
-               "H": (255, 244, 214)}
-    x0, y0 = 10, 9
-    glass = {(x0 + x, y0 + y) for y, row in enumerate(LANTERN_ICON) for x, c in enumerate(row) if c in "DLYH"}
-    for i in range(4, 28):  # the glow on the panel around the glass
+    colours = {"O": OUTLINE, "M": LUT[(85, 89, 89)], "m": BEVEL, "d": LUT[(54, 56, 56)], "D": LANTERN_D,
+               "L": LANTERN, "Y": LANTERN_L, "F": (255, 226, 160), "H": (255, 250, 235), "g": (255, 246, 222)}
+    w, h = len(LANTERN_ICON[0]), len(LANTERN_ICON)
+    x0, y0 = (32 - w) // 2, (32 - h) // 2
+    glass = {(x0 + x, y0 + y) for y, row in enumerate(LANTERN_ICON) for x, c in enumerate(row) if c in "DLYFHg"}
+    for i in range(4, 28):  # the glow on the panel, fading over four pixels from the glass
         for j in range(4, 28):
-            d = min(abs(i - x) + abs(j - y) for x, y in glass)
-            if 0 < d <= 3 and px[i, j][:3] in (FILL, LEAF_TONE):
-                t = (4 - d) / 6
+            d = min(max(abs(i - x), abs(j - y)) for x, y in glass)
+            if 0 < d <= 4 and px[i, j][:3] in (FILL, LEAF_TONE):
+                t = (5 - d) / 9
                 px[i, j] = tuple(round(a + (b - a) * t) for a, b in zip(px[i, j][:3], LANTERN_L)) + (255,)
     for y, row in enumerate(LANTERN_ICON):
         for x, c in enumerate(row):
