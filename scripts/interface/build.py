@@ -22,10 +22,14 @@ vanilla and the mods of the pack, and adapts them to Fallow:
 - mods without a GUI Revision compat: their vanilla-grey screens, read from
   the jars cached by `npm run check-fr`, take the same colours, their own
   drawings keep theirs;
-- sprites: buttons, tabs, lists and toasts follow the same tones by
+- sprites: lists, toasts and containers' sprites follow the same tones by
   brightness, highlights in lantern light; vanilla textures GUI Revision
-  lacks (the crafter, text fields, checkboxes...) are added from the game's
-  own jar and dressed alike;
+  lacks (the crafter, the statistics...) are added from the game's own jar
+  and dressed alike;
+- widgets: buttons, sliders, checkboxes, tabs, text fields and scrollers are
+  drawn anew by widgets.py;
+- menus: their shading and separators in moss and bone, and the title
+  screen's panorama, a pine forest in the mist, drawn here;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
 Only textures the game or a mod of the pack reads are kept: compat files
@@ -51,6 +55,7 @@ from pathlib import Path
 from PIL import Image
 
 import questlog
+import widgets
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "pack" / "resourcepacks" / "fallow-interface"
@@ -335,6 +340,13 @@ SPRITE_MODES = {f"assets/minecraft/textures/gui/sprites/{k}.png": v for k, v in 
     "advancements/challenge_frame_obtained": "lantern", "advancements/goal_frame_obtained": "lantern",
     "advancements/task_frame_obtained": "lantern", "gamemode_switcher/selection": "lantern",
     "container/brewing_stand/fuel_length": "lantern",
+    # the lists' and the recipe book's arrows, green in GUI Revision when pointed at
+    **{k: "lantern" for k in (
+        "server_list/join_highlighted", "server_list/move_up_highlighted", "server_list/move_down_highlighted",
+        "transferable_list/select_highlighted", "transferable_list/unselect_highlighted",
+        "transferable_list/move_up_highlighted", "transferable_list/move_down_highlighted",
+        "world_list/join_highlighted", "world_list/marked_join_highlighted",
+        "recipe_book/page_forward_highlighted", "recipe_book/page_backward_highlighted")},
 }.items()}
 # Last touches on single textures, once built: a box (x0, y0, x1, y1) and what it
 # becomes: "fill" (bare panel), "clear" (transparent), "grey" (its stray greys
@@ -1771,6 +1783,7 @@ def main():
 
     draw_hud(OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "hud")
     finish(decoration)
+    widgets.draw(OUT)
     draw_icon().save(OUT / "pack.png")
 
     questlog.draw(OUT)
