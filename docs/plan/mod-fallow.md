@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.1 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings) and **dissipateur** (dissipator) modules.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.2 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (titles) modules.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -171,6 +171,10 @@ Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false kee
 The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken and placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
 
 Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
+
+## `titres` module
+
+Client only, no mod required. The titles the game writes at fixed positions inside vanilla container screens fell on the frames and ornaments of the `fallow-interface` pack (GUI Revision lays its panels out for screens without titles). Two mixins stop vanilla screens writing their labels: `titres.AbstractContainerScreenMixin` cancels the default `renderLabels` (what a screen adds around it, like the anvil's cost, stays) and `titres.OwnLabelsScreenMixin` the survival inventory's and the villager's, which write theirs themselves. Mod screens and the creative inventory are left alone. On `ContainerScreenEvent.Render.Background`, `TitresClient` draws the `fallow:plaque` sprite (nine slices, drawn by `scripts/interface/build.py`) centred over the panel's top edge, and the title on it in the pack's moss ink (`0x3C4C38`), the villager's with its level as the game writes it. Each panel's top edge is read from `assets/fallow/plaque.json`, written by `build.py` into `fallow-interface` and reloaded with the resources; without it, the plaque sits on the image's top edge, where vanilla panels start. Switch: `titres.enabled` in `config/fallow-client.toml`.
 
 ## In-game tests
 

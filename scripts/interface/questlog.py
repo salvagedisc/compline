@@ -32,7 +32,6 @@ TILE_H = (190, 196, 174)
 PAGE_D = (196, 194, 172)
 PAGE = (232, 229, 210)
 PAGE_L = (242, 240, 226)
-INK = (40, 46, 40)
 INK_FADED = (132, 136, 116)
 # lantern light
 LANTERN_D = (168, 106, 44)

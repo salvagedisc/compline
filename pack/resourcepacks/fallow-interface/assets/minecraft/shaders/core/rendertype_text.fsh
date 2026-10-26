@@ -20,7 +20,7 @@ void main() {
     if (color.a < 0.1) {
         discard;
     }
-    // Fallow: the screens' titles, written in 0x404040, become moss green
+    // Fallow: texts written in 0x404040 become moss green
     if (all(lessThan(abs(vertexColor.rgb - vec3(0.25098)), vec3(0.002)))) {
         color.rgb = texture(Sampler0, texCoord0).rgb * vec3(0.2353, 0.2980, 0.2196) * ColorModulator.rgb;
     }
