@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtenu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "create:shaft",
+              "create:cogwheel",
+              "create:andesite_alloy"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

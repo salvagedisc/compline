@@ -1,0 +1,14 @@
+{
+  "criteria": {
+    "obtenu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "fallow:peau_brute"
+          }
+        ]
+      }
+    }
+  }
+}

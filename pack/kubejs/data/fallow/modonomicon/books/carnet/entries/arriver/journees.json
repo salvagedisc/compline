@@ -1,0 +1,24 @@
+{
+  "type": "modonomicon:content",
+  "id": "fallow:arriver/journees",
+  "category": "fallow:arriver",
+  "name": "book.fallow.carnet.arriver.journees.name",
+  "icon": {
+    "id": "minecraft:clock"
+  },
+  "x": 4,
+  "y": -1,
+  "parents": [
+    {
+      "entry": "fallow:arriver/monde"
+    }
+  ],
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "id": "p1",
+      "title": "book.fallow.carnet.arriver.journees.p1.title",
+      "text": "book.fallow.carnet.arriver.journees.p1.text"
+    }
+  ]
+}

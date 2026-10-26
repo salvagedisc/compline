@@ -1,0 +1,9 @@
+{
+  "name": "book.fallow.carnet.name",
+  "tooltip": "book.fallow.carnet.tooltip",
+  "model": "modonomicon:modonomicon_green",
+  "generate_book_item": true,
+  "display_mode": "node",
+  "page_display_mode": "double_page",
+  "show_recently_unlocked": true
+}

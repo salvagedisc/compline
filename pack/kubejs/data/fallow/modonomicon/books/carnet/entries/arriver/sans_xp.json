@@ -1,0 +1,24 @@
+{
+  "type": "modonomicon:content",
+  "id": "fallow:arriver/sans_xp",
+  "category": "fallow:arriver",
+  "name": "book.fallow.carnet.arriver.sans_xp.name",
+  "icon": {
+    "id": "minecraft:anvil"
+  },
+  "x": 6,
+  "y": 1,
+  "parents": [
+    {
+      "entry": "fallow:arriver/sac"
+    }
+  ],
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "id": "p1",
+      "title": "book.fallow.carnet.arriver.sans_xp.p1.title",
+      "text": "book.fallow.carnet.arriver.sans_xp.p1.text"
+    }
+  ]
+}

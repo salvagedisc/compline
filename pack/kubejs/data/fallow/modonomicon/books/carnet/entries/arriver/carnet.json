@@ -1,0 +1,19 @@
+{
+  "type": "modonomicon:content",
+  "id": "fallow:arriver/carnet",
+  "category": "fallow:arriver",
+  "name": "book.fallow.carnet.arriver.carnet.name",
+  "icon": {
+    "id": "minecraft:writable_book"
+  },
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "id": "p1",
+      "title": "book.fallow.carnet.arriver.carnet.p1.title",
+      "text": "book.fallow.carnet.arriver.carnet.p1.text"
+    }
+  ]
+}
