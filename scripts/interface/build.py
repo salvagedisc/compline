@@ -12,7 +12,9 @@ vanilla and the mods of the pack, and adapts them to Fallow:
   they take the same palette;
 - slots: redrawn over their whole cell as wells with rounded corners and a
   soft shadow inside; deeper wells with a fine grain where creatures stand;
-- arrows: one slim engraved arrow, the progress one in lantern light;
+  the crafting table's frame around every 2x2 and 3x3 grid with room for it;
+- arrows: one slim engraved arrow, the progress one in lantern light, mods'
+  own arrows found by shape and redrawn alike;
 - details: the crafting table's ornaments (GUI Revision's corners and two
   curls from Hollow GUI's frieze) on every large panel, and one tight pattern
   of small leaves on a grid shared by all screens, passing under the slots;
@@ -163,6 +165,37 @@ LANTERN_D = (168, 106, 44)
 LANTERN = (226, 166, 78)
 LANTERN_L = (248, 214, 140)
 LANTERN_EDGE = (110, 70, 34)
+# The same arrow at 17x8, where a mod's progress sprite is that small.
+SMALL_ARROW = [
+    "...........#.....",
+    "...........##....",
+    ".#..........###..",
+    "#################",
+    "#################",
+    ".#..........###..",
+    "...........##....",
+    "...........#.....",
+]
+# Shapes mods draw their own arrows in, whatever the colour: Farm & Charm's two
+# (inside an outline), and Exposure's plus. Vanilla's wide arrow is VANILLA_ARROW.
+FC_ARROWS = [
+    [".............#...", ".............##..", ".............###.", "#################",
+     "#################", ".............###.", ".............##..", ".............#..."],
+    [".............##...", ".............###..", ".............####.", "##################",
+     "##################", "..............###.", ".............###..", ".............##..."],
+]
+PLUS = ["....##...."] * 4 + ["##########"] * 2 + ["....##...."] * 4
+# Arrows a mod draws in a shape of its own: the box to clear, then Fallow's arrow,
+# ("right", its top-left corner) or ("bent", from the shaft's left end (x, y) along
+# to the column x1, then down to the tip's row).
+MOD_ARROWS = {
+    "assets/envelope/textures/gui/mailbox.png": [((247, 37, 267, 52), ("right", 246, 39))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/millstone.png": [((112, 49, 139, 62), ("right", 114, 50))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/chopping_board.png": [((90, 30, 111, 45), ("right", 90, 32))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/steamer.png": [((90, 30, 111, 45), ("right", 90, 32))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/stockpot.png": [((127, 39, 157, 54), ("bent", 127, 40, 149, 53))],
+    "assets/kaleidoscope_cookery/textures/gui/jei/teapot.png": [((90, 19, 144, 35), ("bent", 90, 20, 135, 34))],
+}
 
 # Vanilla screens GUI Revision paints in colours (wood, purple): brought back to
 # its greys first so that they take Fallow's palette like the others.
@@ -206,6 +239,21 @@ WELLS = {
     "tab_inventory.png": [(72, 4, 34, 46, "creature")],
     "assets/quark/textures/misc/backpack_gui.png": [(27, 7, 48, 72, "creature")],
 }
+# Grids a compat draws in a frame of its own with buttons for cells: the frame is
+# cleared from its top-left pixel, the cells (x, y of each 18-pixel cell) are
+# redrawn as slots, then framed like the crafting table's grid.
+REFRAMED = {
+    "assets/quark/textures/gui/container/crafter.png": ((21, 20), [(25 + 18 * c, 15 + 18 * r)
+                                                                   for r in range(3) for c in range(3)]),
+}
+# Wells a compat draws in a style of its own (x, y, w, h of the cell): redrawn as slots.
+MOD_SLOTS = {
+    "assets/farm_and_charm/textures/gui/pot_gui.png": [(122, 26, 20, 20)],
+    "assets/farm_and_charm/textures/gui/roaster_gui.png": [(122, 26, 20, 20)],
+}
+# Marks GUI Revision embosses in light where the others are engraved (x0, y0, x1, y1):
+# the light becomes ink and the shadow under it light, like the arrows.
+ENGRAVED = {"cartography_table.png": (20, 38, 27, 46)}
 # Leftovers of the vanilla frame a compat left outside its own (x0, y0, x1, y1): cleared.
 LEFTOVERS = {
     "assets/farm_and_charm/textures/gui/silo.png": [(0, 85, 4, 138), (172, 85, 176, 138)],
@@ -408,10 +456,15 @@ def matches(im, tpl):
     return found
 
 
-def draw_arrow(im, x0, y0, ink, light, top=None):
-    """Fallow's arrow, 22x10, its tip to the right."""
+def shape(rows):
+    return {(x, y) for y, row in enumerate(rows) for x, c in enumerate(row) if c == "#"}
+
+
+def draw_arrow(im, x0, y0, ink, light, top=None, rows=ARROW, pts=None):
+    """Fallow's arrow, 22x10, its tip to the right (or another shape in the same ink),
+    with a pixel of light under it."""
     px = im.load()
-    pts = {(x, y) for y, row in enumerate(ARROW) for x, c in enumerate(row) if c == "#"}
+    pts = pts or shape(rows)
     for x, y in pts:
         if (x, y + 1) not in pts and light:
             px[x0 + x, y0 + y + 1] = light + (255,)
@@ -424,6 +477,59 @@ def progress_arrow():
     im = Image.new("RGBA", (24, 16))
     draw_arrow(im, 1, 3, LANTERN, LANTERN_D, LANTERN_L)
     return im
+
+
+def bent_arrow(x0, y0, x1, tip):
+    """Fallow's arrow turning down: its shaft from (x0, y0) along to the column x1,
+    then down to the tip, with the same head and tail."""
+    head = {(y, x - 14) for x, y in shape(ARROW) if x >= 14}
+    hx, hy = x1 - 4, tip - 7
+    pts = {(hx + a, hy + b) for a, b in head}
+    pts |= {(x, y) for x in range(x0, x1 + 2) for y in (y0, y0 + 1)}
+    pts |= {(x, y) for x in (x1, x1 + 1) for y in range(y0, hy)}
+    return pts | {(x0 + 1, y0 - 1), (x0 + 1, y0 + 2)}
+
+
+def reshape_arrows(im, path):
+    """Arrows a compat or a mod drew in its own shape and colour (vanilla's wide arrow,
+    Farm & Charm's, Exposure's plus, and those of MOD_ARROWS) become Fallow's: in ink
+    on the panel, in lantern light where they are progress sprites, on transparency."""
+    px = im.load()
+    width, height = im.size
+    shapes = [(VANILLA_ARROW, ARROW, 0, 2), (FC_ARROWS[0], SMALL_ARROW, 1, 0), (FC_ARROWS[1], SMALL_ARROW, 1, 0)]
+    if "/exposure/" in path:
+        shapes.append((PLUS, PLUS, 0, 0))
+    for old, new, outline, dy in shapes:
+        pts, w, h = shape(old), len(old[0]), len(old)
+        k0 = min(pts)
+        for y in range(height - h + 1):
+            for x in range(width - w + 1):
+                c = px[x + k0[0], y + k0[1]]
+                if not c[3] or c[:3] in (FILL, LEAF_TONE) or not all(px[x + a, y + b] == c for a, b in pts):
+                    continue
+                if any(px[x + a, y + b] == c for a in range(w) for b in range(h) if (a, b) not in pts):
+                    continue
+                ring = [px[i, j] for i in range(x - 2, x + w + 2) for j in range(y - 2, y + h + 2)
+                        if 0 <= i < width and 0 <= j < height and not (x <= i < x + w and y <= j < y + h)]
+                progress = sum(1 for q in ring if not q[3]) * 2 > len(ring)
+                ground = (0, 0, 0, 0) if progress else FILL + (255,)
+                for i in range(max(x - outline, 0), min(x + w + outline, width)):
+                    for j in range(max(y - outline, 0), min(y + h + outline, height)):
+                        if (i - x, j - y) in pts or (outline and px[i, j][:3] not in (FILL, LEAF_TONE)):
+                            px[i, j] = ground
+                if progress:
+                    draw_arrow(im, x, y + dy, LANTERN, LANTERN_D, LANTERN_L, rows=new)
+                else:
+                    draw_arrow(im, x, y + dy, ARROW_INK, ARROW_LIGHT, rows=new)
+    for (a, b, c, d), (kind, *at) in MOD_ARROWS.get(path, []):
+        ground = px[a - 1, b - 1] if px[a - 1, b - 1][:3] == FILL or not px[a - 1, b - 1][3] else FILL + (255,)
+        for i in range(a, c):
+            for j in range(b, d):
+                px[i, j] = ground
+        if kind == "right":
+            draw_arrow(im, *at, ARROW_INK, ARROW_LIGHT)
+        else:
+            draw_arrow(im, 0, 0, ARROW_INK, ARROW_LIGHT, pts=bent_arrow(*at))
 
 
 def replace_arrows(im, arrows):
@@ -702,15 +808,33 @@ def find_vanilla_slots(im):
     return found + flat
 
 
-def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
+def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,), cells=()):
     """Redraws the slot cell (x, y, w, h) as a well with rounded corners, or, for
     "creature", a deeper well with a fine two-tone grain. The outline is darker at
     the top and left, fading towards the ends, and the top casts a soft shadow
     into the well. A placeholder drawn inside the slot (a banner, a dye, a
-    blueprint) is kept."""
+    blueprint) is kept. With the other cells of the screen given, each cut corner
+    takes the colour beside it (a frame, a border), and only where four cells meet
+    does it stay panel, a small cross between them."""
     if x < 0 or y < 0 or x + w > im.width or y + h > im.height:
         return
     px = im.load()
+
+    def covered(i, j):
+        return any(a <= i < a + c and b <= j < b + d for a, b, c, d, *_ in cells)
+
+    def beside(i, j):
+        if not cells:
+            return tuple(around)
+        hx, vy = (x - 1 if i < w / 2 else x + w), (y - 1 if j < h / 2 else y + h)
+        side, end = covered(hx, y + j), covered(x + i, vy)
+        if side and end:
+            return tuple(around)
+        ox, oy = (x + i, vy) if side else (hx, y + j)
+        if 0 <= ox < im.width and 0 <= oy < im.height:
+            return px[ox, oy] if px[ox, oy][3] else (0, 0, 0, 0)
+        return tuple(around)
+
     before = {(i, j): px[x + i, y + j] for j in range(h) for i in range(w)}
     ground = Counter(before.values()).most_common(1)[0][0]
     cut = CORNERS[18] if max(w, h) <= 18 else CORNERS[30]
@@ -721,13 +845,14 @@ def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
     for j in range(h):
         for i in range(w):
             if not inside(i, j):
+                out = beside(i, j)
                 near = sum(inside(i + a, j + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))
                 if near >= 2:  # soften the corner step
                     edge = edge_top if j < h / 2 else EDGE_LOW
-                    c = tuple((e + g) // 2 for e, g in zip(edge, around[:3]))
-                    px[x + i, y + j] = c + (max(around[3], 160),)
+                    c = tuple((e + g) // 2 for e, g in zip(edge, out[:3]))
+                    px[x + i, y + j] = c + (max(out[3], 160),)
                 else:
-                    px[x + i, y + j] = tuple(around)
+                    px[x + i, y + j] = out
                 continue
             up, left = not inside(i, j - 1), not inside(i - 1, j)
             down, right = not inside(i, j + 1), not inside(i + 1, j)
@@ -746,6 +871,86 @@ def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
             else:
                 c = SLOT_FILL
             px[x + i, y + j] = c + (255,)
+
+
+def clear_leftovers(im, rects):
+    """Bits of the source's old slot art left just outside the redrawn cells (a light
+    corner, a line along the player's well) become panel: marks in the pack's own
+    tones lying wholly within two pixels of a cell."""
+    px = im.load()
+    width, height = im.size
+    palette = set(LUT.values()) - {FILL}
+    inside, near = set(), set()
+    for a, b, c, d, *_ in rects:
+        inside.update((i, j) for i in range(a, a + c) for j in range(b, b + d))
+        near.update((i, j) for i in range(a - 2, a + c + 2) for j in range(b - 2, b + d + 2))
+
+    def mark(i, j):
+        return (0 <= i < width and 0 <= j < height and (i, j) not in inside
+                and px[i, j][3] and px[i, j][:3] in palette)
+
+    seen = set()
+    for x, y in sorted(near - inside):
+        if (x, y) in seen or not mark(x, y):
+            continue
+        comp, todo = [], [(x, y)]
+        seen.add((x, y))
+        while todo:
+            i, j = todo.pop()
+            comp.append((i, j))
+            for k in (i - 1, i, i + 1):
+                for l in (j - 1, j, j + 1):
+                    if (k, l) not in seen and mark(k, l):
+                        seen.add((k, l))
+                        todo.append((k, l))
+        if len(comp) <= 200 and all(p in near for p in comp):
+            for p in comp:
+                px[p] = FILL + (255,)
+
+
+def frame_slices(crafting):
+    """The frame of the crafting table's grid (cells 29-82 x 16-69): four pixels on
+    each side and a two-row shadow under it, panel left out."""
+    px = crafting.load()
+    return {(u, v): px[sx, sy] for u, sx in ((0, 25), (1, 26), (2, 27), (3, 28), (4, 40), (5, 83), (6, 84), (7, 85), (8, 86))
+            for v, sy in ((0, 12), (1, 13), (2, 14), (3, 15), (4, 40), (5, 70), (6, 71), (7, 72), (8, 73), (9, 74), (10, 75))
+            if (u, v) != (4, 4) and px[sx, sy][3] and px[sx, sy][:3] != FILL}
+
+
+def add_frames(im, cells, frame):
+    """Frames each block of 2x2 to 3x3 slots like the crafting table's grid, where the
+    panel around it is bare with two pixels to spare."""
+    px = im.load()
+    small = {(x, y) for x, y, w, h in cells if (w, h) == (18, 18)}
+    seen = set()
+    for start in sorted(small):
+        if start in seen:
+            continue
+        block, todo = [], [start]
+        seen.add(start)
+        while todo:
+            x, y = todo.pop()
+            block.append((x, y))
+            for q in ((x + 18, y), (x - 18, y), (x, y + 18), (x, y - 18)):
+                if q in small and q not in seen:
+                    seen.add(q)
+                    todo.append(q)
+        x0, y0 = min(x for x, y in block), min(y for x, y in block)
+        cols, rows = (max(x for x, y in block) - x0) // 18 + 1, (max(y for x, y in block) - y0) // 18 + 1
+        if len(block) != cols * rows or not (2 <= cols <= 3 and 2 <= rows <= 3):
+            continue
+        x1, y1 = x0 + 18 * cols, y0 + 18 * rows
+        ring = [(i, j) for i in range(x0 - 6, x1 + 6) for j in range(y0 - 6, y1 + 8)
+                if not (x0 <= i < x1 and y0 <= j < y1)]
+        if not all(0 <= i < im.width and 0 <= j < im.height and px[i, j] == FILL + (255,) for i, j in ring):
+            continue
+        for i, j in ring:
+            if not (x0 - 4 <= i < x1 + 4 and y0 - 4 <= j < y1 + 6):
+                continue
+            u = i - x0 + 4 if i < x0 else 4 if i < x1 else i - x1 + 5
+            v = j - y0 + 4 if j < y0 else 4 if j < y1 else j - y1 + 5
+            if (u, v) in frame:
+                px[i, j] = frame[u, v]
 
 
 def corner_mask(w, h, cut):
@@ -777,7 +982,11 @@ def fill_gaps(im, cells, wells=()):
         if x < 0 or y < 0 or x + 18 > im.width or y + 18 > im.height:
             return False
         inner = [px[x + i, y + j] for j in range(3, 15) for i in range(3, 15)]
-        return sum(p == tone for p in inner) >= 0.6 * len(inner)
+        sides = [[(x - 1, y + k) for k in range(18)], [(x + 18, y + k) for k in range(18)],
+                 [(x + k, y - 1) for k in range(18)], [(x + k, y + 18) for k in range(18)]]
+        open_side = any(sum(0 <= i < im.width and 0 <= j < im.height and px[i, j] == tone for i, j in side) >= 14
+                        for side in sides)  # the place is part of a larger well, not a cell
+        return sum(p == tone for p in inner) >= 0.6 * len(inner) and not open_side
 
     for axis in (0, 1):
         lines = {}
@@ -931,6 +1140,7 @@ def main():
     greyify(crafting)
     recolour(crafting)
     decoration = ornaments(crafting, mask)
+    frame = frame_slices(crafting)
     furnace = png(files[container + "furnace.png"])
     anvil = png(files[container + "anvil.png"])
     progress = png(files["assets/minecraft/textures/gui/sprites/container/furnace/burn_progress.png"])
@@ -972,6 +1182,7 @@ def main():
         slots = [(x - 1, y - 1, w + 2, h + 2) for x, y, w, h in find_slots(im) + cells]
         if vanilla:
             slots += [(x - 1, y - 1, 18, 18) for x, y in EXTRA_SLOTS.get(name, [])]
+        slots += MOD_SLOTS.get(path, [])
         drawn = replace_arrows(im, arrows) if "/gui/" in path or "/misc/" in path else []
         if vanilla and name in WOOD_ARROWS:
             (a, b, c, d), (cx, cy) = WOOD_ARROWS[name]
@@ -983,16 +1194,39 @@ def main():
         recolour(im)
         for x0, y0 in drawn:
             draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
+        if "/sprites/" not in path:
+            reshape_arrows(im, path)
+        if vanilla and name in ENGRAVED:
+            a, b, c, d = ENGRAVED[name]
+            px = im.load()
+            for j in range(b, d):
+                for i in range(a, c):
+                    if px[i, j][:3] == ARROW_LIGHT:
+                        px[i, j] = ARROW_INK + (255,)
+                    elif px[i, j][:3] == (166, 170, 150):
+                        px[i, j] = ARROW_LIGHT + (255,)
+        if path in REFRAMED:
+            seed, extra = REFRAMED[path]
+            px = im.load()
+            todo = [seed]
+            while todo:
+                i, j = todo.pop()
+                if 0 <= i < im.width and 0 <= j < im.height and px[i, j][3] and px[i, j][:3] != FILL:
+                    px[i, j] = FILL + (255,)
+                    todo += [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]
+            slots += [(x, y, 18, 18) for x, y in extra]
         wells = WELLS.get(name, []) if vanilla else WELLS.get(path, [])
         slots = [s for s in slots if all(s[0] + s[2] <= a or a + c <= s[0] or s[1] + s[3] <= b or b + d <= s[1]
                                           for a, b, c, d, _ in wells)]
         slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
         spaced = separate(slots + [w[:4] for w in wells])
         slots, wells = spaced[:len(spaced) - len(wells)], [c + w[4:] for c, w in zip(spaced[len(spaced) - len(wells):], wells)]
+        clear_leftovers(im, slots + wells)
+        add_frames(im, slots, frame)
         for x, y, w, h in slots:
-            draw_slot(im, x, y, w, h)
-        for x, y, w, h, shape in wells:
-            draw_slot(im, x, y, w, h, shape)
+            draw_slot(im, x, y, w, h, cells=slots + wells)
+        for x, y, w, h, kind in wells:
+            draw_slot(im, x, y, w, h, kind, cells=slots + wells)
         if big_panel(path, im):
             add_pattern(im)
             add_ornaments(im, decoration)
@@ -1018,15 +1252,20 @@ def main():
                 if recolour_vanilla(im):
                     for x0, y0 in drawn:
                         draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
+                    if "/sprites/" not in n:
+                        reshape_arrows(im, n)
                     px = im.load()
                     slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
                     spaced = separate(slots + wells)
                     slots, wells = spaced[:len(spaced) - len(wells)], spaced[len(spaced) - len(wells):]
+                    clear_leftovers(im, slots + wells)
+                    add_frames(im, slots, frame)
                     for x, y, w, h in slots:
                         clear = x == 0 or px[x - 1, y + h // 2][3] == 0
-                        draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,))
+                        draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,),
+                                  cells=slots + wells)
                     for x, y, w, h in wells:
-                        draw_slot(im, x, y, w, h, "creature")
+                        draw_slot(im, x, y, w, h, "creature", cells=slots + wells)
                     if big_panel(n, im):
                         add_pattern(im)
                         add_ornaments(im, decoration)

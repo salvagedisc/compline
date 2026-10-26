@@ -2413,7 +2413,7 @@ hash = "7d36af0d0274bcef927041f05389ce9412e01e5f4d101bf2a47e78db9fec579e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/CREDITS.md"
-hash = "1fef709fd726290f0b7b4f3399b8289a2d7554bc79932e6c4df4651b8b4ef5df"
+hash = "f80333be68864a9f0804d9951ca9bf132da09dd7634d076ae24f4d160c270d36"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/adorablehamsterpets/textures/gui/announcement_ui.png"
@@ -2429,7 +2429,7 @@ hash = "05363b5ef42dc8d9363e02dce400699339249602e1fa9f9bf5e023eff685baf5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/adorablehamsterpets/textures/gui/hamster_inventory_gui.png"
-hash = "6711cde60b329a697a973bb235973951b387fdc187b6ab35ed0e1034484622d2"
+hash = "b71fd75ac10ce45b3ba8c0cacb149a8841d8f6dc2118b6fde779c24f30d186e0"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/alexsmobs/textures/gui/book/widgets.png"
@@ -2441,7 +2441,7 @@ hash = "85679daff83922f5edaecc22a43e171b60fdc97cc1dfd035f2632d5f7a1886e8"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/alexsmobs/textures/gui/elephant.png"
-hash = "a218b8b3dd0d0bd25f5dc091eb273d709fe2bd8df002d246f8feac384ff9e474"
+hash = "637ba83a6b54234c3a2b3405e9555426acf5518c5545abe092bbc9237c8f714a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/alexsmobs/textures/gui/transmutation_table.png"
@@ -2457,7 +2457,7 @@ hash = "7b03da26462080c08cb36686131f465e5ba49f830469068ae1102b3c2f8531a1"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/chipped/textures/gui/container/workbench.png"
-hash = "2d03eb0e8286780c7396a660b7f0f67edc1b593ec6518b097de06717e7f62f2d"
+hash = "3954adb89e55572d7acc876b1609aaffde491ea1a1be4f7a3195c0892e98d3cc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/chipped/textures/gui/sprites/button.png"
@@ -2513,7 +2513,7 @@ hash = "3dfacb14f05b4b62d07beb8a312f8bcd7b763b5a070c1d7087458864316dbbed"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/screen/boiler_gui.png"
-hash = "256fddb7571e6ea3b4c144ebb99fdcbe03186f7c13899f9445acc2c46b9161fa"
+hash = "197acda996c2f7a2c6aa2259b439ddf0c9742cba78befc31b7d5ac93382e335c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/screen/config_gui.png"
@@ -2521,15 +2521,15 @@ hash = "f9006dcae3dbe6cda7fa6c1a243c9787db8b9c303bdeda12d9601fb2a2153a95"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/screen/hearth_gui.png"
-hash = "e116ecd9c6586e3ce4d7011a7b693db1b2c091cf846e08673e1ad9220dc2a82b"
+hash = "36afa7a85efc9ac90a63205f9e44b43bfcc79ca8c4849dbb6777aa7ef514ab7f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/screen/icebox_gui.png"
-hash = "a05748e803fdebaa7e594ce1e0cdef78c7e6222b0d3e758056299796b8bd7152"
+hash = "48d29858789a8e3a968a17b26bb50178f551deca2cbf04b3f57b0b5a250f31f3"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/screen/sewing_gui.png"
-hash = "4a373c509bdaf48c3f613cb07e9eb5398433f82e7e50d355ea67116c5269f7dd"
+hash = "c869cb0f527b22d74ad797a74671f5e056e63e0f4853cdd1fa0824a3ddee431a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/cold_sweat/textures/gui/sprites/config/clientside_icon.png"
@@ -2669,7 +2669,7 @@ hash = "5a04667cb42dacab3aed48e43d64ee793def2c6e1932ab27262ba5163943ad12"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/companions/textures/gui/puppet_gui.png"
-hash = "d9bbeae19800e5d066f4ea7897198422c72fbcd76b5c61e88b83e3324a35d182"
+hash = "51fc3333aeb8fe1680c957eff16aba325aab1970e05f0e6bfc9d6b5c2ad8ab6d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/companions/textures/gui/soul_furnace_gui.png"
@@ -2773,7 +2773,7 @@ hash = "3a5b2c88372df8f197bd66d7d0cab57e46eeb9fdd8b8b5d0459f3eef7758951f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/curios/textures/gui/inventory.png"
-hash = "dc8f5f5563ab1e8ccffbb1017851e908a29212de6aead6c7f57cc74b9417781e"
+hash = "76e156b3c9139a24d3b45c1e825fc7e87eb22a6c73955a0a78ac752b6e297e0d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/curios/textures/gui/inventory_revamp.png"
@@ -2833,7 +2833,7 @@ hash = "6ea026bbc771191e69f78809f673825c5b96d4e7a2a7a50b9b5035337581485f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/emi/textures/gui/widgets.png"
-hash = "3533becd3219a0e52695ea3003f2bcf9e493f140d603a2e9e46cfa5ba4d01864"
+hash = "1060636a765c83d0d0732d224302c67b46b7ab0d759e0da4fa9f30ffdf5f2f30"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/entity_features/textures/gui/settings.png"
@@ -2857,27 +2857,27 @@ hash = "12f5a3adc41c7737486e729c406eb37421c09b78a5ba0487df1d41252226356c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/jei/category_mailing.png"
-hash = "c8cdfdc3f276e8f6ecc4cbe0b66810f47866790f0d15f81c9fb9b6901b16d17b"
+hash = "4d7dca42952aa40023c65dc35ea5977c25e826ce4313336a9218165e1ec53510"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/mailbox.png"
-hash = "5a893f7a19788041aa908619177bd196298c5e0efd085e86e4d70a4a9fea0e47"
+hash = "da89a3e09a58f409916c30623f8f7752093b799117e014cb92890a4286f63de4"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/package.png"
-hash = "fe08ca36ac24e9cb724f6a1bd1dba01223c591de5012c9ba2056bf427486e98e"
+hash = "34312bc64ceaa84eb06d47166960984b9c447b32a722cbfaaeeabac46bb8831e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/packing.png"
-hash = "05c9419d124bce0f9d5ee6bdbbb285ebbac42ef4bd1abae8f3a6a977cf09086f"
+hash = "204cb599aebe532939cb6672c2497b842829686f81a01f34662cd441a36ad34f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/payback_package.png"
-hash = "d2f50b80e736c35bfec1a177673ec9130c7b0c8a5c4b2fda51958986eb60fa9a"
+hash = "72ca15c7be4134a3fee537d1714fb61978ada0e6c1dfcb20825efe9d9035a22b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/payback_packing.png"
-hash = "79fbb5704776e8b53f98e4c290464fb17788840e8e2f9f64ee174282fa00c7e7"
+hash = "c3b2b43bf8aff4d22dfc31da3eaf27e5500f778a424960b254a2b674b602f4f9"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/payback_tag.png"
@@ -2905,7 +2905,7 @@ hash = "b1774e432f7337e1ad54f664835439c50da5ab08dec8130ddfd315ee1f983e8c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/envelope/textures/gui/sprites/tooltip/package/background.png"
-hash = "960e8175454c821c10aa4fca5ab62944e0a4249a9e92e6d14c5e7aa1184a9dd8"
+hash = "7f41e78fdee0173bb6f0805ba4dac1e4f06abd9848adf0911c29453c0b68fef6"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/album.png"
@@ -2913,7 +2913,7 @@ hash = "3c1963007b6bc00f783d231ed6a97eb3812640a551545d98c8583d4ccb5d20d4"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/camera_attachments.png"
-hash = "66c20bde50582cfa5e4da52ecc32da86ae14021d8c9be4a236b0a5889f64b0ce"
+hash = "35f4be4fa36a7643cdce6ff17bb23f77a15e515da6b213bcfb11cf09c0b8f5c2"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/film_frame_inspect.png"
@@ -2921,7 +2921,7 @@ hash = "fef7e5f08ec1ff6e63f48875dab231fca0b504422726e13293316d1fed855855"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/item_list.png"
-hash = "42e068f5a532a7eb4115f762ea070cd10804c4299c5c8cbc5c5d33b0aaa615be"
+hash = "6759b6656128b43ea00fda05a12c8526f2116e1c1a9b31172e241e51a9f2e8a4"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/item_rename.png"
@@ -2929,15 +2929,15 @@ hash = "0adf345ca440cf2303ffd0305765a85c38d91cbbf0af58e38e33997a95f721bc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/jei/photograph_printing.png"
-hash = "24d0abf55b65fac0820bd099bccbaa6a1606252d1dc356ee075f46ee30d0c6a2"
+hash = "fd5d6d294148526b3bd2da01eb6dc94a31aed5a73abff8762d386bb438cb986a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/jei/photograph_stacking.png"
-hash = "b88009fe0275c0d94d6a7adb5a54da6550c6fbd7e7c9af919de756b18d169489"
+hash = "56a14fe0b7e6ae57b0094f260d976eb84fcc576a1117df59821d2ae005fce291"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/lightroom.png"
-hash = "e3f3453488bc25742fb77178ff49bcc0e95c80e39cf4fe219fe8294c372e8d5a"
+hash = "344054c41d2af750f49eee5851ac95689e2d9df53802691aeba01bdf4cb05396"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/exposure/textures/gui/lightroom_film_overlays.png"
@@ -3005,27 +3005,27 @@ hash = "e11d5da779e097cd11ad26cb4f8d3b5160b7c1f06490067fc3df120a474a000c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/crafting_bowl.png"
-hash = "bc593548d2481293604cf13fb6d618a5f23e13c1a0551c137edeb64d57ec307c"
+hash = "c4aa6c53e47c29b4ed0080dcc175ae2e0ab56fec42481d6984a12b4c9010f79f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/mincer.png"
-hash = "9a0c35c0633ddc77fd864bc0fd8596c5c6498da8c2f4f3b00e65908fc1f255c2"
+hash = "d1a0a7c08dae97f9955167cd63db253f5bdd2f5372b3424d308c1143ab2270ca"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/pot_gui.png"
-hash = "fe6a2337a42fee983e03413d2b1d21e156b92b9319aa0cbdcc0dcfeefe9f8e82"
+hash = "fb4ca40df3aa552e3840d766fecbad8b6578860c815f77d9a61e64352602ba49"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/roaster_gui.png"
-hash = "fe6a2337a42fee983e03413d2b1d21e156b92b9319aa0cbdcc0dcfeefe9f8e82"
+hash = "fb4ca40df3aa552e3840d766fecbad8b6578860c815f77d9a61e64352602ba49"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/silo.png"
-hash = "841f316ee0400581c031cc2b6ed2fce2d8aaf488577fc782f122d33f78bdfdc9"
+hash = "3ca44a9d071428f05795e62b88969c9a7fa112a65f7e43ab57ae02da9ad53d31"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/farm_and_charm/textures/gui/stove_gui.png"
-hash = "b015d4fba7bf7e18fccd3723a62616559fd1251abbce8e343fd9f72a259d3d7c"
+hash = "bde10ece8b6a1f548e6ae9d710d45078d8989599450da99f070526e363a3df49"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/immersiveenchanting/textures/gui/container/enchanting_table.png"
@@ -3089,7 +3089,7 @@ hash = "8fc2b23015ac24c4ff335968be50a4a8f5ca4301ae905ada8ce0fa9d3416cca3"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/jei/textures/jei/atlas/gui/brewing_stand_background.png"
-hash = "594919c86c7c0cee21dc39a538723392b9d119290991be99f37ac0d855950547"
+hash = "e1ff8f63e3670ef733e3d166dd76d0b50ff577b19e952741fd077cdc37c9af67"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/jei/textures/jei/atlas/gui/brewing_stand_blaze_heat.png"
@@ -3153,11 +3153,11 @@ hash = "03a67deeccf5f919289e7867978a418193e7c9ffb528a94f7752e05e9e1bd30e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/jei/textures/jei/atlas/gui/recipe_arrow.png"
-hash = "1c5a5e80694dc353be2a4519a8ee2b894ef01da9728b648ab1c948ba8a81b0f0"
+hash = "3bedb722fa33fa23df7bf0793681950cc1ddf4eb83af6dfdc0587d563bc7d20f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/jei/textures/jei/atlas/gui/recipe_arrow_filled.png"
-hash = "0d430536e55016f46dc6c34c2d9bfc81a4110d47d59b708436d29ebf59a00387"
+hash = "e3b6517dadf9bd405806742977b27716e7fc705c5efa6c2dd3e2d236f1cc8c63"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/jei/textures/jei/atlas/gui/recipe_catalyst_slot_background.png"
@@ -3209,27 +3209,27 @@ hash = "fb22aa5f11db2ca450b4ed0f99f70957ab580ff6cbf17652adfee7b31aad9387"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/chopping_board.png"
-hash = "4c42c285890fe2b3545fb4b5508497e30552a70160d23c3529b1e9e8613b124d"
+hash = "58ceb6a24fe2d2a51521e56ee1d64cc3d0bca688522d2d0123eb6e0ee3856f8d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/millstone.png"
-hash = "e29f5bcdffc08a51f60fb18f4be1a0710bd39762ed2aafe91159dcedc875f96b"
+hash = "dda69e62d8e4636cad1a2e0632b7d1b1db6193bc2d3595fd2cdabebb068c2bee"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/pot.png"
-hash = "d0d7ac69b0cb8ad0497c0365de674e5917eabb8e9f2ec42cbf9dc32585e74010"
+hash = "2dea51192e7062a72de4ea5895d20ae0e1629cac5c5821ffb290ce7d3e168f72"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/steamer.png"
-hash = "11906ec392c0debcf37ecce2cc1d0450644228ccea817164440f729fcbe7d00c"
+hash = "652835c11fb42a8583164f579ec2dd3b202e871c7487edef105c15803dbdb606"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/stockpot.png"
-hash = "0871fc87e3e73d8841314897ee46c818aac418380f2070dac2f1ea2de80ce991"
+hash = "56ba6e977b610fddde7e2cb8c6976bf8505fc6eebdf3a59c406770275cb225d5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/kaleidoscope_cookery/textures/gui/jei/teapot.png"
-hash = "c9910fa36a3fd3a9e5757a57638eeb95c5b922c136bff1385d51b14f80ce7316"
+hash = "fcd8a88296a85759869458dd400a34c4170c0dba7c6aead9b915d44b38cec6ec"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/lang/en_us.json"
@@ -3241,7 +3241,7 @@ hash = "cd46db9188f1b6b95aff44553eb4d6bb0eecda4f50e0fa0edeb969942d277dec"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/chest.png"
-hash = "fd1efbc613c353550ace61465a9675321481bd3f0d2e9f33533fc15cc9989c30"
+hash = "f669569b8fed328a16e67fad8f5bffbeff3bdbd1d376f1e22823c773d433ad63"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/chest.properties"
@@ -3249,7 +3249,7 @@ hash = "1f5ec9fb5e41de98b06a8bb5b9f16a6e97b68265fb1dca1618f04679a6d9f31f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/chest_double.png"
-hash = "1b4838f9d118f9750e39ef891c3df08d09907224e8ed1d390dc85eeee7ea4bd7"
+hash = "6cfb4898ffe8b078f09c8b5c497c057491d48906ee07dfa6cefb151cd15733b5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/chest_double.properties"
@@ -3257,7 +3257,7 @@ hash = "701ecd17da762ce3f1955a97a9ca27475042ca2d8b68778819c4de9048b1b00b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/ender_chest.png"
-hash = "57feae1c5ae5e5cb0fbd98f318f3867ce6b8709d3ea7ed6bc7211c3ec14b5890"
+hash = "146c313dd6d531286a7d4c5456c7c8ae2773d79b78525284b61ece4ce9e7fcb7"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/ender_chest.properties"
@@ -3265,7 +3265,7 @@ hash = "ca603622ecdaad65b420497a0f55a0f5d8d912e00574954043338c838231863f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_black.png"
-hash = "40b1ab47fcdcd6ccf13a6d013aa2f5be26fc0a98e03fd1ead3221124aef7d4d7"
+hash = "3fed107e4c3f586bc0f58ece9faef73d8b11e2116d34f80c4a1712c587298a36"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_black.properties"
@@ -3273,7 +3273,7 @@ hash = "13f68c6eb8c608bdf99f98237e880f0045af0aa03692fc561273ccaca022c69d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_blue.png"
-hash = "84879c79f46c1c7b38ef84d3d3e2944b36accc6e134de4b8859ef3d972930721"
+hash = "354e9a5d7db05fc74423452816b8478eb15bc2fa2769a2f24170f768043717dc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_blue.properties"
@@ -3281,7 +3281,7 @@ hash = "bef5b54e8b664290cc43aff4cc589846595818a49d00b6d3b10eaffd457f312e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_brown.png"
-hash = "bd9cb9a0fff45218a5685b2bc0b14f0cd6d99493b055a0ed0299e2e9e61d2ecf"
+hash = "6f91c8716d2d9ba11c57d7c41aed89274e56fea6e657cebeaabefd72b42a472b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_brown.properties"
@@ -3289,7 +3289,7 @@ hash = "be860a9f20a267f328b0c134566af18c3434ab2c544aaa2ccaa9c4707d732a3f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_cyan.png"
-hash = "22f6398df3f9d143f4c863a041dcc1518a4e8927216478761c33444711ef8741"
+hash = "52bf37e62b5d4dd0afe265be71157eaf9e96105fb2a4b66a44a4c6992f7fda90"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_cyan.properties"
@@ -3297,7 +3297,7 @@ hash = "42c5bb029fd2233abcdba2e301d53e55f19583f666bc622b8d6f3df22880ac3b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_gray.png"
-hash = "cd61cea4eb52b3ec1f5a4f60a912bebdd4750fef903fb7b019afca79f661ced1"
+hash = "52212d8fb255b3eb038e7c868a174db5f5bb681a22b938a8c3ff4675a366b724"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_gray.properties"
@@ -3305,7 +3305,7 @@ hash = "95c3714abff7f3bfd8fc37f21fa1e35b303f5ec761d30cc0571b9ede4fe83f9e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_green.png"
-hash = "6fc192fd707829755ac49467b5b086d23bb5529195626ee2cca7beda20488b94"
+hash = "1ac4c66989ac31aaf03a6fa142c29cef71b17c4c5b3cbee34357faacc2adf329"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_green.properties"
@@ -3313,7 +3313,7 @@ hash = "9e1e31961c3b5e21ad416631a202208d40930e9bedc3b8dd52da5ca7e7f3fc47"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_light_blue.png"
-hash = "61b86b3c58d948605923ce9e3de11873ea669d41071607cfcdb24ef97a15545f"
+hash = "925478f53bf0dabb7b1981a88adbb8ec096eaa9a9ec40d207b70eb39a9acd7fd"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_light_blue.properties"
@@ -3321,7 +3321,7 @@ hash = "cb4a678867a0698bbc29de729c23751db7d338ab8a15364ae523b1172b25caa0"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_light_gray.png"
-hash = "c72141c9a0243dbd2378f461e813454dd227be8035ca74ed41887f46f6a1bf1b"
+hash = "e020f74399b3f6cccaefd10e826656b5fdaecbd6c8171a09d24f5fe667e6c378"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_light_gray.properties"
@@ -3329,7 +3329,7 @@ hash = "0fbf0aa2ca2f4163db4b0ae4ad6b3de4ff61357e9c05bd3ea86d4d06046e98a6"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_lime.png"
-hash = "ef3faf1f183f93e8c251ef5a85d2b44b1a0e3213daa23fc458d3513d52112298"
+hash = "521be17b9f9e193489c6ca50529ada0e7883010da900a568983b9a9f3f3bc50c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_lime.properties"
@@ -3337,7 +3337,7 @@ hash = "2db7cb53d0be442ac307760d65d74a58a062f6785fbccec6900f25438f950192"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_magenta.png"
-hash = "f6ef46187bd55867b3d0a95351fea07975b2330ca298046fb281eb5d6193d06d"
+hash = "05d79760564da5bfd3f2e7bf5f05adfacfa1149c7fb241716a728580a1002cfc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_magenta.properties"
@@ -3345,7 +3345,7 @@ hash = "74d637a94ccf6b7600d2b1da61df8e8a379c551c6360a47d15d9199d2362d38f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_orange.png"
-hash = "e84b70c7db17b81ec1bfa7be8de07875a40d9e52bfcc3e6f03979f9b19f3bdd9"
+hash = "76cf40e34b66da2d7f71d1d2a7b4fd7b2e15cf1dc308b4a6b9d5cd73b4a34c09"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_orange.properties"
@@ -3353,7 +3353,7 @@ hash = "511be775009ffd870b4cfab7e5a9dad1f04baab0cfe6704449e20343a09057fc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_pink.png"
-hash = "3996f65e4184c3d88ac3d7efb949fb151e4b0c0f138846aed56db52b70af9708"
+hash = "3b1901a593c7f221ed9cf2530fd3d305727365c8cf43e4017c22728a2293cf66"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_pink.properties"
@@ -3361,7 +3361,7 @@ hash = "d1938feb3eb55a9dafb781ceeffafc5acece3d8d90557c57a75fff51115e74d0"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_purple.png"
-hash = "1298c92566f04fbf774b7add7da816e4f7dd3d7ad9bb2ae4b780ce2cd30d2d79"
+hash = "1acad51f1c64d1f44adcd31dab84fc69b7b8169838cec9412aa69eaa79202887"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_purple.properties"
@@ -3369,7 +3369,7 @@ hash = "2ab7046b8cee6159a487ae328fef5a3b9db5d91e67ac3927a9ffae874eb7a2aa"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_red.png"
-hash = "8fb7893e50683f9e2b5f1d11dc21515440ea3fda4a07ac3ae10159a06784a188"
+hash = "91dc82aba3ae3dd1b5783d69ada4ef9f7f097568e072ba7a5bf1fc45cdf8994e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_red.properties"
@@ -3377,7 +3377,7 @@ hash = "44857f8b967e9382169520d4e0517d70d9105579e4edccb129e8d70fa4042e9f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_white.png"
-hash = "495ed702b8ad458e0b1afe1eacc00b7e0ae7f47db910b7b2c7169b87ed2cacbc"
+hash = "e19b5b7093b15620f3ee0d479969ba26fd4b774a19839a572113642ed0c3f2a6"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_white.properties"
@@ -3385,7 +3385,7 @@ hash = "7d82a2e7704289db3e4129d5744f77310e4ed8a46a751cc36b5ec3016c4ea855"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_yellow.png"
-hash = "f8f59185b3c50ad0c74f19808856da91f7cc8c137532904b3db87fda05d3c21f"
+hash = "bab1ef1080252462f7478b68eb345a5acb55a6400e8bd7ce82383440b939ccd3"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/optifine/gui/container/shulker_box/shulker_box_yellow.properties"
@@ -3397,31 +3397,31 @@ hash = "5fb5cc6d539bf583623bc4686ddb11399fd89a017f6f6ea002cc1b7f1cc6ef48"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/anvil.png"
-hash = "55ed5898ac584aa1505e1c80027a84820088f9157e5ecd748799dddf4faca1b2"
+hash = "d74b647bbd45748f5eda796859b6feaadd04967b081291d4f69d6b461bfe6140"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/beacon.png"
-hash = "31fbc0caf42068eace1781be7b048d5035ad0097fb671b17d87662a86e13f457"
+hash = "25621321b4a6fdfcfec1a8d1d18c2888d321148987125bd3a62dee06f5c6566f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/blast_furnace.png"
-hash = "881f90ebc1c294b15f082c04455ac8be9e8397c541372cd37ff3654c9f0ae3c4"
+hash = "742a3572be12dcad6818452e1cded13b5bd8f150989d6ca6c38b069b77bf486e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/brewing_stand.png"
-hash = "6133008c3d80588eedd1bb13e8f999e42fc0861c2fb1bcc46eb1c4fcdc58ac7f"
+hash = "1411f021bef21603b51efa6ab152ac20106052ab983cedd0ab52f71504757af5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/cartography_table.png"
-hash = "eb9d8cb5404f767647a1c4a90d753ed65b91fc1446058ed58bd6456197b0a844"
+hash = "661653895d9fe99fc394e03e108710b90da6c81b757f8872f8864091f6918e2c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/crafting_table.png"
-hash = "839e12a80373701cbb87456a8afc5f1eecc7a4abdf3a59dde3f523427e217123"
+hash = "c17bb314b82935620b7dc40497782c79526653c7f78f309e4d8bfe467b62e50b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/creative_inventory/tab_inventory.png"
-hash = "15e3997860412c04ee44fa0e55502358e00894ad600baa321ee95c29190adbe5"
+hash = "a1b87533806bd6da28c5f2ae34fc2384a88776e32a346fbc459214b904b4180a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/creative_inventory/tab_item_search.png"
@@ -3433,15 +3433,15 @@ hash = "70bd469da4c1b9679ebbf284ccbe4c5b0d959653bbb50dd21d133088f6d03699"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/dispenser.png"
-hash = "df898bfef686e06c6f73d9417e9896561a5dc7325c0ac4e716468102d7be8711"
+hash = "49e110c98292d91e09eaa9f149811aaa26bd5fbbdc15cf2b7c5f455c3ecf071c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/enchanting_table.png"
-hash = "b527f37a47719a32bba73a9e2c94282ee144e50e06b8fc71c5ecd008f28cda3e"
+hash = "39a7bb1556fb19b640230758dd38293481bcc25553a534dadbc1742d83f4b335"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/furnace.png"
-hash = "881f90ebc1c294b15f082c04455ac8be9e8397c541372cd37ff3654c9f0ae3c4"
+hash = "742a3572be12dcad6818452e1cded13b5bd8f150989d6ca6c38b069b77bf486e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/gamemode_switcher.png"
@@ -3449,43 +3449,43 @@ hash = "a1835c39d9e168202631a581f8ca01fb3ac118b5e973fcd3b24f8929ed282164"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/generic_54.png"
-hash = "f89b25841ec4c79e35d9fadfcb601f10cf2a2bbaeea07072a5e4720ac24e1e58"
+hash = "a0939ec07b89a31ccde75fcd2e7c371657ada3fee826dcc6a3da7c4fbcc3075b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/grindstone.png"
-hash = "3cc03e40707b2033365eb83c6e6a90971825630388ef0e2bae125fff08f67ff6"
+hash = "9e003517c6800e4a38c7360709e56d88f18c24045cee7b0cc1ae43f8bce57b04"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/hopper.png"
-hash = "e8b4564b7d0f91db0a3920522cee8a5cd2af731f0ac2b19136a609104b9ed817"
+hash = "ed98e3bba22074418dfbe593a47d4bb75ce18074c7c4b1fd7c9b99947947983a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/horse.png"
-hash = "baf760e6083fe6088724a5aee506e9ff5992678acad38ccdfb8ee3ed96273f70"
+hash = "02a437662d3f0992a56ef4a41331e4d51927ac3e6543592124fb4993dfab9bba"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/inventory.png"
-hash = "1474c8325f1205aa52d7178ac8ad6d5964c5f8faecad6478e51fb5964d3aaf0e"
+hash = "eca082553641425f38dc24088989e2d370ded210c45c222897936807b421f8ea"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/loom.png"
-hash = "7b9560fd6eb331d09361d39d3616867f165c261fec00e775f972051a48163612"
+hash = "4a53e5a27d56cef902d1845b0b480675327cc402d0aa9c39a6cc0e6e0cd7acd8"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/shulker_box.png"
-hash = "f85d9e3fe17ec36a29ad2e7c83def3fc0a722ece41d5ee0012c6aef2d0a86e04"
+hash = "9adaaa8cbf57eb4dc7f019587b914733f5119dd8040ef60e1df19c70b092efb5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/smithing.png"
-hash = "af84b44025bef42d96e293a9402478802713e67a0cbbe7a07bb8abf7085336d2"
+hash = "3e3093da78e3c84aad5d02fa01c344cf28f59842f0d46f2ec6840f4262f923dd"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/smoker.png"
-hash = "881f90ebc1c294b15f082c04455ac8be9e8397c541372cd37ff3654c9f0ae3c4"
+hash = "742a3572be12dcad6818452e1cded13b5bd8f150989d6ca6c38b069b77bf486e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/stonecutter.png"
-hash = "35a7d506b9fa0bd2d464ba13486bab3a950de86ae522d845cba78f104b9967f3"
+hash = "7e0b2b1774ec4c6704a321adc9229980110d488ebf692a0e478aa783529cf3f9"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/villager.png"
@@ -4849,7 +4849,7 @@ hash = "cfd7402211f5ef932b4b991f70ee4396f0e05c6f7ef3932a45e080a73f745756"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/naturalist/textures/gui/container/elephant.png"
-hash = "ab31f9565303e51017717162004dcf9bfd20fb9fa3cfefa0fe1d38de539f920c"
+hash = "7abdc7642dac2c915ee502820d493d7e3618efe88ac22266f0b52b418b50e41a"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/nomansland/textures/gui/sprites/item_slot.png"
@@ -4857,55 +4857,55 @@ hash = "65acaea97c5656b55380e6bb609f5da8a50640a83e47cb5ea53d19293c598789"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/blueprint_workbench.png"
-hash = "c562c4597141cc68102dc34b0bd0e813bc56bddffa0768409047303bcdf95072"
+hash = "41a48f8e19cca030c95d5ca1fbaadf9183048f5e5437ea4b623c9e317754944d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/brick_alloy_furnace.png"
-hash = "6adbdcc89793aefd2c62a3a8ef608f6d9b2888c48cf4f57218d743e6a54aabf1"
+hash = "ecd09a546aea28941aa3971f6f052ee406cd5d6235f52b582e0af5526460847e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/cast_furnace.png"
-hash = "dcb39c92655387682832a7d449a3be70a49e4d427fb116e1ca69c001fcb9d629"
+hash = "10d7847c5831db335d19a36b3bef0b2874e932ef2a29f3081cf3420a00cbfc5e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/casting_furnace_jei.png"
-hash = "782b6a55635e7add7a8e985488f6514e8d32e01c877ebbe921362a6f8e4edd9e"
+hash = "1306fe68aedad5252a16f1a38e29cd8bdcd823a05276eb432add139405d09c19"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/cooling_jei.png"
-hash = "b31548cdaccb5bf8d3d61d13661f8ce4a372c6de9cc1ccd628077abf6f02eb8e"
+hash = "bdea877dfecdb5589bdbfddc70a59baf3795f0f605a7db52b4b2ce8b13871c25"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/explanation_jei.png"
-hash = "37b2e9fe88fc832fb310f98a5f6c6a83a48bf7c07c10ab5f4eab5e1739a740bf"
+hash = "583eec25b77964544980924d0ed341cf779752e2c7d570efaf79844b132dbc25"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/fletching_table.png"
-hash = "01c6d77789d5d5ca0cf7263b2ff5d781a5a8494dd43fb39be0289e3131048f56"
+hash = "f4b921b28b9f931309e7d97f59f0353e9130c87be14122f4ffbd7d152eacb8da"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/fletching_table_jei.png"
-hash = "a87038ef503852bd0e46c520d62847148da84bea32b442bdc8deb5c50cf9f594"
+hash = "8a17d90aa8e58b428c318796a81d28a8a5cf6870f39a62a7de713c55dbfc18d6"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/furnace_jei.png"
-hash = "13a59834675fa002a944935a045fa6db1578d8d1995dc742cc13d2143085f0d2"
+hash = "efbabdb813bf3dedfdd2aac6e7cea7b53de490f432b351d9c1b9823707d63d90"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/grinding_jei.png"
-hash = "b31548cdaccb5bf8d3d61d13661f8ce4a372c6de9cc1ccd628077abf6f02eb8e"
+hash = "bdea877dfecdb5589bdbfddc70a59baf3795f0f605a7db52b4b2ce8b13871c25"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/nether_alloy_furnace.png"
-hash = "e27bf9ff7d80395153ab3c2d05caf6e96c1f9e4855430a91b7d440a0067ac4d9"
+hash = "c133f40be76c3ae2590839700a6b8942f30b124e963db754cc19cac5be8c7766"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/nether_alloy_jei.png"
-hash = "e27bf9ff7d80395153ab3c2d05caf6e96c1f9e4855430a91b7d440a0067ac4d9"
+hash = "c133f40be76c3ae2590839700a6b8942f30b124e963db754cc19cac5be8c7766"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/nether_furnace_jei.png"
-hash = "814ca27dcecdaab00bb863eb8fcb2891d5ae039256b8ae058ceeeb9120cc372f"
+hash = "83d505cb33d2f912a88ef5e4bf8d26026df5e4e6d9defdf466ca6718e98a9df8"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/recipe_book_buttons.png"
@@ -4917,19 +4917,19 @@ hash = "03a67deeccf5f919289e7867978a418193e7c9ffb528a94f7752e05e9e1bd30e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/rock_knapping_gui.png"
-hash = "ad3212ff12c53049880ec6942d31a136d81dded5705cf403fc99c777f3766e55"
+hash = "971648091de02a015664af49d0ba4bc0adb68fc86b8a65dc7a0ed176e1965cb3"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/rock_knapping_jei.png"
-hash = "6b269399bc5c6fc384dbb43383633a05edaff4b4cf3d9f7cf47fb6dffc884ba5"
+hash = "93c61e0d2ca1de3ff906463186305b65bb1907fca6581435c12c3edf43e154ea"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil.png"
-hash = "31c0a467d40275d44143e854fd2f1e79f4bfcc15c79c1348dadfc879797d9973"
+hash = "9fc2e086fe86ebce26a4dfe41c59b4b1ff519774c561da26efdf975aa131c6fa"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil_jei.png"
-hash = "89927e8e417d62ac5c39dd2b1bd8ed58b7d3194c0a35b3acdc3dfe83ce4d6f77"
+hash = "8c5c58e8fccb50f2d8a8ed33b9b4c66e72d2178bf3731e75d2aeeaed3ccbb39f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/smithing_anvil_minigame.png"
@@ -4953,7 +4953,7 @@ hash = "3a36ad8b750344b8a61a9271673e53760e67a9aad5a9d5a2b015201815b781d5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/stone_smithing_anvil.png"
-hash = "f98b3e39c24c2cbe626865abc41257a2a980d0f5c32e3491c5ec9ac1bef73c3f"
+hash = "d125f3d0738b59490af5eb365cfcfbd5f1beae4ef253ab811c1708836ab0668b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/overgeared/textures/gui/twoslot.png"
@@ -4961,27 +4961,27 @@ hash = "8c135ee0963d5b7b813fd72befeb324bd817667872a79ce63284098778ffc5f8"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/gui/container/crafter.png"
-hash = "e24bc7c466014d5db8926c60d3f3eb61ce61d828f1e0f5021b411f6e4f4053ae"
+hash = "07d1a87439e989c5b77ea93f1b37a7927b20d9cb28be468c6c2560de1f56855c"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/gui/container/feeding_trough.png"
-hash = "f4b42fdd2acc74cf10e39ba8dbf40a6ac27c614fae7930b862702080f1b2d110"
+hash = "d038b1870bf03407ce19beb903dcdb66d614e22a6fb9dc556a695347201b35d5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/gui/crate.png"
-hash = "30d75aa90be363c306b4980a95fb3dc674c51497a4f6719fd471ca7e0b9c97ee"
+hash = "a47aee8653996b56947d082593de1fd4cdcf6c84f3fd02c2da486addb8309420"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/gui/general_icons.png"
-hash = "2f6b5dc70a2ae598f1b8a93f98cc07d498c2ec1f032673059344c60649cd0306"
+hash = "c8d4c217142f03bcdb66186761cc0d6519d4ec7a032185c4a10c47b50904dccc"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/gui/jei_influence.png"
-hash = "04e7bfa81390ddb1dec30d27b545e15efb1850ce47e0aceff6924a0c6f7caddc"
+hash = "9c8cea7331d2abbf9f473a1acfeed01c97b68fe28776fb6437b3beea86c8d0c9"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/quark/textures/misc/backpack_gui.png"
-hash = "86cabf814e2d4e119d277a693b2f0880480e0c30eed8d90cfd717d4098920e9d"
+hash = "62f2290d11fb24c1109d2dcdfa4e52b2eb7bdbae9126efa624e146cd965ad484"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/questlog/textures/gui/quest_page.png"
@@ -5005,7 +5005,7 @@ hash = "f5232a47e29cb306ef21802279c5d8be2570eb1e9be4ba857df9581a4679571d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/cannon_gui.png"
-hash = "1100d8060b581955e3ffe4243854e743ca4f920557bda3989890ad2558cafef6"
+hash = "45e5888edfb4ef2a4221cd14dd3f05c4dcc6190314a37facacb23c9120cef5ff"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/cannon_icons.png"
@@ -5013,11 +5013,11 @@ hash = "fcc9eb6c2e796eb367484c9a0f660b0c37a8d1e87e8d849d6c563b5d4bfba030"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/lunch_basket_gui.png"
-hash = "87eb243c8d56ed47b70d307186fcecca7654d6223b5ecdd5220e8bc35ac56779"
+hash = "d0fa2e10254f833a6d26da487084b95c5b3c608480677cf0aa034446ad468e44"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/notice_board_gui.png"
-hash = "73dd1660c9b9b82a71bd49e0d1346dd007509e26cfe875a4585c4227bb3dd4ef"
+hash = "30e55cceb1789572c6a359ec910a570a59ae51fab9b9a162f85ad54b06e9b2b5"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/orange_trader1.png"
@@ -5025,15 +5025,15 @@ hash = "2042463862d3a0d4249d6f106d478878bbd37b9faeb903835c476f9d2f066f6b"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/present_empty_gui.png"
-hash = "3600cdbc495856aea677c40a2c1368f05f9fffbf835c364941204ef1b8a0a181"
+hash = "7c68a3ff7b7fcb90107479d4a662a4ad1db1eb8cfe3fbba7265a6f0174ef9ae6"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/present_gui.png"
-hash = "ac703a5f8cacb5c254154b4b38b41117540b3690c3bc39e4c42aea62c7c73ca0"
+hash = "61bc3eeb5240e49d34dec0fdd56ccbbba63dc48fd5a543a8b82e6f7939273909"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/pulley_block_gui.png"
-hash = "00cc13e65fddd5390c944f05265f2f21f11dd79c6838b599d948308f9bc21684"
+hash = "5860eec60caefec9f942c973d6b01639b8c5934ec7fb40f565c01e4cd6478bea"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/quiver_hud.png"
@@ -5045,7 +5045,7 @@ hash = "26fb55c45badca2d5024010c676b49ba06ff7e9f0c7865429784d36398f93019"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/sack_gui.png"
-hash = "87eb243c8d56ed47b70d307186fcecca7654d6223b5ecdd5220e8bc35ac56779"
+hash = "d0fa2e10254f833a6d26da487084b95c5b3c608480677cf0aa034446ad468e44"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/slot.png"
@@ -5153,11 +5153,11 @@ hash = "5d740edeab43a84970c628b9716ec141dd5da5a258ebf0eece601d9122449328"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/trapped_present_gui.png"
-hash = "66263dcf5bc8f5587fe609c3628ab7f677470b263865448eb8be6843789e9bd6"
+hash = "3ff09bb18e109c6184bfeb705309ecfb7fc9ea41c08927a9f809f7e28eebfb1d"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/variable_size_container_gui.png"
-hash = "87eb243c8d56ed47b70d307186fcecca7654d6223b5ecdd5220e8bc35ac56779"
+hash = "d0fa2e10254f833a6d26da487084b95c5b3c608480677cf0aa034446ad468e44"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/treechop/textures/gui/widgets.png"
