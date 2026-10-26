@@ -270,8 +270,10 @@ def draw_word(im, glyphs, word, cx, y0, pal):
         x += len(g) + 1
 
 
-def retitle(name, im, glyphs):
+def retitle(name, im, glyphs, plate):
+    """Redraws the titles of a texture in French; returns the plates' boxes."""
     px = im.load()
+    boxes = []
     if name in TITLES:
         word, box, rows = TITLES[name]
         pal, bg = plate_palette(im, box, rows)
@@ -280,6 +282,7 @@ def retitle(name, im, glyphs):
             for x in range(*box):
                 px[x, y] = bg
         draw_word(im, glyphs, word, (box[0] + box[1]) // 2, rows[0], pal)
+        boxes.append((box[0] - 8, 0, box[1] + 8, 15))
     if name in ("villager.png", "red_merchant.png", "orange_trader1.png"):
         bg = (133, 15, 50, 255)
         for y in range(5, 12):
@@ -287,36 +290,41 @@ def retitle(name, im, glyphs):
                 px[x, y] = bg
         pal = {"d": (255, 225, 122, 255), "m": (227, 167, 43, 255), "l": (84, 10, 36, 255)}
         draw_word(im, glyphs, "ÉCHANGES", 51, 6, pal)
-    if name == "orange_trader1.png":
-        offer(im)
+    if name in ("red_merchant.png", "orange_trader1.png"):
+        boxes.append(offer(im, glyphs, plate))
+    return boxes
 
 
-def offer(im):
-    """Supplementaries' orange trader: "TRADE OFFER" in white bold -> "OFFRE"."""
+def plate_template(furnace):
+    """GUI Revision's furnace title plate, recoloured, emptied of its letters."""
+    im = recolour(furnace.crop((53, 0, 123, 14)))
     px = im.load()
-    white = (255, 255, 255, 255)
-    cols = [[px[x, y] == white for y in range(10, 17)] for x in range(140, 225)]
-    glyphs, cur = [], []
-    for col in cols:
-        if any(col):
-            cur.append(col)
-        elif cur:
-            glyphs.append(cur)
-            cur = []
-    letters = dict(zip("TRADEOFFER", glyphs))
-    bg = px[141, 13]
-    for y in range(10, 17):
-        for x in range(140, 225):
-            px[x, y] = bg
+    for y in range(14):
+        for x in range(im.width):
+            if px[x, y][3] == 0:
+                px[x, y] = FILL + (255,)
+    return im
+
+
+def offer(im, glyphs, plate):
+    """Supplementaries' traders: the red "TRADE OFFER" box becomes a title plate "OFFRE"."""
+    px = im.load()
+    for y in range(4, 24):
+        for x in range(120, 249):
+            px[x, y] = FILL + (255,)
     word = "OFFRE"
-    width = sum(len(letters[c]) + 1 for c in word) - 1
-    x = 182 - width // 2
-    for c in word:
-        for i, col in enumerate(letters[c]):
-            for j, on in enumerate(col):
-                if on:
-                    px[x + i, 10 + j] = white
-        x += len(letters[c]) + 1
+    text = sum(len(glyphs[c]) + 1 for c in word) - 1
+    w = text + 28
+    x0, y0 = 183 - w // 2, 6
+    tp = plate.load()
+    mid = 7
+    for x in range(w):
+        sx = x if x < 4 else plate.width - (w - x) if x >= w - 4 else mid
+        for y in range(14):
+            px[x0 + x, y0 + y] = tp[sx, y]
+    pal = {"d": LUT[(85, 89, 89)] + (255,), "m": LUT[(85, 89, 89)] + (255,), "l": LUT[(218, 231, 230)] + (255,)}
+    draw_word(im, glyphs, word, x0 + w // 2, y0 + 4, pal)
+    return (x0 - 2, y0 - 2, x0 + w + 2, y0 + 16)
 
 
 # ---------------------------------------------------------------- details
@@ -353,13 +361,15 @@ def add_frieze(im, mask):
             px[x, y + top] = c + (255,)
 
 
-def add_pattern(im):
+def add_pattern(im, skip=()):
     px = im.load()
     ok = (FILL, SEED, SEED_LIGHT)
     for y in range(1, im.height - 1):
         for x in range(1, im.width - 1):
             c = SEED_TILE[y % 24][x % 24]
             if c == "." or px[x, y][:3] != FILL:
+                continue
+            if any(a <= x < c2 and b <= y < d for a, b, c2, d in skip):
                 continue
             if all(px[x + dx, y + dy][:3] in ok for dx in (-1, 0, 1) for dy in (-1, 0, 1)):
                 px[x, y] = (SEED if c == "s" else SEED_LIGHT) + (255,)
@@ -398,6 +408,8 @@ def main():
             glyphs.setdefault(k, [[("d" if r == "m" and name.startswith("enchanting") else r) for r in col]
                                   for col in g])
 
+    plate = plate_template(png(files[container + "furnace.png"]))
+
     if OUT.exists():
         shutil.rmtree(OUT / "assets", ignore_errors=True)
     OUT.mkdir(parents=True, exist_ok=True)
@@ -409,13 +421,14 @@ def main():
             dest.write_bytes(data)
             continue
         im = recolour(png(data))
+        plates = []
         if path.startswith(container):
-            retitle(path[len(container):], im, glyphs)
+            plates = retitle(path[len(container):], im, glyphs, plate)
             add_frieze(im, mask)
         elif path.startswith("assets/supplementaries/textures/gui/"):
-            retitle(path.rsplit("/", 1)[1], im, glyphs)
+            plates = retitle(path.rsplit("/", 1)[1], im, glyphs, plate)
         if big_panel(path, im):
-            add_pattern(im)
+            add_pattern(im, plates)
         im.save(dest)
 
     # vanilla-grey screens of the mods without a compat

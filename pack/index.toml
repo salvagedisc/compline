@@ -3405,7 +3405,7 @@ hash = "7c5636270e398ddc4287766e172b58c83a9f025c72e154051983ef0f759231ab"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/blast_furnace.png"
-hash = "235816900263898b52f9c99b3c9ea83d3f9defab373925d694ee47273fe9d52c"
+hash = "a0e990249bbbe34de73efba6894c610250555c0c77f8846a84f9d1abc77fc547"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/brewing_stand.png"
@@ -3441,7 +3441,7 @@ hash = "d7251db8b9920f316b93c036fe056451033beb7bd68da20a488fac8510a0042e"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/furnace.png"
-hash = "085b58b41c9c4a2bf18609eeb0c013eef7c2f96d4a72136984803e97710f2a99"
+hash = "e3816fa055bdee01b6aff45d369e4e2e65f7b9bda6415f21c239df918eca9caa"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/gamemode_switcher.png"
@@ -3481,7 +3481,7 @@ hash = "eca256b1b42391c8f743894615f258a07267b9abd6c4ebaad349f68a3f12d374"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/smoker.png"
-hash = "0865a6f905de25972df9f73e68ab0b8323ae4ad195023d5a84de4c4fd88747e0"
+hash = "a1b946b9023835cdf51257d9de263e854a49a33f9a213145b16aac75ee64faf8"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/minecraft/textures/gui/container/stonecutter.png"
@@ -5021,7 +5021,7 @@ hash = "aaec787d21da8586e8f7d5b540f3f4f1372fdf7a8a8e42302b8609d85a2b097f"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/orange_trader1.png"
-hash = "15571347faad6e081e5f43a2c635084b902018996df6438005147e4e5947548d"
+hash = "63bc952ff11c9c44955ed078b53de05b2904c58d4394ce48656733b2eaf39087"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/present_empty_gui.png"
@@ -5041,7 +5041,7 @@ hash = "0c287d400b9a3556cd721e8f9d24079cf039dec1c713879dc00f547295f45619"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/red_merchant.png"
-hash = "8f3e6974a3fad26011974ced00235bf3be84c28c557564b87197f0cafe8b4d2c"
+hash = "a09774c9726d5d720939ba0b0795fb8eab2796a795ae8ec358f09091a8538c87"
 
 [[files]]
 file = "resourcepacks/fallow-interface/assets/supplementaries/textures/gui/sack_gui.png"
