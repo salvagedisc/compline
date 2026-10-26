@@ -7,6 +7,6 @@ Ce pack est une adaptation pour Fallow de packs de ressources sous licence libre
 - **Hollow GUI** 2, par Melee (https://modrinth.com/resourcepack/hollow-gui), licence CC BY 4.0 : la frise du haut des panneaux.
 - **Questlog** (Infernal Studios, licence Apache-2.0) : le journal est redessiné pour Fallow dans le même style, aux tailles et aux zones des images d'origine.
 
-Modifications : couleurs de Fallow (brume, sauge, mousse), frise de Hollow GUI et motif de graines germées sur les panneaux, titres écrits dans les images refaits en français avec les lettres de GUI Revision, écrans gris de plusieurs mods recolorés dans les mêmes tons.
+Modifications : couleurs de Fallow (brume, sauge, mousse), frise de Hollow GUI, motif régulier de petites feuilles sur les panneaux, cases arrondies, écrans en bois ou violet ramenés aux mêmes tons, titres écrits dans les images refaits en français avec les lettres de GUI Revision, écrans gris de plusieurs mods recolorés dans les mêmes tons.
 
 Licence : comme GUI Revision, ce pack modifié est diffusé sous licence CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/). Il ne peut pas être utilisé à des fins commerciales.

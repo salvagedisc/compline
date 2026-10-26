@@ -2,12 +2,11 @@
 
 Called by build.py. The rest of the pack comes from GUI Revision; this file
 draws the Questlog sheets in the same light, misty style so the journal
-matches the containers: mist panels sown with sprouting seeds, sage trims
+matches the containers: mist panels (build.py adds the leaf pattern), sage trims
 with curled corners, raised sage tiles, linen pages, lantern light for
 whatever is selected or hovered. Sizes and UV regions follow Questlog's own
 textures (Apache-2.0) so the mod keeps placing text and buttons as expected.
 """
-import random
 from pathlib import Path
 
 from PIL import Image
@@ -19,7 +18,6 @@ T = (0, 0, 0, 0)
 EDGE = (26, 31, 28)
 SLATE_D = (166, 170, 150)
 SLATE = (203, 202, 182)
-SLATE_SEED = (184, 184, 162)
 SLATE_L = (232, 229, 208)
 # sage trims
 BONE_D = (106, 117, 104)
@@ -34,7 +32,6 @@ TILE_H = (190, 196, 174)
 PAGE_D = (196, 194, 172)
 PAGE = (232, 229, 210)
 PAGE_L = (242, 240, 226)
-PAGE_SEED = (224, 220, 200)
 INK = (40, 46, 40)
 INK_FADED = (132, 136, 116)
 # lantern light
@@ -131,34 +128,6 @@ def paint(cv, mask, fill, edge=EDGE, light=None, dark=None, light2=None, open_bo
     return border
 
 
-# --- the sown pattern: sprouting seeds, staggered, a few levels above the ground
-SEED_TILE = [
-    "................",
-    "..s.s...........",
-    "...s............",
-    "..ooo...........",
-    "...o............",
-    "................",
-    "................",
-    "................",
-    "..........s.s...",
-    "...........s....",
-    "..........ooo...",
-    "...........o....",
-    "................",
-    "................",
-    "................",
-    "................",
-]
-
-
-def sown(ground, seed, dx=0, dy=0):
-    def f(x, y):
-        ch = SEED_TILE[(y + dy) % 16][(x + dx) % 16]
-        return seed if ch != "." else ground
-    return f
-
-
 def trim_frame(cv, x0, y0, x1, y1, r=4):
     """Bone trim running 3 px inside a panel, with curled corners."""
     m = rr(x0 + 3, y0 + 3, x1 - 3, y1 - 3, max(1, r - 2))
@@ -175,7 +144,7 @@ def trim_frame(cv, x0, y0, x1, y1, r=4):
 
 
 def panel(cv, x0, y0, x1, y1, r=4, trim=True):
-    paint(cv, rr(x0, y0, x1, y1, r), sown(SLATE, SLATE_SEED), EDGE, SLATE_L, SLATE_D)
+    paint(cv, rr(x0, y0, x1, y1, r), SLATE, EDGE, SLATE_L, SLATE_D)
     if trim:
         trim_frame(cv, x0, y0, x1, y1, r)
 
@@ -223,12 +192,11 @@ def book_panel(page_tone):
     """275x166 nine-slice panel (border 16) at (375, 174) of a 1024x512 sheet."""
     cv = Canvas(1024, 512)
     x0, y0, x1, y1 = 375, 174, 375 + 274, 174 + 165
-    paint(cv, rr(x0, y0, x1, y1, 5), sown(SLATE, SLATE_SEED), EDGE, SLATE_L, SLATE_D)
+    paint(cv, rr(x0, y0, x1, y1, 5), SLATE, EDGE, SLATE_L, SLATE_D)
     trim_frame(cv, x0, y0, x1, y1, 5)
     # the page, rounded and sunk into the cover
     px0, py0, px1, py1 = x0 + 7, y0 + 7, x1 - 7, y1 - 7
-    seed = shade(page_tone, -6)
-    paint(cv, rr(px0, py0, px1, py1, 3), sown(page_tone, seed, 5, 3), EDGE,
+    paint(cv, rr(px0, py0, px1, py1, 3), page_tone, EDGE,
           shade(page_tone, -22), shade(page_tone, 10))
     for (cx, cy, fx, fy) in ((px0 + 3, py0 + 3, 1, 1), (px1 - 3, py0 + 3, -1, 1),
                              (px0 + 3, py1 - 3, 1, -1), (px1 - 3, py1 - 3, -1, -1)):
@@ -258,7 +226,7 @@ def peripherals():
     # toast: area 160x32 at (94, 11)
     tx, ty = 81 + 13, 2 + 9
     panel(cv, tx, ty, tx + 159, ty + 31, r=4, trim=False)
-    paint(cv, rr(tx + 4, ty + 4, tx + 155, ty + 27, 2), sown(PAGE_L, PAGE_SEED, 3, 1), EDGE,
+    paint(cv, rr(tx + 4, ty + 4, tx + 155, ty + 27, 2), PAGE_L, EDGE,
           PAGE_D, shade(PAGE_L, 8))
     cv.set(tx + 2, ty + 2, BONE)
     cv.set(tx + 157, ty + 2, BONE)
@@ -368,7 +336,7 @@ ICONS = {
 def tab_buttons():
     cv = Canvas(256, 256)
     for hot, ox in ((False, 2), (True, 62)):
-        paint(cv, rr(ox + 15, 2 + 19, ox + 42, 2 + 40, 4), sown(SLATE_L if hot else SLATE, SLATE_SEED),
+        paint(cv, rr(ox + 15, 2 + 19, ox + 42, 2 + 40, 4), SLATE_L if hot else SLATE,
               EDGE, BONE_D if hot else SLATE_L, SLATE_D)
         for y in range(2 + 37, 2 + 41):
             for x in range(ox + 15, ox + 43):
@@ -376,7 +344,7 @@ def tab_buttons():
         lens(cv, ox + 22, 2 + 22, hot)
     for hot, oy in ((False, 59), (True, 116)):
         bx = 2
-        paint(cv, rr(bx + 30, oy + 19, bx + 222, oy + 40, 4), sown(SLATE_L if hot else SLATE, SLATE_SEED, 7, 0),
+        paint(cv, rr(bx + 30, oy + 19, bx + 222, oy + 40, 4), SLATE_L if hot else SLATE,
               EDGE, BONE_D if hot else SLATE_L, SLATE_D)
         for y in range(oy + 37, oy + 41):
             for x in range(bx + 30, bx + 223):

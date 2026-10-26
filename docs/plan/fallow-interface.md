@@ -24,9 +24,12 @@ Licence of the result: CC BY-NC-SA 4.0, like GUI Revision. Fallow must therefore
 What the script changes:
 
 - **Colours.** GUI Revision uses a handful of greys; each one maps to Fallow's palette: mist panels `#CBCAB6`, sage slots `#828C7A`, bone highlights `#E8E5D0`, moss darks and outline `#1A1F1C`.
-- **Details.** Hollow GUI's frieze is laid along the top of every 176-pixel vanilla panel, behind slots and title plates. Every large panel gets a faint pattern of sprouting seeds (the fallow field), one shade from the panel.
+- **Screens in other colours.** GUI Revision paints a few vanilla screens in wood or purple (crafting table, loom, cartography table, enchanting table, shulker box); they are first brought back to its greys, so that they take the same palette. The same goes for Chipped's workbench and Quark's backpack, whose leather pocket becomes a darker mist pocket with bone stitches.
+- **Slots.** Every slot (vanilla, compats and recoloured mods, the hotbar too) is redrawn as a rounded well: dark moss outline, a two-row shadow at the top, a light bottom edge. A placeholder drawn inside a slot (the loom's banner and dye) is kept.
+- **Details.** Hollow GUI's frieze is laid along the top of every 176-pixel vanilla panel, behind slots and title plates. Every large panel gets a regular, staggered pattern of small leaves (every 12 pixels), one shade from the panel, kept clear of slots, plates and edges.
+- **Highlights.** The selected hotbar slot and the offhand slot lose GUI Revision's gold for the Questlog's lantern light; the traders' crimson and gold banner becomes moss and bone.
 - **Titles.** GUI Revision hides the game's container titles (`container.*` and `merchant.trades` set to a blank) and draws a few titles into the textures. The blanks are kept in `fr_fr` and `en_us`, and the drawn titles are redone in French with the letters cut from GUI Revision's own plates: FOURNEAU, HAUT FOURNEAU, FUMOIR, ÉTABLI, ENCHANTEMENT, ÉCHANGES. The same goes for Supplementaries' traders: ÉCHANGES on the banner, and their red "TRADE OFFER" box with warning signs becomes a GUI Revision title plate reading OFFRE.
-- **Other mods.** Screens of mods without a compat that use vanilla's greys (Envelope, Kaleidoscope Cookery, Alex's Mobs, Mowzie's Mobs, No Man's Land, hamsters, Companions!, Critters and Companions, TreeChop) are recoloured in the same tones. Create and its addons keep their own style, as do the config libraries and the books (Patchouli, Modonomicon, Wildex).
+- **Other mods.** Screens of mods without a compat that use vanilla's greys (Envelope, Kaleidoscope Cookery, Alex's Mobs, Mowzie's Mobs, No Man's Land, hamsters, Companions!, Critters and Companions, TreeChop) are recoloured in the same tones; the greys a mod adds of its own follow the same ramp. Create and its addons keep their own style, as do the config libraries and the books (Patchouli, Modonomicon, Wildex).
 - **Questlog.** `scripts/interface/questlog.py` draws the journal in the same light style: mist cover with sage trims and curled corners, linen pages, sage tiles, lantern light for what is selected, the search bar written « Rechercher ».
 
 ## Order
@@ -43,4 +46,4 @@ Default Options enables it above the Fresh Animations packs and below Supernova 
 
 ## History
 
-Before this pack, two drawn-from-scratch iterations (2026-10-19, then two on 2026-10-26: leather and parchment, then moss slate) were found not clean enough; the maintainer then asked to start from a free-licensed pack, and picked the GUI Revision + Hollow GUI mix.
+Before this pack, two drawn-from-scratch iterations (2026-10-19, then two on 2026-10-26: leather and parchment, then moss slate) were found not clean enough; the maintainer then asked to start from a free-licensed pack, and picked the GUI Revision + Hollow GUI mix. A first review then asked for a regular background pattern instead of scattered details, rounder slots, and every screen in harmony: hence the leaf pattern, the rounded slots and the greyed screens.
