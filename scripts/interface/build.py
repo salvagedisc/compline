@@ -1,7 +1,7 @@
 """Builds the fallow-interface resource pack from free-licensed packs.
 
 Base: GUI Revision by Vixel and GUI Revision Compats by Fyoncle (both
-CC BY-NC-SA 4.0), with the top frieze of Hollow GUI by Melee (CC BY 4.0).
+CC BY-NC-SA 4.0), with two curls from Hollow GUI by Melee (CC BY 4.0).
 The script downloads the pinned releases, keeps the files that concern
 vanilla and the mods of the pack, and adapts them to Fallow:
 
@@ -13,8 +13,9 @@ vanilla and the mods of the pack, and adapts them to Fallow:
 - slots: redrawn over their whole cell as wells with rounded corners and a
   soft shadow inside; deeper wells with a fine grain where creatures stand;
 - arrows: one slim engraved arrow, the progress one in lantern light;
-- details: Hollow GUI's frieze along the top of vanilla panels and a tight
-  pattern of small leaves over every large panel;
+- details: the crafting table's ornaments (GUI Revision's corners and two
+  curls from Hollow GUI's frieze) on every large panel, and one tight pattern
+  of small leaves on a grid shared by all screens, passing under the slots;
 - HUD: the hotbar as a bar with rounded ends;
 - mods without a GUI Revision compat: their vanilla-grey screens, read from
   the jars cached by `npm run check-fr`, take the same colours, their own
@@ -464,14 +465,6 @@ def frieze_mask(hollow):
     return mask
 
 
-def frieze_top(im):
-    """First row of a 176-wide panel, or None."""
-    px = im.load()
-    w = min(im.width, 180)
-    return next((y for y in range(min(im.height, 40))
-                 if 168 <= sum(px[x, y][3] > 0 for x in range(w)) <= 178), None)
-
-
 def frieze_parts(mask):
     """The frieze's ornaments (8-connected pieces of the mask), each with its mirror."""
     seen, parts = set(), []
@@ -494,35 +487,94 @@ def frieze_parts(mask):
     return [(part, parts[len(parts) - 1 - i]) for i, part in enumerate(parts)]
 
 
-def add_frieze(im, mask, slots=()):
-    """Along the top of a 176-wide panel. An ornament that would meet a slot or leave
-    the bare panel is left out whole, together with its mirror, so that no ornament
-    is ever cut and the frieze stays symmetrical."""
+def ornaments(crafting, mask):
+    """The crafting table's decoration, laid on every panel: GUI Revision's corner
+    ornament (its top-left one, mirrored for the other corners) and the two curls
+    from the middle of Hollow GUI's frieze. Positions are relative to the panel's
+    inside: corners 2 pixels in from the side and 1 from the top or bottom, the
+    curls hanging from the top, centred."""
+    px = crafting.load()
+    corner = {(x - 4, y - 5): px[x, y][:3] for y in range(5, 14) for x in range(4, 13)
+              if px[x, y][:3] != FILL}
+    pieces = frieze_parts(mask)
+    middle = pieces[len(pieces) // 2 - 1][0] + pieces[len(pieces) // 2][0]
+    left = min(x for x, y in middle)
+    width = max(x for x, y in middle) - left + 1
+    top = min(y for x, y in middle)
+    curls = {(x - left, y - top): mask[(x, y)] for x, y in middle}
+    return corner, curls, width
+
+
+def panel_inside(im):
+    """Bounding box (x0, y0, x1, y1, inclusive) of the largest stretch of bare panel
+    (leaves included), or None when the texture has no panel large enough to dress."""
     px = im.load()
-    top = frieze_top(im)
-    if top is None:
+    width, height = im.size
+    bare = {FILL + (255,), LEAF_TONE + (255,)}
+    seen, best = set(), None
+    for y in range(height):
+        for x in range(width):
+            if (x, y) in seen or px[x, y] not in bare:
+                continue
+            todo, n = [(x, y)], 0
+            seen.add((x, y))
+            x0 = x1 = x
+            y0 = y1 = y
+            while todo:
+                i, j = todo.pop()
+                n += 1
+                x0, x1, y0, y1 = min(x0, i), max(x1, i), min(y0, j), max(y1, j)
+                for k, l in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
+                    if 0 <= k < width and 0 <= l < height and (k, l) not in seen and px[k, l] in bare:
+                        seen.add((k, l))
+                        todo.append((k, l))
+            if n >= 2000 and x1 - x0 >= 100 and y1 - y0 >= 20 and (best is None or n > best[0]):
+                best = (n, (x0, y0, x1, y1))
+    return best and best[1]
+
+
+def add_ornaments(im, decoration):
+    """Lays each ornament where it finds bare panel (the leaf pattern counts as bare),
+    with one pixel of panel kept clear around it; an ornament that would touch a
+    slot or an edge is left out whole."""
+    inside = panel_inside(im)
+    if inside is None:
         return
+    corner, curls, width = decoration
+    x0, y0, x1, y1 = inside
+    cw = max(u for u, v in corner) + 1
+    ch = max(v for u, v in corner) + 1
+    placed = [
+        {(x0 + 2 + u, y0 + 1 + v): c for (u, v), c in corner.items()},
+        {(x1 - 2 - u, y0 + 1 + v): c for (u, v), c in corner.items()},
+        {(x0 + 2 + u, y1 - 1 - v): c for (u, v), c in corner.items()},
+        {(x1 - 2 - u, y1 - 1 - v): c for (u, v), c in corner.items()},
+        {((x0 + x1 + 1 - width) // 2 + u, y0 + v): c for (u, v), c in curls.items()},
+    ]
+    if y1 - y0 < 2 * ch + 6:  # a low strip of panel: the curls only
+        placed = placed[4:]
+    px = im.load()
+    bare = (FILL, LEAF_TONE)
 
-    def clear(part):
-        for x, y in part:
-            if px[x, y + top][:3] not in (FILL, VANILLA_EDGES[(255, 255, 255)]):
-                return False
-            if any(a - 1 <= x <= a + w and b - 1 <= y + top <= b + h for a, b, w, h in slots):
-                return False
-        return True
+    def free(p):
+        return 0 <= p[0] < im.width and 0 <= p[1] < im.height and px[p][:3] in bare and px[p][3]
 
-    kept = [part for part, mirror in frieze_parts(mask) if clear(part) and clear(mirror)]
-    for part in kept:
-        for x, y in part:
-            if px[x, y + top][:3] == FILL:  # the ornaments hang from the panel's light top edge
-                px[x, y + top] = mask[(x, y)] + (255,)
+    for stamp in placed:
+        halo = {(x + a, y + b) for x, y in stamp for a in (-1, 0, 1) for b in (-1, 0, 1)} - set(stamp)
+        if x1 - x0 < 2 * cw + 8 or not all(free(p) for p in stamp) or not all(
+                free(p) or p[1] < y0 for p in halo):
+            continue
+        for p in halo:
+            if free(p):
+                px[p] = FILL + (255,)
+        for p, c in stamp.items():
+            px[p] = c + (255,)
 
 
 def add_pattern(im):
-    """The leaf repeated over every large stretch of bare panel, on one grid anchored
-    to the texture's corner so that the spacing is the same everywhere. Only whole
-    leaves are drawn, each with one pixel of bare panel all around: a leaf never
-    touches or is cut by a slot, the frieze or an edge."""
+    """The leaf, repeated tone on tone over every large stretch of bare panel on one
+    grid anchored to the texture's corner: the same pattern everywhere, passing
+    under the slots and the ornaments drawn over it."""
     px = im.load()
     width, height = im.size
     fill = FILL + (255,)
@@ -544,14 +596,12 @@ def add_pattern(im):
             if len(region) >= 300:
                 bare.update(region)
     pw, ph = LEAF_PITCH
-    lw, lh = len(LEAF[0]), len(LEAF)
-    ink = [(u, v) for v, row in enumerate(LEAF) for u, c in enumerate(row) if c == "#"]
-    for row in range(height // ph + 1):
-        y0 = row * ph
-        for x0 in range(pw // 2 if row % 2 else 0, width, pw):
-            if all((x0 + i, y0 + j) in bare for j in range(-1, lh + 1) for i in range(-1, lw + 1)):
-                for u, v in ink:
-                    px[x0 + u, y0 + v] = LEAF_TONE + (255,)
+    for i, j in bare:
+        row = j // ph
+        u = (i - (pw // 2 if row % 2 else 0)) % pw
+        v = j % ph
+        if v < len(LEAF) and u < len(LEAF[0]) and LEAF[v][u] == "#":
+            px[i, j] = LEAF_TONE + (255,)
 
 
 # ---------------------------------------------------------------- slots
@@ -685,12 +735,12 @@ def draw_slot(im, x, y, w, h, shape="square", around=FILL + (255,)):
                 c = EDGE_FADE if (up and i >= w - 5) or (left and j >= h - 5) else edge_top
             elif down or right:
                 c = EDGE_LOW
+            elif deep:
+                c = WELL_GRAIN[(x + i + y + j) % 2]
             elif not inside(i, j - 2):
                 c = SHADE[0]
             elif not inside(i, j - 3):
                 c = SHADE[1]
-            elif deep:
-                c = WELL_GRAIN[(x + i + y + j) % 2]
             elif before[i, j] != ground and max(w, h) <= 18:
                 c = before[i, j][:3]
             else:
@@ -876,6 +926,11 @@ def main():
                 files[f"assets/{m.group(1)}/{m.group(2)}"] = compats.read(n)
 
     container = "assets/minecraft/textures/gui/container/"
+    crafting = png(files[container + "crafting_table.png"])
+    clear_plate(crafting)
+    greyify(crafting)
+    recolour(crafting)
+    decoration = ornaments(crafting, mask)
     furnace = png(files[container + "furnace.png"])
     anvil = png(files[container + "anvil.png"])
     progress = png(files["assets/minecraft/textures/gui/sprites/container/furnace/burn_progress.png"])
@@ -934,14 +989,13 @@ def main():
         slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
         spaced = separate(slots + [w[:4] for w in wells])
         slots, wells = spaced[:len(spaced) - len(wells)], [c + w[4:] for c, w in zip(spaced[len(spaced) - len(wells):], wells)]
-        if vanilla:
-            add_frieze(im, mask, slots + [w[:4] for w in wells])
         for x, y, w, h in slots:
             draw_slot(im, x, y, w, h)
         for x, y, w, h, shape in wells:
             draw_slot(im, x, y, w, h, shape)
         if big_panel(path, im):
             add_pattern(im)
+            add_ornaments(im, decoration)
         im.save(dest)
 
     # vanilla-grey screens of the mods without a compat
@@ -975,6 +1029,7 @@ def main():
                         draw_slot(im, x, y, w, h, "creature")
                     if big_panel(n, im):
                         add_pattern(im)
+                        add_ornaments(im, decoration)
                     dest = OUT / n
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     im.save(dest)
