@@ -2,7 +2,7 @@ type = fancymenu_layout
 
 layout-meta {
   identifier = title_screen
-  render_custom_elements_behind_vanilla = false
+  render_custom_elements_behind_vanilla = true
   last_edited_time = 1790000000000
   is_enabled = true
   randommode = false
@@ -13,6 +13,47 @@ layout-meta {
 }
 
 layout_action_executable_blocks {
+}
+
+element {
+  source = [source:local]/config/fancymenu/assets/fallow_veil.png
+  repeat_texture = false
+  nine_slice_texture = false
+  nine_slice_texture_border_x = 5
+  nine_slice_texture_border_y = 5
+  image_tint = #FFFFFF
+  restart_animated_on_menu_load = false
+  element_type = image
+  instance_identifier = 7dc065f9-fc7f-7cad-ad93-2713af1bba76-1790000000000
+  appearance_delay = no_delay
+  appearance_delay_seconds = 1.0
+  fade_in_v2 = no_fading
+  fade_in_speed = 1.0
+  fade_out = no_fading
+  fade_out_speed = 1.0
+  base_opacity = 1.0
+  auto_sizing = false
+  auto_sizing_base_screen_width = 0
+  auto_sizing_base_screen_height = 0
+  sticky_anchor = false
+  anchor_point = top-left
+  x = 0
+  y = 0
+  width = 320
+  height = 180
+  stretch_x = true
+  stretch_y = true
+  stay_on_screen = true
+  element_loading_requirement_container_identifier = edc06097-5fe9-228c-6377-0d1f3c338a07-1790000000000
+  [loading_requirement_container_meta:edc06097-5fe9-228c-6377-0d1f3c338a07-1790000000000] = [groups:][instances:]
+  enable_parallax = false
+  parallax_intensity_v2 = 0.5
+  invert_parallax = false
+  animated_offset_x = 0
+  animated_offset_y = 0
+  load_once_per_session = false
+  in_editor_color = #FFC800FF
+  layer_hidden_in_editor = false
 }
 
 element {
@@ -38,7 +79,7 @@ element {
   sticky_anchor = false
   anchor_point = top-centered
   x = -135
-  y = 18
+  y = 12
   width = 270
   height = 82
   stretch_x = false

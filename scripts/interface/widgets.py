@@ -3,9 +3,10 @@ fields and scrollers, the recipe book's toggles and the lists' arrows.
 
 Raised parts (buttons, the slider's knob, the scroller's thumb, tabs) are sage
 with a moss outline, rounded corners, a bone light on top and a shadow below;
-the buttons carry an engraved leaf at each end. Recessed parts (the slider's
-track, checkboxes, text fields) are moss wells with a shadow under their top
-edge, like the slots. What the pointer is on glows in the lantern's light.
+the buttons carry an engraved inner frame with a rivet at each end. Recessed
+parts (the slider's track, checkboxes, text fields) are moss wells with a
+shadow under their top edge, like the slots. What the pointer is on lights up:
+a button filled with the lantern's warm light, a well's outline lit.
 
 Called by build.py once the rest of the pack is built.
 """
@@ -25,8 +26,8 @@ LANTERN_L = (248, 214, 140)
 RAISED = {
     "normal": (OUTLINE, (150, 160, 138), (104, 116, 100), (92, 104, 89), (72, 82, 70), (60, 69, 59),
                (80, 92, 78), (124, 134, 116)),
-    "highlighted": (LANTERN_EDGE, LANTERN_L, (118, 130, 110), (104, 116, 98), (80, 90, 76), (66, 74, 62),
-                    LANTERN_D, LANTERN),
+    "highlighted": (LANTERN_EDGE, LANTERN_L, (204, 142, 64), (176, 112, 48), (150, 92, 38), (128, 78, 32),
+                    (150, 94, 40), (232, 180, 100)),
     "disabled": ((44, 50, 46), (82, 90, 80), (74, 82, 72), (70, 78, 68), (62, 70, 60), (56, 63, 55),
                  (66, 74, 64), (78, 86, 76)),
 }
@@ -113,6 +114,12 @@ def raised(w, h, state, leaves=False, bottom=True):
             px[x0, y] = leaf + (255,)
             px[x0 + 1, y] = leaf_light + (255,) if y > y0 and y < y1 - 1 and y != y0 + 1 else px[x0 + 1, y]
             px[x1, y] = leaf_light + (255,)
+        # a rivet at each end, inside the frame
+        cy = h // 2
+        for cx in (7, w - 8):
+            for dx, dy in ((0, -1), (-1, 0), (1, 0), (0, 1)):
+                px[cx + dx, cy + dy - 1] = leaf + (255,)
+            px[cx, cy - 1] = leaf_light + (255,)
     return im
 
 
