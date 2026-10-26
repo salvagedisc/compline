@@ -29,7 +29,9 @@ vanilla and the mods of the pack, and adapts them to Fallow:
 - widgets: buttons, sliders, checkboxes, tabs, text fields and scrollers are
   drawn anew by widgets.py;
 - menus: their shading and separators in moss and bone, and the title
-  screen's panorama, a pine forest in the mist, drawn here;
+  screen's panorama, a pine forest in the mist, drawn here; the Fallow logo
+  and the FancyMenu and Drippy layouts of the title and loading screens are
+  written by menus.py;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
 Only textures the game or a mod of the pack reads are kept: compat files
@@ -54,6 +56,7 @@ from pathlib import Path
 
 from PIL import Image
 
+import menus
 import questlog
 import widgets
 
@@ -1791,6 +1794,7 @@ def main():
         im = Image.open(f).convert("RGBA")
         add_pattern(im)
         im.save(f)
+    menus.draw(ROOT / "pack" / "config")
 
     # every coordinate table must still find its texture
     named = [*MOD_ARROWS, *REFRAMED, *MOD_SLOTS, *LEFTOVERS, *GREYED_COMPATS, *TOUCH_UPS, *SPRITE_MODES,

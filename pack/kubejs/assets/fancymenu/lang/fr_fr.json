@@ -1,0 +1,7 @@
+{
+  "fancymenu.actions.screens.finish.no_action_selected": "§xChoisissez d'abord une action !",
+  "fancymenu.elements.browser.rinku_initializing.line_1": "Le navigateur démarre...",
+  "fancymenu.elements.browser.rinku_initializing.line_2": "Attente de la fin du démarrage de Rinku.",
+  "fancymenu.elements.browser.rinku_failed.line_1": "Échec du démarrage du navigateur !",
+  "fancymenu.elements.browser.rinku_failed.line_2": "Consultez le journal du jeu pour en savoir plus."
+}

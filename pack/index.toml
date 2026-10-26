@@ -53,6 +53,26 @@ file = "config/enhancedcelestials2core/translations.json"
 hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
 
 [[files]]
+file = "config/fancymenu/assets/fallow_logo.png"
+hash = "43bf850d3c5f70c0995e25241bbec8a050a269082991d99f2d69c670e3889edd"
+
+[[files]]
+file = "config/fancymenu/customizablemenus.txt"
+hash = "070c2b267eb3b627dec3bd793b84d326d1b689457a741945eba43d50292eebb0"
+
+[[files]]
+file = "config/fancymenu/customization/fallow_loading_screen.txt"
+hash = "6ce4404e7abc83ef8327294cd5bcad1754a012b14320a68e2f8e3c8cc0e8d147"
+
+[[files]]
+file = "config/fancymenu/customization/fallow_title_screen.txt"
+hash = "109c764d020eb03c6d5975816265579b3517d70c4737ec86cd9c8f70ffbbbfa9"
+
+[[files]]
+file = "config/fancymenu/options.txt"
+hash = "6975be9194248b1c650cdf3a2d038e5e9628abcece1b95767196f82086fdab8f"
+
+[[files]]
 file = "config/friendsandfoes.json"
 hash = "318350044ec18dec4ff71520a86c870edc4ad2f041f41fc4c7900293c1154baf"
 
@@ -737,6 +757,10 @@ file = "kubejs/assets/distanthorizons/lang/fr_fr.json"
 hash = "15306e269324328ca774459385fe69208bed01f4b094d0f2e7c9238612a6e4a0"
 
 [[files]]
+file = "kubejs/assets/drippyloadingscreen/lang/fr_fr.json"
+hash = "8d46b1c383637ad621d243c4108efceedc904e68f13afb39861d063557d926d3"
+
+[[files]]
 file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
 hash = "ec7c8c515cbe1bfcaea11cedbc9404f7c1cdadb29fe337b0e41e35d8d62afb07"
 
@@ -831,6 +855,10 @@ hash = "beeba947c6faf2befd3a533729c53196134bc034f3ce47e055c0b101282daab9"
 [[files]]
 file = "kubejs/assets/fallow/lang/fr_fr.json"
 hash = "041b5cae75f9e034a5323b76b68ee885715ddb2cc1a11f93f2e9b2e50e5ddd50"
+
+[[files]]
+file = "kubejs/assets/fancymenu/lang/fr_fr.json"
+hash = "926d0de4f9ee2cbef1db5f8a8c01f5962e5ba5629adc9d44ecec071d025019f5"
 
 [[files]]
 file = "kubejs/assets/farm_and_charm/lang/en_us.json"
@@ -1740,6 +1768,11 @@ hash = "0c20fea3407ed0db85b4b171f1820a24987f2659946fadd30bae044205041b09"
 metafile = true
 
 [[files]]
+file = "mods/drippy-loading-screen.pw.toml"
+hash = "d89b50af502aab4416e07fa8f92433a18fac11285fe1c39ebccea610dbfdd1e7"
+metafile = true
+
+[[files]]
 file = "mods/dynamic-fps.pw.toml"
 hash = "ae6fd52d8bdcbeca5bbe6db840f22f92c1928fe0fda22017b19612b9b00a245a"
 metafile = true
@@ -1797,6 +1830,11 @@ metafile = true
 [[files]]
 file = "mods/fallow-0.4.1.jar"
 hash = "b5988694f4cffa21b83e00727570ad69f843835095f365517146bc8cac5bc135"
+
+[[files]]
+file = "mods/fancymenu.pw.toml"
+hash = "88afe523b3bc1fed6bd53b6608f0450e9891c8fe25e786a9893243064f8c7e7f"
+metafile = true
 
 [[files]]
 file = "mods/ferrite-core.pw.toml"
@@ -1904,6 +1942,11 @@ hash = "0d575a23218100cd338dbb0fd673fe176d2c33279c7f2edb96d4ac7c1fb8890d"
 metafile = true
 
 [[files]]
+file = "mods/konkrete.pw.toml"
+hash = "5707b722541648df013644f3b4d50083c77965d536f219df9fac5026f6103777"
+metafile = true
+
+[[files]]
 file = "mods/kotlin-for-forge.pw.toml"
 hash = "712a69b3569a8055979de6eea262068535fe182dffb3833e53e5833e9cbf9766"
 metafile = true
@@ -1961,6 +2004,11 @@ metafile = true
 [[files]]
 file = "mods/mcqoy.pw.toml"
 hash = "604b7674b96d10b2c9f03e47a91ec50b448e8193de56f36fca93b5ff0f3132f6"
+metafile = true
+
+[[files]]
+file = "mods/melody.pw.toml"
+hash = "9dff522b00f5269538d0351536f34b22384996de30be454ef1369f1b1e5c1aeb"
 metafile = true
 
 [[files]]
