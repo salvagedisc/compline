@@ -197,10 +197,17 @@ EXTRA_SLOTS = {
     "loom.png": [(13, 26), (33, 26), (23, 45), (143, 58)],
     "cartography_table.png": [(15, 15), (15, 52), (145, 39)],
 }
-# Large wells (cell x, y, w, h): where the player and the mount stand, with a fine grain.
+# Large wells (cell x, y, w, h), by vanilla file name or full path: where the player and
+# the mount stand, with a fine grain.
 WELLS = {
-    "inventory.png": [(25, 7, 51, 72, "creature")],
+    "inventory.png": [(27, 7, 48, 72, "creature")],
     "horse.png": [(26, 16, 53, 55, "creature"), (79, 16, 90, 55, "square")],
+    "tab_inventory.png": [(72, 4, 34, 46, "creature")],
+    "assets/quark/textures/misc/backpack_gui.png": [(27, 7, 48, 72, "creature")],
+}
+# Leftovers of the vanilla frame a compat left outside its own (x0, y0, x1, y1): cleared.
+LEFTOVERS = {
+    "assets/farm_and_charm/textures/gui/silo.png": [(0, 85, 4, 138), (172, 85, 176, 138)],
 }
 # Small arrows GUI Revision paints in wood: the box to clear, the arrow's centre.
 WOOD_ARROWS = {
@@ -465,32 +472,65 @@ def frieze_top(im):
                  if 168 <= sum(px[x, y][3] > 0 for x in range(w)) <= 178), None)
 
 
-def add_frieze(im, mask):
-    """Along the top of a 176-wide panel, behind the slots."""
+def frieze_parts(mask):
+    """The frieze's ornaments (8-connected pieces of the mask), each with its mirror."""
+    seen, parts = set(), []
+    for p in sorted(mask):
+        if p in seen:
+            continue
+        todo, part = [p], []
+        seen.add(p)
+        while todo:
+            x, y = todo.pop()
+            part.append((x, y))
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    q = (x + dx, y + dy)
+                    if q in mask and q not in seen:
+                        seen.add(q)
+                        todo.append(q)
+        parts.append(part)
+    parts.sort(key=min)
+    return [(part, parts[len(parts) - 1 - i]) for i, part in enumerate(parts)]
+
+
+def add_frieze(im, mask, slots=()):
+    """Along the top of a 176-wide panel. An ornament that would meet a slot or leave
+    the bare panel is left out whole, together with its mirror, so that no ornament
+    is ever cut and the frieze stays symmetrical."""
     px = im.load()
     top = frieze_top(im)
     if top is None:
         return
-    for (x, y), c in mask.items():
-        if px[x, y + top][:3] == FILL:
-            px[x, y + top] = c + (255,)
+
+    def clear(part):
+        for x, y in part:
+            if px[x, y + top][:3] not in (FILL, VANILLA_EDGES[(255, 255, 255)]):
+                return False
+            if any(a - 1 <= x <= a + w and b - 1 <= y + top <= b + h for a, b, w, h in slots):
+                return False
+        return True
+
+    kept = [part for part, mirror in frieze_parts(mask) if clear(part) and clear(mirror)]
+    for part in kept:
+        for x, y in part:
+            if px[x, y + top][:3] == FILL:  # the ornaments hang from the panel's light top edge
+                px[x, y + top] = mask[(x, y)] + (255,)
 
 
-def frieze_band(im, vanilla):
-    top = frieze_top(im) if vanilla else None
-    return [] if top is None else [(0, top, 176, top + 14)]
-
-
-def add_pattern(im, skip=()):
-    """The leaf repeated over every large stretch of bare panel, at the same spacing
-    everywhere; slots, wells and the frieze stay clear."""
+def add_pattern(im):
+    """The leaf repeated over every large stretch of bare panel, on one grid anchored
+    to the texture's corner so that the spacing is the same everywhere. Only whole
+    leaves are drawn, each with one pixel of bare panel all around: a leaf never
+    touches or is cut by a slot, the frieze or an edge."""
     px = im.load()
     width, height = im.size
+    fill = FILL + (255,)
+    bare = set()
     seen = set()
-    pw, ph = LEAF_PITCH
     for y in range(height):
         for x in range(width):
-            if (x, y) in seen or px[x, y] != FILL + (255,):
+            if (x, y) in seen or px[x, y] != fill:
                 continue
             region, todo = [], [(x, y)]
             seen.add((x, y))
@@ -498,19 +538,20 @@ def add_pattern(im, skip=()):
                 i, j = todo.pop()
                 region.append((i, j))
                 for k, l in ((i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)):
-                    if 0 <= k < width and 0 <= l < height and (k, l) not in seen and px[k, l] == FILL + (255,):
+                    if 0 <= k < width and 0 <= l < height and (k, l) not in seen and px[k, l] == fill:
                         seen.add((k, l))
                         todo.append((k, l))
-            if len(region) < 300:
-                continue
-            for i, j in region:
-                if any(a <= i < c and b <= j < d for a, b, c, d in skip):
-                    continue
-                row = j // ph
-                u = (i - (pw // 2 if row % 2 else 0)) % pw
-                v = j % ph
-                if v < len(LEAF) and u < len(LEAF[0]) and LEAF[v][u] == "#":
-                    px[i, j] = LEAF_TONE + (255,)
+            if len(region) >= 300:
+                bare.update(region)
+    pw, ph = LEAF_PITCH
+    lw, lh = len(LEAF[0]), len(LEAF)
+    ink = [(u, v) for v, row in enumerate(LEAF) for u, c in enumerate(row) if c == "#"]
+    for row in range(height // ph + 1):
+        y0 = row * ph
+        for x0 in range(pw // 2 if row % 2 else 0, width, pw):
+            if all((x0 + i, y0 + j) in bare for j in range(-1, lh + 1) for i in range(-1, lw + 1)):
+                for u, v in ink:
+                    px[x0 + u, y0 + v] = LEAF_TONE + (255,)
 
 
 # ---------------------------------------------------------------- slots
@@ -667,6 +708,67 @@ def corner_mask(w, h, cut):
     return inside
 
 
+def fill_gaps(im, cells, wells=()):
+    """Adds the cells a slot grid skipped, when a compat drew one slightly
+    differently: within a row or a column of 18-pixel cells, and one step past
+    its ends, a free place on the grid's pitch painted like the other slots is a
+    slot too."""
+    px = im.load()
+    small = [c for c in cells if c[2:] == (18, 18)]
+    if not small:
+        return cells
+    tone = Counter(px[x + 9, y + 9] for x, y, w, h in small).most_common(1)[0][0]
+
+    def free(x, y):
+        return all(x + 18 <= a or a + c <= x or y + 18 <= b or b + d <= y
+                   for a, b, c, d in list(cells) + [w[:4] for w in wells])
+
+    def painted(x, y):
+        if x < 0 or y < 0 or x + 18 > im.width or y + 18 > im.height:
+            return False
+        inner = [px[x + i, y + j] for j in range(3, 15) for i in range(3, 15)]
+        return sum(p == tone for p in inner) >= 0.6 * len(inner)
+
+    for axis in (0, 1):
+        lines = {}
+        for c in small:
+            lines.setdefault(c[1 - axis], []).append(c[axis])
+        for fixed, run in lines.items():
+            run.sort()
+            places = [k for a, b in zip(run, run[1:]) if not (b - a) % 18 and b - a <= 144
+                      for k in range(a + 18, b, 18)]
+            if len(run) >= 2:
+                places += [run[0] - 18, run[-1] + 18]
+            for k in places:
+                x, y = (k, fixed) if axis == 0 else (fixed, k)
+                if free(x, y) and painted(x, y):
+                    cells.append((x, y, 18, 18))
+    return cells
+
+
+def separate(cells):
+    """Where a large well touches a smaller cell, pulls the well back by a pixel so
+    that every slot keeps its own outline."""
+    out = [list(c) for c in cells]
+    for i, (x, y, w, h) in enumerate(cells):
+        for a, b, c, d in cells:
+            if min(w, h) < 30 or w * h <= c * d:  # only wells give way, not sprites of a sheet
+                continue
+            across = min(y + h, b + d) - max(y, b) > 0
+            along = min(x + w, a + c) - max(x, a) > 0
+            if across and x + w == a:
+                out[i][2] -= 1
+            elif across and a + c == x:
+                out[i][0] += 1
+                out[i][2] -= 1
+            elif along and y + h == b:
+                out[i][3] -= 1
+            elif along and b + d == y:
+                out[i][1] += 1
+                out[i][3] -= 1
+    return [tuple(c) for c in out]
+
+
 def find_black_wells(im):
     """Black rectangles of vanilla-style screens where a creature is shown."""
     px = im.load()
@@ -798,6 +900,10 @@ def main():
             clear_plate(im)
         if (vanilla or path.startswith("assets/supplementaries/textures/gui/")) and name in BANNERED:
             clear_banner(im, name)
+        for x0, y0, x1, y1 in LEFTOVERS.get(path, []):
+            for y in range(y0, y1):
+                for x in range(x0, x1):
+                    im.putpixel((x, y), (0, 0, 0, 0))
         spec = GREYED_COMPATS.get(path, {})
         cells = find_cells(im, *spec["cells"]) if "cells" in spec else []
         if (vanilla and name in GREYED) or spec:
@@ -822,16 +928,20 @@ def main():
         recolour(im)
         for x0, y0 in drawn:
             draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
+        wells = WELLS.get(name, []) if vanilla else WELLS.get(path, [])
+        slots = [s for s in slots if all(s[0] + s[2] <= a or a + c <= s[0] or s[1] + s[3] <= b or b + d <= s[1]
+                                          for a, b, c, d, _ in wells)]
+        slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
+        spaced = separate(slots + [w[:4] for w in wells])
+        slots, wells = spaced[:len(spaced) - len(wells)], [c + w[4:] for c, w in zip(spaced[len(spaced) - len(wells):], wells)]
         if vanilla:
-            add_frieze(im, mask)
+            add_frieze(im, mask, slots + [w[:4] for w in wells])
         for x, y, w, h in slots:
             draw_slot(im, x, y, w, h)
-        if vanilla:
-            for x, y, w, h, shape in WELLS.get(name, []):
-                draw_slot(im, x, y, w, h, shape)
-                slots.append((x, y, w, h))
+        for x, y, w, h, shape in wells:
+            draw_slot(im, x, y, w, h, shape)
         if big_panel(path, im):
-            add_pattern(im, [(x, y, x + w, y + h) for x, y, w, h in slots] + frieze_band(im, vanilla))
+            add_pattern(im)
         im.save(dest)
 
     # vanilla-grey screens of the mods without a compat
@@ -855,13 +965,16 @@ def main():
                     for x0, y0 in drawn:
                         draw_arrow(im, x0, y0, ARROW_INK, ARROW_LIGHT)
                     px = im.load()
+                    slots = fill_gaps(im, list(dict.fromkeys(slots)), wells)
+                    spaced = separate(slots + wells)
+                    slots, wells = spaced[:len(spaced) - len(wells)], spaced[len(spaced) - len(wells):]
                     for x, y, w, h in slots:
                         clear = x == 0 or px[x - 1, y + h // 2][3] == 0
                         draw_slot(im, x, y, w, h, around=(0, 0, 0, 0) if clear else FILL + (255,))
                     for x, y, w, h in wells:
                         draw_slot(im, x, y, w, h, "creature")
                     if big_panel(n, im):
-                        add_pattern(im, [(x, y, x + w, y + h) for x, y, w, h in slots + wells])
+                        add_pattern(im)
                     dest = OUT / n
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     im.save(dest)

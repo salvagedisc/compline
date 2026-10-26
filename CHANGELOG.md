@@ -51,6 +51,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Specification of the eight next modules of the `fallow` mod (`docs/plan/modules-fallow.md`) and the research of 2026-10-26 (`docs/plan/recherche/2026-10-26/`).
 
 - Interface: `fallow-interface` pack, built by `scripts/interface/build.py` from GUI Revision and GUI Revision Compats (CC BY-NC-SA 4.0) with the frieze of Hollow GUI (CC BY 4.0): vanilla screens, the screens of 14 mods and the HUD in Fallow's mist and sage with a tight leaf pattern, slots redrawn with rounded corners and a soft inner shadow, a fine grain behind the player, slim arrows, a hotbar with rounded ends, wood and purple screens brought to the same palette, names drawn in the textures removed, vanilla-grey screens of 9 other mods recoloured, Questlog journal drawn in the same style ([page](docs/plan/fallow-interface.md)).
+- HUD without the XP bar: `fallow` 0.4.1 lowers hearts, armor, hunger, air and thirst by 5 pixels into the space the bar left (not on a horse, where the jump meter takes it); Cold Sweat's body temperature icon follows through its client config.
 ### Removed
 - Dark Coffee GUI, Dark Coffee GUI - Extras and Modded Coffee GUI (all rights reserved, author unreachable): replaced by `fallow-interface`.
 - Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod switches itself off and goes in 0.5.0.
