@@ -18,7 +18,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows the Fallow logo over the misty forest, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
-- [ ] Menu titles are readable on the brown background (opening a furnace is enough) [I1].
+- [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
@@ -124,7 +124,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
