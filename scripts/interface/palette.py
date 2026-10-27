@@ -62,13 +62,12 @@ FAMILIES = {
     "bois": ramp(32, 0.30, 0.3),
     # the furnaces: warm ash and brick
     "forge": ramp(24, 0.17, 0.3),
-    # stone and iron: the anvil, the grindstone, the stonecutter, the smithing table
-    "pierre": ramp(205, 0.12, 0.2),
     # the enchanting table, the brewing stand, the beacon: dusk
     "arcane": ramp(262, 0.20, 0.2),
     # the shulker box: the End's purple, softened
     "ender": ramp(300, 0.16, 0.2),
-    # moss: the gardens and kitchens of the mods
+    # moss: the anvil, the grindstone, the stonecutter, the smithing table, the
+    # dispenser and the crafter
     "mousse": ramp(95, 0.22, 0.3),
 }
 

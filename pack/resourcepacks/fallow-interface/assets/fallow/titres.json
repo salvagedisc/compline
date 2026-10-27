@@ -30,27 +30,27 @@
       "centre": 187
     },
     "AnvilScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 8
     },
     "GrindstoneScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 0
     },
     "StonecutterScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 0
     },
     "SmithingScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 22
     },
     "CrafterScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 5
     },
     "DispenserScreen": {
-      "famille": "pierre",
+      "famille": "mousse",
       "haut": 5
     },
     "EnchantmentScreen": {
@@ -104,10 +104,6 @@
     "forge": {
       "encre": "#63544a",
       "lumiere": "#e7e3db"
-    },
-    "pierre": {
-      "encre": "#505b62",
-      "lumiere": "#e2e3e1"
     },
     "arcane": {
       "encre": "#5d5171",
