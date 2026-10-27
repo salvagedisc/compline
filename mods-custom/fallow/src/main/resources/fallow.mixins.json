@@ -14,7 +14,9 @@
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
     "horizon.FogRendererMixin",
-    "horizon.GLStateMixin"
+    "horizon.GLStateMixin",
+    "titres.AbstractContainerScreenMixin",
+    "titres.OwnLabelsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

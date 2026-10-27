@@ -1,0 +1,424 @@
+{
+  "ecrans": {
+    "FurnaceScreen": {
+      "famille": "forge",
+      "haut": 3
+    },
+    "BlastFurnaceScreen": {
+      "famille": "forge",
+      "haut": 3
+    },
+    "SmokerScreen": {
+      "famille": "forge",
+      "haut": 3
+    },
+    "CraftingScreen": {
+      "famille": "bois",
+      "haut": 1
+    },
+    "LoomScreen": {
+      "famille": "bois",
+      "haut": 0
+    },
+    "CartographyTableScreen": {
+      "famille": "bois",
+      "haut": 0
+    },
+    "MerchantScreen": {
+      "famille": "bois",
+      "haut": 0,
+      "centre": 187
+    },
+    "AnvilScreen": {
+      "famille": "pierre",
+      "haut": 8
+    },
+    "GrindstoneScreen": {
+      "famille": "pierre",
+      "haut": 0
+    },
+    "StonecutterScreen": {
+      "famille": "pierre",
+      "haut": 0
+    },
+    "SmithingScreen": {
+      "famille": "pierre",
+      "haut": 22
+    },
+    "CrafterScreen": {
+      "famille": "pierre",
+      "haut": 5
+    },
+    "DispenserScreen": {
+      "famille": "pierre",
+      "haut": 5
+    },
+    "EnchantmentScreen": {
+      "famille": "arcane",
+      "haut": 3
+    },
+    "BrewingStandScreen": {
+      "famille": "arcane",
+      "haut": 0
+    },
+    "BeaconScreen": {
+      "famille": "arcane",
+      "haut": 2,
+      "dessus": 6
+    },
+    "ShulkerBoxScreen": {
+      "famille": "ender",
+      "haut": 4
+    },
+    "ContainerScreen": {
+      "famille": "brume",
+      "haut": 0
+    },
+    "HopperScreen": {
+      "famille": "brume",
+      "haut": 8
+    },
+    "HorseInventoryScreen": {
+      "famille": "brume",
+      "haut": 0
+    }
+  },
+  "mods": {
+    "cold_sweat": "brume",
+    "farm_and_charm": "brume",
+    "naturalist": "brume",
+    "overgeared": "brume",
+    "quark": "brume",
+    "supplementaries": "brume"
+  },
+  "sans": [],
+  "familles": {
+    "brume": {
+      "encre": "#525c52",
+      "lumiere": "#e8e5d0"
+    },
+    "bois": {
+      "encre": "#69563f",
+      "lumiere": "#e9e4d9"
+    },
+    "forge": {
+      "encre": "#63544a",
+      "lumiere": "#e7e3db"
+    },
+    "pierre": {
+      "encre": "#505b62",
+      "lumiere": "#e2e3e1"
+    },
+    "arcane": {
+      "encre": "#5d5171",
+      "lumiere": "#e6e3e4"
+    },
+    "ender": {
+      "encre": "#654d65",
+      "lumiere": "#e6e1e2"
+    },
+    "mousse": {
+      "encre": "#4f6143",
+      "lumiere": "#e2e5d8"
+    }
+  },
+  "lettres": {
+    "largeur": 584,
+    "hauteur": 7,
+    "espace": 3,
+    "table": {
+      "!": [
+        0,
+        1
+      ],
+      "#": [
+        8,
+        5
+      ],
+      "&": [
+        16,
+        4
+      ],
+      "'": [
+        24,
+        1
+      ],
+      "(": [
+        32,
+        2
+      ],
+      ")": [
+        40,
+        2
+      ],
+      "+": [
+        48,
+        3
+      ],
+      ",": [
+        56,
+        1
+      ],
+      "-": [
+        64,
+        3
+      ],
+      ".": [
+        72,
+        1
+      ],
+      "/": [
+        80,
+        4
+      ],
+      "0": [
+        88,
+        5
+      ],
+      "1": [
+        96,
+        3
+      ],
+      "2": [
+        104,
+        5
+      ],
+      "3": [
+        112,
+        5
+      ],
+      "4": [
+        120,
+        5
+      ],
+      "5": [
+        128,
+        5
+      ],
+      "6": [
+        136,
+        5
+      ],
+      "7": [
+        144,
+        5
+      ],
+      "8": [
+        152,
+        5
+      ],
+      "9": [
+        160,
+        5
+      ],
+      ":": [
+        168,
+        1
+      ],
+      "?": [
+        176,
+        4
+      ],
+      "A": [
+        184,
+        5
+      ],
+      "B": [
+        192,
+        5
+      ],
+      "C": [
+        200,
+        5
+      ],
+      "D": [
+        208,
+        5
+      ],
+      "E": [
+        216,
+        4
+      ],
+      "F": [
+        224,
+        4
+      ],
+      "G": [
+        232,
+        5
+      ],
+      "H": [
+        240,
+        5
+      ],
+      "I": [
+        248,
+        5
+      ],
+      "J": [
+        256,
+        5
+      ],
+      "K": [
+        264,
+        4
+      ],
+      "L": [
+        272,
+        4
+      ],
+      "M": [
+        280,
+        5
+      ],
+      "N": [
+        288,
+        5
+      ],
+      "O": [
+        296,
+        5
+      ],
+      "P": [
+        304,
+        5
+      ],
+      "Q": [
+        312,
+        5
+      ],
+      "R": [
+        320,
+        5
+      ],
+      "S": [
+        328,
+        5
+      ],
+      "T": [
+        336,
+        5
+      ],
+      "U": [
+        344,
+        5
+      ],
+      "V": [
+        352,
+        5
+      ],
+      "W": [
+        360,
+        5
+      ],
+      "X": [
+        368,
+        5
+      ],
+      "Y": [
+        376,
+        5
+      ],
+      "Z": [
+        384,
+        5
+      ],
+      "À": [
+        392,
+        5
+      ],
+      "Á": [
+        400,
+        5
+      ],
+      "Â": [
+        408,
+        5
+      ],
+      "Ä": [
+        416,
+        5
+      ],
+      "Æ": [
+        424,
+        5
+      ],
+      "Ç": [
+        432,
+        5
+      ],
+      "È": [
+        440,
+        4
+      ],
+      "É": [
+        448,
+        4
+      ],
+      "Ê": [
+        456,
+        4
+      ],
+      "Ë": [
+        464,
+        4
+      ],
+      "Í": [
+        472,
+        5
+      ],
+      "Î": [
+        480,
+        5
+      ],
+      "Ï": [
+        488,
+        5
+      ],
+      "Ñ": [
+        496,
+        5
+      ],
+      "Ó": [
+        504,
+        5
+      ],
+      "Ô": [
+        512,
+        5
+      ],
+      "Ö": [
+        520,
+        5
+      ],
+      "Ù": [
+        528,
+        5
+      ],
+      "Ú": [
+        536,
+        5
+      ],
+      "Û": [
+        544,
+        5
+      ],
+      "Ü": [
+        552,
+        5
+      ],
+      "Œ": [
+        560,
+        5
+      ],
+      "Ÿ": [
+        568,
+        5
+      ],
+      "’": [
+        576,
+        1
+      ]
+    }
+  }
+}

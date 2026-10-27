@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.3 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings) and **dissipateur** (dissipator) modules. The **titres** module of 0.4.2 (screen titles on a plaque) was removed in 0.4.3: the titles are back in the panels, on plates drawn by the `fallow-interface` pack.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.4 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -172,6 +172,22 @@ The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-
 
 Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
 
+## `titres` module
+
+Client only. Each screen's name leaves the panel for a plate centred over its top edge, which it overhangs by a few pixels, in engraved capitals, as GUI Revision draws the names of five of its screens. Drawing the names in the textures cannot work: a texture is shared by several screens (`generic_54` serves the chest, the barrel and the ender chest), it cannot follow the game's language, and the player can rename a chest. The mod therefore draws the name and the pack decides how it looks.
+
+**What the pack gives** (`fallow-interface`, written by `scripts/interface/build.py`):
+
+- `fallow:titres.json`: for each vanilla screen (by class name) its colour family, the row of its texture where the panel starts (`haut`), how many rows the plate rises above it (`dessus`, 3 by default) and, for the trader, the column of its centre; the mods whose screens take a plate (`mods`, by menu namespace, with their family); the screens to leave alone (`sans`); each family's ink and light; the letters' table (position and width of each character in the atlas).
+- The plate of each family, `fallow:titre/<family>` (nine-slice sprite: its two ends and four columns of plate the game tiles to the name's width, a shadow pixel down and to the right).
+- The letters, `fallow:textures/gui/titre/lettres.png`: white glyphs five pixels tall (accents above, cedilla below) in 8-pixel cells.
+
+**What the mod does.** `TitresClient`, on `ContainerScreenEvent.Render.Background` (after the panel, before the slots), uppercases the screen's title (with its level for a trader, as the game writes it), measures it with the table, draws the plate 13 pixels wider on each side, then the name twice: in the family's light one row lower, then in its ink, which engraves it. A letter the table lacks falls back to its base letter (NFD), then is skipped. The mixins `AbstractContainerScreenMixin` (on `renderLabels`, at its head) and `OwnLabelsScreenMixin` (the inventory and the trader, which write their labels themselves) stop the game writing the title and the inventory label on those screens; what a screen adds around them (the anvil's cost, the beacon's two labels) stays.
+
+**Which screens.** Every vanilla container screen whose labels come from the game, except the player's inventory and the creative inventory, whose top is taken. A mod's screen takes the plate only if `mods` names its mod, whose panel the pack has dressed with its top on the first row (Cold Sweat, Farm & Charm, Naturalist, Overgeared, Quark, Supplementaries); a screen that writes its labels with a method of its own keeps them, without a plate. Without the pack's table (the pack disabled), the module does nothing and the game writes its labels.
+
+Config (`fallow-client.toml`, `[titres]` section): `enabled` (true; false gives the game its labels back).
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -271,6 +287,18 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | K9 | Dissipator on an airship (Sable) | Note what happens: it converts where the ship is when it finishes charging |
 | K10 | Ecliptic seasons and Cold Sweat in a clearing | Crops grow, temperature consistent with the old biome |
 | K11 | Recipes in EMI | The three recipes show, with their French names and tooltips |
+
+### Titles
+
+| # | Test | Expected |
+|---|---|---|
+| E1 | Furnace, crafting table, anvil, enchanting table, brewing stand, beacon, at GUI scales 2, 3 and 4 | The name centred over the top edge on its plate, in the screen's colours, overhanging by 3 pixels; no title or "Inventaire" in the panel; the anvil's cost and the beacon's two labels still there |
+| E2 | A chest renamed "Réserve à blé" in an anvil, a double chest, a barrel | Its own name on the plate, accents kept, the plate as wide as the name |
+| E3 | Trader at level 1 then 3, wandering trader | "VILLAGEOIS - NOVICE", then the new level; the plate centred on the offers' panel |
+| E4 | Recipe book open (crafting table, furnace) | The plate moves with the panel |
+| E5 | Game in English | English names, same plates |
+| E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
+| E7 | `titres.enabled = false`, then `fallow-interface` disabled | The game's labels come back in both cases, no plate |
 
 ## Maintenance
 

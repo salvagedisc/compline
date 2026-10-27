@@ -2,7 +2,7 @@
 
 Ce pack est une adaptation pour Fallow de packs de ressources sous licence libre. Il est produit par le script `scripts/interface/build.py` du dépôt, qui télécharge les versions indiquées ci-dessous et les modifie (version du 26 octobre 2026).
 
-- **GUI Revision** 2.2.0, par Vixel (https://modrinth.com/resourcepack/gui-revision), licence CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/) : interface du jeu de base et barre d'action, et les ornements de coin (ceux de son établi, de sa table d'enchantement, de son coffre et de son coffre de l'Ender).
+- **GUI Revision** 2.2.0, par Vixel (https://modrinth.com/resourcepack/gui-revision), licence CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/) : interface du jeu de base et barre d'action, les ornements de coin (ceux de son établi, de sa table d'enchantement, de son coffre et de son coffre de l'Ender), sa flèche, et la plaque et les lettres gravées de ses noms d'écrans, dont l'alphabet est complété dans la même main (accents, chiffres, signes).
 - **GUI Revision Compats** 43.0, par Fyoncle (https://modrinth.com/resourcepack/gui-revision-compats), licence CC BY-NC-SA 4.0 : écrans de Supplementaries, Amendments, Quark, Cold Sweat, Curios, EMI, JEI, Exposure, Farm & Charm, Immersive Enchanting, Overgeared, Chipped, Naturalist et Entity Texture Features.
 - **Questlog** (Infernal Studios, licence Apache-2.0) : le journal est redessiné pour Fallow dans le même style, aux tailles et aux zones des images d'origine.
 - **Minecraft** (Mojang) : l'écran du crafteur et quelques éléments (champs de texte, onglets, cases à cocher) que GUI Revision ne couvre pas, repris du jeu et recolorés, comme le permettent les règles d'utilisation de Minecraft pour les packs de ressources.
