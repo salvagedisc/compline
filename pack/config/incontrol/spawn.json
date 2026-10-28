@@ -43,18 +43,14 @@
   },
   {
     "mob": [
-      "alexsmobs:cave_centipede",
-      "alexsmobs:rocky_roller",
-      "alexsmobs:guster"
+      "alexsmobs:cave_centipede"
     ],
     "minlight": 8,
     "result": "deny"
   },
   {
     "mob": [
-      "alexsmobs:cave_centipede",
-      "alexsmobs:rocky_roller",
-      "alexsmobs:guster"
+      "alexsmobs:cave_centipede"
     ],
     "mincount": {
       "amount": 3,

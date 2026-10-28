@@ -69,6 +69,22 @@ Older decisions of the plan, confirmed by the maintainer on 2026-10-19:
 
 Same method as for the duplicates: `naturalist-server.toml`, `pack/kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (server and client, 22 items including the sinew whip, the transmutation table and the wildfire crown, which can only be crafted from items dropped by these creatures), Wildex exclusion. The Alex's Mobs advancements tied to these creatures stay in their tab without being obtainable: some are parents of other advancements that can still be earned.
 
+## Creatures with weak animations (2026-10-28)
+
+Request from the maintainer after in-game tests: some animals look poor next to the vanilla animals animated by Fresh Animations. The wildlife stays; only the weakest are cut. Each creature was rated from its jar (number of animations, animated bones, keyframes and states such as sleeping, sitting or eating); the full rating, mod by mod, is in the team's document. The maintainer chose to cut the eight weakest and the borderline cases:
+- Alex's Mobs: banana slug, alligator snapping turtle, mungus, triops, sunbird, guster (one or two sine loops, no state, no keyframe); rocky roller, frilled shark, potoo (borderline);
+- Friends & Foes: moobloom (vanilla cow model, which Fresh Animations does not animate) and glare, also disabled by `enableMoobloomSpawn` and `enableGlareSpawn = false` in `pack/config/friendsandfoes.json`;
+- Critters and Companions: koi (4 bones, 2 animations), sea bunny;
+- Hybrid Aquatic: sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish (1 to 7 bones, a few keyframes); their 25 spawn files are replaced by `neoforge:none` in `pack/kubejs/data/hybrid_aquatic/neoforge/biome_modifier/`, and the nautilus, which only spawns from the trench and deep reef biome files, is covered by `faune_coupee.json`.
+
+Same method as above: `faune_coupee.json`, `faune_coupee.js` (server and client, 43 more items: eggs, banana slug slime and its blocks, spiked scute and spiked turtle shell, mungal spores, triops bucket and eggs, mosquito repellent stew, guster eye, pocket sand, gustmaker, koi and its bucket, rocky shell and rock shell chestplate, frilled shark bucket, sea bunny bucket, slime bottle and slime block, sea urchin spine, thrown starfish), Wildex exclusion; the guster and the rocky roller are taken out of the In Control! darkness rules.
+
+Consequences:
+- the comb jelly, the frilled shark and the starfish disappear from the game, since their duplicates were already cut;
+- the buttercup stays (it also grows in the world), as do the shark teeth (seal gifts) and the vanilla nautilus shell;
+- the moobloom's hide loot in `tannerie_butin.js` no longer has any effect;
+- Hybrid Aquatic's argonaut is a craftable submarine, not a creature: it stays.
+
 ## Hybrid Aquatic biomes (2026-10-19)
 
 They work with NML: like NML, Hybrid Aquatic places them through Biolith. 12.1 wanted to cut them in the name of decision 0003 (no biomes that change the face of the world). Decision of the maintainer: keep its other 13 biomes, almost all underwater (reefs, trenches, seagrass beds, red meadow, deep warm ocean, tide pools, sulphurous caves), with the 34 species that only spawn there, and cut only the **tropical river**, which replaced part of the vanilla rivers, as far as the taigas.
@@ -91,3 +107,4 @@ On a new world.
 | D8 | Hybrid Aquatic's lobster | Correct texture (the tint map could not be rendered outside the game) |
 | D9 | Snowy biomes, dark forests, Nether | No iceologer, illusioner or wildfire, nor their structures; no Murmur, Farseer, Skelewag, fly or cockroach; no mammoth |
 | D10 | `/locate biome hybrid_aquatic:tropical_river`; `/locate biome hybrid_aquatic:coral_reef` | Not found; found |
+| D11 | Old growth taiga, swamp, mushroom fields, desert by night, flower meadow, ponds, lush caves, jungle, caves, oceans and trenches; EMI: "slug", "triops", "guster", "koi", "rocky", "sea bunny", "urchin", "starfish" | None of the creatures cut on 2026-10-28, none of their items |
