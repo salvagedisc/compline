@@ -23,12 +23,16 @@ test('scute offering loads and accepts only scutes that exist', async () => {
 // The NML goose and tortoise no longer spawn (docs/plan/faune-nml.md): their offering
 // dialogues must react to a creature that is still in the world.
 test('goose and tortoise offerings target creatures that still spawn', async () => {
-  const wildex = await readFile(join(packDir, 'config', 'wildex', 'wildex-common.toml'), 'utf8');
-  const excluded = JSON.parse(wildex.match(/excludedModIds = (\[[^\]]*\])/)[1]);
+  const modifierDir = join(packDir, 'kubejs', 'data', 'fallow', 'neoforge', 'biome_modifier');
+  const removed = [];
+  for (const file of ['doublons.json', 'faune_coupee.json', 'sans_lapin.json']) {
+    const modifier = JSON.parse(await readFile(join(modifierDir, file), 'utf8'));
+    removed.push(...[modifier.entity_types].flat());
+  }
   for (const name of ['goose', 'tortoise']) {
     const offering = await readOffering(join('entity', `${name}.json`));
     const entity = offering.condition.entity;
     assert.ok(!entity.startsWith('nomansland:'), `${name}: ${entity}`);
-    assert.ok(!excluded.includes(entity), `${name}: ${entity} is excluded from the Wildex`);
+    assert.ok(!removed.includes(entity), `${name}: ${entity} no longer spawns`);
   }
 });

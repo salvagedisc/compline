@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 4,
+  "title": "Des planches",
+  "description": "Une bûche et la hache, dans la grille, donnent deux planches. La hache reste, un peu plus usée.\n\nQuatre planches font un établi. Plus tard, la scie de Create tirera six planches de chaque bûche.",
+  "icon": {
+    "item": "minecraft:crafting_table"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_hache"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "minecraft:crafting_table",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

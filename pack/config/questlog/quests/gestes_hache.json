@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 3,
+  "title": "La première hache",
+  "description": "Clic droit avec la pierre à tailler : une grille s’ouvre, où l’on taille la forme d’une tête de hache. EMI montre les formes de chaque outil.\n\nLa tête et un bâton, dans la grille de l’inventaire, font la hache. L’arbre tombe bloc par bloc, et chaque coup use la lame : une hache de pierre ne fait pas une forêt.",
+  "icon": {
+    "item": "minecraft:stone_axe"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_pierre"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "minecraft:stone_axe",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

@@ -1,72 +1,67 @@
-// Fallow : la tannerie. Recettes, retraits et infobulles.
-// Les objets sont dans startup_scripts/tannerie.js, le butin dans tannerie_butin.js.
-// Voir docs/plan/tannerie.md.
+// Fallow : la tannerie, avec le mod Tannery (Beckstation). Recettes, retraits et écorce.
+// Le butin est dans tannerie_butin.js, les sacoches cachées et les messages du tonneau
+// traduits dans client_scripts/tannerie.js. Voir docs/plan/tannerie.md.
 //
-// La chaîne :
-//   animal -> peau brute
-//   1. établi : peau brute + cendres (Supplementaries) -> peau préparée
-//   2. plateau en bambou (Kaleidoscope Cookery), mode « humidification » :
-//      la peau préparée trempe sous la pluie, ou sous un stalactite qui goutte
-//      de l'eau, et devient du cuir au bout de TANNERIE_DUREE_TREMPAGE ticks.
+// La chaîne (celle du mod, inchangée) :
+//   animal -> peau (vache, mouton, chèvre, cochon, cheval)
+//   1. séchoir à peaux : la peau sèche à l'air -> peau séchée
+//   2. écorce (bûche écorcée à la hache) x2 -> poudre tannique, versée dans le tonneau à tanner
+//   3. tonneau à tanner : peau séchée -> cuir
+// La chair putréfiée suit le même chemin : séchée, elle donne des tendons, de la viande
+// séchée, ou du cuir au tonneau.
 
-// 6000 ticks = 5 minutes de pluie (ou de gouttes) sur le plateau.
-const TANNERIE_DUREE_TREMPAGE = 6000
+// Sacoches de Tannery : retirées et cachées d'EMI (client_scripts/tannerie.js, même liste).
+// Les sacs à dos de Reliable Backpacks tiennent déjà ce rôle.
+const TANNERIE_OBJETS = [
+  'tannery:small_satchel', 'tannery:large_satchel'
+]
 
-// Source sûre de cendres : du charbon de bois brûlé sur un feu de camp.
-// Les cendres viennent aussi des blocs qui brûlent et des créatures mortes en feu.
-const TANNERIE_DUREE_CENDRES = 600
-
-// Secours, éteint par défaut : si le bambou s'avère trop rare dans le monde,
-// passer à true pour qu'on puisse aussi fumer la peau préparée sur un feu de camp.
-const TANNERIE_SECOURS_FUMAGE = false
-const TANNERIE_DUREE_FUMAGE = 2400
-
-// Recettes du pack qui donnent du cuir trop facilement, ou hors de la chaîne.
+// Recettes du pack qui donnent du cuir sans passer par la tannerie.
 const TANNERIE_RECETTES_RETIREES = [
   // chair putréfiée séchée au soleil sur le plateau en bambou -> cuir
   'kaleidoscope_cookery:bamboo_tray/drying/rotten_flesh_to_leather',
-  // le cuir laissé sous la pluie pourrit : retiré pour ne pas perdre le cuir
-  // tanné qu'on oublie sur le plateau (il y trempe déjà dans la même eau)
-  'kaleidoscope_cookery:bamboo_tray/wetting/leather_to_rotten_flesh',
   // six chairs putréfiées envoyées par pigeon -> cuir
   'envelope:mailing/automated_supply_service/leather',
   // peau de Naturalist cuite au four -> cuir en 10 secondes
   'naturalist:leather_from_smelting_hide',
-  // deux peaux de kangourou -> cuir (remplacé plus bas par une peau brute)
+  // deux peaux de kangourou -> cuir (remplacé plus bas par une peau de Tannery)
   'alexsmobs:kangaroo_hide_to_leather'
 ]
 
 ServerEvents.recipes(event => {
+  event.remove({ output: TANNERIE_OBJETS })
   TANNERIE_RECETTES_RETIREES.forEach(id => event.remove({ id: id }))
 
-  // Étape 1 : écharner et saler.
-  event.shapeless('fallow:peau_preparee', ['#fallow:peaux_brutes', '#c:dusts/ash'])
-    .id('fallow:tannerie/echarner_et_saler')
-
-  // Étape 2 : tremper sur le plateau en bambou (même format que les recettes du mod).
-  event.custom({
-    type: 'kaleidoscope_cookery:bamboo_tray',
-    subtype: 'wetting',
-    duration: TANNERIE_DUREE_TREMPAGE,
-    ingredient: { item: 'fallow:peau_preparee' },
-    result: { id: 'minecraft:leather', count: 1 }
-  }).id('fallow:tannerie/tremper')
-
   // Les peaux de kangourou d'Alex's Mobs gardent leur rapport (2 pour 1),
-  // mais donnent une peau brute au lieu du cuir.
-  event.shapeless('fallow:peau_brute', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
-    .id('fallow:tannerie/peau_de_kangourou')
-
-  // Cendres : charbon de bois brûlé sur un feu de camp.
-  event.campfireCooking('supplementaries:ash', 'minecraft:charcoal')
-    .cookingTime(TANNERIE_DUREE_CENDRES)
-    .id('fallow:tannerie/cendres_de_charbon')
-
-  if (TANNERIE_SECOURS_FUMAGE) {
-    event.campfireCooking('minecraft:leather', 'fallow:peau_preparee')
-      .cookingTime(TANNERIE_DUREE_FUMAGE)
-      .id('fallow:tannerie/fumer')
+  // mais donnent une peau à sécher au lieu du cuir.
+  if (Platform.isLoaded('alexsmobs')) {
+    event.shapeless('tannery:goat_hide', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
+      .id('fallow:tannerie/peau_de_kangourou')
   }
+
+  // Une peau de Naturalist d'un monde existant se sèche comme une peau de vache.
+  if (Platform.isLoaded('naturalist')) {
+    event.shapeless('tannery:cow_hide', ['naturalist:hide'])
+      .id('fallow:tannerie/peau_de_naturalist')
+  }
+})
+
+// Écorce : Tannery n'en donne qu'aux huit bûches vanilla de son tag `tannery:logs`, et sur
+// tout bloc du tag, écorcé ou non. On y met chaque bûche ou bois qui a une version écorcée
+// (No Man's Land et les autres essences), et rien de déjà écorcé : sinon un clic droit
+// répété sur la même bûche donnerait de l'écorce sans fin.
+ServerEvents.tags('block', event => {
+  let ids = new Set()
+  Block.getTypeList().forEach(id => ids.add(String(id)))
+  let ajoutees = 0
+  ids.forEach(id => {
+    let [ns, path] = id.split(':')
+    if (path.startsWith('stripped_') || !/_(log|wood|stem|hyphae)$/.test(path)) return
+    if (!ids.has(`${ns}:stripped_${path}`)) return
+    event.add('tannery:logs', id)
+    ajoutees++
+  })
+  console.info(`[tannerie] ${ajoutees} bûches donnent de l'écorce`)
 })
 
 // Contrôle au chargement : liste dans le journal du serveur toutes les recettes
@@ -75,10 +70,4 @@ ServerEvents.afterRecipes(event => {
   event.forEachRecipe({ output: 'minecraft:leather' }, recipe => {
     console.info(`[tannerie] recette donnant du cuir : ${recipe.getOrCreateId()}`)
   })
-})
-
-// Une ligne d'aide sur chaque peau, pour comprendre sans wiki.
-ItemEvents.modifyTooltips(event => {
-  event.add('fallow:peau_brute', [Text.gray(Text.translatable('tooltip.fallow.peau_brute'))])
-  event.add('fallow:peau_preparee', [Text.gray(Text.translatable('tooltip.fallow.peau_preparee'))])
 })
