@@ -59,7 +59,8 @@ public final class ClairiereModule {
         ITEMS.register(modBus);
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, ClairiereModule::onCreativeTab);
         NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,
-                event -> ClearingConverter.tick(event.getServer(), FallowConfig.clairiereChunksPerTick()));
+                event -> ClearingConverter.tick(event.getServer(), FallowConfig.clairiereChunksPerTick(),
+                        FallowConfig.clairiereRingTicks()));
         NeoForge.EVENT_BUS.addListener(ServerStoppingEvent.class, event -> ClearingConverter.clear());
         NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, ClairiereModule::onRegisterCommands);
         Fallow.LOGGER.info("clairiere : feu de veille (16), lanterne de clairière (32)");

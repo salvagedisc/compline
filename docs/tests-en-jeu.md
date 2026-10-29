@@ -34,6 +34,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] A clearing on a coast: the ocean and the beach keep their biome; a river crossing it becomes clearing [K4]. Note whether a Streams brook stays misty [W10].
 - [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
 - [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
+- [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
 - [ ] The new fire (stone brazier, pale flame) and lantern (standing, quartzite crystal), by day and at night: neither looks like a vanilla campfire or lantern [K15].
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].

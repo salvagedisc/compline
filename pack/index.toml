@@ -1833,7 +1833,7 @@ metafile = true
 
 [[files]]
 file = "mods/fallow-0.4.7.jar"
-hash = "343de45b1ff6cc33a3af59d93ca5705554bf7dcc541c6e8bda51985f0516fd4f"
+hash = "6f3b27bb67c9d9d235b9591a3ef02c14311a950a88358ca54077a08bacdfd988"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"

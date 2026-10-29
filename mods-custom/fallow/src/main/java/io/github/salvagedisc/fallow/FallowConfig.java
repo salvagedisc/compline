@@ -26,6 +26,8 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
     private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
+    private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
+    private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -41,6 +43,11 @@ public final class FallowConfig {
                 .comment("Vider le cache de brume d'ATMOSPHERICS dès que le serveur change des biomes",
                         "(/fillbiome, conversion en clairière), pour que la brume réagisse sans que le joueur bouge.")
                 .define("clearFogOnBiomeUpdate", true);
+        CIEL_CLEARING_FADE = client
+                .comment("Quand une clairière s'ouvre ou se referme, la brume s'éclaircit ou s'épaissit en douceur :",
+                        "secondes pour passer d'une brume pleine à un ciel dégagé, ou l'inverse (le fondu ralentit en fin",
+                        "de course ; la brume visible part dans les 4 ou 5 premières). 0 : fondu normal d'ATMOSPHERICS, presque immédiat.")
+                .defineInRange("clearingFadeSeconds", 10.0, 0.0, 30.0);
         CIEL_FRIEND_MOON = client
                 .comment("Laisser No Man's Land dessiner la Lune Amie et son ombre sous le ciel d'ATMOSPHERICS.",
                         "Faux : la Lune Amie n'apparaît pas au Point de rencontre et l'ombre ne montre pas le chemin.")
@@ -106,6 +113,10 @@ public final class FallowConfig {
         CLAIRIERE_CHUNKS_PER_TICK = common
                 .comment("Tronçons (16 × 16 blocs) convertis par tick. Un dissipateur en touche environ 80.")
                 .defineInRange("chunksPerTick", 2, 1, 16);
+        CLAIRIERE_RING_TICKS = common
+                .comment("La clairière s'ouvre (et se referme) en vague, un anneau de 4 blocs tous les tant de ticks.",
+                        "6 : une lanterne (32 blocs) en 2,7 secondes, un dissipateur (64) en 5. 1 : presque d'un coup.")
+                .defineInRange("ringTicks", 6, 1, 40);
         common.pop();
         COMMON_SPEC = common.build();
     }
@@ -123,6 +134,11 @@ public final class FallowConfig {
 
     public static boolean cielClearFogOnBiomeUpdate() {
         return cielEnabled() && read(CLIENT_SPEC, CIEL_CLEAR_FOG_ON_BIOME_UPDATE);
+    }
+
+    /** Constante de temps du fondu de brume après un changement de biomes, en secondes ; 0 si coupé. */
+    public static float cielClearingFadeSeconds() {
+        return cielEnabled() ? (float) read(CLIENT_SPEC, CIEL_CLEARING_FADE) : 0.0F;
     }
 
     public static boolean cielFriendMoon() {
@@ -173,12 +189,20 @@ public final class FallowConfig {
         return read(COMMON_SPEC, CLAIRIERE_CHUNKS_PER_TICK);
     }
 
+    public static int clairiereRingTicks() {
+        return read(COMMON_SPEC, CLAIRIERE_RING_TICKS);
+    }
+
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
     static boolean read(ModConfigSpec spec, ModConfigSpec.BooleanValue value) {
         return spec.isLoaded() ? value.get() : value.getDefault();
     }
 
     static int read(ModConfigSpec spec, ModConfigSpec.IntValue value) {
+        return spec.isLoaded() ? value.get() : value.getDefault();
+    }
+
+    static double read(ModConfigSpec spec, ModConfigSpec.DoubleValue value) {
         return spec.isLoaded() ? value.get() : value.getDefault();
     }
 }
