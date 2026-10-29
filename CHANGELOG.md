@@ -57,6 +57,8 @@ No version has been published yet: everything below will make up `0.1.0`.
 - HUD without the XP bar: `fallow` 0.4.1 lowers hearts, armor, hunger, air and thirst by 5 pixels into the space the bar left (not on a horse, where the jump meter takes it); Cold Sweat's body temperature icon follows through its client config.
 - First gestures: `outils` module of the `fallow` mod, wood (raw or worked: planks, furniture, chests) and rock no longer break by hand, plants and crops still do (a hint says which tool is needed); wooden tools removed, a log gives 2 planks with an axe in the grid (the axe wears), the campfire is lit with flint, a Twigs pebble becomes an Overgeared knappable rock, leaves drop a few more sticks; « Premiers gestes » Questlog chapter, 10 quests ([page](docs/plan/premiers-gestes.md), [0013](docs/decisions/0013-premiers-gestes.md)).
 ### Removed
+- Icy's Better Horses' stable handbook (Modonomicon): no recipe, hidden from EMI; Modonomicon stays only because the mod requires it. Its essentials move to a new Questlog chapter, Voyager (two guides).
+- Wildex Bestiary (team choice of 2026-10-29), with its config and its translation: the `zoo` module will keep its own ledger of species.
 - Hollow GUI's curls at the top of the panels, lozenges and grooves added to the screens, and the leaf pattern behind the menus (review of 2026-10-26: back to GUI Revision's own drawing).
 - Dark Coffee GUI, Dark Coffee GUI - Extras and Modded Coffee GUI (all rights reserved, author unreachable): replaced by `fallow-interface`.
 - Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod switches itself off and goes in 0.5.0.

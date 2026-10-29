@@ -2,7 +2,7 @@
 
 [![build](https://github.com/salvagedisc/fallow/actions/workflows/build.yml/badge.svg)](https://github.com/salvagedisc/fallow/actions/workflows/build.yml)
 
-A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends, in the spirit of the No Man's Land trailer: an almost empty, enigmatic world under the mist, which lifts wherever the players bring life back. Exploration, Create and aviation, farming and cooking, a bestiary and a zoo as long-term goals. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment. Everything that can be read in game is in French.
+A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends, in the spirit of the No Man's Land trailer: an almost empty, enigmatic world under the mist, which lifts wherever the players bring life back. Exploration, Create and aviation, farming and cooking, a zoo as a long-term goal. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment. Everything that can be read in game is in French.
 
 | | |
 |---|---|
@@ -24,7 +24,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; no experience at all (anvil by wear, enchanting through found books) |
 | Daily life | Kaleidoscope Cookery and Farm & Charm, tannery (Tannery mod: hides, tanning rack, bark, tanning barrel), a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
 | Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
-| Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player; Wildex bestiary |
+| Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player |
 | Finish | Shoulder camera, 3D menus, animated arms, items with physics, coloured light without shaders, particles, wakes, puddles, adaptive music with long silences |
 | Safety | Hourly backups, crashing entities stopped instead of the world, crash assistant |
 
