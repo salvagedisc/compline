@@ -1,0 +1,22 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 5,
+  "title": "Le feu",
+  "description": "Trois bâtons, trois bûches et un silex font un feu de camp. Il cuit la viande, purifie l’eau et éloigne un peu la nuit.\n\nDu charbon de bois posé dessus donne des cendres, pour la tannerie.",
+  "icon": {
+    "item": "minecraft:campfire"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_planches"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:block_place",
+      "block": "minecraft:campfire"
+    }
+  ],
+  "rewards": []
+}
