@@ -15,8 +15,10 @@
     "ciel.FriendMoonSkyMixin",
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
+    "horizon.FarFadeMixin",
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
+    "horizon.VanillaFadeMixin",
     "titres.AbstractContainerScreenMixin",
     "titres.OwnLabelsScreenMixin"
   ],

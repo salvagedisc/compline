@@ -35,7 +35,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; No Man's Land for the Friendly Moon | 6, all client |
 | `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
-| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 3: `horizon.FogRendererMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
+| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
 | `dissipateur` | both | Create | none |
 
@@ -150,13 +150,17 @@ Decision [0011](../decisions/0011-tectonic-streams-distant-horizons.md). Distant
 2. After DH's initialisation (`DhApiAfterDhInitEvent`), `HorizonClient` registers two DH events, if the DH API major version is 7.
 3. `DhApiBeforeFogRenderEvent`, every frame: `HorizonFog` sets DH's far fog to linear, from `start / R` to `end / R` (R = LOD radius in blocks, read from DH's config), thickness 0 to 1. A LOD at distance d is therefore as fogged as a block of terrain at the same distance.
 4. `DhApiBeforeRenderEvent`: when the mist ends before the edge of the normal terrain (render distance × 16 blocks), every LOD is beyond the end of the mist, so invisible; the module cancels the whole LOD rendering of the frame. In misty areas DH costs no GPU time.
-5. Underwater, in lava or powder snow, blinded or in darkness, the module does nothing: DH already drowns its LODs.
+5. `VanillaFadeMixin` skips, in those same frames, DH's fade between the normal terrain and the LODs (`ClientApi.renderFadeOpaque` and `renderFadeTransparent`). That fade blends the edge of the normal terrain with DH's LOD texture, which is only cleared and redrawn by the LOD rendering the module has just cancelled: it would blend in the last LOD image drawn, frozen, for example the clearing's mountains after walking back into the mist.
+6. **The mist ring** (`FarFadeMixin`). A LOD drowned in the mist takes the mist colour, which is not the colour of the sky behind it: without more, the far mountains stay visible as mist-coloured silhouettes up to the end of the LOD radius (1,536 blocks), and the clearing has no horizon. DH already has a far fade that dissolves LODs into the sky, from 50 % to 90 % of its far clip plane. The mixin hands it the ring distance instead: the LODs dissolve into the sky from 55 % to 100 % of the end of the mist. The ring is also capped (`ringMaxDistance`, 512 blocks): even where the mist ends further away (No Man's Land dimensions, the Friend Moon, a future preset), the landscape always closes in a ring. The far fog of step 3 uses the same capped end.
+7. Underwater, in lava or powder snow, blinded or in darkness, the module does nothing: DH already drowns its LODs.
 
-**What it gives with the `fallow_v3` preset.** Misty (end 52) and veiled (end 96) families: no LOD drawn. Clearings (end 500 by day, 260 at night): the landscape appears progressively beyond 128 blocks. The transition follows ATMOSPHERICS' smoothing when walking in or out of a clearing.
+**What it gives with the `fallow_v3` preset.** Misty (end 52) and veiled (end 96) families: no LOD drawn. Clearings (end 500 by day, 260 at night): the landscape appears progressively beyond the normal terrain, then dissolves into the sky between 280 and 500 blocks by day (145 and 260 at night). The transition follows ATMOSPHERICS' smoothing when walking in or out of a clearing.
+
+**Checked in game on 2026-10-29** (development client with only DH 3.3.3, ATMOSPHERICS and `fallow`, `fallow_v3` preset, render distance 12, LOD radius 48 chunks, software OpenGL): from a hill in a clearing, a mountain range about 700 blocks away was visible as a silhouette before the ring, and is gone with it; the landscape up to about 450 blocks stays visible and dissolves into the haze; same result at dusk with the 260-block night mist. The frozen-image case of step 5 comes from reading DH's code; it was not seen on that client.
 
 **Fallback.** The shipped `DistantHorizons.toml` has `farFogMin = farFogMax = 1`: without the module (switched off, error, other API version) every LOD is fully in the fog. No regression: the pack looks as it did without DH.
 
-Config (`fallow-client.toml`, `[horizon]` section): `enabled` (true), `skipHiddenLods` (true).
+Config (`fallow-client.toml`, `[horizon]` section): `enabled` (true), `skipHiddenLods` (true), `ringMaxDistance` (512 blocks, 64 to 4,096).
 
 ### Two fixes for DH 3.3.3
 
@@ -274,6 +278,9 @@ None of this has been done. These tests are also gathered with those of the othe
 | H10 | Mac Apple Silicon, 1 hour of play with DH | No JVM crash (`hs_err_pid*.log`) |
 | H11 | Chunky `start` on the server, then a player exploring | DH pauses its generation during Chunky and resumes; no holes in the LODs (DH #607) |
 | H12 | Seasons (Ecliptic) and Polytone colours | LODs take the colours of the nearby terrain |
+| H13 | From a hill in a clearing, by day, look at mountains more than 600 blocks away | They are not visible: the landscape dissolves into the haze before 500 blocks, no mist-coloured silhouette against the sky |
+| H14 | Same place at night, then `ringMaxDistance = 128` in `fallow-client.toml` | The ring closes at 260 blocks, then at 128 |
+| H15 | Spend a minute in a clearing on a hill, then walk back into the mist and turn around | No frozen relief at the edge of the terrain in the mist |
 
 ### Terrain (Tectonic, Streams Reflowing)
 

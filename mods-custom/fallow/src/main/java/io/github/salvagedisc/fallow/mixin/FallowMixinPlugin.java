@@ -26,6 +26,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             "ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS),
             "horizon.FogRendererMixin", List.of(ModIds.DISTANT_HORIZONS),
             "horizon.GLStateMixin", List.of(ModIds.DISTANT_HORIZONS),
+            "horizon.VanillaFadeMixin", List.of(ModIds.DISTANT_HORIZONS),
+            "horizon.FarFadeMixin", List.of(ModIds.DISTANT_HORIZONS),
             "horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY));
 
     @Override
