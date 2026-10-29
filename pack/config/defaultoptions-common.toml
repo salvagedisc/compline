@@ -1,6 +1,9 @@
 # Fallow : packs de ressources activés au premier lancement (et ajoutés ensuite
 # à chaque mise à jour du pack, une seule fois chacun). Du moins prioritaire au
-# plus prioritaire : les extensions de Fresh Animations passent au-dessus de lui,
+# plus prioritaire : fallow-textures (dossier du pack, tiré de Vanilla Evolved)
+# habille les blocs et les objets sous tous les autres, pour que les feuilles de
+# Better Leaves et les objets animés de Fresh Animations gardent la main ;
+# les extensions de Fresh Animations passent au-dessus de lui,
 # fallow-interface (dossier du pack, tiré de GUI Revision) habille l'interface
 # vanilla, celle des mods, la barre d'action et le journal Questlog, Supernova
 # apporte trois morceaux du paquet musical, et
@@ -13,6 +16,7 @@ defaultResourcePacks = [
 	"vanilla",
 	"mod_resources",
 	"fabric",
+	"file/fallow-textures",
 	"file/Better-Leaves-9.6.zip",
 	"file/FreshAnimations_v1.11_1.20+.zip",
 	"file/FA+Details-v2.2.1.zip",

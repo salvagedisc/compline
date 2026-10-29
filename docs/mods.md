@@ -194,6 +194,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 | `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Fallow's interface, built from GUI Revision and GUI Revision Compats: vanilla screens, 14 mods' screens, HUD and Questlog journal in mist and sage, titles in French ([credits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
+| `fallow-textures` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-textures.md), added 2026-10-29, not seen in game) | Blocks and items from Vanilla Evolved (CC BY-NC-SA 4.0), without its sky, foliage colours and creatures ([credits](../pack/resourcepacks/fallow-textures/CREDITS.md), [0015](decisions/0015-textures.md)) |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Libraries

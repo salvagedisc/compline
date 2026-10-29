@@ -14,7 +14,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, the Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The game is in French, the `fallow-textures`, Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active [Y1], graphics set to "Fancy" (« Détaillés »), music at 40%.
 - [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows the Fallow logo over the misty forest, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
@@ -25,6 +25,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
+- [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
 
 ## Session 2: the mist and the clearings
 
@@ -137,5 +138,6 @@ Once the results are in:
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
 | N (quests) | [plan/quetes.md](plan/quetes.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
+| Y (textures) | [plan/fallow-textures.md](plan/fallow-textures.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
