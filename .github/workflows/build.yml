@@ -53,6 +53,8 @@ jobs:
         with:
           name: ${{ steps.export.outputs.name }}
           path: dist/*.mrpack
+          # Un .mrpack par push remplit vite le stockage des artefacts.
+          retention-days: 7
 
   # Le mod custom fallow (mods-custom/fallow/) doit toujours compiler.
   mod-fallow:
@@ -79,3 +81,4 @@ jobs:
         with:
           name: fallow-mod-${{ github.sha }}
           path: mods-custom/fallow/build/libs/*.jar
+          retention-days: 7
