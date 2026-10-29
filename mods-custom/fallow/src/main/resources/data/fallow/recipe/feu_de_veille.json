@@ -8,22 +8,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    " R ",
-    "CLC",
-    "SSS"
+    " O ",
+    "PCP",
+    " S "
   ],
   "key": {
-    "R": {
-      "item": "nomansland:resin"
+    "O": {
+      "item": "nomansland:resin_oil_bottle"
+    },
+    "P": {
+      "item": "nomansland:polished_stone_slab"
     },
     "C": {
       "item": "minecraft:charcoal"
     },
-    "L": {
-      "tag": "minecraft:logs_that_burn"
-    },
     "S": {
-      "item": "minecraft:cobblestone"
+      "item": "nomansland:polished_stone"
     }
   },
   "result": {

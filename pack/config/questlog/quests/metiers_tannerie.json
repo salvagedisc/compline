@@ -2,21 +2,51 @@
   "chapter": "questlog:fallow_metiers",
   "sort_order": 14,
   "title": "La tannerie",
-  "description": "Un animal donne une peau brute.\n\nÀ l’établi, avec des cendres, elle devient une peau préparée. Posée sur un plateau en bambou, sous la pluie ou sous un stalactite qui goutte, elle devient du cuir en cinq minutes.\n\nDu charbon de bois brûlé sur un feu de camp donne des cendres.",
+  "description": "Un animal donne une peau. Posée sur un séchoir à peaux, elle sèche à l’air en quelques minutes.\n\nÉcorcez une bûche à la hache : il en tombe parfois de l’écorce. Deux écorces font une poudre tannique, à verser dans un tonneau à tanner. Une peau séchée plongée dans le tonneau devient du cuir.\n\nLa chair putréfiée sèche aussi : elle donne des tendons, qui remplacent la ficelle.",
   "icon": {
-    "item": "fallow:peau_brute"
+    "item": "tannery:cow_hide"
   },
   "requirements": [
     {
-      "type": "questlog:item_obtain",
-      "item": "fallow:peau_brute",
-      "required_amount": 1
+      "type": "questlog:or",
+      "objectives": [
+        {
+          "type": "questlog:item_obtain",
+          "item": "tannery:cow_hide",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "tannery:horse_hide",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "tannery:goat_hide",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "tannery:pig_hide",
+          "required_amount": 1
+        },
+        {
+          "type": "questlog:item_obtain",
+          "item": "tannery:sheep_hide",
+          "required_amount": 1
+        }
+      ]
     }
   ],
   "objectives": [
     {
       "type": "questlog:item_obtain",
-      "item": "fallow:peau_preparee",
+      "item": "tannery:dry_animal_hide",
+      "required_amount": 1
+    },
+    {
+      "type": "questlog:item_obtain",
+      "item": "tannery:tannic_powder",
       "required_amount": 1
     },
     {

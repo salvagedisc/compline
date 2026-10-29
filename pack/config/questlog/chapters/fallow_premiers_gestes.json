@@ -1,0 +1,9 @@
+{
+  "name": "Premiers gestes",
+  "icon": {
+    "item": "minecraft:flint"
+  },
+  "order": 1,
+  "default_chapter": false,
+  "hidden": false
+}

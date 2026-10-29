@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 6,
+  "title": "La pioche",
+  "description": "Une tête de pioche taillée et un bâton. Avec elle, la roche cède, le charbon, le cuivre et le fer aussi.\n\nUne pelle et une houe se taillent de la même façon.",
+  "icon": {
+    "item": "minecraft:stone_pickaxe"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_hache"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "minecraft:stone_pickaxe",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

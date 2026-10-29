@@ -14,8 +14,10 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
+    private static final ModConfigSpec.BooleanValue CIEL_FRIEND_MOON;
     private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
+    private static final ModConfigSpec.IntValue HORIZON_RING_MAX_DISTANCE;
     private static final ModConfigSpec.BooleanValue TITRES_ENABLED;
     private static final ModConfigSpec.BooleanValue SAC_ENABLED;
     private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
@@ -24,6 +26,9 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
     private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
+    private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
+    private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
+    private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -39,6 +44,15 @@ public final class FallowConfig {
                 .comment("Vider le cache de brume d'ATMOSPHERICS dès que le serveur change des biomes",
                         "(/fillbiome, conversion en clairière), pour que la brume réagisse sans que le joueur bouge.")
                 .define("clearFogOnBiomeUpdate", true);
+        CIEL_CLEARING_FADE = client
+                .comment("Quand une clairière s'ouvre ou se referme, la brume s'éclaircit ou s'épaissit en douceur :",
+                        "secondes pour passer d'une brume pleine à un ciel dégagé, ou l'inverse (le fondu ralentit en fin",
+                        "de course ; la brume visible part dans les 4 ou 5 premières). 0 : fondu normal d'ATMOSPHERICS, presque immédiat.")
+                .defineInRange("clearingFadeSeconds", 10.0, 0.0, 30.0);
+        CIEL_FRIEND_MOON = client
+                .comment("Laisser No Man's Land dessiner la Lune Amie et son ombre sous le ciel d'ATMOSPHERICS.",
+                        "Faux : la Lune Amie n'apparaît pas au Point de rencontre et l'ombre ne montre pas le chemin.")
+                .define("friendMoon", true);
         client.pop();
 
         client.comment("Module horizon (client) : le paysage lointain de Distant Horizons suit la brume du terrain.").push("horizon");
@@ -50,6 +64,11 @@ public final class FallowConfig {
         HORIZON_SKIP_HIDDEN_LODS = client
                 .comment("Ne pas dessiner du tout les LOD quand la brume les cache entièrement (gain de performance).")
                 .define("skipHiddenLods", true);
+        HORIZON_RING_MAX_DISTANCE = client
+                .comment("Rayon maximal du cercle de brume, en blocs : même là où la brume se lève, le paysage lointain",
+                        "s'efface toujours dans la brume puis le ciel à cette distance (ou avant, si la brume du terrain",
+                        "finit plus tôt : 500 blocs de jour en clairière, 260 la nuit).")
+                .defineInRange("ringMaxDistance", 512, 64, 4096);
         client.pop();
 
         client.comment("Module titres (client) : le nom de chaque écran sur une plaque au-dessus du panneau.").push("titres");
@@ -88,13 +107,25 @@ public final class FallowConfig {
         common.pop();
 
         common.comment("Modules clairiere et dissipateur : poser un feu de veille (rayon 16), une lanterne de clairière (32)",
-                "ou faire tourner un dissipateur (64) change les biomes autour en clairière, une fois pour toutes.").push("clairiere");
+                "ou faire tourner un dissipateur (64) change les biomes autour en clairière ; le retirer y rend la brume.").push("clairiere");
         CLAIRIERE_ENABLED = common
                 .comment("Interrupteur de la conversion (serveur). Faux : les blocs restent, mais ne changent plus rien.")
                 .define("enabled", true);
         CLAIRIERE_CHUNKS_PER_TICK = common
                 .comment("Tronçons (16 × 16 blocs) convertis par tick. Un dissipateur en touche environ 80.")
                 .defineInRange("chunksPerTick", 2, 1, 16);
+        CLAIRIERE_RING_TICKS = common
+                .comment("La clairière s'ouvre (et se referme) en vague, un anneau de 4 blocs tous les tant de ticks.",
+                        "6 : une lanterne (32 blocs) en 2,7 secondes, un dissipateur (64) en 5. 1 : presque d'un coup.")
+                .defineInRange("ringTicks", 6, 1, 40);
+        common.pop();
+
+        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag fallow:outil_requis),",
+                "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
+        OUTILS_ENABLED = common
+                .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.",
+                        "Client et serveur doivent avoir la même valeur.")
+                .define("enabled", true);
         common.pop();
         COMMON_SPEC = common.build();
     }
@@ -114,12 +145,25 @@ public final class FallowConfig {
         return cielEnabled() && read(CLIENT_SPEC, CIEL_CLEAR_FOG_ON_BIOME_UPDATE);
     }
 
+    /** Constante de temps du fondu de brume après un changement de biomes, en secondes ; 0 si coupé. */
+    public static float cielClearingFadeSeconds() {
+        return cielEnabled() ? (float) read(CLIENT_SPEC, CIEL_CLEARING_FADE) : 0.0F;
+    }
+
+    public static boolean cielFriendMoon() {
+        return cielEnabled() && read(CLIENT_SPEC, CIEL_FRIEND_MOON);
+    }
+
     public static boolean horizonEnabled() {
         return read(CLIENT_SPEC, HORIZON_ENABLED);
     }
 
     public static boolean horizonSkipHiddenLods() {
         return horizonEnabled() && read(CLIENT_SPEC, HORIZON_SKIP_HIDDEN_LODS);
+    }
+
+    public static int horizonRingMaxDistance() {
+        return read(CLIENT_SPEC, HORIZON_RING_MAX_DISTANCE);
     }
 
     public static boolean titresEnabled() {
@@ -154,12 +198,24 @@ public final class FallowConfig {
         return read(COMMON_SPEC, CLAIRIERE_CHUNKS_PER_TICK);
     }
 
+    public static int clairiereRingTicks() {
+        return read(COMMON_SPEC, CLAIRIERE_RING_TICKS);
+    }
+
+    public static boolean outilsEnabled() {
+        return read(COMMON_SPEC, OUTILS_ENABLED);
+    }
+
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
     static boolean read(ModConfigSpec spec, ModConfigSpec.BooleanValue value) {
         return spec.isLoaded() ? value.get() : value.getDefault();
     }
 
     static int read(ModConfigSpec spec, ModConfigSpec.IntValue value) {
+        return spec.isLoaded() ? value.get() : value.getDefault();
+    }
+
+    static double read(ModConfigSpec spec, ModConfigSpec.DoubleValue value) {
         return spec.isLoaded() ? value.get() : value.getDefault();
     }
 }

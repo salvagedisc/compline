@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.4 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.12 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -32,10 +32,10 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
-| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client |
+| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; No Man's Land for the Friendly Moon | 6, all client |
 | `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
-| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 3: `horizon.FogRendererMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
+| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
 | `dissipateur` | both | Create | none |
 
@@ -78,6 +78,23 @@ ATMOSPHERICS computes the mist from the biomes around the player. It keeps the r
   It returns `true` if the cache was cleared, or scheduled to be cleared on the render thread. It returns `false` if ATMOSPHERICS is absent, if the module is off or if we are on a server. `FallowSky.isFogCacheAvailable()` answers the same question without clearing anything. KubeJS may require the class to be allowed in its class filter. A server script that wants to trigger the clearing on players' machines must send them a packet, for example with `NetworkEvents.dataReceived` on the client side.
 
 The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS method, reached through a mixin accessor (`@Invoker`).
+
+### The Friendly Moon under ATMOSPHERICS
+
+**The problem** (found in the first in-game test, 2026-10-28: the Friendly Moon never appeared at the Meeting Point). No Man's Land draws the Friendly Moon, its shadow in the sky and its fog from mixins inside the vanilla body of `renderSky` (`FriendMoonRenderer.renderFriendMoon` after the moon is drawn). The Friendly Moon's opacity rises only there, in `updateFriendMoonPosition`. ATMOSPHERICS cancels that body and gives it back only when `Atmospherics.isFriendMoonActive()` is true, that is when that opacity is already above 0.001. Neither can start first: the Friendly Moon could never appear, and the shadow that shows the way after the dream was never drawn either. Read in NML 1.6.3 and ATMOSPHERICS 2.6.5; ATMOSPHERICS 2.6.5.2 changes nothing there.
+
+**The mechanism** (`FriendMoonRelay` and two mixins):
+
+1. `FriendMoonSkyMixin` wraps the call to `renderSky`, like the moon's `LevelRendererMixin`, and also wraps the sky fog setup (`skyFogSetup`) it passes. ATMOSPHERICS runs that setup right after cancelling the vanilla body; the vanilla body runs it as its first step, which the mixin spots separately.
+2. After `renderSky`, if the fog setup ran but the vanilla body did not, ATMOSPHERICS drew the sky. `fallow` then makes the call NML makes in the vanilla sky: `renderFriendMoon` and `renderFriendShadow`, with the same matrices, then `renderFinalize` (which lifts NML's stencil) and restores the render state.
+3. At the Meeting Point at night, the Friendly Moon starts to fade in on this first frame; from the next one, ATMOSPHERICS hands the sky back to vanilla and NML carries on alone, as it was designed to (NML's fog replaces ATMOSPHERICS' mist while the Friendly Moon is up). Away from the Point, during the 8 nights after the dream, the shadow stays drawn by `fallow` over ATMOSPHERICS' sky, which keeps its mist.
+4. `AtmosphericsDreamMixin` makes `Atmospherics.isFriendMoonActive()` also true while the moonlight dream is shown, so ATMOSPHERICS leaves the sky and the fog to the dream whatever the order of the two mods' mixins on `renderSky`.
+
+**Checked on 2026-10-29** in a development client (llvmpipe) with only No Man's Land 1.6.3, ATMOSPHERICS 2.6.5 and `fallow` 0.4.10, on a new world (seed "fallow", Point at 616, −1288, pool at 631, 78, −1273), at midnight, 5 blocks from the pool: the face appears, wakes and speaks, and the "Friendship" goal is reached 10 s after joining. With `ciel.friendMoon = false`, nothing appears, as in the game of 2026-10-28. The shadow (C14) and the dream (C15) were not checked.
+
+A drawing error is logged once, without crashing the rendering. Config: `ciel.friendMoon` (true by default; false gives back the old behaviour, where the Friendly Moon does not appear under ATMOSPHERICS).
+
+**Known limitation.** On the single frame where `fallow` fades the Friendly Moon in, it is drawn over ATMOSPHERICS' stars instead of hiding them; the shadow, drawn the whole night away from the Point, darkens the stars behind it instead of masking them.
 
 ## `sac` module
 
@@ -133,13 +150,17 @@ Decision [0011](../decisions/0011-tectonic-streams-distant-horizons.md). Distant
 2. After DH's initialisation (`DhApiAfterDhInitEvent`), `HorizonClient` registers two DH events, if the DH API major version is 7.
 3. `DhApiBeforeFogRenderEvent`, every frame: `HorizonFog` sets DH's far fog to linear, from `start / R` to `end / R` (R = LOD radius in blocks, read from DH's config), thickness 0 to 1. A LOD at distance d is therefore as fogged as a block of terrain at the same distance.
 4. `DhApiBeforeRenderEvent`: when the mist ends before the edge of the normal terrain (render distance × 16 blocks), every LOD is beyond the end of the mist, so invisible; the module cancels the whole LOD rendering of the frame. In misty areas DH costs no GPU time.
-5. Underwater, in lava or powder snow, blinded or in darkness, the module does nothing: DH already drowns its LODs.
+5. `VanillaFadeMixin` skips, in those same frames, DH's fade between the normal terrain and the LODs (`ClientApi.renderFadeOpaque` and `renderFadeTransparent`). That fade blends the edge of the normal terrain with DH's LOD texture, which is only cleared and redrawn by the LOD rendering the module has just cancelled: it would blend in the last LOD image drawn, frozen, for example the clearing's mountains after walking back into the mist.
+6. **The mist ring** (`FarFadeMixin`). A LOD drowned in the mist takes the mist colour, which is not the colour of the sky behind it: without more, the far mountains stay visible as mist-coloured silhouettes up to the end of the LOD radius (1,536 blocks), and the clearing has no horizon. DH already has a far fade that dissolves LODs into the sky, from 50 % to 90 % of its far clip plane. The mixin hands it the ring distance instead: the LODs dissolve into the sky from 55 % to 100 % of the end of the mist. The ring is also capped (`ringMaxDistance`, 512 blocks): even where the mist ends further away (No Man's Land dimensions, the Friend Moon, a future preset), the landscape always closes in a ring. The far fog of step 3 uses the same capped end.
+7. Underwater, in lava or powder snow, blinded or in darkness, the module does nothing: DH already drowns its LODs.
 
-**What it gives with the `fallow_v3` preset.** Misty (end 52) and veiled (end 96) families: no LOD drawn. Clearings (end 500 by day, 260 at night): the landscape appears progressively beyond 128 blocks. The transition follows ATMOSPHERICS' smoothing when walking in or out of a clearing.
+**What it gives with the `fallow_v3` preset.** Misty (end 52) and veiled (end 96) families: no LOD drawn. Clearings (end 500 by day, 260 at night): the landscape appears progressively beyond the normal terrain, then dissolves into the sky between 280 and 500 blocks by day (145 and 260 at night). The transition follows ATMOSPHERICS' smoothing when walking in or out of a clearing.
+
+**Checked in game on 2026-10-29** (development client with only DH 3.3.3, ATMOSPHERICS and `fallow`, `fallow_v3` preset, render distance 12, LOD radius 48 chunks, software OpenGL): from a hill in a clearing, a mountain range about 700 blocks away was visible as a silhouette before the ring, and is gone with it; the landscape up to about 450 blocks stays visible and dissolves into the haze; same result at dusk with the 260-block night mist. The frozen-image case of step 5 comes from reading DH's code; it was not seen on that client.
 
 **Fallback.** The shipped `DistantHorizons.toml` has `farFogMin = farFogMax = 1`: without the module (switched off, error, other API version) every LOD is fully in the fog. No regression: the pack looks as it did without DH.
 
-Config (`fallow-client.toml`, `[horizon]` section): `enabled` (true), `skipHiddenLods` (true).
+Config (`fallow-client.toml`, `[horizon]` section): `enabled` (true), `skipHiddenLods` (true), `ringMaxDistance` (512 blocks, 64 to 4,096).
 
 ### Two fixes for DH 3.3.3
 
@@ -156,19 +177,27 @@ Plan [10.3](10-recentrage.md#103-the-mist-that-lifts), layer 3: the mist lifts w
 
 | Block | Radius | Recipe |
 |---|---|---|
-| Vigil Fire (`fallow:feu_de_veille`), a stone hearth with embers | 16 | No Man's Land resin, two charcoal, a log, three cobblestone |
-| Clearing Lantern (`fallow:lanterne_de_clairiere`) | 32 | A lantern, two Overgeared iron plates, two resin |
+| Vigil Fire (`fallow:feu_de_veille`), a stone brazier on a foot with embers and a pale flame | 16 | A No Man's Land resin oil bottle, two polished stone slabs, a charcoal, a polished stone |
+| Clearing Lantern (`fallow:lanterne_de_clairiere`), a standing lantern of blackened iron around a glowing quartzite crystal | 32 | Two Overgeared iron plates, two glass panes, a No Man's Land quartzite cluster |
 | Dissipator (`fallow:dissipateur`, `dissipateur` module) | 64 | Encased fan, brass casing, propeller, two precision mechanisms |
 
-**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, for good: breaking the block does not bring the mist back. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, two chunks per tick (`chunksPerTick`), then sends the new biomes to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
+Both have their own model and textures since 0.4.12 (`textures/block/feu_de_veille_*`, `lanterne_de_clairiere_*`; the flame is animated and, like the embers and the crystal, lit at full brightness through NeoForge's per-face light). Before, the fire was a cobblestone campfire and the lantern the vanilla lantern, and players mixed them up with those.
 
-The conversions in progress are lost if the server stops; placing the block again finishes them. Operators can convert by command: `/fallow clairiere <radius>` around the position of the command (4 to 256).
+**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, as long as they stay. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, ring by ring (see the transition below), and sends the new biomes of each ring to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
 
-Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false keeps the blocks but they no longer convert anything), `chunksPerTick` (2).
+**The mist comes back** (0.4.12). Each source (fire, lantern, charged dissipator, command) is recorded with its radius in the world's saved data (`fallow_clairieres`, `ClearingSources`). When a fire or a lantern leaves the world (broken, blown up, replaced: `onRemove`), or a charged dissipator is broken (`destroy`, called by Create), its source is removed and a restore job runs over its disc: every clearing cell that no remaining source covers goes back to the biome the world generator places there (`BiomeSource.getNoiseBiome` with the world's sampler, as at generation). Nothing is stored per cell: the seed is enough. The nearest player within 8 blocks reads "La brume revient." Checked in game on 2026-10-29: a lantern removed gives back its 8,639 cells; a fire inside a lantern's disc, removed, gives back none.
+
+**The transition** (0.4.12). A clearing does not appear at once. `ClearingConverter` first loads the chunks of the disc, then converts it ring by ring, 4 blocks wide, every `ringTicks` ticks (6): from the centre outwards when the mist lifts, from the edge inwards when it comes back. A lantern (32 blocks) takes about 2.7 seconds, a dissipator (64 blocks) about 5. Each ring sends a few cloud puffs (`CLOUD` particles, at most 160 per ring, to players within 160 blocks of the edge) that drift outwards when the mist leaves and inwards when it returns. On the client, `AtmosphericsFadeMixin` slows the fog distance for 15 seconds after each biome packet (`FogCache.smooth`): the fog density (1 / end distance) moves towards its target at a bounded speed, so going from full mist to a clear sky takes `clearingFadeSeconds` (10; the visible mist goes in the first 4 or 5) and the near field clears at a steady pace. Without it, ATMOSPHERICS fades the distance linearly in about a second and the mist seems to vanish in the first few per cent. The grass colour changes with each ring.
+
+Limits: a clearing made before 0.4.12 has no recorded source. Breaking its block still gives the mist back, but a neighbouring old clearing does not hold its own cells when another one is removed over it. A Create contraption that picks up a charged dissipator removes it without `destroy`, so its clearing stays.
+
+The jobs in progress are lost if the server stops; placing the block again finishes a conversion, `/fallow brume` a restoration. Operators can convert by command: `/fallow clairiere <radius>` around the position of the command (4 to 256), and give the mist back with `/fallow brume <radius>`, which also removes the sources whose centre is in the disc (and gives their whole disc back).
+
+Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false keeps the blocks but they no longer convert anything), `chunksPerTick` (2, chunks loaded per tick before the wave starts), `ringTicks` (6, ticks between two rings). Client (`fallow-client.toml`, `[ciel]` section): `clearingFadeSeconds` (10; 0 gives back the ATMOSPHERICS fade).
 
 ## `dissipateur` module
 
-The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken and placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
+The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once, until it is broken; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken, it gives the mist back to its disc; placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
 
 Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
 
@@ -188,6 +217,12 @@ Client only. Each screen's name leaves the panel for a plate centred over its to
 
 Config (`fallow-client.toml`, `[titres]` section): `enabled` (true; false gives the game its labels back).
 
+## `outils` module
+
+Server and client, no mod required ([first gestures](premiers-gestes.md)). With bare hands, you gather but you do not cut. A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`, shipped in the jar) or when it would drop nothing without the correct tool (`BlockState.requiresCorrectToolForDrops()`: stone, ores, bricks, metal blocks). If the main-hand item is not correct for it (`ItemStack.isCorrectToolForDrops`), `PlayerEvent.BreakSpeed` sets the speed to 0 on both sides, so the client never predicts a break the server refuses, and `PlayerEvent.HarvestCheck` refuses the drops. On the client, a hint shows in the action bar at most every 40 ticks: « Il te faut une hache / une pioche / une pelle / une houe / un outil », chosen from the vanilla `mineable/*` tags, or « Ton outil n'est pas assez solide » when the held item is of the right kind but too weak. The `fallow:sans_outil` tag keeps what grows (`#minecraft:sword_efficient`, bamboo, azaleas, a few mod plants) and snow breakable by hand. Creative players and `FakePlayer`s (Create deployers) are left alone. Both tags can be extended by datapack without recompiling.
+
+Config (`fallow-common.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back; client and server must agree).
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -202,10 +237,13 @@ None of this has been done. These tests are also gathered with those of the othe
 | C4 | Rain, then thunderstorm | The moon fades with the rain, like the rest of the sky |
 | C5 | Underwater, in powder snow, with blindness | No double moon and no vanishing moon |
 | C6 | No Man's Land dimension, Friend Moon | The sky in these cases stays that of their mod (log without `fallow` error) |
+| C13 | Meeting Point at night (`/meetingpoint`, then within 16 blocks of the pool), look up | The sleeping face fades in, then wakes; the mist gives way to No Man's Land's fog. With `ciel.friendMoon = false`: nothing appears (the bug of 2026-10-28) |
+| C14 | The 8 nights after the dream, far from the Point | The moon's shadow in the sky, towards the Point, over ATMOSPHERICS' sky and mist; it fades when arriving |
+| C15 | Moonlight dream | The dream's own sky, not ATMOSPHERICS' |
 | C7 | `ciel.redrawMoon = false`, then `ciel.enabled = false` | Back to ATMOSPHERICS' vanilla moon |
 | C8 | `/fillbiome` around a stationary player, with `clearFogOnBiomeUpdate` true then false | The mist changes immediately, then only after a step |
 | C9 | KubeJS call of `FallowSky.clearFogCache()` | Returns `true`, the mist is recomputed |
-| C10 | Log at startup | "Module ciel chargé", no `fallow` mixin warning |
+| C10 | Log at startup | "Module ciel chargé", "Lune Amie de No Man's Land dessinée sous ATMOSPHERICS", no `fallow` mixin warning |
 | C11 | Frames per second at night, with and without the module | No visible difference |
 | C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
 
@@ -254,6 +292,9 @@ None of this has been done. These tests are also gathered with those of the othe
 | H10 | Mac Apple Silicon, 1 hour of play with DH | No JVM crash (`hs_err_pid*.log`) |
 | H11 | Chunky `start` on the server, then a player exploring | DH pauses its generation during Chunky and resumes; no holes in the LODs (DH #607) |
 | H12 | Seasons (Ecliptic) and Polytone colours | LODs take the colours of the nearby terrain |
+| H13 | From a hill in a clearing, by day, look at mountains more than 600 blocks away | They are not visible: the landscape dissolves into the haze before 500 blocks, no mist-coloured silhouette against the sky |
+| H14 | Same place at night, then `ringMaxDistance = 128` in `fallow-client.toml` | The ring closes at 260 blocks, then at 128 |
+| H15 | Spend a minute in a clearing on a hill, then walk back into the mist and turn around | No frozen relief at the edge of the terrain in the mist |
 
 ### Terrain (Tectonic, Streams Reflowing)
 
@@ -280,13 +321,18 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | K2 | F3 at the edge of the disc | `fallow:clairiere` inside, the old biome outside, a round edge of about 16 blocks |
 | K3 | Lantern in a snowy taiga, fire in a savanna | `clairiere_froide` (snow still falls), `clairiere_chaude` |
 | K4 | Clearing on a coast | The ocean and the beach keep their biome; a river crossing the disc becomes a clearing |
-| K5 | Break the fire, leave and come back, restart the server | The clearing stays |
+| K5 | Leave the fire in place, leave and come back, restart the server | The clearing stays |
+| K12 | Break the fire, then a lantern | "La brume revient."; the mist comes back over its disc within seconds, F3 shows the old biome |
+| K13 | A fire inside a lantern's disc, break the fire; then the lantern | Nothing changes; then the whole disc goes back to the mist |
+| K14 | Charged dissipator, broken | The mist comes back over 64 blocks |
+| K15 | The fire and the lantern side by side, by day and at night | Neither looks like a vanilla campfire or lantern; the pale flame flickers, the embers and the crystal glow |
+| K16 | Place a lantern, wait, then break it, watching the edge of the disc | The grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over 4 or 5 seconds; on breaking, the reverse, from the edge inwards |
 | K6 | Clearing music | Node "Clairière" of True Adaptive Music after 30 s |
 | K7 | Far view from a clearing on a hill | Distant Horizons landscape beyond 128 blocks (H3) |
 | K8 | Dissipator driven at 16 RPM, then 64 RPM, then overstressed | Nothing at 16; at 64 the goggles count up to 100 % and the disc of 64 converts; overstress resets the charge |
 | K9 | Dissipator on an airship (Sable) | Note what happens: it converts where the ship is when it finishes charging |
 | K10 | Ecliptic seasons and Cold Sweat in a clearing | Crops grow, temperature consistent with the old biome |
-| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips |
+| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips (the fire: resin oil bottle, polished stone; the lantern: quartzite cluster, glass panes) |
 
 ### Titles
 
@@ -299,6 +345,10 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | E5 | Game in English | English names, same plates |
 | E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
 | E7 | `titres.enabled = false`, then `fallow-interface` disabled | The game's labels come back in both cases, no plate |
+
+### Tools
+
+The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 
 ## Maintenance
 
