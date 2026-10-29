@@ -14,20 +14,22 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, the Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
-- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
+- [ ] The game is in French, the `fallow-textures`, Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active [Y1], graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows the Fallow logo over the misty forest, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
 - [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
+- [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from NML pebbles, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
+- [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
 
 ## Session 2: the mist and the clearings
 
-- [ ] **Quest journal** (Questlog): opens from the inventory; four chapters in French; guides complete when read; the tannery and machines quests appear with a raw hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
+- [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
@@ -49,7 +51,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Frames per second at night: no visible difference with the `ciel` (sky) module turned off [C11].
 - [ ] `/ec lunarForecast`: no blood moon [L2].
 - [ ] An alchemist ruin: look at the engraving for 2 s (zoom and sound), sleep within 3 days, see the dream through to the end (advancement « Premier contact » (first contact)) [L3, L4]. Break jars: the crumpled note sometimes drops, in French [L11].
-- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6, C13]; it did not in the test of 2026-10-28, fixed by `fallow` 0.4.5. The nights after the dream, the moon's shadow points the way over the mist [L4, C14]. With a forced blue moon, it sets in 2 s with a message [L6].
+- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6, C13]; it did not in the test of 2026-10-28, fixed by `fallow` 0.4.10. The nights after the dream, the moon's shadow points the way over the mist [L4, C14]. With a forced blue moon, it sets in 2 s with a message [L6].
 - [ ] Offerings (bone, flower, empty map, turtle scute), then put out one candle, then all of them: sentences in French, then an angry moon [L8, L9].
 - [ ] A rainy night at the Meeting Point: does the Friendly Moon appear? [L12]
 - [ ] Nights are truly dark (More Darkness), auroras in cold biomes.
@@ -62,7 +64,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
-- [ ] **Tannery**: a cow and a horse give a raw hide; hide + ashes at the crafting table; charcoal on a campfire gives ashes; prepared hide on the bamboo tray in the rain or under a dripstone → leather; EMI shows both steps. Note whether bamboo is too rare [T].
+- [ ] **Tannery**: a cow and a horse give their hide; the hide dries on a tanning rack; stripping a log with an axe gives bark, two barks give tannic powder; dry hide in the tanning barrel → leather; the barrel messages are in French; EMI shows no satchel [T].
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s fallow:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
@@ -74,9 +76,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Oceans and reefs: Hybrid Aquatic sharks, jellyfish, orcas, octopuses; Naturalist anglerfish, blobfish, isopod, ray; Alex's Mobs giant squid [D3]. Lobster texture correct [D8].
 - [ ] Flowering meadows: only Longwings butterflies [D5]. Lush caves: C&C otter, no dragonfly or snail [D4].
 - [ ] No deer, goose, bass or NML turtle, no rabbit, no Frienderman (`/summon nomansland:frienderman` disappears) [F3, F6, F10].
-- [ ] EMI and Wildex: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
+- [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
-- [ ] Wildex: a new species is recorded; its pages look good with the chosen theme [I3].
 
 ## Session 6: terrain, Create and airships
 
@@ -125,6 +126,7 @@ Once the results are in:
 | Code | Detailed list |
 | --- | --- |
 | C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
@@ -135,5 +137,6 @@ Once the results are in:
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
 | N (quests) | [plan/quetes.md](plan/quetes.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
+| Y (textures) | [plan/fallow-textures.md](plan/fallow-textures.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
