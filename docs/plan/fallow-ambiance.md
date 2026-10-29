@@ -150,7 +150,7 @@ To compensate for the absence of shaders, read from the jars (Polytone 5.1.3, AT
 
 Contraption Lights' coloured light stays off (its default value): Polytone alone carries the colour.
 
-**The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack's own moon (a pale square with cold rays, in the style of that sun) was removed on 2026-10-29 at the team's request: the vanilla moon is back, drawn 1.35× by ATMOSPHERICS. A sun and moon resource pack can replace both textures; Enhanced Celestials keeps tinting whichever moon is active.
+**The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack's own moon (a pale square with cold rays, in the style of that sun) was removed on 2026-10-29 at the team's request: the moon now comes from the Default HD Sun and Moon resource pack (square, finer, like the Friendly Moon), drawn 1.35× by ATMOSPHERICS. ATMOSPHERICS' built-in pack is registered at the top, so its sun still wins over Default HD's. Enhanced Celestials keeps tinting that moon.
 
 ## What remains to be tuned in game
 

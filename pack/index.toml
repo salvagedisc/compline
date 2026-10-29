@@ -26,7 +26,7 @@ hash = "48b83973132d41c7fe23f5861c1ff580b3734ee0397c62ae1031e2dd289284f2"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "a1e8e8b8a10da8db06cadf57f28e9a13c48ec2bd4c04d92e1be69ae8e4997e39"
+hash = "e821b242e604c62ce92ec1bbe9f3e260fbef9864cbd9b2ca0f36a105372c3f09"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
@@ -2310,6 +2310,11 @@ metafile = true
 [[files]]
 file = "resourcepacks/better-leaves.pw.toml"
 hash = "c26f8da8b6f013fb7e917e29fc6ae783eb379c539da12d9d61196bc762fd26e1"
+metafile = true
+
+[[files]]
+file = "resourcepacks/default-hd-sun-and-moon.pw.toml"
+hash = "2e22ea8f460f959d794feeac24b663ef190382f791a9528f130756f6e9d199a5"
 metafile = true
 
 [[files]]

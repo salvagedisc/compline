@@ -57,7 +57,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Wind and light without shaders ([0013](docs/decisions/0013-vent-et-lumiere.md)): Where Winds Blow (+ ToucanLib), grass and leaves that sway, slanted rain, drifting snow and smoke, its own fog turned off for ATMOSPHERICS; Shine, bloom and coloured light. Both translated into French.
 
 ### Removed
-- The `fallow-ambiance` moon texture (team's choice of 2026-10-29): the vanilla moon is back.
+- The `fallow-ambiance` moon texture (team's choice of 2026-10-29), replaced by the moon of Default HD Sun and Moon, square like the Friendly Moon; ATMOSPHERICS keeps its sun.
 - Better Clouds: it drew the clouds in place of ATMOSPHERICS, so they ignored the mist, dusk and rain ([0013](docs/decisions/0013-vent-et-lumiere.md)).
 - Hollow GUI's curls at the top of the panels, lozenges and grooves added to the screens, and the leaf pattern behind the menus (review of 2026-10-26: back to GUI Revision's own drawing).
 - Dark Coffee GUI, Dark Coffee GUI - Extras and Modded Coffee GUI (all rights reserved, author unreachable): replaced by `fallow-interface`.
