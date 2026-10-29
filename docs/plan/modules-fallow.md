@@ -59,7 +59,7 @@ The guide book (see the [roadmap](../feuille-de-route.md)) gets a page for each 
 - Milestones change the place, not the inventory: the clearing grows (`vie`), a music opens, a monument to build shows its empty plinths. One line from the keeper at each milestone. Nothing missable blocks completion.
 - Kept out: catching rare creatures, money, visitors, random crates, cleanliness or disease gauges.
 
-**To verify first.** Wildex exposes `WildexApi` (counts) and `WildexDiscoveryChangedEvent` (with the mob id); a per-species query is not documented, so read its code or keep our own list. Classify by tags which creatures are housed and which are only observed.
+**To verify first.** Wildex left the pack on 2026-10-29: the ledger keeps its own list of species and its own sheets, so it needs a screen of its own (or a Questlog page per species). Classify by tags which creatures are housed and which are only observed.
 
 ## `vie`: the clearing grows when it is lived in
 

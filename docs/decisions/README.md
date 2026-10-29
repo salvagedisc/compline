@@ -16,6 +16,9 @@ One record per settled decision: the context, the options compared, the choice a
 | [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
 | [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing on NML; Distant Horizons hidden by the mist, `horizon` module |
 | [0012](0012-sacs-piles-jours.md) | Bags, stack sizes and day length | Reliable Backpacks and Comforts, Sensible Stackables, Better Days 30/15; Ecliptic Seasons kept |
+| [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `fallow` mod and Overgeared's knapping; no new mod |
+| [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
+| [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `fallow-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
 
 ## Template
 

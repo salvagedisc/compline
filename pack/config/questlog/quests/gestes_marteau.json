@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 8,
+  "title": "Le marteau et l’enclume de pierre",
+  "description": "Deux lingots de cuivre et deux bâtons font un marteau de forgeron.\n\nAccroupi, clic droit sur une roche avec le marteau : elle devient une enclume de pierre, qui s’use à la longue. On y forge le cuivre et le fer chauffés. Les moules d’argile cuits au four sont l’autre façon d’obtenir des têtes d’outils.",
+  "icon": {
+    "item": "overgeared:copper_smithing_hammer"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_four"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "overgeared:copper_smithing_hammer",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

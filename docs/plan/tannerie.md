@@ -1,57 +1,54 @@
 # The tannery
 
-Idea 4 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, ashes and time. Leather becomes a small trade tied to wildlife, livestock and weather.
+Idea 4 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, bark and time. Since 2026-10-29 the chain is the [Tannery: Better Leather](https://modrinth.com/mod/tannery-better-leather) mod (Beckstation, 1.0.2, All Rights Reserved, used as published), which replaced the pack's own scripted chain (raw hide, ashes, bamboo tray): decision [0014](../decisions/0014-tannery.md).
 
-Status: validated on the test server on 2026-10-19 (scripts error-free, loot checked with `/loot spawn`, recipes: 4 added, 5 removed). Not yet tested with a client: tooltips, tray, EMI. Kaleidoscope Cookery 1.6.0 keeps the same tray format.
+Status: checked on a test server on 2026-10-29 (NeoForge with KubeJS, LootJS, Tannery, No Man's Land): eight kills of each vanilla animal give the expected hides, meat, wool and fat; 28 logs and woods give bark, stripped ones do not. Not yet tested with a client: the rack, the barrel, EMI, the translated barrel messages.
 
 ## The chain, for a player
 
-1. **Get a hide.** A cow, horse, deer, moose or zebra no longer drops leather but a **raw hide**. The tooltip says what to do with it.
-2. **Find ashes.** Supplementaries ashes are left behind when a wooden block burns, or when a creature dies in fire. The simplest way: put **charcoal on a campfire**, which yields a handful of ashes after 30 seconds.
-3. **Flesh and salt.** At the crafting table, a raw hide and ashes give a **prepared hide**.
-4. **Soak.** The prepared hide is placed on a **bamboo tray** (Kaleidoscope Cookery) and left to soak. The tray wets what it holds **in the rain**, or **under a dripstone stalactite** when a block of water lies above it, as when filling a cauldron. After 5 minutes of soaking, the hide becomes **leather**. A whole stack soaks at once.
+1. **Get a hide.** A cow, sheep, goat, pig or horse, and every pack animal that used to give leather, drops one of Tannery's five hides (cow, sheep, goat, pig, horse). Cows, mooshrooms, pigs, sheep and goats also drop a piece of **animal fat**.
+2. **Dry it.** Right-click a **tanning rack** (sticks, planks and a hide) or a hanging rack (wooden slabs and a hide) with the hide. It dries in the air: the rack checks every minute, with one chance in four, so about four minutes. The result is a **dry hide**, whatever the animal.
+3. **Bark.** Stripping a log with an axe drops **bark** half of the time. Two barks make **tannic powder**. A **tanning barrel** (planks and tannic powder) holds powder for several hides.
+4. **Tan.** Right-click the barrel with a dry hide: it becomes **leather**.
 
-To tan all year round, build a small tannery: water, below it a dripstone block with a stalactite, then the tray. Otherwise, wait for rain, which depends on the season (Ecliptic Seasons).
+Rotten flesh follows the same path: dried on the rack it becomes **dry flesh**, which gives two **sinews** (they count as string, tag `c:strings`), **jerky** in the smoker, or leather in the barrel.
+
+Further on, with Tannery's own items: hardened leather (leather in the furnace), treated leather (leather, tannic powder, fat), the tanner's table (planks, hardened leather, iron) which forges nails from iron nuggets and studded leather from nails and hardened leather, and the studded leather armour. Fat makes two torches with a stick, or a block of fat. Leather and an iron ingot make a saddle.
 
 The rabbit has been removed from the game since 2026-10-19 ([faune-nml](faune-nml.md)): there is no more rabbit hide leather.
 
 ## The animals concerned
 
-The leather, or the hide that used to smelt into leather, becomes a raw hide. The original quantities and Looting bonus stay the same.
+Tannery's rack only takes its own five hides, so each animal gets the closest one. All of them dry into the same dry hide. The original quantities and Looting bonus stay the same (`pack/kubejs/server_scripts/tannerie_butin.js`).
 
-| Mod | Animals | Loot table |
+| Hide | Animals | Loot table |
 |---|---|---|
-| Vanilla | cow, mooshroom, horse, donkey, mule, llama, trader llama | `minecraft:entities/cow`, `mooshroom`, `horse`, `donkey`, `mule`, `llama`, `trader_llama` |
-| Vanilla | hoglin (Nether closed, no effect) | `minecraft:entities/hoglin` |
-| Icy's Better Horses | all 15 horse breeds | their tables point to `minecraft:entities/horse` |
-| No Man's Land | moose | `nomansland:entities/moose` |
-| No Man's Land | deer (did not drop leather: hide added, 0 or 1, plus 0 to 1 per Looting level) | `nomansland:entities/deer` |
-| Naturalist | deer, zebra (leather) | `naturalist:entities/deer`, `zebra` |
-| Naturalist | boar, elephant, rhinoceros, Komodo dragon ("hide") | `naturalist:entities/boar`, `elephant`, `rhino`, `komodo_dragon` |
-| Hybrid Aquatic | dugong, manatee | `hybrid_aquatic:entities/dugong`, `manatee` |
-| Friends & Foes | Moobloom | `friendsandfoes:entities/moobloom` |
-| Quark | foxhound (Nether, no effect) | `quark:entities/foxhound` |
-| Alex's Mobs | kangaroo: keeps its hide, but two kangaroo hides give a raw hide instead of leather | recipe |
+| Cow | cow, mooshroom, NML moose, Naturalist elephant and rhinoceros, Hybrid Aquatic dugong and manatee, Friends & Foes Moobloom | `minecraft:entities/cow`, `mooshroom`, `nomansland:entities/moose`, `naturalist:entities/elephant`, `rhino`, `hybrid_aquatic:entities/dugong`, `manatee`, `friendsandfoes:entities/moobloom` |
+| Horse | horse (and the 15 Icy's Better Horses breeds), donkey, mule, llama, trader llama, Naturalist zebra | `minecraft:entities/horse`, `donkey`, `mule`, `llama`, `trader_llama`, `naturalist:entities/zebra` |
+| Goat | goat (added: 0 or 1, plus 0 to 1 per Looting level), Naturalist deer, Komodo dragon, NML deer (added), Quark foxhound (Nether, no effect) | `minecraft:entities/goat`, `naturalist:entities/deer`, `komodo_dragon`, `nomansland:entities/deer`, `quark:entities/foxhound` |
+| Pig | pig (added), Naturalist boar, hoglin (Nether, no effect) | `minecraft:entities/pig`, `naturalist:entities/boar`, `minecraft:entities/hoglin` |
+| Sheep | sheep (added) | `minecraft:entities/sheep` |
 
-Checked and found to have no leather, hence unchanged: Critters and Companions, Adorable Hamster Pets, Mowzie's Mobs, Companions!, Ghost, Longwings, and the rest of Alex's Mobs (the bison and the bear give fur, which was not used for leather). Naturalist furs (bear, lion, tiger, mammoth…) also stay.
+Alex's Mobs kangaroo: two kangaroo hides make a goat hide (`fallow:tannerie/peau_de_kangourou`). A Naturalist hide left over from an existing world makes a cow hide (`fallow:tannerie/peau_de_naturalist`).
 
-The script writes to the server log any creature table that still drops leather (`[tannerie] créature qui lâche encore du cuir`, i.e. "creature that still drops leather"). A new wildlife mod will show up there immediately.
+Tannery ships its own tables for the cow, pig, sheep, goat, horse and donkey. They drop the Looting bonus and the cooked meat of an animal killed by fire. `pack/kubejs/data/minecraft/loot_table/entities/` puts the six vanilla 1.21.1 tables back (KubeJS data loads after the mods), and the script then adds the hides and the fat. No other mod of the pack replaces these six tables; No Man's Land's loot modifiers (horse meat, goat mutton and string) still apply on top.
+
+The script writes to the server log any creature table that still drops leather (`[tannerie] créature qui lâche encore du cuir`, i.e. "creature that still drops leather"). A new wildlife mod shows up there immediately.
+
+## Bark from every wood
+
+Tannery only gives bark for the eight vanilla logs in its `tannery:logs` block tag, and it gives bark on any block of that tag, stripped or not. `pack/kubejs/server_scripts/tannerie.js` adds every log, wood, stem or hyphae that has a `stripped_` version (No Man's Land and the other woods: 28 blocks on the test server, more in the full pack), and never a block that is already stripped: otherwise a repeated right-click on the same block would give endless bark. The count is written to the server log (`[tannerie] N bûches donnent de l'écorce`).
 
 ## The recipes
 
-Added (`pack/kubejs/server_scripts/tannerie.js`):
+Added or changed (`pack/kubejs/server_scripts/tannerie.js`):
 
-| Identifier | Where | Recipe |
-|---|---|---|
-| `fallow:tannerie/echarner_et_saler` | crafting table | raw hide (tag `#fallow:peaux_brutes`) + ashes (`#c:dusts/ash`) → prepared hide |
-| `fallow:tannerie/tremper` | bamboo tray, wetting | prepared hide → leather, 6000 ticks |
-| `fallow:tannerie/cendres_de_charbon` | campfire | charcoal → ashes, 600 ticks |
-| `fallow:tannerie/peau_de_kangourou` | crafting table | 2 kangaroo hides → raw hide |
-| `fallow:tannerie/fumer` (switched off) | campfire | prepared hide → leather, 2400 ticks; fallback if bamboo is too rare, to be switched on with `TANNERIE_SECOURS_FUMAGE = true` |
+| Identifier | Recipe |
+|---|---|
+| `fallow:tannerie/peau_de_kangourou` | 2 kangaroo hides → goat hide (only with Alex's Mobs) |
+| `fallow:tannerie/peau_de_naturalist` | Naturalist hide → cow hide (only with Naturalist) |
 
-The `#fallow:peaux_brutes` tag (`pack/kubejs/data/fallow/tags/item/peaux_brutes.json`) contains the raw hide and the Naturalist hide, so that Naturalist hides from an existing world still work.
-
-Removed, because they gave leather too easily or outside the chain:
+Removed, because they give leather outside the tannery:
 
 | Recipe | What it did |
 |---|---|
@@ -59,50 +56,34 @@ Removed, because they gave leather too easily or outside the chain:
 | `envelope:mailing/automated_supply_service/leather` | 6 rotten flesh sent by pigeon → leather |
 | `naturalist:leather_from_smelting_hide` | Naturalist hide in the furnace → leather in 10 seconds |
 | `alexsmobs:kangaroo_hide_to_leather` | 2 kangaroo hides → leather (replaced, see above) |
-| `kaleidoscope_cookery:bamboo_tray/wetting/leather_to_rotten_flesh` | wet leather rots into rotten flesh. This is not a source, but the tray gave back tanned leather at the next rain if it stayed on it |
 
-Kept, because they recycle leather that already exists or come from rare loot:
-- four rabbit hides → leather (vanilla, recipe copied identically by Naturalist), no effect since the rabbit was removed;
-- Create: saddle at the mill, horse armours at the crusher; Farm & Charm: leather horse armour at the chopper; Quark: bound leather block → 9 leathers;
-- Cold Sweat: hoglin hide → 2 leathers (the Nether is closed, the hide cannot be found);
-- leather in a few chests: lost Envelope letters, NML alchemists' pots, the loft of the illusioner's shack (Friends & Foes), vanilla fishing.
+Tannery's small and large satchels are removed (recipes, loot, EMI: `TANNERIE_OBJETS` and `client_scripts/tannerie.js`): Reliable Backpacks already gives the single bag of the pack ([0012](../decisions/0012-sacs-piles-jours.md)).
 
-## Uses of leather
+Kept, because they recycle leather that already exists or come from rare loot: Create's saddle at the mill and horse armours at the crusher, Farm & Charm's leather horse armour at the chopper, Quark's bound leather block, Cold Sweat's hoglin hide (Nether closed), leather in a few chests (Envelope's lost letters, NML alchemists' pots, the illusioner's shack, vanilla fishing).
 
-All keep `minecraft:leather` and do not change: Traveler's Backpack (52 recipes, including the bags and upgrades), Supplementaries (bellows), vanilla books, the Wildex bestiary, Quark (seed pouch, backpack), Alex's Mobs, Cold Sweat (waterskin), Hybrid Aquatic, Icy's Better Horses, Kaleidoscope Cookery (farmer's outfit, lunch bag), Companions!, Create (toolbox), Aeronautics (aviator goggles), NML (pouch, straw bed). None depends on a removed leather source.
+Leather uses do not change: every recipe keeps `minecraft:leather`. Overgeared 1.6.19 has no leather recipe: its armours are forged from metal plates.
 
-Overgeared 1.6.19 has **no leather recipe**: its armours are forged from metal plates. "Plated armours" on a leather base are a Wayfarer idea, not an Overgeared one.
+## French texts
 
-Leather is needed early: the Wildex bestiary (2 leathers) and the first book. This is the reason for the switched-off fallback described above.
-
-## Why the bamboo tray
-
-The Kaleidoscope Cookery tray is the only container in the pack that makes time pass on a placed item, with two modes: it dries what it holds in the sun and wets it in the rain or under a stalactite. It already made leather (with rotten flesh). It needs no new mod, ties into the weather and the seasons, and a stalactite tannery is a small build. The other routes are worse: a click on a water cauldron is instantaneous, Create's washing and depot come too late in the progression, and the Farm & Charm silo only dries.
+Tannery ships English only. `pack/kubejs/assets/tannery/lang/fr_fr.json` translates its 74 texts (items, blocks, advancements, recipe-viewer pages, tanner's table screen). The barrel writes two messages in hard-coded English (« Barrel needs Tannic Powder », « Barrel Full »): the server sends them as action-bar system messages, and `client_scripts/tannerie.js` replaces them on arrival with `message.fallow.tannerie.*` (`NativeEvents` on NeoForge's `ClientChatReceivedEvent.System`).
 
 ## Files
 
-- `pack/kubejs/startup_scripts/tannerie.js`: the `fallow:peau_brute` and `fallow:peau_preparee` items (vanilla texture `minecraft:item/rabbit_hide`, pinkish or grey tint, no PNG).
-- `pack/kubejs/server_scripts/tannerie.js`: recipes, removals, tooltips, check of the remaining leather recipes.
+- `pack/mods/tannery-better-leather.pw.toml`: the mod.
+- `pack/kubejs/server_scripts/tannerie.js`: removed satchels and recipes, kangaroo and Naturalist hides, bark tag, check of the remaining leather recipes.
 - `pack/kubejs/server_scripts/tannerie_butin.js`: the loot (LootJS).
-- `pack/kubejs/data/fallow/tags/item/peaux_brutes.json`: the raw hide tag.
-- Texts: names and tooltips in French and English, to be merged into `pack/kubejs/assets/fallow/lang/`.
+- `pack/kubejs/data/minecraft/loot_table/entities/{cow,pig,sheep,goat,horse,donkey}.json`: vanilla tables put back over Tannery's.
+- `pack/kubejs/client_scripts/tannerie.js`: satchels hidden from EMI, barrel messages translated.
+- `pack/kubejs/assets/tannery/lang/fr_fr.json`, `pack/kubejs/assets/fallow/lang/*.json`: texts.
+- Quest « La tannerie » (`pack/config/questlog/quests/metiers_tannerie.json`): appears with the first hide; dry hide, tannic powder, leather.
 
 ## What remains to be tested
 
-At test server startup (KubeJS log):
-- the two items register with `.texture()` and `.color(0, …)` (KubeJS 7); the merged language file takes precedence over the English name that KubeJS generates;
-- `LootJS.lootTables`, `hasLootTable`, `getLootTable(...).replaceItem(...)`, `createPool`, `LootEntry.of(...).setCount([0, 1]).applyEnchantmentBonus([0, 1])` pass without error, and no `table absente` ("table missing") line appears;
-- the `[tannerie] recette donnant du cuir` ("recipe giving leather") lines list only the recipes kept above, and `créature qui lâche encore du cuir` lists nothing;
-- `event.custom` accepts the `kaleidoscope_cookery:bamboo_tray` recipe and `event.campfireCooking(...).cookingTime(...)` passes;
-- `ItemEvents.modifyTooltips` in a server script does reach the client (KubeJS 7 synchronises these tooltips); `Text.gray(Text.translatable(...))` displays translated.
-
-In game:
-- kill a cow, an Icy's Better Horses horse and an NML deer: each drops a raw hide, with Looting III too;
-- the crafting table accepts the raw hide and ashes, and also a Naturalist hide;
-- charcoal on a campfire gives ashes;
-- the prepared hide becomes leather on the tray in the rain, then under a water-fed stalactite; the leather no longer rots when it stays on the tray;
-- the tray accepts a whole stack and returns as many leathers;
-- EMI shows both steps and no longer the removed recipes;
-- check that bamboo can be found without searching too long in an NML world (bamboo jungles), and that dripstone exists in the caves. If bamboo is too rare, switch on `TANNERIE_SECOURS_FUMAGE`;
-- after the Kaleidoscope Cookery upgrade to 1.6.0, check that the `kaleidoscope_cookery:bamboo_tray` type and the `subtype` field have not changed;
-- tune `TANNERIE_DUREE_TREMPAGE` (5 minutes) once played.
+In game, on a new world:
+- kill a cow, an Icy's Better Horses horse, a llama and a Naturalist deer: each drops its hide, with Looting III too; a cow killed by fire drops cooked beef;
+- a hide on the tanning rack dries in about four minutes; the hanging rack too;
+- strip an oak log and an NML log with an axe: bark about half of the time; right-click a stripped log: nothing;
+- two barks → tannic powder; barrel; dry hide in the barrel → leather; the barrel messages show in French (« Le tonneau a besoin de poudre tannique. », « Le tonneau est plein. »);
+- rotten flesh on the rack → dry flesh → sinews; sinews craft a bow;
+- EMI: no satchel; Tannery's info pages in French;
+- the server log lists no `créature qui lâche encore du cuir` line, and the `recette donnant du cuir` lines only list the recipes kept above.
