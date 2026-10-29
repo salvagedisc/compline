@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-26. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
+Status as of 2026-10-29. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
@@ -53,7 +53,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
 - [ ] **Monument guardians**: Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff at four Monoliths, blessing after their defeat (decision 15 of [12.5](plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); proposed, not written.
 - [ ] **The zoo**: a measurable long-term goal (species housed, aquariums), still without a mechanic.
-- [ ] **Quests and guides** (Questlog): first version in the pack (four chapters, 16 quests); next quest lines for the fanal, the monuments, the forge and cooking ([quetes](plan/quetes.md)).
+- [ ] **Quests and guides** (Questlog): first version in the pack (five chapters, 26 quests, the forge basics included in « Premiers gestes »); next quest lines for the fanal, the monuments and cooking ([quetes](plan/quetes.md)).
 - [ ] In Control!: `spawn.json` has no rule for villagers and wandering traders, unlike what the survivors plan assumes; to settle with the `survivants` module.
 - [ ] **White moon**: draft in [kubejs-brouillons/](plan/kubejs-brouillons/), needs a sound and texts; the `ciel` module already draws it.
 - [ ] Subtle Effects: turn off superfluous effects ([0007](decisions/0007-ambiance-performance.md)).
@@ -71,6 +71,28 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] Separate Sable Render Distance, now that Distant Horizons is in ([0007](decisions/0007-ambiance-performance.md)).
 - [x] ~~Food preservation~~: dropped by the team on 2026-10-18 (Freeze It and Heat It removed).
 - [x] Terrain: Tectonic + Streams Reflowing on No Man's Land; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)).
+
+### Toward a public release (approved 2026-10-29)
+Study of what makes Homestead and Matcha Flavoured popular, kept to what fits the vision. Ordered by weight; none adds a gauge, a biome or a crowd of structures.
+
+In game:
+- [ ] **The mist lifts early and in full view**: a first vigil fire within the first hour, led by the first quest; the mist recedes over 10 to 20 seconds, the far view appears, the clearing music starts.
+- [ ] **Rebuild a hamlet**: the `survivants` module as a long-term goal; each survivor found in the mist joins a clearing with a trade, and the hamlet grows by milestones like the zoo (Matcha Flavoured: villages are made, not found).
+- [ ] **Named quest chapters** in Questlog: 8 to 12 chapters (first fire, forge, zoo, sky, monuments, Friendly Moon, airship, hamlet), 150 to 250 quests; the first three in order, the rest free.
+- [ ] **A collections page**: zoo species, Exposure: Space objects, Longwings butterflies, monument codex pages, lost letters, dishes; a carved figurine of a species per milestone, to place at home.
+- [ ] **Dishes with a use**: a few Kaleidoscope dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays.
+- [ ] **A few hand-made enigmas**: three to five unique places, never horror (a set table with warm soup and nobody, an observatory whose log stops), with hints in letters, `echos` and the Friendly Moon.
+- [ ] **Travel as a selling point**: a quest chapter for the atlas, horses, rails and airships; `fanal` lights along the roads.
+- [ ] **Letters written by the community**: lost letters and travellers' notebook pages written and signed by players of the Discord, found in ruins.
+
+Around the game:
+- [ ] **English next to French**: French stays the source language and `check-fr` stays blocking; English is added for the custom content (quests, `fallow` mod, scripts).
+- [ ] **A page and a short manifesto video**: one line of identity, before/after shots of the mist, Fallow's own numbers.
+- [ ] **CurseForge and a light profile**: check mod by mod that each one is on CurseForge or may be redistributed; a light profile (shorter far view, fewer particles), recommended memory, a server pack.
+- [ ] **Standalone modules**: publish the clearings and the dissipator (then `voile`) as their own mod on Modrinth, linking to the pack.
+- [ ] **A stability promise**: an update never breaks a world; migration notes in plain words.
+
+Not taken: hundreds of quests and kitchen-sink density, bundled shaders (Iris breaks Aeronautics), gear tiers past Netherite, plushies and traders everywhere, teleportation, horror.
 
 ### Repository housekeeping
 - [ ] Delete the merged branches `test/agriculture`, `test/faune`, `test/structures`, `feat/idea-mods`, `feat/safety-net-and-updates` and `feat/tectonic-streams-distant-horizons` (only the owner can: the cloud environment gets a 403).

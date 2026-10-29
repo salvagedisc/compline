@@ -12,5 +12,11 @@
   "message.fallow.clairiere.retour": "The mist returns.",
   "biome.fallow.clairiere": "Clearing",
   "biome.fallow.clairiere_chaude": "Warm Clearing",
-  "biome.fallow.clairiere_froide": "Cold Clearing"
+  "biome.fallow.clairiere_froide": "Cold Clearing",
+  "message.fallow.outils.hache": "You need an axe.",
+  "message.fallow.outils.pioche": "You need a pickaxe.",
+  "message.fallow.outils.pelle": "You need a shovel.",
+  "message.fallow.outils.houe": "You need a hoe.",
+  "message.fallow.outils.outil": "You need a tool.",
+  "message.fallow.outils.trop_faible": "Your tool is not strong enough."
 }

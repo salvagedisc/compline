@@ -38,7 +38,7 @@ final class ClearingSources extends SavedData {
         setDirty();
     }
 
-    /** Retire la source posée en {@code center} ; sans source enregistrée (monde d'avant 0.4.7), ne fait rien. */
+    /** Retire la source posée en {@code center} ; sans source enregistrée (monde d'avant 0.4.12), ne fait rien. */
     void remove(BlockPos center) {
         if (sources.removeIf(source -> source.center.equals(center))) {
             setDirty();

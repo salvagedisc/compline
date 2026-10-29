@@ -1,0 +1,23 @@
+{
+  "chapter": "questlog:fallow_premiers_gestes",
+  "sort_order": 1,
+  "title": "Le silex",
+  "description": "Les petits tas de galets donnent souvent un silex. Le gravier aussi, plus rarement.\n\nUne brindille donne deux bâtons, une feuille en lâche parfois un.",
+  "icon": {
+    "item": "minecraft:flint"
+  },
+  "requirements": [
+    {
+      "type": "questlog:quest_complete",
+      "quest": "questlog:gestes_mains_nues"
+    }
+  ],
+  "objectives": [
+    {
+      "type": "questlog:item_obtain",
+      "item": "minecraft:flint",
+      "required_amount": 1
+    }
+  ],
+  "rewards": []
+}

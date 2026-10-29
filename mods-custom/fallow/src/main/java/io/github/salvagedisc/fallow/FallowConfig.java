@@ -28,6 +28,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
+    private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -118,6 +119,14 @@ public final class FallowConfig {
                         "6 : une lanterne (32 blocs) en 2,7 secondes, un dissipateur (64) en 5. 1 : presque d'un coup.")
                 .defineInRange("ringTicks", 6, 1, 40);
         common.pop();
+
+        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag fallow:outil_requis),",
+                "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
+        OUTILS_ENABLED = common
+                .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.",
+                        "Client et serveur doivent avoir la même valeur.")
+                .define("enabled", true);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -191,6 +200,10 @@ public final class FallowConfig {
 
     public static int clairiereRingTicks() {
         return read(COMMON_SPEC, CLAIRIERE_RING_TICKS);
+    }
+
+    public static boolean outilsEnabled() {
+        return read(COMMON_SPEC, OUTILS_ENABLED);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */

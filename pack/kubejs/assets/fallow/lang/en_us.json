@@ -12,8 +12,6 @@
   "item.fallow.eclat_de_vie": "Shard of Life",
   "item.fallow.eclat_de_vie.compteur": "Hearts: %s / %s",
   "item.fallow.eclat_de_vie.tooltip": "Restores a lost heart.",
-  "item.fallow.peau_brute": "Raw Hide",
-  "item.fallow.peau_preparee": "Prepared Hide",
-  "tooltip.fallow.peau_brute": "Craft it with ash to prepare it.",
-  "tooltip.fallow.peau_preparee": "Soak it on a Bamboo Tray, in the rain or under a dripping stalactite."
+  "message.fallow.tannerie.poudre_manquante": "The barrel needs tannic powder.",
+  "message.fallow.tannerie.tonneau_plein": "The barrel is full."
 }

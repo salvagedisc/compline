@@ -12,5 +12,11 @@
   "message.fallow.clairiere.retour": "La brume revient.",
   "biome.fallow.clairiere": "Clairière",
   "biome.fallow.clairiere_chaude": "Clairière chaude",
-  "biome.fallow.clairiere_froide": "Clairière froide"
+  "biome.fallow.clairiere_froide": "Clairière froide",
+  "message.fallow.outils.hache": "Il te faut une hache.",
+  "message.fallow.outils.pioche": "Il te faut une pioche.",
+  "message.fallow.outils.pelle": "Il te faut une pelle.",
+  "message.fallow.outils.houe": "Il te faut une houe.",
+  "message.fallow.outils.outil": "Il te faut un outil.",
+  "message.fallow.outils.trop_faible": "Ton outil n'est pas assez solide."
 }

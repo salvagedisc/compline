@@ -129,7 +129,7 @@ If the maintainer prefers the white moon to continue for the other players, the 
 
 ## Under ATMOSPHERICS
 
-The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `fallow` 0.4.5 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](mod-fallow.md#the-friendly-moon-under-atmospherics)).
+The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `fallow` 0.4.10 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](mod-fallow.md#the-friendly-moon-under-atmospherics)).
 
 ## What remains to be checked in game
 
@@ -138,8 +138,8 @@ The first in-game test (2026-10-28) found that the Friendly Moon never appeared 
 | L1 | Log at startup | No `lune.js` error. Enhanced Celestials lists the possible Overworld moons, without `blood_moon` or `super_blood_moon` |
 | L2 | `/ec lunarForecast` on a new world | No blood moon in the forecast. **Done on the test server** |
 | L3 | Alchemists' ruin, look at the carving for 2 s | Zoom and sound. Sleeping within the 3 days starts the dream |
-| L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`). Before `fallow` 0.4.5 the shadow could not show under ATMOSPHERICS (test C14) |
-| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`fallow` mod](mod-fallow.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `fallow` 0.4.5 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
+| L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`). Before `fallow` 0.4.10 the shadow could not show under ATMOSPHERICS (test C14) |
+| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`fallow` mod](mod-fallow.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `fallow` 0.4.10 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
 | L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then go to the Point | Within 2 s at most: Enhanced Celestials message and Fallow message, the blue moon fades. `/ec lunarForecast` shows the rest unchanged. The setting itself is validated on the server; the messages and detection of a real player remain |
 | L7 | Same with a player far from the Point | Nothing changes for them as long as nobody is at the Point |
 | L8 | Offerings: bone, flower, blank map, turtle scute | Lines in French, map of the pool, `scute` line in French |
