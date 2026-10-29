@@ -77,7 +77,7 @@ Request from the maintainer after in-game tests: some animals look poor next to 
 - Critters and Companions: koi (4 bones, 2 animations), sea bunny;
 - Hybrid Aquatic: sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish (1 to 7 bones, a few keyframes); their 25 spawn files are replaced by `neoforge:none` in `pack/kubejs/data/hybrid_aquatic/neoforge/biome_modifier/`, and the nautilus, which only spawns from the trench and deep reef biome files, is covered by `faune_coupee.json`.
 
-Same method as above: `faune_coupee.json`, `faune_coupee.js` (server and client, 43 more items: eggs, banana slug slime and its blocks, spiked scute and spiked turtle shell, mungal spores, triops bucket and eggs, mosquito repellent stew, guster eye, pocket sand, gustmaker, koi and its bucket, rocky shell and rock shell chestplate, frilled shark bucket, sea bunny bucket, slime bottle and slime block, sea urchin spine, thrown starfish), Wildex exclusion; the guster and the rocky roller are taken out of the In Control! darkness rules.
+Same method as above: `faune_coupee.json`, `faune_coupee.js` (server and client, 43 more items: eggs, banana slug slime and its blocks, spiked scute and spiked turtle shell, mungal spores, triops bucket and eggs, mosquito repellent stew, guster eye, pocket sand, gustmaker, koi and its bucket, rocky shell and rock shell chestplate, frilled shark bucket, sea bunny bucket, slime bottle and slime block, sea urchin spine, thrown starfish); the guster and the rocky roller are taken out of the In Control! darkness rules.
 
 Consequences:
 - the comb jelly, the frilled shark and the starfish disappear from the game, since their duplicates were already cut;
