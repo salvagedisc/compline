@@ -10,6 +10,7 @@
   ],
   "client": [
     "ciel.AtmosphericsDreamMixin",
+    "ciel.AtmosphericsFadeMixin",
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",
     "ciel.FriendMoonSkyMixin",

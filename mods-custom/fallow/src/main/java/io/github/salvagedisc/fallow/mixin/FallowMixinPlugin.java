@@ -24,6 +24,7 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("ciel.AtmosphericsDreamMixin", List.of(ModIds.ATMOSPHERICS, ModIds.NO_MANS_LAND)),
             Map.entry("ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS)),
+            Map.entry("ciel.AtmosphericsFadeMixin", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("horizon.FogRendererMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.GLStateMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.VanillaFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
