@@ -98,7 +98,7 @@ public final class FallowConfig {
                 .defineInRange("chunksPerTick", 2, 1, 16);
         common.pop();
 
-        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Les troncs (tag fallow:outil_requis)",
+        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag fallow:outil_requis),",
                 "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
         OUTILS_ENABLED = common
                 .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.",

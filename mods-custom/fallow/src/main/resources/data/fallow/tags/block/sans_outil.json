@@ -1,8 +1,41 @@
 {
   "replace": false,
   "values": [
+    "#minecraft:sword_efficient",
     "minecraft:snow",
     "minecraft:snow_block",
-    "minecraft:powder_snow"
+    "minecraft:powder_snow",
+    "minecraft:bamboo",
+    "minecraft:bamboo_sapling",
+    "minecraft:azalea",
+    "minecraft:flowering_azalea",
+    {
+      "id": "nomansland:field_mushroom",
+      "required": false
+    },
+    {
+      "id": "nomansland:cut_sugar_cane",
+      "required": false
+    },
+    {
+      "id": "nomansland:cattail",
+      "required": false
+    },
+    {
+      "id": "nomansland:reeds",
+      "required": false
+    },
+    {
+      "id": "supplementaries:stick",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:rope",
+      "required": false
+    },
+    {
+      "id": "farm_and_charm:rope_knot",
+      "required": false
+    }
   ]
 }

@@ -26,7 +26,7 @@ public enum FallowModule {
     DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.fallow.dissipateur.DissipateurModule.start(bus), ModIds.CREATE),
     /** Le nom de chaque écran sur une plaque au-dessus du panneau, dessinée par le pack d'interface (client). Aucun mod requis. */
     TITRES("titres", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.titres.TitresModule.start(bus)),
-    /** À mains nues, on ramasse mais on ne coupe pas : troncs et roches demandent le bon outil (client et serveur). Aucun mod requis. */
+    /** À mains nues, on ramasse mais on ne coupe pas : le bois et la roche demandent le bon outil (client et serveur). Aucun mod requis. */
     OUTILS("outils", null, bus -> io.github.salvagedisc.fallow.outils.OutilsModule.start(bus));
 
     private final String id;

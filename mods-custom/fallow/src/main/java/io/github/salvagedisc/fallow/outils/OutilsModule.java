@@ -19,12 +19,14 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 /**
  * Module outils : à mains nues, on ramasse mais on ne coupe pas. Un bloc du tag {@code fallow:outil_requis}
- * (les troncs) ou un bloc qui ne lâcherait rien sans le bon outil (roches, minerais, briques) ne se casse
- * plus du tout tant que le joueur ne tient pas ce bon outil : sa vitesse de minage tombe à zéro, chez le
- * client comme sur le serveur, et un message dit quel outil il faut.
+ * (tout ce qui se travaille à la hache : troncs, planches, meubles, coffres) ou un bloc qui ne lâcherait rien
+ * sans le bon outil (roches, minerais, briques) ne se casse plus du tout tant que le joueur ne tient pas ce
+ * bon outil : sa vitesse de minage tombe à zéro, chez le client comme sur le serveur, et un message dit quel
+ * outil il faut.
  *
- * <p>Le tag {@code fallow:sans_outil} garde quelques blocs à la main (la neige). Le créatif et les faux
- * joueurs (déployeurs de Create) ne sont pas touchés. La règle se règle par les tags, sans recompiler.
+ * <p>Le tag {@code fallow:sans_outil} garde à la main ce qui pousse (plantes, cultures, citrouilles, melons,
+ * cacao, bambou) et la neige. Le créatif et les faux joueurs (déployeurs de Create) ne sont pas touchés.
+ * La règle se règle par les tags, sans recompiler.
  */
 public final class OutilsModule {
     public static final TagKey<Block> OUTIL_REQUIS = BlockTags.create(id("outil_requis"));
@@ -41,7 +43,7 @@ public final class OutilsModule {
         NeoForge.EVENT_BUS.addListener(PlayerEvent.BreakSpeed.class, OutilsModule::onBreakSpeed);
         NeoForge.EVENT_BUS.addListener(PlayerEvent.HarvestCheck.class, OutilsModule::onHarvestCheck);
         // La config n'est pas encore chargée ici : ses valeurs sont lues à chaque usage.
-        Fallow.LOGGER.info("outils : troncs et roches demandent le bon outil (selon config/fallow-common.toml)");
+        Fallow.LOGGER.info("outils : le bois et la roche demandent le bon outil (selon config/fallow-common.toml)");
     }
 
     /** Vrai si ce bloc demande un outil que le joueur n'a pas en main. */
