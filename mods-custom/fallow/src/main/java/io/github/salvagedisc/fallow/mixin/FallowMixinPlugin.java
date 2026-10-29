@@ -20,6 +20,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
     private static final Map<String, List<String>> REQUIRED = Map.of(
             "ciel.LevelRendererMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
             "ciel.RenderSystemMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS),
+            "ciel.FriendMoonSkyMixin", List.of(ModIds.ATMOSPHERICS, ModIds.NO_MANS_LAND),
+            "ciel.AtmosphericsDreamMixin", List.of(ModIds.ATMOSPHERICS, ModIds.NO_MANS_LAND),
             "ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS),
             "ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS),
             "horizon.FogRendererMixin", List.of(ModIds.DISTANT_HORIZONS),
