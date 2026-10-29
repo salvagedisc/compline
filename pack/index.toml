@@ -122,15 +122,19 @@ hash = "1a3a7b7e9b52fdead0a6009c0af4d6585e7ccedaf9ac34398e9cebf20be8b9af"
 
 [[files]]
 file = "config/questlog/chapters/fallow_brume.json"
-hash = "fd9aa2fc5b11e71d108bf031af9ab03c801acb202a3bfa23c1fc9151ba13d988"
+hash = "90b733544ca0cd2c3eaa29464d44cf046d409804553ef6e0570b5483b11d6043"
 
 [[files]]
 file = "config/questlog/chapters/fallow_metiers.json"
-hash = "aed425bcc4fde6bdbd1fc233888d8127bfeab55ea18aff92b2f0db92ff89d0c8"
+hash = "b797c98442128838aa217bb98a599ac83d539dfc36ab3c415f9a57c8f7446a0b"
+
+[[files]]
+file = "config/questlog/chapters/fallow_premiers_gestes.json"
+hash = "8f110e51d99a08dcdc2f4f79b0dad7ba3fad60b98c6db1eea03276a270a461a8"
 
 [[files]]
 file = "config/questlog/chapters/fallow_survivre.json"
-hash = "c738a2c7aec563c2d908c56cb21d15bcea05d5ad39e324a1f5148aaaf2fd58da"
+hash = "e8f21dcb25199e8e0e2cc09bec317dbd841df4f3254b070bd9a1666234aacb51"
 
 [[files]]
 file = "config/questlog/quests/arriver_bienvenue.json"
@@ -175,6 +179,46 @@ hash = "3f85df76a52b0f3730337da933314464150591a39ff7820a1dd8eeccec7a5201"
 [[files]]
 file = "config/questlog/quests/brume_lanterne.json"
 hash = "e4cdcc4a942f90ce865ab62a6127951890958b88b23dbb815f33100c2336af23"
+
+[[files]]
+file = "config/questlog/quests/gestes_feu.json"
+hash = "3a3e72266cf5e35f4cf867c7403d06e36d20068626009649225fc3fa62356cff"
+
+[[files]]
+file = "config/questlog/quests/gestes_forge.json"
+hash = "eeb28b600b88c2cf22b395a42422e642fa4343bd3968ff2417408ac4eb648986"
+
+[[files]]
+file = "config/questlog/quests/gestes_four.json"
+hash = "7397719d65bb4b3185bcd41f1888f92491159de5da108eb98cdd7b872d306367"
+
+[[files]]
+file = "config/questlog/quests/gestes_hache.json"
+hash = "8b61406f2403c6c9249f46cd4695eb221a3661f1698c0ad056262a908cf3595a"
+
+[[files]]
+file = "config/questlog/quests/gestes_mains_nues.json"
+hash = "0127e285f158695467aff0fffc7d3b9cc7c24031a667bf2759bc6f9643b57a76"
+
+[[files]]
+file = "config/questlog/quests/gestes_marteau.json"
+hash = "d769f8bd2bfd733b26c1be46165ef02bd36a5b03bf09a1ee6fad06f5be0d82f5"
+
+[[files]]
+file = "config/questlog/quests/gestes_pierre.json"
+hash = "064ae42aef77e05e4db4d47863d9ff97a5ece6bc78e510edee2bd775d4116f3b"
+
+[[files]]
+file = "config/questlog/quests/gestes_pioche.json"
+hash = "c1ee1d9402af3c727e56fe80e6bd8c8d4c87173eeae6d1a71a9f5cde02eb5376"
+
+[[files]]
+file = "config/questlog/quests/gestes_planches.json"
+hash = "79eebfb70adfca63f9022d9ee5599eabfdc3ddfe169804e48b609beae8dafe87"
+
+[[files]]
+file = "config/questlog/quests/gestes_silex.json"
+hash = "e5973edd53e8d6eabfa924c34dc96a9d2dbe0fce437da93b82cd78cec3c3b5d1"
 
 [[files]]
 file = "config/questlog/quests/metiers_machines.json"
@@ -1173,6 +1217,10 @@ file = "kubejs/client_scripts/faune_nml.js"
 hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
 
 [[files]]
+file = "kubejs/client_scripts/premiers_gestes.js"
+hash = "ac59ced44019fb4a243c97179b60065dcad0908987a94c1a82631ac3c29970d5"
+
+[[files]]
 file = "kubejs/client_scripts/sans_lapin.js"
 hash = "2ef0bd657a5fd6dff83dac6913c6ed7c5637190a034cf5f876b96185b26e099b"
 
@@ -1505,6 +1553,10 @@ file = "kubejs/server_scripts/musique.js"
 hash = "a30162f06015cff75d6b5c80154ed9a195e7e98a446cc3ee5dd97d21a08c3056"
 
 [[files]]
+file = "kubejs/server_scripts/premiers_gestes.js"
+hash = "64114505ee0ceae88950dfaa7feafb4cadeb940c43327d0ffd1be0d48eae2e5f"
+
+[[files]]
 file = "kubejs/server_scripts/sans_lapin.js"
 hash = "217b03bdb361452e112581eef9d950726fc3b7deaa558766d9486868727be35b"
 
@@ -1832,8 +1884,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.4.4.jar"
-hash = "88912e5363028934acf0cecd94b9a73cc13f2c89c4e1a85cea99d3597572f0a1"
+file = "mods/fallow-0.4.9.jar"
+hash = "0125ad417ce9c9508207ac30d01225578ecd4a6b4c5af917bd06b6b68b2d91bc"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"

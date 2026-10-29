@@ -17,12 +17,13 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [12-verification.md](12-verification.md) | **Full verification of 2026-10-18**: it corrects chapters 10 and 11, details the links between mods (Overgeared, Kaleidoscope, Create, world, rendering), proposes the custom `fallow` mod and decisions 14 to 18 |
 | [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset, Polytone colours, chosen values and settings to adjust in game |
 | [fallow-interface.md](fallow-interface.md) | Fallow's interface built from GUI Revision: sources, licences, build script, next steps |
-| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.4 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere`, `dissipateur` and `titres`): how it works, what is deduced from the code, in-game tests |
+| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.9 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres` and `outils`): how it works, what is deduced from the code, in-game tests |
 | [modules-fallow.md](modules-fallow.md) | The eight planned modules of the `fallow` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Fallow takes |
 | [lune-amie.md](lune-amie.md) | The Friendly Moon from No Man's Land as the main thread: the path to the Meeting Point, coexistence with Enhanced Celestials, the removed blood moons |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring |
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |
 | [faune-nml.md](faune-nml.md) | The No Man's Land fauna goes back to vanilla: remodels and textures cut, deer, goose, bass, turtle and Frienderman removed, in-game tests |
+| [premiers-gestes.md](premiers-gestes.md) | First gestures: no logs or rock by hand, knapped stone tools (Overgeared), planks with an axe, flint campfire, the « Premiers gestes » quests ([0013](../decisions/0013-premiers-gestes.md)) |
 | [tannerie.md](tannerie.md) | The tannery: raw hide, ash-prepared hide, soaking on the bamboo tray |
 | [musique.md](musique.md) | The music: True Adaptive Music, the `fallow` pack tree, the server predicates, in-game tests ([0010](../decisions/0010-musique.md)) |
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |

@@ -50,9 +50,13 @@ jobs:
           echo "name=${name}" >> "$GITHUB_OUTPUT"
 
       - uses: actions/upload-artifact@v4
+        # A full artifact storage quota must not hide a good build.
+        continue-on-error: true
         with:
           name: ${{ steps.export.outputs.name }}
           path: dist/*.mrpack
+          # Each pack is ~45 MB: keep the storage quota of a private repo free.
+          retention-days: 3
 
   # Le mod custom fallow (mods-custom/fallow/) doit toujours compiler.
   mod-fallow:
@@ -76,6 +80,8 @@ jobs:
         run: ./gradlew build --console=plain
 
       - uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
           name: fallow-mod-${{ github.sha }}
           path: mods-custom/fallow/build/libs/*.jar
+          retention-days: 3
