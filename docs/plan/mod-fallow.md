@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.6 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.11 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -90,7 +90,7 @@ The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS me
 3. At the Meeting Point at night, the Friendly Moon starts to fade in on this first frame; from the next one, ATMOSPHERICS hands the sky back to vanilla and NML carries on alone, as it was designed to (NML's fog replaces ATMOSPHERICS' mist while the Friendly Moon is up). Away from the Point, during the 8 nights after the dream, the shadow stays drawn by `fallow` over ATMOSPHERICS' sky, which keeps its mist.
 4. `AtmosphericsDreamMixin` makes `Atmospherics.isFriendMoonActive()` also true while the moonlight dream is shown, so ATMOSPHERICS leaves the sky and the fog to the dream whatever the order of the two mods' mixins on `renderSky`.
 
-**Checked on 2026-10-29** in a development client (llvmpipe) with only No Man's Land 1.6.3, ATMOSPHERICS 2.6.5 and `fallow` 0.4.5, on a new world (seed "fallow", Point at 616, −1288, pool at 631, 78, −1273), at midnight, 5 blocks from the pool: the face appears, wakes and speaks, and the "Friendship" goal is reached 10 s after joining. With `ciel.friendMoon = false`, nothing appears, as in the game of 2026-10-28. The shadow (C14) and the dream (C15) were not checked.
+**Checked on 2026-10-29** in a development client (llvmpipe) with only No Man's Land 1.6.3, ATMOSPHERICS 2.6.5 and `fallow` 0.4.10, on a new world (seed "fallow", Point at 616, −1288, pool at 631, 78, −1273), at midnight, 5 blocks from the pool: the face appears, wakes and speaks, and the "Friendship" goal is reached 10 s after joining. With `ciel.friendMoon = false`, nothing appears, as in the game of 2026-10-28. The shadow (C14) and the dream (C15) were not checked.
 
 A drawing error is logged once, without crashing the rendering. Config: `ciel.friendMoon` (true by default; false gives back the old behaviour, where the Friendly Moon does not appear under ATMOSPHERICS).
 
@@ -209,6 +209,12 @@ Client only. Each screen's name leaves the panel for a plate centred over its to
 
 Config (`fallow-client.toml`, `[titres]` section): `enabled` (true; false gives the game its labels back).
 
+## `outils` module
+
+Server and client, no mod required ([first gestures](premiers-gestes.md)). With bare hands, you gather but you do not cut. A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`, shipped in the jar) or when it would drop nothing without the correct tool (`BlockState.requiresCorrectToolForDrops()`: stone, ores, bricks, metal blocks). If the main-hand item is not correct for it (`ItemStack.isCorrectToolForDrops`), `PlayerEvent.BreakSpeed` sets the speed to 0 on both sides, so the client never predicts a break the server refuses, and `PlayerEvent.HarvestCheck` refuses the drops. On the client, a hint shows in the action bar at most every 40 ticks: « Il te faut une hache / une pioche / une pelle / une houe / un outil », chosen from the vanilla `mineable/*` tags, or « Ton outil n'est pas assez solide » when the held item is of the right kind but too weak. The `fallow:sans_outil` tag keeps what grows (`#minecraft:sword_efficient`, bamboo, azaleas, a few mod plants) and snow breakable by hand. Creative players and `FakePlayer`s (Create deployers) are left alone. Both tags can be extended by datapack without recompiling.
+
+Config (`fallow-common.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back; client and server must agree).
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -326,6 +332,10 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | E5 | Game in English | English names, same plates |
 | E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
 | E7 | `titres.enabled = false`, then `fallow-interface` disabled | The game's labels come back in both cases, no plate |
+
+### Tools
+
+The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 
 ## Maintenance
 

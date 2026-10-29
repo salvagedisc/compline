@@ -31,7 +31,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Wildex Bestiary | `wildex-bestiary` | ✅ | CS | Automatic bestiary, backbone of the zoo |
 | Questlog | `questlog` | ✅ (added 2026-10-26) | CS | Book-style journal of quests and guides, by chapter, editable in game ([quetes](plan/quetes.md)) |
 | Exposure | `exposure` | ✅ | CS | Analogue photography: keep a place, discover a species |
 | Exposure: Space | `exposure-space` | ✅ (added 2026-10-25) | CS | Astrophotography: 200 celestial objects to photograph and catalogue; French names translated |
@@ -60,6 +59,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
 | Cold Sweat: Altitude | `cold-sweat-altitude` | ✅ (added 2026-10-25) | CS | Colder as you climb, sheltered areas, windproof lining; supports airships |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
+| Tannery: Better Leather | `tannery-better-leather` | ✅ (1.0.2, added 2026-10-29, not seen in game) | CS | The tannery: hides, tanning rack, bark and tanning barrel, sinew, fat, studded leather; satchels removed, translated into French ([0014](decisions/0014-tannery.md), [tannery](plan/tannerie.md)) |
 | Reliable Backpacks | `reliable-backpacks` | ✅ (added 2026-10-26) | CS | A single simple bag, three rows, worn on the back (Curios), placeable ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Comforts | `comforts` | ✅ (back on 2026-10-26) | CS | Sleeping bag and hammock ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `fallow:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |
@@ -164,7 +164,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.4.5 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64) and `titres` (each screen's name on a plate over its top edge, client) modules ([mod-fallow](plan/mod-fallow.md)) |
+| Mod `fallow` 0.4.10 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64) , `titres` (each screen's name on a plate over its top edge, client) and `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
@@ -194,11 +194,12 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 | `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Fallow's interface, built from GUI Revision and GUI Revision Compats: vanilla screens, 14 mods' screens, HUD and Questlog journal in mist and sage, titles in French ([credits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
+| `fallow-textures` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-textures.md), added 2026-10-29, not seen in game) | Blocks and items from Vanilla Evolved (CC BY-NC-SA 4.0), without its sky, foliage colours and creatures ([credits](../pack/resourcepacks/fallow-textures/CREDITS.md), [0015](decisions/0015-textures.md)) |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
 ## Dropped or rejected
 
@@ -224,7 +225,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | ParCool! | Disabled at the team's request |
 | Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
 | Jade, AppleSkin | Break the mystery |
-| Just Zoom, Zoomify | The spyglass is Wildex's tool |
+| Just Zoom, Zoomify | The vanilla spyglass is enough |
+| Wildex Bestiary | Removed by the team on 2026-10-29; the `zoo` module keeps its own ledger ([modules-fallow](plan/modules-fallow.md)) |
 | Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
 | Carry On | Incompatible with Aeronautics |
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |
