@@ -15,10 +15,11 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 ## Session 1: first launch and first steps
 
 - [ ] The game is in French, the Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active, graphics set to "Fancy" (« Détaillés »), music at 40%.
-- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded) [C10, S9, X1, H1, F1, D1, L1].
+- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows the Fallow logo over the misty forest, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
 - [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
+- [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from NML pebbles, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
@@ -27,7 +28,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 2: the mist and the clearings
 
-- [ ] **Quest journal** (Questlog): opens from the inventory; four chapters in French; guides complete when read; the tannery and machines quests appear with a raw hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
+- [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a raw hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
@@ -125,6 +126,7 @@ Once the results are in:
 | Code | Detailed list |
 | --- | --- |
 | C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |

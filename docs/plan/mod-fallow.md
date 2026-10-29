@@ -188,6 +188,12 @@ Client only. Each screen's name leaves the panel for a plate centred over its to
 
 Config (`fallow-client.toml`, `[titres]` section): `enabled` (true; false gives the game its labels back).
 
+## `outils` module
+
+Server and client, no mod required ([first gestures](premiers-gestes.md)). With bare hands, you gather but you do not cut. A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs`, shipped in the jar) or when it would drop nothing without the correct tool (`BlockState.requiresCorrectToolForDrops()`: stone, ores, bricks, metal blocks). If the main-hand item is not correct for it (`ItemStack.isCorrectToolForDrops`), `PlayerEvent.BreakSpeed` sets the speed to 0 on both sides, so the client never predicts a break the server refuses, and `PlayerEvent.HarvestCheck` refuses the drops. On the client, a hint shows in the action bar at most every 40 ticks: « Il te faut une hache / une pioche / une pelle / une houe / un outil », chosen from the vanilla `mineable/*` tags, or « Ton outil n'est pas assez solide » when the held item is of the right kind but too weak. The `fallow:sans_outil` tag keeps snow breakable by hand. Creative players and `FakePlayer`s (Create deployers) are left alone. Both tags can be extended by datapack without recompiling.
+
+Config (`fallow-common.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back; client and server must agree).
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -299,6 +305,10 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | E5 | Game in English | English names, same plates |
 | E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
 | E7 | `titres.enabled = false`, then `fallow-interface` disabled | The game's labels come back in both cases, no plate |
+
+### Tools
+
+The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 
 ## Maintenance
 
