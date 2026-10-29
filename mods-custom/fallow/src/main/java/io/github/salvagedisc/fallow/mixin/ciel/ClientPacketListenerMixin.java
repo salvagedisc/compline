@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Vide le cache de brume d'ATMOSPHERICS quand le serveur envoie de nouveaux biomes ({@code /fillbiome}
- * renvoie ce paquet aux joueurs). {@code TAIL} n'est atteint que sur le fil du client, une fois les
+ * Vide le cache de brume d'ATMOSPHERICS et ralentit son fondu quand le serveur envoie de nouveaux biomes
+ * ({@code /fillbiome} et les clairières renvoient ce paquet aux joueurs). {@code TAIL} n'est atteint que sur le fil du client, une fois les
  * biomes remplacés : {@code ensureRunningOnSameThread} interrompt d'abord l'appel venu du réseau.
  * Appliqué seulement avec ATMOSPHERICS.
  */
@@ -22,5 +22,6 @@ abstract class ClientPacketListenerMixin {
         if (FallowConfig.cielClearFogOnBiomeUpdate()) {
             FogCache.clear();
         }
+        FogCache.slowFade();
     }
 }

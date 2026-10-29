@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -22,7 +23,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
  * Feu de veille et lanterne de clairière : posés par un joueur, ils changent les biomes autour d'eux en
- * clairière. La conversion est définitive : casser le bloc ne rend pas la brume.
+ * clairière. Retirés (cassés, soufflés), ils rendent la brume à leur disque, sauf là où une autre source
+ * la retient encore.
  */
 public class ClearingBlock extends Block {
     private final int radius;
@@ -49,8 +51,18 @@ public class ClearingBlock extends Block {
     }
 
     @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && level instanceof ServerLevel server && FallowConfig.clairiereEnabled()) {
+            Player nearest = level.getNearestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 8.0, false);
+            ClearingConverter.restore(server, pos, radius, nearest instanceof ServerPlayer player ? player : null);
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.fallow.clairiere.rayon", radius).withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.fallow.clairiere.retour").withStyle(ChatFormatting.DARK_GRAY));
     }
 
     @Override
@@ -63,7 +75,7 @@ public class ClearingBlock extends Block {
         if (!smokes) {
             return;
         }
-        double x = pos.getX() + 0.5, y = pos.getY() + 0.45, z = pos.getZ() + 0.5;
+        double x = pos.getX() + 0.5, y = pos.getY() + 0.6, z = pos.getZ() + 0.5;
         if (random.nextInt(3) == 0) {
             level.addParticle(ParticleTypes.SMALL_FLAME, x + (random.nextDouble() - 0.5) * 0.4, y,
                     z + (random.nextDouble() - 0.5) * 0.4, 0.0, 0.01, 0.0);
