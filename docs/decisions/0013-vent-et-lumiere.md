@@ -28,7 +28,6 @@ After the first in-game tests (2026-10-28), the team found the world bland where
 **Sky and clouds (team's choice of 2026-10-29).** The clouds did not match the mist. Read in the jars: Better Clouds cancels the vanilla `renderClouds`, where ATMOSPHERICS tints its clouds (mist colour, dusk, rain, "Story Mode" clouds); and ATMOSPHERICS cancels `renderSky` and draws the whole Overworld sky itself. So:
 - **Better Clouds is removed**: ATMOSPHERICS alone draws the clouds.
 - Preset `fallow_v4.json` (replaces `fallow_v3.json`, same biome profiles): second cloud layer at 210 (opacity 0.55, slower, wider), clouds mixed 45 % with the mist colour, darkened 60 % at night, automatic horizon blend; sun and moon 1.35× (bounds 0.25-3); stars 1,100 (4-1,500), brightness 1.25 (0-2), size 0.8 (0.5-3); ATMOSPHERICS' own wind streaks and desert tumbleweeds off, as Where Winds Blow already draws both.
-- **Moon**: the `fallow-ambiance` moon is removed (the team did not like it); the moon comes from the Default HD Sun and Moon resource pack, square like the Friendly Moon. ATMOSPHERICS' built-in pack is registered at the top (`Pack.Position.TOP`), so its sun stays. Round packs (Immersive Celestials, Enhanced Moon) would clash with the square Friendly Moon; Cubic Sun & Moon draws in 3D through shaders.
 - **Enhanced Celestials stays**: it can already enlarge and recolour the moon (`moon_size`, texture and colour modifiers); replacing it would mean rebuilding the Friendly Moon and the `ciel` module.
 - Auroras stays for aurorae; Distant Horizons keeps its own clouds off.
 

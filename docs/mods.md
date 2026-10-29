@@ -193,7 +193,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
-| Default HD Sun and Moon | `default-hd-sun-and-moon` | ✅ (1.3.3.7, added on 2026-10-29) | A finer square moon that matches the Friendly Moon; ATMOSPHERICS' built-in pack sits above it and keeps its own sun ([0013](decisions/0013-vent-et-lumiere.md)) |
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 | `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Fallow's interface, built from GUI Revision and GUI Revision Compats: vanilla screens, 14 mods' screens, HUD and Questlog journal in mist and sage, titles in French ([credits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
 | `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |

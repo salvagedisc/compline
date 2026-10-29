@@ -3,8 +3,7 @@
 # plus prioritaire : les extensions de Fresh Animations passent au-dessus de lui,
 # fallow-interface (dossier du pack, tiré de GUI Revision) habille l'interface
 # vanilla, celle des mods, la barre d'action et le journal Questlog, Supernova
-# apporte trois morceaux du paquet musical, Default HD Sun and Moon donne la
-# lune (le pack intégré d'ATMOSPHERICS, toujours au-dessus, garde son soleil), et
+# apporte trois morceaux du paquet musical, et
 # fallow-ambiance (dossier du pack) passe en dernier, au-dessus de tous.
 # Default Options ne sélectionne que les packs de cette liste : les ressources des
 # mods (mod_resources de NeoForge, fabric de Connector), absentes, étaient rajoutées
@@ -22,6 +21,5 @@ defaultResourcePacks = [
 	"file/FA+Player-v1.1.zip",
 	"file/fallow-interface",
 	"file/supernova-pack.zip",
-	"file/Default HD Sun and Moon 1.3.3.7.zip",
 	"file/fallow-ambiance"
 ]
