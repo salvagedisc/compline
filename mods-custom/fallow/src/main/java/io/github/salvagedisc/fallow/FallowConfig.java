@@ -99,7 +99,7 @@ public final class FallowConfig {
         common.pop();
 
         common.comment("Modules clairiere et dissipateur : poser un feu de veille (rayon 16), une lanterne de clairière (32)",
-                "ou faire tourner un dissipateur (64) change les biomes autour en clairière, une fois pour toutes.").push("clairiere");
+                "ou faire tourner un dissipateur (64) change les biomes autour en clairière ; le retirer y rend la brume.").push("clairiere");
         CLAIRIERE_ENABLED = common
                 .comment("Interrupteur de la conversion (serveur). Faux : les blocs restent, mais ne changent plus rien.")
                 .define("enabled", true);

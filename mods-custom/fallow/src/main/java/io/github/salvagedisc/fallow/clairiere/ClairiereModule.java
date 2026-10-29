@@ -25,8 +25,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * Module clairiere : la brume se lève là où le joueur l'a décidé. Deux blocs à poser, le feu de veille
- * (rayon 16) et la lanterne de clairière (rayon 32), changent les biomes autour d'eux en clairière : brume
- * légère (preset ATMOSPHERICS {@code fallow_v3}), herbe vive (Polytone), musique des clairières, et le
+ * (rayon 16) et la lanterne de clairière (rayon 32), changent les biomes autour d'eux en clairière tant qu'ils
+ * restent en place : brume légère (preset ATMOSPHERICS), herbe vive (Polytone), musique des clairières, et le
  * paysage lointain de Distant Horizons. Le troisième palier, le dissipateur (rayon 64), est un bloc Create
  * du module {@code dissipateur}.
  *
@@ -41,12 +41,12 @@ public final class ClairiereModule {
             () -> new ClearingBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.STONE).strength(2.0F, 6.0F).requiresCorrectToolForDrops()
                     .sound(SoundType.STONE).lightLevel(state -> 13).noOcclusion(),
-                    16, Block.box(1, 0, 1, 15, 7, 15), true));
+                    16, Block.box(2, 0, 2, 14, 9, 14), true));
     public static final DeferredBlock<ClearingBlock> LANTERNE_DE_CLAIRIERE = BLOCKS.register("lanterne_de_clairiere",
             () -> new ClearingBlock(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.METAL).strength(3.5F, 8.0F).requiresCorrectToolForDrops()
                     .sound(SoundType.LANTERN).lightLevel(state -> 15).noOcclusion(),
-                    32, Block.box(5, 0, 5, 11, 9, 11), false));
+                    32, Block.box(4, 0, 4, 12, 16, 12), false));
 
     public static final DeferredItem<BlockItem> FEU_DE_VEILLE_ITEM = ITEMS.registerSimpleBlockItem(FEU_DE_VEILLE);
     public static final DeferredItem<BlockItem> LANTERNE_DE_CLAIRIERE_ITEM = ITEMS.registerSimpleBlockItem(LANTERNE_DE_CLAIRIERE);
@@ -65,7 +65,10 @@ public final class ClairiereModule {
         Fallow.LOGGER.info("clairiere : feu de veille (16), lanterne de clairière (32)");
     }
 
-    /** {@code /fallow clairiere <rayon>} (opérateurs) : convertit autour de la position de la commande. */
+    /**
+     * {@code /fallow clairiere <rayon>} (opérateurs) : convertit autour de la position de la commande.
+     * {@code /fallow brume <rayon>} : rend la brume au disque, et aux clairières dont la source y est.
+     */
     private static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal(Fallow.MOD_ID)
                 .requires(source -> source.hasPermission(2))
@@ -77,6 +80,16 @@ public final class ClairiereModule {
                                     ClearingConverter.convert(source.getLevel(), BlockPos.containing(source.getPosition()),
                                             radius, source.getPlayer());
                                     source.sendSuccess(() -> Component.literal("Clairière de rayon " + radius + " programmée"), true);
+                                    return radius;
+                                })))
+                .then(Commands.literal("brume")
+                        .then(Commands.argument("rayon", IntegerArgumentType.integer(4, 256))
+                                .executes(context -> {
+                                    CommandSourceStack source = context.getSource();
+                                    int radius = IntegerArgumentType.getInteger(context, "rayon");
+                                    ClearingConverter.restoreWithin(source.getLevel(), BlockPos.containing(source.getPosition()),
+                                            radius, source.getPlayer());
+                                    source.sendSuccess(() -> Component.literal("Retour de la brume programmé sur " + radius + " blocs"), true);
                                     return radius;
                                 }))));
     }

@@ -32,7 +32,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
 - [ ] A clearing on a coast: the ocean and the beach keep their biome; a river crossing it becomes clearing [K4]. Note whether a Streams brook stays misty [W10].
-- [ ] Break the fire, leave, come back, restart: the clearing stays [K5].
+- [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
+- [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
+- [ ] The new fire (stone brazier, pale flame) and lantern (standing, quartzite crystal), by day and at night: neither looks like a vanilla campfire or lantern [K15].
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].

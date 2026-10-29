@@ -86,11 +86,13 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Repository reorganised: `README` and `CONTRIBUTING` rewritten, documentation index, roadmap, `docs/plan/` location for the modpack plan, `docs/` renamed `docs/conception/`, mod registry sorted by domain.
 - Branches `test/agriculture`, `test/faune` and `test/structures` merged into `main`.
 - No Man's Land 1.5.12 → 1.6.1: ancestral tools (ritual pickaxe, oath sword, bronze bell and chisel), lunar and solar tiles; new texts translated.
+- Vigil fire and clearing lantern (`fallow` 0.4.7): their own models and textures (a stone brazier with a pale flame, a standing lantern of blackened iron around a glowing quartzite crystal) and new recipes (resin oil bottle and polished stone; quartzite cluster, glass panes and iron plates). They looked like the vanilla campfire and lantern.
 - ATMOSPHERICS preset `fallow_v3`: the mist of the clearings ends at 500 blocks by day and 260 at night (124 and 84 before), so that the far landscape can be seen there.
 - Duplicate `docs/plans/` and `docs/specs/` removed (copies of `docs/conception/`).
 - Kaleidoscope Cookery 1.5.1 → 1.6.0: 1.5.1 crashed the game on loading with Kaleidoscope Compat 2.9.7 (`MillstoneBlockEntityMixin` mixin), observed on the test server.
 
 ### Fixed
 - The Friendly Moon never appeared at the Meeting Point, nor its shadow in the sky after the dream: ATMOSPHERICS gives the sky back to No Man's Land only once the Friendly Moon is visible, which only No Man's Land's own sky can make happen. The `ciel` module of `fallow` 0.4.5 draws them after ATMOSPHERICS' sky until it hands over, and leaves the sky to the moonlight dream ([module](docs/plan/mod-fallow.md#the-friendly-moon-under-atmospherics)).
+- Breaking a vigil fire, a clearing lantern or a charged dissipator left its clearing in place. With `fallow` 0.4.7 the mist comes back over its disc, except where another source still holds it; `/fallow brume <radius>` does the same for operators ([module](docs/plan/mod-fallow.md#clairiere-module)).
 - With Distant Horizons, the mist of a clearing never closed: far mountains drowned in the mist stayed visible as pale silhouettes against the sky up to the end of the LOD radius. The `horizon` module of `fallow` 0.4.6 dissolves the far landscape into the sky at the end of the mist, capped by the new client option `horizon.ringMaxDistance` (512 blocks), so a mist ring always remains. It also skips Distant Horizons' terrain-to-LOD fade when LODs are not drawn, which could blend a frozen LOD image into the mist ([module](docs/plan/mod-fallow.md#horizon-module)).
 - No Man's Land: the scutes offering line never loaded (condition on a non-existent item, `nomansland:tortoise_scute`).
