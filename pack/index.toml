@@ -681,10 +681,6 @@ file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
 hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
 
 [[files]]
-file = "kubejs/assets/betterclouds/lang/fr_fr.json"
-hash = "43390bde42dc4468bb701bebcab62da998f020ee36368c9fe29bb4dc230e95dd"
-
-[[files]]
 file = "kubejs/assets/biolith/lang/fr_fr.json"
 hash = "a8fdd83135e21e03a404903c2acd8e7ca4016211cee2cb2fc0d6664eee0be9d2"
 
@@ -1635,11 +1631,6 @@ metafile = true
 [[files]]
 file = "mods/better-advanced-tooltips.pw.toml"
 hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
-metafile = true
-
-[[files]]
-file = "mods/better-clouds.pw.toml"
-hash = "ff68a3c161324e02415d4f2b6806a3b3ebef9ea1c8fff6925ce65e6b8b9d1417"
 metafile = true
 
 [[files]]
