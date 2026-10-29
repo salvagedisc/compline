@@ -12,8 +12,6 @@
   "item.fallow.eclat_de_vie": "Éclat de vie",
   "item.fallow.eclat_de_vie.compteur": "Cœurs : %s / %s",
   "item.fallow.eclat_de_vie.tooltip": "Rend un cœur perdu.",
-  "item.fallow.peau_brute": "Peau brute",
-  "item.fallow.peau_preparee": "Peau préparée",
-  "tooltip.fallow.peau_brute": "À l'établi avec des cendres, elle devient une peau préparée.",
-  "tooltip.fallow.peau_preparee": "Faites-la tremper sur un plateau en bambou, sous la pluie ou sous un stalactite qui goutte."
+  "message.fallow.tannerie.poudre_manquante": "Le tonneau a besoin de poudre tannique.",
+  "message.fallow.tannerie.tonneau_plein": "Le tonneau est plein."
 }

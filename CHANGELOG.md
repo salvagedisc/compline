@@ -32,7 +32,7 @@ No version has been published yet: everything below will make up `0.1.0`.
   - Envelope (mail by pigeon, lost letters), translated into French;
   - the Friendly Moon of No Man's Land as a main thread: crumpled note in the alchemists' jars, a single moon at a time with Enhanced Celestials, blood moons removed ([friendly moon](docs/plan/lune-amie.md));
   - maximum health: one heart lost per death, floor of 5 hearts, life shards to find by exploring ([health](docs/plan/sante.md));
-  - tannery: animals drop a raw hide, prepared with ash then soaked on Kaleidoscope's bamboo tray ([tannery](docs/plan/tannerie.md));
+  - tannery: animals drop a hide instead of leather ([tannery](docs/plan/tannerie.md)), made with the Tannery mod since 2026-10-29 (see Changed);
   - no more experience: anvil without levels (wear), hidden bar, no orbs, vials and nuggets removed ([0009](docs/decisions/0009-xp.md)).
 - Mod `fallow` 0.2.0: `xp` module.
 - Music: True Adaptive Music and the `fallow` pack (`pack/trueadaptivemusicpacks/fallow/`): 11 situations (mist, clearing, seasons, moon, airship, underground, monument…), long silences, muted during bosses; 29 tracks chosen by the team: vanilla and No Man's Land, the Supernova resource pack, 10 free tracks by Scott Buckley, Kevin MacLeod and HoliznaCC0 with their credits; `musique.js` script, `fallow:brumeux` tag, TAM interface in French, pack active and music at 40% on first launch ([0010](docs/decisions/0010-musique.md)).
@@ -68,6 +68,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 
 ### Changed
+- Tannery: the scripted tannery (raw hide, ashes, bamboo tray) is replaced by the Tannery: Better Leather mod 1.0.2: every leather animal drops one of its five hides, which dry on a tanning rack and turn into leather in a tanning barrel with tannic powder from bark; every strippable log gives bark; the vanilla tables it overrides are put back; satchels removed; translated into French ([0014](docs/decisions/0014-tannery.md)).
 - Documentation brought up to date on 2026-10-25: feature overview in the README, vision rewritten around the mist that lifts and the long-term goals, roadmap with the updates held until the tests, every in-game test gathered by play session in `docs/tests-en-jeu.md`.
 - Low-risk updates: Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, No Man's Land 1.6.3, Ecliptic Seasons 0.15.5, Contraption Lights 1.5.5, CreativeCore 2.13.51, ModernFix 5.27.27, ImmediatelyFast 1.6.15, Knight Lib 2.0.5, Companions! 1.3.6, Hybrid Aquatic 1.7.4 and Hybrid API 1.1.3, Naturalist 2.0.7, Alex's Mobs Continued 2.2.4, Traveler's Backpack 10.1.40, AmbientSounds 6.3.11, Lithostitched 1.8.1, Puzzles Lib, Modonomicon, Forgified Fabric API, Every Compat, Subtle Effects 1.15.1, Sound Physics Remastered 1.5.2; NeoForge 21.1.265.
 - Ecliptic Seasons set to farming only (`AGRICULTURE`), heat stroke and chat notices off.

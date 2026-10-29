@@ -29,7 +29,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 2: the mist and the clearings
 
-- [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a raw hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
+- [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
@@ -64,7 +64,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
-- [ ] **Tannery**: a cow and a horse give a raw hide; hide + ashes at the crafting table; charcoal on a campfire gives ashes; prepared hide on the bamboo tray in the rain or under a dripstone → leather; EMI shows both steps. Note whether bamboo is too rare [T].
+- [ ] **Tannery**: a cow and a horse give their hide; the hide dries on a tanning rack; stripping a log with an axe gives bark, two barks give tannic powder; dry hide in the tanning barrel → leather; the barrel messages are in French; EMI shows no satchel [T].
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s fallow:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
