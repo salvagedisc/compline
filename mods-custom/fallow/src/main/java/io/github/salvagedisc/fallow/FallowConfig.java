@@ -24,6 +24,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
     private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
+    private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -96,6 +97,14 @@ public final class FallowConfig {
                 .comment("Tronçons (16 × 16 blocs) convertis par tick. Un dissipateur en touche environ 80.")
                 .defineInRange("chunksPerTick", 2, 1, 16);
         common.pop();
+
+        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Les troncs (tag fallow:outil_requis)",
+                "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
+        OUTILS_ENABLED = common
+                .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.",
+                        "Client et serveur doivent avoir la même valeur.")
+                .define("enabled", true);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -152,6 +161,10 @@ public final class FallowConfig {
 
     public static int clairiereChunksPerTick() {
         return read(COMMON_SPEC, CLAIRIERE_CHUNKS_PER_TICK);
+    }
+
+    public static boolean outilsEnabled() {
+        return read(COMMON_SPEC, OUTILS_ENABLED);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
