@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.11 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.12 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -177,19 +177,27 @@ Plan [10.3](10-recentrage.md#103-the-mist-that-lifts), layer 3: the mist lifts w
 
 | Block | Radius | Recipe |
 |---|---|---|
-| Vigil Fire (`fallow:feu_de_veille`), a stone hearth with embers | 16 | No Man's Land resin, two charcoal, a log, three cobblestone |
-| Clearing Lantern (`fallow:lanterne_de_clairiere`) | 32 | A lantern, two Overgeared iron plates, two resin |
+| Vigil Fire (`fallow:feu_de_veille`), a stone brazier on a foot with embers and a pale flame | 16 | A No Man's Land resin oil bottle, two polished stone slabs, a charcoal, a polished stone |
+| Clearing Lantern (`fallow:lanterne_de_clairiere`), a standing lantern of blackened iron around a glowing quartzite crystal | 32 | Two Overgeared iron plates, two glass panes, a No Man's Land quartzite cluster |
 | Dissipator (`fallow:dissipateur`, `dissipateur` module) | 64 | Encased fan, brass casing, propeller, two precision mechanisms |
 
-**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, for good: breaking the block does not bring the mist back. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, two chunks per tick (`chunksPerTick`), then sends the new biomes to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
+Both have their own model and textures since 0.4.12 (`textures/block/feu_de_veille_*`, `lanterne_de_clairiere_*`; the flame is animated and, like the embers and the crystal, lit at full brightness through NeoForge's per-face light). Before, the fire was a cobblestone campfire and the lantern the vanilla lantern, and players mixed them up with those.
 
-The conversions in progress are lost if the server stops; placing the block again finishes them. Operators can convert by command: `/fallow clairiere <radius>` around the position of the command (4 to 256).
+**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, as long as they stay. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, ring by ring (see the transition below), and sends the new biomes of each ring to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
 
-Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false keeps the blocks but they no longer convert anything), `chunksPerTick` (2).
+**The mist comes back** (0.4.12). Each source (fire, lantern, charged dissipator, command) is recorded with its radius in the world's saved data (`fallow_clairieres`, `ClearingSources`). When a fire or a lantern leaves the world (broken, blown up, replaced: `onRemove`), or a charged dissipator is broken (`destroy`, called by Create), its source is removed and a restore job runs over its disc: every clearing cell that no remaining source covers goes back to the biome the world generator places there (`BiomeSource.getNoiseBiome` with the world's sampler, as at generation). Nothing is stored per cell: the seed is enough. The nearest player within 8 blocks reads "La brume revient." Checked in game on 2026-10-29: a lantern removed gives back its 8,639 cells; a fire inside a lantern's disc, removed, gives back none.
+
+**The transition** (0.4.12). A clearing does not appear at once. `ClearingConverter` first loads the chunks of the disc, then converts it ring by ring, 4 blocks wide, every `ringTicks` ticks (6): from the centre outwards when the mist lifts, from the edge inwards when it comes back. A lantern (32 blocks) takes about 2.7 seconds, a dissipator (64 blocks) about 5. Each ring sends a few cloud puffs (`CLOUD` particles, at most 160 per ring, to players within 160 blocks of the edge) that drift outwards when the mist leaves and inwards when it returns. On the client, `AtmosphericsFadeMixin` slows the fog distance for 15 seconds after each biome packet (`FogCache.smooth`): the fog density (1 / end distance) moves towards its target at a bounded speed, so going from full mist to a clear sky takes `clearingFadeSeconds` (10; the visible mist goes in the first 4 or 5) and the near field clears at a steady pace. Without it, ATMOSPHERICS fades the distance linearly in about a second and the mist seems to vanish in the first few per cent. The grass colour changes with each ring.
+
+Limits: a clearing made before 0.4.12 has no recorded source. Breaking its block still gives the mist back, but a neighbouring old clearing does not hold its own cells when another one is removed over it. A Create contraption that picks up a charged dissipator removes it without `destroy`, so its clearing stays.
+
+The jobs in progress are lost if the server stops; placing the block again finishes a conversion, `/fallow brume` a restoration. Operators can convert by command: `/fallow clairiere <radius>` around the position of the command (4 to 256), and give the mist back with `/fallow brume <radius>`, which also removes the sources whose centre is in the disc (and gives their whole disc back).
+
+Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false keeps the blocks but they no longer convert anything), `chunksPerTick` (2, chunks loaded per tick before the wave starts), `ringTicks` (6, ticks between two rings). Client (`fallow-client.toml`, `[ciel]` section): `clearingFadeSeconds` (10; 0 gives back the ATMOSPHERICS fade).
 
 ## `dissipateur` module
 
-The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken and placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
+The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once, until it is broken; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken, it gives the mist back to its disc; placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
 
 Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
 
@@ -313,13 +321,18 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | K2 | F3 at the edge of the disc | `fallow:clairiere` inside, the old biome outside, a round edge of about 16 blocks |
 | K3 | Lantern in a snowy taiga, fire in a savanna | `clairiere_froide` (snow still falls), `clairiere_chaude` |
 | K4 | Clearing on a coast | The ocean and the beach keep their biome; a river crossing the disc becomes a clearing |
-| K5 | Break the fire, leave and come back, restart the server | The clearing stays |
+| K5 | Leave the fire in place, leave and come back, restart the server | The clearing stays |
+| K12 | Break the fire, then a lantern | "La brume revient."; the mist comes back over its disc within seconds, F3 shows the old biome |
+| K13 | A fire inside a lantern's disc, break the fire; then the lantern | Nothing changes; then the whole disc goes back to the mist |
+| K14 | Charged dissipator, broken | The mist comes back over 64 blocks |
+| K15 | The fire and the lantern side by side, by day and at night | Neither looks like a vanilla campfire or lantern; the pale flame flickers, the embers and the crystal glow |
+| K16 | Place a lantern, wait, then break it, watching the edge of the disc | The grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over 4 or 5 seconds; on breaking, the reverse, from the edge inwards |
 | K6 | Clearing music | Node "Clairière" of True Adaptive Music after 30 s |
 | K7 | Far view from a clearing on a hill | Distant Horizons landscape beyond 128 blocks (H3) |
 | K8 | Dissipator driven at 16 RPM, then 64 RPM, then overstressed | Nothing at 16; at 64 the goggles count up to 100 % and the disc of 64 converts; overstress resets the charge |
 | K9 | Dissipator on an airship (Sable) | Note what happens: it converts where the ship is when it finishes charging |
 | K10 | Ecliptic seasons and Cold Sweat in a clearing | Crops grow, temperature consistent with the old biome |
-| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips |
+| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips (the fire: resin oil bottle, polished stone; the lantern: quartzite cluster, glass panes) |
 
 ### Titles
 
