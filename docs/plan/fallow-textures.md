@@ -27,8 +27,8 @@ CC BY-NC-SA 4.0, like Vanilla Evolved and `fallow-interface`. The pack cannot be
 
 ## Next steps
 
-1. **Mod blocks.** About 25,000 block and item textures of 48 mods keep their vanilla-based colours. Every Compat rebuilds its wood variants from the active pack's planks and logs, so those follow by themselves. For the rest, a `teinte` module of the `fallow` mod would recolour the mods' textures at load time, on each player's computer, from a pattern learnt on the vanilla materials (each wood, each stone, dirt, metals): nothing of the mods (most of them under closed licences) is redistributed, and a mod added later follows on its own. A prototype gave good results on Chipped, Twigs, Handcrafted and Supplementaries' stone, and not enough on Create's brass and gears.
-2. **Hand redraws, in batches**, of the most visible textures in Vanilla Evolved's style: No Man's Land's woods and stones, Create's casings and cogwheels, Fallow's fires and lanterns.
+1. **Mod blocks.** About 25,000 block and item textures of 48 mods keep their vanilla-based colours. Every Compat rebuilds its wood variants from the active pack's planks and logs, so those follow by themselves. For the rest, an idea on hold until the team approves it (the prototype showed too many defects): a `teinte` module of the `fallow` mod would recolour the mods' textures at load time, on each player's computer, from a pattern learnt on the vanilla materials (each wood, each stone, dirt, metals): nothing of the mods (most of them under closed licences) is redistributed, and a mod added later follows on its own. A prototype gave good results on Chipped, Twigs, Handcrafted and Supplementaries' stone, and not enough on Create's brass and gears.
+2. **Hand redraws, in batches**, once the in-game test Y7 shows which mod blocks clash most, of the most visible textures in Vanilla Evolved's style: No Man's Land's woods and stones, Create's casings and cogwheels, Fallow's fires and lanterns.
 
 ## In-game tests
 
