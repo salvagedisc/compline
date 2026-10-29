@@ -1,6 +1,6 @@
 # First gestures
 
-With bare hands, you gather but you do not cut. A trunk needs an axe, rock needs a pickaxe, and the first tool is knapped from stone. Dirt, sand, gravel, leaves and plants stay breakable by hand, otherwise nobody could start. Decision: [0013](../decisions/0013-premiers-gestes.md).
+With bare hands, you gather but you do not cut. Wood, raw or worked (trunks, planks, furniture, chests), needs an axe, rock needs a pickaxe, and the first tool is knapped from stone. Dirt, sand, gravel, leaves, plants and crops stay breakable by hand, otherwise nobody could start. Decision: [0013](../decisions/0013-premiers-gestes.md).
 
 Status: written on 2026-10-29. Checked on a test server (NeoForge with KubeJS, LootJS, Overgeared, Twigs, No Man's Land): the scripts load without error, 15 planks recipes are rewritten (11 vanilla, 4 NML), an oak log and a stone axe give 2 planks and give back the axe with 1 damage, the campfire takes flint, the wooden tools have no recipe. Not yet tested with a player.
 
@@ -14,9 +14,9 @@ Status: written on 2026-10-29. Checked on a test server (NeoForge with KubeJS, L
 
 ## The rule
 
-The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs`) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps snow breakable by hand. Creative mode and fake players (Create deployers) are not affected.
+The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, NML's field mushroom, cut sugar cane, cattail and reeds, Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
 
-Crafted wooden blocks (planks, furniture, chests) stay breakable by hand: a player can take down what they built. To make them need an axe too, add `#minecraft:planks` (and furniture tags) to `fallow:outil_requis` in a datapack; no recompilation.
+The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks, furniture, chests, crafting table, Create's wooden parts). To go back to raw wood only, replace `#minecraft:mineable/axe` by nothing in `fallow:outil_requis` with a datapack (`"replace": true`, `#minecraft:logs` alone); no recompilation.
 
 ## The recipes
 
@@ -48,7 +48,8 @@ New chapter « Premiers gestes » (order 1, after Arriver; the other chapters mo
 |---|---|---|
 | G1 | New world, bare hands on a log, then on stone | Nothing breaks; « Il te faut une hache », then « Il te faut une pioche », in French, not spammed |
 | G2 | Stone pickaxe on a diamond ore | « Ton outil n'est pas assez solide », the ore does not break |
-| G3 | Dirt, sand, gravel, leaves, snow, flowers by hand | Break as in vanilla |
+| G3 | Dirt, sand, gravel, leaves, snow, flowers, wheat, a pumpkin, cocoa, bamboo, NML reeds by hand | Break as in vanilla |
+| G3b | A crafting table, a chest, planks, a Handcrafted chair by hand, then with an axe | « Il te faut une hache », then they break |
 | G4 | Walk around spawn | A flint within about 5 minutes (NML pebbles, gravel) |
 | G5 | Flint on stone, knap an axe head, head + stick | A stone axe; the tree falls with TreeChop; note the durability used per tree |
 | G6 | Oak log + axe; NML maple log + axe | 2 planks each, the axe stays in the grid with one point less; the server log says how many planks recipes were rewritten |
