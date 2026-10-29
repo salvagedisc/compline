@@ -114,7 +114,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Camera Overhaul | `cameraoverhaul` | ✅ | C | The camera follows movement (set low) |
 | ItemPhysic | `itemphysic` | ✅ | C | Dropped items fall, roll and float |
 | Smooth Swapping | `smooth-swapping` | ✅ | C | Items slide around in the inventory |
-| Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos |
+| Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos; `fallow` 0.4.7 stops its equip animation looping with Sensible Stackables ([fix](plan/mod-fallow.md#punchy-and-sensible-stackables-the-hand-that-kept-jumping)) |
 
 ## Atmosphere, rendering and sound
 

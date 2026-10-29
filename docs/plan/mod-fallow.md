@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.6 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.7 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules, plus a [compatibility fix](#compatibility-fixes) between Punchy! and Sensible Stackables. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -38,6 +38,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
 | `dissipateur` | both | Create | none |
+| (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 
 ## `ciel` module
 
@@ -209,6 +210,20 @@ Client only. Each screen's name leaves the panel for a plate centred over its to
 
 Config (`fallow-client.toml`, `[titres]` section): `enabled` (true; false gives the game its labels back).
 
+## Compatibility fixes
+
+Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present.
+
+### Punchy! and Sensible Stackables: the hand that kept jumping
+
+**Symptom** (reported on 2026-10-29): with most items in hand, the first-person hand went down and up again without end and the item never showed. Tools, weapons and armour (items with durability) were not affected.
+
+**Cause.** Punchy! plays its "hand out, hand in" animation when the held item changes. To decide, `HandEquipStateMachine.hasItemChanged` walks the vanilla components of the new stack and compares each value with the one `get` returns on the previous stack. Sensible Stackables gives each item the pack's stack size by wrapping `PatchedDataComponentMap.get` for `minecraft:max_stack_size`, but walking the components still yields the item's base value. For stone, the walk gives 64 and `get` gives 32 (decision 0012): the item "changes" every tick and Punchy! restarts the animation every tick. Items whose stack size the pack does not change (the `fallow:pile/64` tag, items with durability) never differ, hence the tools that stayed steady.
+
+**Fix.** `compat.PunchyEquipMixin` makes Punchy!'s `shouldIgnoreComponentForEquipDiff` also ignore `minecraft:max_stack_size`, as it already ignores wear (`minecraft:damage`). A stack size never changes what the hand holds, so no real item change is missed. Applied only with Punchy! (`punchy`) and Sensible Stackables (`sensible_stackables`).
+
+**Checked** in a development client with only Punchy! 2.8g, Sensible Stackables and their libraries, with the pack's configs: before the fix, a probe logging every tick showed `max_stack_size` read as 64 by the walk and 32 by `get` with stone in hand, and the hand stayed lowered and moving with no stone drawn; after it, the stone is drawn and only Punchy!'s light idle sway remains. An iron sword was steady in both cases.
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -327,6 +342,14 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
 | E7 | `titres.enabled = false`, then `fallow-interface` disabled | The game's labels come back in both cases, no plate |
 
+### Held items
+
+| # | Test | Expected |
+|---|---|---|
+| G1 | Hold stone, dirt, a torch, bread, then stand still for 10 seconds | The item is drawn in hand and stays there; only Punchy!'s light sway |
+| G2 | Scroll the hotbar between those items and a sword | One lowering then raising of the hand per change, no more |
+| G3 | Place stone blocks until the stack shrinks, eat bread | No hand-out animation when the count drops; the eating animation plays normally |
+
 ## Maintenance
 
 At each update of ATMOSPHERICS, Enhanced Celestials, Traveler's Backpack, Thirst Was Reclaimed or NeoForge:
@@ -341,6 +364,7 @@ Known fragile points:
 - Traveler's Backpack: the `EffectFluid` constructor and the moment it empties its registry;
 - Thirst Was Reclaimed: `WaterPurity` and `ThirstHelper`.
 - Distant Horizons: the `DhApiBeforeFogRenderEvent` and `DhApiBeforeRenderEvent` events (API 7), `GLState.saveState`, `AbstractChunkyAccessor.tryRunFirstTimeSetup` and its `listenerBound` field.
+- Punchy!: the `HandEquipStateMachine.shouldIgnoreComponentForEquipDiff` method (class `punchy.client.state.HandEquipStateMachine`). If an update of Punchy! or Sensible Stackables fixes the mismatch on its side, the mixin can go.
 - Create: `KineticBlockEntity` (`write`/`read`, `addToGoggleTooltip`), `RotatedPillarKineticBlock`, `BlockStressValues.IMPACTS`; the compile classpath pins Ponder and Flywheel to the versions Create bundles (`build.gradle`).
 - Minecraft and NeoForge: `ChunkAccess.fillBiomesFromNoise` and `ChunkMap.resendBiomesForChunks` (clearings); the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers, the cancellation of `AnvilUpdateEvent`.
 

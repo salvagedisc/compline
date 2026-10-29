@@ -24,6 +24,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
+- [ ] Stone, a torch or bread in hand: the item is drawn and the hand stays still (only a light sway); scrolling the hotbar lowers and raises the hand once per change [G1-G3].
 
 ## Session 2: the mist and the clearings
 
@@ -125,7 +126,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), G (held items) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
