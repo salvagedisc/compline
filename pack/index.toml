@@ -2322,8 +2322,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v4.json"
-hash = "7333d9949d48b49ddecd955a918a49c903896e23d2729082d730d628d2b844c4"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v5.json"
+hash = "579c51abf83cd91283d20fd1dbcc3d48d8c264cbdbb6932f3b40c5966c26b528"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
