@@ -182,7 +182,7 @@ hash = "e4cdcc4a942f90ce865ab62a6127951890958b88b23dbb815f33100c2336af23"
 
 [[files]]
 file = "config/questlog/quests/gestes_feu.json"
-hash = "3a3e72266cf5e35f4cf867c7403d06e36d20068626009649225fc3fa62356cff"
+hash = "3d8aa480a3b02783a15dc02a5f72467acb7534404da0cabff24f436cd77a36d8"
 
 [[files]]
 file = "config/questlog/quests/gestes_forge.json"
@@ -226,7 +226,7 @@ hash = "c0e13fb57a9bd70342f3b2bf5f7e537a1745de0167ae67959de1fa918c858b0b"
 
 [[files]]
 file = "config/questlog/quests/metiers_tannerie.json"
-hash = "39cae8eab4e3ad1dc353dcb22a747e96af57c78a80ed254af3ce410e362874f9"
+hash = "58edff05e36cfbd30d60617855936e2289e8a43007a072d3583ab74f49f9f5e8"
 
 [[files]]
 file = "config/questlog/quests/survivre_froid.json"
@@ -898,11 +898,11 @@ hash = "2bba661d1f0b6ae0c1a65c567ce02b44eeb646d92d4cc6fc2f8f107b53226d68"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/en_us.json"
-hash = "beeba947c6faf2befd3a533729c53196134bc034f3ce47e055c0b101282daab9"
+hash = "657a5c815e3444769e969b83d0b038fbcabafaad8cdf1ec1a2e92d2392099aff"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/fr_fr.json"
-hash = "041b5cae75f9e034a5323b76b68ee885715ddb2cc1a11f93f2e9b2e50e5ddd50"
+hash = "36d991edcea53a770c0903e0a27d0d7d7140ded43eae1456d98964e3e1549b43"
 
 [[files]]
 file = "kubejs/assets/fancymenu/lang/fr_fr.json"
@@ -1157,6 +1157,10 @@ file = "kubejs/assets/supplementaries/lang/fr_fr.json"
 hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
 
 [[files]]
+file = "kubejs/assets/tannery/lang/fr_fr.json"
+hash = "89fc0bb384a6bf90161aa88f51055b508d923a37cf332649ec9fadae3f9d2ba0"
+
+[[files]]
 file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
@@ -1229,6 +1233,10 @@ file = "kubejs/client_scripts/sante.js"
 hash = "52d57a2606821e955f78da721ba9197b41f033b3bcfaca9f4209a840f3a88684"
 
 [[files]]
+file = "kubejs/client_scripts/tannerie.js"
+hash = "b3420f2304c2a5210feaddb17662fcf6c0700213fcac572c5f176e83b32e816b"
+
+[[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
 hash = "22c2ae67c6ace47c327ec9330f51e8e98727dfe91337b11a286cd6ae1f8ff149"
 
@@ -1251,10 +1259,6 @@ hash = "1cba5ef5c996301103e87cb1b299fb47f0bd55f1feeef5f977ea3615caea6390"
 [[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
-
-[[files]]
-file = "kubejs/data/fallow/tags/item/peaux_brutes.json"
-hash = "01293223c715bc17b280d45dce77d5f522bb67a5218c53e7cc8b8d179f8b7070"
 
 [[files]]
 file = "kubejs/data/fallow/tags/item/pile/16.json"
@@ -1411,6 +1415,30 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/cow.json"
+hash = "b4fed92e5c0068f160f28e54bfcf52120dc97646d202244420ebf24600cf5a28"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/donkey.json"
+hash = "ebc1fe4b85d605fbf54a1913e168ec9e37daf0882f757d54aaff87b37070a858"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/goat.json"
+hash = "64607c4f134775a9f7fa3a8ff3fc325977bb7119dbd12e693298dad4411e48cb"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/horse.json"
+hash = "ec75aaecbfa0191ae31463e83b857674d184697ce1bff38996a83bc915b80e3c"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/pig.json"
+hash = "e38231836b8cd3e27358afa87e46e47462da4f9386403edddb37ffe620076bb3"
+
+[[files]]
+file = "kubejs/data/minecraft/loot_table/entities/sheep.json"
+hash = "a3d563f6d2d52a31e2ca286745210de99cddea86071b2b8c5811ef2c11a035ac"
 
 [[files]]
 file = "kubejs/data/minecraft/tags/worldgen/biome/has_structure/stronghold.json"
@@ -1574,19 +1602,15 @@ hash = "43df3caa0baef3ecb90808ee3a6b84a2c4e31111ac40d18537f5dea496518962"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "d0f56c28df6e479b19379ef12af041293e80fea5082b675cd1673db687f78d82"
+hash = "756381895c317027c3fc7bfc3d49fdd2a5b4261314fbcb711e9c402714b978a1"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
-hash = "308235451f04e0c95df739d599e6ddb3c6df1af3d6465cfc243df34b6c3a0dcc"
+hash = "d860a5e1f79e550fae99530e847202d771b18b217b60b02abae9471e4b5c10ae"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
 hash = "9794e921bc533f2ea5fa8f50258558db9ffc30a783ea9d7b3978ae82a87c139c"
-
-[[files]]
-file = "kubejs/startup_scripts/tannerie.js"
-hash = "d82c42a37f6a2706cf262bda01100541b507cecbed48edbd42b42859a1e04489"
 
 [[files]]
 file = "mods/3dskinlayers.pw.toml"
@@ -2285,6 +2309,11 @@ metafile = true
 [[files]]
 file = "mods/surveyor.pw.toml"
 hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
+metafile = true
+
+[[files]]
+file = "mods/tannery-better-leather.pw.toml"
+hash = "e79f2c7e151ba0d565e1a6e31bb7380359acfbdd81b58c9129dd99b1fe0bce9c"
 metafile = true
 
 [[files]]
