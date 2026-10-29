@@ -53,6 +53,8 @@ jobs:
         with:
           name: ${{ steps.export.outputs.name }}
           path: dist/*.mrpack
+          # Each pack is ~45 MB: keep the storage quota of a private repo free.
+          retention-days: 3
 
   # Le mod custom fallow (mods-custom/fallow/) doit toujours compiler.
   mod-fallow:
@@ -79,3 +81,4 @@ jobs:
         with:
           name: fallow-mod-${{ github.sha }}
           path: mods-custom/fallow/build/libs/*.jar
+          retention-days: 3
