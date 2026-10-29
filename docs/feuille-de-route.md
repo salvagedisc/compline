@@ -53,7 +53,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
 - [ ] **Monument guardians**: Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff at four Monoliths, blessing after their defeat (decision 15 of [12.5](plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); proposed, not written.
 - [ ] **The zoo**: a measurable long-term goal (species housed, aquariums), still without a mechanic.
-- [ ] **Quests and guides** (Questlog): first version in the pack (four chapters, 16 quests); next quest lines for the fanal, the monuments, the forge and cooking ([quetes](plan/quetes.md)).
+- [ ] **Quests and guides** (Questlog): first version in the pack (five chapters, 26 quests, the forge basics included in « Premiers gestes »); next quest lines for the fanal, the monuments and cooking ([quetes](plan/quetes.md)).
 - [ ] In Control!: `spawn.json` has no rule for villagers and wandering traders, unlike what the survivors plan assumes; to settle with the `survivants` module.
 - [ ] **White moon**: draft in [kubejs-brouillons/](plan/kubejs-brouillons/), needs a sound and texts; the `ciel` module already draws it.
 - [ ] Subtle Effects: turn off superfluous effects ([0007](decisions/0007-ambiance-performance.md)).

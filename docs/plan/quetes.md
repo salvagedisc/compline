@@ -27,10 +27,11 @@ Quests made with the in-game editor are saved in the same folder: bring them bac
 | Chapter | Quests |
 |---|---|
 | Arriver (Arriving) | Bienvenue, Le jour et la nuit, Un sac sur le dos (obtain the backpack), Les cœurs perdus, Sans expérience, Au long cours |
+| Premiers gestes (First gestures) | Mains nues, Le silex, La pierre à tailler, La première hache, Des planches, Le feu (place a campfire), La pioche, Le four, Le marteau et l'enclume de pierre, La forge (guide, with the first iron ingot) ([first gestures](premiers-gestes.md)) |
 | Survivre (Surviving) | La soif, Le froid et le chaud, Les saisons |
 | La brume (The mist) | La brume, Un feu de veille (place one), Une lanterne de clairière (place one), Les clairières, Le dissipateur (place one, after the machines guide) |
 | Voyager (Travelling) | Un cheval à soi (ownership, bond, whistle), L'écurie (command wheel, registry, lending); they replace Icy's Better Horses' Modonomicon handbook, which is hidden |
-| Métiers (Crafts) | La tannerie (appears with the first raw hide; obtain a prepared hide, then leather), Les machines (appears with the first Create part) |
+| Métiers (Crafts) | La tannerie (appears with the first hide; obtain a dry hide, tannic powder, then leather), Les machines (appears with the first Create part) |
 
 ## Next
 - A `fanal` quest line when the module exists; then one per new module (zoo, survivors, clearing spell).
@@ -39,8 +40,8 @@ Quests made with the in-game editor are saved in the same folder: bring them bac
 - Hover images (`[text](image:...)`) for the gestures that are hard to describe.
 
 ## In-game tests
-- N1. The journal opens from the inventory and with its key; the five chapters show in French, Arriver first.
+- N1. The journal opens from the inventory and with its key; the six chapters show in French, Arriver first, then Premiers gestes.
 - N2. Guides complete when opened; "Un sac sur le dos" completes when the bag is crafted.
-- N3. La tannerie appears with the first raw hide, Les machines with the first shaft, cogwheel or andesite alloy.
+- N3. La tannerie appears with the first hide, Les machines with the first shaft, cogwheel or andesite alloy.
 - N4. Placing a vigil fire, then a lantern, completes their quests; the dissipator quest appears after both the lantern and the machines.
 - N5. A quest written with the in-game editor lands in `config/questlog/quests/`.
