@@ -57,6 +57,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Wind and light without shaders ([0013](docs/decisions/0013-vent-et-lumiere.md)): Where Winds Blow (+ ToucanLib), grass and leaves that sway, slanted rain, drifting snow and smoke, its own fog turned off for ATMOSPHERICS; Shine, bloom and coloured light. Both translated into French.
 
 ### Removed
+- Better Clouds: it drew the clouds in place of ATMOSPHERICS, so they ignored the mist, dusk and rain ([0013](docs/decisions/0013-vent-et-lumiere.md)).
 - Hollow GUI's curls at the top of the panels, lozenges and grooves added to the screens, and the leaf pattern behind the menus (review of 2026-10-26: back to GUI Revision's own drawing).
 - Dark Coffee GUI, Dark Coffee GUI - Extras and Modded Coffee GUI (all rights reserved, author unreachable): replaced by `fallow-interface`.
 - Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod switches itself off and goes in 0.5.0.
@@ -68,6 +69,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 
 ### Changed
+- ATMOSPHERICS preset `fallow_v4`: a second, higher and thinner cloud layer; clouds take the colour of the mist, darken at night and blend into the horizon; sun and moon 1.35× (1.1 before); more, brighter and larger stars; its wind streaks and tumbleweeds off, Where Winds Blow owns the wind ([0013](docs/decisions/0013-vent-et-lumiere.md)).
 - Documentation brought up to date on 2026-10-25: feature overview in the README, vision rewritten around the mist that lifts and the long-term goals, roadmap with the updates held until the tests, every in-game test gathered by play session in `docs/tests-en-jeu.md`.
 - Low-risk updates: Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, No Man's Land 1.6.3, Ecliptic Seasons 0.15.5, Contraption Lights 1.5.5, CreativeCore 2.13.51, ModernFix 5.27.27, ImmediatelyFast 1.6.15, Knight Lib 2.0.5, Companions! 1.3.6, Hybrid Aquatic 1.7.4 and Hybrid API 1.1.3, Naturalist 2.0.7, Alex's Mobs Continued 2.2.4, Traveler's Backpack 10.1.40, AmbientSounds 6.3.11, Lithostitched 1.8.1, Puzzles Lib, Modonomicon, Forgified Fabric API, Every Compat, Subtle Effects 1.15.1, Sound Physics Remastered 1.5.2; NeoForge 21.1.265.
 - Ecliptic Seasons set to farming only (`AGRICULTURE`), heat stroke and chat notices off.

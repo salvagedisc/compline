@@ -1,4 +1,4 @@
-# 0013 — Wind and light, without shaders
+# 0013 — Wind, light and sky, without shaders
 
 - **Date**: 2026-10-29
 - **Status**: kept (the team's choice of 2026-10-29); nothing seen in game yet
@@ -25,11 +25,18 @@ After the first in-game tests (2026-10-28), the team found the world bland where
 - Shine starts in "bloom only" mode; its coloured-light and rim-light presets are tried in game with its editor, then the chosen settings are copied into the pack. Shine 2.0.2 supports Sodium 0.8.12 and 0.8.13; entity and particle bloom does not work in this version.
 - Both mods' texts are translated into French in `pack/kubejs/assets/`.
 
+**Sky and clouds (team's choice of 2026-10-29).** The clouds did not match the mist. Read in the jars: Better Clouds cancels the vanilla `renderClouds`, where ATMOSPHERICS tints its clouds (mist colour, dusk, rain, "Story Mode" clouds); and ATMOSPHERICS cancels `renderSky` and draws the whole Overworld sky itself. So:
+- **Better Clouds is removed**: ATMOSPHERICS alone draws the clouds.
+- Preset `fallow_v4.json` (replaces `fallow_v3.json`, same biome profiles): second cloud layer at 210 (opacity 0.55, slower, wider), clouds mixed 45 % with the mist colour, darkened 60 % at night, automatic horizon blend; sun and moon 1.35× (bounds 0.25-3); stars 1,100 (4-1,500), brightness 1.25 (0-2), size 0.8 (0.5-3); ATMOSPHERICS' own wind streaks and desert tumbleweeds off, as Where Winds Blow already draws both.
+- **Enhanced Celestials stays**: it can already enlarge and recolour the moon (`moon_size`, texture and colour modifiers); replacing it would mean rebuilding the Friendly Moon and the `ciel` module.
+- Auroras stays for aurorae; Distant Horizons keeps its own clouds off.
+
 ## Rejected
 - Iris + a shader pack (Complementary Reimagined, MakeUp Ultra Fast): threatens the mist, switches off the two mods above, heavy on Mac. Could come back later as an option turned off by default, once the mist ring with Distant Horizons is fixed.
 - Photon: not compatible with Apple GPUs. BSL: may not be redistributed in a modpack.
 - Windblown (sway only, released 2026-10-17), Living Wind (a new release almost every day): fallbacks only.
 - Windy: decorative wind streaks only. Aeronautics: Winds and Weather: sail gameplay, nothing moves on the ground. Weather, Storms & Tornadoes: heavy, its particle clouds would fight ATMOSPHERICS.
+- Cirrus (replaces ATMOSPHERICS' fog and sky), Simple Clouds (OpenGL 4.3, so not on macOS; Sodium 0.8 bug #265), Nuit, Stellar View, Caelum (skyboxes, inert since ATMOSPHERICS cancels the vanilla sky).
 - Vibrancy: refuses Sodium 0.8, development paused. Gleam, FilterLab: too young, later.
 
 ## Conditions and tests
@@ -39,3 +46,6 @@ After the first in-game tests (2026-10-28), the team found the world bland where
 - R4. Snow and desert biomes: no extra fog on top of ATMOSPHERICS.
 - R5. An Aeronautics airship in flight with lanterns: no bloom glitch on the Sable sub-level, lanterns sway.
 - R6. Distant Horizons LODs: they stay still (sway applies to near terrain only).
+- R7. Clouds: two layers, mist-coloured in misty biomes, orange at dusk, dark at night and in the rain; mountains rise through the lower layer.
+- R8. Sun, moon and stars: bigger and brighter, still believable; the Enhanced Celestials moon is drawn over ATMOSPHERICS' moon at the right size.
+- R9. No ATMOSPHERICS wind streaks or tumbleweeds next to Where Winds Blow's.

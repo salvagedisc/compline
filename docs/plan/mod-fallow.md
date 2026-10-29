@@ -250,7 +250,7 @@ None of this has been done. These tests are also gathered with those of the othe
 | H6 | Underwater, blindness, powder snow | No sharp LOD in the distance |
 | H7 | `horizon.enabled = false` | All LODs hidden (shipped config) |
 | H8 | `skipHiddenLods` true then false, in the mist, F3 | Same image; fewer FPS with false |
-| H9 | Better Clouds in a clearing | Clouds drawn over the LODs, no double clouds |
+| H9 | ATMOSPHERICS clouds in a clearing | Clouds drawn over the LODs, no double clouds |
 | H10 | Mac Apple Silicon, 1 hour of play with DH | No JVM crash (`hs_err_pid*.log`) |
 | H11 | Chunky `start` on the server, then a player exploring | DH pauses its generation during Chunky and resumes; no holes in the LODs (DH #607) |
 | H12 | Seasons (Ecliptic) and Polytone colours | LODs take the colours of the nearby terrain |

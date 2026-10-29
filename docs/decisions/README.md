@@ -16,7 +16,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
 | [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing on NML; Distant Horizons hidden by the mist, `horizon` module |
 | [0012](0012-sacs-piles-jours.md) | Bags, stack sizes and day length | Reliable Backpacks and Comforts, Sensible Stackables, Better Days 30/15; Ecliptic Seasons kept |
-| [0013](0013-vent-et-lumiere.md) | Wind and light | Where Winds Blow and Shine, no shader pack |
+| [0013](0013-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars |
 
 ## Template
 
