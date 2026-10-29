@@ -166,15 +166,15 @@ hash = "a4c940298b7b336140d8c4f416f777197a9c4d2dcbd3fb7ada879123980e7609"
 
 [[files]]
 file = "config/questlog/quests/brume_dissipateur.json"
-hash = "e10b5d066cc3eba53e40ebf989da539b8db130702bef07e68bcd0ae908b94394"
+hash = "15d6dea0b2ee19fc24a320e4403b286aa8e5cc39468ca7937e344c8384e3d545"
 
 [[files]]
 file = "config/questlog/quests/brume_feu.json"
-hash = "3f85df76a52b0f3730337da933314464150591a39ff7820a1dd8eeccec7a5201"
+hash = "0b7be9e60c4df366143d50a7ec8c79a76615fdfc3452589e81de1c4ad81779ea"
 
 [[files]]
 file = "config/questlog/quests/brume_lanterne.json"
-hash = "e4cdcc4a942f90ce865ab62a6127951890958b88b23dbb815f33100c2336af23"
+hash = "bf5b7050727e40291fe140d7f73aa04b6f27bf69c6cc20e028d17738c46bcd9d"
 
 [[files]]
 file = "config/questlog/quests/metiers_machines.json"
@@ -1832,8 +1832,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.4.6.jar"
-hash = "eb882d32c45d817cff2ec678aed150d30ac71fd9d0efda8c82967f3f7422c0b5"
+file = "mods/fallow-0.4.7.jar"
+hash = "343de45b1ff6cc33a3af59d93ca5705554bf7dcc541c6e8bda51985f0516fd4f"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
