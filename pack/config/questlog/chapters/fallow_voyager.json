@@ -1,0 +1,9 @@
+{
+  "name": "Voyager",
+  "icon": {
+    "item": "minecraft:saddle"
+  },
+  "order": 4,
+  "default_chapter": false,
+  "hidden": false
+}

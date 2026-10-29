@@ -133,6 +133,10 @@ file = "config/questlog/chapters/fallow_survivre.json"
 hash = "c738a2c7aec563c2d908c56cb21d15bcea05d5ad39e324a1f5148aaaf2fd58da"
 
 [[files]]
+file = "config/questlog/chapters/fallow_voyager.json"
+hash = "7bd624c166c175e3081e4d256f9bbb4273c517e99c32b01cf7ec5c0392439710"
+
+[[files]]
 file = "config/questlog/quests/arriver_bienvenue.json"
 hash = "87fba656734ecf25723169c7826f6ef4be85288d412d2031d87e99b19f7712f6"
 
@@ -195,6 +199,14 @@ hash = "9a728bf80576f5b6dcaa5e292a184cfaf6d1bf2391799eb614455cc2eae9b6c0"
 [[files]]
 file = "config/questlog/quests/survivre_soif.json"
 hash = "29f07bb8978539976d71c5f3854722a24b3eccce012c620d6658983708a4c6a2"
+
+[[files]]
+file = "config/questlog/quests/voyager_cheval.json"
+hash = "71ce83ec532bb54e8120e676e803cfdc29d34217ab377cbd06817534400c391c"
+
+[[files]]
+file = "config/questlog/quests/voyager_ecurie.json"
+hash = "7f25bf8bcd4a3f43073f6e93a9701a623bfee5e4ffccbe4810c11a33a6a6683b"
 
 [[files]]
 file = "config/reliable_backpacks.json"

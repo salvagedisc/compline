@@ -29,16 +29,17 @@ Quests made with the in-game editor are saved in the same folder: bring them bac
 | Arriver (Arriving) | Bienvenue, Le jour et la nuit, Un sac sur le dos (obtain the backpack), Les cœurs perdus, Sans expérience, Au long cours |
 | Survivre (Surviving) | La soif, Le froid et le chaud, Les saisons |
 | La brume (The mist) | La brume, Un feu de veille (place one), Une lanterne de clairière (place one), Les clairières, Le dissipateur (place one, after the machines guide) |
+| Voyager (Travelling) | Un cheval à soi (ownership, bond, whistle), L'écurie (command wheel, registry, lending); they replace Icy's Better Horses' Modonomicon handbook, which is hidden |
 | Métiers (Crafts) | La tannerie (appears with the first raw hide; obtain a prepared hide, then leather), Les machines (appears with the first Create part) |
 
 ## Next
 - A `fanal` quest line when the module exists; then one per new module (zoo, survivors, clearing spell).
 - Monuments and the Friendly Moon: one vague quest each, appearing with `visit_structure` or after the first encounter.
-- Forge (Overgeared), cooking (Kaleidoscope Cookery), the atlas, the zoo.
+- Forge (Overgeared), cooking (Kaleidoscope Cookery), the zoo; the atlas, rails and airships in Voyager.
 - Hover images (`[text](image:...)`) for the gestures that are hard to describe.
 
 ## In-game tests
-- N1. The journal opens from the inventory and with its key; the four chapters show in French, Arriver first.
+- N1. The journal opens from the inventory and with its key; the five chapters show in French, Arriver first.
 - N2. Guides complete when opened; "Un sac sur le dos" completes when the bag is crafted.
 - N3. La tannerie appears with the first raw hide, Les machines with the first shaft, cogwheel or andesite alloy.
 - N4. Placing a vigil fire, then a lantern, completes their quests; the dissipator quest appears after both the lantern and the machines.
