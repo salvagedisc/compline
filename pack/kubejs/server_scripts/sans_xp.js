@@ -10,7 +10,7 @@ EntityEvents.spawned('minecraft:experience_orb', event => {
   event.cancel()
 })
 
-// 2. Plus de gain direct de points (succès, Wildex, Overgeared, chambre noire d'Exposure,
+// 2. Plus de gain direct de points (succès, Overgeared, chambre noire d'Exposure,
 //    /xp add … points). Seuls les gains sont bloqués : une dépense (montant négatif) passe.
 MoreJS.playerXpChange(event => {
   if (event.amount > 0) event.cancel()

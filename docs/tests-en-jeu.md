@@ -74,9 +74,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Oceans and reefs: Hybrid Aquatic sharks, jellyfish, orcas, octopuses; Naturalist anglerfish, blobfish, isopod, ray; Alex's Mobs giant squid [D3]. Lobster texture correct [D8].
 - [ ] Flowering meadows: only Longwings butterflies [D5]. Lush caves: C&C otter, no dragonfly or snail [D4].
 - [ ] No deer, goose, bass or NML turtle, no rabbit, no Frienderman (`/summon nomansland:frienderman` disappears) [F3, F6, F10].
-- [ ] EMI and Wildex: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
+- [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
-- [ ] Wildex: a new species is recorded; its pages look good with the chosen theme [I3].
 
 ## Session 6: terrain, Create and airships
 

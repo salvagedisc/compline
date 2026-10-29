@@ -146,7 +146,7 @@ hash = "de9055c13f594d3dc3044f1dd40e4c9f03b986b34775bc9721da7fb4148ebfd1"
 
 [[files]]
 file = "config/questlog/quests/arriver_long_cours.json"
-hash = "78aaf9e3e63c095838600c9d2550059efce4715c333e64ad2bb56ad9d82669f2"
+hash = "dc0e76bb65f0963002ba4ae5badab51833ea1df51887e60981653cdfed6c50c9"
 
 [[files]]
 file = "config/questlog/quests/arriver_sac.json"
@@ -231,10 +231,6 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 [[files]]
 file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
-
-[[files]]
-file = "config/wildex/wildex-common.toml"
-hash = "e6df9615a04f8ee25fc4bda118a6eef3b4b86718e022a8780fb5996d8400dbcb"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -1149,10 +1145,6 @@ file = "kubejs/assets/whitenoise/lang/fr_fr.json"
 hash = "7f3040fb17a7e8ad80e59920d5399da65e36a21b3d088f0b6e0495cad4f8114d"
 
 [[files]]
-file = "kubejs/assets/wildex/lang/fr_fr.json"
-hash = "c8df1314b5b66a168239d5fe0ec4afaa1a33cc0cd625fa822bbb5a0583e5e8b3"
-
-[[files]]
 file = "kubejs/assets/yet_another_config_lib_v3/lang/fr_fr.json"
 hash = "59dce3211a1121055bc2b9d904b17dbfaf94c9878d0acf244f26aecc3f911b3c"
 
@@ -1175,6 +1167,10 @@ hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
 [[files]]
 file = "kubejs/client_scripts/sans_lapin.js"
 hash = "2ef0bd657a5fd6dff83dac6913c6ed7c5637190a034cf5f876b96185b26e099b"
+
+[[files]]
+file = "kubejs/client_scripts/sans_manuel_ecurie.js"
+hash = "98bd0ace4a57b67b9feacb242f7d604f3bdae76f28164e6d359f4e57ce340971"
 
 [[files]]
 file = "kubejs/client_scripts/sante.js"
@@ -1509,8 +1505,12 @@ file = "kubejs/server_scripts/sans_lapin.js"
 hash = "217b03bdb361452e112581eef9d950726fc3b7deaa558766d9486868727be35b"
 
 [[files]]
+file = "kubejs/server_scripts/sans_manuel_ecurie.js"
+hash = "6387e8f42e052ce80acde6f4cb669de7a7e12c40bf2ce299e2473342ec312a97"
+
+[[files]]
 file = "kubejs/server_scripts/sans_xp.js"
-hash = "218ef4b9a25d00f275730f1c9d59221eb8bc7d28cad14511f36516fa5fe874ff"
+hash = "dcbe9ea326cb1f5e4a76cc5345908fa938ca55d074fe3a54529482af29adbf47"
 
 [[files]]
 file = "kubejs/server_scripts/sante.js"
@@ -2268,11 +2268,6 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
-metafile = true
-
-[[files]]
-file = "mods/wildex-bestiary.pw.toml"
-hash = "100accd1ac05547f4a7ae10cc36328f4b7af9cc9b132f13890a68c8f0339c16e"
 metafile = true
 
 [[files]]

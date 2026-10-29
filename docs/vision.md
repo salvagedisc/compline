@@ -17,7 +17,7 @@ A vast, damp, almost empty world, in the spirit of the No Man's Land trailer: la
 3. **Daily life** — Water → farming → animal husbandry → cooking (Kaleidoscope Cookery) → tannery → expedition.
 
 ## Long-term goals
-A zoo and a complete bestiary (Wildex), clearings joined into a living territory, a rail and air network, the monuments' codex, a complete atlas, photographs of species and stars.
+A zoo and its keeper's ledger, clearings joined into a living territory, a rail and air network, the monuments' codex, a complete atlas, photographs of species and stars.
 
 ## Survival
 Harder because of the environment (temperature, altitude, thirst, seasons), not because of combat. Few hostile creatures: rare, territorial and polished (quality models and animations). No vanilla monsters. No experience: tools wear out and knowledge is found. Each death costs a heart, down to five.

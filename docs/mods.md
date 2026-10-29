@@ -31,7 +31,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Wildex Bestiary | `wildex-bestiary` | ✅ | CS | Automatic bestiary, backbone of the zoo |
 | Questlog | `questlog` | ✅ (added 2026-10-26) | CS | Book-style journal of quests and guides, by chapter, editable in game ([quetes](plan/quetes.md)) |
 | Exposure | `exposure` | ✅ | CS | Analogue photography: keep a place, discover a species |
 | Exposure: Space | `exposure-space` | ✅ (added 2026-10-25) | CS | Astrophotography: 200 celestial objects to photograph and catalogue; French names translated |
@@ -198,7 +197,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon, Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
 
 ## Dropped or rejected
 
@@ -224,7 +223,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | ParCool! | Disabled at the team's request |
 | Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
 | Jade, AppleSkin | Break the mystery |
-| Just Zoom, Zoomify | The spyglass is Wildex's tool |
+| Just Zoom, Zoomify | The vanilla spyglass is enough |
+| Wildex Bestiary | Removed by the team on 2026-10-29; the `zoo` module keeps its own ledger ([modules-fallow](plan/modules-fallow.md)) |
 | Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
 | Carry On | Incompatible with Aeronautics |
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |

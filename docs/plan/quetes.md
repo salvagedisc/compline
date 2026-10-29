@@ -34,7 +34,7 @@ Quests made with the in-game editor are saved in the same folder: bring them bac
 ## Next
 - A `fanal` quest line when the module exists; then one per new module (zoo, survivors, clearing spell).
 - Monuments and the Friendly Moon: one vague quest each, appearing with `visit_structure` or after the first encounter.
-- Forge (Overgeared), cooking (Kaleidoscope Cookery), the atlas, the bestiary.
+- Forge (Overgeared), cooking (Kaleidoscope Cookery), the atlas, the zoo.
 - Hover images (`[text](image:...)`) for the gestures that are hard to describe.
 
 ## In-game tests
