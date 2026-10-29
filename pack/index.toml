@@ -233,6 +233,10 @@ file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
+file = "config/where_winds_blow-client.toml"
+hash = "cf96866c7be227a9587e889d5a237cb6646eda81f993b9ea858904940932b3c0"
+
+[[files]]
 file = "config/wildex/wildex-common.toml"
 hash = "e6df9615a04f8ee25fc4bda118a6eef3b4b86718e022a8780fb5996d8400dbcb"
 
@@ -1117,6 +1121,10 @@ file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
+file = "kubejs/assets/toucanlib/lang/fr_fr.json"
+hash = "22871eeffc9a151fae66eacfbb576e0d50dd73ee19274ca616ce732d0e74a69b"
+
+[[files]]
 file = "kubejs/assets/treechop/lang/fr_fr.json"
 hash = "3232139133528c6891edbdbdb37f0c0b9c2cb2870b0cac293de61bc00e1aab2c"
 
@@ -1143,6 +1151,10 @@ hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 [[files]]
 file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
+
+[[files]]
+file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
+hash = "97d736253a37ed54114047a0ca1d4ff9d16998ec05dbbffcf27d398b699c7349"
 
 [[files]]
 file = "kubejs/assets/whitenoise/lang/fr_fr.json"
@@ -2246,6 +2258,11 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
+file = "mods/toucan.pw.toml"
+hash = "621ed3fadbf439318744d8fc324fee13ce44e18ffbc24c56338ea259e5ff5abb"
+metafile = true
+
+[[files]]
 file = "mods/treechop.pw.toml"
 hash = "da1c1cf28e8d5ffe377998d29d59eae29a2020f2de7a0aea7f7253acdc695cfd"
 metafile = true
@@ -2268,6 +2285,11 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
+metafile = true
+
+[[files]]
+file = "mods/where-winds-blow.pw.toml"
+hash = "3076b4a06b0da48e20b4698adc0f0d786a98f699955d929c49a2830cc3ceb9db"
 metafile = true
 
 [[files]]
