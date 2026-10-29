@@ -1069,6 +1069,10 @@ file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
 hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
 
 [[files]]
+file = "kubejs/assets/shine/lang/fr_fr.json"
+hash = "282dd7d2ee3658f7f8391d2d5e235e7caa483409c276112c57875f5d220a4b1b"
+
+[[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
 hash = "a0f1f99a00251a48e6369b270e6caa528c82afaee9db62eb614fb67100bfb71f"
 
@@ -2175,6 +2179,11 @@ metafile = true
 [[files]]
 file = "mods/sensible-stackables.pw.toml"
 hash = "d68120fbb2e90e41b398c8168b87a8397fbe4b65e6771240f5ae2ef31ee2d5a6"
+metafile = true
+
+[[files]]
+file = "mods/shine.pw.toml"
+hash = "b00883c0832dc19b262dcd48e888e1834725139b64ce76cf1725f255d7c75b0a"
 metafile = true
 
 [[files]]
