@@ -21,7 +21,6 @@ Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with 
 | Bass (bar à serpe) | `…/biome_modifier/spawns/add_spawns_to_swamps.json` | only the cod remains |
 | Frienderman | `pack/kubejs/server_scripts/faune_nml.js` | `EntityEvents.spawned` cancelled: the enderman it replaces is already cancelled by NML, so nothing is left |
 | 15 items with no source | `faune_nml.js` (server and client) | recipes removed, items hidden from EMI; creative mode remains an admin tool |
-| Wildex | `pack/config/wildex/wildex-common.toml` | `[wildexList] excludedModIds`: the five creatures and the rabbit, absent from the interface, the discoveries and the completion rate |
 | 15 items removed (batch B) | `faune_nml.js` | recipes removed, items removed from all loot tables, hidden from EMI |
 | TNT | `faune_nml.js` | vanilla 1.21.1 recipe restored under the id `minecraft:tnt` |
 | "explode_ore" advancement | `pack/kubejs/data/nomansland/advancement/main/explode_ore.json` | removed by a `neoforge:false` condition |
@@ -60,7 +59,6 @@ On a new world: registry data is read when the world is created.
 | F5 | Fox, goat, donkey, wolf in `autumnal_forest` | Vanilla textures; no golden or "timber" wolf, no mud frog |
 | F6 | `/summon nomansland:frienderman` | It disappears immediately |
 | F7 | EMI: search "venison", "bass", "tortoise", "rabbit", "horse", "explosive", "pancake" | Nothing |
-| F8 | Wildex | No entry for the five creatures or for the rabbit |
 | F9 | Mushroom island | Rings and Buddy present; ascension (L10) unchanged |
 | F10 | Desert, snowy plains, flower meadow, grove | No rabbit |
 | F11 | Kill a horse, a frog; open dungeon, igloo and shipwreck chests | No horse meat, no legs, no pancake, no bomb |
