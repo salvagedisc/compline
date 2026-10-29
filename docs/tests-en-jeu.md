@@ -49,7 +49,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Frames per second at night: no visible difference with the `ciel` (sky) module turned off [C11].
 - [ ] `/ec lunarForecast`: no blood moon [L2].
 - [ ] An alchemist ruin: look at the engraving for 2 s (zoom and sound), sleep within 3 days, see the dream through to the end (advancement « Premier contact » (first contact)) [L3, L4]. Break jars: the crumpled note sometimes drops, in French [L11].
-- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6]. With a forced blue moon, it sets in 2 s with a message [L6].
+- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6, C13]; it did not in the test of 2026-10-28, fixed by `fallow` 0.4.5. The nights after the dream, the moon's shadow points the way over the mist [L4, C14]. With a forced blue moon, it sets in 2 s with a message [L6].
 - [ ] Offerings (bone, flower, empty map, turtle scute), then put out one candle, then all of them: sentences in French, then an angry moon [L8, L9].
 - [ ] A rainy night at the Meeting Point: does the Friendly Moon appear? [L12]
 - [ ] Nights are truly dark (More Darkness), auroras in cold biomes.

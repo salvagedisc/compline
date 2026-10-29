@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.4 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.5 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator) and **titres** (screen names) modules. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -32,7 +32,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
-| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client |
+| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; No Man's Land for the Friendly Moon | 6, all client |
 | `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 3: `horizon.FogRendererMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
@@ -78,6 +78,23 @@ ATMOSPHERICS computes the mist from the biomes around the player. It keeps the r
   It returns `true` if the cache was cleared, or scheduled to be cleared on the render thread. It returns `false` if ATMOSPHERICS is absent, if the module is off or if we are on a server. `FallowSky.isFogCacheAvailable()` answers the same question without clearing anything. KubeJS may require the class to be allowed in its class filter. A server script that wants to trigger the clearing on players' machines must send them a packet, for example with `NetworkEvents.dataReceived` on the client side.
 
 The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS method, reached through a mixin accessor (`@Invoker`).
+
+### The Friendly Moon under ATMOSPHERICS
+
+**The problem** (found in the first in-game test, 2026-10-28: the Friendly Moon never appeared at the Meeting Point). No Man's Land draws the Friendly Moon, its shadow in the sky and its fog from mixins inside the vanilla body of `renderSky` (`FriendMoonRenderer.renderFriendMoon` after the moon is drawn). The Friendly Moon's opacity rises only there, in `updateFriendMoonPosition`. ATMOSPHERICS cancels that body and gives it back only when `Atmospherics.isFriendMoonActive()` is true, that is when that opacity is already above 0.001. Neither can start first: the Friendly Moon could never appear, and the shadow that shows the way after the dream was never drawn either. Read in NML 1.6.3 and ATMOSPHERICS 2.6.5; ATMOSPHERICS 2.6.5.2 changes nothing there.
+
+**The mechanism** (`FriendMoonRelay` and two mixins):
+
+1. `FriendMoonSkyMixin` wraps the call to `renderSky`, like the moon's `LevelRendererMixin`, and also wraps the sky fog setup (`skyFogSetup`) it passes. ATMOSPHERICS runs that setup right after cancelling the vanilla body; the vanilla body runs it as its first step, which the mixin spots separately.
+2. After `renderSky`, if the fog setup ran but the vanilla body did not, ATMOSPHERICS drew the sky. `fallow` then makes the call NML makes in the vanilla sky: `renderFriendMoon` and `renderFriendShadow`, with the same matrices, then `renderFinalize` (which lifts NML's stencil) and restores the render state.
+3. At the Meeting Point at night, the Friendly Moon starts to fade in on this first frame; from the next one, ATMOSPHERICS hands the sky back to vanilla and NML carries on alone, as it was designed to (NML's fog replaces ATMOSPHERICS' mist while the Friendly Moon is up). Away from the Point, during the 8 nights after the dream, the shadow stays drawn by `fallow` over ATMOSPHERICS' sky, which keeps its mist.
+4. `AtmosphericsDreamMixin` makes `Atmospherics.isFriendMoonActive()` also true while the moonlight dream is shown, so ATMOSPHERICS leaves the sky and the fog to the dream whatever the order of the two mods' mixins on `renderSky`.
+
+**Checked on 2026-10-29** in a development client (llvmpipe) with only No Man's Land 1.6.3, ATMOSPHERICS 2.6.5 and `fallow` 0.4.5, on a new world (seed "fallow", Point at 616, −1288, pool at 631, 78, −1273), at midnight, 5 blocks from the pool: the face appears, wakes and speaks, and the "Friendship" goal is reached 10 s after joining. With `ciel.friendMoon = false`, nothing appears, as in the game of 2026-10-28. The shadow (C14) and the dream (C15) were not checked.
+
+A drawing error is logged once, without crashing the rendering. Config: `ciel.friendMoon` (true by default; false gives back the old behaviour, where the Friendly Moon does not appear under ATMOSPHERICS).
+
+**Known limitation.** On the single frame where `fallow` fades the Friendly Moon in, it is drawn over ATMOSPHERICS' stars instead of hiding them; the shadow, drawn the whole night away from the Point, darkens the stars behind it instead of masking them.
 
 ## `sac` module
 
@@ -202,10 +219,13 @@ None of this has been done. These tests are also gathered with those of the othe
 | C4 | Rain, then thunderstorm | The moon fades with the rain, like the rest of the sky |
 | C5 | Underwater, in powder snow, with blindness | No double moon and no vanishing moon |
 | C6 | No Man's Land dimension, Friend Moon | The sky in these cases stays that of their mod (log without `fallow` error) |
+| C13 | Meeting Point at night (`/meetingpoint`, then within 16 blocks of the pool), look up | The sleeping face fades in, then wakes; the mist gives way to No Man's Land's fog. With `ciel.friendMoon = false`: nothing appears (the bug of 2026-10-28) |
+| C14 | The 8 nights after the dream, far from the Point | The moon's shadow in the sky, towards the Point, over ATMOSPHERICS' sky and mist; it fades when arriving |
+| C15 | Moonlight dream | The dream's own sky, not ATMOSPHERICS' |
 | C7 | `ciel.redrawMoon = false`, then `ciel.enabled = false` | Back to ATMOSPHERICS' vanilla moon |
 | C8 | `/fillbiome` around a stationary player, with `clearFogOnBiomeUpdate` true then false | The mist changes immediately, then only after a step |
 | C9 | KubeJS call of `FallowSky.clearFogCache()` | Returns `true`, the mist is recomputed |
-| C10 | Log at startup | "Module ciel chargé", no `fallow` mixin warning |
+| C10 | Log at startup | "Module ciel chargé", "Lune Amie de No Man's Land dessinée sous ATMOSPHERICS", no `fallow` mixin warning |
 | C11 | Frames per second at night, with and without the module | No visible difference |
 | C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
 

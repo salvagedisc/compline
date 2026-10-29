@@ -9,8 +9,10 @@
     "xp.AnvilMenuMixin"
   ],
   "client": [
+    "ciel.AtmosphericsDreamMixin",
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",
+    "ciel.FriendMoonSkyMixin",
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
     "horizon.FogRendererMixin",

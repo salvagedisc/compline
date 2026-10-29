@@ -14,6 +14,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
+    private static final ModConfigSpec.BooleanValue CIEL_FRIEND_MOON;
     private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
     private static final ModConfigSpec.BooleanValue TITRES_ENABLED;
@@ -39,6 +40,10 @@ public final class FallowConfig {
                 .comment("Vider le cache de brume d'ATMOSPHERICS dès que le serveur change des biomes",
                         "(/fillbiome, conversion en clairière), pour que la brume réagisse sans que le joueur bouge.")
                 .define("clearFogOnBiomeUpdate", true);
+        CIEL_FRIEND_MOON = client
+                .comment("Laisser No Man's Land dessiner la Lune Amie et son ombre sous le ciel d'ATMOSPHERICS.",
+                        "Faux : la Lune Amie n'apparaît pas au Point de rencontre et l'ombre ne montre pas le chemin.")
+                .define("friendMoon", true);
         client.pop();
 
         client.comment("Module horizon (client) : le paysage lointain de Distant Horizons suit la brume du terrain.").push("horizon");
@@ -112,6 +117,10 @@ public final class FallowConfig {
 
     public static boolean cielClearFogOnBiomeUpdate() {
         return cielEnabled() && read(CLIENT_SPEC, CIEL_CLEAR_FOG_ON_BIOME_UPDATE);
+    }
+
+    public static boolean cielFriendMoon() {
+        return cielEnabled() && read(CLIENT_SPEC, CIEL_FRIEND_MOON);
     }
 
     public static boolean horizonEnabled() {

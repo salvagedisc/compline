@@ -91,4 +91,5 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Kaleidoscope Cookery 1.5.1 → 1.6.0: 1.5.1 crashed the game on loading with Kaleidoscope Compat 2.9.7 (`MillstoneBlockEntityMixin` mixin), observed on the test server.
 
 ### Fixed
+- The Friendly Moon never appeared at the Meeting Point, nor its shadow in the sky after the dream: ATMOSPHERICS gives the sky back to No Man's Land only once the Friendly Moon is visible, which only No Man's Land's own sky can make happen. The `ciel` module of `fallow` 0.4.5 draws them after ATMOSPHERICS' sky until it hands over, and leaves the sky to the moonlight dream ([module](docs/plan/mod-fallow.md#the-friendly-moon-under-atmospherics)).
 - No Man's Land: the scutes offering line never loaded (condition on a non-existent item, `nomansland:tortoise_scute`).
