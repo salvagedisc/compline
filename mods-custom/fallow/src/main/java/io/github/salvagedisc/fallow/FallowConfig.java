@@ -17,6 +17,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_FRIEND_MOON;
     private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
+    private static final ModConfigSpec.IntValue HORIZON_RING_MAX_DISTANCE;
     private static final ModConfigSpec.BooleanValue TITRES_ENABLED;
     private static final ModConfigSpec.BooleanValue SAC_ENABLED;
     private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
@@ -56,6 +57,11 @@ public final class FallowConfig {
         HORIZON_SKIP_HIDDEN_LODS = client
                 .comment("Ne pas dessiner du tout les LOD quand la brume les cache entièrement (gain de performance).")
                 .define("skipHiddenLods", true);
+        HORIZON_RING_MAX_DISTANCE = client
+                .comment("Rayon maximal du cercle de brume, en blocs : même là où la brume se lève, le paysage lointain",
+                        "s'efface toujours dans la brume puis le ciel à cette distance (ou avant, si la brume du terrain",
+                        "finit plus tôt : 500 blocs de jour en clairière, 260 la nuit).")
+                .defineInRange("ringMaxDistance", 512, 64, 4096);
         client.pop();
 
         client.comment("Module titres (client) : le nom de chaque écran sur une plaque au-dessus du panneau.").push("titres");
@@ -138,6 +144,10 @@ public final class FallowConfig {
 
     public static boolean horizonSkipHiddenLods() {
         return horizonEnabled() && read(CLIENT_SPEC, HORIZON_SKIP_HIDDEN_LODS);
+    }
+
+    public static int horizonRingMaxDistance() {
+        return read(CLIENT_SPEC, HORIZON_RING_MAX_DISTANCE);
     }
 
     public static boolean titresEnabled() {

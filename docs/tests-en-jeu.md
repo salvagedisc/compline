@@ -37,6 +37,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Break the fire, leave, come back, restart: the clearing stays [K5].
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
+- [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
 - [ ] Enter and leave the clearing: visibility changes smoothly [H4]. At sunrise and sunset, the colour of the distance follows the sky [H5].
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
 - [ ] Better Clouds clouds pass in front of the distance, with no duplicates [H9]. The colours of the distance follow the seasons [H12].
