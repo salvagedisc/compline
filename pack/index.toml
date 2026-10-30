@@ -297,6 +297,10 @@ file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
+file = "config/where_winds_blow-client.toml"
+hash = "cf96866c7be227a9587e889d5a237cb6646eda81f993b9ea858904940932b3c0"
+
+[[files]]
 file = "defaultconfigs/emi.css"
 hash = "cdc1b208611b1f04df67e5e39949aa57843af625a03cb2e6b7943eceb3bc13f1"
 
@@ -737,10 +741,6 @@ file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
 hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
 
 [[files]]
-file = "kubejs/assets/betterclouds/lang/fr_fr.json"
-hash = "43390bde42dc4468bb701bebcab62da998f020ee36368c9fe29bb4dc230e95dd"
-
-[[files]]
 file = "kubejs/assets/biolith/lang/fr_fr.json"
 hash = "a8fdd83135e21e03a404903c2acd8e7ca4016211cee2cb2fc0d6664eee0be9d2"
 
@@ -1125,6 +1125,10 @@ file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
 hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
 
 [[files]]
+file = "kubejs/assets/shine/lang/fr_fr.json"
+hash = "282dd7d2ee3658f7f8391d2d5e235e7caa483409c276112c57875f5d220a4b1b"
+
+[[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
 hash = "a0f1f99a00251a48e6369b270e6caa528c82afaee9db62eb614fb67100bfb71f"
 
@@ -1181,6 +1185,10 @@ file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
+file = "kubejs/assets/toucanlib/lang/fr_fr.json"
+hash = "22871eeffc9a151fae66eacfbb576e0d50dd73ee19274ca616ce732d0e74a69b"
+
+[[files]]
 file = "kubejs/assets/treechop/lang/fr_fr.json"
 hash = "3232139133528c6891edbdbdb37f0c0b9c2cb2870b0cac293de61bc00e1aab2c"
 
@@ -1207,6 +1215,10 @@ hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 [[files]]
 file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
+
+[[files]]
+file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
+hash = "97d736253a37ed54114047a0ca1d4ff9d16998ec05dbbffcf27d398b699c7349"
 
 [[files]]
 file = "kubejs/assets/whitenoise/lang/fr_fr.json"
@@ -1711,11 +1723,6 @@ metafile = true
 [[files]]
 file = "mods/better-advanced-tooltips.pw.toml"
 hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
-metafile = true
-
-[[files]]
-file = "mods/better-clouds.pw.toml"
-hash = "ff68a3c161324e02415d4f2b6806a3b3ebef9ea1c8fff6925ce65e6b8b9d1417"
 metafile = true
 
 [[files]]
@@ -2258,6 +2265,11 @@ hash = "d68120fbb2e90e41b398c8168b87a8397fbe4b65e6771240f5ae2ef31ee2d5a6"
 metafile = true
 
 [[files]]
+file = "mods/shine.pw.toml"
+hash = "b00883c0832dc19b262dcd48e888e1834725139b64ce76cf1725f255d7c75b0a"
+metafile = true
+
+[[files]]
 file = "mods/shoulder-surfing-reloaded.pw.toml"
 hash = "bcce409dc3bd3c765d92538e192563b4baf345a843acb5fb9c90fce4ebccdf58"
 metafile = true
@@ -2343,6 +2355,11 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
+file = "mods/toucan.pw.toml"
+hash = "621ed3fadbf439318744d8fc324fee13ce44e18ffbc24c56338ea259e5ff5abb"
+metafile = true
+
+[[files]]
 file = "mods/treechop.pw.toml"
 hash = "da1c1cf28e8d5ffe377998d29d59eae29a2020f2de7a0aea7f7253acdc695cfd"
 metafile = true
@@ -2365,6 +2382,11 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
+metafile = true
+
+[[files]]
+file = "mods/where-winds-blow.pw.toml"
+hash = "3076b4a06b0da48e20b4698adc0f0d786a98f699955d929c49a2830cc3ceb9db"
 metafile = true
 
 [[files]]
@@ -2392,8 +2414,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v3.json"
-hash = "dfd9f16edf2db96bd9785ec17badada38f61120d308336f8143430067c5984ba"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v4.json"
+hash = "7333d9949d48b49ddecd955a918a49c903896e23d2729082d730d628d2b844c4"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
@@ -2546,10 +2568,6 @@ hash = "2ab2e0cfd90fa19be532b6410f60c9a926e92943e84852a5765b54bfc6f5842d"
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.ogg"
 hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
-
-[[files]]
-file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/moon_phases.png"
-hash = "3c2c019418285ea52bc74666acc600d8577351cb89a1192ec3416a8dbfbc19e1"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"

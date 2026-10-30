@@ -120,7 +120,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds per biome ([0007](decisions/0007-ambiance-performance.md)) |
+| ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds (two layers), sun, moon and stars per biome ([0007](decisions/0007-ambiance-performance.md)) |
 | Polytone | `polytone` | ✅ | C | Colour of grass, leaves and water, coloured light from fires and candles ([page](plan/fallow-ambiance.md)) |
 | Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves, cave dust |
 | Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
@@ -136,7 +136,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
-| Better Clouds | `better-clouds` | ✅ | C | Volumetric clouds; ordering with No Man's Land (which disables clouds during the dream) to be tested |
+| Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, No Man's Land wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
+| Shine | `shine` | ✅ (2.0.2, not seen in game) | C | Bloom and coloured light without shaders ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `fallow` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle NML's leaves |
 
@@ -199,7 +200,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta.
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow).
 
 ## Dropped or rejected
 
@@ -217,6 +218,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Ba
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
+| Better Clouds | Draws the clouds in place of ATMOSPHERICS, whose clouds follow the mist, dusk and rain; removed on 2026-10-29 ([0016](decisions/0016-vent-et-lumiere.md)) |
+| Cirrus, Simple Clouds, Nuit, Stellar View, Caelum | Cirrus replaces ATMOSPHERICS' fog and sky; Simple Clouds needs OpenGL 4.3 (not on macOS); ATMOSPHERICS cancels the vanilla sky, so skybox mods have no effect ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
 | Dark Coffee GUI, Dark Coffee GUI - Extras, Modded Coffee GUI | All rights reserved and the author does not answer; replaced on 2026-10-26 by `fallow-interface`, built from free-licensed packs |
