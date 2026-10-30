@@ -8,7 +8,7 @@
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v4.json          the mist biome by biome, the sand, the clouds, sun, moon and stars
+    ├── atmospherics/preset/fallow_v5.json          the mist biome by biome, the storms, the sand, the clouds, sun, moon and stars
     ├── fallow/polytone/biome_modifiers/*.json      grass, foliage, water (23 files)
     ├── fallow/polytone/colored_lights/*.json       colour of fire, soul and moonlight
     ├── fallow/sounds.json                         events for the music pack tracks ([musique](musique.md))
@@ -25,7 +25,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - The file is a complete configuration: it **replaces** `config/ambientfog/biome_fog.json`, including the player's tweaks.
 - Consequences:
   - a single preset in the pack;
-  - to ship a new version, **rename** the file (`fallow_v4.json` → `fallow_v5.json`) and delete the old one, otherwise it is not reapplied;
+  - to ship a new version, **rename** the file (`fallow_v5.json` → `fallow_v6.json`) and delete the old one, otherwise it is not reapplied;
   - each new version overwrites the players' ATMOSPHERICS settings.
 - The file starts from the mod's original preset (version 43, all global settings kept). Only `presetName`, `presetAuthor` and the biome profiles change.
 - The mod's bounds are respected: intensity 0-4, density 0.2-5, veil 0-3, particles 0-3.
@@ -53,8 +53,8 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 
 | Family | Start → end (day) | Start → end (night) | Horizon veil | Mist particles |
 |---|---|---|---|---|
-| **Misty** | 0 → 52 | -2 → 34 | 3 / 3 | strong (1.6) |
-| **Veiled** | 6 → 96 | 0 → 56 | 2.5 / 2.2 | medium (1.15) |
+| **Misty** | 0 → 40 (v5; 52 before) | -2 → 26 (v5; 34 before) | 3 / 3 | strong (1.6) |
+| **Veiled** | 4 → 72 (v5; 6 → 96 before) | 0 → 44 (v5; 56 before) | 2.5 / 2.2 | medium (1.15) |
 | **Clearing** | 40 → 500 (v3; 28 → 124 before) | 16 → 260 (v3; 8 → 84 before) | 1.5 / 1.2 | off |
 
 - 10.3 spoke of "open" biomes. The maintainer wants a thick mist in general: they become **veiled**, still misty but markedly less so.
@@ -139,6 +139,26 @@ Storms follow the rain as seen by the client. With Ecliptic's per-biome weather,
 
 Limits: the densities are paper choices, and the flakes also appear under roofs and in the caves of these biomes.
 
+## Snow and dust storms (v5, 2026-10-29)
+
+Request after the first tests: ATMOSPHERICS closer to the mod's presentation screenshots, with real effects in snowy and sandy biomes (the feeling of being lost in a cloud of snow or dust), and a thicker mist elsewhere. Built on `fallow_v4` (sky and clouds of [0016](../decisions/0016-vent-et-lumiere.md)). **Checked on the development client** (ATMOSPHERICS and Distant Horizons only, software OpenGL): ice spikes, savanna plateau, desert and forest, each in clear weather, rain and thunder; screenshots in the project files.
+
+**How ATMOSPHERICS handles weather** (read in `AtmosphericEnvironmentVisuals`): with rain or thunder, the fog start and end move towards the absolute `fogStart`/`fogEnd` of the weather settings, in proportion to the rain and thunder levels, and the fog colour towards the rain or thunder colour. A biome's `weatherOverride` replaces the global settings entirely while the camera is in that biome. The rain level is global: in a snowy biome it is snowfall, in a dry biome (no precipitation) it is ATMOSPHERICS' dust weather, with its sandstorm particles in deserts, savannas and badlands. Where Winds Blow ties its blizzards (thunder in a snowy biome) and desert storms (rain in a desert or badlands) to the same levels, so its snow sheets and dust line up with this fog. Its own storm fog stays off (`snowFogMode`, `sandstormFogMode`): ATMOSPHERICS sets the fog last and would override it anyway.
+
+| | Clear | Rain | Thunder | Colours (fog, rain → thunder) |
+|---|---|---|---|---|
+| Global (all other surface biomes) | biome value | 0 → 34 | 0 → 22 | grey `#8e989e` → `#5e666c` (the original preset's blue-violet `#424881` before) |
+| Snow (15 biomes: snowy plains, slopes, taiga, beach, ice spikes, peaks, grove, frozen river and oceans, NML frozen woods, frozen shore, boreal forest, maple grove) | biome value | 0 → 30 | 0 → 10 (whiteout) | `#d3dce5` → `#b9c4cf` |
+| Desert and NML desert river | biome value | 0 → 24 | 0 → 10 | ochre `#d4b07a` → `#b88f5c` |
+| Badlands (3) | biome value | 0 → 24 | 0 → 10 | red sand `#c99a70` → `#a8704a` |
+| Savannas (3) | biome value | 0 → 30 | 0 → 14 | gold `#cdb586` → `#ad9264` |
+| Clearings | 500 / 260 | 0 → 200 | 0 → 120 (cold clearing 120, 60: snow still falls there) | grey |
+
+- v4 had a single global rain end at 166 blocks: rain lifted the mist of every misty biome (52 blocks) and turned it blue. It now thickens it.
+- **Colours in clear weather**, closer to the mod's screenshots but muted: desert fog `#d6bf93`, badlands `#cfa784`, savannas `#cdbb8a` (sky and haze tinted the same way); swamps `#869a78` and jungles `#8a9e7e`, greener; snow `#c3ced8`, a little bluer. Temperate biomes keep their grey-green: it is the Silent Hill mist.
+- **Air particles** (`airHaze`): desert and badlands 2.2 intensity, 2.0 rate, 1.6 size; savannas 1.8 / 1.6 / 1.45; snow biomes 1.9 / 1.8 / 1.4 in white `#eef3f7` (1.1 to 1.6 before).
+- **Sandstorm particles**: rain count 8 and size 1.3 (6 and 1.2 before), thunder count 12, size 1.4, speed 2.0 (9, 1.2, 1.8).
+
 ## Coloured lights and moon (2026-10-19)
 
 To compensate for the absence of shaders, read from the jars (Polytone 5.1.3, ATMOSPHERICS 2.6.5, Enhanced Celestials 2), not seen in game.
@@ -156,7 +176,7 @@ Contraption Lights' coloured light stays off (its default value): Polytone alone
 
 1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].
    - Tune with the ATMOSPHERICS editor.
-   - Export, then save as `fallow_v5.json` while deleting `fallow_v4.json`.
+   - Export, then save as `fallow_v6.json` while deleting `fallow_v5.json`.
 2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
 3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2). No use testing before the `fallow:clairiere` biome exists in `pack/kubejs/data/`.
 4. **The clearing biome**, once created:

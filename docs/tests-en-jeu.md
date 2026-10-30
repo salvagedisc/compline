@@ -41,6 +41,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
+- [ ] **Storms** (preset `fallow_v5`): `/weather rain` then `/weather thunder` in a snowy biome, a desert and a savanna: a white snow cloud, then ochre or golden dust, down to about 10 blocks under thunder; in a forest the grey mist closes in instead of lifting; in a clearing the view stays wide. In clear weather the desert and the savanna have a warm haze, the forest's mist ends around 40 blocks.
 - [ ] Enter and leave the clearing: visibility changes smoothly [H4]. At sunrise and sunset, the colour of the distance follows the sky [H5].
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
 - [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
