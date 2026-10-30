@@ -18,7 +18,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset, Polytone colours, chosen values and settings to adjust in game |
 | [fallow-interface.md](fallow-interface.md) | Fallow's interface built from GUI Revision: sources, licences, build script, next steps |
 | [fallow-textures.md](fallow-textures.md) | The world's blocks and items from Vanilla Evolved: what is kept and left out, order of the packs, next steps for the mods' blocks |
-| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.9 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres` and `outils`): how it works, what is deduced from the code, in-game tests |
+| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.4.10 (modules `ciel`, `sac`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres` and `outils`): how it works, what is deduced from the code, in-game tests |
 | [modules-fallow.md](modules-fallow.md) | The eight planned modules of the `fallow` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Fallow takes |
 | [lune-amie.md](lune-amie.md) | The Friendly Moon from No Man's Land as the main thread: the path to the Meeting Point, coexistence with Enhanced Celestials, the removed blood moons |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring |

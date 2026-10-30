@@ -11,11 +11,13 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Le dissipateur se charge tant qu'il tourne assez vite sans surcharge ; chargé, il convertit une fois
- * le disque autour de lui. Déplacé (cassé puis reposé), il se recharge et convertit là où il est.
+ * le disque autour de lui. Cassé, il rend la brume à ce disque ; reposé, il se recharge et convertit là où il est.
  */
 public class DissipateurBlockEntity extends KineticBlockEntity {
     public static final int RADIUS = 64;
@@ -57,6 +59,17 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
             setChanged();
             ClearingConverter.convert((ServerLevel) level, worldPosition, RADIUS, null);
             sendData();
+        }
+    }
+
+    /** Appelé par Create quand le bloc est retiré du monde (pas au déchargement du tronçon). */
+    @Override
+    public void destroy() {
+        super.destroy();
+        if (done && level instanceof ServerLevel server && FallowConfig.clairiereEnabled()) {
+            Player nearest = level.getNearestPlayer(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5,
+                    worldPosition.getZ() + 0.5, 8.0, false);
+            ClearingConverter.restore(server, worldPosition, RADIUS, nearest instanceof ServerPlayer player ? player : null);
         }
     }
 
