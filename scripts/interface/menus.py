@@ -1,24 +1,37 @@
 """Fallow's title screen and loading screen, for FancyMenu and Drippy Loading
 Screen: the Fallow logo (drawn by logo.py) in place of Minecraft's over a moss
-veil that darkens the panorama behind the buttons, and a moss loading screen
+veil that darkens the background behind the buttons, and a moss loading screen
 with the logo and a bar in lantern light in place of Mojang's red one.
 
-Writes into pack/config/fancymenu the logo, the two layouts, the list of
-customised screens and FancyMenu's options (modpack mode: players never see
-the editor). The title screen keeps the vanilla buttons, the panorama drawn
-by build.py and the texts the game requires.
+The title screen's background is Caspar David Friedrich's "Riesengebirge
+Landscape with Rising Fog" (c. 1820, Neue Pinakothek, public domain), with
+mist flowing through its valleys: a GLSL background (title/mist.glsl) over the
+painting (title/painting.jpg: the Web Gallery of Art's scan on Wikimedia
+Commons, "Caspar David Friedrich - Riesengebirge Landscape with Rising Fog -
+WGA8257.jpg", 1920 pixels wide, cut to 16:9) and a mask of its valleys
+(title/mist-mask.png: drawn from the painting's pale, grey, finely detailed
+mist, the sky cut, blurred), which keeps the mist off the sky and the slopes
+in front.
+
+Writes into pack/config/fancymenu the logo, the painting and its mask, the two
+layouts, the list of customised screens and FancyMenu's options (modpack mode:
+players never see the editor). The title screen keeps the vanilla buttons and
+the texts the game requires; the other menus keep the panorama drawn by
+build.py.
 
 Called by build.py; can run alone: python3 scripts/interface/menus.py
 """
 import hashlib
+import shutil
 from pathlib import Path
 
 from PIL import Image
 
 import logo
 
-# the title screen: a moss veil darkening the panorama towards the bottom and
-# the sides, so that the buttons read over the forest
+TITLE = Path(__file__).resolve().parent / "title"
+# the title screen: a moss veil darkening the painting towards the bottom and
+# the sides, so that the buttons read over it
 VEIL = (20, 26, 22)
 # the loading screen
 GROUND = "#1F2521"
@@ -172,10 +185,27 @@ def draw(config):
     w, h = im.width // logo.SCALE, im.height // logo.SCALE
     source = "[source:local]/config/fancymenu/assets/fallow_logo.png"
 
-    # title screen: the logo where Minecraft's stood, the splash text gone, a
-    # veil over the panorama behind the buttons
+    # title screen: the painting with its mist, the logo where Minecraft's
+    # stood, the splash text gone, a veil behind the buttons
     veil().save(fm / "assets" / "fallow_veil.png", optimize=True)
-    title = layout("title_screen", "", [
+    shutil.copyfile(TITLE / "painting.jpg", fm / "assets" / "fallow_title_painting.jpg")
+    shutil.copyfile(TITLE / "mist-mask.png", fm / "assets" / "fallow_title_mist_mask.png")
+    # FancyMenu keeps a property on one line, its newlines written as a token
+    shader = (TITLE / "mist.glsl").read_text().strip().replace("\n", "%%!serialized_property_newline!%%")
+    painting = f"""
+menu_background {{
+  instance_identifier = {ident("fallow:title:background")}
+  background_type = glsl
+  show_background = true
+  inline_shader_source = {shader}
+  compile_mode = shadertoy
+  ichannel_0_source = [source:local]/config/fancymenu/assets/fallow_title_painting.jpg
+  ichannel_1_source = [source:local]/config/fancymenu/assets/fallow_title_mist_mask.png
+  image_ichannel0_input = resource0
+  image_ichannel1_input = resource1
+}}
+"""
+    title = layout("title_screen", painting, [
         image("fallow:title:veil", "[source:local]/config/fancymenu/assets/fallow_veil.png", "top-left",
               0, 0, 320, 180, stretch=True),
         image("fallow:title:logo", source, "top-centered", -(w // 2), 12, w, h),
