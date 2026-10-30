@@ -8,10 +8,9 @@
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v3.json          the mist, biome by biome, and the sand
+    ├── atmospherics/preset/fallow_v4.json          the mist biome by biome, the sand, the clouds, sun, moon and stars
     ├── fallow/polytone/biome_modifiers/*.json      grass, foliage, water (23 files)
     ├── fallow/polytone/colored_lights/*.json       colour of fire, soul and moonlight
-    ├── minecraft/textures/environment/moon_phases.png   the moon, in the style of the ATMOSPHERICS sun
     ├── fallow/sounds.json                         events for the music pack tracks ([musique](musique.md))
     └── fallow/sounds/music/*.ogg                  10 free tracks, credits in CREDITS.md
 ```
@@ -26,7 +25,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - The file is a complete configuration: it **replaces** `config/ambientfog/biome_fog.json`, including the player's tweaks.
 - Consequences:
   - a single preset in the pack;
-  - to ship a new version, **rename** the file (`fallow_v3.json` → `fallow_v4.json`) and delete the old one, otherwise it is not reapplied;
+  - to ship a new version, **rename** the file (`fallow_v4.json` → `fallow_v5.json`) and delete the old one, otherwise it is not reapplied;
   - each new version overwrites the players' ATMOSPHERICS settings.
 - The file starts from the mod's original preset (version 43, all global settings kept). Only `presetName`, `presetAuthor` and the biome profiles change.
 - The mod's bounds are respected: intensity 0-4, density 0.2-5, veil 0-3, particles 0-3.
@@ -151,13 +150,13 @@ To compensate for the absence of shaders, read from the jars (Polytone 5.1.3, AT
 
 Contraption Lights' coloured light stays off (its default value): Polytone alone carries the colour.
 
-**The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack provides one in the same style: a 4×2 sheet of 128×64, a pale 12 px square (same apparent size as the sun once ATMOSPHERICS' scale is applied), the dark part barely visible, eight very faint cold rays. The phases follow the vanilla order (checked against the game texture). It dresses the ordinary moon, all EC2 moons (which keep their tint) and the vanilla moon outside ATMOSPHERICS.
+**The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack's own moon (a pale square with cold rays, in the style of that sun) was removed on 2026-10-29 at the team's request: the vanilla moon is back, drawn 1.35× by ATMOSPHERICS. A sun and moon resource pack can replace both textures; Enhanced Celestials keeps tinting whichever moon is active.
 
 ## What remains to be tuned in game
 
 1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].
    - Tune with the ATMOSPHERICS editor.
-   - Export, then save as `fallow_v4.json` while deleting `fallow_v3.json`.
+   - Export, then save as `fallow_v5.json` while deleting `fallow_v4.json`.
 2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
 3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2). No use testing before the `fallow:clairiere` biome exists in `pack/kubejs/data/`.
 4. **The clearing biome**, once created:
