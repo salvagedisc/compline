@@ -57,6 +57,14 @@ file = "config/fancymenu/assets/fallow_logo.png"
 hash = "ea2661355472462737f397399c6e430205487b49691f774a9a7b4be83a890773"
 
 [[files]]
+file = "config/fancymenu/assets/fallow_title_mist_mask.png"
+hash = "bc465430412473288717978cece41b13720b920dd0343b45ad5c93f96bbd1688"
+
+[[files]]
+file = "config/fancymenu/assets/fallow_title_painting.jpg"
+hash = "a100d5ab9cebf5cd2648dd015911a3a8aafbc9a76c80abe07adf6eaa534984fc"
+
+[[files]]
 file = "config/fancymenu/assets/fallow_veil.png"
 hash = "571cd6eba2cac8d8dc6b2ed0df878c5b97bb7064c7a4a3d0caa88ad6adc43a5a"
 
@@ -70,7 +78,7 @@ hash = "34d7c618f924a626c8c6e3a52c79f37a9c8036a3f02c6d87c8a14d25f56492ff"
 
 [[files]]
 file = "config/fancymenu/customization/fallow_title_screen.txt"
-hash = "1ecbe66e6835fc59baa8df9277ecec9432a4d9bd41b31f89672a354e80ac22f0"
+hash = "6c152329ca46e462d58b96351b55de6becb0573263d66816caa4ab9b5d20d687"
 
 [[files]]
 file = "config/fancymenu/options.txt"
