@@ -2,7 +2,7 @@
   "targets": [
     "nomansland:lush_river"
   ],
-  "grass_color": "#68b042",
-  "foliage_color": "#5d9a2c",
+  "grass_color": "#76b04b",
+  "foliage_color": "#689a35",
   "water_color": "#3f9a92"
 }

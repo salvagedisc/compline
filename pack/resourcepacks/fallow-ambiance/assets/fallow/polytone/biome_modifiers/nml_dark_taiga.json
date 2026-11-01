@@ -2,7 +2,7 @@
   "targets": [
     "nomansland:dark_taiga"
   ],
-  "grass_color": "#6f8b69",
-  "foliage_color": "#5d7458",
+  "grass_color": "#748b6c",
+  "foliage_color": "#61745a",
   "water_color": "#4579a6"
 }

@@ -2,8 +2,8 @@
   "targets": [
     "nomansland:frozen_woods"
   ],
-  "grass_color": "#a5b3b4",
-  "foliage_color": "#a5b3b4",
+  "grass_color": "#a6b4b1",
+  "foliage_color": "#a6b4b1",
   "water_color": "#4966a0",
   "particle": {
     "options": {
