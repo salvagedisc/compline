@@ -41,17 +41,17 @@ def rain():
     rnd = random.Random(7)
     im = Image.new("RGBA", (64, 256), STREAK + (0,))
     used = []
-    for _ in range(9):
+    # sparse on purpose: Where Winds Blow stacks this texture in several layers around the player
+    for _ in range(7):
         for _try in range(40):
             x = rnd.randrange(1, 63)
-            if all(abs(x - u) > 3 for u in used):
+            if all(abs(x - u) > 5 for u in used):
                 break
         used.append(x)
-        for _k in range(2):
-            streak(im, x, rnd.randrange(256), rnd.randint(26, 64), rnd.randint(110, 170))
+        streak(im, x, rnd.randrange(256), rnd.randint(18, 40), rnd.randint(80, 125))
     # a few faint ones in between, for depth
-    for _ in range(6):
-        streak(im, rnd.randrange(64), rnd.randrange(256), rnd.randint(14, 30), rnd.randint(40, 70))
+    for _ in range(4):
+        streak(im, rnd.randrange(64), rnd.randrange(256), rnd.randint(10, 22), rnd.randint(30, 50))
     return im
 
 
