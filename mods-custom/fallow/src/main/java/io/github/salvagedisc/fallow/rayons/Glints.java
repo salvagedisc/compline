@@ -145,7 +145,7 @@ public final class Glints {
             if (glint <= 0.0F) {
                 continue;
             }
-            float alpha = Math.min(1.0F, 1.5F * base * glint * pulse * (1.0F - 0.6F * Sun.fogAt(distance)));
+            float alpha = Math.min(1.0F, base * glint * pulse * (1.0F - 0.6F * Sun.fogAt(distance)));
             if (alpha <= 0.01F) {
                 continue;
             }

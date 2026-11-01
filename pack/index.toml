@@ -301,6 +301,10 @@ file = "config/sensible_stackables/config.toml"
 hash = "9d1c94c8d9995a65f98550386db0d97d9713a2fce316f9f714856a6afa086087"
 
 [[files]]
+file = "config/shine.json"
+hash = "fed3fcfd584d74f734ef3b9070cd22793e02f410baf11a785ab81ee290c45701"
+
+[[files]]
 file = "config/shouldersurfing-client.toml"
 hash = "8df1450108472775d18ecb1c573c75dca9cbc1ea1545005a158bf7921dd18d5a"
 
@@ -2256,8 +2260,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.6.0.jar"
-hash = "e78351242a690c30da0b856d91e0227202cf9b98381f1dcf748bb0c8e1111103"
+file = "mods/fallow-0.6.1.jar"
+hash = "893c58b1da64e9a6e7ce57f5602574f4eebaf327c80ef318c1ae020728855134"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
@@ -2919,7 +2923,7 @@ hash = "6f6b3496be181cd2cd4dfd97a598783a7769b6451f12de3fc08fdb84a145dc9f"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/rain.png"
-hash = "f56a94d494e7fbd4208f0e5fbfda19ddf0c459fd8984653f31144522d5e5b140"
+hash = "aa475633e6ff0e68c07d90eabb54619035915ee3d2ef9a80f2f244abcb227408"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
