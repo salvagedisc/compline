@@ -1,0 +1,44 @@
+{
+  "levels": {
+    "1": [
+      {
+        "item_cost": {
+          "item": "minecraft:spyglass",
+          "count": 1
+        }
+      }
+    ],
+    "2": [
+      {
+        "item_cost": {
+          "item": "minecraft:feather",
+          "count": 8
+        }
+      }
+    ],
+    "3": [
+      {
+        "item_cost": {
+          "item": "minecraft:crossbow",
+          "count": 1
+        }
+      }
+    ],
+    "4": [
+      {
+        "item_cost": {
+          "item": "create:precision_mechanism",
+          "count": 1
+        }
+      }
+    ],
+    "5": [
+      {
+        "item_cost": {
+          "item": "minecraft:lightning_rod",
+          "count": 8
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "levels": {
+    "1": [
+      {
+        "item_cost": {
+          "item": "minecraft:bamboo",
+          "count": 1
+        }
+      }
+    ],
+    "2": [
+      {
+        "item_cost": {
+          "item": "minecraft:iron_sword",
+          "count": 1
+        }
+      }
+    ],
+    "3": [
+      {
+        "item_cost": {
+          "item": "create:propeller",
+          "count": 1
+        }
+      }
+    ]
+  }
+}

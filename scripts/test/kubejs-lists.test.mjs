@@ -23,7 +23,7 @@ function clientItems(source) {
 
 // Each removed item loses its recipes on the server and is hidden from EMI on the client;
 // the lists are written twice because KubeJS server and client scripts cannot share code.
-for (const name of ['faune_nml', 'sans_lapin', 'doublons', 'faune_coupee', 'premiers_gestes', 'tannerie']) {
+for (const name of ['faune_nml', 'sans_lapin', 'doublons', 'faune_coupee', 'premiers_gestes', 'tannerie', 'tri']) {
   test(`${name}: items removed on the server are the items hidden from EMI`, async () => {
     const server = serverItems(await readFile(join(kubejsDir, 'server_scripts', `${name}.js`), 'utf8'));
     const client = clientItems(await readFile(join(kubejsDir, 'client_scripts', `${name}.js`), 'utf8'));
@@ -31,3 +31,16 @@ for (const name of ['faune_nml', 'sans_lapin', 'doublons', 'faune_coupee', 'prem
     assert.deepEqual([...client].sort(), [...server].sort());
   });
 }
+
+// The Steam 'n' Rails variants are removed by pattern, on both sides.
+test('tri: Steam \'n\' Rails patterns are the same on the server and in EMI', async () => {
+  const patterns = (source) => {
+    const list = source.match(/const TRI_MOTIFS = \[([\s\S]*?)\n\]/);
+    assert.ok(list, 'no TRI_MOTIFS list');
+    return list[1].split('\n').map((line) => line.trim().replace(/,$/, '')).filter(Boolean);
+  };
+  const server = patterns(await readFile(join(kubejsDir, 'server_scripts', 'tri.js'), 'utf8'));
+  const client = patterns(await readFile(join(kubejsDir, 'client_scripts', 'tri.js'), 'utf8'));
+  assert.equal(server.length, 2);
+  assert.deepEqual(client, server);
+});

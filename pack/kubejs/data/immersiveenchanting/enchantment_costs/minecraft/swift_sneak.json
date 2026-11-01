@@ -1,0 +1,28 @@
+{
+  "levels": {
+    "1": [
+      {
+        "item_cost": {
+          "item": "minecraft:sculk",
+          "count": 1
+        }
+      }
+    ],
+    "2": [
+      {
+        "item_cost": {
+          "item": "minecraft:sculk",
+          "count": 8
+        }
+      }
+    ],
+    "3": [
+      {
+        "item_cost": {
+          "item": "minecraft:echo_shard",
+          "count": 1
+        }
+      }
+    ]
+  }
+}

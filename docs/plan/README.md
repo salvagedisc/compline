@@ -25,6 +25,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |
 | [faune-nml.md](faune-nml.md) | The No Man's Land fauna goes back to vanilla: remodels and textures cut, deer, goose, bass, turtle and Frienderman removed, in-game tests |
 | [premiers-gestes.md](premiers-gestes.md) | First gestures: no logs or rock by hand, knapped stone tools (Overgeared), planks with an axe, flint campfire, the « Premiers gestes » quests ([0013](../decisions/0013-premiers-gestes.md)) |
+| [tri-du-pack.md](tri-du-pack.md) | Pack sort of 2026-11-01: Chipped and Beautify! removed, 11 defects fixed (levitite, mincer, enchanting costs, structures), settings, 313 items and about 1,110 Steam 'n' Rails variants removed, recipe levels (rope, pulley, kitchen knives) |
 | [tannerie.md](tannerie.md) | The tannery with the Tannery mod: hides for every leather animal, tanning rack, bark, tanning barrel |
 | [musique.md](musique.md) | The music: True Adaptive Music, the `fallow` pack tree, the server predicates, in-game tests ([0010](../decisions/0010-musique.md)) |
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |

@@ -9,6 +9,10 @@ file = "config/adorablehamsterpets/main.toml"
 hash = "c58df881614688ddaeb1dd84da064e77d406dbf3d29a7e6695cf19b20ccd196e"
 
 [[files]]
+file = "config/amendments-common.toml"
+hash = "5cc23f0d3635f51ea8298f4b9bdb8150c960d40168785fe5945c39a23a585a2e"
+
+[[files]]
 file = "config/betterdays-common.toml"
 hash = "41b732b6d12bb2edff305a4008a07d0317e2efdb0a78929f9390e5f24431f74e"
 
@@ -53,6 +57,10 @@ file = "config/enhancedcelestials2core/translations.json"
 hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
 
 [[files]]
+file = "config/everycomp-hazardous.toml"
+hash = "4c50cc5ef2649107c18a099ead7bc728f5c870aa596ce4da4f8e4de8a88b04c8"
+
+[[files]]
 file = "config/fancymenu/assets/fallow_logo.png"
 hash = "ea2661355472462737f397399c6e430205487b49691f774a9a7b4be83a890773"
 
@@ -93,12 +101,20 @@ file = "config/hybrid_aquatic.json"
 hash = "12ee2cf37f37fe0ad796fa054e4851b64fbd762d12cb5ad3745191779f2dcd3d"
 
 [[files]]
+file = "config/icys-better-horses.json"
+hash = "1fc17b8422afe5b228e766290e63d5ff18401adb9b27578e0d07d82ec8b10f5d"
+
+[[files]]
 file = "config/incontrol/spawn.json"
-hash = "4a5e08b7733b3afc97ddf70d8e3dfd3f860233fdd5a02b5f267e0f3ff999d08e"
+hash = "9b4cddf6de7c4c7a71ea25c238270f9f5b418fa4265948ce21efae60b7c50667"
 
 [[files]]
 file = "config/jei/jei-client.ini"
 hash = "a20c3d9caba8fb5f715fbad929c6bfe553a52ba1b7a5a1dc1ea20fd827fe789d"
+
+[[files]]
+file = "config/kaleidoscope_compat.jsonc"
+hash = "85dceb413cc0c4d1998b0c914f63e95717fbe9a67467a44bf30206c32393e296"
 
 [[files]]
 file = "config/mixed_litter-startup.toml"
@@ -121,8 +137,12 @@ file = "config/nomansland-common.toml"
 hash = "4cc0342b40171b2006ef7d80ff03b1053cbe617820e736922abf6a0dc562bad5"
 
 [[files]]
+file = "config/overgeared-common.toml"
+hash = "04b592420e4005f5fc02a161297fb8833455381253b4253fef00e485c63f5e10"
+
+[[files]]
 file = "config/quark-common.toml"
-hash = "890330b216be379ffbc8f2f553cfb82e5eb6ebee9b6f9532b1688ce15eb13bac"
+hash = "c70526c0a156c64b8636c3deb9b21dd86f27fde315b280259431ed01a43fe956"
 
 [[files]]
 file = "config/questlog/chapters/fallow_arriver.json"
@@ -261,6 +281,10 @@ file = "config/questlog/quests/voyager_ecurie.json"
 hash = "7f25bf8bcd4a3f43073f6e93a9701a623bfee5e4ffccbe4810c11a33a6a6683b"
 
 [[files]]
+file = "config/railways-common.toml"
+hash = "7e9f40d0cd7d6392564cc084e9abb7d33c03c369cc7b7b1766d8c62854bde908"
+
+[[files]]
 file = "config/reliable_backpacks.json"
 hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
 
@@ -290,7 +314,7 @@ hash = "8f39475f5d53b1244325fcc7b0dda74e86ca436542ef83ebf94777d049c01d1a"
 
 [[files]]
 file = "config/supplementaries-common.toml"
-hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
+hash = "db45383ebe2ad50f8abf89ea546f4a3e208b03c58c46ffa352bcf05cc90a3a41"
 
 [[files]]
 file = "config/tectonic.json"
@@ -299,6 +323,10 @@ hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 [[files]]
 file = "config/where_winds_blow-client.toml"
 hash = "cf96866c7be227a9587e889d5a237cb6646eda81f993b9ea858904940932b3c0"
+
+[[files]]
+file = "config/where_winds_blow-common.toml"
+hash = "d8dcd546e98c0f7fe5345052b1d1a77c9d1d64671a753d476d20c5a8ed66d11c"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -310,7 +338,7 @@ hash = "8a8b8862f01f0d56077df808b9839cf3165ca0fa3844f4d86e94fd6ae6aada36"
 
 [[files]]
 file = "defaultconfigs/exposure-server.toml"
-hash = "a51b7d3e8ebbdaed9f4862cab55860b85b265bb31b345a956360783617173a96"
+hash = "f5c472d82554cdff910a87f62854e0fb2990e845ced3d4ea84c999e5727c0a8d"
 
 [[files]]
 file = "kubejs/assets/adorablehamsterpets/lang/fr_fr.json"
@@ -322,7 +350,7 @@ hash = "c5afa0489e058ff8da5354bcf1b556cf408b521e35164ea960fab6624cac2214"
 
 [[files]]
 file = "kubejs/assets/aeronautics/lang/fr_fr.json"
-hash = "ffacdb381383c1eeff4e2a1546c2bec43d326e61ecaab060cdcfb537a4cbcbfe"
+hash = "7302a19e8c9d0071f331e35cef635f1fb55f38fb50df2ea4b80fe37fe7ab67bf"
 
 [[files]]
 file = "kubejs/assets/alexsmobs/book/animal_dictionary/fr_fr/alligator_snapping_turtle.txt"
@@ -733,10 +761,6 @@ file = "kubejs/assets/balm/lang/fr_fr.json"
 hash = "49fd275feac43a47285d16553b3bda996a2bf4443ce3488cc22459b7f98c5c17"
 
 [[files]]
-file = "kubejs/assets/beautify/lang/fr_fr.json"
-hash = "6365c748776d5fd866b53428b87db9a3d166f6bedb6f774e646a4e9009ab935a"
-
-[[files]]
 file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
 hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
 
@@ -751,10 +775,6 @@ hash = "08fa2966c04a2e0738058e2bd3387c1bde37986c94b066e0f8d871c8a8c26130"
 [[files]]
 file = "kubejs/assets/chat_heads/lang/fr_fr.json"
 hash = "437498949c8a9fcf54e2385d51ed3d19103a0a0759107228a7060a711ff17f67"
-
-[[files]]
-file = "kubejs/assets/chipped/lang/fr_fr.json"
-hash = "e2fb42e83327253810fdebb150919324bd5c015f9cc27ee646960d5bcefc5d67"
 
 [[files]]
 file = "kubejs/assets/cloth-config2/lang/fr_fr.json"
@@ -1265,8 +1285,48 @@ file = "kubejs/client_scripts/tannerie.js"
 hash = "b3420f2304c2a5210feaddb17662fcf6c0700213fcac572c5f176e83b32e816b"
 
 [[files]]
+file = "kubejs/client_scripts/tri.js"
+hash = "4d37afc24daab32b63db35061b6714d05138b8d96180a87b2c9974bb61272c66"
+
+[[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
 hash = "22c2ae67c6ace47c327ec9330f51e8e98727dfe91337b11a286cd6ae1f8ff149"
+
+[[files]]
+file = "kubejs/data/companions/worldgen/structure_set/companions_babayaga.json"
+hash = "e51af270fa7713a3c1a059dab71a98b175806429aa7c7ea4648b3b1c26a5abe7"
+
+[[files]]
+file = "kubejs/data/companions/worldgen/structure_set/companions_factory.json"
+hash = "4ebb6217e49369988ff164e6aa4b8b202fc4a17497415fe1aded8a8bf9d41ebd"
+
+[[files]]
+file = "kubejs/data/companions/worldgen/structure_set/companions_monkey_temple.json"
+hash = "871c9976adca74537dff210c00282fc4e9274bd677d4762334d56e02bb51941c"
+
+[[files]]
+file = "kubejs/data/companions/worldgen/structure_set/companions_teddytower.json"
+hash = "d265bf3be720d1f2cc37bd4ea17f22409fc860930eab054e46ae89342d68e98a"
+
+[[files]]
+file = "kubejs/data/companions/worldgen/structure_set/companions_tent.json"
+hash = "579c797d04257d6b5eb7bfa4d112def8e1cc8f4d0b1f3d73da4400507debae21"
+
+[[files]]
+file = "kubejs/data/eclipticseasons/tags/block/crops/spring_autumn.json"
+hash = "ef44505beaa0977042895a8a298ba76edabac00adf89a5dcc03840697804699f"
+
+[[files]]
+file = "kubejs/data/eclipticseasons/tags/block/crops/spring_summer.json"
+hash = "9aa287b9f5f9554d5f261aee6ac25a3b1ae0dd52a211e7f0d70bb26dee3b590a"
+
+[[files]]
+file = "kubejs/data/eclipticseasons/tags/block/crops/summer.json"
+hash = "7ceb3e204bd4028dd820fe99562ed7dc261cbcab4d3ece1cef2dbc6966f5a8a0"
+
+[[files]]
+file = "kubejs/data/eclipticseasons/tags/block/crops/summer_autumn.json"
+hash = "daa1efc34bed94851ab0d571250046adba950d19edc659b7be8bb65acc1a4349"
 
 [[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
@@ -1533,6 +1593,118 @@ file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/tr
 hash = "4ef49a2cfb99b570d150a79f15218448f044bc197e81cb4c308849ea124a125c"
 
 [[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/bane_of_arthropods.json"
+hash = "39b7b80552d4b844ba22bb420f0aef8089964de7a0ff4776c1bb8f2bc15a682d"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/blast_protection.json"
+hash = "2dfa0459d9ff2cad273ff6b9de9cd74382e405c8e86fc786f9c99704c40421bb"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/breach.json"
+hash = "93bda6fc358de5800604f0c86a05686cc4821e69d8f60e4e4aeca07c0ee9d52f"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/density.json"
+hash = "222de7e803ee5088547c59559d94b1969140580308ced7509ca06b9232384590"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/depth_strider.json"
+hash = "a3f1b2cf4ca398bd425b903d302286fdd94d5eaf140b401f3a2acac670673b8e"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/efficiency.json"
+hash = "e836783a7f87949f64491a4c341a037c1badc435db2bed75e93dc9e8f24d81fa"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/fire_aspect.json"
+hash = "4be2c435d3daae92b3f614ca0b5944e3acadb1e1e197ed8678a2b014329a5fbe"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/fire_protection.json"
+hash = "ce5dbebdf0e89fd93c887e3647d83aaa0fdcaabc130c31c9701af219c6428f53"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/impaling.json"
+hash = "94a0bec6e2fa70f2736cc3eeca8a436bdd84f847a2a16cfc2dc00c4f34bdc9cd"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/infinity.json"
+hash = "a6ffaaf56dbb8f010b29da5f6fb18d70c28d4584a8bfc2a57b4281ff89adc7ae"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/knockback.json"
+hash = "f4de7732da01ef4d1a169e80bbdba925eca42ce01f5edfb06d8c6f95504f5f2d"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/looting.json"
+hash = "34b6237a80eaac22f5eb16ea2972bf72dc092bde37f44e736bbe6b0660661096"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/loyalty.json"
+hash = "6066e65dab1078366d7a0860216cb3a75fe5c59c70f123ec43de217cced1e3bb"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/lunge.json"
+hash = "00dc7eccdb8f2cd5013fb01f3d018cec07c9dc6946ae96a002e3a1f71e698ee8"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/multishot.json"
+hash = "6c6044d7fbc016de4a9abe14e824b7c4548bff9bdc5d6c4bb76e4f2a6a57cdcb"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/piercing.json"
+hash = "5e2583a94943efe8d3abf938db7c94e452ce330374dfe784050e675646012ac8"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/power.json"
+hash = "27f68781e97075fc3dbd1996605a24ee4d0e4fa4a5e6b6b02decdee037dce193"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/protection.json"
+hash = "9fc391b6426de49f091a30ec8af5e3eab5b12a08ed87d78ee12fa3dedf13c57a"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/punch.json"
+hash = "f4de7732da01ef4d1a169e80bbdba925eca42ce01f5edfb06d8c6f95504f5f2d"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/quick_charge.json"
+hash = "cddfac30502c93ad158474b04f2a09ace48213c8922d1505dd1fb48ffa586d92"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/respiration.json"
+hash = "1825d3b70dae9df18746ff41abeccc1d9e186d68e51271eecbaeb9dad6d45a9b"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/sharpness.json"
+hash = "a33a6b940bdb9f5912bc2190e64e1bc12436da07f871bfbb28686bad0da6d3ef"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/silk_touch.json"
+hash = "171d7b1f3e0353e6b83c4702f6bf2fca5b6ee02b502fb11f75d93ed9eca52330"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/smite.json"
+hash = "d73fbb9a823581366dcefa4bbd63190bb38ca2b646e7a4e33216335f1886f080"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/soul_speed.json"
+hash = "7492eb3f02b679a9e0f0fe29ec2f764c1d8c33ff6fd1f3ac42d7d46541abaf2f"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/sweeping_edge.json"
+hash = "a9975f7aa49082a3725159bad3c792f69e3dc0396484214a30a7b4546a12628e"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/swift_sneak.json"
+hash = "6242d20c4d60af944558852e2d4c1d7421bf8a21cbf71739ff6e49f514dcfd3f"
+
+[[files]]
+file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/wind_burst.json"
+hash = "a29962d5fda201783451a8c0cd993e0e5ece47e969bfc54aad6a3bbec16f7ed7"
+
+[[files]]
 file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_desert_biomes.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
@@ -1571,6 +1743,18 @@ hash = "a3d563f6d2d52a31e2ca286745210de99cddea86071b2b8c5811ef2c11a035ac"
 [[files]]
 file = "kubejs/data/minecraft/tags/worldgen/biome/has_structure/stronghold.json"
 hash = "cee09dec79eaf898a5ecbf50767dd2b9b1f258be79f2a44406b694f555022cd2"
+
+[[files]]
+file = "kubejs/data/mowziesmobs/worldgen/structure_set/frostmaw_spawns.json"
+hash = "2be15dabd3671f040d7228fc0d9fabb730d7fcb0ee47ddd04147e5df2888d067"
+
+[[files]]
+file = "kubejs/data/mowziesmobs/worldgen/structure_set/umvuthana_groves.json"
+hash = "881fb226c57e55664f28bd3a81dbb8309ac51b06b09be30f1623e3d7f7b22b64"
+
+[[files]]
+file = "kubejs/data/mowziesmobs/worldgen/structure_set/wrought_chambers.json"
+hash = "2c16cd040054bc5cd9c4d55b0fbecdffd19ddd37d9ae3e12ae90c96a731b76e1"
 
 [[files]]
 file = "kubejs/data/nomansland/mixed_litter/variant_groups/bee.json"
@@ -1681,6 +1865,10 @@ file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.js
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
 
 [[files]]
+file = "kubejs/data/twigs/neoforge/biome_modifier/add_ore_rhyolite.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
 hash = "4380bcd64440e2b590968feb95d0792168e3d58a2e4c4087df1218983884fc99"
 
@@ -1735,6 +1923,14 @@ hash = "756381895c317027c3fc7bfc3d49fdd2a5b4261314fbcb711e9c402714b978a1"
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
 hash = "d860a5e1f79e550fae99530e847202d771b18b217b60b02abae9471e4b5c10ae"
+
+[[files]]
+file = "kubejs/server_scripts/tri.js"
+hash = "10d8f6d0999980aeea3bd553fcc0a4017c63451c56ba6e59a5fd51c266dc6307"
+
+[[files]]
+file = "kubejs/server_scripts/tri_recettes.js"
+hash = "70abb7adb83b15e7460c4bbfd8ab536888a0f7885fdeeea7eceaaa4aec284fa8"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -1796,11 +1992,6 @@ hash = "187eafde5974beee1263538b462b7b8fe2fc8948c5d413980d9796d55928580b"
 metafile = true
 
 [[files]]
-file = "mods/athena-ctm.pw.toml"
-hash = "f54cf71372645810ce22b0ba68e706139565437150e4cfd22bde4c14606099c4"
-metafile = true
-
-[[files]]
 file = "mods/atmospherics.pw.toml"
 hash = "f12b246fef3275920f5fb335c3c592ac9406f6ee7c3ab2b38f430dafadd461f5"
 metafile = true
@@ -1813,11 +2004,6 @@ metafile = true
 [[files]]
 file = "mods/balm.pw.toml"
 hash = "603cdc47142b5aa5729cbbf265a473574c9e2b55561de4318e9842d3d4b3b995"
-metafile = true
-
-[[files]]
-file = "mods/beautify.pw.toml"
-hash = "5e3421b58c8c905e686ed7b63d2fe086fe3265009347ca01aba99f13cb8edca3"
 metafile = true
 
 [[files]]
@@ -1843,11 +2029,6 @@ metafile = true
 [[files]]
 file = "mods/chat-heads.pw.toml"
 hash = "80455b28c3010ad153ccabc2998cb445b9854b26b386628243a9c8160b8d7e8e"
-metafile = true
-
-[[files]]
-file = "mods/chipped.pw.toml"
-hash = "24c6c3fe917ffbcef04e788dec3e003d0ed03433bc00f9cf4f23fe9b85636aa7"
 metafile = true
 
 [[files]]

@@ -5,7 +5,6 @@
 
 [general]
 	"Enable Onboarding" = false
-	"Terrablender Add Region" = false
 
 [categories]
 	automation = true
@@ -34,7 +33,7 @@
 
 [building]
 	"Celebratory Lamps" = false
-	"Compressed Blocks" = true
+	"Compressed Blocks" = false
 	"Duskbound Blocks" = false
 	"Framed Glass" = true
 	"Glass Item Frame" = true
@@ -42,25 +41,25 @@
 	"Grate" = true
 	"Hedges" = true
 	"Hollow Logs" = true
-	"Industrial Palette" = true
+	"Industrial Palette" = false
 	"Japanese Palette" = false
 	"Leaf Carpet" = true
 	"Midori" = false
-	"More Brick Types" = true
+	"More Brick Types" = false
 	"More Mud Blocks" = true
 	"More Potted Plants" = true
 	"More Stone Variants" = true
-	"Nether Brick Fence Gate" = true
+	"Nether Brick Fence Gate" = false
 	"Rainbow Lamps" = false
 	"Raw Metal Bricks" = true
 	"Rope" = false
 	"Shear Vines" = true
-	"Shingles" = true
+	"Shingles" = false
 	"Soul Sandstone" = false
 	"Stools" = false
 	"Sturdy Stone" = true
-	"Thatch" = true
-	"Variant Bookshelves" = true
+	"Thatch" = false
+	"Variant Bookshelves" = false
 	"Variant Chests" = true
 	"Variant Furnaces" = true
 	"Variant Ladders" = true
@@ -96,7 +95,7 @@
 
 [tweaks]
 	"Armed Armor Stands" = true
-	"Automatic Recipe Unlock" = true
+	"Automatic Recipe Unlock" = false
 	"Better Elytra Rocket" = false
 	"Campfires Boost Elytra" = false
 	"Compasses Work Everywhere" = false
@@ -105,7 +104,7 @@
 	"Double Door Opening" = true
 	"Dragon Scales" = false
 	"Dyeable Item Frames" = true
-	"Emotes" = true
+	"Emotes" = false
 	"Enhanced Ladders" = true
 	"Glass Shard" = false
 	"Gold Tools Have Fortune" = false
@@ -160,7 +159,7 @@
 	"Auto Walk Keybind" = false
 	"Back Button Keybind" = true
 	"Buckets Show Inhabitants" = true
-	"Camera" = true
+	"Camera" = false
 	"Chest Searching" = true
 	"Elytra Indicator" = false
 	"Greener Grass" = false
@@ -172,3 +171,7 @@
 	"Uses For Curses" = false
 	"Variant Animal Textures" = false
 	"Wool Shuts Up Minecarts" = false
+
+	#La faim et la saturation des aliments restent à découvrir (AppleSkin écarté pour la même raison)
+	[client.improved_tooltips]
+		"Food Tooltips" = false

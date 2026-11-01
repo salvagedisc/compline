@@ -35,8 +35,9 @@
 		enabled = true
 	[functional.safe]
 		enabled = true
+	#Un seul sac dans le pack : celui de Reliable Backpacks (décision 0012)
 	[functional.sack]
-		enabled = true
+		enabled = false
 	[functional.bamboo_spikes]
 		enabled = false
 	[functional.urn]
@@ -52,6 +53,8 @@
 			enabled = false
 		[functional.cannon.plunderer]
 			enabled = false
+			#Pas de galion à pillards en mer
+			galleon = false
 	[functional.present]
 		enabled = true
 	[functional.flax]
@@ -63,12 +66,16 @@
 			enabled = false
 
 [building]
+	#Crêpes sans cuisson : la cuisine passe par Kaleidoscope Cookery
+	pancake = false
+	#Appliques : celles de No Man's Land suffisent
 	[building.sconce]
-		enabled = true
+		enabled = false
 	[building.blackboard]
 		enabled = true
+	#Briques de gravier : Twigs a les mêmes
 	[building.gravel_bricks]
-		enabled = true
+		enabled = false
 	[building.slidy_block]
 		enabled = false
 	[building.timber_frame]
@@ -93,6 +100,8 @@
 		enabled = true
 	[building.globe]
 		enabled = true
+		#Jamais de coordonnées
+		show_coordinates = false
 	[building.way_sign]
 		enabled = true
 		[building.way_sign.road_signs]
@@ -114,22 +123,34 @@
 		enabled = true
 	[building.gold_bars]
 		enabled = false
+	#Netherite introuvable (Nether fermé)
+	[building.netherite_doors]
+		door = false
+		trapdoor = false
 
 [tools]
+	#Ni altitude en chiffres ni bonbons sans cuisine
+	altimeter = false
+	candy = false
 	[tools.quiver]
 		enabled = true
 	[tools.lunch_basket]
 		enabled = true
+	#Carte en tranches : un radar de grottes, contraire à l'exploration
 	[tools.slice_map]
-		enabled = true
+		enabled = false
 	[tools.bubble_blower]
 		enabled = false
 	[tools.wrench]
 		enabled = false
 	[tools.rope_arrow]
 		enabled = true
+		#Une flèche à corde emporte 8 cordes au plus (32 par défaut) : le lin reste une ressource
+		capacity = 8
 	[tools.flute]
 		enabled = true
+		#La flûte ramène un animal lié de 24 blocs au plus (64 par défaut)
+		bound_distance = 24
 	[tools.bomb]
 		enabled = false
 	[tools.slingshot]

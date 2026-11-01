@@ -1,0 +1,36 @@
+{
+  "levels": {
+    "1": [
+      {
+        "item_cost": {
+          "item": "minecraft:firework_rocket",
+          "count": 1
+        }
+      }
+    ],
+    "2": [
+      {
+        "item_cost": {
+          "item": "minecraft:flint",
+          "count": 8
+        }
+      }
+    ],
+    "3": [
+      {
+        "item_cost": {
+          "item": "minecraft:goat_horn",
+          "count": 1
+        }
+      }
+    ],
+    "4": [
+      {
+        "item_cost": {
+          "item": "minecraft:echo_shard",
+          "count": 1
+        }
+      }
+    ]
+  }
+}

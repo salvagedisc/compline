@@ -73,7 +73,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Naturalist | `naturalist` | ✅ | CS | Realistic base fauna ([0003](decisions/0003-faune.md)) |
 | Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species; nine creatures with weak animations cut (banana slug, alligator snapping turtle, mungus, triops, sunbird, guster, rocky roller, frilled shark, potoo, [duplicates](plan/doublons.md#creatures-with-weak-animations-2026-10-28)) |
 | Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans; seven near-motionless invertebrates cut (sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish) |
-| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most |
+| Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most; Wroughtnaut chambers, Frostmaw and Umvuthana groves no longer generated, boss weapons removed ([pack sort](plan/tri-du-pack.md)) |
 | Longwings | `longwings` | ✅ | CS | Butterflies to collect |
 
 ## Companions
@@ -95,9 +95,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Supplementaries | `supplementaries` | ✅ | CS | The essentials ([0006](decisions/0006-supplementaries.md)) |
 | Amendments | `amendments` | ✅ | CS | 3D lanterns, signs, cauldrons |
 | Handcrafted | `handcrafted` | ✅ | CS | Furniture |
-| Chipped | `chipped` | ✅ | CS | Block variants at the workbench (adds Athena) |
-| Beautify! | `beautify` | ✅ | CS | Small decor: trellises, hanging pots, blinds, lamps |
-| Twigs | `twigs` | ✅ | CS | Small decor (rhyolite disabled) |
+| Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed ([pack sort](plan/tri-du-pack.md)) |
 | Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including NML's |
 | HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
 | Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench |
@@ -177,7 +175,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FerriteCore | `ferrite-core` | ✅ | CS | Memory |
 | Lithium | `lithium` | ✅ | CS | Server logic |
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
-| Chunky | `chunky` | ✅ | CS | Pregeneration |
+| Chunky | `chunky` | ✅ | CS | Pregeneration; leaves once test H11 has confirmed `/dh pregen` ([pack sort](plan/tri-du-pack.md)) |
 | spark | `spark` | ✅ | CS | Profiling |
 | Dynamic FPS | `dynamic-fps` | ✅ | C | The game slows down in the background |
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
@@ -200,12 +198,13 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Athena, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow).
 
 ## Dropped or rejected
 
 | Mod | Reason |
 |---|---|
+| Chipped (with Athena), Beautify! | Removed on 2026-11-01: 6,980 blocks for Chipped, including 1,110 Nether and End variants; Beautify! duplicates Supplementaries, Amendments and Handcrafted ([pack sort](plan/tri-du-pack.md)) |
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Removed by the team on 2026-10-19 |
 | FallingTree, ItemPhysic Lite | Replaced by HT's TreeChop and ItemPhysic (team choice on 2026-10-19) |
 | Entity Culling | Breaks Aeronautics contraptions; removed on 2026-10-19 |
