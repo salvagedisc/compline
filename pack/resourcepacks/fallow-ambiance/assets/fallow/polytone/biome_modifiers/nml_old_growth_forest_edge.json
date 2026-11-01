@@ -2,7 +2,7 @@
   "targets": [
     "nomansland:old_growth_forest_edge"
   ],
-  "grass_color": "#7e9d56",
-  "foliage_color": "#728247",
+  "grass_color": "#839d5c",
+  "foliage_color": "#74824c",
   "water_color": "#4583a6"
 }

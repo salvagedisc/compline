@@ -13,6 +13,8 @@ public final class ModIds {
     public static final String CREATE = "create";
     public static final String PUNCHY = "punchy";
     public static final String SENSIBLE_STACKABLES = "sensible_stackables";
+    public static final String WHERE_WINDS_BLOW = "where_winds_blow";
+    public static final String PARTICULAR = "particular";
 
     private ModIds() {
     }

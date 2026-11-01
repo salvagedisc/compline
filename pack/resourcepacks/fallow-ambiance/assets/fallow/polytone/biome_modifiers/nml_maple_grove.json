@@ -2,8 +2,8 @@
   "targets": [
     "nomansland:maple_grove"
   ],
-  "grass_color": "#7cb38c",
-  "foliage_color": "#57866b",
+  "grass_color": "#80b386",
+  "foliage_color": "#5b8665",
   "water_color": "#4966a0",
   "particle": {
     "options": {

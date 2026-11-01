@@ -25,7 +25,12 @@ public enum FallowModule {
     /** Le nom de chaque écran sur une plaque au-dessus du panneau, dessinée par le pack d'interface (client). Aucun mod requis. */
     TITRES("titres", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.titres.TitresModule.start(bus)),
     /** À mains nues, on ramasse mais on ne coupe pas : le bois et la roche demandent le bon outil (client et serveur). Aucun mod requis. */
-    OUTILS("outils", null, bus -> io.github.salvagedisc.fallow.outils.OutilsModule.start(bus));
+    OUTILS("outils", null, bus -> io.github.salvagedisc.fallow.outils.OutilsModule.start(bus)),
+    /** Pluie teintée et à contre-jour, rideaux de pluie, éclair, feuilles et brins d'herbe dans le vent (client). Aucun mod requis ;
+     *  la teinte demande Where Winds Blow, les feuilles Particular. */
+    AVERSE("averse", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.averse.AverseModule.start(bus)),
+    /** Rayons de soleil dans les trouées et éclats du soleil sur l'eau (client). Aucun mod requis. */
+    RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.rayons.RayonsModule.start(bus));
 
     private final String id;
     private final Dist side;

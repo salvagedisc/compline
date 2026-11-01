@@ -109,6 +109,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
+- [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): pale streaks in the mist's colour, gold against the sun, rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
+- [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): shafts through the canopy, glints on the water; footprints in snow and sand, waves on a beach, greens a little more olive [AV9 to AV11].
 
 ## Session 8: multiplayer server (with a friend)
 
@@ -149,6 +151,7 @@ Once the results are in:
 | N (quests) | [plan/quetes.md](plan/quetes.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
+| AV (rain, storm and sunlight) | [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) |
 | Y (textures) | [plan/fallow-textures.md](plan/fallow-textures.md#in-game-tests) |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 

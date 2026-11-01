@@ -97,6 +97,10 @@ dependencies {
     // Module horizon
     compileOnly modrinth('distanthorizons')
 
+    // Module averse : la pluie et le vent de Where Winds Blow, les feuilles de Particular
+    compileOnly modrinth('where-winds-blow')
+    compileOnly modrinth('particular-reforged')
+
     // Module dissipateur
     compileOnly modrinth('create')
     // Versions embarquées par Create 6.0.10 (META-INF/jarjar/metadata.json)

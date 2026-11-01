@@ -1,0 +1,104 @@
+{
+  "logging": {
+    "enableModUpdateChatMessage": false,
+    "registerCommands": false
+  },
+  "enhancedSounds": {
+    "enableEnhancedSounds": false
+  },
+  "soundOptions": {
+    "replaceThunderSounds": false,
+    "allowScarySounds": false,
+    "displayToastMessagesForMusic": false,
+    "remapSounds": false,
+    "enableBackgroundThunder": false,
+    "enableBiomeSounds": false
+  },
+  "blockEffects": {
+    "steamColumnEnabled": false,
+    "flameJetEnabled": false,
+    "bubbleColumnEnabled": false,
+    "firefliesEnabled": false,
+    "dustJetEnabled": false,
+    "fallingBlockDustEnabled": false,
+    "waterfallsEnabled": false,
+    "enableWaterfallSounds": false,
+    "enableWaterfallParticles": false,
+    "enableMagmaSteam": false,
+    "furnaceIgniteEnabled": false,
+    "enableEnchantTableSounds": false
+  },
+  "entityEffects": {
+    "enableBowPull": false,
+    "enableProjectileBreakSounds": false,
+    "enableBreathEffect": false,
+    "enablePlayerToolbarEffect": false,
+    "enableToolbarBlockSounds": false,
+    "enableSwingEffect": false,
+    "enableBrushStepEffect": false,
+    "enablePlayerHeartbeatSound": false,
+    "enablePlayerHungerSound": false,
+    "enablePlayerJumpSound": false,
+    "enablePlayerLandSound": false,
+    "enableFootstepSounds": false,
+    "enableStopScuffSound": false,
+    "enableSneakFootstepSounds": false,
+    "enableCreatureFootstepSounds": false,
+    "enableCraftingSound": false,
+    "enableFootprints": false,
+    "enableCreatureFootprints": false,
+    "showCritWords": false,
+    "showDamageNumbers": false
+  },
+  "footstepAccents": {
+    "enableAccents": false,
+    "enableArmorAccents": false,
+    "enableWetSurfaceAccents": false,
+    "enableFloorSqueaks": false
+  },
+  "compassAndClockOptions": {
+    "enableClock": false,
+    "enableCompass": false,
+    "enableTreasureDistance": false,
+    "enableLowDurabilityHighlight": false
+  },
+  "fogOptions": {
+    "enableFogEffects": false,
+    "enableMorningFog": false,
+    "enableBiomeFog": false,
+    "enableWeatherFog": false,
+    "enableAfterRainFog": false,
+    "enableBedrockFog": false,
+    "enableElevationHaze": false
+  },
+  "weatherOptions": {
+    "enableGradedPrecipitation": false,
+    "enableWindSounds": false,
+    "enableMaterialRainSounds": false,
+    "enableWaterDrips": true,
+    "enableIcicles": false,
+    "enableFoliageRainDrips": true,
+    "enableMorningDew": true,
+    "enableSnowCover": false,
+    "enableDesertSandstorm": false,
+    "enableNetherDust": false,
+    "enableSkyEvents": false,
+    "enableOvercastSkyEvent": false,
+    "enableClearSkyEvent": false,
+    "enableBiomeFogColor": false,
+    "enableDistantHorizonsIntegration": false
+  },
+  "windOptions": {
+    "enableUnifiedWind": false
+  },
+  "speechBubbles": {
+    "enableSpeechBubbles": false,
+    "enableEntityChat": false
+  },
+  "auroraOptions": {
+    "enableAurora": false
+  },
+  "otherOptions": {
+    "playRandomSoundOnStartup": false
+  }
+}

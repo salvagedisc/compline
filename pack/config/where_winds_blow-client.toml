@@ -4,3 +4,9 @@
 enableFoliageColorVariation = false
 snowFogMode = "DISABLED"
 sandstormFogMode = "DISABLED"
+
+# Effets façon Recrafted (module averse) : les feuillages bougent un peu même par
+# temps calme, plus franchement au passage du joueur et sous le vent.
+clearWeatherSwayStrength = 0.35
+windFoliageSwayStrength = 1.25
+foliageInteractivityStrength = 1.3

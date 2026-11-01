@@ -1,0 +1,50 @@
+package io.github.salvagedisc.fallow.rayons;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.common.NeoForge;
+
+/**
+ * Module rayons (client) : la lumière du soleil dans la brume, sans shader.
+ *
+ * <ul>
+ *   <li>{@link SunShafts} : des rayons qui tombent par les trouées des feuillages, d'autant plus
+ *       visibles que la brume est épaisse.</li>
+ *   <li>{@link Glints} : des éclats de soleil qui scintillent sur l'eau, là où elle renvoie le soleil
+ *       vers l'œil.</li>
+ * </ul>
+ */
+public final class RayonsModule {
+    private RayonsModule() {
+    }
+
+    public static void start(IEventBus modBus) {
+        NeoForge.EVENT_BUS.addListener(RayonsModule::onClientTick);
+        NeoForge.EVENT_BUS.addListener(RayonsModule::onRenderStage);
+    }
+
+    private static void onClientTick(ClientTickEvent.Post event) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null || minecraft.player == null || minecraft.isPaused()) {
+            return;
+        }
+        SunShafts.scan(minecraft.level, minecraft.player.blockPosition());
+        Glints.scan(minecraft.level, minecraft.player.blockPosition());
+    }
+
+    private static void onRenderStage(RenderLevelStageEvent event) {
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_WEATHER) {
+            return;
+        }
+        ClientLevel level = Minecraft.getInstance().level;
+        if (level == null) {
+            return;
+        }
+        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
+        SunShafts.render(level, event.getCamera().getPosition(), partialTick);
+        Glints.render(level, event.getCamera().getPosition(), partialTick);
+    }
+}

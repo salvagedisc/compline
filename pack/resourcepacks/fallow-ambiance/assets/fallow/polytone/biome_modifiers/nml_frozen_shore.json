@@ -2,8 +2,8 @@
   "targets": [
     "nomansland:frozen_shore"
   ],
-  "grass_color": "#99b5a1",
-  "foliage_color": "#57866b",
+  "grass_color": "#9bb59e",
+  "foliage_color": "#5b8665",
   "water_color": "#4966a0",
   "particle": {
     "options": {

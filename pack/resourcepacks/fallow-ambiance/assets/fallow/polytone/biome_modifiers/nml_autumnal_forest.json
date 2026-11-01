@@ -2,7 +2,7 @@
   "targets": [
     "nomansland:autumnal_forest"
   ],
-  "grass_color": "#8f9053",
-  "foliage_color": "#a59553",
+  "grass_color": "#8e9058",
+  "foliage_color": "#a59a5a",
   "water_color": "#4583a6"
 }

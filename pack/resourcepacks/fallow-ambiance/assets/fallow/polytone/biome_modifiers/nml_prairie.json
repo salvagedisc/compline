@@ -2,7 +2,7 @@
   "targets": [
     "nomansland:prairie"
   ],
-  "grass_color": "#b6a959",
-  "foliage_color": "#9fa159",
+  "grass_color": "#b6ae60",
+  "foliage_color": "#9ea15f",
   "water_color": "#4583a6"
 }

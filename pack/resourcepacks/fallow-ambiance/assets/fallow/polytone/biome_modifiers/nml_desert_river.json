@@ -2,8 +2,8 @@
   "targets": [
     "nomansland:desert_river"
   ],
-  "grass_color": "#9fb575",
-  "foliage_color": "#899e37",
+  "grass_color": "#a3b57a",
+  "foliage_color": "#8c9e3f",
   "water_color": "#47a0be",
   "particle": {
     "options": {

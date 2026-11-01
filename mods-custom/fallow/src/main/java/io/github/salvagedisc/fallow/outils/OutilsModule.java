@@ -34,7 +34,7 @@ public final class OutilsModule {
 
     /** Un message toutes les deux secondes au plus, tant que le joueur frappe. */
     private static final long HINT_INTERVAL = 40;
-    private static long lastHint = Long.MIN_VALUE;
+    private static long lastHint = -1000L; // pas MIN_VALUE : now - lastHint déborderait et l'indice ne viendrait jamais
 
     private OutilsModule() {
     }
