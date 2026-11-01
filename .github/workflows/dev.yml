@@ -1,0 +1,62 @@
+name: dev
+
+# Every push to main refreshes two things, so the latest main can be played without asking for an export:
+# - the rolling "dev" pre-release, which holds the .mrpack of the latest main;
+# - while the repository is public, a GitHub Pages copy of pack/, read by packwiz-installer
+#   at each launch of the game (scripts/dev/fallow-update.sh, docs/dev-sync.md).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: dev
+  cancel-in-progress: true
+
+jobs:
+  mrpack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - run: go install github.com/packwiz/packwiz@ef87d964f8cbd52b3b13ea42453ef322290e2b9e
+
+      - name: Export .mrpack
+        working-directory: pack
+        run: |
+          mkdir -p ../dist
+          packwiz mr export -o ../dist/Fallow-dev.mrpack
+
+      - name: Update the dev pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="Latest main: ${GITHUB_SHA::7} ($(git log -1 --format=%cs)). $(git log -1 --format=%s)"
+          gh release delete dev --cleanup-tag --yes || true
+          gh release create dev dist/Fallow-dev.mrpack --target "$GITHUB_SHA" --prerelease --latest=false \
+            --title "Fallow dev (${GITHUB_SHA::7})" --notes "$notes"
+
+  pages:
+    # GitHub Pages of a private repository needs a paid plan: this job waits for the repository to be public
+    # and for Settings → Pages → Source to be set to "GitHub Actions".
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}pack.toml
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pack
+      - id: deploy
+        uses: actions/deploy-pages@v4

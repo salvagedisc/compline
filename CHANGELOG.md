@@ -7,6 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions: `0.x
 No version has been published yet: everything below will make up `0.1.0`.
 
 ### Added
+- `dev` workflow: every push to `main` refreshes the `dev` pre-release (`Fallow-dev.mrpack`) and, once the repository is public, a GitHub Pages copy of `pack/` read at each launch by `scripts/dev/fallow-update.sh` (docs/dev-sync.md).
 - Base pack: No Man's Land, Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
 - Farming: [Let's Do] Farm & Charm (+ Architectury API), Ecliptic Seasons, KaleidoscopeCookery-Automation.
 - Fauna: Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, Critters and Companions.
