@@ -26,6 +26,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
 - [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
+- [ ] Stone, a torch or bread in hand: the item is drawn and the hand stays still (only a light sway); scrolling the hotbar lowers and raises the hand once per change [A1-A3].
 
 ## Session 2: the mist and the clearings
 
@@ -131,7 +132,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
