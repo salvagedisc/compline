@@ -71,8 +71,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Naturalist | `naturalist` | ✅ | CS | Realistic base fauna ([0003](decisions/0003-faune.md)) |
-| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species |
-| Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans |
+| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species; nine creatures with weak animations cut (banana slug, alligator snapping turtle, mungus, triops, sunbird, guster, rocky roller, frilled shark, potoo, [duplicates](plan/doublons.md#creatures-with-weak-animations-2026-10-28)) |
+| Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans; seven near-motionless invertebrates cut (sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish) |
 | Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most |
 | Longwings | `longwings` | ✅ | CS | Butterflies to collect |
 
@@ -80,8 +80,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Critters and Companions | `critters-and-companions` | ✅ | CS | Tameable small fauna |
-| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Peaceful creatures from the mob vote; Iceologer, Illusioner, Wildfire, their structures and the zombie horse trap disabled, fewer Maulers and crabs (`pack/config/friendsandfoes.json`) |
+| Critters and Companions | `critters-and-companions` | ✅ | CS | Tameable small fauna; koi and sea bunny cut (weak animations) |
+| Friends & Foes | `friends-and-foes-forge` | ✅ | CS | Peaceful creatures from the mob vote; Iceologer, Illusioner, Wildfire, their structures and the zombie horse trap disabled, moobloom (vanilla cow model, not animated by Fresh Animations) and glare cut, fewer Maulers and crabs (`pack/config/friendsandfoes.json`) |
 | Adorable Hamster Pets | `adorable-hamster-pets` | ✅ | CS | Hamsters; throwing, item stealing, diamond sniffing and redstone fever disabled |
 | Companion | `companion` | ✅ | CS | Tamed animals no longer get lost |
 | Companions! | `companions-mod` | ✅ | CS | Companions with powers; the Sacred Pontiff guards the oak monument; wild spawns about three times rarer |

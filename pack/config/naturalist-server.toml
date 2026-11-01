@@ -5,7 +5,8 @@
 
 [disable_mobs]
 	[disable_mobs.aquatic_mobs]
-		# Grand requin blanc et méduses d'Hybrid Aquatic, étoiles de mer d'Hybrid Aquatic.
+		# Grand requin blanc et méduses d'Hybrid Aquatic ; étoiles de mer coupées partout
+		# (celles d'Hybrid Aquatic aussi, animations trop faibles).
 		great_white_shark_removed = true
 		jellyfish_removed = true
 		starfish_removed = true
