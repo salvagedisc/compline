@@ -92,6 +92,7 @@ dependencies {
     compileOnly modrinth('enhanced-celestials-2-core')
     compileOnly modrinth('data-anchor')   // classes parentes des données lunaires d'Enhanced Celestials
     compileOnly modrinth('corgilib')      // types référencés par l'API d'Enhanced Celestials
+    compileOnly modrinth('no-mans-land')  // la Lune Amie, à dessiner sous ATMOSPHERICS
 
     // Module sac : Traveler's Backpack a quitté le pack (décision 0012), version figée jusqu'au
     // retrait du module en 0.5.0.

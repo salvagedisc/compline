@@ -1,6 +1,6 @@
 // Fallow : objets de No Man's Land retirés du jeu, cachés d'EMI. Mêmes listes que
 // server_scripts/faune_nml.js : objets sans source une fois ses créatures coupées, puis
-// objets retirés (viande de cheval, cuisses de grenouille, explosifs, plats).
+// objets retirés (viande de cheval, cuisses de grenouille, plats).
 RecipeViewerEvents.removeEntriesCompletely('item', event => {
   [
     'nomansland:deer_spawn_egg', 'nomansland:goose_spawn_egg',
@@ -13,8 +13,6 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
 
     'nomansland:raw_horse', 'nomansland:horse_steak',
     'nomansland:frog_leg', 'nomansland:cooked_frog_leg',
-    'nomansland:firebomb', 'nomansland:ink_bomb', 'nomansland:explosive',
-    'nomansland:incendiary_arrow',
     'nomansland:pancake', 'nomansland:maple_tart', 'nomansland:sweet_tart',
     'nomansland:trail_mix', 'nomansland:syruped_pear', 'nomansland:honeyed_apple',
     'nomansland:hardtack'

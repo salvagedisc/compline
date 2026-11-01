@@ -17,7 +17,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] The game is in French, the `fallow-textures`, Fresh Animations, `fallow-interface` and `fallow-ambiance` packs are active [Y1], graphics set to "Fancy" (« Détaillés »), music at 40%.
 - [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module sac ignoré » (bag module skipped: Traveler's Backpack has left the pack), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, S9, X1, H1, F1, D1, L1].
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
-- [ ] The title screen shows the Fallow logo over the misty forest, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
+- [ ] The title screen shows the Fallow logo over Friedrich's mountains, the right way up, with mist flowing slowly through the valleys and never over the sky or the slopes in front, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
 - [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
 - [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from NML pebbles, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
@@ -34,14 +34,20 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
 - [ ] A clearing on a coast: the ocean and the beach keep their biome; a river crossing it becomes clearing [K4]. Note whether a Streams brook stays misty [W10].
-- [ ] Break the fire, leave, come back, restart: the clearing stays [K5].
+- [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
+- [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
+- [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
+- [ ] The new fire (stone brazier, pale flame) and lantern (standing, quartzite crystal), by day and at night: neither looks like a vanilla campfire or lantern [K15].
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
+- [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
+- [ ] **Storms** (preset `fallow_v5`): `/weather rain` then `/weather thunder` in a snowy biome, a desert and a savanna: a white snow cloud, then ochre or golden dust, down to about 10 blocks under thunder; in a forest the grey mist closes in instead of lifting; in a clearing the view stays wide. In clear weather the desert and the savanna have a warm haze, the forest's mist ends around 40 blocks.
 - [ ] Enter and leave the clearing: visibility changes smoothly [H4]. At sunrise and sunset, the colour of the distance follows the sky [H5].
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
-- [ ] Better Clouds clouds pass in front of the distance, with no duplicates [H9]. The colours of the distance follow the seasons [H12].
+- [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
 - [ ] The three recipes (fire, lantern, dissipator) in EMI, with French names and tooltips [K11].
 - [ ] Crops and temperature in a clearing: things grow, the temperature stays that of the old biome [K10].
+- [ ] **Wind and light** (Where Winds Blow, Shine): a No Man's Land forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. A clearing at sunset: halo on the sky and the fires, the mist still around [R3]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: no halo glitch, lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
 ## Session 3: the night and the moon
 
@@ -51,7 +57,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Frames per second at night: no visible difference with the `ciel` (sky) module turned off [C11].
 - [ ] `/ec lunarForecast`: no blood moon [L2].
 - [ ] An alchemist ruin: look at the engraving for 2 s (zoom and sound), sleep within 3 days, see the dream through to the end (advancement « Premier contact » (first contact)) [L3, L4]. Break jars: the crumpled note sometimes drops, in French [L11].
-- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6]. With a forced blue moon, it sets in 2 s with a message [L6].
+- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6, C13]; it did not in the test of 2026-10-28, fixed by `fallow` 0.4.10. The nights after the dream, the moon's shadow points the way over the mist [L4, C14]. With a forced blue moon, it sets in 2 s with a message [L6].
 - [ ] Offerings (bone, flower, empty map, turtle scute), then put out one candle, then all of them: sentences in French, then an angry moon [L8, L9].
 - [ ] A rainy night at the Meeting Point: does the Friendly Moon appear? [L12]
 - [ ] Nights are truly dark (More Darkness), auroras in cold biomes.
@@ -137,6 +143,7 @@ Once the results are in:
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
 | N (quests) | [plan/quetes.md](plan/quetes.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
+| R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | Y (textures) | [plan/fallow-textures.md](plan/fallow-textures.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).

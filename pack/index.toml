@@ -57,6 +57,14 @@ file = "config/fancymenu/assets/fallow_logo.png"
 hash = "ea2661355472462737f397399c6e430205487b49691f774a9a7b4be83a890773"
 
 [[files]]
+file = "config/fancymenu/assets/fallow_title_mist_mask.png"
+hash = "bc465430412473288717978cece41b13720b920dd0343b45ad5c93f96bbd1688"
+
+[[files]]
+file = "config/fancymenu/assets/fallow_title_painting.jpg"
+hash = "a100d5ab9cebf5cd2648dd015911a3a8aafbc9a76c80abe07adf6eaa534984fc"
+
+[[files]]
 file = "config/fancymenu/assets/fallow_veil.png"
 hash = "571cd6eba2cac8d8dc6b2ed0df878c5b97bb7064c7a4a3d0caa88ad6adc43a5a"
 
@@ -70,7 +78,7 @@ hash = "34d7c618f924a626c8c6e3a52c79f37a9c8036a3f02c6d87c8a14d25f56492ff"
 
 [[files]]
 file = "config/fancymenu/customization/fallow_title_screen.txt"
-hash = "1ecbe66e6835fc59baa8df9277ecec9432a4d9bd41b31f89672a354e80ac22f0"
+hash = "6c152329ca46e462d58b96351b55de6becb0573263d66816caa4ab9b5d20d687"
 
 [[files]]
 file = "config/fancymenu/options.txt"
@@ -174,15 +182,15 @@ hash = "a4c940298b7b336140d8c4f416f777197a9c4d2dcbd3fb7ada879123980e7609"
 
 [[files]]
 file = "config/questlog/quests/brume_dissipateur.json"
-hash = "e10b5d066cc3eba53e40ebf989da539b8db130702bef07e68bcd0ae908b94394"
+hash = "15d6dea0b2ee19fc24a320e4403b286aa8e5cc39468ca7937e344c8384e3d545"
 
 [[files]]
 file = "config/questlog/quests/brume_feu.json"
-hash = "3f85df76a52b0f3730337da933314464150591a39ff7820a1dd8eeccec7a5201"
+hash = "0b7be9e60c4df366143d50a7ec8c79a76615fdfc3452589e81de1c4ad81779ea"
 
 [[files]]
 file = "config/questlog/quests/brume_lanterne.json"
-hash = "e4cdcc4a942f90ce865ab62a6127951890958b88b23dbb815f33100c2336af23"
+hash = "bf5b7050727e40291fe140d7f73aa04b6f27bf69c6cc20e028d17738c46bcd9d"
 
 [[files]]
 file = "config/questlog/quests/gestes_feu.json"
@@ -287,6 +295,10 @@ hash = "9f4f0ec0670f77190501a9c1299f1aa657fb88ea7ef0c6ac82efb2ef117e6b2e"
 [[files]]
 file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
+
+[[files]]
+file = "config/where_winds_blow-client.toml"
+hash = "cf96866c7be227a9587e889d5a237cb6646eda81f993b9ea858904940932b3c0"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -729,10 +741,6 @@ file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
 hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
 
 [[files]]
-file = "kubejs/assets/betterclouds/lang/fr_fr.json"
-hash = "43390bde42dc4468bb701bebcab62da998f020ee36368c9fe29bb4dc230e95dd"
-
-[[files]]
 file = "kubejs/assets/biolith/lang/fr_fr.json"
 hash = "a8fdd83135e21e03a404903c2acd8e7ca4016211cee2cb2fc0d6664eee0be9d2"
 
@@ -1117,6 +1125,10 @@ file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
 hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
 
 [[files]]
+file = "kubejs/assets/shine/lang/fr_fr.json"
+hash = "282dd7d2ee3658f7f8391d2d5e235e7caa483409c276112c57875f5d220a4b1b"
+
+[[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
 hash = "a0f1f99a00251a48e6369b270e6caa528c82afaee9db62eb614fb67100bfb71f"
 
@@ -1173,6 +1185,10 @@ file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
+file = "kubejs/assets/toucanlib/lang/fr_fr.json"
+hash = "22871eeffc9a151fae66eacfbb576e0d50dd73ee19274ca616ce732d0e74a69b"
+
+[[files]]
 file = "kubejs/assets/treechop/lang/fr_fr.json"
 hash = "3232139133528c6891edbdbdb37f0c0b9c2cb2870b0cac293de61bc00e1aab2c"
 
@@ -1201,6 +1217,10 @@ file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
 
 [[files]]
+file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
+hash = "97d736253a37ed54114047a0ca1d4ff9d16998ec05dbbffcf27d398b699c7349"
+
+[[files]]
 file = "kubejs/assets/whitenoise/lang/fr_fr.json"
 hash = "7f3040fb17a7e8ad80e59920d5399da65e36a21b3d088f0b6e0495cad4f8114d"
 
@@ -1222,7 +1242,7 @@ hash = "62ccd6efb5c55077daf9f1dcd6f72d5780c2a2b758ff9aecad72d03a522f73a2"
 
 [[files]]
 file = "kubejs/client_scripts/faune_nml.js"
-hash = "1c5c77ce872c160a57bab49bab3685e89735eb9a817bd37643e472e07d9d4f4f"
+hash = "7bcf8e0cc0a5c40fd96c7d23c372165dbbafbcf071e5021da9d2e1f66bd38e99"
 
 [[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
@@ -1553,10 +1573,6 @@ file = "kubejs/data/minecraft/tags/worldgen/biome/has_structure/stronghold.json"
 hash = "cee09dec79eaf898a5ecbf50767dd2b9b1f258be79f2a44406b694f555022cd2"
 
 [[files]]
-file = "kubejs/data/nomansland/advancement/main/explode_ore.json"
-hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
-
-[[files]]
 file = "kubejs/data/nomansland/mixed_litter/variant_groups/bee.json"
 hash = "734f317c3b200a57c2b43bf4a759ad9a5c88126f90d62658448417302cabd601"
 
@@ -1678,7 +1694,7 @@ hash = "e8b047b64292dcf74ccd599c6108bcb1b3869dfbd73b57e4f83bddabd53b9d41"
 
 [[files]]
 file = "kubejs/server_scripts/faune_nml.js"
-hash = "ff4b14a30aff484a4a7b4a7deca267c5efee43b0ab8a52f79a2047d3ed2ec855"
+hash = "bdab56fafe3ea22e1edfebffb7d76ac681f6fe7f332357ea1445d68682bb3041"
 
 [[files]]
 file = "kubejs/server_scripts/lune.js"
@@ -1807,11 +1823,6 @@ metafile = true
 [[files]]
 file = "mods/better-advanced-tooltips.pw.toml"
 hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
-metafile = true
-
-[[files]]
-file = "mods/better-clouds.pw.toml"
-hash = "ff68a3c161324e02415d4f2b6806a3b3ebef9ea1c8fff6925ce65e6b8b9d1417"
 metafile = true
 
 [[files]]
@@ -2020,8 +2031,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.4.9.jar"
-hash = "0125ad417ce9c9508207ac30d01225578ecd4a6b4c5af917bd06b6b68b2d91bc"
+file = "mods/fallow-0.4.12.jar"
+hash = "27ac6219b67e38fc040dcf3f4b56c063780d5582bfc6fce16dcf0d7c1b6049e5"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
@@ -2354,6 +2365,11 @@ hash = "d68120fbb2e90e41b398c8168b87a8397fbe4b65e6771240f5ae2ef31ee2d5a6"
 metafile = true
 
 [[files]]
+file = "mods/shine.pw.toml"
+hash = "b00883c0832dc19b262dcd48e888e1834725139b64ce76cf1725f255d7c75b0a"
+metafile = true
+
+[[files]]
 file = "mods/shoulder-surfing-reloaded.pw.toml"
 hash = "bcce409dc3bd3c765d92538e192563b4baf345a843acb5fb9c90fce4ebccdf58"
 metafile = true
@@ -2439,6 +2455,11 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
+file = "mods/toucan.pw.toml"
+hash = "621ed3fadbf439318744d8fc324fee13ce44e18ffbc24c56338ea259e5ff5abb"
+metafile = true
+
+[[files]]
 file = "mods/treechop.pw.toml"
 hash = "da1c1cf28e8d5ffe377998d29d59eae29a2020f2de7a0aea7f7253acdc695cfd"
 metafile = true
@@ -2461,6 +2482,11 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
+metafile = true
+
+[[files]]
+file = "mods/where-winds-blow.pw.toml"
+hash = "3076b4a06b0da48e20b4698adc0f0d786a98f699955d929c49a2830cc3ceb9db"
 metafile = true
 
 [[files]]
@@ -2488,8 +2514,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v3.json"
-hash = "dfd9f16edf2db96bd9785ec17badada38f61120d308336f8143430067c5984ba"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v5.json"
+hash = "579c51abf83cd91283d20fd1dbcc3d48d8c264cbdbb6932f3b40c5966c26b528"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
@@ -2642,10 +2668,6 @@ hash = "2ab2e0cfd90fa19be532b6410f60c9a926e92943e84852a5765b54bfc6f5842d"
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.ogg"
 hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
-
-[[files]]
-file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/moon_phases.png"
-hash = "3c2c019418285ea52bc74666acc600d8577351cb89a1192ec3416a8dbfbc19e1"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"
