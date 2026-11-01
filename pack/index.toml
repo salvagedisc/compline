@@ -49,6 +49,10 @@ file = "config/defaultoptions/options.txt"
 hash = "90e4475dd55830d818d487e39094c01af1c31a085209694ba24457cb27bcf616"
 
 [[files]]
+file = "config/dsrebirth/dsrebirth.json"
+hash = "5d65d2e4dbebbd4968a95365fe49b6961b46a271ef6ae173b94c7c2e592fcf76"
+
+[[files]]
 file = "config/eclipticseasons-common.toml"
 hash = "014e1994ef9a7a3c15db1c8a7f27b5c1cedc130c99c7599b19b34f1368c40039"
 
@@ -139,6 +143,10 @@ hash = "4cc0342b40171b2006ef7d80ff03b1053cbe617820e736922abf6a0dc562bad5"
 [[files]]
 file = "config/overgeared-common.toml"
 hash = "04b592420e4005f5fc02a161297fb8833455381253b4253fef00e485c63f5e10"
+
+[[files]]
+file = "config/particular-common.toml"
+hash = "8128bdbedbebfac72a80ed44c47884218f59ce59d178558137e9e326f19c033b"
 
 [[files]]
 file = "config/quark-common.toml"
@@ -322,7 +330,7 @@ hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
 file = "config/where_winds_blow-client.toml"
-hash = "cf96866c7be227a9587e889d5a237cb6646eda81f993b9ea858904940932b3c0"
+hash = "fbb773c771efc8bdf5843b030144025b3281880a936a392f8d448cb99c6b28ff"
 
 [[files]]
 file = "config/where_winds_blow-common.toml"
@@ -749,6 +757,10 @@ file = "kubejs/assets/apollib/lang/fr_fr.json"
 hash = "8ce63bf51348702706179e292aa7141e00953dc93049cc45ccdd551df637050d"
 
 [[files]]
+file = "kubejs/assets/atmophericrain/lang/fr_fr.json"
+hash = "2c51fe893b80a76956602666817fcbab0d6fcf8cac699a21a44b2fb9e47748cc"
+
+[[files]]
 file = "kubejs/assets/atmospherics/lang/fr_fr.json"
 hash = "8f5ef6c0102d32b262070959a8331d77f95b8d394ba893690da53ceea9dc9d27"
 
@@ -813,6 +825,10 @@ file = "kubejs/assets/controlling/lang/fr_fr.json"
 hash = "d516172c328be7fd7b025934e4aa08948afbf5f3489a059a211a272e1aad4e15"
 
 [[files]]
+file = "kubejs/assets/coolrain/lang/fr_fr.json"
+hash = "d57298002efcacf6bf3d3de141b9af48bbf398fc17006f0af7d7bd542f89333c"
+
+[[files]]
 file = "kubejs/assets/create/lang/fr_fr.json"
 hash = "b5943a8d788c14a0a4ba8cebf1f42fec66d03f150ca07415939026128a1e99f4"
 
@@ -843,6 +859,10 @@ hash = "15306e269324328ca774459385fe69208bed01f4b094d0f2e7c9238612a6e4a0"
 [[files]]
 file = "kubejs/assets/drippyloadingscreen/lang/fr_fr.json"
 hash = "8d46b1c383637ad621d243c4108efceedc904e68f13afb39861d063557d926d3"
+
+[[files]]
+file = "kubejs/assets/dsrebirth/lang/fr_fr.json"
+hash = "f5fa3fbf4d7aa1601fee80d9a8d38b9a322377c00e95c4a4945c27fa20f92a92"
 
 [[files]]
 file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
@@ -1235,6 +1255,10 @@ hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 [[files]]
 file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
+
+[[files]]
+file = "kubejs/assets/wavify/lang/fr_fr.json"
+hash = "2a97fc73da273c449d5eba21006aebef0381857ec8ff2ef4b9284705d43b7ab4"
 
 [[files]]
 file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
@@ -1992,6 +2016,11 @@ hash = "187eafde5974beee1263538b462b7b8fe2fc8948c5d413980d9796d55928580b"
 metafile = true
 
 [[files]]
+file = "mods/atmospheric-rain-backport.pw.toml"
+hash = "37845e3216ef522676430ac436cc189ec938fd23f1940de08929929a465ae065"
+metafile = true
+
+[[files]]
 file = "mods/atmospherics.pw.toml"
 hash = "f12b246fef3275920f5fb335c3c592ac9406f6ee7c3ab2b38f430dafadd461f5"
 metafile = true
@@ -2092,6 +2121,11 @@ hash = "65c8086d2ec3d39acc7bd36c7a0306ccc43b602b38fa07d13291bc478ef7dfff"
 metafile = true
 
 [[files]]
+file = "mods/cool-rain-reforged.pw.toml"
+hash = "0c4f4642cbf2d8e1d97b624c44fd87f2e6c60894598af68e8244e5e2722b47a7"
+metafile = true
+
+[[files]]
 file = "mods/corgilib.pw.toml"
 hash = "9ae835550d113663b527b6ba934dd7d758d8e0a93c68bb44d84eb1ef1be69159"
 metafile = true
@@ -2147,6 +2181,11 @@ hash = "a6967d761dde867ccc1af53dc9f4e530eb9917a9cb21d0fc15708e8cd2c0f2ba"
 metafile = true
 
 [[files]]
+file = "mods/distant-thunders.pw.toml"
+hash = "c4f8d0e902db9829218ce8367705350418d8a5a35a9feeaf443612a9e0b5d3ee"
+metafile = true
+
+[[files]]
 file = "mods/distanthorizons.pw.toml"
 hash = "0c20fea3407ed0db85b4b171f1820a24987f2659946fadd30bae044205041b09"
 metafile = true
@@ -2159,6 +2198,11 @@ metafile = true
 [[files]]
 file = "mods/dynamic-fps.pw.toml"
 hash = "ae6fd52d8bdcbeca5bbe6db840f22f92c1928fe0fda22017b19612b9b00a245a"
+metafile = true
+
+[[files]]
+file = "mods/dynamic-surroundings-rebirth-by-uawiegrfv.pw.toml"
+hash = "f823115ddd7e9c51e9f7737219f113489e86f2a99e71285af20eb90b2cf71269"
 metafile = true
 
 [[files]]
@@ -2212,8 +2256,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.5.0.jar"
-hash = "0b51bdc34164338e293071ec8f794ee0a1d54c7983af65addeed5964081f83f7"
+file = "mods/fallow-0.6.0.jar"
+hash = "e78351242a690c30da0b856d91e0227202cf9b98381f1dcf748bb0c8e1111103"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
@@ -2526,6 +2570,11 @@ hash = "e55ca32b338a0e0540f4fec5170675d860566255ae0f45692a00cb4ebf2eb535"
 metafile = true
 
 [[files]]
+file = "mods/sable-cool-rain.pw.toml"
+hash = "d83497f150d4938933f135fe1b79fd34bae71b2c4e9698c41b8177537d1cef3f"
+metafile = true
+
+[[files]]
 file = "mods/sable.pw.toml"
 hash = "fadb5c9cfe145e51992894fe57209fc8f1696ef892ee9702a24c6205f042e9b2"
 metafile = true
@@ -2563,6 +2612,11 @@ metafile = true
 [[files]]
 file = "mods/smooth-swapping.pw.toml"
 hash = "c29444a15935e622aaf6a8849cbed78095c1f9328315383a382859b3872d97ee"
+metafile = true
+
+[[files]]
+file = "mods/snow-imprints.pw.toml"
+hash = "5e263b6eedad21a622e270bb63255fc79bad7158f203fd023e6498d38ff979cd"
 metafile = true
 
 [[files]]
@@ -2666,6 +2720,11 @@ hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
 metafile = true
 
 [[files]]
+file = "mods/wavify.pw.toml"
+hash = "d037a9ffc54ce7247670d09dad85c342db8d78b7df05688700a7854eda750bd0"
+metafile = true
+
+[[files]]
 file = "mods/where-winds-blow.pw.toml"
 hash = "3076b4a06b0da48e20b4698adc0f0d786a98f699955d929c49a2830cc3ceb9db"
 metafile = true
@@ -2712,83 +2771,83 @@ hash = "ad14723a512552eb530178fff7aeb9fc5e3acbe2d48a10b1bee23840a72762d1"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_autumnal_forest.json"
-hash = "658ace2ad3cba6f8a831fd66b3fcf4869b17b22e466bfd5ab4a3bedb45821c16"
+hash = "6965dd558a093d4f1756f00a2aa739471dc691085f438b25d9ded50da67ec57f"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_bayou.json"
-hash = "07f654829dcd2d58b1c06a1b5924fc3a307f5ce2393365e135178e86215303a5"
+hash = "2cdc12e597a443be385f08827e11ba5db74c839df4ed83002aa9bfaaea89a4ac"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_blackwater_river.json"
-hash = "a064695502923e087537a1023e55d4b5e9926e26d69d1c7f4bd26251a499297f"
+hash = "ee12501467ea234e4834e978baf609e2b7855e59153f02ef5f4a3644fc03b2d4"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_bog.json"
-hash = "9dc7b9f2e4eed27c6c18eccfd282b7ec5b819217291f9cdde6e91788591c201f"
+hash = "4a290fad78c28f9f94fdfc0ccf8ce94db79a9315aa02ba9fe8269cbd9e19ae6d"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_boreal_forest.json"
-hash = "9a592a26b6dc615bac5f1ec23763ad50559da63186d8a36ea0e4f8d88d908e24"
+hash = "6e5167ac26fab77e5cdf6f5d8f349e3fd42acca8580cf56afce4f44215f5f010"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_dark_swamp.json"
-hash = "97327faa309b2aca46920badb339c9791fd3141dc48d7700c80ead8f4de778f0"
+hash = "96f5d7b8e08337e62a4b1be1590094b90cac9c633cd66cdd359f0e56109bb745"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_dark_taiga.json"
-hash = "c3776c2aab53d4d02380de9648f4e6d3c238b067ac879bf703c07627f8dacd0e"
+hash = "4ddf1d5a5c35c5ee1ef547cc623f89c68a6bf49d3da13db2be2ce4d1de76c04e"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_desert_river.json"
-hash = "c7745e24dee134bc1d5e050dc2a574bf54db728c4f2ea016fc04cd8373ae63af"
+hash = "4724e7cf893335e3e1f9d9428a093975eb14e75ba0b440e93891afaaab53db86"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_shore.json"
-hash = "0b86360567fc00d67f91a248727a6f6a3bfc94d1c5af72acc4e9a6f4abd25921"
+hash = "f15fcf00e1609a95d3c9eb916ad4217788f165f0e0488b503128aced9eb4757a"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_frozen_woods.json"
-hash = "5b20afc640fe2865624e4df7405af66b553d91e8c0cf99705b4a6f55d99ebe72"
+hash = "1259bec3f4baba94158cec5d45b4f811599e7a70cc461e399f35bf9bddf2426d"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lavender_field.json"
-hash = "8df69f2a28ee9bda4ee3ff4ee3dac7767103a431fc6326ea88f9f902bf74c226"
+hash = "2cbd4eb61fb396da6156e3e9d2dad80bac69be7c70ca2ad1440d72665b517293"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_lush_river.json"
-hash = "d86dc01e86f051d645c273480a594cad881afc3b1ef6b3337f0744463c9b89ef"
+hash = "04608ef5b29bd738daa46bdee0cd21866d7283ca8e473ba1abb57aa5c6144a95"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_forest.json"
-hash = "0c6490e0a0f456836327a68d8126b224a9a66f501523355504978b86c95e86a9"
+hash = "fca9c72674ccb7fcf67c8266198b5271e4c70f30a1a8fd17e462c657172e3a1b"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_maple_grove.json"
-hash = "acee6d0c8942611b47ca0f3b38d1f85f27287d8140182877fa779b0e4dcc6e25"
+hash = "47f5e588790d7384f56ed9f1e5de3ebb3144a850f9f44f86f84a9c0a0f711f9a"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_mud_beach.json"
-hash = "96dc3ae509d1f612e85a438c0b71bc36f1f69668101925f33ec0de610aeb5387"
+hash = "28bad7abe8d2a4fd5981959c05079d3006ca961c239c4b3fac383a604d4764ae"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest.json"
-hash = "029c4de24eb815d9de8ea63fabaf56a14e917824169a1b3f56b49643d735e7ea"
+hash = "f0d89d1eac37f7a51bd61a00893e05459d888d5f3ee1374b5252e4633114d152"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest_clearing.json"
-hash = "b755f6cb16275c4660338eb681b1efe4c3b5386efbdd4cccf13d0ef57abb56c3"
+hash = "8705c45f291208606eaf15ecadfa263833f97954b5fabf1df8f2dc5eeb2a81ff"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_old_growth_forest_edge.json"
-hash = "2fcf1922a1c68c54ef38decdcaa905b633bc2f692141bffa7b416991a6eaa644"
+hash = "c5e8582de3c8f96e11955d94238c20815d5751e5e6aea8c7526905039cb994c6"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_prairie.json"
-hash = "7bcb43ab300a05e107ef72b9bd3e972affc029ea55e6b215cbaf371e944a5a3b"
+hash = "2584a3dc56211582ae9e49f0dafad2ad4b5f5c20fdf190976b3bfaa109ca1134"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/nml_tropical_beach.json"
-hash = "30f05f07a5fe11bfbc08ed077051936c92c6654b81922b04a4bd0868f389af38"
+hash = "cf3b6e9301d84adb09385ee58a411d193a756eb45eb6f86b0b1522edcc648f83"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/vanilla_neige.json"
@@ -2849,6 +2908,18 @@ hash = "2ab2e0cfd90fa19be532b6410f60c9a926e92943e84852a5765b54bfc6f5842d"
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.ogg"
 hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/colormap/foliage.png"
+hash = "9715fbf159df7b691f7932d676d3d66cd19b8e431feac70ac59b6128dab37883"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/colormap/grass.png"
+hash = "6f6b3496be181cd2cd4dfd97a598783a7769b6451f12de3fc08fdb84a145dc9f"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/rain.png"
+hash = "f56a94d494e7fbd4208f0e5fbfda19ddf0c459fd8984653f31144522d5e5b140"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"

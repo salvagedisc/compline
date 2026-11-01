@@ -27,6 +27,19 @@ public final class FallowConfig {
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
+    private static final ModConfigSpec.BooleanValue AVERSE_ENABLED;
+    private static final ModConfigSpec.BooleanValue AVERSE_RAIN_TINT;
+    private static final ModConfigSpec.BooleanValue AVERSE_CURTAINS;
+    private static final ModConfigSpec.DoubleValue AVERSE_CURTAIN_OPACITY;
+    private static final ModConfigSpec.BooleanValue AVERSE_LIGHTNING;
+    private static final ModConfigSpec.BooleanValue AVERSE_SKY_FLASH;
+    private static final ModConfigSpec.BooleanValue AVERSE_WINDBLOWN_LEAVES;
+    private static final ModConfigSpec.IntValue AVERSE_LEAF_REST_SECONDS;
+    private static final ModConfigSpec.BooleanValue AVERSE_GRASS_BITS;
+    private static final ModConfigSpec.BooleanValue RAYONS_ENABLED;
+    private static final ModConfigSpec.BooleanValue RAYONS_SHAFTS;
+    private static final ModConfigSpec.DoubleValue RAYONS_SHAFT_STRENGTH;
+    private static final ModConfigSpec.BooleanValue RAYONS_GLINTS;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -73,6 +86,56 @@ public final class FallowConfig {
         TITRES_ENABLED = client
                 .comment("Interrupteur du module. Faux : le jeu écrit de nouveau les titres dans les panneaux, à ses places.")
                 .define("enabled", true);
+        client.pop();
+
+        client.comment("Module averse (client) : la pluie, l'orage et le vent dans les feuilles, sans shader.").push("averse");
+        AVERSE_ENABLED = client
+                .comment("Interrupteur du module. Faux : la pluie et l'orage redeviennent ceux de Where Winds Blow et du jeu.")
+                .define("enabled", true);
+        AVERSE_RAIN_TINT = client
+                .comment("Teinter la pluie de Where Winds Blow avec la couleur de la brume, et l'éclairer d'or à contre-jour",
+                        "quand on regarde vers le soleil.")
+                .define("rainTint", true);
+        AVERSE_CURTAINS = client
+                .comment("Rideaux de pluie : des pans de pluie de 14 à 84 blocs autour du joueur, penchés par le vent,",
+                        "qui donnent les averses qu'on voit traverser la vallée. La brume les efface au loin.")
+                .define("curtains", true);
+        AVERSE_CURTAIN_OPACITY = client
+                .comment("Opacité des rideaux de pluie (1 : réglage du pack).")
+                .defineInRange("curtainOpacity", 1.0, 0.0, 2.0);
+        AVERSE_LIGHTNING = client
+                .comment("Dessiner l'éclair de Fallow (trait blanc fin en zigzag, halos, branches) à la place de celui du jeu.")
+                .define("lightning", true);
+        AVERSE_SKY_FLASH = client
+                .comment("À chaque coup de foudre, un bref éclat blanc-bleu sur tout l'écran quand on voit le ciel.")
+                .define("skyFlash", true);
+        AVERSE_WINDBLOWN_LEAVES = client
+                .comment("Les feuilles qui tombent (Particular) suivent le vent de Where Winds Blow ; dans l'orage, le vent",
+                        "en arrache bien plus aux arbres et les emporte à l'horizontale.")
+                .define("windblownLeaves", true);
+        AVERSE_LEAF_REST_SECONDS = client
+                .comment("Secondes qu'une feuille tombée reste posée au sol ou flotte sur l'eau avant de s'effacer",
+                        "(Particular seul : 5).")
+                .defineInRange("leafRestSeconds", 25, 5, 120);
+        AVERSE_GRASS_BITS = client
+                .comment("Brins d'herbe projetés quand on court dans les hautes herbes ; le vent les emporte.")
+                .define("grassBits", true);
+        client.pop();
+
+        client.comment("Module rayons (client) : la lumière du soleil dans la brume, sans shader.").push("rayons");
+        RAYONS_ENABLED = client
+                .comment("Interrupteur du module.")
+                .define("enabled", true);
+        RAYONS_SHAFTS = client
+                .comment("Rayons de soleil qui tombent par les trouées des arbres et au bord des clairières,",
+                        "plus visibles quand la brume est épaisse, absents la nuit et sous la pluie.")
+                .define("shafts", true);
+        RAYONS_SHAFT_STRENGTH = client
+                .comment("Intensité des rayons et des éclats sur l'eau (1 : réglage du pack).")
+                .defineInRange("shaftStrength", 1.0, 0.0, 3.0);
+        RAYONS_GLINTS = client
+                .comment("Éclats du soleil sur l'eau : le chemin de lumière qui scintille entre le soleil et le joueur.")
+                .define("glints", true);
         client.pop();
         CLIENT_SPEC = client.build();
 
@@ -183,6 +246,54 @@ public final class FallowConfig {
 
     public static boolean outilsEnabled() {
         return read(COMMON_SPEC, OUTILS_ENABLED);
+    }
+
+    public static boolean averseEnabled() {
+        return read(CLIENT_SPEC, AVERSE_ENABLED);
+    }
+
+    public static boolean averseRainTint() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_RAIN_TINT);
+    }
+
+    public static boolean averseCurtains() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_CURTAINS);
+    }
+
+    public static double averseCurtainOpacity() {
+        return read(CLIENT_SPEC, AVERSE_CURTAIN_OPACITY);
+    }
+
+    public static boolean averseLightning() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_LIGHTNING);
+    }
+
+    public static boolean averseSkyFlash() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_SKY_FLASH);
+    }
+
+    public static boolean averseWindblownLeaves() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_WINDBLOWN_LEAVES);
+    }
+
+    public static int averseLeafRestTicks() {
+        return read(CLIENT_SPEC, AVERSE_LEAF_REST_SECONDS) * 20;
+    }
+
+    public static boolean averseGrassBits() {
+        return averseEnabled() && read(CLIENT_SPEC, AVERSE_GRASS_BITS);
+    }
+
+    public static boolean rayonsShafts() {
+        return read(CLIENT_SPEC, RAYONS_ENABLED) && read(CLIENT_SPEC, RAYONS_SHAFTS);
+    }
+
+    public static double rayonsShaftStrength() {
+        return read(CLIENT_SPEC, RAYONS_SHAFT_STRENGTH);
+    }
+
+    public static boolean rayonsGlints() {
+        return read(CLIENT_SPEC, RAYONS_ENABLED) && read(CLIENT_SPEC, RAYONS_GLINTS);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
