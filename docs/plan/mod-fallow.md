@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.6.1 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (sunlight) modules, plus a [compatibility fix](#compatibility-fixes) between Punchy! and Sensible Stackables. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.6.2 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (sunlight) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, No Man's Land's inverted bell). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -378,3 +378,13 @@ Known fragile points:
 ## Next modules
 
 Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-fallow.md](modules-fallow.md), with their order of work. The modules of [12.4](12-verification.md#124-the-custom-fallow-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
+
+### No Man's Land: the inverted bell message in English
+
+**Symptom**: placing an inverted bell that is already linked to another one shows "Successfully linked bell" in chat, in English, whatever the game language.
+
+**Cause.** `InvertedBellBlock.setPlacedBy` builds the message with `Component.literal`, a fixed text that no language file can translate.
+
+**Fix.** `compat.InvertedBellMessageMixin` replaces that text with the language key `message.fallow.nomansland.cloche_liee` ("Cloche liée." in French, "Bell linked." in English). The key is resolved on each player's client, so it follows each player's language. Applied only with No Man's Land (`nomansland`).
+
+**Checked** in a development client with No Man's Land 1.6.3: the mixin applies at start-up (it is required, so a missing target would stop the game) and the key reads "Cloche liée." in French.

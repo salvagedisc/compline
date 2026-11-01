@@ -18,5 +18,6 @@
   "message.fallow.outils.pelle": "Il te faut une pelle.",
   "message.fallow.outils.houe": "Il te faut une houe.",
   "message.fallow.outils.outil": "Il te faut un outil.",
-  "message.fallow.outils.trop_faible": "Ton outil n'est pas assez solide."
+  "message.fallow.outils.trop_faible": "Ton outil n'est pas assez solide.",
+  "message.fallow.nomansland.cloche_liee": "Cloche liée."
 }
