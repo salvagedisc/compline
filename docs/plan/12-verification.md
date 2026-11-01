@@ -108,7 +108,7 @@ With Freeze It and Heat It gone, the Ancient Remnants breeze spawners had to be 
 
 - **The blessing waits for victory**: the Elderheart gives nothing without its `Blessing` data. The script removes it on creation, spawns the guardian once when a player approaches, then gives it back on its death (or when the Sculptor leaves after the trial). It then opens the clearing and gives the codex page. It is the same script as the clearing one.
 - **The spawners go out by datapack**: the mod's two processor lists (`monolith`, `monument`) replace the spawner with chiseled tuff.
-- **The guardians stay unique**: the natural spawns of the Wroughtnaut, the Frostmaw and the Sculptor are cut by datapack, otherwise you would come across a Wroughtnaut room about every 15 chunks.
+- **The guardians stay unique**: the natural spawns of the Wroughtnaut, the Frostmaw and the Sculptor are cut by datapack, otherwise you would come across a Wroughtnaut room about every 15 chunks. Applied on 2026-11-01 by the [pack sort](tri-du-pack.md): empty structure sets for the Wroughtnaut chambers and the Frostmaw, the Umvuthana groves cut, the monastery kept, and the boss weapons and armour removed from loot (the guardians give their blessing and nothing else).
 - The Elderheart rooms are narrow: each boss is placed on the ground, outside.
 - **If the maintainer prefers a real fight for the Sculptor**: Bosses of Mass Destruction (1.95 MB), of which only the Obsidilith is kept, a living obsidian monolith; its structures are cut by datapack. Caveat: it places obsidian and its purple atmosphere recalls the End. Legendary Monsters would suit the theme but weighs 44.75 MB for 37 creatures: rejected.
 

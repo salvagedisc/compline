@@ -27,7 +27,7 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 - [ ] Run the [in-game tests](tests-en-jeu.md) and fix what breaks.
 - [ ] Compare `pack/config/quark-common.toml` with the config generated on first launch (the keys were inferred from the Quark 4.1 classes, [decision 0005](decisions/0005-quark.md)).
 - [ ] Turn `[Unreleased]` in the changelog into `[0.1.0]` and place the tag.
-- [ ] Pregenerate the permanent world once the terrain tests (W) pass, with `/dh pregen` rather than Chunky (Chunky leaves holes in the far view; to confirm with H11).
+- [ ] Pregenerate the permanent world once the terrain tests (W) pass, with `/dh pregen` rather than Chunky (Chunky leaves holes in the far view; to confirm with H11), then remove Chunky from the pack ([pack sort](plan/tri-du-pack.md)).
 
 ## Updates held until the in-game tests
 

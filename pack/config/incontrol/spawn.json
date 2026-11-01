@@ -43,7 +43,7 @@
   },
   {
     "mob": [
-      "alexsmobs:cave_centipede",
+      "alexsmobs:centipede_head",
       "alexsmobs:rocky_roller",
       "alexsmobs:guster"
     ],
@@ -52,7 +52,7 @@
   },
   {
     "mob": [
-      "alexsmobs:cave_centipede",
+      "alexsmobs:centipede_head",
       "alexsmobs:rocky_roller",
       "alexsmobs:guster"
     ],
@@ -60,6 +60,42 @@
       "amount": 3,
       "perplayer": true,
       "hostile": true
+    },
+    "result": "deny"
+  },
+  {
+    "mob": "naturalist:lion",
+    "mincount": {
+      "amount": 2,
+      "mob": "naturalist:lion",
+      "perplayer": true
+    },
+    "result": "deny"
+  },
+  {
+    "mob": "naturalist:tiger",
+    "mincount": {
+      "amount": 2,
+      "mob": "naturalist:tiger",
+      "perplayer": true
+    },
+    "result": "deny"
+  },
+  {
+    "mob": "naturalist:bear",
+    "mincount": {
+      "amount": 2,
+      "mob": "naturalist:bear",
+      "perplayer": true
+    },
+    "result": "deny"
+  },
+  {
+    "mob": "naturalist:black_bear",
+    "mincount": {
+      "amount": 2,
+      "mob": "naturalist:black_bear",
+      "perplayer": true
     },
     "result": "deny"
   },

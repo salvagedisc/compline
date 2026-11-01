@@ -9,3 +9,7 @@
 	experience_color = 0
 	#Amount of experience awarded per printed chromatic Photograph (when all three channels have been printed). Default: 5
 	experience_chromatic = 0
+
+[capture]
+	#Fallow : pas d'images venues de fichiers ou d'Internet ; le projecteur interplanaire est retiré. Default: true
+	projecting_enabled = false

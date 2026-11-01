@@ -1,0 +1,11 @@
+# Fallow : Amendments sans crânes de monstres ni boules de feu lancées à la main.
+# Fichier partiel : les options absentes gardent leur valeur par défaut.
+[fireball]
+	#Pas de charge du dragon : l'End est fermé
+	dragon_charge = false
+	fire_charges_throwable = false
+
+[mob_head]
+	#Plus de squelettes ni de monstres vanilla : pas de piles de crânes
+	skull_piles = false
+	skull_candles = false

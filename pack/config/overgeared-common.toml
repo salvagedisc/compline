@@ -1,0 +1,4 @@
+# Fallow : Overgeared sans la recette du souffle du dragon (l'End est fermé).
+# Fichier partiel : les options absentes gardent leur valeur par défaut.
+["Arrow Fletching Settings"]
+	enableDragonBreathRecipe = false

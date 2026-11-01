@@ -1,0 +1,44 @@
+{
+  "levels": {
+    "1": [
+      {
+        "item_cost": {
+          "item": "minecraft:string",
+          "count": 8
+        }
+      }
+    ],
+    "2": [
+      {
+        "item_cost": {
+          "item": "minecraft:poisonous_potato",
+          "count": 8
+        }
+      }
+    ],
+    "3": [
+      {
+        "item_cost": {
+          "item": "minecraft:honey_bottle",
+          "count": 8
+        }
+      }
+    ],
+    "4": [
+      {
+        "item_cost": {
+          "item": "minecraft:honeycomb",
+          "count": 8
+        }
+      }
+    ],
+    "5": [
+      {
+        "item_cost": {
+          "item": "minecraft:honey_block",
+          "count": 8
+        }
+      }
+    ]
+  }
+}

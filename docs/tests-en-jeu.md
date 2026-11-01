@@ -24,6 +24,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
+- [ ] **Pack sort**: no Chipped, Beautify! or Twigs table in EMI, Steam 'n' Rails reduced to a few tracks and plain locometal, Every Compat without Quark or Ghost woods; no food values in tooltips [TR1, TR2, TR9].
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
 - [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
 
@@ -75,6 +76,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
 - [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
+- [ ] **Pack sort, recipes**: mincer refuses ores, stone and logs; Immersive Enchanting costs without Nether items; 3 flax for 2 ropes, rope arrow of 8, pulley with a cogwheel, kitchen knives through the forge; Farm & Charm crops follow the seasons [TR4 to TR7].
 
 ## Session 5: wildlife tour
 
@@ -84,6 +86,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] No deer, goose, bass or NML turtle, no rabbit, no Frienderman (`/summon nomansland:frienderman` disappears) [F3, F6, F10].
 - [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
+- [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 
 ## Session 6: terrain, Create and airships
 
@@ -104,6 +107,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Enough alchemist ruins to find an engraving without searching for hours [L14].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
+- [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
 
 ## Session 8: multiplayer server (with a friend)
 
@@ -145,5 +149,6 @@ Once the results are in:
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | Y (textures) | [plan/fallow-textures.md](plan/fallow-textures.md#in-game-tests) |
+| TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
