@@ -21,19 +21,19 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Les rideaux de pluie : des anneaux de grands pans de pluie autour du joueur, de 14 à 84 blocs, là où
- * Where Winds Blow (rayon de 10 blocs) ne dessine plus rien. Ils penchent avec le vent, défilent vers
- * le bas et prennent la couleur de la brume ; le brouillard du shader les efface au loin, si bien
+ * Les rideaux de pluie : des anneaux de grands pans de pluie autour du joueur, de 24 à 84 blocs,
+ * bien au-delà de la pluie de Where Winds Blow (rayon de 10 blocs), et légers : ils ne doivent pas
+ * boucher la vue. Ils penchent avec le vent, défilent vers le bas et prennent la couleur de la brume ; le brouillard du shader les efface au loin, si bien
  * qu'on les voit surtout là où la brume se lève, comme une averse qui traverse la vallée.
  *
  * <p>La hauteur du sol et la pluie de chaque pan sont relues quand le joueur a bougé de deux blocs ou
- * toutes les secondes ; le dessin coûte environ 200 quads par image.
+ * toutes les secondes ; le dessin coûte environ 180 quads par image.
  */
 public final class RainCurtains {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Fallow.MOD_ID, "textures/environment/rain_curtain.png");
-    private static final float[] RADII = {14.0F, 20.0F, 28.0F, 40.0F, 58.0F, 84.0F};
+    private static final float[] RADII = {24.0F, 34.0F, 48.0F, 64.0F, 84.0F};
     /** Opacité de chaque anneau : les proches restent légers, les lointains s'épaississent avant que la brume les prenne. */
-    private static final float[] WEIGHT = {0.35F, 0.5F, 0.65F, 0.8F, 0.9F, 1.0F};
+    private static final float[] WEIGHT = {0.4F, 0.6F, 0.8F, 0.9F, 1.0F};
     private static final int SEGMENTS = 36;
 
     /** Sol (y) de chaque pan, ou {@link Integer#MIN_VALUE} s'il n'y pleut pas. */
@@ -66,7 +66,7 @@ public final class RainCurtains {
         float r = Mth.lerp(0.7F, fog[0], 0.92F);
         float g = Mth.lerp(0.7F, fog[1], 0.94F);
         float b = Mth.lerp(0.7F, fog[2], 0.96F);
-        float strength = rain * (0.45F + 0.3F * thunder) * (float) FallowConfig.averseCurtainOpacity();
+        float strength = rain * (0.2F + 0.15F * thunder) * (float) FallowConfig.averseCurtainOpacity();
         float time = (level.getGameTime() % 24000L) + partialTick;
         float scroll = -(time * (0.09F + thunder * 0.04F)) % 1.0F;
 

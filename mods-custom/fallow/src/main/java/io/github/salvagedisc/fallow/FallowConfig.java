@@ -93,11 +93,11 @@ public final class FallowConfig {
                 .comment("Interrupteur du module. Faux : la pluie et l'orage redeviennent ceux de Where Winds Blow et du jeu.")
                 .define("enabled", true);
         AVERSE_RAIN_TINT = client
-                .comment("Teinter la pluie de Where Winds Blow avec la couleur de la brume, et l'éclairer d'or à contre-jour",
-                        "quand on regarde vers le soleil.")
+                .comment("Teinter la pluie de Where Winds Blow d'un gris clair pris dans la brume, un peu plus transparente",
+                        "que celle du jeu.")
                 .define("rainTint", true);
         AVERSE_CURTAINS = client
-                .comment("Rideaux de pluie : des pans de pluie de 14 à 84 blocs autour du joueur, penchés par le vent,",
+                .comment("Rideaux de pluie : des pans de pluie légers de 24 à 84 blocs autour du joueur, penchés par le vent,",
                         "qui donnent les averses qu'on voit traverser la vallée. La brume les efface au loin.")
                 .define("curtains", true);
         AVERSE_CURTAIN_OPACITY = client

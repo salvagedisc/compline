@@ -176,7 +176,7 @@ Contraption Lights' coloured light stays off (its default value): Polytone alone
 
 Part of [0017](../decisions/0017-averse-et-rayons.md), the answer to Recrafted's rain and colours.
 
-**Rain drop.** Where Winds Blow draws the vanilla `textures/environment/rain.png`, slanted by the wind. `scripts/ambiance/weather.py` (Pillow, deterministic) draws a new one: 64 × 256, nine thin streaks of one pixel, 26 to 64 pixels long, pale grey-white, brightest toward the falling end, plus six faint ones for depth. The `averse` module of the `fallow` mod then tints them with the mist colour and lights them gold against the sun. The same script draws the module's textures (rain curtain, sun shaft, glint on water).
+**Rain drop.** Where Winds Blow draws the vanilla `textures/environment/rain.png`, slanted by the wind. `scripts/ambiance/weather.py` (Pillow, deterministic) draws a new one: 64 × 256, seven thin streaks of one pixel, 18 to 40 pixels long, pale grey-white, brightest toward the falling end, plus four faint ones for depth (sparse on purpose: Where Winds Blow stacks the texture in several layers). The `averse` module of the `fallow` mod then tints them with the mist colour. The same script draws the module's textures (rain curtain, sun shaft, glint on water).
 
 **Greens.**
 - Vanilla biomes: `scripts/ambiance/palette.py` reads the game's grass and foliage colour maps from the NeoForge client resources jar and pulls each entry a quarter of the way toward olive (hue 68°), saturation × 0.85, brightness × 0.96. The map still varies with temperature and humidity; Ecliptic Seasons' seasonal tint applies on top.
