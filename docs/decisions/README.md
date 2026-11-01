@@ -19,6 +19,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `fallow` mod and Overgeared's knapping; no new mod |
 | [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
 | [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `fallow-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
+| [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars |
 
 ## Template
 

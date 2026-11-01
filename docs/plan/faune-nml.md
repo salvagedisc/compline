@@ -21,10 +21,7 @@ Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with 
 | Bass (bar à serpe) | `…/biome_modifier/spawns/add_spawns_to_swamps.json` | only the cod remains |
 | Frienderman | `pack/kubejs/server_scripts/faune_nml.js` | `EntityEvents.spawned` cancelled: the enderman it replaces is already cancelled by NML, so nothing is left |
 | 15 items with no source | `faune_nml.js` (server and client) | recipes removed, items hidden from EMI; creative mode remains an admin tool |
-| Wildex | `pack/config/wildex/wildex-common.toml` | `[wildexList] excludedModIds`: the five creatures and the rabbit, absent from the interface, the discoveries and the completion rate |
-| 15 items removed (batch B) | `faune_nml.js` | recipes removed, items removed from all loot tables, hidden from EMI |
-| TNT | `faune_nml.js` | vanilla 1.21.1 recipe restored under the id `minecraft:tnt` |
-| "explode_ore" advancement | `pack/kubejs/data/nomansland/advancement/main/explode_ore.json` | removed by a `neoforge:false` condition |
+| 11 items removed (batch B) | `faune_nml.js` | recipes removed, items removed from all loot tables, hidden from EMI |
 | Rabbit | `pack/kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json`, `sans_lapin.js` (server and client) | spawns removed from `#minecraft:is_overworld`; items removed from recipes, loot and EMI |
 | `scute` offering line | `pack/kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json` | impossible condition removed (see below) |
 | Goose and tortoise offering lines | `…/offering/entity/goose.json`, `tortoise.json` | redirected to creatures that are present |
@@ -33,9 +30,9 @@ The 15 items: spawn eggs for the deer, goose, bass and tortoise; raw and cooked 
 
 We keep the Buddy (`buddy`, quest of the [Friendly Moon](lune-amie.md)), the living pot in the alchemists' ruins and the dreaming player.
 
-**Batch B** (decision of the maintainer, 2026-10-19): horse meat (`raw_horse`, `horse_steak`), frog legs (`frog_leg`, `cooked_frog_leg`), explosives and an arrow (`firebomb`, `ink_bomb`, `explosive`, `incendiary_arrow`) and seven dishes (`pancake`, `maple_tart`, `sweet_tart`, `trail_mix`, `syruped_pear`, `honeyed_apple`, `hardtack`). NML adds them to vanilla loot through modifiers that draw on its own tables (`entities/horse_addition`, `chests/hardtack_addition`…): removing the item from all tables is enough. Two consequences:
-- NML replaces the TNT recipe with four explosives. Without the explosives, the vanilla recipe is restored.
-- The `explode_ore` advancement (mine an ore with an explosive) can no longer be earned: it is removed.
+**Batch B** (decision of the maintainer, 2026-10-19): horse meat (`raw_horse`, `horse_steak`), frog legs (`frog_leg`, `cooked_frog_leg`) and seven dishes (`pancake`, `maple_tart`, `sweet_tart`, `trail_mix`, `syruped_pear`, `honeyed_apple`, `hardtack`). NML adds them to vanilla loot through modifiers that draw on its own tables (`entities/horse_addition`, `chests/hardtack_addition`…): removing the item from all tables is enough.
+
+**Explosives** (decision of the maintainer, 2026-10-29): NML's explosives come back, they had been removed in batch B along with a vanilla TNT recipe. NML's own items and recipes apply again: the explosive (paper, gunpowder, sand) thrown by hand, which mines ores (`explode_ore` advancement, restored); TNT from four explosives (`minecraft:tnt` overridden by NML); fire and ink bombs (gunpowder, string, resin or ink sac); the incendiary arrow (arrows and a bottle of resin oil). They are found again in NML's dungeon and pot loot.
 
 **Rabbit** (same decision): Fresh Animations v1.11 has no model for it; without the remodel, it looked out of place. It is removed from the game. NML lists its biomes in `#minecraft:is_overworld`, so a single `neoforge:remove_spawns` biome modifier covers the whole Overworld. Its six items (egg, raw and cooked meat, stew, foot, hide) are taken out of the recipes and of all tables, including the cat's morning gift. Consequences: the potion of leaping can no longer be brewed (rabbit's foot), leather no longer comes from rabbit hides, Alex's Mobs' Bunfungus can no longer be born from a rabbit.
 
@@ -59,11 +56,11 @@ On a new world: registry data is read when the world is created.
 | F4 | Caves, including lush caves | No more tortoise burrows |
 | F5 | Fox, goat, donkey, wolf in `autumnal_forest` | Vanilla textures; no golden or "timber" wolf, no mud frog |
 | F6 | `/summon nomansland:frienderman` | It disappears immediately |
-| F7 | EMI: search "venison", "bass", "tortoise", "rabbit", "horse", "explosive", "pancake" | Nothing |
-| F8 | Wildex | No entry for the five creatures or for the rabbit |
+| F7 | EMI: search "venison", "bass", "tortoise", "rabbit", "horse", "pancake" | Nothing |
 | F9 | Mushroom island | Rings and Buddy present; ascension (L10) unchanged |
 | F10 | Desert, snowy plains, flower meadow, grove | No rabbit |
-| F11 | Kill a horse, a frog; open dungeon, igloo and shipwreck chests | No horse meat, no legs, no pancake, no bomb |
-| F12 | Crafting table: 5 gunpowder and 4 sand | One TNT |
+| F11 | Kill a horse, a frog; open dungeon, igloo and shipwreck chests | No horse meat, no legs, no pancake |
+| F12 | Crafting table: paper, gunpowder and sand in a column, then four explosives in a square | One explosive, then one TNT; 5 gunpowder and 4 sand in the vanilla pattern give nothing |
+| F15 | Throw an explosive at an ore; craft a fire bomb, an ink bomb and incendiary arrows | The ore drops, the `explode_ore` advancement appears in French; the three items work and have French names |
 | F13 | Offer a sea turtle scute to the Friendly Moon (L8) | The line "A precious gift from a wise creature" |
 | F14 | Show a Naturalist tortoise, then a Naturalist duck, to the Friendly Moon | The tortoise and goose lines |
