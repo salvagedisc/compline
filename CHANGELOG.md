@@ -59,13 +59,14 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Wind and light without shaders ([0016](docs/decisions/0016-vent-et-lumiere.md)): Where Winds Blow (+ ToucanLib), grass and leaves that sway, slanted rain, drifting snow and smoke, its own fog turned off for ATMOSPHERICS; Shine, bloom and coloured light. Both translated into French.
 
 ### Removed
+- The `sac` module of the `fallow` mod (0.5.0), idle since Traveler's Backpack left the pack, with its config keys and its tests S1 to S10.
 - Icy's Better Horses' stable handbook (Modonomicon): no recipe, hidden from EMI; Modonomicon stays only because the mod requires it. Its essentials move to a new Questlog chapter, Voyager (two guides).
 - Wildex Bestiary (team choice of 2026-10-29), with its config and its translation: the `zoo` module will keep its own ledger of species.
 - The `fallow-ambiance` moon texture (team's choice of 2026-10-29): the vanilla moon is back.
 - Better Clouds: it drew the clouds in place of ATMOSPHERICS, so they ignored the mist, dusk and rain ([0016](docs/decisions/0016-vent-et-lumiere.md)).
 - Hollow GUI's curls at the top of the panels, lozenges and grooves added to the screens, and the leaf pattern behind the menus (review of 2026-10-26: back to GUI Revision's own drawing).
 - Dark Coffee GUI, Dark Coffee GUI - Extras and Modded Coffee GUI (all rights reserved, author unreachable): replaced by `fallow-interface`.
-- Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod switches itself off and goes in 0.5.0.
+- Traveler's Backpack (team choice of 2026-10-26: too complicated), with its server config and its translation; the `sac` module of the `fallow` mod is removed in 0.5.0.
 - Drip Sounds (beta build for 1.21.8, duplicates AmbientSounds and Sounds) and Seamless Loading Screen (unmaintained, overwritten by Sodium).
 - Untitled Duck Mod (team choice): the Naturalist duck returns, and the No Man's Land goose's offering line now targets that duck.
 - AA4 Atlas: compiled for Antique Atlas 2, it called `AtlasScreen.prepareToOpen()` with the old return type and crashed the game when opening the atlas (crash report from testing). The atlas opens with the Antique Atlas key.

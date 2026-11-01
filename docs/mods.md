@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the pack, updated on 2026-10-25 (late evening, after PRs #1 to #3): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
+Complete list of the pack, updated on 2026-11-01 (after PRs #1 to #32): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -163,7 +163,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.4.10 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `sac` (hose that quenches thirst), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64) , `titres` (each screen's name on a plate over its top edge, client) and `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
+| Mod `fallow` 0.5.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) and `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
