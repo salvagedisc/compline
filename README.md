@@ -34,7 +34,7 @@ The full list, with what was dropped and why, is in the [mod registry](docs/mods
 
 1. Install the [Modrinth App](https://modrinth.com/app).
 2. Accept the *Share* invitation you received, **or** download the `.mrpack` from the latest [release](../../releases) (or the artifact of the latest [build](../../actions/workflows/build.yml)) and use *+ → Import from file*.
-3. To play the latest `main` without waiting for a release, see [Playing the latest main](docs/dev-sync.md): automatic update at each launch, or the `.mrpack` of the [`dev` pre-release](../../releases/tag/dev).
+3. To play the latest `main` without waiting for a release, download the `.mrpack` of the [`dev` pre-release](../../releases/tag/dev), rebuilt after every merge ([details](docs/dev-sync.md)).
 
 ## The repository
 

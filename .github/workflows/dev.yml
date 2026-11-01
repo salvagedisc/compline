@@ -1,9 +1,7 @@
 name: dev
 
-# Every push to main refreshes two things, so the latest main can be played without asking for an export:
-# - the rolling "dev" pre-release, which holds the .mrpack of the latest main;
-# - while the repository is public, a GitHub Pages copy of pack/, read by packwiz-installer
-#   at each launch of the game (scripts/dev/fallow-update.sh, docs/dev-sync.md).
+# Every push to main refreshes the rolling "dev" pre-release with the .mrpack of the latest main,
+# so it can be played without asking for an export (docs/dev-sync.md).
 
 on:
   push:
@@ -42,21 +40,3 @@ jobs:
           gh release create dev dist/Fallow-dev.mrpack --target "$GITHUB_SHA" --prerelease --latest=false \
             --title "Fallow dev (${GITHUB_SHA::7})" --notes "$notes"
 
-  pages:
-    # GitHub Pages of a private repository needs a paid plan: this job waits for the repository to be public
-    # and for Settings → Pages → Source to be set to "GitHub Actions".
-    if: ${{ !github.event.repository.private }}
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}pack.toml
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: pack
-      - id: deploy
-        uses: actions/deploy-pages@v4
