@@ -2,7 +2,7 @@
   "chapter": "questlog:fallow_brume",
   "sort_order": 11,
   "title": "Une lanterne de clairière",
-  "description": "Une lanterne, deux plaques de fer forgées et deux résines.\n\nElle lève la brume sur 32 blocs.",
+  "description": "Une lanterne sur pied, autour d’un amas de quartzite : deux plaques de fer forgées, deux vitres et un amas de quartzite.\n\nElle lève la brume sur 32 blocs, tant qu’elle reste en place.",
   "icon": {
     "item": "fallow:lanterne_de_clairiere"
   },

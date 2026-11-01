@@ -17,7 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.material.FogType;
 
 /**
- * La brume lointaine de Distant Horizons suit celle du terrain.
+ * La brume lointaine de Distant Horizons suit celle du terrain, et se referme toujours en cercle.
  *
  * <p>Distant Horizons dessine les LOD à part, puis leur applique son propre brouillard, mesuré en fraction du
  * rayon LOD ; il ne connaît pas ATMOSPHERICS. On lui donne donc, à chaque image, la brume du terrain
@@ -26,15 +26,25 @@ import net.minecraft.world.level.material.FogType;
  *
  * <ul>
  *   <li>Brume plus courte que la distance de rendu : tout LOD est au-delà de la fin de brume, donc invisible.
- *       On annule alors tout le rendu LOD de l'image (aucun coût GPU).</li>
- *   <li>Brume levée (fin au-delà de la distance de rendu) : les LOD apparaissent progressivement, sans couture.</li>
+ *       On annule alors tout le rendu LOD de l'image (aucun coût GPU), et le fondu de Distant Horizons entre
+ *       terrain et LOD (mixin {@code horizon.VanillaFadeMixin}), qui sinon mêlerait au bord du terrain la
+ *       dernière image de LOD dessinée : des reliefs fantômes dans la brume.</li>
+ *   <li>Brume levée (fin au-delà de la distance de rendu) : les LOD apparaissent progressivement, sans couture,
+ *       jusqu'au cercle de brume.</li>
+ *   <li>Le cercle : un LOD noyé dans la brume garde la couleur de la brume, et se découpe en silhouette sur le
+ *       ciel, plus clair ; sans plus, on verrait les montagnes jusqu'au bout du rayon LOD. Le fondu lointain de
+ *       Distant Horizons (mixin {@code horizon.FarFadeMixin}) les efface donc dans le ciel, de 55 % à 100 % de
+ *       la fin de la brume, plafonnée à {@code horizon.ringMaxDistance} blocs.</li>
  *   <li>Sous l'eau, dans la lave, la neige poudreuse, aveuglé ou dans l'obscurité : on laisse Distant Horizons,
  *       qui noie déjà tout.</li>
  * </ul>
  *
  * Sans ce module (coupé ou en erreur), la config livrée garde une épaisseur minimale de 1 : LOD cachés.
  */
-final class HorizonFog {
+public final class HorizonFog {
+    /** Le fondu lointain de Distant Horizons va de 50 % à 90 % de la distance qu'on lui rend. */
+    private static final float FAR_FADE_END = 0.9f;
+
     private boolean errorLogged;
 
     DhApiBeforeRenderEvent beforeRender() {
@@ -42,7 +52,7 @@ final class HorizonFog {
             @Override
             public void beforeRender(DhApiCancelableEventParam<DhApiRenderParam> event) {
                 try {
-                    if (FallowConfig.horizonSkipHiddenLods() && lodsHidden()) {
+                    if (skipLods()) {
                         event.cancelEvent();
                     }
                 } catch (RuntimeException e) {
@@ -65,9 +75,12 @@ final class HorizonFog {
         };
     }
 
-    /** Vrai si la brume du terrain finit avant le bord du terrain normal : aucun LOD ne peut se voir. */
-    private boolean lodsHidden() {
-        if (!FallowConfig.horizonEnabled() || !TerrainFog.captured() || specialFog()) {
+    /**
+     * Vrai si les LOD de cette image ne sont pas dessinés : la brume du terrain finit avant le bord du terrain
+     * normal, aucun LOD ne peut se voir. Lu aussi par {@code horizon.VanillaFadeMixin}.
+     */
+    public static boolean skipLods() {
+        if (!FallowConfig.horizonSkipHiddenLods() || !active()) {
             return false;
         }
         Minecraft minecraft = Minecraft.getInstance();
@@ -75,8 +88,28 @@ final class HorizonFog {
         return TerrainFog.end() < vanillaEdge;
     }
 
+    /**
+     * La distance que le fondu lointain de Distant Horizons doit prendre pour effacer les LOD dans le ciel au
+     * cercle de brume, au lieu du bout du rayon LOD. Lu par {@code horizon.FarFadeMixin}.
+     */
+    public static float farFadeDistance(float farClip) {
+        if (!active()) {
+            return farClip;
+        }
+        return Math.min(farClip, ringEnd() / FAR_FADE_END);
+    }
+
+    /** Fin de la brume lointaine : celle du terrain, plafonnée pour que le cercle se referme toujours. */
+    private static float ringEnd() {
+        return Math.min(TerrainFog.end(), FallowConfig.horizonRingMaxDistance());
+    }
+
+    private static boolean active() {
+        return FallowConfig.horizonEnabled() && TerrainFog.captured() && !specialFog();
+    }
+
     private void mirror(DhApiMutableFogRenderParam fog) {
-        if (!FallowConfig.horizonEnabled() || !TerrainFog.captured() || specialFog()) {
+        if (!active()) {
             return;
         }
         IDhApiConfig configs = DhApi.Delayed.configs;
@@ -84,8 +117,8 @@ final class HorizonFog {
             return;
         }
         float radius = configs.graphics().chunkRenderDistance().getValue() * 16f;
-        float start = TerrainFog.start();
-        float end = TerrainFog.end();
+        float start = Math.min(TerrainFog.start(), FallowConfig.horizonRingMaxDistance() * 0.5f);
+        float end = ringEnd();
         if (radius <= 0f || !(end > start)) {
             return;
         }

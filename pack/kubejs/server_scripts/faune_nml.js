@@ -18,16 +18,15 @@ const FAUNE_NML_OBJETS = [
   'nomansland:pot_debug_stick', 'nomansland:no_mans_globe'
 ]
 
-// Objets de NML retirés du jeu : viande de cheval, cuisses de grenouille, explosifs et
-// flèche incendiaire, plats. Ils tombent aussi de butins : NML les ajoute aux tables
+// Objets de NML retirés du jeu : viande de cheval, cuisses de grenouille, plats. Les
+// explosifs, les bombes et la flèche incendiaire restent, avec la TNT de NML (quatre
+// explosifs). Les objets retirés tombent aussi de butins : NML les ajoute aux tables
 // vanilla par des modificateurs qui tirent ses propres tables (entities/*_addition,
 // chests/hardtack_addition…), ou les place dans ses tables et dans simple_dungeon.
 // Aussi cachés d'EMI (client_scripts/faune_nml.js, même liste).
 const FAUNE_NML_OBJETS_RETIRES = [
   'nomansland:raw_horse', 'nomansland:horse_steak',
   'nomansland:frog_leg', 'nomansland:cooked_frog_leg',
-  'nomansland:firebomb', 'nomansland:ink_bomb', 'nomansland:explosive',
-  'nomansland:incendiary_arrow',
   'nomansland:pancake', 'nomansland:maple_tart', 'nomansland:sweet_tart',
   'nomansland:trail_mix', 'nomansland:syruped_pear', 'nomansland:honeyed_apple',
   'nomansland:hardtack'
@@ -42,14 +41,6 @@ EntityEvents.spawned('nomansland:frienderman', event => {
 ServerEvents.recipes(event => {
   event.remove({ output: FAUNE_NML_OBJETS })
   event.remove({ output: FAUNE_NML_OBJETS_RETIRES })
-
-  // NML remplace la recette de la TNT par quatre explosifs. L'explosif retiré, on remet
-  // celle du vanilla 1.21.1, sous le même id.
-  event.remove({ id: 'minecraft:tnt' })
-  event.shaped('minecraft:tnt', ['X#X', '#X#', 'X#X'], {
-    X: 'minecraft:gunpowder',
-    '#': ['minecraft:sand', 'minecraft:red_sand']
-  }).id('minecraft:tnt')
 })
 
 LootJS.lootTables(event => {
