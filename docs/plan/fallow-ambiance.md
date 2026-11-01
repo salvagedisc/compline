@@ -172,6 +172,17 @@ Contraption Lights' coloured light stays off (its default value): Polytone alone
 
 **The moon.** The sun comes from ATMOSPHERICS' built-in pack: a warm 8 px square and eight very faint amber rays, on a black background (the blend is additive). Enhanced Celestials 2 moons have no texture of their own: all of them tint `moon_phases.png`. The pack's own moon (a pale square with cold rays, in the style of that sun) was removed on 2026-10-29 at the team's request: the vanilla moon is back, drawn 1.35× by ATMOSPHERICS. A sun and moon resource pack can replace both textures; Enhanced Celestials keeps tinting whichever moon is active.
 
+## Rain and olive greens (2026-11-01)
+
+Part of [0017](../decisions/0017-averse-et-rayons.md), the answer to Recrafted's rain and colours.
+
+**Rain drop.** Where Winds Blow draws the vanilla `textures/environment/rain.png`, slanted by the wind. `scripts/ambiance/weather.py` (Pillow, deterministic) draws a new one: 64 × 256, nine thin streaks of one pixel, 26 to 64 pixels long, pale grey-white, brightest toward the falling end, plus six faint ones for depth. The `averse` module of the `fallow` mod then tints them with the mist colour and lights them gold against the sun. The same script draws the module's textures (rain curtain, sun shaft, glint on water).
+
+**Greens.**
+- Vanilla biomes: `scripts/ambiance/palette.py` reads the game's grass and foliage colour maps from the NeoForge client resources jar and pulls each entry a quarter of the way toward olive (hue 68°), saturation × 0.85, brightness × 0.96. The map still varies with temperature and humidity; Ecliptic Seasons' seasonal tint applies on top.
+- No Man's Land biomes: their grass and foliage in `polytone/biome_modifiers/nml_*.json` were pulled 15 % toward olive, saturation × 0.92 (for example `old_growth_forest` grass `#7e9d56` → `#839d5c`, `bayou` `#67a248` → `#72a24f`). The table above gives the values before this change.
+- Clearings keep their frank green: they must stand out from the misty land around them.
+
 ## What remains to be tuned in game
 
 1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].

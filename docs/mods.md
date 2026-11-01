@@ -120,7 +120,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds (two layers), sun, moon and stars per biome ([0007](decisions/0007-ambiance-performance.md)) |
 | Polytone | `polytone` | ✅ | C | Colour of grass, leaves and water, coloured light from fires and candles ([page](plan/fallow-ambiance.md)) |
-| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves, cave dust |
+| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves (a little more often, carried by the wind by the `averse` module of the `fallow` mod), cave dust |
 | Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
 | LambDynamicLights | `lambdynamiclights` | ✅ | C | Light held in hand |
 | More Darkness | `more-darkness` | ✅ | CS | Real nights |
@@ -135,7 +135,14 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, No Man's Land wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
-| Shine | `shine` | ✅ (2.0.2, not seen in game) | C | Bloom and coloured light without shaders ([0016](decisions/0016-vent-et-lumiere.md)) |
+| Shine | `shine` | ✅ (2.0.2, not seen in game) | C | Bloom without shaders; its coloured light stays off, Polytone owns it ([0016](decisions/0016-vent-et-lumiere.md)) |
+| Atmospheric Rain Backport | `atmospheric-rain-backport` | ✅ (1.2, not seen in game) | C | Drops on the screen when looking up in the rain ([0017](decisions/0017-averse-et-rayons.md)) |
+| Cool Rain Reforged | `cool-rain-reforged` | ✅ (1.0.2, not seen in game) | C | The sound of rain on metal, glass, fabric, leaves and water, muffled indoors ([0017](decisions/0017-averse-et-rayons.md)) |
+| Sable: Cool Rain | `sable-cool-rain` | ✅ (1.0.1, not seen in game) | C | Cool Rain's sounds on Sable airships and contraptions ([0017](decisions/0017-averse-et-rayons.md)) |
+| Distant Thunders | `distant-thunders` | ✅ (1.1.0, not seen in game) | C | Thunder delayed and dulled with distance ([0017](decisions/0017-averse-et-rayons.md)) |
+| Dynamic Surroundings Rebirth | `dynamic-surroundings-rebirth-by-uawiegrfv` | ✅ (1.4.2, not seen in game) | C | Reduced to drops on plants, drips from eaves and leaves, morning dew; everything else off in `config/dsrebirth/dsrebirth.json` ([0017](decisions/0017-averse-et-rayons.md)) |
+| Soft Imprints | `snow-imprints` | ✅ (2.8.0, not seen in game) | C | Footprints in snow, sand and mud ([0017](decisions/0017-averse-et-rayons.md)) |
+| Wavify | `wavify` | ✅ (1.2.1, not seen in game) | C | Waves breaking on shores and rivers ([0017](decisions/0017-averse-et-rayons.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `fallow` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle NML's leaves |
 
@@ -163,7 +170,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.5.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) and `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
+| Mod `fallow` 0.6.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain colour and curtains, lightning, leaves in the wind, client) and `rayons` (sun shafts under the trees, glints on water, client; [0017](decisions/0017-averse-et-rayons.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
