@@ -18,5 +18,6 @@
   "message.fallow.outils.pelle": "You need a shovel.",
   "message.fallow.outils.houe": "You need a hoe.",
   "message.fallow.outils.outil": "You need a tool.",
-  "message.fallow.outils.trop_faible": "Your tool is not strong enough."
+  "message.fallow.outils.trop_faible": "Your tool is not strong enough.",
+  "message.fallow.nomansland.cloche_liee": "Bell linked."
 }
