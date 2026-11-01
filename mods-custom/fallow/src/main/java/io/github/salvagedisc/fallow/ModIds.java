@@ -8,8 +8,6 @@ public final class ModIds {
     public static final String ATMOSPHERICS = "atmospherics";
     public static final String ENHANCED_CELESTIALS = "enhancedcelestials2core";
     public static final String NO_MANS_LAND = "nomansland";
-    public static final String TRAVELERS_BACKPACK = "travelersbackpack";
-    public static final String THIRST = "thirst";
     public static final String DISTANT_HORIZONS = "distanthorizons";
     public static final String CHUNKY = "chunky";
     public static final String CREATE = "create";

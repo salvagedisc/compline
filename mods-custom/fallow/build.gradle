@@ -94,11 +94,6 @@ dependencies {
     compileOnly modrinth('corgilib')      // types référencés par l'API d'Enhanced Celestials
     compileOnly modrinth('no-mans-land')  // la Lune Amie, à dessiner sous ATMOSPHERICS
 
-    // Module sac : Traveler's Backpack a quitté le pack (décision 0012), version figée jusqu'au
-    // retrait du module en 0.5.0.
-    compileOnly 'maven.modrinth:travelersbackpack:ZqrwMSn5'
-    compileOnly modrinth('thirst-was-reclaimed')
-
     // Module horizon
     compileOnly modrinth('distanthorizons')
 

@@ -10,7 +10,6 @@ authors="salvagedisc"
 description='''
 Liens entre les mods du modpack Fallow, en modules activables (config/fallow-client.toml, config/fallow-common.toml).
 ciel : la lune d'Enhanced Celestials redessinée sous ATMOSPHERICS, cache de brume vidé après un changement de biome.
-sac : boire au tuyau de Traveler's Backpack désaltère dans Thirst Was Reclaimed.
 xp : l'enclume sans niveaux d'expérience (son coût devient une usure), barre d'expérience cachée.
 horizon : le paysage lointain de Distant Horizons caché par la brume et révélé là où elle se lève.
 clairiere : feu de veille et lanterne de clairière, la brume se lève autour d'eux.

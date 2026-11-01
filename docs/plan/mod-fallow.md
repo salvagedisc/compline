@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.4.13 contains the **ciel** (sky), **sac** (bag), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules, plus a [compatibility fix](#compatibility-fixes) between Punchy! and Sensible Stackables. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.5.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names) and **outils** (tools) modules, plus a [compatibility fix](#compatibility-fixes) between Punchy! and Sensible Stackables. The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -26,14 +26,13 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 ## Principles
 
-- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/fallow-client.toml` for `ciel`, `config/fallow-common.toml` for `sac` and `xp`. The values are re-read at each use, so a change in game takes effect immediately.
+- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/fallow-client.toml` for `ciel`, `config/fallow-common.toml` for `xp`. The values are re-read at each use, so a change in game takes effect immediately.
 - **A module loads only if its mods are present.** At startup, `Fallow` checks with `ModList` the mods each module depends on. It writes "Module X chargé" or "Module X ignoré" to the log. Mixins go through `FallowMixinPlugin`, which applies them only if the targeted mods are in `LoadingModList`. The only hard dependency is NeoForge.
 - **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible.
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
 | `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; No Man's Land for the Friendly Moon | 6, all client |
-| `sac` | both (the effect runs on the server) | Traveler's Backpack and Thirst Was Reclaimed | none |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
@@ -96,29 +95,6 @@ The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS me
 A drawing error is logged once, without crashing the rendering. Config: `ciel.friendMoon` (true by default; false gives back the old behaviour, where the Friendly Moon does not appear under ATMOSPHERICS).
 
 **Known limitation.** On the single frame where `fallow` fades the Friendly Moon in, it is drawn over ATMOSPHERICS' stars instead of hiding them; the shadow, drawn the whole night away from the Point, darkens the stars behind it instead of masking them.
-
-## `sac` module
-
-> **Inactive since 2026-10-26.** Traveler's Backpack left the pack for Reliable Backpacks ([0012](../decisions/0012-sacs-piles-jours.md)). The module switches itself off ("Module sac ignoré") and is removed in 0.5.0, with its tests S1 to S9.
-
-**The mechanism.** Traveler's Backpack has a fluid effect API (`api.fluids.EffectFluid`). Each effect registered for a fluid runs when the player drinks that fluid through the hose. `fallow` adds the `fallow:thirst_water` effect on water, next to the backpack's own, which puts out fire. The backpack empties its effect registry during its common initialization: the `fallow` effect is therefore registered at the end of loading (`FMLLoadCompleteEvent`). The log announces it with "sac : effet fallow:thirst_water enregistré". The module has no mixin.
-
-At each sip, on the server:
-
-1. the purity of the tank's water is read through the Thirst Was Reclaimed API (`WaterPurity.getPurity`);
-2. the effects of that purity apply (`WaterPurity.givePurityEffects`: nausea, poison, depending on the TWR config). If the water makes the player sick and TWR does not quench thirst in that case (`quenchThirstWhenDebuffed`), we stop there;
-3. otherwise the player gains the hydration and thirst quenching of a bottle of water (`minecraft:potion`) according to TWR (6 hydration by default), multiplied by `sac.bottlesPerDrink`.
-
-Config: `sac.enabled` (true by default) and `sac.bottlesPerDrink` (1 to 4, default 1).
-
-### What is deduced from the code
-
-The purity of the tank's water does exist: TWR stores it in the `thirst:purity` component of the `FluidStack`, from 0 (dirty) to 3 (purified). What the jars show:
-
-- **A sip removes 1000 mB.** The hose removes the largest amount requested by the fluid's effects (1000 for water). With less than 1000 mB in the tank, nothing happens.
-- **A bucket keeps its purity.** The backpack fills its tanks with `FluidUtil`; TWR rewrites the passage through `FluidBucketWrapper` and adds the bucket's purity there.
-- **A mixture keeps the lowest purity.** The backpack's tanks are NeoForge `FluidTank`s, which TWR also modifies.
-- **Water drawn by the hose in the world counts as purified.** The suction mode fills the tank with `new FluidStack(water, 1000)`, with no purity component. But TWR reads a missing component as purified water (`MISSING_COMPONENT_PURITY = 3`). It even removes the component when it equals 3, so "missing" and "purified" cannot be told apart. The module follows TWR's rule: **water drawn directly from a source is clean**. This is a shortcut that avoids purifying water, to be settled after the in-game test. Possible fix: a mixin targeted at the hose's suction, which would give the water the purity of the block drawn.
 
 ## `xp` module
 
@@ -261,21 +237,6 @@ None of this has been done. These tests are also gathered with those of the othe
 | C10 | Log at startup | "Module ciel chargé", "Lune Amie de No Man's Land dessinée sous ATMOSPHERICS", no `fallow` mixin warning |
 | C11 | Frames per second at night, with and without the module | No visible difference |
 | C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
-
-### Bag
-
-| # | Test | Expected |
-|---|---|---|
-| S1 | Bucket of dirty water (filled at a source) emptied into the tank, then drunk through the hose | TWR's dirty water effects; quenches thirst or not depending on its config |
-| S2 | Bucket of purified water (furnace or campfire) | Quenches thirst, without negative effect |
-| S3 | Water drawn by the hose from a lake | Quenches thirst like purified water (shortcut to settle, see above) |
-| S4 | Mixture of dirty and purified water in a tank | The lowest purity wins |
-| S5 | One sip, with `bottlesPerDrink` at 1 then at 3 | 1000 mB removed; 6 then 18 hydration (TWR defaults) |
-| S6 | Drinking while on fire | The fire is still put out (backpack effect) |
-| S7 | Dedicated server | The thirst bar updates on the player's side |
-| S8 | `sac.enabled = false` | The hose no longer quenches thirst |
-| S9 | Log at startup | "Module sac chargé" then "sac : effet fallow:thirst_water enregistré" |
-| S10 | Tank with less than 1000 mB | Nothing happens, as before |
 
 ### XP
 

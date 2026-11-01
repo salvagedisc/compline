@@ -19,8 +19,6 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
     private static final ModConfigSpec.IntValue HORIZON_RING_MAX_DISTANCE;
     private static final ModConfigSpec.BooleanValue TITRES_ENABLED;
-    private static final ModConfigSpec.BooleanValue SAC_ENABLED;
-    private static final ModConfigSpec.IntValue SAC_BOTTLES_PER_DRINK;
     private static final ModConfigSpec.BooleanValue XP_ENABLED;
     private static final ModConfigSpec.BooleanValue XP_HIDE_BAR;
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
@@ -79,17 +77,6 @@ public final class FallowConfig {
         CLIENT_SPEC = client.build();
 
         ModConfigSpec.Builder common = new ModConfigSpec.Builder();
-        common.comment("Module sac : il relie Traveler's Backpack et Thirst Was Reclaimed.").push("sac");
-        SAC_ENABLED = common
-                .comment("Interrupteur du module. Vrai : boire de l'eau au tuyau du sac désaltère, selon la pureté",
-                        "de l'eau du réservoir (effets de l'eau sale compris). Faux : le tuyau ne désaltère pas.")
-                .define("enabled", true);
-        SAC_BOTTLES_PER_DRINK = common
-                .comment("Une gorgée au tuyau (le sac retire 1000 mB du réservoir) vaut ce nombre de bouteilles d'eau",
-                        "au sens de Thirst Was Reclaimed (hydratation et désaltération de minecraft:potion).")
-                .defineInRange("bottlesPerDrink", 1, 1, 4);
-        common.pop();
-
         common.comment("Module xp : Fallow n'a plus d'expérience. Les orbes et les gains sont coupés par",
                 "kubejs/server_scripts/sans_xp.js ; ce module règle l'enclume et cache la barre.").push("xp");
         XP_ENABLED = common
@@ -168,14 +155,6 @@ public final class FallowConfig {
 
     public static boolean titresEnabled() {
         return read(CLIENT_SPEC, TITRES_ENABLED);
-    }
-
-    public static boolean sacEnabled() {
-        return read(COMMON_SPEC, SAC_ENABLED);
-    }
-
-    public static int sacBottlesPerDrink() {
-        return read(COMMON_SPEC, SAC_BOTTLES_PER_DRINK);
     }
 
     public static boolean xpEnabled() {

@@ -1,12 +1,12 @@
 # Roadmap
 
-Status as of 2026-10-29. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
+Status as of 2026-11-01. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](conception/specs/2026-09-23-repo-outillage-design.md)) |
 | 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0011 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
-| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, 19 KubeJS scripts, custom mod `fallow` 0.4.1 (sky, bag, xp, far view, clearings, dissipator); survivors, zoo, monument guardians and the seasons bridge still to write |
+| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, 26 KubeJS scripts, 6 Questlog chapters, custom mod `fallow` 0.5.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
 ## Where the pack stands
@@ -21,6 +21,9 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-10-19 | The team's 57 choices applied; everything in French; Wayfarer ideas (Envelope, Friendly Moon, health, tannery, no XP); music; `fallow` 0.1.0 to 0.2.1 |
 | 2026-10-25 | Tectonic, Streams Reflowing and Distant Horizons (0011); safety net and 24 updates; six mods from the review; `fallow` 0.4.0 with clearings and the dissipator |
 | 2026-10-26 | Research on what is done elsewhere; eight next modules specified; simpler bag, stacks by kind of item, 30-minute days and 15-minute nights (0012) |
+| 2026-10-26 and 10-27 | Questlog quests and guides; the `fallow-interface` pack rebuilt on GUI Revision |
+| 2026-10-29 and 10-30 | First gestures (0013), Tannery (0014), Vanilla Evolved textures (0015), wind and light without shaders (0016), mist ring with Distant Horizons, reversible clearings, snow and dust storms, Friendly Moon fixed, Wildex removed, painted title screen, NML explosives back |
+| 2026-11-01 | 20 weakly animated creatures cut, held-item hand fixed, pack sort (Chipped and Beautify! removed, 313 items hidden), `sac` module removed (`fallow` 0.5.0) |
 
 ## Before the first release (`v0.1.0`)
 
@@ -62,7 +65,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 
 ### Custom `fallow` mod
 - [ ] A Ponder scene for the dissipator.
-- [ ] Remove the `sac` module in 0.5.0: Traveler's Backpack has left the pack ([0012](decisions/0012-sacs-piles-jours.md)).
+- [x] Remove the `sac` module: done in 0.5.0 (Traveler's Backpack has left the pack, [0012](decisions/0012-sacs-piles-jours.md)).
 - [ ] The eight modules approved on 2026-10-26, in this order: `voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants` ([modules-fallow](plan/modules-fallow.md)). The zoo and survivor items above are now these modules.
 
 ### Pending research (sub-project 2)
@@ -95,7 +98,7 @@ Around the game:
 Not taken: hundreds of quests and kitchen-sink density, bundled shaders (Iris breaks Aeronautics), gear tiers past Netherite, plushies and traders everywhere, teleportation, horror.
 
 ### Repository housekeeping
-- [ ] Delete the merged branches `test/agriculture`, `test/faune`, `test/structures`, `feat/idea-mods`, `feat/safety-net-and-updates` and `feat/tectonic-streams-distant-horizons` (only the owner can: the cloud environment gets a 403).
+- [ ] Delete the 34 merged branches left on GitHub (every branch except `main`; all their commits are in `main`). Only the owner can: the cloud environment gets a 403. "Automatically delete head branches" is now on, so new branches go away when their PR is merged.
 
 ### Watch list
 - Sinytra Connector (beta) runs Antique Atlas 4 and Surveyor, two Fabric mods: keep an eye on it at every update.
