@@ -16,6 +16,7 @@
     "ciel.FriendMoonSkyMixin",
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
+    "compat.PunchyEquipMixin",
     "horizon.FarFadeMixin",
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",

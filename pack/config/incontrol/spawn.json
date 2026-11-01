@@ -43,18 +43,14 @@
   },
   {
     "mob": [
-      "alexsmobs:centipede_head",
-      "alexsmobs:rocky_roller",
-      "alexsmobs:guster"
+      "alexsmobs:centipede_head"
     ],
     "minlight": 8,
     "result": "deny"
   },
   {
     "mob": [
-      "alexsmobs:centipede_head",
-      "alexsmobs:rocky_roller",
-      "alexsmobs:guster"
+      "alexsmobs:centipede_head"
     ],
     "mincount": {
       "amount": 3,

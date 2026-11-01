@@ -29,7 +29,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("horizon.GLStateMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.VanillaFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.FarFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
-            Map.entry("horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY)));
+            Map.entry("horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY)),
+            Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)));
 
     @Override
     public void onLoad(String mixinPackage) {

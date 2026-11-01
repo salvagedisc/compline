@@ -27,6 +27,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Pack sort**: no Chipped, Beautify! or Twigs table in EMI, Steam 'n' Rails reduced to a few tracks and plain locometal, Every Compat without Quark or Ghost woods; no food values in tooltips [TR1, TR2, TR9].
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
 - [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
+- [ ] Stone, a torch or bread in hand: the item is drawn and the hand stays still (only a light sway); scrolling the hotbar lowers and raises the hand once per change [A1-A3].
 
 ## Session 2: the mist and the clearings
 
@@ -84,7 +85,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Oceans and reefs: Hybrid Aquatic sharks, jellyfish, orcas, octopuses; Naturalist anglerfish, blobfish, isopod, ray; Alex's Mobs giant squid [D3]. Lobster texture correct [D8].
 - [ ] Flowering meadows: only Longwings butterflies [D5]. Lush caves: C&C otter, no dragonfly or snail [D4].
 - [ ] No deer, goose, bass or NML turtle, no rabbit, no Frienderman (`/summon nomansland:frienderman` disappears) [F3, F6, F10].
-- [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, F8, D6, D7].
+- [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, D6].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 
@@ -135,7 +136,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
+| C (sky), S (bag), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L | [plan/lune-amie.md](plan/lune-amie.md) |
 | F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
