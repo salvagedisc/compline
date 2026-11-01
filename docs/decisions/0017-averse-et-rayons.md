@@ -38,10 +38,10 @@ What was missing, effect by effect (read from Recrafted's published videos and f
 - Where Winds Blow sways foliage a little even in calm weather (`clearWeatherSwayStrength` 0.35), and more when the player passes (1.3) or the wind blows (1.25).
 - `fallow-ambiance` draws a new rain drop (`scripts/ambiance/weather.py`): thin, long, pale streaks instead of short blue drops.
 - Greens pulled toward olive: the vanilla grass and foliage colour maps (`scripts/ambiance/palette.py`, a quarter of the way toward olive, saturation × 0.85) and No Man's Land's biome colours in Polytone (15 % toward olive, saturation × 0.92). The clearings keep their frank green: they must stand out.
-- Shine stays in bloom-only mode: Polytone already colours the light of fires and candles, a second coloured light would double it.
+- Shine stays in bloom-only mode: Polytone already colours the light of fires and candles, a second coloured light would double it. Its bloom is set low in `config/shine.json` (see Revision below).
 
-**`fallow` mod 0.6.0, two client modules** ([module page](../plan/mod-fallow.md#averse-module)):
-- `averse`: the rain takes the colour of the mist and lights up gold against the sun; rain curtains from 14 to 84 blocks, slanted by the wind; a redrawn lightning bolt (thin white zigzag, halos, branches) and a brief flash of the sky; Particular's leaves carried by Where Winds Blow's wind, more of them torn off in storms, and left on the ground for 25 s; grass bits kicked up when running through tall grass.
+**`fallow` mod 0.6.0 (0.6.1 after the revision), two client modules** ([module page](../plan/mod-fallow.md#averse-module)):
+- `averse`: the rain takes the colour of the mist; light rain curtains from 24 to 84 blocks, slanted by the wind; a redrawn lightning bolt (thin white zigzag, halos, branches) and a brief flash of the sky; Particular's leaves carried by Where Winds Blow's wind, more of them torn off in storms, and left on the ground for 25 s; grass bits kicked up when running through tall grass.
 - `rayons`: sun shafts falling through gaps in the canopy, stronger in thick mist, absent at night and in the rain; glints of sun on water along the path between the sun and the player.
 
 Every effect has its own switch in `fallow-client.toml`. The mixins on Where Winds Blow and Particular apply only when those mods are present, and fail silently if their classes change.
@@ -51,10 +51,18 @@ Every effect has its own switch in `fallow-client.toml`. The mixins on Where Win
 - The rain curtains and the shafts add a few hundred quads per frame; the leaves read the wind once per tick.
 - Logo: the team does not like the three sketches inspired by the Minecraft logo family; put aside for now.
 
+## Revision (2026-11-01, `fallow` 0.6.1)
+The first game on 0.6.0 showed three faults, all reproduced in a test instance running the whole pack:
+- **Glowing blobs** in daylight. Shine had never been configured: its default bloom (strength 8, threshold 0.15, radius 500) made every sunlit surface glow, and the glints on water even more. `config/shine.json` now sets strength 2, threshold 0.75, radius 160 and a 48-block bloom distance: no blob in daylight, a light halo around lanterns and torches at night. The glints are dimmer too.
+- **Yellow rain against the sun.** The gold back-light turned the whole rain yellow and more opaque. Removed: the drops are a light grey taken from the mist, at 70 % opacity.
+- **Too much rain.** The drop texture has seven short streaks instead of nine long doubled ones, and fainter; the curtains start at 24 blocks instead of 14 and are half as opaque.
+
+Visual Effects+ (Polytone resource pack, all rights reserved, 1.3.1 for 1.21.1) was considered as a replacement; see the thread of 2026-11-01.
+
 ## In-game checks
 Commands: `/weather rain`, `/weather thunder`, `/time set 1000` (morning), `/time set 23500` (dawn).
 - AV1. The log shows « averse : pluie de Where Winds Blow teintée, feuilles de Particular dans le vent » and no mixin error from `fallow`.
-- AV2. Rain in a misty forest: thin pale streaks, the colour of the mist; facing the sun, they light up gold.
+- AV2. Rain in a misty forest: thin pale streaks, the colour of the mist, the landscape visible through them; facing the sun, they stay grey, never yellow.
 - AV3. Rain in a clearing or on a hill: curtains of rain drift in the distance and lean with the wind; none underground; FPS before and after (`curtains = false`).
 - AV4. Thunder: the bolt is a thin white zigzag with branches, the sky flashes briefly, distant thunder comes later and duller than near thunder.
 - AV5. Under a tree in calm weather leaves fall almost straight and stay on the ground about 25 s; in a storm many more fly off sideways with the wind.
