@@ -58,19 +58,6 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
-    // Bibliothèques que Create embarque (jarjar), nécessaires pour compiler contre ses classes
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'Create'
-                url = 'https://maven.createmod.net'
-            }
-        }
-        filter {
-            includeGroup 'net.createmod.ponder'
-            includeGroup 'dev.engine-room.flywheel'
-        }
-    }
 }
 
 // Coordonnées Modrinth d'un mod du pack : le slug est le nom du fichier pack/mods/<slug>.pw.toml,
@@ -84,6 +71,24 @@ def modrinth = { String slug ->
         throw new GradleException("Version Modrinth introuvable dans pack/mods/${slug}.pw.toml")
     }
     return "maven.modrinth:${slug}:${m.group(1)}"
+}
+
+configurations {
+    createBundle {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+    }
+}
+
+def createBundleFiles = configurations.createBundle
+def createLibs = tasks.register('createLibs', Sync) {
+    from({ createBundleFiles.collect { zipTree(it) } }) {
+        include 'META-INF/jarjar/flywheel-*.jar', 'META-INF/jarjar/ponder-*.jar'
+        eachFile { path = name }
+    }
+    includeEmptyDirs = false
+    into layout.buildDirectory.dir('create-libs')
 }
 
 dependencies {
@@ -103,9 +108,11 @@ dependencies {
 
     // Module dissipateur
     compileOnly modrinth('create')
-    // Versions embarquées par Create 6.0.10 (META-INF/jarjar/metadata.json)
-    compileOnly('net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1') { transitive = false }
-    compileOnly('dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6') { transitive = false }
+    // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar
+    // de Create lui-même (META-INF/jarjar), donc toujours aux versions qu'il embarque. Plus de dépôt
+    // maven.createmod.net, dont le certificat a expiré le 2026-11-03.
+    createBundle modrinth('create')
+    compileOnly files(createLibs).asFileTree
 }
 
 var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
