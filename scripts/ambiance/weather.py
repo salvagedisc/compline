@@ -3,9 +3,9 @@
 - pack/resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/rain.png
   The rain drawn by Where Winds Blow (and vanilla): thin, long, pale streaks
   instead of short blue drops. 64 x 256, one block wide and four blocks tall.
+  Texel (0, 0) is a marker for the particle core shader of fallow-ambiance.
 - mods-custom/fallow/src/main/resources/assets/fallow/textures/environment/
   rain_curtain.png  the far rain curtains of the `averse` module (tiles both ways)
-  sun_shaft.png     one shaft of the `rayons` module (soft edges, faded ends)
   glint.png         one glint of sunlight on water (`rayons` module)
 
 Run from the repository root: python3 scripts/ambiance/weather.py
@@ -21,6 +21,8 @@ AMBIANCE = os.path.join(ROOT, "pack/resourcepacks/fallow-ambiance/assets/minecra
 MOD = os.path.join(ROOT, "mods-custom/fallow/src/main/resources/assets/fallow/textures/environment")
 
 STREAK = (232, 236, 238)
+# "FAL" + alpha 1: keep in sync with RAIN_MARKER in fallow-ambiance/assets/minecraft/shaders/core/particle.vsh
+RAIN_MARKER = (70, 65, 76, 1)
 
 
 def streak(im, x, y0, length, peak, wrap=True):
@@ -52,6 +54,9 @@ def rain():
     # a few faint ones in between, for depth
     for _ in range(4):
         streak(im, rnd.randrange(64), rnd.randrange(256), rnd.randint(10, 22), rnd.randint(30, 50))
+    # marker texel read by the particle core shader of fallow-ambiance, which then gives the drops
+    # the colour of the mist; alpha 1 is never drawn (the shader discards alpha < 0.1)
+    im.putpixel((0, 0), RAIN_MARKER)
     return im
 
 
@@ -60,20 +65,6 @@ def curtain():
     im = Image.new("RGBA", (128, 256), STREAK + (0,))
     for _ in range(90):
         streak(im, rnd.randrange(128), rnd.randrange(256), rnd.randint(40, 120), rnd.randint(30, 80))
-    return im
-
-
-def shaft():
-    w, h = 32, 128
-    im = Image.new("RGBA", (w, h), (255, 255, 255, 0))
-    for y in range(h):
-        t = y / (h - 1)
-        # fade in over the top fifth (the canopy), out over the last quarter (the ground)
-        v = min(1.0, t / 0.2) * min(1.0, (1 - t) / 0.25)
-        for x in range(w):
-            u = (x + 0.5) / w * 2 - 1
-            a = math.exp(-(u * u) / 0.18) * v
-            im.putpixel((x, y), (255, 255, 255, int(255 * a)))
     return im
 
 
@@ -98,6 +89,5 @@ if __name__ == "__main__":
     os.makedirs(MOD, exist_ok=True)
     rain().save(os.path.join(AMBIANCE, "rain.png"))
     curtain().save(os.path.join(MOD, "rain_curtain.png"))
-    shaft().save(os.path.join(MOD, "sun_shaft.png"))
     glint().save(os.path.join(MOD, "glint.png"))
     print("weather textures written")

@@ -1,0 +1,15 @@
+{
+    "targets": [ "swap" ],
+    "passes": [
+        {
+            "name": "fallow:rayons",
+            "intarget": "minecraft:main",
+            "outtarget": "swap"
+        },
+        {
+            "name": "fallow:copie",
+            "intarget": "swap",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
