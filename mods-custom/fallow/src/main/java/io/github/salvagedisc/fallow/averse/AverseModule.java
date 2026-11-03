@@ -17,9 +17,12 @@ import net.neoforged.neoforge.common.NeoForge;
  * Module averse (client) : la pluie, l'orage et le vent dans les feuilles, au niveau de finition des
  * meilleurs packs à shaders, sans shader.
  *
+ * <p>La couleur de la pluie et l'éclair qui perce la brume ne sont plus ici : le pack de ressources
+ * {@code fallow-ambiance} les fait avec les core shaders du jeu ({@code particle}, {@code rendertype_lightning}).
+ * Ce module garde ce qu'un pack de ressources ne peut pas faire : de la géométrie nouvelle et ce qui lit le
+ * monde ou le vent.
+ *
  * <ul>
- *   <li>{@link RainLook} : la pluie de Where Winds Blow prend la couleur de la brume et s'éclaire à
- *       contre-jour (mixin {@code averse.WwbRainMixin}, avec Where Winds Blow).</li>
  *   <li>{@link RainCurtains} : rideaux de pluie au loin.</li>
  *   <li>{@link Bolt} : l'éclair redessiné (mixin {@code averse.LightningBoltRendererMixin}) et l'éclat du ciel.</li>
  *   <li>Feuilles de Particular dans le vent et arrachées par l'orage (mixins {@code averse.LeafParticleMixin}
@@ -36,7 +39,7 @@ public final class AverseModule {
         NeoForge.EVENT_BUS.addListener(AverseModule::onClientTick);
         NeoForge.EVENT_BUS.addListener(AverseModule::onRenderGui);
         Fallow.LOGGER.info("averse : pluie {}, feuilles {}",
-                ModIds.isLoaded(ModIds.WHERE_WINDS_BLOW) ? "de Where Winds Blow teintée" : "du jeu",
+                ModIds.isLoaded(ModIds.WHERE_WINDS_BLOW) ? "de Where Winds Blow" : "du jeu",
                 ModIds.isLoaded(ModIds.PARTICULAR) ? "de Particular dans le vent" : "absentes (Particular manque)");
     }
 

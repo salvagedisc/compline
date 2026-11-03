@@ -89,7 +89,7 @@ public final class Glints {
         if (day <= 0.01F || sun.y() < 0.02F) {
             return;
         }
-        float base = day * clear * (float) FallowConfig.rayonsShaftStrength();
+        float base = day * clear * (float) FallowConfig.rayonsGlintStrength();
         float[] colour = Sun.colour(sun);
         float time = level.getGameTime() + partialTick;
         Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
