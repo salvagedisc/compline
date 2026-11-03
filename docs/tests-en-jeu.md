@@ -109,8 +109,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
-- [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): pale streaks in the mist's colour, gold against the sun, rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
-- [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): shafts through the canopy, glints on the water; footprints in snow and sand, waves on a beach, greens a little more olive [AV9 to AV11].
+- [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): pale streaks in the mist's colour, never yellow against the sun, rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
+- [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): sun rays between the leaves when facing the sun, glints on the water; footprints in snow and sand, waves on a beach, greens a little more olive [AV9 to AV11, RP1 to RP4 of [0018](decisions/0018-effets-en-pack-de-ressources.md)].
 
 ## Session 8: multiplayer server (with a friend)
 

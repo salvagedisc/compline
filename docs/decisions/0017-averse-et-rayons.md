@@ -59,6 +59,9 @@ The first game on 0.6.0 showed three faults, all reproduced in a test instance r
 
 Visual Effects+ (Polytone resource pack, all rights reserved, 1.3.1 for 1.21.1) was considered as a replacement; see the thread of 2026-11-01.
 
+## Revision (2026-11-03, `fallow` 0.6.3)
+The rain colour, the fog of the lightning and the sun shafts moved into the resource pack `fallow-ambiance`: see [0018](0018-effets-en-pack-de-ressources.md). AV1 now reads « averse : pluie de Where Winds Blow, feuilles de Particular dans le vent »; AV10's shafts are the rays of RP1.
+
 ## In-game checks
 Commands: `/weather rain`, `/weather thunder`, `/time set 1000` (morning), `/time set 23500` (dawn).
 - AV1. The log shows « averse : pluie de Where Winds Blow teintée, feuilles de Particular dans le vent » and no mixin error from `fallow`.

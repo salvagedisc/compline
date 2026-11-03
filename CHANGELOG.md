@@ -63,6 +63,7 @@ No version has been published yet: everything below will make up `0.1.0`.
   - a thin, pale rain streak instead of the blue drops, greens pulled toward olive (vanilla colour maps and No Man's Land biomes), Particular's leaves a little more frequent, foliage that sways a little in calm weather;
   - `averse` module of the `fallow` mod 0.6.0: rain in the mist's colour and gold against the sun, rain curtains from 14 to 84 blocks, a redrawn lightning bolt and a sky flash, leaves carried by the wind and torn off by storms, grass bits kicked up when running;
   - `rayons` module: sun shafts through gaps in the canopy, glints of sun on water ([modules](docs/plan/mod-fallow.md#averse-module)).
+- Effects in the resource pack, the way Recrafted does it ([0018](docs/decisions/0018-effets-en-pack-de-ressources.md)): `fallow-ambiance` gives the rain the mist's colour and lets lightning pierce the mist with the game's core shaders, and draws sun rays between the leaves as a Polytone post shader (adapted from Sunbathing, MIT). `fallow` 0.6.3 drops the Java versions (`RainLook` and its mixin on Where Winds Blow, `SunShafts`).
 
 ### Removed
 - The `sac` module of the `fallow` mod (0.5.0), idle since Traveler's Backpack left the pack, with its config keys and its tests S1 to S10.
