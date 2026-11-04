@@ -21,6 +21,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `fallow-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
 | [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars |
 | [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `fallow` mod |
+| [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `fallow-ambiance` (core shaders, Polytone post shader); `fallow` 0.6.3 keeps what needs new geometry or game data |
 
 ## Template
 

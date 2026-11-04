@@ -2260,8 +2260,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.6.2.jar"
-hash = "08ed15d89c19a29732f143a37dd39549177e641b26b920100e513d3f656a4a9a"
+file = "mods/fallow-0.6.3.jar"
+hash = "584e6b812aa58caa8c20ec7c676de5b1454f369884290814bbc6e0cf27e707a1"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
@@ -2755,11 +2755,19 @@ metafile = true
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/CREDITS.md"
-hash = "2e3b17437112fc171fc02845ce6f46ff3313e2485412e46618f236fdf521ad0d"
+hash = "c74b3e1fcbe9c9e83b379d09b8a60287263caa5149c0d029af7eb6d4cc67f48b"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v5.json"
 hash = "579c51abf83cd91283d20fd1dbcc3d48d8c264cbdbb6932f3b40c5966c26b528"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/lang/en_us.json"
+hash = "12cd6b736cb5d283af59e60e585a09f6f61470b7beb24b2069b62be0c4a663ac"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/lang/fr_fr.json"
+hash = "12cd6b736cb5d283af59e60e585a09f6f61470b7beb24b2069b62be0c4a663ac"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/biome_modifiers/clairiere.json"
@@ -2870,6 +2878,42 @@ file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/colored_lights/feu.
 hash = "c531710b418f7cfcd874712920ed2276d743c6eee0029e5fd814068741a4686c"
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/config_entries/rayons.json"
+hash = "bf69a8a5fb5695891921f753134a506c674695e222b08206559d85dc831dc06c"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/config_entries/rayons_lune.json"
+hash = "e46a0358d3ef7bd204bf0e98756163d022c14577292f1adb82fa1074a9182e27"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/config_entries/rayons_soleil.json"
+hash = "a093e163f019b66bbb0748e72d92db5bc6fcc8689fa95e422335c6531c44bb73"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/polytone/post_shaders/rayons.json"
+hash = "a21809b16a499c385f1c40b55c8e3f5634aa87f06d6d096bcc754d6c399eec1d"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/post_effect/rayons.json"
+hash = "162f3e363476baf93e1650115fc1eb69cf99a6fca05773958dc7311ad8e4caae"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/shaders/program/copie.fsh"
+hash = "492db06171092010ca5c71ce76584c309e4531fd9ba5c19dd9a8952ea1fbe3fd"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/shaders/program/copie.json"
+hash = "8de3057247d4f35b4806d3523dc810e9bdc0d90867b4220aa8617279a8fa6bdb"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/shaders/program/rayons.fsh"
+hash = "8cfe77e08e75983cd3993f31fce0f387929d40f7f9e8740fe416cf6ee5a1da38"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/fallow/shaders/program/rayons.json"
+hash = "63d889b9325f7b3ec6a4fe4a76784ffd13057a9cb2b680e8612021c0a2596a03"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/sounds.json"
 hash = "fb5a073057ae7b87e374c82c11b2089c059a3ca9c04f93b96addc397c1ea5d54"
 
@@ -2914,6 +2958,18 @@ file = "resourcepacks/fallow-ambiance/assets/fallow/sounds/music/the_long_dark.o
 hash = "f69f7f77f8382b70728b303d27673b0655d47cfeef63525f63f87c5ec0b3291a"
 
 [[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/shaders/core/particle.fsh"
+hash = "6b1dd1939f57c7c3d93f85bb4cdcedcc38499d8a1e636aaf8138f76c9ac9ec81"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/shaders/core/particle.vsh"
+hash = "ec275ee4abb5fba5a008195f6e8f94c6557b25e1ea40fe02a6c5f67ce6cbf080"
+
+[[files]]
+file = "resourcepacks/fallow-ambiance/assets/minecraft/shaders/core/rendertype_lightning.fsh"
+hash = "2a785bfd1e96bccf8fa83c0ac88d44c62ff7c0a66c5dfe4003fa51318d0f6dac"
+
+[[files]]
 file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/colormap/foliage.png"
 hash = "9715fbf159df7b691f7932d676d3d66cd19b8e431feac70ac59b6128dab37883"
 
@@ -2923,7 +2979,7 @@ hash = "6f6b3496be181cd2cd4dfd97a598783a7769b6451f12de3fc08fdb84a145dc9f"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/rain.png"
-hash = "aa475633e6ff0e68c07d90eabb54619035915ee3d2ef9a80f2f244abcb227408"
+hash = "43098e6aa737496e3a8d9710e19a86eed8cf617887078b1785a7a87a6a640c90"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/pack.mcmeta"

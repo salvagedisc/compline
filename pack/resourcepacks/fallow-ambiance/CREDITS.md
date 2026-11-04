@@ -22,3 +22,11 @@ Mentions demandées par les auteurs :
 - « "Long Note Four", "Meditation Impromptu 02", "Lightless Dawn" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. http://creativecommons.org/licenses/by/4.0/ »
 
 Les autres morceaux du paquet musical ne sont pas dans ce dossier : ce sont ceux du jeu (C418, Lena Raine, Kumi Tanioka, Aaron Cherof), de No Man's Land (Lev Vey et Farcr) et du pack de ressources *Supernova* de bouncytorch (CC-BY-NC-SA 4.0), téléchargé depuis Modrinth.
+
+# Crédits des shaders
+
+`assets/fallow/shaders/program/rayons.fsh` (rayons de soleil, post-effet Polytone) est adapté de *Sunbathing* de MehVahdJukaar, sous licence MIT : https://modrinth.com/resourcepack/sunbathing-godrays. Changements : couleurs du soleil et de la lune, force, nombre d'échantillons, sans halo d'objectif ni flou de profondeur.
+
+Licence MIT : https://opensource.org/license/mit. « Copyright (c) MehVahdJukaar. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. »
+
+Les core shaders de `assets/minecraft/shaders/core/` partent de ceux du jeu (Mojang) et n'en changent que la pluie et la brume de l'éclair.

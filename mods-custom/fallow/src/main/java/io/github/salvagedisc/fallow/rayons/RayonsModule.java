@@ -8,14 +8,13 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
 /**
- * Module rayons (client) : la lumière du soleil dans la brume, sans shader.
+ * Module rayons (client) : {@link Glints}, des éclats de soleil qui scintillent sur l'eau, là où elle
+ * renvoie le soleil vers l'œil.
  *
- * <ul>
- *   <li>{@link SunShafts} : des rayons qui tombent par les trouées des feuillages, d'autant plus
- *       visibles que la brume est épaisse.</li>
- *   <li>{@link Glints} : des éclats de soleil qui scintillent sur l'eau, là où elle renvoie le soleil
- *       vers l'œil.</li>
- * </ul>
+ * <p>Les rayons de soleil entre les feuillages ne sont plus ici : le pack de ressources
+ * {@code fallow-ambiance} les dessine en post-effet Polytone, avec le tampon de profondeur
+ * ({@code assets/fallow/shaders/program/rayons.fsh}). Les éclats restent en Java : il faut savoir où est
+ * l'eau, ce qu'aucun shader de pack ne voit.
  */
 public final class RayonsModule {
     private RayonsModule() {
@@ -31,7 +30,6 @@ public final class RayonsModule {
         if (minecraft.level == null || minecraft.player == null || minecraft.isPaused()) {
             return;
         }
-        SunShafts.scan(minecraft.level, minecraft.player.blockPosition());
         Glints.scan(minecraft.level, minecraft.player.blockPosition());
     }
 
@@ -44,7 +42,6 @@ public final class RayonsModule {
             return;
         }
         float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
-        SunShafts.render(level, event.getCamera().getPosition(), partialTick);
         Glints.render(level, event.getCamera().getPosition(), partialTick);
     }
 }

@@ -27,8 +27,9 @@ import org.joml.Vector3f;
  * entouré de deux halos bleutés, avec deux à quatre branches qui s'éteignent avant le sol. Chaque
  * éclair garde sa forme (graine de l'entité) ; il scintille comme celui du jeu.
  *
- * <p>Il est dessiné tout de suite, la brume repoussée le temps du dessin : dans la brume de Fallow,
- * l'éclair du jeu se fond dans le gris à vingt blocs. Celui-ci la perce, en s'adoucissant au loin.
+ * <p>Dans la brume de Fallow, l'éclair du jeu se fond dans le gris à vingt blocs. Celui-ci la perce, en
+ * s'adoucissant au loin : c'est le core shader {@code rendertype_lightning} du pack {@code fallow-ambiance}
+ * qui repousse la brume, pour cet éclair comme pour celui du jeu.
  */
 public final class Bolt {
     private static final float TOP = 110.0F;
@@ -94,10 +95,7 @@ public final class Bolt {
         if (mesh == null) {
             return;
         }
-        float fogStart = RenderSystem.getShaderFogStart();
-        float fogEnd = RenderSystem.getShaderFogEnd();
-        RenderSystem.setShaderFogStart(Math.max(fogStart, 0.0F) + 96.0F);
-        RenderSystem.setShaderFogEnd(fogEnd + 320.0F);
+        // the mist is pushed back by the rendertype_lightning core shader of fallow-ambiance
         RenderSystem.setShader(GameRenderer::getRendertypeLightningShader);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
@@ -109,8 +107,6 @@ public final class Bolt {
         RenderSystem.depthMask(true);
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableBlend();
-        RenderSystem.setShaderFogStart(fogStart);
-        RenderSystem.setShaderFogEnd(fogEnd);
     }
 
     /** Un ruban tourné vers la caméra le long d'une ligne brisée ; l'opacité baisse vers le bout. */

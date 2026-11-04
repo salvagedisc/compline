@@ -28,7 +28,6 @@ public final class FallowConfig {
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue AVERSE_ENABLED;
-    private static final ModConfigSpec.BooleanValue AVERSE_RAIN_TINT;
     private static final ModConfigSpec.BooleanValue AVERSE_CURTAINS;
     private static final ModConfigSpec.DoubleValue AVERSE_CURTAIN_OPACITY;
     private static final ModConfigSpec.BooleanValue AVERSE_LIGHTNING;
@@ -37,8 +36,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.IntValue AVERSE_LEAF_REST_SECONDS;
     private static final ModConfigSpec.BooleanValue AVERSE_GRASS_BITS;
     private static final ModConfigSpec.BooleanValue RAYONS_ENABLED;
-    private static final ModConfigSpec.BooleanValue RAYONS_SHAFTS;
-    private static final ModConfigSpec.DoubleValue RAYONS_SHAFT_STRENGTH;
+    private static final ModConfigSpec.DoubleValue RAYONS_GLINT_STRENGTH;
     private static final ModConfigSpec.BooleanValue RAYONS_GLINTS;
 
     static {
@@ -92,10 +90,6 @@ public final class FallowConfig {
         AVERSE_ENABLED = client
                 .comment("Interrupteur du module. Faux : la pluie et l'orage redeviennent ceux de Where Winds Blow et du jeu.")
                 .define("enabled", true);
-        AVERSE_RAIN_TINT = client
-                .comment("Teinter la pluie de Where Winds Blow d'un gris clair pris dans la brume, un peu plus transparente",
-                        "que celle du jeu.")
-                .define("rainTint", true);
         AVERSE_CURTAINS = client
                 .comment("Rideaux de pluie : des pans de pluie légers de 24 à 84 blocs autour du joueur, penchés par le vent,",
                         "qui donnent les averses qu'on voit traverser la vallée. La brume les efface au loin.")
@@ -122,17 +116,14 @@ public final class FallowConfig {
                 .define("grassBits", true);
         client.pop();
 
-        client.comment("Module rayons (client) : la lumière du soleil dans la brume, sans shader.").push("rayons");
+        client.comment("Module rayons (client) : les éclats du soleil sur l'eau, sans shader. Les rayons de soleil entre les",
+                "feuillages sont dans le pack de ressources fallow-ambiance (réglages : écran des packs de ressources, Polytone).").push("rayons");
         RAYONS_ENABLED = client
                 .comment("Interrupteur du module.")
                 .define("enabled", true);
-        RAYONS_SHAFTS = client
-                .comment("Rayons de soleil qui tombent par les trouées des arbres et au bord des clairières,",
-                        "plus visibles quand la brume est épaisse, absents la nuit et sous la pluie.")
-                .define("shafts", true);
-        RAYONS_SHAFT_STRENGTH = client
-                .comment("Intensité des rayons et des éclats sur l'eau (1 : réglage du pack).")
-                .defineInRange("shaftStrength", 1.0, 0.0, 3.0);
+        RAYONS_GLINT_STRENGTH = client
+                .comment("Intensité des éclats sur l'eau (1 : réglage du pack).")
+                .defineInRange("glintStrength", 1.0, 0.0, 3.0);
         RAYONS_GLINTS = client
                 .comment("Éclats du soleil sur l'eau : le chemin de lumière qui scintille entre le soleil et le joueur.")
                 .define("glints", true);
@@ -252,10 +243,6 @@ public final class FallowConfig {
         return read(CLIENT_SPEC, AVERSE_ENABLED);
     }
 
-    public static boolean averseRainTint() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_RAIN_TINT);
-    }
-
     public static boolean averseCurtains() {
         return averseEnabled() && read(CLIENT_SPEC, AVERSE_CURTAINS);
     }
@@ -284,12 +271,8 @@ public final class FallowConfig {
         return averseEnabled() && read(CLIENT_SPEC, AVERSE_GRASS_BITS);
     }
 
-    public static boolean rayonsShafts() {
-        return read(CLIENT_SPEC, RAYONS_ENABLED) && read(CLIENT_SPEC, RAYONS_SHAFTS);
-    }
-
-    public static double rayonsShaftStrength() {
-        return read(CLIENT_SPEC, RAYONS_SHAFT_STRENGTH);
+    public static double rayonsGlintStrength() {
+        return read(CLIENT_SPEC, RAYONS_GLINT_STRENGTH);
     }
 
     public static boolean rayonsGlints() {
