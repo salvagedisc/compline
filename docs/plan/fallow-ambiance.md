@@ -1,6 +1,6 @@
 # The `fallow-ambiance` resource pack
 
-> Created on 2026-10-19 from [11.1-11.2](11-rendu-et-confort.md), [12.1-12.2](12-verification.md) and [report 3](recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
+> Created on 2026-10-19 from [11.1-11.2](../archive/plan/11-rendu-et-confort.md), [12.1-12.2](../archive/plan/12-verification.md) and [report 3](../archive/plan/recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
 
 ## What it contains
 

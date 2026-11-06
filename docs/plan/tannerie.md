@@ -1,6 +1,6 @@
 # The tannery
 
-Idea 4 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, bark and time. Since 2026-10-29 the chain is the [Tannery: Better Leather](https://modrinth.com/mod/tannery-better-leather) mod (Beckstation, 1.0.2, All Rights Reserved, used as published), which replaced the pack's own scripted chain (raw hide, ashes, bamboo tray): decision [0014](../decisions/0014-tannery.md).
+Idea 4 from Wayfarer ([research](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, bark and time. Since 2026-10-29 the chain is the [Tannery: Better Leather](https://modrinth.com/mod/tannery-better-leather) mod (Beckstation, 1.0.2, All Rights Reserved, used as published), which replaced the pack's own scripted chain (raw hide, ashes, bamboo tray): decision [0014](../decisions/0014-tannery.md).
 
 Status: checked on a test server on 2026-10-29 (NeoForge with KubeJS, LootJS, Tannery, No Man's Land): eight kills of each vanilla animal give the expected hides, meat, wool and fat; 28 logs and woods give bark, stripped ones do not. Not yet tested with a client: the rack, the barrel, EMI, the translated barrel messages.
 

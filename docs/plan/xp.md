@@ -1,6 +1,6 @@
 # Removing XP: study and removal plan
 
-Idea 5 from Wayfarer ([research](recherche/2026-10-19/wayfarer.md), recommendation 5). The maintainer asked for a study before any removal, then chose to **remove XP**.
+Idea 5 from Wayfarer ([research](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 5). The maintainer asked for a study before any removal, then chose to **remove XP**.
 
 > **Status as of 2026-10-19: applied, not yet tested in game.** The removal plan is written in `pack/` and in the `fallow` mod 0.2.0, which compiles. What was done, what deviates from the plan and what remains to be verified are in [Application](#application-2026-10-19). The study below comes from reading the pack's jars (`.cache/jars/`, `javap`), the Minecraft 1.21.1 code patched by NeoForge 21.1.251 (Gradle cache of the `fallow` mod) and the Modrinth API.
 
@@ -37,7 +37,7 @@ Once the orbs are cancelled and the gains blocked (step 2 of the plan), **all th
 | Farm & Charm | The stove (`StoveBlockEntity`) returns orbs; the "Rested" effect says "Increases experience points gained" | No more orbs. The effect has no code (`RestedEffect` is empty): only its description lies | New description | Key `effect.farm_and_charm.rested.description` in `pack/kubejs/assets/farm_and_charm/lang/fr_fr.json` |
 | Kaleidoscope Cookery | No reference to XP | Nothing | — | — |
 | Exposure | Darkroom: 2, 4 or 5 points per photo printed | Nothing left | Optional: set to 0 | `pack/defaultconfigs/exposure-server.toml`, `[lightroom]` `experience_black_and_white`, `experience_color`, `experience_chromatic` = 0 |
-| Wildex | 5 points per new species (`newEntryRewardsXp = true`, `newEntryXpAmount = 5`) | Nothing left | Optional: cut; the reward will come from the zoo script ([07](07-kubejs-et-datapack.md), line 18) | `pack/config/wildex/wildex-common.toml`, `[general]` `newEntryRewardsXp = false` |
+| Wildex | 5 points per new species (`newEntryRewardsXp = true`, `newEntryXpAmount = 5`) | Nothing left | Optional: cut; the reward will come from the zoo script ([07](../archive/plan/07-kubejs-et-datapack.md), line 18) | `pack/config/wildex/wildex-common.toml`, `[general]` `newEntryRewardsXp = false` |
 | Envelope | Crafting service parcels (`PACKAGE_EXPERIENCE`), returned as orbs on opening | Nothing left | None | — |
 | Enhanced Celestials | Blue moon: XP ×2; super blue moon: ×4 (`xp_amplifier`) | The XP bonus disappears. The moon keeps the luck (`minecraft:luck`) and the beacon range ×1.5 | None; see the anvil below | — |
 | Traveler's Backpack | Lapis backpack: 15% chance to double the XP picked up | Dead ability | Optional: remove it from the list | `pack/defaultconfigs/travelersbackpack-server.toml`, `[server.backpackAbilities]` `allowedAbilities`, without `travelersbackpack:lapis` |

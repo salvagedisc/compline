@@ -1,6 +1,6 @@
 # Maximum health: lose it by dying, regain it by exploring
 
-Idea 3 drawn from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 3). Death costs something without adding combat, and to make up for the loss you have to go back out exploring.
+Idea 3 drawn from Wayfarer ([research of 2026-10-19](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 3). Death costs something without adding combat, and to make up for the loss you have to go back out exploring.
 
 ## The rule, for a player
 

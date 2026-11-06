@@ -4,7 +4,7 @@
 - **Status**: kept (team choice); 29 tracks chosen by ear by the team, not yet heard in game
 
 ## Context
-The team wants music "in the style of what we are building, with beautiful transitions", without losing silence. The pack already plays vanilla music every 10 to 20 minutes, with three No Man's Land tracks; it lacks contexts (mist, clearing, season, moon, airship) and transitions. Full study: [music research](../plan/recherche/2026-10-19/musique.md).
+The team wants music "in the style of what we are building, with beautiful transitions", without losing silence. The pack already plays vanilla music every 10 to 20 minutes, with three No Man's Land tracks; it lacks contexts (mist, clearing, season, moon, airship) and transitions. Full study: [music research](../archive/plan/recherche/2026-10-19/musique.md).
 
 ## Options
 | Criterion | True Adaptive Music | Reactive Music | Music Moods + Ecliptic |

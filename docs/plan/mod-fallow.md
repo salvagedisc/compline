@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.6.3 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (glints on water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, No Man's Land's inverted bell). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.6.3 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (glints on water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, No Man's Land's inverted bell). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -148,7 +148,7 @@ Both use `require = 0`: if a future DH no longer has the targeted code, they do 
 
 ## `clairiere` module
 
-Plan [10.3](10-recentrage.md#103-the-mist-that-lifts), layer 3: the mist lifts where the players decide. It replaces the KubeJS drafts `clairieres.js` and `clairiere.json` of `kubejs-brouillons/`.
+Plan [10.3](../archive/plan/10-recentrage.md#103-the-mist-that-lifts), layer 3: the mist lifts where the players decide. It replaces the KubeJS drafts `clairieres.js` and `clairiere.json` of `kubejs-brouillons/`.
 
 **Blocks.**
 
@@ -174,7 +174,7 @@ Config (`fallow-common.toml`, `[clairiere]` section): `enabled` (true; false kee
 
 ## `dissipateur` module
 
-The third tier, a real Create kinetic block (plan [12.4](12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once, until it is broken; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken, it gives the mist back to its disc; placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
+The third tier, a real Create kinetic block (plan [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod)). A brass casing crossed by a shaft on the axis chosen when placing it. It needs 32 RPM or more (`SpeedLevel.MEDIUM`) and consumes 8 stress units per RPM, shown by engineer's goggles. After ten seconds of continuous rotation without overstress it converts the disc of radius 64 around it, once, until it is broken; the goggles show the progress, then "The mist has lifted around it". It keeps blowing white mist while it turns. Broken, it gives the mist back to its disc; placed elsewhere, it charges again and converts where it is. No Ponder scene yet.
 
 Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM it is part of the Create network (stress 512), charges, converts (`execute if biome … fallow:clairiere` true at its position) and keeps `FallowDone` after a restart.
 
@@ -376,7 +376,7 @@ Known fragile points:
 
 ## Next modules
 
-Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-fallow.md](modules-fallow.md), with their order of work. The modules of [12.4](12-verification.md#124-the-custom-fallow-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
+Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-fallow.md](modules-fallow.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
 
 ### No Man's Land: the inverted bell message in English
 

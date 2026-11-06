@@ -1,10 +1,10 @@
 # Roadmap
 
-Status as of 2026-11-01. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [conception/](conception/)).
+Status as of 2026-11-01. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [archive/conception/](archive/conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
-| 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](conception/specs/2026-09-23-repo-outillage-design.md)) |
+| 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](archive/conception/specs/2026-09-23-repo-outillage-design.md)) |
 | 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0011 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
 | 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, 26 KubeJS scripts, 6 Questlog chapters, custom mod `fallow` 0.5.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
@@ -54,11 +54,11 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] **Farm & Charm confined to the farm**: hide or merge its cooking stations and its ingredients that duplicate Kaleidoscope Cookery ([0002](decisions/0002-agriculture.md)).
 - [ ] Lock KC-Automation's automation behind progression ([0002](decisions/0002-agriculture.md)).
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
-- [ ] **Monument guardians**: Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff at four Monoliths, blessing after their defeat (decision 15 of [12.5](plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); proposed, not written.
+- [ ] **Monument guardians**: Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff at four Monoliths, blessing after their defeat (decision 15 of [12.5](archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); proposed, not written.
 - [ ] **The zoo**: a measurable long-term goal (species housed, aquariums), still without a mechanic.
 - [ ] **Quests and guides** (Questlog): first version in the pack (five chapters, 26 quests, the forge basics included in « Premiers gestes »); next quest lines for the fanal, the monuments and cooking ([quetes](plan/quetes.md)).
 - [ ] In Control!: `spawn.json` has no rule for villagers and wandering traders, unlike what the survivors plan assumes; to settle with the `survivants` module.
-- [ ] **White moon**: draft in [kubejs-brouillons/](plan/kubejs-brouillons/), needs a sound and texts; the `ciel` module already draws it.
+- [ ] **White moon**: draft in [kubejs-brouillons/](archive/kubejs-brouillons/), needs a sound and texts; the `ciel` module already draws it.
 - [ ] Subtle Effects: turn off superfluous effects ([0007](decisions/0007-ambiance-performance.md)).
 - [x] Remove hostile vanilla monsters from the Overworld; spawn table per biome; Friends & Foes, hamsters and Companions! tamed by config; End removed and Nether closed ([0003](decisions/0003-faune.md), [0004](decisions/0004-structures.md)). To check in game.
 - [x] Clearings and the dissipator: module `clairiere` and `dissipateur` of the `fallow` mod 0.4.0 ([mod-fallow](plan/mod-fallow.md)).

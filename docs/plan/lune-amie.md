@@ -1,6 +1,6 @@
 # The Friendly Moon: the central mystery of Fallow
 
-Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
+Idea 2 taken from Wayfarer ([research of 2026-10-19](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](../archive/plan/recherche/verif-2026-10-18/4-monde-et-objectifs.md).
 
 > **Status as of 2026-10-19.** Everything comes from reading the jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 then Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), decompiled with `javap` and Vineflower. A first pass on the test server without a player validated the server side ([results](#test-server-2026-10-19)). **Nothing has been tested with a player.** The list of [tests](#what-remains-to-be-checked-in-game) says what to check.
 
@@ -88,7 +88,7 @@ The blood moon is removed by two files that empty its dimension list (`"dimensio
 
 ### The white moon
 
-The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
+The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](../archive/plan/recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
 
 ## The chosen coexistence
 
@@ -148,7 +148,7 @@ The first in-game test (2026-10-28) found that the Friendly Moon never appeared 
 | L11 | Break "alchemy" jars | The crumpled note sometimes drops, name and lines in French |
 | L12 | A rainy night at the Point | Does the Friendly Moon appear in the rain? And does the Enhanced Celestials moon that returns when the rain stops set properly? |
 | L13 | Real distance of the Point with Fallow's generation | Between 1,000 and 2,500 blocks from the centre, on accessible terrain |
-| L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](12-verification.md)) |
+| L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](../archive/plan/12-verification.md)) |
 
 ## Test server (2026-10-19)
 

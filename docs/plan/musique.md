@@ -1,6 +1,6 @@
 # Music: True Adaptive Music and the `fallow` pack
 
-> Created on 2026-10-19 from the [music research](recherche/2026-10-19/musique.md) and [decision 0010](../decisions/0010-musique.md). **Nothing has been heard in game.** The pack format was read in the source code of True Adaptive Music 2.9.3 (GPL-3.0, [repository](https://github.com/LilTOJustice/TrueAdaptiveMusic)); the 29 tracks are those kept by the maintainer after listening on 2026-10-19; the silences are paper choices, to be tuned by ear.
+> Created on 2026-10-19 from the [music research](../archive/plan/recherche/2026-10-19/musique.md) and [decision 0010](../decisions/0010-musique.md). **Nothing has been heard in game.** The pack format was read in the source code of True Adaptive Music 2.9.3 (GPL-3.0, [repository](https://github.com/LilTOJustice/TrueAdaptiveMusic)); the 29 tracks are those kept by the maintainer after listening on 2026-10-19; the silences are paper choices, to be tuned by ear.
 
 ## The principle
 
@@ -77,7 +77,7 @@ The selection comes from the listening page (the maintainer's sheet of 2026-10-1
 | 11.3 | Autumn | `custom` `automne.json` | hiraeth, echo_in_the_wind | 480 ± 240 | — |
 | 11.4 | Winter | `custom` `hiver.json` | permafrost, floating_dream | 480 ± 240 | — |
 
-The clearings (`fallow:clairiere*`) are still only a draft ([10](10-recentrage.md)): as long as these biomes do not exist, node 8 stays false, without error (a missing biome matches nothing).
+The clearings (`fallow:clairiere*`) are still only a draft ([10](../archive/plan/10-recentrage.md)): as long as these biomes do not exist, node 8 stays false, without error (a missing biome matches nothing).
 
 ## The server predicates
 
