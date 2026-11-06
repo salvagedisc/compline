@@ -49,15 +49,15 @@ fallow/
 │   └── kubejs/            ← rules layer: startup/server/client scripts
 │       └── data/fallow/   ← datapack data loaded by KubeJS
 ├── mods-custom/fallow/    ← sources of the custom `fallow` mod (jar copied to pack/mods/)
-├── scripts/               ← dependency-free Node.js tooling (+ tests)
+├── scripts/               ← dependency-free Node.js tooling (+ tests), Python resource pack scripts
 ├── docs/
 │   ├── vision.md          ← philosophy of the pack
 │   ├── mods.md            ← registry: kept, to test, rejected
 │   ├── feuille-de-route.md ← sub-projects and open work items
 │   ├── tests-en-jeu.md    ← in-game tests to run, grouped by play session
-│   ├── plan/              ← full modpack plan (mods, configs, scripts)
+│   ├── plan/              ← living pages of each system
 │   ├── decisions/         ← one record per settled decision
-│   └── conception/        ← specs and implementation plans
+│   └── archive/           ← frozen plans, research, drafts
 ├── .github/workflows/     ← build (every push) and release (tag vX.Y.Z)
 ├── CONTRIBUTING.md        ← working conventions
 └── CHANGELOG.md

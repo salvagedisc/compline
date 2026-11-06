@@ -34,6 +34,6 @@ Everything that can be read in game (mechanics, books, quests, codex, bestiary, 
 ## Working rules
 - Every suggestion is a hypothesis: we compare for real before deciding.
 - The 5-question filter for every mod: does it change the gameplay? does it fit with the other systems? is it still interesting after 100 hours? does it bring a mechanic rather than content? does it avoid overlaps?
-- Then the whole pack is judged on four more: **weight** (does it change what the player decides or feels?), **tone** (does it keep the world almost empty and enigmatic?), **link** (does it plug into wood, temperature, cooking, fauna, the map?), **cost** (stable and light for a world meant to last years?) ([10.2](plan/10-recentrage.md#102-the-basic-idea)).
+- Then the whole pack is judged on four more: **weight** (does it change what the player decides or feels?), **tone** (does it keep the world almost empty and enigmatic?), **link** (does it plug into wood, temperature, cooking, fauna, the map?), **cost** (stable and light for a world meant to last years?) ([10.2](archive/plan/10-recentrage.md#102-the-basic-idea)).
 - "Add 200 items" is not an argument; "turns an activity into a craft" is.
 - What scripts cannot do goes into the custom `fallow` mod, one module per feature, each with its own switch ([mod-fallow](plan/mod-fallow.md)).

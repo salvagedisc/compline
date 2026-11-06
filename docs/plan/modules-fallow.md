@@ -1,6 +1,6 @@
 # Planned modules of the `fallow` mod
 
-Eight modules approved by the team on 2026-10-26, to be written after the six that exist ([mod-fallow.md](mod-fallow.md)). They all come from the same idea: **the mist hides, life lifts it, and what is hidden does not need to be drawn**. Each design below was compared with what other games and mods do well; the full research is in [recherche/2026-10-26/](recherche/2026-10-26/).
+Eight modules approved by the team on 2026-10-26, to be written after the six that exist ([mod-fallow.md](mod-fallow.md)). They all come from the same idea: **the mist hides, life lifts it, and what is hidden does not need to be drawn**. Each design below was compared with what other games and mods do well; the full research is in [recherche/2026-10-26/](../archive/plan/recherche/2026-10-26/).
 
 Nothing here is written yet. Each module will follow the rules of the existing ones: one module, one switch in the config; loaded only if the mods it needs are present; no copied code; its own section and tests in [mod-fallow.md](mod-fallow.md) once it exists.
 
@@ -24,7 +24,7 @@ Nothing here is written yet. Each module will follow the rules of the existing o
 3. `fanal`: navigation without coordinates, useful as soon as one leaves the base.
 4. `eclaircie`: the great Distant Horizons spectacle, once the far view passes the H tests.
 5. `sillage`, after test K9 (the dissipator on a ship).
-6. `echos` and `survivants`, the most delicate to tune, last; their look depends on the animation study ([recherche/2026-10-26/](recherche/2026-10-26/)).
+6. `echos` and `survivants`, the most delicate to tune, last; their look depends on the animation study ([recherche/2026-10-26/](../archive/plan/recherche/2026-10-26/)).
 
 The guide book (see the [roadmap](../feuille-de-route.md)) gets a page for each module as it lands.
 

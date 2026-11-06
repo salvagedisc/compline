@@ -4,7 +4,7 @@
 - **Status**: kept (team choice); not tested in game
 
 ## Context
-The team wants enchanting to become a real stage of the game, like forging with Overgeared and cooking with Kaleidoscope, rather than a mere cost in levels. Full research: [enchantement.md](../plan/recherche/2026-10-19/enchantement.md).
+The team wants enchanting to become a real stage of the game, like forging with Overgeared and cooking with Kaleidoscope, rather than a mere cost in levels. Full research: [enchantement.md](../archive/plan/recherche/2026-10-19/enchantement.md).
 
 ## Options
 | Criterion | Immersive Enchanting | Matrix Enchanting (Quark) | Enchanting Overhauled |

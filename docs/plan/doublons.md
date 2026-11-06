@@ -1,6 +1,6 @@
 # Wildlife duplicates: one model per species
 
-Request from the maintainer, 2026-10-19: when two mods have the same species, compare the models and keep the best one. No cuts for reasons of style: Companions! stays in full. Untitled Duck Mod is removed. The comparison was made on the jars (models rebuilt and rendered at the same scale, bones, animations, buckets, spawns), without running them. **Nothing has been tested in game.** It replaces the duplicate choices in [5.3](05-faune-et-ambiance.md) and [5.7](05-faune-et-ambiance.md).
+Request from the maintainer, 2026-10-19: when two mods have the same species, compare the models and keep the best one. No cuts for reasons of style: Companions! stays in full. Untitled Duck Mod is removed. The comparison was made on the jars (models rebuilt and rendered at the same scale, bones, animations, buckets, spawns), without running them. **Nothing has been tested in game.** It replaces the duplicate choices in [5.3](../archive/plan/05-faune-et-ambiance.md) and [5.7](../archive/plan/05-faune-et-ambiance.md).
 
 Fresh Animations animates no modded creature: consistency with vanilla is judged on proportions and type of animation. Naturalist 2.0 animates with keyframes, like vanilla 1.21; Alex's Mobs mostly with sinusoids. For the zoo, with equal models, the version that can be put in a bucket wins (Hybrid Aquatic has no fish bucket).
 

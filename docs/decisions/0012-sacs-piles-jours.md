@@ -5,7 +5,7 @@
 - **Supersedes**: the Traveler's Backpack line of the team's choices of 2026-10-19, and the "Comforts duplicates the sleeping bag" rejection
 
 ## Context
-The team asked for four things on 2026-10-26: simpler bags than Traveler's Backpack (and not Sophisticated Backpacks), stack sizes that depend on the kind of item ("64 is too much"), days longer than nights (30 min / 15 min, or 1 h / 30 min), and a comparison of Ecliptic Seasons with Serene Seasons. Research: [piles-et-sacs](../plan/recherche/2026-10-26/piles-et-sacs.md) and [saisons-et-duree-des-jours](../plan/recherche/2026-10-26/saisons-et-duree-des-jours.md); jars of Reliable Backpacks 1.9.1, Sensible Stackables 3.1.2, Better Days 3.3.6.3 and Ecliptic Seasons 0.15.5 read with `javap`.
+The team asked for four things on 2026-10-26: simpler bags than Traveler's Backpack (and not Sophisticated Backpacks), stack sizes that depend on the kind of item ("64 is too much"), days longer than nights (30 min / 15 min, or 1 h / 30 min), and a comparison of Ecliptic Seasons with Serene Seasons. Research: [piles-et-sacs](../archive/plan/recherche/2026-10-26/piles-et-sacs.md) and [saisons-et-duree-des-jours](../archive/plan/recherche/2026-10-26/saisons-et-duree-des-jours.md); jars of Reliable Backpacks 1.9.1, Sensible Stackables 3.1.2, Better Days 3.3.6.3 and Ecliptic Seasons 0.15.5 read with `javap`.
 
 ## Decision
 

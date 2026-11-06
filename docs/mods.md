@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the pack, updated on 2026-11-01 (after PRs #1 to #32): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](plan/10-recentrage.md), [11](plan/11-rendu-et-confort.md) and [12](plan/12-verification.md).
+Complete list of the pack, updated on 2026-11-01 (after PRs #1 to #32): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -19,7 +19,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Tectonic | `tectonic` | ✅ (3.0.28, not seen in game) | CS | The terrain under NML's biomes: continents, mountain ranges, valleys, underground rivers; height -64 to 320, never to change once the world exists; requires Lithostitched without declaring it ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
-| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](plan/12-verification.md#the-monument-guardians-report-6)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](archive/plan/12-verification.md#the-monument-guardians-report-6)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
 | Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed, a single moon at a time with the Friendly Moon ([friendly moon](plan/lune-amie.md)). Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
@@ -64,7 +64,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Comforts | `comforts` | ✅ (back on 2026-10-26) | CS | Sleeping bag and hammock ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `fallow:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Better Days | `betterdays` | ✅ (added 2026-10-26) | CS | 30 minutes of day, 15 of night ([0012](decisions/0012-sacs-piles-jours.md)) |
-| Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](plan/recherche/2026-10-19/wayfarer.md)) |
+| Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](archive/plan/recherche/2026-10-19/wayfarer.md)) |
 
 ## Fauna
 
@@ -218,7 +218,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | AA4 Atlas | Crashes the game when opening the atlas with Antique Atlas 3 (`AtlasScreen.prepareToOpen()` no longer returns the screen); removed on 2026-10-19, the atlas opens with its key |
 | Clumps | Grouped XP orbs, which no longer exist ([0009](decisions/0009-xp.md)); removed on 2026-10-19 |
 | Freeze It and Heat It | Removed by the team on 2026-10-18: no food preservation |
-| Easy Anvils | Replaces the anvil that Overgeared needs ([12](plan/12-verification.md)) |
+| Easy Anvils | Replaces the anvil that Overgeared needs ([12](archive/plan/12-verification.md)) |
 | Leaves Be Gone | On Aeronautics' blacklist |
 | Dynamic Surroundings | Touches the sound engine like Sound Physics; duplicates |
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
@@ -246,8 +246,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Copycats+, Connected, Factory Logistics, Bells & Whistles, Diesel Generators, Power Loader, Prospecting Picks, Rechiseled | Too many Create addons |
 | Create Villager Labor, Open Parties and Claims | Useless among friends |
 | Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | One more gauge or activity for a role already covered |
-| Reactive Music | Silence between tracks capped at 2 min, 295 MB jar, cuts vanilla music ([research](plan/recherche/2026-10-19/musique.md)) |
-| Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](plan/recherche/2026-10-19/enchantement.md)) |
+| Reactive Music | Silence between tracks capped at 2 min, 295 MB jar, cuts vanilla music ([research](archive/plan/recherche/2026-10-19/musique.md)) |
+| Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](archive/plan/recherche/2026-10-19/enchantement.md)) |
 | Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Content without a strong mechanic, or breaks the mystery |
 | Farmer's Delight (+ addons) | Kaleidoscope Cookery is the pack's cooking |
 | Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |
