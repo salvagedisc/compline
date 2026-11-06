@@ -58,7 +58,7 @@ Datapacks go through KubeJS: NeoForge does not load a global datapack without an
 
 - Docs, commit messages and code identifiers in **English**; in-game text in **French** (the language of each translation file). KubeJS script comments and Fallow's own texts are in French.
 - Documentation file names may stay in French (`feuille-de-route.md`, `tannerie.md`…): they name the systems as the team says them in game. New files follow the same rule; do not rename existing ones, links depend on them.
-- Never commit assistant or editor files (`CLAUDE.md`, `AGENTS.md`, `.claude/`, `.mcp.json`) or personal data; keep local pointers in `.git/info/exclude`.
+- Never commit local tool or editor configuration, or personal data (names, e-mail addresses, local paths); list local-only files in `.git/info/exclude`.
 
 **Adding, updating or removing a mod**
 
