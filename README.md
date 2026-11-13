@@ -10,7 +10,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Loader | NeoForge 21.1.265 |
 | Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
 | Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
-| Status (2026-11-13) | 158 Modrinth mods, 10 resource packs, custom mod `tilth` 0.10.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
+| Status (2026-11-13) | 158 Modrinth mods, 7 resource packs, custom mod `tilth` 0.10.1; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
 | Content | see the [mod registry](docs/mods.md) |
 
 ## What the pack does today
@@ -25,7 +25,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Daily life | Kaleidoscope Cookery and Farm & Charm, tannery (Tannery mod: hides, tanning rack, bark, tanning barrel), a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
 | Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
 | Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player |
-| Finish | Shoulder camera, 3D menus, animated arms, items with physics, coloured light without shaders, particles, wakes, puddles, adaptive music with long silences |
+| Finish | Shoulder camera, 3D menus, animated arms, items with physics, particles, wakes, puddles, adaptive music with long silences |
 | Safety | Hourly backups, crashing entities stopped instead of the world, crash assistant |
 
 The full list, with what was dropped and why, is in the [mod registry](docs/mods.md); what is planned next is in the [roadmap](docs/feuille-de-route.md).
@@ -49,7 +49,7 @@ tilth/
 │   └── kubejs/            ← rules layer: startup/server/client scripts
 │       └── data/tilth/   ← datapack data loaded by KubeJS
 ├── mods-custom/tilth/    ← sources of the custom `tilth` mod (jar copied to pack/mods/)
-├── scripts/               ← dependency-free Node.js tooling (+ tests), Python resource pack scripts
+├── scripts/               ← dependency-free Node.js tooling (+ tests), Python generators (menus, biome rules, world data)
 ├── docs/
 │   ├── vision.md          ← philosophy of the pack
 │   ├── mods.md            ← registry: kept, to test, rejected
