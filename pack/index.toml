@@ -2089,14 +2089,12 @@ hash = "db0001882963da83b811339a87b4ec47ac6644be32a98d6e0a5c5dfa5af25c67"
 metafile = true
 
 [[files]]
-file = "mods/antique-atlas-4.pw.toml"
-hash = "72f9cf7ef1412b9384467782dd5444ec8adbd03b9f532d1238e5a166ffb25237"
-metafile = true
+file = "mods/antique-atlas-3.1.2+1.21-neoforge.1.jar"
+hash = "7096bd9fc3353e9c3912c63340a824a59fffd0310a44cb9dee789183897d2a89"
 
 [[files]]
-file = "mods/antique-transport.pw.toml"
-hash = "891be2897e122a50bd68da39b9bd866812edc4a5d650994e154a90afd132fb63"
-metafile = true
+file = "mods/antique-transport-1.3.0+1.21.1-neoforge.1.jar"
+hash = "fd0040e514434dab31904f28bf26e2a9942292a9e0d4a24b072f9a04cf365a12"
 
 [[files]]
 file = "mods/architectury-api.pw.toml"
@@ -2191,11 +2189,6 @@ metafile = true
 [[files]]
 file = "mods/configurable.pw.toml"
 hash = "dcd40eb17aefa2335e200f44114967260f5b5bc3dbae4e426c19dabcc89a6019"
-metafile = true
-
-[[files]]
-file = "mods/connector.pw.toml"
-hash = "a38d72ca403e9064338be6e0cf69532768b0c1aba8f88703a8ce74c2734da522"
 metafile = true
 
 [[files]]
@@ -2763,9 +2756,8 @@ hash = "25fdaaf01546f4083aa00f85b6c1c4b67434f6d068d3e1725d4437576ca34a7a"
 metafile = true
 
 [[files]]
-file = "mods/surveyor.pw.toml"
-hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
-metafile = true
+file = "mods/surveyor-1.2.4+1.21-neoforge.1.jar"
+hash = "abf9d101845dddb9fb52755fb6eef1a4c6f8840712fd077f5ca02320f0cbde16"
 
 [[files]]
 file = "mods/tannery-better-leather.pw.toml"

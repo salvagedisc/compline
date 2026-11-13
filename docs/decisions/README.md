@@ -24,6 +24,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `fallow-ambiance` (core shaders, Polytone post shader); `fallow` 0.6.3 keeps what needs new geometry or game data |
 | [0019](0019-leaving-no-mans-land.md) | Leaving No Man's Land | Tectonic + Regions Unexplored + Geophilic kept (Lithosphere compared and set aside on 2026-11-13), world of radius 6,000; not played |
 | [0020](0020-clearings-keep-their-biome.md) | Clearings keep their biome | A clearing no longer replaces the biome: the server syncs a list of discs, the client shows the mist lifted and the vivid colours; climate, seasons, crops and fauna stay those of the place (`fallow` 0.8.0) |
+| [0021](0021-native-atlas.md) | The atlas runs natively | Surveyor, Antique Atlas 4 and Antique Transport ported to NeoForge in `salvagedisc/fallow-atlas`; Connector removed, Forgified Fabric API kept for Puddles & Floods |
 
 ## Template
 

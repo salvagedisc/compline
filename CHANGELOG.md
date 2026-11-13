@@ -96,6 +96,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
   - its pebble: flint now comes from gravel, the Twigs pebble still knaps into Overgeared's knappable rock;
   - the special case for the Friendly Moon dialogues in `npm run check-fr`, and its test `scripts/test/nml-dialogues.test.mjs`.
 - The pages on the Friendly Moon and on the No Man's Land fauna moved from `docs/plan/` to `docs/archive/plan/`.
+- Sinytra Connector, no longer needed by the atlas ([0021](docs/decisions/0021-native-atlas.md)). Forgified Fabric API stays for Puddles & Floods.
 
 ### Changed
 - Pack sort ([details](docs/plan/tri-du-pack.md)): Every Compat blacklist written before the permanent world; Where Winds Blow grass halved and wild wheat off; Farm & Charm and hamster crops follow Ecliptic's seasons; at most 2 Naturalist lions, tigers, brown and black bears of each species per player; rope costs 3 flax for 2, the rope arrow carries 8, the pulley needs a Create cogwheel and the flute reaches 24 blocks; Kaleidoscope kitchen knives go through the Overgeared forge.
@@ -136,6 +137,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Coloured lights: fire and soul lights target Supplementaries sconces. Supplementaries sconces are enabled again (they were off because No Man's Land had its own).
 - Twigs cobblestone bricks (with the mossy and cracked ones, slabs, stairs and walls) are back: they had been removed as duplicates of No Man's Land's.
 - Documentation brought up to date on 2026-11-13: decision 0019, roadmap (Lithosphere to compare, disc world, new name and new main thread still open), in-game tests (checks for Regions Unexplored and Geophilic added, those that needed No Man's Land removed), system pages.
+- Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/fallow-atlas`, jars in `pack/mods/` ([0021](docs/decisions/0021-native-atlas.md)). Maps and waypoints from before are kept.
 
 ### Fixed
 - A clearing changed the rules of the place: the vigil fire, the clearing lantern and the dissipator replaced the biome of their disc with a clearing biome that has no tags and its own climate, so the rain and the crop humidity of Ecliptic Seasons, the temperature of Cold Sweat, the fauna and the atlas tile were no longer those of the biome around. With `fallow` 0.8.0 the biome stays as generated; a clearing only lifts the mist, brings the vivid colours and the clearing music, and keeps monsters from spawning ([0020](docs/decisions/0020-clearings-keep-their-biome.md), [module](docs/plan/mod-fallow.md#clairiere-module)). The farm animals that appeared in every clearing are gone with the clearing biome: the animals are those of the place. Worlds made before: break the source or run `/fallow brume <radius>` to give the old cells back to their biome.
