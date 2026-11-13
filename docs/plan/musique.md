@@ -1,6 +1,6 @@
 # Music: True Adaptive Music and the `fallow` pack
 
-> Created on 2026-10-19 from the [music research](../archive/plan/recherche/2026-10-19/musique.md) and [decision 0010](../decisions/0010-musique.md). **Nothing has been heard in game.** The pack format was read in the source code of True Adaptive Music 2.9.3 (GPL-3.0, [repository](https://github.com/LilTOJustice/TrueAdaptiveMusic)); the 29 tracks are those kept by the maintainer after listening on 2026-10-19; the silences are paper choices, to be tuned by ear.
+> Created on 2026-10-19 from the [music research](../archive/plan/recherche/2026-10-19/musique.md) and [decision 0010](../decisions/0010-musique.md). **Nothing has been heard in game.** The pack format was read in the source code of True Adaptive Music 2.9.3 (GPL-3.0, [repository](https://github.com/LilTOJustice/TrueAdaptiveMusic)); the 29 tracks of that day (25 since 2026-11-13) are those kept by the maintainer after listening on 2026-10-19; the silences are paper choices, to be tuned by ear.
 
 ## The principle
 
@@ -34,8 +34,8 @@ pack/
 
 **Why a folder and not a zip.** TAM loads a folder as well as a zip (`MusicPack.fromDirectory`). A folder can be read and compared in git. The built-in editor works on it: "Edit pack" creates a copy `fallow.new`; "Export" turns it into `fallow.zip`. To feed a change back into the repository, copy `rules.json` (and `predicates/`) from `fallow.new` to `pack/trueadaptivemusicpacks/fallow/`, without the zip.
 
-**Where the 29 tracks come from.** Each one is an event in `sounds.json`:
-- 12 are already in the game and are not copied: 8 vanilla (C418, Lena Raine, Kumi Tanioka, Aaron Cherof) and 4 from No Man's Land (`nomad`, `drifter`, `anachronistic`, the `guidance` disc);
+**Where the 25 tracks come from** (29 until 2026-11-13: the four tracks of No Man's Land, `nomad`, `drifter`, `anachronistic` and the `guidance` disc, left with the mod, [0019](../decisions/0019-leaving-no-mans-land.md)). Each one is an event in `sounds.json`:
+- 8 are already in the game and are not copied: vanilla (C418, Lena Raine, Kumi Tanioka, Aaron Cherof);
 - 3 come from the *Supernova* resource pack (`rose_field`, `supernova`, `cliff_hanger`), downloaded from Modrinth and enabled by Default Options, just below `fallow-ambiance`. Its licence (CC-BY-NC-SA 4.0) allows use in an entirely free pack; we do not copy it;
 - 10 are free and shipped in `fallow-ambiance`: 6 by Scott Buckley and 3 by Kevin MacLeod (CC-BY 4.0, licence read on their pages on 2026-10-19), 1 by HoliznaCC0 (CC0). The credits are in `CREDITS.md`, next to the files.
 
@@ -46,7 +46,7 @@ pack/
 - Every tick, TAM walks the tree from the root: the **first** child whose predicate is true wins, then it descends to the deepest true child. A node with several predicates is true if any one of them is.
 - `trackDelay` and `trackDelayNoise` are in seconds: silence of `trackDelay ± trackDelayNoise` after each track. `enterDelay` waits before the first track of a node, `exitDelay` after leaving it.
 - `persistentNodeMusic = true` (`options.json`): a track plays to the end even if the node changes; this avoids cut-offs at borders. `ignorePersistence` reverses this setting for a node: the current track fades out.
-- `vanillaMusic`: TAM lets the vanilla music of the place play, hence that of the No Man's Land biomes.
+- `vanillaMusic`: TAM lets the vanilla music of the place play, hence that of the biomes of the world.
 - A track is a sound event (`fallow:music.sweden`) resolved by the client's sound manager. An event declared in a resource pack is enough (`SoundEventSoundInstance`).
 - A biome predicate accepts a tag: if the identifier is a registry tag, TAM tests membership (`BiomeIdentifier.matches`). Biome tags are sent to the client, so `fallow:brumeux` works without a server.
 - A `custom` predicate reads a file from `predicates/`. The client sends its text to the server, which decodes it as a **vanilla loot condition** (`LootItemCondition.CODEC`) and evaluates it with the player as `this` and their position as origin. TAM is therefore needed on the server. The condition is re-evaluated ten times less often than an ordinary predicate (`tickRate` × 10).
@@ -66,10 +66,10 @@ The selection comes from the listening page (the maintainer's sheet of 2026-10-1
 | 4 | Nether | `dimension` `minecraft:the_nether` | vanilla music | — | `vanillaMusic` |
 | 5 | Moon | `custom` `lune.json` | lullabies_3, lightless_dawn | 600 ± 300 | enter 60 s |
 | 6 | Aboard | `custom` `a_bord.json` | aerie, featherfall, cliff_hanger | 240 ± 120 | exit 30 s |
-| 7 | Underground | `height` below y = 40 | drifter, infinite_amethyst | 600 ± 300 | — |
-| 8 | Clearing | `biome` `fallow:clairiere`, `_froide`, `_chaude` | nomad, sweden, wet_hands, mice_on_venus, key, komorebi, left_to_bloom, rose_field, guidance | 300 ± 180 | enter 30 s |
+| 7 | Underground | `height` below y = 40 | infinite_amethyst | 600 ± 300 | — |
+| 8 | Clearing | `biome` `fallow:clairiere`, `_froide`, `_chaude` | sweden, wet_hands, mice_on_venus, key, komorebi, left_to_bloom, rose_field | 300 ± 180 | enter 30 s |
 | 8.1 | … at night | `night` | subwoofer_lullaby, the_long_dark, meditation_impromptu_02 | 600 ± 300 | enter 30 s |
-| 9 | Mist | `biome` `fallow:brumeux` | anachronistic, hymn_to_the_dawn, long_note_four | 900 ± 300 | enter 120 s |
+| 9 | Mist | `biome` `fallow:brumeux` | hymn_to_the_dawn, long_note_four | 900 ± 300 | enter 120 s |
 | 10 | Night | `night` | subwoofer_lullaby, the_long_dark, meditation_impromptu_02 | 720 ± 300 | — |
 | 11 | Day | `day` | — | — | `requireChildren`: with no known season, back to the root |
 | 11.1 | Spring | `custom` `printemps.json` | floating_dream, supernova | 480 ± 240 | — |
@@ -100,13 +100,13 @@ TAM has no English language file: its texts are fallbacks written in the code. `
 ## To test in game
 
 1. On first launch, is the `fallow` pack chosen (Default Options copy before TAM reads its options)? If not, choose it by hand in Options → Music & Sounds → True Adaptive Music, and look for another way.
-2. Does the pack load without "Problems detected"? Do the 32 `fallow:music.*` events appear in the editor's track list?
+2. Does the pack load without "Problems detected"? Do the 25 `fallow:music.*` events appear in the editor's track list?
 3. Server predicates: is `eclipticseasons:season` accepted (season in lower case)? Are the player's tags read by `entity_properties`? Enable "Debug display" in TAM's options to see the chosen node.
 4. `musique.js`: is `fallow_a_bord` set when standing on the deck of an airship in flight? `fallow_lune` during a blue moon (`/setLunarEvent`)?
 5. Silences: how many tracks per hour in the mist and in a clearing? Do tracks persist at borders? Does the volume of the free tracks (−23 LUFS) hold up between C418 and Lena Raine?
 6. Boss: facing the Wroughtnaut or Frostmaw, does the Mowzie's theme play alone? Monument: does *I Walk With Ghosts* replace the current track on approach, and does the Elderheart's drone stay audible?
 7. Is *Supernova* active (Options → Resource Packs)? Without it, its three tracks stay silent.
-8. No Man's Land `guidance` disc in a jukebox: does TAM lower its music?
+8. (Removed on 2026-11-13: the No Man's Land `guidance` disc no longer exists.)
 9. On macOS (no ffmpeg shipped by TAM): no error message, since everything is ogg?
 10. spark: cost of the predicate queries with 4 players, and of the Elderheart search within a 96-block radius.
 11. Listening in game: moving a track from one node to another is done in `rules.json` or in TAM's editor.

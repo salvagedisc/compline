@@ -28,7 +28,7 @@ Once the orbs are cancelled and the gains blocked (step 2 of the plan), **all th
 | Mining (vanilla) | Orbs from coal, diamond, emerald, lapis, redstone, quartz ores, sculk blocks and spawners | Nothing left | None | — |
 | Smelting (vanilla) | `experience` field of each furnace, smoker and blast furnace recipe, returned as orbs at the output | Nothing left | None | — |
 | Creatures killed | `xpReward` and `LivingExperienceDropEvent`: Mowzie's Mobs (13 creatures), Alex's Mobs, Friends & Foes, Adorable Hamster Pets | Nothing left | None | — |
-| Husbandry | Orbs on breeding: vanilla, Alex's Mobs (caiman, crocodile, platypus, turtle), Naturalist (egg layers), No Man's Land (turtle), Hybrid Aquatic (`hapi`), Friends & Foes (crab) | Nothing left | None | — |
+| Husbandry | Orbs on breeding: vanilla, Alex's Mobs (caiman, crocodile, platypus, turtle), Naturalist (egg layers), Hybrid Aquatic (`hapi`), Friends & Foes (crab) | Nothing left | None | — |
 | Fishing, trading, grindstone | Orbs from fishing, villager trades and grindstone disenchanting | Nothing left | None | — |
 | Advancements | `experience` reward: Icy's Better Horses (250, 100, 100), Exposure (`wildlife_archivist`, 150), vanilla "challenge" advancements | Nothing left; the advancement stays | None | — |
 | Experience bottles | Found in loot: Twigs, Critters and Companions (ferret digging), Envelope (`valuables`), Hybrid Aquatic (crate), Supplementaries (safe), vanilla chests | The thrown bottle gives nothing: a dead item | Remove the bottle from all loot | LootJS, `pack/kubejs/server_scripts/sans_xp.js` |
@@ -42,9 +42,10 @@ Once the orbs are cancelled and the gains blocked (step 2 of the plan), **all th
 | Enhanced Celestials | Blue moon: XP ×2; super blue moon: ×4 (`xp_amplifier`) | The XP bonus disappears. The moon keeps the luck (`minecraft:luck`) and the beacon range ×1.5 | None; see the anvil below | — |
 | Traveler's Backpack | Lapis backpack: 15% chance to double the XP picked up | Dead ability | Optional: remove it from the list | `pack/defaultconfigs/travelersbackpack-server.toml`, `[server.backpackAbilities]` `allowedAbilities`, without `travelersbackpack:lapis` |
 | Supplementaries | Tap on an XP jar, Red Merchant | Nothing left | None | — |
-| No Man's Land | Pots, large jars, anchor (`getExpDrop`) | Nothing left | None | — |
 | Others | Ghost, Critters and Companions ferret, Alex's Mobs phantom pickaxe, Curios, Moonlight, `/xp` command | Nothing left | None | — |
 | **Clumps** | This mod groups orbs together | It is no longer of any use | **Remove it from the pack** | Delete `pack/mods/clumps.pw.toml` |
+
+Until 2026-11-13 the table also listed No Man's Land (turtle orbs on breeding; pots, large jars and the anchor). The mod left the pack ([0019](../decisions/0019-leaving-no-mans-land.md)). The experience sources of Regions Unexplored have not been examined.
 
 ## Who consumes XP
 
@@ -229,7 +230,7 @@ Advised order: write and test the `xp` module, then release steps 1 to 5 in the 
 | 6 | `pack/defaultconfigs/exposure-server.toml` (new, partial) | `[lightroom]` the three `experience_*` at 0 |
 | 6 | `pack/defaultconfigs/travelersbackpack-server.toml` (new, partial) | `[server.backpackAbilities]` `allowedAbilities`: the default list of 10.1.39, without `travelersbackpack:lapis` |
 
-The partial config files follow the pack's practice (`supplementaries-common.toml`, `nomansland-common.toml`): NeoForge adds the missing keys on first launch.
+The partial config files follow the pack's practice (`supplementaries-common.toml`): NeoForge adds the missing keys on first launch.
 
 ### Deviations from the plan
 

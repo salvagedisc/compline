@@ -14,7 +14,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback |
 | [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `fallow` mod 0.2.0 |
 | [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
-| [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing on NML; Distant Horizons hidden by the mist, `horizon` module |
+| [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing; Distant Horizons hidden by the mist, `horizon` module; the "on NML" part superseded by 0019 |
 | [0012](0012-sacs-piles-jours.md) | Bags, stack sizes and day length | Reliable Backpacks and Comforts, Sensible Stackables, Better Days 30/15; Ecliptic Seasons kept |
 | [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `fallow` mod and Overgeared's knapping; no new mod |
 | [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
@@ -22,6 +22,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars |
 | [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `fallow` mod |
 | [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `fallow-ambiance` (core shaders, Polytone post shader); `fallow` 0.6.3 keeps what needs new geometry or game data |
+| [0019](0019-leaving-no-mans-land.md) | Leaving No Man's Land | Tectonic + Regions Unexplored + Geophilic kept, not seen in game; Lithosphere still to compare |
 
 ## Template
 

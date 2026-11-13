@@ -28,7 +28,7 @@ One model per species, the best after comparing models and animations, rather th
 Removed by the team. The Naturalist duck returns; the NML goose's offering line now targets that duck.
 
 ## No Man's Land (2026-10-19)
-Its remodelled and retextured animals do not go with Fresh Animations: back to vanilla animals, and its creatures (deer, goose, _bar à serpe_ (a fish), turtle, Frienderman) are disabled. The Companion stays. Details: [NML fauna](../plan/faune-nml.md).
+Its remodelled and retextured animals do not go with Fresh Animations: back to vanilla animals, and its creatures (deer, goose, _bar à serpe_ (a fish), turtle, Frienderman) are disabled. The Companion stays. Details: [NML fauna](../archive/plan/faune-nml.md).
 
 ## Rejected
 - Integrated Mowzie's Mobs: requires Quark, Supplementaries and Amendments (content pile-up).

@@ -1,6 +1,8 @@
+> Archived since 2026-11-13: No Man's Land left the pack ([decision 0019](../../decisions/0019-leaving-no-mans-land.md)). This page is kept as history.
+
 # The Friendly Moon: the central mystery of Fallow
 
-Idea 2 taken from Wayfarer ([research of 2026-10-19](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](../archive/plan/recherche/verif-2026-10-18/4-monde-et-objectifs.md).
+Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
 
 > **Status as of 2026-10-19.** Everything comes from reading the jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 then Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), decompiled with `javap` and Vineflower. A first pass on the test server without a player validated the server side ([results](#test-server-2026-10-19)). **Nothing has been tested with a player.** The list of [tests](#what-remains-to-be-checked-in-game) says what to check.
 
@@ -88,7 +90,7 @@ The blood moon is removed by two files that empty its dimension list (`"dimensio
 
 ### The white moon
 
-The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](../archive/plan/recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
+The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
 
 ## The chosen coexistence
 
@@ -129,7 +131,7 @@ If the maintainer prefers the white moon to continue for the other players, the 
 
 ## Under ATMOSPHERICS
 
-The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `fallow` 0.4.10 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](mod-fallow.md#the-friendly-moon-under-atmospherics)).
+The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `fallow` 0.4.10 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](../../plan/mod-fallow.md#the-friendly-moon-under-atmospherics)).
 
 ## What remains to be checked in game
 
@@ -139,7 +141,7 @@ The first in-game test (2026-10-28) found that the Friendly Moon never appeared 
 | L2 | `/ec lunarForecast` on a new world | No blood moon in the forecast. **Done on the test server** |
 | L3 | Alchemists' ruin, look at the carving for 2 s | Zoom and sound. Sleeping within the 3 days starts the dream |
 | L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`). Before `fallow` 0.4.10 the shadow could not show under ATMOSPHERICS (test C14) |
-| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`fallow` mod](mod-fallow.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `fallow` 0.4.10 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
+| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`fallow` mod](../../plan/mod-fallow.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `fallow` 0.4.10 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
 | L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then go to the Point | Within 2 s at most: Enhanced Celestials message and Fallow message, the blue moon fades. `/ec lunarForecast` shows the rest unchanged. The setting itself is validated on the server; the messages and detection of a real player remain |
 | L7 | Same with a player far from the Point | Nothing changes for them as long as nobody is at the Point |
 | L8 | Offerings: bone, flower, blank map, turtle scute | Lines in French, map of the pool, `scute` line in French |
@@ -148,7 +150,7 @@ The first in-game test (2026-10-28) found that the Friendly Moon never appeared 
 | L11 | Break "alchemy" jars | The crumpled note sometimes drops, name and lines in French |
 | L12 | A rainy night at the Point | Does the Friendly Moon appear in the rain? And does the Enhanced Celestials moon that returns when the rain stops set properly? |
 | L13 | Real distance of the Point with Fallow's generation | Between 1,000 and 2,500 blocks from the centre, on accessible terrain |
-| L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](../archive/plan/12-verification.md)) |
+| L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](12-verification.md)) |
 
 ## Test server (2026-10-19)
 

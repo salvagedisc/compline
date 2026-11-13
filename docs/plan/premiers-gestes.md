@@ -2,11 +2,11 @@
 
 With bare hands, you gather but you do not cut. Wood, raw or worked (trunks, planks, furniture, chests), needs an axe, rock needs a pickaxe, and the first tool is knapped from stone. Dirt, sand, gravel, leaves, plants and crops stay breakable by hand, otherwise nobody could start. Decision: [0013](../decisions/0013-premiers-gestes.md).
 
-Status: written on 2026-10-29. Checked on a test server (NeoForge with KubeJS, LootJS, Overgeared, Twigs, No Man's Land): the scripts load without error, 15 planks recipes are rewritten (11 vanilla, 4 NML), an oak log and a stone axe give 2 planks and give back the axe with 1 damage, the campfire takes flint, the wooden tools have no recipe. Not yet tested with a player.
+Status: written on 2026-10-29. Checked on a test server on 2026-10-29 (NeoForge with KubeJS, LootJS, Overgeared, Twigs and No Man's Land, which has since left the pack, [0019](../decisions/0019-leaving-no-mans-land.md)): the scripts load without error, 15 planks recipes are rewritten (11 vanilla, 4 NML), an oak log and a stone axe give 2 planks and give back the axe with 1 damage, the campfire takes flint, the wooden tools have no recipe. Not yet tested with a player.
 
 ## The chain, for a player
 
-1. **Bare hands.** Pick up NML pebbles (one chance in two of flint), gravel (flint, rarer), Twigs twigs (two sticks each, in forests, taigas and swamps), leaves (a stick 8% of the time). A trunk or a rock does not give way: the action bar says « Il te faut une hache » / « Il te faut une pioche » ("you need an axe / a pickaxe").
+1. **Bare hands.** Pick up gravel (flint), since 2026-11-13 the only source of flint on the ground (the No Man's Land pebble, one chance in two of flint, left with the mod), Twigs twigs (two sticks each, in forests, taigas and swamps), leaves (a stick 8% of the time). A trunk or a rock does not give way: the action bar says « Il te faut une hache » / « Il te faut une pioche » ("you need an axe / a pickaxe").
 2. **Knapped stone.** Flint used on bare `minecraft:stone` gives a knappable rock (Overgeared, 30% per strike, the flint breaks 15% of the time). A Twigs pebble also turns into a knappable rock in the inventory grid. Right-click with the rock opens Overgeared's knapping grid: axe, pickaxe, shovel, hoe heads, sword blade, hammer head. Head + stick in the 2 × 2 grid = the stone tool (Overgeared's own recipes).
 3. **Wood.** The stone axe fells the tree block by block (TreeChop); each chop costs durability. A log and an axe in the grid give **2 planks**; the axe stays in the grid and loses one point. Create's mechanical saw later gives 6 planks per log.
 4. **Fire.** A campfire is three sticks, three logs and **a flint** instead of coal: fire on the first day, before the furnace. It cooks and purifies water (Thirst Was Reclaimed).
@@ -14,7 +14,7 @@ Status: written on 2026-10-29. Checked on a test server (NeoForge with KubeJS, L
 
 ## The rule
 
-The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, NML's field mushroom, cut sugar cane, cattail and reeds, Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
+The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, cut sugar cane and, since 2026-11-13, Regions Unexplored's cattail (No Man's Land's plants left the tag with the mod), Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
 
 The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks, furniture, chests, crafting table, Create's wooden parts). To go back to raw wood only, replace `#minecraft:mineable/axe` by nothing in `fallow:outil_requis` with a datapack (`"replace": true`, `#minecraft:logs` alone); no recompilation.
 
@@ -25,7 +25,7 @@ The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks,
 | What | Before | After |
 |---|---|---|
 | Wooden tools (5) | Craftable | Recipes removed, removed from chest loot, hidden from EMI (`client_scripts/premiers_gestes.js`) |
-| Log → planks | 4 by hand | `PREMIERS_GESTES_PLANCHES_A_LA_HACHE` (2) with any axe in the grid, damaged by 1; every single-log shapeless planks recipe is rewritten (vanilla, NML, other woods), id `fallow:premiers_gestes/planches/<original id>`; the log reports how many |
+| Log → planks | 4 by hand | `PREMIERS_GESTES_PLANCHES_A_LA_HACHE` (2) with any axe in the grid, damaged by 1; every single-log shapeless planks recipe is rewritten (vanilla and the other mods' woods, Regions Unexplored's included), id `fallow:premiers_gestes/planches/<original id>`; the log reports how many |
 | Campfire | Sticks + logs + coal | Sticks + logs + flint |
 | Twigs pebble | 4 → cobblestone | Kept, plus 1 → `overgeared:knappable_rock` (`fallow:premiers_gestes/galet_a_tailler`) |
 | Leaves broken | Stick 2% | Plus an extra stick at `PREMIERS_GESTES_BATONS_FEUILLES` (6%) |
@@ -38,7 +38,7 @@ New chapter « Premiers gestes » (order 1, after Arriver; the other chapters mo
 
 ## Rejected
 
-- [Survivalist Essentials](https://modrinth.com/mod/survivalist-essentials) (MIT): configurable tool rule, saws, knife and plant fibre, loose rocks, bandages and bleeding. A second stone and rock system next to Overgeared, bandages duplicating NML's, one more book.
+- [Survivalist Essentials](https://modrinth.com/mod/survivalist-essentials) (MIT): configurable tool rule, saws, knife and plant fibre, loose rocks, bandages and bleeding. A second stone and rock system next to Overgeared, bandages duplicating those of another mod, one more book.
 - [No Tree Punching Remastered](https://modrinth.com/mod/no-tree-punching-remastered) (GPL-3.0): flint and copper tools, rocks, ceramic vessel. Copper tools duplicate Overgeared's, the vessel duplicates the bag.
 - [Primity](https://modrinth.com/mod/primity) (own licence): flint tools, cast iron, harder blocks. Cast iron duplicates Overgeared's steel chain.
 
@@ -48,11 +48,11 @@ New chapter « Premiers gestes » (order 1, after Arriver; the other chapters mo
 |---|---|---|
 | G1 | New world, bare hands on a log, then on stone | Nothing breaks; « Il te faut une hache », then « Il te faut une pioche », in French, not spammed |
 | G2 | Stone pickaxe on a diamond ore | « Ton outil n'est pas assez solide », the ore does not break |
-| G3 | Dirt, sand, gravel, leaves, snow, flowers, wheat, a pumpkin, cocoa, bamboo, NML reeds by hand | Break as in vanilla |
+| G3 | Dirt, sand, gravel, leaves, snow, flowers, wheat, a pumpkin, cocoa, bamboo, reeds by hand | Break as in vanilla |
 | G3b | A crafting table, a chest, planks, a Handcrafted chair by hand, then with an axe | « Il te faut une hache », then they break |
-| G4 | Walk around spawn | A flint within about 5 minutes (NML pebbles, gravel) |
+| G4 | Walk around spawn | A flint within about 5 minutes (gravel; the number to note, since the NML pebble is gone) |
 | G5 | Flint on stone, knap an axe head, head + stick | A stone axe; the tree falls with TreeChop; note the durability used per tree |
-| G6 | Oak log + axe; NML maple log + axe | 2 planks each, the axe stays in the grid with one point less; the server log says how many planks recipes were rewritten |
+| G6 | Oak log + axe; Regions Unexplored maple log + axe | 2 planks each, the axe stays in the grid with one point less; the server log says how many planks recipes were rewritten |
 | G7 | Craft and place a campfire with flint | Lit campfire; the « Le feu » quest completes |
 | G8 | Twigs pebble in the grid | A knappable rock |
 | G9 | EMI search "bois" | No wooden tools |

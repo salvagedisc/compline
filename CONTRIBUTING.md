@@ -4,7 +4,7 @@ Project guide: what the repository is, how to work in it, what lives outside it.
 
 ## Purpose
 
-Fallow is a Minecraft **1.21.1 / NeoForge 21.1.265** modpack built with packwiz: a permanent, almost empty world in the spirit of the No Man's Land trailer, where the mist lifts wherever life is brought back ([vision](docs/vision.md)). The repository is the **source of truth** for the pack: mod list, configs, scripts, the custom `fallow` mod, its resource packs and the decisions behind them.
+Fallow is a Minecraft **1.21.1 / NeoForge 21.1.265** modpack built with packwiz: a permanent, almost empty world in the spirit of the No Man's Land trailer (the mod itself left the pack on 2026-11-13), where the mist lifts wherever life is brought back ([vision](docs/vision.md)). The repository is the **source of truth** for the pack: mod list, configs, scripts, the custom `fallow` mod, its resource packs and the decisions behind them.
 
 ## Principles
 
@@ -32,6 +32,7 @@ Manual scripts, run from the repository root and committed with their output (ne
 |---|---|
 | `python3 scripts/ambiance/weather.py` | Rain, rain curtain and glint textures (`fallow-ambiance`, `fallow` mod) |
 | `python3 scripts/ambiance/palette.py <neoforge client resources jar>` | Olive grass and foliage colour maps; the jar is in `mods-custom/fallow/build/moddev/artifacts/` |
+| `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `fallow:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/fallow-ambiance.md)) |
 | `python3 scripts/interface/build.py` | The `fallow-interface` pack from GUI Revision (calls `menus.py`, which can also run alone) |
 | `python3 scripts/textures/build.py` | The `fallow-textures` pack from Vanilla Evolved |
 
@@ -92,4 +93,4 @@ Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local expor
 
 ## Current state
 
-As of 2026-11-06: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 155 Modrinth mods plus the custom `fallow` mod 0.6.3, decisions 0001 to 0018, CI green on `main`. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).
+As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 156 Modrinth mods plus the custom `fallow` mod 0.7.0, decisions 0001 to 0019, CI green on `main`. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).

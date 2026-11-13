@@ -1,3 +1,5 @@
+> Archived since 2026-11-13: No Man's Land left the pack ([decision 0019](../../decisions/0019-leaving-no-mans-land.md)). This page is kept as history.
+
 # No Man's Land wildlife goes back to vanilla
 
 Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with Fresh Animations; we keep the vanilla animals, and cut the other creatures and the items that no longer have a source. Everything below is read from the jars (NML 1.6.1, Mixed Litter 1.2.2 which it bundles, Fresh Animations v1.11, Wildex 3.0.0, KubeJS 2101.7.2). **Nothing has been tested in game yet.**

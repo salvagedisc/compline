@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the pack, updated on 2026-11-01 (after PRs #1 to #32): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
+Complete list of the pack, updated on 2026-11-13 (after PRs #1 to #32 and the change of terrain base, [0019](decisions/0019-leaving-no-mans-land.md)): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -15,13 +15,14 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| No Man's Land | `no-mans-land` | ✅ (1.6.3) | CS | The world: biomes, ruins ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); its animals and creatures are disabled, vanilla animals remain ([NML fauna](plan/faune-nml.md)) |
-| Tectonic | `tectonic` | ✅ (3.0.28, not seen in game) | CS | The terrain under NML's biomes: continents, mountain ranges, valleys, underground rivers; height -64 to 320, never to change once the world exists; requires Lithostitched without declaring it ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Tectonic | `tectonic` | ✅ (3.0.28, not seen in game) | CS | The relief of the world: continents, mountain ranges, valleys, underground rivers; height -64 to 320, never to change once the world exists; requires Lithostitched without declaring it ([0011](decisions/0011-tectonic-streams-distant-horizons.md), [0019](decisions/0019-leaving-no-mans-land.md)). Lithosphere is still to be compared with it in game |
+| Regions Unexplored | `regions-unexplored` | ✅ (0.6.3, added 2026-11-13, not seen in game) | CS | The biomes on Tectonic's terrain: new woods and plants, cave biomes; MIT; requires Lithostitched ([0019](decisions/0019-leaving-no-mans-land.md)). French translation by the pack, mist and colours per biome by `scripts/ambiance/biomes.py` ([ambiance](plan/fallow-ambiance.md)) |
+| Geophilic | `geophilic` | ✅ (3.7, added 2026-11-13, not seen in game) | CS | Vanilla biomes reworked, no new block ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](archive/plan/12-verification.md#the-monument-guardians-report-6)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
-| Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed, a single moon at a time with the Friendly Moon ([friendly moon](plan/lune-amie.md)). Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
+| Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed. Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
 | Antique Transport | `antique-transport` | ✅ (added 2026-10-25) | CS | Create trains, tracks, stations and Sable ships appear on the atlas |
 | Surveyor Map Framework | `surveyor` | ✅ | CS | Shared exploration for the atlas |
@@ -92,11 +93,11 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Quark | `quark` | ✅ (4.1-487) | CS | The essentials, selected modules ([0005](decisions/0005-quark.md)) |
-| Supplementaries | `supplementaries` | ✅ | CS | The essentials ([0006](decisions/0006-supplementaries.md)) |
+| Supplementaries | `supplementaries` | ✅ | CS | The essentials ([0006](decisions/0006-supplementaries.md)); its sconces are enabled again since 2026-11-13 (they were off while No Man's Land had its own) |
 | Amendments | `amendments` | ✅ | CS | 3D lanterns, signs, cauldrons |
 | Handcrafted | `handcrafted` | ✅ | CS | Furniture |
-| Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed ([pack sort](plan/tri-du-pack.md)) |
-| Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including NML's |
+| Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed; cobblestone bricks back since 2026-11-13 ([pack sort](plan/tri-du-pack.md)) |
+| Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including those of Regions Unexplored |
 | HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
 | Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench |
 | Immersive Enchanting | `immersive-enchanting` | ✅ (beta) | CS | Enchanting becomes lore: ancient books found, shelved near the table, levels paid in materials ([0008](decisions/0008-enchantement.md)); structures disabled, French translation |
@@ -127,14 +128,14 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | AmbientSounds | `ambientsounds` | ✅ | C | Biome sounds |
 | Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Echo, muffling |
 | True Adaptive Music | `true-adaptive-music` | ✅ | CS | Music by situation (mist, clearing, season, moon, airship), long silences ([0010](decisions/0010-musique.md)) |
-| `fallow` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 29 tracks chosen by the team |
+| `fallow` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 25 tracks chosen by the team (29 until No Man's Land left) |
 | Sounds | `sound` | ✅ | C | 170 interface, item and block sounds |
 | Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
-| Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, No Man's Land wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
+| Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Shine | `shine` | ✅ (2.0.2, seen in game in a test instance) | C | Bloom without shaders, set low in `config/shine.json` (strength 2, threshold 0.75): a halo around fires and lanterns only; its default made the sunlit landscape glow in large blobs. Its coloured light stays off, Polytone owns it ([0016](decisions/0016-vent-et-lumiere.md), [0017](decisions/0017-averse-et-rayons.md)) |
 | Atmospheric Rain Backport | `atmospheric-rain-backport` | ✅ (1.2, not seen in game) | C | Drops on the screen when looking up in the rain ([0017](decisions/0017-averse-et-rayons.md)) |
 | Cool Rain Reforged | `cool-rain-reforged` | ✅ (1.0.2, not seen in game) | C | The sound of rain on metal, glass, fabric, leaves and water, muffled indoors ([0017](decisions/0017-averse-et-rayons.md)) |
@@ -144,7 +145,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Soft Imprints | `snow-imprints` | ✅ (2.8.0, not seen in game) | C | Footprints in snow, sand and mud ([0017](decisions/0017-averse-et-rayons.md)) |
 | Wavify | `wavify` | ✅ (1.2.1, not seen in game) | C | Waves breaking on shores and rivers ([0017](decisions/0017-averse-et-rayons.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `fallow` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
-| Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle NML's leaves |
+| Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle the leaves of Regions Unexplored |
 
 ## Interface and comfort
 
@@ -170,7 +171,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.6.3 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon and Friendly Moon visible under ATMOSPHERICS, mist), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); rain colour and sun rays are in `fallow-ambiance` since 0.6.3, [0018](decisions/0018-effets-en-pack-de-ressources.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
+| Mod `fallow` 0.7.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); rain colour and sun rays are in `fallow-ambiance` since 0.6.3, [0018](decisions/0018-effets-en-pack-de-ressources.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
@@ -201,7 +202,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 | `fallow-interface` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-interface.md)) | Fallow's interface, built from GUI Revision and GUI Revision Compats: vanilla screens, 14 mods' screens, HUD and Questlog journal in mist and sage, titles in French ([credits](../pack/resourcepacks/fallow-interface/CREDITS.md)) |
 | `fallow-textures` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-textures.md), added 2026-10-29, not seen in game) | Blocks and items from Vanilla Evolved (CC BY-NC-SA 4.0), without its sky, foliage colours and creatures ([credits](../pack/resourcepacks/fallow-textures/CREDITS.md), [0015](decisions/0015-textures.md)) |
-| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, Particular entries for NML, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
+| `fallow-ambiance` | — | ✅ (`pack/resourcepacks/`, [page](plan/fallow-ambiance.md)) | ATMOSPHERICS presets, Polytone colours and lights, moon texture, sound events and 10 free tracks of the music pack ([credits](../pack/resourcepacks/fallow-ambiance/CREDITS.md)) |
 
 ## Libraries
 
@@ -229,7 +230,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
 | Dark Coffee GUI, Dark Coffee GUI - Extras, Modded Coffee GUI | All rights reserved and the author does not answer; replaced on 2026-10-26 by `fallow-interface`, built from free-licensed packs |
-| Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([NML fauna](plan/faune-nml.md)) |
+| Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([wildlife page, archived](archive/plan/faune-nml.md)) |
 | Traveler's Backpack, Sophisticated Backpacks | Too many upgrades and screens; Reliable Backpacks chosen on 2026-10-26 ([0012](decisions/0012-sacs-piles-jours.md)) |
 | ParCool! | Disabled at the team's request |
 | Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
@@ -239,7 +240,9 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
 | Carry On | Incompatible with Aeronautics |
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |
-| Downhill Rivers, Terralith | Streams Reflowing and Tectonic chosen instead ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Downhill Rivers, Terralith | Streams Reflowing and Tectonic chosen instead ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); Terralith measured again on 2026-11-12, alone or with Tectonic ([0019](decisions/0019-leaving-no-mans-land.md)) |
+| No Man's Land | Left the pack on 2026-11-13 at the team's decision of 2026-11-11: Regions Unexplored and Geophilic replace its biomes, the Friendly Moon thread goes with it ([0019](decisions/0019-leaving-no-mans-land.md)) |
+| Biomes O' Plenty, Oh The Biomes We've Gone, Nature's Spirit, Lithosphere | Measured against Regions Unexplored on 2026-11-12 and not kept; Lithosphere is still to be compared in game ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | Drip Sounds | Beta build for 1.21.8, duplicates AmbientSounds and Sounds in caves; removed on 2026-10-25 |
 | Seamless Loading Screen | Last build 2024-10, Sodium overwrites the screen it draws; removed on 2026-10-25 |
 | Mezz config | Orphan library (only JEI ≥ 19.55 needs it, the pack is on 19.51); removed on 2026-10-25 |
@@ -253,10 +256,10 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |
 | Minimaps, waypoints | Contrary to the vision |
 | Animal Husbandry, Spoiled | Judged unreliable |
-| Let's Do Bakery, Meadow, Wilder Nature | Duplicates or biomes in conflict with NML |
+| Let's Do Bakery, Meadow, Wilder Nature | Duplicates or biomes in conflict with the terrain base (then No Man's Land); not re-evaluated since |
 | Graze | Makes animal husbandry self-sufficient |
 | Integrated Mowzie's Mobs | Too many dependencies |
-| Spawn, Environmental | Add biomes (NML conflict) |
+| Spawn, Environmental | Add biomes (conflict with the terrain base, then No Man's Land); not re-evaluated since |
 | Prehistorum, Jurassic Saga, Jurassic Revived, Jurassic Reborn | Prehistory set aside for now |
 | YUNG's Better *, Structory, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns | Too many structures or RPG orientation ([0004](decisions/0004-structures.md)) |
 | C2ME, Noisium, Ksyxis, FogRule | Alpha, not up to date or marginal gain ([0007](decisions/0007-ambiance-performance.md)) |
