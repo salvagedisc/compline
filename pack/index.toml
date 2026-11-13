@@ -2154,11 +2154,11 @@ metafile = true
 
 [[files]]
 file = "mods/antique-atlas-3.1.2+1.21-neoforge.1.jar"
-hash = "bb8f06a84813f891bb6b23194e1d109dd6b5305f5367f7097c6bd4a486696045"
+hash = "143155968b67c6aa5b6f64959dbafb2ea77c85687d9fa9d217828430bf66cb3d"
 
 [[files]]
 file = "mods/antique-transport-1.3.0+1.21.1-neoforge.1.jar"
-hash = "63a6117e6f4afbfcc23b55108b8128637aa2499c3582c1ae69c0955591fd1a8c"
+hash = "2a18e2b5bfebebbf663a216c1db1f079f3b50f28131a95d82d4faea8e7708fcc"
 
 [[files]]
 file = "mods/archies-dinosaurs.pw.toml"
@@ -2831,7 +2831,7 @@ metafile = true
 
 [[files]]
 file = "mods/surveyor-1.2.4+1.21-neoforge.1.jar"
-hash = "a630fb7d6e91cc1112e13b0636a8c7a13b72e68834d440b1b680fc5af1378404"
+hash = "e34b087ed079f7afa92829b0af9b213dea515d1b4e5b7bee854918932f77d1f9"
 
 [[files]]
 file = "mods/tannery-better-leather.pw.toml"
