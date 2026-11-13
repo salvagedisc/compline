@@ -25,7 +25,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0019](0019-leaving-no-mans-land.md) | Leaving No Man's Land | Tectonic + Regions Unexplored + Geophilic kept (Lithosphere compared and set aside on 2026-11-13), world of radius 6,000; not played |
 | [0020](0020-clearings-keep-their-biome.md) | Clearings keep their biome | A clearing no longer replaces the biome: the server syncs a list of discs, the client shows the mist lifted and the vivid colours; climate, seasons, crops and fauna stay those of the place (`tilth` 0.8.0) |
 | [0021](0021-spelunkery-and-dinosaurs.md) | Spelunkery and Archie's Dinosaurs | Both join the pack; the Nether and End dinosaurs move to cave biomes, Spelunkery is sorted like the other mods, the streams keep their thaw, the dinosaurs' library is kept as a jar |
-| [0023](0023-rename-to-tilth.md) | The pack is renamed Tilth | `fallow` was taken on Modrinth: pack, custom mod, namespaces, resource packs, logo and repository become Tilth / `tilth`; worlds made before lose the mod's blocks |
+| [0023](0023-rename-to-tilth.md) | The pack is renamed Tilth | `fallow` was taken on Modrinth: pack, custom mod, namespaces, resource packs and repository become Tilth / `tilth`; worlds made before lose the mod's blocks |
 | [0024](0024-native-atlas.md) | The atlas runs natively | Surveyor, Antique Atlas 4 and Antique Transport ported to NeoForge in `salvagedisc/tilth-atlas`; Connector removed, Forgified Fabric API kept for Puddles & Floods |
 
 ## Template
