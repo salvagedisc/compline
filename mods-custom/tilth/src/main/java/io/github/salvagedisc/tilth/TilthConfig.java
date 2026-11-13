@@ -25,6 +25,7 @@ public final class TilthConfig {
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
+    private static final ModConfigSpec.BooleanValue BORD_ENABLED;
     private static final ModConfigSpec.BooleanValue AVERSE_ENABLED;
     private static final ModConfigSpec.BooleanValue AVERSE_CURTAINS;
     private static final ModConfigSpec.DoubleValue AVERSE_CURTAIN_OPACITY;
@@ -160,6 +161,13 @@ public final class TilthConfig {
                         "Client et serveur doivent avoir la même valeur.")
                 .define("enabled", true);
         common.pop();
+
+        common.comment("Module bord : le monde est un disque. Le cercle de data/tilth/monde/bord.json (centre et rayon, écrit par",
+                "scripts/terrain/disc.py) ne se franchit pas : le joueur, sa monture ou son bateau sont ramenés en deçà.").push("bord");
+        BORD_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : plus de bord, on peut naviguer sans fin sur l'océan.")
+                .define("enabled", true);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -221,6 +229,10 @@ public final class TilthConfig {
 
     public static boolean outilsEnabled() {
         return read(COMMON_SPEC, OUTILS_ENABLED);
+    }
+
+    public static boolean bordEnabled() {
+        return read(COMMON_SPEC, BORD_ENABLED);
     }
 
     public static boolean averseEnabled() {

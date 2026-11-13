@@ -2877,8 +2877,8 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
-file = "mods/tilth-0.9.3.jar"
-hash = "538d8d0fdbd28e565b149a4a1589e38aa263b964c5508d41b38e88eabece7c9a"
+file = "mods/tilth-0.10.0.jar"
+hash = "2929aaeadee0361234096b29d635bd79457c2bf51d3e726746a1e27f32db4320"
 
 [[files]]
 file = "mods/toucan.pw.toml"
