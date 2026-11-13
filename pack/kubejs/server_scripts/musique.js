@@ -61,7 +61,7 @@ function musiquePresDUnMonument(player) {
 function musiqueMettreAJour(server) {
   const lune = musiqueLuneLevee(server)
   server.getPlayerList().getPlayers().forEach(player => {
-    const overworld = String(player.level.dimension().location()) === 'minecraft:overworld'
+    const overworld = String(player.level.dimension) === 'minecraft:overworld'
     musiqueTag(player, 'fallow_lune', lune && overworld)
     musiqueTag(player, 'fallow_a_bord', musiqueABord(player))
     musiqueTag(player, 'fallow_monument', musiquePresDUnMonument(player))

@@ -88,6 +88,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, D6].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
+- [ ] **Dinosaurs** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): a Lushsaur in a lush or bioshroom cave, an Obsidiceratops in a redstone cave (`/locate structure ec_ad:obsidiceratops`), a Therimoss in a jungle, a Coralosaur nest in a warm ocean, a Sculkraptor in the deep dark. Note how each moves and looks next to Fresh Animations, whether the Obsidiceratops finds lava to drink and what it breaks.
+- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure fallow:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
+- [ ] **Amber**: an amber crater and a big one (`/locate structure ec_ad:crater`, `ec_ad:big_crater`): whole, no floating block around, not too many per kilometre. Archie's guidebook and his trades read in French.
 
 ## Session 6: terrain, Create and airships
 
@@ -97,6 +100,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Colours next to vanilla biomes**: at a border between a Regions Unexplored biome and a vanilla one, grass, leaves and water do not jump; the snowy Regions Unexplored biomes let snowflakes fall.
 - [ ] **French names**: blocks, items and biomes of Regions Unexplored in EMI and F3 are in French (maple = érable, pine = pin, willow = saule, redwood = séquoia, larch = mélèze, cypress = cyprès, palm = palmier, kapok = kapokier, wisteria = glycine, blackwood = bois noir); no English text left.
 - [ ] **Biome rules in Regions Unexplored biomes**: horses of Icy's Better Horses in a prairie, a maple forest and a steppe; a Naturalist hedgehog or turkey in a deciduous forest, a capybara in a bayou; the wind of the plains in a prairie and of the swamps in a bayou (grass sway, gusts).
+- [ ] **Spelunkery underground** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): iron, coal and copper ores in andesite, diorite, granite and tuff; rock salt under mountains, a nephrite geode deep down, cave mushrooms. Mine a diamond ore: a rough diamond, polished at the grindstone. Everything reads in French [TR13, TR14].
+- [ ] **Thaw of a stream**: ice on a stream melts into flowing stream water [W11].
 - [ ] Highest summit below Y 320, an airship clears the range [W5]. In winter, snow consistent with altitude [W6].
 - [ ] Boat and Sable hull on a brook: the hull drifts, the airship in flight does not [W7]. Create pump and boiler on a brook [W8].
 - [ ] **Dissipator**: nothing at 16 rpm; at 64 the engineer's goggles climb to 100% and a 64 disc is converted; on overload the charge resets to zero [K8]. On an airship: note what happens [K9].

@@ -67,6 +67,24 @@ Chunky stays until test H11 has confirmed the Distant Horizons pregeneration, th
 | Mowzie's Mobs | Boss weapons and armour (Wroughtnaut axe and helmet, earthrend gauntlet, sculptor staff, sol visage, geomancer set): the guardians give their blessing and nothing else; technical items. The ice crystal stays |
 | Other wildlife mods | Hybrid Aquatic `uni`, Naturalist silverfish and endermite, netherite hamster armour and trim, Critters and Companions dragonfly wing and acorn hat (the hamster's stays) |
 
+### Spelunkery and Archie's Dinosaurs
+
+Added on 2026-11-13 ([0021](../decisions/0021-spelunkery-and-dinosaurs.md)) and sorted by the same rules, in the same two scripts (`TRI_OBJETS_SPELUNKERY`, `TRI_OBJETS_DINOSAURES`).
+
+| Mod | Removed | Why |
+|---|---|---|
+| Spelunkery | Nephrite charm, carved nephrite, nephrite siphon, fountain and diode | They store and give back experience ([0009](../decisions/0009-xp.md)); nephrite stays a stone to build with |
+| Spelunkery | Depth gauge, magnetic compass | Height and position in numbers, like the altimeter and the globe's coordinates |
+| Spelunkery | Tuning fork, echo fork | They locate amethyst geodes and creatures through walls, like the echolocator |
+| Spelunkery | Compression blast miner, sulfur and its block, End stone pebble, crown of fools, eggplant, iron pick on a stick | Netherite, soul sand valleys, the End and the Wither are out of reach ([0004](../decisions/0004-structures.md)); the last two are unfinished items without a source. The miner also breaks bedrock |
+| Spelunkery | Raw lead, silver, bismuth and tin nuggets, bismuth nugget, jade shards, the 12 lead, silver and jade ores, copper nugget | Metals and mods the pack does not have; Create's copper nugget is the one in use |
+| Spelunkery | Recipe `spelunkery:gunpowder` | It asked for sulfur |
+| Archie's Dinosaurs | Netherite theri claws | Netherite |
+
+Kept on purpose: the rope ladder (tangle roots and sticks; it rolls down like scaffolding and does not lift loads, so the pulley keeps its place), the parachute (it breaks a fall, it does not fly), the item magnet, the handheld compactor, Mine-o-mite, the trader Archie (his map is a blank one and his compass the vanilla one).
+
+The ids were checked against the registry of the test server; the ore drops were read there too (`/loot spawn … mine`): a diamond ore gives a rough diamond, a deepslate iron ore raw iron and raw iron nuggets.
+
 **Steam 'n' Rails** (about 1,110 entries): two patterns in the same scripts remove the recipes and hide from EMI the tracks of every wood except oak, spruce and birch (andesite, monorail and tieless tracks stay), the blackstone, ender and phantom tracks, and every dyed locometal and hazard stripe block. The paint brush still paints placed blocks; about 215 entries remain.
 
 The Overgeared plates stay next to Create's sheets: the iron and copper armour of the Overgeared anvil asks for `overgeared:iron_plate` by item, not by tag.
@@ -100,3 +118,5 @@ The maintainer asked whether a mod changes how these levels play; otherwise we d
 10. **TR10** Icy's Better Horses: Paint at maximum bond does not mark structures, the harness does not glide, the Andalusian does not save from a death.
 11. **TR11** Structures: no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure in a new world; the Umvuthana monastery still exists.
 12. **TR12** To decide in game: does the Hybrid Aquatic depth charge break blocks, what do the ominous conch and hook summon, are Ghost's ghosts and the giant crabs hostile and where, does the Naturalist whistle teleport like Icy's.
+13. **TR13** Spelunkery in EMI: no nephrite charm, siphon or fountain, no depth gauge, magnetic compass, tuning fork or echo fork, no sulfur, no lead, silver or jade ore; gunpowder has no recipe with saltpeter. A diamond ore gives a rough diamond, the grindstone polishes it.
+14. **TR14** To decide in game: is the rope ladder too cheap next to the rope, does the echo of the forks deserve to come back.

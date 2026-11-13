@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.1 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -38,6 +38,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
 | `dissipateur` | both | Create | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
+| (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 
 ## `ciel` module
 
@@ -239,6 +240,16 @@ Fixes between two mods of the pack, outside any module: they have no switch and 
 
 **Checked** in a development client with only Punchy! 2.8g, Sensible Stackables and their libraries, with the pack's configs: before the fix, a probe logging every tick showed `max_stack_size` read as 64 by the walk and 32 by `get` with stone in hand, and the hand stayed lowered and moving with no stone drawn; after it, the stone is drawn and only Punchy!'s light idle sway remains. An iron sword was steady in both cases.
 
+### Streams Reflowing and Spelunkery: the ice of a stream
+
+**Symptom** (test server log, 2026-11-13): `Mixin apply for mod streamsreflowing failed streamsreflowing.mixins.json:IceMeltMixin`, as soon as Spelunkery is in the pack.
+
+**Cause.** When ice melts, Streams Reflowing replaces the water that `IceBlock.melt` places with stream water where a stream runs (`StreamIceMelt.meltsInto`), so that a stream frozen by winter flows again in spring. Spelunkery's `IceMixin` rewrites `melt` in full (it also lets salt melt ice). Mixin does not let a mixin inject into a method another mixin of the same priority has merged, and both have the default priority: Streams Reflowing's hook was dropped and the ice of a stream thawed into still water.
+
+**Fix** (0.9.1). `compat.IceThawMixin`, priority 1100, wraps the same `setBlockAndUpdate` call inside the method Spelunkery merged and asks Streams Reflowing's own `StreamIceMelt.meltsInto` (looked up by reflection) which water to place. Salt still melts ice. `require = 0`; applied only with Streams Reflowing (`streamsreflowing`) and Spelunkery (`spelunkery`).
+
+**Checked** on the test server: the debug log shows `Mixing compat.IceThawMixin from fallow.mixins.json into net.minecraft.world.level.block.IceBlock` with no error after it. The thaw itself has not been seen in game (test W11). If Streams Reflowing renames `StreamIceMelt`, the log says "Dégel des ruisseaux : règle de Streams Reflowing introuvable" and ice melts into plain water.
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -308,6 +319,7 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 | W8 | Create pump and boiler on a stream | Water accepted, Create channels do not overflow |
 | W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with Tectonic alone |
 | W10 | A clearing crossed by a stream | Note whether the stream stays misty (river biome not convertible); if so add the river biomes to `fallow:peut_devenir_clairiere` |
+| W11 | A stream frozen by winter, then spring; ice placed on a stream next to a torch | The ice thaws into flowing stream water, not into a still pool. The log still shows Streams Reflowing's `IceMeltMixin` warning at start: expected, `compat.IceThawMixin` does its work |
 
 ### Clearings
 

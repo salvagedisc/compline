@@ -97,7 +97,7 @@ Vanilla surface biomes also receive the mist, and so does every Regions Unexplor
   - warm: `#9cc456`, `#7fae3c`, `#3a92c4`.
 - Vanilla biomes are not touched: their grass follows the temperature palette, which a fixed colour would overwrite.
 - Usage, from the repository root, after each update of Regions Unexplored: `python3 scripts/ambiance/biomes.py <regions-unexplored jar>`. The preset must then be renamed by hand to be applied again. Run manually, committed with its output, never in CI.
-- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome (and each surface biome of `OTHER_MODELS`, outside the tags of its own mod) to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`.
+- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome (and each surface biome of `OTHER_MODELS`, outside the tags of its own mod) to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`. Placements chosen by hand (a dinosaur moved to a cave biome, [0021](../decisions/0021-spelunkery-and-dinosaurs.md)) are in its `PLACED` table.
 
 The values are paper choices, not seen in game. Until 2026-11-13 the same rule was applied by hand to 20 `nml_*.json` files for No Man's Land's biomes (for example `old_growth_forest` grass `#87b44c` → `#7e9d56`); they were deleted with the mod.
 

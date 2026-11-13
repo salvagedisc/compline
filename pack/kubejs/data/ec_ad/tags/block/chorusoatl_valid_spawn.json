@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "regions_unexplored:prismoss",
+    "regions_unexplored:deepslate_prismoss",
+    "minecraft:stone",
+    "minecraft:deepslate"
+  ]
+}
