@@ -1,0 +1,21 @@
+{
+  "biomes": [
+    "regions_unexplored:barley_fields",
+    "regions_unexplored:clover_plains",
+    "regions_unexplored:flower_fields",
+    "regions_unexplored:grassland",
+    "regions_unexplored:highland_fields",
+    "regions_unexplored:poppy_fields",
+    "regions_unexplored:prairie",
+    "regions_unexplored:pumpkin_fields",
+    "regions_unexplored:rocky_meadow",
+    "regions_unexplored:shrubland"
+  ],
+  "priority": 40,
+  "base_strength_multiplier": 1.05,
+  "gust_strength_multiplier": 1.1,
+  "gust_frequency_multiplier": 1.0,
+  "turbulence_multiplier": 0.8,
+  "direction_instability_multiplier": 0.9,
+  "altitude_influence": 0.7
+}

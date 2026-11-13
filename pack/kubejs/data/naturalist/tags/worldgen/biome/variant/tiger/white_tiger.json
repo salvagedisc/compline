@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "regions_unexplored:bamboo_forest",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:frozen_tundra",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:pine_slopes",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:tundra",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "regions_unexplored:chalk_cliffs",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:highland_fields",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:mountains",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:old_growth_boreal_taiga",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:old_growth_golden_boreal_taiga",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:redwoods",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:rocky_meadow",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:sparse_redwoods",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:towering_cliffs",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:windswept_maple_forest",
+      "required": false
+    }
+  ]
+}
