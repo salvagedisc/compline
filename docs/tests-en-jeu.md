@@ -89,7 +89,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 - [ ] **Dinosaurs** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): a Lushsaur in a lush or bioshroom cave, an Obsidiceratops in a redstone cave (`/locate structure ec_ad:obsidiceratops`), a Therimoss in a jungle, a Coralosaur nest in a warm ocean, a Sculkraptor in the deep dark. Note how each moves and looks next to Fresh Animations, whether the Obsidiceratops finds lava to drink and what it breaks.
-- [ ] **Chorusoatl**: stay a few minutes in a prismachasm (`/locate biome regions_unexplored:prismachasm`): do Chorusoatls spawn, can they fly there, is the place too crowded or too dangerous. Its egg hatches in full darkness.
+- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure fallow:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
 - [ ] **Amber**: an amber crater and a big one (`/locate structure ec_ad:crater`, `ec_ad:big_crater`): whole, no floating block around, not too many per kilometre. Archie's guidebook and his trades read in French.
 
 ## Session 6: terrain, Create and airships

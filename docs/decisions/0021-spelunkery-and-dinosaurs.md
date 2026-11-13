@@ -18,21 +18,21 @@ Both mods join the pack, with these adjustments.
 **Spelunkery** (0.4.4)
 - Kept as the mod makes it: stone-variant ores, rough gems to polish at the grindstone, raw nuggets, salt, nephrite as a stone, cave mushrooms, sluices and channels, wooden rails, rope ladder, glowsticks, hammer and chisel, item magnet, compactor, parachute, Mine-o-mite.
 - Sorted out, like every other mod ([pack sort](../plan/tri-du-pack.md#spelunkery-and-archies-dinosaurs)): the stored experience (nephrite charm, carved nephrite, siphon, fountain, diode), the depth gauge and the magnetic compass (height and position in numbers), the tuning fork and the echo fork (they locate geodes and creatures), what needs the Nether, the End or netherite, the ores and nuggets of metals the pack does not have.
-- `slimes_spawn_in_all_caves = false`: slimes keep their vanilla places. Provisional, to be confirmed by the team.
+- Its settings are left at their defaults. Slimes in every cave change nothing here: In Control! already denies every natural slime in the Overworld (`pack/config/incontrol/spawn.json`); the mod's slimes come from a slime block dropped in a cauldron.
 - `fallow` 0.9.1 gives the streams their thaw back ([compatibility fix](../plan/mod-fallow.md#streams-reflowing-and-spelunkery-the-ice-of-a-stream)).
 - Its biome lists are extended to Regions Unexplored by `biome_rules.py`, like those of the other mods.
 
 **Archie's Dinosaurs** (1.0.4)
 - The Lushsaur also lives in the bioshroom caves.
 - The Obsidiceratops moves to the redstone caves: its structure is placed like the Lushsaur's (`underground` instead of `in_nether`, which finds no place in the Overworld).
-- The Chorusoatl moves to the prismachasm: its spawn tag and the blocks it accepts under its feet. Its egg already hatches outside the End, in full darkness.
+- The Chorusoatl moves to the prismachasm. In the End it spawns like any animal; in the Overworld the animals of the surface fill the spawn cap and it never came (three minutes in a prismachasm in the test client). It gets a nest like the three others: `fallow:chorusoatl`, a floor of deepslate prismoss, an air pocket and one Chorusoatl, written by `scripts/structures/chorusoatl_nest.py` and placed like the Lushsaur's. Its egg already hatches outside the End, in full darkness.
 - Therimoss (jungles), Coralosaur (warm ocean, and Hybrid Aquatic's coral reef), Sculkraptor (deep dark), the amber craters and fossils and the trader Archie are left as the mod makes them. Sparse Structures already spreads the craters by two.
 - Only the netherite claws are sorted out.
 - Astemir Re-Lib 1.2.985 is committed as a jar in `pack/mods/` (MIT licence, in the jar). `npm run check-deps` reads the jars of that folder too.
 
 ## Consequences
 - Archie's Dinosaurs is young (first published on 2026-10-28), All Rights Reserved, without public source or issue tracker, and its library moves every day. An update of the mod may ask for a newer library: update both together, by hand. If the mod is abandoned it leaves the pack with its blocks; this has to be settled before the permanent world starts.
-- The three moved dinosaurs live in places the mod did not plan. Seen on the test server: the Lushsaur and the Obsidiceratops are generated in their caves. Not seen: the natural spawn of the Chorusoatl in the prismachasm, and how any of them behaves there ([tests](../tests-en-jeu.md)).
+- The three moved dinosaurs live in places the mod did not plan. Seen on the test server: the Lushsaur, the Obsidiceratops and the Chorusoatl are generated in their caves. Not seen: how any of them behaves there, and whether a Chorusoatl can fly in a prismachasm ([tests](../tests-en-jeu.md)).
 - Sulfur has no source, so Spelunkery's gunpowder recipe is removed; saltpeter stays a desert stone.
 - Diamonds, emeralds, lapis and redstone now come out rough and are polished at a grindstone; Create's crushing wheels still give the finished gem.
 

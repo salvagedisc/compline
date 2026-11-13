@@ -119,4 +119,4 @@ The maintainer asked whether a mod changes how these levels play; otherwise we d
 11. **TR11** Structures: no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure in a new world; the Umvuthana monastery still exists.
 12. **TR12** To decide in game: does the Hybrid Aquatic depth charge break blocks, what do the ominous conch and hook summon, are Ghost's ghosts and the giant crabs hostile and where, does the Naturalist whistle teleport like Icy's.
 13. **TR13** Spelunkery in EMI: no nephrite charm, siphon or fountain, no depth gauge, magnetic compass, tuning fork or echo fork, no sulfur, no lead, silver or jade ore; gunpowder has no recipe with saltpeter. A diamond ore gives a rough diamond, the grindstone polishes it.
-14. **TR14** To decide in game: is the rope ladder too cheap next to the rope, are slimes missed in caves (`slimes_spawn_in_all_caves`), does the echo of the forks deserve to come back.
+14. **TR14** To decide in game: is the rope ladder too cheap next to the rope, does the echo of the forks deserve to come back.

@@ -305,10 +305,6 @@ file = "config/simplebackups-common.toml"
 hash = "6f8767311c678896646bb75b2113077d1e5601a078615031a2e7b6d24aa0f187"
 
 [[files]]
-file = "config/spelunkery-common.toml"
-hash = "8f32331d261bde350abd190ec7052bc7c06cd155e9456b2d050929c4284bfddb"
-
-[[files]]
 file = "config/streamsreflowing-client.properties"
 hash = "b3cbcd608c06f1eda2dbe212398184f68908f0768261c2db0b3c28636db507de"
 
@@ -1457,6 +1453,10 @@ file = "kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
 
 [[files]]
+file = "kubejs/data/fallow/structure/chorusoatl.nbt"
+hash = "6b8bb16f9a63d69ea19a308b4472754f31eb53a7868fb5cceef7f50bc0f85736"
+
+[[files]]
 file = "kubejs/data/fallow/tags/item/pile/16.json"
 hash = "6274996e7b94e7ce56eb627485b5f8b208b418158366bfde56535b28a01496d8"
 
@@ -1495,6 +1495,14 @@ hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
 [[files]]
 file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_swamps.json"
 hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
+file = "kubejs/data/fallow/worldgen/structure/chorusoatl.json"
+hash = "222d652e7bf3289784d0b877fb3421ef7d6b43367c8e808b765a06f8b27fbbb2"
+
+[[files]]
+file = "kubejs/data/fallow/worldgen/structure_set/chorusoatl.json"
+hash = "c97a95891efe7c8845b46b7174a3213ddac3ecee9f15a51a7cbdd265bd85e42e"
 
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/collections/snowy_forest.json"
