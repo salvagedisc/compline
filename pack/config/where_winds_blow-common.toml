@@ -1,4 +1,4 @@
-# Fallow : herbe deux fois moins dense que par défaut, pour un monde presque vide.
+# Tilth : herbe deux fois moins dense que par défaut, pour un monde presque vide.
 # Ne touche que les nouveaux chunks : à figer avant de prégénérer le monde permanent.
 # Le blé sauvage reste coupé (0.0 par défaut) : Farm & Charm a déjà ses céréales sauvages.
 denseGrassDensityMultiplier = 4.0

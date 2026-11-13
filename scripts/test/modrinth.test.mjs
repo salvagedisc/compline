@@ -13,7 +13,7 @@ test('lookupVersions posts sha512 hashes and maps the response', async () => {
   const map = await lookupVersions(['h1', 'h2'], { fetch });
   assert.equal(calls[0].url, 'https://api.modrinth.com/v2/version_files');
   assert.deepEqual(JSON.parse(calls[0].init.body), { hashes: ['h1', 'h2'], algorithm: 'sha512' });
-  assert.match(calls[0].init.headers['User-Agent'], /fallow/);
+  assert.match(calls[0].init.headers['User-Agent'], /tilth/);
   assert.deepEqual(map.get('h1'), { projectId: 'p1', versionId: 'v1', versionNumber: '1.0' });
   assert.equal(map.has('h2'), false);
 });

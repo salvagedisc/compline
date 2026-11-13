@@ -1,4 +1,4 @@
-// Fallow : santé maximale perdue à la mort, regagnée en explorant.
+// Tilth : santé maximale perdue à la mort, regagnée en explorant.
 // Chaque mort retire un cœur de santé maximale, jusqu'à un plancher. L'« Éclat de vie »,
 // trouvé en explorant, en rend un. Voir docs/plan/sante.md.
 //
@@ -25,11 +25,11 @@ const SANTE_COEUR_ANCIEN_INTERVALLE = 100 // ticks entre deux vérifications par
 
 // ---- Identifiants (ne pas changer sur un monde en cours) ----
 const SANTE_ATTRIBUT = 'minecraft:generic.max_health'
-const SANTE_MODIFICATEUR = 'fallow:mort'
-const SANTE_CLE_PERDUS = 'fallow_sante_perdus'
-const SANTE_CLE_REVEIL = 'fallow_sante_reveil'
-const SANTE_CLE_COEURS_ANCIENS = 'fallow_sante_coeurs_anciens'
-const SANTE_ECLAT = 'fallow:eclat_de_vie'
+const SANTE_MODIFICATEUR = 'tilth:mort'
+const SANTE_CLE_PERDUS = 'tilth_sante_perdus'
+const SANTE_CLE_REVEIL = 'tilth_sante_reveil'
+const SANTE_CLE_COEURS_ANCIENS = 'tilth_sante_coeurs_anciens'
+const SANTE_ECLAT = 'tilth:eclat_de_vie'
 const SANTE_COEUR_ANCIEN = 'ancient_remnants:elderheart'
 const SANTE_SON = 'minecraft:block.amethyst_block.chime'
 
@@ -48,7 +48,7 @@ function santeCoeursRestants(player) {
   return SANTE_COEURS_DEPART - santePerdus(player)
 }
 
-// Pose (ou retire) le modificateur fallow:mort selon les cœurs perdus.
+// Pose (ou retire) le modificateur tilth:mort selon les cœurs perdus.
 function santeAppliquer(player) {
   const perdus = santePerdus(player)
   if (perdus > 0) {
@@ -88,7 +88,7 @@ PlayerEvents.respawned(event => {
   player.health = player.maxHealth
   if (player.persistentData.getBoolean(SANTE_CLE_REVEIL)) {
     player.persistentData.remove(SANTE_CLE_REVEIL)
-    const cle = santePerdus(player) >= SANTE_PERTE_MAX ? 'fallow.sante.reveil_plancher' : 'fallow.sante.reveil'
+    const cle = santePerdus(player) >= SANTE_PERTE_MAX ? 'tilth.sante.reveil_plancher' : 'tilth.sante.reveil'
     player.tell(Text.gray(Text.translatable(cle, santeCoeursRestants(player))))
   }
 })
@@ -101,7 +101,7 @@ ItemEvents.rightClicked(SANTE_ECLAT, event => {
 
   const perdus = santePerdus(player)
   if (perdus <= 0) {
-    player.setStatusMessage(Text.gray(Text.translatable('fallow.sante.plein', SANTE_COEURS_DEPART)))
+    player.setStatusMessage(Text.gray(Text.translatable('tilth.sante.plein', SANTE_COEURS_DEPART)))
     return event.cancel()
   }
 
@@ -112,7 +112,7 @@ ItemEvents.rightClicked(SANTE_ECLAT, event => {
   player.swing(event.hand, true)
   if (!player.isCreative()) objet.shrink(1)
   santeEffets(player)
-  player.setStatusMessage(Text.red(Text.translatable('fallow.sante.rendu', santeCoeursRestants(player), SANTE_COEURS_DEPART)))
+  player.setStatusMessage(Text.red(Text.translatable('tilth.sante.rendu', santeCoeursRestants(player), SANTE_COEURS_DEPART)))
   return event.cancel()
 })
 
@@ -138,6 +138,6 @@ PlayerEvents.tick(event => {
     player.persistentData.putString(SANTE_CLE_COEURS_ANCIENS, vus ? vus + ';' + id : id)
     player.give(Item.of(SANTE_ECLAT, SANTE_COEUR_ANCIEN_ECLATS))
     santeEffets(player)
-    player.tell(Text.gray(Text.translatable('fallow.sante.coeur_ancien')))
+    player.tell(Text.gray(Text.translatable('tilth.sante.coeur_ancien')))
   })
 })

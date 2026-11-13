@@ -1,6 +1,6 @@
-# Fallow : réglages serveur d'Exposure appliqués à chaque nouveau monde.
+# Tilth : réglages serveur d'Exposure appliqués à chaque nouveau monde.
 # Seules les clés changées sont écrites ; NeoForge complète le reste avec les valeurs par défaut.
-# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Fallow (défauts : 2, 4 et 5).
+# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Tilth (défauts : 2, 4 et 5).
 
 [lightroom]
 	#Amount of experience awarded per printed black and white Photograph. Default: 2
@@ -11,5 +11,5 @@
 	experience_chromatic = 0
 
 [capture]
-	#Fallow : pas d'images venues de fichiers ou d'Internet ; le projecteur interplanaire est retiré. Default: true
+	#Tilth : pas d'images venues de fichiers ou d'Internet ; le projecteur interplanaire est retiré. Default: true
 	projecting_enabled = false

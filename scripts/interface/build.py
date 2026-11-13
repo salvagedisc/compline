@@ -1,12 +1,12 @@
-"""Builds the fallow-interface resource pack from free-licensed packs.
+"""Builds the tilth-interface resource pack from free-licensed packs.
 
 Base: GUI Revision by Vixel and GUI Revision Compats by Fyoncle (both
 CC BY-NC-SA 4.0). The script downloads the pinned releases, keeps the files that concern
-vanilla and the mods of the pack, and adapts them to Fallow: GUI Revision's
-panels with their relief, its trays and its corner ornaments stay, Fallow's own
+vanilla and the mods of the pack, and adapts them to Tilth: GUI Revision's
+panels with their relief, its trays and its corner ornaments stay, Tilth's own
 details (details.py) are laid over them.
 
-- colours (palette.py): GUI Revision's greys become Fallow's mist; each kind of
+- colours (palette.py): GUI Revision's greys become Tilth's mist; each kind of
   screen takes a family of its own on its top panel, every grey keeping its
   brightness so that the relief stays: wood for the crafting table, the loom,
   the cartography table and the traders, forge for the furnaces, moss for the
@@ -16,11 +16,11 @@ details (details.py) are laid over them.
   hoppers and the mounts stay mist;
 - names: the names GUI Revision drew in English in a few textures are removed;
   every screen's name stands on GUI Revision's plate, centred over its top edge,
-  in its engraved capitals (lettering.py), drawn in game by the fallow mod from
-  what this script writes (`assets/fallow/titres.json`, the plates of each
+  in its engraved capitals (lettering.py), drawn in game by the tilth mod from
+  what this script writes (`assets/tilth/titres.json`, the plates of each
   family, the letters): it follows the game's language and a container's name;
 - details (details.py): one leaf pattern, tone on tone, on a single grid over
-  every large stretch of panel, under the slots; every slot redrawn as Fallow's
+  every large stretch of panel, under the slots; every slot redrawn as Tilth's
   rounded well, without GUI Revision's cast shadow; tiled wells where the player
   and the mounts stand; the crafting table's frame around the other 2x2 and 3x3
   grids that have room for it; a slim fletched arrow and a slim plus, engraved,
@@ -30,17 +30,17 @@ details (details.py) are laid over them.
   the chest's, the ender chest's), in its colours, where no slot, widget or name
   plate is;
 - mods without a GUI Revision compat: their vanilla-grey screens, read from the
-  jars cached by `npm run check-fr`, take the mist and Fallow's slots, wells and
+  jars cached by `npm run check-fr`, take the mist and Tilth's slots, wells and
   arrows, their own drawings keep their colours;
 - sprites: lists, toasts and containers' sprites follow the same tones by
   brightness, highlights, selected states and progress in lantern light;
   vanilla textures GUI Revision lacks (the crafter, the statistics...) are added
   and dressed alike;
-- HUD: the hotbar as a bar with rounded ends, Fallow's slots in it;
+- HUD: the hotbar as a bar with rounded ends, Tilth's slots in it;
 - widgets: buttons, sliders, checkboxes, tabs, text fields and scrollers are
   drawn by widgets.py;
 - menus: their shading and separators in moss and bone, and the title screen's
-  panorama, drawn by panorama.py; the Fallow logo (logo.py) and the FancyMenu
+  panorama, drawn by panorama.py; the Tilth logo (logo.py) and the FancyMenu
   and Drippy layouts of the title and loading screens are written by menus.py;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
@@ -74,7 +74,7 @@ import widgets
 from palette import BRUME, FAMILIES, lum
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "pack" / "resourcepacks" / "fallow-interface"
+OUT = ROOT / "pack" / "resourcepacks" / "tilth-interface"
 CACHE = ROOT / ".cache" / "interface"
 JARS = ROOT / ".cache" / "jars"
 
@@ -117,7 +117,7 @@ KEEP_ORIGINAL = {
 FILL = BRUME[(193, 198, 198)]
 OUTLINE = BRUME[(28, 28, 31)]
 BONE = BRUME[(218, 231, 230)]
-# Vanilla container greys -> Fallow, for the mods without a compat.
+# Vanilla container greys -> Tilth, for the mods without a compat.
 VANILLA = {
     (198, 198, 198): FILL,
     (139, 139, 139): BRUME[(131, 139, 139)],
@@ -226,13 +226,13 @@ WIDGETS = {
 # Texts blanked in every screen: the player's inventory label (the screens that
 # carry a name plate no longer write it; the others keep their own title).
 LANG = {"container.inventory": " "}
-# The colour the game writes labels in (0x404040), and Fallow's: the moss ink,
+# The colour the game writes labels in (0x404040), and Tilth's: the moss ink,
 # set by the text shader, for the titles mods write themselves.
 TITLE_GREY = 0x40
 TITLE_INK = (60, 76, 56)
 
 # GUI Revision's plus of the anvil and the cartography table, cleared (x0, y0,
-# x1, y1, inclusive) and replaced by Fallow's slim plus, centred on (cx, cy).
+# x1, y1, inclusive) and replaced by Tilth's slim plus, centred on (cx, cy).
 PLUSES = {"anvil.png": ((55, 50, 63, 60), (59, 55)), "cartography_table.png": ((18, 37, 27, 47), (23, 42))}
 # The mods whose screens take the name plate, by the namespace of their menus:
 # their panels are dressed here in the mist, their top edge on the texture's first
@@ -240,7 +240,7 @@ PLUSES = {"anvil.png": ((55, 50, 63, 60), (59, 55)), "cartography_table.png": ((
 PLATED_MODS = {m: "brume" for m in (
     "cold_sweat", "farm_and_charm", "naturalist", "overgeared", "quark", "supplementaries")}
 # GUI Revision's small triangles between a screen's inputs and its result (x0,
-# y0, x1, y1, inclusive), cleared and replaced by Fallow's arrow, centred on them.
+# y0, x1, y1, inclusive), cleared and replaced by Tilth's arrow, centred on them.
 TRIANGLES = {"crafting_table.png": (102, 39, 106, 47), "anvil.png": (110, 50, 114, 58),
              "smithing.png": (79, 52, 83, 60), "grindstone.png": (101, 37, 105, 45),
              "villager.png": (198, 40, 202, 48), "cartography_table.png": (48, 38, 51, 45)}
@@ -274,16 +274,16 @@ MOD_SLOTS = {
     "assets/cold_sweat/textures/gui/screen/sewing_gui.png": [(42, 52, 18, 18)],
     "assets/immersiveenchanting/textures/gui/container/enchanting_table.png": [(232, 168, 18, 20)],
 }
-# JEI's recipe arrow, empty and filled, and its plus: drawn again as Fallow's.
+# JEI's recipe arrow, empty and filled, and its plus: drawn again as Tilth's.
 JEI_ARROWS = ("assets/jei/textures/jei/atlas/gui/recipe_arrow.png",
               "assets/jei/textures/jei/atlas/gui/recipe_arrow_filled.png")
 JEI_PLUS = "assets/jei/textures/jei/atlas/gui/recipe_plus_sign.png"
-# JEI's slots, drawn again as Fallow's; its brewing stand's arrow, laid at (42, 2)
+# JEI's slots, drawn again as Tilth's; its brewing stand's arrow, laid at (42, 2)
 # on its background, and the lit one over it.
 JEI = "assets/jei/textures/jei/atlas/gui/"
 JEI_SLOTS = (JEI + "slot.png", JEI + "output_slot.png")
 
-# Sprites (under textures/gui/sprites) and screens whose greys follow Fallow's tones
+# Sprites (under textures/gui/sprites) and screens whose greys follow Tilth's tones
 # by brightness; the colours a mod or the game gives meaning to (red crosses,
 # green ticks, pings, boss bars) are not greys and stay.
 RETONED = tuple("assets/minecraft/textures/gui/" + d for d in (
@@ -297,7 +297,7 @@ RETONED = tuple("assets/minecraft/textures/gui/" + d for d in (
     "assets/emi/textures/gui/buttons.png", "assets/emi/textures/gui/widgets.png",
 )
 # Sprites GUI Revision leaves in colours of their own (purple, wood, blue, gold):
-# "all" takes every pixel to Fallow's tones by brightness, "light" the same with
+# "all" takes every pixel to Tilth's tones by brightness, "light" the same with
 # the sprite lifted to the panel's brightness (a button), "dim" a step darker (a
 # disabled state), "lantern" to the lantern's light, "glow" its pale light (a highlight).
 SPRITE_MODES = {f"assets/minecraft/textures/gui/sprites/{k}.png": v for k, v in {
@@ -426,7 +426,7 @@ def top_panel(im, height, whole=False):
 
 
 def recolour(im, family="brume", region=()):
-    """GUI Revision's greys to Fallow's: the family's in the region, mist elsewhere."""
+    """GUI Revision's greys to Tilth's: the family's in the region, mist elsewhere."""
     px = im.load()
     fam = FAMILIES[family]
     for y in range(im.height):
@@ -530,14 +530,14 @@ def lantern_tone(v):
     return ramp[-1][1]
 
 
-FALLOW = {c for f in FAMILIES.values() for c in f.values()} | details.TONES | {
+TILTH = {c for f in FAMILIES.values() for c in f.values()} | details.TONES | {
     LANTERN_D, LANTERN, LANTERN_L, LANTERN_EDGE}
 
 
 def retone(im, mode, box=None, family=BRUME):
     """Takes greys ("neutral"), every colour ("all"), every colour a step darker
-    ("dim") or to the lantern's light ("lantern") to Fallow's tones by brightness;
-    Fallow's own colours stay. "light" and "glow" first lift the sprite's main
+    ("dim") or to the lantern's light ("lantern") to Tilth's tones by brightness;
+    Tilth's own colours stay. "light" and "glow" first lift the sprite's main
     colour to the panel's brightness or the lantern's pale light (a button, its
     highlight). Returns whether a pixel changed."""
     px = im.load()
@@ -551,7 +551,7 @@ def retone(im, mode, box=None, family=BRUME):
     for y in range(y0, y1):
         for x in range(x0, x1):
             r, g, b, a = px[x, y]
-            if not a or (mode in ("neutral", "all") and (r, g, b) in FALLOW):
+            if not a or (mode in ("neutral", "all") and (r, g, b) in TILTH):
                 continue
             if mode == "neutral" and max(r, g, b) - min(r, g, b) > 16:
                 continue
@@ -662,10 +662,10 @@ def plate_box(name, im):
 
 
 def write_titles(out, textures):
-    """What the fallow mod reads to draw the names: each screen's top edge and
+    """What the tilth mod reads to draw the names: each screen's top edge and
     family, the families' plates and inks, the letters."""
-    fallow = out / "assets" / "fallow"
-    sprites = fallow / "textures" / "gui" / "sprites" / "titre"
+    tilth = out / "assets" / "tilth"
+    sprites = tilth / "textures" / "gui" / "sprites" / "titre"
     sprites.mkdir(parents=True, exist_ok=True)
     families = {}
     for family in FAMILIES:
@@ -682,8 +682,8 @@ def write_titles(out, textures):
             "border": {"left": side, "top": 7, "right": side + 1, "bottom": 7}}}}, indent=2) + "\n")
         families[family] = {"encre": palette.hexa(tones["ink"]), "lumiere": palette.hexa(tones["light"])}
     atlas, table = lettering.atlas()
-    (fallow / "textures" / "gui" / "titre").mkdir(parents=True, exist_ok=True)
-    atlas.save(fallow / "textures" / "gui" / "titre" / "lettres.png")
+    (tilth / "textures" / "gui" / "titre").mkdir(parents=True, exist_ok=True)
+    atlas.save(tilth / "textures" / "gui" / "titre" / "lettres.png")
     screens = {}
     for cls, (tex, family, _, _, *centre) in SCREENS.items():
         cx = centre[0] if centre else 88
@@ -693,7 +693,7 @@ def write_titles(out, textures):
         if cls in RAISED:
             entry["dessus"] = RAISED[cls]
         screens[cls] = entry
-    (fallow / "titres.json").write_text(json.dumps({
+    (tilth / "titres.json").write_text(json.dumps({
         "ecrans": screens, "mods": PLATED_MODS, "sans": [], "familles": families,
         "lettres": {"largeur": atlas.width, "hauteur": lettering.HEIGHT, "espace": lettering.SPACE,
                     "table": table},
@@ -853,7 +853,7 @@ def big_panel(path, im):
 
 def dress_vanilla(im, n, frame):
     """A screen drawn in vanilla's greys (a mod's, or the game's where GUI Revision
-    has none) dressed like the others: the mist, Fallow's slots, wells and
+    has none) dressed like the others: the mist, Tilth's slots, wells and
     arrows; returns whether it had vanilla's greys."""
     slots = details.find_vanilla_slots(im)
     wells = details.find_black_wells(im)
@@ -902,7 +902,7 @@ def draw_bar(im, x0, y0, w, h):
 
 
 def draw_hud(hud):
-    """The hotbar as a bar with rounded ends and Fallow's rounded slots; the
+    """The hotbar as a bar with rounded ends and Tilth's rounded slots; the
     selection and the offhand slot to match, in the lantern's light."""
     bar = Image.new("RGBA", (182, 22))
     draw_bar(bar, 0, 0, 182, 21)
@@ -988,7 +988,7 @@ def dress_sprites(vanilla):
         return png(vanilla.read(f"assets/minecraft/textures/{path}.png"))
 
     # the goal's and challenge's frames keep their own outline (round, notched),
-    # in the colours Fallow gives the task's square one, pixel role by pixel role
+    # in the colours Tilth gives the task's square one, pixel role by pixel role
     for state in ("obtained", "unobtained"):
         task, ref = ours(f"advancements/task_frame_{state}"), game(f"gui/sprites/advancements/task_frame_{state}")
         roles = {}
@@ -1062,7 +1062,7 @@ def dress_sprites(vanilla):
 
 def round_slot_sprites():
     """The slots the game draws as sprites over a screen, square in the game,
-    rounded like Fallow's: the bundle's slots (its blocked one keeping its
+    rounded like Tilth's: the bundle's slots (its blocked one keeping its
     cross), the generic slot, and the crafter's disabled slot."""
     sprites = OUT / "assets" / "minecraft" / "textures" / "gui" / "sprites" / "container"
     for name in ("slot", "bundle/slot", "bundle/blocked_slot"):
@@ -1300,7 +1300,7 @@ def main():
             family = sprite_family(path)
             region = {(x, y) for y in range(im.height) for x in range(im.width)}
 
-        # where Fallow's slots, arrows and plus go, GUI Revision's own cleared
+        # where Tilth's slots, arrows and plus go, GUI Revision's own cleared
         slots = [(x - 1, y - 1, w + 2, h + 2) for x, y, w, h in details.find_slots(im) + cells]
         if vanilla_screen:
             slots += [(x - 1, y - 1, 18, 18) for x, y in EXTRA_SLOTS.get(name, [])]
@@ -1340,7 +1340,7 @@ def main():
                 for x in range(44, 68):
                     px[x, y + 17] = px[x, y]
             details.lit_arrow(im, 44, 17, pts=pts)
-            touch_up(im, (82, 0, 95, 13), "fill")  # its plus, Fallow's
+            touch_up(im, (82, 0, 95, 13), "fill")  # its plus, Tilth's
             details.draw_arrow(im, 84, 2, rows=details.PLUS)
         if path in REFRAMED:
             seed, extra = REFRAMED[path]
@@ -1424,10 +1424,10 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         im.save(dest, optimize=True)
 
-    # the names on their plates, drawn by the fallow mod
+    # the names on their plates, drawn by the tilth mod
     write_titles(OUT, textures)
 
-    # the texts mods write on their screens in 0x404040, in Fallow's moss green:
+    # the texts mods write on their screens in 0x404040, in Tilth's moss green:
     # the game's text shader, recolouring that one grey
     lang = OUT / "assets" / "minecraft" / "lang"
     lang.mkdir(parents=True, exist_ok=True)
@@ -1435,7 +1435,7 @@ def main():
         (lang / f"{code}.json").write_text(json.dumps(LANG, indent=2) + "\n")
     shader = vanilla.read("assets/minecraft/shaders/core/rendertype_text.fsh").decode()
     grey, ink = TITLE_GREY / 255, ", ".join(f"{c / 255:.4f}" for c in TITLE_INK)
-    shader = shader.replace("    fragColor = ", f"""    // Fallow: texts written in 0x404040 become moss green
+    shader = shader.replace("    fragColor = ", f"""    // Tilth: texts written in 0x404040 become moss green
     if (all(lessThan(abs(vertexColor.rgb - vec3({grey:.5f})), vec3(0.002)))) {{
         color.rgb = texture(Sampler0, texCoord0).rgb * vec3({ink}) * ColorModulator.rgb;
     }}

@@ -1,4 +1,4 @@
-# Item stacks and backpacks for Fallow
+# Item stacks and backpacks for Tilth
 
 Date: 2026-10-26. Pack: Minecraft 1.21.1, NeoForge 21.1.265, KubeJS 2101.7.2 build 377, Create 6.0.10, Quark 4.1-487, Curios 9.5.1, Traveler's Backpack 10.1.40. The repository was not modified.
 
@@ -6,7 +6,7 @@ Method: opened web pages (list at the end of the document), Modrinth API, and ja
 
 ## Summary
 
-- Stacks: the simplest and safest is the **Sensible Stackables 3.1.2** mod (MIT, 2026-10-24). It reads tags, syncs the client, ignores items with durability. A table of `fallow:pile/N` tags in KubeJS decides the categories.
+- Stacks: the simplest and safest is the **Sensible Stackables 3.1.2** mod (MIT, 2026-10-24). It reads tags, syncs the client, ignores items with durability. A table of `tilth:pile/N` tags in KubeJS decides the categories.
 - Bags: **Reliable Backpacks 1.9.1** (MIT, 2026-09-07). A single bag, 3 rows, dyeing, Curios "back" slot. Fallback: Quark bag + Quark Backpack Plus.
 - Without Traveler's Backpack, we lose the canteen-tank (the `sac` module), the sleeping bag and a few effects. Replacement plan below.
 
@@ -34,7 +34,7 @@ The names cited by the maintainer ("Stack Size Controller", "StackUp", "Realisti
 ### A.3 Traps
 
 Verified or read in the code:
-- **Existing stacks**: see A.1. The Fallow world has not been started, so setting the stacks **before** the first game avoids the whole problem.
+- **Existing stacks**: see A.1. The Tilth world has not been started, so setting the stacks **before** the first game avoids the whole problem.
 - **Loot**: `LootTable` splits stacks that are too big (comparison of the count with `getMaxStackSize`, then `Math.min`). Chests, Lootr (same path, to test) and mobs are safe.
 - **Recipes**: a result larger than the stack is not rejected at load. The risk is in machines that insert without splitting. So **keep each stack at least equal to the biggest recipe result**. Jar scan: Kaleidoscope Cookery outputs 9 cooked meats per pot, Farm & Charm 16 fences and separators and 12 yeasts, Create 16 glass panes per craft and 18 nuggets from the crusher, Overgeared 9 steel nuggets. Rules: ingots, nuggets, gems, cooked dishes: 16 minimum. Glass panes, rails, bars: 32.
 - **Create 6**: vault `vaultCapacity` = 20 slots per block (1 to 2048). The capacity in items goes down with the stacks: plan to raise the value if needed. The package (`PackageItem`) has 9 slots, so 9 stacks of the new size: Frogports carry less per package. Create goes through `getMaxStackSize`, nothing special to set.
@@ -52,7 +52,7 @@ Not verified (to test in game): Traveler's/Reliable Backpacks with reduced stack
 - Vintage Story: logs stack at 16 in the inventory (wiki "Log"). The wiki "Ground Storage" gives stack capacities **on the ground** (ingots 64, planks 48, firewood 32, charcoal 16), not inventory stacks.
 - Realism Craft (Bedrock): no reliable source found on its values. So I give no figure about it.
 
-### A.5 Proposed table for Fallow
+### A.5 Proposed table for Tilth
 
 Idea: three common tiers (64, 32, 16), two heavy (8, 4), one single (1).
 
@@ -71,8 +71,8 @@ Idea: three common tiers (64, 32, 16), two heavy (8, 4), one single (1).
 | Empty bottles | 16 | `minecraft:glass_bottle` | 64 |
 | Full bottles (water, honey, potions) | 8 | `minecraft:potion`, TWR bottles | 1 or 16 |
 | Full buckets, boats, beds, saddles, minecarts | 1 | unchanged | 1 |
-| Create parts: shafts, gears, chains, tubes, mechanisms, casings | 16 | tag `fallow:pile/16` | 64 |
-| Create machines, vaults, tanks, Aeronautics engines | 4 | tag `fallow:pile/4` | 64 |
+| Create parts: shafts, gears, chains, tubes, mechanisms, casings | 16 | tag `tilth:pile/16` | 64 |
+| Create machines, vaults, tanks, Aeronautics engines | 4 | tag `tilth:pile/4` | 64 |
 | Metal or gem storage blocks | 4 | `#c:storage_blocks` | 64 |
 | Chests, barrels, furnaces, workbenches | 8 | `#c:chests`, `#c:barrels` | 64 |
 | Tools, weapons, armor, bows | 1 | unchanged | 1 |
@@ -82,17 +82,17 @@ To decide: dirt and stone at 16 hamper building. Soft variant: 32.
 
 ### A.6 Assignment and approach
 
-1. **Sensible Stackables mod**: `uncapStackSize = false`, `commonStackSize = 32`. In the `items` table, one line per tag: `"#fallow:pile/16" = 16`, etc. (exact name of the TOML file to read at first launch).
-2. **Tags in the repository**: `pack/kubejs/data/fallow/tags/item/pile/{1,4,8,16,32}.json`, modeled on `peaux_brutes.json`. Each references the `c:` tags and adds mod items one by one with `{"id": "...", "required": false}`. A modded item without a `c:` tag is caught here, without touching the mod. An item must be in only one stack tag: with two tags, the value retained is not guaranteed (Upstack says so, Sensible Stackables not verified).
+1. **Sensible Stackables mod**: `uncapStackSize = false`, `commonStackSize = 32`. In the `items` table, one line per tag: `"#tilth:pile/16" = 16`, etc. (exact name of the TOML file to read at first launch).
+2. **Tags in the repository**: `pack/kubejs/data/tilth/tags/item/pile/{1,4,8,16,32}.json`, modeled on `peaux_brutes.json`. Each references the `c:` tags and adds mod items one by one with `{"id": "...", "required": false}`. A modded item without a `c:` tag is caught here, without touching the mod. An item must be in only one stack tag: with two tags, the value retained is not guaranteed (Upstack says so, Sensible Stackables not verified).
 3. **Check**: a script `server_scripts/piles.js` goes through the recipes at server start and writes in the log "[piles] recette dont le résultat dépasse la pile" (recipe whose result exceeds the stack) (same style as `tannerie.js`). It also lists the items without a stack tag.
 4. **Without a mod**: a script `startup_scripts/piles.js` with `ItemEvents.modification` and identifier regexes (`_ingot$`, `^raw_`, `_planks$`). Works without Java, but requires a restart and does not see tags.
-5. **`fallow` module**: only if the regexes become unmanageable. A mixin on `ItemStack.getMaxStackSize` reading a table rebuilt at `TagsUpdatedEvent` would do the same as Sensible Stackables. I advise against it: the mod exists, is active and maintained.
+5. **`tilth` module**: only if the regexes become unmanageable. A mixin on `ItemStack.getMaxStackSize` reading a table rebuilt at `TagsUpdatedEvent` would do the same as Sensible Stackables. I advise against it: the mod exists, is active and maintained.
 
 ## B. A simpler backpack
 
 ### B.1 What Traveler's Backpack brings today
 
-- **Hose and tanks**: the `sac` module of `fallow` (`ThirstHoseEffect`, `SacModule`) is tied to it. Without the bag, the module ignores itself ("Module sac ignoré" (Sac module ignored)), but it becomes dead code.
+- **Hose and tanks**: the `sac` module of `tilth` (`ThirstHoseEffect`, `SacModule`) is tied to it. Without the bag, the module ignores itself ("Module sac ignoré" (Sac module ignored)), but it becomes dead code.
 - **Sleeping bag**: sixteen blocks `travelersbackpack:*_sleeping_bag`. Comforts had been removed as a duplicate.
 - **Abilities**: lapis already cut (`xp.md`), Warden bag (+4 hearts, `sante.md`), etc.
 - Other traces: `pack/defaultconfigs/travelersbackpack-server.toml`, `pack/kubejs/assets/travelersbackpack/lang/fr_fr.json`, and a comment in `sante.js`. No Cold Sweat sleeping-bag list was written (empty search in `pack/config`).
@@ -102,11 +102,11 @@ To decide: dirt and stone at 16 hamper building. Soft variant: 32.
 | Mod | 1.21.1 NeoForge version | License | Size / use | Remarks |
 |---|---|---|---|---|
 | **Reliable Backpacks** | 1.9.1, 2026-09-07 | MIT | 1 bag, 3 rows by default (adjustable), dyeable, placeable | Chestplate or Curios "back" (read in the jar). No dependency except NeoForge. Forbids shulkers and Supplementaries sacks inside. No French |
-| Quark (Backpack module) | 4.1-487 | Oddities: CC-BY-NC-SA 3.0 | Three extra rows | Already in the jar, but category `oddities` cut. Chestplate armor. Recipe with ravager hide (raids cut in Fallow) or, if the flag is off, 4 leather, 2 iron ingots, a chest. Native French "Sac à dos" |
+| Quark (Backpack module) | 4.1-487 | Oddities: CC-BY-NC-SA 3.0 | Three extra rows | Already in the jar, but category `oddities` cut. Chestplate armor. Recipe with ravager hide (raids cut in Tilth) or, if the flag is off, 4 leather, 2 iron ingots, a chest. Native French "Sac à dos" |
 | Quark Backpack Plus | 1.0.3, 2026-05-14 | LGPL-3.0 | Places the Quark bag in Curios "back" | Small mod (3.6k), requires Quark, Quark Oddities (marker) and Curios |
 | Packed Up | 1.1.1, 2026-08-09 | All rights reserved (modpacks allowed by the FAQ) | 7 levels, 3 to 8 rows | Too many tiers. Requires two SuperMartijn642 libraries |
 | L2 Backpack | 3.1.5, 2026-07-30 | LGPL-2.1 | 9 to 54 slots, upgrades at the smithing table | Requires L2 Library, remote sharing |
-| Backpacked (MrCrayfish) | 3.0.5 (CurseForge, 2026-04-03) | LGPL-2.1 | Unlock by **XP** (option: by items), augments, Framework | Against Fallow's "no more XP" rule, and not simple |
+| Backpacked (MrCrayfish) | 3.0.5 (CurseForge, 2026-04-03) | LGPL-2.1 | Unlock by **XP** (option: by items), augments, Framework | Against Tilth's "no more XP" rule, and not simple |
 | Vercte's Satchels | 1.2.0, 2026-06-15 | MIT | 6 slots under the bar, V key | Very simple, good complement. Curios optional |
 | Useful Backpacks | 3.0.2, 2025-05-22 | Apache-2.0 | 3 sizes | Old, requires U Team Core |
 | Backpacks! | 1.3.5, 2025-10-03 | Apache-2.0 | Data pack | Shader trick to hide the name: risk with rendering mods |
@@ -129,7 +129,7 @@ Fallback if we want zero new heavy mods: Quark (`oddities = true`, disable Magne
 
 1. Remove `pack/mods/travelersbackpack.pw.toml`, `pack/defaultconfigs/travelersbackpack-server.toml`, `pack/kubejs/assets/travelersbackpack/lang/fr_fr.json`. Add `reliable-backpacks.pw.toml` and `pack/kubejs/assets/reliable_backpacks/lang/fr_fr.json`.
 2. Translation: `block.reliable_backpacks.backpack` = "Sac à dos" (Backpack), `container.backpack` = "Sac à dos", the subtitles (placed, opened, closed, equipped) and the config labels. The mod only has de, es_mx, ru, sv and en.
-3. `sac` module: remove in 0.5.0 (`SacModule`, `ThirstHoseEffect`, `ModIds`, `FallowConfig`, `FallowModule`, `build.gradle`, `neoforge.mods.toml`) and the section of `docs/plan/mod-fallow.md`, its tests S1 to S9, decision 18 of `12-verification.md`.
+3. `sac` module: remove in 0.5.0 (`SacModule`, `ThirstHoseEffect`, `ModIds`, `TilthConfig`, `TilthModule`, `build.gradle`, `neoforge.mods.toml`) and the section of `docs/plan/mod-tilth.md`, its tests S1 to S9, decision 18 of `12-verification.md`.
 4. Docs: `docs/mods.md` (lines Traveler's Backpack, Modded Coffee GUI, Comforts), `xp.md` (lapis lines), `sante.md` (Warden bag), `sante.js` (comment), `tannerie.md` (the 52 leather recipes disappear), `10-recentrage.md`, `README.md`, `CHANGELOG.md`.
 5. Water while traveling: no more hose. Either the TWR bottles (stacks of 8), or reopen the case of **Thirst Canteen** (LGPL-3.0, 2026-07-17), classed "refused" in `docs/mods.md` but recommended in `04-vie-quotidienne.md`.
 6. Sleep: **Comforts 9.0.5+1.21.1** (LGPL-3.0, 2026-06-22) does not change the respawn point (Modrinth page). Its options list an insulated bag and a rest bonus: interaction with Cold Sweat to test. To restore if the sleeping bag is still wanted.

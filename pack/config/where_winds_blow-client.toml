@@ -1,4 +1,4 @@
-# Fallow : ATMOSPHERICS est le seul responsable de la brume, Polytone des couleurs
+# Tilth : ATMOSPHERICS est le seul responsable de la brume, Polytone des couleurs
 # de la végétation (une couche, un mod). Le vent garde tout le reste ; les autres
 # clés gardent leur valeur par défaut, ajoutée par NeoForge au premier lancement.
 enableFoliageColorVariation = false

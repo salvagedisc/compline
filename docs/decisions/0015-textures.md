@@ -18,9 +18,9 @@ The team was not convinced by the pack's own resource packs, which only dress th
 No pack covers Create, Supplementaries, Twigs, Handcrafted, Chipped or No Man's Land. Mizuno's 16 Craft, Whimscape, Bare Bones, Excalibur, Stay True, Ovo's Rustic Redemption, Dokucraft, Jolicraft and Soartex Fanver were set aside for their licences.
 
 ## Decision
-**Vanilla Evolved**, as the `fallow-textures` pack ([page](../plan/fallow-textures.md)): built by `scripts/textures/build.py` from the pinned 1.17.0 release, without the sky, the foliage colour map, the creature textures, the language file and the OptiFine files; enabled on first launch under every other pack of ours. Same licence and same artist as `fallow-interface`.
+**Vanilla Evolved**, as the `tilth-textures` pack ([page](../plan/tilth-textures.md)): built by `scripts/textures/build.py` from the pinned 1.17.0 release, without the sky, the foliage colour map, the creature textures, the language file and the OptiFine files; enabled on first launch under every other pack of ours. Same licence and same artist as `tilth-interface`.
 
-Mod textures are left as they are. Recolouring them (a `teinte` module of the `fallow` mod working at load time on each player's computer) is on hold: the prototype showed too many defects, and nothing is recoloured without the team's approval. Hand redraws of the most visible mod textures (No Man's Land, Create, Fallow's fires and lanterns) will be proposed after the in-game test Y7.
+Mod textures are left as they are. Recolouring them (a `teinte` module of the `tilth` mod working at load time on each player's computer) is on hold: the prototype showed too many defects, and nothing is recoloured without the team's approval. Hand redraws of the most visible mod textures (No Man's Land, Create, Tilth's fires and lanterns) will be proposed after the in-game test Y7.
 
 ## Rejected
 - Pixel Perfection Fidelity: recommended in the comparison, not chosen by the team.

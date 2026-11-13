@@ -1,4 +1,4 @@
-# Fallow : ce qu'Every Compat n'enregistre pas du tout (voir docs/plan/tri-du-pack.md).
+# Tilth : ce qu'Every Compat n'enregistre pas du tout (voir docs/plan/tri-du-pack.md).
 # Fichier « hazardous » : il change le registre. Client et serveur doivent avoir le même,
 # et il ne doit plus changer une fois le monde permanent créé (un bloc retiré deviendrait de l'air).
 # Rouvrir une entrée plus tard est sans risque ; en fermer une ne l'est pas.

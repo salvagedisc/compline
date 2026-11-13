@@ -1,4 +1,4 @@
-// Fallow title screen: mist flowing through the mountains of Caspar David
+// Tilth title screen: mist flowing through the mountains of Caspar David
 // Friedrich's "Riesengebirge Landscape with Rising Fog" (c. 1820, public domain).
 // The painting is never moved or warped. A mask drawn from the painting itself
 // (iChannel1: white where the painted mist lies between the ridges, black on

@@ -1,8 +1,8 @@
-"""The Fallow logo: the word in old carved stone uncials (the Uncial Antiqua
+"""The Tilth logo: the word in old carved stone uncials (the Uncial Antiqua
 typeface by Astigmatic, SIL Open Font License), weathered, chipped and
 cracked, with moss in cushions on their ledges, ivy hanging from them and
-wound round the F, a seedling and a few flowers, and a lit lantern hanging on
-a chain inside the O, its light warming the stone around it.
+wound round the first T, a seedling and a few flowers, and a lit lantern hanging on
+a chain under the arch of the h, its light warming the stone around it.
 
 Everything is drawn at one pixel per GUI pixel, lit from the top left, then
 scaled four times. The ruin and the plants are composed by hand: each chip,
@@ -31,13 +31,13 @@ MOSS = [(52, 66, 50), (78, 98, 72), (106, 130, 90), (140, 160, 112), (176, 190, 
 STEM = (58, 74, 54)
 BLOOM = ((250, 246, 228), (226, 166, 78))           # a flower's petals and heart
 LANTERN_L = (248, 214, 140)
-# the lantern's light on the stone: on the sides of the O facing it, from
+# the lantern's light on the stone: on the sides of the h facing it, from
 # the nearest to the furthest, and on the outline
 WARM = [(226, 180, 116), (190, 142, 90), (146, 112, 78)]
 WARM_EDGE = (66, 48, 34)
 IRON = [(40, 46, 42), (70, 78, 72), (108, 116, 104), (146, 152, 136)]
 
-# The lantern hung in the O, after the pack icon's (build.py), one pixel
+# The lantern hung under the h, after the pack icon's (build.py), one pixel
 # narrower so that it sits on the counter's middle column: a ring, a cap lit
 # from the left, the glass in its frame around the flame, a rim and two feet.
 LANTERN = [
@@ -71,7 +71,7 @@ CHAIN = [".K.", "K.K", "K.K", ".K.", ".M.", ".M."]
 GLOW = 20          # reach of the lantern's light, in pixels
 HALO = [(5, 150), (8, 112), (11, 80), (14, 52), (17, 28), (20, 12)]   # its halo: radius, opacity
 
-TEXT, SIZE, SPACING, SEED = "FALLOW", 54, 1, 4
+TEXT, SIZE, SPACING, SEED = "TILTH", 54, 1, 4
 WEATHER = 1.4      # how far the stone's tone wanders, in broad patches
 PAD = (16, 16, 16, 22)
 SCALE = 4
@@ -80,56 +80,56 @@ SCALE = 4
 # the break (pixels from the letter's top left); a crack a line through the
 # stone, from where it opens on an edge.
 CHIPS = [
-    (0, [(3.5, 11.5), (6, 13), (6.5, 15), (5, 16.5), (3.5, 17.5)]),            # F: a bite out of the stem
-    (1, [(16.5, -0.5), (21.5, -0.5), (21.5, 1), (19, 1.5), (18, 1)]),           # A: the top of its stroke
-    (2, [(9.5, -0.5), (13.5, -0.5), (13.5, 4.5), (12, 3.5), (11, 1.5), (10, 1)]),  # L: a corner gone
-    (3, [(13.5, 24), (11, 26), (11.5, 27.5), (13.5, 29)]),                     # L: a nick in the stem
-    (4, [(32.5, 3.5), (34, 3.5), (38, 7.5), (38, 9), (36.5, 8.5), (34, 6.5), (32.5, 5.5)]),  # O: its shoulder
-    (5, [(57.5, -0.5), (62.5, -0.5), (62.5, 2.5), (60, 3), (59, 1.5)]),         # W: the end of its arm
+    (0, [(33.5, -0.5), (38.5, -0.5), (38.5, 2), (36, 2.5), (34.5, 1)]),         # T: the end of its bar
+    (1, [(4.5, 13.5), (7, 15), (7.5, 17), (6, 18.5), (4.5, 19.5)]),            # I: a bite out of the stem
+    (2, [(-0.5, -0.5), (4.5, -0.5), (4.5, 1.5), (2, 2), (0.5, 1)]),            # L: a corner gone
+    (2, [(13.5, 27), (11, 29), (11.5, 30.5), (13.5, 32)]),                     # L: a nick in the stem
+    (3, [(1.5, -0.5), (6.5, -0.5), (6.5, 1), (4, 1.5), (2.5, 1)]),             # T: the tip of its bar
+    (4, [(-0.5, -0.5), (5.5, -0.5), (5.5, 1.5), (3, 2), (1, 1)]),              # h: the top of its stem
 ]
 CRACKS = [
-    (2, [(11, 3), (9, 6), (10, 9), (8, 13)]),        # L: down from the broken corner
-    (4, [(34, 6), (32, 9), (33, 12), (32, 14)]),     # O: in from its shoulder
-    (1, [(27, 9), (25, 11), (25, 13), (23, 15)]),    # A: across the stroke
+    (2, [(3, 2), (5, 6), (4, 9), (6, 13)]),          # L: down from the broken corner
+    (3, [(22, 1), (21, 4), (22, 7), (20, 10)]),      # T: down from the bar into the stem
+    (4, [(34, 13), (36, 16), (35, 19), (37, 22)]),   # h: down the arch's shoulder
 ]
 # The moss: cushions on ledges (letter, point on a ledge, half width, height),
 # and small ones where a ledge meets a rising wall, where water sits.
 CUSHIONS = [
-    (0, (3, 0), 4, 2), (0, (21, 0), 4, 2), (0, (17, 21), 5, 2),
-    (1, (13, 0), 4, 2), (1, (3, 36), 3, 1), (1, (39, 35), 5, 2),
-    (2, (5, 0), 4, 2), (2, (17, 47), 6, 3), (2, (27, 47), 2, 1),
-    (3, (6, 0), 5, 2), (3, (16, 47), 4, 2),
-    (4, (20, 0), 6, 3), (4, (20, 37), 5, 2),
-    (5, (9, 0), 6, 2), (5, (32, 0), 4, 2), (5, (54, 0), 4, 3),
+    (0, (8, 0), 5, 2), (0, (26, 0), 4, 2), (0, (20, 37), 5, 2),
+    (1, (4, 0), 4, 2), (1, (14, 37), 3, 1), (1, (2, 37), 2, 1),
+    (2, (6, 0), 4, 2), (2, (18, 47), 6, 3), (2, (27, 47), 2, 1),
+    (3, (14, 0), 5, 2), (3, (32, 0), 4, 2), (3, (14, 37), 4, 2),
+    (4, (8, 0), 4, 2), (4, (24, 10), 6, 3), (4, (4, 48), 4, 2), (4, (40, 27), 2, 1),
 ]
 # The plants. A vine hangs from a letter's underside, from the point nearest
 # to (x, y), long so many pixels, swaying left (-1) or right (1), and ends in
-# a curl or not. The ivy winds down round the F's stem, from a cushion of moss.
+# a curl or not. The ivy winds down round the first T's stem, from a cushion
+# of moss.
 VINES = [
-    (0, (24, 2), 7, 1, True),       # F: under its top arm
-    (0, (22, 22), 6, -1, True),     # F: under its middle arm
-    (1, (9, 2), 10, -1, True),      # A: from its flag
-    (1, (41, 37), 7, 1, False),     # A: its right foot
-    (2, (15, 48), 12, -1, True),    # L
-    (3, (8, 48), 4, 1, False),      # L
-    (3, (20, 48), 13, 1, True),     # L, the longest
-    (4, (12, 36), 9, -1, True),     # O
-    (4, (28, 36), 4, 1, False),
-    (5, (18, 37), 11, 1, True),     # W
-    (5, (43, 36), 8, -1, True),
+    (0, (31, 4), 9, 1, True),       # T: under the right of its bar
+    (0, (6, 4), 6, -1, True),       # T: under the left of its bar
+    (1, (2, 1), 5, -1, False),      # I: under its head
+    (1, (15, 1), 8, 1, True),       # I
+    (2, (22, 49), 12, -1, True),    # L: under its foot
+    (2, (28, 55), 6, 1, False),     # L: from its tail
+    (3, (7, 4), 13, -1, True),      # T, the longest
+    (3, (29, 4), 7, 1, True),
+    (3, (34, 5), 4, 1, False),
+    (4, (2, 49), 8, -1, True),      # h: under its foot
+    (4, (24, 50), 10, 1, True),     # h: from the end of its leg
 ]
 # letter, the stem's span, and the height and drop of each turn in front
-IVY = (0, (4, 12), [(23, 5), (32, 5), (40, 4)])
+IVY = (0, (16, 23), [(11, 5), (19, 5), (27, 4)])
 # vines clinging to a letter's face or edge: letter, the vine's path
 CLINGS = [
-    (5, [(57, 1), (59, 5), (58, 10), (56, 15), (55, 20), (56, 23)]),    # W: down its right arm
+    (4, [(42, 27), (41, 31), (42, 35), (40, 39), (38, 43), (37, 46)]),    # h: down its leg
 ]
 # the leaves on a vine, hanging to the right of its stem (a: lit, b, c: shade)
 LEAVES = {3: ((1, 0, "a"), (2, 0, "b"), (1, 1, "b"), (2, 1, "b"), (3, 1, "c"), (2, 2, "c")),
           2: ((1, 0, "a"), (2, 0, "b"), (1, 1, "b"), (2, 1, "c")),
           1: ((1, 0, "b"), (1, 1, "c"))}
 LEAF = {"a": MOSS[3], "b": MOSS[2], "c": MOSS[1]}
-SEEDLING = (3, (6, 0), [        # letter, point on a ledge: a seedling on the L
+SEEDLING = (2, (8, 0), [        # letter, point on a ledge: a seedling on the L
     ".a...a.",
     "abb.bbc",
     ".bbSbc.",
@@ -138,7 +138,10 @@ SEEDLING = (3, (6, 0), [        # letter, point on a ledge: a seedling on the L
     "...Sbc.",
     "...S...",
 ])
-FLOWERS = [(5, (56, 0)), (2, (18, 47)), (1, (41, 35))]   # letter, point on a ledge
+FLOWERS = [(3, (24, 0)), (2, (14, 47)), (4, (10, 0))]   # letter, point on a ledge
+# The lantern hangs under the h's arch, a hollow open at its foot: this line
+# (from the letter's top left) closes it, so that it is found as a counter.
+HOLLOW = (4, [(11, 47), (23, 47)])
 
 N4 = ((1, 0), (-1, 0), (0, 1), (0, -1))
 
@@ -362,8 +365,10 @@ def draw():
         x0, y0 = corner(glyphs[i])
         path = [q for a, b in zip(points, points[1:]) for q in line(a, b)]
         cracks |= {(x0 + x, y0 + y) for x, y in path if (x0 + x, y0 + y) in stone}
-    o = glyphs[TEXT.index("O")]
-    counter = counter_of(o)
+    i, (a, b) = HOLLOW
+    x0, y0 = corner(glyphs[i])
+    closing = {(x0 + x, y0 + y) for x, y in line(a, b)}
+    counter = counter_of(glyphs[i] | closing) - closing
 
     im = Image.new("RGBA", (w, h))
     px = im.load()
@@ -428,7 +433,7 @@ def draw():
         for dx, dy, c in LEAVES[size]:
             put((x + s * dx, y + dy), LEAF[c])
 
-    # the ivy wound round the F's stem: in front for half a turn, then behind,
+    # the ivy wound round the first T's stem: in front for half a turn, then behind,
     # and on down the stem's left edge to dangle from its point
     i, (sl, sr), turns = IVY
     g = glyphs[i]
@@ -450,7 +455,7 @@ def draw():
         leaf(b, ys + drop, 1, 2 if n % 2 else 3)
         end = y0 + turns[n + 1][0] if n + 1 < len(turns) else max(y for _, y in g) + 4
         for y in range(ys + drop + 2, end):   # where it comes back round on the left
-            x = left_edge(y) if (x0 + sl, y) in g or (x0 + sl, y - 1) in g else x0 + sl - 1
+            x = left_edge(y) if (x0 + sl, y) in g else x0 + sl - 1
             put((x, y), STEM)
             if n + 1 == len(turns) and (y - ys) % 3 == 0:
                 leaf(x, y, -1 if (y - ys) % 6 else 1, 2 if y < end - 3 else 1)
@@ -499,7 +504,7 @@ def draw():
             put((x + dx, y + dy), BLOOM[0])
         put((x, y - 1), BLOOM[1])
 
-    # the lantern in the O, on the counter's middle column, on its chain
+    # the lantern under the h, on the counter's middle column, on its chain
     cx = round(sum(x for x, _ in counter) / len(counter))
     ctop = min(y for x, y in counter if x == cx)
     cbottom = max(y for x, y in counter if x == cx)
@@ -516,7 +521,7 @@ def draw():
             if c != ".":
                 lamp[lx + x, ly + y] = LANTERN_COLOURS[c]
 
-    # its light: on the sides of the O facing it, on the face of the O near
+    # its light: on the sides of the h facing it, on the face of the h near
     # its inner edge, and a halo in the counter
     for x in range(fx - GLOW, fx + GLOW + 1):
         for y in range(fy - GLOW, fy + GLOW + 1):
@@ -529,7 +534,7 @@ def draw():
                 put(p, WARM[0 if near > 0.45 else 1 if near > 0.3 else 2] if near > 0.15 else px[p][:3])
             elif p in counter and px[p][:3] == OUTLINE:
                 put(p, WARM_EDGE if near > 0.25 else OUTLINE)
-            elif p in o:
+            elif p in glyphs[HOLLOW[0]]:
                 rim = min(abs(x - a) + abs(y - b) for a, b in counter) if counter else 9
                 k = near * (1 if rim <= 1 else 0.6 if rim == 2 else 0.3 if rim == 3 else 0)
                 k = round(k * 4) / 4
@@ -555,7 +560,7 @@ def draw():
                 hp[x, y] = 255
     halo = halo.filter(ImageFilter.GaussianBlur(3)).point(lambda v: round(v * 0.45) if v > 8 else 0)
     hp = halo.load()
-    for p in counter:   # but none in the O: there the lantern's light
+    for p in counter:   # but none under the h: there the lantern's light
         hp[p] = 0
     back = Image.new("RGBA", (w, h), MOSS[0] + (0,))
     back.putalpha(halo)

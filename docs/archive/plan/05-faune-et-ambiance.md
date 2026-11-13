@@ -20,9 +20,9 @@ They arrive by six routes; each has its countermeasure.
 | Entities placed at generation | mansion illagers, zombies in abandoned villages, silverfish in infested blocks | KubeJS safety net; `remove_features` on `ore_infested` |
 
 Three layers, from the cheapest to the most fine-grained:
-1. **Datapack** (`kubejs/data/fallow/neoforge/biome_modifier/`): removal of spawns, dungeons and infested blocks. To neutralise another mod's biome modifier without touching its config, its file is overridden with `{"type": "neoforge:none"}`.
+1. **Datapack** (`kubejs/data/tilth/neoforge/biome_modifier/`): removal of spawns, dungeons and infested blocks. To neutralise another mod's biome modifier without touching its config, its file is overridden with `{"type": "neoforge:none"}`.
 2. **In Control!** (new, core, server only) for the fine-grained rules.
-3. **KubeJS safety net**: any banned vanilla entity entering the Overworld is cancelled, unless it carries the `fallow_allowed` tag (summoned by an admin).
+3. **KubeJS safety net**: any banned vanilla entity entering the Overworld is cancelled, unless it carries the `tilth_allowed` tag (summoned by an admin).
 
 ## 5.2 Controlling modded creatures
 
@@ -83,7 +83,7 @@ A pass over the recipes of every .jar (`slime_ball`, `blaze_rod`, `gunpowder`, `
 | **Cosy Critters & Creepy Crawlies** | Particle birds that land and fly off as you approach; moths around lamps; small web spiders. Silhouettes in the distance, base = island of light, no server cost | yes (client) | recommended |
 | **Enhanced Celestials** | Harvest moon (growth), blue moon; **blood moon cut**; a home-made "Pale Moon" as a datapack (washed-out sky, more frequent Lantern and Ghost, no extra hostiles) | yes (6.0.2.5; v1 is archived, check v2) | recommended |
 | **Simple Voice Chat** | Proximity voice; Sound Physics reverberates voices in valleys and caves | yes | recommended ([6](06-technique-et-serveur.md)) |
-| **Reactive Music** (replaced by True Adaptive Music, [0010](../../decisions/0010-musique.md)) | Replaces Presence Not Position (not found) and Biome Music (Fabric only). Music chosen by place, time, danger, indoors or outdoors. Its fantasy and Celtic tracks do not necessarily suit Fallow: keep the rules, change the songpack or write a sober one | yes (1.3.5, client, uses YACL already present) | recommended; to be listened to in phase 6 |
+| **Reactive Music** (replaced by True Adaptive Music, [0010](../../decisions/0010-musique.md)) | Replaces Presence Not Position (not found) and Biome Music (Fabric only). Music chosen by place, time, danger, indoors or outdoors. Its fantasy and Celtic tracks do not necessarily suit Tilth: keep the rules, change the songpack or write a sober one | yes (1.3.5, client, uses YACL already present) | recommended; to be listened to in phase 6 |
 | **Particle Rain** | Rain and snow as particles, storm mist | already "to test" | to test, Ecliptic keeps the weather |
 | **Simple Clouds** | Storms that darken the horizon, visible from afar | yes (0.7.3) | dedicated branch, **client only** (otherwise conflicts with Ecliptic); compute shaders, probably no macOS |
 | Longwings | 70 butterflies to collect, manual, nets | yes | optional (duplicates Naturalist butterflies) |

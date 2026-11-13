@@ -1,11 +1,11 @@
-// Fallow : états que le paquet musical TAM « fallow » ne peut pas voir depuis le client.
+// Tilth : états que le paquet musical TAM « tilth » ne peut pas voir depuis le client.
 // Voir docs/plan/musique.md. Le script pose ou retire trois tags sur chaque joueur ; les
-// prédicats personnalisés du paquet (trueadaptivemusicpacks/fallow/predicates/*.json) sont
+// prédicats personnalisés du paquet (trueadaptivemusicpacks/tilth/predicates/*.json) sont
 // des conditions de butin que TAM fait évaluer par le serveur, et lisent ces tags.
 //
-// - fallow_monument : un Cœur ancien d'Ancient Remnants est proche (un morceau à l'approche) ;
-// - fallow_lune     : une lune d'Enhanced Celestials est levée (lune bleue, des moissons…) ;
-// - fallow_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
+// - tilth_monument : un Cœur ancien d'Ancient Remnants est proche (un morceau à l'approche) ;
+// - tilth_lune     : une lune d'Enhanced Celestials est levée (lune bleue, des moissons…) ;
+// - tilth_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
 //
 // Classes lues dans les jars : Enhanced Celestials 2 Core 2.0.3.3 (mêmes appels que lune.js),
 // Sable 2.0.6 (Sable.HELPER, ActiveSableCompanion.getTrackingOrVehicleSubLevel).
@@ -19,12 +19,12 @@ let MUSIQUE_SABLE = null
 try {
   MUSIQUE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials2core.EnhancedCelestials')
 } catch (e) {
-  console.warn(`[Fallow] musique.js : Enhanced Celestials introuvable, pas de musique de lune (${e})`)
+  console.warn(`[Tilth] musique.js : Enhanced Celestials introuvable, pas de musique de lune (${e})`)
 }
 try {
   MUSIQUE_SABLE = Java.loadClass('dev.ryanhcode.sable.Sable')
 } catch (e) {
-  console.warn(`[Fallow] musique.js : Sable introuvable, pas de musique de voyage (${e})`)
+  console.warn(`[Tilth] musique.js : Sable introuvable, pas de musique de voyage (${e})`)
 }
 
 let musiqueTicks = 0
@@ -62,9 +62,9 @@ function musiqueMettreAJour(server) {
   const lune = musiqueLuneLevee(server)
   server.getPlayerList().getPlayers().forEach(player => {
     const overworld = String(player.level.dimension) === 'minecraft:overworld'
-    musiqueTag(player, 'fallow_lune', lune && overworld)
-    musiqueTag(player, 'fallow_a_bord', musiqueABord(player))
-    musiqueTag(player, 'fallow_monument', musiquePresDUnMonument(player))
+    musiqueTag(player, 'tilth_lune', lune && overworld)
+    musiqueTag(player, 'tilth_a_bord', musiqueABord(player))
+    musiqueTag(player, 'tilth_monument', musiquePresDUnMonument(player))
   })
 }
 
@@ -76,6 +76,6 @@ ServerEvents.tick(event => {
     musiqueMettreAJour(event.server)
   } catch (e) {
     musiqueEnPanne = true
-    console.error(`[Fallow] musique.js : états musicaux coupés après une erreur (${e})`)
+    console.error(`[Tilth] musique.js : états musicaux coupés après une erreur (${e})`)
   }
 })

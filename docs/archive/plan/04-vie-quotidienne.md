@@ -81,13 +81,13 @@ Not to be bought again elsewhere (checked in the source code):
 ## 4.5 The "Pantry" (KubeJS script)
 
 With no reliable mod on Modrinth, slow spoilage is written in KubeJS, modelled on ShelfLife:
-1. Tags `fallow:perishable/fast`, `fallow:perishable/medium`, `fallow:perishable/slow` and `fallow:preserved`.
-2. The production date is rounded **to the day** (`custom_data.fallow_day`), so that stacks from the same day merge.
+1. Tags `tilth:perishable/fast`, `tilth:perishable/medium`, `tilth:perishable/slow` and `tilth:preserved`.
+2. The production date is rounded **to the day** (`custom_data.tilth_day`), so that stacks from the same day merge.
 3. The calculation only runs when a container is opened, on pickup, and roughly every 30 s for the player's inventory: no per-tick cost.
 4. Location matters: container temperature via `coldsweat.getTemperatureAt` (cold cellar ×0.3, icebox ×0.1), faster in summer via `EclipticSeasonsApi`.
 5. Spoiled food becomes rotten flesh or compost, which goes back into F&C's fertilisers.
 6. Plain tooltip ("fresh", "to be eaten soon", "spoiled"), with no precise countdown.
-7. Processing is rewarded: dried on KC's bamboo tray (open sky, no rain, hence seasonal), salted, put in a barrel, the food moves into `fallow:preserved`.
+7. Processing is rewarded: dried on KC's bamboo tray (open sky, no rain, hence seasonal), salted, put in a barrel, the food moves into `tilth:preserved`.
 
 **Gradual rollout**: start with the **expedition rations** only, then extend if the mechanic works out.
 
@@ -105,7 +105,7 @@ First script of sub-project 3 (decision 0002). Ecliptic exposes the season and t
 | Cattlestrophic | `acceptedFoodItems` with F&C's barley, oats, corn, fodder and grain and KC's rice; JSON for Untitled Duck Mod; decide the status of animals already present | Field → fodder → herd loop |
 | Salt's Animal Farm | List of frightening mobs rewritten with the Naturalist and Alex's Mobs predators; soft blocks: KC straw, F&C barn floor | Vanilla hostiles no longer exist |
 | Animal Genders | Exclude hamsters (own genetics); check the F&C henhouse | — |
-| Freeze It and Heat It | Whitelist aligned with `fallow:perishable/*`; dried foods exempted | A single preservation logic |
+| Freeze It and Heat It | Whitelist aligned with `tilth:perishable/*`; dried foods exempted | A single preservation logic |
 | Kaleidoscope Tavern | Molotov cocktail disabled | No incendiary weapon |
 | Thirst Was Reclaimed | `item-settings.toml`: KC and Tavern drinks; F&C well water "acceptable", collected rain "purified" | Consistent water |
 | Nutritional Balance | Check that it correctly derives nutrients from KC recipes; tag them otherwise | — |

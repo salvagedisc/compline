@@ -1,6 +1,6 @@
 # Eclaircie, sillage, voile (clearing, wake, veil): what is done elsewhere, and what is done well
 
-Date: 26 October 2026. Target: Fallow, Minecraft 1.21.1 NeoForge.
+Date: 26 October 2026. Target: Tilth, Minecraft 1.21.1 NeoForge.
 
 Method note. I only cite pages that I really opened. Several topics could not be verified: RDR2, Firewatch, Death Stranding, Subnautica, Weather2, Pretty Rain, the fog culling of Bedrock and OptiFine, Better Render Dragon, the Distant Horizons GitLab wiki (page empty on fetch) and the exact key `maxHorizontalResolution`. They are flagged as "not verified". What comes from my memory is marked "memory".
 
@@ -9,7 +9,7 @@ Method note. I only cite pages that I really opened. Several topics could not be
 ### Enhanced Celestials
 - What it does: special moons (Blood Moon, Harvest Moon) and many moon add-ons. Available in 1.21.1 NeoForge, client and server. Config by datapack (wiki pages "Editing Lunar Events", "Lunar Text Components", "Client Settings", "Color Settings").
 - The good: everything is data-driven, so chance, sky color and text can be set per moon.
-- Limit: I found no documented forecast system. The GitHub wiki did not load its detail pages. For Fallow, the rare moon is therefore not a model for "forecast", only for variety.
+- Limit: I found no documented forecast system. The GitHub wiki did not load its detail pages. For Tilth, the rare moon is therefore not a model for "forecast", only for variety.
 
 ### Ecliptic Seasons
 - Weather by season and region, snow that builds up and melts gradually, days of varying length. Compat with Sodium, Iris, Distant Horizons. No public weather API doc on the page, nothing on fog.
@@ -24,12 +24,12 @@ Method note. I only cite pages that I really opened. Several topics could not be
 ### Zelda BotW
 - Forecast shown next to the minimap (wikis differ on the corner), the weather of an area changes every 4 game hours, sun/cloud/storm/sand icons, forecast screen on the Sheikah Slate. TotK has a weather gauge. Storm and Blood Moon warnings do not appear in the page read.
 - The good: a simple icon, always in the same place, readable at a glance.
-- To avoid for Fallow: a permanent HUD, which breaks the riddle. Prefer an object to take out.
+- To avoid for Tilth: a permanent HUD, which breaks the riddle. Prefer an object to take out.
 
 ### The Long Dark, aurora
 - The aurora is a rare weather that makes predators more dangerous and temporarily powers electronics. According to the page, it is the only time the lamp recharges. Players call it very rare (one every 30 to 35 days on average according to a Steam thread, with large gaps). The thread describes no warning sign.
 - The good: a unique mechanical benefit gives a reason to go out and watch the phenomenon.
-- Lesson: rarity without a warning sign makes players miss the event (some sleep through the aurora). Fallow plans a sign the day before: a good choice.
+- Lesson: rarity without a warning sign makes players miss the event (some sleep through the aurora). Tilth plans a sign the day before: a good choice.
 
 ### Sea of Thieves, fog
 - The fog covers about a third of a region and often lasts more than a day. Everything outside the ship's immediate surroundings is hidden. The arrival signal is audio: the water goes quiet, a light hum; a patch moved up the trigger of the music and sounds. Counterplay: climb high (lookout) or fire in the air. A fire on board no longer clears the view (patches 2.4.0 and 2.4.1). The producer cites the sound atmosphere (amplified creaks) as half of the effect.
@@ -71,7 +71,7 @@ Method note. I only cite pages that I really opened. Several topics could not be
 - `SodiumWorldRenderer` compares `RenderSystem.getShaderFogEnd()` to the previous value: if it changes, the visibility graph is marked dirty. So varying the fog end every frame restarts the computation every frame.
 - `OcclusionCuller`: "cylindrical" test (max of the horizontal distance and the vertical distance), commented as the vanilla algorithm. A spherical fog hides more than this test: the culling is conservative, never too aggressive.
 - The real fog is in the fragment shader (`fog.glsl`, `_linearFog`, uniforms `u_FogStart`, `u_FogEnd`, `u_FogColor`): global to the camera, not per zone.
-- `dev` branch (recent MC): `FogParameters` with `cullDistance`. The hook will change if Fallow moves up a version.
+- `dev` branch (recent MC): `FogParameters` with `cullDistance`. The hook will change if Tilth moves up a version.
 - ATMOSPHERICS: client mod that sets fog, sky, clouds, per biome with transitions, presets in `config/ambientfog`. The page says nothing about Sodium or DH. I did not find how it pushes the fog. To test in game (see recommendation 10).
 - Sodium Extra: fog settings, particles per type, animations. No entity distance option on the opened page. (A search summary, not opened, says its recent versions align chunk culling on its cylindrical fog: to check.)
 

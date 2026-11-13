@@ -14,15 +14,15 @@ The six monuments of Ancient Remnants: Monoliths (AR) 1.5.2 are the pack's large
 | Coniferous monument | Same, spruce | *Architect's Reach*: +3 block reach | `#minecraft:is_taiga` |
 
 - The Elderheart blesses the nearest player within 16 blocks, every 5 seconds. A player holds one blessing at a time: visiting another monument replaces it.
-- Monuments have **no chest**. Five of the six had a **breeze spawner**; breezes are banned in Fallow.
+- Monuments have **no chest**. Five of the six had a **breeze spawner**; breezes are banned in Tilth.
 - The **Monolith Codex** (book, amethyst, deepslate) holds one page per monument. Each page is a research scrap, which tells the monument's lore and the biomes where it stands. Scraps dropped only at 0.2% per mob killed, and from pillager outposts.
 - Placement is AR's own `ancient_remnants:configurable_random_spread`, set in `config/obscuria/ancient_remnants-common.toml` (spacing 100 chunks, separation 20, biome lists). A datapack can add biomes to the tags but not remove the config's defaults. Sparse Structures does not touch these sets.
 
 ## What was wrong on our terrain
 
-Measured on 2026-11-13 on a headless server with the pack's server mods, seed `fallow`, within 6,000 blocks of 0,0, the size of the planned disc, which is not in `main` yet (counted with `/locate` from a grid of points, chunks generated only up to structure starts):
+Measured on 2026-11-13 on a headless server with the pack's server mods, seed `tilth`, within 6,000 blocks of 0,0, the size of the planned disc, which is not in `main` yet (counted with `/locate` from a grid of points, chunks generated only up to structure starts):
 
-| Monument | Default settings | Fallow settings |
+| Monument | Default settings | Tilth settings |
 |---|---|---|
 | Hunter | 1 | 4 |
 | Warrior | 0 | 7 |
@@ -32,11 +32,11 @@ Measured on 2026-11-13 on a headless server with the pack's server mods, seed `f
 | Coniferous | 2 | 5 |
 | **Total** | **11** | **31** |
 
-- Fallow settings: 31 monuments, about one every 3.6 km² of the disc; each kind has 3 to 7, spread over the disc, so changing blessing stays a journey.
+- Tilth settings: 31 monuments, about one every 3.6 km² of the disc; each kind has 3 to 7, spread over the disc, so changing blessing stays a journey.
 - The disc has almost no ice spikes (7 samples out of 27,600) and no desert (1 sample), so two monuments never appeared and a third was rare.
 - On Tectonic's relief, the ground under a 70-block monument often varies by 30 to 100 blocks. Of the first 59 candidate sites with wider biomes, 39 were on a steep slope, 5 in water, 2 had a hill under a floating monolith and 1 would have gone through the ceiling of the world.
 
-## What Fallow changes
+## What Tilth changes
 
 ### Biomes and spacing (`pack/config/obscuria/ancient_remnants-common.toml`)
 
@@ -51,9 +51,9 @@ Measured on 2026-11-13 on a headless server with the pack's server mods, seed `f
 
 The lists follow the lore of each codex page (desert hunters, legends of the cold north, secluded monks, springs and blossoming trees, forest peoples, taiga and mountain dwarves). The codex reads its biome hints from the same tags, so it names the right biomes.
 
-### Only on suitable ground (custom mod `fallow`, module `monuments`)
+### Only on suitable ground (custom mod `tilth`, module `monuments`)
 
-`fallow:terrain_checked` is a structure type that wraps another structure. AR's six structures are redefined with it in `pack/kubejs/data/ancient_remnants/worldgen/structure/`, with the original jigsaw definition inside, so their identifiers do not change (`/locate structure ancient_remnants:…`, the music, the Streams Reflowing tag). The monument is first assembled as usual; the ground under its footprint plus 4 blocks is then read every 8 blocks from the noise, before any block is generated. A site that fails gives no monument in that cell.
+`tilth:terrain_checked` is a structure type that wraps another structure. AR's six structures are redefined with it in `pack/kubejs/data/ancient_remnants/worldgen/structure/`, with the original jigsaw definition inside, so their identifiers do not change (`/locate structure ancient_remnants:…`, the music, the Streams Reflowing tag). The monument is first assembled as usual; the ground under its footprint plus 4 blocks is then read every 8 blocks from the noise, before any block is generated. A site that fails gives no monument in that cell.
 
 | Rule | Monoliths | Monuments |
 |---|---|---|
@@ -102,20 +102,20 @@ The processor lists `ancient_remnants:monolith` and `ancient_remnants:monument` 
 
 | File | Role |
 |---|---|
-| `mods-custom/fallow/…/monuments/` | `MonumentsModule`, `TerrainCheckedStructure` (fallow 0.9.0) |
+| `mods-custom/tilth/…/monuments/` | `MonumentsModule`, `TerrainCheckedStructure` (tilth 0.9.0) |
 | `pack/config/obscuria/ancient_remnants-common.toml` | Biomes, spacing, separation |
-| `pack/kubejs/data/ancient_remnants/worldgen/structure/*.json` | The six structures wrapped in `fallow:terrain_checked` |
+| `pack/kubejs/data/ancient_remnants/worldgen/structure/*.json` | The six structures wrapped in `tilth:terrain_checked` |
 | `pack/kubejs/data/ancient_remnants/worldgen/processor_list/*.json` | Spawner → chiseled tuff |
 | `pack/kubejs/server_scripts/monuments.js` | Sleeping hearts, guardians, codex pages in loot |
-| `pack/kubejs/assets/fallow/lang/*.json` | `fallow.monument.*` messages |
+| `pack/kubejs/assets/tilth/lang/*.json` | `tilth.monument.*` messages |
 
-How it works: the Elderheart keeps its blessing in the NBT key `Blessing`; without it, it blesses nobody. When a guarded heart enters the world, the script moves that value into its persistent data (`fallow_benediction`) and removes the key; on the guardian's death it writes it back and marks the heart `fallow_eveille`. The guardian carries the tag `fallow_gardien` and its heart's UUID. If the heart is not loaded when the guardian dies, its UUID waits in the server's persistent data and the heart awakens when it loads.
+How it works: the Elderheart keeps its blessing in the NBT key `Blessing`; without it, it blesses nobody. When a guarded heart enters the world, the script moves that value into its persistent data (`tilth_benediction`) and removes the key; on the guardian's death it writes it back and marks the heart `tilth_eveille`. The guardian carries the tag `tilth_gardien` and its heart's UUID. If the heart is not loaded when the guardian dies, its UUID waits in the server's persistent data and the heart awakens when it loads.
 
 ## Verified on the test server (2026-11-13, no player)
 
-- The census above, before and after, on fresh worlds of seed `fallow`.
-- A warrior monolith generated in full: no spawner left, its chiseled tuff in place; its Elderheart about 100 blocks above the ground, without `Blessing`, its blessing kept in `fallow_benediction`.
-- The four guardians created at the foot of their monument (Wroughtnaut, Frostmaw, Umvuthi, Sacred Pontiff); a Wroughtnaut killed: its heart gets `Blessing` back and `fallow_eveille`. No KubeJS error.
+- The census above, before and after, on fresh worlds of seed `tilth`.
+- A warrior monolith generated in full: no spawner left, its chiseled tuff in place; its Elderheart about 100 blocks above the ground, without `Blessing`, its blessing kept in `tilth_benediction`.
+- The four guardians created at the foot of their monument (Wroughtnaut, Frostmaw, Umvuthi, Sacred Pontiff); a Wroughtnaut killed: its heart gets `Blessing` back and `tilth_eveille`. No KubeJS error.
 - Not testable without a player: the guardian rising as a player approaches, the messages, the blessing itself, the codex pages in loot.
 
 ## Still to see in game

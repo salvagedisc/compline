@@ -1,0 +1,11 @@
+{
+  "targets": [
+    {
+      "id": "tilth:clairiere",
+      "required": false
+    }
+  ],
+  "grass_color": "#74c255",
+  "foliage_color": "#5fae3f",
+  "water_color": "#3d86c9"
+}

@@ -1,4 +1,4 @@
-# Research: "Civilization" pillar (Fallow, 1.21.1 NeoForge, Create 6.0.10)
+# Research: "Civilization" pillar (Tilth, 1.21.1 NeoForge, Create 6.0.10)
 
 > Scope: crafting → workshop → industry → rail → aviation → colonies.
 > Baseline retained (registry of 2026-10-10, 46 mods): Overgeared 1.6.19, Create 6.0.10, Aeronautics 1.3.2 + Sable 2.0.5, Steam 'n' Rails (NeoForge port 0.3.0-beta.2), KaleidoscopeCookery-Automation, Supplementaries and Quark (essentials only), Modonomicon and Patchouli (already there as dependencies), KubeJS. To test: Copycats+, Connected, Integrated Farming, Power Loader, IDAS.
@@ -73,7 +73,7 @@ Reminder: **Create: Integrated Farming** is already "to test". Cooking on contra
 | Hot ingots | Forge and hammer | Blaze burner under a basin or "heating" fan (test) | Industrial heating is allowed; quality shaping stays manual |
 | Plates and heads | Anvil, quality depending on the blueprint | Mechanical press → **"poor" to "decent" quality at most** | Press output with a fixed quality component (exact component key to read in the jar) |
 | Alloys | Alloy foundry (4 inputs): bronze, brass, steel | Heated, then superheated mixer | **Brass**: first at the Overgeared foundry, then at the mixer (rate ×4). **Steel in bulk**: superheated mixer (burner + blaze/diesel fuel) |
-| Critical parts | Hand-forged, quality ≥ "good" | — | COE drill head, train bogies and axles, airplane engine casing: recipes requiring the **forged item** (tag `fallow:forged_quality_good`) |
+| Critical parts | Hand-forged, quality ≥ "good" | — | COE drill head, train bogies and axles, airplane engine casing: recipes requiring the **forged item** (tag `tilth:forged_quality_good`) |
 | Tools and weapons | Only source of quality tools | No metal tools made by Create (deploying, sequenced assembly) | Remove the vanilla tool and armor recipes in iron, gold, diamond and steel (according to the Overgeared config) and the corresponding villager trades |
 
 ### Ore and prospecting: "real veins"
@@ -96,11 +96,11 @@ Reminder: **Create: Integrated Farming** is already "to test". Cooking on contra
 ServerEvents.recipes(e => {
   e.recipes.createoreexcavation.vein('{"text":"Gisement de zinc"}', 'create:raw_zinc')
     .placement(64, 24, 91827).biomeWhitelist('#c:is_wet/overworld') // tag to check
-    .alwaysFinite().veinSize(4, 8).id('fallow:vein_zinc')
+    .alwaysFinite().veinSize(4, 8).id('tilth:vein_zinc')
   e.recipes.createoreexcavation.drilling(
       [coeutil.processingOutput('create:raw_zinc', 1), coeutil.processingOutput('minecraft:gravel', 0.3)],
-      'fallow:vein_zinc', 400)
-    .drill('fallow:forged_drill_head').stress(512)
+      'tilth:vein_zinc', 400)
+    .drill('tilth:forged_drill_head').stress(512)
 })
 ```
 
@@ -184,7 +184,7 @@ Already retained: Quark (essentials), Supplementaries (essentials), Copycats+ (�
 |---|---|---|
 | FTB Quests | **CurseForge only** (FTB does not publish on Modrinth); 2101.1.28 NeoForge on CF | **Rejected** (Modrinth constraint) |
 | Heracles / Odyssey Quests | 1.20.1; unofficial NeoForge port for 26.2+ only | **Rejected** (no 1.21.1) |
-| **Modonomicon** (already present) + **custom advancements** (datapack in `kubejs/data/fallow/advancement`) | ✔ | **Core**: an "engineer's notebook". Each chapter (Forge, Workshop, Steam, Logistics, Rail, Combustion, Aviation, Colonies) opens on an advancement; with multiblock diagrams. No extra mod. Ponder (Create, KC) serves as an in-game tutorial |
+| **Modonomicon** (already present) + **custom advancements** (datapack in `kubejs/data/tilth/advancement`) | ✔ | **Core**: an "engineer's notebook". Each chapter (Forge, Workshop, Steam, Logistics, Rail, Combustion, Aviation, Colonies) opens on an advancement; with multiblock diagrams. No extra mod. Ponder (Create, KC) serves as an in-game tutorial |
 
 ---
 
@@ -196,7 +196,7 @@ Already retained: Quark (essentials), Supplementaries (essentials), Copycats+ (�
 | **1. Forge** | Stone anvil → forge → first forged iron, bronze | **Overgeared**, Prospecting Picks | raw iron, copper, tin(?) and coal; bronze at the foundry | Vanilla tool and armor recipes removed; basic blueprints found in the ruins; the prospecting pickaxe requires a forged head |
 | **2. Workshop** | Water wheel, mill, press, mixer | **Create** (andesite), **Connected** (shear pin, clutches), Copycats+ | andesite alloy, iron plates | `create:andesite_alloy` by hand with a **forged nail or rivet** (Overgeared); press and mixer require a forged "workshop hammer" of quality ≥ decent |
 | **3. Brass and steam** | Steam engine, burners, first conveyors | Create (brass), Rechiseled: Create | **brass** (Overgeared → mixer), Overgeared **steel** | Steam engine and boiler: **steel** plates instead of gold; precision mechanism: forged gear of "good" quality. Advancement "Pressure" |
-| **4. Logistics and mining** | Packages, frogports, stock, deposits | Create 6, **Factory Logistics**, **Ore Excavation** (+ Deposits) | forged drill heads, brass, steel | COE drill: `.drill('fallow:forged_drill_head')`; **finite** deposits, biome whitelist; possible Integrated Farming here |
+| **4. Logistics and mining** | Packages, frogports, stock, deposits | Create 6, **Factory Logistics**, **Ore Excavation** (+ Deposits) | forged drill heads, brass, steel | COE drill: `.drill('tilth:forged_drill_head')`; **finite** deposits, biome whitelist; possible Integrated Farming here |
 | **5. Rail** | First line, stations, rail mail | **Steam 'n' Rails**, **Bells & Whistles**, Interiors (opt.), Power Loader (trains only) | steel (rails, bogies), brass | `create:track` and S'n'R bogies with **steel**; train casing with a forged axle; station mailbox = mail between colonies |
 | **6. Combustion** | Oil, distillation, diesel locomotives | **Diesel Generators** (+ C&A in option B) | crude (COE fluid deposit or mod oil), steel, brass | Diesel engines with a forged steel engine block; fuel shipped in jars or tanks (Factory Logistics) |
 | **7. Aviation** | Hot-air balloon, then airship, then propeller plane | **Create Aeronautics + Sable** (+ Transmission & Linkage optional) | brass, steel, canvas (Supplementaries flax), fuel | Hot-air burner in brass (age 3+); propellers and propulsion bearings with **forged "excellent" blades** (real mastery of the forge); floating stones (levitite?) found only while exploring |

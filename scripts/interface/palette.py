@@ -1,8 +1,8 @@
-"""Fallow's colours for GUI Revision's screens.
+"""Tilth's colours for GUI Revision's screens.
 
 GUI Revision draws every screen with one ramp of greys (outline, darks, slots,
 panel, light). The player's inventory, the chests and most screens take
-Fallow's mist ramp (`BRUME`); the other screens take a family of their own on
+Tilth's mist ramp (`BRUME`); the other screens take a family of their own on
 their top panel, so that each kind of work has its colour, as GUI Revision gives
 the crafting table its wood and the enchanting table its purple: every grey
 keeps its brightness, so the relief stays as GUI Revision drew it.
@@ -15,7 +15,7 @@ GREYS = [(28, 28, 31), (54, 56, 56), (85, 89, 89), (98, 102, 102), (100, 107, 10
 # One step off the panel grey, left in a few compats.
 NEAR = {(193, 197, 197): (193, 198, 198), (194, 198, 198): (193, 198, 198)}
 
-# Fallow's mist: moss darks, sage slots, mist panel, bone light.
+# Tilth's mist: moss darks, sage slots, mist panel, bone light.
 BRUME = {
     (28, 28, 31): (26, 31, 28),
     (54, 56, 56): (52, 60, 53),

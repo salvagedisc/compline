@@ -5,7 +5,7 @@ Verification of plan v2 (chapters 10 and 11, KubeJS drafts, chapters 03, 06 and 
 **Method**
 - Versions taken from the Modrinth API on 2026-10-18, filter `neoforge` + `1.21.1`.
 - 30 jars opened in `scratchpad/jars/` (own folders: `jars/<slug>/` and `jars/s5/<slug>/`): `javap`, JSON from `data/` and `assets/`, `mods.toml`.
-- GitHub was closed during this pass (proxy 403, MCP limited to `salvagedisc/fallow`). The Aeronautics issues cited in chapter 06 therefore **could not be reread**.
+- GitHub was closed during this pass (proxy 403, MCP limited to `salvagedisc/tilth`). The Aeronautics issues cited in chapter 06 therefore **could not be reread**.
 - Markers: "jar" = read in the jar; "Modrinth" = API; "inferred" = reasoning without testing.
 
 ---
@@ -131,7 +131,7 @@ For memory, the cost comes mostly from **block states** and baked models: roofs 
   - conditions `randomChance`, `matchStructure`, `matchBiome`, **`hasAnyStage`**, `matchPlayer`; actions `addLoot`, `removeLoot`, `replaceLoot`, `playerAction`, `customAction`.
   - The `.when(c => c.randomChance(0.5))` syntax of the `butin.js` draft is LootJS 2's: in 3, one chains `.randomChance(0.5).addLoot(…)`.
 - **MoreJS 0.16**: the group is called **`MoreJS`**, not `MoreJSEvents` (the `survivants.js` draft is wrong). Events: `villagerTrades`, `wandererTrades`, `updateOffer`, `structureLoad`, `structureAfterPlace`, `teleport`, `enchantmentTableChanged`, `playerEnchant`…
-- **Create Ore Excavation 1.6.8**: `event.recipes.createoreexcavation.vein(…)` with `alwaysFinite`, `biomeWhitelist`, `biomeBlacklist`, `placement`, `veinSize`, `priority`; `coeutil` binding (jar). The 15 default veins (`recipe/ore_vein_type/*.json`) have `"finite":"default"` and `biomeWhitelist: minecraft:is_overworld`. They must be **removed** (`event.remove({type:'createoreexcavation:vein'})`) before adding Fallow's.
+- **Create Ore Excavation 1.6.8**: `event.recipes.createoreexcavation.vein(…)` with `alwaysFinite`, `biomeWhitelist`, `biomeBlacklist`, `placement`, `veinSize`, `priority`; `coeutil` binding (jar). The 15 default veins (`recipe/ore_vein_type/*.json`) have `"finite":"default"` and `biomeWhitelist: minecraft:is_overworld`. They must be **removed** (`event.remove({type:'createoreexcavation:vein'})`) before adding Tilth's.
 - **Wildex 3.0.0** exposes `de.coldfang.wildex.integration.kubejs.WildexKubeJsScriptBridge.onDiscoveryChanged(cb)` and `onCompleted(cb)`. The received parameter carries `playerUuid`, `playerName`, `mobId`, `discovered`, `total`, `percentScaled` and `isComplete`. `zoo.js` is feasible (section 2.5).
 
 ### 1.6 Wood and tools (jars)
@@ -224,10 +224,10 @@ Every Compat config (hazardous file; exact name to be found at first launch):
 | Option | How | What leaks | Cost |
 |---|---|---|---|
 | **A. `doLimitedCrafting`** (current draft) | `recipe give *` on login, then `recipe take` of the locked recipes; reading the blueprint gives them back | 1) **Recipe advancements give recipes back**: Create has 1,071 of them, for example `create:recipes/misc/crafting/kinetics/mechanical_press` gives the press as soon as one **holds an andesite casing** (jar). Each advancement concerned must be overridden in `kubejs/data/<mod>/advancement/recipes/…`. 2) The **Traveler's Backpack bag** ignores it: cut `enableCraftingUpgrade`. 3) Create's **mechanical crafters, mixer and press**: no player, hence no control (`allowRegularCraftingInCrafter=true` by default). 4) Any other modded grid. 5) Quark `Automatic Recipe Unlock` is **still `true`** in the repository | KubeJS only, but fragile |
-| **B. The blueprint placed on the crafting table** | The blueprint becomes a **kept** ingredient of the locked recipes: `event.shaped('create:mechanical_press', [...], {..., P: 'fallow:plan_atelier'}).keepIngredient('fallow:plan_atelier')` | Knowledge is no longer personal: it is **physical**. The blueprint can be lent and can be lost (consistent with a permanent world among friends). A copy of the blueprint can be added (paper + Supplementaries ancient ink) | KubeJS only, robust. The mixer and press do not craft irregular-pattern recipes. Visual Workbench shows the blueprint placed on the table, in 3D |
-| **C. Overgeared blueprints** | Add types (`rail`, `vapeur`, `aerostat`…) to `availableToolTypes`, then `requires_blueprint: true` on the forge recipes of the `fallow:*` parts that already lock the machines (`progression.js`). The blueprint found in a ruin is an `overgeared:blueprint` of that type, given by LootJS | Need to check that the type-selection screen does not offer these types to the player (packet `SelectToolTypeC2SPacket`); otherwise anyone can make the blueprint | Configuration + LootJS. **A single blueprint system** in the pack, instead of two that look alike ("Smithing Blueprint" versus "engineer blueprint") |
+| **B. The blueprint placed on the crafting table** | The blueprint becomes a **kept** ingredient of the locked recipes: `event.shaped('create:mechanical_press', [...], {..., P: 'tilth:plan_atelier'}).keepIngredient('tilth:plan_atelier')` | Knowledge is no longer personal: it is **physical**. The blueprint can be lent and can be lost (consistent with a permanent world among friends). A copy of the blueprint can be added (paper + Supplementaries ancient ink) | KubeJS only, robust. The mixer and press do not craft irregular-pattern recipes. Visual Workbench shows the blueprint placed on the table, in 3D |
+| **C. Overgeared blueprints** | Add types (`rail`, `vapeur`, `aerostat`…) to `availableToolTypes`, then `requires_blueprint: true` on the forge recipes of the `tilth:*` parts that already lock the machines (`progression.js`). The blueprint found in a ruin is an `overgeared:blueprint` of that type, given by LootJS | Need to check that the type-selection screen does not offer these types to the player (packet `SelectToolTypeC2SPacket`); otherwise anyone can make the blueprint | Configuration + LootJS. **A single blueprint system** in the pack, instead of two that look alike ("Smithing Blueprint" versus "engineer blueprint") |
 | **D. AStages** (`astages` 2.5.3, NeoForge 1.21.1, Modrinth) | Per-player recipe locks, with KubeJS integration; mixins on `CraftingMenu`, `CrafterBlock`, furnaces, stonecutter, forge | Heavy: 0.98 MB, "all rights reserved" licence, 26,000 downloads. It places rendering mixins (`ASectionCompiler`, `ALevelChunkSection`) that are a risk with Sodium 0.8 and Sable | Not adopted without testing |
-| **E. Custom mod `fallow-plans`** | Section 4.2 | no known leak | 7 to 10 classes |
+| **E. Custom mod `tilth-plans`** | Section 4.2 | no known leak | 7 to 10 classes |
 
 **Recommendation: B right away, C to test, E if per-player knowledge is wanted.**
 - B requires no Java, works in every grid, shows in EMI (a blueprint is required, you do not know where it is) and ties Visual Workbench into the system.
@@ -250,8 +250,8 @@ With Lootr, the loot context contains the player who opens the chest (inferred).
 KubeJS Create cannot create a kinetic block (1.5). Two routes:
 
 1. **KubeJS alone: the Dissipator is a head placed in front of a Create fan**
-   - Block `fallow:dissipateur` with a block entity: `.blockEntity(be => { be.serverTicking(); be.tickFrequency(20) })`.
-   - In `BlockEvents.blockEntityTick('fallow:dissipateur', e => …)`, the neighbouring block is read. If it is a `create:encased_fan` turned towards the head, `getSpeed()` is read on its block entity (public method of `KineticBlockEntity`, which KubeJS's class filter does not block).
+   - Block `tilth:dissipateur` with a block entity: `.blockEntity(be => { be.serverTicking(); be.tickFrequency(20) })`.
+   - In `BlockEvents.blockEntityTick('tilth:dissipateur', e => …)`, the neighbouring block is read. If it is a `create:encased_fan` turned towards the head, `getSpeed()` is read on its block entity (public method of `KineticBlockEntity`, which KubeJS's class filter does not block).
    - Beyond 128 rpm for N minutes (counter in the block entity's data), the conversion of the 64 radius starts.
    - **The fan is what consumes the stress**: a real installation is needed to run it.
    - Limits: no engineer's goggles info on the head, no Ponder, and a call to an internal Create class to recheck at each update.
@@ -263,13 +263,13 @@ Recommendation: **1 for prototyping** (and to check that the idea appeals), 2 on
 
 | # | Script | Feasible in KubeJS 2101? | Exact event or tool | Correction needed |
 |---|---|---|---|---|
-| 1 | `fallow:init` + `load.json` | Yes (datapack) | tag `minecraft:load` | Remove `doLimitedCrafting` if option B is chosen |
+| 1 | `tilth:init` + `load.json` | Yes (datapack) | tag `minecraft:load` | Remove `doLimitedCrafting` if option B is chosen |
 | 2 | `no_end_no_nether.js` | Yes | `ServerEvents.recipes`, `BlockEvents.rightClicked`, `NativeEvents.onEvent` | Pass `Java.loadClass('net.neoforged.neoforge.event.level.BlockEvent$PortalSpawnEvent')` if the string is not accepted (the parameter is a `Class`) |
 | 3 | `spawns_safety.js` | Yes | `EntityEvents.checkSpawn` (earlier and cheaper) or `EntityEvents.spawned` | — |
 | 4 | `saisons_cold_sweat.js` | Outside the scope of this report | — | see the survival report |
 | 5 | `recipes/remplacements.js` | Yes | `event.recipes.create.mixing/splashing` (KubeJS Create) | — |
 | 6 | `cuisine_unifiee.js` | Yes | `ServerEvents.recipes`, `ServerEvents.tags` | — |
-| 7 | `objets_fallow.js` + `overgeared_pieces.js` | Yes | `StartupEvents.registry('item')`; type `overgeared:forging` (fields `blueprint`, `requires_blueprint`, `hammering`, `minimum_quality`…, Overgeared's `doc.txt`) | Use `event.custom({type:'overgeared:forging', …})` |
+| 7 | `objets_tilth.js` + `overgeared_pieces.js` | Yes | `StartupEvents.registry('item')`; type `overgeared:forging` (fields `blueprint`, `requires_blueprint`, `hammering`, `minimum_quality`…, Overgeared's `doc.txt`) | Use `event.custom({type:'overgeared:forging', …})` |
 | 8 | `recipes/progression.js` | Yes | `replaceInput`, `shaped`, `create.sequenced_assembly` | The steam engine takes `#c:plates/gold` (jar): replacing it with steel is correct |
 | 9 | `plans_ingenieur.js` + `loot/butin.js` | **Option B: yes; option A: with leaks** | `shaped(...).keepIngredient(...)`; `LootJS.modifiers` + `addTableModifier('nomansland:chests/…').randomChance(x).addLoot(...)` | Rewrite `butin.js` in LootJS 3 syntax; target NML's tables (2.3) |
 | 10 | `survivants.js` | Yes | `NativeEvents.onEvent(BabyEntitySpawnEvent)`; **`MoreJS.villagerTrades`** | Rename `MoreJSEvents` to `MoreJS` |
@@ -314,7 +314,7 @@ Recommendation: **1 for prototyping** (and to check that the idea appeals), 2 on
 
 ## 4. To adapt, remove or add in the plan
 
-### 4.1 Custom mod `fallow-dissipateur` (only if the KubeJS prototype of 2.4 convinces)
+### 4.1 Custom mod `tilth-dissipateur` (only if the KubeJS prototype of 2.4 convinces)
 - **Role**: a real Create kinetic block. It consumes stress (for example 16 su/rpm, adjustable), shows its state in engineer's goggles, has a Ponder, and launches the conversion of the 64 radius in Java (same method as `/fillbiome`, which already sends clients the biome update packet).
 - **Size**: 8 to 12 classes.
   - Block (subclass of Create's `KineticBlock`/`DirectionalKineticBlock`), block entity (`KineticBlockEntity`) and item.
@@ -322,26 +322,26 @@ Recommendation: **1 for prototyping** (and to check that the idea appeals), 2 on
   - Conversion service split by ticks; configuration; data (recipe, loot, tags).
 - Dependency: Create 6.0.10 (Registrate API). The simplest is to start from the Create addon template for NeoForge 1.21.1.
 
-### 4.2 Custom mod `fallow-plans` (only if per-player knowledge is wanted)
+### 4.2 Custom mod `tilth-plans` (only if per-player knowledge is wanted)
 - **Role**: per-player knowledge, without leaks.
   - Player attachment: set of blueprints read.
   - Blueprint item with a "blueprint identifier" component.
-  - Files `data/fallow/plans/*.json`: blueprint → recipes.
+  - Files `data/tilth/plans/*.json`: blueprint → recipes.
   - Mixin on `ResultContainer#setRecipeUsed(Level, ServerPlayer, RecipeHolder)` and on the TB bag grid.
   - Small EMI plugin that displays "Blueprint required: …" on the recipe; admin command.
 - **Size**: 7 to 10 classes.
 
-### 4.3 Custom mod `fallow-voies` (optional, later)
+### 4.3 Custom mod `tilth-voies` (optional, later)
 - **Role**: Steam 'n' Rails tracks in maple, pine, walnut and willow, through Create's `TrackMaterial` API, with NML's textures.
 - **Size**: 3 to 5 classes, plus models and textures.
 - Makes the rail network a real extension of the region's wood.
 
-### 4.4 Mini-mod `fallow-tombe` (if test 5.3 fails)
+### 4.4 Mini-mod `tilth-tombe` (if test 5.3 fails)
 - **Role**: mixin on `GraveUtils.getGraveStoneLocation` to descend to the first solid ground when death occurs in the air (airship, fall).
 - **Size**: 2 classes.
 - Alternative without code: `strict_placement` is not enough, since the search never goes down.
 
-> All four can live in **a single `fallow` mod**, of which 4.1 would be the core. This is simpler to maintain than one mod per feature.
+> All four can live in **a single `tilth` mod**, of which 4.1 would be the core. This is simpler to maintain than one mod per feature.
 
 ### 4.5 Changes to the plan
 
