@@ -3,10 +3,12 @@
 The mist of the pack is set biome by biome in the ATMOSPHERICS preset. A biome the preset
 does not know gets no mist at all, so each Regions Unexplored biome copies the profile of
 the vanilla biome it resembles (the "model" below): same family (misty, veiled, cave),
-same colours by climate.
+same colours by climate. The few biomes of the other mods (`OTHER_MODELS`: Hybrid Aquatic,
+the Streams Reflowing stream, Quark's glimmering weald) get their mist profile the same way,
+and nothing else.
 
 The script rewrites three things, from the table below and the biome files of the jar:
-  - the `regions_unexplored:*` profiles of the single preset in
+  - the `regions_unexplored:*` profiles, and those of `OTHER_MODELS`, of the single preset in
     pack/resourcepacks/fallow-ambiance/assets/atmospherics/preset/ (rename the file by hand
     to ship it: ATMOSPHERICS applies a preset once per file name);
   - one Polytone modifier per surface biome that sets its own grass, foliage or water
@@ -121,6 +123,28 @@ MODELS = {
 
 UNDERGROUND = {"lush_caves", "dripstone_caves", "nether_wastes"}
 
+# Biomes of the other mods of the pack ("namespace:biome") -> vanilla biome whose mist profile they copy.
+# Their own colours are left alone. biome_rules.py checks this table against the jars.
+OTHER_MODELS = {
+    "hybrid_aquatic:cold_trench": "deep_cold_ocean",
+    "hybrid_aquatic:coral_reef": "warm_ocean",
+    "hybrid_aquatic:deep_coral_reef": "deep_lukewarm_ocean",
+    "hybrid_aquatic:deep_warm_ocean": "deep_lukewarm_ocean",
+    "hybrid_aquatic:frozen_trench": "deep_frozen_ocean",
+    "hybrid_aquatic:lukewarm_trench": "deep_lukewarm_ocean",
+    "hybrid_aquatic:red_meadow": "lukewarm_ocean",
+    "hybrid_aquatic:seagrass_bed": "lukewarm_ocean",
+    "hybrid_aquatic:sulfuric_caves": "dripstone_caves",
+    "hybrid_aquatic:tide_pools": "beach",
+    "hybrid_aquatic:trench": "deep_ocean",
+    "hybrid_aquatic:tropical_deep_coral_reef": "deep_lukewarm_ocean",
+    "hybrid_aquatic:tropical_river": "river",
+    "hybrid_aquatic:warm_trench": "deep_lukewarm_ocean",
+    "quark:glimmering_weald": "lush_caves",
+    "streamsreflowing:stream": "river",
+}
+OTHER_NAMESPACES = {name.split(":")[0] for name in OTHER_MODELS}
+
 # The misty family ends its daytime mist at 40 blocks, the veiled one at 72.
 MISTY_END = 40.0
 
@@ -168,7 +192,7 @@ def main(jar_path):
     with open(presets[0], encoding="utf-8") as source:
         preset = json.load(source)
     profiles = preset["biomes"]
-    for key in [key for key in profiles if key.startswith(NAMESPACE + ":")]:
+    for key in [key for key in profiles if key.split(":")[0] in {NAMESPACE} | OTHER_NAMESPACES]:
         del profiles[key]
 
     for old in glob.glob(os.path.join(MODIFIERS, PREFIX + "*.json")):
@@ -202,14 +226,21 @@ def main(jar_path):
             write_json(os.path.join(MODIFIERS, f"{PREFIX}{name}.json"), modifier)
             modifiers += 1
 
+    for name, model in sorted(OTHER_MODELS.items()):
+        profile = profiles["minecraft:" + model]
+        profiles[name] = json.loads(json.dumps(profile))
+        if model not in UNDERGROUND and profile["endDistance"] == MISTY_END:
+            misty.append(name)
+
     write_json(presets[0], preset)
 
     with open(MISTY_TAG, encoding="utf-8") as source:
         tag = json.load(source)
-    tag["values"] = [value for value in tag["values"] if not value.startswith(NAMESPACE + ":")] + misty
+    tag["values"] = [value for value in tag["values"]
+                     if value.split(":")[0] not in {NAMESPACE} | OTHER_NAMESPACES] + misty
     write_json(MISTY_TAG, tag)
 
-    print(f"{len(biomes)} mist profiles in {os.path.basename(presets[0])}, "
+    print(f"{len(biomes)} + {len(OTHER_MODELS)} mist profiles in {os.path.basename(presets[0])}, "
           f"{modifiers} colour modifiers, {len(misty)} misty biomes in the tag")
 
 

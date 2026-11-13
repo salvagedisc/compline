@@ -2,7 +2,7 @@
 
 > Created on 2026-10-19 from [11.1-11.2](../archive/plan/11-rendu-et-confort.md), [12.1-12.2](../archive/plan/12-verification.md) and [report 3](../archive/plan/recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
 
-> **Updated on 2026-11-13.** No Man's Land left the pack ([0019](../decisions/0019-leaving-no-mans-land.md)): the preset is now `fallow_v6.json` (same global settings as `fallow_v5.json`; the 24 profiles of No Man's Land removed, 78 profiles of Regions Unexplored added), with the mist profiles and colours of Regions Unexplored written by `scripts/ambiance/biomes.py`. Nothing has been seen in game with Regions Unexplored. The dated sections below that speak of No Man's Land are kept as history.
+> **Updated on 2026-11-13.** No Man's Land left the pack ([0019](../decisions/0019-leaving-no-mans-land.md)): the preset became `fallow_v6.json` (same global settings as `fallow_v5.json`; the 24 profiles of No Man's Land removed, 78 profiles of Regions Unexplored added), with the mist profiles and colours of Regions Unexplored written by `scripts/ambiance/biomes.py`. The same day it became `fallow_v7.json`: 16 biomes of other mods had no profile at all, so no mist (the 14 of Hybrid Aquatic, the stream of Streams Reflowing, Quark's glimmering weald); they now copy a vanilla profile too (`OTHER_MODELS`). Nothing has been seen in game with Regions Unexplored. The dated sections below that speak of No Man's Land are kept as history.
 
 ## What it contains
 
@@ -10,7 +10,7 @@
 pack/resourcepacks/fallow-ambiance/
 ├── pack.mcmeta                                    pack_format 34 (1.21.1)
 └── assets/
-    ├── atmospherics/preset/fallow_v6.json          the mist biome by biome, the storms, the sand, the clouds, sun, moon and stars
+    ├── atmospherics/preset/fallow_v7.json          the mist biome by biome, the storms, the sand, the clouds, sun, moon and stars
     ├── fallow/polytone/biome_modifiers/*.json      grass, foliage, water, snowflakes (69 files: 65 `ru_*`, 3 clearings, `vanilla_neige`)
     ├── fallow/polytone/colored_lights/*.json       colour of fire and soul lights
     ├── fallow/sounds.json                         events for the music pack tracks ([musique](musique.md))
@@ -27,7 +27,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - The file is a complete configuration: it **replaces** `config/ambientfog/biome_fog.json`, including the player's tweaks.
 - Consequences:
   - a single preset in the pack;
-  - to ship a new version, **rename** the file (`fallow_v6.json` → `fallow_v7.json`, as `fallow_v5.json` became `fallow_v6.json` on 2026-11-13) and delete the old one, otherwise it is not reapplied;
+  - to ship a new version, **rename** the file (`fallow_v7.json` → `fallow_v8.json`, as `fallow_v6.json` became `fallow_v7.json` on 2026-11-13) and delete the old one, otherwise it is not reapplied;
   - each new version overwrites the players' ATMOSPHERICS settings.
 - The file starts from the mod's original preset (version 43, all global settings kept). Only `presetName`, `presetAuthor` and the biome profiles change.
 - The mod's bounds are respected: intensity 0-4, density 0.2-5, veil 0-3, particles 0-3.
@@ -68,6 +68,8 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 | Clearing | none | `fallow:clairiere`, `fallow:clairiere_froide`, `fallow:clairiere_chaude` |
 | Cave and Nether (11) | `ancient_delta`, `bioshroom_caves`, `prismachasm`, `redstone_caves`, `inferno`, `scorching_caves`, `blackstone_basin`, `glistering_meadow`, `infernal_holt`, `mycotoxic_undergrowth`, `redstone_abyss` (profile of vanilla `lush_caves`, `dripstone_caves` or `nether_wastes`, as the script pairs them) | vanilla caves, Nether, End: original preset |
 
+**Biomes of the other mods** (16 profiles, table `OTHER_MODELS` of the same script). Hybrid Aquatic's trenches, reefs, seagrass bed, red meadow and deep warm ocean copy the vanilla ocean of their temperature, its tide pools the beach, its tropical river and the Streams Reflowing stream the river, its sulfuric caves and Quark's glimmering weald a vanilla cave. Their colours stay those of their mod. `biome_rules.py` stops if a mod of the pack has a biome that is in neither table.
+
 Vanilla surface biomes also receive the mist, and so does every Regions Unexplored biome: a biome the preset does not know gets no mist at all, and would act as a clearing. When the mod is updated and adds a biome, `biomes.py` stops with a message until `MODELS` is completed.
 
 **Mist colours** (day / night):
@@ -95,7 +97,7 @@ Vanilla surface biomes also receive the mist, and so does every Regions Unexplor
   - warm: `#9cc456`, `#7fae3c`, `#3a92c4`.
 - Vanilla biomes are not touched: their grass follows the temperature palette, which a fixed colour would overwrite.
 - Usage, from the repository root, after each update of Regions Unexplored: `python3 scripts/ambiance/biomes.py <regions-unexplored jar>`. The preset must then be renamed by hand to be applied again. Run manually, committed with its output, never in CI.
-- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`.
+- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome (and each surface biome of `OTHER_MODELS`, outside the tags of its own mod) to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`.
 
 The values are paper choices, not seen in game. Until 2026-11-13 the same rule was applied by hand to 20 `nml_*.json` files for No Man's Land's biomes (for example `old_growth_forest` grass `#87b44c` → `#7e9d56`); they were deleted with the mod.
 
@@ -171,7 +173,7 @@ Part of [0017](../decisions/0017-averse-et-rayons.md), the answer to Recrafted's
 
 1. **Colour rendering.** The original preset uses very saturated mist colours (`#20afff` for plains): ATMOSPHERICS probably darkens or blends them according to the time. The greys chosen here may come out too dull or too light [inferred].
    - Tune with the ATMOSPHERICS editor.
-   - Export, then save as `fallow_v7.json` while deleting `fallow_v6.json`.
+   - Export, then save as `fallow_v8.json` while deleting `fallow_v7.json`.
 2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
 3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2).
 4. **The clearing looks** (`fallow:clairiere` and its two variants, in the `fallow` mod): their JSON colours match those of Polytone; check in game that the Polytone values are the ones shown (change one and reload with F3+T).

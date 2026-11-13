@@ -18,7 +18,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Area | In game |
 |---|---|
 | The world | Regions Unexplored and Geophilic biomes on Tectonic terrain (continents, ranges, valleys) with Streams Reflowing streams, not yet seen in game ([0019](docs/decisions/0019-leaving-no-mans-land.md)); sparse structures, six Monoliths monuments with a codex to piece together; End removed and Nether closed |
-| The mist | ATMOSPHERICS mist per biome (`fallow_v6` preset), snow and dust storms; Distant Horizons hidden in the mist and revealed where it lifts |
+| The mist | ATMOSPHERICS mist per biome (`fallow_v7` preset), snow and dust storms; Distant Horizons hidden in the mist and revealed where it lifts |
 | Clearings | Vigil fire (radius 16), clearing lantern (32) and the Create **dissipator** (64) turn the land around them into a clearing for good: light mist, vivid grass, far view, its own music |
 | Exploration | Hand-drawn Antique Atlas without coordinates, trains and ships on it; Lootr chests; Exposure photography and astrophotography |
 | Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; no experience at all (anvil by wear, enchanting through found books) |

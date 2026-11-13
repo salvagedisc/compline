@@ -1,4 +1,4 @@
-"""Makes the mods' own biome rules apply to the Regions Unexplored biomes (Python 3).
+"""Makes the mods' own biome rules apply to the biomes other mods add (Python 3).
 
 Several mods decide by a list of vanilla biome names where an animal spawns, which breed of
 horse appears or how the wind blows. A Regions Unexplored biome is in none of these lists, so
@@ -13,10 +13,14 @@ the mist (`MODELS` in biomes.py):
   - wind: for every Where Winds Blow profile that names vanilla biomes, a profile
     `ru_<name>.json` with the same values in pack/kubejs/{data,assets}/fallow/.
 
+The biomes of `OTHER_MODELS` in biomes.py (Hybrid Aquatic, the Streams Reflowing stream)
+inherit the same way from their model, in the tags that know no biome of their mod. The
+script stops if a mod of the pack has a biome that is in neither table.
+
 Cave and Nether biomes inherit nothing: their model was chosen for the mist only. The tags
 matched by `SKIPPED` are left alone too.
 
-The script owns every `regions_unexplored:*` entry of the pack's biome tags outside the
+The script owns every entry of these mods' biomes in the pack's biome tags outside the
 `fallow` namespace, and the `ru_*.json` wind profiles: it rewrites them at each run.
 
 Usage, from the repository root, after `npm run check-deps` has filled the jar cache:
@@ -29,13 +33,14 @@ import re
 import sys
 import zipfile
 
-from biomes import MODELS, NAMESPACE, ROOT, UNDERGROUND, write_json
+from biomes import MODELS, NAMESPACE, OTHER_MODELS, ROOT, UNDERGROUND, write_json
 
 PACK_DATA = os.path.join(ROOT, "pack/kubejs/data")
 PACK_ASSETS = os.path.join(ROOT, "pack/kubejs/assets")
 MODS = os.path.join(ROOT, "pack/mods")
 
 TAG = re.compile(r"^data/([^/]+)/tags/worldgen/biome/(.+)\.json$")
+BIOME = re.compile(r"^data/([^/]+)/worldgen/biome/(.+)\.json$")
 WIND = re.compile(r"^data/where_winds_blow/where_winds_blow/wind_profiles/(.+)\.json$")
 WIND_FOLDER = "fallow/where_winds_blow/wind_profiles"
 
@@ -45,7 +50,13 @@ OWN = {NAMESPACE, "fallow"}
 # Left as they are: Quark's fallen trunks are of vanilla woods, out of place under maples or redwoods.
 SKIPPED = re.compile(r"^quark:has_(lower_)?fallen_")
 
-RU = NAMESPACE + ":"
+# Every biome that inherits, with its model.
+ALL_MODELS = {f"{NAMESPACE}:{name}": model for name, model in MODELS.items()}
+ALL_MODELS.update(OTHER_MODELS)
+# Tag namespaces a mod writes itself: its biomes take nothing there, the mod has made its choices.
+FAMILY = {"hapi": "hybrid_aquatic"}
+# The script owns the entries that start with one of these.
+HEIRS = tuple(sorted({name.split(":")[0] + ":" for name in ALL_MODELS}))
 
 
 def pack_jars(folder):
@@ -68,12 +79,14 @@ def entry_id(entry):
 
 
 def read_jars(jars):
-    """Biome tags (tag -> entries, merged like the game does) and Where Winds Blow profiles of the jars."""
-    tags, winds = {}, {}
+    """Biome tags (tag -> entries, merged like the game does), Where Winds Blow profiles and biomes of the jars."""
+    tags, winds, biomes = {}, {}, set()
     for path in jars:
         with zipfile.ZipFile(path) as jar:
             for name in jar.namelist():
-                tag, wind = TAG.match(name), WIND.match(name)
+                tag, wind, biome = TAG.match(name), WIND.match(name), BIOME.match(name)
+                if biome and biome.group(1) not in ("minecraft", "fallow"):
+                    biomes.add(f"{biome.group(1)}:{biome.group(2)}")
                 if not tag and not wind:
                     continue
                 try:
@@ -87,7 +100,7 @@ def read_jars(jars):
                     if data.get("replace"):
                         entries.clear()
                     entries += [entry_id(entry) for entry in data.get("values", [])]
-    return tags, winds
+    return tags, winds, biomes
 
 
 def pack_tag_files():
@@ -120,19 +133,24 @@ def resolve(tag, tags, seen=()):
     return biomes
 
 
-def heirs(vanilla):
-    """Regions Unexplored surface biomes whose model is one of these vanilla biomes."""
-    return sorted(RU + name for name, model in MODELS.items()
-                  if model not in UNDERGROUND and "minecraft:" + model in vanilla)
+def heirs(vanilla, known=()):
+    """Surface biomes whose model is one of these vanilla biomes, except those of the mods in `known`."""
+    return sorted(name for name, model in ALL_MODELS.items()
+                  if model not in UNDERGROUND and "minecraft:" + model in vanilla
+                  and name.split(":")[0] not in known)
 
 
 def main(folder):
-    tags, winds = read_jars(pack_jars(folder))
+    tags, winds, biomes = read_jars(pack_jars(folder))
+    unknown, gone = sorted(biomes - set(ALL_MODELS)), sorted(set(ALL_MODELS) - biomes)
+    if unknown or gone:
+        sys.exit(f"MODELS and OTHER_MODELS (biomes.py) do not match the jars: missing {unknown}, "
+                 f"no longer in a mod {gone}")
 
     # The pack's own tag files come last, without the entries of a previous run.
     files = pack_tag_files()
     for path, (tag, data) in files.items():
-        data["values"] = [entry for entry in data.get("values", []) if not entry_id(entry).startswith(RU)]
+        data["values"] = [entry for entry in data.get("values", []) if not entry_id(entry).startswith(HEIRS)]
         entries = tags.setdefault(tag, [])
         if data.get("replace"):
             entries.clear()
@@ -142,10 +160,13 @@ def main(folder):
     for tag in sorted(tags):
         if tag.split(":")[0] in COMMON | OWN or SKIPPED.match(tag):
             continue
-        biomes = resolve(tag, tags)
-        if not biomes or any(biome.startswith(RU) for biome in biomes):
+        named = resolve(tag, tags)
+        if not named:
             continue
-        new = heirs(set(tags[tag]))
+        # So has a mod that already names one of its biomes in the tag.
+        namespace = tag.split(":")[0]
+        known = {biome.split(":")[0] for biome in named} | {namespace, FAMILY.get(namespace)}
+        new = heirs(set(tags[tag]), known)
         if new:
             additions[tag] = new
 
@@ -154,7 +175,7 @@ def main(folder):
         data["values"] += [{"id": biome, "required": False} for biome in additions.pop(tag, [])]
         if data["values"] or data.get("replace"):
             write_json(path, data)
-            written += any(entry_id(entry).startswith(RU) for entry in data["values"])
+            written += any(entry_id(entry).startswith(HEIRS) for entry in data["values"])
         else:
             os.remove(path)
     for tag, new in additions.items():
@@ -178,7 +199,7 @@ def main(folder):
             write_json(os.path.join(base, WIND_FOLDER, f"ru_{name}.json"), dict(profile, biomes=new))
         profiles += 1
 
-    print(f"{written} biome tags and {profiles} wind profiles now include Regions Unexplored biomes")
+    print(f"{written} biome tags and {profiles} wind profiles now include the biomes of other mods")
 
 
 if __name__ == "__main__":
