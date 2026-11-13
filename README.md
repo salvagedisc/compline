@@ -10,14 +10,14 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Loader | NeoForge 21.1.265 |
 | Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
 | Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
-| Status (2026-11-13) | 158 Modrinth mods, 10 resource packs, custom mod `tilth` 0.9.3; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
+| Status (2026-11-13) | 158 Modrinth mods, 10 resource packs, custom mod `tilth` 0.10.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
 | Content | see the [mod registry](docs/mods.md) |
 
 ## What the pack does today
 
 | Area | In game |
 |---|---|
-| The world | Regions Unexplored and Geophilic biomes on Tectonic terrain (continents, ranges, valleys) with Streams Reflowing streams, not yet seen in game ([0019](docs/decisions/0019-leaving-no-mans-land.md)); sparse structures, six Monoliths monuments with a codex to piece together; End removed and Nether closed |
+| The world | One continent on a disc 12 km wide, cold in the north and hot in the south, with an edge kept by the mist ([0022](docs/decisions/0022-disc-world.md)); Regions Unexplored and Geophilic biomes on Tectonic terrain (ranges, valleys) with Streams Reflowing streams, not yet seen in game ([0019](docs/decisions/0019-leaving-no-mans-land.md)); sparse structures, six Monoliths monuments with a codex to piece together; End removed and Nether closed |
 | The mist | ATMOSPHERICS mist per biome (`tilth_v7` preset), snow and dust storms; Distant Horizons hidden in the mist and revealed where it lifts |
 | Clearings | Vigil fire (radius 16), clearing lantern (32) and the Create **dissipator** (64) turn the land around them into a clearing for good: light mist, vivid grass, far view, its own music |
 | Exploration | Hand-drawn Antique Atlas without coordinates, trains and ships on it; Lootr chests; Exposure photography and astrophotography |
