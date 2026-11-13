@@ -2712,6 +2712,11 @@ hash = "39eac2df2b472e75842d065f3220cfedc4a1c28979e1c82ae5e3f8955c54c7de"
 metafile = true
 
 [[files]]
+file = "mods/spelunkery.pw.toml"
+hash = "cd2c6fa89eecaaa1aadf369b043ceb45e99778cacd590e3fc01b0dcae2e6557d"
+metafile = true
+
+[[files]]
 file = "mods/streams-reflowing.pw.toml"
 hash = "814062f207d8837246db5699198c5381e0b094866d112e7dd20b1f83c8dd6e17"
 metafile = true
