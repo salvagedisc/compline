@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 731905226,
+    "separation": 5,
+    "spacing": 6
+  },
+  "structures": [
+    {
+      "structure": "tilth:chorusoatl",
+      "weight": 1
+    }
+  ]
+}

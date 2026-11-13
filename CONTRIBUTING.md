@@ -1,10 +1,10 @@
-# Contributing to Fallow
+# Contributing to Tilth
 
 Project guide: what the repository is, how to work in it, what lives outside it. It applies to everyone who contributes.
 
 ## Purpose
 
-Fallow is a Minecraft **1.21.1 / NeoForge 21.1.265** modpack built with packwiz: a permanent, almost empty world in the spirit of the No Man's Land trailer (the mod itself left the pack on 2026-11-13), where the mist lifts wherever life is brought back ([vision](docs/vision.md)). The repository is the **source of truth** for the pack: mod list, configs, scripts, the custom `fallow` mod, its resource packs and the decisions behind them.
+Tilth is a Minecraft **1.21.1 / NeoForge 21.1.265** modpack built with packwiz: a permanent, almost empty world in the spirit of the No Man's Land trailer (the mod itself left the pack on 2026-11-13), where the mist lifts wherever life is brought back ([vision](docs/vision.md)). The repository is the **source of truth** for the pack: mod list, configs, scripts, the custom `tilth` mod, its resource packs and the decisions behind them.
 
 ## Principles
 
@@ -21,22 +21,22 @@ Requirements: Node.js ≥ 20, [packwiz](https://packwiz.infra.link/installation/
 | `npm test` | Tooling tests (`scripts/test/*.test.mjs`) | yes |
 | `npm run check-deps` | Dependencies declared in the jars are provided by the pack (Modrinth does not always declare them) | yes |
 | `npm run check-fr` | Every text of every mod has a French translation and keeps its variables ([translation](docs/plan/traduction.md)) | yes |
-| `npm run sync -- --instance "Fallow test"` | Compares the Modrinth App test instance with the pack and applies the packwiz commands after confirmation (`--configs`, `--dry-run`) | no |
+| `npm run sync -- --instance "Tilth test"` | Compares the Modrinth App test instance with the pack and applies the packwiz commands after confirmation (`--configs`, `--dry-run`) | no |
 | `cd pack && packwiz refresh` | Regenerates `index.toml` after any change to `pack/` (CI fails if it is stale) | yes |
 | `cd pack && packwiz mr export` | Builds the `.mrpack` locally | yes |
-| `cd mods-custom/fallow && ./gradlew build` | Builds the custom `fallow` mod; copy the jar to `pack/mods/` and bump `mod_version` in `gradle.properties` | yes |
+| `cd mods-custom/tilth && ./gradlew build` | Builds the custom `tilth` mod; copy the jar to `pack/mods/` and bump `mod_version` in `gradle.properties` | yes |
 
 Manual scripts, run from the repository root and committed with their output (never run in CI):
 
 | Script | Output |
 |---|---|
-| `python3 scripts/ambiance/weather.py` | Rain, rain curtain and glint textures (`fallow-ambiance`, `fallow` mod) |
-| `python3 scripts/ambiance/palette.py <neoforge client resources jar>` | Olive grass and foliage colour maps; the jar is in `mods-custom/fallow/build/moddev/artifacts/` |
-| `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes, and of the few biomes of other mods (`OTHER_MODELS`), in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `fallow:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/fallow-ambiance.md)) |
+| `python3 scripts/ambiance/weather.py` | Rain, rain curtain and glint textures (`tilth-ambiance`, `tilth` mod) |
+| `python3 scripts/ambiance/palette.py <neoforge client resources jar>` | Olive grass and foliage colour maps; the jar is in `mods-custom/tilth/build/moddev/artifacts/` |
+| `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes, and of the few biomes of other mods (`OTHER_MODELS`), in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `tilth:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/tilth-ambiance.md)) |
 | `python3 scripts/ambiance/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the same tables as `biomes.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
-| `python3 scripts/structures/chorusoatl_nest.py` | The nest of the Chorusoatl (`pack/kubejs/data/fallow/structure/chorusoatl.nbt`): a floor, an air pocket and the animal, like the nests of Archie's Dinosaurs ([0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) |
-| `python3 scripts/interface/build.py` | The `fallow-interface` pack from GUI Revision (calls `menus.py`, which can also run alone) |
-| `python3 scripts/textures/build.py` | The `fallow-textures` pack from Vanilla Evolved |
+| `python3 scripts/structures/chorusoatl_nest.py` | The nest of the Chorusoatl (`pack/kubejs/data/tilth/structure/chorusoatl.nbt`): a floor, an air pocket and the animal, like the nests of Archie's Dinosaurs ([0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) |
+| `python3 scripts/interface/build.py` | The `tilth-interface` pack from GUI Revision (calls `menus.py`, which can also run alone) |
+| `python3 scripts/textures/build.py` | The `tilth-textures` pack from Vanilla Evolved |
 
 ## Layout
 
@@ -46,9 +46,9 @@ Manual scripts, run from the repository root and committed with their output (ne
 | Shared config of a mod / config applied to every new world | `pack/config/` / `pack/defaultconfigs/` |
 | KubeJS scripts: registries and items / recipes, rules, spawns / display, EMI, tooltips | `pack/kubejs/startup_scripts/`, `server_scripts/`, `client_scripts/` |
 | French translation of a mod (language files, books) | `pack/kubejs/assets/<namespace>/` |
-| Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/fallow/` (or `data/<namespace>/` to override a mod) |
-| In-house resource packs | `pack/resourcepacks/fallow-ambiance/`, `fallow-interface/`, `fallow-textures/` |
-| Custom `fallow` mod (sources) | `mods-custom/fallow/` ([mod-fallow](docs/plan/mod-fallow.md)) |
+| Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/tilth/` (or `data/<namespace>/` to override a mod) |
+| In-house resource packs | `pack/resourcepacks/tilth-ambiance/`, `tilth-interface/`, `tilth-textures/` |
+| Custom `tilth` mod (sources) | `mods-custom/tilth/` ([mod-tilth](docs/plan/mod-tilth.md)) |
 | Tooling and its tests / resource pack scripts | `scripts/` + `scripts/test/` / `scripts/ambiance/`, `scripts/interface/`, `scripts/textures/` |
 | Vision, registry, roadmap, in-game tests | `docs/vision.md`, `docs/mods.md`, `docs/feuille-de-route.md`, `docs/tests-en-jeu.md` |
 | Living page of a system (mod, pack, translation, quests…) | `docs/plan/` |
@@ -59,7 +59,7 @@ Datapacks go through KubeJS: NeoForge does not load a global datapack without an
 
 ## Conventions
 
-- Docs, commit messages and code identifiers in **English**; in-game text in **French** (the language of each translation file). KubeJS script comments and Fallow's own texts are in French.
+- Docs, commit messages and code identifiers in **English**; in-game text in **French** (the language of each translation file). KubeJS script comments and Tilth's own texts are in French.
 - Documentation file names may stay in French (`feuille-de-route.md`, `tannerie.md`…): they name the systems as the team says them in game. New files follow the same rule; do not rename existing ones, links depend on them.
 - Never commit local tool or editor configuration, or personal data (names, e-mail addresses, local paths); list local-only files in `.git/info/exclude`.
 
@@ -87,12 +87,12 @@ Datapacks go through KubeJS: NeoForge does not load a global datapack without an
 
 **Test instance**
 
-In-game testing is done in a **"Fallow test"** instance of the Modrinth App. `npm run sync` never modifies the instance. In the other direction: `packwiz mr export` (or the `dev` pre-release), then import the `.mrpack` into the Modrinth App.
+In-game testing is done in a **"Tilth test"** instance of the Modrinth App. `npm run sync` never modifies the instance. In the other direction: `packwiz mr export` (or the `dev` pre-release), then import the `.mrpack` into the Modrinth App.
 
 ## Outside Git
 
-Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local exports; releases and the `dev` pre-release hold the built packs), `mods-custom/fallow/build/`, `mods-custom/fallow/run/` (Gradle dev client and server, with their worlds), `.gradle/`, `node_modules/`, `.cache/` (downloads of the resource pack scripts), `__pycache__/`. The only build output that is committed is the `fallow` jar in `pack/mods/`. Secrets live in the GitHub repository settings, never in files.
+Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local exports; releases and the `dev` pre-release hold the built packs), `mods-custom/tilth/build/`, `mods-custom/tilth/run/` (Gradle dev client and server, with their worlds), `.gradle/`, `node_modules/`, `.cache/` (downloads of the resource pack scripts), `__pycache__/`. The only build output that is committed is the `tilth` jar in `pack/mods/`. Secrets live in the GitHub repository settings, never in files.
 
 ## Current state
 
-As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 158 Modrinth mods, one library kept as a jar and the custom `fallow` mod 0.9.2, decisions 0001 to 0021, CI green on `main`. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).
+As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 158 Modrinth mods, one library kept as a jar and the custom `tilth` mod 0.9.2, decisions 0001 to 0021, CI green on `main`. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).

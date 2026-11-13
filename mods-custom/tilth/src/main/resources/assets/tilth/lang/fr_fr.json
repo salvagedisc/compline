@@ -1,0 +1,22 @@
+{
+  "block.tilth.feu_de_veille": "Feu de veille",
+  "block.tilth.lanterne_de_clairiere": "Lanterne de clairière",
+  "block.tilth.dissipateur": "Dissipateur",
+  "tooltip.tilth.clairiere.rayon": "Une fois posé, lève la brume sur %s blocs autour",
+  "tooltip.tilth.clairiere.retour": "Retiré, la brume revient",
+  "tooltip.tilth.dissipateur.usage": "Entraîné à 32 tr/min ou plus pendant dix secondes, lève la brume sur %s blocs autour. Cassé, il la rend",
+  "tooltip.tilth.dissipateur.charge": "La brume se lève : %s %%",
+  "tooltip.tilth.dissipateur.fait": "La brume s'est levée autour de lui",
+  "message.tilth.clairiere.dissipee": "La brume se retire.",
+  "message.tilth.clairiere.rien": "Ici, la brume n'a rien à quitter.",
+  "message.tilth.clairiere.retour": "La brume revient.",
+  "biome.tilth.clairiere": "Clairière",
+  "biome.tilth.clairiere_chaude": "Clairière chaude",
+  "biome.tilth.clairiere_froide": "Clairière froide",
+  "message.tilth.outils.hache": "Il te faut une hache.",
+  "message.tilth.outils.pioche": "Il te faut une pioche.",
+  "message.tilth.outils.pelle": "Il te faut une pelle.",
+  "message.tilth.outils.houe": "Il te faut une houe.",
+  "message.tilth.outils.outil": "Il te faut un outil.",
+  "message.tilth.outils.trop_faible": "Ton outil n'est pas assez solide."
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "tilth:block/dissipateur"
+    },
+    "axis=z": {
+      "model": "tilth:block/dissipateur",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "tilth:block/dissipateur",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

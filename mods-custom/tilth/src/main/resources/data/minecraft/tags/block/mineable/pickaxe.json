@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "tilth:feu_de_veille",
+    "tilth:lanterne_de_clairiere",
+    {
+      "id": "tilth:dissipateur",
+      "required": false
+    }
+  ]
+}

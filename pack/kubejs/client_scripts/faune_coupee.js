@@ -1,4 +1,4 @@
-// Fallow : objets des créatures retirées hors doublons, cachés d'EMI. Même liste que
+// Tilth : objets des créatures retirées hors doublons, cachés d'EMI. Même liste que
 // server_scripts/faune_coupee.js.
 RecipeViewerEvents.removeEntriesCompletely('item', event => {
   [

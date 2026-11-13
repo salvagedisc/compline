@@ -1,4 +1,4 @@
-// Fallow : objets retirés par le tri du pack, cachés d'EMI. Mêmes listes que
+// Tilth : objets retirés par le tri du pack, cachés d'EMI. Mêmes listes que
 // server_scripts/tri.js.
 
 // Variantes décoratives de Steam 'n' Rails, mêmes motifs que côté serveur.

@@ -1,0 +1,9 @@
+{
+  "config.tilth.header": "Tilth",
+  "config.tilth.rayons": "Rayons de soleil",
+  "config.tilth.rayons.tooltip": "La lumière du soleil et de la lune qui passe entre les feuillages.",
+  "config.tilth.rayons_soleil": "Rayons du soleil",
+  "config.tilth.rayons_soleil.tooltip": "La force des rayons du soleil.",
+  "config.tilth.rayons_lune": "Rayons de la lune",
+  "config.tilth.rayons_lune.tooltip": "La force des rayons de la lune. 0 les éteint."
+}

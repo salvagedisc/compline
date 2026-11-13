@@ -1,10 +1,10 @@
-"""Draws the weather textures of Fallow (Python 3 + Pillow, deterministic).
+"""Draws the weather textures of Tilth (Python 3 + Pillow, deterministic).
 
-- pack/resourcepacks/fallow-ambiance/assets/minecraft/textures/environment/rain.png
+- pack/resourcepacks/tilth-ambiance/assets/minecraft/textures/environment/rain.png
   The rain drawn by Where Winds Blow (and vanilla): thin, long, pale streaks
   instead of short blue drops. 64 x 256, one block wide and four blocks tall.
-  Texel (0, 0) is a marker for the particle core shader of fallow-ambiance.
-- mods-custom/fallow/src/main/resources/assets/fallow/textures/environment/
+  Texel (0, 0) is a marker for the particle core shader of tilth-ambiance.
+- mods-custom/tilth/src/main/resources/assets/tilth/textures/environment/
   rain_curtain.png  the far rain curtains of the `averse` module (tiles both ways)
   glint.png         one glint of sunlight on water (`rayons` module)
 
@@ -17,11 +17,11 @@ import random
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-AMBIANCE = os.path.join(ROOT, "pack/resourcepacks/fallow-ambiance/assets/minecraft/textures/environment")
-MOD = os.path.join(ROOT, "mods-custom/fallow/src/main/resources/assets/fallow/textures/environment")
+AMBIANCE = os.path.join(ROOT, "pack/resourcepacks/tilth-ambiance/assets/minecraft/textures/environment")
+MOD = os.path.join(ROOT, "mods-custom/tilth/src/main/resources/assets/tilth/textures/environment")
 
 STREAK = (232, 236, 238)
-# "FAL" + alpha 1: keep in sync with RAIN_MARKER in fallow-ambiance/assets/minecraft/shaders/core/particle.vsh
+# "FAL" + alpha 1: keep in sync with RAIN_MARKER in tilth-ambiance/assets/minecraft/shaders/core/particle.vsh
 RAIN_MARKER = (70, 65, 76, 1)
 
 
@@ -54,7 +54,7 @@ def rain():
     # a few faint ones in between, for depth
     for _ in range(4):
         streak(im, rnd.randrange(64), rnd.randrange(256), rnd.randint(10, 22), rnd.randint(30, 50))
-    # marker texel read by the particle core shader of fallow-ambiance, which then gives the drops
+    # marker texel read by the particle core shader of tilth-ambiance, which then gives the drops
     # the colour of the mist; alpha 1 is never drawn (the shader discards alpha < 0.1)
     im.putpixel((0, 0), RAIN_MARKER)
     return im

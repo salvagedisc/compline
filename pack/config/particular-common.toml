@@ -1,4 +1,4 @@
-# Fallow : un peu plus de feuilles qui tombent (60 par défaut ; plus petit = plus
+# Tilth : un peu plus de feuilles qui tombent (60 par défaut ; plus petit = plus
 # fréquent). Le module averse les pousse au vent et les laisse plus longtemps au sol.
 # Les autres clés gardent leur valeur par défaut, ajoutée par NeoForge au premier lancement.
 [general.advancedSettings.fallingLeavesSettings]

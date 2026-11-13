@@ -1,15 +1,15 @@
-# Fallow: stack sizes by kind of item (decision 0012). Every item that stacked to 64
-# now stacks to 32; the fallow:pile/N tags (pack/kubejs/data/fallow/tags/item/pile/)
+# Tilth: stack sizes by kind of item (decision 0012). Every item that stacked to 64
+# now stacks to 32; the tilth:pile/N tags (pack/kubejs/data/tilth/tags/item/pile/)
 # set the exceptions. Items with durability are never touched. Keep every stack at
 # least as large as the biggest recipe output of that item.
 # Layout checked against the file Fzzy Config writes (test server, 2026-10-26).
 # Don't change this! Version used to track needed updates.
 version = 2
 items = [
-    [ "#fallow:pile/64", 64 ],
-    [ "#fallow:pile/16", 16 ],
-    [ "#fallow:pile/8", 8 ],
-    [ "#fallow:pile/4", 4 ]
+    [ "#tilth:pile/64", 64 ],
+    [ "#tilth:pile/16", 16 ],
+    [ "#tilth:pile/8", 8 ],
+    [ "#tilth:pile/4", 4 ]
 ]
 splashPotionCooldown = 0
 uncapStackSize = false

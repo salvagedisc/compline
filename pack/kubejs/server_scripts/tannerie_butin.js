@@ -1,4 +1,4 @@
-// Fallow : la tannerie, le butin. Les animaux à cuir lâchent une peau de Tannery.
+// Tilth : la tannerie, le butin. Les animaux à cuir lâchent une peau de Tannery.
 // Les recettes sont dans tannerie.js. Voir docs/plan/tannerie.md.
 //
 // Tannery remplace les tables vanilla de la vache, du cochon, du mouton, de la chèvre,

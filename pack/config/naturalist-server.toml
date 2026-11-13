@@ -1,4 +1,4 @@
-# Fallow : créatures de Naturalist coupées quand un autre mod a un meilleur modèle pour la
+# Tilth : créatures de Naturalist coupées quand un autre mod a un meilleur modèle pour la
 # même espèce (docs/plan/doublons.md), lapins des forêts retirés avec le lapin
 # (docs/archive/plan/faune-nml.md), mammouth retiré (préhistoire écartée, décision 0003). Fichier partiel : les options absentes gardent leur valeur
 # par défaut. Une créature coupée n'apparaît plus et disparaît du monde.

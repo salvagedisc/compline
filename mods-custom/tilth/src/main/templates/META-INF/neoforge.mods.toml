@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="salvagedisc"
+description='''
+Liens entre les mods du modpack Tilth, en modules activables (config/tilth-client.toml, config/tilth-common.toml).
+ciel : la lune d'Enhanced Celestials redessinée sous ATMOSPHERICS, cache de brume vidé après un changement de biome.
+xp : l'enclume sans niveaux d'expérience (son coût devient une usure), barre d'expérience cachée.
+horizon : le paysage lointain de Distant Horizons caché par la brume et révélé là où elle se lève.
+clairiere : feu de veille et lanterne de clairière, la brume se lève autour d'eux.
+dissipateur : bloc Create qui éclaircit un grand disque (avec Create).
+Chaque module ne se charge que si les mods qu'il relie sont présents.
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+# Seule dépendance dure : NeoForge (et Minecraft). Les mods reliés sont détectés au chargement.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

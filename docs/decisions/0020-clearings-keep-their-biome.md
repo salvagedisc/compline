@@ -4,7 +4,7 @@
 - **Status**: kept (the team's request of 2026-11-13); seen in a headless test client with the full pack, not played
 
 ## Context
-Until `fallow` 0.7.0 a vigil fire, a clearing lantern or a dissipator replaced the biome of its disc with one of three clearing biomes (`fallow:clairiere`, `clairiere_froide`, `clairiere_chaude`). That was the simplest way to lift the mist: ATMOSPHERICS, Polytone and True Adaptive Music all decide from the biome.
+Until `tilth` 0.7.0 a vigil fire, a clearing lantern or a dissipator replaced the biome of its disc with one of three clearing biomes (`tilth:clairiere`, `clairiere_froide`, `clairiere_chaude`). That was the simplest way to lift the mist: ATMOSPHERICS, Polytone and True Adaptive Music all decide from the biome.
 
 The same is true of everything else. A clearing biome has no tags and its own climate, so inside a clearing:
 - Ecliptic Seasons classed the ground by `downfall` alone: other rain, other crop humidity than ten blocks away;
@@ -24,18 +24,18 @@ Players live in clearings. The place where they farm, breed and build was the on
 | Risk | Silent gaps (a rule nobody copied) | A mixin target renamed by an update switches off part of the look |
 
 ## Decision
-Option B, in `fallow` 0.8.0 ([module](../plan/mod-fallow.md#clairiere-module)).
+Option B, in `tilth` 0.8.0 ([module](../plan/mod-tilth.md#clairiere-module)).
 
 - The server keeps the list of clearings and sends it to the clients. The biome is never changed.
 - The three clearing biomes stay in the registry as **looks**. On the client, inside a disc, the mist (ATMOSPHERICS), the music (True Adaptive Music) and the base grass, foliage and water colours are those of the look that matches the temperature of the real biome. Seasonal tints still come from the real biome.
 - One game rule is kept from the old clearing biomes, because it is what makes a clearing a shelter: monsters do not spawn naturally inside.
-- Only the biomes of `fallow:peut_devenir_clairiere` clear, as before.
+- Only the biomes of `tilth:peut_devenir_clairiere` clear, as before.
 
 ## Consequences
 - Crops, seasons, temperature, fauna, atlas tiles and every biome tag behave in a clearing as in the rest of the biome. The farm animals that used to appear in any clearing no longer do: the animals are those of the place.
 - The transition (ring by ring, cloud puffs, slow fade of the mist) is now computed on each client from the opening time; nothing is lost when the server stops in the middle of it.
 - Seen from far away through Distant Horizons, a clearing has the colours of its biome: the far terrain is coloured per biome, not per position.
-- A world made before 0.8.0 keeps its clearing cells until its sources are broken or `/fallow brume` is run over them; both give the cells back to the generator's biome.
+- A world made before 0.8.0 keeps its clearing cells until its sources are broken or `/tilth brume` is run over them; both give the cells back to the generator's biome.
 - The hooks into ATMOSPHERICS, True Adaptive Music and Sodium all use `require = 0`. After an update of one of them, tests K1, K2 and K6 say whether its part of the look still works.
 
 ## Rejected

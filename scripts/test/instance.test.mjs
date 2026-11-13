@@ -9,8 +9,8 @@ import { resolveInstanceDir, readInstanceJars } from '../sync/instance.mjs';
 test('resolveInstanceDir maps a name to the Modrinth App profiles folder', () => {
   const env = { APPDATA: 'C:\\Users\\utilisateur\\AppData\\Roaming' };
   assert.equal(
-    resolveInstanceDir('Fallow test', env),
-    join('C:\\Users\\utilisateur\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Fallow test'),
+    resolveInstanceDir('Tilth test', env),
+    join('C:\\Users\\utilisateur\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Tilth test'),
   );
 });
 
@@ -19,7 +19,7 @@ test('resolveInstanceDir keeps absolute paths', () => {
 });
 
 test('readInstanceJars hashes .jar files and skips disabled ones (path with spaces and accents)', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'fallow inst é-'));
+  const root = await mkdtemp(join(tmpdir(), 'tilth inst é-'));
   await mkdir(join(root, 'mods'));
   await writeFile(join(root, 'mods', 'a.jar'), 'AAA');
   await writeFile(join(root, 'mods', 'b.jar.disabled'), 'BBB');

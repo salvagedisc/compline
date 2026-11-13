@@ -1,9 +1,9 @@
-# Fallow : réglages serveur d'Envelope appliqués à chaque nouveau monde.
+# Tilth : réglages serveur d'Envelope appliqués à chaque nouveau monde.
 # Seules les clés changées sont écrites ; NeoForge complète le reste avec les valeurs par défaut.
-# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Fallow.
+# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Tilth.
 
 [mailbox]
 	#Levels of experience needed to set or change the address.
 	#Range: 0 ~ 128
-	#Fallow : 0. Sans XP, nommer une boîte aux lettres doit rester possible (défaut : 3).
+	#Tilth : 0. Sans XP, nommer une boîte aux lettres doit rester possible (défaut : 3).
 	address_experience_levels_cost = 0

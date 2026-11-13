@@ -1,4 +1,4 @@
-"""The Fallow logo: the word in old carved stone uncials (the Uncial Antiqua
+"""The Tilth logo: the word in old carved stone uncials (the Uncial Antiqua
 typeface by Astigmatic, SIL Open Font License), weathered, chipped and
 cracked, with moss in cushions on their ledges, ivy hanging from them and
 wound round the F, a seedling and a few flowers, and a lit lantern hanging on
@@ -71,7 +71,7 @@ CHAIN = [".K.", "K.K", "K.K", ".K.", ".M.", ".M."]
 GLOW = 20          # reach of the lantern's light, in pixels
 HALO = [(5, 150), (8, 112), (11, 80), (14, 52), (17, 28), (20, 12)]   # its halo: radius, opacity
 
-TEXT, SIZE, SPACING, SEED = "FALLOW", 54, 1, 4
+TEXT, SIZE, SPACING, SEED = "TILTH", 54, 1, 4
 WEATHER = 1.4      # how far the stone's tone wanders, in broad patches
 PAD = (16, 16, 16, 22)
 SCALE = 4

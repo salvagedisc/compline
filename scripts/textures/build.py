@@ -1,8 +1,8 @@
-"""Builds the fallow-textures resource pack from Vanilla Evolved.
+"""Builds the tilth-textures resource pack from Vanilla Evolved.
 
 Base: Vanilla Evolved 1.17.0 by Vixel (CC BY-NC-SA 4.0), the release made for
 Minecraft 1.21 and 1.21.1. Vixel also drew GUI Revision, the base of
-fallow-interface, so the world and the interface share one hand.
+tilth-interface, so the world and the interface share one hand.
 
 The script downloads the pinned release, checks its hash and keeps what
 retextures the world's blocks and items. It drops what would undo a choice
@@ -11,7 +11,7 @@ already made for the pack:
   2026-10-29) and ATMOSPHERICS draws the sun; rain and snow stay as Where Winds
   Blow expects them;
 - textures/colormap: grass and foliage colours come from Polytone, biome by
-  biome (fallow-ambiance);
+  biome (tilth-ambiance);
 - textures/entity, except block entities (chests, chest boats, shulker boxes,
   the enchanting table's book, beams): creatures keep the textures Fresh
   Animations is drawn on;
@@ -33,7 +33,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "pack" / "resourcepacks" / "fallow-textures"
+OUT = ROOT / "pack" / "resourcepacks" / "tilth-textures"
 
 URL = "https://cdn.modrinth.com/data/5Wz8MWHt/versions/ltHEptpg/VanillaEvolved_1.17.0.zip"
 SHA512 = ("4af2df14c115345a30221fe69003c760fc64d4ae9452c2db779c10dbbd9558c3"
@@ -56,7 +56,7 @@ KEEP_ENTITIES = (
 MCMETA = {
     "pack": {
         "pack_format": 34,
-        "description": "Fallow : blocs et objets, d'après Vanilla Evolved",
+        "description": "Tilth : blocs et objets, d'après Vanilla Evolved",
     }
 }
 
@@ -75,7 +75,7 @@ def keep(name: str) -> bool:
 
 
 def main() -> None:
-    data = urllib.request.urlopen(urllib.request.Request(URL, headers={"User-Agent": "fallow-build"})).read()
+    data = urllib.request.urlopen(urllib.request.Request(URL, headers={"User-Agent": "tilth-build"})).read()
     if hashlib.sha512(data).hexdigest() != SHA512:
         raise SystemExit("Vanilla Evolved: unexpected hash, check the pinned release")
     credits = (OUT / "CREDITS.md").read_text(encoding="utf-8") if (OUT / "CREDITS.md").exists() else None
@@ -94,7 +94,7 @@ def main() -> None:
     (OUT / "pack.mcmeta").write_text(json.dumps(MCMETA, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if credits:
         (OUT / "CREDITS.md").write_text(credits, encoding="utf-8")
-    print(f"fallow-textures: {kept} files kept, {dropped} dropped")
+    print(f"tilth-textures: {kept} files kept, {dropped} dropped")
 
 
 if __name__ == "__main__":
