@@ -19,7 +19,7 @@ The three mods are small (about 17,000 lines of Java, 12 mixins) and LGPL-licens
 The team refused Map Atlases. Remnants Minimap and Mapwright, the native maps found, change what the map is (Elden Ring theme, or a map the player draws).
 
 ## Decision
-Option C. The ports live in their own public repository, `salvagedisc/fallow-atlas`, as the LGPL requires; the jars are committed in `pack/mods/` like the `fallow` jar.
+Option C. The ports live in their own public repository, `salvagedisc/tilth-atlas`, as the LGPL requires; the jars are committed in `pack/mods/` like the `fallow` jar.
 
 - Surveyor 1.2.4, Antique Atlas 3.1.2 and Antique Transport 1.3.0, version suffix `-neoforge.1`.
 - Mod ids, packets, configs and save formats are unchanged: maps and waypoints explored before the port load as they are.
@@ -27,5 +27,5 @@ Option C. The ports live in their own public repository, `salvagedisc/fallow-atl
 - Antique Transport's ship teleport is operator-only (upstream registered it twice, once without a permission check).
 
 ## Consequences
-- Upstream updates are merged by hand into `fallow-atlas`. Antique Atlas was last released in January 2026, Surveyor in May.
+- Upstream updates are merged by hand into `tilth-atlas`. Antique Atlas was last released in January 2026, Surveyor in May.
 - To check in game: the atlas opens (M key and handheld book), tiles and markers draw, structures are discovered, waypoints sync in multiplayer, Create trains and Sable ships show.
