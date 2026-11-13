@@ -1,6 +1,8 @@
 # tilth-textures
 
-The world's blocks and items, from **Vanilla Evolved** by Vixel, the artist behind GUI Revision (the base of [tilth-interface](tilth-interface.md)). Chosen by the team on 2026-10-29 ([decision 0015](../decisions/0015-textures.md)) after a comparison of the full texture packs whose licence allows a modified copy, with previews rendered from their 1.21.1 files.
+> **Archived on 2026-11-13.** The maintainer removed the three house resource packs (`tilth-interface`, `tilth-ambiance`, `tilth-textures`) from the pack ([0024](../../decisions/0024-removing-the-house-resource-packs.md)). This page records what they contained and how the mods read them, should any part come back.
+
+The world's blocks and items, from **Vanilla Evolved** by Vixel, the artist behind GUI Revision (the base of [tilth-interface](tilth-interface.md)). Chosen by the team on 2026-10-29 ([decision 0015](../../decisions/0015-textures.md)) after a comparison of the full texture packs whose licence allows a modified copy, with previews rendered from their 1.21.1 files.
 
 ## What the pack holds
 

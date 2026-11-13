@@ -1,8 +1,10 @@
 # The `tilth-ambiance` resource pack
 
-> Created on 2026-10-19 from [11.1-11.2](../archive/plan/11-rendu-et-confort.md), [12.1-12.2](../archive/plan/12-verification.md) and [report 3](../archive/plan/recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
+> **Archived on 2026-11-13.** The maintainer removed the three house resource packs (`tilth-interface`, `tilth-ambiance`, `tilth-textures`) from the pack ([0024](../../decisions/0024-removing-the-house-resource-packs.md)). This page records what they contained and how the mods read them, should any part come back.
 
-> **Updated on 2026-11-13.** No Man's Land left the pack ([0019](../decisions/0019-leaving-no-mans-land.md)): the preset became `tilth_v6.json` (same global settings as `tilth_v5.json`; the 24 profiles of No Man's Land removed, 78 profiles of Regions Unexplored added), with the mist profiles and colours of Regions Unexplored written by `scripts/ambiance/biomes.py`. The same day it became `tilth_v7.json`: 16 biomes of other mods had no profile at all, so no mist (the 14 of Hybrid Aquatic, the stream of Streams Reflowing, Quark's glimmering weald); they now copy a vanilla profile too (`OTHER_MODELS`). Nothing has been seen in game with Regions Unexplored. The dated sections below that speak of No Man's Land are kept as history.
+> Created on 2026-10-19 from [11.1-11.2](../plan/11-rendu-et-confort.md), [12.1-12.2](../plan/12-verification.md) and [report 3](../plan/recherche/verif-2026-10-18/3-client.md). **Nothing has been seen in game.** The formats were read in the installed jars (ATMOSPHERICS 2.6.5, Polytone 1.21-5.1.3, Particular 1.5.7, No Man's Land 1.5.12, Default Options 21.1.8); the values, on the other hand, are paper choices, to be tuned on screen.
+
+> **Updated on 2026-11-13.** No Man's Land left the pack ([0019](../../decisions/0019-leaving-no-mans-land.md)): the preset became `tilth_v6.json` (same global settings as `tilth_v5.json`; the 24 profiles of No Man's Land removed, 78 profiles of Regions Unexplored added), with the mist profiles and colours of Regions Unexplored written by `scripts/ambiance/biomes.py`. The same day it became `tilth_v7.json`: 16 biomes of other mods had no profile at all, so no mist (the 14 of Hybrid Aquatic, the stream of Streams Reflowing, Quark's glimmering weald); they now copy a vanilla profile too (`OTHER_MODELS`). Nothing has been seen in game with Regions Unexplored. The dated sections below that speak of No Man's Land are kept as history.
 
 ## What it contains
 
@@ -13,7 +15,7 @@ pack/resourcepacks/tilth-ambiance/
     ├── atmospherics/preset/tilth_v7.json          the mist biome by biome, the storms, the sand, the clouds, sun, moon and stars
     ├── tilth/polytone/biome_modifiers/*.json      grass, foliage, water, snowflakes (69 files: 65 `ru_*`, 3 clearings, `vanilla_neige`)
     ├── tilth/polytone/colored_lights/*.json       colour of fire and soul lights
-    ├── tilth/sounds.json                         events for the music pack tracks ([musique](musique.md))
+    ├── tilth/sounds.json                         events for the music pack tracks ([musique](../../plan/musique.md))
     └── tilth/sounds/music/*.ogg                  10 free tracks, credits in CREDITS.md
 ```
 
@@ -38,7 +40,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - Fields used: `grass_color`, `foliage_color`, `water_color` (`#rrggbb` string).
 - No `fog_color`, `sky_color`, `fog_start` or `fog_end`: ATMOSPHERICS rewrites them after Polytone (report 3, 3.3).
 - No lightmap: it would switch off More Darkness and the Enhanced Celestials moon (3.2).
-- The clearings target `{"id": "tilth:clairiere", "required": false}`. Since `tilth` 0.8.0 these three biomes are only the look of a clearing: the world keeps its real biome, and the mod lends their base colours to it where a clearing is open ([mod-tilth](mod-tilth.md#clairiere-module)). Without the mod, Polytone ignores them without error.
+- The clearings target `{"id": "tilth:clairiere", "required": false}`. Since `tilth` 0.8.0 these three biomes are only the look of a clearing: the world keeps its real biome, and the mod lends their base colours to it where a clearing is open ([mod-tilth](../../plan/mod-tilth.md#clairiere-module)). Without the mod, Polytone ignores them without error.
 
 **Particular Reforged: nothing to ship.**
 - The leaf → particle mapping is **written in the code** (`CommonClass.clientSetup`). It is read neither from a pack nor from its config.
@@ -57,7 +59,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 | **Clearing** | 40 → 500 (v3; 28 → 124 before) | 16 → 260 (v3; 8 → 84 before) | 1.5 / 1.2 | off |
 
 - 10.3 spoke of "open" biomes. The maintainer wants a thick mist in general: they become **veiled**, still misty but markedly less so.
-- Only the clearings open up the view. Since v3 (2026-10-25, [0011](../decisions/0011-tectonic-streams-distant-horizons.md)) their mist ends at 500 blocks by day, well beyond the 128 blocks of terrain: Distant Horizons draws the landscape beyond, fogged with the same curve by the `horizon` module of the `tilth` mod ([mod-tilth](mod-tilth.md#horizon-module)). Without Distant Horizons, the edge of the terrain shows at 128 blocks in a clearing: the price of the far view.
+- Only the clearings open up the view. Since v3 (2026-10-25, [0011](../../decisions/0011-tectonic-streams-distant-horizons.md)) their mist ends at 500 blocks by day, well beyond the 128 blocks of terrain: Distant Horizons draws the landscape beyond, fogged with the same curve by the `horizon` module of the `tilth` mod ([mod-tilth](../../plan/mod-tilth.md#horizon-module)). Without Distant Horizons, the edge of the terrain shows at 128 blocks in a clearing: the price of the far view.
 
 **Regions Unexplored biomes** (`regions_unexplored:*`, 78 profiles in the preset). Each one copies the profile of the vanilla biome it resembles: the table `MODELS` of `scripts/ambiance/biomes.py` gives the pairs (for example `redwoods` copies `old_growth_pine_taiga`, `bayou` copies `swamp`, `steppe` copies `savanna`, `tundra` copies `snowy_plains`). The family follows from the model, so a biome is misty when its model ends its daytime mist at 40 blocks.
 
@@ -90,14 +92,14 @@ Vanilla surface biomes also receive the mist, and so does every Regions Unexplor
   - snowflakes (`minecraft:snowflake`, probability 0.004) in snowy biomes;
   - a grass colour is not written when the biome uses a grass colour modifier (swamp-like), which would ignore a fixed colour;
   - cave and Nether biomes get no modifier.
-- The same script rewrites the Regions Unexplored part of the `tilth:brumeux` biome tag (the misty family: 34 biomes, 49 with the 15 vanilla ones), which the music pack reads ([musique](musique.md)).
+- The same script rewrites the Regions Unexplored part of the `tilth:brumeux` biome tag (the misty family: 34 biomes, 49 with the 15 vanilla ones), which the music pack reads ([musique](../../plan/musique.md)).
 - Clearings, in a frank green:
   - temperate: grass `#74c255`, foliage `#5fae3f`, water `#3d86c9`;
   - cold: `#79b878`, `#5f9f62`, `#3f7fc6`;
   - warm: `#9cc456`, `#7fae3c`, `#3a92c4`.
 - Vanilla biomes are not touched: their grass follows the temperature palette, which a fixed colour would overwrite.
 - Usage, from the repository root, after each update of Regions Unexplored: `python3 scripts/ambiance/biomes.py <regions-unexplored jar>`. The preset must then be renamed by hand to be applied again. Run manually, committed with its output, never in CI.
-- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome (and each surface biome of `OTHER_MODELS`, outside the tags of its own mod) to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`. Placements chosen by hand (a dinosaur moved to a cave biome, [0021](../decisions/0021-spelunkery-and-dinosaurs.md)) are in its `PLACED` table.
+- The same table carries the biome rules of the other mods: `python3 scripts/ambiance/biome_rules.py` adds each Regions Unexplored surface biome (and each surface biome of `OTHER_MODELS`, outside the tags of its own mod) to the mod tags that name its vanilla model (horse breeds, Naturalist animals, pigeons, fish) and writes the matching Where Winds Blow profiles (`ru_<name>.json`). It reads the jar cache of `npm run check-deps`. Placements chosen by hand (a dinosaur moved to a cave biome, [0021](../../decisions/0021-spelunkery-and-dinosaurs.md)) are in its `PLACED` table.
 
 The values are paper choices, not seen in game. Until 2026-11-13 the same rule was applied by hand to 20 `nml_*.json` files for No Man's Land's biomes (for example `old_growth_forest` grass `#87b44c` → `#7e9d56`); they were deleted with the mod.
 
@@ -127,7 +129,7 @@ Limits: the densities are paper choices, and the flakes also appear under roofs 
 
 ## Snow and dust storms (v5, 2026-10-29)
 
-Request after the first tests: ATMOSPHERICS closer to the mod's presentation screenshots, with real effects in snowy and sandy biomes (the feeling of being lost in a cloud of snow or dust), and a thicker mist elsewhere. Built on `tilth_v4` (sky and clouds of [0016](../decisions/0016-vent-et-lumiere.md)). **Checked on the development client** (ATMOSPHERICS and Distant Horizons only, software OpenGL): ice spikes, savanna plateau, desert and forest, each in clear weather, rain and thunder; screenshots in the project files.
+Request after the first tests: ATMOSPHERICS closer to the mod's presentation screenshots, with real effects in snowy and sandy biomes (the feeling of being lost in a cloud of snow or dust), and a thicker mist elsewhere. Built on `tilth_v4` (sky and clouds of [0016](../../decisions/0016-vent-et-lumiere.md)). **Checked on the development client** (ATMOSPHERICS and Distant Horizons only, software OpenGL): ice spikes, savanna plateau, desert and forest, each in clear weather, rain and thunder; screenshots in the project files.
 
 **How ATMOSPHERICS handles weather** (read in `AtmosphericEnvironmentVisuals`): with rain or thunder, the fog start and end move towards the absolute `fogStart`/`fogEnd` of the weather settings, in proportion to the rain and thunder levels, and the fog colour towards the rain or thunder colour. A biome's `weatherOverride` replaces the global settings entirely while the camera is in that biome. The rain level is global: in a snowy biome it is snowfall, in a dry biome (no precipitation) it is ATMOSPHERICS' dust weather, with its sandstorm particles in deserts, savannas and badlands. Where Winds Blow ties its blizzards (thunder in a snowy biome) and desert storms (rain in a desert or badlands) to the same levels, so its snow sheets and dust line up with this fog. Its own storm fog stays off (`snowFogMode`, `sandstormFogMode`): ATMOSPHERICS sets the fog last and would override it anyway.
 
@@ -160,7 +162,7 @@ Contraption Lights' coloured light stays off (its default value): Polytone alone
 
 ## Rain and olive greens (2026-11-01)
 
-Part of [0017](../decisions/0017-averse-et-rayons.md), the answer to Recrafted's rain and colours.
+Part of [0017](../../decisions/0017-averse-et-rayons.md), the answer to Recrafted's rain and colours.
 
 **Rain drop.** Where Winds Blow draws the vanilla `textures/environment/rain.png`, slanted by the wind. `scripts/ambiance/weather.py` (Pillow, deterministic) draws a new one: 64 × 256, seven thin streaks of one pixel, 18 to 40 pixels long, pale grey-white, brightest toward the falling end, plus four faint ones for depth (sparse on purpose: Where Winds Blow stacks the texture in several layers). The `averse` module of the `tilth` mod then tints them with the mist colour. The same script draws the module's textures (rain curtain, sun shaft, glint on water).
 

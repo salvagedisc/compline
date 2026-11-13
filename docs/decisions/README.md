@@ -27,6 +27,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0021](0021-spelunkery-and-dinosaurs.md) | Spelunkery and Archie's Dinosaurs | Both join the pack; the Nether and End dinosaurs move to cave biomes, Spelunkery is sorted like the other mods, the streams keep their thaw, the dinosaurs' library is kept as a jar |
 | [0022](0022-disc-world.md) | A disc world with an edge | One continent on a computed disc (coast near 5,700, edge at 6,000), north cold and south hot, `scripts/terrain/disc.py`; the `bord` module of the `tilth` mod turns players back at the edge; the edge seen in a test client on 2026-11-13 (on foot, by teleport, in a boat); the continent mapped by sampling on two seeds, not walked yet |
 | [0023](0023-rename-to-tilth.md) | The pack is renamed Tilth | `fallow` was taken on Modrinth: pack, custom mod, namespaces, resource packs and repository become Tilth / `tilth`; worlds made before lose the mod's blocks |
+| [0024](0024-removing-the-house-resource-packs.md) | The house resource packs leave the pack | `tilth-interface`, `tilth-textures` and `tilth-ambiance` are removed, mist preset and free tracks included; the `titres` module goes (`tilth` 0.10.1); the menus stay in FancyMenu |
 
 ## Template
 

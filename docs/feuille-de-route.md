@@ -25,6 +25,7 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-10-29 and 10-30 | First gestures (0013), Tannery (0014), Vanilla Evolved textures (0015), wind and light without shaders (0016), mist ring with Distant Horizons, reversible clearings, snow and dust storms, Friendly Moon fixed, Wildex removed, painted title screen, NML explosives back |
 | 2026-11-01 | 20 weakly animated creatures cut, held-item hand fixed, pack sort (Chipped and Beautify! removed, 313 items hidden), `sac` module removed (`tilth` 0.5.0) |
 | 2026-11-11 to 11-13 | The team leaves No Man's Land (11-11); candidates measured on one seed (11-12) and Tectonic + Regions Unexplored + Geophilic chosen ([0019](decisions/0019-leaving-no-mans-land.md)); the Friendly Moon, its fauna rules and its music go; mist preset `tilth_v6`, `biomes.py`, French translation of Regions Unexplored; `tilth` 0.7.0; the mods' biome rules applied to Regions Unexplored, clearings that keep their biome (`tilth` 0.8.0, [0020](decisions/0020-clearings-keep-their-biome.md)) |
+| 2026-11-13 | Cleanup: the three house resource packs (interface, textures, ambiance with its mist and free tracks) and the `titres` module removed, Adorable Hamster Pets' announcements, the narrator and the experimental-settings warning turned off (0024, `tilth` 0.10.1) |
 
 ## Before the first release (`v0.1.0`)
 
@@ -39,7 +40,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 
 | Mod | In the pack | Held version | Why wait |
 |---|---|---|---|
-| Polytone + Spatial GUI | 5.1.3 + 1.8 | 5.3.1 + 1.9 | Go together; the colours and lights of `tilth-ambiance` must be checked first |
+| Polytone + Spatial GUI | 5.1.3 + 1.8 | 5.3.1 + 1.9 | Go together; no pack of Tilth uses Polytone since [0024](decisions/0024-removing-the-house-resource-packs.md) |
 | Supplementaries | 3.9.9 | 4.x | Major version; our config (0006) must be re-read |
 | Friends & Foes | 4.0.27 | 5.x | Major version; the creatures disabled by config must stay disabled |
 | Envelope | 0.7.5 | 0.8 | Its JEI mixin crashed once (see the changelog); to retest with JEI 19.51 |
@@ -76,7 +77,8 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [x] ~~Food preservation~~: dropped by the team on 2026-10-18 (Freeze It and Heat It removed).
 - [x] Terrain: Tectonic + Streams Reflowing; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)). Done on No Man's Land, which has since left; the biomes are now Regions Unexplored's and Geophilic's ([0019](decisions/0019-leaving-no-mans-land.md)).
 - [x] **Compare Lithosphere in game** under the same biomes: done on 2026-11-13 with two test packs, Tectonic stays ([0019](decisions/0019-leaving-no-mans-land.md)).
-- [ ] **Walk the new biomes**: neither Regions Unexplored nor Geophilic has been seen in game; the mist families, colours and French names are paper choices ([ambiance](plan/tilth-ambiance.md)).
+- [ ] **Walk the new biomes**: neither Regions Unexplored nor Geophilic has been seen in game; their French names are paper choices.
+- [ ] **Choose a new mist**: since [0024](decisions/0024-removing-the-house-resource-packs.md) the mist is ATMOSPHERICS' own preset, with no profile for the clearings, so lighting a clearing no longer shows on screen.
 - [ ] Confirm the provisional vanilla recipes of the vigil fire and the clearing lantern, and recompute the life shard frequency with the vanilla sources ([sante](plan/sante.md)).
 
 ### Identity and world shape (arising from 0019)
