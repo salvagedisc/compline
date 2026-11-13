@@ -2163,6 +2163,11 @@ hash = "35779b39ddc06059ec483b33de2ecfdc3adb95c0a49e69b6701fb0024827e2f5"
 metafile = true
 
 [[files]]
+file = "mods/geophilic.pw.toml"
+hash = "a25c9bea00a19293f8b2c5958dea71e60fbe6db7800693862c3e8f624750f4b6"
+metafile = true
+
+[[files]]
 file = "mods/ghost.pw.toml"
 hash = "895a8abebb82f5cd662e71f765b0d1ae8e3bf5e9c7a1bff3270f4fa329cab0cd"
 metafile = true
