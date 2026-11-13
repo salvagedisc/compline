@@ -22,7 +22,7 @@ The team refused Map Atlases. Remnants Minimap and Mapwright, the native maps fo
 Option C. The ports live in their own public repository, `salvagedisc/tilth-atlas`, as the LGPL requires; the jars are committed in `pack/mods/` like the `tilth` jar.
 
 - Surveyor 1.2.4, Antique Atlas 3.1.2 and Antique Transport 1.3.0, version suffix `-neoforge.1`.
-- Mod ids, packets, configs and save formats are unchanged, so maps and waypoints explored before the port should load as they are (not tried with a real save).
+- Mod ids, packets, configs and save formats are unchanged, so maps and waypoints explored before the port load as they are (seen on the server with data written by the Fabric builds; not tried with a client's own save).
 - Connector is removed. **Forgified Fabric API stays**: Puddles & Floods is a NeoForge mod but declares it as a required dependency and calls `FabricLoader` to detect Iris. Moonlight's warning remains until Puddles & Floods drops that dependency.
 - Antique Transport's ship teleport is operator-only (upstream registered it twice, once without a permission check).
 - The atlas book is recognised by its name, "Antique Atlas", whatever the language: the French strings keep that name ("Atlas ancien" made the renaming hint wrong). Punchy leaves `minecraft:book` to the vanilla hand, otherwise the held atlas is drawn as a plain item instead of the open map.
