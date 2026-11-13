@@ -10,7 +10,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Loader | NeoForge 21.1.265 |
 | Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
 | Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
-| Status (2026-11-13) | 156 Modrinth mods, 10 resource packs, custom mod `fallow` 0.7.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
+| Status (2026-11-13) | 156 Modrinth mods, 10 resource packs, custom mod `fallow` 0.8.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
 | Content | see the [mod registry](docs/mods.md) |
 
 ## What the pack does today

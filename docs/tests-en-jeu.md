@@ -35,14 +35,14 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 - [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
-- [ ] F3 at the edge of the disc: `fallow:clairiere` inside, the old biome outside, a round edge [K2].
-- [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (snow still falls), a fire in a savanna [K3].
-- [ ] A clearing on a coast: the ocean and the beach keep their biome; a river crossing it becomes clearing [K4]. Note whether a Streams brook stays misty [W10].
+- [ ] F3 inside the disc and at its edge: the real biome everywhere (never `fallow:clairiere`: since `fallow` 0.8.0 a clearing no longer changes the biome); the vivid grass stops on a round edge [K2].
+- [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (bluish green, snow still falls), a fire in a savanna (yellow green) [K3].
+- [ ] A clearing on a coast: the ocean and the beach keep their mist; a river crossing it clears [K4]. Note whether a Streams brook stays misty [W10].
 - [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
 - [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
 - [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
 - [ ] The new fire (stone brazier, pale flame) and lantern (standing), by day and at night: neither looks like a vanilla campfire or lantern [K15].
-- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the clearing replaces the biome, the mist lifts and the grass turns vivid, as in a vanilla biome [K1, K2]. Biomes from the `fallow:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
+- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the mist lifts and the grass turns vivid, as in a vanilla biome, and F3 still shows the Regions Unexplored biome [K1, K2]. Biomes from the `fallow:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
@@ -51,7 +51,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
 - [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
 - [ ] The three recipes (fire, lantern, dissipator) in EMI, with French names and tooltips [K11]. Provisional vanilla ingredients since 2026-11-13: fire = honeycomb, two smooth stone slabs, charcoal, smooth stone; lantern = two Overgeared iron plates, two glass panes, an amethyst shard. Craft both and tell whether they feel right.
-- [ ] Crops and temperature in a clearing: things grow, the temperature stays that of the old biome [K10].
+- [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
 - [ ] **Wind and light** (Where Winds Blow, Shine): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. A clearing at sunset: halo on the sky and the fires, the mist still around [R3]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: no halo glitch, lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
 ## Session 3: the night and the moon

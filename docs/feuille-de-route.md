@@ -6,7 +6,7 @@ Status as of 2026-11-13. The project is split into sub-projects, each with its o
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](archive/conception/specs/2026-09-23-repo-outillage-design.md)) |
 | 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0019 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
-| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, KubeJS scripts (26 on 2026-11-01; the Friendly Moon and fauna scripts of No Man's Land have gone since), 6 Questlog chapters, custom mod `fallow` 0.7.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
+| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, KubeJS scripts (26 on 2026-11-01; the Friendly Moon and fauna scripts of No Man's Land have gone since), 6 Questlog chapters, custom mod `fallow` 0.8.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
 ## Where the pack stands
@@ -24,7 +24,7 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-10-26 and 10-27 | Questlog quests and guides; the `fallow-interface` pack rebuilt on GUI Revision |
 | 2026-10-29 and 10-30 | First gestures (0013), Tannery (0014), Vanilla Evolved textures (0015), wind and light without shaders (0016), mist ring with Distant Horizons, reversible clearings, snow and dust storms, Friendly Moon fixed, Wildex removed, painted title screen, NML explosives back |
 | 2026-11-01 | 20 weakly animated creatures cut, held-item hand fixed, pack sort (Chipped and Beautify! removed, 313 items hidden), `sac` module removed (`fallow` 0.5.0) |
-| 2026-11-11 to 11-13 | The team leaves No Man's Land (11-11); candidates measured on one seed (11-12) and Tectonic + Regions Unexplored + Geophilic chosen ([0019](decisions/0019-leaving-no-mans-land.md)); the Friendly Moon, its fauna rules and its music go; mist preset `fallow_v6`, `biomes.py`, French translation of Regions Unexplored; `fallow` 0.7.0 |
+| 2026-11-11 to 11-13 | The team leaves No Man's Land (11-11); candidates measured on one seed (11-12) and Tectonic + Regions Unexplored + Geophilic chosen ([0019](decisions/0019-leaving-no-mans-land.md)); the Friendly Moon, its fauna rules and its music go; mist preset `fallow_v6`, `biomes.py`, French translation of Regions Unexplored; `fallow` 0.7.0; the mods' biome rules applied to Regions Unexplored, clearings that keep their biome (`fallow` 0.8.0, [0020](decisions/0020-clearings-keep-their-biome.md)) |
 
 ## Before the first release (`v0.1.0`)
 

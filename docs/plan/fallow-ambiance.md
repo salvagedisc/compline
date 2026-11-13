@@ -38,7 +38,7 @@ It is enabled on first launch by Default Options (`pack/config/defaultoptions-co
 - Fields used: `grass_color`, `foliage_color`, `water_color` (`#rrggbb` string).
 - No `fog_color`, `sky_color`, `fog_start` or `fog_end`: ATMOSPHERICS rewrites them after Polytone (report 3, 3.3).
 - No lightmap: it would switch off More Darkness and the Enhanced Celestials moon (3.2).
-- The clearings target `{"id": "fallow:clairiere", "required": false}`: as long as the biome does not exist (it is only a draft), Polytone ignores it without error.
+- The clearings target `{"id": "fallow:clairiere", "required": false}`. Since `fallow` 0.8.0 these three biomes are only the look of a clearing: the world keeps its real biome, and the mod lends their base colours to it where a clearing is open ([mod-fallow](mod-fallow.md#clairiere-module)). Without the mod, Polytone ignores them without error.
 
 **Particular Reforged: nothing to ship.**
 - The leaf → particle mapping is **written in the code** (`CommonClass.clientSetup`). It is read neither from a pack nor from its config.
@@ -173,10 +173,8 @@ Part of [0017](../decisions/0017-averse-et-rayons.md), the answer to Recrafted's
    - Tune with the ATMOSPHERICS editor.
    - Export, then save as `fallow_v7.json` while deleting `fallow_v6.json`.
 2. **Thickness.** 52 blocks by day and 34 by night in forest: is it still playable? Are monuments and ruins visible early enough?
-3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2). No use testing before the `fallow:clairiere` biome exists in `pack/kubejs/data/`.
-4. **The clearing biome**, once created:
-   - align the colours of its JSON (and of its two variants from report 4) with those of Polytone;
-   - check that Polytone does apply them to a datapack biome received from the server.
+3. **The transition at the edge of a clearing.** The mist changes in 4-block cells, with smoothing (report 3, 1.4 and test T2).
+4. **The clearing looks** (`fallow:clairiere` and its two variants, in the `fallow` mod): their JSON colours match those of Polytone; check in game that the Polytone values are the ones shown (change one and reload with F3+T).
 5. **Ecliptic.** Do the seasons still tint the grass and leaves of the recoloured Regions Unexplored biomes? Report 3 thinks so, since we go through the biome colour and not a block colormap [inferred].
 6. **The family of each Regions Unexplored biome**: the `MODELS` pairs are paper choices. Walk through the biomes and note those whose mist or colours do not suit their look; change the pair in `scripts/ambiance/biomes.py` and run it again.
 7. **Caves**: the cave biomes of Regions Unexplored copy vanilla cave profiles; compare with Particular's dust.
