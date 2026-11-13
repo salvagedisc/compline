@@ -4,10 +4,7 @@
     "music": [
       "tilth:music.floating_dream",
       "tilth:music.supernova",
-      "tilth:music.cicadas",
-      "tilth:music.echo_in_the_wind",
-      "tilth:music.hiraeth",
-      "tilth:music.permafrost"
+      "tilth:music.echo_in_the_wind"
     ],
     "ambience": [],
     "predicates": [
@@ -69,9 +66,7 @@
         "children": []
       },
       {
-        "music": [
-          "tilth:music.i_walk_with_ghosts"
-        ],
+        "music": [],
         "ambience": [],
         "predicates": [
           {
@@ -175,44 +170,6 @@
           "loopMusic": false,
           "loopStartPoints": {},
           "title": "Nether"
-        },
-        "children": []
-      },
-      {
-        "music": [
-          "tilth:music.lullabies_3",
-          "tilth:music.lightless_dawn"
-        ],
-        "ambience": [],
-        "predicates": [
-          {
-            "type": "custom",
-            "arguments": {
-              "predicateFile": {
-                "fileName": "lune.json"
-              }
-            }
-          }
-        ],
-        "events": [],
-        "parameters": {
-          "musicWeights": {},
-          "vanillaMusic": false,
-          "compatibilityMode": false,
-          "disableFading": false,
-          "disableResuming": false,
-          "ignorePersistence": false,
-          "trackDelay": 600,
-          "trackDelayNoise": 300,
-          "enterDelay": 60,
-          "exitDelay": 0,
-          "inheritMusic": false,
-          "inheritAmbience": true,
-          "parallelMusic": false,
-          "requireChildren": false,
-          "loopMusic": false,
-          "loopStartPoints": {},
-          "title": "Lune d'Enhanced Celestials"
         },
         "children": []
       },
@@ -352,9 +309,7 @@
         "children": [
           {
             "music": [
-              "tilth:music.subwoofer_lullaby",
-              "tilth:music.the_long_dark",
-              "tilth:music.meditation_impromptu_02"
+              "tilth:music.subwoofer_lullaby"
             ],
             "ambience": [],
             "predicates": [
@@ -389,52 +344,7 @@
       },
       {
         "music": [
-          "tilth:music.hymn_to_the_dawn",
-          "tilth:music.long_note_four"
-        ],
-        "ambience": [],
-        "predicates": [
-          {
-            "type": "biome",
-            "arguments": {
-              "biomes": [
-                {
-                  "id": {
-                    "namespace": "tilth",
-                    "path": "brumeux"
-                  }
-                }
-              ]
-            }
-          }
-        ],
-        "events": [],
-        "parameters": {
-          "musicWeights": {},
-          "vanillaMusic": false,
-          "compatibilityMode": false,
-          "disableFading": false,
-          "disableResuming": false,
-          "ignorePersistence": false,
-          "trackDelay": 900,
-          "trackDelayNoise": 300,
-          "enterDelay": 120,
-          "exitDelay": 0,
-          "inheritMusic": false,
-          "inheritAmbience": true,
-          "parallelMusic": false,
-          "requireChildren": false,
-          "loopMusic": false,
-          "loopStartPoints": {},
-          "title": "Brume"
-        },
-        "children": []
-      },
-      {
-        "music": [
-          "tilth:music.subwoofer_lullaby",
-          "tilth:music.the_long_dark",
-          "tilth:music.meditation_impromptu_02"
+          "tilth:music.subwoofer_lullaby"
         ],
         "ambience": [],
         "predicates": [
@@ -535,7 +445,6 @@
           },
           {
             "music": [
-              "tilth:music.cicadas",
               "tilth:music.echo_in_the_wind"
             ],
             "ambience": [],
@@ -573,7 +482,6 @@
           },
           {
             "music": [
-              "tilth:music.hiraeth",
               "tilth:music.echo_in_the_wind"
             ],
             "ambience": [],
@@ -611,7 +519,6 @@
           },
           {
             "music": [
-              "tilth:music.permafrost",
               "tilth:music.floating_dream"
             ],
             "ambience": [],
