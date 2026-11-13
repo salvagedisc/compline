@@ -1,9 +1,4 @@
 {
-  "fallow.lune.efface": "La lune pâlit. Une autre présence occupe le ciel cette nuit.",
-  "fallow.lune.note": "Note froissée",
-  "fallow.lune.note.1": "« Au fond des ruines, un visage de lune est gravé dans la pierre.",
-  "fallow.lune.note.2": "Je l'ai regardé longtemps. Les nuits suivantes, j'ai rêvé d'elle.",
-  "fallow.lune.note.3": "Depuis, une ombre dans le ciel me montre un chemin. »",
   "fallow.sante.coeur_ancien": "Le Cœur ancien laisse un éclat de vie entre vos mains.",
   "fallow.sante.plein": "Votre santé est déjà entière : %s cœurs.",
   "fallow.sante.rendu": "Un cœur vous revient : %s / %s.",

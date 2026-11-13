@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "regions_unexplored:cold_deciduous_forest"
+  ],
+  "grass_color": "#77b0a1",
+  "foliage_color": "#68a288",
+  "particle": {
+    "options": {
+      "type": "minecraft:snowflake"
+    },
+    "probability": 0.004
+  }
+}

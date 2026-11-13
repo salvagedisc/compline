@@ -1,7 +1,7 @@
 # Fallow — Vision
 
 ## Pitch
-A vast, damp, almost empty world, in the spirit of the No Man's Land trailer: landscapes in the mist, ruins, menhirs, a lone traveller. A handful of players arrive, settle in, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. Wherever they bring life back, the mist lifts and the distant landscape appears. There is no end: the permanent world is for perfecting one's installations.
+A vast, damp, almost empty world, in the spirit of the No Man's Land trailer (the mod itself left the pack on 2026-11-13, [0019](decisions/0019-leaving-no-mans-land.md)): landscapes in the mist, ruins, menhirs, a lone traveller. A handful of players arrive, settle in, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. Wherever they bring life back, the mist lifts and the distant landscape appears. There is no end: the permanent world is for perfecting one's installations.
 
 ## Art direction
 - Mist, distance, silhouettes: the world is hard to read from afar.
@@ -12,7 +12,7 @@ A vast, damp, almost empty world, in the spirit of the No Man's Land trailer: la
 - **A polished, connected finish**, in the manner of Realism Craft: travelling, building, eating, cutting a tree or opening one's bag must be pleasant to look at and to perform, and the systems talk to each other.
 
 ## Three pillars
-1. **Exploration** — "I wonder what's over there", not "I need X diamonds". Inspiration: Zelda Breath of the Wild. No coordinates: the map builds itself (Antique Atlas). Monuments, the Friendly Moon and lost letters give the world its enigmas.
+1. **Exploration** — "I wonder what's over there", not "I need X diamonds". Inspiration: Zelda Breath of the Wild. No coordinates: the map builds itself (Antique Atlas). Monuments and lost letters give the world its enigmas. The main thread that was to tie them together, the Friendly Moon of No Man's Land, left with the mod; what replaces it is to be defined.
 2. **Civilisation** — Forging (Overgeared) → workshop → industry (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics). Each step widens the land one can clear of mist.
 3. **Daily life** — Water → farming → animal husbandry → cooking (Kaleidoscope Cookery) → tannery → expedition.
 

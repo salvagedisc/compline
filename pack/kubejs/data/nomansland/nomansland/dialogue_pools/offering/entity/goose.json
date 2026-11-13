@@ -1,8 +1,0 @@
-{
-    "condition": {
-        "type": "nomansland:entity_conditional",
-        "entity": "naturalist:duck"
-    },
-    "weight": 1,
-    "text": "Loud, stubborn beast!///\nI admire its conviction."
-}

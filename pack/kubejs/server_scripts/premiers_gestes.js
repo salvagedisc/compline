@@ -4,7 +4,7 @@
 // Voir docs/plan/premiers-gestes.md.
 //
 // La chaîne :
-//   galet (No Man's Land) ou gravier -> silex
+//   gravier -> silex
 //   silex frappé sur une roche -> pierre à tailler (Overgeared), ou galet de Twigs -> pierre à tailler
 //   pierre à tailler, clic droit -> tête d'outil ; tête + bâton -> outil de pierre (Overgeared)
 //   hache + bûche -> 2 planches ; scie mécanique de Create -> 6 planches
@@ -33,7 +33,7 @@ function premiersGestesIngredient(json) {
 ServerEvents.recipes(event => {
   event.remove({ output: PREMIERS_GESTES_OBJETS })
 
-  // Bûche -> planches : chaque recette d'une seule bûche (vanilla, No Man's Land, autres bois)
+  // Bûche -> planches : chaque recette d'une seule bûche (vanilla, Regions Unexplored, autres bois)
   // demande désormais une hache, qui reste dans la grille et perd un point.
   let planches = []
   event.forEachRecipe({ type: 'minecraft:crafting_shapeless', output: '#minecraft:planks' }, recipe => {

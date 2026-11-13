@@ -1,17 +1,17 @@
 # Roadmap
 
-Status as of 2026-11-01. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [archive/conception/](archive/conception/)).
+Status as of 2026-11-13. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [archive/conception/](archive/conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](archive/conception/specs/2026-09-23-repo-outillage-design.md)) |
-| 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0011 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
-| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, 26 KubeJS scripts, 6 Questlog chapters, custom mod `fallow` 0.5.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
+| 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0019 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
+| 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, KubeJS scripts (26 on 2026-11-01; the Friendly Moon and fauna scripts of No Man's Land have gone since), 6 Questlog chapters, custom mod `fallow` 0.7.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
 ## Where the pack stands
 
-The pack starts on a dedicated server, but **nobody has played it yet**. The next step is the play sessions of [tests-en-jeu.md](tests-en-jeu.md): eight sessions of about an hour, which gather every in-game test of the plan pages. Everything frozen at world creation (Tectonic, Streams Reflowing, clearings) must pass before the permanent world is pregenerated.
+The pack starts on a dedicated server, but **nobody has played it yet**. The next step is the play sessions of [tests-en-jeu.md](tests-en-jeu.md): eight sessions of about an hour, which gather every in-game test of the plan pages. Everything frozen at world creation (Tectonic, Streams Reflowing, the biome mods, clearings) must pass before the permanent world is pregenerated.
 
 | Date | Milestone |
 |---|---|
@@ -24,6 +24,7 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-10-26 and 10-27 | Questlog quests and guides; the `fallow-interface` pack rebuilt on GUI Revision |
 | 2026-10-29 and 10-30 | First gestures (0013), Tannery (0014), Vanilla Evolved textures (0015), wind and light without shaders (0016), mist ring with Distant Horizons, reversible clearings, snow and dust storms, Friendly Moon fixed, Wildex removed, painted title screen, NML explosives back |
 | 2026-11-01 | 20 weakly animated creatures cut, held-item hand fixed, pack sort (Chipped and Beautify! removed, 313 items hidden), `sac` module removed (`fallow` 0.5.0) |
+| 2026-11-11 to 11-13 | The team leaves No Man's Land (11-11); candidates measured on one seed (11-12) and Tectonic + Regions Unexplored + Geophilic chosen ([0019](decisions/0019-leaving-no-mans-land.md)); the Friendly Moon, its fauna rules and its music go; mist preset `fallow_v6`, `biomes.py`, French translation of Regions Unexplored; `fallow` 0.7.0 |
 
 ## Before the first release (`v0.1.0`)
 
@@ -73,7 +74,15 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] A mod that replaces vanilla structures with Create-integrated versions; candidates: Create: Structures Arise, Create Rustic Structures ([0004](decisions/0004-structures.md)).
 - [ ] Separate Sable Render Distance, now that Distant Horizons is in ([0007](decisions/0007-ambiance-performance.md)).
 - [x] ~~Food preservation~~: dropped by the team on 2026-10-18 (Freeze It and Heat It removed).
-- [x] Terrain: Tectonic + Streams Reflowing on No Man's Land; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)).
+- [x] Terrain: Tectonic + Streams Reflowing; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)). Done on No Man's Land, which has since left; the biomes are now Regions Unexplored's and Geophilic's ([0019](decisions/0019-leaving-no-mans-land.md)).
+- [ ] **Compare Lithosphere in game** under the same biomes before the relief is final: it measured 0 visible defects on 2026-11-13, but 330 detached rock clusters in caves when alone ([0019](decisions/0019-leaving-no-mans-land.md)).
+- [ ] **Walk the new biomes**: neither Regions Unexplored nor Geophilic has been seen in game; the mist families, colours and French names are paper choices ([ambiance](plan/fallow-ambiance.md)).
+- [ ] Confirm the provisional vanilla recipes of the vigil fire and the clearing lantern, and recompute the life shard frequency with the vanilla sources ([sante](plan/sante.md)).
+
+### Identity and world shape (arising from 0019)
+- [ ] **The new main thread** of the pack, in place of the Friendly Moon: not decided.
+- [ ] **The finite disc world**: whether to do it, and its radius: not decided.
+- [ ] **The pack's new name**: not decided.
 
 ### Toward a public release (approved 2026-10-29)
 Study of what makes Homestead and Matcha Flavoured popular, kept to what fits the vision. Ordered by weight; none adds a gauge, a biome or a crowd of structures.
@@ -81,10 +90,10 @@ Study of what makes Homestead and Matcha Flavoured popular, kept to what fits th
 In game:
 - [ ] **The mist lifts early and in full view**: a first vigil fire within the first hour, led by the first quest; the mist recedes over 10 to 20 seconds, the far view appears, the clearing music starts.
 - [ ] **Rebuild a hamlet**: the `survivants` module as a long-term goal; each survivor found in the mist joins a clearing with a trade, and the hamlet grows by milestones like the zoo (Matcha Flavoured: villages are made, not found).
-- [ ] **Named quest chapters** in Questlog: 8 to 12 chapters (first fire, forge, zoo, sky, monuments, Friendly Moon, airship, hamlet), 150 to 250 quests; the first three in order, the rest free.
+- [ ] **Named quest chapters** in Questlog: 8 to 12 chapters (first fire, forge, zoo, sky, monuments, airship, hamlet, and the new main thread once defined), 150 to 250 quests; the first three in order, the rest free.
 - [ ] **A collections page**: zoo species, Exposure: Space objects, Longwings butterflies, monument codex pages, lost letters, dishes; a carved figurine of a species per milestone, to place at home.
 - [ ] **Dishes with a use**: a few Kaleidoscope dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays.
-- [ ] **A few hand-made enigmas**: three to five unique places, never horror (a set table with warm soup and nobody, an observatory whose log stops), with hints in letters, `echos` and the Friendly Moon.
+- [ ] **A few hand-made enigmas**: three to five unique places, never horror (a set table with warm soup and nobody, an observatory whose log stops), with hints in letters and `echos`.
 - [ ] **Travel as a selling point**: a quest chapter for the atlas, horses, rails and airships; `fanal` lights along the roads.
 - [ ] **Letters written by the community**: lost letters and travellers' notebook pages written and signed by players of the Discord, found in ruins.
 

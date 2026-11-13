@@ -33,36 +33,3 @@ export function compareNamespace(en, modFr, ours) {
   const missing = Object.keys(en).filter((key) => !(key in modFr) && !(key in ours));
   return { unknown, badPlaceholders, missing };
 }
-
-// No Man's Land reads the Friendly Moon's dialogues outside the usual language files: each
-// pool has its own assets/<ns>/lang/nomansland/dialogue_pools/<pool>/<locale>.json, keyed by
-// the dialogue's path in the datapack registry (data/<ns>/nomansland/dialogue_pools/<pool>/
-// <path>.json, "/" turned into "."), whose "text" is shown when no translation matches.
-export const DIALOGUE_POOLS = ['greeting', 'passive', 'offering', 'negative', 'contextual', 'leaving', 'special'];
-const DIALOGUE_LANG_PATH = /^assets\/[^/]+\/lang\/nomansland\/dialogue_pools\/([^/]+)\/(en_us|fr_fr)\.json$/;
-const DIALOGUE_DATA_PATH = /^data\/[^/]+\/nomansland\/dialogue_pools\/([^/]+)\/(.+)\.json$/;
-const PLAYER_NAME = /&PlayerName/g;
-
-export function dialogueLangEntry(name) {
-  const m = DIALOGUE_LANG_PATH.exec(name);
-  return m && DIALOGUE_POOLS.includes(m[1]) ? { pool: m[1], locale: m[2] } : null;
-}
-
-export function dialogueDataEntry(name) {
-  const m = DIALOGUE_DATA_PATH.exec(name);
-  return m && DIALOGUE_POOLS.includes(m[1]) ? { pool: m[1], key: m[2].replaceAll('/', '.') } : null;
-}
-
-// Compares the dialogues of one pool. `en` holds every English text the player can see:
-// the pool's en_us file and the "text" of each registry entry (which the en_us file overrides).
-export function compareDialogues(en, modFr, ours) {
-  const fr = { ...modFr, ...ours };
-  const missing = [];
-  const badPlaceholders = [];
-  for (const [key, value] of Object.entries(en)) {
-    if (typeof value !== 'string' || !/\p{L}/u.test(value)) continue; // "...", "!" or empty
-    if (typeof fr[key] !== 'string') { missing.push(key); continue; }
-    if ((fr[key].match(PLAYER_NAME) ?? []).length !== (value.match(PLAYER_NAME) ?? []).length) badPlaceholders.push(key);
-  }
-  return { missing, badPlaceholders };
-}

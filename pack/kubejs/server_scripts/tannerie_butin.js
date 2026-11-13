@@ -25,8 +25,6 @@ const TANNERIE_TABLES_A_PEAU = {
   'minecraft:entities/llama': 'tannery:horse_hide',
   'minecraft:entities/trader_llama': 'tannery:horse_hide',
   'minecraft:entities/hoglin': 'tannery:pig_hide',         // Nether fermé : sans effet en jeu
-  // No Man's Land
-  'nomansland:entities/moose': 'tannery:cow_hide',
   // Naturalist (cuir)
   'naturalist:entities/deer': 'tannery:goat_hide',
   'naturalist:entities/zebra': 'tannery:horse_hide',
@@ -49,8 +47,7 @@ const TANNERIE_TABLES_A_PEAU = {
 const TANNERIE_TABLES_PEAU_AJOUTEE = {
   'minecraft:entities/pig': 'tannery:pig_hide',
   'minecraft:entities/sheep': 'tannery:sheep_hide',
-  'minecraft:entities/goat': 'tannery:goat_hide',
-  'nomansland:entities/deer': 'tannery:goat_hide'
+  'minecraft:entities/goat': 'tannery:goat_hide'
 }
 
 // Gras animal : un morceau par bête, comme dans les tables de Tannery.

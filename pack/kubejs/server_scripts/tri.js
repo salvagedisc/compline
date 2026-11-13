@@ -72,8 +72,8 @@ const TRI_OBJETS_HANDCRAFTED = [
   'handcrafted:warped_table'
 ]
 
-// Twigs : tables (Handcrafted les a), pierre de sang et blocs du Nether, doublons du tuf vanilla et
-// des briques de pavé de NML, rhyolite qui ne se génère plus.
+// Twigs : tables (Handcrafted les a), pierre de sang et blocs du Nether, doublons du tuf vanilla,
+// rhyolite qui ne se génère plus.
 const TRI_OBJETS_TWIGS = [
   'twigs:oak_table', 'twigs:spruce_table', 'twigs:birch_table', 'twigs:jungle_table',
   'twigs:acacia_table', 'twigs:dark_oak_table', 'twigs:mangrove_table', 'twigs:cherry_table',
@@ -91,10 +91,6 @@ const TRI_OBJETS_TWIGS = [
   'twigs:polished_tuff_brick_wall', 'twigs:polished_tuff_bricks', 'twigs:polished_tuff_slab',
   'twigs:polished_tuff_stairs', 'twigs:rhyolite', 'twigs:rhyolite_slab', 'twigs:rhyolite_stairs',
   'twigs:rhyolite_wall', 'twigs:tuff_slab', 'twigs:tuff_stairs', 'twigs:tuff_wall',
-  'twigs:cobblestone_brick_slab', 'twigs:cobblestone_brick_stairs', 'twigs:cobblestone_brick_wall',
-  'twigs:cobblestone_bricks', 'twigs:cracked_cobblestone_bricks',
-  'twigs:mossy_cobblestone_brick_slab', 'twigs:mossy_cobblestone_brick_stairs',
-  'twigs:mossy_cobblestone_brick_wall', 'twigs:mossy_cobblestone_bricks',
   'twigs:crimson_shroomlamp', 'twigs:warped_shroomlamp', 'twigs:crimson_roots_paper_lantern',
   'twigs:twisting_polished_blackstone_brick_slab',
   'twigs:twisting_polished_blackstone_brick_stairs',

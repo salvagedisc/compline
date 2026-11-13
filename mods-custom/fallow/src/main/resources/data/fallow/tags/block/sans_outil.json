@@ -10,19 +10,7 @@
     "minecraft:azalea",
     "minecraft:flowering_azalea",
     {
-      "id": "nomansland:field_mushroom",
-      "required": false
-    },
-    {
-      "id": "nomansland:cut_sugar_cane",
-      "required": false
-    },
-    {
-      "id": "nomansland:cattail",
-      "required": false
-    },
-    {
-      "id": "nomansland:reeds",
+      "id": "regions_unexplored:cattail",
       "required": false
     },
     {

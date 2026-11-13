@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.6.3 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (glints on water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, No Man's Land's inverted bell). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.7.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (glints on water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -32,7 +32,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
-| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; No Man's Land for the Friendly Moon | 6, all client |
+| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client (6 before 0.7.0) |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (blocks on both sides, conversion on the server) | none | none |
@@ -48,7 +48,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 **The mechanism** (`MoonOverlay` and three mixins):
 
 1. `LevelRendererMixin` wraps the call to `renderSky` in `renderLevel` (`@WrapOperation`). Just before the call, the module arms itself if the dimension has Enhanced Celestials lunar data.
-2. The same mixin spots the first `Runnable.run()` of `renderSky`: this is the fog setup, at the start of the vanilla body. If it runs, ATMOSPHERICS has not taken over (it does not do so in No Man's Land dimensions or during the Friend Moon); Enhanced Celestials then draws its moon itself, and `fallow` touches nothing.
+2. The same mixin spots the first `Runnable.run()` of `renderSky`: this is the fog setup, at the start of the vanilla body. If it runs, ATMOSPHERICS has not taken over; Enhanced Celestials then draws its moon itself, and `fallow` touches nothing.
 3. Otherwise, `RenderSystemMixin` replaces, during ATMOSPHERICS' sky only, the `moon_phases.png` texture with a transparent texture (`fallow:textures/environment/hidden_moon.png`). ATMOSPHERICS' moon quad no longer draws anything.
 4. After `renderSky`, if the moon was indeed hidden, `fallow` draws the Enhanced Celestials one at the same place, with the same matrices:
    - the texture of the current event;
@@ -81,20 +81,9 @@ The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS me
 
 ### The Friendly Moon under ATMOSPHERICS
 
-**The problem** (found in the first in-game test, 2026-10-28: the Friendly Moon never appeared at the Meeting Point). No Man's Land draws the Friendly Moon, its shadow in the sky and its fog from mixins inside the vanilla body of `renderSky` (`FriendMoonRenderer.renderFriendMoon` after the moon is drawn). The Friendly Moon's opacity rises only there, in `updateFriendMoonPosition`. ATMOSPHERICS cancels that body and gives it back only when `Atmospherics.isFriendMoonActive()` is true, that is when that opacity is already above 0.001. Neither can start first: the Friendly Moon could never appear, and the shadow that shows the way after the dream was never drawn either. Read in NML 1.6.3 and ATMOSPHERICS 2.6.5; ATMOSPHERICS 2.6.5.2 changes nothing there.
+Removed in 0.7.0. History: in the first in-game test (2026-10-28) the Friendly Moon of No Man's Land never appeared, because ATMOSPHERICS and that mod each waited for the other to start the sky. `fallow` 0.4.10 (2026-10-29) made the call itself (`FriendMoonRelay`, mixins `ciel.FriendMoonSkyMixin` and `ciel.AtmosphericsDreamMixin`, config key `ciel.friendMoon`), and it was checked in a development client.
 
-**The mechanism** (`FriendMoonRelay` and two mixins):
-
-1. `FriendMoonSkyMixin` wraps the call to `renderSky`, like the moon's `LevelRendererMixin`, and also wraps the sky fog setup (`skyFogSetup`) it passes. ATMOSPHERICS runs that setup right after cancelling the vanilla body; the vanilla body runs it as its first step, which the mixin spots separately.
-2. After `renderSky`, if the fog setup ran but the vanilla body did not, ATMOSPHERICS drew the sky. `fallow` then makes the call NML makes in the vanilla sky: `renderFriendMoon` and `renderFriendShadow`, with the same matrices, then `renderFinalize` (which lifts NML's stencil) and restores the render state.
-3. At the Meeting Point at night, the Friendly Moon starts to fade in on this first frame; from the next one, ATMOSPHERICS hands the sky back to vanilla and NML carries on alone, as it was designed to (NML's fog replaces ATMOSPHERICS' mist while the Friendly Moon is up). Away from the Point, during the 8 nights after the dream, the shadow stays drawn by `fallow` over ATMOSPHERICS' sky, which keeps its mist.
-4. `AtmosphericsDreamMixin` makes `Atmospherics.isFriendMoonActive()` also true while the moonlight dream is shown, so ATMOSPHERICS leaves the sky and the fog to the dream whatever the order of the two mods' mixins on `renderSky`.
-
-**Checked on 2026-10-29** in a development client (llvmpipe) with only No Man's Land 1.6.3, ATMOSPHERICS 2.6.5 and `fallow` 0.4.10, on a new world (seed "fallow", Point at 616, −1288, pool at 631, 78, −1273), at midnight, 5 blocks from the pool: the face appears, wakes and speaks, and the "Friendship" goal is reached 10 s after joining. With `ciel.friendMoon = false`, nothing appears, as in the game of 2026-10-28. The shadow (C14) and the dream (C15) were not checked.
-
-A drawing error is logged once, without crashing the rendering. Config: `ciel.friendMoon` (true by default; false gives back the old behaviour, where the Friendly Moon does not appear under ATMOSPHERICS).
-
-**Known limitation.** On the single frame where `fallow` fades the Friendly Moon in, it is drawn over ATMOSPHERICS' stars instead of hiding them; the shadow, drawn the whole night away from the Point, darkens the stars behind it instead of masking them.
+No Man's Land left the pack on 2026-11-13 ([0019](../decisions/0019-leaving-no-mans-land.md)): `fallow` 0.7.0 removes `FriendMoonRelay`, both mixins and the `friendMoon` key. The module keeps the moon of Enhanced Celestials and the mist cache. The description of the mechanism is in the archived [friendly moon page](../archive/plan/lune-amie.md).
 
 ## `xp` module
 
@@ -128,7 +117,7 @@ Decision [0011](../decisions/0011-tectonic-streams-distant-horizons.md). Distant
 3. `DhApiBeforeFogRenderEvent`, every frame: `HorizonFog` sets DH's far fog to linear, from `start / R` to `end / R` (R = LOD radius in blocks, read from DH's config), thickness 0 to 1. A LOD at distance d is therefore as fogged as a block of terrain at the same distance.
 4. `DhApiBeforeRenderEvent`: when the mist ends before the edge of the normal terrain (render distance × 16 blocks), every LOD is beyond the end of the mist, so invisible; the module cancels the whole LOD rendering of the frame. In misty areas DH costs no GPU time.
 5. `VanillaFadeMixin` skips, in those same frames, DH's fade between the normal terrain and the LODs (`ClientApi.renderFadeOpaque` and `renderFadeTransparent`). That fade blends the edge of the normal terrain with DH's LOD texture, which is only cleared and redrawn by the LOD rendering the module has just cancelled: it would blend in the last LOD image drawn, frozen, for example the clearing's mountains after walking back into the mist.
-6. **The mist ring** (`FarFadeMixin`). A LOD drowned in the mist takes the mist colour, which is not the colour of the sky behind it: without more, the far mountains stay visible as mist-coloured silhouettes up to the end of the LOD radius (1,536 blocks), and the clearing has no horizon. DH already has a far fade that dissolves LODs into the sky, from 50 % to 90 % of its far clip plane. The mixin hands it the ring distance instead: the LODs dissolve into the sky from 55 % to 100 % of the end of the mist. The ring is also capped (`ringMaxDistance`, 512 blocks): even where the mist ends further away (No Man's Land dimensions, the Friend Moon, a future preset), the landscape always closes in a ring. The far fog of step 3 uses the same capped end.
+6. **The mist ring** (`FarFadeMixin`). A LOD drowned in the mist takes the mist colour, which is not the colour of the sky behind it: without more, the far mountains stay visible as mist-coloured silhouettes up to the end of the LOD radius (1,536 blocks), and the clearing has no horizon. DH already has a far fade that dissolves LODs into the sky, from 50 % to 90 % of its far clip plane. The mixin hands it the ring distance instead: the LODs dissolve into the sky from 55 % to 100 % of the end of the mist. The ring is also capped (`ringMaxDistance`, 512 blocks): even where the mist ends further away (a future preset), the landscape always closes in a ring. The far fog of step 3 uses the same capped end.
 7. Underwater, in lava or powder snow, blinded or in darkness, the module does nothing: DH already drowns its LODs.
 
 **What it gives with the `fallow_v3` preset.** Misty (end 52) and veiled (end 96) families: no LOD drawn. Clearings (end 500 by day, 260 at night): the landscape appears progressively beyond the normal terrain, then dissolves into the sky between 280 and 500 blocks by day (145 and 260 at night). The transition follows ATMOSPHERICS' smoothing when walking in or out of a clearing.
@@ -154,13 +143,13 @@ Plan [10.3](../archive/plan/10-recentrage.md#103-the-mist-that-lifts), layer 3: 
 
 | Block | Radius | Recipe |
 |---|---|---|
-| Vigil Fire (`fallow:feu_de_veille`), a stone brazier on a foot with embers and a pale flame | 16 | A No Man's Land resin oil bottle, two polished stone slabs, a charcoal, a polished stone |
-| Clearing Lantern (`fallow:lanterne_de_clairiere`), a standing lantern of blackened iron around a glowing quartzite crystal | 32 | Two Overgeared iron plates, two glass panes, a No Man's Land quartzite cluster |
+| Vigil Fire (`fallow:feu_de_veille`), a stone brazier on a foot with embers and a pale flame | 16 | A honeycomb, two smooth stone slabs, a charcoal, a smooth stone (provisional, to be confirmed by the team; before 0.7.0: a No Man's Land resin oil bottle, polished stone slabs, polished stone) |
+| Clearing Lantern (`fallow:lanterne_de_clairiere`), a standing lantern of blackened iron around a glowing crystal | 32 | Two Overgeared iron plates, two glass panes, an amethyst shard (provisional, to be confirmed by the team; before 0.7.0: a No Man's Land quartzite cluster) |
 | Dissipator (`fallow:dissipateur`, `dissipateur` module) | 64 | Encased fan, brass casing, propeller, two precision mechanisms |
 
 Both have their own model and textures since 0.4.12 (`textures/block/feu_de_veille_*`, `lanterne_de_clairiere_*`; the flame is animated and, like the embers and the crystal, lit at full brightness through NeoForge's per-face light). Before, the fire was a cobblestone campfire and the lantern the vanilla lantern, and players mixed them up with those.
 
-**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, as long as they stay. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, ring by ring (see the transition below), and sends the new biomes of each ring to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
+**Conversion.** Placed by a player, the fire and the lantern change the biomes of a disc around them into a clearing, as long as they stay. `ClearingConverter` works like `/fillbiome` without its 32,768-block limit. It rewrites the 4 × 4 × 4 biome cells of each chunk over the whole height, ring by ring (see the transition below), and sends the new biomes of each ring to the clients. The `ciel` module then empties the ATMOSPHERICS cache, so the mist reacts without the player moving. Only the biomes of the `fallow:peut_devenir_clairiere` tag change: land biomes and rivers, not oceans, beaches or caves. Since 0.7.0 the tag lists 59 surface biomes of Regions Unexplored (not beaches, deserts, oceans, caves or the Nether) next to the vanilla ones; the tag `fallow:sans_outil` has `regions_unexplored:cattail` among the plants that need no tool. The clearing follows the temperature of the biome it replaces: `fallow:clairiere_froide` below 0.3 (snow keeps falling), `fallow:clairiere_chaude` above 1.0, `fallow:clairiere` otherwise. The three biomes have a light mist (`fallow_v3` preset, 40 → 500 blocks by day), vivid grass (biome and Polytone), the clearing music (node 8 of the [music](musique.md)), farm animals and salmon, and they show the far landscape of Distant Horizons (`horizon` module).
 
 **The mist comes back** (0.4.12). Each source (fire, lantern, charged dissipator, command) is recorded with its radius in the world's saved data (`fallow_clairieres`, `ClearingSources`). When a fire or a lantern leaves the world (broken, blown up, replaced: `onRemove`), or a charged dissipator is broken (`destroy`, called by Create), its source is removed and a restore job runs over its disc: every clearing cell that no remaining source covers goes back to the biome the world generator places there (`BiomeSource.getNoiseBiome` with the world's sampler, as at generation). Nothing is stored per cell: the seed is enough. The nearest player within 8 blocks reads "La brume revient." Checked in game on 2026-10-29: a lantern removed gives back its 8,639 cells; a fire inside a lantern's disc, removed, gives back none.
 
@@ -224,7 +213,7 @@ Shared helpers in `rendu.Sun`: sun direction from the time of day, daylight, the
 
 ## Compatibility fixes
 
-Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present.
+Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
 
 ### Punchy! and Sensible Stackables: the hand that kept jumping
 
@@ -249,14 +238,10 @@ None of this has been done. These tests are also gathered with those of the othe
 | C3 | Blood moon, blue moon, harvest moon, super moon (size 40) | Color and size specific to each event, and fade at the transition |
 | C4 | Rain, then thunderstorm | The moon fades with the rain, like the rest of the sky |
 | C5 | Underwater, in powder snow, with blindness | No double moon and no vanishing moon |
-| C6 | No Man's Land dimension, Friend Moon | The sky in these cases stays that of their mod (log without `fallow` error) |
-| C13 | Meeting Point at night (`/meetingpoint`, then within 16 blocks of the pool), look up | The sleeping face fades in, then wakes; the mist gives way to No Man's Land's fog. With `ciel.friendMoon = false`: nothing appears (the bug of 2026-10-28) |
-| C14 | The 8 nights after the dream, far from the Point | The moon's shadow in the sky, towards the Point, over ATMOSPHERICS' sky and mist; it fades when arriving |
-| C15 | Moonlight dream | The dream's own sky, not ATMOSPHERICS' |
 | C7 | `ciel.redrawMoon = false`, then `ciel.enabled = false` | Back to ATMOSPHERICS' vanilla moon |
 | C8 | `/fillbiome` around a stationary player, with `clearFogOnBiomeUpdate` true then false | The mist changes immediately, then only after a step |
 | C9 | KubeJS call of `FallowSky.clearFogCache()` | Returns `true`, the mist is recomputed |
-| C10 | Log at startup | "Module ciel chargé", "Lune Amie de No Man's Land dessinée sous ATMOSPHERICS", no `fallow` mixin warning |
+| C10 | Log at startup | "Module ciel chargé", no `fallow` mixin warning |
 | C11 | Frames per second at night, with and without the module | No visible difference |
 | C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
 
@@ -296,19 +281,18 @@ None of this has been done. These tests are also gathered with those of the othe
 
 ### Terrain (Tectonic, Streams Reflowing)
 
-Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NML biomes, the Meeting Point and the Monoliths are found by `/locate`. The Meeting Point of seed `fallow` is 2,898 blocks from spawn, beyond the 2,500 of `nomansland-common.toml`: to watch with the larger Tectonic continents.
+Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` datapack was enabled and the Monoliths were found by `/locate`. Since 2026-11-13 the biomes are Regions Unexplored's and Geophilic's ([0019](../decisions/0019-leaving-no-mans-land.md)): the same tests apply, and the terrain of the new base has not been seen in game.
 
 | # | Test | Expected |
 |---|---|---|
-| W1 | Explore 3,000 blocks (atlas) | Large continents, mountain ranges, river valleys; NML biomes present (`/locate biome` for each) |
-| W2 | `/locate structure nomansland:meeting_point` on three seeds | Always on reachable land |
+| W1 | Explore 3,000 blocks (atlas) | Large continents, mountain ranges, river valleys; Regions Unexplored biomes present (`/locate biome` for a few) |
 | W3 | The six Monoliths (`/locate structure ancient_remnants:…`) | Whole, on the ground, not cut by water |
-| W4 | A Streams stream in a swamp | It carries `nomansland:blackwater_river` |
+| W4 | A Streams stream in a swamp | Note which biome it carries; no error in the log |
 | W5 | Highest peak (F3) | Y ≤ 320; airships can cross a range (otherwise lower `vertical_scale`) |
 | W6 | Winter (Ecliptic) at Y 70 and Y 150 | Snow consistent with altitude; streams freeze like rivers |
 | W7 | Boat, Sable hull on a stream, airship above | The hull drifts (`vesselDriftSpeed`), the airship in flight does not |
 | W8 | Create pump and boiler on a stream | Water accepted, Create channels do not overflow |
-| W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with NML alone |
+| W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with Tectonic alone |
 | W10 | A clearing crossed by a stream | Note whether the stream stays misty (river biome not convertible); if so add the river biomes to `fallow:peut_devenir_clairiere` |
 
 ### Clearings
@@ -330,7 +314,7 @@ Started on the test server on 2026-10-25: the `tectonic` datapack is enabled, NM
 | K8 | Dissipator driven at 16 RPM, then 64 RPM, then overstressed | Nothing at 16; at 64 the goggles count up to 100 % and the disc of 64 converts; overstress resets the charge |
 | K9 | Dissipator on an airship (Sable) | Note what happens: it converts where the ship is when it finishes charging |
 | K10 | Ecliptic seasons and Cold Sweat in a clearing | Crops grow, temperature consistent with the old biome |
-| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips (the fire: resin oil bottle, polished stone; the lantern: quartzite cluster, glass panes) |
+| K11 | Recipes in EMI | The three recipes show, with their French names and tooltips, and the new vanilla ingredients (the fire: honeycomb, smooth stone slabs, charcoal, smooth stone; the lantern: iron plates, glass panes, amethyst shard) |
 
 ### Titles
 
@@ -377,13 +361,3 @@ Known fragile points:
 ## Next modules
 
 Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-fallow.md](modules-fallow.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
-
-### No Man's Land: the inverted bell message in English
-
-**Symptom**: placing an inverted bell that is already linked to another one shows "Successfully linked bell" in chat, in English, whatever the game language.
-
-**Cause.** `InvertedBellBlock.setPlacedBy` builds the message with `Component.literal`, a fixed text that no language file can translate.
-
-**Fix.** `compat.InvertedBellMessageMixin` replaces that text with the language key `message.fallow.nomansland.cloche_liee` ("Cloche liée." in French, "Bell linked." in English). The key is resolved on each player's client, so it follows each player's language. Applied only with No Man's Land (`nomansland`).
-
-**Checked** in a development client with No Man's Land 1.6.3: the mixin applies at start-up (it is required, so a missing target would stop the game) and the key reads "Cloche liée." in French.

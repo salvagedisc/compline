@@ -86,7 +86,7 @@ Consequences:
 
 ## Hybrid Aquatic biomes (2026-10-19)
 
-They work with NML: like NML, Hybrid Aquatic places them through Biolith. 12.1 wanted to cut them in the name of decision 0003 (no biomes that change the face of the world). Decision of the maintainer: keep its other 13 biomes, almost all underwater (reefs, trenches, seagrass beds, red meadow, deep warm ocean, tide pools, sulphurous caves), with the 34 species that only spawn there, and cut only the **tropical river**, which replaced part of the vanilla rivers, as far as the taigas.
+They worked beside No Man's Land (checked on 2026-10-19), which also placed its biomes through Biolith; beside Regions Unexplored they have not been seen in game. 12.1 wanted to cut them in the name of decision 0003 (no biomes that change the face of the world). Decision of the maintainer: keep its other 13 biomes, almost all underwater (reefs, trenches, seagrass beds, red meadow, deep warm ocean, tide pools, sulphurous caves), with the 34 species that only spawn there, and cut only the **tropical river**, which replaced part of the vanilla rivers, as far as the taigas.
 
 `pack/config/hybrid_aquatic.json`: `generateTropicalRiver = false`. The mod reads this file through a codec that requires all fields and data version 8 (otherwise it saves the file and replaces it with its default values): the file is therefore complete, with default values read from the 1.7.3 jar. `spawn_configuration` is empty: the list is only used for the mod's data generation, not in game. At every mod update, check `data_version`.
 

@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readPackMods } from './sync/pwtoml.mjs';
 import { listEntries, readEntry } from './deps/zip.mjs';
-import { compareDialogues, compareNamespace, dialogueDataEntry, dialogueLangEntry, langEntry, parseLang } from './fr/lang.mjs';
+import { compareNamespace, langEntry, parseLang } from './fr/lang.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const packDir = join(root, 'pack');
@@ -26,28 +26,8 @@ async function loadJar(mod) {
 
 const en = {};
 const modFr = {};
-// Friendly Moon dialogues (No Man's Land), per pool: registry texts, en_us and fr_fr files.
-const dialogueText = {};
-const dialogueEn = {};
-const dialogueModFr = {};
-function addDialogue(name, read) {
-  const lang = dialogueLangEntry(name);
-  if (lang) {
-    const target = lang.locale === 'en_us' ? dialogueEn : dialogueModFr;
-    Object.assign((target[lang.pool] ??= {}), parseLang(read().toString('utf8')) ?? {});
-    return true;
-  }
-  const data = dialogueDataEntry(name);
-  if (data) {
-    const entry = parseLang(read().toString('utf8'));
-    (dialogueText[data.pool] ??= {})[data.key] = entry?.text ?? '';
-    return true;
-  }
-  return false;
-}
 function scan(buf, depth = 0) {
   for (const name of listEntries(buf)) {
-    if (addDialogue(name, () => readEntry(buf, name))) continue;
     const lang = langEntry(name);
     if (lang) {
       const target = lang.locale === 'en_us' ? en : modFr;
@@ -84,38 +64,6 @@ for (const ns of Object.keys(en).sort()) {
   for (const key of badPlaceholders) console.log(`VARIABLES ${ns} ${key}`);
   errors += badPlaceholders.length;
   if (missing.length) console.log(`MANQUANT ${ns} : ${missing.length} texte(s), ex. ${missing.slice(0, 3).join(', ')}`);
-}
-
-// Our datapack can add or replace dialogues (pack/kubejs/data) and translate them (pack/kubejs/assets).
-async function* walk(dir, prefix) {
-  let entries;
-  try { entries = await readdir(dir, { withFileTypes: true }); } catch { return; }
-  for (const entry of entries) {
-    const rel = `${prefix}/${entry.name}`;
-    if (entry.isDirectory()) yield* walk(join(dir, entry.name), rel);
-    else yield [rel, join(dir, entry.name)];
-  }
-}
-const dialogueOurs = {};
-for await (const [rel, path] of walk(join(packDir, 'kubejs', 'data'), 'data')) {
-  const buf = await readFile(path);
-  addDialogue(rel, () => buf);
-}
-for await (const [rel, path] of walk(assetsDir, 'assets')) {
-  const lang = dialogueLangEntry(rel);
-  if (lang?.locale !== 'fr_fr') continue;
-  const parsed = parseLang(await readFile(path, 'utf8'));
-  if (!parsed) { console.log(`JSON INVALIDE ${rel}`); errors++; continue; }
-  Object.assign((dialogueOurs[lang.pool] ??= {}), parsed);
-}
-for (const pool of [...new Set([...Object.keys(dialogueText), ...Object.keys(dialogueEn)])].sort()) {
-  const poolEn = { ...dialogueText[pool], ...dialogueEn[pool] };
-  const { badPlaceholders, missing } = compareDialogues(poolEn, dialogueModFr[pool] ?? {}, dialogueOurs[pool] ?? {});
-  total += Object.keys(poolEn).length;
-  missingTotal += missing.length;
-  for (const key of badPlaceholders) console.log(`VARIABLES dialogue ${pool} ${key}`);
-  errors += badPlaceholders.length;
-  if (missing.length) console.log(`MANQUANT dialogue ${pool} : ${missing.length} texte(s), ex. ${missing.slice(0, 3).join(', ')}`);
 }
 
 // Keys for other namespaces are allowed: Every Compat, for instance, reads Moonlight's wood_type.* keys.

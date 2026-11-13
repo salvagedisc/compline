@@ -6,9 +6,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions: `0.x
 
 No version has been published yet: everything below will make up `0.1.0`.
 
+No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
+
 ### Added
 - `dev` workflow: every push to `main` refreshes the `dev` pre-release with `Fallow-dev.mrpack` (docs/dev-sync.md).
-- Base pack: No Man's Land, Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
+- Base pack: No Man's Land (removed on 2026-11-13, see Removed), Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
 - Farming: [Let's Do] Farm & Charm (+ Architectury API), Ecliptic Seasons, KaleidoscopeCookery-Automation.
 - Fauna: Naturalist, Alex's Mobs Continued, Hybrid Aquatic, Mowzie's Mobs, Critters and Companions.
 - Companions: Untitled Duck Mod, Friends & Foes, Adorable Hamster Pets, Companion, Companions!, Ghost.
@@ -31,7 +33,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Everything in French: game in French on first launch (Default Options); translation of the missing texts of 94 mod namespaces (≈25,300 texts) and of their books (Alex's Mobs dictionary, hamster guide, Ecliptic Seasons chronicle) in `pack/kubejs/assets/`; `npm run check-fr` (also run in CI) rejects an untranslated text or a lost variable ([translation](docs/plan/traduction.md)).
 - Ideas taken from Wayfarer, the No Man's Land team's modpack ([research](docs/archive/plan/recherche/2026-10-19/wayfarer.md)):
   - Envelope (mail by pigeon, lost letters), translated into French;
-  - the Friendly Moon of No Man's Land as a main thread: crumpled note in the alchemists' jars, a single moon at a time with Enhanced Celestials, blood moons removed ([friendly moon](docs/plan/lune-amie.md));
+  - the Friendly Moon of No Man's Land as a main thread: crumpled note in the alchemists' jars, a single moon at a time with Enhanced Celestials, blood moons removed ([friendly moon](docs/archive/plan/lune-amie.md));
   - maximum health: one heart lost per death, floor of 5 hearts, life shards to find by exploring ([health](docs/plan/sante.md));
   - tannery: animals drop a hide instead of leather ([tannery](docs/plan/tannerie.md)), made with the Tannery mod since 2026-10-29 (see Changed);
   - no more experience: anvil without levels (wear), hidden bar, no orbs, vials and nuggets removed ([0009](docs/decisions/0009-xp.md)).
@@ -64,6 +66,9 @@ No version has been published yet: everything below will make up `0.1.0`.
   - `averse` module of the `fallow` mod 0.6.0: rain in the mist's colour and gold against the sun, rain curtains from 14 to 84 blocks, a redrawn lightning bolt and a sky flash, leaves carried by the wind and torn off by storms, grass bits kicked up when running;
   - `rayons` module: sun shafts through gaps in the canopy, glints of sun on water ([modules](docs/plan/mod-fallow.md#averse-module)).
 - Effects in the resource pack, the way Recrafted does it ([0018](docs/decisions/0018-effets-en-pack-de-ressources.md)): `fallow-ambiance` gives the rain the mist's colour and lets lightning pierce the mist with the game's core shaders, and draws sun rays between the leaves as a Polytone post shader (adapted from Sunbathing, MIT). `fallow` 0.6.3 drops the Java versions (`RainLook` and its mixin on Where Winds Blow, `SunShafts`).
+- Terrain base replaced ([0019](docs/decisions/0019-leaving-no-mans-land.md)): Regions Unexplored 0.6.3 (biomes, new woods and plants, cave biomes; MIT; requires Lithostitched) and Geophilic 3.7 (vanilla biomes reworked, no new block) on Tectonic 3.0.28, with Streams Reflowing; both client and server. Chosen by the team on 2026-11-12 after ten candidates were measured on one seed over one square kilometre (visible floating clusters, distinct biomes, plants without support). Neither mod has been seen in game; Lithosphere is still to be compared in game.
+- French translation of Regions Unexplored, which ships none: `pack/kubejs/assets/regions_unexplored/lang/fr_fr.json`, 933 texts (maple = érable, pine = pin, willow = saule, redwood = séquoia, wisteria = glycine, blackwood = bois noir; Bioshroom = biochampignon).
+- `scripts/ambiance/biomes.py` (manual script, run with the Regions Unexplored jar): gives each Regions Unexplored biome the mist profile of the vanilla biome it resembles (78 profiles in the preset), writes its Polytone colour modifiers (`ru_<biome>.json`, 65 files) and its part of the `fallow:brumeux` tag (34 misty biomes, 49 with the vanilla ones) ([fallow-ambiance](docs/plan/fallow-ambiance.md)).
 
 ### Removed
 - The `sac` module of the `fallow` mod (0.5.0), idle since Traveler's Backpack left the pack, with its config keys and its tests S1 to S10.
@@ -82,6 +87,14 @@ No version has been published yet: everything below will make up `0.1.0`.
 - MezzConfig: orphan library, required only by JEI versions newer than the pack's.
 - Chipped (with Athena, which only it needed) and Beautify!: 6,980 and 53 blocks, Chipped's including 1,110 Nether and End variants; Beautify! duplicates Supplementaries, Amendments and Handcrafted ([pack sort](docs/plan/tri-du-pack.md)).
 - Pack sort: the recipes, loot and EMI entries of 313 items (Nether and End orphans, teleportation and locator items, elytra, boss weapons, duplicates) and about 1,110 Steam 'n' Rails variants (other woods, Nether and End tracks, dyed locometal); Quark, Supplementaries and Amendments modules that duplicate other mods or break the vision; Mowzie's Wroughtnaut, Frostmaw and Umvuthana grove structures and five Companions! structures ([pack sort](docs/plan/tri-du-pack.md)).
+- No Man's Land, at the team's decision of 2026-11-11 ([0019](docs/decisions/0019-leaving-no-mans-land.md)), and everything tied to it:
+  - the Friendly Moon thread, the pack's main thread, with `lune.js` (one moon at a time, the crumpled note in the alchemists' jars), its `fallow.lune.*` texts, the Friendly Moon parts of the `ciel` module of the `fallow` mod (`FriendMoonRelay`, mixins `ciel.FriendMoonSkyMixin` and `ciel.AtmosphericsDreamMixin`, config key `friendMoon`) and the compatibility mixin `compat.InvertedBellMessageMixin`; what replaces the main thread is not decided;
+  - its fauna rules: `faune_nml.js` (server and client), `pack/kubejs/data/nomansland/` and `pack/kubejs/assets/nomansland/`, the NML moose and deer lines of the tannery loot (the rabbit stays removed, Fresh Animations has no model for it);
+  - its configs `nomansland-client.toml`, `nomansland-common.toml` and `mixed_litter-startup.toml`, its 24 mist profiles and its 20 `nml_*.json` colour modifiers, the moonlight coloured light file;
+  - its four music tracks (anachronistic, drifter, guidance, nomad): the music pack goes from 29 to 25 tracks, the "underground" situation keeps infinite_amethyst, the "mist" one hymn_to_the_dawn and long_note_four;
+  - its pebble: flint now comes from gravel, the Twigs pebble still knaps into Overgeared's knappable rock;
+  - the special case for the Friendly Moon dialogues in `npm run check-fr`, and its test `scripts/test/nml-dialogues.test.mjs`.
+- The pages on the Friendly Moon and on the No Man's Land fauna moved from `docs/plan/` to `docs/archive/plan/`.
 
 ### Changed
 - Pack sort ([details](docs/plan/tri-du-pack.md)): Every Compat blacklist written before the permanent world; Where Winds Blow grass halved and wild wheat off; Farm & Charm and hamster crops follow Ecliptic's seasons; at most 2 Naturalist lions, tigers, brown and black bears of each species per player; rope costs 3 flax for 2, the rope arrow carries 8, the pulley needs a Create cogwheel and the flute reaches 24 blocks; Kaleidoscope kitchen knives go through the Overgeared forge.
@@ -96,7 +109,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 - Adorable Hamster Pets: throwing, item stealing, diamond sniffing and redstone fever disabled.
 - Companions! and Mowzie's Mobs: natural spawns rarer.
 - Quark: variant animal textures off (No Man's Land and Fresh Animations own them).
-- No Man's Land fauna: Mixed Litter's remodels and NML's textures on vanilla animals are disabled, for Fresh Animations; deer, goose, _bar à serpe_ (a fish), turtle and Frienderman no longer spawn, are removed from the Wildex, and their 15 items no longer have a recipe or a place in EMI ([NML fauna](docs/plan/faune-nml.md)).
+- No Man's Land fauna: Mixed Litter's remodels and NML's textures on vanilla animals are disabled, for Fresh Animations; deer, goose, _bar à serpe_ (a fish), turtle and Frienderman no longer spawn, are removed from the Wildex, and their 15 items no longer have a recipe or a place in EMI ([NML fauna](docs/archive/plan/faune-nml.md)).
 - No Man's Land, items removed: horse meat, frog legs and seven dishes. NML's explosives, fire and ink bombs and incendiary arrow are kept, with its TNT recipe (four explosives) and its `explode_ore` advancement. The rabbit is removed from the game (Fresh Animations has no model for it). The turtle's offering line targets the Naturalist one.
 - Fauna: a single model per species. 32 duplicates compared; 17 Alex's Mobs creatures, 9 from Hybrid Aquatic, 2 from Critters and Companions and 6 from Naturalist are disabled, removed from the Wildex, and their 78 sourceless items removed ([duplicates](docs/plan/doublons.md)).
 - Fauna removed by decision of the plan: Murmur, Farseer, Skelewag, Alex's Mobs fly and cockroach, Friends & Foes iceologer, illusioner and wildfire with their structures, Naturalist mammoth ([duplicates](docs/plan/doublons.md)).
@@ -114,6 +127,13 @@ No version has been published yet: everything below will make up `0.1.0`.
 - ATMOSPHERICS preset `fallow_v3`: the mist of the clearings ends at 500 blocks by day and 260 at night (124 and 84 before), so that the far landscape can be seen there.
 - Duplicate `docs/plans/` and `docs/specs/` removed (copies of `docs/conception/`).
 - Kaleidoscope Cookery 1.5.1 → 1.6.0: 1.5.1 crashed the game on loading with Kaleidoscope Compat 2.9.7 (`MillstoneBlockEntityMixin` mixin), observed on the test server.
+- Custom mod `fallow` 0.6.3 → 0.7.0 (`pack/mods/fallow-0.7.0.jar`): the Friendly Moon parts of the `ciel` module removed; the vigil fire and the clearing lantern take vanilla ingredients; `fallow:peut_devenir_clairiere` lists 59 Regions Unexplored surface biomes (not beaches, deserts, oceans, caves or the Nether), `fallow:sans_outil` has `regions_unexplored:cattail`.
+- Recipes without No Man's Land (provisional, to be confirmed by the team): vigil fire = a honeycomb, two smooth stone slabs, a charcoal, a smooth stone; clearing lantern = two Overgeared iron plates, two glass panes, an amethyst shard.
+- ATMOSPHERICS preset `fallow_v5` → `fallow_v6`: same global settings, No Man's Land's 24 biome profiles replaced by 78 Regions Unexplored profiles; the Polytone colour modifiers follow (grass and foliage saturation × 0.72 and brightness × 0.95 in the misty family, × 0.85 and × 0.98 in the veiled one, water saturation × 0.80 where the biome sets its own water colour, snowflakes in snowy biomes). Values are paper choices, not seen in game.
+- Life shards: the No Man's Land loot tables are replaced by vanilla ones of the same order of magnitude (provisional): chests `simple_dungeon` 10 %, `jungle_temple` 25 %, `desert_pyramid` 5 %, `shipwreck_treasure` 15 %, `shipwreck_supply` 5 %, `underwater_ruin_big` 12 %, `underwater_ruin_small` 5 %; archaeology `trail_ruins_rare` 3 %, `desert_well` 5 %, `ocean_ruin_cold` 4 %, `ocean_ruin_warm` 4 %. The expected frequency (a shard every 2 to 3 hours) has not been recomputed ([health](docs/plan/sante.md)).
+- Coloured lights: fire and soul lights target Supplementaries sconces. Supplementaries sconces are enabled again (they were off because No Man's Land had its own).
+- Twigs cobblestone bricks (with the mossy and cracked ones, slabs, stairs and walls) are back: they had been removed as duplicates of No Man's Land's.
+- Documentation brought up to date on 2026-11-13: decision 0019, roadmap (Lithosphere to compare, disc world, new name and new main thread still open), in-game tests (checks for Regions Unexplored and Geophilic added, those that needed No Man's Land removed), system pages.
 
 ### Fixed
 - No Man's Land in French: `npm run check-fr` now also checks the Friendly Moon dialogues, which NML keeps outside the usual language files (it missed them until now; all of them already have a French text). The hard-coded "Successfully linked bell" message is translated by `fallow` 0.6.2 ([translation](docs/plan/traduction.md#what-stays-in-english-or-needs-watching)).

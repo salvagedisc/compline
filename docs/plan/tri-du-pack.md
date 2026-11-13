@@ -41,8 +41,8 @@ Chunky stays until test H11 has confirmed the Distant Horizons pregeneration, th
 
 | Mod | Change |
 |---|---|
-| Quark | Off: Thatch, Variant Bookshelves, More Brick Types, Shingles, Compressed Blocks, Industrial Palette, Nether Brick Fence Gate (duplicates of NML, Twigs, Create, Farm & Charm), Automatic Recipe Unlock (knowledge must be found), Emotes, Camera (Exposure is the pack's camera). Framed Glass is kept now that Chipped is gone |
-| Supplementaries | Off: sack (Reliable Backpacks), sconces (NML), gravel bricks (Twigs), netherite door and trapdoor, pancake, candy, altimeter (height in numbers), slice map (a cave radar). Flute range 24 blocks instead of 64. Rope arrow carries 8 ropes instead of 32 |
+| Quark | Off: Thatch, Variant Bookshelves, More Brick Types, Shingles, Compressed Blocks, Industrial Palette, Nether Brick Fence Gate (duplicates of Twigs, Create, Farm & Charm and, at the time, of No Man's Land), Automatic Recipe Unlock (knowledge must be found), Emotes, Camera (Exposure is the pack's camera). Framed Glass is kept now that Chipped is gone |
+| Supplementaries | Off: sack (Reliable Backpacks), sconces (they were off while No Man's Land had its own; enabled again on 2026-11-13), gravel bricks (Twigs), netherite door and trapdoor, pancake, candy, altimeter (height in numbers), slice map (a cave radar). Flute range 24 blocks instead of 64. Rope arrow carries 8 ropes instead of 32 |
 | Amendments | Off: thrown fire charges, dragon charge, skull piles and skull candles |
 | Overgeared | Dragon breath arrow recipe off |
 | Exposure | Interplanar projector off (`projecting_enabled = false`): it loads images from the Internet |
@@ -61,7 +61,7 @@ Chunky stays until test H11 has confirmed the Distant Horizons pregeneration, th
 | Exposure, Envelope, Amendments, Lootr | Interplanar projectors; crimson and warped pigeonholes, charred pigeon egg; dragon charge; Lootr shulker and trophy |
 | Supplementaries | The items switched off above |
 | Handcrafted | 19 trophies (12 of creatures that no longer exist), the oven, berry jam, 30 crimson and warped furniture pieces |
-| Twigs | 11 tables (Handcrafted has them), bloodstone and other Nether blocks, duplicates of vanilla tuff and of NML's cobblestone bricks, rhyolite (no longer generated) |
+| Twigs | 11 tables (Handcrafted has them), bloodstone and other Nether blocks, duplicates of vanilla tuff, rhyolite (no longer generated). Its cobblestone bricks (with the mossy and cracked ones, slabs, stairs and walls) were removed on 2026-11-01 as duplicates of No Man's Land's; they are back since 2026-11-13 |
 | Alex's Mobs | Dimensional carver and its shards, void worm items, echolocator, endolocator and fish finder, tarantula hawk elytra and wings, the vanilla elytra, items and spawn eggs of the Nether and End creatures, 13 technical items |
 | Companions! | Recall platform, respawn totem, Nether and End coins, netherite chains and dagger, soul gem and furnace, shade altars, mage, holy robe and crystallized blood gear, spell books, arms |
 | Mowzie's Mobs | Boss weapons and armour (Wroughtnaut axe and helmet, earthrend gauntlet, sculptor staff, sol visage, geomancer set): the guardians give their blessing and nothing else; technical items. The ice crystal stays |

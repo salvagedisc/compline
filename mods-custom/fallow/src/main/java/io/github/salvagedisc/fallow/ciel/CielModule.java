@@ -12,9 +12,6 @@ import net.neoforged.bus.api.IEventBus;
  *   <li>La lune : {@link MoonOverlay} cache la lune vanilla d'ATMOSPHERICS et dessine celle
  *       d'Enhanced Celestials juste après le ciel (mixins {@code ciel.LevelRendererMixin} et
  *       {@code ciel.RenderSystemMixin}, appliqués seulement si les deux mods sont là).</li>
- *   <li>La Lune Amie : {@link FriendMoonRelay} dessine la Lune Amie et son ombre de No Man's Land après le ciel
- *       d'ATMOSPHERICS, qui sinon les empêche d'apparaître (mixins {@code ciel.FriendMoonSkyMixin} et
- *       {@code ciel.AtmosphericsDreamMixin}, appliqués seulement si les deux mods sont là).</li>
  *   <li>La brume : {@link FogCache} vide le cache de biomes d'ATMOSPHERICS ; appelé tout seul quand le
  *       serveur change des biomes, et ouvert aux scripts par {@link io.github.salvagedisc.fallow.api.FallowSky}.</li>
  * </ul>
@@ -30,9 +27,6 @@ public final class CielModule {
             Fallow.LOGGER.info("ciel : lune d'Enhanced Celestials redessinée sous ATMOSPHERICS");
         } else {
             Fallow.LOGGER.info("ciel : Enhanced Celestials absent, seule la remise à zéro de la brume est active");
-        }
-        if (ModIds.isLoaded(ModIds.NO_MANS_LAND)) {
-            Fallow.LOGGER.info("ciel : Lune Amie de No Man's Land dessinée sous ATMOSPHERICS");
         }
     }
 }

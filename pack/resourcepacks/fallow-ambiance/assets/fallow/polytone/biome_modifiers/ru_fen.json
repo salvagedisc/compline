@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "regions_unexplored:fen"
+  ],
+  "grass_color": "#9fa66e",
+  "foliage_color": "#838e5a",
+  "water_color": "#6293b3"
+}

@@ -2,6 +2,8 @@
 
 List set aside on 2026-10-25 for when there is time to play. None of this has been checked with a player yet: the pack starts on a server, but nobody has played on it.
 
+Updated on 2026-11-13, after No Man's Land left the pack ([0019](decisions/0019-leaving-no-mans-land.md)): the checks that needed it (Friendly Moon session, its fauna, the alchemists' ruins, the Meeting Point) are gone, and checks for Regions Unexplored and Geophilic are added. Neither mod has been seen in game.
+
 It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Fallow instance → Logs, or `crash-reports/`) to the report.
 
 The code in brackets, such as [K1], points to the detailed test in the repository. A French copy of this checklist is kept for the team outside the repository.
@@ -19,12 +21,12 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows the Fallow logo over Friedrich's mountains, the right way up, with mist flowing slowly through the valleys and never over the sky or the slopes in front, and the loading screen (F3+T) is moss green with the logo and a lantern-coloured bar [I6].
 - [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
-- [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from NML pebbles, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
+- [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from gravel, the Twigs pebble knapped into a rock, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
-- [ ] **Pack sort**: no Chipped, Beautify! or Twigs table in EMI, Steam 'n' Rails reduced to a few tracks and plain locometal, Every Compat without Quark or Ghost woods; no food values in tooltips [TR1, TR2, TR9].
+- [ ] **Pack sort**: no Chipped, Beautify! or Twigs table in EMI, Twigs cobblestone bricks (mossy, cracked, slabs, stairs, walls) present, Supplementaries sconces present, Steam 'n' Rails reduced to a few tracks and plain locometal, Every Compat without Quark or Ghost woods; no food values in tooltips [TR1, TR2, TR9].
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
 - [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
 - [ ] Stone, a torch or bread in hand: the item is drawn and the hand stays still (only a light sway); scrolling the hotbar lowers and raises the hand once per change [A1-A3].
@@ -39,7 +41,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
 - [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
 - [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
-- [ ] The new fire (stone brazier, pale flame) and lantern (standing, quartzite crystal), by day and at night: neither looks like a vanilla campfire or lantern [K15].
+- [ ] The new fire (stone brazier, pale flame) and lantern (standing), by day and at night: neither looks like a vanilla campfire or lantern [K15].
+- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the clearing replaces the biome, the mist lifts and the grass turns vivid, as in a vanilla biome [K1, K2]. Biomes from the `fallow:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
@@ -47,9 +50,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Enter and leave the clearing: visibility changes smoothly [H4]. At sunrise and sunset, the colour of the distance follows the sky [H5].
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
 - [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
-- [ ] The three recipes (fire, lantern, dissipator) in EMI, with French names and tooltips [K11].
+- [ ] The three recipes (fire, lantern, dissipator) in EMI, with French names and tooltips [K11]. Provisional vanilla ingredients since 2026-11-13: fire = honeycomb, two smooth stone slabs, charcoal, smooth stone; lantern = two Overgeared iron plates, two glass panes, an amethyst shard. Craft both and tell whether they feel right.
 - [ ] Crops and temperature in a clearing: things grow, the temperature stays that of the old biome [K10].
-- [ ] **Wind and light** (Where Winds Blow, Shine): a No Man's Land forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. A clearing at sunset: halo on the sky and the fires, the mist still around [R3]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: no halo glitch, lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
+- [ ] **Wind and light** (Where Winds Blow, Shine): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. A clearing at sunset: halo on the sky and the fires, the mist still around [R3]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: no halo glitch, lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
 ## Session 3: the night and the moon
 
@@ -57,11 +60,8 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then harvest moon and super moon: colour and size specific to each, with no vanilla moon behind [C2, C3].
 - [ ] Rain then thunderstorm: the moon fades with the sky [C4]. Underwater and blinded: no double moon, no vanishing moon [C5].
 - [ ] Frames per second at night: no visible difference with the `ciel` (sky) module turned off [C11].
-- [ ] `/ec lunarForecast`: no blood moon [L2].
-- [ ] An alchemist ruin: look at the engraving for 2 s (zoom and sound), sleep within 3 days, see the dream through to the end (advancement « Premier contact » (first contact)) [L3, L4]. Break jars: the crumpled note sometimes drops, in French [L11].
-- [ ] At the Meeting Point (*Point de rencontre*, `/meetingpoint`), at night: the face of the Friendly Moon (*Lune Amie*) appears, with no coloured moon beside it [L5, C6, C13]; it did not in the test of 2026-10-28, fixed by `fallow` 0.4.10. The nights after the dream, the moon's shadow points the way over the mist [L4, C14]. With a forced blue moon, it sets in 2 s with a message [L6].
-- [ ] Offerings (bone, flower, empty map, turtle scute), then put out one candle, then all of them: sentences in French, then an angry moon [L8, L9].
-- [ ] A rainy night at the Meeting Point: does the Friendly Moon appear? [L12]
+- [ ] `/ec lunarForecast`: no blood moon.
+- [ ] Several moons can show together if Enhanced Celestials rolls them: the Friendly Moon rule "one moon at a time" no longer applies. Note what you see.
 - [ ] Nights are truly dark (More Darkness), auroras in cold biomes.
 
 ## Session 4: survival (thirst, anvil, leather, health, altitude)
@@ -84,14 +84,19 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Forest, taiga, savanna, jungle, swamp, rivers: bear, tiger, elephant, rhinoceros, monitor lizard, alligator, Naturalist snake, without their Alex's Mobs duplicates [D2].
 - [ ] Oceans and reefs: Hybrid Aquatic sharks, jellyfish, orcas, octopuses; Naturalist anglerfish, blobfish, isopod, ray; Alex's Mobs giant squid [D3]. Lobster texture correct [D8].
 - [ ] Flowering meadows: only Longwings butterflies [D5]. Lush caves: C&C otter, no dragonfly or snail [D4].
-- [ ] No deer, goose, bass or NML turtle, no rabbit, no Frienderman (`/summon nomansland:frienderman` disappears) [F3, F6, F10].
+- [ ] No rabbit (it stays removed, Fresh Animations has no model for it) [F6].
 - [ ] EMI: nothing from the removed creatures (« venaison » (venison), « crocodile » (crocodile), « homard » (lobster), « lapin » (rabbit)…) [F7, D6].
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 
 ## Session 6: terrain, Create and airships
 
-- [ ] Explore 3000 blocks with the atlas: large continents, mountain ranges, valleys; NML biomes present [W1].
+- [ ] Explore 3000 blocks with the atlas: large continents, mountain ranges, valleys; Regions Unexplored biomes present, and the relief reads well on a world with Geophilic's vanilla biomes [W1].
+- [ ] **Floating blocks**: walk or fly over a few kilometres, caves included: no floating island, tree or isolated block, no plant resting on air. The team's measure of 2026-11-12 covered one square kilometre of one seed ([0019](decisions/0019-leaving-no-mans-land.md)); this is the first look by eye.
+- [ ] **Mist in Regions Unexplored biomes**: in a forest, a taiga and a bayou the mist is thick (about 40 blocks by day); in a prairie, a steppe, a mountain and a beach it is veiled (about 72); in a cave biome it is the cave mist. No biome is clear without a clearing, none has no mist at all.
+- [ ] **Colours next to vanilla biomes**: at a border between a Regions Unexplored biome and a vanilla one, grass, leaves and water do not jump; the snowy Regions Unexplored biomes let snowflakes fall.
+- [ ] **French names**: blocks, items and biomes of Regions Unexplored in EMI and F3 are in French (maple = érable, pine = pin, willow = saule, redwood = séquoia, larch = mélèze, cypress = cyprès, palm = palmier, kapok = kapokier, wisteria = glycine, blackwood = bois noir); no English text left.
+- [ ] **Lithosphere** (open since [0019](decisions/0019-leaving-no-mans-land.md)): the same seed with Lithosphere instead of Tectonic, same biomes, to compare the relief and the caves by eye before the relief is final.
 - [ ] Highest summit below Y 320, an airship clears the range [W5]. In winter, snow consistent with altitude [W6].
 - [ ] Boat and Sable hull on a brook: the hull drifts, the airship in flight does not [W7]. Create pump and boiler on a brook [W8].
 - [ ] **Dissipator**: nothing at 16 rpm; at 64 the engineer's goggles climb to 100% and a 64 disc is converted; on overload the charge resets to zero [K8]. On an airship: note what happens [K9].
@@ -102,10 +107,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 7: monuments and exploration
 
-- [ ] The six Monoliths (`/locate structure ancient_remnants:…`) are whole, on the ground, not cut by water [W3]. The Meeting Point is on reachable land, between 1000 and 2500 blocks from the centre [W2, L13].
+- [ ] The six Monoliths (`/locate structure ancient_remnants:…`) are whole, on the ground, not cut by water [W3]. 
 - [ ] Approach a monument: a life shard and a message, only once [V10]. Music *I Walk With Ghosts* on approach [M6].
-- [ ] Ruin chests: no XP vial; a life shard about one time in five in the wells [XP5, V7].
-- [ ] Enough alchemist ruins to find an engraving without searching for hours [L14].
+- [ ] Ruin chests: no XP vial; life shards in the vanilla chests and archaeology sites of [sante](plan/sante.md#sources-and-rates), at the provisional rates, and how often one is found in an hour of exploring [XP5, V7].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
@@ -116,7 +120,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 - [ ] On a dedicated server: the thirst bar updates, the anvil does not roll back [S7, X4].
 - [ ] Lootr: everyone finds the chest full. Monument: the second player also gets their shard [V7, V10].
-- [ ] Friendly Moon: nothing changes for a player far from the Meeting Point [L7]. Envelope: name a mailbox at no cost, send a letter by pigeon [XP7].
+- [ ] Envelope: name a mailbox at no cost, send a letter by pigeon [XP7].
 - [ ] Chunky `start` on the server, then a player explores: no holes in the far landscape [H11]. Note the generation speed with spark [W9].
 - [ ] Simple Backups: one backup after an hour of play, and one when everyone leaves.
 - [ ] On Apple Silicon Mac: one hour of play with the far view and no Java crash [H10].
@@ -140,8 +144,7 @@ Once the results are in:
 | --- | --- |
 | C (sky), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
-| L | [plan/lune-amie.md](plan/lune-amie.md) |
-| F | [plan/faune-nml.md](plan/faune-nml.md#in-game-tests) |
+| L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
 | I (numbered items) | [plan/fallow-interface.md](plan/fallow-interface.md#limits-and-in-game-tests) |

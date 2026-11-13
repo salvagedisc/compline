@@ -15,7 +15,7 @@ The maintainer asked to start from an existing pack that may be modified, then a
 
 Rejected: Overgrown Flowery GUI (its licence forbids publishing a modified version), STONEBORN and Whimscape (all rights reserved), CozyUI+ (GPL-3, but its high-definition look feels like an app rather than Minecraft).
 
-Licence of the result: CC BY-NC-SA 4.0, like GUI Revision. Fallow must therefore not be used commercially (no paid access, no revenue sharing on the pack, monetisation off on its Modrinth page). The recoloured textures of other mods stay under their own licences, listed in `pack/resourcepacks/fallow-interface/CREDITS.md`; only mods whose licence allows a modified copy to be shared are recoloured, so Adorable Hamster Pets, Critters and Companions, Mowzie's Mobs and No Man's Land (all rights reserved) keep their own screens.
+Licence of the result: CC BY-NC-SA 4.0, like GUI Revision. Fallow must therefore not be used commercially (no paid access, no revenue sharing on the pack, monetisation off on its Modrinth page). The recoloured textures of other mods stay under their own licences, listed in `pack/resourcepacks/fallow-interface/CREDITS.md`; only mods whose licence allows a modified copy to be shared are recoloured, so Adorable Hamster Pets, Critters and Companions and Mowzie's Mobs (all rights reserved; No Man's Land was in the list until it left the pack) keep their own screens.
 
 ## Build
 

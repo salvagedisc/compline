@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "regions_unexplored:mauve_hills"
+  ],
+  "grass_color": "#7fae8e",
+  "foliage_color": "#bab8f2",
+  "water_color": "#63a181"
+}

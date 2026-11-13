@@ -1,7 +1,7 @@
 # 0011 — Terrain and far view: Tectonic, Streams Reflowing, Distant Horizons
 
 - **Date**: 2026-10-25
-- **Status**: kept (the team's choice); server start validated without a player, nothing seen in game yet
+- **Status**: kept (the team's choice); server start validated without a player, nothing seen in game yet; its "on NML" part is superseded by [0019](0019-leaving-no-mans-land.md) (Distant Horizons and the `horizon` module stay)
 - **Supersedes**: [0001](0001-nml-vs-terralith.md) for the terrain, and the "Distant Horizons pending" part of [0007](0007-ambiance-performance.md)
 
 ## Context

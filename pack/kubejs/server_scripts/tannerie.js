@@ -48,7 +48,7 @@ ServerEvents.recipes(event => {
 
 // Écorce : Tannery n'en donne qu'aux huit bûches vanilla de son tag `tannery:logs`, et sur
 // tout bloc du tag, écorcé ou non. On y met chaque bûche ou bois qui a une version écorcée
-// (No Man's Land et les autres essences), et rien de déjà écorcé : sinon un clic droit
+// (Regions Unexplored et les autres essences), et rien de déjà écorcé : sinon un clic droit
 // répété sur la même bûche donnerait de l'écorce sans fin.
 ServerEvents.tags('block', event => {
   let ids = new Set()

@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "regions_unexplored:rainforest"
+  ],
+  "grass_color": "#79ac62",
+  "foliage_color": "#68a14e",
+  "water_color": "#45a7d3"
+}
