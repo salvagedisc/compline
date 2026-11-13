@@ -19,6 +19,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Regions Unexplored | `regions-unexplored` | ✅ (0.6.3, added 2026-11-13, not seen in game) | CS | The biomes on Tectonic's terrain: new woods and plants, cave biomes; MIT; requires Lithostitched ([0019](decisions/0019-leaving-no-mans-land.md)). French translation by the pack, mist and colours per biome by `scripts/ambiance/biomes.py` ([ambiance](plan/fallow-ambiance.md)) |
 | Geophilic | `geophilic` | ✅ (3.7, added 2026-11-13, not seen in game) | CS | Vanilla biomes reworked, no new block ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Spelunkery | `spelunkery` | ✅ (0.4.4, added 2026-11-13, not seen in game) | CS | Underground: ores in every stone, rough gems to polish at the grindstone, raw nuggets, salt, nephrite, cave mushrooms, sluices, rope ladder, glowsticks, parachute; experience storage, locators and Nether items sorted out; requires Moonlight Lib ([0021](decisions/0021-spelunkery-and-dinosaurs.md)). French translation completed in `pack/kubejs/assets/spelunkery/` |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](archive/plan/12-verification.md#the-monument-guardians-report-6)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
@@ -76,6 +77,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans; seven near-motionless invertebrates cut (sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish) |
 | Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most; Wroughtnaut chambers, Frostmaw and Umvuthana groves no longer generated, boss weapons removed ([pack sort](plan/tri-du-pack.md)) |
 | Longwings | `longwings` | ✅ | CS | Butterflies to collect |
+| Archie's Dinosaurs | `archies-dinosaurs` | ✅ (1.0.4, added 2026-11-13, not seen in game) | CS | Six dinosaurs to find, tame and ride, amber craters and fossils, the trader Archie; the Nether and End species moved to the redstone caves and the prismachasm; young mod, All Rights Reserved, with a library kept as a jar ([0021](decisions/0021-spelunkery-and-dinosaurs.md)) |
 
 ## Companions
 
@@ -171,7 +173,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `fallow` 0.8.0 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); rain colour and sun rays are in `fallow-ambiance` since 0.6.3, [0018](decisions/0018-effets-en-pack-de-ressources.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
+| Mod `fallow` 0.8.1 | `mods-custom/fallow/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `titres` (each screen's name on a plate over its top edge, client) `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); rain colour and sun rays are in `fallow-ambiance` since 0.6.3, [0018](decisions/0018-effets-en-pack-de-ressources.md)) modules ([mod-fallow](plan/mod-fallow.md)) |
 
 ## Performance and technical
 
@@ -206,7 +208,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
