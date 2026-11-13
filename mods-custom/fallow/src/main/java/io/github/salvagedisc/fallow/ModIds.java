@@ -16,6 +16,8 @@ public final class ModIds {
     public static final String PARTICULAR = "particular";
     public static final String SODIUM = "sodium";
     public static final String TRUE_ADAPTIVE_MUSIC = "trueadaptivemusic";
+    public static final String STREAMS_REFLOWING = "streamsreflowing";
+    public static final String SPELUNKERY = "spelunkery";
 
     private ModIds() {
     }
