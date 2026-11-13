@@ -1985,6 +1985,18 @@ file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.js
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
 
 [[files]]
+file = "kubejs/data/tilth/lithostitched/worldgen_modifier/disque_climat.json"
+hash = "60571bbf67fe5afbedf88e8371663c75b99766e57ff6cf72837775129b6b6b25"
+
+[[files]]
+file = "kubejs/data/tilth/lithostitched/worldgen_modifier/disque_continents.json"
+hash = "2de2596df2321ee5a8307a77854dafd53ade9f392d12a081662d89c6fb7ba5f4"
+
+[[files]]
+file = "kubejs/data/tilth/monde/bord.json"
+hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
+
+[[files]]
 file = "kubejs/data/tilth/neoforge/biome_modifier/doublons.json"
 hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
 
@@ -2039,6 +2051,10 @@ hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
 [[files]]
 file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_swamps.json"
 hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
+file = "kubejs/data/tilth/worldgen/density_function/disque/distance.json"
+hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
 
 [[files]]
 file = "kubejs/data/tilth/worldgen/structure/chorusoatl.json"
