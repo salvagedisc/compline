@@ -17,10 +17,9 @@ import net.neoforged.neoforge.common.NeoForge;
  * Module averse (client) : la pluie, l'orage et le vent dans les feuilles, au niveau de finition des
  * meilleurs packs à shaders, sans shader.
  *
- * <p>La couleur de la pluie et l'éclair qui perce la brume ne sont plus ici : le pack de ressources
- * {@code tilth-ambiance} les fait avec les core shaders du jeu ({@code particle}, {@code rendertype_lightning}).
- * Ce module garde ce qu'un pack de ressources ne peut pas faire : de la géométrie nouvelle et ce qui lit le
- * monde ou le vent.
+ * <p>La pluie garde la couleur du jeu : sa teinte et l'éclair qui perçait la brume venaient d'un pack de
+ * ressources maison, retiré (décision 0024). Ce module fait de la géométrie nouvelle et ce qui lit le monde
+ * ou le vent.
  *
  * <ul>
  *   <li>{@link RainCurtains} : rideaux de pluie au loin.</li>

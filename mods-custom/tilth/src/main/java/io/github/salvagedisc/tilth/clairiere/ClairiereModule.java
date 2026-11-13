@@ -30,7 +30,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 /**
  * Module clairiere : la brume se lève là où le joueur l'a décidé. Deux blocs à poser, le feu de veille
  * (rayon 16) et la lanterne de clairière (rayon 32), ouvrent une clairière autour d'eux tant qu'ils restent en
- * place : brume légère (preset ATMOSPHERICS), herbe vive, musique des clairières, paysage lointain de Distant
+ * place : brume légère (si un preset ATMOSPHERICS donne un profil aux biomes de clairière ; aucun depuis la
+ * décision 0024), herbe vive, musique des clairières, paysage lointain de Distant
  * Horizons, et plus de monstres. Le troisième palier, le dissipateur (rayon 64), est un bloc Create du module
  * {@code dissipateur}.
  *

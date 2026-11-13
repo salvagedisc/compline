@@ -28,9 +28,7 @@
     "horizon.FarFadeMixin",
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
-    "horizon.VanillaFadeMixin",
-    "titres.AbstractContainerScreenMixin",
-    "titres.OwnLabelsScreenMixin"
+    "horizon.VanillaFadeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
