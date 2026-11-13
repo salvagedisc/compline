@@ -60,8 +60,8 @@ Consequences, all applied with the change:
 14. **Translation.** Regions Unexplored ships no French: `pack/kubejs/assets/regions_unexplored/lang/fr_fr.json` translates its 933 texts (maple = érable, pine = pin, willow = saule, redwood = séquoia, larch = mélèze, cypress = cyprès, palm = palmier, kapok = kapokier, joshua = arbre de Josué, wisteria = glycine, blackwood = bois noir; invented names such as Prismoss and Prismarite stay; Bioshroom = biochampignon). `npm run check-fr` no longer has its special case for the Friendly Moon dialogues (code and tests removed, `scripts/test/nml-dialogues.test.mjs` deleted).
 
 ## Still open
-- **Lithosphere**, under the same biomes, is to be compared in game before the relief is final.
-- **The finite disc world**, its radius and **the pack's new name** are not decided.
+- ~~**Lithosphere**, under the same biomes, is to be compared in game before the relief is final.~~ Decided on 2026-11-13, after walking in both test packs: Tectonic stays.
+- **The finite disc world**: its radius was set to 6,000 blocks on 2026-11-13, with a border after the coast; the disc itself is still to be built. **The pack's new name** is not decided.
 - **The new main thread** of the pack, in place of the Friendly Moon.
 - Geophilic and Regions Unexplored have not been seen in game; the figures above come from a scanner, not from a walk.
 
@@ -71,5 +71,5 @@ Consequences, all applied with the change:
 - Oh The Biomes We've Gone: only 16 biomes and 14 plants without support.
 - Nature's Spirit: 9 visible defects, 25 biomes, no plant without support; not retained by the team.
 - Geophilic alone on Tectonic: same figures as Tectonic alone (it reworks the vanilla biomes and adds no block); it is kept next to Regions Unexplored, not instead of it.
-- Lithosphere alone: 8 biomes and 330 detached rock clusters in caves. Not rejected for good: see "Still open".
+- Lithosphere alone: 8 biomes and 330 detached rock clusters in caves. Compared in game under the same biomes on 2026-11-13 and not kept.
 - Keeping No Man's Land: the team's decision of 2026-11-11.
