@@ -16,7 +16,6 @@ Every mention of Fallow becomes Tilth, identifiers included:
 | Datapack and assets namespace (`pack/kubejs/data/fallow/`, `assets/fallow/`), language keys `*.fallow.*` | `tilth` |
 | Resource packs `fallow-ambiance`, `fallow-interface`, `fallow-textures` | `tilth-ambiance`, `tilth-interface`, `tilth-textures` |
 | Questlog chapters, music pack, FancyMenu layouts and assets `fallow_*` | `tilth_*` |
-| Title screen logo | the word TILTH, its lantern hung under the arch of the h (`scripts/interface/logo.py`) |
 | GitHub repository `salvagedisc/fallow` | `salvagedisc/tilth` (GitHub redirects the old address) |
 
 Older entries of the changelog, decisions and archive were renamed too, so that every path they cite still exists.

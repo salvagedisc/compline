@@ -40,7 +40,7 @@ details (details.py) are laid over them.
 - widgets: buttons, sliders, checkboxes, tabs, text fields and scrollers are
   drawn by widgets.py;
 - menus: their shading and separators in moss and bone, and the title screen's
-  panorama, drawn by panorama.py; the Tilth logo (logo.py) and the FancyMenu
+  panorama, drawn by panorama.py; the FancyMenu
   and Drippy layouts of the title and loading screens are written by menus.py;
 - Questlog: its journal is drawn by questlog.py in the same style.
 
