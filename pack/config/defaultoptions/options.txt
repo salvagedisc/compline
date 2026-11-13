@@ -2,3 +2,8 @@ version:3955
 lang:fr_fr
 soundCategory_music:0.4
 graphicsMode:1
+narrator:0
+onboardAccessibility:false
+skipMultiplayerWarning:true
+tutorialStep:none
+realmsNotifications:false

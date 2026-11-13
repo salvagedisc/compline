@@ -1,26 +1,18 @@
 // Tilth : états que le paquet musical TAM « tilth » ne peut pas voir depuis le client.
-// Voir docs/plan/musique.md. Le script pose ou retire trois tags sur chaque joueur ; les
+// Voir docs/plan/musique.md. Le script pose ou retire deux tags sur chaque joueur ; les
 // prédicats personnalisés du paquet (trueadaptivemusicpacks/tilth/predicates/*.json) sont
 // des conditions de butin que TAM fait évaluer par le serveur, et lisent ces tags.
 //
-// - tilth_monument : un Cœur ancien d'Ancient Remnants est proche (un morceau à l'approche) ;
-// - tilth_lune     : une lune d'Enhanced Celestials est levée (lune bleue, des moissons…) ;
+// - tilth_monument : un Cœur ancien d'Ancient Remnants est proche (silence à l'approche) ;
 // - tilth_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
 //
-// Classes lues dans les jars : Enhanced Celestials 2 Core 2.0.3.3 (mêmes appels que lune.js),
-// Sable 2.0.6 (Sable.HELPER, ActiveSableCompanion.getTrackingOrVehicleSubLevel).
+// Classe lue dans le jar : Sable 2.0.6 (Sable.HELPER, ActiveSableCompanion.getTrackingOrVehicleSubLevel).
 
 const MUSIQUE_PERIODE = 40                 // ticks entre deux mises à jour (2 s)
 const MUSIQUE_RAYON_MONUMENT = 96          // blocs ; la nappe du Cœur ancien porte à 256
 const MUSIQUE_COEUR_ANCIEN = 'ancient_remnants:elderheart'
 
-let MUSIQUE_EC = null
 let MUSIQUE_SABLE = null
-try {
-  MUSIQUE_EC = Java.loadClass('dev.corgitaco.enhancedcelestials2core.EnhancedCelestials')
-} catch (e) {
-  console.warn(`[Tilth] musique.js : Enhanced Celestials introuvable, pas de musique de lune (${e})`)
-}
 try {
   MUSIQUE_SABLE = Java.loadClass('dev.ryanhcode.sable.Sable')
 } catch (e) {
@@ -35,18 +27,6 @@ function musiqueTag(player, tag, actif) {
   else player.removeTag(tag)
 }
 
-// Vrai si l'évènement lunaire de cette nuit n'est pas la lune ordinaire.
-function musiqueLuneLevee(server) {
-  if (!MUSIQUE_EC) return false
-  let previsionOpt = MUSIQUE_EC.lunarForecastWorldData(server.overworld())
-  if (!previsionOpt.isPresent()) return false
-  let prevision = previsionOpt.get()
-  let actuelleOpt = prevision.currentLunarEventHolder().unwrapKey()
-  if (!actuelleOpt.isPresent()) return false
-  let ordinaire = prevision.getDimensionSettings().defaultEvent()
-  return String(ordinaire.location()) !== String(actuelleOpt.get().location())
-}
-
 function musiqueABord(player) {
   if (!MUSIQUE_SABLE) return false
   return MUSIQUE_SABLE.HELPER.getTrackingOrVehicleSubLevel(player) != null
@@ -59,10 +39,7 @@ function musiquePresDUnMonument(player) {
 }
 
 function musiqueMettreAJour(server) {
-  const lune = musiqueLuneLevee(server)
   server.getPlayerList().getPlayers().forEach(player => {
-    const overworld = String(player.level.dimension) === 'minecraft:overworld'
-    musiqueTag(player, 'tilth_lune', lune && overworld)
     musiqueTag(player, 'tilth_a_bord', musiqueABord(player))
     musiqueTag(player, 'tilth_monument', musiquePresDUnMonument(player))
   })

@@ -1,8 +1,0 @@
-{
-  "targets": [
-    "regions_unexplored:sparse_rainforest"
-  ],
-  "grass_color": "#74b157",
-  "foliage_color": "#61a642",
-  "water_color": "#45a7d3"
-}

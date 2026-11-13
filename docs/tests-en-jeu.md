@@ -16,11 +16,11 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, the `tilth-textures`, Fresh Animations, `tilth-interface` and `tilth-ambiance` packs are active [Y1], graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The game is in French, Fresh Animations and Better Leaves are active and no `tilth-*` pack is listed, graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] First launch: no narrator voice and no accessibility screen; creating then reopening a world shows no experimental settings warning; no Adorable Hamster Pets bell on the HUD or in the inventory, no update notice ([0024](decisions/0024-removing-the-house-resource-packs.md)).
 - [ ] The log shows no `tilth`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
 - [ ] The `tilth` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] The title screen shows Friedrich's mountains without any logo, the right way up, with mist flowing slowly through the valleys and never over the sky or the slopes in front, and the loading screen (F3+T) is moss green with a lantern-coloured bar [I6].
-- [ ] Each screen's name stands centred over its top edge on its plate, in the screen's colours (furnace, crafting table, anvil, chest renamed in an anvil, trader), nothing overlapping [I1, E1-E3].
 - [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from gravel, the Twigs pebble knapped into a rock, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
@@ -28,10 +28,11 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] EMI: R and U on an item open its recipes; JEI stays invisible. Quark's inventory sorting works.
 - [ ] **Pack sort**: no Chipped, Beautify! or Twigs table in EMI, Twigs cobblestone bricks (mossy, cracked, slabs, stairs, walls) present, Supplementaries sconces present, Steam 'n' Rails reduced to a few tracks and plain locometal, Every Compat without Quark or Ghost woods; no food values in tooltips [TR1, TR2, TR9].
 - [ ] Vanilla animals move with Fresh Animations (pig, cow, chicken, sheep) [F2].
-- [ ] Blocks and items show Vanilla Evolved's textures; grass and flowers have its models and still sway; leaves stay bushy; the moon is vanilla; a powered observer has no missing texture [Y2 to Y6].
 - [ ] Stone, a torch or bread in hand: the item is drawn and the hand stays still (only a light sway); scrolling the hotbar lowers and raises the hand once per change [A1-A3].
 
 ## Session 2: the mist and the clearings
+
+> Since [0024](decisions/0024-removing-the-house-resource-packs.md) the mist is ATMOSPHERICS' own preset, with no profile for the clearings: the tests below that expect the mist to thin or end at a given distance wait for a new mist. The rest (messages, biome, colours, far view, spawns) still applies.
 
 - [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
@@ -46,7 +47,6 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
-- [ ] **Storms** (preset `tilth_v5`): `/weather rain` then `/weather thunder` in a snowy biome, a desert and a savanna: a white snow cloud, then ochre or golden dust, down to about 10 blocks under thunder; in a forest the grey mist closes in instead of lifting; in a clearing the view stays wide. In clear weather the desert and the savanna have a warm haze, the forest's mist ends around 40 blocks.
 - [ ] Enter and leave the clearing: visibility changes smoothly [H4]. At sunrise and sunset, the colour of the distance follows the sky [H5].
 - [ ] Underwater, blinded, in powder snow: no sharp landscape in the distance [H6].
 - [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
@@ -115,14 +115,14 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] The six Ancient Remnants monuments (`/locate structure ancient_remnants:…`) are whole, on the ground, not cut by water; the floating monoliths clear of any hill; no spawner left [W3, [monuments](plan/monuments.md)].
 - [ ] **Guardians**: walk towards a warrior monolith, a coniferous and an oakwood monument and a hunter monolith: the guardian rises between you and the monument with a message; until it dies the Elderheart gives no blessing; after its death a message, then the blessing within 16 blocks. Note how each fight goes (Umvuthi without his throne, the Frostmaw).
 - [ ] **Codex**: craft the Monolith Codex; a research scrap found in a dungeon, shipwreck map chest or igloo adds its page, which names the right biomes.
-- [ ] Approach a monument: a life shard and a message, only once [V10]. Music *I Walk With Ghosts* on approach [M6].
+- [ ] Approach a monument: a life shard and a message, only once [V10]. On approach the music fades out [M6].
 - [ ] Ruin chests: no XP vial; life shards in the vanilla chests and archaeology sites of [sante](plan/sante.md#sources-and-rates), at the provisional rates, and how often one is found in an hour of exploring [XP5, V7].
 - [ ] **Edge of the world**: on foot, by boat and in flight the mist turns you back at 6,000 blocks from the centre, with a warning 64 blocks before; an airship is not stopped yet, a message asks to turn back; sailing around the continent, the coast stays away from the edge; north cold, south hot [Z1 to Z6].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
-- [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): pale streaks in the mist's colour, never yellow against the sun, rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
-- [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): sun rays between the leaves when facing the sun, glints on the water; footprints in snow and sand, waves on a beach, greens a little more olive [AV9 to AV11, RP1 to RP4 of [0018](decisions/0018-effets-en-pack-de-ressources.md)].
+- [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
+- [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): glints on the water; footprints in snow and sand, waves on a beach [AV9 to AV11].
 
 ## Session 8: multiplayer server (with a friend)
 
@@ -150,12 +150,12 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items), Z (world edge and disc) | [plan/mod-tilth.md](plan/mod-tilth.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc) | [plan/mod-tilth.md](plan/mod-tilth.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
-| I (numbered items) | [plan/tilth-interface.md](plan/tilth-interface.md#limits-and-in-game-tests) |
+| I (numbered items) | [archive/resource-packs/tilth-interface.md](archive/resource-packs/tilth-interface.md#limits-and-in-game-tests) (pack removed; only I6, the title and loading screens, still applies) |
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | T | [plan/tannerie.md](plan/tannerie.md#what-remains-to-be-tested) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
@@ -163,7 +163,6 @@ Once the results are in:
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | AV (rain, storm and sunlight) | [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) |
-| Y (textures) | [plan/tilth-textures.md](plan/tilth-textures.md#in-game-tests) |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
