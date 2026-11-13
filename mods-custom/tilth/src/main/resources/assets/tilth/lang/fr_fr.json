@@ -18,5 +18,8 @@
   "message.tilth.outils.pelle": "Il te faut une pelle.",
   "message.tilth.outils.houe": "Il te faut une houe.",
   "message.tilth.outils.outil": "Il te faut un outil.",
-  "message.tilth.outils.trop_faible": "Ton outil n'est pas assez solide."
+  "message.tilth.outils.trop_faible": "Ton outil n'est pas assez solide.",
+  "message.tilth.bord.proche": "La brume s'épaissit. Le monde s'arrête un peu plus loin.",
+  "message.tilth.bord.limite": "La brume ne laisse passer personne.",
+  "message.tilth.bord.navire": "Le navire a quitté le monde connu. Faites demi-tour."
 }

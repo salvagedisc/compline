@@ -117,6 +117,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Codex**: craft the Monolith Codex; a research scrap found in a dungeon, shipwreck map chest or igloo adds its page, which names the right biomes.
 - [ ] Approach a monument: a life shard and a message, only once [V10]. Music *I Walk With Ghosts* on approach [M6].
 - [ ] Ruin chests: no XP vial; life shards in the vanilla chests and archaeology sites of [sante](plan/sante.md#sources-and-rates), at the provisional rates, and how often one is found in an hour of exploring [XP5, V7].
+- [ ] **Edge of the world**: on foot, by boat and in flight the mist turns you back at 6,000 blocks from the centre, with a warning 64 blocks before; an airship is not stopped yet, a message asks to turn back; sailing around the continent, the coast stays away from the edge; north cold, south hot [Z1 to Z6].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
@@ -149,7 +150,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items) | [plan/mod-tilth.md](plan/mod-tilth.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), E (screen names), A (held items), Z (world edge and disc) | [plan/mod-tilth.md](plan/mod-tilth.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |

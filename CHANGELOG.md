@@ -9,6 +9,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
 
 ### Added
+- The world is a disc ([0022](docs/decisions/0022-disc-world.md)): one continent about 11 km wide whatever the seed, cold in the north and hot in the south, open sea around it, and an edge at 6,000 blocks from the centre. The shape is computed, not painted (`scripts/terrain/disc.py`, two Lithostitched modifiers on Tectonic's continents and on the temperature); the `bord` module of the `tilth` mod turns back a player who reaches the edge, with the boat or the mount, and warns 64 blocks before. A player aboard an airship is warned but not stopped yet.
 - `dev` workflow: every push to `main` refreshes the `dev` pre-release with `Tilth-dev.mrpack` (docs/dev-sync.md).
 - Base pack: No Man's Land (removed on 2026-11-13, see Removed), Overgeared, Create, Create Aeronautics + Sable, Steam 'n' Rails, Kaleidoscope Cookery, Antique Atlas 4 + Surveyor, Cold Sweat, Thirst Was Reclaimed, KubeJS.
 - Farming: [Let's Do] Farm & Charm (+ Architectury API), Ecliptic Seasons, KaleidoscopeCookery-Automation.
@@ -132,6 +133,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - ATMOSPHERICS preset `tilth_v3`: the mist of the clearings ends at 500 blocks by day and 260 at night (124 and 84 before), so that the far landscape can be seen there.
 - Duplicate `docs/plans/` and `docs/specs/` removed (copies of `docs/conception/`).
 - Kaleidoscope Cookery 1.5.1 → 1.6.0: 1.5.1 crashed the game on loading with Kaleidoscope Compat 2.9.7 (`MillstoneBlockEntityMixin` mixin), observed on the test server.
+- Custom mod `tilth` 0.9.3 → 0.10.0 (`pack/mods/tilth-0.10.0.jar`): new `bord` module, the edge of the disc world (see Added).
 - Custom mod `tilth` 0.9.1 → 0.9.2 (`pack/mods/tilth-0.9.2.jar`): a compatibility fix for world generation that stalled (see Fixed).
 - Custom mod `tilth` 0.9.0 → 0.9.1 (`pack/mods/tilth-0.9.1.jar`): a compatibility fix between Streams Reflowing and Spelunkery, so that the ice of a frozen stream still thaws into stream water ([details](docs/plan/mod-tilth.md#streams-reflowing-and-spelunkery-the-ice-of-a-stream)).
 - Custom mod `tilth` 0.7.0 → 0.8.0 (`pack/mods/tilth-0.8.0.jar`): the `clairiere` module no longer converts biomes (see Fixed); the wave of a clearing, its cloud puffs and the slow fade of the mist are computed on each client; the `chunksPerTick` setting is gone. Test [K10, K17 to K20](docs/plan/mod-tilth.md#clearings) added.

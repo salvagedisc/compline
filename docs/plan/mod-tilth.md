@@ -1,6 +1,6 @@
 # The custom `tilth` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-tilth-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.2 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `tilth-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-tilth-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.10.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** and **bord** (world edge) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `tilth-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -37,6 +37,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
 | `dissipateur` | both | Create | none |
+| `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -227,6 +228,20 @@ Shared helpers in `rendu.Sun`: sun direction from the time of day, daylight, the
 
 Client and server, no mod required. Registers the structure type `tilth:terrain_checked`: it wraps another structure and only places it where the ground suits it (slope, water, room under a floating base, ceiling of the world). The Ancient Remnants structures use it; rules, values and measurements are in [monuments](monuments.md). The type is always registered, because the pack's structure files name it and a world does not load if a type is missing. No config switch: the rules are in the structure files.
 
+## `bord` module
+
+Client and server, no mod required; everything happens on the server. The world is a disc ([0022](../decisions/0022-disc-world.md)) and this module keeps its edge.
+
+- **The edge** is a circle in the Overworld, read at each data load from `data/tilth/monde/bord.json` (`center_x`, `center_z`, `radius`). [`scripts/terrain/disc.py`](../../scripts/terrain/disc.py) writes that file with the shape of the continent, so the two always agree. Without the file the module does nothing; the log says which case applies ("bord : cercle de rayon 6000.0 autour de 0.0, 0.0").
+- **A player who passes the circle** is brought back two blocks inside it, on the line to the centre, at the same height, with the message « La brume ne laisse passer personne. » above the hotbar. A player on a boat, a horse or any other mount is brought back with it: the server moves the root vehicle, stops it and tells the riding clients (`ClientboundMoveVehiclePacket`, `ClientboundSetEntityMotionPacket`), because a ridden vehicle is steered by the client.
+- **64 blocks before the edge**, a message every five seconds: « La brume s'épaissit. Le monde s'arrête un peu plus loin. »
+- **Nothing is drawn.** Beyond the edge there is only open sea, and a wall would break the mist.
+- **Spectators pass.** Creative players do not.
+- **Ships of Sable** (airships of Create Aeronautics). Sable keeps the blocks of a ship in a plot grid far from the world, and a player seated aboard has coordinates there: `Ships` asks Sable for the real position (`SableCompanion.projectOutOfSubLevel`, found by reflection, no dependency). A player aboard a ship is **not** brought back, because the ship would stay behind and be lost; a message says « Le navire a quitté le monde connu. Faites demi-tour. » Stopping the ship itself at the edge is the next step ([next modules](#next-modules)).
+- **Switch**: `bord.enabled` in `config/tilth-common.toml`.
+
+**Checked** in the test client on 2026-11-13 (mod 0.10.0, full pack, a world whose new chunks follow the disc): the first message shows at 5,990; a player teleported to 6,010 is back at 5,998; a player swimming east from 5,994 ends at 5,998; a boat driven east from 5,990 for 14 seconds is at 5,998.4 with its rider still seated and the second message on screen; a spectator teleported to 6,010 stays there. The log says that Sable was found. Not checked: a horse, elytra, an airship (tests Z2 to Z4).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -369,6 +384,18 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 | E6 | A Supplementaries, Farm & Charm and Overgeared screen | A mist plate with the screen's name; nothing overlaps the panel's own drawings |
 | E7 | `titres.enabled = false`, then `tilth-interface` disabled | The game's labels come back in both cases, no plate |
 
+### World edge and disc
+
+| # | Test | Expected |
+|---|---|---|
+| Z1 | Walk or swim to the edge (`/tp @s 5990 70 0`, then east) | A message 64 blocks before; at 6,000 the player is set back two blocks, again and again, with the second message; no fall, no damage |
+| Z2 | The same in a boat, then on a horse along a beach near the edge if one exists | The boat or the horse comes back with its rider, who stays seated |
+| Z3 | The same with elytra or in creative flight | Stopped the same way; a spectator passes |
+| Z4 | An airship flown past the edge | The pilot stays aboard, the ship is not stopped (known limit), the message asks to turn back |
+| Z5 | Sail around the continent | The coast never comes closer than about 150 blocks to the edge; no land beyond the edge with Distant Horizons |
+| Z6 | Walk from the north coast to the south coast | Cold in the north, hot in the south, with no straight limit between climates |
+| Z7 | A new world with another seed | Still one continent on the disc; the inland seas differ |
+
 ### Tools
 
 The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
@@ -403,3 +430,5 @@ Known fragile points:
 ## Next modules
 
 Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-tilth.md](modules-tilth.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-tilth-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
+
+**World edge and ships** (after 0.10.0). The `bord` module lets a player aboard a Sable ship pass the edge. Next step: stop the ship itself, by removing the outward part of its speed near the edge (`RigidBodyHandle.addLinearAndAngularVelocity`) and, past the edge, moving it back (`RigidBodyHandle.teleport`). It needs an airship built in a test world to be checked.

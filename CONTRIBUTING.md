@@ -34,6 +34,7 @@ Manual scripts, run from the repository root and committed with their output (ne
 | `python3 scripts/ambiance/palette.py <neoforge client resources jar>` | Olive grass and foliage colour maps; the jar is in `mods-custom/tilth/build/moddev/artifacts/` |
 | `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes, and of the few biomes of other mods (`OTHER_MODELS`), in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `tilth:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/tilth-ambiance.md)) |
 | `python3 scripts/ambiance/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the same tables as `biomes.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
+| `python3 scripts/terrain/disc.py [key=value ...]` | The disc world (`pack/kubejs/data/tilth/`): the two Lithostitched modifiers that shape the continent and its climate, and `monde/bord.json`, the edge read by the `bord` module; rerun to change the size, the coast or the edge ([0022](docs/decisions/0022-disc-world.md)) |
 | `python3 scripts/structures/chorusoatl_nest.py` | The nest of the Chorusoatl (`pack/kubejs/data/tilth/structure/chorusoatl.nbt`): a floor, an air pocket and the animal, like the nests of Archie's Dinosaurs ([0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) |
 | `python3 scripts/interface/build.py` | The `tilth-interface` pack from GUI Revision (calls `menus.py`, which can also run alone) |
 | `python3 scripts/textures/build.py` | The `tilth-textures` pack from Vanilla Evolved |
@@ -49,7 +50,7 @@ Manual scripts, run from the repository root and committed with their output (ne
 | Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/tilth/` (or `data/<namespace>/` to override a mod) |
 | In-house resource packs | `pack/resourcepacks/tilth-ambiance/`, `tilth-interface/`, `tilth-textures/` |
 | Custom `tilth` mod (sources) | `mods-custom/tilth/` ([mod-tilth](docs/plan/mod-tilth.md)) |
-| Tooling and its tests / resource pack scripts | `scripts/` + `scripts/test/` / `scripts/ambiance/`, `scripts/interface/`, `scripts/textures/` |
+| Tooling and its tests / resource pack scripts | `scripts/` + `scripts/test/` / `scripts/ambiance/`, `scripts/interface/`, `scripts/textures/`; `scripts/structures/`, `scripts/terrain/` for generated world data |
 | Vision, registry, roadmap, in-game tests | `docs/vision.md`, `docs/mods.md`, `docs/feuille-de-route.md`, `docs/tests-en-jeu.md` |
 | Living page of a system (mod, pack, translation, quests…) | `docs/plan/` |
 | Settled decision (comparison, choice) | `docs/decisions/NNNN-subject.md` |
@@ -95,4 +96,4 @@ Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local expor
 
 ## Current state
 
-As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 158 Modrinth mods, one library kept as a jar and the custom `tilth` mod 0.9.3, decisions 0001 to 0021 and 0023, CI green on `main`. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).
+As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 158 Modrinth mods, one library kept as a jar and the custom `tilth` mod 0.10.0, decisions 0001 to 0023, CI green on `main`. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).

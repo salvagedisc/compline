@@ -18,5 +18,8 @@
   "message.tilth.outils.pelle": "You need a shovel.",
   "message.tilth.outils.houe": "You need a hoe.",
   "message.tilth.outils.outil": "You need a tool.",
-  "message.tilth.outils.trop_faible": "Your tool is not strong enough."
+  "message.tilth.outils.trop_faible": "Your tool is not strong enough.",
+  "message.tilth.bord.proche": "The mist thickens. The world ends a little further.",
+  "message.tilth.bord.limite": "The mist lets no one through.",
+  "message.tilth.bord.navire": "The ship has left the known world. Turn back."
 }

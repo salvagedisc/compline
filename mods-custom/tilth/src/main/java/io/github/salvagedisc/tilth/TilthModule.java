@@ -33,7 +33,10 @@ public enum TilthModule {
     RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.rayons.RayonsModule.start(bus)),
     /** Les monuments d'Ancient Remnants posés seulement sur un terrain qui s'y prête : type de structure
      *  {@code tilth:terrain_checked} (client et serveur). Aucun mod requis. */
-    MONUMENTS("monuments", null, bus -> io.github.salvagedisc.tilth.monuments.MonumentsModule.start(bus));
+    MONUMENTS("monuments", null, bus -> io.github.salvagedisc.tilth.monuments.MonumentsModule.start(bus)),
+    /** Le bord du monde : un cercle que la brume ne laisse pas franchir, donné par {@code data/tilth/monde/bord.json}
+     *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
+    BORD("bord", null, bus -> io.github.salvagedisc.tilth.bord.BordModule.start(bus));
 
     private final String id;
     private final Dist side;

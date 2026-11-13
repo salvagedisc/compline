@@ -19,6 +19,7 @@ public final class ModIds {
     public static final String STREAMS_REFLOWING = "streamsreflowing";
     public static final String SPELUNKERY = "spelunkery";
     public static final String LITHOSTITCHED = "lithostitched";
+    public static final String SABLE = "sable";
 
     private ModIds() {
     }
