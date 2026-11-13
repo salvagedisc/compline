@@ -11,10 +11,8 @@ import net.neoforged.neoforge.common.NeoForge;
  * Module rayons (client) : {@link Glints}, des éclats de soleil qui scintillent sur l'eau, là où elle
  * renvoie le soleil vers l'œil.
  *
- * <p>Les rayons de soleil entre les feuillages ne sont plus ici : le pack de ressources
- * {@code tilth-ambiance} les dessine en post-effet Polytone, avec le tampon de profondeur
- * ({@code assets/tilth/shaders/program/rayons.fsh}). Les éclats restent en Java : il faut savoir où est
- * l'eau, ce qu'aucun shader de pack ne voit.
+ * <p>Les rayons de soleil entre les feuillages venaient d'un pack de ressources maison, retiré
+ * (décision 0024). Les éclats restent en Java : il faut savoir où est l'eau.
  */
 public final class RayonsModule {
     private RayonsModule() {

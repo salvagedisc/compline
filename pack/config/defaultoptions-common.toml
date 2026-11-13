@@ -1,29 +1,19 @@
-# Tilth : packs de ressources activés au premier lancement (et ajoutés ensuite
-# à chaque mise à jour du pack, une seule fois chacun). Du moins prioritaire au
-# plus prioritaire : tilth-textures (dossier du pack, tiré de Vanilla Evolved)
-# habille les blocs et les objets sous tous les autres, pour que les feuilles de
-# Better Leaves et les objets animés de Fresh Animations gardent la main ;
-# les extensions de Fresh Animations passent au-dessus de lui,
-# tilth-interface (dossier du pack, tiré de GUI Revision) habille l'interface
-# vanilla, celle des mods, la barre d'action et le journal Questlog, Supernova
-# apporte trois morceaux du paquet musical, et
-# tilth-ambiance (dossier du pack) passe en dernier, au-dessus de tous.
+# Tilth : packs de ressources activés au premier lancement. Du moins prioritaire
+# au plus prioritaire : les feuilles de Better Leaves, Fresh Animations et ses
+# extensions, puis Supernova qui apporte trois morceaux du paquet musical.
 # Default Options ne sélectionne que les packs de cette liste : les ressources des
 # mods (mod_resources de NeoForge, fabric de Connector), absentes, étaient rajoutées
-# au-dessus de nos packs et passaient devant Fresh Animations. Elles sont donc
+# au-dessus des autres et passaient devant Fresh Animations. Elles sont donc
 # nommées ici, en bas, juste au-dessus de vanilla.
 defaultResourcePacks = [
 	"vanilla",
 	"mod_resources",
 	"fabric",
-	"file/tilth-textures",
 	"file/Better-Leaves-9.6.zip",
 	"file/FreshAnimations_v1.11_1.20+.zip",
 	"file/FA+Details-v2.2.1.zip",
 	"file/FA+Objects-v2.1.2.zip",
 	"file/FA+Emissive-v1.6.zip",
 	"file/FA+Player-v1.1.zip",
-	"file/tilth-interface",
-	"file/supernova-pack.zip",
-	"file/tilth-ambiance"
+	"file/supernova-pack.zip"
 ]

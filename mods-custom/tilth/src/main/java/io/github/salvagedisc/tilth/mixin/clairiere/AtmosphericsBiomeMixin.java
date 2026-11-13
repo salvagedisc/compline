@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 /**
  * ATMOSPHERICS choisit la brume, la brume de l'air, la météo et le voile d'horizon d'après le biome lu autour
  * du joueur. Dans une clairière le vrai biome est resté : ces lectures reçoivent à sa place le biome de
- * clairière qui porte le profil dégagé du preset. Les particules propres à un biome (poussière du désert,
+ * clairière, qui porte le profil dégagé d'un preset s'il y en a un (aucun depuis la décision 0024). Les particules propres à un biome (poussière du désert,
  * buissons roulants) gardent le vrai biome. Appliqué seulement avec ATMOSPHERICS ; {@code require = 0} : une
  * méthode renommée par une version future laisse sa lecture telle quelle.
  */

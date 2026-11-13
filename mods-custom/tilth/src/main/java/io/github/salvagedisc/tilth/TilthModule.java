@@ -22,18 +22,19 @@ public enum TilthModule {
     CLAIRIERE("clairiere", null, bus -> io.github.salvagedisc.tilth.clairiere.ClairiereModule.start(bus)),
     /** Le dissipateur, troisième palier des clairières : un bloc cinétique de Create (client et serveur). */
     DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.tilth.dissipateur.DissipateurModule.start(bus), ModIds.CREATE),
-    /** Le nom de chaque écran sur une plaque au-dessus du panneau, dessinée par le pack d'interface (client). Aucun mod requis. */
-    TITRES("titres", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.titres.TitresModule.start(bus)),
     /** À mains nues, on ramasse mais on ne coupe pas : le bois et la roche demandent le bon outil (client et serveur). Aucun mod requis. */
     OUTILS("outils", null, bus -> io.github.salvagedisc.tilth.outils.OutilsModule.start(bus)),
-    /** Pluie teintée et à contre-jour, rideaux de pluie, éclair, feuilles et brins d'herbe dans le vent (client). Aucun mod requis ;
-     *  la teinte demande Where Winds Blow, les feuilles Particular. */
+    /** Rideaux de pluie, éclair, feuilles et brins d'herbe dans le vent (client). Aucun mod requis ;
+     *  les feuilles demandent Particular. */
     AVERSE("averse", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.averse.AverseModule.start(bus)),
-    /** Rayons de soleil dans les trouées et éclats du soleil sur l'eau (client). Aucun mod requis. */
+    /** Éclats du soleil sur l'eau (client). Aucun mod requis. */
     RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.rayons.RayonsModule.start(bus)),
     /** Les monuments d'Ancient Remnants posés seulement sur un terrain qui s'y prête : type de structure
      *  {@code tilth:terrain_checked} (client et serveur). Aucun mod requis. */
-    MONUMENTS("monuments", null, bus -> io.github.salvagedisc.tilth.monuments.MonumentsModule.start(bus));
+    MONUMENTS("monuments", null, bus -> io.github.salvagedisc.tilth.monuments.MonumentsModule.start(bus)),
+    /** Le bord du monde : un cercle que la brume ne laisse pas franchir, donné par {@code data/tilth/monde/bord.json}
+     *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
+    BORD("bord", null, bus -> io.github.salvagedisc.tilth.bord.BordModule.start(bus));
 
     private final String id;
     private final Dist side;

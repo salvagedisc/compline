@@ -27,9 +27,8 @@ import org.joml.Vector3f;
  * entouré de deux halos bleutés, avec deux à quatre branches qui s'éteignent avant le sol. Chaque
  * éclair garde sa forme (graine de l'entité) ; il scintille comme celui du jeu.
  *
- * <p>Dans la brume de Tilth, l'éclair du jeu se fond dans le gris à vingt blocs. Celui-ci la perce, en
- * s'adoucissant au loin : c'est le core shader {@code rendertype_lightning} du pack {@code tilth-ambiance}
- * qui repousse la brume, pour cet éclair comme pour celui du jeu.
+ * <p>Il est dessiné avec le shader {@code rendertype_lightning} du jeu, comme celui du jeu : dans la brume,
+ * il se fond dans le gris comme lui.
  */
 public final class Bolt {
     private static final float TOP = 110.0F;
@@ -95,7 +94,7 @@ public final class Bolt {
         if (mesh == null) {
             return;
         }
-        // the mist is pushed back by the rendertype_lightning core shader of tilth-ambiance
+        // drawn with the game's own lightning shader
         RenderSystem.setShader(GameRenderer::getRendertypeLightningShader);
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
