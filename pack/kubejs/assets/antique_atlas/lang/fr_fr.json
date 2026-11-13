@@ -22,7 +22,7 @@
   "gui.antique_atlas.marker.death.euphemisms.verb.8": "Démoli",
   "gui.antique_atlas.marker.death.euphemisms.verb.9": "Rossé",
   "gui.antique_atlas.marker.death.euphemisms.verb.10": "Achevé",
-  "item.antique_atlas.atlas": "Atlas ancien",
+  "item.antique_atlas.atlas": "Antique Atlas",
   "item.antique_atlas.atlas.lore": "Affiche les environs quand il est tenu en main.",
   "item.antique_atlas.atlas.hint": "S'obtient en survie en renommant un livre « %s »."
 }

@@ -42,7 +42,7 @@ hash = "67005e1a77cf4b111ebd17137bb0e3e3bc73d9ea62154be41ea542e2ee2432a8"
 
 [[files]]
 file = "config/defaultoptions/extra/config/punchy/punchy_config.json"
-hash = "8caa03d2a2539d6da981a366a9b78c4bc6727bf031aa432c2854e5a0d77905d6"
+hash = "95d3212dcd24c753571ff47bbf34ff17ffbfcc66ac619f5b7b9f4dc7820b45f8"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
@@ -750,7 +750,7 @@ hash = "83ea39612609944cbce047e2a19e3f5875675f23ad3f0bbbc48b39c95cf4e048"
 
 [[files]]
 file = "kubejs/assets/antique_atlas/lang/fr_fr.json"
-hash = "2acb044ab7aec71685f05cbdd969cda3eff0404530fb45b2965fb9bbcd4b73a5"
+hash = "3fc68690de7e9c87659a4568a8a741024d0801cd0a3832dca8ab3b54075c3799"
 
 [[files]]
 file = "kubejs/assets/antique_transport/lang/fr_fr.json"
@@ -2173,14 +2173,12 @@ hash = "db0001882963da83b811339a87b4ec47ac6644be32a98d6e0a5c5dfa5af25c67"
 metafile = true
 
 [[files]]
-file = "mods/antique-atlas-4.pw.toml"
-hash = "72f9cf7ef1412b9384467782dd5444ec8adbd03b9f532d1238e5a166ffb25237"
-metafile = true
+file = "mods/antique-atlas-3.1.2+1.21-neoforge.1.jar"
+hash = "143155968b67c6aa5b6f64959dbafb2ea77c85687d9fa9d217828430bf66cb3d"
 
 [[files]]
-file = "mods/antique-transport.pw.toml"
-hash = "891be2897e122a50bd68da39b9bd866812edc4a5d650994e154a90afd132fb63"
-metafile = true
+file = "mods/antique-transport-1.3.0+1.21.1-neoforge.1.jar"
+hash = "2a18e2b5bfebebbf663a216c1db1f079f3b50f28131a95d82d4faea8e7708fcc"
 
 [[files]]
 file = "mods/archies-dinosaurs.pw.toml"
@@ -2284,11 +2282,6 @@ metafile = true
 [[files]]
 file = "mods/configurable.pw.toml"
 hash = "dcd40eb17aefa2335e200f44114967260f5b5bc3dbae4e426c19dabcc89a6019"
-metafile = true
-
-[[files]]
-file = "mods/connector.pw.toml"
-hash = "a38d72ca403e9064338be6e0cf69532768b0c1aba8f88703a8ce74c2734da522"
 metafile = true
 
 [[files]]
@@ -2857,9 +2850,8 @@ hash = "25fdaaf01546f4083aa00f85b6c1c4b67434f6d068d3e1725d4437576ca34a7a"
 metafile = true
 
 [[files]]
-file = "mods/surveyor.pw.toml"
-hash = "13848a9eb3c5fd091b52f78cfae4ace2c3cd0cb32a76d6f61c12435f47d82ed1"
-metafile = true
+file = "mods/surveyor-1.2.4+1.21-neoforge.1.jar"
+hash = "e34b087ed079f7afa92829b0af9b213dea515d1b4e5b7bee854918932f77d1f9"
 
 [[files]]
 file = "mods/tannery-better-leather.pw.toml"

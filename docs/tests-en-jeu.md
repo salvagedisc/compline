@@ -95,6 +95,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 ## Session 6: terrain, Create and airships
 
 - [ ] Explore 3000 blocks with the atlas: large continents, mountain ranges, valleys; Regions Unexplored biomes present, and the relief reads well on a world with Geophilic's vanilla biomes [W1].
+- [ ] Rename a book "Antique Atlas" at an anvil: it takes the look of the atlas and shows the open map when held in first person. Two players on a server see each other's explored map and markers once they share it.
 - [ ] **Floating blocks**: walk or fly over a few kilometres, caves included: no floating island, tree or isolated block, no plant resting on air. The team's measure of 2026-11-12 covered one square kilometre of one seed ([0019](decisions/0019-leaving-no-mans-land.md)); this is the first look by eye.
 - [ ] **Mist in Regions Unexplored biomes**: in a forest, a taiga and a bayou the mist is thick (about 40 blocks by day); in a prairie, a steppe, a mountain and a beach it is veiled (about 72); in a cave biome it is the cave mist. No biome is clear without a clearing, none has no mist at all.
 - [ ] **Colours next to vanilla biomes**: at a border between a Regions Unexplored biome and a vanilla one, grass, leaves and water do not jump; the snowy Regions Unexplored biomes let snowflakes fall.

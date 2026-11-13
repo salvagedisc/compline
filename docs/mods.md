@@ -24,9 +24,9 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments placed on suitable ground, blessings, codex to piece together from ruins; four guarded by Mowzie's Mobs and Companions! bosses ([monuments](plan/monuments.md)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
 | Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed. Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
-| Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
-| Antique Transport | `antique-transport` | ✅ (added 2026-10-25) | CS | Create trains, tracks, stations and Sable ships appear on the atlas |
-| Surveyor Map Framework | `surveyor` | ✅ | CS | Shared exploration for the atlas |
+| Antique Atlas 4 | jar in `pack/mods/` | ✅ (NeoForge port, [0025](decisions/0025-native-atlas.md)) | C | Hand-drawn map, no coordinates |
+| Antique Transport | jar in `pack/mods/` | ✅ (added 2026-10-25, NeoForge port) | CS | Create trains, tracks, stations and Sable ships appear on the atlas |
+| Surveyor Map Framework | jar in `pack/mods/` | ✅ (NeoForge port) | CS | Shared exploration for the atlas |
 | Icy's Better Horses | `icys-better-horses` | ✅ (2.0.1; 2.1.x held, see the roadmap) | CS | Horses, breeds, bond, carts |
 
 ## Long-term goals
@@ -191,7 +191,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
 | Simple Backups | `simple-backups` | ✅ | CS | Backups every hour of play, last 24 kept, plus one when everyone leaves (beta) |
 | Crash Assistant | `crash-assistant` | ✅ | C | Helps read crashes |
-| Sinytra Connector + Forgified Fabric API | `connector`, `forgified-fabric-api` | ✅ | CS | Run Antique Atlas and Surveyor (beta, under watch) |
+| Forgified Fabric API | `forgified-fabric-api` | ✅ | CS | Required by Puddles & Floods; Connector removed on 2026-11-13 ([0025](decisions/0025-native-atlas.md)) |
 
 ## Resource packs
 
