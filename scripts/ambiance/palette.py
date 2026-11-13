@@ -3,7 +3,8 @@
 Vanilla biomes take their grass and leaf colour from these two maps (temperature x
 humidity). Fallow keeps the map, so the colour still changes from one biome to the
 next, but pulls every entry a quarter of the way toward olive and takes off some
-saturation: the same warm, muted greens as the No Man's Land biomes.
+saturation: warm, muted greens, like the biomes that set their own colours
+(scripts/ambiance/biomes.py).
 
 Usage, from the repository root, with the NeoForge client resources jar that
 ModDevGradle puts in mods-custom/fallow/build/moddev/artifacts/:

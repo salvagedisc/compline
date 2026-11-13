@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "regions_unexplored:icy_heights"
+  ],
+  "grass_color": "#7ec091",
+  "foliage_color": "#72b678",
+  "particle": {
+    "options": {
+      "type": "minecraft:snowflake"
+    },
+    "probability": 0.004
+  }
+}

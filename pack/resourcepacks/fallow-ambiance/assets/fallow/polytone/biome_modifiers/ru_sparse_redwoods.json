@@ -1,0 +1,7 @@
+{
+  "targets": [
+    "regions_unexplored:sparse_redwoods"
+  ],
+  "grass_color": "#7e9751",
+  "foliage_color": "#7e8e4f"
+}

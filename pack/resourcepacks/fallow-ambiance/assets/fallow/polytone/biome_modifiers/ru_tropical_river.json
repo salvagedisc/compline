@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "regions_unexplored:tropical_river"
+  ],
+  "grass_color": "#71b847",
+  "foliage_color": "#4ea644",
+  "water_color": "#45a7d3"
+}

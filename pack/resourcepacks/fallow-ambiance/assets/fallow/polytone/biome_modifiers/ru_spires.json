@@ -1,0 +1,13 @@
+{
+  "targets": [
+    "regions_unexplored:spires"
+  ],
+  "grass_color": "#61a776",
+  "foliage_color": "#61a76b",
+  "particle": {
+    "options": {
+      "type": "minecraft:snowflake"
+    },
+    "probability": 0.004
+  }
+}

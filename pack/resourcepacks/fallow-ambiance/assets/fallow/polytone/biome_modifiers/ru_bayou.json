@@ -1,0 +1,8 @@
+{
+  "targets": [
+    "regions_unexplored:bayou"
+  ],
+  "grass_color": "#809a65",
+  "foliage_color": "#748c5b",
+  "water_color": "#4e7c54"
+}
