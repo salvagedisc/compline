@@ -33,6 +33,7 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY)),
             Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)),
             Map.entry("compat.IceThawMixin", List.of(ModIds.STREAMS_REFLOWING, ModIds.SPELUNKERY)),
+            Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)),
             Map.entry("averse.LeafParticleMixin", List.of(ModIds.PARTICULAR)),
             Map.entry("averse.LeavesBlockMixin", List.of(ModIds.PARTICULAR)));
 

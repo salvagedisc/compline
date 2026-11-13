@@ -101,6 +101,9 @@ dependencies {
     // Module horizon
     compileOnly modrinth('distanthorizons')
 
+    // Correctif de génération : le prédicat in_structure de Lithostitched
+    compileOnly modrinth('lithostitched')
+
     // Module averse : la pluie et le vent de Where Winds Blow, les feuilles de Particular
     compileOnly modrinth('where-winds-blow')
     compileOnly modrinth('particular-reforged')
