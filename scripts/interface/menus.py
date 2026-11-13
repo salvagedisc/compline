@@ -1,7 +1,8 @@
 """Tilth's title screen and loading screen, for FancyMenu and Drippy Loading
-Screen: the Tilth logo (drawn by logo.py) in place of Minecraft's over a moss
-veil that darkens the background behind the buttons, and a moss loading screen
-with the logo and a bar in lantern light in place of Mojang's red one.
+Screen: no logo for now (the pack's logo is to be redrawn), Minecraft's
+hidden, a moss veil that darkens the background behind the buttons, and a moss
+loading screen with a bar in lantern light in place of Mojang's logo and red
+bar.
 
 The title screen's background is Caspar David Friedrich's "Riesengebirge
 Landscape with Rising Fog" (c. 1820, Neue Pinakothek, public domain), with
@@ -13,7 +14,7 @@ WGA8257.jpg", 1920 pixels wide, cut to 16:9) and a mask of its valleys
 mist, the sky cut, blurred), which keeps the mist off the sky and the slopes
 in front.
 
-Writes into pack/config/fancymenu the logo, the painting and its mask, the two
+Writes into pack/config/fancymenu the veil, the painting and its mask, the two
 layouts, the list of customised screens and FancyMenu's options (modpack mode:
 players never see the editor). The title screen keeps the vanilla buttons and
 the texts the game requires; the other menus keep the panorama drawn by
@@ -26,8 +27,6 @@ import shutil
 from pathlib import Path
 
 from PIL import Image
-
-import logo
 
 TITLE = Path(__file__).resolve().parent / "title"
 # the title screen: a moss veil darkening the painting towards the bottom and
@@ -164,7 +163,7 @@ layout_action_executable_blocks {{
 
 
 def veil(w=320, h=180):
-    """The title screen's veil: clear around the logo, a moss shade rising from the
+    """The title screen's veil: clear at the top, a moss shade rising from the
     bottom and creeping in from the sides."""
     im = Image.new("RGBA", (w, h))
     px = im.load()
@@ -180,13 +179,8 @@ def draw(config):
     fm = config / "fancymenu"
     (fm / "assets").mkdir(parents=True, exist_ok=True)
     (fm / "customization").mkdir(parents=True, exist_ok=True)
-    im = logo.draw()
-    im.save(fm / "assets" / "tilth_logo.png", optimize=True)
-    w, h = im.width // logo.SCALE, im.height // logo.SCALE
-    source = "[source:local]/config/fancymenu/assets/tilth_logo.png"
-
-    # title screen: the painting with its mist, the logo where Minecraft's
-    # stood, the splash text gone, a veil behind the buttons
+    # title screen: the painting with its mist, Minecraft's logo and the
+    # splash text gone, a veil behind the buttons
     veil().save(fm / "assets" / "tilth_veil.png", optimize=True)
     shutil.copyfile(TITLE / "painting.jpg", fm / "assets" / "tilth_title_painting.jpg")
     shutil.copyfile(TITLE / "mist-mask.png", fm / "assets" / "tilth_title_mist_mask.png")
@@ -208,13 +202,12 @@ menu_background {{
     title = layout("title_screen", painting, [
         image("tilth:title:veil", "[source:local]/config/fancymenu/assets/tilth_veil.png", "top-left",
               0, 0, 320, 180, stretch=True),
-        image("tilth:title:logo", source, "top-centered", -(w // 2), 12, w, h),
         hidden("minecraft_logo_widget"),
         hidden("minecraft_splash_widget"),
     ], behind=True)
     (fm / "customization" / "tilth_title_screen.txt").write_text(title)
 
-    # loading screen: moss ground, the logo, a bar in lantern light
+    # loading screen: moss ground and a bar in lantern light
     ground = f"""
 menu_background {{
   instance_identifier = {ident("tilth:loading:background")}
@@ -224,8 +217,7 @@ menu_background {{
 }}
 """
     loading = layout("drippy_loading_overlay", ground, [
-        image("tilth:loading:logo", source, "mid-centered", -(w // 2), -h // 2 - 12, w, h),
-        bar("tilth:loading:bar", "mid-centered", -80, h // 2 + 6, 160, 4),
+        bar("tilth:loading:bar", "mid-centered", -80, -2, 160, 4),
         hidden("mojang_logo"),
         hidden("progress_bar"),
     ])
