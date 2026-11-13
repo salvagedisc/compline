@@ -1266,7 +1266,7 @@ hash = "4316f845f3862b349170ddaa79f28132822a967c671d51c6be2d2c7708c7146f"
 
 [[files]]
 file = "kubejs/client_scripts/faune_coupee.js"
-hash = "62ccd6efb5c55077daf9f1dcd6f72d5780c2a2b758ff9aecad72d03a522f73a2"
+hash = "0a73edb991d3c1928f9824e2cf32e2b9b2d5a31c5fa6103b40d88cd40e9bb33a"
 
 [[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
@@ -1778,7 +1778,7 @@ hash = "5d725b75487d5da8d2e7a411b6695e348f42b71363cfc4f827e1bb21e0c54d5e"
 
 [[files]]
 file = "kubejs/server_scripts/faune_coupee.js"
-hash = "e8b047b64292dcf74ccd599c6108bcb1b3869dfbd73b57e4f83bddabd53b9d41"
+hash = "04dddead6d5e3ea7512c3210c7c22f0f7b90731312876248b2c3c90da48f40a4"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
