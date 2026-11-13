@@ -194,7 +194,7 @@ hash = "529233612112073e9528389e474eb45cb9157b51b2d90f1239c7ec3834d305c7"
 
 [[files]]
 file = "config/questlog/quests/brume_clairieres.json"
-hash = "a4c940298b7b336140d8c4f416f777197a9c4d2dcbd3fb7ada879123980e7609"
+hash = "09b8e35e9b7804bdf43b7b4e0435e5daf06b120e8c25f0e4d8bf130850a0a37e"
 
 [[files]]
 file = "config/questlog/quests/brume_dissipateur.json"
@@ -202,11 +202,11 @@ hash = "15d6dea0b2ee19fc24a320e4403b286aa8e5cc39468ca7937e344c8384e3d545"
 
 [[files]]
 file = "config/questlog/quests/brume_feu.json"
-hash = "0b7be9e60c4df366143d50a7ec8c79a76615fdfc3452589e81de1c4ad81779ea"
+hash = "9693cbe2dc8434c37df5cbb6313ac6cf49b580974ce79bf737e9b510422eeeba"
 
 [[files]]
 file = "config/questlog/quests/brume_lanterne.json"
-hash = "bf5b7050727e40291fe140d7f73aa04b6f27bf69c6cc20e028d17738c46bcd9d"
+hash = "9465f42839b51e31a620fae86a1a0962950c7cecf56b8ce0bffe3c62080cd276"
 
 [[files]]
 file = "config/questlog/quests/gestes_feu.json"
@@ -2296,8 +2296,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.7.0.jar"
-hash = "45d5cfa76b56c9e0289cfa96a7bad38b56b0ba308c9993c98e4dd3822aa35f00"
+file = "mods/fallow-0.8.0.jar"
+hash = "f20d0756564af62fa789e2c1baca4d4680acb6f74607783e81f5aafc8f8918aa"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"

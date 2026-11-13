@@ -14,6 +14,8 @@ public final class ModIds {
     public static final String SENSIBLE_STACKABLES = "sensible_stackables";
     public static final String WHERE_WINDS_BLOW = "where_winds_blow";
     public static final String PARTICULAR = "particular";
+    public static final String SODIUM = "sodium";
+    public static final String TRUE_ADAPTIVE_MUSIC = "trueadaptivemusic";
 
     private ModIds() {
     }

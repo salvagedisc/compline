@@ -2,7 +2,7 @@ package io.github.salvagedisc.fallow.dissipateur;
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import io.github.salvagedisc.fallow.FallowConfig;
-import io.github.salvagedisc.fallow.clairiere.ClearingConverter;
+import io.github.salvagedisc.fallow.clairiere.Clearings;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -57,7 +57,7 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
         if (charge >= CHARGE_TICKS) {
             done = true;
             setChanged();
-            ClearingConverter.convert((ServerLevel) level, worldPosition, RADIUS, null);
+            Clearings.open((ServerLevel) level, worldPosition, RADIUS, null);
             sendData();
         }
     }
@@ -69,7 +69,7 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
         if (done && level instanceof ServerLevel server && FallowConfig.clairiereEnabled()) {
             Player nearest = level.getNearestPlayer(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5,
                     worldPosition.getZ() + 0.5, 8.0, false);
-            ClearingConverter.restore(server, worldPosition, RADIUS, nearest instanceof ServerPlayer player ? player : null);
+            Clearings.close(server, worldPosition, nearest instanceof ServerPlayer player ? player : null);
         }
     }
 

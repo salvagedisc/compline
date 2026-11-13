@@ -2,7 +2,7 @@
   "chapter": "questlog:fallow_brume",
   "sort_order": 10,
   "title": "Un feu de veille",
-  "description": "Un brasero de pierre où brûle une flamme pâle : une bouteille d’huile de résine, deux dalles de roche polie, un charbon de bois et un bloc de roche polie.\n\nPosé, il lève la brume sur 16 blocs autour de lui. Retiré, il la laisse revenir, sauf là où une autre lumière la tient encore à distance.",
+  "description": "Un brasero de pierre où brûle une flamme pâle : un rayon de miel, deux dalles de pierre lisse, un charbon de bois et un bloc de pierre lisse.\n\nPosé, il lève la brume sur 16 blocs autour de lui. Retiré, il la laisse revenir, sauf là où une autre lumière la tient encore à distance.",
   "icon": {
     "item": "fallow:feu_de_veille"
   },

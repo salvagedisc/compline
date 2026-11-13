@@ -22,9 +22,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
- * Feu de veille et lanterne de clairière : posés par un joueur, ils changent les biomes autour d'eux en
- * clairière. Retirés (cassés, soufflés), ils rendent la brume à leur disque, sauf là où une autre source
- * la retient encore.
+ * Feu de veille et lanterne de clairière : posés par un joueur, ils ouvrent une clairière autour d'eux.
+ * Retirés (cassés, soufflés), ils rendent la brume à leur disque, sauf là où une autre clairière la retient
+ * encore.
  */
 public class ClearingBlock extends Block {
     private final int radius;
@@ -46,7 +46,7 @@ public class ClearingBlock extends Block {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
         if (level instanceof ServerLevel server && placer instanceof ServerPlayer player && FallowConfig.clairiereEnabled()) {
-            ClearingConverter.convert(server, pos, radius, player);
+            Clearings.open(server, pos, radius, player);
         }
     }
 
@@ -54,7 +54,7 @@ public class ClearingBlock extends Block {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock()) && level instanceof ServerLevel server && FallowConfig.clairiereEnabled()) {
             Player nearest = level.getNearestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 8.0, false);
-            ClearingConverter.restore(server, pos, radius, nearest instanceof ServerPlayer player ? player : null);
+            Clearings.close(server, pos, nearest instanceof ServerPlayer player ? player : null);
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }

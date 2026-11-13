@@ -67,7 +67,7 @@ The selection comes from the listening page (the maintainer's sheet of 2026-10-1
 | 5 | Moon | `custom` `lune.json` | lullabies_3, lightless_dawn | 600 ± 300 | enter 60 s |
 | 6 | Aboard | `custom` `a_bord.json` | aerie, featherfall, cliff_hanger | 240 ± 120 | exit 30 s |
 | 7 | Underground | `height` below y = 40 | infinite_amethyst | 600 ± 300 | — |
-| 8 | Clearing | `biome` `fallow:clairiere`, `_froide`, `_chaude` | sweden, wet_hands, mice_on_venus, key, komorebi, left_to_bloom, rose_field | 300 ± 180 | enter 30 s |
+| 8 | Clearing | `biome` `fallow:clairiere`, `_froide`, `_chaude` (the look of a clearing, see below) | sweden, wet_hands, mice_on_venus, key, komorebi, left_to_bloom, rose_field | 300 ± 180 | enter 30 s |
 | 8.1 | … at night | `night` | subwoofer_lullaby, the_long_dark, meditation_impromptu_02 | 600 ± 300 | enter 30 s |
 | 9 | Mist | `biome` `fallow:brumeux` | hymn_to_the_dawn, long_note_four | 900 ± 300 | enter 120 s |
 | 10 | Night | `night` | subwoofer_lullaby, the_long_dark, meditation_impromptu_02 | 720 ± 300 | — |
@@ -77,7 +77,7 @@ The selection comes from the listening page (the maintainer's sheet of 2026-10-1
 | 11.3 | Autumn | `custom` `automne.json` | hiraeth, echo_in_the_wind | 480 ± 240 | — |
 | 11.4 | Winter | `custom` `hiver.json` | permafrost, floating_dream | 480 ± 240 | — |
 
-The clearings (`fallow:clairiere*`) are still only a draft ([10](../archive/plan/10-recentrage.md)): as long as these biomes do not exist, node 8 stays false, without error (a missing biome matches nothing).
+Since `fallow` 0.8.0 a clearing no longer changes the biome of the world: the three `fallow:clairiere*` biomes are only its look. The `clairiere` module hands True Adaptive Music the look biome where the player stands in a clearing ([mod-fallow](mod-fallow.md#clairiere-module)), so node 8 is written as before. Without the mod, node 8 stays false, without error.
 
 ## The server predicates
 

@@ -22,7 +22,6 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue XP_HIDE_BAR;
     private static final ModConfigSpec.BooleanValue XP_BLOCK_ENCHANT_MERGE;
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
-    private static final ModConfigSpec.IntValue CLAIRIERE_CHUNKS_PER_TICK;
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
@@ -143,13 +142,11 @@ public final class FallowConfig {
         common.pop();
 
         common.comment("Modules clairiere et dissipateur : poser un feu de veille (rayon 16), une lanterne de clairière (32)",
-                "ou faire tourner un dissipateur (64) change les biomes autour en clairière ; le retirer y rend la brume.").push("clairiere");
+                "ou faire tourner un dissipateur (64) lève la brume autour ; le retirer la rend. Le biome ne change pas :",
+                "climat, saisons, cultures et faune restent ceux du lieu ; seuls les monstres n'y apparaissent plus.").push("clairiere");
         CLAIRIERE_ENABLED = common
-                .comment("Interrupteur de la conversion (serveur). Faux : les blocs restent, mais ne changent plus rien.")
+                .comment("Interrupteur des clairières (serveur). Faux : les blocs restent, mais ne lèvent plus la brume.")
                 .define("enabled", true);
-        CLAIRIERE_CHUNKS_PER_TICK = common
-                .comment("Tronçons (16 × 16 blocs) convertis par tick. Un dissipateur en touche environ 80.")
-                .defineInRange("chunksPerTick", 2, 1, 16);
         CLAIRIERE_RING_TICKS = common
                 .comment("La clairière s'ouvre (et se referme) en vague, un anneau de 4 blocs tous les tant de ticks.",
                         "6 : une lanterne (32 blocs) en 2,7 secondes, un dissipateur (64) en 5. 1 : presque d'un coup.")
@@ -216,10 +213,6 @@ public final class FallowConfig {
 
     public static boolean clairiereEnabled() {
         return read(COMMON_SPEC, CLAIRIERE_ENABLED);
-    }
-
-    public static int clairiereChunksPerTick() {
-        return read(COMMON_SPEC, CLAIRIERE_CHUNKS_PER_TICK);
     }
 
     public static int clairiereRingTicks() {
