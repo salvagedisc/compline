@@ -9,12 +9,12 @@ and nothing else.
 
 The script rewrites three things, from the table below and the biome files of the jar:
   - the `regions_unexplored:*` profiles, and those of `OTHER_MODELS`, of the single preset in
-    pack/resourcepacks/fallow-ambiance/assets/atmospherics/preset/ (rename the file by hand
+    pack/resourcepacks/tilth-ambiance/assets/atmospherics/preset/ (rename the file by hand
     to ship it: ATMOSPHERICS applies a preset once per file name);
   - one Polytone modifier per surface biome that sets its own grass, foliage or water
     colour (`ru_<biome>.json`), muted like the rest of the pack, with the snowflakes of the
     snowy biomes;
-  - the Regions Unexplored part of the `fallow:brumeux` biome tag (the misty family), which
+  - the Regions Unexplored part of the `tilth:brumeux` biome tag (the misty family), which
     the music pack reads.
 
 Usage, from the repository root:
@@ -28,10 +28,10 @@ import sys
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-AMBIANCE = os.path.join(ROOT, "pack/resourcepacks/fallow-ambiance/assets")
+AMBIANCE = os.path.join(ROOT, "pack/resourcepacks/tilth-ambiance/assets")
 PRESETS = os.path.join(AMBIANCE, "atmospherics/preset")
-MODIFIERS = os.path.join(AMBIANCE, "fallow/polytone/biome_modifiers")
-MISTY_TAG = os.path.join(ROOT, "pack/kubejs/data/fallow/tags/worldgen/biome/brumeux.json")
+MODIFIERS = os.path.join(AMBIANCE, "tilth/polytone/biome_modifiers")
+MISTY_TAG = os.path.join(ROOT, "pack/kubejs/data/tilth/tags/worldgen/biome/brumeux.json")
 
 NAMESPACE = "regions_unexplored"
 PREFIX = "ru_"

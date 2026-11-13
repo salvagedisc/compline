@@ -29,7 +29,7 @@ jobs:
         working-directory: pack
         run: |
           mkdir -p ../dist
-          packwiz mr export -o ../dist/Fallow-dev.mrpack
+          packwiz mr export -o ../dist/Tilth-dev.mrpack
 
       - name: Update the dev pre-release
         env:
@@ -37,6 +37,6 @@ jobs:
         run: |
           notes="Latest main: ${GITHUB_SHA::7} ($(git log -1 --format=%cs)). $(git log -1 --format=%s)"
           gh release delete dev --cleanup-tag --yes || true
-          gh release create dev dist/Fallow-dev.mrpack --target "$GITHUB_SHA" --prerelease --latest=false \
-            --title "Fallow dev (${GITHUB_SHA::7})" --notes "$notes"
+          gh release create dev dist/Tilth-dev.mrpack --target "$GITHUB_SHA" --prerelease --latest=false \
+            --title "Tilth dev (${GITHUB_SHA::7})" --notes "$notes"
 

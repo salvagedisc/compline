@@ -2,15 +2,15 @@
 
 Idea 5 from Wayfarer ([research](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 5). The maintainer asked for a study before any removal, then chose to **remove XP**.
 
-> **Status as of 2026-10-19: applied, not yet tested in game.** The removal plan is written in `pack/` and in the `fallow` mod 0.2.0, which compiles. What was done, what deviates from the plan and what remains to be verified are in [Application](#application-2026-10-19). The study below comes from reading the pack's jars (`.cache/jars/`, `javap`), the Minecraft 1.21.1 code patched by NeoForge 21.1.251 (Gradle cache of the `fallow` mod) and the Modrinth API.
+> **Status as of 2026-10-19: applied, not yet tested in game.** The removal plan is written in `pack/` and in the `tilth` mod 0.2.0, which compiles. What was done, what deviates from the plan and what remains to be verified are in [Application](#application-2026-10-19). The study below comes from reading the pack's jars (`.cache/jars/`, `javap`), the Minecraft 1.21.1 code patched by NeoForge 21.1.251 (Gradle cache of the `tilth` mod) and the Modrinth API.
 
 ## Summary
 
-1. XP now has only **four uses** in Fallow: the anvil, the copying and transmutation of Immersive Enchanting ancient books, and the address of an Envelope mailbox. Enchanting itself is already paid for in materials.
-2. Three are handled by data or config. **The anvil is not**: Minecraft refuses to hand over the item if the player has fewer levels than the cost, and this cost is always at least 1. A small mixin is needed in the `fallow` mod.
-3. Cutting XP is done in a single place: cancel the spawning of orbs and every point gain (KubeJS and MoreJS). The bar is hidden in the same module of the `fallow` mod. No Modrinth mod does it cleanly in French.
+1. XP now has only **four uses** in Tilth: the anvil, the copying and transmutation of Immersive Enchanting ancient books, and the address of an Envelope mailbox. Enchanting itself is already paid for in materials.
+2. Three are handled by data or config. **The anvil is not**: Minecraft refuses to hand over the item if the player has fewer levels than the cost, and this cost is always at least 1. A small mixin is needed in the `tilth` mod.
+3. Cutting XP is done in a single place: cancel the spawning of orbs and every point gain (KubeJS and MoreJS). The bar is hidden in the same module of the `tilth` mod. No Modrinth mod does it cleanly in French.
 4. The player loses a gauge and an invisible currency. They also lose a few minor bonuses: the blue moon (XP ×2), the lapis backpack, Create's nuggets and the 5 XP per Wildex species. No mod read crashes at 0 XP: every new player starts at 0.
-5. **Recommendation: remove XP entirely**, in a single version, as soon as the `xp` module of the `fallow` mod is written and tested. The removal touches **16 essential files**, plus 3 optional settings and 5 doc pages.
+5. **Recommendation: remove XP entirely**, in a single version, as soon as the `xp` module of the `tilth` mod is written and tested. The removal touches **16 essential files**, plus 3 optional settings and 5 doc pages.
 
 ## How the study was done
 
@@ -51,7 +51,7 @@ Until 2026-11-13 the table also listed No Man's Land (turtle orbs on breeding; p
 
 | Source | What breaks without XP | Replacement | File, key, value |
 |---|---|---|---|
-| **Anvil** (vanilla): rename, repair, combine | **Everything.** `AnvilMenu.mayPickup` requires `experienceLevel >= cost` and `cost > 0`. Renaming costs at least 1 level: at level 0, you can no longer name a tag for an animal, nor repair | **`xp` module of the `fallow` mod**: a mixin on `mayPickup` ignores levels. The anvil keeps its cost in materials (ingots, sacrificed item) and its "Too expensive!" limit (40), which becomes **wear**: an item repaired too often no longer goes through the anvil, the grindstone or Overgeared's forge is needed. The label changes: "Usure : %1$s" ("Wear") and "Trop usé !" ("Too worn!"). Optional: refuse the merging of enchantments (`AnvilUpdateEvent` event), so that enchanting stays at the table | `mods-custom/fallow/…/mixin/xp/AnvilMenuMixin.java`; keys `container.repair.cost` and `container.repair.expensive` in `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
+| **Anvil** (vanilla): rename, repair, combine | **Everything.** `AnvilMenu.mayPickup` requires `experienceLevel >= cost` and `cost > 0`. Renaming costs at least 1 level: at level 0, you can no longer name a tag for an animal, nor repair | **`xp` module of the `tilth` mod**: a mixin on `mayPickup` ignores levels. The anvil keeps its cost in materials (ingots, sacrificed item) and its "Too expensive!" limit (40), which becomes **wear**: an item repaired too often no longer goes through the anvil, the grindstone or Overgeared's forge is needed. The label changes: "Usure : %1$s" ("Wear") and "Trop usé !" ("Too worn!"). Optional: refuse the merging of enchantments (`AnvilUpdateEvent` event), so that enchanting stays at the table | `mods-custom/tilth/…/mixin/xp/AnvilMenuMixin.java`; keys `container.repair.cost` and `container.repair.expensive` in `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
 | Grindstone (vanilla) | Nothing: it gives XP, it does not take any | **Keep.** Overgeared uses it to restore durability (`grindingToggle`), without XP | — |
 | Enchanting table | Nothing: Immersive Enchanting replaces the vanilla menu. The 43 cost files of the vanilla enchantments have **no** `xp_levels`: a material and lapis are paid | **Keep** | — |
 | **Immersive Enchanting**: copy an ancient book | `replicate.json`: book and quill **+ 10 levels**. `Cost.test` requires `experienceLevel >= xp_levels`: nobody copies any more. Yet enchanting research counts on it to pass knowledge on to a friend | Book and quill alone, `xp_levels` at 0. The price remains the fuel (1 lapis) and having the book put away. Only one item can be put per cost slot | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json`: `{"levels": {"1": [{"item_cost": {"item": "minecraft:writable_book", "count": 1}}]}}` |
@@ -88,7 +88,7 @@ For levels given all at once (`/xp add … levels`), only the native event `Play
 
 The level stays at 0, so the green number is never displayed (`renderExperienceLevel` only draws if the level is positive). The empty bar remains.
 
-- **Chosen: the `xp` module of the `fallow` mod.** It cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump gauge is another layer (`JUMP_METER`): it stays. The module already contains the anvil mixin, and the mod is installed on both sides.
+- **Chosen: the `xp` module of the `tilth` mod.** It cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump gauge is another layer (`JUMP_METER`): it stays. The module already contains the anvil mixin, and the mod is installed on both sides.
 - Fallback without Java: a script in `pack/kubejs/client_scripts/` with `NativeEvents.onEvent('net.neoforged.neoforge.client.event.RenderGuiLayerEvent$Pre', …)`. It works, but it goes through JavaScript at every layer and every frame.
 - Mods searched on Modrinth for NeoForge 1.21.1 (API `/project/<slug>/version`, on 2026-10-19). **None is suitable**, and none has French:
 
@@ -109,14 +109,14 @@ Visible effect: hearts and hunger stay at their height, and a small gap remains 
 
 Each step lists the files touched. Steps 1 and 2 must come out **in the same version**: without the module, the anvil no longer works.
 
-1. **`xp` module of the `fallow` mod** (version 0.2.0).
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` (new): in `AnvilMenu.mayPickup`, ignore `player.experienceLevel` when the module is active. Keep the "cost > 0" test and the limit of 40. The mixin touches vanilla code. It does not interfere with that of Enhanced Celestials, which targets `createResult` (cost calculation).
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/xp/XpModule.java` (new): client side, cancel the two bar layers. Optional on the server side: refuse in `AnvilUpdateEvent` the merging of two enchanted items, so that enchanting goes through the table.
-   - `mods-custom/fallow/src/main/resources/fallow.mixins.json`: add `xp.AnvilMenuMixin` to the `mixins` list (both sides). This mixin targets no mod: nothing to add in `FallowMixinPlugin`.
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowModule.java`: entry `XP("xp", null, …)`, no required mod.
-   - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/FallowConfig.java`: `xp.enabled` (true), `xp.hideBar` (true), `xp.blockEnchantMerge` (to be decided), in `fallow-common.toml`.
-   - `mods-custom/fallow/gradle.properties`: `mod_version=0.2.0`.
-   - `pack/mods/fallow-0.1.0.jar` replaced by `pack/mods/fallow-0.2.0.jar`.
+1. **`xp` module of the `tilth` mod** (version 0.2.0).
+   - `mods-custom/tilth/src/main/java/io/github/salvagedisc/tilth/mixin/xp/AnvilMenuMixin.java` (new): in `AnvilMenu.mayPickup`, ignore `player.experienceLevel` when the module is active. Keep the "cost > 0" test and the limit of 40. The mixin touches vanilla code. It does not interfere with that of Enhanced Celestials, which targets `createResult` (cost calculation).
+   - `mods-custom/tilth/src/main/java/io/github/salvagedisc/tilth/xp/XpModule.java` (new): client side, cancel the two bar layers. Optional on the server side: refuse in `AnvilUpdateEvent` the merging of two enchanted items, so that enchanting goes through the table.
+   - `mods-custom/tilth/src/main/resources/tilth.mixins.json`: add `xp.AnvilMenuMixin` to the `mixins` list (both sides). This mixin targets no mod: nothing to add in `TilthMixinPlugin`.
+   - `mods-custom/tilth/src/main/java/io/github/salvagedisc/tilth/TilthModule.java`: entry `XP("xp", null, …)`, no required mod.
+   - `mods-custom/tilth/src/main/java/io/github/salvagedisc/tilth/TilthConfig.java`: `xp.enabled` (true), `xp.hideBar` (true), `xp.blockEnchantMerge` (to be decided), in `tilth-common.toml`.
+   - `mods-custom/tilth/gradle.properties`: `mod_version=0.2.0`.
+   - `pack/mods/tilth-0.1.0.jar` replaced by `pack/mods/tilth-0.2.0.jar`.
 2. **Cut the sources**: `pack/kubejs/server_scripts/sans_xp.js` (new). Draft, to be verified on the test server:
    ```js
    // No more experience orbs, no more point gains.
@@ -157,7 +157,7 @@ Each step lists the files touched. Steps 1 and 2 must come out **in the same ver
    - `pack/config/wildex/wildex-common.toml`: `[general]` `newEntryRewardsXp = false` (the file lives in the `wildex/` subfolder);
    - `pack/defaultconfigs/exposure-server.toml`: `[lightroom]` the three `experience_*` at 0;
    - `pack/defaultconfigs/travelersbackpack-server.toml`: `[server.backpackAbilities]` `allowedAbilities` without `travelersbackpack:lapis`.
-7. **Documentation**: `docs/mods.md` (Clumps goes out, the `fallow` mod gains the `xp` module), `docs/plan/mod-fallow.md` (`xp` module and its tests), `CHANGELOG.md`, a decision `docs/decisions/0009-xp.md`, and the status of this page.
+7. **Documentation**: `docs/mods.md` (Clumps goes out, the `tilth` mod gains the `xp` module), `docs/plan/mod-tilth.md` (`xp` module and its tests), `CHANGELOG.md`, a decision `docs/decisions/0009-xp.md`, and the status of this page.
 8. **In-game tests**, with two players:
    - mine coal, smelt iron, kill a creature, breed two cows: no orbs;
    - open a ruin chest: no experience bottle;
@@ -168,7 +168,7 @@ Each step lists the files touched. Steps 1 and 2 must come out **in the same ver
    - discover a species in Wildex, take a photo, earn an Icy's Better Horses advancement: the bar does not move;
    - check that the bar has disappeared, on foot, on horseback (the jump gauge stays) and when aiming with the Supplementaries cannon.
 
-Total: **16 essential files** (7 in `pack/` with `index.toml`, 3 language files, 6 in the `fallow` mod), 3 optional settings, 5 doc pages.
+Total: **16 essential files** (7 in `pack/` with `index.toml`, 3 language files, 6 in the `tilth` mod), 3 optional settings, 5 doc pages.
 
 ## What the player gains and loses
 
@@ -188,10 +188,10 @@ Total: **16 essential files** (7 in `pack/` with `index.toml`, 3 language files,
 
 ## Risks
 
-- **The anvil mixin** is the only real risk. It touches vanilla code and must run on both sides: the client also refuses to take the item if it thinks the player does not have enough levels. Client and server must therefore have the same version of the `fallow` mod. No mod in the pack patches `mayPickup`. Enhanced Celestials patches `createResult`, a different method. Easy Anvils is already rejected.
+- **The anvil mixin** is the only real risk. It touches vanilla code and must run on both sides: the client also refuses to take the item if it thinks the player does not have enough levels. Client and server must therefore have the same version of the `tilth` mod. No mod in the pack patches `mayPickup`. Enhanced Celestials patches `createResult`, a different method. Easy Anvils is already rejected.
 - **API names.** `EntityEvents.spawned`, `MoreJS.playerXpChange`, `PlayerEvents.loggedIn`, `findRecipes` and `LootJS.modifiers` are read in the jars, not yet tried. The format of the recipe copied by `event.custom` is the most fragile part.
 - **Mods that crash at 0 XP**: none found. Every new player is at level 0, so these paths are the most played. The `getXpNeededForNextLevel` calculation is 7 at level 0, never 0: no division by zero.
-- **Farms**: an XP farm is no longer of any use, which goes in the direction of Fallow. Loot farms (wool, meat, crops) do not change. The only real automatic producer was Create's crushing.
+- **Farms**: an XP farm is no longer of any use, which goes in the direction of Tilth. Loot farms (wool, meat, crops) do not change. The only real automatic producer was Create's crushing.
 - **A mod added later** that pays in levels (enchanting, repair, teleportation) would become unusable. The adding filter must ask the question: "does it pay in XP?".
 - **Going back** is easy: delete `sans_xp.js` and set `xp.enabled = false`. The levels come back with the game, nothing is lost in the world.
 - **Flaw already present, unrelated to XP**: the anvil accepts an Immersive Enchanting ancient book as a book (it tests the `stored_enchantments` component), but it reads the enchantments through `EnchantmentHelper.getEnchantmentsForCrafting`, which only reads this component on the vanilla enchanted book. The anvil should therefore apply nothing. This is deduced from the code: to be verified in game, with or without XP.
@@ -202,7 +202,7 @@ Total: **16 essential files** (7 in `pack/` with `index.toml`, 3 language files,
 
 - "Remove only the bar and the orbs" does not hold. Direct gains (advancements, Wildex, Overgeared) would fill an invisible gauge. The anvil and Envelope would or would not work, without the player knowing why.
 - "Keep" costs nothing, but XP no longer has a role: enchanting is already paid for in materials. It remains a grind reward, contrary to the exploration wanted by the [vision](../vision.md).
-- The real cost is low: a two-class module in the `fallow` mod, a script, two data files and a config line. The only delicate point, the anvil, comes out improved.
+- The real cost is low: a two-class module in the `tilth` mod, a script, two data files and a config line. The only delicate point, the anvil, comes out improved.
 
 Advised order: write and test the `xp` module, then release steps 1 to 5 in the same 0.x version.
 
@@ -218,10 +218,10 @@ Advised order: write and test the `xp` module, then release steps 1 to 5 in the 
 
 | Step | File | Contents |
 |---|---|---|
-| 1 | `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/mixin/xp/AnvilMenuMixin.java` | `@ModifyExpressionValue` (MixinExtras) on the read of `player.experienceLevel` in `AnvilMenu.mayPickup`: equals `Integer.MAX_VALUE` when `xp.enabled`. The "cost > 0" test and the limit of 40 (in `createResult`) do not move |
-| 1 | `…/fallow/xp/XpModule.java`, `…/fallow/xp/XpClient.java` | `AnvilUpdateEvent` cancelled if `xp.blockEnchantMerge` and the right-hand item carries enchantments; on the client, `RenderGuiLayerEvent.Pre` cancelled for `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` if `xp.hideBar` |
-| 1 | `FallowModule.java`, `FallowConfig.java`, `Fallow.java`, `fallow.mixins.json`, `neoforge.mods.toml`, `gradle.properties` | Module `XP("xp", null, …)` with no required mod; `[xp]` `enabled = true`, `hideBar = true`, `blockEnchantMerge = false` in `fallow-common.toml`; `xp.AnvilMenuMixin` in `mixins` (both sides); version 0.2.0 |
-| 1 | `pack/mods/fallow-0.2.0.jar` (replaces `fallow-0.1.0.jar`) | Jar from `./gradlew build`. Its entry in `pack/index.toml` (name and sha256) is updated by hand |
+| 1 | `mods-custom/tilth/src/main/java/io/github/salvagedisc/tilth/mixin/xp/AnvilMenuMixin.java` | `@ModifyExpressionValue` (MixinExtras) on the read of `player.experienceLevel` in `AnvilMenu.mayPickup`: equals `Integer.MAX_VALUE` when `xp.enabled`. The "cost > 0" test and the limit of 40 (in `createResult`) do not move |
+| 1 | `…/tilth/xp/XpModule.java`, `…/tilth/xp/XpClient.java` | `AnvilUpdateEvent` cancelled if `xp.blockEnchantMerge` and the right-hand item carries enchantments; on the client, `RenderGuiLayerEvent.Pre` cancelled for `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` if `xp.hideBar` |
+| 1 | `TilthModule.java`, `TilthConfig.java`, `Tilth.java`, `tilth.mixins.json`, `neoforge.mods.toml`, `gradle.properties` | Module `XP("xp", null, …)` with no required mod; `[xp]` `enabled = true`, `hideBar = true`, `blockEnchantMerge = false` in `tilth-common.toml`; `xp.AnvilMenuMixin` in `mixins` (both sides); version 0.2.0 |
+| 1 | `pack/mods/tilth-0.2.0.jar` (replaces `tilth-0.1.0.jar`) | Jar from `./gradlew build`. Its entry in `pack/index.toml` (name and sha256) is updated by hand |
 | 2 | `pack/kubejs/server_scripts/sans_xp.js` | Orbs cancelled, positive gains blocked, XP reset to 0 on login, nuggets removed from Create crushing, experience block recipes removed, bottles removed from all loot tables |
 | 3 | `pack/kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json`, `transmute.json` | Book and quill without levels; 4 amethyst shards without levels (`xp_levels` is 0 by default in the `Cost` codec) |
 | 3 | `pack/defaultconfigs/envelope-server.toml` | `[mailbox]` `address_experience_levels_cost = 0` (key read in `Config$Server` of Envelope 0.7.5, `SERVER` config) |
@@ -236,7 +236,7 @@ The partial config files follow the pack's practice (`supplementaries-common.tom
 
 - **Create nuggets**: the script goes through all `create:crushing` recipes (`forEachRecipe`) and reads their JSON, instead of the `output` filter, whose support by the KubeJS Create schema is uncertain. It first removes each recipe, then recreates it under the same identifier without the nugget and without `neoforge:conditions` (KubeJS 7 places the added recipes after the originals: the identifier is not lost). A recipe that had only the nugget would simply be removed; Create 6.0.10 has none (160 recipes read, all with another output).
 - **Bottles**: removed from the tables themselves (`LootJS.lootTables`, `forEachTable`, `removeItem`), as `tannerie_butin.js` does, instead of a modifier applied to each roll.
-- **Anvil label**: it goes through the vanilla keys, so it stays "Usure" (Wear) even with `xp.enabled = false`. The `fallow` mod has no language file (no registered config screen): nothing to translate in the mod.
+- **Anvil label**: it goes through the vanilla keys, so it stays "Usure" (Wear) even with `xp.enabled = false`. The `tilth` mod has no language file (no registered config screen): nothing to translate in the mod.
 - **Death screen**: `deathScreen.score.value` is not emptied. A value without `%s` would make `npm run check-fr` fail (variable check); "Score : 0" stays.
 - **Done separately**: Clumps removed and `packwiz refresh` run (step 5). **Remaining**: `docs/mods.md`, `CHANGELOG.md` and the decision `docs/decisions/0009-xp.md` (step 7).
 
@@ -244,7 +244,7 @@ The partial config files follow the pack's practice (`supplementaries-common.tom
 
 On the test server, then with two players (list of step 8):
 
-1. **Startup**: log "Module xp chargé (aucun mod requis)", no `fallow` mixin warning (`AnvilMenuMixin` must find its target); KubeJS log with no error in `sans_xp.js`, with "[sans_xp] 29 recettes de broyage recopiées sans pépite d'expérience" (see [Test server](#test-server-2026-10-19)).
+1. **Startup**: log "Module xp chargé (aucun mod requis)", no `tilth` mixin warning (`AnvilMenuMixin` must find its target); KubeJS log with no error in `sans_xp.js`, with "[sans_xp] 29 recettes de broyage recopiées sans pépite d'expérience" (see [Test server](#test-server-2026-10-19)).
 2. **Anvil at level 0**: name a tag, repair a pickaxe with ingots, merge two enchanted pickaxes. The cost is displayed in green ("Usure : n") and the item can be taken; at 40, "Trop usé !". With `xp.enabled = false`, the anvil asks for levels again. With `xp.blockEnchantMerge = true`, an enchanted book on the right no longer gives a result.
 3. **Sources cut**: mine coal, smelt iron, kill a creature, breed two cows, fish: no orbs. `/xp add @s 10 points`: nothing changes. Wildex, Exposure darkroom, Icy's Better Horses advancements: the bar does not move.
 4. **Create**: crush raw iron ore; no nugget, the other outputs and the duration are there; EMI no longer shows the nugget in crushing, nor a recipe for the experience block. Most fragile point: the copying by `event.custom`.
@@ -261,7 +261,7 @@ Dedicated server without a player (NeoForge 21.1.251, new world, 98 jars, Clumps
 
 | Check | Result |
 |---|---|
-| Startup | "Done" in 17 s. "Module xp chargé (aucun mod requis)", then "xp : enclume sans niveaux…". No `fallow` mixin warning. `AnvilMenu` is loaded at startup (`MenuType.ANVIL`): with `required` and `defaultRequire: 1`, a failed `AnvilMenuMixin` would have crashed the server |
+| Startup | "Done" in 17 s. "Module xp chargé (aucun mod requis)", then "xp : enclume sans niveaux…". No `tilth` mixin warning. `AnvilMenu` is loaded at startup (`MenuType.ANVIL`): with `required` and `defaultRequire: 1`, a failed `AnvilMenuMixin` would have crashed the server |
 | KubeJS scripts | `startup.log`: 2/2 scripts, 0 errors. `server.log`: 6/6 scripts, 0 errors, 0 warnings; "Reloaded with no KubeJS errors" after `/reload`. The 81 warnings in `server.log` are recipes from other mods that it cannot read ("Falling back to vanilla"), unrelated to `sans_xp.js` |
 | Create crushing | "29 recettes de broyage recopiées", "0 failed recipes". **29 and not 160**: the other 131 nugget recipes in Create 6.0.10 carry a `neoforge:tag_empty` condition (ores from other mods) and do not load in this pack. The export (`/kubejs export debug`) shows `raw_iron` with the single output `create:crushed_raw_iron` and the same duration (400). For `deepslate_gold_ore` and `nether_quartz_ore`, the outputs and the duration are the original ones, minus the nugget. No exported recipe contains `experience_nugget`. The two experience block recipes are removed |
 | Orbs | `summon minecraft:experience_orb … {Value:10}` answers "Summoned", but no orb exists afterwards (`execute if entity @e[type=experience_orb]`: fails). Same for an experience bottle thrown by `summon` |

@@ -45,7 +45,7 @@ CW = W + 2 * PAD
 TPB = 8            # texels a block for the cut-outs
 HALF = H // 2      # the horizon's row
 
-# Fallow's tones: mist and bone, sage, moss, lantern light.
+# Tilth's tones: mist and bone, sage, moss, lantern light.
 MIST = (206, 205, 188)
 MIST_DEEP = (150, 160, 146)
 SKY_HIGH = (122, 140, 136)

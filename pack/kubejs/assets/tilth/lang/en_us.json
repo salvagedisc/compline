@@ -1,0 +1,14 @@
+{
+  "tilth.sante.coeur_ancien": "The Elderheart leaves a shard of life in your hands.",
+  "tilth.sante.plein": "Your health is already whole: %s hearts.",
+  "tilth.sante.rendu": "A heart returns to you: %s / %s.",
+  "tilth.sante.reveil": "You wake up weaker. %s hearts remain.",
+  "tilth.sante.reveil_plancher": "You wake up. %s hearts remain; you will grow no weaker.",
+  "item.tilth.eclat_de_vie": "Shard of Life",
+  "item.tilth.eclat_de_vie.compteur": "Hearts: %s / %s",
+  "item.tilth.eclat_de_vie.tooltip": "Restores a lost heart.",
+  "message.tilth.tannerie.poudre_manquante": "The barrel needs tannic powder.",
+  "message.tilth.tannerie.tonneau_plein": "The barrel is full.",
+  "tilth.monument.gardien": "The monument's guardian rises before you.",
+  "tilth.monument.eveil": "The Elderheart awakens: its blessing awaits whoever comes near."
+}

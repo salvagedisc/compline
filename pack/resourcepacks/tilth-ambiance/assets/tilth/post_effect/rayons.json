@@ -1,0 +1,15 @@
+{
+    "targets": [ "swap" ],
+    "passes": [
+        {
+            "name": "tilth:rayons",
+            "intarget": "minecraft:main",
+            "outtarget": "swap"
+        },
+        {
+            "name": "tilth:copie",
+            "intarget": "swap",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}

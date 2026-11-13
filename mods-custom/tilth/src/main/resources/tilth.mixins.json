@@ -1,0 +1,38 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.salvagedisc.tilth.mixin",
+  "plugin": "io.github.salvagedisc.tilth.mixin.TilthMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "compat.IceThawMixin",
+    "compat.InStructureMixin",
+    "horizon.ChunkyAccessorMixin",
+    "xp.AnvilMenuMixin"
+  ],
+  "client": [
+    "averse.LeafParticleMixin",
+    "averse.LeavesBlockMixin",
+    "averse.LightningBoltRendererMixin",
+    "ciel.AtmosphericsFadeMixin",
+    "ciel.BiomeBlendUtilInvoker",
+    "ciel.ClientPacketListenerMixin",
+    "ciel.LevelRendererMixin",
+    "ciel.RenderSystemMixin",
+    "clairiere.AtmosphericsBiomeMixin",
+    "clairiere.BiomeLookMixin",
+    "clairiere.ClientLevelTintMixin",
+    "clairiere.MusicBiomeMixin",
+    "clairiere.SodiumTintMixin",
+    "compat.PunchyEquipMixin",
+    "horizon.FarFadeMixin",
+    "horizon.FogRendererMixin",
+    "horizon.GLStateMixin",
+    "horizon.VanillaFadeMixin",
+    "titres.AbstractContainerScreenMixin",
+    "titres.OwnLabelsScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

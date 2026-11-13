@@ -1,4 +1,4 @@
-// Fallow : tri du pack (docs/plan/tri-du-pack.md). Objets qui n'ont plus leur place :
+// Tilth : tri du pack (docs/plan/tri-du-pack.md). Objets qui n'ont plus leur place :
 // dimensions fermées (décision 0004), téléportation et repérage, armes de boss, doublons
 // d'un autre mod. Ils perdent leurs recettes et sortent du butin ; ils sont aussi cachés
 // d'EMI (client_scripts/tri.js, mêmes listes). Ids relevés dans le registre du serveur de test.

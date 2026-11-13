@@ -1,9 +1,0 @@
-{
-  "config.fallow.header": "Fallow",
-  "config.fallow.rayons": "Rayons de soleil",
-  "config.fallow.rayons.tooltip": "La lumière du soleil et de la lune qui passe entre les feuillages.",
-  "config.fallow.rayons_soleil": "Rayons du soleil",
-  "config.fallow.rayons_soleil.tooltip": "La force des rayons du soleil.",
-  "config.fallow.rayons_lune": "Rayons de la lune",
-  "config.fallow.rayons_lune.tooltip": "La force des rayons de la lune. 0 les éteint."
-}

@@ -1,4 +1,4 @@
-"""Fallow's widgets, drawn from scratch: buttons, sliders, checkboxes, tabs, text
+"""Tilth's widgets, drawn from scratch: buttons, sliders, checkboxes, tabs, text
 fields and scrollers, the recipe book's toggles and the lists' arrows.
 
 Raised parts (buttons, the slider's knob, the scroller's thumb, tabs) are sage

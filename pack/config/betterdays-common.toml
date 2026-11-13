@@ -1,4 +1,4 @@
-# Fallow: 30 minutes of day, 15 minutes of night (decision 0012).
+# Tilth: 30 minutes of day, 15 minutes of night (decision 0012).
 # Day runs from dayStart to nightStart (13000 ticks), night the other 11000.
 # RATIO = ticks of game time per tick: 13000 / (30 x 1200) and 11000 / (15 x 1200).
 # For 60 / 30: daySpeed = 0.1806, nightSpeed = 0.3056 (and LastingDaysOfEachTerm = 2

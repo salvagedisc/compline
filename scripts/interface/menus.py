@@ -1,5 +1,5 @@
-"""Fallow's title screen and loading screen, for FancyMenu and Drippy Loading
-Screen: the Fallow logo (drawn by logo.py) in place of Minecraft's over a moss
+"""Tilth's title screen and loading screen, for FancyMenu and Drippy Loading
+Screen: the Tilth logo (drawn by logo.py) in place of Minecraft's over a moss
 veil that darkens the background behind the buttons, and a moss loading screen
 with the logo and a bar in lantern light in place of Mojang's red one.
 
@@ -181,55 +181,55 @@ def draw(config):
     (fm / "assets").mkdir(parents=True, exist_ok=True)
     (fm / "customization").mkdir(parents=True, exist_ok=True)
     im = logo.draw()
-    im.save(fm / "assets" / "fallow_logo.png", optimize=True)
+    im.save(fm / "assets" / "tilth_logo.png", optimize=True)
     w, h = im.width // logo.SCALE, im.height // logo.SCALE
-    source = "[source:local]/config/fancymenu/assets/fallow_logo.png"
+    source = "[source:local]/config/fancymenu/assets/tilth_logo.png"
 
     # title screen: the painting with its mist, the logo where Minecraft's
     # stood, the splash text gone, a veil behind the buttons
-    veil().save(fm / "assets" / "fallow_veil.png", optimize=True)
-    shutil.copyfile(TITLE / "painting.jpg", fm / "assets" / "fallow_title_painting.jpg")
-    shutil.copyfile(TITLE / "mist-mask.png", fm / "assets" / "fallow_title_mist_mask.png")
+    veil().save(fm / "assets" / "tilth_veil.png", optimize=True)
+    shutil.copyfile(TITLE / "painting.jpg", fm / "assets" / "tilth_title_painting.jpg")
+    shutil.copyfile(TITLE / "mist-mask.png", fm / "assets" / "tilth_title_mist_mask.png")
     # FancyMenu keeps a property on one line, its newlines written as a token
     shader = (TITLE / "mist.glsl").read_text().strip().replace("\n", "%%!serialized_property_newline!%%")
     painting = f"""
 menu_background {{
-  instance_identifier = {ident("fallow:title:background")}
+  instance_identifier = {ident("tilth:title:background")}
   background_type = glsl
   show_background = true
   inline_shader_source = {shader}
   compile_mode = shadertoy
-  ichannel_0_source = [source:local]/config/fancymenu/assets/fallow_title_painting.jpg
-  ichannel_1_source = [source:local]/config/fancymenu/assets/fallow_title_mist_mask.png
+  ichannel_0_source = [source:local]/config/fancymenu/assets/tilth_title_painting.jpg
+  ichannel_1_source = [source:local]/config/fancymenu/assets/tilth_title_mist_mask.png
   image_ichannel0_input = resource0
   image_ichannel1_input = resource1
 }}
 """
     title = layout("title_screen", painting, [
-        image("fallow:title:veil", "[source:local]/config/fancymenu/assets/fallow_veil.png", "top-left",
+        image("tilth:title:veil", "[source:local]/config/fancymenu/assets/tilth_veil.png", "top-left",
               0, 0, 320, 180, stretch=True),
-        image("fallow:title:logo", source, "top-centered", -(w // 2), 12, w, h),
+        image("tilth:title:logo", source, "top-centered", -(w // 2), 12, w, h),
         hidden("minecraft_logo_widget"),
         hidden("minecraft_splash_widget"),
     ], behind=True)
-    (fm / "customization" / "fallow_title_screen.txt").write_text(title)
+    (fm / "customization" / "tilth_title_screen.txt").write_text(title)
 
     # loading screen: moss ground, the logo, a bar in lantern light
     ground = f"""
 menu_background {{
-  instance_identifier = {ident("fallow:loading:background")}
+  instance_identifier = {ident("tilth:loading:background")}
   background_type = color_fancymenu
   show_background = true
   color = {GROUND}
 }}
 """
     loading = layout("drippy_loading_overlay", ground, [
-        image("fallow:loading:logo", source, "mid-centered", -(w // 2), -h // 2 - 12, w, h),
-        bar("fallow:loading:bar", "mid-centered", -80, h // 2 + 6, 160, 4),
+        image("tilth:loading:logo", source, "mid-centered", -(w // 2), -h // 2 - 12, w, h),
+        bar("tilth:loading:bar", "mid-centered", -80, h // 2 + 6, 160, 4),
         hidden("mojang_logo"),
         hidden("progress_bar"),
     ])
-    (fm / "customization" / "fallow_loading_screen.txt").write_text(loading)
+    (fm / "customization" / "tilth_loading_screen.txt").write_text(loading)
 
     (fm / "customizablemenus.txt").write_text(
         "type = customizablemenus\n\n"

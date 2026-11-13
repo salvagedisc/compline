@@ -2,7 +2,7 @@
 
 > The phases remain valid for the v2 mods. The decisions in 8.4 are replaced by [10.12](10-recentrage.md#1012-decisions-to-validate-replaces-84).
 
-Each phase follows [CONTRIBUTING.md](https://github.com/salvagedisc/fallow/blob/main/CONTRIBUTING.md): one `test/<topic>` branch, one mod per commit, config and scripts in `pack/`, a record in `docs/decisions/` for each trade-off, and green CI (`check-deps`, `.mrpack` export) before merging. **`packwiz mr add` settles Modrinth availability**: the research could not establish it for every mod (see [README](../../plan/README.md)), and a mod absent for 1.21.1 NeoForge is replaced by the fallback given in the relevant chapter.
+Each phase follows [CONTRIBUTING.md](https://github.com/salvagedisc/tilth/blob/main/CONTRIBUTING.md): one `test/<topic>` branch, one mod per commit, config and scripts in `pack/`, a record in `docs/decisions/` for each trade-off, and green CI (`check-deps`, `.mrpack` export) before merging. **`packwiz mr add` settles Modrinth availability**: the research could not establish it for every mod (see [README](../../plan/README.md)), and a mod absent for 1.21.1 NeoForge is replaced by the fallback given in the relevant chapter.
 
 ## 8.1 Phases
 
@@ -20,7 +20,7 @@ Each phase follows [CONTRIBUTING.md](https://github.com/salvagedisc/fallow/blob/
 | **8. Server & comfort** | `test/serveur` | Jade, AppleSkin, Mouse Tweaks, Controlling + Searchables, GraveStone, Simple Voice Chat, Crash Assistant, Default Options, Simple Backups; `server.properties`, backups, `scripts/deploy-serverconfig`; settler's notebook | Restoring a backup tested; all players connect with voice |
 | **Launch** | `main` | Chunky pregeneration, CHANGELOG, tag `v1.0.0` | Permanent world open |
 
-Phases 3, 4 and 6 are independent once phase 2 is closed and can proceed in parallel. Phase 1 must precede all the others: without it, every test is run in a world that is not Fallow's.
+Phases 3, 4 and 6 are independent once phase 2 is closed and can proceed in parallel. Phase 1 must precede all the others: without it, every test is run in a world that is not Tilth's.
 
 ## 8.2 For each mod added
 

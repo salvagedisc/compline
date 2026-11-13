@@ -29,7 +29,7 @@ Tannery's rack only takes its own five hides, so each animal gets the closest on
 | Pig | pig (added), Naturalist boar, hoglin (Nether, no effect) | `minecraft:entities/pig`, `naturalist:entities/boar`, `minecraft:entities/hoglin` |
 | Sheep | sheep (added) | `minecraft:entities/sheep` |
 
-Alex's Mobs kangaroo: two kangaroo hides make a goat hide (`fallow:tannerie/peau_de_kangourou`). A Naturalist hide left over from an existing world makes a cow hide (`fallow:tannerie/peau_de_naturalist`).
+Alex's Mobs kangaroo: two kangaroo hides make a goat hide (`tilth:tannerie/peau_de_kangourou`). A Naturalist hide left over from an existing world makes a cow hide (`tilth:tannerie/peau_de_naturalist`).
 
 Tannery ships its own tables for the cow, pig, sheep, goat, horse and donkey. They drop the Looting bonus and the cooked meat of an animal killed by fire. `pack/kubejs/data/minecraft/loot_table/entities/` puts the six vanilla 1.21.1 tables back (KubeJS data loads after the mods), and the script then adds the hides and the fat. No other mod of the pack replaces these six tables.
 
@@ -45,8 +45,8 @@ Added or changed (`pack/kubejs/server_scripts/tannerie.js`):
 
 | Identifier | Recipe |
 |---|---|
-| `fallow:tannerie/peau_de_kangourou` | 2 kangaroo hides → goat hide (only with Alex's Mobs) |
-| `fallow:tannerie/peau_de_naturalist` | Naturalist hide → cow hide (only with Naturalist) |
+| `tilth:tannerie/peau_de_kangourou` | 2 kangaroo hides → goat hide (only with Alex's Mobs) |
+| `tilth:tannerie/peau_de_naturalist` | Naturalist hide → cow hide (only with Naturalist) |
 
 Removed, because they give leather outside the tannery:
 
@@ -65,7 +65,7 @@ Leather uses do not change: every recipe keeps `minecraft:leather`. Overgeared 1
 
 ## French texts
 
-Tannery ships English only. `pack/kubejs/assets/tannery/lang/fr_fr.json` translates its 74 texts (items, blocks, advancements, recipe-viewer pages, tanner's table screen). The barrel writes two messages in hard-coded English (« Barrel needs Tannic Powder », « Barrel Full »): the server sends them as action-bar system messages, and `client_scripts/tannerie.js` replaces them on arrival with `message.fallow.tannerie.*` (`NativeEvents` on NeoForge's `ClientChatReceivedEvent.System`).
+Tannery ships English only. `pack/kubejs/assets/tannery/lang/fr_fr.json` translates its 74 texts (items, blocks, advancements, recipe-viewer pages, tanner's table screen). The barrel writes two messages in hard-coded English (« Barrel needs Tannic Powder », « Barrel Full »): the server sends them as action-bar system messages, and `client_scripts/tannerie.js` replaces them on arrival with `message.tilth.tannerie.*` (`NativeEvents` on NeoForge's `ClientChatReceivedEvent.System`).
 
 ## Files
 
@@ -74,7 +74,7 @@ Tannery ships English only. `pack/kubejs/assets/tannery/lang/fr_fr.json` transla
 - `pack/kubejs/server_scripts/tannerie_butin.js`: the loot (LootJS).
 - `pack/kubejs/data/minecraft/loot_table/entities/{cow,pig,sheep,goat,horse,donkey}.json`: vanilla tables put back over Tannery's.
 - `pack/kubejs/client_scripts/tannerie.js`: satchels hidden from EMI, barrel messages translated.
-- `pack/kubejs/assets/tannery/lang/fr_fr.json`, `pack/kubejs/assets/fallow/lang/*.json`: texts.
+- `pack/kubejs/assets/tannery/lang/fr_fr.json`, `pack/kubejs/assets/tilth/lang/*.json`: texts.
 - Quest « La tannerie » (`pack/config/questlog/quests/metiers_tannerie.json`): appears with the first hide; dry hide, tannic powder, leather.
 
 ## What remains to be tested

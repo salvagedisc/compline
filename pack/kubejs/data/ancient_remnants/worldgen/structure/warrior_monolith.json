@@ -1,5 +1,5 @@
 {
-  "type": "fallow:terrain_checked",
+  "type": "tilth:terrain_checked",
   "biomes": "#ancient_remnants:has_structure/warrior_monolith",
   "step": "surface_structures",
   "spawn_overrides": {},

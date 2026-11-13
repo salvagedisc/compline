@@ -1,4 +1,4 @@
-# Fallow — Vision
+# Tilth — Vision
 
 ## Pitch
 A vast, damp, almost empty world, in the spirit of the No Man's Land trailer (the mod itself left the pack on 2026-11-13, [0019](decisions/0019-leaving-no-mans-land.md)): landscapes in the mist, ruins, menhirs, a lone traveller. A handful of players arrive, settle in, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. Wherever they bring life back, the mist lifts and the distant landscape appears. There is no end: the permanent world is for perfecting one's installations.
@@ -36,4 +36,4 @@ Everything that can be read in game (mechanics, books, quests, codex, bestiary, 
 - The 5-question filter for every mod: does it change the gameplay? does it fit with the other systems? is it still interesting after 100 hours? does it bring a mechanic rather than content? does it avoid overlaps?
 - Then the whole pack is judged on four more: **weight** (does it change what the player decides or feels?), **tone** (does it keep the world almost empty and enigmatic?), **link** (does it plug into wood, temperature, cooking, fauna, the map?), **cost** (stable and light for a world meant to last years?) ([10.2](archive/plan/10-recentrage.md#102-the-basic-idea)).
 - "Add 200 items" is not an argument; "turns an activity into a craft" is.
-- What scripts cannot do goes into the custom `fallow` mod, one module per feature, each with its own switch ([mod-fallow](plan/mod-fallow.md)).
+- What scripts cannot do goes into the custom `tilth` mod, one module per feature, each with its own switch ([mod-tilth](plan/mod-tilth.md)).

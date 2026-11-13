@@ -1,4 +1,4 @@
-name = "Fallow"
+name = "Tilth"
 author = "salvagedisc"
 version = "0.1.0"
 pack-format = "packwiz:1.1.0"
@@ -6,7 +6,7 @@ pack-format = "packwiz:1.1.0"
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "fb5665e69363e6fb8e1f824b474ea5e2d89c5c822e43732943b849d4e646cf26"
+hash = "1d2eaec623019b4f303c38223b529a42af201ceb2290d21925e5ab2faa3df69f"
 
 [versions]
 minecraft = "1.21.1"

@@ -1,4 +1,4 @@
-"""Draws the Questlog journal textures of the fallow-interface resource pack.
+"""Draws the Questlog journal textures of the tilth-interface resource pack.
 
 Called by build.py. The rest of the pack comes from GUI Revision; this file
 draws the Questlog sheets in the same light, misty style so the journal

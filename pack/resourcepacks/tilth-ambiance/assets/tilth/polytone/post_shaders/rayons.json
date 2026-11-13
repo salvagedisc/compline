@@ -1,0 +1,10 @@
+{
+  "activation_condition": "config('tilth:rayons') && g.skyType()==1 && g.rain()<=0.1",
+  "post_chain": "tilth:rayons",
+  "use_depth_buffer": true,
+  "priority": 0.0,
+  "expression_uniforms": {
+    "SunRayIntensity": "config('tilth:rayons_soleil')",
+    "MoonRayIntensity": "config('tilth:rayons_lune')"
+  }
+}

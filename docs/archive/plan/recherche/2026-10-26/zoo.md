@@ -1,4 +1,4 @@
-# Research: Fallow zoo module (the keeper's register)
+# Research: Tilth zoo module (the keeper's register)
 
 Date: 2026-10-26. Research report. Everything cited comes from pages that were really opened (list at the end of the document). When a piece of information comes only from a search engine snippet, this is stated.
 
@@ -56,7 +56,7 @@ The pages do not say. We only see that animals appear through the creature mods,
 
 - A built-in book that documents each creature: 3D preview, spawn biome, diet, taming or breeding items, drops. Source: the 9minecraft wiki, which stays vague on how to obtain them.
 - Good: a useful sheet (biome + food), given early.
-- To avoid: knowing everything from the start removes the investigation. For Fallow, the sheet must fill in through observation.
+- To avoid: knowing everything from the start removes the investigation. For Tilth, the sheet must fill in through observation.
 - To take: the biome + food pair is exactly what the register must display.
 
 ### Cobblemon: Pokédex, Cobbledex, Research Tasks
@@ -77,7 +77,7 @@ The pages do not say. We only see that animals appear through the creature mods,
 ### "Zoo" packs and captures
 
 - **Zeno's Zoo Craft**: breeding, exhibits, finances. Very vague page, nothing instructive on the substance.
-- Capture mods for 1.21.1 NeoForge: Caged Mobs Reborn (DNA sample and cages), Better Cage Trap, Mob Catcher (net). They move beasts around, which Fallow does not want for rare creatures. For common fauna, a cage or a closed enclosure is enough.
+- Capture mods for 1.21.1 NeoForge: Caged Mobs Reborn (DNA sample and cages), Better Cage Trap, Mob Catcher (net). They move beasts around, which Tilth does not want for rare creatures. For common fauna, a cage or a closed enclosure is enough.
 - Naturalist: 24 to 47 animals depending on the page, behaviors and drops. No observation tool.
 
 ## 3. Outside Minecraft: the six most instructive

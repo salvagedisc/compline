@@ -6,7 +6,7 @@ edge of the panel.
 The letters GUI Revision drew (in FURNACE, BLAST FURNACE, SMOKER, CRAFTING
 TABLE and ENCHANTING TABLE) are taken as they are; the rest of the alphabet,
 the accents French needs, the digits and some signs are drawn in the same
-hand. The fallow mod draws the names with this atlas (`lettres.png` and
+hand. The tilth mod draws the names with this atlas (`lettres.png` and
 `lettres.json`), in each screen's colours.
 """
 # Five rows each, '#' ink. A glyph is followed by a pixel of space.

@@ -1,4 +1,4 @@
-"""Fallow's own details over GUI Revision's panels: the leaf pattern, the rounded
+"""Tilth's own details over GUI Revision's panels: the leaf pattern, the rounded
 slots, the tiled wells where creatures stand, the crafting grids' frames, and the
 slim fletched arrow and plus.
 
@@ -59,7 +59,7 @@ TONES = set(BRUME.values()) | {LEAF_TONE, EDGE_TOP, EDGE_FADE, EDGE_LOW, SLOT_FI
 
 
 def arrow_rows(width, height, fletched=True):
-    """Fallow's arrow, width long and height tall (even): a two-pixel shaft, a
+    """Tilth's arrow, width long and height tall (even): a two-pixel shaft, a
     barbed head of two slim diagonals meeting at the tip, and a notch of
     fletching at the tail."""
     k = height // 2 - 1  # rows above the shaft
@@ -85,7 +85,7 @@ ARROW = arrow_rows(22, 10)
 SHORT_ARROW = arrow_rows(13, 10)
 # where a mod's progress sprite is that small
 SMALL_ARROW = arrow_rows(17, 8)
-# Fallow's plus, 8x8 with two-pixel bars
+# Tilth's plus, 8x8 with two-pixel bars
 PLUS = ["...##..."] * 3 + ["########"] * 2 + ["...##..."] * 3
 
 # Shapes mods draw their own arrows in, whatever the colour: vanilla's wide arrow,
@@ -114,7 +114,7 @@ FC_ARROWS = [
      "##################", "..............###.", ".............###..", ".............##..."],
 ]
 EXPOSURE_PLUS = ["....##...."] * 4 + ["##########"] * 2 + ["....##...."] * 4
-# Arrows a mod draws in a shape of its own: the box to clear, then Fallow's arrow,
+# Arrows a mod draws in a shape of its own: the box to clear, then Tilth's arrow,
 # ("right", its top-left corner) or ("bent", from the shaft's left end (x, y) along
 # to the column x1, then down to the tip's row).
 MOD_ARROWS = {
@@ -171,7 +171,7 @@ def matches(im, tpl, alone=False):
 
 
 def draw_arrow(im, x0, y0, ink=ARROW_INK, light=ARROW_LIGHT, top=None, rows=ARROW, pts=None):
-    """Fallow's arrow (or another shape in the same ink) engraved: a pixel of
+    """Tilth's arrow (or another shape in the same ink) engraved: a pixel of
     light under it; with top, its upper edge lit (a progress arrow)."""
     px = im.load()
     pts = pts or shape(rows)
@@ -212,7 +212,7 @@ def trade_arrow():
 
 
 def bent_arrow(x0, y0, x1, tip):
-    """Fallow's arrow turning down: its shaft from (x0, y0) along to the column x1,
+    """Tilth's arrow turning down: its shaft from (x0, y0) along to the column x1,
     then down to the tip, with the same head turned."""
     head = {(y, x - 14) for x, y in shape(ARROW) if x >= 14}
     hx, hy = x1 - 4, tip - 7
@@ -224,7 +224,7 @@ def bent_arrow(x0, y0, x1, tip):
 
 def reshape_arrows(im, path):
     """Arrows a compat or a mod drew in its own shape and colour (vanilla's wide arrow,
-    Farm & Charm's, Exposure's plus, and those of MOD_ARROWS) become Fallow's: in ink
+    Farm & Charm's, Exposure's plus, and those of MOD_ARROWS) become Tilth's: in ink
     on the panel, in lantern light where they are progress sprites, on transparency."""
     px = im.load()
     width, height = im.size
@@ -267,7 +267,7 @@ def reshape_arrows(im, path):
 def replace_arrows(im, arrows):
     """GUI Revision's arrows (its furnace's wide one, its small triangle) and the
     progress arrow stored next to them are cleared, in its greys; returns where
-    Fallow's arrow goes, and puts the lit one in the progress arrow's place."""
+    Tilth's arrow goes, and puts the lit one in the progress arrow's place."""
     px = im.load()
     big, small, filled = arrows
     out = []
@@ -687,7 +687,7 @@ def add_frames(im, cells, frame, texts=()):
 
 
 def dress(im, slots, wells, frame, texts=()):
-    """A screen's slots and wells, Fallow's way: the cells a grid skipped added,
+    """A screen's slots and wells, Tilth's way: the cells a grid skipped added,
     wells pulled back from the slots, the old slot art around them cleared, the
     crafting grids framed, then each slot and well redrawn."""
     slots = [s for s in slots if all(s[0] + s[2] <= a or a + c <= s[0] or s[1] + s[3] <= b or b + d <= s[1]

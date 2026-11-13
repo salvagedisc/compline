@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tilth:block/feu_de_veille"
+    }
+  }
+}

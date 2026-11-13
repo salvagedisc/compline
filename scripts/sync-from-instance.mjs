@@ -11,13 +11,13 @@ import { toPackwizCommands } from './sync/commands.mjs';
 import { diffConfigs, copyConfigs } from './sync/configs.mjs';
 
 const USAGE = `Usage: npm run sync -- --instance <nom|chemin> [--configs] [--dry-run] [--yes]
-  --instance  Nom de l'instance Modrinth App (défaut : "Fallow test") ou chemin absolu
+  --instance  Nom de l'instance Modrinth App (défaut : "Tilth test") ou chemin absolu
   --configs   Rapatrie aussi les fichiers de config/ modifiés
   --dry-run   Affiche le diff et les commandes sans rien appliquer
   --yes       N'attend pas de confirmation`;
 
 function parseArgs(argv) {
-  const opts = { instance: 'Fallow test', configs: false, dryRun: false, yes: false, help: false };
+  const opts = { instance: 'Tilth test', configs: false, dryRun: false, yes: false, help: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--instance') opts.instance = argv[++i];

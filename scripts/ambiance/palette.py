@@ -1,13 +1,13 @@
 """Pulls the vanilla grass and foliage colour maps toward olive (Python 3 + Pillow).
 
 Vanilla biomes take their grass and leaf colour from these two maps (temperature x
-humidity). Fallow keeps the map, so the colour still changes from one biome to the
+humidity). Tilth keeps the map, so the colour still changes from one biome to the
 next, but pulls every entry a quarter of the way toward olive and takes off some
 saturation: warm, muted greens, like the biomes that set their own colours
 (scripts/ambiance/biomes.py).
 
 Usage, from the repository root, with the NeoForge client resources jar that
-ModDevGradle puts in mods-custom/fallow/build/moddev/artifacts/:
+ModDevGradle puts in mods-custom/tilth/build/moddev/artifacts/:
   python3 scripts/ambiance/palette.py <neoforge-...-client-extra-aka-minecraft-resources.jar>
 """
 import colorsys
@@ -19,7 +19,7 @@ import zipfile
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-OUT = os.path.join(ROOT, "pack/resourcepacks/fallow-ambiance/assets/minecraft/textures/colormap")
+OUT = os.path.join(ROOT, "pack/resourcepacks/tilth-ambiance/assets/minecraft/textures/colormap")
 
 OLIVE_HUE = 68 / 360  # yellow-green
 HUE_PULL = 0.25
