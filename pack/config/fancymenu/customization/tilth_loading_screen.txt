@@ -13,7 +13,7 @@ layout-meta {
 }
 
 menu_background {
-  instance_identifier = c32a5a15-f91c-6dba-6445-658243e01c83-1790000000000
+  instance_identifier = a157c3a1-3aa4-1804-f28d-e184f32e1c03-1790000000000
   background_type = color_fancymenu
   show_background = true
   color = #1F2521
@@ -31,7 +31,7 @@ element {
   image_tint = #FFFFFF
   restart_animated_on_menu_load = false
   element_type = image
-  instance_identifier = 87a432f7-f2fc-d659-74a8-9961772aadc4-1790000000000
+  instance_identifier = 3ba8d90c-43cc-3862-0a87-2df63b98de4e-1790000000000
   appearance_delay = no_delay
   appearance_delay_seconds = 1.0
   fade_in_v2 = no_fading
@@ -44,15 +44,15 @@ element {
   auto_sizing_base_screen_height = 0
   sticky_anchor = false
   anchor_point = mid-centered
-  x = -133
-  y = -55
-  width = 267
-  height = 85
+  x = -98
+  y = -54
+  width = 197
+  height = 84
   stretch_x = false
   stretch_y = false
   stay_on_screen = true
-  element_loading_requirement_container_identifier = 869b81fe-7fed-e57d-2971-ad2a376d39d4-1790000000000
-  [loading_requirement_container_meta:869b81fe-7fed-e57d-2971-ad2a376d39d4-1790000000000] = [groups:][instances:]
+  element_loading_requirement_container_identifier = 51d99037-2639-c728-2718-9fbe6fa4cab0-1790000000000
+  [loading_requirement_container_meta:51d99037-2639-c728-2718-9fbe6fa4cab0-1790000000000] = [groups:][instances:]
   enable_parallax = false
   parallax_intensity_v2 = 0.5
   invert_parallax = false
@@ -72,7 +72,7 @@ element {
   value_mode = percentage
   smooth_filling_animation = true
   element_type = progress_bar
-  instance_identifier = a96b102b-0508-7a0d-6720-e708244aeb6b-1790000000000
+  instance_identifier = e0dc4d7d-8b2f-47b0-353d-c7b0c9268739-1790000000000
   appearance_delay = no_delay
   appearance_delay_seconds = 1.0
   fade_in_v2 = no_fading
@@ -92,8 +92,8 @@ element {
   stretch_x = false
   stretch_y = false
   stay_on_screen = true
-  element_loading_requirement_container_identifier = 0193075d-5ea2-baeb-ecd4-07a2fa608504-1790000000000
-  [loading_requirement_container_meta:0193075d-5ea2-baeb-ecd4-07a2fa608504-1790000000000] = [groups:][instances:]
+  element_loading_requirement_container_identifier = 14484f5b-a08c-66af-7c09-582cff302b12-1790000000000
+  [loading_requirement_container_meta:14484f5b-a08c-66af-7c09-582cff302b12-1790000000000] = [groups:][instances:]
   enable_parallax = false
   parallax_intensity_v2 = 0.5
   invert_parallax = false
