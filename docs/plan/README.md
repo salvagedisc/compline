@@ -12,7 +12,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 
 | Page | Contents |
 |---|---|
-| [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset `fallow_v6`, Polytone colours, Regions Unexplored mist and colours by `biomes.py`, chosen values and settings to adjust in game |
+| [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset `fallow_v7`, Polytone colours, Regions Unexplored mist and colours by `biomes.py`, chosen values and settings to adjust in game |
 | [fallow-interface.md](fallow-interface.md) | Fallow's interface built from GUI Revision: sources, licences, build script, next steps |
 | [fallow-textures.md](fallow-textures.md) | The world's blocks and items from Vanilla Evolved: what is kept and left out, order of the packs, next steps for the mods' blocks |
 | [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.7.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres`, `outils`, `averse` and `rayons`): how it works, what is deduced from the code, in-game tests |

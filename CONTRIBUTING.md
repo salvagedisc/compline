@@ -32,8 +32,8 @@ Manual scripts, run from the repository root and committed with their output (ne
 |---|---|
 | `python3 scripts/ambiance/weather.py` | Rain, rain curtain and glint textures (`fallow-ambiance`, `fallow` mod) |
 | `python3 scripts/ambiance/palette.py <neoforge client resources jar>` | Olive grass and foliage colour maps; the jar is in `mods-custom/fallow/build/moddev/artifacts/` |
-| `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `fallow:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/fallow-ambiance.md)) |
-| `python3 scripts/ambiance/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes, from the same table as `biomes.py`; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biome rules or updating Regions Unexplored |
+| `python3 scripts/ambiance/biomes.py <regions-unexplored jar>` | Mist profiles of the Regions Unexplored biomes, and of the few biomes of other mods (`OTHER_MODELS`), in the ATMOSPHERICS preset, Polytone modifiers `ru_<biome>.json`, misty biomes of the `fallow:brumeux` tag; rerun after each update of the mod ([ambiance](docs/plan/fallow-ambiance.md)) |
+| `python3 scripts/ambiance/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the same tables as `biomes.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
 | `python3 scripts/interface/build.py` | The `fallow-interface` pack from GUI Revision (calls `menus.py`, which can also run alone) |
 | `python3 scripts/textures/build.py` | The `fallow-textures` pack from Vanilla Evolved |
 

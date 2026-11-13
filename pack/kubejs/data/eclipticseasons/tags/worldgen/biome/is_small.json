@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     {
+      "id": "hybrid_aquatic:tropical_river",
+      "required": false
+    },
+    {
       "id": "regions_unexplored:cold_river",
       "required": false
     },
@@ -11,6 +15,10 @@
     },
     {
       "id": "regions_unexplored:tropical_river",
+      "required": false
+    },
+    {
+      "id": "streamsreflowing:stream",
       "required": false
     }
   ]

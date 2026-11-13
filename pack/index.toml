@@ -958,7 +958,7 @@ hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
 
 [[files]]
 file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "69278550e8d84dc4dfaf4fed45ec939ed3b26a95571a6b2952fc035528bb5c95"
+hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
 
 [[files]]
 file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_plains.json"
@@ -1354,7 +1354,7 @@ hash = "daa1efc34bed94851ab0d571250046adba950d19edc659b7be8bb65acc1a4349"
 
 [[files]]
 file = "kubejs/data/eclipticseasons/tags/worldgen/biome/is_small.json"
-hash = "2f995c7bcc802b8f8bf8adca922288f92c25b417d8b6c7416fe8aaeb6862e76e"
+hash = "120b6240287323a1335d5264ef177d9ec1527f1f6b8fb5012977b7d11ff72820"
 
 [[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
@@ -1410,7 +1410,7 @@ hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
 
 [[files]]
 file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "69278550e8d84dc4dfaf4fed45ec939ed3b26a95571a6b2952fc035528bb5c95"
+hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
 
 [[files]]
 file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_plains.json"
@@ -1430,7 +1430,7 @@ hash = "2582d7297f5688df00cac18067defbf55eb4deb9105f0de2a4ac4113990e5675"
 
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_crab.json"
-hash = "d4c30aa6fc4cc7b72e9a2a6e546231382f80888d4fd86aef5e66de332a292ede"
+hash = "5a999fd06c936d74d868ba38a6a69b06b23a0a34805def828dbbedf9721bcba2"
 
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/citadel.json"
@@ -1463,6 +1463,10 @@ hash = "cc75d501d62cff1f3f689bcec94a9b7477349ca14f3421b0258123a3b995ebae"
 [[files]]
 file = "kubejs/data/hapi/tags/worldgen/biome/lukewarm_oceans.json"
 hash = "c5fd23a597251d38d8622bc82d8ce9cea68a9ed5d1c919f703b5d87bb7ef914b"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/rivers.json"
+hash = "10f829d92a61da4af91b87430d09938c723215792d0effaa668e35b46306915a"
 
 [[files]]
 file = "kubejs/data/hapi/tags/worldgen/biome/rocky_beaches.json"
@@ -1909,12 +1913,16 @@ file = "kubejs/data/mowziesmobs/worldgen/structure_set/wrought_chambers.json"
 hash = "2c16cd040054bc5cd9c4d55b0fbecdffd19ddd37d9ae3e12ae90c96a731b76e1"
 
 [[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/blacklist/blacklist_whale.json"
+hash = "679cf64bb224e3301fc327d909dddb376ae8c87846b3ecb3e42c92247e832f0c"
+
+[[files]]
 file = "kubejs/data/naturalist/tags/worldgen/biome/has_capybara.json"
 hash = "c453edd1e4acd9b241f7be7819fbe8aa47f932cbe61dcf765d957528bf643ae3"
 
 [[files]]
 file = "kubejs/data/naturalist/tags/worldgen/biome/has_great_white_shark.json"
-hash = "c5fd23a597251d38d8622bc82d8ce9cea68a9ed5d1c919f703b5d87bb7ef914b"
+hash = "73562434748c359edae176ac635f992e0e7e432299839af4fbce38263c5a614f"
 
 [[files]]
 file = "kubejs/data/naturalist/tags/worldgen/biome/has_hedgehog.json"
@@ -2799,8 +2807,8 @@ file = "resourcepacks/fallow-ambiance/CREDITS.md"
 hash = "ed402d8b971e914194402c071c6013a50e0cf7accfd8a4e894a117470c98b2e1"
 
 [[files]]
-file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v6.json"
-hash = "4e7f3904fa348f31d2342c5059b02c1d8b959ea09b159dab8884f6423aecc285"
+file = "resourcepacks/fallow-ambiance/assets/atmospherics/preset/fallow_v7.json"
+hash = "e17f54fc6dc99ba1f73d5c5f810b072d8acd46dc9f2f69227f6fd564fe7a948c"
 
 [[files]]
 file = "resourcepacks/fallow-ambiance/assets/fallow/lang/en_us.json"
