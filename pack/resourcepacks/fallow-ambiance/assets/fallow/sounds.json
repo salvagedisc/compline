@@ -7,14 +7,6 @@
       }
     ]
   },
-  "music.anachronistic": {
-    "sounds": [
-      {
-        "name": "nomansland:music/anachronistic",
-        "stream": true
-      }
-    ]
-  },
   "music.cicadas": {
     "sounds": [
       {
@@ -27,14 +19,6 @@
     "sounds": [
       {
         "name": "minecraft:music/game/cliff-hanger",
-        "stream": true
-      }
-    ]
-  },
-  "music.drifter": {
-    "sounds": [
-      {
-        "name": "nomansland:music/drifter",
         "stream": true
       }
     ]
@@ -59,14 +43,6 @@
     "sounds": [
       {
         "name": "minecraft:music/game/floating_dream",
-        "stream": true
-      }
-    ]
-  },
-  "music.guidance": {
-    "sounds": [
-      {
-        "name": "nomansland:records/guidance",
         "stream": true
       }
     ]
@@ -163,14 +139,6 @@
     "sounds": [
       {
         "name": "minecraft:music/game/mice_on_venus",
-        "stream": true
-      }
-    ]
-  },
-  "music.nomad": {
-    "sounds": [
-      {
-        "name": "nomansland:music/nomad",
         "stream": true
       }
     ]

@@ -257,7 +257,6 @@
       },
       {
         "music": [
-          "fallow:music.drifter",
           "fallow:music.infinite_amethyst"
         ],
         "ambience": [],
@@ -294,15 +293,13 @@
       },
       {
         "music": [
-          "fallow:music.nomad",
           "fallow:music.sweden",
           "fallow:music.wet_hands",
           "fallow:music.mice_on_venus",
           "fallow:music.key",
           "fallow:music.komorebi",
           "fallow:music.left_to_bloom",
-          "fallow:music.rose_field",
-          "fallow:music.guidance"
+          "fallow:music.rose_field"
         ],
         "ambience": [],
         "predicates": [
@@ -392,7 +389,6 @@
       },
       {
         "music": [
-          "fallow:music.anachronistic",
           "fallow:music.hymn_to_the_dawn",
           "fallow:music.long_note_four"
         ],

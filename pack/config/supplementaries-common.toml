@@ -68,9 +68,8 @@
 [building]
 	#Crêpes sans cuisson : la cuisine passe par Kaleidoscope Cookery
 	pancake = false
-	#Appliques : celles de No Man's Land suffisent
 	[building.sconce]
-		enabled = false
+		enabled = true
 	[building.blackboard]
 		enabled = true
 	#Briques de gravier : Twigs a les mêmes

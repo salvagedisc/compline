@@ -106,8 +106,7 @@ COMPAT_NAMESPACES = {
 # whose licence lets a modified copy be shared (credited in CREDITS.md).
 # Config libraries, books and mods with a style of their own (Create and its
 # addons) are left alone, and so are the mods whose textures are all rights
-# reserved (Adorable Hamster Pets, Critters and Companions, Mowzie's Mobs,
-# No Man's Land).
+# reserved (Adorable Hamster Pets, Critters and Companions, Mowzie's Mobs).
 RECOLOUR_MODS = {"alexsmobs", "companions", "envelope", "kaleidoscope_cookery", "treechop"}
 # Compat files whose change does not suit the mod's version: its own texture stays.
 KEEP_ORIGINAL = {

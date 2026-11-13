@@ -1,6 +1,0 @@
-# Fallow : ATMOSPHERICS est le seul responsable de la brume (plan 12.1, rapport 3 L6).
-# Le brouillard propre à No Man's Land est coupé ; les autres clés gardent leur
-# valeur par défaut, ajoutée par NeoForge au premier lancement.
-[fog_modifiers]
-	#If any custom fog modifiers are enabled
-	fogModifiers = false

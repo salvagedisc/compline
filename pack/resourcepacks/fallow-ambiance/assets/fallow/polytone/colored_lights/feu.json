@@ -7,8 +7,8 @@
     "minecraft:campfire",
     "minecraft:fire",
     "#minecraft:candles",
-    "nomansland:sconce_torch",
-    "nomansland:sconce_wall_torch"
+    "supplementaries:sconce",
+    "supplementaries:sconce_wall"
   ],
   "colored_light": {
     "color": "#ffb36b"

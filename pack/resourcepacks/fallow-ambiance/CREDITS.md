@@ -21,7 +21,7 @@ Mentions demandées par les auteurs :
 - « 'Hymn To The Dawn', 'The Long Dark', 'Cicadas', 'Hiraeth', 'Permafrost', 'I Walk With Ghosts' by Scott Buckley - released under CC-BY 4.0. www.scottbuckley.com.au »
 - « "Long Note Four", "Meditation Impromptu 02", "Lightless Dawn" Kevin MacLeod (incompetech.com). Licensed under Creative Commons: By Attribution 4.0 License. http://creativecommons.org/licenses/by/4.0/ »
 
-Les autres morceaux du paquet musical ne sont pas dans ce dossier : ce sont ceux du jeu (C418, Lena Raine, Kumi Tanioka, Aaron Cherof), de No Man's Land (Lev Vey et Farcr) et du pack de ressources *Supernova* de bouncytorch (CC-BY-NC-SA 4.0), téléchargé depuis Modrinth.
+Les autres morceaux du paquet musical ne sont pas dans ce dossier : ce sont ceux du jeu (C418, Lena Raine, Kumi Tanioka, Aaron Cherof) et du pack de ressources *Supernova* de bouncytorch (CC-BY-NC-SA 4.0), téléchargé depuis Modrinth.
 
 # Crédits des shaders
 

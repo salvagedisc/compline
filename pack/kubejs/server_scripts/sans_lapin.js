@@ -1,9 +1,7 @@
-// Fallow : le lapin est retiré du jeu. Fresh Animations n'a pas de modèle pour lui, et le
-// remodèle de No Man's Land est coupé (config/mixed_litter-startup.toml) : il détonnait
-// au milieu des animaux animés. Voir docs/plan/faune-nml.md.
+// Fallow : le lapin est retiré du jeu. Fresh Animations n'a pas de modèle pour lui : il
+// détonnait au milieu des animaux animés. L'historique est dans docs/archive/plan/faune-nml.md.
 // Ses apparitions sont retirées de tous les biomes de l'Overworld par
-// kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json (No Man's Land inscrit ses
-// biomes dans #minecraft:is_overworld). Ce script retire ses objets.
+// kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json. Ce script retire ses objets.
 
 // Objets qui n'ont plus de source sans lapin. Aussi cachés d'EMI
 // (client_scripts/sans_lapin.js, même liste).
