@@ -170,10 +170,35 @@ const TRI_OBJETS_FAUNE = [
   'crittersandcompanions:dragonfly_wing', 'crittersandcompanions:acorn_hat'
 ]
 
+// Spelunkery : l'expérience en réserve (décision 0009), la hauteur et la position en chiffres, le
+// repérage des géodes et des créatures, le Nether, l'End et la netherite (décision 0004), les
+// objets inachevés du mod, les minerais et pépites des métaux absents du pack, la pépite de cuivre
+// (Create a la sienne).
+const TRI_OBJETS_SPELUNKERY = [
+  'spelunkery:nephrite_charm', 'spelunkery:carved_nephrite', 'spelunkery:nephrite_siphon',
+  'spelunkery:nephrite_fountain', 'spelunkery:nephrite_diode', 'spelunkery:depth_gauge',
+  'spelunkery:magnetic_compass', 'spelunkery:tuning_fork', 'spelunkery:echo_fork',
+  'spelunkery:compression_blast_miner', 'spelunkery:sulfur', 'spelunkery:sulfur_block',
+  'spelunkery:end_stone_pebble', 'spelunkery:true_crown', 'spelunkery:eggplant',
+  'spelunkery:iron_pick_on_a_stick',
+  'spelunkery:copper_nugget', 'spelunkery:raw_lead_nugget',
+  'spelunkery:raw_silver_nugget', 'spelunkery:raw_bismuth_nugget', 'spelunkery:raw_tin_nugget',
+  'spelunkery:bismuth_nugget', 'spelunkery:rough_jade_shard', 'spelunkery:jade_shard',
+  'spelunkery:andesite_lead_ore', 'spelunkery:diorite_lead_ore', 'spelunkery:granite_lead_ore',
+  'spelunkery:tuff_lead_ore', 'spelunkery:andesite_silver_ore', 'spelunkery:diorite_silver_ore',
+  'spelunkery:granite_silver_ore', 'spelunkery:tuff_silver_ore', 'spelunkery:andesite_jade_ore',
+  'spelunkery:diorite_jade_ore', 'spelunkery:granite_jade_ore', 'spelunkery:tuff_jade_ore'
+]
+
+// Archie's Dinosaurs : les griffes en netherite.
+const TRI_OBJETS_DINOSAURES = [
+  'ec_ad:theri_claw_netherite'
+]
+
 const TRI_TOUT = [].concat(
   TRI_OBJETS_CREATE, TRI_OBJETS_OVERGEARED, TRI_OBJETS_CUISINE, TRI_OBJETS_DIVERS,
   TRI_OBJETS_HANDCRAFTED, TRI_OBJETS_TWIGS, TRI_OBJETS_ALEXSMOBS, TRI_OBJETS_COMPANIONS,
-  TRI_OBJETS_MOWZIE, TRI_OBJETS_FAUNE
+  TRI_OBJETS_MOWZIE, TRI_OBJETS_FAUNE, TRI_OBJETS_SPELUNKERY, TRI_OBJETS_DINOSAURES
 )
 
 // Steam 'n' Rails : variantes décoratives. Voies de 3 bois (chêne, épicéa, bouleau), en
@@ -187,6 +212,8 @@ const TRI_MOTIFS = [
 
 ServerEvents.recipes(event => {
   event.remove({ output: TRI_TOUT })
+  // La poudre à canon de Spelunkery demandait son soufre, qui ne se trouve que dans le Nether.
+  event.remove({ id: 'spelunkery:gunpowder' })
   TRI_MOTIFS.forEach(motif => event.remove({ output: motif }))
 })
 

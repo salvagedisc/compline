@@ -20,6 +20,9 @@ script stops if a mod of the pack has a biome that is in neither table.
 Cave and Nether biomes inherit nothing: their model was chosen for the mist only. The tags
 matched by `SKIPPED` are left alone too.
 
+`PLACED` holds the placements chosen by hand, for what a mod puts in a cave biome or in a
+closed dimension: they are written with the rest.
+
 The script owns every entry of these mods' biomes in the pack's biome tags outside the
 `fallow` namespace, and the `ru_*.json` wind profiles: it rewrites them at each run.
 
@@ -49,6 +52,16 @@ COMMON = {"minecraft", "c", "forge", "neoforge"}
 OWN = {NAMESPACE, "fallow"}
 # Left as they are: Quark's fallen trunks are of vanilla woods, out of place under maples or redwoods.
 SKIPPED = re.compile(r"^quark:has_(lower_)?fallen_")
+
+# Placements chosen by hand (tag -> biomes), written with the inherited ones. Archie's Dinosaurs:
+# the Lushsaur also lives in the bioshroom caves (lush caves are rare on Tectonic terrain); the
+# Obsidiceratops of the Nether and the Chorusoatl of the End, both closed (decision 0004), move
+# to the redstone caves and to the prismachasm.
+PLACED = {
+    "ec_ad:spawns_lushsaurs": ["regions_unexplored:bioshroom_caves"],
+    "ec_ad:spawns_obsidiceratopses": ["regions_unexplored:redstone_caves"],
+    "ec_ad:spawns_chorusoatls": ["regions_unexplored:prismachasm"],
+}
 
 # Every biome that inherits, with its model.
 ALL_MODELS = {f"{NAMESPACE}:{name}": model for name, model in MODELS.items()}
@@ -169,6 +182,10 @@ def main(folder):
         new = heirs(set(tags[tag]), known)
         if new:
             additions[tag] = new
+    for tag, placed in PLACED.items():
+        if tag not in tags:
+            sys.exit(f"PLACED names {tag}, which no mod of the pack has")
+        additions[tag] = sorted(set(additions.get(tag, [])) | set(placed))
 
     written = 0
     for path, (tag, data) in files.items():

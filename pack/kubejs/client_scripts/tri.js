@@ -131,7 +131,21 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'adorablehamsterpets:hamster_armor_trim_smithing_template_netherite',
     'adorablehamsterpets:announcement_bell_icon',
     'adorablehamsterpets:upside_down_hamster_bed_icon', 'crittersandcompanions:dragonfly_wing',
-    'crittersandcompanions:acorn_hat'
+    'crittersandcompanions:acorn_hat',
+    'spelunkery:nephrite_charm', 'spelunkery:carved_nephrite', 'spelunkery:nephrite_siphon',
+    'spelunkery:nephrite_fountain', 'spelunkery:nephrite_diode', 'spelunkery:depth_gauge',
+    'spelunkery:magnetic_compass', 'spelunkery:tuning_fork', 'spelunkery:echo_fork',
+    'spelunkery:compression_blast_miner', 'spelunkery:sulfur', 'spelunkery:sulfur_block',
+    'spelunkery:end_stone_pebble', 'spelunkery:true_crown', 'spelunkery:eggplant',
+    'spelunkery:iron_pick_on_a_stick',
+    'spelunkery:copper_nugget',
+    'spelunkery:raw_lead_nugget', 'spelunkery:raw_silver_nugget', 'spelunkery:raw_bismuth_nugget',
+    'spelunkery:raw_tin_nugget', 'spelunkery:bismuth_nugget', 'spelunkery:rough_jade_shard',
+    'spelunkery:jade_shard', 'spelunkery:andesite_lead_ore', 'spelunkery:diorite_lead_ore',
+    'spelunkery:granite_lead_ore', 'spelunkery:tuff_lead_ore', 'spelunkery:andesite_silver_ore',
+    'spelunkery:diorite_silver_ore', 'spelunkery:granite_silver_ore', 'spelunkery:tuff_silver_ore',
+    'spelunkery:andesite_jade_ore', 'spelunkery:diorite_jade_ore', 'spelunkery:granite_jade_ore',
+    'spelunkery:tuff_jade_ore', 'ec_ad:theri_claw_netherite'
   ].forEach(id => event.remove(id))
 
   TRI_MOTIFS.forEach(motif => event.remove(motif))
