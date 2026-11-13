@@ -43,7 +43,8 @@
     "simulated:plunger_launcher",
     "exposure:photograph",
     "exposure:aged_photograph",
-    "exposure:stacked_photographs"
+    "exposure:stacked_photographs",
+    "minecraft:book"
   ],
   "blacklistApplyDualHanded": {},
   "animationPackSelections": {},
