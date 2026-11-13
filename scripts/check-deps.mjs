@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Vérifie que chaque dépendance requise déclarée DANS les jars du pack est fournie par le pack
 // (Modrinth ne déclare pas toujours toutes les dépendances). Usage : npm run check-deps [-- <cacheDir>]
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readPackMods } from './sync/pwtoml.mjs';
@@ -41,6 +41,11 @@ for (const mod of await readPackMods(packDir)) {
   for (const nested of nestedJarPaths(listEntries(buf), metadata?.toString('utf8'))) {
     addToml(nested, readEntry(buf, nested), true);
   }
+}
+
+// Jars committed as they are in pack/mods (the custom mod, a library whose Modrinth versions are withdrawn).
+for (const name of (await readdir(join(packDir, 'mods'))).filter((n) => n.endsWith('.jar'))) {
+  addToml(name, await readFile(join(packDir, 'mods', name)), false);
 }
 
 const missing = findMissing(provided, deps);

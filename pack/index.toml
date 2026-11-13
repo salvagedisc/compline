@@ -2064,6 +2064,10 @@ hash = "187eafde5974beee1263538b462b7b8fe2fc8948c5d413980d9796d55928580b"
 metafile = true
 
 [[files]]
+file = "mods/astemirlib_re-1.21.1-forge-1.2.985-SNAPSHOT.jar"
+hash = "42a71a91fa6a1f11eb298e4441f7a7d66a01704068540150014c0e6eede49c20"
+
+[[files]]
 file = "mods/atmospheric-rain-backport.pw.toml"
 hash = "37845e3216ef522676430ac436cc189ec938fd23f1940de08929929a465ae065"
 metafile = true
