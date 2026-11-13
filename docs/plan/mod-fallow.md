@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.8.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm) and **rayons** (glints on water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -221,6 +221,10 @@ Config (`fallow-client.toml`, `[rayons]` section): `enabled`, `glintStrength` (1
 
 Shared helpers in `rendu.Sun`: sun direction from the time of day, daylight, the sun's colour, and the mist thickness read from the shader fog.
 
+## `monuments` module
+
+Client and server, no mod required. Registers the structure type `fallow:terrain_checked`: it wraps another structure and only places it where the ground suits it (slope, water, room under a floating base, ceiling of the world). The Ancient Remnants structures use it; rules, values and measurements are in [monuments](monuments.md). The type is always registered, because the pack's structure files name it and a world does not load if a type is missing. No config switch: the rules are in the structure files.
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -296,7 +300,7 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 | # | Test | Expected |
 |---|---|---|
 | W1 | Explore 3,000 blocks (atlas) | Large continents, mountain ranges, river valleys; Regions Unexplored biomes present (`/locate biome` for a few) |
-| W3 | The six Monoliths (`/locate structure ancient_remnants:…`) | Whole, on the ground, not cut by water |
+| W3 | The six Ancient Remnants monuments (`/locate structure ancient_remnants:…`) | Whole, on the ground, not cut by water, monoliths clear of hills ([monuments](monuments.md)) |
 | W4 | A Streams stream in a swamp | Note which biome it carries; no error in the log |
 | W5 | Highest peak (F3) | Y ≤ 320; airships can cross a range (otherwise lower `vertical_scale`) |
 | W6 | Winter (Ecliptic) at Y 70 and Y 150 | Snow consistent with altitude; streams freeze like rivers |

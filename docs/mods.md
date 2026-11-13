@@ -20,7 +20,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Geophilic | `geophilic` | ✅ (3.7, added 2026-11-13, not seen in game) | CS | Vanilla biomes reworked, no new block ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | Streams Reflowing | `streams-reflowing` | ✅ (2.15.2, not seen in game) | CS | Streams and lakes that follow the relief, currents for boats and Sable hulls; world settings frozen at creation ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Sparse Structures | `sparsestructures` | ✅ | CS | Spaced-out structures ([0004](decisions/0004-structures.md)) |
-| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 rare monuments, blessings, codex to piece together; guardians drawn from Mowzie's Mobs and Companions! ([12](archive/plan/12-verification.md#the-monument-guardians-report-6)) |
+| Ancient Remnants: Monoliths | `ancient-remnants` | ✅ | CS | 6 monuments placed on suitable ground, blessings, codex to piece together from ruins; four guarded by Mowzie's Mobs and Companions! bosses ([monuments](plan/monuments.md)) |
 | Lootr | `lootr` | ✅ | CS | Each player finds the chests full |
 | Enhanced Celestials 2 (Core + Default Lunar Events) | `enhanced-celestials-2-core`, `enhanced-celestials-2-default-lunar-events` | ✅ | CS | Rare moons; blood moons removed. Replaces Enhanced Celestials 6; Shader Support addon useless without Iris |
 | Antique Atlas 4 | `antique-atlas-4` | ✅ | C | Hand-drawn map, no coordinates |
