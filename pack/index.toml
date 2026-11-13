@@ -2059,6 +2059,11 @@ hash = "891be2897e122a50bd68da39b9bd866812edc4a5d650994e154a90afd132fb63"
 metafile = true
 
 [[files]]
+file = "mods/archies-dinosaurs.pw.toml"
+hash = "094a4701a650c27ddc1e3ce84c87d4d373c3638464cc73c64d191c4e9f8127c0"
+metafile = true
+
+[[files]]
 file = "mods/architectury-api.pw.toml"
 hash = "187eafde5974beee1263538b462b7b8fe2fc8948c5d413980d9796d55928580b"
 metafile = true
