@@ -18,7 +18,7 @@ public enum FallowModule {
     XP("xp", null, bus -> io.github.salvagedisc.fallow.xp.XpModule.start(bus)),
     /** Le paysage lointain de Distant Horizons suit la brume : caché dans la brume, visible là où elle se lève (client et serveur). */
     HORIZON("horizon", null, bus -> io.github.salvagedisc.fallow.horizon.HorizonModule.start(bus), ModIds.DISTANT_HORIZONS),
-    /** La brume se lève : feu de veille et lanterne de clairière changent les biomes autour d'eux (client et serveur). Aucun mod requis. */
+    /** La brume se lève autour du feu de veille et de la lanterne de clairière, sans changer le biome (client et serveur). Aucun mod requis. */
     CLAIRIERE("clairiere", null, bus -> io.github.salvagedisc.fallow.clairiere.ClairiereModule.start(bus)),
     /** Le dissipateur, troisième palier des clairières : un bloc cinétique de Create (client et serveur). */
     DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.fallow.dissipateur.DissipateurModule.start(bus), ModIds.CREATE),

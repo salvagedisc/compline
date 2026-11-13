@@ -9,84 +9,88 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Ce qui tient la brume à distance dans un monde : chaque feu de veille, lanterne, dissipateur chargé ou
- * clairière de commande, avec son rayon. Quand l'un disparaît, la brume ne revient que là où aucun autre
- * ne la retient encore.
+ * clairière de commande, avec son rayon et l'heure où il a été posé. Le monde lui-même ne change pas :
+ * une clairière n'existe que par cette liste.
  */
 final class ClearingSources extends SavedData {
     private static final String NAME = "fallow_clairieres";
 
-    record Source(BlockPos center, int radius) {
-        boolean covers(long x, long z) {
-            long dx = x - center.getX(), dz = z - center.getZ();
-            return dx * dx + dz * dz <= (long) radius * radius;
-        }
-    }
-
-    private final List<Source> sources = new ArrayList<>();
+    private final List<Clearing> clearings = new ArrayList<>();
+    private ClearingIndex index = ClearingIndex.EMPTY;
 
     static ClearingSources get(ServerLevel level) {
         return level.getDataStorage().computeIfAbsent(
                 new SavedData.Factory<>(ClearingSources::new, ClearingSources::load, null), NAME);
     }
 
-    void add(BlockPos center, int radius) {
-        sources.removeIf(source -> source.center.equals(center));
-        sources.add(new Source(center.immutable(), radius));
+    ClearingIndex index() {
+        return index;
+    }
+
+    private void changed() {
+        index = new ClearingIndex(clearings);
         setDirty();
     }
 
-    /** Retire la source posée en {@code center} ; sans source enregistrée (monde d'avant 0.4.12), ne fait rien. */
-    void remove(BlockPos center) {
-        if (sources.removeIf(source -> source.center.equals(center))) {
-            setDirty();
-        }
+    Clearing add(BlockPos center, int radius, long since) {
+        clearings.removeIf(clearing -> clearing.center().equals(center));
+        Clearing clearing = new Clearing(center.immutable(), radius, since, Clearing.OPEN);
+        clearings.add(clearing);
+        changed();
+        return clearing;
     }
 
-    /** Retire les sources dont le centre est dans le disque, et les rend pour que leur brume revienne aussi. */
-    List<Source> removeWithin(BlockPos center, int radius) {
-        List<Source> removed = new ArrayList<>();
-        Source area = new Source(center, radius);
-        sources.removeIf(source -> {
-            boolean inside = area.covers(source.center.getX(), source.center.getZ());
-            if (inside) {
-                removed.add(source);
+    /** Retire la clairière posée en {@code center} et la rend ; {@code null} s'il n'y en avait pas. */
+    @Nullable
+    Clearing remove(BlockPos center) {
+        for (Clearing clearing : clearings) {
+            if (clearing.center().equals(center)) {
+                clearings.remove(clearing);
+                changed();
+                return clearing;
             }
-            return inside;
-        });
-        if (!removed.isEmpty()) {
-            setDirty();
+        }
+        return null;
+    }
+
+    /** Retire les clairières dont le centre est à {@code radius} blocs de {@code center} au plus, et les rend. */
+    List<Clearing> removeWithin(BlockPos center, int radius) {
+        List<Clearing> removed = new ArrayList<>();
+        for (Clearing clearing : clearings) {
+            if (clearing.covers(center.getX(), center.getZ(), radius)) {
+                removed.add(clearing);
+            }
+        }
+        if (clearings.removeAll(removed)) {
+            changed();
         }
         return removed;
-    }
-
-    boolean covers(long x, long z) {
-        for (Source source : sources) {
-            if (source.covers(x, z)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static ClearingSources load(CompoundTag tag, HolderLookup.Provider registries) {
         ClearingSources data = new ClearingSources();
         for (Tag entry : tag.getList("Sources", Tag.TAG_COMPOUND)) {
             CompoundTag source = (CompoundTag) entry;
-            data.sources.add(new Source(BlockPos.of(source.getLong("Pos")), source.getInt("Radius")));
+            // « Since » manque dans les mondes d'avant 0.8.0 : 0, la clairière est ouverte depuis toujours.
+            data.clearings.add(new Clearing(BlockPos.of(source.getLong("Pos")), source.getInt("Radius"),
+                    source.getLong("Since"), Clearing.OPEN));
         }
+        data.index = new ClearingIndex(data.clearings);
         return data;
     }
 
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
         ListTag list = new ListTag();
-        for (Source source : sources) {
+        for (Clearing clearing : clearings) {
             CompoundTag entry = new CompoundTag();
-            entry.putLong("Pos", source.center.asLong());
-            entry.putInt("Radius", source.radius);
+            entry.putLong("Pos", clearing.center().asLong());
+            entry.putInt("Radius", clearing.radius());
+            entry.putLong("Since", clearing.since());
             list.add(entry);
         }
         tag.put("Sources", list);

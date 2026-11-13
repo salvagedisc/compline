@@ -2,7 +2,6 @@ package io.github.salvagedisc.fallow.clairiere;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import io.github.salvagedisc.fallow.Fallow;
-import io.github.salvagedisc.fallow.FallowConfig;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
@@ -13,25 +12,33 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
  * Module clairiere : la brume se lève là où le joueur l'a décidé. Deux blocs à poser, le feu de veille
- * (rayon 16) et la lanterne de clairière (rayon 32), changent les biomes autour d'eux en clairière tant qu'ils
- * restent en place : brume légère (preset ATMOSPHERICS), herbe vive (Polytone), musique des clairières, et le
- * paysage lointain de Distant Horizons. Le troisième palier, le dissipateur (rayon 64), est un bloc Create
- * du module {@code dissipateur}.
+ * (rayon 16) et la lanterne de clairière (rayon 32), ouvrent une clairière autour d'eux tant qu'ils restent en
+ * place : brume légère (preset ATMOSPHERICS), herbe vive, musique des clairières, paysage lointain de Distant
+ * Horizons, et plus de monstres. Le troisième palier, le dissipateur (rayon 64), est un bloc Create du module
+ * {@code dissipateur}.
+ *
+ * <p>Une clairière ne change pas le biome ({@link Clearings}) : le serveur retient son disque et l'annonce aux
+ * clients ({@link ClearingSync}), qui en font l'apparence ({@link ClearingClient}).
  *
  * <p>Les blocs sont toujours enregistrés (le serveur et les clients doivent avoir les mêmes registres) ;
- * l'interrupteur de la config ne coupe que la conversion.
+ * l'interrupteur de la config ne coupe que l'ouverture des clairières.
  */
 public final class ClairiereModule {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Fallow.MOD_ID);
@@ -58,17 +65,28 @@ public final class ClairiereModule {
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, ClairiereModule::onCreativeTab);
-        NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class,
-                event -> ClearingConverter.tick(event.getServer(), FallowConfig.clairiereChunksPerTick(),
-                        FallowConfig.clairiereRingTicks()));
-        NeoForge.EVENT_BUS.addListener(ServerStoppingEvent.class, event -> ClearingConverter.clear());
+        modBus.addListener(RegisterPayloadHandlersEvent.class, event -> event.registrar("1")
+                .playToClient(ClearingSync.TYPE, ClearingSync.STREAM_CODEC,
+                        (sync, context) -> context.enqueueWork(() -> ClearingClient.receive(sync))));
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer player) {
+                Clearings.sendAll(player);
+            }
+        });
+        NeoForge.EVENT_BUS.addListener(MobSpawnEvent.PositionCheck.class, Clearings::onSpawnCheck);
+        NeoForge.EVENT_BUS.addListener(ServerTickEvent.Post.class, event -> OldClearings.tick(event.getServer()));
+        NeoForge.EVENT_BUS.addListener(ServerStoppingEvent.class, event -> OldClearings.clear());
+        if (FMLEnvironment.dist.isClient()) {
+            ClearingClient.start();
+        }
         NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, ClairiereModule::onRegisterCommands);
         Fallow.LOGGER.info("clairiere : feu de veille (16), lanterne de clairière (32)");
     }
 
     /**
-     * {@code /fallow clairiere <rayon>} (opérateurs) : convertit autour de la position de la commande.
-     * {@code /fallow brume <rayon>} : rend la brume au disque, et aux clairières dont la source y est.
+     * {@code /fallow clairiere <rayon>} (opérateurs) : ouvre une clairière autour de la position de la commande.
+     * {@code /fallow brume <rayon>} : referme les clairières dont le centre est dans le disque, et rend à leur
+     * biome les cases de clairière des mondes d'avant la 0.8.0.
      */
     private static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal(Fallow.MOD_ID)
@@ -78,9 +96,9 @@ public final class ClairiereModule {
                                 .executes(context -> {
                                     CommandSourceStack source = context.getSource();
                                     int radius = IntegerArgumentType.getInteger(context, "rayon");
-                                    ClearingConverter.convert(source.getLevel(), BlockPos.containing(source.getPosition()),
+                                    Clearings.open(source.getLevel(), BlockPos.containing(source.getPosition()),
                                             radius, source.getPlayer());
-                                    source.sendSuccess(() -> Component.literal("Clairière de rayon " + radius + " programmée"), true);
+                                    source.sendSuccess(() -> Component.literal("Clairière de rayon " + radius + " ouverte"), true);
                                     return radius;
                                 })))
                 .then(Commands.literal("brume")
@@ -88,9 +106,9 @@ public final class ClairiereModule {
                                 .executes(context -> {
                                     CommandSourceStack source = context.getSource();
                                     int radius = IntegerArgumentType.getInteger(context, "rayon");
-                                    ClearingConverter.restoreWithin(source.getLevel(), BlockPos.containing(source.getPosition()),
-                                            radius, source.getPlayer());
-                                    source.sendSuccess(() -> Component.literal("Retour de la brume programmé sur " + radius + " blocs"), true);
+                                    int closed = Clearings.closeWithin(source.getLevel(),
+                                            BlockPos.containing(source.getPosition()), radius, source.getPlayer());
+                                    source.sendSuccess(() -> Component.literal(closed + " clairière(s) refermée(s) sur " + radius + " blocs"), true);
                                     return radius;
                                 }))));
     }
