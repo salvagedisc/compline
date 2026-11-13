@@ -1213,6 +1213,10 @@ file = "kubejs/assets/spectrelib/lang/fr_fr.json"
 hash = "e10eca48fde63c271d4b0626e6921a4d92f75ae9ef052cb79b070fce9bc8d598"
 
 [[files]]
+file = "kubejs/assets/spelunkery/lang/fr_fr.json"
+hash = "6d2e113d3f923ff84026fbad972b8b941153f49288c3c8646748fdf21bfb7745"
+
+[[files]]
 file = "kubejs/assets/structure_layout_optimizer/lang/fr_fr.json"
 hash = "d973329458bfcef4321e08457c64ca96e27c8c48237dd756d1b58d864ff1c65d"
 
@@ -1314,7 +1318,7 @@ hash = "b3420f2304c2a5210feaddb17662fcf6c0700213fcac572c5f176e83b32e816b"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "fbff3db36e54f07c1e05e2c1dafba0df9ec1395318adcbb8ec8f3608b9b84503"
+hash = "fd18b27e93f3217a95c6b150d88b2d3960122c43d197b5bd8b855168bf983b0c"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1373,6 +1377,34 @@ file = "kubejs/data/companions/worldgen/structure_set/companions_tent.json"
 hash = "579c797d04257d6b5eb7bfa4d112def8e1cc8f4d0b1f3d73da4400507debae21"
 
 [[files]]
+file = "kubejs/data/ec_ad/tags/block/chorusoatl_valid_spawn.json"
+hash = "d8b8e914f346d4d7dcd390116e4b891a48d98a0fc1a0db899d18dc6d99e217da"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/block/obsidiceratops_valid_spawn.json"
+hash = "306e0e563e541a9b470ef2f0b2277455385838bc312a5de684505ef3b589464c"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/worldgen/biome/spawns_chorusoatls.json"
+hash = "b3a3d530c043fb78fa2c7f7460c69865e069b4dbb483e416bbf027a561fda52f"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/worldgen/biome/spawns_coralosaurs.json"
+hash = "b12024c3bac79fa5144516d8e79b14116a2a601d757a73a06808737e0eb942bc"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/worldgen/biome/spawns_lushsaurs.json"
+hash = "c93f5967f2bd9652a80919c60b602477919e7d4f5c13a8afa25569f7a6162100"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/worldgen/biome/spawns_obsidiceratopses.json"
+hash = "dc30a0f9414195095d3ea6c2cbbb154e0baf58a4bf393264cc77387eb54fff5c"
+
+[[files]]
+file = "kubejs/data/ec_ad/worldgen/structure/obsidiceratops.json"
+hash = "2b5f4f6f00a9301f4fb2d1c7f63198b153859c3c37a151b5151c8d6e128bf035"
+
+[[files]]
 file = "kubejs/data/eclipticseasons/tags/block/crops/spring_autumn.json"
 hash = "ef44505beaa0977042895a8a298ba76edabac00adf89a5dcc03840697804699f"
 
@@ -1421,6 +1453,10 @@ file = "kubejs/data/fallow/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
 
 [[files]]
+file = "kubejs/data/fallow/structure/chorusoatl.nbt"
+hash = "6b8bb16f9a63d69ea19a308b4472754f31eb53a7868fb5cceef7f50bc0f85736"
+
+[[files]]
 file = "kubejs/data/fallow/tags/item/pile/16.json"
 hash = "6274996e7b94e7ce56eb627485b5f8b208b418158366bfde56535b28a01496d8"
 
@@ -1459,6 +1495,14 @@ hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
 [[files]]
 file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_swamps.json"
 hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
+file = "kubejs/data/fallow/worldgen/structure/chorusoatl.json"
+hash = "222d652e7bf3289784d0b877fb3421ef7d6b43367c8e808b765a06f8b27fbbb2"
+
+[[files]]
+file = "kubejs/data/fallow/worldgen/structure_set/chorusoatl.json"
+hash = "c97a95891efe7c8845b46b7174a3213ddac3ecee9f15a51a7cbdd265bd85e42e"
 
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/collections/snowy_forest.json"
@@ -1977,6 +2021,30 @@ file = "kubejs/data/naturalist/tags/worldgen/biome/variant/tiger/white_tiger.jso
 hash = "159af79b05df2d6ab2417042c5196700e22666674f8f3c4583eb8708d49b2a38"
 
 [[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_desert_noise.json"
+hash = "bec1e47f060dd904ec8632d3639e58b10b307a28ffd41b21cc4a629d847e2ea5"
+
+[[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_dirt_noise.json"
+hash = "642b7d4feafda3f9526bd131340eb8d3c93fe276a517e0359dbea1b9628acfbc"
+
+[[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_ice_noise.json"
+hash = "cea91bfd5ef0696c6c6880fbf2acdd1203cd1b8898376fea4e69daf3d0e4e75a"
+
+[[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_ocean_noise.json"
+hash = "abcf63bb2d7454cdacfc341793f8ec1a656e26e896b6280e540c430f30379e50"
+
+[[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_stone_noise.json"
+hash = "5653e42da754a802e321637b6c5aeb2c02121503ed9e7e69239802ee3ce6463e"
+
+[[files]]
+file = "kubejs/data/spelunkery/tags/worldgen/biome/has_swamp_noise.json"
+hash = "16ff938f545db43586cf299c3c93587393c0913315fc487207e6d6b534ab6090"
+
+[[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
 
@@ -2002,7 +2070,7 @@ hash = "607ed9168c2c0d8a6bf50d687761dadbd12f68129c40e154562e7683c1582661"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
-hash = "a30162f06015cff75d6b5c80154ed9a195e7e98a446cc3ee5dd97d21a08c3056"
+hash = "2457b34fe9aeb921f9a96d9cd3533991923a427611ff3e9885702cc73e01b1b3"
 
 [[files]]
 file = "kubejs/server_scripts/premiers_gestes.js"
@@ -2038,7 +2106,7 @@ hash = "02d8cb2865bdb71b5f2669fbf0152512975435cee91e83bacd179dc73a43ebe9"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "205c56a0e524daf217170de9c2d94e06f79b2a6dced24335394283d995fb1819"
+hash = "69aad4495fde5eb0ea7a5f3dc2b27f3a44ad02e0ed625e81378a0e2d73468b9c"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
@@ -2097,9 +2165,18 @@ file = "mods/antique-transport-1.3.0+1.21.1-neoforge.1.jar"
 hash = "c3e2995610d6768cea659c1082a1db14c92419bfa6ce90798ec8c84f5b402049"
 
 [[files]]
+file = "mods/archies-dinosaurs.pw.toml"
+hash = "094a4701a650c27ddc1e3ce84c87d4d373c3638464cc73c64d191c4e9f8127c0"
+metafile = true
+
+[[files]]
 file = "mods/architectury-api.pw.toml"
 hash = "187eafde5974beee1263538b462b7b8fe2fc8948c5d413980d9796d55928580b"
 metafile = true
+
+[[files]]
+file = "mods/astemirlib_re-1.21.1-forge-1.2.985-SNAPSHOT.jar"
+hash = "42a71a91fa6a1f11eb298e4441f7a7d66a01704068540150014c0e6eede49c20"
 
 [[files]]
 file = "mods/atmospheric-rain-backport.pw.toml"
@@ -2337,8 +2414,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.9.0.jar"
-hash = "756c302961a01d75da1a21a5e604194515ecd4b7779fee19aed4e82201f471a2"
+file = "mods/fallow-0.9.1.jar"
+hash = "5812befe7405296d66c76542e9f5b36cd49c4085534556f3137ead97667fca93"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"
@@ -2733,6 +2810,11 @@ metafile = true
 [[files]]
 file = "mods/spatial-gui.pw.toml"
 hash = "39eac2df2b472e75842d065f3220cfedc4a1c28979e1c82ae5e3f8955c54c7de"
+metafile = true
+
+[[files]]
+file = "mods/spelunkery.pw.toml"
+hash = "cd2c6fa89eecaaa1aadf369b043ceb45e99778cacd590e3fc01b0dcae2e6557d"
 metafile = true
 
 [[files]]

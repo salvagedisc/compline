@@ -1,4 +1,4 @@
-# 0021 — The atlas runs natively, without Connector
+# 0022 — The atlas runs natively, without Connector
 
 - **Date**: 2026-11-13
 - **Status**: kept (the team's choice of 2026-11-13); dedicated server and headless test client with the full pack, not played

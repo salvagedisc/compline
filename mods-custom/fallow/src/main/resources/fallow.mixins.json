@@ -5,6 +5,7 @@
   "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "compat.IceThawMixin",
     "horizon.ChunkyAccessorMixin",
     "xp.AnvilMenuMixin"
   ],
