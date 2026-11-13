@@ -1,6 +1,6 @@
 # The custom `fallow` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.1 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-fallow-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.9.2 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **titres** (screen names), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module, removed in 0.4.3 when the titles went back into the panels, returns in 0.4.4 in another form: each screen's name centred over its top edge on GUI Revision's plate, in the look the `fallow-interface` pack gives it.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -39,6 +39,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `dissipateur` | both | Create | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
+| (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
 
 ## `ciel` module
 
@@ -250,6 +251,16 @@ Fixes between two mods of the pack, outside any module: they have no switch and 
 
 **Checked** on the test server: the debug log shows `Mixing compat.IceThawMixin from fallow.mixins.json into net.minecraft.world.level.block.IceBlock` with no error after it. The thaw itself has not been seen in game (test W11). If Streams Reflowing renames `StreamIceMelt`, the log says "Dégel des ruisseaux : règle de Streams Reflowing introuvable" and ice melts into plain water.
 
+### Lithostitched and Regions Unexplored: generation that stalls
+
+**Symptom.** A Chunky pregeneration slows to one or two chunks per second, or stops for minutes, with no error in the log. Seen four times on the terrain bench on 2026-11-12 and again on the full pack on 2026-11-13 (stopped at 32 % of 10,201 chunks).
+
+**Cause.** Eight cave decorations of Regions Unexplored 0.6.3 (lava deltas and falls, dropleaves, cave bioshrooms, redstone buds and bulbs, ash vents, prismarite clusters) are filtered by the block predicate `lithostitched:in_structure`, up to a hundred times per chunk. In Lithostitched 1.8.1 that predicate reads the neighbouring chunks and their structures from the server level (`ServerLevel.getChunk`, then `ServerLevel.structureManager()`), while it runs on the world generation thread: each read is handed to the server thread and waited for. When the server thread is busy, which is the case during a pregeneration (it spends its spare time in `ChunkMap.processUnloads`), it answers about one read per tick. The thread dump shows `Worker-Main` parked in `ServerChunkCache.getChunk`, called from `InStructurePredicate.test`. Nothing here is specific to Chunky: a player exploring cave biomes can meet the same slowdown.
+
+**Fix** (0.9.2). `compat.InStructureMixin` answers the predicate from the region being generated when there is one (`WorldGenRegion.getChunk`, as the game does for its own features): the structure references of the chunk and of its direct neighbours and the structure starts up to eight chunks away are already there, and no thread is waited for. Outside generation (a command, bone meal) the original code runs. `require = 0`; applied only with Lithostitched.
+
+**Checked** on the test server, same world and same request (square of radius 800, 10,201 chunks, full pack): without the fix the task stopped at 3,259 chunks; with it the 10,201 chunks were generated in 13 min 06 s at a steady 12 to 15 chunks per second, with no error in the log. The debug log shows `Mixing compat.InStructureMixin from fallow.mixins.json into dev.worldgen.lithostitched.worldgen.blockpredicate.InStructurePredicate`. A structure start nine chunks away, seen from a neighbouring chunk, is outside the region and is left out: a first version read it and stopped the generation with "Requested chunk unavailable during world generation".
+
 ## In-game tests
 
 None of this has been done. These tests are also gathered with those of the other pages, in play-session order, in [tests-en-jeu.md](../tests-en-jeu.md).
@@ -317,7 +328,7 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 | W6 | Winter (Ecliptic) at Y 70 and Y 150 | Snow consistent with altitude; streams freeze like rivers |
 | W7 | Boat, Sable hull on a stream, airship above | The hull drifts (`vesselDriftSpeed`), the airship in flight does not |
 | W8 | Create pump and boiler on a stream | Water accepted, Create channels do not overflow |
-| W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with Tectonic alone |
+| W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with Tectonic alone; the rate never falls to one or two chunks per second for minutes (`compat.InStructureMixin`) |
 | W10 | A clearing crossed by a stream | Note whether the stream stays misty (river biome not convertible); if so add the river biomes to `fallow:peut_devenir_clairiere` |
 | W11 | A stream frozen by winter, then spring; ice placed on a stream next to a torch | The ice thaws into flowing stream water, not into a still pool. The log still shows Streams Reflowing's `IceMeltMixin` warning at start: expected, `compat.IceThawMixin` does its work |
 
