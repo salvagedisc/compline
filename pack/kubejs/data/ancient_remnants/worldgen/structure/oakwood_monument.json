@@ -1,0 +1,24 @@
+{
+  "type": "fallow:terrain_checked",
+  "biomes": "#ancient_remnants:has_structure/oakwood_monument",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "check": {
+    "max_height_difference": 26,
+    "max_water_share": 0.05
+  },
+  "structure": {
+    "type": "minecraft:jigsaw",
+    "start_pool": "ancient_remnants:oakwood_monument/start",
+    "start_height": {
+      "absolute": -24
+    },
+    "project_start_to_heightmap": "WORLD_SURFACE_WG",
+    "biomes": "#ancient_remnants:has_structure/oakwood_monument",
+    "step": "surface_structures",
+    "max_distance_from_center": 128,
+    "size": 7,
+    "use_expansion_hack": false,
+    "spawn_overrides": {}
+  }
+}

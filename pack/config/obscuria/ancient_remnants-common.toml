@@ -1,0 +1,28 @@
+#=========[ Ancient Remnants Common Config ]=========
+# Fallow: biomes and spacing chosen for Tectonic + Regions Unexplored + Geophilic
+# on a disc of radius 6,000 (docs/plan/monuments.md). Spacing and separation are in chunks.
+#====================================================
+# Hunter: hot, dry lands where game is scarce.
+hunter_monolith_placement_spacing = 44
+hunter_monolith_placement_separation = 11
+hunter_monolith_biomes = ["#minecraft:is_badlands", "#minecraft:is_savanna", "minecraft:desert", "regions_unexplored:dry_bushland", "regions_unexplored:outback", "regions_unexplored:baobab_savanna", "regions_unexplored:joshua_desert", "regions_unexplored:saguaro_desert", "regions_unexplored:steppe"]
+# Warrior: the cold north of the old legends.
+warrior_monolith_placement_spacing = 40
+warrior_monolith_placement_separation = 10
+warrior_monolith_biomes = ["minecraft:snowy_plains", "minecraft:ice_spikes", "minecraft:snowy_taiga", "minecraft:snowy_slopes", "regions_unexplored:tundra", "regions_unexplored:frozen_tundra", "regions_unexplored:frozen_pine_taiga", "regions_unexplored:cold_boreal_taiga"]
+# Sentinel: secluded high meadows and hills, far from conflict.
+sentinel_monolith_placement_spacing = 40
+sentinel_monolith_placement_separation = 10
+sentinel_monolith_biomes = ["minecraft:meadow", "minecraft:windswept_hills", "minecraft:windswept_gravelly_hills", "minecraft:windswept_forest", "regions_unexplored:highland_fields", "regions_unexplored:rocky_meadow", "regions_unexplored:pine_slopes", "regions_unexplored:mauve_hills"]
+# Cherry: blossoming groves and springs.
+cherry_monument_placement_spacing = 22
+cherry_monument_placement_separation = 6
+cherry_monument_biomes = ["minecraft:cherry_grove", "minecraft:flower_forest", "regions_unexplored:magnolia_woodland", "regions_unexplored:wisteria_grove", "regions_unexplored:orchard", "regions_unexplored:poppy_fields", "regions_unexplored:flower_fields"]
+# Oakwood: broadleaf forests.
+oakwood_monument_placement_spacing = 64
+oakwood_monument_placement_separation = 16
+oakwood_monument_biomes = ["minecraft:forest", "minecraft:dark_forest", "minecraft:birch_forest", "minecraft:old_growth_birch_forest", "regions_unexplored:deciduous_forest", "regions_unexplored:old_growth_forest", "regions_unexplored:maple_forest", "regions_unexplored:autumnal_maple_forest", "regions_unexplored:silver_birch_forest", "regions_unexplored:temperate_grove", "regions_unexplored:willow_forest"]
+# Coniferous: taiga and its mountain edges.
+coniferous_monument_placement_spacing = 36
+coniferous_monument_placement_separation = 9
+coniferous_monument_biomes = ["#minecraft:is_taiga", "minecraft:grove", "regions_unexplored:boreal_taiga", "regions_unexplored:blackwood_taiga", "regions_unexplored:old_growth_boreal_taiga", "regions_unexplored:golden_boreal_taiga", "regions_unexplored:old_growth_golden_boreal_taiga"]

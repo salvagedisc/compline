@@ -112,7 +112,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 7: monuments and exploration
 
-- [ ] The six Monoliths (`/locate structure ancient_remnants:…`) are whole, on the ground, not cut by water [W3]. 
+- [ ] The six Ancient Remnants monuments (`/locate structure ancient_remnants:…`) are whole, on the ground, not cut by water; the floating monoliths clear of any hill; no spawner left [W3, [monuments](plan/monuments.md)].
+- [ ] **Guardians**: walk towards a warrior monolith, a coniferous and an oakwood monument and a hunter monolith: the guardian rises between you and the monument with a message; until it dies the Elderheart gives no blessing; after its death a message, then the blessing within 16 blocks. Note how each fight goes (Umvuthi without his throne, the Frostmaw).
+- [ ] **Codex**: craft the Monolith Codex; a research scrap found in a dungeon, shipwreck map chest or igloo adds its page, which names the right biomes.
 - [ ] Approach a monument: a life shard and a message, only once [V10]. Music *I Walk With Ghosts* on approach [M6].
 - [ ] Ruin chests: no XP vial; life shards in the vanilla chests and archaeology sites of [sante](plan/sante.md#sources-and-rates), at the provisional rates, and how often one is found in an hour of exploring [XP5, V7].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.

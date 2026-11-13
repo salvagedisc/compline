@@ -129,6 +129,10 @@ file = "config/naturalist-server.toml"
 hash = "4f02b446c7cd571ee999e1e2376df384966fdf9090da715a785d96f7f7874b64"
 
 [[files]]
+file = "config/obscuria/ancient_remnants-common.toml"
+hash = "7e6f3cfe2b5ed7ba178f7c35f20ac8be5172768deb8ec44e3553b92daed47504"
+
+[[files]]
 file = "config/overgeared-common.toml"
 hash = "04b592420e4005f5fc02a161297fb8833455381253b4253fef00e485c63f5e10"
 
@@ -950,11 +954,11 @@ hash = "2bba661d1f0b6ae0c1a65c567ce02b44eeb646d92d4cc6fc2f8f107b53226d68"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/en_us.json"
-hash = "dc3190475f1a3e3aa2900f784d6c688abc73e1b39d60a515db6e328b892b79ca"
+hash = "a567dadbf5fb620d43367f7d28b60218bd9586dad549b5ba69fee8b4fe22ef49"
 
 [[files]]
 file = "kubejs/assets/fallow/lang/fr_fr.json"
-hash = "76b163a35dbdcfa1e397172d979fa9d2dfde17d2248f75a55c946a9b34db53fd"
+hash = "994787cc56725328c8c4f6349fb47d0807766f7fe862282baedd67ced7ebb076"
 
 [[files]]
 file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
@@ -1323,6 +1327,38 @@ hash = "fd18b27e93f3217a95c6b150d88b2d3960122c43d197b5bd8b855168bf983b0c"
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
 hash = "22c2ae67c6ace47c327ec9330f51e8e98727dfe91337b11a286cd6ae1f8ff149"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/processor_list/monolith.json"
+hash = "f20bcddf339badab09c21ad641ce56983b08863d417bb749820ccb99b01b5b7d"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/processor_list/monument.json"
+hash = "f20bcddf339badab09c21ad641ce56983b08863d417bb749820ccb99b01b5b7d"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/cherry_monument.json"
+hash = "08b60ee6508e57280292ad98fdda25f8944de16ad09763e217f026ee686c3995"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/coniferous_monument.json"
+hash = "b954ba33a98c4d289d9926ff3f8206773d9fd1d7f873eb2739e641d9823f6840"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/hunter_monolith.json"
+hash = "df9217f1f9b93db630a488ff1f7679f0c3c4ab8fcddb5f79f297cadca92fd82b"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/oakwood_monument.json"
+hash = "5416f321d7c23e9070b31d73791e51db83f9bd51c5e248f6db8aaa8bc6625143"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/sentinel_monolith.json"
+hash = "5bbda877e934670bc2866e2caf5c10e8822d8bcf2e3336262611d707b3732440"
+
+[[files]]
+file = "kubejs/data/ancient_remnants/worldgen/structure/warrior_monolith.json"
+hash = "761398c17de2b9ccd8bb7cad01e9ecc034a8c785b0a9f1cd8f15eff7b3b5f911"
 
 [[files]]
 file = "kubejs/data/companions/worldgen/structure_set/companions_babayaga.json"
@@ -2021,6 +2057,10 @@ file = "kubejs/server_scripts/faune_coupee.js"
 hash = "04dddead6d5e3ea7512c3210c7c22f0f7b90731312876248b2c3c90da48f40a4"
 
 [[files]]
+file = "kubejs/server_scripts/monuments.js"
+hash = "607ed9168c2c0d8a6bf50d687761dadbd12f68129c40e154562e7683c1582661"
+
+[[files]]
 file = "kubejs/server_scripts/musique.js"
 hash = "2457b34fe9aeb921f9a96d9cd3533991923a427611ff3e9885702cc73e01b1b3"
 
@@ -2373,8 +2413,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.8.1.jar"
-hash = "176d9d4869775b18386f310381a2f531d06c0c24a5f3f663f0f8619db6ba6980"
+file = "mods/fallow-0.9.1.jar"
+hash = "5812befe7405296d66c76542e9f5b36cd49c4085534556f3137ead97667fca93"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"

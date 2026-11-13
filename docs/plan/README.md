@@ -15,7 +15,8 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [fallow-ambiance.md](fallow-ambiance.md) | The in-house resource pack: ATMOSPHERICS preset `fallow_v7`, Polytone colours, Regions Unexplored mist and colours by `biomes.py`, chosen values and settings to adjust in game |
 | [fallow-interface.md](fallow-interface.md) | Fallow's interface built from GUI Revision: sources, licences, build script, next steps |
 | [fallow-textures.md](fallow-textures.md) | The world's blocks and items from Vanilla Evolved: what is kept and left out, order of the packs, next steps for the mods' blocks |
-| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.7.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres`, `outils`, `averse` and `rayons`): how it works, what is deduced from the code, in-game tests |
+| [monuments.md](monuments.md) | Ancient Remnants on the new terrain: biomes, spacing, ground check, sleeping hearts and guardians, codex pages |
+| [mod-fallow.md](mod-fallow.md) | The custom `fallow` mod 0.9.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `titres`, `outils`, `averse`, `rayons` and `monuments`): how it works, what is deduced from the code, in-game tests |
 | [modules-fallow.md](modules-fallow.md) | The eight planned modules of the `fallow` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Fallow takes |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring in vanilla structures |
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |

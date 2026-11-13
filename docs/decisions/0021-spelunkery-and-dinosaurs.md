@@ -19,7 +19,7 @@ Both mods join the pack, with these adjustments.
 - Kept as the mod makes it: stone-variant ores, rough gems to polish at the grindstone, raw nuggets, salt, nephrite as a stone, cave mushrooms, sluices and channels, wooden rails, rope ladder, glowsticks, hammer and chisel, item magnet, compactor, parachute, Mine-o-mite.
 - Sorted out, like every other mod ([pack sort](../plan/tri-du-pack.md#spelunkery-and-archies-dinosaurs)): the stored experience (nephrite charm, carved nephrite, siphon, fountain, diode), the depth gauge and the magnetic compass (height and position in numbers), the tuning fork and the echo fork (they locate geodes and creatures), what needs the Nether, the End or netherite, the ores and nuggets of metals the pack does not have.
 - `slimes_spawn_in_all_caves = false`: slimes keep their vanilla places. Provisional, to be confirmed by the team.
-- `fallow` 0.8.1 gives the streams their thaw back ([compatibility fix](../plan/mod-fallow.md#streams-reflowing-and-spelunkery-the-ice-of-a-stream)).
+- `fallow` 0.9.1 gives the streams their thaw back ([compatibility fix](../plan/mod-fallow.md#streams-reflowing-and-spelunkery-the-ice-of-a-stream)).
 - Its biome lists are extended to Regions Unexplored by `biome_rules.py`, like those of the other mods.
 
 **Archie's Dinosaurs** (1.0.4)

@@ -30,7 +30,10 @@ public enum FallowModule {
      *  la teinte demande Where Winds Blow, les feuilles Particular. */
     AVERSE("averse", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.averse.AverseModule.start(bus)),
     /** Rayons de soleil dans les trouées et éclats du soleil sur l'eau (client). Aucun mod requis. */
-    RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.rayons.RayonsModule.start(bus));
+    RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.rayons.RayonsModule.start(bus)),
+    /** Les monuments d'Ancient Remnants posés seulement sur un terrain qui s'y prête : type de structure
+     *  {@code fallow:terrain_checked} (client et serveur). Aucun mod requis. */
+    MONUMENTS("monuments", null, bus -> io.github.salvagedisc.fallow.monuments.MonumentsModule.start(bus));
 
     private final String id;
     private final Dist side;
