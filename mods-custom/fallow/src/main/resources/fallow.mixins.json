@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "compat.IceThawMixin",
+    "compat.InStructureMixin",
     "horizon.ChunkyAccessorMixin",
     "xp.AnvilMenuMixin"
   ],
