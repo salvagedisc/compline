@@ -5,7 +5,6 @@
   "plugin": "io.github.salvagedisc.fallow.mixin.FallowMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "compat.InvertedBellMessageMixin",
     "horizon.ChunkyAccessorMixin",
     "xp.AnvilMenuMixin"
   ],
@@ -13,11 +12,9 @@
     "averse.LeafParticleMixin",
     "averse.LeavesBlockMixin",
     "averse.LightningBoltRendererMixin",
-    "ciel.AtmosphericsDreamMixin",
     "ciel.AtmosphericsFadeMixin",
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",
-    "ciel.FriendMoonSkyMixin",
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
     "compat.PunchyEquipMixin",

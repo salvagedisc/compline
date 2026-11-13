@@ -2124,8 +2124,8 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.6.3.jar"
-hash = "584e6b812aa58caa8c20ec7c676de5b1454f369884290814bbc6e0cf27e707a1"
+file = "mods/fallow-0.7.0.jar"
+hash = "45d5cfa76b56c9e0289cfa96a7bad38b56b0ba308c9993c98e4dd3822aa35f00"
 
 [[files]]
 file = "mods/fancymenu.pw.toml"

@@ -20,8 +20,6 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
     private static final Map<String, List<String>> REQUIRED = Map.ofEntries(
             Map.entry("ciel.LevelRendererMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS)),
             Map.entry("ciel.RenderSystemMixin", List.of(ModIds.ATMOSPHERICS, ModIds.ENHANCED_CELESTIALS)),
-            Map.entry("ciel.FriendMoonSkyMixin", List.of(ModIds.ATMOSPHERICS, ModIds.NO_MANS_LAND)),
-            Map.entry("ciel.AtmosphericsDreamMixin", List.of(ModIds.ATMOSPHERICS, ModIds.NO_MANS_LAND)),
             Map.entry("ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("ciel.AtmosphericsFadeMixin", List.of(ModIds.ATMOSPHERICS)),
@@ -30,7 +28,6 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("horizon.VanillaFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.FarFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY)),
-            Map.entry("compat.InvertedBellMessageMixin", List.of(ModIds.NO_MANS_LAND)),
             Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)),
             Map.entry("averse.LeafParticleMixin", List.of(ModIds.PARTICULAR)),
             Map.entry("averse.LeavesBlockMixin", List.of(ModIds.PARTICULAR)));

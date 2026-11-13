@@ -33,7 +33,7 @@ import org.joml.Matrix4f;
  *   <li>{@link #beginSky()} juste avant l'appel à {@code renderSky} : on s'arme si le module est
  *       actif et si la dimension a des données lunaires Enhanced Celestials ;</li>
  *   <li>si le corps vanilla de {@code renderSky} s'exécute (ATMOSPHERICS n'a pas pris la main :
- *       sous l'eau, dans No Man's Land…), {@link #markVanillaSky()} désarme tout : Enhanced Celestials
+ *       sous l'eau, dans une autre dimension…), {@link #markVanillaSky()} désarme tout : Enhanced Celestials
  *       dessine alors lui-même sa lune ;</li>
  *   <li>sinon ATMOSPHERICS lie la texture vanilla {@code moon_phases.png} pour sa lune :
  *       {@link #swapMoonTexture} la remplace par une texture transparente (son quad ne dessine rien) ;</li>

@@ -14,7 +14,6 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
     private static final ModConfigSpec.BooleanValue CIEL_CLEAR_FOG_ON_BIOME_UPDATE;
-    private static final ModConfigSpec.BooleanValue CIEL_FRIEND_MOON;
     private static final ModConfigSpec.BooleanValue HORIZON_ENABLED;
     private static final ModConfigSpec.BooleanValue HORIZON_SKIP_HIDDEN_LODS;
     private static final ModConfigSpec.IntValue HORIZON_RING_MAX_DISTANCE;
@@ -58,10 +57,6 @@ public final class FallowConfig {
                         "secondes pour passer d'une brume pleine à un ciel dégagé, ou l'inverse (le fondu ralentit en fin",
                         "de course ; la brume visible part dans les 4 ou 5 premières). 0 : fondu normal d'ATMOSPHERICS, presque immédiat.")
                 .defineInRange("clearingFadeSeconds", 10.0, 0.0, 30.0);
-        CIEL_FRIEND_MOON = client
-                .comment("Laisser No Man's Land dessiner la Lune Amie et son ombre sous le ciel d'ATMOSPHERICS.",
-                        "Faux : la Lune Amie n'apparaît pas au Point de rencontre et l'ombre ne montre pas le chemin.")
-                .define("friendMoon", true);
         client.pop();
 
         client.comment("Module horizon (client) : le paysage lointain de Distant Horizons suit la brume du terrain.").push("horizon");
@@ -189,10 +184,6 @@ public final class FallowConfig {
     /** Constante de temps du fondu de brume après un changement de biomes, en secondes ; 0 si coupé. */
     public static float cielClearingFadeSeconds() {
         return cielEnabled() ? (float) read(CLIENT_SPEC, CIEL_CLEARING_FADE) : 0.0F;
-    }
-
-    public static boolean cielFriendMoon() {
-        return cielEnabled() && read(CLIENT_SPEC, CIEL_FRIEND_MOON);
     }
 
     public static boolean horizonEnabled() {

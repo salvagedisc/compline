@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "nomansland"
-    }
-  ],
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
@@ -14,16 +8,16 @@
   ],
   "key": {
     "O": {
-      "item": "nomansland:resin_oil_bottle"
+      "item": "minecraft:honeycomb"
     },
     "P": {
-      "item": "nomansland:polished_stone_slab"
+      "item": "minecraft:smooth_stone_slab"
     },
     "C": {
       "item": "minecraft:charcoal"
     },
     "S": {
-      "item": "nomansland:polished_stone"
+      "item": "minecraft:smooth_stone"
     }
   },
   "result": {
