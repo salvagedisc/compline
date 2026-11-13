@@ -75,7 +75,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 - [ ] Separate Sable Render Distance, now that Distant Horizons is in ([0007](decisions/0007-ambiance-performance.md)).
 - [x] ~~Food preservation~~: dropped by the team on 2026-10-18 (Freeze It and Heat It removed).
 - [x] Terrain: Tectonic + Streams Reflowing; Distant Horizons driven by the mist ([0011](decisions/0011-tectonic-streams-distant-horizons.md)). Done on No Man's Land, which has since left; the biomes are now Regions Unexplored's and Geophilic's ([0019](decisions/0019-leaving-no-mans-land.md)).
-- [ ] **Compare Lithosphere in game** under the same biomes before the relief is final: it measured 0 visible defects on 2026-11-13, but 330 detached rock clusters in caves when alone ([0019](decisions/0019-leaving-no-mans-land.md)).
+- [x] **Compare Lithosphere in game** under the same biomes: done on 2026-11-13 with two test packs, Tectonic stays ([0019](decisions/0019-leaving-no-mans-land.md)).
 - [ ] **Walk the new biomes**: neither Regions Unexplored nor Geophilic has been seen in game; the mist families, colours and French names are paper choices ([ambiance](plan/fallow-ambiance.md)).
 - [ ] Confirm the provisional vanilla recipes of the vigil fire and the clearing lantern, and recompute the life shard frequency with the vanilla sources ([sante](plan/sante.md)).
 

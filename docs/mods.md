@@ -242,7 +242,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |
 | Downhill Rivers, Terralith | Streams Reflowing and Tectonic chosen instead ([0011](decisions/0011-tectonic-streams-distant-horizons.md)); Terralith measured again on 2026-11-12, alone or with Tectonic ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | No Man's Land | Left the pack on 2026-11-13 at the team's decision of 2026-11-11: Regions Unexplored and Geophilic replace its biomes, the Friendly Moon thread goes with it ([0019](decisions/0019-leaving-no-mans-land.md)) |
-| Biomes O' Plenty, Oh The Biomes We've Gone, Nature's Spirit, Lithosphere | Measured against Regions Unexplored on 2026-11-12 and not kept; Lithosphere is still to be compared in game ([0019](decisions/0019-leaving-no-mans-land.md)) |
+| Biomes O' Plenty, Oh The Biomes We've Gone, Nature's Spirit, Lithosphere | Measured against Regions Unexplored on 2026-11-12 and not kept; Lithosphere was compared in game on 2026-11-13 and not kept ([0019](decisions/0019-leaving-no-mans-land.md)) |
 | Drip Sounds | Beta build for 1.21.8, duplicates AmbientSounds and Sounds in caves; removed on 2026-10-25 |
 | Seamless Loading Screen | Last build 2024-10, Sodium overwrites the screen it draws; removed on 2026-10-25 |
 | Mezz config | Orphan library (only JEI ≥ 19.55 needs it, the pack is on 19.51); removed on 2026-10-25 |

@@ -953,6 +953,26 @@ file = "kubejs/assets/fallow/lang/fr_fr.json"
 hash = "76b163a35dbdcfa1e397172d979fa9d2dfde17d2248f75a55c946a9b34db53fd"
 
 [[files]]
+file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
+hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
+
+[[files]]
+file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
+hash = "69278550e8d84dc4dfaf4fed45ec939ed3b26a95571a6b2952fc035528bb5c95"
+
+[[files]]
+file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_plains.json"
+hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
+
+[[files]]
+file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_snowy.json"
+hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
+
+[[files]]
+file = "kubejs/assets/fallow/where_winds_blow/wind_profiles/ru_swamps.json"
+hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
 file = "kubejs/assets/fancymenu/lang/fr_fr.json"
 hash = "926d0de4f9ee2cbef1db5f8a8c01f5962e5ba5629adc9d44ecec071d025019f5"
 
@@ -1333,12 +1353,24 @@ file = "kubejs/data/eclipticseasons/tags/block/crops/summer_autumn.json"
 hash = "daa1efc34bed94851ab0d571250046adba950d19edc659b7be8bb65acc1a4349"
 
 [[files]]
+file = "kubejs/data/eclipticseasons/tags/worldgen/biome/is_small.json"
+hash = "2f995c7bcc802b8f8bf8adca922288f92c25b417d8b6c7416fe8aaeb6862e76e"
+
+[[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/blood_moon.json"
 hash = "ef3359093a5a8613d4641081bcbbee1d32626139c4abf07242a969be86e3cecd"
 
 [[files]]
 file = "kubejs/data/enhancedcelestials2defaultlunarevents/enhancedcelestials2core/lunar/event_probability/super_blood_moon.json"
 hash = "9f8a738af5d9b5d14d2b0c73fc12d0a30c2eb94194c45b3e77721e184f62bab5"
+
+[[files]]
+file = "kubejs/data/envelope/tags/worldgen/biome/allows_pigeon_spawns.json"
+hash = "bcfdb551949a118098d12c23320f52a66e73e4b314dd97014a8913af5971ab47"
+
+[[files]]
+file = "kubejs/data/envelope/tags/worldgen/biome/spawns_passenger_pigeons.json"
+hash = "15e9d6830b82e7aba921b695441ffc54d293b9d9c5a166fe73d79ba02d9fa9cf"
 
 [[files]]
 file = "kubejs/data/fallow/neoforge/biome_modifier/doublons.json"
@@ -1373,6 +1405,34 @@ file = "kubejs/data/fallow/tags/worldgen/biome/brumeux.json"
 hash = "b0656c9447d209f27942f14a162e3430b3dec279edbb1493d79d747ecc5081ba"
 
 [[files]]
+file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
+hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
+
+[[files]]
+file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
+hash = "69278550e8d84dc4dfaf4fed45ec939ed3b26a95571a6b2952fc035528bb5c95"
+
+[[files]]
+file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_plains.json"
+hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
+
+[[files]]
+file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_snowy.json"
+hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
+
+[[files]]
+file = "kubejs/data/fallow/where_winds_blow/wind_profiles/ru_swamps.json"
+hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/collections/snowy_forest.json"
+hash = "2582d7297f5688df00cac18067defbf55eb4deb9105f0de2a4ac4113990e5675"
+
+[[files]]
+file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_crab.json"
+hash = "d4c30aa6fc4cc7b72e9a2a6e546231382f80888d4fd86aef5e66de332a292ede"
+
+[[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/citadel.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
@@ -1387,6 +1447,34 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/illusioner_training_grounds.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/cold_oceans.json"
+hash = "cc75d501d62cff1f3f689bcec94a9b7477349ca14f3421b0258123a3b995ebae"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/deep_cold_oceans.json"
+hash = "cc75d501d62cff1f3f689bcec94a9b7477349ca14f3421b0258123a3b995ebae"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/hapi_deep_oceans.json"
+hash = "cc75d501d62cff1f3f689bcec94a9b7477349ca14f3421b0258123a3b995ebae"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/lukewarm_oceans.json"
+hash = "c5fd23a597251d38d8622bc82d8ce9cea68a9ed5d1c919f703b5d87bb7ef914b"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/rocky_beaches.json"
+hash = "c9aa6a5f68aa5fcd98cf0c51bff0a8f86c1b7431208a4360a25e1a0a034479fc"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/sandy_beaches.json"
+hash = "d4c30aa6fc4cc7b72e9a2a6e546231382f80888d4fd86aef5e66de332a292ede"
+
+[[files]]
+file = "kubejs/data/hapi/tags/worldgen/biome/shallow_lukewarm_oceans.json"
+hash = "c5fd23a597251d38d8622bc82d8ce9cea68a9ed5d1c919f703b5d87bb7ef914b"
 
 [[files]]
 file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/anglerfish_all_trenches.json"
@@ -1589,6 +1677,66 @@ file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_shallow_warm
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/american_paint.json"
+hash = "91119a379345436a0e1fd283d0d6acfff39d0227635b879c2507c27cf13af129"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/andalusian.json"
+hash = "c118b6c7424ca22297103228b14da1178a8441998aa915e7c97187bfcb3920f6"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/appaloosa.json"
+hash = "b9144b098c75dc6a7648146ab968dd02c14d2d00ca3c0a80854c7c37ab7f5f66"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/arabian.json"
+hash = "e4b9da965cb14b612e7fe0dd4203449fb3caded6ba599554c49b29f6e85b7f6e"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/belgian.json"
+hash = "ca101088c5fe2833d7de4f584aabd88095cfdb10d48aa9230692a4c9a9434839"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/clydesdale.json"
+hash = "c738dc14584472c8a30c853d818a1d55272cfd25a51823b3b21362a8319dbe39"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/friesian.json"
+hash = "b8d0a14fd5c3c7c4524ba1a4ed72181d245802aab2dc38773637595b6372eb15"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/haflinger.json"
+hash = "5b1327701d242ff9b5dbc091606aa68a1df968dd26bfb9538cddae1f487a4622"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/icelandic.json"
+hash = "a276390785fe6b0fc843cec7af29f846e3cdeaec8e102e28f6be2a806962b9d6"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/morgan.json"
+hash = "0335c97a8e42b4eda66d3a839cb9df8dc215775067be72cb472a0aab88dc3b2b"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/mustang.json"
+hash = "4f025420e281fd73fb3413b64128b7a738e6d18d9e143f12125d2d6e92723102"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/percheron.json"
+hash = "e69cc79a3def7c02387ac395b12b9f0b799666483340ef19e4a5339f7f1aff02"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/quarter.json"
+hash = "bfe5f4a0111db3136c944c26f884c9b028461b6060a6357ab97c231e24047dfb"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/shire.json"
+hash = "2786d4f877ee1925d85587e8a66e5b9566602eced9bda03e5f795a49650d1e31"
+
+[[files]]
+file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/thoroughbred.json"
+hash = "0335c97a8e42b4eda66d3a839cb9df8dc215775067be72cb472a0aab88dc3b2b"
+
+[[files]]
 file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json"
 hash = "47649c899720f22da8e13b6d7ef16cb331dc32c84cf70a7d6a165b28be4b9cc3"
 
@@ -1759,6 +1907,30 @@ hash = "881fb226c57e55664f28bd3a81dbb8309ac51b06b09be30f1623e3d7f7b22b64"
 [[files]]
 file = "kubejs/data/mowziesmobs/worldgen/structure_set/wrought_chambers.json"
 hash = "2c16cd040054bc5cd9c4d55b0fbecdffd19ddd37d9ae3e12ae90c96a731b76e1"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/has_capybara.json"
+hash = "c453edd1e4acd9b241f7be7819fbe8aa47f932cbe61dcf765d957528bf643ae3"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/has_great_white_shark.json"
+hash = "c5fd23a597251d38d8622bc82d8ce9cea68a9ed5d1c919f703b5d87bb7ef914b"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/has_hedgehog.json"
+hash = "86faab221b8ca279bbae067f070ed7605ef24426d41e4cf5f62c731e117620f1"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/has_mammoth.json"
+hash = "32beb49bdc1c19c69d76284e910c22b9d5855a010f10a50fed3e0381a98dd08d"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/has_turkey.json"
+hash = "817ff3284685491adde6df49e8bd047ac167db960acf1e4eb582e72e4fdc8d3f"
+
+[[files]]
+file = "kubejs/data/naturalist/tags/worldgen/biome/variant/tiger/white_tiger.json"
+hash = "159af79b05df2d6ab2417042c5196700e22666674f8f3c4583eb8708d49b2a38"
 
 [[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
