@@ -65,10 +65,6 @@ file = "config/everycomp-hazardous.toml"
 hash = "793f1a870ec68f3df77126da9a0d33214b992f370cbe06326d40d7823acaacba"
 
 [[files]]
-file = "config/fancymenu/assets/tilth_logo.png"
-hash = "4181bf1a2c251b5231968eed3163e94ee5175812f0922fdc55bbd485c71becf7"
-
-[[files]]
 file = "config/fancymenu/assets/tilth_title_mist_mask.png"
 hash = "bc465430412473288717978cece41b13720b920dd0343b45ad5c93f96bbd1688"
 
@@ -86,11 +82,11 @@ hash = "070c2b267eb3b627dec3bd793b84d326d1b689457a741945eba43d50292eebb0"
 
 [[files]]
 file = "config/fancymenu/customization/tilth_loading_screen.txt"
-hash = "f1389fb31574d1cf9263b1abfaafffc4506f49a239aa78848ebc1f4a3b15cbda"
+hash = "19a25f0eb18c76d168ec119566f76fac2cda821c06c6e0b3bec9fec7fc4ed9e8"
 
 [[files]]
 file = "config/fancymenu/customization/tilth_title_screen.txt"
-hash = "57e2553062c023ed49803661a380964fa491f57cb31026cd4be70a88e6549e34"
+hash = "34ead5e03b36d38d88fcb4cd8f8e947a9b9b65bfe098a479ca0667ebb3f41ff6"
 
 [[files]]
 file = "config/fancymenu/options.txt"
