@@ -64,8 +64,7 @@ const FAUNE_COUPEE_OBJETS = [
   'hybrid_aquatic:sea_urchin_spine', 'hybrid_aquatic:comb_jelly_spawn_egg',
   'hybrid_aquatic:garden_eel_spawn_egg', 'hybrid_aquatic:nautilus_spawn_egg',
   'hybrid_aquatic:sea_slug_spawn_egg', 'hybrid_aquatic:sea_cucumber_spawn_egg',
-  'hybrid_aquatic:starfish_spawn_egg', 'hybrid_aquatic:starfish',
-  'hybrid_aquatic:starfish_projectile_spawn_egg'
+  'hybrid_aquatic:starfish_spawn_egg', 'hybrid_aquatic:starfish'
 ]
 
 FAUNE_COUPEE_CREATURES.forEach(id => {
