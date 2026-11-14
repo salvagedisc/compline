@@ -13,8 +13,9 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | Page | Contents |
 |---|---|
 | [monuments.md](monuments.md) | Ancient Remnants on the new terrain: biomes, spacing, ground check, sleeping hearts and guardians, codex pages |
-| [mod-compline.md](mod-compline.md) | The custom `compline` mod 0.11.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments` and `bord`): how it works, what is deduced from the code, in-game tests |
+| [mod-compline.md](mod-compline.md) | The custom `compline` mod 0.12.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments`, `bord` and `rendu`): how it works, what is deduced from the code, in-game tests |
 | [modules-compline.md](modules-compline.md) | The eight planned modules of the `compline` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Compline takes |
+| [shader.md](shader.md) | Brumaire, the house shader pack: how a frame is built, the mist, what the `compline` mod gives it, other mods, what is left to do |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring in vanilla structures |
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |
 | [premiers-gestes.md](premiers-gestes.md) | First gestures: no logs or rock by hand, flint from gravel, knapped stone tools (Overgeared), planks with an axe, flint campfire, the « Premiers gestes » quests ([0013](../decisions/0013-premiers-gestes.md)) |
