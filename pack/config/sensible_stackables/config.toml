@@ -1,15 +1,15 @@
-# Tilth: stack sizes by kind of item (decision 0012). Every item that stacked to 64
-# now stacks to 32; the tilth:pile/N tags (pack/kubejs/data/tilth/tags/item/pile/)
+# Compline: stack sizes by kind of item (decision 0012). Every item that stacked to 64
+# now stacks to 32; the compline:pile/N tags (pack/kubejs/data/compline/tags/item/pile/)
 # set the exceptions. Items with durability are never touched. Keep every stack at
 # least as large as the biggest recipe output of that item.
 # Layout checked against the file Fzzy Config writes (test server, 2026-10-26).
 # Don't change this! Version used to track needed updates.
 version = 2
 items = [
-    [ "#tilth:pile/64", 64 ],
-    [ "#tilth:pile/16", 16 ],
-    [ "#tilth:pile/8", 8 ],
-    [ "#tilth:pile/4", 4 ]
+    [ "#compline:pile/64", 64 ],
+    [ "#compline:pile/16", 16 ],
+    [ "#compline:pile/8", 8 ],
+    [ "#compline:pile/4", 4 ]
 ]
 splashPotionCooldown = 0
 uncapStackSize = false

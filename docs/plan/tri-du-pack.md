@@ -100,7 +100,7 @@ The maintainer asked whether a mod changes how these levels play; otherwise we d
 ## Checks on the test server
 
 - 17/17 server scripts loaded, no error; the empty structure sets and the new recipes raise no warning.
-- Checked in the loaded recipe list: the 7 `tilth:tri/*` recipes are present, the old rope, pulley and knife recipes are gone, 13 mincer recipes remain, no recipe makes a jungle track, a dyed locometal block, a potato cannon or a Twigs table; oak tracks and plain locometal still have theirs.
+- Checked in the loaded recipe list: the 7 `compline:tri/*` recipes are present, the old rope, pulley and knife recipes are gone, 13 mincer recipes remain, no recipe makes a jungle track, a dyed locometal block, a potato cannon or a Twigs table; oak tracks and plain locometal still have theirs.
 - Every edited setting survives NeoForge's config correction pass (partial files are completed, our values are kept).
 - The registry has 7,557 items without Chipped and Beautify!; the ids of every list come from it.
 

@@ -11,17 +11,17 @@ The team asked for four things on 2026-10-26: simpler bags than Traveler's Backp
 
 **Bags: Reliable Backpacks** replaces Traveler's Backpack. One bag, three rows, dyeable, placeable as a block, worn in the Curios "back" slot. `pack/config/reliable_backpacks.json`: `enableChestSlot = false` (the bag never takes the chestplate slot), `enableEntityStealing = false`. The default recipe (8 leather) is kept: leather comes from the tannery.
 - **Comforts** comes back for the sleeping bag and the hammock, which Traveler's Backpack used to bring.
-- Lost with Traveler's Backpack: the hose and its tanks. The `sac` module of the `tilth` mod switches itself off without the mod ("Module sac ignoré") and is removed in 0.5.0. Water on the road is carried in bottles, which now stack to 8.
+- Lost with Traveler's Backpack: the hose and its tanks. The `sac` module of the `compline` mod switches itself off without the mod ("Module sac ignoré") and is removed in 0.5.0. Water on the road is carried in bottles, which now stack to 8.
 
-**Stacks: Sensible Stackables.** `pack/config/sensible_stackables/config.toml`: every item that stacked to 64 now stacks to 32 (`commonStackSize`), and the `tilth:pile/N` item tags (`pack/kubejs/data/tilth/tags/item/pile/`) set the exceptions. Items with durability are never touched; the mod syncs the client.
+**Stacks: Sensible Stackables.** `pack/config/sensible_stackables/config.toml`: every item that stacked to 64 now stacks to 32 (`commonStackSize`), and the `compline:pile/N` item tags (`pack/kubejs/data/compline/tags/item/pile/`) set the exceptions. Items with durability are never touched; the mod syncs the client.
 
 | Tag | Stack | What |
 |---|---|---|
-| `tilth:pile/64` | 64 | Small things: seeds, nuggets, dyes, string, sticks, powders, feathers, flint, paper |
+| `compline:pile/64` | 64 | Small things: seeds, nuggets, dyes, string, sticks, powders, feathers, flint, paper |
 | (common size) | 32 | Everything else that stacked to 64: building blocks, planks, crops, torches, arrows |
-| `tilth:pile/16` | 16 | Ingots, gems, raw metal, ores, logs, glass, wool, cooked meat, fish and bread, empty bottles, Create parts (shafts, gears, casings, pipes, mechanisms) |
-| `tilth:pile/8` | 8 | Chests, barrels, storage blocks, workbench and furnaces, potions and water bottles, honey bottles |
-| `tilth:pile/4` | 4 | Create machines, vaults and tanks |
+| `compline:pile/16` | 16 | Ingots, gems, raw metal, ores, logs, glass, wool, cooked meat, fish and bread, empty bottles, Create parts (shafts, gears, casings, pipes, mechanisms) |
+| `compline:pile/8` | 8 | Chests, barrels, storage blocks, workbench and furnaces, potions and water bottles, honey bottles |
+| `compline:pile/4` | 4 | Create machines, vaults and tanks |
 
 Raw building blocks (stone, dirt, sand) stay at 32 so that building is not a chore. Each stack stays at least as large as the biggest recipe output of its item (Kaleidoscope Cookery: 9 dishes, Farm & Charm: 16 fences, Create: 16 panes, 18 nuggets).
 

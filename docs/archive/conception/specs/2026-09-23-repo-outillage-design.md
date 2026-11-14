@@ -1,12 +1,12 @@
-# Tilth — Repo & tooling (sub-project 1)
+# Compline — Repo & tooling (sub-project 1)
 
 - **Date**: 2026-09-23
 - **Status**: under review
-- **Repo**: `salvagedisc/tilth` (GitHub, private)
+- **Repo**: `salvagedisc/compline` (GitHub, private)
 
 ## 1. Context
 
-Tilth is a Minecraft modpack for a permanent world played among friends on a rented dedicated server. Direction: exploration (Breath of the Wild style), Create + Aeronautics, settlement building, long-term farming and animal husbandry, a misty, solitary and strange atmosphere.
+Compline is a Minecraft modpack for a permanent world played among friends on a rented dedicated server. Direction: exploration (Breath of the Wild style), Create + Aeronautics, settlement building, long-term farming and animal husbandry, a misty, solitary and strange atmosphere.
 
 Fixed constraints:
 
@@ -57,7 +57,7 @@ Local installation: official binary (CI artifact of the `packwiz/packwiz` repo) 
 ## 4. Repo structure
 
 ```
-tilth/
+compline/
 ├── pack/                     ← packwiz root, the only content of the .mrpack
 │   ├── pack.toml             ← name, version, MC 1.21.1, pinned NeoForge
 │   ├── index.toml            ← generated (packwiz refresh)
@@ -68,7 +68,7 @@ tilth/
 │       ├── startup_scripts/
 │       ├── server_scripts/
 │       ├── client_scripts/
-│       └── data/tilth/      ← "datapack" data loaded by KubeJS
+│       └── data/compline/      ← "datapack" data loaded by KubeJS
 ├── scripts/
 │   └── sync-from-instance    ← bridge Modrinth App instance → repo
 ├── docs/
@@ -114,7 +114,7 @@ Decisions:
 
 ### Test instance and synchronisation
 
-The maintainer experiments in a **"Tilth – test"** instance of the Modrinth App (free addition/removal of mods).
+The maintainer experiments in a **"Compline – test"** instance of the Modrinth App (free addition/removal of mods).
 
 `scripts/sync-from-instance`:
 
@@ -158,7 +158,7 @@ Plus the dependencies required by these mods. Optimisation mods (client and serv
 
 1. Installs packwiz (pinned commit).
 2. Checks that `index.toml` is up to date (`packwiz refresh` produces no diff).
-3. `packwiz mr export` → `Tilth-<version>-<sha>.mrpack`.
+3. `packwiz mr export` → `Compline-<version>-<sha>.mrpack`.
 4. Publishes the file as a run artifact.
 
 ### `release.yml` — on `v*` tag

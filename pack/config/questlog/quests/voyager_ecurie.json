@@ -1,5 +1,5 @@
 {
-  "chapter": "questlog:tilth_voyager",
+  "chapter": "questlog:compline_voyager",
   "sort_order": 1,
   "title": "L’écurie",
   "description": "Regardez votre cheval et appuyez sur « Roue d’ordres du cheval » : le suivre, errer, rester, ou rentrer à son écurie. « Définir l’écurie » marque l’endroit où il revient.\n\n« Gérer les chevaux » ouvre le registre de toutes vos montures, même loin d’ici. Un cheval au repos est en sécurité et entend toujours le sifflet.\n\nPour prêter vos chevaux à un ami : /horse trust suivi de son nom. /horse untrust le lui retire.",

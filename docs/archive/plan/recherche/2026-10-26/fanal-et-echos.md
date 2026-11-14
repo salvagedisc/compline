@@ -1,6 +1,6 @@
 # Fanal and Échos: design references
 
-Research of 26 October 2026 for the `fanal` (light beacon) and `echos` (distant silhouettes) modules of the `tilth` mod. Everything cited comes from pages opened during the research. What could not be verified is flagged.
+Research of 26 October 2026 for the `fanal` (light beacon) and `echos` (distant silhouettes) modules of the `compline` mod. Everything cited comes from pages opened during the research. What could not be verified is flagged.
 
 ## 1. What exists in Minecraft
 
@@ -20,59 +20,59 @@ Research of 26 October 2026 for the `fanal` (light beacon) and `echos` (distant 
 **What it does.** A thick mist covers the biome. The Wisplight is a small blue orb that follows the player and clears the mist around them. The Wisp Torch clears the mist around a point, with no fuel, but only at ground level.
 **Good.** The mist is a real challenge, and the tool is a light.
 **To avoid.** Players complain about frustration (Steam threads). The EIP guide advises placing map markers everywhere, because you get lost. The WispReach mod exists precisely to reduce the mist.
-**For Tilth.** The fanal must be the opposite: the mist hides the ground, but not the light. Option: a small radius of clearer mist around the beacon.
+**For Compline.** The fanal must be the opposite: the mist hides the ground, but not the light. Option: a small radius of clearer mist around the beacon.
 
 ### Outer Wilds, the signal scope
 **What it does.** You listen to signals, follow them, find the source. According to the creative director (Mobius blog, 2016), the tool "never worked 100%".
 **Good.** Separate channels per source. A "natural" channel that rewards exploration. A distance indicator, described as a "game changer".
 **To avoid.** Players aimed at nearby rocks while the signal was on the other side of the planet. Direction without distance equals confusion.
-**For Tilth.** A signal must have its own sound or visual identity. For `echos`, give distance through intensity (opacity, volume), never through a number.
+**For Compline.** A signal must have its own sound or visual identity. For `echos`, give distance through intensity (opacity, volume), never through a number.
 
 ### Dark Souls and Elden Ring
 **What it does.** Messages with a limited vocabulary, placed where they were written. Bloodstains that replay the last seconds of a dead player as a ghost. Ghosts only show actions, have no effect on the world, and appear with a certain probability (arXiv 2204.10949). The Erdtree is a landmark visible from almost everywhere (mapmaster.io calls it the "main compass").
 **Good.** Non-interactive ghosts, so no risk. Anonymous camaraderie.
 **To avoid.** Messages sometimes misleading, humor misunderstood, possible toxicity.
-**For Tilth.** An echo can replay a trace, never interact. A closed vocabulary prevents abuse. The single big landmark (menhir, tree) helps orient without a map.
+**For Compline.** An echo can replay a trace, never interact. A closed vocabulary prevents abuse. The single big landmark (menhir, tree) helps orient without a map.
 
 ### Journey
 **What it does.** The mountain is visible all along and serves as a goal. An anonymous companion, without text or voice, only a chant (Wikipedia, Game Developer).
 **Good.** No names, no chat, no competition. Communication through a single sound creates a bond. Minimalism: remove everything that does not serve the emotion.
 **To avoid.** A "karma" system was cut because it was too preachy and exploitable.
-**For Tilth.** The fanal is the private "mountain" of each group: a fixed point that says "come home". No numeric reward for lighting it.
+**For Compline.** The fanal is the private "mountain" of each group: a fixed point that says "come home". No numeric reward for lighting it.
 
 ### Death Stranding
 **What it does.** Structures, signs and paths of other players appear in your world. Heavily walked paths get smoother. "Likes" reward the builder.
 **Good.** You feel accompanied without direct contact. The amount of visible content is capped, which limits clutter and abuse (Gfinity, CheatCC).
 **To avoid.** Secondary source only, no interview with the game's director found.
-**For Tilth.** A friend's fanal is a trace left for others. A cap on visible beacons prevents a saturated sky.
+**For Compline.** A friend's fanal is a trace left for others. A cap on visible beacons prevents a saturated sky.
 
 ### Breath of the Wild
 **What it does.** Unique places (Lost Woods, ruins, mazes), towers, Korok seeds.
 **Good.** The Game Developer article says the mystery comes from anticipation, not from discovery. It recommends breaking an established pattern, at the right moment, and keeping the fiction mysterious but the controls predictable.
 **To avoid.** Fixed templates, signs that are too clear, random loot unrelated to the place. Repeated Koroks become predictable. I could not verify the "triangle rule" or the "allure of the unknown" in an open source.
-**For Tilth.** An echo must stay rare and varied. If you always see the same one, the charm dies.
+**For Compline.** An echo must stay rare and varied. If you always see the same one, the charm dies.
 
 ### Sea of Thieves
 **What it does.** The lantern lights up and is used to light beacons on the large islands, "visible from afar on the seas" (official community wiki). Some riddles ask you to raise the lantern at a landmark.
 **Good.** The physical act (lighting, raising) is the game gesture.
 **To avoid.** I could not verify the Skull Fort clouds or the ship lighting at night.
-**For Tilth.** Lighting the fanal is a ritual, by hand, with a visible fuel.
+**For Compline.** Lighting the fanal is a ritual, by hand, with a visible fuel.
 
 ### Ghost of Tsushima
 **What it does.** The wind guides, particles fall toward the objective. Golden birds lead off the paths. The game's creative director: "the wind is under the player's control" and "curiosity is constantly rewarded". The wind came from an idea of atmosphere, not of navigation.
 **Good.** The guidance is atmosphere. Ignoring the guide still pays.
 **To avoid.** The wind is an exact guide to the objective, so almost a compass. The echo must not be one.
-**For Tilth.** Strong idea: echoes born from atmosphere (silhouette, lantern), and following is a choice.
+**For Compline.** Strong idea: echoes born from atmosphere (silhouette, lantern), and following is a choice.
 
 ### Hollow Knight, Cornifer
 **What it does.** The cartographer hums. The sound grows stronger as you approach. Papers on the ground lead to him. If he has left, you find a letter that points to his shop.
 **Good.** A soft sound clue, a visual thread, a way out without punishment. In Deepnest, he does not hum, because he is afraid (wiki).
-**For Tilth.** An echo can hum. A distant hum plus a detail on the ground (a lost letter) is enough as "proof" that you are following the right thread.
+**For Compline.** An echo can hum. A distant hum plus a detail on the ground (a lost letter) is enough as "proof" that you are following the right thread.
 
 ### Shadow of the Colossus
 **What it does.** The sword raised to the sun draws a beam that narrows toward the target. It is not a radar, you must stop to use it, and it fails under dense cover (Game Developer). Each defeated colossus leaves a ray toward the clouds, a permanent landmark.
 **Good.** The cost of use (stopping, risk) makes the clue precious. The author notes that the game "wants you to get a little lost".
-**For Tilth.** A light beam as a landmark, with a cost. The rays left after a feat make luminous "tombs": this could be considered for memorial fanals.
+**For Compline.** A light beam as a landmark, with a cost. The rays left after a feat make luminous "tombs": this could be considered for memorial fanals.
 
 ### Others, briefly
 Subnautica: beacons are placed by the player, a pod's signal can disappear (Steam threads, no design source). Proteus: music is born from the landscape, no goal, nothing about apparitions in the opened article. Dear Esther: not verified.

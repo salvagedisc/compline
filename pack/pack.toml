@@ -1,4 +1,4 @@
-name = "Tilth"
+name = "Compline"
 author = "salvagedisc"
 version = "0.1.0"
 pack-format = "packwiz:1.1.0"
@@ -6,7 +6,7 @@ pack-format = "packwiz:1.1.0"
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "639a2807d0b7c1d62e9e26721575cad0360a49027f4408045abfa2724c3f56ac"
+hash = "c982a4dfcc32c341c3d526f6db7eea2b809e7971d2cebbca5f6811611d6354e1"
 
 [versions]
 minecraft = "1.21.1"

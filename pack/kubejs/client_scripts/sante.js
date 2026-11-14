@@ -1,28 +1,28 @@
-// Tilth : infobulle de l'« Éclat de vie » (règles dans server_scripts/sante.js).
+// Compline : infobulle de l'« Éclat de vie » (règles dans server_scripts/sante.js).
 // Ligne fixe : « Rend un cœur perdu. » Ligne dynamique : les cœurs du joueur sur 10.
-// Le compteur lit le modificateur tilth:mort, synchronisé avec les attributs du joueur.
+// Le compteur lit le modificateur compline:mort, synchronisé avec les attributs du joueur.
 
 const SANTE_CLIENT_COEURS_DEPART = 10   // doit rester égal à SANTE_COEURS_DEPART (server_scripts/sante.js)
-const SANTE_CLIENT_ECLAT = 'tilth:eclat_de_vie'
+const SANTE_CLIENT_ECLAT = 'compline:eclat_de_vie'
 
 ItemEvents.modifyTooltips(event => {
-  event.add(SANTE_CLIENT_ECLAT, [Text.gray(Text.translatable('item.tilth.eclat_de_vie.tooltip'))])
-  event.modify(SANTE_CLIENT_ECLAT, text => text.dynamic('tilth_sante_compteur'))
+  event.add(SANTE_CLIENT_ECLAT, [Text.gray(Text.translatable('item.compline.eclat_de_vie.tooltip'))])
+  event.modify(SANTE_CLIENT_ECLAT, text => text.dynamic('compline_sante_compteur'))
 })
 
-ItemEvents.dynamicTooltips('tilth_sante_compteur', event => {
+ItemEvents.dynamicTooltips('compline_sante_compteur', event => {
   const player = Client.player
   if (!player) return
   let perdus = 0
   try {
     // let et non const : le Rhino de KubeJS refuse « const » dans un bloc try.
     let attribut = player.getAttribute('minecraft:generic.max_health')
-    let modificateur = attribut ? attribut.getModifier('tilth:mort') : null
+    let modificateur = attribut ? attribut.getModifier('compline:mort') : null
     if (modificateur) perdus = Math.round(-modificateur.amount() / 2)
   } catch (e) {
     // Repli : sans accès au modificateur, on déduit les cœurs du maximum affiché.
     perdus = Math.max(0, Math.round((SANTE_CLIENT_COEURS_DEPART * 2 - player.maxHealth) / 2))
   }
   const coeurs = Math.max(0, SANTE_CLIENT_COEURS_DEPART - perdus)
-  event.add([Text.red(Text.translatable('item.tilth.eclat_de_vie.compteur', coeurs, SANTE_CLIENT_COEURS_DEPART))])
+  event.add([Text.red(Text.translatable('item.compline.eclat_de_vie.compteur', coeurs, SANTE_CLIENT_COEURS_DEPART))])
 })

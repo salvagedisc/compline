@@ -15,9 +15,9 @@ The team asked on 2026-10-29 to rethink the recipes and how basic resources are 
 | Licence | Ours | MIT | GPL-3.0 | Own |
 
 ## Decision
-No new mod. The `outils` module of the `tilth` mod makes every wooden block, raw or crafted (`tilth:outil_requis`: logs and `#minecraft:mineable/axe`, minus what grows), and every block that needs the correct tool for drops unbreakable without that tool, with a hint in the action bar ([mod-tilth](../plan/mod-tilth.md#outils-module)). `pack/kubejs/server_scripts/premiers_gestes.js` removes wooden tools, makes planks cost an axe (2 per log, the axe takes one point of damage; Create's saw keeps 6), lights the campfire with flint instead of coal, turns a Twigs pebble into an Overgeared knappable rock and adds a few sticks to leaves. A « Premiers gestes » Questlog chapter guides each step. Details: [premiers-gestes](../plan/premiers-gestes.md).
+No new mod. The `outils` module of the `compline` mod makes every wooden block, raw or crafted (`compline:outil_requis`: logs and `#minecraft:mineable/axe`, minus what grows), and every block that needs the correct tool for drops unbreakable without that tool, with a hint in the action bar ([mod-compline](../plan/mod-compline.md#outils-module)). `pack/kubejs/server_scripts/premiers_gestes.js` removes wooden tools, makes planks cost an axe (2 per log, the axe takes one point of damage; Create's saw keeps 6), lights the campfire with flint instead of coal, turns a Twigs pebble into an Overgeared knappable rock and adds a few sticks to leaves. A « Premiers gestes » Questlog chapter guides each step. Details: [premiers-gestes](../plan/premiers-gestes.md).
 
-Of the three options offered (raw wood only; worked wood too; a forged hand saw and a fire drill on top), the team took the second. Plants and crops tagged for the axe stay breakable by hand (`tilth:sans_outil`).
+Of the three options offered (raw wood only; worked wood too; a forged hand saw and a fire drill on top), the team took the second. Plants and crops tagged for the axe stay breakable by hand (`compline:sans_outil`).
 
 ## Rejected
 - Survivalist Essentials, No Tree Punching Remastered, Primity: each brings a second stone-age system next to Overgeared's, plus content the pack already has elsewhere (NML bandages, the bag, Overgeared's copper and steel).

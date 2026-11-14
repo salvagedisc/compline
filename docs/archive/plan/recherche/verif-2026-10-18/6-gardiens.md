@@ -1,6 +1,6 @@
 # 6 — A guardian for the Ancient Remnants: Monoliths monuments
 
-Check of 2026-10-18. Scope: replace the `minecraft:breeze` spawners of Ancient Remnants 1.5.2 (AR) with a guardian consistent with Tilth (decision 0003: rare, territorial hostiles, no horror).
+Check of 2026-10-18. Scope: replace the `minecraft:breeze` spawners of Ancient Remnants 1.5.2 (AR) with a guardian consistent with Compline (decision 0003: rare, territorial hostiles, no horror).
 
 Method:
 - AR 1.5.2 jar already extracted (`<work dir>/jars/ar/x`): the 41 `.nbt` files were read with a small NBT reader written for the purpose (Python `-I`);
@@ -60,7 +60,7 @@ The six structures are jigsaws. Their pieces use two shared processor_lists: `an
 
 ### 1.3 The candidates in the current pack
 
-Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which lists only vanilla). No config for these mods is in `pack/config` (only `quark-common.toml` and `supplementaries-common.toml` are there). The only existing rules are the In Control drafts (`plan/kubejs-brouillons/config/incontrol/spawn.json`):
+Status in Compline (`origin/main`): none of these mobs is in `bannedVanilla` (which lists only vanilla). No config for these mods is in `pack/config` (only `quark-common.toml` and `supplementaries-common.toml` are there). The only existing rules are the In Control drafts (`plan/kubejs-brouillons/config/incontrol/spawn.json`):
 - Mowzie's: `minlight 8` → deny, `maxdist 40` → deny, at most 2 per player;
 - Alex's Mobs Guster: `minlight 8` → deny, at most 3;
 - Mauler: 60% denied.
@@ -72,7 +72,7 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
 **Ferrous Wroughtnaut** (Mowzie's, `mowziesmobs:ferrous_wroughtnaut`)
 - **Look and tone**: a giant iron armor holding an axe. It stays motionless until struck, then returns to its place. It is not a monster: it is the guardian of an ancient room.
 - **Boss**: yes. Key `ferrous_wroughtnaut.has_boss_bar`; also `heals_out_of_battle` and `reset_health_when_respawn` [jar config]. 40 HP, 30 damage [`createAttributes`]. It is vulnerable only in certain phases [Mowzie's wiki].
-- **In Tilth**: present, no config. An "anomaly" mob of 0003.
+- **In Compline**: present, no config. An "anomaly" mob of 0003.
 - **How it appears**: through a `wrought_chamber` structure, which contains the entity in the `.nbt` (`spacing 15`, `separation 5`, tag `has_mowzie_structure` = `#c:is_overworld`). `/summon` can also be used.
 - **Tied to a single monument**: yes.
   - It returns to its place thanks to the `restPos` NBT, and it is dormant as long as `active` is false (`addAdditionalSaveData`).
@@ -81,7 +81,7 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
 **Frostmaw** (Mowzie's, `mowziesmobs:frostmaw`)
 - **Look and tone**: a great snow yeti, which sleeps until disturbed. It is a legendary beast, not a horror monster.
 - **Boss**: yes. Key `frostmaw.has_boss_bar`; also `stealable_ice_crystal`. 250 HP, 10 damage, tracking range of 50 blocks.
-- **In Tilth**: present, no config. Plan 05 proposes a ×0.2 multiplier.
+- **In Compline**: present, no config. Plan 05 proposes a ×0.2 multiplier.
 - **How it appears**: through the `frostmaw_spawn` structure, whose `.nbt` contains `{"id":"mowziesmobs:frostmaw","has_crystal":1}`, or through `/summon`.
 - **Tied to a single monument**: yes, with a reservation.
   - `requiresCustomPersistence()` returns `getHasCrystal()`: it stays persistent **only if it has its crystal**.
@@ -97,7 +97,7 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
   - `disappear_after_reward`: he disappears after the reward;
   - `heals_out_of_battle`.
 - **Reward**: the table `mowziesmobs:entities/sculptor_test` (Earthrend Gauntlet), which can be overridden.
-- **In Tilth**: present, no config.
+- **In Compline**: present, no config.
 - **How he appears**: through the `monastery` structure (mountain pillar), or through `/summon`.
 - **Tied to a single monument**: yes, persistent (`requiresCustomPersistence` = `true`). He needs open sky over the trial height (message "Test is blocked!").
 
@@ -105,7 +105,7 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
 - **Look and tone**: a high priest in a green moss robe, with a gold crown and mask and a wooden staff (texture `sacred_pontiff_0.png`). He stays **inert** (state 0) until **a player touches him by hand**: `mobInteract` then triggers `cycleState` and the `PONTIFF_ACTIVATE` sound. His second form **petrifies** on dying (textures `his_holiness_petrification0..20`). It looks like a temple statue awakening.
 - **Boss**: yes, red bar `TrackedServerBossEvent`, in two phases. `setDarkenScreen(true)` and `setCreateWorldFog(true)` are **hard-coded**. He has boss music (`IBossMusicProvider`, no config key in `KnightLibConfig`).
 - **Default hit points**: about 225 then 350 (fields `SACRED_PONTIFF_MAX_LIFE` / `HIS_HOLINESS_MAX_LIFE` of `CompanionsConfig`; the order is deduced).
-- **In Tilth**: present. According to 0003, the Companions! bosses are "to disable or make very rare". One per monument is "very rare".
+- **In Compline**: present. According to 0003, the Companions! bosses are "to disable or make very rare". One per monument is "very rare".
 - **How he appears**: through the `companions_monkey_temple` structure (entity in the `.nbt`; biomes `MONKEY_TEMPLE_STRUCTURE_BIOMES = "minecraft:jungle"`), or through `/summon`.
 - **Tied to a single monument**: yes (`removeWhenFarAway` returns `false`).
 
@@ -114,7 +114,7 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
 **Umvuthi, the Sun Bird** (Mowzie's)
 - **Look and tone**: a chief of a masked tribe, with Umvuthana. Tribal caricature; plan 08 already makes it an art direction question.
 - **Boss**: yes (`has_boss_bar`).
-- **In Tilth**: present, and the question remains open (08, row 10).
+- **In Compline**: present, and the question remains open (08, row 10).
 - **How it appears**: through the `umvuthana_grove` structure.
 - **Verdict: rejected** for tone.
 
@@ -124,14 +124,14 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
   - Foliaath: jungle carnivorous plant;
   - Grottol and Lantern: small peaceful creatures.
 - **Boss**: no.
-- **In Tilth**: present.
+- **In Compline**: present.
 - **How they appear**: natural spawning.
 - **Verdict: rejected**, they are not guardians. The Grottol (which eats ores) would be a nod to the dwarf monument, nothing more.
 
 **Guster** (Alex's Mobs)
 - **Look and tone**: a small desert sand tornado. It is the closest equivalent to the breeze.
 - **Boss**: no.
-- **In Tilth**: limited by In Control.
+- **In Compline**: limited by In Control.
 - **How it appears**: naturally; one could also put one in the spawner.
 - **Verdict: possible variant** for the hunter monolith, but as a spawner (it respawns) and not as a unique guardian.
 
@@ -146,18 +146,18 @@ Status in Tilth (`origin/main`): none of these mobs is in `bannedVanilla` (which
 **Tuff Golem** (Friends & Foes)
 - **Look and tone**: a tuff statue that comes alive, peaceful. The monuments are made of tuff.
 - **Boss**: no.
-- **In Tilth**: appears only in strongholds, which are removed (plan 05).
+- **In Compline**: appears only in strongholds, which are removed (plan 05).
 - **Verdict: to keep as living decor**, not as a guardian.
 
 **Wildfire, Iceologer, Illusioner** (Friends & Foes)
 - **Boss**: Wildfire, yes.
-- **In Tilth**: already to be disabled (0003).
+- **In Compline**: already to be disabled (0003).
 - **Verdict: rejected.**
 
 **Karkinos** (Hybrid Aquatic, `hybrid_aquatic:karkinos`)
 - **Look and tone**: a giant crab (folder `entity/miniboss`) that summons minions (`Summoning`).
 - **Boss**: mini-boss with a bar (`BossEvent` in `KarkinosEntity`).
-- **In Tilth**: present.
+- **In Compline**: present.
 - **How it appears**: through `/summon`.
 - **Verdict: option** for the sentinel monolith (underwater). The sentinel and its aegis go with a carapace; but the monks' lore rather says "no fighting".
 
@@ -286,12 +286,12 @@ const GARDIENS = {
 // (1) Seal: as soon as the Elderheart enters the world (structure placement or chunk load)
 EntityEvents.spawned('ancient_remnants:elderheart', event => {
   const e = event.entity, pd = e.persistentData
-  if (pd.contains('tilth_type')) return                     // already handled
+  if (pd.contains('compline_type')) return                     // already handled
   const nbt = e.nbt
   const type = String(nbt.getString('PossibleBlessings'))
-  pd.putString('tilth_type', type)
+  pd.putString('compline_type', type)
   if (!GARDIENS[type] || !nbt.contains('Blessing')) return
-  pd.putString('tilth_benediction', nbt.getString('Blessing'))
+  pd.putString('compline_benediction', nbt.getString('Blessing'))
   event.server.scheduleInTicks(1, () => { const n = e.nbt; n.remove('Blessing'); e.nbt = n })
 })
 
@@ -301,17 +301,17 @@ ServerEvents.tick(event => {
   event.server.players.forEach(p => {
     p.level.getEntitiesWithin(p.boundingBox.inflate(48)).forEach(e => {
       if (String(e.type) !== 'ancient_remnants:elderheart') return
-      const pd = e.persistentData, g = GARDIENS[String(pd.getString('tilth_type'))]
+      const pd = e.persistentData, g = GARDIENS[String(pd.getString('compline_type'))]
       if (!g) return
-      if (!pd.contains('tilth_gardien')) {
-        const pos = global.tilthSolDuGardien(p.level, e.blockPosition(), g.cielOuvert) // ground at the foot of the monument
-        const lien = 'tilth_g_' + e.uuid.toString().substring(0, 8)
-        event.server.runCommandSilent(`execute in ${p.level.dimension} run summon ${g.id} ${pos.x} ${pos.y} ${pos.z} {${g.nbt}PersistenceRequired:1b,Tags:["tilth_gardien","${lien}"]}`)
+      if (!pd.contains('compline_gardien')) {
+        const pos = global.complineSolDuGardien(p.level, e.blockPosition(), g.cielOuvert) // ground at the foot of the monument
+        const lien = 'compline_g_' + e.uuid.toString().substring(0, 8)
+        event.server.runCommandSilent(`execute in ${p.level.dimension} run summon ${g.id} ${pos.x} ${pos.y} ${pos.z} {${g.nbt}PersistenceRequired:1b,Tags:["compline_gardien","${lien}"]}`)
         const garde = p.level.getEntitiesWithin(AABB.ofSize(pos, 8, 8, 8)).find(x => x.tags.contains(lien))
-        if (garde) { garde.persistentData.putString('tilth_elderheart', e.uuid.toString()); pd.putString('tilth_gardien', garde.uuid.toString()) }
-      } else if (pd.contains('tilth_benediction') && g.cielOuvert) {
+        if (garde) { garde.persistentData.putString('compline_elderheart', e.uuid.toString()); pd.putString('compline_gardien', garde.uuid.toString()) }
+      } else if (pd.contains('compline_benediction') && g.cielOuvert) {
         // Sculptor: disappeared after the reward, without dying → trial passed
-        if (!p.level.getEntity(UUID.fromString(pd.getString('tilth_gardien')))) global.tilthLibererElderheart(e, p)
+        if (!p.level.getEntity(UUID.fromString(pd.getString('compline_gardien')))) global.complineLibererElderheart(e, p)
       }
     })
   })
@@ -320,19 +320,19 @@ ServerEvents.tick(event => {
 // (3) Release: on the guardian's death
 EntityEvents.death(event => {
   const g = event.entity
-  if (!g.tags.contains('tilth_gardien')) return
-  const eh = event.level.getEntity(UUID.fromString(g.persistentData.getString('tilth_elderheart')))
-  if (eh) global.tilthLibererElderheart(eh, event.source.player)
+  if (!g.tags.contains('compline_gardien')) return
+  const eh = event.level.getEntity(UUID.fromString(g.persistentData.getString('compline_elderheart')))
+  if (eh) global.complineLibererElderheart(eh, event.source.player)
 })
 
-global.tilthLibererElderheart = (eh, joueur) => {
+global.complineLibererElderheart = (eh, joueur) => {
   const pd = eh.persistentData
-  if (!pd.contains('tilth_benediction')) return
-  const n = eh.nbt; n.putString('Blessing', pd.getString('tilth_benediction')); eh.nbt = n
-  pd.remove('tilth_benediction')
-  global.tilthOuvrirClairiere(eh.level, eh.blockPosition(), 32, joueur)   // report 4, §2.3
+  if (!pd.contains('compline_benediction')) return
+  const n = eh.nbt; n.putString('Blessing', pd.getString('compline_benediction')); eh.nbt = n
+  pd.remove('compline_benediction')
+  global.complineOuvrirClairiere(eh.level, eh.blockPosition(), 32, joueur)   // report 4, §2.3
   eh.block.popItem(Item.of('ancient_remnants:research_scrap',
-    `[ancient_remnants:stored_research=["${pd.getString('tilth_type')}"]]`)) // this monument's page
+    `[ancient_remnants:stored_research=["${pd.getString('compline_type')}"]]`)) // this monument's page
 }
 ```
 
@@ -341,7 +341,7 @@ What this script ties together:
 - **the codex**: the monument's page as a reward (component `ancient_remnants:stored_research`, report 4 §1.3);
 - **the Elderheart**: the blessing becomes the guardian's prize.
 
-`global.tilthSolDuGardien` remains to be written:
+`global.complineSolDuGardien` remains to be written:
 - test 16 directions at 10–20 blocks from the Elderheart;
 - take `level.getHeight('motion_blocking_no_leaves', x, z)`;
 - check 4 blocks of air above, and `canSeeSky` for the Sculptor;
@@ -356,7 +356,7 @@ What this script ties together:
 - `sculptor.disappear_after_reward` to **true**. The script uses it to detect the passed trial.
 
 **Making the guardians unique** (datapack):
-- override `data/mowziesmobs/worldgen/structure/wrought_chamber.json` and `frostmaw_spawn.json` with `"biomes": "#tilth:aucun"`, an empty tag;
+- override `data/mowziesmobs/worldgen/structure/wrought_chamber.json` and `frostmaw_spawn.json` with `"biomes": "#compline:aucun"`, an empty tag;
 - do the same for `monastery.json`, if the Sculptor should exist only at the monolith;
 - Companions!: set `MONKEY_TEMPLE_STRUCTURE_BIOMES` to a nonexistent biome, to test (the value is a string, `"minecraft:jungle"` by default);
 - otherwise, the pack will also have Wroughtnauts in underground rooms, about every 15 chunks (`wrought_chambers`, `spacing 15`).
@@ -376,7 +376,7 @@ What this script ties together:
 1. **Bypassing the guardian.** Without the seal, you walk within 16 blocks of the Elderheart and receive the blessing without doing anything. The Wroughtnaut does not move until struck, and the Pontiff until touched. The seal (§2.3) settles this point.
 2. **Space.** Bosses do not fit in the 2-block corridors where the spawners are (§1.1). They are placed on the ground, outside, and the offsets must be adjusted type by type in game.
 3. **The Frostmaw's persistence.** It is persistent only with its crystal. `PersistenceRequired:1b` is therefore mandatory, otherwise the guardian may disappear without dying, and the seal stays closed forever.
-   - Safeguard to add: an op command `/function tilth:liberer_elderheart`, or a test "guardian not found for more than N days".
+   - Safeguard to add: an op command `/function compline:liberer_elderheart`, or a test "guardian not found for more than N days".
 4. **`setNbt` on the Elderheart.** This calls `Entity.load` on a living entity. To test: position, UUID, sound, and the blessing actually null.
 5. **`EntityEvents.spawned`.** It must be verified that it is raised for an entity **loaded from disk**, or at the first load of a chunk pregenerated by Chunky. Otherwise, the seal must be done in the polling, with a radius of at least 48 blocks, since a sprinting player covers about 28 blocks in 5 s.
 6. **The Sacred Pontiff is heavy.**
@@ -387,7 +387,7 @@ What this script ties together:
 8. **Damage to the monument.** No `setBlock` was found in the Pontiff's classes (including the fire rings). The oak monument's leaves and fire must still be checked.
    - The Obsidilith (if BoMD is added) **places obsidian**: `spawnPillarOnDeath=false` and `anvilAttackExplosionStrength=0` limit the damage, without eliminating it.
 9. **In Control.** If a spawner were chosen instead (variant B, §4), spawning would go through `PositionCheck`, and the Mowzie's rules in the drafts would block it (`minlight 8` in a lit monument). With `/summon`, this is not the case (§1.3).
-10. **AR updates.** The script depends on `PossibleBlessings`, `Blessing` and the id `ancient_remnants:elderheart`, and on the processor_list of the current paths. If AR changes its pieces, it is enough to recheck these points; no `.nbt` is copied into Tilth.
+10. **AR updates.** The script depends on `PossibleBlessings`, `Blessing` and the id `ancient_remnants:elderheart`, and on the processor_list of the current paths. If AR changes its pieces, it is enough to recheck these points; no `.nbt` is copied into Compline.
 11. **Multiplayer.** There is one guardian per monument, once. After its death, the blessing is free for everyone, which is consistent with a permanent world.
 
 ---
@@ -409,7 +409,7 @@ What this script ties together:
 - **Datapack** `kubejs/data/`:
   - `ancient_remnants/worldgen/processor_list/{monolith,monument}.json`;
   - the overrides of `mowziesmobs/worldgen/structure/*.json`;
-  - the empty tag `tilth:aucun`.
+  - the empty tag `compline:aucun`.
 
 **Not to do**
 - No new mod. If the maintainer wants a "real" boss at the hunter monolith instead of the Sculptor's trial, BoMD is added (Obsidilith only, four structures disabled by tags).
@@ -437,7 +437,7 @@ What this script ties together:
    - fire on the leaves;
    - music.
 6. Do the In Control rules (drafts) and `spawns_safety.js` let the four summons through (expected: yes)?
-7. With Mowzie's natural structures disabled by `#tilth:aucun`, does no Wroughtnaut room or wild Frostmaw appear any more (`/locate structure`)?
+7. With Mowzie's natural structures disabled by `#compline:aucun`, does no Wroughtnaut room or wild Frostmaw appear any more (`/locate structure`)?
 8. The spawner replaced by `chiseled_tuff`: correct rendering in the 5 pieces (no hole, no terrain block)?
 
 ---

@@ -1,4 +1,4 @@
-// Tilth : fichier complet (Resourceful Config). Seul changement : farm_and_charm.cooking_pot_recipes_disabled = true,
+// Compline : fichier complet (Resourceful Config). Seul changement : farm_and_charm.cooking_pot_recipes_disabled = true,
 // pour que la marmite soit celle de Kaleidoscope Cookery (décision 0002).
 {
     // The version of the config file. Do not change this unless you know what you are doing.

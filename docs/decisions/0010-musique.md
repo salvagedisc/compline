@@ -16,9 +16,9 @@ The team wants music "in the style of what we are building, with beautiful trans
 | Weight | 11.3 MB | 294.8 MB | 0.33 MB |
 
 ## Decision
-**True Adaptive Music 2.9.3**, client and server side, with the `tilth` pack ([music](../plan/musique.md)):
+**True Adaptive Music 2.9.3**, client and server side, with the `compline` pack ([music](../plan/musique.md)):
 - a tree of 11 situations, silences of 4 to 20 minutes, tracks played to the end;
-- 29 tracks kept by the team after listening: 12 already in the game (vanilla and No Man's Land), 3 from the *Supernova* resource pack (Modrinth, CC-BY-NC-SA 4.0, free use permitted), 10 free tracks shipped in `tilth-ambiance` with their credits (Scott Buckley and Kevin MacLeod under CC-BY 4.0, HoliznaCC0 under CC0), normalised to −23 LUFS with fades;
+- 29 tracks kept by the team after listening: 12 already in the game (vanilla and No Man's Land), 3 from the *Supernova* resource pack (Modrinth, CC-BY-NC-SA 4.0, free use permitted), 10 free tracks shipped in `compline-ambiance` with their credits (Scott Buckley and Kevin MacLeod under CC-BY 4.0, HoliznaCC0 under CC0), normalised to −23 LUFS with fades;
 - `musique.js` sets on the player the states the client cannot see (monument, moon, aboard); the seasons go through Ecliptic's loot condition;
 - a single track on approaching a monument, nothing during boss fights;
 - pack selected on first launch by Default Options, music at 40%.

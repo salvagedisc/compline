@@ -17,7 +17,7 @@ await mkdir(cacheDir, { recursive: true });
 async function loadJar(mod) {
   const path = join(cacheDir, mod.filename);
   try { return await readFile(path); } catch { /* not cached yet */ }
-  const res = await fetch(mod.url, { headers: { 'User-Agent': 'salvagedisc/tilth check-fr' } });
+  const res = await fetch(mod.url, { headers: { 'User-Agent': 'salvagedisc/compline check-fr' } });
   if (!res.ok) throw new Error(`download ${mod.filename}: HTTP ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
   await writeFile(path, buf);

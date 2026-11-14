@@ -1,4 +1,4 @@
-# Research — "Daily life" pillar & environmental survival (Tilth, 1.21.1 NeoForge)
+# Research — "Daily life" pillar & environmental survival (Compline, 1.21.1 NeoForge)
 
 > Report adjusted to the up-to-date registry (46 mods, decisions 0002–0007): Farm & Charm, Ecliptic Seasons, KC-Automation **already retained**; Animal Husbandry, Spoiled, Let's Do Bakery/Meadow, Graze **rejected** (not proposed again).
 > Priorities handled first: **demanding animal husbandry** (replacement for Animal Husbandry) and **preservation** (replacement for Spoiled).
@@ -133,8 +133,8 @@ State of the 1.21.1 NeoForge market: **Spoiled** (rejected); **ShelfLife** (xiao
 
 #### KubeJS "Pantry" system (slow expiry, cellar, drying) — **core (home-made script)**
 Inspired by the ShelfLife architecture (avoids the cost of one tick per item):
-1. **Tags**: `tilth:perishable/fast` (raw meat and fish, milk), `…/medium` (fruit, vegetables, KC dishes), `…/slow` (bread, cheese); `tilth:preserved` (dried on the KC bamboo tray, salted, smoked, jars, Tavern bottles).
-2. **Timestamp per game day**: `custom_data.tilth_day = floor(gameTime/24000)` set at crafting, pickup and container exit. **Rounded to the day** so stacks from the same day merge (the classic flaw of these mods).
+1. **Tags**: `compline:perishable/fast` (raw meat and fish, milk), `…/medium` (fruit, vegetables, KC dishes), `…/slow` (bread, cheese); `compline:preserved` (dried on the KC bamboo tray, salted, smoked, jars, Tavern bottles).
+2. **Timestamp per game day**: `custom_data.compline_day = floor(gameTime/24000)` set at crafting, pickup and container exit. **Rounded to the day** so stacks from the same day merge (the classic flaw of these mods).
 3. **Calculation only on events**: container opening, pickup, and player inventory every ~30 s. A chest never opened does not rot (accepted trade-off, like ShelfLife).
 4. **Location factor**: `coldsweat.getTemperatureAt(level, pos)` of the container → **cold cellar** (underground) ×0.3; **Cold Sweat icebox** ×0.1; in the sun in summer ×1.5 (`EclipticSeasonsApi.getSeason`).
 5. **Result**: the expired item becomes `minecraft:rotten_flesh`, `farm_and_charm:rotten_tomato` or compost (F&C `compost`) → it will loop back to F&C fertilisers.
@@ -248,7 +248,7 @@ Rejected: Aquaculture 2 (content, neptunium), Fish of Thieves, Stardew Fishing, 
 4. **Cattlestrophic**: `acceptedFoodItems` JSON = `farm_and_charm:barley/oat/corn/horse_fodder/chicken_feed`, `kaleidoscope_cookery:rice_panicle`; JSON for `untitledduckmod:*`.
 5. **Salt's Animal Farm**: "scary mobs" list = Naturalist and Alex's Mobs predators; soft blocks = KC straw, F&C barn floors.
 6. **TWR** `item-settings.toml`: KC teas and milk tea, Tavern drinks (alcohol = barely hydrating), KC soups.
-7. **Drying**: `kaleidoscope_cookery:bamboo_tray` recipes (`subtype: "drying"`) for dried meat, dried fish, dried fruit; add these products to `tilth:preserved` and to the FIAHI whitelist.
+7. **Drying**: `kaleidoscope_cookery:bamboo_tray` recipes (`subtype: "drying"`) for dried meat, dried fish, dried fruit; add these products to `compline:preserved` and to the FIAHI whitelist.
 8. **Nutritional Balance**: tag the KC and Tavern dishes if the recipe traversal does not cover them.
 9. **Seasons → Cold Sweat bridge**: `EclipticSeasonsApi.getSubSeason(level)` → `coldsweat.createModifier/addModifier` (already planned).
 10. **Pantry** (§3.2): use `coldsweat.getTemperatureAt` for the cellar effect.

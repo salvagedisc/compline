@@ -1,4 +1,4 @@
-// Tilth : recettes corrigées par le tri du pack (docs/plan/tri-du-pack.md).
+// Compline : recettes corrigées par le tri du pack (docs/plan/tri-du-pack.md).
 // Chacune répare une chaîne qui passait par le Nether ou l'End, fermés (décision 0004),
 // ou un raccourci qui contournait la forge et Create (recettes de base vérifiées dans les
 // mods : aucun ne couvre les cordes, la poulie ni les couteaux, on le fait ici).
@@ -31,7 +31,7 @@ ServerEvents.recipes(event => {
       { id: 'aeronautics:end_stone_powder' },
       { id: 'minecraft:calcite', chance: 0.5 }
     ]
-  }).id('tilth:tri/poudre_de_levitite')
+  }).id('compline:tri/poudre_de_levitite')
 
   // Foyer de Cold Sweat : briques ordinaires et deux fours au lieu des briques du Nether
   // et du sable des âmes.
@@ -41,7 +41,7 @@ ServerEvents.recipes(event => {
     B: 'minecraft:brick',
     S: 'minecraft:furnace',
     I: '#c:ingots/iron'
-  }).id('tilth:tri/foyer')
+  }).id('compline:tri/foyer')
 
   // Lentille télescopique excellente d'Exposure: Space : un mécanisme de précision de Create
   // à la place du débris de netherite.
@@ -53,13 +53,13 @@ ServerEvents.recipes(event => {
   // engrenage de Create : on ne monte pas de charges avant d'avoir ouvert l'atelier.
   event.remove({ id: 'supplementaries:rope' })
   event.shaped('2x supplementaries:rope', ['#', '#', '#'], { '#': '#c:crops/flax' })
-    .id('tilth:tri/corde')
+    .id('compline:tri/corde')
   event.remove({ id: 'supplementaries:pulley' })
   event.shaped('supplementaries:pulley_block', ['PSP', 'PCP', 'PSP'], {
     P: '#minecraft:planks',
     S: '#minecraft:wooden_slabs',
     C: 'create:cogwheel'
-  }).id('tilth:tri/poulie')
+  }).id('compline:tri/poulie')
 
   // Couteaux de cuisine de Kaleidoscope : ils se faisaient à l'établi avec des lingots, à
   // côté de la forge d'Overgeared. Le fer passe par une plaque forgée, l'or par une lame
@@ -70,12 +70,12 @@ ServerEvents.recipes(event => {
   event.shaped('kaleidoscope_cookery:iron_kitchen_knife', ['#', 'S'], {
     '#': 'overgeared:iron_plate',
     S: 'minecraft:stick'
-  }).id('tilth:tri/couteau_fer')
+  }).id('compline:tri/couteau_fer')
   event.shaped('kaleidoscope_cookery:gold_kitchen_knife', ['#', 'S'], {
     '#': 'overgeared:golden_sword_blade',
     S: 'minecraft:stick'
-  }).id('tilth:tri/couteau_or')
+  }).id('compline:tri/couteau_or')
   event.smithing('kaleidoscope_cookery:diamond_kitchen_knife',
     'overgeared:diamond_upgrade_smithing_template',
-    'kaleidoscope_cookery:iron_kitchen_knife', 'minecraft:diamond').id('tilth:tri/couteau_diamant')
+    'kaleidoscope_cookery:iron_kitchen_knife', 'minecraft:diamond').id('compline:tri/couteau_diamant')
 })

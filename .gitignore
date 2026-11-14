@@ -2,7 +2,7 @@ dist/
 node_modules/
 *.mrpack
 .cache/
-mods-custom/tilth/build/
-mods-custom/tilth/run/
+mods-custom/compline/build/
+mods-custom/compline/run/
 .gradle/
 __pycache__/
