@@ -24,11 +24,6 @@ public enum TilthModule {
     DISSIPATEUR("dissipateur", null, bus -> io.github.salvagedisc.tilth.dissipateur.DissipateurModule.start(bus), ModIds.CREATE),
     /** À mains nues, on ramasse mais on ne coupe pas : le bois et la roche demandent le bon outil (client et serveur). Aucun mod requis. */
     OUTILS("outils", null, bus -> io.github.salvagedisc.tilth.outils.OutilsModule.start(bus)),
-    /** Rideaux de pluie, éclair, feuilles et brins d'herbe dans le vent (client). Aucun mod requis ;
-     *  les feuilles demandent Particular. */
-    AVERSE("averse", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.averse.AverseModule.start(bus)),
-    /** Éclats du soleil sur l'eau (client). Aucun mod requis. */
-    RAYONS("rayons", Dist.CLIENT, bus -> io.github.salvagedisc.tilth.rayons.RayonsModule.start(bus)),
     /** Les monuments d'Ancient Remnants posés seulement sur un terrain qui s'y prête : type de structure
      *  {@code tilth:terrain_checked} (client et serveur). Aucun mod requis. */
     MONUMENTS("monuments", null, bus -> io.github.salvagedisc.tilth.monuments.MonumentsModule.start(bus)),

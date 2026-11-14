@@ -1,4 +1,12 @@
 {
+  "music.a_familiar_room": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/a_familiar_room",
+        "stream": true
+      }
+    ]
+  },
   "music.aerie": {
     "sounds": [
       {
@@ -7,10 +15,58 @@
       }
     ]
   },
-  "music.cliff_hanger": {
+  "music.an_ordinary_day": {
     "sounds": [
       {
-        "name": "minecraft:music/game/cliff-hanger",
+        "name": "minecraft:music/game/an_ordinary_day",
+        "stream": true
+      }
+    ]
+  },
+  "music.ancestry": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/ancestry",
+        "stream": true
+      }
+    ]
+  },
+  "music.bromeliad": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/bromeliad",
+        "stream": true
+      }
+    ]
+  },
+  "music.comforting_memories": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/comforting_memories",
+        "stream": true
+      }
+    ]
+  },
+  "music.crescent_dunes": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/crescent_dunes",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/deeper",
+        "stream": true
+      }
+    ]
+  },
+  "music.dry_hands": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/dry_hands",
         "stream": true
       }
     ]
@@ -23,10 +79,34 @@
       }
     ]
   },
+  "music.eld_unknown": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/eld_unknown",
+        "stream": true
+      }
+    ]
+  },
+  "music.endless": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/endless",
+        "stream": true
+      }
+    ]
+  },
   "music.featherfall": {
     "sounds": [
       {
         "name": "minecraft:music/game/featherfall",
+        "stream": true
+      }
+    ]
+  },
+  "music.firebugs": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/swamp/firebugs",
         "stream": true
       }
     ]
@@ -63,6 +143,14 @@
       }
     ]
   },
+  "music.labyrinthine": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/swamp/labyrinthine",
+        "stream": true
+      }
+    ]
+  },
   "music.left_to_bloom": {
     "sounds": [
       {
@@ -79,10 +167,26 @@
       }
     ]
   },
-  "music.rose_field": {
+  "music.one_more_day": {
     "sounds": [
       {
-        "name": "minecraft:music/game/rose-field",
+        "name": "minecraft:music/game/one_more_day",
+        "stream": true
+      }
+    ]
+  },
+  "music.oxygene": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/oxygene",
+        "stream": true
+      }
+    ]
+  },
+  "music.stand_tall": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/stand_tall",
         "stream": true
       }
     ]
@@ -95,14 +199,6 @@
       }
     ]
   },
-  "music.supernova": {
-    "sounds": [
-      {
-        "name": "minecraft:music/game/supernova",
-        "stream": true
-      }
-    ]
-  },
   "music.sweden": {
     "sounds": [
       {
@@ -111,10 +207,34 @@
       }
     ]
   },
+  "music.watcher": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/watcher",
+        "stream": true
+      }
+    ]
+  },
+  "music.wending": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/wending",
+        "stream": true
+      }
+    ]
+  },
   "music.wet_hands": {
     "sounds": [
       {
         "name": "minecraft:music/game/wet_hands",
+        "stream": true
+      }
+    ]
+  },
+  "music.yakusoku": {
+    "sounds": [
+      {
+        "name": "minecraft:music/game/yakusoku",
         "stream": true
       }
     ]

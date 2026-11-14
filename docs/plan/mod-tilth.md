@@ -1,6 +1,6 @@
 # The custom `tilth` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-tilth-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.10.1 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **averse** (rain and storm), **rayons** (glints on water) and **monuments** and **bord** (world edge) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `tilth-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)).
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-tilth-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.11.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools) and **monuments** and **bord** (world edge) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `tilth-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -34,7 +34,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 |---|---|---|---|
 | `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client (6 before 0.7.0) |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
-| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
+| `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix, only if a server owner adds it) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
 | `dissipateur` | both | Create | none |
 | `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
@@ -133,7 +133,7 @@ Config (`tilth-client.toml`, `[horizon]` section): `enabled` (true), `skipHidden
 
 ### Two fixes for DH 3.3.3
 
-- **Crash when creating the world with Chunky** (`ChunkyAccessorMixin`, common). DH binds to Chunky's events on the first chunk loaded. On NeoForge the spawn chunks load before Chunky has started: `ChunkyProvider.get()` throws "Chunky is not loaded" and the server crashes during `createLevels` (observed on the test server, dedicated server; single player goes through the same code). The mixin catches the error and puts DH's `listenerBound` flag back to false: DH tries again on the next chunk, once Chunky is ready. Verified: with it, the full pack starts.
+- **Crash when creating the world with Chunky** (`ChunkyAccessorMixin`, common). Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md)); the fix stays and applies only if a server owner adds Chunky to the server. DH binds to Chunky's events on the first chunk loaded. On NeoForge the spawn chunks load before Chunky has started: `ChunkyProvider.get()` throws "Chunky is not loaded" and the server crashes during `createLevels` (observed on the test server, dedicated server; single player goes through the same code). The mixin catches the error and puts DH's `listenerBound` flag back to false: DH tries again on the next chunk, once Chunky is ready. Verified: with it, the full pack starts.
 - **Native memory overflow on Apple Silicon** (`GLStateMixin`, client). `GLState.saveState` reads `GL_POLYGON_MODE` with `glGetInteger`, which reserves one integer; Apple's OpenGL driver writes two, which corrupts native memory and makes the JVM crash at random (DH issue #1346, fixed upstream after 3.3.3). The mixin reads that value into an array of two integers and keeps the first. Not verified on a Mac.
 
 Both use `require = 0`: if a future DH no longer has the targeted code, they do nothing.
@@ -185,28 +185,6 @@ Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM 
 Server and client, no mod required ([first gestures](premiers-gestes.md)). With bare hands, you gather but you do not cut. A block needs a tool when it is in the `tilth:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`, shipped in the jar) or when it would drop nothing without the correct tool (`BlockState.requiresCorrectToolForDrops()`: stone, ores, bricks, metal blocks). If the main-hand item is not correct for it (`ItemStack.isCorrectToolForDrops`), `PlayerEvent.BreakSpeed` sets the speed to 0 on both sides, so the client never predicts a break the server refuses, and `PlayerEvent.HarvestCheck` refuses the drops. On the client, a hint shows in the action bar at most every 40 ticks: « Il te faut une hache / une pioche / une pelle / une houe / un outil », chosen from the vanilla `mineable/*` tags, or « Ton outil n'est pas assez solide » when the held item is of the right kind but too weak. The `tilth:sans_outil` tag keeps what grows (`#minecraft:sword_efficient`, bamboo, azaleas, a few mod plants) and snow breakable by hand. Creative players and `FakePlayer`s (Create deployers) are left alone. Both tags can be extended by datapack without recompiling.
 
 Config (`tilth-common.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back; client and server must agree).
-
-## `averse` module
-
-Client only. Rain, storms and wind in the leaves at the level of the best shader packs, without a shader ([0017](../decisions/0017-averse-et-rayons.md)). Every part reads the wind through `averse.Wind`: Where Winds Blow's `DynamicWindManager.sampleWind` when it is present (the same wind that slants its rain and bends its grass), otherwise a simple wind that strengthens with rain and thunder. If a Where Winds Blow update changes that class, a warning is logged once and the simple wind takes over.
-
-- **Rain colour**: the game's. It was tinted by a core shader of `tilth-ambiance` from 0.6.3 ([0018](../decisions/0018-effets-en-pack-de-ressources.md)) until that pack left ([0024](../decisions/0024-removing-the-house-resource-packs.md)).
-- **Rain curtains** (`RainCurtains`): five rings of 36 light panels from 24 to 84 blocks around the player, well beyond Where Winds Blow's 10-block radius (0.6.0 started at 14 blocks and was twice as opaque: the rain closed the view), drawn at `AFTER_WEATHER` with the particle shader and the `rain_curtain` texture scrolling down. Each panel stands on the ground (heightmap), only where it rains (biome precipitation), slants with the wind and takes the mist colour; the shader fog hides it in the distance, so curtains show mostly where the mist lifts. Ground and rain are re-read when the player has moved two blocks or every second; nothing is drawn more than 12 blocks below the surface.
-- **Lightning** (`averse.LightningBoltRendererMixin`): the vanilla bolt is replaced by a seeded zigzag of 44 segments that drifts sideways and comes back to the point of impact from 110 blocks up, with two to four branches that die out before the ground, drawn as three camera-facing ribbons (wide blue halo, tight halo, thin white core) with the lightning shader, at once. The fog is no longer pushed back: that was the `rendertype_lightning` core shader of `tilth-ambiance`, removed ([0024](../decisions/0024-removing-the-house-resource-packs.md)), so the bolt melts into the mist like the vanilla one. **Sky flash**: while `skyFlashTime` runs, a brief white-blue veil over the screen (35 % at most), only if the camera sees the sky.
-- **Leaves in the wind** (`averse.LeafParticleMixin` and `averse.LeavesBlockMixin`, with Particular): in the air, a Particular leaf's horizontal speed eases toward the wind (8 % per tick, up to 0.045 block/tick per unit of wind strength), and a strong gust lifts it now and then. Once landed, it stays `leafRestSeconds` (25) before Particular's 5-second fade. In strong wind and under thunder, leaf blocks shed extra leaves (up to 7 % of their display ticks), from below or from the downwind side, already moving with the wind, with Particular's particle and colour for that tree.
-- **Grass bits** (`GrassBits`): running on the ground through replaceable bushes (tall grass, ferns) kicks up a few `TerrainParticle`s of that block, which the wind carries away.
-
-Config (`tilth-client.toml`, `[averse]` section): `enabled`, `curtains`, `curtainOpacity` (1.0, 0-2), `lightning`, `skyFlash`, `windblownLeaves`, `leafRestSeconds` (25, 5-120), `grassBits`.
-
-## `rayons` module
-
-Client only. Glints of sunlight on water ([0017](../decisions/0017-averse-et-rayons.md)). The sun rays through the canopy left this module in 0.6.3 for a Polytone post shader of `tilth-ambiance` ([0018](../decisions/0018-effets-en-pack-de-ressources.md)), which left with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)). Up to 0.6.2, `SunShafts` drew one additive quad pair through each gap found in the leaves within 22 blocks.
-
-- **Glints on water** (`Glints`): once a second, the open water surfaces within 28 blocks (2,500 at most, enough for the whole circle) are listed. Each carries four glints; each blinks at its own pace and moves within its block at each blink; it lights only where the water, tilted by a small random ripple, reflects the sun into the eye (reflected view within about 15° of the sun, the ripple wider when the sun is low). The result is the glittering path between the sun and the player.
-
-Config (`tilth-client.toml`, `[rayons]` section): `enabled`, `glintStrength` (1.0, 0-3), `glints`.
-
-Shared helpers in `rendu.Sun`: sun direction from the time of day, daylight, the sun's colour, and the mist thickness read from the shader fog.
 
 ## `monuments` module
 
@@ -308,8 +286,8 @@ None of this has been done. These tests are also gathered with those of the othe
 | H8 | `skipHiddenLods` true then false, in the mist, F3 | Same image; fewer FPS with false |
 | H9 | ATMOSPHERICS clouds in a clearing | Clouds drawn over the LODs, no double clouds |
 | H10 | Mac Apple Silicon, 1 hour of play with DH | No JVM crash (`hs_err_pid*.log`) |
-| H11 | Chunky `start` on the server, then a player exploring | DH pauses its generation during Chunky and resumes; no holes in the LODs (DH #607) |
-| H12 | Seasons (Ecliptic) and Polytone colours | LODs take the colours of the nearby terrain |
+| H11 | Only if a server owner adds Chunky: Chunky `start` on the server, then a player exploring | DH pauses its generation during Chunky and resumes; no holes in the LODs (DH #607) |
+| H12 | Seasons (Ecliptic) | LODs take the colours of the nearby terrain |
 | H13 | From a hill in a clearing, by day, look at mountains more than 600 blocks away | They are not visible: the landscape dissolves into the haze before 500 blocks, no mist-coloured silhouette against the sky |
 | H14 | Same place at night, then `ringMaxDistance = 128` in `tilth-client.toml` | The ring closes at 260 blocks, then at 128 |
 | H15 | Spend a minute in a clearing on a hill, then walk back into the mist and turn around | No frozen relief at the edge of the terrain in the mist |
@@ -327,7 +305,7 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 | W6 | Winter (Ecliptic) at Y 70 and Y 150 | Snow consistent with altitude; streams freeze like rivers |
 | W7 | Boat, Sable hull on a stream, airship above | The hull drifts (`vesselDriftSpeed`), the airship in flight does not |
 | W8 | Create pump and boiler on a stream | Water accepted, Create channels do not overflow |
-| W9 | Chunky radius 1,000 with spark | Generation speed noted, compared with Tectonic alone; the rate never falls to one or two chunks per second for minutes (`compat.InStructureMixin`) |
+| W9 | Pregeneration of radius 1,000 (`/dh pregen`, or Chunky if added) with spark | Generation speed noted, compared with Tectonic alone; the rate never falls to one or two chunks per second for minutes (`compat.InStructureMixin`) |
 | W10 | A clearing crossed by a stream | Note whether the stream stays misty (river biome not convertible); if so add the river biomes to `tilth:peut_devenir_clairiere` |
 | W11 | A stream frozen by winter, then spring; ice placed on a stream next to a torch | The ice thaws into flowing stream water, not into a still pool. The log still shows Streams Reflowing's `IceMeltMixin` warning at start: expected, `compat.IceThawMixin` does its work |
 

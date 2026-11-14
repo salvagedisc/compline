@@ -1,7 +1,7 @@
 # 0018 — Weather and light effects moved into the resource pack
 
 - **Date**: 2026-11-03
-- **Status**: kept (the team's request of 2026-11-03); rain colour and sun rays seen in a headless test client (Sodium, Polytone, Where Winds Blow, ATMOSPHERICS, Distant Horizons, `tilth`), not played
+- **Status**: kept (the team's request of 2026-11-03); rain colour and sun rays seen in a headless test client (Sodium, Polytone, Where Winds Blow, ATMOSPHERICS, Distant Horizons, `tilth`), not played; the `averse` and `rayons` modules are removed by [0026](0026-second-cleanup.md) (the resource pack left in [0024](0024-removing-the-house-resource-packs.md))
 
 ## Context
 The team pointed out that Recrafted (MR_CHOO) reaches its look with a single resource pack: no mod, no shader pack. [0017](0017-averse-et-rayons.md) had reached a similar level with mods and two Java modules of the `tilth` mod (`averse`, `rayons`). The question: what can a resource pack do on its own in Tilth, and what can it take back from the Java code?

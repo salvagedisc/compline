@@ -13,7 +13,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | Page | Contents |
 |---|---|
 | [monuments.md](monuments.md) | Ancient Remnants on the new terrain: biomes, spacing, ground check, sleeping hearts and guardians, codex pages |
-| [mod-tilth.md](mod-tilth.md) | The custom `tilth` mod 0.10.1 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `averse`, `rayons`, `monuments` and `bord`): how it works, what is deduced from the code, in-game tests |
+| [mod-tilth.md](mod-tilth.md) | The custom `tilth` mod 0.11.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments` and `bord`): how it works, what is deduced from the code, in-game tests |
 | [modules-tilth.md](modules-tilth.md) | The eight planned modules of the `tilth` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Tilth takes |
 | [sante.md](sante.md) | Maximum health: one heart lost per death (floor of 5), life shards found while exploring in vanilla structures |
 | [doublons.md](doublons.md) | One model per species: comparison of duplicates across Naturalist, Alex's Mobs, Hybrid Aquatic, Critters and Companions, Longwings and Friends & Foes, cuts, in-game tests |

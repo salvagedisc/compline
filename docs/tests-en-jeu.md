@@ -2,7 +2,7 @@
 
 List set aside on 2026-10-25 for when there is time to play. None of this has been checked with a player yet: the pack starts on a server, but nobody has played on it.
 
-Updated on 2026-11-13, after No Man's Land left the pack ([0019](decisions/0019-leaving-no-mans-land.md)): the checks that needed it (Friendly Moon session, its fauna, the alchemists' ruins, the Meeting Point) are gone, and checks for Regions Unexplored and Geophilic are added. Neither mod has been seen in game.
+Updated on 2026-11-14 after the second cleanup ([0026](decisions/0026-second-cleanup.md)): the title and loading screens are the game's own, and the tests of Shine and of the rain, storm and sunlight effects are gone. Updated on 2026-11-13, after No Man's Land left the pack ([0019](decisions/0019-leaving-no-mans-land.md)): the checks that needed it (Friendly Moon session, its fauna, the alchemists' ruins, the Meeting Point) are gone, and checks for Regions Unexplored and Geophilic are added. Neither mod has been seen in game.
 
 It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Tilth instance → Logs, or `crash-reports/`) to the report.
 
@@ -20,7 +20,10 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] First launch: no narrator voice and no accessibility screen; creating then reopening a world shows no experimental settings warning; no Adorable Hamster Pets bell on the HUD or in the inventory, no update notice ([0024](decisions/0024-removing-the-house-resource-packs.md)).
 - [ ] The log shows no `tilth`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
 - [ ] The `tilth` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
-- [ ] The title screen shows Friedrich's mountains without any logo, the right way up, with mist flowing slowly through the valleys and never over the sky or the slopes in front, and the loading screen (F3+T) is moss green with a lantern-coloured bar [I6].
+- [ ] Music: after the first silence, a track of the game plays from the new list (30 tracks, no resource pack needed) and the others follow in the clearing, at night, underground and aboard [M7].
+- [ ] No « Hamster Tips » book is handed out on first login or at the first hamster seen (it can still be crafted).
+- [ ] Distant Horizons writes no compatibility, render distance, garbage collector, object pool, replay or slow generation warning at start-up or in chat; only the low-memory warning may show, and only if Java lacks memory.
+- [ ] The title screen and the loading screen (F3+T) are the game's own, with the Minecraft logo.
 - [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from gravel, the Twigs pebble knapped into a rock, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
@@ -52,7 +55,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] ATMOSPHERICS clouds (two layers) pass in front of the distance, with no duplicates; they take the colour of the mist and darken at night and in the rain [H9, R7]. The colours of the distance follow the seasons [H12].
 - [ ] The three recipes (fire, lantern, dissipator) in EMI, with French names and tooltips [K11]. Provisional vanilla ingredients since 2026-11-13: fire = honeycomb, two smooth stone slabs, charcoal, smooth stone; lantern = two Overgeared iron plates, two glass panes, an amethyst shard. Craft both and tell whether they feel right.
 - [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
-- [ ] **Wind and light** (Where Winds Blow, Shine): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. A clearing at sunset: halo on the sky and the fires, the mist still around [R3]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: no halo glitch, lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
+- [ ] **Wind** (Where Winds Blow): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
 ## Session 3: the night and the moon
 
@@ -130,7 +133,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] On a dedicated server: the thirst bar updates, the anvil does not roll back [S7, X4].
 - [ ] Lootr: everyone finds the chest full. Monument: the second player also gets their shard [V7, V10].
 - [ ] Envelope: name a mailbox at no cost, send a letter by pigeon [XP7].
-- [ ] Chunky `start` on the server, then a player explores: no holes in the far landscape [H11]. Note the generation speed with spark [W9].
+- [ ] `/dh pregen` on the server, then a player explores: no holes in the far landscape. Note the generation speed with spark [W9]. (Only if a server owner adds Chunky: its `start` and the same check [H11].)
 - [ ] Simple Backups: one backup after an hour of play, and one when everyone leaves.
 - [ ] On Apple Silicon Mac: one hour of play with the far view and no Java crash [H10].
 - [ ] spark (`/spark profiler`) for 10 min with 2 or 4 players: share the link so the cost can be reviewed [M10].
@@ -139,9 +142,9 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 Once the results are in:
 
-1. Fix what broke, then apply the **updates held back**: Polytone 5.3.1 with Spatial GUI 1.9, Supplementaries 4, Friends & Foes 5, Envelope 0.8, Icy's Better Horses 2.1 (the revive XP cost has to be replaced), Cold Sweat 2.4.4 (once Altitude follows it), Lithium (to remove if it freezes with Sable), Subtle Effects and More Darkness (client-side settings to read in game).
+1. Fix what broke, then apply the **updates held back**: Spatial GUI 1.9, Supplementaries 4, Friends & Foes 5, Envelope 0.8, Icy's Better Horses 2.1 (the revive XP cost has to be replaced), Cold Sweat 2.4.4 (once Altitude follows it), Lithium (to remove if it freezes with Sable), Subtle Effects and More Darkness (client-side settings to read in game).
 2. Compare the hand-written Quark config with the one the game generates.
-3. Publish version `0.1.0` (tag and release), then pregenerate the permanent world with Chunky.
+3. Publish version `0.1.0` (tag and release), then pregenerate the permanent world with `/dh pregen`.
 
 ## Repository housekeeping
 
@@ -156,14 +159,14 @@ Once the results are in:
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
-| I (numbered items) | [archive/resource-packs/tilth-interface.md](archive/resource-packs/tilth-interface.md#limits-and-in-game-tests) (pack removed; only I6, the title and loading screens, still applies) |
+| I (numbered items) | [archive/resource-packs/tilth-interface.md](archive/resource-packs/tilth-interface.md#limits-and-in-game-tests) (pack removed; nothing of it still applies) |
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | T | [plan/tannerie.md](plan/tannerie.md#what-remains-to-be-tested) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
 | N (quests) | [plan/quetes.md](plan/quetes.md#in-game-tests) |
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
-| AV (rain, storm and sunlight) | [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) |
+| AV (rain, storm and sunlight) | Removed by [0026](decisions/0026-second-cleanup.md); [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) is kept as history |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
