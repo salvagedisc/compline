@@ -31,7 +31,9 @@ public enum ComplineModule {
      *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
     BORD("bord", null, bus -> io.github.salvagedisc.compline.bord.BordModule.start(bus)),
     /** Les clairières et le vent du pack donnés au pack de shaders de Compline, sous Iris (client). */
-    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS);
+    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS),
+    /** La forme du monde donnée au pack de ressources compline-ambiance, pour ses ombres sans shader, sous Polytone (client). */
+    RELIEF("relief", Dist.CLIENT, bus -> io.github.salvagedisc.compline.relief.ReliefModule.start(bus), ModIds.POLYTONE);
 
     private final String id;
     private final Dist side;

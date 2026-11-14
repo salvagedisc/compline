@@ -15,6 +15,7 @@ horizon : le paysage lointain de Distant Horizons caché par la brume et révél
 clairiere : feu de veille et lanterne de clairière, la brume se lève autour d'eux.
 dissipateur : bloc Create qui éclaircit un grand disque (avec Create).
 rendu : sous Iris, les clairières et le vent du pack donnés au pack de shaders de Compline.
+relief : sous Polytone, la hauteur du monde donnée au pack de ressources compline-ambiance pour ses ombres sans shader.
 Chaque module ne se charge que si les mods qu'il relie sont présents.
 '''
 

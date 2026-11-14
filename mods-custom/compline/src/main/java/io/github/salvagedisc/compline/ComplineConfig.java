@@ -25,6 +25,7 @@ public final class ComplineConfig {
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
+    private static final ModConfigSpec.BooleanValue RELIEF_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
 
     static {
@@ -69,6 +70,13 @@ public final class ComplineConfig {
                 .comment("Interrupteur du module. Vrai : la brume du pack de shaders se lève dans les clairières et ses plantes",
                         "ondulent au vent de Where Winds Blow. Faux : le pack de shaders garde une brume uniforme et son vent de repli.",
                         "Sans effet sans shader, ou avec un autre pack de shaders.")
+                .define("enabled", true);
+        client.pop();
+
+        client.comment("Module relief (client) : sous Polytone, il donne au pack de ressources compline-ambiance la hauteur du monde autour de la caméra.").push("relief");
+        RELIEF_ENABLED = client
+                .comment("Interrupteur du module. Vrai : le pack de ressources dessine l'ombre du soleil (arbres, reliefs, murs)",
+                        "sans pack de shaders. Faux : pas d'ombres portées, le reste du rendu du pack est inchangé.")
                 .define("enabled", true);
         client.pop();
 
@@ -155,6 +163,10 @@ public final class ComplineConfig {
 
     public static boolean renduEnabled() {
         return read(CLIENT_SPEC, RENDU_ENABLED);
+    }
+
+    public static boolean reliefEnabled() {
+        return read(CLIENT_SPEC, RELIEF_ENABLED);
     }
 
     public static boolean xpEnabled() {
