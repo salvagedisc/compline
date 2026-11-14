@@ -24,6 +24,7 @@ public final class ComplineConfig {
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
+    private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
 
     static {
@@ -61,6 +62,14 @@ public final class ComplineConfig {
                         "s'efface toujours dans la brume puis le ciel à cette distance (ou avant, si la brume du terrain",
                         "finit plus tôt : 500 blocs de jour en clairière, 260 la nuit).")
                 .defineInRange("ringMaxDistance", 512, 64, 4096);
+        client.pop();
+
+        client.comment("Module rendu (client) : sous Iris, il donne au pack de shaders Brumaire les clairières, le sol et le vent du pack.").push("rendu");
+        RENDU_ENABLED = client
+                .comment("Interrupteur du module. Vrai : la brume du pack de shaders se lève dans les clairières et ses plantes",
+                        "ondulent au vent de Where Winds Blow. Faux : le pack de shaders garde une brume uniforme et son vent de repli.",
+                        "Sans effet sans shader, ou avec un autre pack de shaders.")
+                .define("enabled", true);
         client.pop();
 
         CLIENT_SPEC = client.build();
@@ -143,6 +152,10 @@ public final class ComplineConfig {
         return read(CLIENT_SPEC, HORIZON_RING_MAX_DISTANCE);
     }
 
+
+    public static boolean renduEnabled() {
+        return read(CLIENT_SPEC, RENDU_ENABLED);
+    }
 
     public static boolean xpEnabled() {
         return read(COMMON_SPEC, XP_ENABLED);

@@ -31,6 +31,7 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
             Map.entry("horizon.VanillaFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.FarFadeMixin", List.of(ModIds.DISTANT_HORIZONS)),
             Map.entry("horizon.ChunkyAccessorMixin", List.of(ModIds.DISTANT_HORIZONS, ModIds.CHUNKY)),
+            Map.entry("rendu.IrisUniformsMixin", List.of(ModIds.IRIS)),
             Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)),
             Map.entry("compat.IceThawMixin", List.of(ModIds.STREAMS_REFLOWING, ModIds.SPELUNKERY)),
             Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)));

@@ -25,7 +25,8 @@
     "horizon.FarFadeMixin",
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
-    "horizon.VanillaFadeMixin"
+    "horizon.VanillaFadeMixin",
+    "rendu.IrisUniformsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

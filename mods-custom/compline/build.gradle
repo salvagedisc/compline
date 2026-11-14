@@ -104,7 +104,8 @@ dependencies {
     // Correctif de génération : le prédicat in_structure de Lithostitched
     compileOnly modrinth('lithostitched')
 
-    // Module averse : la pluie et le vent de Where Winds Blow, les feuilles de Particular
+    // Module rendu (client) : les uniformes d'Iris, le vent de Where Winds Blow
+    compileOnly modrinth('iris')
     compileOnly modrinth('where-winds-blow')
     compileOnly modrinth('particular-reforged')
 

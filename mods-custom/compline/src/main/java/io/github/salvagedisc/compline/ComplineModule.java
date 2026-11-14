@@ -29,7 +29,9 @@ public enum ComplineModule {
     MONUMENTS("monuments", null, bus -> io.github.salvagedisc.compline.monuments.MonumentsModule.start(bus)),
     /** Le bord du monde : un cercle que la brume ne laisse pas franchir, donné par {@code data/compline/monde/bord.json}
      *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
-    BORD("bord", null, bus -> io.github.salvagedisc.compline.bord.BordModule.start(bus));
+    BORD("bord", null, bus -> io.github.salvagedisc.compline.bord.BordModule.start(bus)),
+    /** Les clairières et le vent du pack donnés au pack de shaders de Compline, sous Iris (client). */
+    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS);
 
     private final String id;
     private final Dist side;

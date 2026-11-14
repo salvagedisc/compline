@@ -38,6 +38,22 @@ public record Clearing(BlockPos center, int radius, long since, long until) {
         return closing() ? Math.max(0, Math.min(opened, radius - swept(time - until, ringTicks))) : opened;
     }
 
+    /**
+     * Même rayon, sans les marches d'un anneau à l'autre : le bord que dessine le pack de shaders, qui avance
+     * à chaque image ({@code time} compte la fraction du tick en cours).
+     */
+    public float smoothRadiusAt(double time, int ringTicks) {
+        float opened = sweptSmooth(time - since, ringTicks);
+        return closing() ? Math.max(0.0F, Math.min(opened, radius - sweptSmooth(time - until, ringTicks))) : opened;
+    }
+
+    private float sweptSmooth(double ticks, int ringTicks) {
+        if (ticks < 0) {
+            return 0.0F;
+        }
+        return (float) Math.min(radius, (ticks / Math.max(1, ringTicks) + 1.0) * RING);
+    }
+
     /** Distance parcourue par la vague en {@code ticks} ticks. */
     private int swept(long ticks, int ringTicks) {
         if (ticks < 0) {
