@@ -1,5 +1,6 @@
-# Tilth: no announcement bell, update notice or developer news from Adorable
-# Hamster Pets. The server switch overrides every client; the client switches
+# Compline: no announcement bell, update notice or developer news from Adorable
+# Hamster Pets, and no "Hamster Tips" book handed out (it is in English; it
+# can still be crafted). The server switch overrides every client; the client switches
 # also hide the bell on the HUD and in inventories. The mod fills in its other
 # defaults on first launch.
 version = 0
@@ -7,3 +8,5 @@ serverDisableAnnouncements = true
 enableNotificationIcons = false
 enableHudIcon = false
 enableWidgetIcon = false
+enableAutoGuidebookDelivery = false
+enableAutoGuidebookDeliveryFallback = false

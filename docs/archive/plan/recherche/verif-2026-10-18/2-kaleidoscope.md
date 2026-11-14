@@ -54,7 +54,7 @@ Notation of the evidence:
 
 **Other effects**:
 - `tundra_strider`: fast on snow. It is a true winter dish with Ecliptic.
-- `mustard` (creepers flee) and `sulfur` (phantoms flee) have **no effect** in Tilth, since these monsters are removed.
+- `mustard` (creepers flee) and `sulfur` (phantoms flee) have **no effect** in Compline, since these monsters are removed.
 
 **Crops**: tomato, chili, lettuce, rice (+ wild rice), tea plant.
 - Seeds drop from grass (`minecraft:blocks/short_grass`) **only if the straw hat is worn** (loot modifier `straw_hat_seed_drop`).
@@ -109,7 +109,7 @@ Schema fields:
 - It is pulled by an animal, chosen by the tag `millstone_bindable` (donkey, mule, horse, llama, cow, sheep, goat, villager) and the datamap `millstone_bindable_data`.
 - In 1.6.0, any creature more than one block tall can pull it, except for a blacklist [MR].
 
-**Excess content for Tilth**:
+**Excess content for Compline**:
 - Chairs, tables, stools, bench and "Eight Immortals table", in vanilla wood, plus the Every Compat variants (compatibility in KC).
 - Scarecrow, straw hat and farmer's clothing.
 - Added village houses (`AddVillageStructuresEvent`).
@@ -131,7 +131,7 @@ Schema fields:
   - the pack `unite_farm_and_charm` replaces F&C recipes with versions that produce `farmersdelight:onion`, `:bacon`, `:chicken_cuts` and `:raw_pasta`;
   - these recipes fail, and F&C's originals disappear with them (same path, priority pack);
   - it **cuts the generation** of F&C's wild carrots, potatoes, beetroots, **onions** and tomatoes (`rarity_filter` 9999999999), assuming that Farmer's Delight provides them;
-  - **in Tilth, the onion would become impossible to find** [deduced from the JSON].
+  - **in Compline, the onion would become impossible to find** [deduced from the JSON].
 - **NONE**: only the soup bases.
 
 **Setting `cooking_pot_recipes_disabled`** (category `farm_and_charm`, false by default):
@@ -169,7 +169,7 @@ Schema fields:
 **Seasons: the F&C tags are misplaced.**
 - They are in `data/sereneseasons/block/*.json` and `data/sereneseasons/item/*.json`, **without the `tags/` folder**. They are therefore not tags, and Ecliptic does not read them. Same mistake in 1.1.25 and in 1.1.29.
 - The `data/farm_and_charm/seasons/*.json` files (coefficients per season) are useless under NeoForge [deduced].
-- **F&C crops grow all year round with Ecliptic** as long as Tilth does not tag them.
+- **F&C crops grow all year round with Ecliptic** as long as Compline does not tag them.
 
 **NeoForge configuration**: `enableBonemealEffect`, `fertilizedSoilRange`, `waterSprinklerRange`, `enableRainGrowthEffect`, `rainGrowthMultiplier`, `feedingTroughRange`, `enableFertilizer`, taming and effects of the horse, chicken, dog and cat, nutritional values of each dish [jar `FarmAndCharmNeoForgeConfig`].
 
@@ -298,7 +298,7 @@ Schema fields:
 
 **Sleeping bag**: blocks `travelersbackpack:<colour>_sleeping_bag`, plus the item tag `travelersbackpack:sleeping_bags`.
 
-**Hose**: one can drink the tank water (`WaterEffect`), but the effect only extinguishes fire and gives an effect depending on the biome's temperature. **It only knows Tough As Nails (`compat/toughasnails`), not TWR.** Drinking from the hose therefore does not quench thirst in Tilth [deduced].
+**Hose**: one can drink the tank water (`WaterEffect`), but the effect only extinguishes fire and gives an effect depending on the biome's temperature. **It only knows Tough As Nails (`compat/toughasnails`), not TWR.** Drinking from the hose therefore does not quench thirst in Compline [deduced].
 
 **Inventory**: the placed backpack (`BackpackBlockEntity`) **does not implement `Container`**, and the worn backpack is not in the player's `Inventory`. **FIAHI therefore never ages the food stored in the backpack** [deduced].
 
@@ -310,7 +310,7 @@ Schema fields:
 
 | What | Tool | Detail |
 |---|---|---|
-| Lit KC stove and F&C stove warm the room | KubeJS `ColdSweatEvents.registries`, or JSON `data/tilth/cold_sweat/block/block_temp/` | `event.addBlockTemperature(12, 'f', b => b.blocks('kaleidoscope_cookery:stove','farm_and_charm:stove').state('lit', true).range(4).maxEffect(20).fades(true))`. A **weaker** effect than the campfire (25 °F, 7 blocks), because the KC stove **burns without fuel**: it must not replace Cold Sweat's hearth |
+| Lit KC stove and F&C stove warm the room | KubeJS `ColdSweatEvents.registries`, or JSON `data/compline/cold_sweat/block/block_temp/` | `event.addBlockTemperature(12, 'f', b => b.blocks('kaleidoscope_cookery:stove','farm_and_charm:stove').state('lit', true).range(4).maxEffect(20).fades(true))`. A **weaker** effect than the campfire (25 °F, 7 blocks), because the KC stove **burns without fuel**: it must not replace Cold Sweat's hearth |
 | Vigil Fire (tier 1 of the clearings) | Tag + Cold Sweat KubeJS | The draft makes it a simple KubeJS block, without a `lit` state. Add it to `farmersdelight:heat_sources` (so that the wok recognises it), to `kaleidoscope_cookery:warmth_heat_source_blocks` and to an `addBlockTemperature` entry (~20 °F, 6 blocks). It does not purify water: only the vanilla campfire carries the TWR recipes |
 | Boiling cauldrons, braziers, fireplaces (10.7) | Cold Sweat config or KubeJS | These blocks come from Amendments and Supplementaries, not from KC: they are outside this verification. Only blocks with a `lit` or `boiling` state can be hooked in with `.state(...)` |
 | Hot dishes that warm, cold dishes that cool | KubeJS `event.addFoodTemperature(...)` | Hot dishes: KC soups (`borscht`, `pork_bone_soup`, `lamb_and_radish_soup`, `laba_congee`…), F&C soups, KC teas. Cold dishes: `cold_*_sashimi`, `frost_lamb_chop`, `cold_cut_ham_slices`. Finally gives meaning to KC's "Warmth" effect in winter. To calibrate with `coldsweat.convertTemperature` |
@@ -321,7 +321,7 @@ Schema fields:
 **Rewrite `saisons_cold_sweat.js`.** The only copy is the draft `plan/kubejs-brouillons/server_scripts/saisons_cold_sweat.js`; no branch of the repository contains it (`test/agriculture` only has `.gitkeep` files in `pack/kubejs/`).
 
 **What is wrong in the draft**:
-- `coldsweat.createModifier('tilth:season', offset)` does not exist: a single argument, read in the registry.
+- `coldsweat.createModifier('compline:season', offset)` does not exist: a single argument, read in the registry.
 - The tick every 1200 ticks only touches players.
 - The container temperature, hence FIAHI, does not see the season.
 
@@ -329,22 +329,22 @@ Schema fields:
 
 ```js
 // server_scripts/saisons_cold_sweat.js (sketch, values in °C to calibrate)
-const TILTH_SAISON_C = { EARLY_SPRING: -2, MID_SPRING: 0, LATE_SPRING: 1, EARLY_SUMMER: 3, MID_SUMMER: 6,
+const COMPLINE_SAISON_C = { EARLY_SPRING: -2, MID_SPRING: 0, LATE_SPRING: 1, EARLY_SUMMER: 3, MID_SUMMER: 6,
   LATE_SUMMER: 4, EARLY_AUTUMN: 1, MID_AUTUMN: -2, LATE_AUTUMN: -4, EARLY_WINTER: -6, MID_WINTER: -8, LATE_WINTER: -6 }
 
 ColdSweatEvents.registries(event => {
-  event.addTempModifier('tilth:saison', data => {
+  event.addTempModifier('compline:saison', data => {
     const level = data.entity().level()
     if (String(level.dimension()) !== 'minecraft:overworld') return t => t
     const sub = String(EclipticSeasonsApi.getSubSeason(level))
-    const off = coldsweat.convertTemperature(TILTH_SAISON_C[sub] ?? 0, 'c', 'mc', false)
+    const off = coldsweat.convertTemperature(COMPLINE_SAISON_C[sub] ?? 0, 'c', 'mc', false)
     return t => t + off
   })
 })
 
 // Added to every tracked entity AND to the "ghost player" that computes the temperature of a place.
 ColdSweatEvents.gatherDefaultModifiers(event => {
-  event.addModifier('world', coldsweat.createModifier('tilth:saison'))
+  event.addModifier('world', coldsweat.createModifier('compline:saison'))
 })
 ```
 
@@ -388,7 +388,7 @@ Proposed distribution:
 
 **KC**: already tagged, nothing to do.
 
-**Clearing** (`tilth:clairiere`, temperature 0.7, precipitation 0.6):
+**Clearing** (`compline:clairiere`, temperature 0.7, precipitation 0.6):
 - It will fall into Ecliptic's **temperate** climate [deduced: empty `agro` tags, choice by temperature].
 - Rice (`humid_humid`) will grow poorly there: it is a swamp crop.
 - Add the biome to the `eclipticseasons:seasonal` tags, seasonal colour, so that it changes hue with the seasons, if desired.
@@ -469,7 +469,7 @@ Everything is driven by tags [jar of the fauna mods]:
 
 **Clearings**:
 - The Vigil Fire serves as a heat and cooking source (see 2.1).
-- The biome `tilth:clairiere` receives the season through the bridge (2.2), like the other biomes.
+- The biome `compline:clairiere` receives the season through the bridge (2.2), like the other biomes.
 - Its sheep and rabbits feed on F&C crops (2.6).
 - To avoid a temperature jump when entering a clearing, give the biome, in Cold Sweat, the same temperature as the plains (`addBiomeTemperature`), or a slight bonus ("life returns").
 
@@ -485,7 +485,7 @@ Everything is driven by tags [jar of the fauna mods]:
 | **FIAHI in Traveler's Backpack** | **No.** The backpack is neither a `Container` nor in the `Inventory`. A mixin or a Java tick applying `IFrozenRottenFood.tick` to the `BackpackWrapper` is needed, with an insulation coefficient |
 | **Drinking tank water with TWR** | **No.** A Java `EffectFluid` is needed for Traveler's Backpack water that calls `ThirstHelper` and takes purity into account |
 
-**Proposal: a small custom mod `tilth-liens`** (NeoForge 21.1, Java) that would do three things:
+**Proposal: a small custom mod `compline-liens`** (NeoForge 21.1, Java) that would do three things:
 1. Age the food in the backpack (worn and placed) according to the temperature of the wearer or the place, at a reduced speed: the backpack insulates a little, the FIAHI provisions bag remains better.
 2. Make the backpack hose quench thirst according to TWR, with the purity of the tank water.
 3. Optionally, port the Cold Sweat seasonal modifier to Java, if the KubeJS version causes a client-side or performance problem.
@@ -498,7 +498,7 @@ Without this mod, the backpack becomes a **perfect refrigerator**, and its tanks
 
 1. **Seasonal bridge client-side**:
    - `ColdSweatEvents.registries` and `gatherDefaultModifiers` are **server** events [jar `EventGroup.server`].
-   - If Cold Sweat computes or deserialises modifiers client-side (thermometer display), an identifier `tilth:saison` unknown to the client can cause errors or a wrong display.
+   - If Cold Sweat computes or deserialises modifiers client-side (thermometer display), an identifier `compline:saison` unknown to the client can cause errors or a wrong display.
    - To test in multiplayer; fallback: custom mod (2.9).
 2. **KC-Automation and Kaleidoscope Compat both declare a Create arm interaction point** for the wok, the stockpot, the steamer and the spit [jar, neither knows the other].
    - Proposal: set `create.arm.pot_enabled`, `stockpot_enabled`, `steamer_enabled` and `shawarma_spit_enabled` to `false` in Compat.
@@ -540,7 +540,7 @@ Without this mod, the backpack becomes a **perfect refrigerator**, and its tanks
 | 10.7, "Eating and drinking" row | KC soups and teas: nothing to do (Compat). F&C teas and soups: TWR keywords | Already automatic |
 | 10.5, Traveler's Backpack row | Add the settings: furnace, smoker and feeding upgrades off; sleeping bags in Cold Sweat's sleep list | Cooking while travelling through the campfire |
 | 10.10, scripts | Add `chaleur_cold_sweat.js` (heat sources, dishes, icebox), `faune_nourriture.js` (husbandry tags), `saisons_cultures.js` (Ecliptic F&C tags and seasonal breeding); `garde_manger.js` stays removed | The links from 2.1 to 2.6 |
-| New | **Custom mod `tilth-liens`** (2.9), if the backpack is not to be a refrigerator and its tanks are not to be useless for drinking | Impossible in KubeJS |
+| New | **Custom mod `compline-liens`** (2.9), if the backpack is not to be a refrigerator and its tanks are not to be useless for drinking | Impossible in KubeJS |
 | Versions | KC → 1.6.0, Ecliptic → 0.15.4.1 on a test branch. F&C stays at 1.1.25. Cold Sweat 2.4.3.1 until 2.4.4 is tested | 1.3, 3.7 |
 | Zoo (10.4) | Husbandry and seasonal breeding tags (2.6); KC millstone pulled by animals | Links the zoo to the farm |
 
@@ -548,14 +548,14 @@ Without this mod, the backpack becomes a **perfect refrigerator**, and its tanks
 
 ## 5. To settle with an in-game test
 
-1. Does the `tilth:saison` modifier defined in KubeJS display correctly client-side (Cold Sweat thermometer), in single player then on a dedicated server?
+1. Does the `compline:saison` modifier defined in KubeJS display correctly client-side (Cold Sweat thermometer), in single player then on a dedicated server?
 2. Does this modifier reach the temperature of a chest: does food rot faster in summer than in winter in a FIAHI chest?
 3. With both mods active, which Create arm wins on the wok: KC-Automation or Compat? And after turning off Compat's arms?
 4. Does the log show that `forge:false` is accepted? Has the F&C stockpot disappeared from the crafting table?
 5. Do the F&C recipes replayed in the KC stockpot appear in EMI?
 6. Does Kaleidoscope Compat 2.9.7-Patch.2 run with KC 1.6.0 (millstone mixin)?
 7. With the `eclipticseasons:crops/*` tags placed on the F&C blocks, are Ecliptic's tooltip and the actual growth seasonal?
-8. KC rice in the clearing: which climate and humidity does Ecliptic assign to the biome `tilth:clairiere`?
+8. KC rice in the clearing: which climate and humidity does Ecliptic assign to the biome `compline:clairiere`?
 9. Does food age in Traveler's Backpack (worn and placed)? Expected: no.
 10. Does the Cold Sweat waterskin quench thirst with TWR? The backpack hose does not, to confirm.
 11. Does KC's "Preservation" effect cancel the `fiahi:shiver` penalty?

@@ -1,6 +1,6 @@
-// Tilth : les premiers gestes. À mains nues, on ramasse mais on ne coupe pas.
+// Compline : les premiers gestes. À mains nues, on ramasse mais on ne coupe pas.
 // La règle elle-même (tronc et roche impossibles sans le bon outil) est dans le module
-// `outils` du mod tilth ; ce script règle les recettes et le butin qui vont avec.
+// `outils` du mod compline ; ce script règle les recettes et le butin qui vont avec.
 // Voir docs/plan/premiers-gestes.md.
 //
 // La chaîne :
@@ -54,7 +54,7 @@ ServerEvents.recipes(event => {
     let nombre = Math.max(1, Math.floor(r.nombre * PREMIERS_GESTES_PLANCHES_A_LA_HACHE / 4))
     event.shapeless(Item.of(r.planche, nombre), [r.bois, '#minecraft:axes'])
       .damageIngredient('#minecraft:axes')
-      .id(`tilth:premiers_gestes/planches/${r.id.replace(':', '/')}`)
+      .id(`compline:premiers_gestes/planches/${r.id.replace(':', '/')}`)
   })
   console.info(`[premiers gestes] ${planches.length} recettes de planches passées à la hache`)
 
@@ -64,7 +64,7 @@ ServerEvents.recipes(event => {
 
   // Un galet de Twigs est déjà une pierre : il se taille comme celle d'Overgeared.
   event.shapeless('overgeared:knappable_rock', ['twigs:pebble'])
-    .id('tilth:premiers_gestes/galet_a_tailler')
+    .id('compline:premiers_gestes/galet_a_tailler')
 })
 
 LootJS.lootTables(event => {

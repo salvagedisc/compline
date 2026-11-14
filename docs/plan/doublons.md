@@ -50,7 +50,7 @@ Kept despite a similar role, because they are different species: Naturalist's wh
 |---|---|---|
 | Naturalist | `pack/config/naturalist-server.toml` | `_removed = true` per species, in sections (`aquatic_mobs`, `land_mobs`, `bugs`); the species no longer spawns and disappears from the world. The forest rabbits that Naturalist adds are cut as well |
 | Hybrid Aquatic | `pack/kubejs/data/hybrid_aquatic/neoforge/biome_modifier/` | its 25 per-species spawn files replaced by `neoforge:none` |
-| Alex's Mobs, Critters and Companions | `pack/kubejs/data/tilth/neoforge/biome_modifier/doublons.json` | `neoforge:remove_spawns` on `#minecraft:is_overworld`; no partial config, since their formats (CodxLib, YACL) have not been tested with an incomplete file |
+| Alex's Mobs, Critters and Companions | `pack/kubejs/data/compline/neoforge/biome_modifier/doublons.json` | `neoforge:remove_spawns` on `#minecraft:is_overworld`; no partial config, since their formats (CodxLib, YACL) have not been tested with an incomplete file |
 | All | `pack/kubejs/server_scripts/doublons.js` | joining the world cancelled for the cut creatures (C&C's lush caves, biomes outside the tag); 78 items with no source removed from recipes and loot (including the seal's lobster bucket) |
 | All | `pack/kubejs/client_scripts/doublons.js` | the same items hidden from EMI |
 | Alex's Mobs | `pack/kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json` | the roadrunner hunts Naturalist's snake, as it used to hunt Alex's Mobs' rattlesnake |
@@ -66,7 +66,7 @@ Older decisions of the plan, confirmed by the maintainer on 2026-10-19:
 - Friends & Foes: iceologer, illusioner, wildfire (hostiles, decision 0003), and their four structures (iceologer's cabin, illusioner's cabin and training ground, wildfire's citadel), whose biome tags are emptied;
 - Naturalist: mammoth (prehistory ruled out, 0003).
 
-Same method as for the duplicates: `naturalist-server.toml`, `pack/kubejs/data/tilth/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (server and client, 22 items including the sinew whip, the transmutation table and the wildfire crown, which can only be crafted from items dropped by these creatures). The Alex's Mobs advancements tied to these creatures stay in their tab without being obtainable: some are parents of other advancements that can still be earned.
+Same method as for the duplicates: `naturalist-server.toml`, `pack/kubejs/data/compline/neoforge/biome_modifier/faune_coupee.json`, `faune_coupee.js` (server and client, 22 items including the sinew whip, the transmutation table and the wildfire crown, which can only be crafted from items dropped by these creatures). The Alex's Mobs advancements tied to these creatures stay in their tab without being obtainable: some are parents of other advancements that can still be earned.
 
 ## Creatures with weak animations (2026-10-28)
 

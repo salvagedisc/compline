@@ -1,9 +1,9 @@
-# Tilth : réglages serveur d'Envelope appliqués à chaque nouveau monde.
+# Compline : réglages serveur d'Envelope appliqués à chaque nouveau monde.
 # Seules les clés changées sont écrites ; NeoForge complète le reste avec les valeurs par défaut.
-# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Tilth.
+# Voir docs/plan/xp.md : il n'y a plus d'expérience dans Compline.
 
 [mailbox]
 	#Levels of experience needed to set or change the address.
 	#Range: 0 ~ 128
-	#Tilth : 0. Sans XP, nommer une boîte aux lettres doit rester possible (défaut : 3).
+	#Compline : 0. Sans XP, nommer une boîte aux lettres doit rester possible (défaut : 3).
 	address_experience_levels_cost = 0

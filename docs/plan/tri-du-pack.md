@@ -11,7 +11,7 @@ Request from the maintainer, 2026-10-29: check every mod, creature, item and blo
 | Chipped (and Athena, which only Chipped needed) | 6,980 blocks, 58 % of the pack's blocks, including 1,110 Nether and End variants nothing can supply; heavy loading |
 | Beautify! | Almost everything overlaps another mod (Supplementaries chandeliers and rope, Amendments hanging pot, Handcrafted books); it also adds a botanist villager selling decor |
 
-Chunky stays until test H11 has confirmed the Distant Horizons pregeneration, then leaves (roadmap).
+Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md)): the world is pregenerated with `/dh pregen`, or a server owner adds Chunky to the server (the `horizon` fix for it stays).
 
 ## Defects fixed
 
@@ -100,7 +100,7 @@ The maintainer asked whether a mod changes how these levels play; otherwise we d
 ## Checks on the test server
 
 - 17/17 server scripts loaded, no error; the empty structure sets and the new recipes raise no warning.
-- Checked in the loaded recipe list: the 7 `tilth:tri/*` recipes are present, the old rope, pulley and knife recipes are gone, 13 mincer recipes remain, no recipe makes a jungle track, a dyed locometal block, a potato cannon or a Twigs table; oak tracks and plain locometal still have theirs.
+- Checked in the loaded recipe list: the 7 `compline:tri/*` recipes are present, the old rope, pulley and knife recipes are gone, 13 mincer recipes remain, no recipe makes a jungle track, a dyed locometal block, a potato cannon or a Twigs table; oak tracks and plain locometal still have theirs.
 - Every edited setting survives NeoForge's config correction pass (partial files are completed, our values are kept).
 - The registry has 7,557 items without Chipped and Beautify!; the ids of every list come from it.
 

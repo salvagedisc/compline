@@ -1,6 +1,6 @@
-# Tilth: animations of the survivors and echoes, and compatibility with Fresh Animations
+# Compline: animations of the survivors and echoes, and compatibility with Fresh Animations
 
-Date: 26 October 2026. Research for the `tilth` module (NeoForge 1.21.1).
+Date: 26 October 2026. Research for the `compline` module (NeoForge 1.21.1).
 
 ## Short answer
 
@@ -14,7 +14,7 @@ What is verified: the EMF source code (master branch) and the contents of the FA
 
 **Added mods: supported.** The README says EMF does "little to no hardcoding" of vanilla models, which opens CEM to mod entities. FEATURES.md states that EMF handles "all modded entity models whose factory goes through the entity model loader". The `allowedCEM` setting is `ALL` by default (the pack does not provide an EMF config). It was added in 3.1 to separate known and unknown (mostly modded) models.
 
-**File layout.** In `EMFDirectoryHandler`, the final path is `<namespace>:optifine/cem/<name>.jem` or `<namespace>:emf/cem/<name>.jem`, with a subfolder variant `<name>/<name>.jem`. For vanilla, the namespace is `minecraft`. For a modded layer `tilth:survivant#main`, it would be `assets/tilth/optifine/cem/survivant.jem` (or `emf/cem/`). The name is lowercased, characters outside `a-z0-9/._-` become `_`. The EMF 2.0 changelog confirms that the old `modded` folder was replaced by these namespaces.
+**File layout.** In `EMFDirectoryHandler`, the final path is `<namespace>:optifine/cem/<name>.jem` or `<namespace>:emf/cem/<name>.jem`, with a subfolder variant `<name>/<name>.jem`. For vanilla, the namespace is `minecraft`. For a modded layer `compline:survivant#main`, it would be `assets/compline/optifine/cem/survivant.jem` (or `emf/cem/`). The name is lowercased, characters outside `a-z0-9/._-` become `_`. The EMF 2.0 changelog confirms that the old `modded` folder was replaced by these namespaces.
 
 **Unknown model.** EMF explores the model, maps each part to its own name, and can export a sample `.jem` into `emf/export/assets/<namespace>/optifine/cem/`. This is the tool for writing animations specific to our creatures.
 
@@ -38,7 +38,7 @@ Source: Modrinth pages of FA and FA Player Extension, plus the file `FAterms&con
 - Modrinth shows the FAPE license as "Licensed ARR". The "early access" content (Ko-fi, including the torch and lantern poses) is marked "Do not distribute" in FA's `early-access.txt`. Never to be shipped.
 
 **What this means for us.**
-1. Depending on the presence of FA: yes, we already have it in the pack through packwiz (Modrinth link, no redistribution). The `tilth` mod must not require it. Without EMF, the creature plays the vanilla animations.
+1. Depending on the presence of FA: yes, we already have it in the pack through packwiz (Modrinth link, no redistribution). The `compline` mod must not require it. Without EMF, the creature plays the vanilla animations.
 2. Shipping our own `.jem` and `.jpm` copied or adapted from FA: the permission covers a "resource pack" with credit. A mod jar is not literally a resource pack. When in doubt, put these files in a resource pack of the repository (`pack/resourcepacks/`), with credit, or ask FreshLX for agreement. I recommend asking, the wording "within reason" is vague.
 3. The vanilla layer route avoids all of this: we ship no FA file.
 
@@ -72,16 +72,16 @@ Versions and licenses: Modrinth API of 26/10/2026, completed by opening the page
 | Who's There? Ghost Players | 1.4.1 | MIT | `ModelLayers.PLAYER` (technical precedent) | Invisible cave entities with usernames, "White Eyes" stalks the player. Tone too threatening. To cite as a code example only |
 | Cloud Revive (Wandering Spirits) | 1.1.0 beta 1 | Apache-2.0 | own Java model and animation | Decorative natural spirits, no glow, no collision, invulnerable. Good tone reference, but small spirits, not a human silhouette |
 
-Finding: no mod combines human NPCs, an empty atmosphere and FA animations. The pack has already removed Easy NPC. Keeping the gameplay (following the lantern, living in a clearing, filtered trade) in `tilth` is necessary anyway.
+Finding: no mod combines human NPCs, an empty atmosphere and FA animations. The pack has already removed Easy NPC. Keeping the gameplay (following the lantern, living in a clearing, filtered trade) in `compline` is necessary anyway.
 
 ## 5. Recommendation
 
 ### Survivors: own entity on the player layer
 
-- Type `tilth:survivant`, AI written in the module. Renderer: `HumanoidMobRenderer<Survivant, PlayerModel<Survivant>>`, with `context.bakeLayer(ModelLayers.PLAYER)` (wide arms) or `PLAYER_SLIM`. This is the Who's There? method. Add the vanilla armor layers only if the NPCs are equipped. FAPE's armor `.jem` files already exist (`player_inner_armor.jem`, etc.).
+- Type `compline:survivant`, AI written in the module. Renderer: `HumanoidMobRenderer<Survivant, PlayerModel<Survivant>>`, with `context.bakeLayer(ModelLayers.PLAYER)` (wide arms) or `PLAYER_SLIM`. This is the Who's There? method. Add the vanilla armor layers only if the NPCs are equipped. FAPE's armor `.jem` files already exist (`player_inner_armor.jem`, etc.).
 - Ship nothing from FA. If EMF is absent, the vanilla animations play.
 - Differentiate the 12 silhouettes without touching the animations: a 64x64 texture per character (coat and hood painted on the `jacket` layer), scale between 0.92 and 1.08 in the renderer, helmet or hood as a head item, held item (lantern, staff, bag), thin arms for some. Avoid extra render layers (skirt, cape): they would not follow the parts animated by EMF.
-- If one day we want our own animations (sitting by the ember, fear), two routes: an own layer `tilth:survivant#main` with a hand-written `.jem` in `assets/tilth/optifine/cem/` (we lose the FAPE animations), or keep the player layer and drive crouching and sitting position by the vanilla state of the entity (see tests).
+- If one day we want our own animations (sitting by the ember, fear), two routes: an own layer `compline:survivant#main` with a hand-written `.jem` in `assets/compline/optifine/cem/` (we lose the FAPE animations), or keep the player layer and drive crouching and sitting position by the vanilla state of the entity (see tests).
 
 ### Echoes: same rendering, ghost version
 
@@ -92,7 +92,7 @@ Finding: no mod combines human NPCs, an empty atmosphere and FA animations. The 
 
 ### To test in game
 
-1. Open the EMF config, model list: check that `tilth:survivant` appears, and that the layer is indeed `minecraft:player#main`. Export the sample `.jem`.
+1. Open the EMF config, model list: check that `compline:survivant` appears, and that the layer is indeed `minecraft:player#main`. Export the sample `.jem`.
 2. Spawn a survivor next to a real player: walking, running, standing still. Compare the movements.
 3. `is_sneaking`: does the NPC's crouched state (pose `CROUCHING`) trigger the FAPE animation?
 4. `is_riding`: make the NPC sit through an invisible seat or the vanilla state, and see whether the FAPE pose plays.
@@ -130,6 +130,6 @@ Finding: no mod combines human NPCs, an empty atmosphere and FA animations. The 
 - https://modrinth.com/mod/villager-recruits
 - Modrinth API (versions, licenses): https://api.modrinth.com/v2/project/{guard-villagers, minecraft-comes-alive-reborn, villagers-reborn, whos-there-ghost-players, ghost, easy-npc, customnpcs-unofficial, taterzens, villager-recruits, cloud_revive}
 - Jars inspected (classes, mods.toml): Guard Villagers 2.4.12, MCA 7.7.36, Villagers Reborn 1.0.9b, Who's There? 1.4.1, Ghost 1.3.4, Cloud Revive 1.1.0 beta 1
-- Tilth repository: `docs/mods.md`, `pack/config/incontrol/spawn.json`, `pack/mods/entity-model-features.pw.toml`, `docs/plan/03-civilisation.md`
+- Compline repository: `docs/mods.md`, `pack/config/incontrol/spawn.json`, `pack/mods/entity-model-features.pw.toml`, `docs/plan/03-civilisation.md`
 
 Not opened (search summaries only): Entity Player Compat, EMF Compat Take a Seat, EMF Compat Supplementaries, CustomNPCs-Unofficial, Easy NPC, Taterzens, MCA (Modrinth pages).

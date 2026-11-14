@@ -14,9 +14,9 @@ Status: written on 2026-10-29. Checked on a test server on 2026-10-29 (NeoForge 
 
 ## The rule
 
-The `outils` module of the `tilth` mod ([mod-tilth](mod-tilth.md#outils-module)). A block needs a tool when it is in the `tilth:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `tilth:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, cut sugar cane and, since 2026-11-13, Regions Unexplored's cattail (No Man's Land's plants left the tag with the mod), Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
+The `outils` module of the `compline` mod ([mod-compline](mod-compline.md#outils-module)). A block needs a tool when it is in the `compline:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `compline:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, cut sugar cane and, since 2026-11-13, Regions Unexplored's cattail (No Man's Land's plants left the tag with the mod), Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
 
-The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks, furniture, chests, crafting table, Create's wooden parts). To go back to raw wood only, replace `#minecraft:mineable/axe` by nothing in `tilth:outil_requis` with a datapack (`"replace": true`, `#minecraft:logs` alone); no recompilation.
+The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks, furniture, chests, crafting table, Create's wooden parts). To go back to raw wood only, replace `#minecraft:mineable/axe` by nothing in `compline:outil_requis` with a datapack (`"replace": true`, `#minecraft:logs` alone); no recompilation.
 
 ## The recipes
 
@@ -25,9 +25,9 @@ The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks,
 | What | Before | After |
 |---|---|---|
 | Wooden tools (5) | Craftable | Recipes removed, removed from chest loot, hidden from EMI (`client_scripts/premiers_gestes.js`) |
-| Log → planks | 4 by hand | `PREMIERS_GESTES_PLANCHES_A_LA_HACHE` (2) with any axe in the grid, damaged by 1; every single-log shapeless planks recipe is rewritten (vanilla and the other mods' woods, Regions Unexplored's included), id `tilth:premiers_gestes/planches/<original id>`; the log reports how many |
+| Log → planks | 4 by hand | `PREMIERS_GESTES_PLANCHES_A_LA_HACHE` (2) with any axe in the grid, damaged by 1; every single-log shapeless planks recipe is rewritten (vanilla and the other mods' woods, Regions Unexplored's included), id `compline:premiers_gestes/planches/<original id>`; the log reports how many |
 | Campfire | Sticks + logs + coal | Sticks + logs + flint |
-| Twigs pebble | 4 → cobblestone | Kept, plus 1 → `overgeared:knappable_rock` (`tilth:premiers_gestes/galet_a_tailler`) |
+| Twigs pebble | 4 → cobblestone | Kept, plus 1 → `overgeared:knappable_rock` (`compline:premiers_gestes/galet_a_tailler`) |
 | Leaves broken | Stick 2% | Plus an extra stick at `PREMIERS_GESTES_BATONS_FEUILLES` (6%) |
 
 Unchanged on purpose: Overgeared's stone, copper, iron and steel tools; the vigil fire and clearing lantern recipes (reviewed with the mist settings).

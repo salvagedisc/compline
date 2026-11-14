@@ -1,6 +1,6 @@
 # Quests and guides (Questlog)
 
-A book-style quest journal, in French, that explains the mechanics of Tilth as the player meets them and gives a few goals. The team chose **Questlog** on 2026-10-26: it opens as a menu (the inventory button or the key under Esc), shows quests by chapter, and can be edited in game. It replaces the first idea of a Modonomicon book carried as an item ("too constraining"). The research that compared the candidates is [livre-de-quetes](../archive/plan/recherche/2026-10-26/livre-de-quetes.md); Questlog was not in it.
+A book-style quest journal, in French, that explains the mechanics of Compline as the player meets them and gives a few goals. The team chose **Questlog** on 2026-10-26: it opens as a menu (the inventory button or the key under Esc), shows quests by chapter, and can be edited in game. It replaces the first idea of a Modonomicon book carried as an item ("too constraining"). The research that compared the candidates is [livre-de-quetes](../archive/plan/recherche/2026-10-26/livre-de-quetes.md); Questlog was not in it.
 
 Questlog 3.5.0 (Apache-2.0, InfernalStudios, requires Cloth Config). Documentation: moddedmc.wiki, project `questlog`.
 

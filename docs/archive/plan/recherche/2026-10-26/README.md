@@ -1,6 +1,6 @@
 # Research of 2026-10-26
 
-Eight research reports for Tilth, translated from French. Each report lists its sources and flags what could not be verified.
+Eight research reports for Compline, translated from French. Each report lists its sources and flags what could not be verified.
 
 | File | Question | Main recommendation |
 |---|---|---|
@@ -8,7 +8,7 @@ Eight research reports for Tilth, translated from French. Each report lists its 
 | [vie-et-survivants.md](vie-et-survivants.md) | How should the `vie` (life) and `survivants` (survivors) modules grow a clearing and bring in survivors? | Feed life by variety, not volume (duplicates do not count), with daily caps and anti-AFK rules. Show growth as a visible event, not a gauge. Hand-written survivors, found by one discreet clue, with no marker. |
 | [fanal-et-echos.md](fanal-et-echos.md) | How should the `fanal` (light beacon) and `echos` (distant silhouettes) modules look and behave in the mist? | Amber diffuse glow column of 60 to 120 blocks, drawn client-side with fuel and a cap on visible beacons. Echoes are very rare, calm silhouettes that give a direction but never a compass or a distance. |
 | [eclaircie-sillage-voile.md](eclaircie-sillage-voile.md) | How to do the clearing spell (eclaircie), the ship's clear wake (sillage) and the distance culling (voile) with Sodium, Distant Horizons and Sable? | One server-side clarity variable with slow transitions, warned by signs and a barometer. Wake in two steps (camera-based first, per-fragment later). One `distanceVoile` function for culling, with exceptions for Sable sublevels. Test Sodium fog occlusion first. |
-| [animations-survivants-echos.md](animations-survivants-echos.md) | Can survivors and echoes use Fresh Animations without a third-party NPC mod? | Use an own entity `tilth:survivant` on the vanilla player model layer (`ModelLayers.PLAYER` or `PLAYER_SLIM`), so EMF applies the Fresh Animations Player Extension. Ship no Fresh Animations file. Echoes reuse the same renderer in a ghost version. |
+| [animations-survivants-echos.md](animations-survivants-echos.md) | Can survivors and echoes use Fresh Animations without a third-party NPC mod? | Use an own entity `compline:survivant` on the vanilla player model layer (`ModelLayers.PLAYER` or `PLAYER_SLIM`), so EMF applies the Fresh Animations Player Extension. Ship no Fresh Animations file. Echoes reuse the same renderer in a ghost version. |
 | [saisons-et-duree-des-jours.md](saisons-et-duree-des-jours.md) | Ecliptic Seasons or Serene Seasons, and how to make days longer than nights? | Keep Ecliptic Seasons (Serene as fallback). Use Better Days with `DynamicDaylightDuration = false`, 30 min of day and 15 min of night, and set `LastingDaysOfEachTerm` to compensate. |
 | [livre-de-quetes.md](livre-de-quetes.md) | Which mod should power a quest and guide book? | Modonomicon for the book "Carnet du voyageur" (Traveler's Notebook), unlocked by advancements. Heracles (Odyssey Quests) only as an optional trial. Do not add GuideME. |
-| [piles-et-sacs.md](piles-et-sacs.md) | How to reduce stack sizes and simplify the backpack? | Sensible Stackables with `tilth:pile/N` tags set by KubeJS. Replace Traveler's Backpack with Reliable Backpacks 1.9.1, and remove the `sac` module. |
+| [piles-et-sacs.md](piles-et-sacs.md) | How to reduce stack sizes and simplify the backpack? | Sensible Stackables with `compline:pile/N` tags set by KubeJS. Replace Traveler's Backpack with Reliable Backpacks 1.9.1, and remove the `sac` module. |

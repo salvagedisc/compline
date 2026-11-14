@@ -2,7 +2,7 @@ hash-format = "sha256"
 
 [[files]]
 file = "config/DistantHorizons.toml"
-hash = "50e58d2b37f477943ffd1ecadcd99cb5ff6b5a1e90e34f36fcd9614dc78b6f96"
+hash = "e1022cea867ab184771bfc3e14f355163b304dd6c452d2d1dcfe773dd15f6d68"
 
 [[files]]
 file = "config/adorablehamsterpets/main.toml"
@@ -10,23 +10,23 @@ hash = "c58df881614688ddaeb1dd84da064e77d406dbf3d29a7e6695cf19b20ccd196e"
 
 [[files]]
 file = "config/adorablehamsterpets/ui.toml"
-hash = "f8233eff7d0a8c73e582c290e8456523e0aea9c35a47e87017bc03d077a4f630"
+hash = "b6e9c7ce74b802edc54404ea82b17e6981dcb08d18e72ed41d4d4e343ff5e283"
 
 [[files]]
 file = "config/amendments-common.toml"
-hash = "14838bd23330c3016f5fdee60225fdac546e19ca8272a931614083a9fe48f8dc"
+hash = "bb0da40e6e0a140dfdb497345774b56e44bd5db7847ada59227e947a63a677b8"
 
 [[files]]
 file = "config/betterdays-common.toml"
-hash = "210d3c57684254b7db54aa345323e8b6c267608b8e2f77614fd4ff724110b03b"
+hash = "8acfbad73bb7c379656d8f15f9e814bc90349274aef2f1080ba23e2c153709a8"
 
 [[files]]
 file = "config/cameraoverhaul.toml"
-hash = "f494c0023738c9ed8c0a5247023dd68a4c64309e4a5ae7766684fdd518711bd1"
+hash = "b74cb3796d69c8acde135e6bf87089cb0d94e4254eec7bcc4dcf83e4bf38a41b"
 
 [[files]]
 file = "config/coldsweat/client.toml"
-hash = "bda2573cba8da1b438cee65f59fcc70482e6ed8eceacc398ebd7762d403d6dc4"
+hash = "8d0ba01a2b5f694510d665fe042cc5d7f7e6b33cfa6b1c7969de3a5850b2b985"
 
 [[files]]
 file = "config/companions.toml"
@@ -34,11 +34,15 @@ hash = "48b83973132d41c7fe23f5861c1ff580b3734ee0397c62ae1031e2dd289284f2"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "68e09b3e1d4c62fc669c00c33b64e3adeb55311a07f16c908655f2b81fa78f6a"
+hash = "e4db601658501f98b1d33bfc78909d8da87bb1f4d35d5a5dfe624e3e1d8de980"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
 hash = "67005e1a77cf4b111ebd17137bb0e3e3bc73d9ea62154be41ea542e2ee2432a8"
+
+[[files]]
+file = "config/defaultoptions/extra/config/iris.properties"
+hash = "6d78e1e2e4c216738da7386a15ffa031c774eccd2052f84aaaf3c2898c9a14fd"
 
 [[files]]
 file = "config/defaultoptions/extra/config/punchy/punchy_config.json"
@@ -46,15 +50,11 @@ hash = "95d3212dcd24c753571ff47bbf34ff17ffbfcc66ac619f5b7b9f4dc7820b45f8"
 
 [[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
-hash = "5bd7a2ab3d00f190d3fa821d3c9d3e591374d681f5d9c17c0737f7a987d9e59b"
+hash = "5f34941b7b8b2ab45f49a12dac6a2cf180eb09bf2cdf235632886a3fdaaadafd"
 
 [[files]]
 file = "config/defaultoptions/options.txt"
 hash = "f08f3b53dbdaf3fa0444c2cef8968350ddc0c9afa94b4abde4a7b6521fcb39c6"
-
-[[files]]
-file = "config/dsrebirth/dsrebirth.json"
-hash = "5d65d2e4dbebbd4968a95365fe49b6961b46a271ef6ae173b94c7c2e592fcf76"
 
 [[files]]
 file = "config/eclipticseasons-common.toml"
@@ -66,39 +66,11 @@ hash = "ca187fe5c82c892b512d33479b28c0ade281734322ad2261732654cb3fb52d88"
 
 [[files]]
 file = "config/everycomp-hazardous.toml"
-hash = "793f1a870ec68f3df77126da9a0d33214b992f370cbe06326d40d7823acaacba"
-
-[[files]]
-file = "config/fancymenu/assets/tilth_title_mist_mask.png"
-hash = "bc465430412473288717978cece41b13720b920dd0343b45ad5c93f96bbd1688"
-
-[[files]]
-file = "config/fancymenu/assets/tilth_title_painting.jpg"
-hash = "a100d5ab9cebf5cd2648dd015911a3a8aafbc9a76c80abe07adf6eaa534984fc"
-
-[[files]]
-file = "config/fancymenu/assets/tilth_veil.png"
-hash = "571cd6eba2cac8d8dc6b2ed0df878c5b97bb7064c7a4a3d0caa88ad6adc43a5a"
-
-[[files]]
-file = "config/fancymenu/customizablemenus.txt"
-hash = "070c2b267eb3b627dec3bd793b84d326d1b689457a741945eba43d50292eebb0"
-
-[[files]]
-file = "config/fancymenu/customization/tilth_loading_screen.txt"
-hash = "19a25f0eb18c76d168ec119566f76fac2cda821c06c6e0b3bec9fec7fc4ed9e8"
-
-[[files]]
-file = "config/fancymenu/customization/tilth_title_screen.txt"
-hash = "34ead5e03b36d38d88fcb4cd8f8e947a9b9b65bfe098a479ca0667ebb3f41ff6"
-
-[[files]]
-file = "config/fancymenu/options.txt"
-hash = "6975be9194248b1c650cdf3a2d038e5e9628abcece1b95767196f82086fdab8f"
+hash = "01e30898c0f6ba8465114ca44123f8a92aa672dc38ab6a41a36dd5acf3ee69ed"
 
 [[files]]
 file = "config/fml.toml"
-hash = "e7a89ecc645a4a29ca8784c6bbbbdf15fe96c25b5caa5714156f45d121f0ca01"
+hash = "c43f16789d9d33067cf0b258b83d1a365b03a3b36e4d21881ea24f8a79176682"
 
 [[files]]
 file = "config/friendsandfoes.json"
@@ -118,15 +90,15 @@ hash = "9b4cddf6de7c4c7a71ea25c238270f9f5b418fa4265948ce21efae60b7c50667"
 
 [[files]]
 file = "config/jei/jei-client.ini"
-hash = "06995b7f0500d060d328ea0c54e76afc3b44bcf41882e7b733a11f761b5fb1df"
+hash = "70028d2afc45f39d036621a7a96100275b6d4eadf87e12763757283a48c80ec4"
 
 [[files]]
 file = "config/kaleidoscope_compat.jsonc"
-hash = "c05f8d054eb7a7f386c0208f5949ab91b14c68eeefc3c0f4ded7d437926160f5"
+hash = "0a3a1d27dd6543246c9184d57edabd3156c62c584f5c98e9e8abfb87cb0f46b0"
 
 [[files]]
 file = "config/kiwi-client.yaml"
-hash = "5c27b9db78c30206a9fe3f83ba4749317e00070c481d773ed84e8101870a7441"
+hash = "44f6ae879a9a883bdd7eae399a6e97f7d6c871f22b4ead22a1c8b2f6fdfc9374"
 
 [[files]]
 file = "config/mowziesmobs-common.toml"
@@ -134,163 +106,163 @@ hash = "da52a1e74d2100ed61ccf10fb7e088d6cccc78524436040fa94598bebc845ea7"
 
 [[files]]
 file = "config/naturalist-server.toml"
-hash = "d21e6c203aef8a99f284965d5f93627a8a0a0a1ec2d7750be7d3f3b0e82f1916"
+hash = "c9fc4c1df52508d50dec0f04dfa31006f0676de8c6e7f306e306f7051a08dc27"
 
 [[files]]
 file = "config/obscuria/ancient_remnants-common.toml"
-hash = "37859ac8d1f7c426f2ad3abf2110b473afc5613f8cbdd0bd4105c1c818dcd381"
+hash = "ec4f015beaab46f7ecf19348a95213c2e077f9164d09e80a2808aa51b502b63f"
 
 [[files]]
 file = "config/overgeared-common.toml"
-hash = "b098c4d722ad9c1ed94461c1e1f6ac5d51c5283b27d4252a8de739afa09f1d7c"
+hash = "c66f6ea42e430a4ab33abd8b4a966d28377e6f15ff97d34b25d97ed8c108bc8b"
 
 [[files]]
 file = "config/particular-common.toml"
-hash = "2a0779971adbdebdfc8e4032cb92f9fe75c6a8681094e5637df907463af14d35"
+hash = "fb56c94d7fce4b816ed9551dc7d79f2f6a3d5affbaa8002e6241e45871c83532"
 
 [[files]]
 file = "config/quark-common.toml"
-hash = "e5cb80d5822d98ac84fba54def89de756b7cfddf35776a74d9a294a7fcdcdb90"
+hash = "cfef20e4485865e1d313dd2952c333a9f639c5ae7532699477730dde9401f44b"
 
 [[files]]
-file = "config/questlog/chapters/tilth_arriver.json"
+file = "config/questlog/chapters/compline_arriver.json"
 hash = "1a3a7b7e9b52fdead0a6009c0af4d6585e7ccedaf9ac34398e9cebf20be8b9af"
 
 [[files]]
-file = "config/questlog/chapters/tilth_brume.json"
-hash = "ed6806d2fc0b5398fad2597e6903d65516c445daf38831c273457e036152340e"
+file = "config/questlog/chapters/compline_brume.json"
+hash = "4ae506966c24d3d02a4e4aa534bd0b6fff0104556d68fdb0a0ffeb389de38fa6"
 
 [[files]]
-file = "config/questlog/chapters/tilth_metiers.json"
+file = "config/questlog/chapters/compline_metiers.json"
 hash = "b797c98442128838aa217bb98a599ac83d539dfc36ab3c415f9a57c8f7446a0b"
 
 [[files]]
-file = "config/questlog/chapters/tilth_premiers_gestes.json"
+file = "config/questlog/chapters/compline_premiers_gestes.json"
 hash = "8f110e51d99a08dcdc2f4f79b0dad7ba3fad60b98c6db1eea03276a270a461a8"
 
 [[files]]
-file = "config/questlog/chapters/tilth_survivre.json"
+file = "config/questlog/chapters/compline_survivre.json"
 hash = "e8f21dcb25199e8e0e2cc09bec317dbd841df4f3254b070bd9a1666234aacb51"
 
 [[files]]
-file = "config/questlog/chapters/tilth_voyager.json"
+file = "config/questlog/chapters/compline_voyager.json"
 hash = "a8c8890f699fb34fd922db93e96b11630ac8a804b470a773fd6672585a561cad"
 
 [[files]]
 file = "config/questlog/quests/arriver_bienvenue.json"
-hash = "bb301a30af6c0d89f532060d0265f942a7b9776d40d01d8ea2aca6909f458506"
+hash = "00d9113f961ee6f7ff9a6f0984e466b508e4cdf5f59da44dc75c886db897583e"
 
 [[files]]
 file = "config/questlog/quests/arriver_coeurs.json"
-hash = "eb69b13d49476740088ffba8bdf538f7a41c00c5a93854213554efdf56362bde"
+hash = "d25ec52154b968d3017a52c4f450a605e99b194418366e00155334f4967d95ef"
 
 [[files]]
 file = "config/questlog/quests/arriver_jour_nuit.json"
-hash = "792feea12d1fb1c9b795062a9c95a1fb3d5070d4e10206f24c138c4b2e2fb02c"
+hash = "7209028cd5c8a77b75b2f2c67924a8bcec2dc75e042e17f9f4f37e317f9547bc"
 
 [[files]]
 file = "config/questlog/quests/arriver_long_cours.json"
-hash = "36b77b7a8ce188f07a26d5025f1d9e14b23065c48efb30772f9b475e9061422d"
+hash = "f58406f9c9041c82232b1a88dca46d45c5dab0838abee8c86c6630393865e8c3"
 
 [[files]]
 file = "config/questlog/quests/arriver_sac.json"
-hash = "41b0186b49cc20cea584e6e254e05343ecc13437e03a9456d145a66d33d6b7b9"
+hash = "0ac926e692de27dc1106ca665f170a8ba19d5ff69113966bbeab6e1a55a0c425"
 
 [[files]]
 file = "config/questlog/quests/arriver_sans_xp.json"
-hash = "54491de02d2b07b0c83f4ad1f92f4d55f4f10e7d1781aea232bf98ea890e7a81"
+hash = "06a59dff29c19fb2cea0f38cefb02746b8f4585f1f437968fa821b86f06d313c"
 
 [[files]]
 file = "config/questlog/quests/brume_brume.json"
-hash = "ae02b7d45fb2dc6868bfa7e15b7f1e28c47cced27055364e952f1e03cfd8b9fc"
+hash = "4cf8055eda2512b38e21d9bd7fb299a13e39f66e1b4ea2697475e5f5ad15ae25"
 
 [[files]]
 file = "config/questlog/quests/brume_clairieres.json"
-hash = "401bb2c1de541d3faef323fe852bd2375a479bf6211b9069bee1649666abc20f"
+hash = "8b92eaecf9f2200d29664630ee73ddb12d1df4487f1b5d19ad4cc024579cc770"
 
 [[files]]
 file = "config/questlog/quests/brume_dissipateur.json"
-hash = "4a452474fcb65cba3a7d74d9c7d7714dd995c9fe7dc07cb94f8ccb6d97e0ae7c"
+hash = "2d125151f647d377562d856f519c41f655c8be6096c7105786bc74f03aee6975"
 
 [[files]]
 file = "config/questlog/quests/brume_feu.json"
-hash = "fbc13703a470f8b0e598e1411eccae0531f71ad15010714f0b91f87c9e0fcdcd"
+hash = "de7ffe0527350c0b5e8c3065699e9a19cef63c2f4f668ceaa5d6ad14f3f44b5b"
 
 [[files]]
 file = "config/questlog/quests/brume_lanterne.json"
-hash = "7b440eabde1111659ff609c6110e413c649197c6f8fe8596889df86eacf5ee75"
+hash = "cd52300728cd2c94146177ae31dff78ad3a829047d79997d5a595e3cff17f84d"
 
 [[files]]
 file = "config/questlog/quests/gestes_feu.json"
-hash = "8fe14be7f05e7fe75d8d188bbf83f57790632e4915cc35216148ce8bac44117e"
+hash = "6a733d952b134d869aff892842364f826409a8ac8d11639dea289e3d432bfbd0"
 
 [[files]]
 file = "config/questlog/quests/gestes_forge.json"
-hash = "304764553b2202821af5510286c859801d75e7389fdbf175e809c03d432e395b"
+hash = "72dca2658a41fe6b7ff77efe2a9beab7c692f8fa7ad980084ed6ae14fc56038f"
 
 [[files]]
 file = "config/questlog/quests/gestes_four.json"
-hash = "71d3ece2250cd15cf5b9d48366e3925058bcf159e53f857ed1e632dcb2e07354"
+hash = "ed9cc489a2a07eac378f4e80efb208d1aa64b414ea431565edc22c3177b5fd6f"
 
 [[files]]
 file = "config/questlog/quests/gestes_hache.json"
-hash = "0a07ee73af1e235f0e60ef6ac04b9656ff33fce250fc50a0429cd726c840a100"
+hash = "c03408ddd249cc5b59f2bff7e57e59ccae92318e73a74a27e815633c2a414aac"
 
 [[files]]
 file = "config/questlog/quests/gestes_mains_nues.json"
-hash = "37b10b5da04bcb864a84ae757839f84230e322628ec625e7b8b9058bc19cd758"
+hash = "e405453e1811edcfe6e319b78a9e7361746d9cd270ee82af396cfd2f71e44064"
 
 [[files]]
 file = "config/questlog/quests/gestes_marteau.json"
-hash = "e1c31fb66bc6ff0bb8f6c7d7494b6af053b5c1fb5323cfcf91b40b90c6275b77"
+hash = "481a62518a5156261f12beadb4b8aca6be025f0b7b4422d516cf9129500404c5"
 
 [[files]]
 file = "config/questlog/quests/gestes_pierre.json"
-hash = "ff4905c76b3bff53c8e24ea4e49f879736e926e911cdef8efc10b1a95596c53a"
+hash = "6ed973bf1f57726c13a9fcb95d07c88a12ae3efa1f08909295953658562fdebf"
 
 [[files]]
 file = "config/questlog/quests/gestes_pioche.json"
-hash = "9701fdcd3c0e862483abc5754fda02cfe05db1be6bfd4e9e659c026fb854b36e"
+hash = "c5b8c871e3b816708591ff5b5a7e8d369ea467b9b9565fec39f2196510f17507"
 
 [[files]]
 file = "config/questlog/quests/gestes_planches.json"
-hash = "959c86f2dab725bdaf974b56ac40c58dd8c6f02dea5c9edd886bd59e8b0a9337"
+hash = "11369e662b00ecc4aef3ddd01a3d7bdaca6220aa24d4f2e91134661e723ce8e5"
 
 [[files]]
 file = "config/questlog/quests/gestes_silex.json"
-hash = "367a3101e3272c638191ab65b9a3d57a9800116c259d66b69c889d0831eda1ae"
+hash = "b864caa6223c3a29e448d1c5189d9db86424aea2e223b6e38990b791b8c84f13"
 
 [[files]]
 file = "config/questlog/quests/metiers_machines.json"
-hash = "dce7a3e0c5b93cc58f3261604273a87334158492de4a02216060e43b7d039eaa"
+hash = "7ef36bc6f85da92f3141fda48d4b6376ae24b28027df61756a587a75ed0192f7"
 
 [[files]]
 file = "config/questlog/quests/metiers_tannerie.json"
-hash = "d4e51a91ab8a0e26df4f51193782153301f2ce460157b1f7a49eedf1b2ff648c"
+hash = "a4e15bdadbc116510c4c78e1f67076273bf6bece04a1203e85a79515e7bd9f98"
 
 [[files]]
 file = "config/questlog/quests/survivre_froid.json"
-hash = "73f316a21f2de815e41ee1debedfd9c3aaea1330e55fc75f1297a5cdc6ca9bd7"
+hash = "a1b0f593bb8664c14e257877586ec01ba78681a7029170f91e6081d11bdab49e"
 
 [[files]]
 file = "config/questlog/quests/survivre_saisons.json"
-hash = "aa08bde5b4f78e51345528dbb931358bfd8725b4f6fe74893ecc9b31cd586239"
+hash = "3a3fd27fc02f4692eedb6695f4f1e221b15548f7a1ae42a0b34614320b83a4df"
 
 [[files]]
 file = "config/questlog/quests/survivre_soif.json"
-hash = "ebbd2d1934f18afaa6763e76ad2018cac8d0c88ff52449facd8d347433e81079"
+hash = "28ea39541fa0e03faba916401aeac7d96e95ed45551d420196f4fb79669e078f"
 
 [[files]]
 file = "config/questlog/quests/voyager_cheval.json"
-hash = "5a49488f845bd8f22fc3bbb47e2ef6f860cadd716c1e8c695dd742996c17cd0d"
+hash = "d732747f4312cadec25df89ae102593210dda95885b2e7e79caab1e93164a132"
 
 [[files]]
 file = "config/questlog/quests/voyager_ecurie.json"
-hash = "36686d192dc8ae18fed4fef30c68ab1043a0e0f92791d07bc7cc763c7c8e5de8"
+hash = "afd68e370e5c796c540a6d6022a5d17d34d08c40dd1f78308fd74f2c1f9a71e1"
 
 [[files]]
 file = "config/railways-common.toml"
-hash = "7d141fdf46775a1ef0a7d8e99ca904c68a98f5d9dfcdac523003075b77f8bc1c"
+hash = "8eb44d18b0d8085e91c55afc74c93e0f64f68e24f16bc8c14b2845ded665b567"
 
 [[files]]
 file = "config/reliable_backpacks.json"
@@ -298,15 +270,11 @@ hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
 
 [[files]]
 file = "config/sensible_stackables/config.toml"
-hash = "21c1a83bf80cb1ecb4f5789dfcc663e2d12f46302a773b5f539f9da74c69b91a"
-
-[[files]]
-file = "config/shine.json"
-hash = "fed3fcfd584d74f734ef3b9070cd22793e02f410baf11a785ab81ee290c45701"
+hash = "8fc3745e70f64fbacb6945fa5abe09c8b1a7bec25ce630de6519d1c3af0df268"
 
 [[files]]
 file = "config/shouldersurfing-client.toml"
-hash = "bed8b5e6b1626b53124d561eab7a3b0777e7fec5e1d3f6ad2dce9f23392549ef"
+hash = "82153ed9420f115106351c184f784a1636fb7f9cfc05a3743589229f796748ac"
 
 [[files]]
 file = "config/simplebackups-common.toml"
@@ -322,11 +290,11 @@ hash = "af54ebe719135c885a1d457a09ad05be888991e06e959c4226c7e7dd52a662d3"
 
 [[files]]
 file = "config/supplementaries-client.toml"
-hash = "02083609311490f53448b27f30fcf2711940fc65011b54f9ead6d2ec83111b42"
+hash = "8ff438146e5983ce0a9d19c8558ca926f87795ddb75e18a8d28471e94f38f50d"
 
 [[files]]
 file = "config/supplementaries-common.toml"
-hash = "75e7f926e6a7175238426b1670696c75132e5893f5770f203ade3fa8a880eb54"
+hash = "61922e1d54ea4426cb6fb30591e637e670c5b989f9a072bed69b7b4f6fc447b8"
 
 [[files]]
 file = "config/tectonic.json"
@@ -334,23 +302,23 @@ hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
 file = "config/where_winds_blow-client.toml"
-hash = "13f85eb331646ace95485a4fbaf6b5b0dab8e62494e8ab797ee0a6ca2b92ea65"
+hash = "7af7072c1788b8b46682bd7a91d1f53233271d522b3b5622945e3d839edb22c4"
 
 [[files]]
 file = "config/where_winds_blow-common.toml"
-hash = "d47349fd0eab87c9e0980fde7cc5f0a7e9556cd36d82843e2cac49378d0ad8ae"
+hash = "3d0f32feb80c38ca7a18d27b468b3c502b169f5e2f5458f5197e6e2579fe72eb"
 
 [[files]]
 file = "defaultconfigs/emi.css"
-hash = "f9473d4cfd03b71bd91fad71b73241c6e1d4c175c3d000e451368637fa4590c4"
+hash = "7dcc95225343da8d6b19ef96a5183194420161f2f115c33e4543d455526733eb"
 
 [[files]]
 file = "defaultconfigs/envelope-server.toml"
-hash = "39aa555e007937a3022bf3f71aade87d0d0839b80c3bd70629480094055019e6"
+hash = "9979fbb84de9a777662a157454f5ea8384befe8a71fbffa455a4f8f4bf20ded0"
 
 [[files]]
 file = "defaultconfigs/exposure-server.toml"
-hash = "a1b154ceabe0b2e77ce531bb365502651d06344a9632c61e2002d22a7c51786a"
+hash = "fac8c0ae244604652cc9729da8884ff3799109f8fe1a33cfb43b9635dbfaf6dd"
 
 [[files]]
 file = "kubejs/assets/adorablehamsterpets/lang/fr_fr.json"
@@ -761,10 +729,6 @@ file = "kubejs/assets/apollib/lang/fr_fr.json"
 hash = "8ce63bf51348702706179e292aa7141e00953dc93049cc45ccdd551df637050d"
 
 [[files]]
-file = "kubejs/assets/atmophericrain/lang/fr_fr.json"
-hash = "2c51fe893b80a76956602666817fcbab0d6fcf8cac699a21a44b2fb9e47748cc"
-
-[[files]]
 file = "kubejs/assets/atmospherics/lang/fr_fr.json"
 hash = "8f5ef6c0102d32b262070959a8331d77f95b8d394ba893690da53ceea9dc9d27"
 
@@ -809,6 +773,10 @@ file = "kubejs/assets/coldsweat_altitude/lang/fr_fr.json"
 hash = "dc93517ec0ff6b567c0a55bb8fe90c702ea6baaf706d85503e7cc9d32791ed1d"
 
 [[files]]
+file = "kubejs/assets/colorwheel/lang/fr_fr.json"
+hash = "44b6a7b46083cda749335ca335b93405afdc747578ad9a5214911b9794e3fa7b"
+
+[[files]]
 file = "kubejs/assets/comforts/lang/fr_fr.json"
 hash = "fddaf40623ac3e4e3d744a9483d179e9234ffb39642f21500d9f25715c8d8f69"
 
@@ -821,16 +789,40 @@ file = "kubejs/assets/companions/lang/fr_fr.json"
 hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
+file = "kubejs/assets/compline/lang/en_us.json"
+hash = "a84fa099f3b91546890068e832d6c22ab1ad028587517484ae9d6682e1619d43"
+
+[[files]]
+file = "kubejs/assets/compline/lang/fr_fr.json"
+hash = "254c7a4f308a8dbfbfd3ed663b909c6ff00602bb24a18a26e0ccb25d99eb7694"
+
+[[files]]
+file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
+hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
+
+[[files]]
+file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
+hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
+
+[[files]]
+file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_plains.json"
+hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
+
+[[files]]
+file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_snowy.json"
+hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
+
+[[files]]
+file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_swamps.json"
+hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
 hash = "f189e28c0a7b2c224446b6e94a068fc32024c05e2cd2479d3bd33a8c5b3a8a3d"
 
 [[files]]
 file = "kubejs/assets/controlling/lang/fr_fr.json"
 hash = "d516172c328be7fd7b025934e4aa08948afbf5f3489a059a211a272e1aad4e15"
-
-[[files]]
-file = "kubejs/assets/coolrain/lang/fr_fr.json"
-hash = "d57298002efcacf6bf3d3de141b9af48bbf398fc17006f0af7d7bd542f89333c"
 
 [[files]]
 file = "kubejs/assets/create/lang/fr_fr.json"
@@ -859,14 +851,6 @@ hash = "d9a2ca8642587dc2a19d5bc33856da36e26af74326bd4836b4f84123ea4ba391"
 [[files]]
 file = "kubejs/assets/distanthorizons/lang/fr_fr.json"
 hash = "15306e269324328ca774459385fe69208bed01f4b094d0f2e7c9238612a6e4a0"
-
-[[files]]
-file = "kubejs/assets/drippyloadingscreen/lang/fr_fr.json"
-hash = "8d46b1c383637ad621d243c4108efceedc904e68f13afb39861d063557d926d3"
-
-[[files]]
-file = "kubejs/assets/dsrebirth/lang/fr_fr.json"
-hash = "f5fa3fbf4d7aa1601fee80d9a8d38b9a322377c00e95c4a4945c27fa20f92a92"
 
 [[files]]
 file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
@@ -957,10 +941,6 @@ file = "kubejs/assets/fabric-data-attachment-api-v1/lang/fr_fr.json"
 hash = "2bba661d1f0b6ae0c1a65c567ce02b44eeb646d92d4cc6fc2f8f107b53226d68"
 
 [[files]]
-file = "kubejs/assets/fancymenu/lang/fr_fr.json"
-hash = "926d0de4f9ee2cbef1db5f8a8c01f5962e5ba5629adc9d44ecec071d025019f5"
-
-[[files]]
 file = "kubejs/assets/farm_and_charm/lang/en_us.json"
 hash = "dde2cb743c5207cb9c28421dad13c58afad5086a8aa121df505aefb537b98099"
 
@@ -1007,6 +987,10 @@ hash = "e4ec5172661f94284afc945db73648de795fe9e26321dae14dadd7c64644ff53"
 [[files]]
 file = "kubejs/assets/immersiveenchanting/lang/fr_fr.json"
 hash = "6dea51c0c92d24bad830f737fe9332d08a8121a0bf9ac9816c175933f996377c"
+
+[[files]]
+file = "kubejs/assets/iris/lang/fr_fr.json"
+hash = "130457b4c1d2df63bad2a8af90a01904202104bae908feeba5b5a2cbfff8000a"
 
 [[files]]
 file = "kubejs/assets/itemphysic/lang/fr_fr.json"
@@ -1093,10 +1077,6 @@ file = "kubejs/assets/patchouli/lang/fr_fr.json"
 hash = "d21a21897ce4ee9673ecb09e7469dd2e78a4d442314dd14c0dbe7eedc2bfb257"
 
 [[files]]
-file = "kubejs/assets/polytone/lang/fr_fr.json"
-hash = "b864b69aaabd7563347a8cb860e1f2bda0c97136dbaf0b16d46bab1ed96b3f23"
-
-[[files]]
 file = "kubejs/assets/ponder/lang/fr_fr.json"
 hash = "1b941cf869ea0fd6d99c10a23f9e1ba4f813fc6f28d04d905b7c54cbce271b55"
 
@@ -1143,10 +1123,6 @@ hash = "e6e82b9957d5c4004a6edd1c1fb9e223ae24afd4194033f4993315fb9e49499e"
 [[files]]
 file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
 hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
-
-[[files]]
-file = "kubejs/assets/shine/lang/fr_fr.json"
-hash = "282dd7d2ee3658f7f8391d2d5e235e7caa483409c276112c57875f5d220a4b1b"
 
 [[files]]
 file = "kubejs/assets/simplebackups/lang/fr_fr.json"
@@ -1209,34 +1185,6 @@ file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
 
 [[files]]
-file = "kubejs/assets/tilth/lang/en_us.json"
-hash = "322cf39e3d2485259c38ffbe97d5d6621d3d129d204f15619c9db9ad32646a21"
-
-[[files]]
-file = "kubejs/assets/tilth/lang/fr_fr.json"
-hash = "bc02713375b4272cfdfaec4f8911310f660b59ac81a1b406b112c5b9b9c19896"
-
-[[files]]
-file = "kubejs/assets/tilth/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
-hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
-
-[[files]]
-file = "kubejs/assets/tilth/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
-
-[[files]]
-file = "kubejs/assets/tilth/where_winds_blow/wind_profiles/ru_plains.json"
-hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
-
-[[files]]
-file = "kubejs/assets/tilth/where_winds_blow/wind_profiles/ru_snowy.json"
-hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
-
-[[files]]
-file = "kubejs/assets/tilth/where_winds_blow/wind_profiles/ru_swamps.json"
-hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
-
-[[files]]
 file = "kubejs/assets/toucanlib/lang/fr_fr.json"
 hash = "22871eeffc9a151fae66eacfbb576e0d50dd73ee19274ca616ce732d0e74a69b"
 
@@ -1269,10 +1217,6 @@ file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
 
 [[files]]
-file = "kubejs/assets/wavify/lang/fr_fr.json"
-hash = "2a97fc73da273c449d5eba21006aebef0381857ec8ff2ef4b9284705d43b7ab4"
-
-[[files]]
 file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
 hash = "97d736253a37ed54114047a0ca1d4ff9d16998ec05dbbffcf27d398b699c7349"
 
@@ -1290,35 +1234,35 @@ hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
 file = "kubejs/client_scripts/doublons.js"
-hash = "21ed2be29a9861991a5db1e3a3b270872f8931e798e8638c36fc080f3fbe75b6"
+hash = "f023d93427a60bda56b96d62cc6209b3dbcd731804b2cfeab4ae1183cc0d9264"
 
 [[files]]
 file = "kubejs/client_scripts/faune_coupee.js"
-hash = "9589c8bdcb2d2f7a78e72ce7f3f6910e95d957fe1eb0c2cff7eded68d705169a"
+hash = "2550e30c1d181e144ed61266ab4903cf4b47cfbe5581290a52b3871dd879e481"
 
 [[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
-hash = "845ff98555d603a4af663116409e4c207d558c00dab1ca00588480dc2d4f3bdc"
+hash = "44d6ba7e64bd839c960fcbd9d3203e9179538f36707945e0c6ae55825b3db621"
 
 [[files]]
 file = "kubejs/client_scripts/sans_lapin.js"
-hash = "74cdf17ad9778ef8b4b753b502335c2b884118159c3fee5aee03b663ce3de760"
+hash = "358de0becdaba001c6737b68618ab520d485edfd2886dccec238979b3de688a6"
 
 [[files]]
 file = "kubejs/client_scripts/sans_manuel_ecurie.js"
-hash = "0dee110254e976ec037b6dad91c16b40acff3408c028bf8aef700bc2699eba10"
+hash = "766733bc90d6163cb99242e55ecd4c100fc676202c724ea331e32fef3491517c"
 
 [[files]]
 file = "kubejs/client_scripts/sante.js"
-hash = "bb219e55048e2eb6d9f10ca77d5eb59076c1a53019964ec12c1602dfc3cd9056"
+hash = "111e02d12580734b9ea2ed8f2cdab4bf0ebbf8d05e81f269132b09259b7d9e4c"
 
 [[files]]
 file = "kubejs/client_scripts/tannerie.js"
-hash = "3262cfe1e0c556a74c32547ce103e2c9cd7c242f4ce5e39136fbfb98efc9a865"
+hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "8216fcf636de0e412316cbefcb817f82b1076db0bd64aaf7d505dc3f00c153de"
+hash = "64ffc0d023a11f7ea4056fb21daf40155ccb78d6bfdf396fde9e59ddefd1b3b2"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1334,27 +1278,27 @@ hash = "f20bcddf339badab09c21ad641ce56983b08863d417bb749820ccb99b01b5b7d"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/cherry_monument.json"
-hash = "9bba0d95b241bb2b146b54aa17421e672847f178ed4b2631d421a6290ab8908b"
+hash = "eefacbb5cf9cfb34b4b48ed85bb17a07a3333983012cc6ae3f4fe93096339811"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/coniferous_monument.json"
-hash = "4177b60c6651f4f3be1f9b8e411d60da33f00b4d019bd711fa7e95d6785bda0b"
+hash = "ba10e3223d432c561210dce642b21cde12baa33495e759eb01219361d721f19d"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/hunter_monolith.json"
-hash = "3bc1944cdc45594383b1dbfddf763c26c55610e20ea132cbf8de5ca78ece225c"
+hash = "1c38ad10f391e386940540eeb6c4cd0499e4434cefe5d6898b738df9aae0b6fc"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/oakwood_monument.json"
-hash = "6ed9f9075d917c41ae4ebb1b10cf4cf56608223b75c74addd38ccc6fb3383e56"
+hash = "8ff3bd446147a175703ffd9293ab32ff0b9efaf332ba0f3fabad3ce150093cf7"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/sentinel_monolith.json"
-hash = "6f3a87d82faf96d40633dadcd26a81358aec24c0a6b82733adfa3f5f3e6db488"
+hash = "744584012aed45439727f3912f0523046059d2e748e4f298d19f49f77f3537c5"
 
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/warrior_monolith.json"
-hash = "11d289b50400e1a91cf2e6564ffefd9ad3afa2a57bf47f3f9ea7cb6e1880dabe"
+hash = "47cc23a8ba1037994ddf1a0db4719b636d075d918c1ba8cde67aadd614472dd8"
 
 [[files]]
 file = "kubejs/data/companions/worldgen/structure_set/companions_babayaga.json"
@@ -1375,6 +1319,82 @@ hash = "d265bf3be720d1f2cc37bd4ea17f22409fc860930eab054e46ae89342d68e98a"
 [[files]]
 file = "kubejs/data/companions/worldgen/structure_set/companions_tent.json"
 hash = "579c797d04257d6b5eb7bfa4d112def8e1cc8f4d0b1f3d73da4400507debae21"
+
+[[files]]
+file = "kubejs/data/compline/lithostitched/worldgen_modifier/disque_climat.json"
+hash = "60571bbf67fe5afbedf88e8371663c75b99766e57ff6cf72837775129b6b6b25"
+
+[[files]]
+file = "kubejs/data/compline/lithostitched/worldgen_modifier/disque_continents.json"
+hash = "44f3679280725b4f328682ecd5a4c02a476127bfd708f9ea917e41a7b89fc9cc"
+
+[[files]]
+file = "kubejs/data/compline/monde/bord.json"
+hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/doublons.json"
+hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/faune_coupee.json"
+hash = "48537e1eb4ebb4a505cca42b80c59f7580d9a103541b14b311e826543fdde751"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/sans_lapin.json"
+hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
+
+[[files]]
+file = "kubejs/data/compline/structure/chorusoatl.nbt"
+hash = "6b8bb16f9a63d69ea19a308b4472754f31eb53a7868fb5cceef7f50bc0f85736"
+
+[[files]]
+file = "kubejs/data/compline/tags/item/pile/16.json"
+hash = "6274996e7b94e7ce56eb627485b5f8b208b418158366bfde56535b28a01496d8"
+
+[[files]]
+file = "kubejs/data/compline/tags/item/pile/4.json"
+hash = "e411f3f0eaf0c928a5337f8f23bb4a447e56fcd50d9ee2a6e460b7900f8160d9"
+
+[[files]]
+file = "kubejs/data/compline/tags/item/pile/64.json"
+hash = "3b97d9b08ae27ab4d401aa6e7e22cd2ffcafab47385f984619f16779a9eb9cc7"
+
+[[files]]
+file = "kubejs/data/compline/tags/item/pile/8.json"
+hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
+
+[[files]]
+file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
+hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
+
+[[files]]
+file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
+hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
+
+[[files]]
+file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_plains.json"
+hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
+
+[[files]]
+file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_snowy.json"
+hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
+
+[[files]]
+file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_swamps.json"
+hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/density_function/disque/distance.json"
+hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/structure/chorusoatl.json"
+hash = "f460df6b182db3f1fa00456240f6ea6206a72d861bbdb3ff0f5a01e2766cebf4"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/structure_set/chorusoatl.json"
+hash = "8a148ad7bb6469b2a539be03ba6454e0d1d60f6507e064ed6d2d51fd9ef06cba"
 
 [[files]]
 file = "kubejs/data/ec_ad/tags/block/chorusoatl_valid_spawn.json"
@@ -1985,148 +2005,72 @@ file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.js
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
 
 [[files]]
-file = "kubejs/data/tilth/lithostitched/worldgen_modifier/disque_climat.json"
-hash = "60571bbf67fe5afbedf88e8371663c75b99766e57ff6cf72837775129b6b6b25"
-
-[[files]]
-file = "kubejs/data/tilth/lithostitched/worldgen_modifier/disque_continents.json"
-hash = "2de2596df2321ee5a8307a77854dafd53ade9f392d12a081662d89c6fb7ba5f4"
-
-[[files]]
-file = "kubejs/data/tilth/monde/bord.json"
-hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
-
-[[files]]
-file = "kubejs/data/tilth/neoforge/biome_modifier/doublons.json"
-hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
-
-[[files]]
-file = "kubejs/data/tilth/neoforge/biome_modifier/faune_coupee.json"
-hash = "48537e1eb4ebb4a505cca42b80c59f7580d9a103541b14b311e826543fdde751"
-
-[[files]]
-file = "kubejs/data/tilth/neoforge/biome_modifier/sans_lapin.json"
-hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
-
-[[files]]
-file = "kubejs/data/tilth/structure/chorusoatl.nbt"
-hash = "6b8bb16f9a63d69ea19a308b4472754f31eb53a7868fb5cceef7f50bc0f85736"
-
-[[files]]
-file = "kubejs/data/tilth/tags/item/pile/16.json"
-hash = "6274996e7b94e7ce56eb627485b5f8b208b418158366bfde56535b28a01496d8"
-
-[[files]]
-file = "kubejs/data/tilth/tags/item/pile/4.json"
-hash = "e411f3f0eaf0c928a5337f8f23bb4a447e56fcd50d9ee2a6e460b7900f8160d9"
-
-[[files]]
-file = "kubejs/data/tilth/tags/item/pile/64.json"
-hash = "3b97d9b08ae27ab4d401aa6e7e22cd2ffcafab47385f984619f16779a9eb9cc7"
-
-[[files]]
-file = "kubejs/data/tilth/tags/item/pile/8.json"
-hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
-
-[[files]]
-file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
-hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
-
-[[files]]
-file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
-
-[[files]]
-file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_plains.json"
-hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
-
-[[files]]
-file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_snowy.json"
-hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
-
-[[files]]
-file = "kubejs/data/tilth/where_winds_blow/wind_profiles/ru_swamps.json"
-hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
-
-[[files]]
-file = "kubejs/data/tilth/worldgen/density_function/disque/distance.json"
-hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
-
-[[files]]
-file = "kubejs/data/tilth/worldgen/structure/chorusoatl.json"
-hash = "314ff7253dbc6f06b5872d413cdbb2bb4f7178827149c8ecc86d25b73a413688"
-
-[[files]]
-file = "kubejs/data/tilth/worldgen/structure_set/chorusoatl.json"
-hash = "6298fe7973fb1de3dd2cc0b7003134d5370a64cc0be58926e735be06460d6c95"
-
-[[files]]
 file = "kubejs/data/twigs/neoforge/biome_modifier/add_ore_rhyolite.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
-hash = "618e8b5b13c35352c552a620cf6e866e40e0343ded69d074c977c2a8708407cc"
+hash = "ee09776b3e975b8babb6fb27cf790abd78263b2e7b40eb8071977a277ed417a9"
 
 [[files]]
 file = "kubejs/server_scripts/doublons.js"
-hash = "530c1bcc2f62abd209974e3ef64513754fba0f9d26554468d4a4b1352898087e"
+hash = "768c30116a5233e9693150b66cc0f0aae407ad142235a478d8e86f476411fe28"
 
 [[files]]
 file = "kubejs/server_scripts/faune_coupee.js"
-hash = "842d41e037eee16256176caa9af05aa561647ec7043fd59f92e0f77d5a9dfa58"
+hash = "5a956001a784513ff82b0683b26a3266a1723d1a8be29885e4d335fee83ebe1f"
 
 [[files]]
 file = "kubejs/server_scripts/monuments.js"
-hash = "2e05dcf3b102edb22a9ad9aa7d01c7d48c7cf3d44a264d356623180c23854c69"
+hash = "9cf427a4879a9b47489b252fe074bd863a65a39766a5f8388c19da1468c0fc4b"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"
-hash = "c19bc39fe611b397fa075ab2c582f8dfe8fa19a7797bb53784cb3cf4953f58f3"
+hash = "ea7f12135b76690421e72db6d788c8f425a569b7063e8e6fe66445101d88157c"
 
 [[files]]
 file = "kubejs/server_scripts/premiers_gestes.js"
-hash = "1b03fe25cf2670536f7ecee6f2ff5bdb932c75a1eee3f2e7b17272c0cc98667d"
+hash = "210891467fe66244ea0a4595a29ddbc906eee6a7f2c04fac860b947f47691961"
 
 [[files]]
 file = "kubejs/server_scripts/sans_lapin.js"
-hash = "6bb2392e0455d6cb983d0c620dc866120e6f862865c647ebe7bdead06c497713"
+hash = "ede2c50bd24cb22b04f841936860ddea3ff8117df38a783b5406d3ea71962bc6"
 
 [[files]]
 file = "kubejs/server_scripts/sans_manuel_ecurie.js"
-hash = "19b4e97b0f047fb1a911858193117d6dbdd6d2ff04e4bd0baa6affc9579184b9"
+hash = "1a5563d5ebc8672ec80d09bbc41613c1cc03fd05ee774d48c700a1fb8a12818f"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
-hash = "096596b7ef013b57f0c54d013bdbf8ed3b4e323230563e6848a2485be156d901"
+hash = "5025ab7df6ad861fb6193a83cb74810f10c2fa12de12b5836ffd0f6587dd43a6"
 
 [[files]]
 file = "kubejs/server_scripts/sante.js"
-hash = "a458fc8590f90923117124ffc32bf5bd0e560c8e6bb46ea714e651bc1a1ab4de"
+hash = "d8b908190fb9b19ef29050d65b9df30091fa9a26bf4d008e97d22bc7c26ff4c5"
 
 [[files]]
 file = "kubejs/server_scripts/sante_butin.js"
-hash = "ae8b0a421ada21fb08cfdbea1c92fae9560fc0efc33a422b29d27a8e943322bc"
+hash = "ea30bf7fb58597eb9c000d733928c7404d4196609cd13a557d9c602a02763345"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "13f09f0986949dda9c7f43d79a24b5e1eaabe1375100e527aee4e3a6913a653d"
+hash = "74c2f6fae5a7d17c7fd98b0e0c3f2a2eee37c884af487c98d865cf5680bce501"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
-hash = "c50488ac1ee36f95009e02ecd5bef893d051e0d7aa74abeadd83ed947aa41b46"
+hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "a6323729854287391728d3017f2c8b9f896dc0b30786e05c90110a402ce0096c"
+hash = "1e835467d0f29098c18e927bf6051684253970938aa0582af8808765e77101c7"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
-hash = "4ce9a87c3aede9bc9312ee70811355904c6f3f5af1061c6d5d5f3217a554663d"
+hash = "940082b0277d38f50235d11c8d30c9ce69c6d5987a2a94f34bd7ec41a46567aa"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
-hash = "7c9f3f139dfdb800f09bcbaa46e4c70011d63a3646e36453edaf20874628fc76"
+hash = "ffdeb55e18ad47f1a9f764d99455095f1780f0f4d097d16cc5f259147ecc8242"
 
 [[files]]
 file = "mods/3dskinlayers.pw.toml"
@@ -2191,11 +2135,6 @@ file = "mods/astemirlib_re-1.21.1-forge-1.2.985-SNAPSHOT.jar"
 hash = "42a71a91fa6a1f11eb298e4441f7a7d66a01704068540150014c0e6eede49c20"
 
 [[files]]
-file = "mods/atmospheric-rain-backport.pw.toml"
-hash = "37845e3216ef522676430ac436cc189ec938fd23f1940de08929929a465ae065"
-metafile = true
-
-[[files]]
 file = "mods/atmospherics.pw.toml"
 hash = "f12b246fef3275920f5fb335c3c592ac9406f6ee7c3ab2b38f430dafadd461f5"
 metafile = true
@@ -2221,11 +2160,6 @@ hash = "f567df6f58cbb28cd6e28dfa72dde29ed8c787afc6e4694c797b0896fa07c8f6"
 metafile = true
 
 [[files]]
-file = "mods/biolith.pw.toml"
-hash = "cc79b689faf345a5aa19ead3423726b6f87c267d686fb5807738e0cd20756679"
-metafile = true
-
-[[files]]
 file = "mods/cameraoverhaul.pw.toml"
 hash = "51f925e75075df676cc1efff5bb8db9d828842c0f3031310a05dbf368aa67393"
 metafile = true
@@ -2233,11 +2167,6 @@ metafile = true
 [[files]]
 file = "mods/chat-heads.pw.toml"
 hash = "80455b28c3010ad153ccabc2998cb445b9854b26b386628243a9c8160b8d7e8e"
-metafile = true
-
-[[files]]
-file = "mods/chunky.pw.toml"
-hash = "1d5cc2b6dcfd1fc3adba4566b1c29b57ff1175316678c1f22e63cbc3e28a5ba0"
 metafile = true
 
 [[files]]
@@ -2261,6 +2190,11 @@ hash = "3d30ac171f7b054e06a4efe45f22fc62d8e79d28c745c3ea9f0a32182500243a"
 metafile = true
 
 [[files]]
+file = "mods/colorwheel.pw.toml"
+hash = "c7f9286eabbfd298a73a92dc91031a27a8551a7cda8656f2173a4ba8cc0ac1a2"
+metafile = true
+
+[[files]]
 file = "mods/comforts.pw.toml"
 hash = "36f2f6e74b7dbeccb504572d47006582207544fa234a095093b97adfc7ecd5ac"
 metafile = true
@@ -2276,6 +2210,10 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
+file = "mods/compline-0.12.0.jar"
+hash = "294f58dd034762eba27b023bb1f74adf49f825332d45d8e6cde48506f96821e6"
+
+[[files]]
 file = "mods/configurable.pw.toml"
 hash = "dcd40eb17aefa2335e200f44114967260f5b5bc3dbae4e426c19dabcc89a6019"
 metafile = true
@@ -2288,11 +2226,6 @@ metafile = true
 [[files]]
 file = "mods/controlling.pw.toml"
 hash = "65c8086d2ec3d39acc7bd36c7a0306ccc43b602b38fa07d13291bc478ef7dfff"
-metafile = true
-
-[[files]]
-file = "mods/cool-rain-reforged.pw.toml"
-hash = "0c4f4642cbf2d8e1d97b624c44fd87f2e6c60894598af68e8244e5e2722b47a7"
 metafile = true
 
 [[files]]
@@ -2351,28 +2284,13 @@ hash = "a6967d761dde867ccc1af53dc9f4e530eb9917a9cb21d0fc15708e8cd2c0f2ba"
 metafile = true
 
 [[files]]
-file = "mods/distant-thunders.pw.toml"
-hash = "c4f8d0e902db9829218ce8367705350418d8a5a35a9feeaf443612a9e0b5d3ee"
-metafile = true
-
-[[files]]
 file = "mods/distanthorizons.pw.toml"
 hash = "0c20fea3407ed0db85b4b171f1820a24987f2659946fadd30bae044205041b09"
 metafile = true
 
 [[files]]
-file = "mods/drippy-loading-screen.pw.toml"
-hash = "d89b50af502aab4416e07fa8f92433a18fac11285fe1c39ebccea610dbfdd1e7"
-metafile = true
-
-[[files]]
 file = "mods/dynamic-fps.pw.toml"
 hash = "ae6fd52d8bdcbeca5bbe6db840f22f92c1928fe0fda22017b19612b9b00a245a"
-metafile = true
-
-[[files]]
-file = "mods/dynamic-surroundings-rebirth-by-uawiegrfv.pw.toml"
-hash = "f823115ddd7e9c51e9f7737219f113489e86f2a99e71285af20eb90b2cf71269"
 metafile = true
 
 [[files]]
@@ -2423,11 +2341,6 @@ metafile = true
 [[files]]
 file = "mods/exposure.pw.toml"
 hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
-metafile = true
-
-[[files]]
-file = "mods/fancymenu.pw.toml"
-hash = "88afe523b3bc1fed6bd53b6608f0450e9891c8fe25e786a9893243064f8c7e7f"
 metafile = true
 
 [[files]]
@@ -2501,6 +2414,16 @@ hash = "8311cf201aa8d3c5d0c0291194f3c76d825591122b7ccf4f2fea08f6b39af526"
 metafile = true
 
 [[files]]
+file = "mods/iris-veil-compat.pw.toml"
+hash = "a485506e10aa312fe8786763a5a26a406ff3240541ecbdb7d4777d2efa1ceb40"
+metafile = true
+
+[[files]]
+file = "mods/iris.pw.toml"
+hash = "db1c1e6382878b78e994dba1b9026935f8d1c5ca685c89d2437858e0a0dcab58"
+metafile = true
+
+[[files]]
 file = "mods/itemphysic.pw.toml"
 hash = "a970ffa9dabefee6e82a6dc10bb140ff65ee785e1575672ab985f65fb461527f"
 metafile = true
@@ -2533,11 +2456,6 @@ metafile = true
 [[files]]
 file = "mods/knight-lib.pw.toml"
 hash = "0d575a23218100cd338dbb0fd673fe176d2c33279c7f2edb96d4ac7c1fb8890d"
-metafile = true
-
-[[files]]
-file = "mods/konkrete.pw.toml"
-hash = "5707b722541648df013644f3b4d50083c77965d536f219df9fac5026f6103777"
 metafile = true
 
 [[files]]
@@ -2598,11 +2516,6 @@ metafile = true
 [[files]]
 file = "mods/mcqoy.pw.toml"
 hash = "604b7674b96d10b2c9f03e47a91ec50b448e8193de56f36fca93b5ff0f3132f6"
-metafile = true
-
-[[files]]
-file = "mods/melody.pw.toml"
-hash = "9dff522b00f5269538d0351536f34b22384996de30be454ef1369f1b1e5c1aeb"
 metafile = true
 
 [[files]]
@@ -2676,11 +2589,6 @@ hash = "49c0bacf8e4cb3ade6c384ad379282f92d7fa3075f2affd8e3093feb685288dd"
 metafile = true
 
 [[files]]
-file = "mods/polytone.pw.toml"
-hash = "cbac7982f1372646ae50fb6ddfe7d75abd43101f5b461938e67c206f20a7fd7c"
-metafile = true
-
-[[files]]
 file = "mods/punchy-fpa.pw.toml"
 hash = "253e843caefaf2ddb7b5d18ea5198904ed1a2e913a9d29dc577c8e0a82f4948b"
 metafile = true
@@ -2731,11 +2639,6 @@ hash = "e55ca32b338a0e0540f4fec5170675d860566255ae0f45692a00cb4ebf2eb535"
 metafile = true
 
 [[files]]
-file = "mods/sable-cool-rain.pw.toml"
-hash = "d83497f150d4938933f135fe1b79fd34bae71b2c4e9698c41b8177537d1cef3f"
-metafile = true
-
-[[files]]
 file = "mods/sable.pw.toml"
 hash = "fadb5c9cfe145e51992894fe57209fc8f1696ef892ee9702a24c6205f042e9b2"
 metafile = true
@@ -2756,11 +2659,6 @@ hash = "d68120fbb2e90e41b398c8168b87a8397fbe4b65e6771240f5ae2ef31ee2d5a6"
 metafile = true
 
 [[files]]
-file = "mods/shine.pw.toml"
-hash = "b00883c0832dc19b262dcd48e888e1834725139b64ce76cf1725f255d7c75b0a"
-metafile = true
-
-[[files]]
 file = "mods/shoulder-surfing-reloaded.pw.toml"
 hash = "bcce409dc3bd3c765d92538e192563b4baf345a843acb5fb9c90fce4ebccdf58"
 metafile = true
@@ -2773,11 +2671,6 @@ metafile = true
 [[files]]
 file = "mods/smooth-swapping.pw.toml"
 hash = "c29444a15935e622aaf6a8849cbed78095c1f9328315383a382859b3872d97ee"
-metafile = true
-
-[[files]]
-file = "mods/snow-imprints.pw.toml"
-hash = "5e263b6eedad21a622e270bb63255fc79bad7158f203fd023e6498d38ff979cd"
 metafile = true
 
 [[files]]
@@ -2855,10 +2748,6 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
-file = "mods/tilth-0.10.1.jar"
-hash = "41245ed921b83930df73bcb44a4541557bf155b6faba9b48552655bf5dc01bf6"
-
-[[files]]
 file = "mods/toucan.pw.toml"
 hash = "621ed3fadbf439318744d8fc324fee13ce44e18ffbc24c56338ea259e5ff5abb"
 metafile = true
@@ -2886,11 +2775,6 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
-metafile = true
-
-[[files]]
-file = "mods/wavify.pw.toml"
-hash = "d037a9ffc54ce7247670d09dad85c342db8d78b7df05688700a7854eda750bd0"
 metafile = true
 
 [[files]]
@@ -2939,42 +2823,341 @@ hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
 metafile = true
 
 [[files]]
-file = "resourcepacks/supernova-ost.pw.toml"
-hash = "14bdef1585d0648dcee22ca01646ca4ba5edff0b902fbc2ddd2f01505d6499cd"
-metafile = true
+file = "shaderpacks/Brumaire/shaders/block.properties"
+hash = "b9478871f048c1bb46b257ee9c6c2bcdccd9a5cc95670f07d4aa89d36aa7b7ad"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/meta.json"
+file = "shaderpacks/Brumaire/shaders/clrwl_gbuffers.fsh"
+hash = "e82e685efbda0640503d4e1db6a6dc5653e954273ec1f238cce04a639c7d0e17"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_gbuffers.vsh"
+hash = "d74d4a018c4cbc99b007cf87baf0be26838bdfd3402803032159c0519b3cf48a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_shadow.fsh"
+hash = "9d5f28cb4b85864831f2025bf172255ad05b66aff2dc84bfd42ca7c6c593e460"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_shadow.vsh"
+hash = "e396230ed4eab323bab7c6b3f9ff3b41a94c7764a8eeb7a358aee28667e1fa7d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/colorwheel.properties"
+hash = "3c5b87fa0f6359bef141d94f3924b39f33b598cd604c5a179273162f3e9e76ac"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/composite.fsh"
+hash = "096f8cc7b4e866acfd6a9a7171eb42cd439a4d50d849b20e4b2201cb501fb1a6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/composite.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/deferred.fsh"
+hash = "7304011e78eef87ad835ba8033c2a7b80bff59572cfa67302efed2f7620fd470"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/deferred.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_terrain.fsh"
+hash = "121bc1c54693dd8fd1c39696d7345afe470ee672c8216aa20146a1bfb7fb231c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_terrain.vsh"
+hash = "93a43a214f4512f0011cc285edf102bbb07c39079f0b7498ac5e9ddc3320c255"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_water.fsh"
+hash = "33bff691a2618e258f112f62b6ddcf8323b5c73f58674fb36d71b57a519dca95"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_water.vsh"
+hash = "ddae2e0fca233ac06be4d9971e46e4200a27c8d754ac29b6098a2df30d1fa6c3"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/final.fsh"
+hash = "0b5896841d8f90daaeb8f444d04cdf44b784a0ec76fd0a92fa42c0dba371d8c6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/final.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_armor_glint.fsh"
+hash = "5b85d055289b8f797939ac9007e45a54db0d6a871dcfe323448b6adb8890d5ce"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_armor_glint.vsh"
+hash = "9e12ece22a755950b819e3ceb6ebc83dee7dd45b3c885529b648c3aad1848e4d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_basic.fsh"
+hash = "54e2f63c361a69312d680cd227497ec5af612f2a1442b3837e0c4e9f96b917fc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_basic.vsh"
+hash = "b78c0f5a3e301c75053f33ffcc334789a1a639ccd74c0cf3351dca3dbd763c35"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_beaconbeam.fsh"
+hash = "6d793b01a0fd2ce641b8ae68c1ab4f8e7955c168e0a59bc303b17eb9130bb430"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_beaconbeam.vsh"
+hash = "6868e53a57d3ed81943bb0c720c4a41048e1795473dd26a9adc7f8ba1858c240"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_block.fsh"
+hash = "99d7a7762b0240605d5fc71f898d49a1187f63a7d225f91ba74132b97d690d56"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_block.vsh"
+hash = "ef8b4ead3949da8a2999a5073379cca1d39716e3b1661375e4344c06089b0bb1"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_clouds.fsh"
+hash = "dc381995b21022eaee955ee8586539b1427d9c9db18f81cc81ec9a775d332890"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_clouds.vsh"
+hash = "a3952495fc3f6fbd1fadc5efc004afb6a225e2a5092d8421b4ea3955881cf909"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_damagedblock.fsh"
+hash = "f3c6e04b06d9b2825f72c7530817dcbd7390444a00a766f653b737576c20df51"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_damagedblock.vsh"
+hash = "0e698d9b69e5a3f3ffb08bce97706d09b3cab3376460c0421074cbedb91d7f53"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_entities.fsh"
+hash = "fb413b356c20b3ab91d3e2bd5f712af5ebd2e52bc7243c6799a4df2dbff2dc27"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_entities.vsh"
+hash = "43dc3080d3dfb7d4de7af857a3545cef7686c24b67c6a10bb97804822201c4e1"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_hand.fsh"
+hash = "cd15e9ab75602302ee6bc10e9f941dfdffa98f22ab8d2832f909a8b761a72999"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_hand.vsh"
+hash = "3d3e27dd550848a8f917fb42d0f0d6276338e84025c6d74ffb6939bbf8056f36"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skybasic.fsh"
+hash = "77c708f420a6932a995a33f8f5633ae77f2416a87a9ada76d3aa03f33bcc2a07"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skybasic.vsh"
+hash = "bcb61fd19a1f5ec2da3f91bfd8d0fe085a63df67395e9fdc8af250b6753c643f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skytextured.fsh"
+hash = "4b8db4b3560efc06ab9859a39e38426ae75a93e99ad0cd0fcd4831d5b1bd91ac"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skytextured.vsh"
+hash = "4d979bd0b835ca15753c7d4655345eaae7cbe73a88b3ef89e41831c1ebac2f87"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_spidereyes.fsh"
+hash = "6d793b01a0fd2ce641b8ae68c1ab4f8e7955c168e0a59bc303b17eb9130bb430"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_spidereyes.vsh"
+hash = "6868e53a57d3ed81943bb0c720c4a41048e1795473dd26a9adc7f8ba1858c240"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain.fsh"
+hash = "d62c61763f051177c7d4f27e31cf64bac8d3c89f3387bbdfb0346c529607cf65"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain.vsh"
+hash = "f49708f9bd2b830a06dda8f3e786fc1dce3fe6e7ec8352aa83ca74387cd7be4e"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured.fsh"
+hash = "6a5f3d268dfe5e0b96e4f4f6125941bc063ac5799de997f62f649bd2410ec65a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured.vsh"
+hash = "b6350beff838efe3f4f35c4e6afe873d5dcc422f7547262614761082cb08cc3f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured_lit.fsh"
+hash = "6a5f3d268dfe5e0b96e4f4f6125941bc063ac5799de997f62f649bd2410ec65a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured_lit.vsh"
+hash = "b6350beff838efe3f4f35c4e6afe873d5dcc422f7547262614761082cb08cc3f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_water.fsh"
+hash = "d9714c422adc63b75419b927efc931962f6e469df128f6ae7977658f6398a714"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_water.vsh"
+hash = "2f796f3eeb4ce2ecddb2bcd2416ee2057a6a3c907a9156be288f83058bad0f36"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_weather.fsh"
+hash = "2d2f66097912b3f897f60d7e3bd0af32428afdc7b92aa243a72ae232a9318c17"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_weather.vsh"
+hash = "c61aa1698feda1de65e3b2dbd2914a7dadfc559c39da9c2b0b285755b63c7d6e"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
+hash = "23bc4f117448da80cc1fa620e74639aeb7435c60b39700332fc3ee40d2cbbbb3"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
+hash = "dac97415324ed70aa65a7fd0abca2242d3443a11342da542d43bf211510b4dd9"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/common.glsl"
+hash = "31722e7fef69752e55df22cf7486fa118bbe24833b978aa4503ed9ad876b5705"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/light.glsl"
+hash = "e211ad1c15de3b51a20738448df100737dc27e66703f8e06f73e310e095c7260"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/mist.glsl"
+hash = "5832f89d91c80e145700dcb014332b45666da9c8358d5e18bffd4837e2c4d5cc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
+hash = "fdc4ffd491a5e6a20608a4a1da1c85a734f2028307f9ccfe54f5c8d737e3483a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
+hash = "7d86b35571ce29b2b7a3f0b140ea363f3edbe9b7da0fa2139533c4e642c325cc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/wind.glsl"
+hash = "fcaaf7591346b8caa4ce31364807680c5850c8b37a000f49ff8bccb932a03553"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/clrwl_shadow.fsh"
+hash = "b77f2b2eeea25e1de24e977c400f09f250c0f0c502fe4c3563669d8f873eedd7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/clrwl_shadow.vsh"
+hash = "65e57b612fda59c7babd6c5ed825eedb74d7bd26093d08a38d1e639c9f3ae497"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/composite.fsh"
+hash = "315e16834805f4ba7fce93fe43bf5db2512b531f38d2ce043348694367e1f954"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/deferred.fsh"
+hash = "dee5e42278ba7b05c061d6a6055c40e4fc18e752b724942e52c9dcb66dba1f88"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/distant.fsh"
+hash = "dd21d2a0c53a9408344e7173bf2f1b1ee8a4ef05c2eb42ef547aae69473034b4"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/distant.vsh"
+hash = "c4400b92d1b12a7607846fd2caeaf6a0446879ed8d95cb0f45206b80ecfda09c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/final.fsh"
+hash = "17f9ec5b5a385d96c529694e864d70fd896c9859840b7789a2e920f57e2fd44d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skybasic.fsh"
+hash = "2530536937b567ea5dd503a186baf0a092175c82467413090625f4e1603f5370"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skybasic.vsh"
+hash = "c6a9f6c7bf836099bc48f8dc5009aca62bc070c9f6eddea3e967ca4f347f3fe0"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skytextured.fsh"
+hash = "3dc434ff96964282287ef8a7d41173fea323b997cff78d4a27328ddbd3b226b7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skytextured.vsh"
+hash = "14a9b7d36fc0669ca98dd1421376136d6713abe91045b78a37805f220e0546a6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/scene.glsl"
+hash = "95d4e4979e81750ea42a6c6460f8597a06bdaea5e5d562fad76f03db3c343bde"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/screen.vsh"
+hash = "650b256b387ac2bf0c02aee45e8057a66f4a2359011b51d506551cd64258a2ba"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/shadow.fsh"
+hash = "49913e00d0fee810f12ff69ee7c2fbee3785a5033d0a3af40cecdeef099e554c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/shadow.vsh"
+hash = "8742129f28798153722bafded28aa09a001d651bf05613f408d26ce80b4649af"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
+hash = "e75c88dee6e46c2e79c383b7295c9b66643d608c40be6394b885aabfe3dbb8e7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
+hash = "617b553a0ba2f2b84f4ce873a9fe861bc60687d01a936e3de63bcc632bf465a4"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shaders.properties"
+hash = "4962ccc3d067a6b21cbb38e8983b8466f6ba2504b138b6b63db64b538b4879a2"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shadow.fsh"
+hash = "fc4629ebf1fdb6f73cdb1de3ac9021b48f6f9b14dd436379fcc59d5094c51e93"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shadow.vsh"
+hash = "e0ac0ff863b07d0be49ca1e53a72845f3c9df8f4dbdcef85b884fbf0e53950ff"
+
+[[files]]
+file = "trueadaptivemusicpacks/compline/meta.json"
 hash = "5dbc5591cbb61acf9d35c6a69cb7cdbd15cebe762aeb6fb1da887c045a26b13b"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/options.json"
-hash = "2675f63ea36e7009c8bb5a8d84e155dee76f147ac6b3a55253b9b7e1d33da28a"
+file = "trueadaptivemusicpacks/compline/options.json"
+hash = "1e2e1405cd239efaea292f8604a6c61b7e467d23c03aed136b24a8bf33b6f572"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/a_bord.json"
-hash = "f785937136f1c2e4095b59d48278a5b37d3d359a54c6d28c77fad9d13b458c73"
+file = "trueadaptivemusicpacks/compline/predicates/a_bord.json"
+hash = "04f617d0f0622cc200cc0a6ba4836577e4ff1ca04c19ceafb60e420c7e8053c7"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/automne.json"
+file = "trueadaptivemusicpacks/compline/predicates/automne.json"
 hash = "d553c39efc65ea2b1e6465c511d6cc143a98c03d53c9d41a3a93e7e0316950f8"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/ete.json"
+file = "trueadaptivemusicpacks/compline/predicates/ete.json"
 hash = "9318ccc206b6dd72eab8b44c584dd64565af68974ad005fba00c91c9f14c3e17"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/hiver.json"
+file = "trueadaptivemusicpacks/compline/predicates/hiver.json"
 hash = "abea75bbcdc8bb2ee3d25224a900a998eb4357e4220e80325440f372b832ba9e"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/monument.json"
-hash = "58ae6a13cc90578b249bceb1237c15c7b55d0b56674b506e599e6b3f596e8315"
+file = "trueadaptivemusicpacks/compline/predicates/monument.json"
+hash = "ade3f75fc2a450be562a465f685ad60dc9ed87249cd449e349cca25bfc268bed"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/predicates/printemps.json"
+file = "trueadaptivemusicpacks/compline/predicates/printemps.json"
 hash = "02bf9589473fc7361a534dc4aa62cb39d9a0265fc2bd85c9b3d2357e61ae0808"
 
 [[files]]
-file = "trueadaptivemusicpacks/tilth/rules.json"
-hash = "13af47108c64402caf42dda04f3b783eaab3ec634b2f40a1716b9649154909b5"
+file = "trueadaptivemusicpacks/compline/rules.json"
+hash = "64f8ddd2d44d6d721f27818776b4ed7290a71e5160a312486464220bc99b0ad8"

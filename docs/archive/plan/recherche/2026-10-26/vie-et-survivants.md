@@ -1,4 +1,4 @@
-# Tilth: references for the `vie` (life) and `survivants` (survivors) modules
+# Compline: references for the `vie` (life) and `survivants` (survivors) modules
 
 Date: 26 October 2026. Game design reference research.
 
@@ -22,7 +22,7 @@ I opened about twenty pages. Points taken from an opened page are cited as they 
 
 **Sculk (vanilla).** The catalyst activates when an entity dies within 8 blocks (Java). Only the nearest catalyst reacts. XP becomes charge at 1 to 1, a block holds 1000 charges at most, and sensors are limited per area (page opened). The good: the spread is gradual and visible, with local caps. To avoid: sculk feeds on deaths, so it is farmed with a mob trap. Same problem for the life counter if it is fed by an event that can be repeated without limit.
 
-**Receding corruption: Terraria, Thaumcraft, Ōkami.** Terraria: purification is expensive, and purified blocks convert back "unless quarantined" (page opened). The game warns that purification has a price in money and work. Thaumcraft: flux is cleaned by hand or with a scrubber (search summary, to check). Ōkami: you make a guardian tree bloom and the curse lifts (search summary, to check). Lesson: the pleasure is in the visible transformation, not in the quarantine work. Tilth already has the right choice: the conversion is permanent, nothing is lost again.
+**Receding corruption: Terraria, Thaumcraft, Ōkami.** Terraria: purification is expensive, and purified blocks convert back "unless quarantined" (page opened). The game warns that purification has a price in money and work. Thaumcraft: flux is cleaned by hand or with a scrubber (search summary, to check). Ōkami: you make a guardian tree bloom and the curse lifts (search summary, to check). Lesson: the pleasure is in the visible transformation, not in the quarantine work. Compline already has the right choice: the conversion is permanent, nothing is lost again.
 
 **Twilight Forest.** Each defeated boss makes the barrier of the next region disappear (search summary, to check). Barriers without a clue are judged too restrictive by some players. To take: an unlock that announces itself (a clue, a sound) rather than a silent wall.
 
@@ -30,13 +30,13 @@ I opened about twenty pages. Points taken from an opened page are cited as they 
 
 **Death Stranding.** Players do not meet: they leave structures and messages. Structures degrade under the "timefall". "Likes" give statistics and reputation. Reconnecting an area opens its maps and blueprints (Wikipedia, opened). The good: friends' traces are a relief when found, and the network is earned by walking. To avoid: the hunt for likes as a goal. To take: a survivor is a "connection" that opens something real in the clearing.
 
-**Frostpunk.** Scouts bring back survivors. They must be housed, otherwise "better not let them in". Two gauges, hope and discontent, can lead to the end of the game (Game Informer, GamingBolt, opened). The good: the arrival is a choice with a cost. To avoid: gauges that punish up to failure. Tilth must never lose what it has gained.
+**Frostpunk.** Scouts bring back survivors. They must be housed, otherwise "better not let them in". Two gauges, hope and discontent, can lead to the end of the game (Game Informer, GamingBolt, opened). The good: the arrival is a choice with a cost. To avoid: gauges that punish up to failure. Compline must never lose what it has gained.
 
-**Banished.** Residents are born, work and die. Keeping everyone healthy and happy makes the town grow. Building houses is not enough (Steam description, search summary). Growth by birth is excluded for Tilth. To keep in mind: a population that grows can quickly overflow.
+**Banished.** Residents are born, work and die. Keeping everyone healthy and happy makes the town grow. Building houses is not enough (Steam description, search summary). Growth by birth is excluded for Compline. To keep in mind: a population that grows can quickly overflow.
 
 **Valheim.** Comfort comes from furniture under a roof, and the "Rested" buff lasts a time tied to comfort. Identical decorations count only once (Mobalytics and Shockbyte guides, not opened, to check). To take: the principle "duplicates do not count", very useful against exploits.
 
-**Don't Starve.** Night and darkness lower sanity: about -5 per minute at dusk, -50 in total darkness. Fire helps, and the stronger it is, the more it helps (page opened). The good: light has a felt effect, never a number to watch. To avoid: fear through hallucinations, too close to the horror register that Tilth wants to avoid. To take: survivors soothed near the lantern, with no sanity mechanic.
+**Don't Starve.** Night and darkness lower sanity: about -5 per minute at dusk, -50 in total darkness. Fire helps, and the stronger it is, the more it helps (page opened). The good: light has a felt effect, never a number to watch. To avoid: fear through hallucinations, too close to the horror register that Compline wants to avoid. To take: survivors soothed near the lantern, with no sanity mechanic.
 
 **Dwarf Fortress.** The number of migrants depends mostly on the wealth created by the fortress. The first two waves are guaranteed. Deaths scare the arrivals, and selling all your wealth stops immigration (pages 23a and 40d, search summary, to check). Waves rarely exceed 24. To take: a guaranteed arrival at the start, then tied to prosperity, with caps. To avoid: the hidden mechanic that only experts understand.
 
@@ -50,7 +50,7 @@ I opened about twenty pages. Points taken from an opened page are cited as they 
 
 **Outward.** No guidance, three factions, quests with outcomes that change the world (Wikipedia, opened). Mixed reception (Metacritic 62 to 67). The "no hand-holding" appeals to a niche. To take with measure: the clue must exist, but be discreet.
 
-**Spiritfarer.** Each spirit has its story, its tastes (food, housing, neighbors), its requests. It leaves for good when it is ready (WayTooManyGames, opened). The good: one person, one story. To avoid: the final loss, too sad for Tilth. To take: one story per survivor, revealed through care and preferences.
+**Spiritfarer.** Each spirit has its story, its tastes (food, housing, neighbors), its requests. It leaves for good when it is ready (WayTooManyGames, opened). The good: one person, one story. To avoid: the final loss, too sad for Compline. To take: one story per survivor, revealed through care and preferences.
 
 **Ōkami, Ori.** Ōkami: you paint to make a cursed area bloom, the reward is visual (search summary, to check). Ori: the world regains its balance in stages tied to the elements, and the art and music are the most praised points (Wikipedia Ori, opened). To take: healing must be seen and heard.
 

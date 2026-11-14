@@ -1,4 +1,4 @@
-# Tilth: skip the "experimental settings" warning screen when creating or
+# Compline: skip the "experimental settings" warning screen when creating or
 # opening a world. Kiwi fills in its other defaults on first launch.
 qol:
   suppressExperimentalSettingsWarning: true

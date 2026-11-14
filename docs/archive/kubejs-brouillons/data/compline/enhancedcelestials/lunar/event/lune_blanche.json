@@ -1,0 +1,41 @@
+{
+  "_brouillon": "Compline, plan/10 §10.3 couche 2. Format copié de enhancedcelestials:blue_moon (lu dans le .jar 6.0.2.6). Nuit étrange, rien d'hostile. Couleurs, texture et son à régler en jeu ; la lune de sang est retirée à part (tag ou chance 0).",
+  "client_settings": {
+    "color_settings": {
+      "moon_texture_color": "e8e8e0",
+      "sky_light_color": "c8c8c0"
+    },
+    "moon_size": 14.0,
+    "moon_texture_location": "minecraft:textures/environment/moon_phases.png",
+    "sound_track": {
+      "sound_id": "minecraft:ambient.cave"
+    }
+  },
+  "dimension_chances": {
+    "minecraft:overworld": {
+      "chance": 0.04,
+      "min_number_of_nights_between": 10,
+      "valid_moon_phases": [
+        0
+      ]
+    }
+  },
+  "mob_settings": {
+    "blocks_sleeping": {
+      "type": "corgilib:flipped",
+      "condition_to_flip": {
+        "type": "corgilib:any"
+      }
+    },
+    "lunar_spawn_settings": {
+      "force_surface_spawning": false,
+      "mob_spawn_settings": {
+        "spawn_costs": {},
+        "spawners": {}
+      },
+      "slimes_spawn_everywhere": false,
+      "use_biome_spawn_settings": true
+    },
+    "mob_effects": []
+  }
+}
