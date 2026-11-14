@@ -2182,6 +2182,11 @@ hash = "3d30ac171f7b054e06a4efe45f22fc62d8e79d28c745c3ea9f0a32182500243a"
 metafile = true
 
 [[files]]
+file = "mods/colorwheel.pw.toml"
+hash = "c7f9286eabbfd298a73a92dc91031a27a8551a7cda8656f2173a4ba8cc0ac1a2"
+metafile = true
+
+[[files]]
 file = "mods/comforts.pw.toml"
 hash = "36f2f6e74b7dbeccb504572d47006582207544fa234a095093b97adfc7ecd5ac"
 metafile = true
