@@ -1,4 +1,4 @@
-# Tilth : écrit en entier pour figer registerMissingTracks = false (voies de mods absents hors du registre).
+# Compline : écrit en entier pour figer registerMissingTracks = false (voies de mods absents hors du registre).
 #.
 #Register integration tracks for mods that are not present
 #[@cui:RequiresReload:both]

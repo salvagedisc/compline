@@ -1,4 +1,4 @@
-# Tilth — Supplementaries réduit à l'essentiel (voir docs/decisions/0006-supplementaries.md).
+# Compline — Supplementaries réduit à l'essentiel (voir docs/decisions/0006-supplementaries.md).
 # Fichier partiel : les options absentes gardent leur valeur par défaut.
 
 [general]

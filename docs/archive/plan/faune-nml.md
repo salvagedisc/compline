@@ -12,7 +12,7 @@ Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with 
 - **Frienderman**: it replaces 1% of the natural endermen in the Overworld, with no setting in NML's config.
 - The moose (`moose`) is not registered in 1.6.1; `buried`, `cave_carp` and `fat_joint` only have a language key.
 
-## What Tilth does
+## What Compline does
 
 | What | Where | How |
 |---|---|---|
@@ -24,7 +24,7 @@ Request from the maintainer, 2026-10-19: No Man's Land's animals do not go with 
 | Frienderman | `pack/kubejs/server_scripts/faune_nml.js` | `EntityEvents.spawned` cancelled: the enderman it replaces is already cancelled by NML, so nothing is left |
 | 15 items with no source | `faune_nml.js` (server and client) | recipes removed, items hidden from EMI; creative mode remains an admin tool |
 | 11 items removed (batch B) | `faune_nml.js` | recipes removed, items removed from all loot tables, hidden from EMI |
-| Rabbit | `pack/kubejs/data/tilth/neoforge/biome_modifier/sans_lapin.json`, `sans_lapin.js` (server and client) | spawns removed from `#minecraft:is_overworld`; items removed from recipes, loot and EMI |
+| Rabbit | `pack/kubejs/data/compline/neoforge/biome_modifier/sans_lapin.json`, `sans_lapin.js` (server and client) | spawns removed from `#minecraft:is_overworld`; items removed from recipes, loot and EMI |
 | `scute` offering line | `pack/kubejs/data/nomansland/nomansland/dialogue_pools/offering/scute.json` | impossible condition removed (see below) |
 | Goose and tortoise offering lines | `…/offering/entity/goose.json`, `tortoise.json` | redirected to creatures that are present |
 

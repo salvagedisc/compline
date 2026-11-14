@@ -1,9 +1,9 @@
-// Tilth : quand deux mods ont la même espèce, on garde le meilleur modèle et on coupe
+// Compline : quand deux mods ont la même espèce, on garde le meilleur modèle et on coupe
 // l'autre. Voir docs/plan/doublons.md.
 // - Naturalist se règle dans config/naturalist-server.toml ;
 // - Hybrid Aquatic, par ses biome modifiers d'espèce remplacés par neoforge:none
 //   (kubejs/data/hybrid_aquatic/neoforge/biome_modifier/) ;
-// - Alex's Mobs et Critters and Companions, par kubejs/data/tilth/neoforge/biome_modifier/doublons.json.
+// - Alex's Mobs et Critters and Companions, par kubejs/data/compline/neoforge/biome_modifier/doublons.json.
 // Ce script fait le reste. Ids et objets lus dans les jars (Alex's Mobs 2.2.2, Hybrid
 // Aquatic 1.7.3, Critters and Companions 2.7.0, Naturalist 2.0.4).
 

@@ -1,8 +1,8 @@
-// Tilth : plus d'expérience. Voir docs/plan/xp.md.
-// Ce script coupe toutes les sources d'XP. Le module xp du mod tilth fait le reste :
+// Compline : plus d'expérience. Voir docs/plan/xp.md.
+// Ce script coupe toutes les sources d'XP. Le module xp du mod compline fait le reste :
 // l'enclume ne demande plus de niveaux et la barre d'expérience est cachée.
 // Pour revenir en arrière : supprimer ce fichier et passer xp.enabled = false
-// dans config/tilth-common.toml.
+// dans config/compline-common.toml.
 
 // 1. Plus d'orbes d'expérience. Couvre le minage, la fonte, les créatures, l'élevage,
 //    la pêche, le commerce, la meule, les fioles, les pépites de Create et les mods.

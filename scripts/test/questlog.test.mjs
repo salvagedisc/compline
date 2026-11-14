@@ -24,7 +24,7 @@ function refs(objectives = [], out = []) {
   return out;
 }
 
-test('every Tilth quest points to an existing chapter and existing quests', async () => {
+test('every Compline quest points to an existing chapter and existing quests', async () => {
   const chapters = await load('chapters');
   const quests = await load('quests');
   assert.ok(quests.size > 0);

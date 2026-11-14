@@ -34,7 +34,7 @@
 | **JEI, hidden** | Bridge for EMI: Create, Aeronautics, Cold Sweat, Ecliptic, Quark, Exposure, Alex's Mobs and Farm & Charm only have a JEI plugin (report 3). Overgeared and Kaleidoscope already have an EMI plugin |
 | **AA4 Atlas** | Confirmed: the atlas becomes an item (report 4) |
 | Libraries Puzzles Lib, Balm, Configurable, MRU, Cloth Config | Required by the additions of chapter 11 (reports 3 and 5) |
-| **A custom `tilth` mod** | What scripts cannot do (12.4) |
+| **A custom `compline` mod** | What scripts cannot do (12.4) |
 | French translation of Overgeared (`fr_fr.json`) | The mod has none (report 1) |
 
 ### What the plan got wrong
@@ -46,11 +46,11 @@
 | 10.5 | Kaleidoscope Compat merges duplicates | It makes them interchangeable; its "UNITE" mode breaks Farm & Charm's bacon, pasta and onions |
 | 10.7 | Freeze It and Heat It has season tags | It is configured through lists of identifiers in its config, with no KubeJS API; the season goes through Cold Sweat |
 | `saisons_cold_sweat.js` | — | Wrong API: the right pattern is `addTempModifier` + `gatherDefaultModifiers('world')` (code in report 2) |
-| 10.4 | The Wildex "Spyglass Pulse" reward is cut | There is no switch: accept it, or a small mixin in `tilth` |
+| 10.4 | The Wildex "Spyglass Pulse" reward is cut | There is no switch: accept it, or a small mixin in `compline` |
 | 11.1 | Polytone makes a warmer light in the clearings | No per-biome lightmap in 1.21.1 |
 | 11.7 | EMI groups items, and does not hide recipes player by player | EMI 1.1.24 has no groups (report 3; report 5 thinks KubeJS can do it: to be tested). AStages does hide per player, but its licence is closed and it touches chunk rendering |
 | 11.8 | A wandering trader leaves the Monoliths codex fragments | It does not exist. Only source: 0.2% per mob killed |
-| 11.8 | The monuments have guardians | They are breeze spawners, which Tilth bans. Report 6 proposes guardians drawn from the mods already present |
+| 11.8 | The monuments have guardians | They are breeze spawners, which Compline bans. Report 6 proposes guardians drawn from the mods already present |
 | 11.8 | The monument biomes are set by datapack | Through the config `config/obscuria/ancient_remnants-common.toml`; a datapack can add, not remove. Sparse Structures does not space them |
 | 11.7 | Camera order: Spatial GUI, Camera Overhaul, Shoulder Surfing, Real Camera | Spatial GUI, **Shoulder Surfing** (Sable has 5 mixins written for it), Camera Overhaul in first person only and at 0 in vehicles, Real Camera last (it touches aiming like Shoulder Surfing) |
 | 10.6, 11.2 | NML remodels pigs, cows and squids | 8 species (pig, cow, mooshroom, chicken, sheep, rabbit, squid, glow squid), through Mixed Litter which it bundles; which ones to leave to Fresh Animations is chosen species by species in `mixed_litter-startup.toml` |
@@ -84,8 +84,8 @@ Each line is a config, a tag, a datapack or a script; the cited report gives the
 - **Monoliths**:
   - the 6 monuments are tied to NML biomes, with a spacing of 64 to 80 chunks;
   - the Elderheart is an entity with no event. A script that watches it starts the clearing around the awakened monument;
-  - blessings are permanent, one at a time, kept on death. The warrior's is almost null in Tilth and can be replaced by another through its tag;
-  - the codex fragments enter the loot of NML ruins (chests and archaeology), and a photo of a monument with Exposure gives one. Tilth pages can be added to the codex by datapack.
+  - blessings are permanent, one at a time, kept on death. The warrior's is almost null in Compline and can be replaced by another through its tag;
+  - the codex fragments enter the loot of NML ruins (chests and archaeology), and a photo of a monument with Exposure gives one. Compline pages can be added to the codex by datapack.
 - **Zoo**:
   - **transport**: lead, boat for small animals, and above all the **Create seat**, on a train or an airship, which accepts any animal;
   - **settings**: the Icy's cart moves to 2.1.4. Hybrid Aquatic animals have no bucket, and the lion attacks horses;
@@ -123,13 +123,13 @@ With Freeze It and Heat It gone, the Ancient Remnants breeze spawners had to be 
   - furniture and the backpack receive a Sable mass through tags;
   - the backpack's coordinates message on death is cut;
   - the GraveStone grave of a death in flight probably floats in the sky: to be tested.
-- **The Dissipator**: KubeJS Create does not create a kinetic block. A KubeJS prototype, a head placed in front of a Create fan that reads its speed (the fan is what consumes the stress), makes it possible to judge the idea. The real block goes into `tilth`.
+- **The Dissipator**: KubeJS Create does not create a kinetic block. A KubeJS prototype, a head placed in front of a Create fan that reads its speed (the fan is what consumes the stress), makes it possible to judge the idea. The real block goes into `compline`.
 - **Scripts to fix**: the MoreJS group is called `MoreJS`; LootJS 3 no longer has `.when()`; `NativeEvents.onEvent` expects a class; the 15 default deposits of Create Ore Excavation must be removed.
 
 ### Rendering, report 3
 
 - **ATMOSPHERICS erases the sky of other mods**: the Enhanced Celestials moon (hence the white moon) and the NML double suns are no longer visible. This is the biggest gap found on the client side.
-- **Its presets**: the NML biomes must be named there one by one, and the file renamed at each version (`tilth_v1`, `tilth_v2`…) to be reapplied.
+- **Its presets**: the NML biomes must be named there one by one, and the file renamed at each version (`compline_v1`, `compline_v2`…) to be reapplied.
 - **Polytone**: it only keeps grass, leaves and water. Its 5.x modifies Sodium's chunk rendering: pin it after testing, or take 4.5.3.
 - **Small settings**:
   - MB-3D goes below Amendments, for its lanterns;
@@ -140,9 +140,9 @@ With Freeze It and Heat It gone, the Ancient Remnants breeze spawners had to be 
 
 NML 1.6.1, Sable 2.0.6, Quark 4.1-487, Moonlight 3.7.2, Kaleidoscope Cookery 1.6.0, Ecliptic 0.15.4.1, Icy's Better Horses 2.1.4, Friends & Foes. Cold Sweat stays on 2.4.3.1 and Farm & Charm on 1.1.25 until tested. Supplementaries 4.0.2 is a new major version: reread its config before upgrading. KubeJS Create and Steam 'n' Rails are in beta.
 
-## 12.4 The custom `tilth` mod
+## 12.4 The custom `compline` mod
 
-Scripts and data cover almost everything. What remains requires Java. Proposed: **a single `tilth` mod** (NeoForge 1.21.1), split into modules enabled one by one, rather than several small mods.
+Scripts and data cover almost everything. What remains requires Java. Proposed: **a single `compline` mod** (NeoForge 1.21.1), split into modules enabled one by one, rather than several small mods.
 
 | Module | What it does | Why not in a script | Size | Priority |
 |---|---|---|---|---|
@@ -154,9 +154,9 @@ Scripts and data cover almost everything. What remains requires Java. Proposed: 
 | **plans** | Blueprint knowledge specific to each player, without leaks | KubeJS 2101 no longer locks a recipe per player | 7 to 10 classes | Only if the maintainer wants personal rather than physical knowledge |
 | **finitions** | Real sparks on Overgeared hammer strikes; cut the Wildex Spyglass Pulse | No event on the KubeJS side | 2 to 4 classes | Low |
 
-The mod is built in the repository, in a separate folder (`mods-custom/tilth/`), with GitHub CI to compile it. It never touches the code of other mods, only through targeted mixins and their APIs.
+The mod is built in the repository, in a separate folder (`mods-custom/compline/`), with GitHub CI to compile it. It never touches the code of other mods, only through targeted mixins and their APIs.
 
-> **Follow-up.** The `ciel` and `sac` modules exist in version 0.1.0, untested in game: see [mod-tilth.md](../../plan/mod-tilth.md). Since the pack's mod is Thirst Was Reclaimed, that is the one `sac` targets.
+> **Follow-up.** The `ciel` and `sac` modules exist in version 0.1.0, untested in game: see [mod-compline.md](../../plan/mod-compline.md). Since the pack's mod is Thirst Was Reclaimed, that is the one `sac` targets.
 
 ## 12.5 Decisions that are added (continuing 10.12)
 
@@ -164,8 +164,8 @@ The mod is built in the repository, in a separate folder (`mods-custom/tilth/`),
 |---|---|---|---|
 | 14 | Engineer's blueprints | Physical blueprint, kept in the recipe, plus Overgeared blueprints for forged parts | Personal knowledge per player (`plans` module) |
 | 15 | Monument guardians | Wroughtnaut, Frostmaw, Sculptor and Sacred Pontiff, drawn from the present mods; the blessing waits for their defeat (report 6) | Obsidilith from Bosses of Mass Destruction in place of the Sculptor, or empty monuments |
-| 16 | Visible white moon | `ciel` module of the `tilth` mod | Give up the white moon |
-| 17 | Custom `tilth` mod | Yes, `ciel`, `dissipateur` and `sac` modules first | Scripts only, accepting the listed gaps |
+| 16 | Visible white moon | `ciel` module of the `compline` mod | Give up the white moon |
+| 17 | Custom `compline` mod | Yes, `ciel`, `dissipateur` and `sac` modules first | Scripts only, accepting the listed gaps |
 | 18 | Drinking from the backpack hose | `sac` module | The backpack tank only serves to carry water |
 
 ## 12.6 Proposed order of work
@@ -173,4 +173,4 @@ The mod is built in the repository, in a separate folder (`mods-custom/tilth/`),
 1. Upgrade the versions (12.3) on a test branch and launch the pack as is.
 2. Run the tests that change what can be built: the Wildex callback, the Exposure server trigger, a large animal seated during a flight, the moon with ATMOSPHERICS, Entity Culling on an airship.
 3. Write the corrected configs and scripts (reports 1, 2, 4 and 5), one system at a time.
-4. Start `tilth` with the `ciel` module.
+4. Start `compline` with the `ciel` module.

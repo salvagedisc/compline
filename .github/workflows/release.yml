@@ -34,12 +34,12 @@ jobs:
         working-directory: pack
         run: |
           mkdir -p ../dist
-          packwiz mr export -o "../dist/Tilth-${{ steps.meta.outputs.version }}.mrpack"
+          packwiz mr export -o "../dist/Compline-${{ steps.meta.outputs.version }}.mrpack"
 
       - name: GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Tilth ${{ steps.meta.outputs.version }}" --notes-file notes.md
+        run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Compline ${{ steps.meta.outputs.version }}" --notes-file notes.md
 
       # Désactivé tant que le projet Modrinth n'existe pas : définir la variable MODRINTH_PROJECT_ID
       # et le secret MODRINTH_TOKEN (créés par l'utilisateur) pour l'activer.
@@ -51,11 +51,11 @@ jobs:
           version="${{ steps.meta.outputs.version }}"
           case "$version" in 0.*) type=beta ;; *) type=release ;; esac
           data=$(jq -n --arg p "$MODRINTH_PROJECT_ID" --arg v "$version" --arg t "$type" --rawfile c notes.md \
-            '{project_id:$p, name:("Tilth " + $v), version_number:$v, changelog:$c, version_type:$t,
+            '{project_id:$p, name:("Compline " + $v), version_number:$v, changelog:$c, version_type:$t,
               game_versions:["1.21.1"], loaders:["neoforge"], dependencies:[], featured:true,
               file_parts:["file"], primary_file:"file"}')
           curl --fail-with-body -sS -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: ${MODRINTH_TOKEN}" \
-            -H "User-Agent: salvagedisc/tilth release" \
+            -H "User-Agent: salvagedisc/compline release" \
             --form-string "data=${data}" \
-            -F "file=@dist/Tilth-${version}.mrpack;type=application/x-modrinth-modpack+zip"
+            -F "file=@dist/Compline-${version}.mrpack;type=application/x-modrinth-modpack+zip"

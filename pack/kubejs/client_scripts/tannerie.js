@@ -1,4 +1,4 @@
-// Tilth : la tannerie, côté client. Voir docs/plan/tannerie.md.
+// Compline : la tannerie, côté client. Voir docs/plan/tannerie.md.
 
 // Sacoches de Tannery cachées d'EMI. Même liste que server_scripts/tannerie.js.
 RecipeViewerEvents.removeEntriesCompletely('item', event => {
@@ -9,10 +9,10 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
 
 // Le tonneau à tanner écrit ses messages en anglais, en dur (Component.literal), au-dessus
 // de la barre d'objets. Le serveur les envoie comme messages système : on les remplace
-// à l'arrivée par leur traduction (assets/tilth/lang).
+// à l'arrivée par leur traduction (assets/compline/lang).
 const TANNERIE_MESSAGES = {
-  'Barrel needs Tannic Powder': 'message.tilth.tannerie.poudre_manquante',
-  'Barrel Full': 'message.tilth.tannerie.tonneau_plein'
+  'Barrel needs Tannic Powder': 'message.compline.tannerie.poudre_manquante',
+  'Barrel Full': 'message.compline.tannerie.tonneau_plein'
 }
 
 try {

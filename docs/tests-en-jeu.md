@@ -4,22 +4,22 @@ List set aside on 2026-10-25 for when there is time to play. None of this has be
 
 Updated on 2026-11-14 after the second cleanup ([0026](decisions/0026-second-cleanup.md)): the title and loading screens are the game's own, and the tests of Shine and of the rain, storm and sunlight effects are gone. Updated on 2026-11-13, after No Man's Land left the pack ([0019](decisions/0019-leaving-no-mans-land.md)): the checks that needed it (Friendly Moon session, its fauna, the alchemists' ruins, the Meeting Point) are gone, and checks for Regions Unexplored and Geophilic are added. Neither mod has been seen in game.
 
-It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Tilth instance → Logs, or `crash-reports/`) to the report.
+It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Compline instance → Logs, or `crash-reports/`) to the report.
 
 The code in brackets, such as [K1], points to the detailed test in the repository. A French copy of this checklist is kept for the team outside the repository.
 
 ## Before starting
 
 - [ ] Import the latest `.mrpack` (Actions tab of the repository → latest build → artifact) into the Modrinth App, with **8 GB of memory** for the instance.
-- [ ] Create a **Creative world with commands allowed**, seed `tilth`. A new world per session if possible: many settings are only read at world creation.
+- [ ] Create a **Creative world with commands allowed**, seed `compline`. A new world per session if possible: many settings are only read at world creation.
 - [ ] Keep F3 handy: it shows the biome (useful for the clearings).
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, Fresh Animations and Better Leaves are active and no `tilth-*` pack is listed, graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The game is in French, Fresh Animations and Better Leaves are active and no `compline-*` pack is listed, graphics set to "Fancy" (« Détaillés »), music at 40%.
 - [ ] First launch: no narrator voice and no accessibility screen; creating then reopening a world shows no experimental settings warning; no Adorable Hamster Pets bell on the HUD or in the inventory, no update notice ([0024](decisions/0024-removing-the-house-resource-packs.md)).
-- [ ] The log shows no `tilth`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
-- [ ] The `tilth` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
+- [ ] The log shows no `compline`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
+- [ ] The `compline` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] Music: after the first silence, a track of the game plays from the new list (30 tracks, no resource pack needed) and the others follow in the clearing, at night, underground and aboard [M7].
 - [ ] No « Hamster Tips » book is handed out on first login or at the first hamster seen (it can still be crafted).
 - [ ] Distant Horizons writes no compatibility, render distance, garbage collector, object pool, replay or slow generation warning at start-up or in chat; only the low-memory warning may show, and only if Java lacks memory.
@@ -39,14 +39,14 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 - [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
-- [ ] F3 inside the disc and at its edge: the real biome everywhere (never `tilth:clairiere`: since `tilth` 0.8.0 a clearing no longer changes the biome); the vivid grass stops on a round edge [K2].
+- [ ] F3 inside the disc and at its edge: the real biome everywhere (never `compline:clairiere`: since `compline` 0.8.0 a clearing no longer changes the biome); the vivid grass stops on a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (bluish green, snow still falls), a fire in a savanna (yellow green) [K3].
 - [ ] A clearing on a coast: the ocean and the beach keep their mist; a river crossing it clears [K4]. Note whether a Streams brook stays misty [W10].
 - [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
 - [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
 - [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
 - [ ] The new fire (stone brazier, pale flame) and lantern (standing), by day and at night: neither looks like a vanilla campfire or lantern [K15].
-- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the mist lifts and the grass turns vivid, as in a vanilla biome, and F3 still shows the Regions Unexplored biome [K1, K2]. Biomes from the `tilth:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
+- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the mist lifts and the grass turns vivid, as in a vanilla biome, and F3 still shows the Regions Unexplored biome [K1, K2]. Biomes from the `compline:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
@@ -76,7 +76,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
 - [ ] **Tannery**: a cow and a horse give their hide; the hide dries on a tanning rack; stripping a log with an axe gives bark, two barks give tannic powder; dry hide in the tanning barrel → leather; the barrel messages are in French; EMI shows no satchel [T].
-- [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s tilth:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
+- [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s compline:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
 - [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
@@ -92,7 +92,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 - [ ] **Dinosaurs** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): a Lushsaur in a lush or bioshroom cave, an Obsidiceratops in a redstone cave (`/locate structure ec_ad:obsidiceratops`), a Therimoss in a jungle, a Coralosaur nest in a warm ocean, a Sculkraptor in the deep dark. Note how each moves and looks next to Fresh Animations, whether the Obsidiceratops finds lava to drink and what it breaks.
-- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure tilth:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
+- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure compline:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
 - [ ] **Amber**: an amber crater and a big one (`/locate structure ec_ad:crater`, `ec_ad:big_crater`): whole, no floating block around, not too many per kilometre. Archie's guidebook and his trades read in French.
 
 ## Session 6: terrain, Create and airships
@@ -154,12 +154,12 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc) | [plan/mod-tilth.md](plan/mod-tilth.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
-| I (numbered items) | [archive/resource-packs/tilth-interface.md](archive/resource-packs/tilth-interface.md#limits-and-in-game-tests) (pack removed; nothing of it still applies) |
+| I (numbered items) | [archive/resource-packs/compline-interface.md](archive/resource-packs/compline-interface.md#limits-and-in-game-tests) (pack removed; nothing of it still applies) |
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | T | [plan/tannerie.md](plan/tannerie.md#what-remains-to-be-tested) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |

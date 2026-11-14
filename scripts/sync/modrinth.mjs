@@ -1,5 +1,5 @@
 const API = 'https://api.modrinth.com/v2';
-const HEADERS = { 'User-Agent': 'salvagedisc/tilth sync-from-instance', 'Content-Type': 'application/json' };
+const HEADERS = { 'User-Agent': 'salvagedisc/compline sync-from-instance', 'Content-Type': 'application/json' };
 
 async function call(fetch, url, init) {
   const res = await fetch(url, { ...init, headers: HEADERS });

@@ -1,5 +1,5 @@
 {
-  "name": "tilth-tools",
+  "name": "compline-tools",
   "private": true,
   "type": "module",
   "engines": { "node": ">=20" },
