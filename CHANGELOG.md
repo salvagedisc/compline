@@ -111,6 +111,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
   - Shine (and `shine.json`), Polytone, Chunky (the `horizon.ChunkyAccessorMixin` fix stays and applies only if a server owner adds it) and the separate copy of Biolith (Quark ships it);
   - the Supernova resource pack and its three tracks;
   - the translations of every removed mod and the `.gitkeep` files of folders that are no longer empty.
+- Puddles & Floods (maintainer's choice of 2026-11-14) and Forgified Fabric API, which only it still needed: the pack no longer loads any Fabric layer, and Moonlight's start-up warning about Fabric API goes away.
 
 ### Changed
 - **The pack is renamed Compline** ([0027](docs/decisions/0027-rename-to-compline.md)), replacing Tilth: pack, exports, custom mod (`compline` 0.11.1: mod id, namespace and package), datapack and asset namespaces, music pack, Questlog chapters and documentation take the new name; worlds created before lose the custom mod's blocks and items.

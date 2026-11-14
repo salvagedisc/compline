@@ -134,7 +134,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
-| Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `compline` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
@@ -183,7 +182,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
 | Simple Backups | `simple-backups` | ✅ | CS | Backups every hour of play, last 24 kept, plus one when everyone leaves (beta) |
 | Crash Assistant | `crash-assistant` | ✅ | C | Helps read crashes |
-| Forgified Fabric API | `forgified-fabric-api` | ✅ | CS | Required by Puddles & Floods; Connector removed on 2026-11-13 ([0025](decisions/0025-native-atlas.md)) |
 
 ## Resource packs
 
@@ -218,6 +216,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Chunky | Removed on 2026-11-14: the world is pregenerated with `/dh pregen`, or a server owner adds Chunky; the `horizon` fix for it stays ([0026](decisions/0026-second-cleanup.md)) |
 | Supernova (Original Music Pack) | Resource pack with three tracks, removed on 2026-11-14; the music draws on 30 tracks of the game ([music](plan/musique.md), [0026](decisions/0026-second-cleanup.md)) |
 | Biolith (separate copy) | Quark ships Biolith 3.0.14 in its jar and no other mod declares it; removed on 2026-11-14 ([0026](decisions/0026-second-cleanup.md)) |
+| Puddles & Floods, Forgified Fabric API | Removed on 2026-11-14 (maintainer's choice). Puddles & Floods was the last mod that needed Forgified Fabric API, which goes with it: the pack no longer loads any Fabric layer |
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |

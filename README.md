@@ -25,7 +25,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Daily life | Kaleidoscope Cookery and Farm & Charm, tannery (Tannery mod: hides, tanning rack, bark, tanning barrel), a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
 | Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
 | Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player |
-| Finish | Shoulder camera, 3D menus, animated arms, items with physics, particles, wakes, puddles, adaptive music with long silences |
+| Finish | Shoulder camera, 3D menus, animated arms, items with physics, particles, wakes, adaptive music with long silences |
 | Safety | Hourly backups, crashing entities stopped instead of the world, crash assistant |
 
 The full list, with what was dropped and why, is in the [mod registry](docs/mods.md); what is planned next is in the [roadmap](docs/feuille-de-route.md).
