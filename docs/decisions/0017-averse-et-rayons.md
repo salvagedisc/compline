@@ -1,7 +1,7 @@
 # 0017 — Rain, storm and sunlight at the level of the best shader packs
 
 - **Date**: 2026-11-01
-- **Status**: kept (the team's choice of 2026-11-01); seen only in a headless test client loaded with the weather mods alone (the full pack does not start in the development environment), not played
+- **Status**: kept (the team's choice of 2026-11-01); seen only in a headless test client loaded with the weather mods alone (the full pack does not start in the development environment), not played; removed by [0026](0026-second-cleanup.md)
 
 ## Context
 The team compared the pack with Recrafted, a paid resource pack with its own core shaders. Its rain, its storms and its moving leaves are more worked than ours, even where we have a similar element. Recrafted itself cannot be used: no licence, Minecraft 26.x only, and its core shaders replace the terrain shaders that Sodium already replaces. The team asked to reach that level with what the pack can carry, without treating what is already in place as enough.

@@ -30,11 +30,9 @@ Manual scripts, run from the repository root and committed with their output (ne
 
 | Script | Output |
 |---|---|
-| `python3 scripts/mod/weather.py` | Rain curtain and glint textures of the `tilth` mod |
 | `python3 scripts/biomes/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the tables of `scripts/biomes/models.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
 | `python3 scripts/terrain/disc.py [key=value ...]` | The disc world (`pack/kubejs/data/tilth/`): the two Lithostitched modifiers that shape the continent and its climate, and `monde/bord.json`, the edge read by the `bord` module; rerun to change the size, the coast or the edge ([0022](docs/decisions/0022-disc-world.md)) |
 | `python3 scripts/structures/chorusoatl_nest.py` | The nest of the Chorusoatl (`pack/kubejs/data/tilth/structure/chorusoatl.nbt`): a floor, an air pocket and the animal, like the nests of Archie's Dinosaurs ([0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) |
-| `python3 scripts/menu/menus.py` | The title and loading screens: the painting and its mist, the veil, the FancyMenu and Drippy layouts in `pack/config/fancymenu/` |
 
 ## Layout
 
@@ -46,7 +44,7 @@ Manual scripts, run from the repository root and committed with their output (ne
 | French translation of a mod (language files, books) | `pack/kubejs/assets/<namespace>/` |
 | Datapack data (worldgen, loot tables, tags, structures) | `pack/kubejs/data/tilth/` (or `data/<namespace>/` to override a mod) |
 | Custom `tilth` mod (sources) | `mods-custom/tilth/` ([mod-tilth](docs/plan/mod-tilth.md)) |
-| Tooling and its tests / generators | `scripts/` + `scripts/test/` / `scripts/biomes/`, `scripts/menu/`, `scripts/mod/`; `scripts/structures/`, `scripts/terrain/` for generated world data |
+| Tooling and its tests / generators | `scripts/` + `scripts/test/` / `scripts/biomes/`; `scripts/structures/`, `scripts/terrain/` for generated world data |
 | Vision, registry, roadmap, in-game tests | `docs/vision.md`, `docs/mods.md`, `docs/feuille-de-route.md`, `docs/tests-en-jeu.md` |
 | Living page of a system (mod, pack, translation, quests…) | `docs/plan/` |
 | Settled decision (comparison, choice) | `docs/decisions/NNNN-subject.md` |
@@ -92,4 +90,4 @@ Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local expor
 
 ## Current state
 
-As of 2026-11-13: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 154 Modrinth mods, one library kept as a jar, the custom `tilth` mod 0.10.1 and the three atlas ports, decisions 0001 to 0025, CI green on `main`. The house resource packs were removed on 2026-11-13 ([0024](docs/decisions/0024-removing-the-house-resource-packs.md)): the mist is ATMOSPHERICS' own preset until a new one is chosen. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).
+As of 2026-11-14: pack `0.1.0` unreleased (`[Unreleased]` in the changelog), 139 Modrinth mods, one library kept as a jar, the custom `tilth` mod 0.11.0 and the three atlas ports, decisions 0001 to 0026, CI green on `main`. The house resource packs were removed on 2026-11-13 ([0024](docs/decisions/0024-removing-the-house-resource-packs.md)) and the house screens, weather effects and a few leftover mods on 2026-11-14 ([0026](docs/decisions/0026-second-cleanup.md)): the mist is ATMOSPHERICS' own preset until a new one is chosen. No Man's Land left the pack ([0019](docs/decisions/0019-leaving-no-mans-land.md)). Geophilic and Regions Unexplored have not been seen in game. The pack starts on a dedicated server but **nobody has played it yet**: next step is the eight play sessions of [tests-en-jeu.md](docs/tests-en-jeu.md), then the `v0.1.0` tag. Open work is tracked in the [roadmap](docs/feuille-de-route.md).

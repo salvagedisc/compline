@@ -10,7 +10,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Loader | NeoForge 21.1.265 |
 | Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
 | Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
-| Status (2026-11-13) | 158 Modrinth mods, 7 resource packs, custom mod `tilth` 0.10.1; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
+| Status (2026-11-14) | 139 Modrinth mods, 6 resource packs, custom mod `tilth` 0.11.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
 | Content | see the [mod registry](docs/mods.md) |
 
 ## What the pack does today
@@ -49,7 +49,7 @@ tilth/
 │   └── kubejs/            ← rules layer: startup/server/client scripts
 │       └── data/tilth/   ← datapack data loaded by KubeJS
 ├── mods-custom/tilth/    ← sources of the custom `tilth` mod (jar copied to pack/mods/)
-├── scripts/               ← dependency-free Node.js tooling (+ tests), Python generators (menus, biome rules, world data)
+├── scripts/               ← dependency-free Node.js tooling (+ tests), Python generators (biome rules, world data)
 ├── docs/
 │   ├── vision.md          ← philosophy of the pack
 │   ├── mods.md            ← registry: kept, to test, rejected

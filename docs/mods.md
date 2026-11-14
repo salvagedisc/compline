@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the pack, updated on 2026-11-13 (after PRs #1 to #32 and the change of terrain base, [0019](decisions/0019-leaving-no-mans-land.md)): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
+Complete list of the pack, updated on 2026-11-14 (after the second cleanup, [0026](decisions/0026-second-cleanup.md), and after PRs #1 to #32 and the change of terrain base, [0019](decisions/0019-leaving-no-mans-land.md)): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -122,8 +122,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds (two layers), sun, moon and stars per biome ([0007](decisions/0007-ambiance-performance.md)) |
-| Polytone | `polytone` | ✅ | C | Reads colours, lights and shaders from resource packs; since the house colours and lights left with `tilth-ambiance` on 2026-11-13, no pack of Tilth uses it ([0024](decisions/0024-removing-the-house-resource-packs.md)) |
-| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves (a little more often, carried by the wind by the `averse` module of the `tilth` mod), cave dust |
+| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves (a little more often), cave dust |
 | Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
 | LambDynamicLights | `lambdynamiclights` | ✅ | C | Light held in hand |
 | More Darkness | `more-darkness` | ✅ | CS | Real nights |
@@ -138,14 +137,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
-| Shine | `shine` | ✅ (2.0.2, seen in game in a test instance) | C | Bloom without shaders, set low in `config/shine.json` (strength 2, threshold 0.75): a halo around fires and lanterns only; its default made the sunlit landscape glow in large blobs. Its coloured light stays off, Polytone owns it ([0016](decisions/0016-vent-et-lumiere.md), [0017](decisions/0017-averse-et-rayons.md)) |
-| Atmospheric Rain Backport | `atmospheric-rain-backport` | ✅ (1.2, not seen in game) | C | Drops on the screen when looking up in the rain ([0017](decisions/0017-averse-et-rayons.md)) |
-| Cool Rain Reforged | `cool-rain-reforged` | ✅ (1.0.2, not seen in game) | C | The sound of rain on metal, glass, fabric, leaves and water, muffled indoors ([0017](decisions/0017-averse-et-rayons.md)) |
-| Sable: Cool Rain | `sable-cool-rain` | ✅ (1.0.1, not seen in game) | C | Cool Rain's sounds on Sable airships and contraptions ([0017](decisions/0017-averse-et-rayons.md)) |
-| Distant Thunders | `distant-thunders` | ✅ (1.1.0, not seen in game) | C | Thunder delayed and dulled with distance ([0017](decisions/0017-averse-et-rayons.md)) |
-| Dynamic Surroundings Rebirth | `dynamic-surroundings-rebirth-by-uawiegrfv` | ✅ (1.4.2, not seen in game) | C | Reduced to drops on plants, drips from eaves and leaves, morning dew; everything else off in `config/dsrebirth/dsrebirth.json` ([0017](decisions/0017-averse-et-rayons.md)) |
-| Soft Imprints | `snow-imprints` | ✅ (2.8.0, not seen in game) | C | Footprints in snow, sand and mud ([0017](decisions/0017-averse-et-rayons.md)) |
-| Wavify | `wavify` | ✅ (1.2.1, not seen in game) | C | Waves breaking on shores and rivers ([0017](decisions/0017-averse-et-rayons.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `tilth` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle the leaves of Regions Unexplored |
 
@@ -161,7 +152,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |
 | Default Options | `default-options` | ✅ | C | Key bindings and video settings shipped with the pack |
 | Chat Heads | `chat-heads` | ✅ | C | Player head in the chat |
-| FancyMenu + Drippy Loading Screen | `fancymenu`, `drippy-loading-screen` (+ `konkrete`, `melody`) | ✅ (3.9.14, 3.1.5; added 2026-10-26, not seen in game) | C | Tilth title screen (painting with mist, logo to come) and loading screen (moss, lantern bar); layouts written by `scripts/menu/menus.py`, editor hidden |
 | Lamb Lanterns | `lamb-lanterns` | ✅ | CS | A lantern carried at the hip (Curios slot) gives light as if held in hand |
 
 ## Rules and scripts
@@ -173,7 +163,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `tilth` 0.10.1 | `mods-custom/tilth/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); the rain colour and sun rays of `tilth-ambiance` left on 2026-11-13, [0024](decisions/0024-removing-the-house-resource-packs.md)) modules, `monuments` (structures placed only on fitting ground) and `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)) ([mod-tilth](plan/mod-tilth.md)) |
+| Mod `tilth` 0.11.0 | `mods-custom/tilth/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) and `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)) ([mod-tilth](plan/mod-tilth.md)) |
 
 ## Performance and technical
 
@@ -185,7 +175,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FerriteCore | `ferrite-core` | ✅ | CS | Memory |
 | Lithium | `lithium` | ✅ | CS | Server logic |
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
-| Chunky | `chunky` | ✅ | CS | Pregeneration; leaves once test H11 has confirmed `/dh pregen` ([pack sort](plan/tri-du-pack.md)) |
 | spark | `spark` | ✅ | CS | Profiling |
 | Dynamic FPS | `dynamic-fps` | ✅ | C | The game slows down in the background |
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
@@ -201,11 +190,10 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
-| Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -221,6 +209,12 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Easy Anvils | Replaces the anvil that Overgeared needs ([12](archive/plan/12-verification.md)) |
 | Leaves Be Gone | On Aeronautics' blacklist |
 | Dynamic Surroundings | Touches the sound engine like Sound Physics; duplicates |
+| FancyMenu, Drippy Loading Screen (+ Konkrete, Melody) | The house title and loading screens; removed on 2026-11-14, the game's own menu is back ([0026](decisions/0026-second-cleanup.md)) |
+| Atmospheric Rain Backport, Cool Rain Reforged, Sable: Cool Rain, Distant Thunders, Soft Imprints (`snow-imprints`), Wavify, Dynamic Surroundings Rebirth | The rain, thunder, footprint, wave and drip mods of [0017](decisions/0017-averse-et-rayons.md); removed on 2026-11-14 with the `averse` and `rayons` modules of the `tilth` mod ([0026](decisions/0026-second-cleanup.md)) |
+| Shine, Polytone | Shine's bloom and Polytone (no pack used it since 0024); removed on 2026-11-14 ([0026](decisions/0026-second-cleanup.md)) |
+| Chunky | Removed on 2026-11-14: the world is pregenerated with `/dh pregen`, or a server owner adds Chunky; the `horizon` fix for it stays ([0026](decisions/0026-second-cleanup.md)) |
+| Supernova (Original Music Pack) | Resource pack with three tracks, removed on 2026-11-14; the music draws on 30 tracks of the game ([music](plan/musique.md), [0026](decisions/0026-second-cleanup.md)) |
+| Biolith (separate copy) | Quark ships Biolith 3.0.14 in its jar and no other mod declares it; removed on 2026-11-14 ([0026](decisions/0026-second-cleanup.md)) |
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |

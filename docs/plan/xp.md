@@ -71,7 +71,7 @@ Until 2026-11-13 the table also listed No Man's Land (turtle orbs on breeding; p
 | Death | The player loses their levels and drops orbs | Nothing left to lose. The death screen still shows "Score: 0" | Optional: empty `deathScreen.score.value` in `pack/kubejs/assets/minecraft/lang/fr_fr.json` |
 | Commands | `/xp`, `/enchant` (operators) | `/xp add … points` is blocked by the script; `/xp add … levels` still goes through (`LevelChange` event, not covered by MoreJS) | Nothing, unless levels are to be blocked too (see step 2) |
 | Books and guides | The hamster guide mentions "anvils and enchanted books"; the "Goals" page of the Icy's Better Horses manual has an experience bottle as its icon; the lapis backpack tooltip mentions experience | Nothing breaks; these are texts | Only to be revised if they get in the way in game |
-| Cold Sweat, GeckoLib, Spatial GUI, ModernFix, Polytone, Steam 'n' Rails | They read or move the bar (action bar layout, rendering, orb colour) | Nothing breaks: at 0, these paths are those of a new player | — |
+| Cold Sweat, GeckoLib, Spatial GUI, ModernFix, Steam 'n' Rails | They read or move the bar (action bar layout, rendering, orb colour) | Nothing breaks: at 0, these paths are those of a new player | — |
 
 ## How to remove XP cleanly
 

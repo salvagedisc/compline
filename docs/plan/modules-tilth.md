@@ -95,7 +95,7 @@ The guide book (see the [roadmap](../feuille-de-route.md)) gets a page for each 
 - Since it is scheduled, the forecast can be exact, in three signs: a red sky at dusk the day before, the **barometer** (block or item) rising with its trend arrow, a discreet sound at sunset.
 - During it only: an advancement "Vu d'en haut" (seen from above) taken at altitude, a short musical theme, once.
 
-**To verify first.** One clarity value from 0 to 1, held by the server and synchronised, driving ATMOSPHERICS, Distant Horizons and `voile`. The far view of unvisited regions must exist: Distant Horizons generation on both sides and a pregeneration with `/dh pregen start overworld 0 0 <radius>` (Chunky leaves holes in the LODs according to the Distant Horizons documentation; to confirm with test H11).
+**To verify first.** One clarity value from 0 to 1, held by the server and synchronised, driving ATMOSPHERICS, Distant Horizons and `voile`. The far view of unvisited regions must exist: Distant Horizons generation on both sides and a pregeneration with `/dh pregen start overworld 0 0 <radius>` (Chunky, which left the pack on 2026-11-14, leaves holes in the LODs according to the Distant Horizons documentation; a server owner may still add it).
 
 ## `sillage`: the dissipator on board
 
@@ -135,7 +135,7 @@ The guide book (see the [roadmap](../feuille-de-route.md)) gets a page for each 
 | Lead | What it does | Status |
 |---|---|---|
 | Sodium fog occlusion | Terrain hidden by the mist is not drawn | To check with ATMOSPHERICS (alpha 1.0) |
-| Distant Horizons on the server | The server generates the far view once and sends it | Generation on both sides; `/dh pregen` instead of Chunky |
+| Distant Horizons on the server | The server generates the far view once and sends it | Generation on both sides; `/dh pregen` (Chunky only if a server owner adds it) |
 | Far-view resolution | Lower `maxHorizontalResolution` | Cost undocumented; judge by eye |
 | Settings | Lower `entityDistanceScaling`; `view-distance` 10, `simulation-distance` 6, `allow-flight=true`; 6 GB server, 8 GB per player | Usual values, confirm with spark |
 | Lithium | Out if it freezes the world with Sable | Watched |

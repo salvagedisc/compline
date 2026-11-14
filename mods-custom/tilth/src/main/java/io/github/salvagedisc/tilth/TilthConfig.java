@@ -25,17 +25,6 @@ public final class TilthConfig {
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
-    private static final ModConfigSpec.BooleanValue AVERSE_ENABLED;
-    private static final ModConfigSpec.BooleanValue AVERSE_CURTAINS;
-    private static final ModConfigSpec.DoubleValue AVERSE_CURTAIN_OPACITY;
-    private static final ModConfigSpec.BooleanValue AVERSE_LIGHTNING;
-    private static final ModConfigSpec.BooleanValue AVERSE_SKY_FLASH;
-    private static final ModConfigSpec.BooleanValue AVERSE_WINDBLOWN_LEAVES;
-    private static final ModConfigSpec.IntValue AVERSE_LEAF_REST_SECONDS;
-    private static final ModConfigSpec.BooleanValue AVERSE_GRASS_BITS;
-    private static final ModConfigSpec.BooleanValue RAYONS_ENABLED;
-    private static final ModConfigSpec.DoubleValue RAYONS_GLINT_STRENGTH;
-    private static final ModConfigSpec.BooleanValue RAYONS_GLINTS;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -74,47 +63,6 @@ public final class TilthConfig {
                 .defineInRange("ringMaxDistance", 512, 64, 4096);
         client.pop();
 
-        client.comment("Module averse (client) : la pluie, l'orage et le vent dans les feuilles, sans shader.").push("averse");
-        AVERSE_ENABLED = client
-                .comment("Interrupteur du module. Faux : la pluie et l'orage redeviennent ceux de Where Winds Blow et du jeu.")
-                .define("enabled", true);
-        AVERSE_CURTAINS = client
-                .comment("Rideaux de pluie : des pans de pluie légers de 24 à 84 blocs autour du joueur, penchés par le vent,",
-                        "qui donnent les averses qu'on voit traverser la vallée. La brume les efface au loin.")
-                .define("curtains", true);
-        AVERSE_CURTAIN_OPACITY = client
-                .comment("Opacité des rideaux de pluie (1 : réglage du pack).")
-                .defineInRange("curtainOpacity", 1.0, 0.0, 2.0);
-        AVERSE_LIGHTNING = client
-                .comment("Dessiner l'éclair de Tilth (trait blanc fin en zigzag, halos, branches) à la place de celui du jeu.")
-                .define("lightning", true);
-        AVERSE_SKY_FLASH = client
-                .comment("À chaque coup de foudre, un bref éclat blanc-bleu sur tout l'écran quand on voit le ciel.")
-                .define("skyFlash", true);
-        AVERSE_WINDBLOWN_LEAVES = client
-                .comment("Les feuilles qui tombent (Particular) suivent le vent de Where Winds Blow ; dans l'orage, le vent",
-                        "en arrache bien plus aux arbres et les emporte à l'horizontale.")
-                .define("windblownLeaves", true);
-        AVERSE_LEAF_REST_SECONDS = client
-                .comment("Secondes qu'une feuille tombée reste posée au sol ou flotte sur l'eau avant de s'effacer",
-                        "(Particular seul : 5).")
-                .defineInRange("leafRestSeconds", 25, 5, 120);
-        AVERSE_GRASS_BITS = client
-                .comment("Brins d'herbe projetés quand on court dans les hautes herbes ; le vent les emporte.")
-                .define("grassBits", true);
-        client.pop();
-
-        client.comment("Module rayons (client) : les éclats du soleil sur l'eau, sans shader.").push("rayons");
-        RAYONS_ENABLED = client
-                .comment("Interrupteur du module.")
-                .define("enabled", true);
-        RAYONS_GLINT_STRENGTH = client
-                .comment("Intensité des éclats sur l'eau (1 : réglage du pack).")
-                .defineInRange("glintStrength", 1.0, 0.0, 3.0);
-        RAYONS_GLINTS = client
-                .comment("Éclats du soleil sur l'eau : le chemin de lumière qui scintille entre le soleil et le joueur.")
-                .define("glints", true);
-        client.pop();
         CLIENT_SPEC = client.build();
 
         ModConfigSpec.Builder common = new ModConfigSpec.Builder();
@@ -222,46 +170,6 @@ public final class TilthConfig {
 
     public static boolean bordEnabled() {
         return read(COMMON_SPEC, BORD_ENABLED);
-    }
-
-    public static boolean averseEnabled() {
-        return read(CLIENT_SPEC, AVERSE_ENABLED);
-    }
-
-    public static boolean averseCurtains() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_CURTAINS);
-    }
-
-    public static double averseCurtainOpacity() {
-        return read(CLIENT_SPEC, AVERSE_CURTAIN_OPACITY);
-    }
-
-    public static boolean averseLightning() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_LIGHTNING);
-    }
-
-    public static boolean averseSkyFlash() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_SKY_FLASH);
-    }
-
-    public static boolean averseWindblownLeaves() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_WINDBLOWN_LEAVES);
-    }
-
-    public static int averseLeafRestTicks() {
-        return read(CLIENT_SPEC, AVERSE_LEAF_REST_SECONDS) * 20;
-    }
-
-    public static boolean averseGrassBits() {
-        return averseEnabled() && read(CLIENT_SPEC, AVERSE_GRASS_BITS);
-    }
-
-    public static double rayonsGlintStrength() {
-        return read(CLIENT_SPEC, RAYONS_GLINT_STRENGTH);
-    }
-
-    public static boolean rayonsGlints() {
-        return read(CLIENT_SPEC, RAYONS_ENABLED) && read(CLIENT_SPEC, RAYONS_GLINTS);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */

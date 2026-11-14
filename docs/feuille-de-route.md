@@ -1,11 +1,11 @@
 # Roadmap
 
-Status as of 2026-11-13. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [archive/conception/](archive/conception/)).
+Status as of 2026-11-14. The project is split into sub-projects, each with its own spec → plan → implementation cycle (see [archive/conception/](archive/conception/)).
 
 | # | Sub-project | Status |
 |---|---|---|
 | 1 | Repository & tooling: packwiz, sync from the instance, CI, release | ✅ Done ([spec](archive/conception/specs/2026-09-23-repo-outillage-design.md)) |
-| 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0019 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
+| 2 | System choices: farming, fauna, structures, atmosphere, performance | ✅ Decisions 0001 to 0026 made and applied to `pack/`; every mod of the [registry](mods.md) marked ✅ is in the pack |
 | 3 | Rules layer: configs, KubeJS scripts, datapack data, custom mod | 🟡 Configs for most systems, KubeJS scripts (26 on 2026-11-01; the Friendly Moon and fauna scripts of No Man's Land have gone since), 6 Questlog chapters, custom mod `tilth` 0.8.0 (sky, xp, far view, clearings, dissipator, screen titles, tools); the eight approved modules, monument guardians and the seasons bridge still to write |
 | 4 | Server: host, deployment, backups | 🟡 Backups (Simple Backups) and Neruina in the pack; host and deployment not started |
 
@@ -26,13 +26,14 @@ The pack starts on a dedicated server, but **nobody has played it yet**. The nex
 | 2026-11-01 | 20 weakly animated creatures cut, held-item hand fixed, pack sort (Chipped and Beautify! removed, 313 items hidden), `sac` module removed (`tilth` 0.5.0) |
 | 2026-11-11 to 11-13 | The team leaves No Man's Land (11-11); candidates measured on one seed (11-12) and Tectonic + Regions Unexplored + Geophilic chosen ([0019](decisions/0019-leaving-no-mans-land.md)); the Friendly Moon, its fauna rules and its music go; mist preset `tilth_v6`, `biomes.py`, French translation of Regions Unexplored; `tilth` 0.7.0; the mods' biome rules applied to Regions Unexplored, clearings that keep their biome (`tilth` 0.8.0, [0020](decisions/0020-clearings-keep-their-biome.md)) |
 | 2026-11-13 | Cleanup: the three house resource packs (interface, textures, ambiance with its mist and free tracks) and the `titres` module removed, Adorable Hamster Pets' announcements, the narrator and the experimental-settings warning turned off (0024, `tilth` 0.10.1) |
+| 2026-11-14 | Second cleanup: 15 mods (FancyMenu and Drippy with the house title and loading screens, the rain mods, Shine, Polytone, Chunky and others) and the Supernova pack removed, the `averse` and `rayons` modules removed (`tilth` 0.11.0), Distant Horizons warnings and the Hamster Tips book turned off, music on 30 game tracks (0026) |
 
 ## Before the first release (`v0.1.0`)
 
 - [ ] Run the [in-game tests](tests-en-jeu.md) and fix what breaks.
 - [ ] Compare `pack/config/quark-common.toml` with the config generated on first launch (the keys were inferred from the Quark 4.1 classes, [decision 0005](decisions/0005-quark.md)).
 - [ ] Turn `[Unreleased]` in the changelog into `[0.1.0]` and place the tag.
-- [ ] Pregenerate the permanent world once the terrain tests (W) pass, with `/dh pregen` rather than Chunky (Chunky leaves holes in the far view; to confirm with H11), then remove Chunky from the pack ([pack sort](plan/tri-du-pack.md)).
+- [ ] Pregenerate the permanent world once the terrain tests (W) pass, with `/dh pregen` (Chunky left the pack on 2026-11-14, [0026](decisions/0026-second-cleanup.md); a server owner may add it, but it leaves holes in the far view) ([pack sort](plan/tri-du-pack.md)).
 
 ## Updates held until the in-game tests
 
@@ -40,7 +41,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 
 | Mod | In the pack | Held version | Why wait |
 |---|---|---|---|
-| Polytone + Spatial GUI | 5.1.3 + 1.8 | 5.3.1 + 1.9 | Go together; no pack of Tilth uses Polytone since [0024](decisions/0024-removing-the-house-resource-packs.md) |
+| Spatial GUI | 1.8 | 1.9 | Was held together with Polytone, which left the pack ([0026](decisions/0026-second-cleanup.md)) |
 | Supplementaries | 3.9.9 | 4.x | Major version; our config (0006) must be re-read |
 | Friends & Foes | 4.0.27 | 5.x | Major version; the creatures disabled by config must stay disabled |
 | Envelope | 0.7.5 | 0.8 | Its JEI mixin crashed once (see the changelog); to retest with JEI 19.51 |

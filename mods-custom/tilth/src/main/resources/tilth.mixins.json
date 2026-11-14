@@ -11,9 +11,6 @@
     "xp.AnvilMenuMixin"
   ],
   "client": [
-    "averse.LeafParticleMixin",
-    "averse.LeavesBlockMixin",
-    "averse.LightningBoltRendererMixin",
     "ciel.AtmosphericsFadeMixin",
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",

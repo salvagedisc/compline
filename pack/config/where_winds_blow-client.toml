@@ -1,11 +1,11 @@
-# Tilth : ATMOSPHERICS est le seul responsable de la brume, Polytone des couleurs
-# de la végétation (une couche, un mod). Le vent garde tout le reste ; les autres
+# Tilth : ATMOSPHERICS est le seul responsable de la brume ; la végétation garde
+# les couleurs du jeu et des mods de biomes. Le vent garde tout le reste ; les autres
 # clés gardent leur valeur par défaut, ajoutée par NeoForge au premier lancement.
 enableFoliageColorVariation = false
 snowFogMode = "DISABLED"
 sandstormFogMode = "DISABLED"
 
-# Effets façon Recrafted (module averse) : les feuillages bougent un peu même par
+# Les feuillages bougent un peu même par
 # temps calme, plus franchement au passage du joueur et sous le vent.
 clearWeatherSwayStrength = 0.35
 windFoliageSwayStrength = 1.25

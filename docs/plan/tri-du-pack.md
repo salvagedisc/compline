@@ -11,7 +11,7 @@ Request from the maintainer, 2026-10-29: check every mod, creature, item and blo
 | Chipped (and Athena, which only Chipped needed) | 6,980 blocks, 58 % of the pack's blocks, including 1,110 Nether and End variants nothing can supply; heavy loading |
 | Beautify! | Almost everything overlaps another mod (Supplementaries chandeliers and rope, Amendments hanging pot, Handcrafted books); it also adds a botanist villager selling decor |
 
-Chunky stays until test H11 has confirmed the Distant Horizons pregeneration, then leaves (roadmap).
+Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md)): the world is pregenerated with `/dh pregen`, or a server owner adds Chunky to the server (the `horizon` fix for it stays).
 
 ## Defects fixed
 

@@ -3,8 +3,9 @@
   "root": {
     "music": [
       "tilth:music.floating_dream",
-      "tilth:music.supernova",
-      "tilth:music.echo_in_the_wind"
+      "tilth:music.echo_in_the_wind",
+      "tilth:music.comforting_memories",
+      "tilth:music.an_ordinary_day"
     ],
     "ambience": [],
     "predicates": [
@@ -66,7 +67,10 @@
         "children": []
       },
       {
-        "music": [],
+        "music": [
+          "tilth:music.ancestry",
+          "tilth:music.eld_unknown"
+        ],
         "ambience": [],
         "predicates": [
           {
@@ -177,7 +181,8 @@
         "music": [
           "tilth:music.aerie",
           "tilth:music.featherfall",
-          "tilth:music.cliff_hanger"
+          "tilth:music.wending",
+          "tilth:music.stand_tall"
         ],
         "ambience": [],
         "predicates": [
@@ -214,7 +219,9 @@
       },
       {
         "music": [
-          "tilth:music.infinite_amethyst"
+          "tilth:music.infinite_amethyst",
+          "tilth:music.deeper",
+          "tilth:music.a_familiar_room"
         ],
         "ambience": [],
         "predicates": [
@@ -256,7 +263,8 @@
           "tilth:music.key",
           "tilth:music.komorebi",
           "tilth:music.left_to_bloom",
-          "tilth:music.rose_field"
+          "tilth:music.bromeliad",
+          "tilth:music.yakusoku"
         ],
         "ambience": [],
         "predicates": [
@@ -309,7 +317,9 @@
         "children": [
           {
             "music": [
-              "tilth:music.subwoofer_lullaby"
+              "tilth:music.subwoofer_lullaby",
+              "tilth:music.oxygene",
+              "tilth:music.dry_hands"
             ],
             "ambience": [],
             "predicates": [
@@ -344,7 +354,10 @@
       },
       {
         "music": [
-          "tilth:music.subwoofer_lullaby"
+          "tilth:music.subwoofer_lullaby",
+          "tilth:music.oxygene",
+          "tilth:music.labyrinthine",
+          "tilth:music.firebugs"
         ],
         "ambience": [],
         "predicates": [
@@ -408,7 +421,8 @@
           {
             "music": [
               "tilth:music.floating_dream",
-              "tilth:music.supernova"
+              "tilth:music.bromeliad",
+              "tilth:music.one_more_day"
             ],
             "ambience": [],
             "predicates": [
@@ -445,7 +459,9 @@
           },
           {
             "music": [
-              "tilth:music.echo_in_the_wind"
+              "tilth:music.echo_in_the_wind",
+              "tilth:music.crescent_dunes",
+              "tilth:music.stand_tall"
             ],
             "ambience": [],
             "predicates": [
@@ -482,7 +498,9 @@
           },
           {
             "music": [
-              "tilth:music.echo_in_the_wind"
+              "tilth:music.comforting_memories",
+              "tilth:music.an_ordinary_day",
+              "tilth:music.wending"
             ],
             "ambience": [],
             "predicates": [
@@ -519,7 +537,9 @@
           },
           {
             "music": [
-              "tilth:music.floating_dream"
+              "tilth:music.floating_dream",
+              "tilth:music.endless",
+              "tilth:music.watcher"
             ],
             "ambience": [],
             "predicates": [
