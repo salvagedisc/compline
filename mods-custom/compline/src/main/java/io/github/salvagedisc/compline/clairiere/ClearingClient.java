@@ -119,6 +119,21 @@ public final class ClearingClient {
         return look != null && current.coversAt(pos.getX() + 0.5, pos.getZ() + 0.5, time, ringTicks) ? look : biome;
     }
 
+    /** Les clairières connues du client, vagues en cours comprises ; vide hors de la Surface. Fil du client. */
+    public static List<Clearing> open(ClientLevel level) {
+        return level.dimension() == Level.OVERWORLD ? clearings : List.of();
+    }
+
+    /** Rayon dégagé d'une clairière en ce moment, vague comprise, lissé d'une image à l'autre. */
+    public static float radius(Clearing clearing, float partialTick) {
+        return clearing.smoothRadiusAt(time + (double) partialTick, ringTicks);
+    }
+
+    /** Vrai si le biome de {@code pos} fait partie de ceux qui se dégagent (ni océan, ni plage, ni désert, ni grotte). */
+    public static boolean clears(ClientLevel level, BlockPos pos) {
+        return looks.containsKey(level.getBiome(pos).value());
+    }
+
     /** Reçoit l'annonce du serveur, sur le fil du client. */
     static void receive(ClearingSync sync) {
         ringTicks = Math.max(1, sync.ringTicks());

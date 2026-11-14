@@ -1,0 +1,89 @@
+// La brume : une nappe posée sur le sol, percée par les clairières, et un anneau au loin qui ne se lève jamais.
+
+#ifdef DISTANT_HORIZONS
+uniform int dhRenderDistance;
+#endif
+
+/** Intégrale de exp(-(y0 + t dy - base) / h) pour t de t0 à t1 : la brume traversée dans une nappe. */
+float mistLayer(float y0, float dy, float t0, float t1, float h, float base) {
+    float span = t1 - t0;
+    if (span <= 0.0) return 0.0;
+    float start = exp(clamp((base - y0 - t0 * dy) / h, -30.0, 3.0));
+    float x = clamp(dy / h * span, -30.0, 1e6);
+    float mean = abs(x) < 1e-3 ? 1.0 - 0.5 * x : (1.0 - exp(-x)) / x;
+    return min(start * mean, 2.2) * span;
+}
+
+float mistAnchor() {
+    // Altitude du pied de la nappe : le sol autour du joueur, sinon un peu sous la caméra.
+    return brumaireLink > 0.5 ? brumaireMist.y : cameraPosition.y - 3.0;
+}
+
+float mistNearDensity() {
+    // Plus dense à l'aube, la nuit et sous la pluie ; elle ne descend pas dans les grottes.
+    float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
+    float hour = mix(1.25, 0.9, gDay) + 0.25 * gDusk;
+    return 0.021 * MIST_DENSITY * hour * (1.0 + 0.6 * rainStrength) * open;
+}
+
+/** Brume retirée par une clairière : un cylindre vertical, au bord adouci par deux rayons. */
+float mistHole(vec4 c, vec3 dir, float len, float y0, float h, float base) {
+    if (c.z <= 0.0) return 0.0;
+    float flat_ = length(dir.xz);
+    float hole = 0.0;
+    for (int i = 0; i < 2; i++) {
+        float r = c.z * (i == 0 ? 1.0 : 0.72);
+        if (flat_ < 1e-4) {
+            if (dot(c.xy, c.xy) < r * r) hole += 0.5 * mistLayer(y0, dir.y, 0.0, len, h, base);
+            continue;
+        }
+        vec2 d = dir.xz / flat_;
+        float b = dot(d, c.xy);
+        float disc = r * r - (dot(c.xy, c.xy) - b * b);
+        if (disc <= 0.0) continue;
+        float w = sqrt(disc);
+        float t0 = max(b - w, 0.0) / flat_;
+        float t1 = min((b + w) / flat_, len);
+        hole += 0.5 * mistLayer(y0, dir.y, t0, t1, h, base);
+    }
+    return hole * c.w;
+}
+
+/**
+ * Épaisseur optique de brume le long d'un rayon parti de la caméra. dir : unitaire, repère monde ;
+ * len : longueur du rayon ; nearOnly rend aussi la part de la nappe proche, sans l'anneau.
+ */
+float mistDepth(vec3 dir, float len, out float nearOnly) {
+    float y0 = cameraPosition.y;
+    float base = mistAnchor();
+    float h = MIST_HEIGHT;
+    float density = mistNearDensity() * (1.0 - MIST_LIFT * brumaireMist.x);
+    float through = mistLayer(y0, dir.y, 0.0, len, h, base);
+    through -= mistHole(brumaireClearing0, dir, len, y0, h, base);
+    through -= mistHole(brumaireClearing1, dir, len, y0, h, base);
+    through -= mistHole(brumaireClearing2, dir, len, y0, h, base);
+    through -= mistHole(brumaireClearing3, dir, len, y0, h, base);
+    nearOnly = density * max(through, 0.0);
+
+    // L'anneau : au-delà d'un rayon lié à la distance de rendu, une nappe dense.
+#ifdef DISTANT_HORIZONS
+    float edge = min(float(dhRenderDistance), MIST_RING_MAX);
+#else
+    float edge = far;
+#endif
+    float inner = edge * 0.55;
+    float flat_ = max(length(dir.xz), 1e-4);
+    float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
+    float ring = 5.0 / (edge - inner) * MIST_RING * open * mistLayer(y0, dir.y, inner / flat_, len, h, base);
+    return nearOnly + ring;
+}
+
+/** Couleur de la brume vue dans une direction ; sun : part de soleil qui l'atteint (0 sous un couvert). */
+vec3 mistColor(vec3 dir, float sun) {
+    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.55) * 0.95;
+    // Au lever et au coucher, la nappe prend les couleurs de l'horizon : chaude vers le soleil, mauve à l'opposé.
+    body = mix(body, skyAt(normalize(vec3(dir.x, 0.04, dir.z))) * 0.9, 0.65 * gDusk);
+    float toward = max(dot(dir, gLightDir), 0.0);
+    vec3 beam = gLightColor * (0.055 + 0.30 * pow(toward, 5.0) * SHAFT_STRENGTH);
+    return body + beam * sun;
+}

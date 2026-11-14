@@ -31,6 +31,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0025](0025-native-atlas.md) | The atlas runs natively | Surveyor, Antique Atlas 4 and Antique Transport ported to NeoForge in `salvagedisc/compline-atlas`; Connector removed, Forgified Fabric API kept for Puddles & Floods |
 | [0026](0026-second-cleanup.md) | Second cleanup: house effects, menus and leftovers | 15 mods and the Supernova pack removed (FancyMenu and Drippy, the rain mods, Shine, Polytone, Chunky, Biolith copy…), `averse` and `rayons` modules removed (`compline` 0.11.0), Distant Horizons warnings and Hamster Tips book off, music on 30 game tracks; the mist waits for the rendering study |
 | [0027](0027-rename-to-compline.md) | The pack is renamed Compline | Tilth no longer convinced: pack, custom mod, namespaces and repository become Compline / `compline`; worlds made before lose the mod's blocks |
+| [0028](0028-house-shader.md) | A house shader pack written from scratch | Brumaire in `pack/shaderpacks/`, off by default; Iris, Colorwheel and Iris Veil Compat; the mist follows the clearings; forks of Complementary and BSL ruled out by their licences |
 
 ## Template
 

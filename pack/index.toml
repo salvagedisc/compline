@@ -41,6 +41,10 @@ file = "config/defaultoptions/extra/config/entity_model_features.json"
 hash = "67005e1a77cf4b111ebd17137bb0e3e3bc73d9ea62154be41ea542e2ee2432a8"
 
 [[files]]
+file = "config/defaultoptions/extra/config/iris.properties"
+hash = "6d78e1e2e4c216738da7386a15ffa031c774eccd2052f84aaaf3c2898c9a14fd"
+
+[[files]]
 file = "config/defaultoptions/extra/config/punchy/punchy_config.json"
 hash = "95d3212dcd24c753571ff47bbf34ff17ffbfcc66ac619f5b7b9f4dc7820b45f8"
 
@@ -769,6 +773,10 @@ file = "kubejs/assets/coldsweat_altitude/lang/fr_fr.json"
 hash = "dc93517ec0ff6b567c0a55bb8fe90c702ea6baaf706d85503e7cc9d32791ed1d"
 
 [[files]]
+file = "kubejs/assets/colorwheel/lang/fr_fr.json"
+hash = "44b6a7b46083cda749335ca335b93405afdc747578ad9a5214911b9794e3fa7b"
+
+[[files]]
 file = "kubejs/assets/comforts/lang/fr_fr.json"
 hash = "fddaf40623ac3e4e3d744a9483d179e9234ffb39642f21500d9f25715c8d8f69"
 
@@ -979,6 +987,10 @@ hash = "e4ec5172661f94284afc945db73648de795fe9e26321dae14dadd7c64644ff53"
 [[files]]
 file = "kubejs/assets/immersiveenchanting/lang/fr_fr.json"
 hash = "6dea51c0c92d24bad830f737fe9332d08a8121a0bf9ac9816c175933f996377c"
+
+[[files]]
+file = "kubejs/assets/iris/lang/fr_fr.json"
+hash = "130457b4c1d2df63bad2a8af90a01904202104bae908feeba5b5a2cbfff8000a"
 
 [[files]]
 file = "kubejs/assets/itemphysic/lang/fr_fr.json"
@@ -2182,6 +2194,11 @@ hash = "3d30ac171f7b054e06a4efe45f22fc62d8e79d28c745c3ea9f0a32182500243a"
 metafile = true
 
 [[files]]
+file = "mods/colorwheel.pw.toml"
+hash = "c7f9286eabbfd298a73a92dc91031a27a8551a7cda8656f2173a4ba8cc0ac1a2"
+metafile = true
+
+[[files]]
 file = "mods/comforts.pw.toml"
 hash = "36f2f6e74b7dbeccb504572d47006582207544fa234a095093b97adfc7ecd5ac"
 metafile = true
@@ -2197,8 +2214,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.11.1.jar"
-hash = "8606612800871c8fe6fa10259d3055118ad349834ef61f5edc9d29347ac84c16"
+file = "mods/compline-0.12.0.jar"
+hash = "294f58dd034762eba27b023bb1f74adf49f825332d45d8e6cde48506f96821e6"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -2403,6 +2420,16 @@ metafile = true
 [[files]]
 file = "mods/in-control.pw.toml"
 hash = "8311cf201aa8d3c5d0c0291194f3c76d825591122b7ccf4f2fea08f6b39af526"
+metafile = true
+
+[[files]]
+file = "mods/iris-veil-compat.pw.toml"
+hash = "a485506e10aa312fe8786763a5a26a406ff3240541ecbdb7d4777d2efa1ceb40"
+metafile = true
+
+[[files]]
+file = "mods/iris.pw.toml"
+hash = "db1c1e6382878b78e994dba1b9026935f8d1c5ca685c89d2437858e0a0dcab58"
 metafile = true
 
 [[files]]
@@ -2808,6 +2835,310 @@ metafile = true
 file = "resourcepacks/fresh-animations.pw.toml"
 hash = "070948ef5674abf5d87f737453ee394531834602091aaa04dec192472cfa531e"
 metafile = true
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/block.properties"
+hash = "b9478871f048c1bb46b257ee9c6c2bcdccd9a5cc95670f07d4aa89d36aa7b7ad"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_gbuffers.fsh"
+hash = "e82e685efbda0640503d4e1db6a6dc5653e954273ec1f238cce04a639c7d0e17"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_gbuffers.vsh"
+hash = "d74d4a018c4cbc99b007cf87baf0be26838bdfd3402803032159c0519b3cf48a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_shadow.fsh"
+hash = "9d5f28cb4b85864831f2025bf172255ad05b66aff2dc84bfd42ca7c6c593e460"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/clrwl_shadow.vsh"
+hash = "e396230ed4eab323bab7c6b3f9ff3b41a94c7764a8eeb7a358aee28667e1fa7d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/colorwheel.properties"
+hash = "3c5b87fa0f6359bef141d94f3924b39f33b598cd604c5a179273162f3e9e76ac"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/composite.fsh"
+hash = "096f8cc7b4e866acfd6a9a7171eb42cd439a4d50d849b20e4b2201cb501fb1a6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/composite.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/deferred.fsh"
+hash = "7304011e78eef87ad835ba8033c2a7b80bff59572cfa67302efed2f7620fd470"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/deferred.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_terrain.fsh"
+hash = "121bc1c54693dd8fd1c39696d7345afe470ee672c8216aa20146a1bfb7fb231c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_terrain.vsh"
+hash = "93a43a214f4512f0011cc285edf102bbb07c39079f0b7498ac5e9ddc3320c255"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_water.fsh"
+hash = "33bff691a2618e258f112f62b6ddcf8323b5c73f58674fb36d71b57a519dca95"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/dh_water.vsh"
+hash = "ddae2e0fca233ac06be4d9971e46e4200a27c8d754ac29b6098a2df30d1fa6c3"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/final.fsh"
+hash = "0b5896841d8f90daaeb8f444d04cdf44b784a0ec76fd0a92fa42c0dba371d8c6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/final.vsh"
+hash = "3bc3210be5fa131cb90044730dc75634173f96132854a4fad5ba336efea3d84c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_armor_glint.fsh"
+hash = "5b85d055289b8f797939ac9007e45a54db0d6a871dcfe323448b6adb8890d5ce"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_armor_glint.vsh"
+hash = "9e12ece22a755950b819e3ceb6ebc83dee7dd45b3c885529b648c3aad1848e4d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_basic.fsh"
+hash = "54e2f63c361a69312d680cd227497ec5af612f2a1442b3837e0c4e9f96b917fc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_basic.vsh"
+hash = "b78c0f5a3e301c75053f33ffcc334789a1a639ccd74c0cf3351dca3dbd763c35"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_beaconbeam.fsh"
+hash = "6d793b01a0fd2ce641b8ae68c1ab4f8e7955c168e0a59bc303b17eb9130bb430"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_beaconbeam.vsh"
+hash = "6868e53a57d3ed81943bb0c720c4a41048e1795473dd26a9adc7f8ba1858c240"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_block.fsh"
+hash = "99d7a7762b0240605d5fc71f898d49a1187f63a7d225f91ba74132b97d690d56"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_block.vsh"
+hash = "ef8b4ead3949da8a2999a5073379cca1d39716e3b1661375e4344c06089b0bb1"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_clouds.fsh"
+hash = "dc381995b21022eaee955ee8586539b1427d9c9db18f81cc81ec9a775d332890"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_clouds.vsh"
+hash = "a3952495fc3f6fbd1fadc5efc004afb6a225e2a5092d8421b4ea3955881cf909"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_damagedblock.fsh"
+hash = "f3c6e04b06d9b2825f72c7530817dcbd7390444a00a766f653b737576c20df51"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_damagedblock.vsh"
+hash = "0e698d9b69e5a3f3ffb08bce97706d09b3cab3376460c0421074cbedb91d7f53"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_entities.fsh"
+hash = "fb413b356c20b3ab91d3e2bd5f712af5ebd2e52bc7243c6799a4df2dbff2dc27"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_entities.vsh"
+hash = "43dc3080d3dfb7d4de7af857a3545cef7686c24b67c6a10bb97804822201c4e1"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_hand.fsh"
+hash = "cd15e9ab75602302ee6bc10e9f941dfdffa98f22ab8d2832f909a8b761a72999"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_hand.vsh"
+hash = "3d3e27dd550848a8f917fb42d0f0d6276338e84025c6d74ffb6939bbf8056f36"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skybasic.fsh"
+hash = "77c708f420a6932a995a33f8f5633ae77f2416a87a9ada76d3aa03f33bcc2a07"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skybasic.vsh"
+hash = "bcb61fd19a1f5ec2da3f91bfd8d0fe085a63df67395e9fdc8af250b6753c643f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skytextured.fsh"
+hash = "4b8db4b3560efc06ab9859a39e38426ae75a93e99ad0cd0fcd4831d5b1bd91ac"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_skytextured.vsh"
+hash = "4d979bd0b835ca15753c7d4655345eaae7cbe73a88b3ef89e41831c1ebac2f87"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_spidereyes.fsh"
+hash = "6d793b01a0fd2ce641b8ae68c1ab4f8e7955c168e0a59bc303b17eb9130bb430"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_spidereyes.vsh"
+hash = "6868e53a57d3ed81943bb0c720c4a41048e1795473dd26a9adc7f8ba1858c240"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain.fsh"
+hash = "d62c61763f051177c7d4f27e31cf64bac8d3c89f3387bbdfb0346c529607cf65"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain.vsh"
+hash = "f49708f9bd2b830a06dda8f3e786fc1dce3fe6e7ec8352aa83ca74387cd7be4e"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured.fsh"
+hash = "6a5f3d268dfe5e0b96e4f4f6125941bc063ac5799de997f62f649bd2410ec65a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured.vsh"
+hash = "b6350beff838efe3f4f35c4e6afe873d5dcc422f7547262614761082cb08cc3f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured_lit.fsh"
+hash = "6a5f3d268dfe5e0b96e4f4f6125941bc063ac5799de997f62f649bd2410ec65a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_textured_lit.vsh"
+hash = "b6350beff838efe3f4f35c4e6afe873d5dcc422f7547262614761082cb08cc3f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_water.fsh"
+hash = "d9714c422adc63b75419b927efc931962f6e469df128f6ae7977658f6398a714"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_water.vsh"
+hash = "2f796f3eeb4ce2ecddb2bcd2416ee2057a6a3c907a9156be288f83058bad0f36"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_weather.fsh"
+hash = "2d2f66097912b3f897f60d7e3bd0af32428afdc7b92aa243a72ae232a9318c17"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_weather.vsh"
+hash = "c61aa1698feda1de65e3b2dbd2914a7dadfc559c39da9c2b0b285755b63c7d6e"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
+hash = "23bc4f117448da80cc1fa620e74639aeb7435c60b39700332fc3ee40d2cbbbb3"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
+hash = "dac97415324ed70aa65a7fd0abca2242d3443a11342da542d43bf211510b4dd9"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/common.glsl"
+hash = "31722e7fef69752e55df22cf7486fa118bbe24833b978aa4503ed9ad876b5705"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/light.glsl"
+hash = "e211ad1c15de3b51a20738448df100737dc27e66703f8e06f73e310e095c7260"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/mist.glsl"
+hash = "5832f89d91c80e145700dcb014332b45666da9c8358d5e18bffd4837e2c4d5cc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
+hash = "fdc4ffd491a5e6a20608a4a1da1c85a734f2028307f9ccfe54f5c8d737e3483a"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
+hash = "7d86b35571ce29b2b7a3f0b140ea363f3edbe9b7da0fa2139533c4e642c325cc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/wind.glsl"
+hash = "fcaaf7591346b8caa4ce31364807680c5850c8b37a000f49ff8bccb932a03553"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/clrwl_shadow.fsh"
+hash = "b77f2b2eeea25e1de24e977c400f09f250c0f0c502fe4c3563669d8f873eedd7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/clrwl_shadow.vsh"
+hash = "65e57b612fda59c7babd6c5ed825eedb74d7bd26093d08a38d1e639c9f3ae497"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/composite.fsh"
+hash = "315e16834805f4ba7fce93fe43bf5db2512b531f38d2ce043348694367e1f954"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/deferred.fsh"
+hash = "dee5e42278ba7b05c061d6a6055c40e4fc18e752b724942e52c9dcb66dba1f88"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/distant.fsh"
+hash = "dd21d2a0c53a9408344e7173bf2f1b1ee8a4ef05c2eb42ef547aae69473034b4"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/distant.vsh"
+hash = "c4400b92d1b12a7607846fd2caeaf6a0446879ed8d95cb0f45206b80ecfda09c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/final.fsh"
+hash = "17f9ec5b5a385d96c529694e864d70fd896c9859840b7789a2e920f57e2fd44d"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skybasic.fsh"
+hash = "2530536937b567ea5dd503a186baf0a092175c82467413090625f4e1603f5370"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skybasic.vsh"
+hash = "c6a9f6c7bf836099bc48f8dc5009aca62bc070c9f6eddea3e967ca4f347f3fe0"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skytextured.fsh"
+hash = "3dc434ff96964282287ef8a7d41173fea323b997cff78d4a27328ddbd3b226b7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/gbuffers_skytextured.vsh"
+hash = "14a9b7d36fc0669ca98dd1421376136d6713abe91045b78a37805f220e0546a6"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/scene.glsl"
+hash = "95d4e4979e81750ea42a6c6460f8597a06bdaea5e5d562fad76f03db3c343bde"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/screen.vsh"
+hash = "650b256b387ac2bf0c02aee45e8057a66f4a2359011b51d506551cd64258a2ba"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/shadow.fsh"
+hash = "49913e00d0fee810f12ff69ee7c2fbee3785a5033d0a3af40cecdeef099e554c"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/shadow.vsh"
+hash = "8742129f28798153722bafded28aa09a001d651bf05613f408d26ce80b4649af"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
+hash = "e75c88dee6e46c2e79c383b7295c9b66643d608c40be6394b885aabfe3dbb8e7"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
+hash = "617b553a0ba2f2b84f4ce873a9fe861bc60687d01a936e3de63bcc632bf465a4"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shaders.properties"
+hash = "4962ccc3d067a6b21cbb38e8983b8466f6ba2504b138b6b63db64b538b4879a2"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shadow.fsh"
+hash = "fc4629ebf1fdb6f73cdb1de3ac9021b48f6f9b14dd436379fcc59d5094c51e93"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/shadow.vsh"
+hash = "e0ac0ff863b07d0be49ca1e53a72845f3c9df8f4dbdcef85b884fbf0e53950ff"
 
 [[files]]
 file = "trueadaptivemusicpacks/compline/meta.json"

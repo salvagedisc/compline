@@ -57,6 +57,20 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
 - [ ] **Wind** (Where Winds Blow): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
+### With the house shader pack
+
+> Brumaire is off by default ([shader](plan/shader.md)). Turn it on with K or in the video settings, on a machine with a graphics card (not an Apple Silicon Mac). Note the frame rate of each profile next to the one without shader.
+
+- [ ] **It loads** [SH1]: no red message in the chat when turning it on; K turns it off and the game looks as before.
+- [ ] **Mist** [SH2]: it lies on the ground, the tree tops and the hills come out of it; the horizon is always closed by mist, with Distant Horizons too; no mist in a cave.
+- [ ] **Clearing** [SH3]: place a Vigil Fire, then a Clearing Lantern: the mist opens with the wave; from inside the view carries far, from outside the clearing is a clear pocket; breaking the block brings the mist back.
+- [ ] **Light** [SH4]: shadows of trees, animals and Create contraptions; shafts of light under a canopy in the morning; lanterns and torches glow at night; the moonlit night stays readable.
+- [ ] **Wind** [SH5]: grass, flowers, crops and leaves move with the wind and bend when a gust of Where Winds Blow passes; list the plants of the biome mods that stay still.
+- [ ] **Water** [SH6]: waves, the bottom fades with depth, the sky is mirrored at a low angle; under water the view is blue-green.
+- [ ] **Create, Sable, Aeronautics** [SH7]: a water wheel, a moving contraption, an airship and levitite are lit and shaded like the rest; note anything translucent drawn in the wrong order.
+- [ ] **Camera** [SH9]: in the over-the-shoulder view, the character still fades when the camera comes close to it (on the bench a spectator's head stayed opaque).
+- [ ] **Settings** [SH8]: the three profiles change the frame rate; the names are in French; "Verts olive" at 0 gives back the greens of the game.
+
 ## Session 3: the night and the moon
 
 - [ ] Clear night: a single moon, in its place, with the right phase [C1].
@@ -156,6 +170,7 @@ Once the results are in:
 | --- | --- |
 | C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
+| SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
