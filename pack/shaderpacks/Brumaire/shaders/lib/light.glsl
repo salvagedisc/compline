@@ -1,0 +1,32 @@
+// Éclairage direct d'une surface : soleil ou lune avec ombre, ciel, blocs lumineux.
+
+/**
+ * albedo : couleur linéaire ; normal : repère monde ; lm : lumière des blocs et du ciel (0..1) ; ao : occlusion ;
+ * pos : repère joueur ; leaf : 0 surface dure, 1 feuillage que la lumière traverse ; frag : gl_FragCoord.xy.
+ */
+vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, vec2 frag, int taps) {
+    float facing = dot(normal, gLightDir);
+    float diffuse = mix(max(facing, 0.0), 0.72, leaf);
+    float lit = 0.0;
+    if (diffuse > 0.0) {
+        float dist = length(pos);
+        // Au-delà de la carte d'ombre, la lumière du ciel du jeu tient lieu d'ombre.
+        float beyond = smoothstep(shadowDistance * 0.82, shadowDistance * 0.98, dist);
+        float fallback = smoothstep(0.80, 0.94, lm.y);
+        lit = beyond < 1.0 ? mix(shadowAt(pos, normal, dither(frag), taps), fallback, beyond) : fallback;
+    }
+    vec3 light = gLightColor * diffuse * lit;
+    // Le feuillage à contre-jour laisse passer un peu de soleil.
+    vec3 view = normalize(pos);
+    light += gLightColor * leaf * lit * 0.35 * pow(max(dot(view, gLightDir), 0.0), 4.0);
+
+    float sky = lm.y * lm.y;
+    float occl = ao * ao;
+    light += gAmbient * (0.70 + 0.30 * normal.y) * sky * occl;
+    float glow = lm.x * lm.x * (0.30 + 2.3 * lm.x * lm.x * lm.x);
+    light += vec3(1.0, 0.60, 0.30) * glow * mix(occl, 1.0, lm.x * lm.x);
+    light += vec3(0.016, 0.018, 0.022) * occl;
+    light += vec3(0.30, 0.32, 0.34) * nightVision;
+    light *= 1.0 - 0.7 * darknessFactor;
+    return albedo * light;
+}
