@@ -1185,6 +1185,10 @@ file = "kubejs/assets/treechop/lang/fr_fr.json"
 hash = "3232139133528c6891edbdbdb37f0c0b9c2cb2870b0cac293de61bc00e1aab2c"
 
 [[files]]
+file = "kubejs/assets/trender/lang/fr_fr.json"
+hash = "147a536e96829f10bbf4fe21365d56951537b70ab97342a7a1765e613e9448c7"
+
+[[files]]
 file = "kubejs/assets/trueadaptivemusic/lang/fr_fr.json"
 hash = "fc7370419d6486b76d1483401ed7d1cb0ac58a1c86959dc091caf0183d419ad6"
 
