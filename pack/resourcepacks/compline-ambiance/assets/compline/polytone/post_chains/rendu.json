@@ -1,0 +1,23 @@
+{
+  "activation_condition": "config('compline:rendu') && g.skyType()==1",
+  "post_chain": "compline:rendu",
+  "use_depth_buffer": true,
+  "priority": 0.0,
+  "expression_uniforms": {
+    "Pluie": "g.rain()",
+    "Ciel": "c.skyLight() / 15.0",
+    "ForceRayons": "config('compline:rayons')",
+    "ForceHalo": "config('compline:halo')",
+    "ForceAir": "config('compline:air')",
+    "ForceTons": "config('compline:tons')",
+    "ForceOlive": "config('compline:olive')",
+    "ForceOmbres": "config('compline:ombres')",
+    "CamX": "c.x()",
+    "CamY": "c.y()",
+    "CamZ": "c.z()",
+    "Temps": "g.time() % 7200"
+  },
+  "samplers": {
+    "Relief": "compline:textures/relief.png"
+  }
+}

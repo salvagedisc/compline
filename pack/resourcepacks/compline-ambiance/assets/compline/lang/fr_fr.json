@@ -1,0 +1,17 @@
+{
+  "config.compline.header": "Compline",
+  "config.compline.rendu": "Rendu de Compline",
+  "config.compline.rendu.tooltip": "La lumière, l'air et les couleurs que Compline pose sur l'image du jeu. Coupé, le jeu retrouve son rendu d'origine.",
+  "config.compline.ombres": "Ombres du soleil",
+  "config.compline.ombres.tooltip": "L'ombre des arbres, des reliefs et des murs, sans pack de shaders. 0 les éteint.",
+  "config.compline.rayons": "Rayons de soleil",
+  "config.compline.rayons.tooltip": "La lumière du soleil et de la lune qui passe entre les feuillages. 0 les éteint.",
+  "config.compline.halo": "Halo des lumières",
+  "config.compline.halo.tooltip": "La lueur autour des torches, de la lave et du soleil. 0 l'éteint.",
+  "config.compline.air": "Air et lointains",
+  "config.compline.air.tooltip": "Le voile doré du côté du soleil et la fraîcheur des lointains. 0 l'éteint.",
+  "config.compline.tons": "Tons",
+  "config.compline.tons.tooltip": "Nuits bleutées, crépuscules dorés, pluie plus grise, contraste plus doux. 0 garde les couleurs du jeu.",
+  "config.compline.olive": "Verts olive",
+  "config.compline.olive.tooltip": "Tire les verts vifs vers l'olive. 0 garde les verts du jeu."
+}
