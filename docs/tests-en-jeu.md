@@ -57,6 +57,21 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
 - [ ] **Wind** (Where Winds Blow): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9].
 
+### The default look (`compline-ambiance`)
+
+> On by default ([ambiance](plan/ambiance.md)). Settings: Options > Resource Packs > brush button, section Compline. Note the frame rate with `Rendu de Compline` on and off.
+
+- [ ] **It loads** [AM1]: no red message at launch; the section Compline shows seven settings in French; `Rendu de Compline` off gives back the image of the game at once.
+- [ ] **Sun shadows** [AM2]: at mid-morning in a clearing, trees, hills and a wall cast a shadow on the right side; flecks of sun under a canopy; the shadows do not swim when walking or turning; they soften in the mist and vanish in the rain and at night.
+- [ ] **A change shows** [AM3]: fell a tree, build a wall three blocks high: the shadow follows within a second or two.
+- [ ] **Light** [AM4]: shafts of light between the leaves when looking towards a low sun; torches and lava glow at night without washing out the screen.
+- [ ] **Under water** [AM5]: dive in a lake and in the sea: murky green water, beams from the surface, moving light on the bottom near the surface; coming out, the look is back at once. Lava and powder snow are unchanged.
+- [ ] **Rain and storm** [AM6]: the rain is pale and lets the landscape through; under a storm the day darkens and lightning shows through the mist.
+- [ ] **Night** [AM7]: after the eyes adapt (More Darkness), the night is as readable as with `Rendu de Compline` off.
+- [ ] **Distance** [AM8]: with Distant Horizons, note where the look of the near terrain and of the distant terrain differ (no shadow beyond 112 blocks).
+- [ ] **With Brumaire** [AM9]: turn the shader pack on (K): no doubled effects, no black screen; turn it off: the default look is back.
+- [ ] **Without a graphics card to spare** [AM10]: on the weakest machine of the group and on a Mac, frame rate with and without.
+
 ### With the house shader pack
 
 > Brumaire is off by default ([shader](plan/shader.md)). Turn it on with K or in the video settings, on a machine with a graphics card (not an Apple Silicon Mac). Note the frame rate of each profile next to the one without shader.

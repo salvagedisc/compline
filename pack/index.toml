@@ -34,7 +34,7 @@ hash = "48b83973132d41c7fe23f5861c1ff580b3734ee0397c62ae1031e2dd289284f2"
 
 [[files]]
 file = "config/defaultoptions-common.toml"
-hash = "e4db601658501f98b1d33bfc78909d8da87bb1f4d35d5a5dfe624e3e1d8de980"
+hash = "ffa3e0a056334f93c6eda26aee1706b5e05a9c1d555e59376add18fb5ae03c9e"
 
 [[files]]
 file = "config/defaultoptions/extra/config/entity_model_features.json"
@@ -1075,6 +1075,10 @@ hash = "0fddeb2112e0cd9a75286b2a7b41aa5bfcbc3dfc32fa0ca5a310959902ee815b"
 [[files]]
 file = "kubejs/assets/patchouli/lang/fr_fr.json"
 hash = "d21a21897ce4ee9673ecb09e7469dd2e78a4d442314dd14c0dbe7eedc2bfb257"
+
+[[files]]
+file = "kubejs/assets/polytone/lang/fr_fr.json"
+hash = "e1526689c6eaff64fbf4f6b055058662131f09f6a15d217f500cd2f7304ead33"
 
 [[files]]
 file = "kubejs/assets/ponder/lang/fr_fr.json"
@@ -2210,8 +2214,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.12.0.jar"
-hash = "294f58dd034762eba27b023bb1f74adf49f825332d45d8e6cde48506f96821e6"
+file = "mods/compline-0.13.0.jar"
+hash = "2634a00eafff4658b745adb1029343eb10132b051be258ea26846380702d97d6"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -2589,6 +2593,11 @@ hash = "49c0bacf8e4cb3ade6c384ad379282f92d7fa3075f2affd8e3093feb685288dd"
 metafile = true
 
 [[files]]
+file = "mods/polytone.pw.toml"
+hash = "9d937a18c45d97e551c97677f5ed65c0a31837ba63e3767dbca7a498dadb9d58"
+metafile = true
+
+[[files]]
 file = "mods/punchy-fpa.pw.toml"
 hash = "253e843caefaf2ddb7b5d18ea5198904ed1a2e913a9d29dc577c8e0a82f4948b"
 metafile = true
@@ -2796,6 +2805,122 @@ metafile = true
 file = "resourcepacks/better-leaves.pw.toml"
 hash = "c26f8da8b6f013fb7e917e29fc6ae783eb379c539da12d9d61196bc762fd26e1"
 metafile = true
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/lang/en_us.json"
+hash = "0d97e14d62a25acd268a80fb0edb717eb66632b69eefb63289ee4451b1ecdcb1"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/lang/fr_fr.json"
+hash = "33b0f1f68e1f87d2a223316f1637fe5355fe2155dac51c6f395d6e2e2e32d21c"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/air.json"
+hash = "f055f40f43494554a35a84579e61c0d0c12a64400a0163f9b02aeaa4f3f68751"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/halo.json"
+hash = "51dfcacb6c9b4982e2f4bb368e456ab24d8a1bd0140cb5f658dec7533dddc8f9"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/olive.json"
+hash = "e6789118d401828adbf82a44a7f7c9145fd62ef6c49a6354c0e1d5194eaaaec7"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/ombres.json"
+hash = "b78a878128f6660bdb8c6573cbabeee9229fb5575d7d8d37db815c49693eb551"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/rayons.json"
+hash = "2a71c72fb95efc537bd33dd3c518177c1a1c7d40ec9ae75f81225ccb2f3656fb"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/rendu.json"
+hash = "bf69a8a5fb5695891921f753134a506c674695e222b08206559d85dc831dc06c"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/tons.json"
+hash = "47a0d409e5cca87febb583cad1dc5963284301a8249f3e3b2766eb332aaedbd9"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/post_chains/rendu.json"
+hash = "a3da61a0ee68c762a2a5f4b756a968b90c3eeff537c09a4fbac0af2ca0ef7b9b"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/post_effect/rendu.json"
+hash = "6558278776ca020ac9231d45de62d0bbcbbf7cffa233b0a0b3fba5723b0e8e94"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/copie.fsh"
+hash = "492db06171092010ca5c71ce76584c309e4531fd9ba5c19dd9a8952ea1fbe3fd"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/copie.json"
+hash = "a7df38abbc3f5694da3a009df6b6a391fe74ff08ceee3979c383d259deef8677"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/ecran.vsh"
+hash = "d232eeb49edf4eff154be3198e5751757b9c41f8f75a549ccbd2027cef17b8c9"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/flou.fsh"
+hash = "9bc290cf70fe9c43d95448ec77f2c66aab3f1de5750881e025f68e780ed68a41"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/flou.json"
+hash = "5fc9b54626626edc9b696a9e1fd53d76173c1241963d7cd5579922aa6db1c607"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/plein.vsh"
+hash = "f2e394b38b4d6ffaec9aa830c28b7b4cf2b45d66d14f766b7c2653b9158de11c"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/rayons.fsh"
+hash = "017588ac202997a0a26e5b5895d6e36003549fcdd7cdb0225ca6e15f92faf4de"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/rayons.json"
+hash = "c812c978b1a35252eef0142124239e26acfc3b2ae5f65854c1968be726c33e9b"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/seuil.fsh"
+hash = "d9a4eeabb30725f265c10e0a5bc5fa55a8fb42065971e378d232e659790aeba8"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/seuil.json"
+hash = "2103d8680ec5e82d505e6098c22a4846d6b73f7b54e80b44d8bc0f8e991ee001"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/tons.fsh"
+hash = "329c4b93a912891796d8a6f1fd224e82b08101cdc4413e2484b6d50ffb7da084"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/tons.json"
+hash = "535aab873e08a40a8467da9f994ebb94a8c418cb74bde77558a70434104ed78d"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/textures/relief.png"
+hash = "cda81936510937479a70412ad3f0f5397c40fe729fdcc01949e60100770f10a7"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/minecraft/shaders/core/particle.fsh"
+hash = "e24d73ca3c8e2ab8ae62ad57177e0d7501e9cae027ccd4d76b335b2ca47492eb"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/minecraft/shaders/core/particle.vsh"
+hash = "9c4417b6ac55fab7a8827e62450d1d414ae380076be154317ebf2b949fc78b6a"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/minecraft/shaders/core/rendertype_lightning.fsh"
+hash = "9b015ab132e50775b0d3b54f8e72d7ad1aa0f20293be1e99ba2f3122ddfbba47"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/minecraft/textures/environment/rain.png"
+hash = "43098e6aa737496e3a8d9710e19a86eed8cf617887078b1785a7a87a6a640c90"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/pack.mcmeta"
+hash = "730a4c7679e07160a3a905b0755881bb2246c97a70fcec6cf0655f0d7098bbcf"
 
 [[files]]
 file = "resourcepacks/fa-player-extension.pw.toml"
