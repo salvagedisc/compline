@@ -77,9 +77,24 @@ const CUISINE_RECETTES_RETIREES = [
   'regions_unexplored:barley_smoking'
 ]
 
+// Petits poissons d'Hybrid Aquatic : son tag hybrid_aquatic:small_fish contient aussi la
+// morue, le saumon et le poisson tropical, que Farmer's Delight découpe déjà en filets. Le tag
+// compline:petits_poissons ne garde que les siens (la planche n'accepte pas de liste).
+const CUISINE_PETITS_POISSONS = [
+  'carp', 'trout', 'sunfish', 'pleco', 'dragonfish', 'hagfish', 'piranha', 'anglerfish',
+  'barreleye', 'surgeonfish', 'clownfish', 'damselfish', 'boxfish', 'tiger_barb', 'flying_fish',
+  'snailfish', 'pearlfish', 'seahorse', 'cichlid', 'flashlight_fish', 'squirrelfish', 'blowfish',
+  'stonefish', 'discus', 'gourami', 'betta', 'danio', 'tetra', 'african_butterflyfish',
+  'mackerel', 'herring', 'john_dory', 'goldfish'
+].map(nom => 'hybrid_aquatic:' + nom)
+
+ServerEvents.tags('item', event => {
+  event.add('compline:petits_poissons', CUISINE_PETITS_POISSONS)
+})
+
 // Découpe d'Hybrid Aquatic : [recette retirée de l'établi, ingrédient, résultat, nombre, os].
 const CUISINE_DECOUPES = [
-  ['hybrid_aquatic:raw_fish_meat_small', { tag: 'hybrid_aquatic:small_fish' }, 'hybrid_aquatic:raw_fish_meat', 1, true],
+  ['hybrid_aquatic:raw_fish_meat_small', { tag: 'compline:petits_poissons' }, 'hybrid_aquatic:raw_fish_meat', 1, true],
   ['hybrid_aquatic:raw_fish_meat_medium', { tag: 'hybrid_aquatic:medium_fish' }, 'hybrid_aquatic:raw_fish_meat', 2, true],
   ['hybrid_aquatic:raw_fish_steak', { tag: 'hybrid_aquatic:large_fish' }, 'hybrid_aquatic:raw_fish_steak', 2, true],
   ['hybrid_aquatic:raw_crab', { tag: 'hybrid_aquatic:crab_claw' }, 'hybrid_aquatic:raw_crab', 1, false],

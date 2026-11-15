@@ -2130,7 +2130,7 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/server_scripts/cuisine.js"
-hash = "c512574ba663ef97f7d6888f08b69d6a2c918c22eae9475a3d05052fd013b77e"
+hash = "7656d4b36ecb95f7c57d777297473e5094f8b19017141d7fc85168eb5b0d7dd9"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
