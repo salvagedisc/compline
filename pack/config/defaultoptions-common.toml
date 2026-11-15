@@ -1,6 +1,6 @@
 # Compline : packs de ressources activés au premier lancement. Du moins prioritaire
 # au plus prioritaire : les feuilles de Better Leaves, Fresh Animations et ses
-# extensions, puis compline-ambiance (lumière, couleurs et météo, sans shader).
+# extensions. Le rendu vient du pack de shaders Brumaire (config/iris.properties).
 # Default Options ne sélectionne que les packs de cette liste : les ressources des
 # mods (mod_resources de NeoForge, fabric de Connector), absentes, étaient rajoutées
 # au-dessus des autres et passaient devant Fresh Animations. Elles sont donc
@@ -14,6 +14,5 @@ defaultResourcePacks = [
 	"file/FA+Details-v2.2.1.zip",
 	"file/FA+Objects-v2.1.2.zip",
 	"file/FA+Emissive-v1.6.zip",
-	"file/FA+Player-v1.1.zip",
-	"file/compline-ambiance"
+	"file/FA+Player-v1.1.zip"
 ]

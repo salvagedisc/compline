@@ -1,10 +1,10 @@
 # Brumaire, the house shader pack
 
-Living page of the shader pack shipped in `pack/shaderpacks/Brumaire/` (decision [0028](../decisions/0028-house-shader.md)). "Brumaire" is a working name.
+Living page of the shader pack shipped in `pack/shaderpacks/Brumaire/` (decisions [0028](../decisions/0028-house-shader.md) and [0031](../decisions/0031-brumaire-is-the-look.md)). It is the look of the pack. "Brumaire" is a working name.
 
 ## Turning it on
 
-Shaders are **off by default**. In game: Options > Video Settings > Shader Packs, or K (toggle), O (list), R (reload). Iris keeps a player's settings in `shaderpacks/Brumaire.txt`. Iris does not officially support Apple Silicon Macs: there the pack is meant to be played with the shader off.
+Brumaire is **on from the first launch** (`config/iris.properties`, written once by Default Options). In game: K turns it off or on, O lists the shader packs, R reloads it; Options > Video Settings > Shader Packs holds its settings and profiles. Iris keeps a player's settings in `shaderpacks/Brumaire.txt`. Iris does not support Apple Silicon Macs: there the pack is played without shader, with the vanilla look and the mist of ATMOSPHERICS.
 
 ## How a frame is built
 

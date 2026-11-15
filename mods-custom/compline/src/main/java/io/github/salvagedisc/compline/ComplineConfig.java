@@ -25,7 +25,6 @@ public final class ComplineConfig {
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
-    private static final ModConfigSpec.BooleanValue RELIEF_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
 
     static {
@@ -73,12 +72,6 @@ public final class ComplineConfig {
                 .define("enabled", true);
         client.pop();
 
-        client.comment("Module relief (client) : sous Polytone, il donne au pack de ressources compline-ambiance la hauteur du monde autour de la caméra.").push("relief");
-        RELIEF_ENABLED = client
-                .comment("Interrupteur du module. Vrai : le pack de ressources dessine l'ombre du soleil (arbres, reliefs, murs)",
-                        "sans pack de shaders. Faux : pas d'ombres portées, le reste du rendu du pack est inchangé.")
-                .define("enabled", true);
-        client.pop();
 
         CLIENT_SPEC = client.build();
 
@@ -163,10 +156,6 @@ public final class ComplineConfig {
 
     public static boolean renduEnabled() {
         return read(CLIENT_SPEC, RENDU_ENABLED);
-    }
-
-    public static boolean reliefEnabled() {
-        return read(CLIENT_SPEC, RELIEF_ENABLED);
     }
 
     public static boolean xpEnabled() {

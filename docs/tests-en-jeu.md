@@ -57,30 +57,11 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
 - [ ] **Wind** (Where Winds Blow): a misty forest under rain then thunder, grass and leaves sway, rain slants; FPS before and after [R1, R2]. Snow and desert: no extra fog [R4]. An airship in flight with lanterns: lanterns sway [R5]. Distant landscape stays still [R6]. Sun, moon and stars bigger and brighter [R8]; no double wind streaks or tumbleweeds [R9]. Campfire smoke: one fire, then three or four side by side, in calm weather then under rain; the smoke bends with the grass, the fires merge into one larger plume, a soul fire keeps its own colour; if it looks thin, raise `windSmokeStrength` in Where Winds Blow's settings [R10].
 
-### The default look (`compline-ambiance`)
+### The look (Brumaire)
 
-> On by default ([ambiance](plan/ambiance.md)). Settings: Options > Resource Packs > brush button, section Compline. Note the frame rate with `Rendu de Compline` on and off.
+> Brumaire is on from the first launch ([shader](plan/shader.md)), on a machine with a graphics card (not an Apple Silicon Mac). K turns it off. Note the frame rate of each profile next to the one without shader, and on the weakest machine of the group.
 
-- [ ] **It loads** [AM1]: no red message at launch; the section Compline shows ten settings in French; `Rendu de Compline` off gives back the image of the game at once.
-- [ ] **Sun shadows** [AM2]: at mid-morning in a clearing, trees, hills and a wall cast a shadow on the right side; flecks of sun under a canopy; the shadows do not swim when walking or turning; they soften in the mist and vanish in the rain and at night.
-- [ ] **A change shows** [AM3]: fell a tree, build a wall three blocks high: the shadow follows within a second or two.
-- [ ] **Light** [AM4]: shafts of light between the leaves when looking towards a low sun; torches and lava glow at night without washing out the screen.
-- [ ] **Under water** [AM5]: dive in a lake and in the sea: murky green water, beams from the surface, moving light on the bottom near the surface; coming out, the look is back at once. Lava and powder snow are unchanged.
-- [ ] **Rain and storm** [AM6]: the rain is pale and lets the landscape through; under a storm the day darkens and lightning shows through the mist.
-- [ ] **Night** [AM7]: after the eyes adapt (More Darkness), the night is as readable as with `Rendu de Compline` off.
-- [ ] **Distance** [AM8]: with Distant Horizons, note where the look of the near terrain and of the distant terrain differ (no shadow beyond 112 blocks).
-- [ ] **With Brumaire** [AM9]: turn the shader pack on (K): no doubled effects, no black screen; turn it off: the default look is back.
-- [ ] **Without a graphics card to spare** [AM10]: on the weakest machine of the group and on a Mac, frame rate with and without.
-- [ ] **Water from inside** [AM11]: dive in a river, the sea and a swamp: each water keeps its own tint (green, teal, olive) without the game's bright blue; deeper, it darkens; a few specks float and catch the light when looking up; `Sous l'eau` at 0 gives back the game's water.
-- [ ] **Sky through the surface** [AM12]: two blocks under a lake, look up: a bright circle of sky with a dark ring around it; a tree on the bank stays visible inside the circle; under a roof of ice or rock no circle.
-- [ ] **Sky on the water** [AM13]: at a lake at sunset, the water near the horizon shows the sky's colours, little when looking straight down, and the sun leaves a glint; in the rain the reflection breaks up; no reflection on dry ground next to the water.
-- [ ] **Low mist** [AM14]: at dawn in a river valley, a thin mist lies on the water and in the low ground, not on the hilltops; it never paints a band over the sky.
-
-### With the house shader pack
-
-> Brumaire is off by default ([shader](plan/shader.md)). Turn it on with K or in the video settings, on a machine with a graphics card (not an Apple Silicon Mac). Note the frame rate of each profile next to the one without shader.
-
-- [ ] **It loads** [SH1]: no red message in the chat when turning it on; K turns it off and the game looks as before.
+- [ ] **It loads** [SH1]: on a new installation the shader is on at the first world; no red message in the chat; K turns it off and the game shows the vanilla look with the mist of ATMOSPHERICS.
 - [ ] **Mist** [SH2]: it lies on the ground, the tree tops and the hills come out of it; the horizon is always closed by mist, with Distant Horizons too; no mist in a cave.
 - [ ] **Clearing** [SH3]: place a Vigil Fire, then a Clearing Lantern: the mist opens with the wave; from inside the view carries far, from outside the clearing is a clear pocket; breaking the block brings the mist back.
 - [ ] **Light** [SH4]: shadows of trees, animals and Create contraptions; shafts of light under a canopy in the morning; lanterns and torches glow at night; the moonlit night stays readable.

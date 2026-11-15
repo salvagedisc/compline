@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
  * Là où le jeu calcule la teinte d'un bloc (herbe, feuillage, eau), il interroge une règle de couleur avec le
  * biome de chaque point. Dans une clairière, la règle reçoit toujours le vrai biome, mais ses couleurs de base
  * sont celles du biome de clairière le temps de l'appel ({@link ClearingClient#tint}). On passe par l'appel, et
- * non par les constantes de {@code BiomeColors} : Ecliptic Seasons et Polytone les remplacent à leur tour.
+ * non par les constantes de {@code BiomeColors} : Ecliptic Seasons les remplace à leur tour.
  */
 @Mixin(ClientLevel.class)
 abstract class ClientLevelTintMixin {

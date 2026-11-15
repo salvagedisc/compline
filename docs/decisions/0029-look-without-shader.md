@@ -1,7 +1,7 @@
 # 0029 — The default look comes from a house resource pack, not from the shader pack
 
 - **Date**: 2026-11-14
-- **Status**: under test on `feat/ambiance-pack` (it runs on the full pack on a bench without a graphics card; not played)
+- **Status**: replaced by [0031](0031-brumaire-is-the-look.md) on 2026-11-15 (the pack and Polytone left)
 
 ## Context
 [0028](0028-house-shader.md) gave the pack a shader pack, Brumaire, off by default: Iris does not support Apple Silicon Macs and a shader pack costs frames on every machine. The maintainer asked whether a resource pack with visual effects would not serve the goal better ("optimise as much as possible while improving the visuals") and named Recrafted by MR_CHOO as the model.
@@ -26,7 +26,7 @@ The default look is a house resource pack, **`compline-ambiance`**, in `pack/res
 - Settings in Polytone's screen, in French; `rendu` off gives back the image of the game.
 - **Brumaire stays**, off by default, for the players who want real shadows and water and have the machine for it.
 
-Details: [ambiance](../plan/ambiance.md).
+Details: [ambiance](../archive/plan/ambiance-polytone.md).
 
 ## Rejected
 - Recrafted as is: wrong game version, paid, no licence.
@@ -35,6 +35,6 @@ Details: [ambiance](../plan/ambiance.md).
 
 ## Consequences
 - 141 Modrinth mods, 7 resource packs.
-- The shadows are an approximation (see the limits in [ambiance](../plan/ambiance.md)); the frame rate has not been measured on a graphics card.
+- The shadows are an approximation (see the limits in [ambiance](../archive/plan/ambiance-polytone.md)); the frame rate has not been measured on a graphics card.
 - Without the `compline` mod the pack keeps everything but the shadows and the underwater look.
 - Still missing from the model: armor weathering, leaf litter, snow and sand effects.
