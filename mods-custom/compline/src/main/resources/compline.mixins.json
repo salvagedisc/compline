@@ -26,7 +26,9 @@
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
     "horizon.VanillaFadeMixin",
-    "rendu.IrisUniformsMixin"
+    "rendu.IrisUniformsMixin",
+    "zoo.CategoryTabsMixin",
+    "zoo.GuidebookDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1

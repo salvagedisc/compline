@@ -34,7 +34,9 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
             Map.entry("rendu.IrisUniformsMixin", List.of(ModIds.IRIS)),
             Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)),
             Map.entry("compat.IceThawMixin", List.of(ModIds.STREAMS_REFLOWING, ModIds.SPELUNKERY)),
-            Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)));
+            Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)),
+            Map.entry("zoo.CategoryTabsMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
+            Map.entry("zoo.GuidebookDataMixin", List.of(ModIds.ARCHIES_DINOSAURS)));
 
     @Override
     public void onLoad(String mixinPackage) {

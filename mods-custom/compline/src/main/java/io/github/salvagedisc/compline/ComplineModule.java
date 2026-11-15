@@ -31,7 +31,10 @@ public enum ComplineModule {
      *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
     BORD("bord", null, bus -> io.github.salvagedisc.compline.bord.BordModule.start(bus)),
     /** Les clairières et le vent du pack donnés au pack de shaders de Compline, sous Iris (client). */
-    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS);
+    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS),
+    /** Le zoo : les quatre tampons du guide d'Archie's Dinosaurs pour toutes les bêtes (client et serveur). Le suivi
+     *  ne demande aucun mod ; les pages du guide demandent Archie's Dinosaurs, la photo demande Exposure. */
+    ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus));
 
     private final String id;
     private final Dist side;

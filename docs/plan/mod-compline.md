@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.15.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link) and **relief** (height of the world for the resource pack) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.16.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **relief** (height of the world for the resource pack) and **zoo** (stamps for every creature in Archie's guidebook) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -39,6 +39,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `dissipateur` | both | Create | none |
 | `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
 | `rendu` | client | Iris; Where Winds Blow for the wind | 1, client (`rendu.IrisUniformsMixin`) |
+| `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -216,6 +217,24 @@ Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GL
 
 Switch: `rendu.enabled` in `config/compline-client.toml`. Another shader pack never declares these uniforms and is not affected.
 
+## `zoo` module
+
+Client and server. Design and reasons in [modules-compline](modules-compline.md#zoo-the-stamps-of-archies-guidebook); this section is the reference for what the code does.
+
+- **Stamps** (`Stamp`): `apercevoir` (spot), `photographier` (photograph), `heberger` (tame or house), `maitriser` (master). They are kept per player in the `compline:zoo` data attachment (`ZooRecord`: a bit mask per species and the ticks of observation), copied on death, and sent to the client with the `compline:zoo` payload (`ZooSync`: the whole list at login and after `/reload`, one species at a time after).
+- **Spot and observe** (`Zoo.tick`, every 10 ticks): each `Mob` within `spotDistance` blocks, inside a 55° half-cone around the look direction and in line of sight, is spotted; within 16 blocks it also counts as observed. Any stamp also gives the spot stamp.
+- **Photograph** (`ZooPhoto`, only when Exposure is present): each entity of Exposure's `FrameAddedEvent` (server side) is photographed by the player who took the picture.
+- **Tame or house**: `AnimalTameEvent`, `BabyEntitySpawnEvent` caused by a player, or a water bucket used on a `Bucketable`. Only for species that are `OwnableEntity`, `Animal` or `Bucketable`; the others never show that stamp.
+- **Master**: given as soon as the species has its other stamps and `observeSeconds` of observation.
+- **Species** (`ZooSpecies`, at `ServerStartedEvent` and after each `/reload`): the mobs of the spawn settings of every Overworld biome, minus the entity type tags `compline:zoo/absents` and `compline:zoo/exclus`, plus `compline:zoo/inclus` and the species found by sight outside the list (saved in the `compline_zoo` world data). One sample of each type, made in the Overworld, gives its habitat: the tag `compline:zoo/<terre|eaux|ciel|creatures>` if any, else `Enemy` → creatures, water mob → eaux, `FlyingAnimal` or `AmbientCreature` → ciel, else terre. The tags are in `pack/kubejs/data/compline/tags/entity_type/zoo/`.
+- **Guidebook** (client, only with Archie's Dinosaurs): `zoo.GuidebookDataMixin` adds the `compline_zoo` category before the credits when `GuidebookData.loadData` returns, and patches the parsed XML of Archie's pages (`GuidePatches`, from `assets/compline/archie/guide/<language>.json`: page, label index and a word that must be in the original text, else nothing changes). `zoo.CategoryTabsMixin` adds the green bookmark at the bottom and the left tabs of the habitats. The pages are our widgets (`ZooIntroWidget`, `ZooSpreadWidget`) on Archie's UI classes; creatures are drawn with `InventoryScreen.renderEntityInInventory`, tinted with ink until spotted; tooltips go through `Screen.setTooltipForNextRenderPass`, because a page is drawn into a buffer that would cut them. The images come from `scripts/zoo/textures.py`.
+- **Key**: "Ouvrir le guide d'Archie" (J by default, because Iris and KubeJS already use K; category Compline) opens the guidebook without holding it.
+- **Commands** (level 2): `/compline zoo especes` (species per habitat), `/compline zoo tamponner <players> <species> <stamp>`, `/compline zoo effacer <players>`.
+
+Config (`compline-common.toml`, `[zoo]` section): `enabled` (true), `spotDistance` (25), `observeSeconds` (60).
+
+**Checked** in the test client on 2026-11-15 (mod 0.16.0 with Archie's Dinosaurs, no other mod): 41 species (19 land, 8 water, 2 sky, 12 creatures); the bookmark opens the welcome spread, a habitat tab opens its species with silhouettes and the given stamps, tooltips show over the book; the Obsidiceratops page names the redstone caves. Not checked: the full pack's species list, the photo stamp with Exposure, taming, the bucket, mastery by observation (tests ZO1 to ZO6).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -362,6 +381,17 @@ Started on the test server on 2026-10-25 (with No Man's Land): the `tectonic` da
 
 The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 
+### Zoo
+
+| # | Test | Expected |
+|---|---|---|
+| ZO1 | `/compline zoo especes` in a world of the full pack | Wildlife of the mods counted, no vanilla monster refused by In Control, no dinosaur, villager or golem |
+| ZO2 | Look at a fox from 20 blocks, then turn away | The spot stamp in the action bar with a sound, once; nothing for a fox behind a wall or behind you |
+| ZO3 | Take a photo of a cow with an Exposure camera | The photograph stamp for the cow (and the spot stamp if missing) |
+| ZO4 | Tame a wolf, breed two cows, catch a cod in a water bucket | The third stamp for each; a creeper or a bat shows no third stamp in the guidebook |
+| ZO5 | With the three other stamps, stay a minute near the species | The master stamp and a gold line in the chat; the hover shows the seconds counted before that |
+| ZO6 | J, then the green bookmark; each left tab; die and come back | The welcome spread, the habitats, the stamps kept after death; Archie's Obsidiceratops and Chorusoatl pages name no Nether or End |
+
 ### Held items
 
 | # | Test | Expected |
@@ -391,6 +421,6 @@ Known fragile points:
 
 ## Next modules
 
-Eight modules approved on 2026-10-26 (`voile`, `zoo`, `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-compline.md](modules-compline.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
+Eight modules approved on 2026-10-26 (`voile`, `zoo` (built in 0.16.0), `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-compline.md](modules-compline.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
 
 **World edge and ships** (after 0.10.0). The `bord` module lets a player aboard a Sable ship pass the edge. Next step: stop the ship itself, by removing the outward part of its speed near the edge (`RigidBodyHandle.addLinearAndAngularVelocity`) and, past the edge, moving it back (`RigidBodyHandle.teleport`). It needs an airship built in a test world to be checked.

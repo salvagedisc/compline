@@ -26,6 +26,9 @@ public final class ComplineConfig {
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
+    private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
+    private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
+    private static final ModConfigSpec.IntValue ZOO_OBSERVE_SECONDS;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -118,6 +121,21 @@ public final class ComplineConfig {
                 .comment("Interrupteur du module (serveur). Faux : plus de bord, on peut naviguer sans fin sur l'océan.")
                 .define("enabled", true);
         common.pop();
+
+        common.comment("Module zoo : les quatre tampons du guide d'Archie's Dinosaurs pour toutes les bêtes du monde (Apercevoir,",
+                "Photographier, Apprivoiser ou héberger, Maîtriser), sans jamais tuer. Les tampons restent enregistrés quand le module est coupé.").push("zoo");
+        ZOO_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : plus aucun tampon n'est donné.")
+                .define("enabled", true);
+        ZOO_SPOT_DISTANCE = common
+                .comment("Distance en blocs à laquelle une bête en vue (champ de vision, sans obstacle) vaut le tampon Apercevoir.",
+                        "25 : la règle des dinosaures d'Archie.")
+                .defineInRange("spotDistance", 25, 4, 64);
+        ZOO_OBSERVE_SECONDS = common
+                .comment("Secondes d'observation (une bête de l'espèce en vue à moins de 16 blocs) demandées par le tampon Maîtriser,",
+                        "en plus des autres tampons de l'espèce.")
+                .defineInRange("observeSeconds", 60, 0, 600);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -184,6 +202,18 @@ public final class ComplineConfig {
 
     public static boolean bordEnabled() {
         return read(COMMON_SPEC, BORD_ENABLED);
+    }
+
+    public static boolean zooEnabled() {
+        return read(COMMON_SPEC, ZOO_ENABLED);
+    }
+
+    public static int zooSpotDistance() {
+        return read(COMMON_SPEC, ZOO_SPOT_DISTANCE);
+    }
+
+    public static int zooObserveSeconds() {
+        return read(COMMON_SPEC, ZOO_OBSERVE_SECONDS);
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */

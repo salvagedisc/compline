@@ -61,23 +61,26 @@ Revised on 2026-11-15: the zoo lives **inside Archie's guidebook** (Archie's Din
 - The badge page is hard-coded: an enum of the seven dinosaurs and, for each, the stamps it shows (the Sculksaur has no tame stamp). Adding a species there needs code.
 - The mod is All Rights Reserved, without public source: overriding its data and resources is fine, copying its code, textures or whole guidebook files into the repository is not.
 
-**Design.**
-- **Four stamps per species**, as advancements in data (`compline:zoo/<species>/<stamp>`), one small file per species listing its entity, its environment tab, its stamps and its French texts:
-  - **Apercevoir**: `ec_ad:spotted_entity` with the species as entity predicate.
-  - **Photographier** (in place of *kill* for the ordinary fauna, confirmed by the maintainer on 2026-11-15): `exposure:frame_exposed` with the species in `entities_in_frame`, as Exposure's own `wildlife_archivist` advancement does.
-  - **Apprivoiser ou héberger**: `minecraft:tame_animal` for tameable creatures; for the others, housed in an enclosure measured by the module (four criteria: usable space, preferred terrain, shelter, food, each with its cause in plain words; group size as the social setting; no manual validation).
-  - **Maîtriser**: the three others, plus a behaviour seen (eating, sleeping, moving in a group) where it fits.
-  - A species lists only the stamps that make sense (a creature that is never caged has no housing stamp), like the Sculksaur has no tame stamp.
-- **Pages**: one page per species in the guidebook, grouped in tabs by environment (forest, water, caves, sky, dinosaurs), generated in French by a script into `pack/kubejs/assets/ec_ad/guidebook/` from the species files, with a portrait of each creature taken on the test client and toned like the guidebook's paintings. The dinosaurs keep their own pages.
-- **Badge page**: a mixin of the `compline` mod reads the species list from data instead of the enum and spreads the stamps over several pages. The same graft opens the guidebook with a key, so it does not have to be held (a book held in hand was refused for quests).
+**Built in `compline` 0.16.0** (module `zoo`, details in [mod-compline](mod-compline.md#zoo-module)).
+- **Four stamps per species**, kept per player (a data attachment, kept on death), not as advancements: hundreds of advancements would fill the advancement screen and its toasts, and the guidebook is the only place they are read.
+  - **Apercevoir**: the species in the player's field of view (a 110° cone), unobstructed, within 25 blocks, checked every half second; Archie's rule, applied to every creature.
+  - **Photographier**: the species in a photo taken with an Exposure camera (`FrameAddedEvent`, its entities in frame).
+  - **Apprivoiser ou héberger**: tamed (`AnimalTameEvent`), a young one born of the player (`BabyEntitySpawnEvent`), or caught in a water bucket. Only for species that can be kept (tameable, breedable or bucketable); the others have no third stamp, like the Sculksaur has no tame stamp.
+  - **Maîtriser**: the other stamps of the species, then one minute of observation (in view within 16 blocks). No kill anywhere.
+  - A new stamp shows in the action bar with a pen sound; a mastered species gets a line in the chat.
+- **The species list** is computed by the server at start: every mob that spawns naturally in an Overworld biome (biome modifiers of the mods included), minus the tag `compline:zoo/absents` (the vanilla monsters In Control refuses, checked by a test against its config) and `compline:zoo/exclus` (the dinosaurs, which keep Archie's own page, and the villagers, traders and golems); `compline:zoo/inclus` adds a species by hand. A mob seen outside the list (born of a structure, an egg) joins it when spotted, and the world remembers it. The habitat comes from the nature of the creature (monster, water, flying, land), unless a tag `compline:zoo/terre|eaux|ciel|creatures` says otherwise.
+- **In the guidebook**: a fourth bookmark at the bottom, green with a paw, next to Archie's stamps bookmark, opens a zoo category placed before the credits: a welcome spread (Archie's word, what each stamp asks, the habitats with what has been spotted and mastered) then the species of each habitat, sixteen per spread, each with its creature drawn in 3D (an ink silhouette and "???" until spotted), its name and its stamps, with what each asks on hover. Tabs on the left lead to each habitat. Our own images (`scripts/zoo/textures.py`), drawn in the guidebook's style; nothing of the mod is copied. A key (J by default, "Ouvrir le guide d'Archie") opens the guidebook without holding it.
+- **Archie's pages corrected**: the Obsidiceratops and Chorusoatl texts that still named the Nether and the End are replaced at load time from `assets/compline/archie/guide/<language>.json` (positions in the XML, each checked against a word of the original text); the paintings of the old biomes stay.
+
+**Not built yet.**
+- Pages per species with a text (behaviour, habitat, food), in the guidebook's style.
+- Housing in an enclosure measured by the module (four criteria: usable space, preferred terrain, shelter, food, each with its cause in plain words; group size as the social setting; no manual validation), as a second way to earn the third stamp.
 - **Tracks**: rare tracks (feathers, prints, nests) that fade over time and a vague hint in French help find a species without a compass, in the spirit of Archie's "I've tracked every dino in these lands". Archie is the keeper's voice: one line from him at each milestone.
 - Players of the same clearing add up to one zoo; a species counts once. Milestones (5, 15, 30, 50 species mastered) change the place, not the inventory: the clearing grows (`vie`), a music opens, a monument shows its empty plinths. Nothing missable blocks completion.
-- Other mods behind the guidebook: Alex's Mobs' animal dictionary stays hidden; Questlog keeps one chapter that points to the guidebook and its milestones; Exposure photos are the proof for the photo stamp.
+- Other mods behind the guidebook: Alex's Mobs' animal dictionary stays hidden; Questlog keeps one chapter that points to the guidebook and its milestones.
 - Kept out: catching rare creatures, money, visitors, random crates, cleanliness or disease gauges.
 
-**Risks.** The badge-page mixin targets a closed, very young mod and may have to be redone when it updates. If the mod goes away, the stamps stay in the players' advancements (data of our own) and only the display has to be rebuilt.
-
-**To verify first.** The guidebook override: shipping a whole `fr_fr.xml` of the mod is a copy of All Rights Reserved content; prefer generating our categories at load time from the mixin, or adding files the mod reads alongside its own. Classify by tags which creatures are tamed, housed or only observed. The guidebook pages of the Obsidiceratops and the Chorusoatl still name the Nether and the End.
+**Risks.** The guidebook graft (two mixins on Archie's `GuidebookData` and `CategoryTabs`) targets a closed, very young mod and may have to be redone when it updates; the module logs and skips what it cannot find. If the mod goes away, the stamps stay in the players' data and only the display has to be rebuilt.
 
 ## `vie`: the clearing grows when it is lived in
 
