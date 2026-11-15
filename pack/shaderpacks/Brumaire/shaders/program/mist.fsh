@@ -6,6 +6,7 @@
 #include "/lib/mist.glsl"
 #include "/lib/clouds.glsl"
 #include "/lib/water.glsl"
+#include "/lib/rain.glsl"
 #include "/program/scene.glsl"
 
 uniform sampler2D colortex0;
@@ -115,6 +116,9 @@ void main() {
             mist = mix(mist, skyAt(normalize(vec3(dir.x, 0.03, dir.z))) * mistTint() * 0.9, far_ * 0.75);
             color = mix(color, mist, veil);
         }
+        // Au loin, là où le jeu ne dessine plus de gouttes, les rideaux de pluie.
+        float curtain = rainCurtain(dir, len, frameTimeCounter) * rainStrength * rainHere;
+        if (curtain > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.1 + vec3(0.02), min(curtain * 0.2, 0.35));
     }
     if (blindness > 0.0) color *= exp(-len * 0.35 * blindness);
     outColor = vec4(color, 1.0);

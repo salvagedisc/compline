@@ -4,10 +4,16 @@
 #include "/lib/common.glsl"
 #include "/lib/shadow.glsl"
 #include "/lib/light.glsl"
+#ifdef PROGRAM_TERRAIN
+#include "/lib/rain.glsl"
+#endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
 uniform sampler2D depthtex1;
 uniform sampler2D colortex6;
+#define REFLECT_DEPTH depthtex1
+#define REFLECT_COLOR colortex6
+#include "/lib/reflect.glsl"
 #endif
 
 uniform sampler2D gtexture;
@@ -36,94 +42,6 @@ layout(location = 0) out vec4 outColor;
 #endif
 
 #ifdef PROGRAM_WATER
-/** Position dans la vue (repère caméra) d'un point de l'écran. */
-vec3 viewAt(vec2 uv, float depth) {
-    vec4 v = gbufferProjectionInverse * vec4(vec3(uv, depth) * 2.0 - 1.0, 1.0);
-    return v.xyz / v.w;
-}
-
-vec3 screenOf(vec3 view) {
-    vec4 c = gbufferProjection * vec4(view, 1.0);
-    return c.xyz / c.w * 0.5 + 0.5;
-}
-
-/**
- * Reflet d'écran : le rayon réfléchi avance dans la vue jusqu'à passer derrière la scène opaque (colortex6).
- * side : 1 si le reflet part au-dessus de l'eau, -1 en dessous ; ce qui est de l'autre côté de la surface (le fond vu
- * à travers l'eau, ou la rive vue d'en dessous) ne peut pas se refléter.
- * Rend la couleur trouvée et sa part (0 : rien trouvé, le ciel prend le relais) ; dist : chemin parcouru.
- */
-vec4 screenReflection(vec3 start, vec3 ray, float jitter, float side, out float dist) {
-    dist = 0.0;
-#if WATER_REFLECTIONS > 0
-    float stride = 0.35 + 0.025 * length(start);
-    float level = (gbufferModelViewInverse * vec4(start, 1.0)).y;
-    float t = stride * (0.5 + jitter);
-    float last = 0.0;
-    for (int i = 0; i < WATER_REFLECTIONS; i++) {
-        vec3 p = start + ray * t;
-        if (p.z > -near) break;
-        vec3 s = screenOf(p);
-        if (any(lessThan(s.xy, vec2(0.0))) || any(greaterThan(s.xy, vec2(1.0)))) break;
-        float d = texture(depthtex1, s.xy).r;
-        if (d < 1.0 && d > 0.56) {
-            vec3 found = viewAt(s.xy, d);
-            float scene = found.z;
-            bool across = ((gbufferModelViewInverse * vec4(found, 1.0)).y - level) * side < -0.15;
-            if (!across && p.z < scene && scene - p.z < stride * 2.0 + 0.6) {
-                // Affinage : on recule de moitié en moitié jusqu'au bord de l'objet.
-                float lo = last, hi = t;
-                for (int k = 0; k < 4; k++) {
-                    float mid = 0.5 * (lo + hi);
-                    vec3 q = screenOf(start + ray * mid);
-                    if (start.z + ray.z * mid < viewAt(q.xy, texture(depthtex1, q.xy).r).z) hi = mid; else lo = mid;
-                }
-                s = screenOf(start + ray * hi);
-                dist = hi;
-                vec2 edge = min(s.xy, 1.0 - s.xy);
-                float fade = smoothstep(0.0, 0.06, min(edge.x, edge.y)) * (1.0 - smoothstep(0.7, 1.0, float(i) / float(WATER_REFLECTIONS)));
-                return vec4(texture(colortex6, s.xy).rgb, fade);
-            }
-        }
-        last = t;
-        t += stride;
-        stride *= 1.28;
-    }
-#endif
-    return vec4(0.0);
-}
-
-/** Le ciel reflété : voilé par la même brume que le vrai, avec les nuages à mi-hauteur de leur couche. */
-vec3 skyReflection(vec3 world, vec3 r) {
-    float nearOnly;
-    float veil = 1.0 - exp(-mistDepth(r, 4096.0, nearOnly));
-    vec3 sky = skyAt(r);
-#if CLOUD_STEPS > 0
-    if (r.y > 0.03) {
-        float y = cloudBase() + CLOUD_TOP_SPAN * 0.3;
-        float reach = (y - world.y) / r.y;
-        if (reach > 0.0 && reach < CLOUD_RANGE) {
-            float d = cloudDensity(world + r * reach, cloudCoverage(), false);
-            vec3 lit = gLightColor * (0.30 + 0.25 * max(dot(r, gLightDir), 0.0)) + gAmbient * 0.85;
-            lit = mix(lit, vec3(luma(lit)) * 0.75, rainStrength);
-            sky = mix(sky, lit, d * 0.85 * (1.0 - reach / CLOUD_RANGE));
-        }
-    }
-#endif
-    return mix(sky, mistColor(r, 1.0), veil);
-}
-
-/** Le voile de l'air sur un trajet (repère joueur, depuis la caméra) : la brume que traverse un reflet. */
-vec3 veiled(vec3 color, vec3 world) {
-    vec3 dir = normalize(world);
-    float len = length(world);
-    vec3 inscat;
-    color = color * airVeil(dir, len, inscat) + inscat;
-    float nearOnly;
-    float veil = 1.0 - exp(-mistDepth(dir, len, nearOnly));
-    return mix(color, mistColor(dir, 1.0), veil);
-}
-
 vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 world = vPos + cameraPosition;
     vec3 n = normal;
@@ -150,7 +68,7 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         vec3 t = refract(-eye, n, WATER_IOR);
         vec3 r = reflect(-eye, n);
         float dist;
-        vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, -1.0, dist);
+        vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, -1.0, WATER_REFLECTIONS, dist);
         vec3 inner = mix(murk, hit.rgb, hit.a);
         if (dot(t, t) < 1e-4) return vec4(inner, 1.0);
         vec3 s = screenOf(view + mat3(gbufferModelView) * t * 12.0);
@@ -180,7 +98,7 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     float f = 0.04 + 0.96 * pow(1.0 - max(dot(n, eye), 0.0), 4.0);
     vec3 mirror = skyReflection(world, r) * mix(0.12, 1.0, sky);
     float dist;
-    vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, 1.0, dist);
+    vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, 1.0, WATER_REFLECTIONS, dist);
     if (hit.a > 0.0) {
         // Le point reflété, voilé par l'air et la brume de la surface jusqu'à lui (le chemin de la caméra à la
         // surface est voilé par composite1 comme le reste). La brume basse est déjà comptée une fois sur ce
@@ -202,7 +120,7 @@ void main() {
     vec2 lm = vLm;
     float ao = 1.0;
 
-#if defined PROGRAM_BASIC
+#if defined PROGRAM_BASIC || defined PROGRAM_LIGHTNING
     vec4 color = vTint;
 #elif defined PROGRAM_CLRWL
     // Flywheel (Create) : Colorwheel applique sa matière, sa lumière et sa découpe.
@@ -242,8 +160,17 @@ void main() {
     outColor = vec4(albedo, color.a);
 #elif defined PROGRAM_GLINT
     outColor = vec4(albedo * 0.8, color.a);
+#elif defined PROGRAM_LIGHTNING
+    // L'éclair : un trait blanc bleuté ; les couches du jeu s'additionnent, le cœur éblouit et le halo reste léger.
+    outColor = vec4(vec3(0.80, 0.86, 1.0) * 1.8, color.a);
 #elif defined PROGRAM_WEATHER
-    outColor = vec4(albedo * (gAmbient * 1.3 + gLightColor * 0.08 + vec3(0.02)), color.a * 0.75);
+    // Gouttes et flocons prennent la lumière du ciel : de fins traits gris clair, pas les traits bleus du jeu. Ceux
+    // qui tombent tout contre l'œil s'effacent, sans quoi ils barrent l'écran.
+    bool rain = color.b > color.r + 0.04;
+    vec3 tone = rain ? vec3(0.92, 0.95, 1.0) * mix(0.75, 1.0, luma(color.rgb)) : vec3(luma(color.rgb)) * 1.05;
+    vec3 light = gAmbient * 1.25 + gLightColor * 0.10 + vec3(0.025);
+    float close = smoothstep(1.5, 6.0, length(vPos));
+    outColor = vec4(tone * light, color.a * (rain ? 0.22 : 0.8) * mix(0.2, 1.0, close));
 #elif defined PROGRAM_CLOUDS
 #if CLOUD_STEPS > 0
     // Les nuages du jeu laissent la place à ceux du pack (composite).
@@ -268,11 +195,24 @@ void main() {
         return;
     }
 #endif
+    // Sous la pluie, le sol fonce et luit ; dans les creux plats, des flaques (leur reflet : deferred1).
+    float gloss = 0.0;
+#if defined PROGRAM_TERRAIN
+    float wet = leaf > 0.0 || vMat == 8 ? 0.0 : wetAt(lm.y);
+    if (wet > 0.0) {
+        float puddle = puddleAt(vPos + cameraPosition, normal, wet);
+        float soak = wet * mix(0.55, 1.0, max(normal.y, 0.0));
+        albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
+        albedo = mix(albedo, vec3(luma(albedo)) * 0.5, puddle * 0.8);
+        gloss = max(0.4 * soak, puddle);
+    }
+#endif
     float indirect;
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
 #ifdef WRITE_SURFACE
-    // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre.
-    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0);
+    // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre. L'alpha marque une surface (> 0.5) et
+    // porte son éclat mouillé (1 : mat, 0.55 : flaque).
+    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0 - 0.45 * gloss);
 #endif
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.

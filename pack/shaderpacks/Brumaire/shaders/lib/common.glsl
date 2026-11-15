@@ -18,6 +18,7 @@ uniform float nightVision;
 uniform float blindness;
 uniform float darknessFactor;
 uniform int isEyeInWater;
+uniform vec4 lightningBoltPosition; // xyz : l'éclair depuis la caméra ; w : 1 tant qu'il frappe
 uniform ivec2 eyeBrightnessSmooth;
 
 // Liaison avec le mod du pack. Sans lui, Iris laisse ces valeurs à zéro et le shader garde ses replis.
@@ -45,6 +46,7 @@ vec3 gLightColor; // lumière directe
 vec3 gAmbient;    // lumière du ciel
 float gDay;       // 0 la nuit, 1 le jour
 float gDusk;      // 1 quand le soleil rase l'horizon
+float gFlash;     // l'éclair qui illumine le ciel et le paysage, 0..1
 
 float luma(vec3 c) { return dot(c, LUMA); }
 float sq(float x) { return x * x; }
@@ -74,7 +76,11 @@ void initEnv() {
     vec3 sky = skyRow(0);
     vec3 amb = mix(sky, vec3(luma(sky)), 0.45) * 1.1 + (e > 0.0 ? sun * fade * 0.06 : vec3(0.0));
     amb += vec3(0.020, 0.026, 0.042);
-    gAmbient = mix(amb, vec3(luma(amb)) * vec3(0.86, 0.92, 1.0) * 0.75, rainStrength * 0.7);
+    gAmbient = mix(amb, vec3(luma(amb)) * vec3(0.95, 0.95, 0.93) * 0.75, rainStrength * 0.7);
+    // Un éclair qui frappe blanchit tout d'un coup, en vacillant, moins quand il tombe loin.
+    float flicker = 0.55 + 0.45 * sin(frameTimeCounter * 47.0) * sin(frameTimeCounter * 13.0 + 1.3);
+    gFlash = lightningBoltPosition.w * flicker / (1.0 + length(lightningBoltPosition.xyz) / 160.0);
+    gAmbient += vec3(0.62, 0.68, 0.90) * gFlash;
 }
 
 /** Couleur du ciel dans une direction (repère monde), sans astres ni brume. */
@@ -85,7 +91,9 @@ vec3 skyAt(vec3 d) {
     c = mix(c, vec3(luma(c)) * vec3(0.55, 0.75, 1.30), night * 0.5);
     // Un ciel d'été voilé : jamais d'un bleu profond.
     c = mix(c, vec3(luma(c)) * vec3(0.90, 0.96, 1.08), 0.22 * gDay);
-    return mix(c, vec3(luma(c)) * vec3(0.78, 0.82, 0.88) * 0.7, rainStrength * 0.85);
+    // Sous la pluie, un gris un peu chaud, celui des nuages chargés.
+    c = mix(c, vec3(luma(c)) * vec3(0.85, 0.84, 0.80) * 0.7, rainStrength * 0.85);
+    return c + vec3(0.55, 0.60, 0.80) * gFlash * (0.6 + 0.4 * max(d.y, 0.0));
 }
 
 /** Le disque du soleil, à ajouter au ciel : rond, plus sombre au bord, de la couleur que l'air lui laisse. */
