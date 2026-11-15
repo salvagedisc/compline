@@ -53,6 +53,9 @@
 #define CONTRAST 1.0 // [0.9 0.95 1.0 1.05 1.1 1.15]
 #define EXPOSURE 1.0 // [0.7 0.85 1.0 1.15 1.3]
 
+// Image
+#define SMAA 2 // [0 1 2 3]
+
 const int shadowMapResolution = 2048; // [1024 1536 2048 3072 4096]
 const float shadowDistance = 112.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0]
 const float sunPathRotation = -28.0; // [-40.0 -28.0 -15.0 0.0 15.0 28.0 40.0]

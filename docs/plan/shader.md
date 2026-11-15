@@ -17,7 +17,8 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Water | `gbuffers_water` | The surface is drawn whole where it lies: the bottom seen through it (read in `colortex6`, bent by the waves), dimmed by the thickness of water, the banks and the sky mirrored in it |
 | Clouds | `composite` (half size) | Volumetric clouds marched through a 3D noise computed once at load (`setup.csh`) |
 | Air and mist | `composite1` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the rain curtains beyond the game's drops, the water seen from below |
-| Screen | `final` | Glow of the bright lights, exposure, tone curve, grade |
+| Grade | `composite2` | Glow of the bright lights, exposure, tone curve, grade, into an 8-bit image (`colortex7`) |
+| Anti-aliasing | `composite3`, `composite4`, `final` | SMAA: the edges of shapes (`colortex8`), their blending weights (`colortex9`), then the blend with the neighbours on screen |
 
 All the geometry programs include `program/solid.vsh` and `program/solid.fsh` with one `PROGRAM_*` define each; the top-level files only hold that define.
 
@@ -36,6 +37,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
 | `lib/cover.glsl` | Snow laid on trees and ledges, the glitter of snow and sand |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
+| `lib/smaa.glsl`, `program/smaa.*`, `textures/smaa_*.png` | SMAA by Jorge Jimenez et al. (MIT, `textures/SMAA-LICENSE.txt`), unchanged but for its encoding, its lookup tables, and the three passes that use it |
 | `block.properties` | Which blocks wave, which are water, which glow, which are snow, ice or sand |
 | `lang/` | Names of the settings, French and English |
 
@@ -92,6 +94,11 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Sand** keeps its warm colour in the sun (darker and slightly richer than the game's texture, otherwise it reads as snow) and glitters more sparsely.
 - **Ice**: clear ice is drawn with the water, light blue, with the sky and the landscape mirrored in it, more at a low angle; packed and blue ice shine like a tarnished mirror (screen reflection, no ripples).
 - **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
+
+## Anti-aliasing and profiles
+
+- **SMAA** (`SMAA`: off, medium, high, ultra; on the first page of the settings) smooths the stair-stepped silhouettes of blocks, plants and creatures. Edges are found on the luminance of the finished image, then kept only where the depth jumps by more than 2 % between neighbours: the pixels of the textures stay sharp, only shapes are smoothed. The grade moved from `final` to `composite2` so that SMAA works on the image as it will be shown.
+- **Four profiles**: Très léger (very light: no reflections, no screen occlusion, no shafts, the game's clouds, 1024 shadow map over 64 blocks with hard edges, no anti-aliasing), Léger, Équilibré (the default) and Beau. Every profile sets every option it touches, so switching back and forth restores them.
 
 ## The mist
 

@@ -1,3 +1,4 @@
+profile.TRES_LEGER=Very light
 profile.LEGER=Light
 profile.EQUILIBRE=Balanced
 profile.BEAU=Beautiful
@@ -92,3 +93,9 @@ option.HEAT_SHIMMER=Heat shimmer
 option.HEAT_SHIMMER.comment=In a desert, in the sun, the distance shimmers near the ground.
 value.HEAT_SHIMMER.0=Off
 value.HEAT_SHIMMER.1=On
+option.SMAA=Anti-aliasing
+option.SMAA.comment=Smooths the stair-stepped edges of blocks and objects (SMAA). Off: no smoothing, the fastest.
+value.SMAA.0=Off
+value.SMAA.1=Medium
+value.SMAA.2=High
+value.SMAA.3=Ultra

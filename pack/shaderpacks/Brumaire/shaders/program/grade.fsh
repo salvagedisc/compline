@@ -1,8 +1,10 @@
-// Mise à l'écran : exposition, courbe de tons, étalonnage.
+// L'image finie : halo des hautes lumières, exposition, courbe de tons, étalonnage. Le résultat, déjà en tons d'écran,
+// passe par l'anticrénelage (smaa.fsh) avant l'écran.
 #include "/lib/settings.glsl"
 
 /*
 const int colortex0Format = R11F_G11F_B10F;
+const int colortex7Format = RGBA8;
 */
 const vec4 colortex0ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
 #ifdef BLOOM
@@ -17,6 +19,7 @@ uniform mat4 gbufferModelViewInverse;
 uniform ivec2 eyeBrightnessSmooth;
 in vec2 vUv;
 
+/* RENDERTARGETS: 7 */
 layout(location = 0) out vec4 outColor;
 
 const vec3 LUMA = vec3(0.2126, 0.7152, 0.0722);
