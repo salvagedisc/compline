@@ -1274,7 +1274,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "c3aa74e324410f2a5aabf9d7423a9ef050cae3a2055dbfcbc1989602e6de4631"
+hash = "52f3820a93c5448597a352da06f4fb201a555cdc32dcfa24d4ed02d341167df4"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -2117,6 +2117,10 @@ file = "kubejs/data/twigs/neoforge/biome_modifier/add_ore_rhyolite.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/server_scripts/cuisine.js"
+hash = "fcd49be9ab440aa04fbb9a1734ba828d64e3a9b8a2e25f6edfe3d4602d90d412"
+
+[[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
 hash = "ee09776b3e975b8babb6fb27cf790abd78263b2e7b40eb8071977a277ed417a9"
 
@@ -2170,7 +2174,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "b1a0fd2c16e2ee389e4414ed2c589cd791917da32533b6fa5501e4df921650e1"
+hash = "5932e9527cb9f2e4e7284bcfd8c45937e6975e7187dd6a8c46b60bd4e75fbb8f"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
