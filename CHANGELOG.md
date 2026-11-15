@@ -162,7 +162,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Coloured lights: fire and soul lights target Supplementaries sconces. Supplementaries sconces are enabled again (they were off because No Man's Land had its own).
 - Twigs cobblestone bricks (with the mossy and cracked ones, slabs, stairs and walls) are back: they had been removed as duplicates of No Man's Land's.
 - Documentation brought up to date on 2026-11-13: decision 0019, roadmap (Lithosphere to compare, disc world, new name and new main thread still open), in-game tests (checks for Regions Unexplored and Geophilic added, those that needed No Man's Land removed), system pages.
-- Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/compline-atlas`, jars in `pack/mods/` ([0025](docs/decisions/0025-native-atlas.md)). Mod ids, configs and save formats are unchanged.
+- Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/compline-atlas`, jars in `pack/mods/` ([0025](docs/decisions/0025-native-atlas.md)). Mod ids, configs and save formats are unchanged. The ship teleport of Antique Transport is removed.
 
 ### Fixed
 - The atlas book works in French and shows its map when held: the mod recognises a book named "Antique Atlas", so the French strings keep that name ("Atlas ancien" made the renaming hint wrong and left the creative item a plain book), and Punchy leaves `minecraft:book` to the vanilla hand.

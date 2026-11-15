@@ -24,10 +24,10 @@ Option C. The ports live in their own public repository, `salvagedisc/compline-a
 - Surveyor 1.2.4, Antique Atlas 3.1.2 and Antique Transport 1.3.0, version suffix `-neoforge.1`.
 - Mod ids, packets, configs and save formats are unchanged, so maps and waypoints explored before the port load as they are (seen on the server with data written by the Fabric builds; not tried with a client's own save).
 - Connector is removed. **Forgified Fabric API stays**: Puddles & Floods is a NeoForge mod but declares it as a required dependency and calls `FabricLoader` to detect Iris. Moonlight's warning remains until Puddles & Floods drops that dependency.
-- Antique Transport's ship teleport is operator-only (upstream registered it twice, once without a permission check).
+- Antique Transport's ship teleport is removed, button, packet and server receivers (the team's choice of 2026-11-14). Upstream registered the packet twice, and the receiver that took effect let any player teleport.
 - The atlas book is recognised by its name, "Antique Atlas", whatever the language: the French strings keep that name ("Atlas ancien" made the renaming hint wrong). Punchy leaves `minecraft:book` to the vanilla hand, otherwise the held atlas is drawn as a plain item instead of the open map.
 
 ## Consequences
 - Upstream updates are merged by hand into `compline-atlas`. Antique Atlas was last released in January 2026, Surveyor in May.
 - Seen on the test bench: the client joins a dedicated server, terrain syncs, the atlas opens with the M key, a book renamed "Antique Atlas" shows the map when held, the client map is saved on disconnect.
-- Still to check in game: structures are discovered, markers and waypoints sync between players, Create trains and Sable ships show, the ship teleport.
+- Still to check in game: structures are discovered, markers and waypoints sync between players, Create trains and Sable ships show.
