@@ -857,6 +857,10 @@ file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
 hash = "ec7c8c515cbe1bfcaea11cedbc9404f7c1cdadb29fe337b0e41e35d8d62afb07"
 
 [[files]]
+file = "kubejs/assets/ec_ad/lang/fr_fr.json"
+hash = "7dddaa0412947518969bdbfd6c3648410406be2afa5337fb337cdf6b68d40291"
+
+[[files]]
 file = "kubejs/assets/eclipticseasons/lang/fr_fr.json"
 hash = "6355efcaffd21912a00b345d76d84c30c182141e7e16aa8528de96cc90a55c57"
 
@@ -1399,6 +1403,82 @@ hash = "f460df6b182db3f1fa00456240f6ea6206a72d861bbdb3ff0f5a01e2766cebf4"
 [[files]]
 file = "kubejs/data/compline/worldgen/structure_set/chorusoatl.json"
 hash = "8a148ad7bb6469b2a539be03ba6454e0d1d60f6507e064ed6d2d51fd9ef06cba"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_chorusoatl.json"
+hash = "f779a0a3908c66272443b86cef04930e37ed80926344d1eeca1b89d43f26556f"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_coralosaur.json"
+hash = "162981618c4bdf0d238de75e5053822f3a4334f7f6eb931477fe74e9eaf53854"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_lushsaur.json"
+hash = "6b1b0f9fe5852486f4e8f7ea66a92f54f0c63cfb45285e978230c5895cbb0984"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_obsidiceratops.json"
+hash = "601f82884daf746b1f4187924429bb78e5b6d5b41244edc39c88fb9b2ede04a3"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_sculkraptor.json"
+hash = "2bde06dfbff1e93a7d267bd272dd701fdeed38af577f0cf19d86c5dbf8050dc4"
+
+[[files]]
+file = "kubejs/data/ec_ad/advancement/master_therimoss.json"
+hash = "3fd8731bcdf97bfcbe9b824bc365742071d06062ea99b4c200af20a0c613be0d"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_chorus.json"
+hash = "ddcb89eead5cdd48f825e3e102e209c9ab86670a5a091d395ead5f5ae8461f04"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_claw.json"
+hash = "701201f893fafbbd11e81221b9fdcb92cbfa5b41062dfb6c5824cf01b8140339"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_core.json"
+hash = "d70b815994e5814485f162c704164eaf2742ad28d2e31e4465e9511ffcbc8844"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_horn.json"
+hash = "c93fa6c539ada10f7aeee76e1732bad7abc63b5e16ecbf958e46a04d3c045ddb"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_rib.json"
+hash = "4587446f2ea2d095f0d0e2cc3c81481e840a7113e0b5bb369e45a094f047085f"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_talon.json"
+hash = "6681601ec60e969654cf116e47afdec7ebc7cd6ab68e5d64af870ba83551c2a8"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_claw.json"
+hash = "2e2839d77c593fca2fcf630332fe934259d3d5985ad26e0d7b1952e262428c05"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_core.json"
+hash = "97f74337733eccfd8cfb51523b59c5c3053f7e1b5b4ad4586e6fcf97a3ab8131"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_fossil.json"
+hash = "9c4f125235168ba4149bdcd241d761895258885bc98ae24172ccf2b2770d0154"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_horn.json"
+hash = "0e9706c350487985b3deb86986d41cb542724e18fa1d2c1f8ce940df79c479e1"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_talon.json"
+hash = "3ddbb8857eb721062e44cbb75edff4e6d46d155bf938196a356c6c49e9c416c6"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/block/chorusoatl_egg_chorus.json"
+hash = "8e3128414c3d61c4bfad763d4f54f81972e2fa72693dfa33f89070b08a9defa7"
+
+[[files]]
+file = "kubejs/data/ec_ad/tags/block/chorusoatl_egg_hatchable.json"
+hash = "7d3ee61a1abb65cdef1364dc076bed29c763542dc0e0680eadc933a351bc8154"
 
 [[files]]
 file = "kubejs/data/ec_ad/tags/block/chorusoatl_valid_spawn.json"

@@ -1,0 +1,28 @@
+{
+  "type": "ec_ad:archie_trade",
+  "input": {
+    "item": "ec_ad:lushsaur_egg",
+    "max": 1,
+    "min": 1
+  },
+  "max_uses": -1,
+  "output": [
+    {
+      "item": "ec_ad:lush_core",
+      "max": 2,
+      "min": 2
+    }
+  ],
+  "requirement": "ec_ad:tame_lushsaur",
+  "reward_exp": 5,
+  "sort": [
+    {
+      "ordinal": 14,
+      "weight": 1
+    },
+    {
+      "ordinal": 15,
+      "weight": 1
+    }
+  ]
+}

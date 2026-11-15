@@ -1,0 +1,28 @@
+{
+  "type": "ec_ad:archie_trade",
+  "input": {
+    "item": "minecraft:emerald",
+    "max": 20,
+    "min": 16
+  },
+  "max_uses": 12,
+  "output": [
+    {
+      "item": "ec_ad:lush_core",
+      "max": 1,
+      "min": 1
+    }
+  ],
+  "requirement": "ec_ad:tame_lushsaur",
+  "reward_exp": 5,
+  "sort": [
+    {
+      "ordinal": 11,
+      "weight": 1
+    },
+    {
+      "ordinal": 12,
+      "weight": 1
+    }
+  ]
+}

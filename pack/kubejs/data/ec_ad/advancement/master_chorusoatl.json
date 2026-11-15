@@ -1,0 +1,117 @@
+{
+  "parent": "ec_ad:tame_chorusoatl",
+  "criteria": {
+    "craft_boots": {
+      "conditions": {
+        "recipe_id": "ec_ad:chorusoatl_boots"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_chestplate": {
+      "conditions": {
+        "recipe_id": "ec_ad:chorusoatl_chestplate"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_helmet": {
+      "conditions": {
+        "recipe_id": "ec_ad:chorusoatl_helmet"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_leggings": {
+      "conditions": {
+        "recipe_id": "ec_ad:chorusoatl_leggings"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "spot": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:chorusoatl"
+            }
+          }
+        ]
+      },
+      "trigger": "ec_ad:spotted_entity"
+    },
+    "tame": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:chorusoatl"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.master_chorusoatl.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "minecraft:attribute_modifiers": {
+          "modifiers": [
+            {
+              "type": "minecraft:generic.armor",
+              "amount": 2.0,
+              "id": "minecraft:armor.helmet",
+              "operation": "add_value",
+              "slot": "head"
+            },
+            {
+              "type": "minecraft:generic.armor_toughness",
+              "amount": 0.0,
+              "id": "minecraft:armor.helmet",
+              "operation": "add_value",
+              "slot": "head"
+            }
+          ]
+        },
+        "minecraft:max_damage": 350
+      },
+      "count": 1,
+      "id": "ec_ad:chorusoatl_helmet"
+    },
+    "title": {
+      "translate": "advancement.master_chorusoatl.title"
+    }
+  },
+  "requirements": [
+    [
+      "spot"
+    ],
+    [
+      "craft_boots"
+    ],
+    [
+      "craft_chestplate"
+    ],
+    [
+      "craft_helmet"
+    ],
+    [
+      "craft_leggings"
+    ],
+    [
+      "tame"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ec_ad:soaring_totem"
+    ]
+  },
+  "sends_telemetry_event": true
+}
