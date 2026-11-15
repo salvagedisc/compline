@@ -36,6 +36,13 @@
 #define WATER_CAUSTICS 2 // [0 1 2]
 #define WATER_REFLECTIONS 20 // [0 12 20 32]
 
+// Pluie
+#define WETNESS 1.0 // [0.0 0.5 0.75 1.0 1.25]
+#define PUDDLES 1 // [0 1]
+#define PUDDLE_AMOUNT 1.0 // [0.5 0.75 1.0 1.25 1.5]
+#define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
+#define WET_REFLECTIONS 12 // [0 8 12 20]
+
 // Couleurs
 #define OLIVE 0.6 // [0.0 0.2 0.4 0.6 0.8 1.0]
 #define SATURATION 1.0 // [0.7 0.8 0.9 1.0 1.1 1.2]
@@ -51,6 +58,9 @@ const float shadowDistanceRenderMul = 1.0;
 const float shadowIntervalSize = 2.0;
 const float entityShadowDistanceMul = 0.5;
 const float ambientOcclusionLevel = 1.0;
+// Iris lisse la pluie en « wetness » : le sol se mouille en une minute environ et sèche en trois.
+const float wetnessHalflife = 300.0;
+const float drynessHalflife = 900.0;
 
 // Forme de la carte d'ombre : le centre est grossi, les lointains tassés.
 #define SHADOW_BEND 0.86

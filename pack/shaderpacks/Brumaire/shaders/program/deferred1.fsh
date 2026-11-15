@@ -1,13 +1,23 @@
-// Occlusion lissée et appliquée à la lumière indirecte, puis le ciel peint derrière le terrain. La scène opaque est
-// aussi copiée dans colortex6 : l'eau la relit pour ce qu'on voit à travers elle et ce qu'elle reflète.
+// Occlusion lissée et appliquée à la lumière indirecte, le reflet des surfaces mouillées et des flaques, puis le ciel
+// peint derrière le terrain. La scène opaque est aussi copiée dans colortex6 : l'eau la relit pour ce qu'on voit à
+// travers elle et ce qu'elle reflète.
+#define FSH
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/program/scene.glsl"
+#include "/lib/shadow.glsl"
+#include "/lib/mist.glsl"
+#include "/lib/clouds.glsl"
+#include "/lib/rain.glsl"
 
 uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 in vec2 vUv;
+
+#define REFLECT_DEPTH depthtex0
+#define REFLECT_COLOR colortex0
+#include "/lib/reflect.glsl"
 
 /*
 const int colortex6Format = R11F_G11F_B10F;
@@ -37,21 +47,50 @@ float smoothAo(vec2 uv, float depth) {
     return sum / weight;
 }
 
+/**
+ * Ce que renvoie une surface mouillée : une flaque reflète le paysage comme un miroir ridé par les gouttes ; un sol
+ * seulement trempé luit du ciel, sans image nette. gloss : 1 flaque, jusqu'à 0.4 sol mouillé.
+ */
+vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
+    vec3 world = pos + cameraPosition;
+    vec3 eye = normalize(-pos);
+    bool puddle = gloss > 0.6;
+    vec3 n = normal;
+    if (puddle) {
+        vec2 slope = rippleSlope(world.xz, frameTimeCounter) * rainStrength;
+        n = normalize(vec3(-slope.x, 1.0, -slope.y));
+    }
+    vec3 r = reflect(-eye, n);
+    r.y = max(r.y, 0.01);
+    float f = 0.03 + 0.97 * pow(1.0 - max(dot(n, eye), 0.0), 5.0);
+    vec3 mirror = skyReflection(world, r);
+    if (puddle) {
+        float dist;
+        vec3 view = (gbufferModelView * vec4(pos, 1.0)).xyz;
+        vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy), 1.0, WET_REFLECTIONS, dist);
+        if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
+        return mix(color, mirror, min(f * 1.2 + 0.18, 1.0));
+    }
+    // Un sol trempé : un éclat diffus, surtout à jour frisant.
+    return mix(color, mirror, f * gloss * 1.4);
+}
+
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
     bool sky, hand;
     vec3 pos = scenePosition(vUv, sky, hand);
+    initEnv();
     if (sky) {
-        initEnv();
         vec3 dir = normalize(pos);
         color += skyAt(dir) + sunDisc(dir);
-    }
-#if AO_SAMPLES > 0
-    else if (!hand) {
+    } else if (!hand) {
         vec4 surface = texture(colortex1, vUv);
+#if AO_SAMPLES > 0
         if (surface.a > 0.5) color *= mix(1.0, smoothAo(vUv, texture(depthtex0, vUv).r), surface.b);
-    }
 #endif
+        float gloss = surface.a > 0.5 ? (1.0 - surface.a) / 0.45 : 0.0;
+        if (gloss > 0.02) color = wetReflection(color, pos, unpackNormal(surface.rg), gloss);
+    }
     outColor = vec4(color, 1.0);
     outScene = outColor;
 }
