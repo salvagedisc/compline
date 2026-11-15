@@ -24,15 +24,11 @@ const TRI_OBJETS_OVERGEARED = [
   'overgeared:tier_b_smithing_anvil'
 ]
 
-// Kaleidoscope Cookery et Cold Sweat : plats, meubles et cuir venus du Nether ou de l'End.
+// Farmer's Delight et Cold Sweat : salade du Nether, meubles et couteau venus du Nether, cuir
+// de hoglin.
 const TRI_OBJETS_CUISINE = [
-  'kaleidoscope_cookery:blaze_lamb_chop', 'kaleidoscope_cookery:chorus_fried_egg',
-  'kaleidoscope_cookery:chorus_fruit_platter', 'kaleidoscope_cookery:crimson_fungus_pot_soup',
-  'kaleidoscope_cookery:warped_fungus_pot_soup', 'kaleidoscope_cookery:end_style_sashimi',
-  'kaleidoscope_cookery:nether_style_sashimi', 'kaleidoscope_cookery:netherite_kitchen_knife',
-  'kaleidoscope_cookery:chair_crimson', 'kaleidoscope_cookery:chair_warped',
-  'kaleidoscope_cookery:cook_stool_crimson', 'kaleidoscope_cookery:cook_stool_warped',
-  'kaleidoscope_cookery:table_crimson', 'kaleidoscope_cookery:table_warped',
+  'farmersdelight:nether_salad', 'farmersdelight:netherite_knife',
+  'farmersdelight:crimson_cabinet', 'farmersdelight:warped_cabinet',
   'cold_sweat:hoglin_hide', 'cold_sweat:hoglin_helmet', 'cold_sweat:hoglin_chestplate',
   'cold_sweat:hoglin_leggings', 'cold_sweat:hoglin_boots'
 ]
