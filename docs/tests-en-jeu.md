@@ -168,7 +168,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] `/dh pregen` on the server, then a player explores: no holes in the far landscape. Note the generation speed with spark [W9]. (Only if a server owner adds Chunky: its `start` and the same check [H11].)
 - [ ] Simple Backups: one backup after an hour of play, and one when everyone leaves.
 - [ ] On Apple Silicon Mac: one hour of play with the far view and no Java crash [H10].
-- [ ] spark (`/spark profiler`) for 10 min with 2 or 4 players: share the link so the cost can be reviewed [M10].
+- [ ] spark (`/spark profiler start --force-java-sampler` on a Mac, async-profiler crashes there) for 10 min with 2 or 4 players: share the link so the cost can be reviewed [M10].
 
 ## After the tests
 
