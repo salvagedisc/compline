@@ -1,4 +1,5 @@
 #include "/lib/clouds.glsl"
+#include "/lib/water.glsl"
 // Éclairage direct d'une surface : soleil ou lune avec ombre, ciel, blocs lumineux.
 
 /** Normale (repère monde) rangée dans deux canaux, et relue. */
@@ -29,6 +30,14 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     // L'ombre des nuages qui passent.
     if (diffuse > 0.0) lit *= cloudShadow(pos + cameraPosition, gLightDir);
     vec3 light = gLightColor * diffuse * lit;
+    // Sous l'eau, la lumière arrive affaiblie et teintée, rassemblée en filets par les vagues.
+    if (lit > 0.0) {
+        float water = waterAbove(pos, normal);
+        if (water > 0.0) {
+            vec3 hue = waterHue(vec3(0.25, 0.46, 0.89));
+            light *= exp(-waterExtinction(hue) * water) * caustics(pos + cameraPosition + gLightDir * water);
+        }
+    }
     // Le feuillage à contre-jour laisse passer un peu de soleil.
     vec3 view = normalize(pos);
     light += gLightColor * leaf * lit * 0.35 * pow(max(dot(view, gLightDir), 0.0), 4.0);
