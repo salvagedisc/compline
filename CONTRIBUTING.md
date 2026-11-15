@@ -21,6 +21,7 @@ Requirements: Node.js ≥ 20, [packwiz](https://packwiz.infra.link/installation/
 | `npm test` | Tooling tests (`scripts/test/*.test.mjs`) | yes |
 | `npm run check-deps` | Dependencies declared in the jars are provided by the pack (Modrinth does not always declare them) | yes |
 | `npm run check-fr` | Every text of every mod has a French translation and keeps its variables ([translation](docs/plan/traduction.md)) | yes |
+| `npm run gen-creative` | Regenerates `pack/kubejs/startup_scripts/onglets_creatifs.js` (removed items out of the creative tabs) after a change to a removal list of the KubeJS server scripts | checked by `npm test` |
 | `npm run sync -- --instance "Compline test"` | Compares the Modrinth App test instance with the pack and applies the packwiz commands after confirmation (`--configs`, `--dry-run`) | no |
 | `cd pack && packwiz refresh` | Regenerates `index.toml` after any change to `pack/` (CI fails if it is stale) | yes |
 | `cd pack && packwiz mr export` | Builds the `.mrpack` locally | yes |

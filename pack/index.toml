@@ -2197,6 +2197,10 @@ file = "kubejs/server_scripts/tri_recettes.js"
 hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
+file = "kubejs/startup_scripts/onglets_creatifs.js"
+hash = "d66a2c9564223874178f349aec35f33c57b7b4ab22f56e07f7ded62180b33ca0"
+
+[[files]]
 file = "kubejs/startup_scripts/sante.js"
 hash = "ffdeb55e18ad47f1a9f764d99455095f1780f0f4d097d16cc5f259147ecc8242"
 
