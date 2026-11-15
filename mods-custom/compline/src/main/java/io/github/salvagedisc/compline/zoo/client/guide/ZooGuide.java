@@ -30,14 +30,14 @@ import net.minecraft.sounds.SoundEvents;
 
 /**
  * Le zoo dans le guide d'Archie's Dinosaurs : une catégorie de plus, glissée avant les crédits, avec une page
- * d'accueil puis les espèces de chaque milieu, seize par double page, quatre tampons chacune, comme la page des
+ * d'accueil puis les espèces de chaque milieu, huit par double page, quatre tampons chacune, comme la page des
  * tampons des dinosaures. On y entre par un marque-page du bas, à côté de celui des tampons d'Archie ; des onglets à
  * gauche mènent à chaque milieu. Rien n'est copié du mod : il est relié par ses propres classes
  * ({@code mixin.zoo}), et nos images sont à nous.
  */
 public final class ZooGuide {
     static final String CATEGORY_ID = "compline_zoo";
-    static final int PER_PAGE = 8;
+    static final int PER_PAGE = 4;
     static final int PER_SPREAD = PER_PAGE * 2;
 
     static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath("ec_ad", "textures/gui/guidebook/badges/background.png");
@@ -131,7 +131,7 @@ public final class ZooGuide {
     }
 
     /**
-     * Ajoute aux onglets d'Archie le marque-page du zoo (en bas, à gauche de celui des tampons) et les onglets des
+     * Ajoute aux onglets d'Archie le marque-page du zoo (en bas, à droite du fermoir, en miroir de ceux d'Archie et loin de ses flèches) et les onglets des
      * milieux (à gauche du livre, visibles sur les pages du zoo). Appelé à la fin du constructeur de {@link CategoryTabs}.
      */
     public static void decorate(CategoryTabs tabs, AnimatedBookFlipper book, Map<CategoryData, AbstractWidget> subTabs) {
@@ -139,7 +139,7 @@ public final class ZooGuide {
         if (category == null) {
             return;
         }
-        tabs.addChild(Button.builder(80.0F, 272.0F, 32.0F, 48.0F)
+        tabs.addChild(Button.builder(320.0F, 272.0F, 32.0F, 48.0F)
                 .sprites(Sprite.of(BOOKMARK, 0.0F, 0.0F, 32.0F, 48.0F, 64.0F, 48.0F),
                         Sprite.of(BOOKMARK, 32.0F, 0.0F, 32.0F, 48.0F, 64.0F, 48.0F))
                 .appearAnimation(AppearAnimation.verticalBottomSlide(0.3F, Easing.Simple.SINE_OUT))
@@ -166,11 +166,11 @@ public final class ZooGuide {
     }
 
     private static Button sideTab(int row, int sprite, ZooTab tab) {
-        return Button.builder(0.0F, 32.0F + row * 48.0F, 64.0F, 32.0F)
-                .sprites(Sprite.of(TABS, 0.0F, sprite * 32.0F, 64.0F, 32.0F, 128.0F, 160.0F),
-                        Sprite.of(TABS, 64.0F, sprite * 32.0F, 64.0F, 32.0F, 128.0F, 160.0F))
-                .hitbox(0.0F, 0.0F, 48.0F, 32.0F)
-                .hoverAnimation(HoverAnimation.leftSlide(48.0F, 8.0F, 0.3F, Easing.Simple.SINE_OUT))
+        return Button.builder(10.0F, 32.0F + row * 32.0F, 48.0F, 24.0F)
+                .sprites(Sprite.of(TABS, 0.0F, sprite * 24.0F, 48.0F, 24.0F, 96.0F, 120.0F),
+                        Sprite.of(TABS, 48.0F, sprite * 24.0F, 48.0F, 24.0F, 96.0F, 120.0F))
+                .hitbox(0.0F, 0.0F, 26.0F, 24.0F)
+                .hoverAnimation(HoverAnimation.leftSlide(48.0F, 6.0F, 0.3F, Easing.Simple.SINE_OUT))
                 .appearAnimation(AppearAnimation.leftShift(48.0F, 0.1F, Easing.Simple.SINE_OUT))
                 .clicked((context, element) -> flipTo(tab))
                 .build();

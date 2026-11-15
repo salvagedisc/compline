@@ -71,7 +71,7 @@ final class Portraits {
         }
         float height = Math.max(entity.getBbHeight(), 0.2F);
         float width = Math.max(entity.getBbWidth(), 0.2F);
-        float scale = Math.min(size * 0.74F / Math.max(height, width * 1.6F), size * 1.4F);
+        float scale = Math.min(size * 0.84F / Math.max(height, width * 1.6F), size * 1.4F);
         Quaternionf pose = new Quaternionf().rotateZ((float) Math.PI);
         Quaternionf camera = new Quaternionf().rotateX((float) Math.toRadians(12.0));
         pose.mul(camera);
