@@ -22,8 +22,8 @@ final class ZooIntroWidget extends AbstractWidget {
     private static final float LEFT = ZooSpreadWidget.LEFT;
     private static final float RIGHT = ZooSpreadWidget.RIGHT;
     private static final float WIDTH = ZooSpreadWidget.WIDTH;
-    private static final float TABS_Y = 50.0F;
-    private static final float TAB_H = 34.0F;
+    private static final float TABS_Y = 52.0F;
+    private static final float TAB_H = 40.0F;
 
     ZooIntroWidget(float width, float height) {
         super(0.0F, 0.0F, width, height);
@@ -37,19 +37,19 @@ final class ZooIntroWidget extends AbstractWidget {
         double mouseX = context.mouseX();
         double mouseY = context.mouseY();
 
-        ZooText.centered(graphics, font, Component.translatable("zoo.compline.titre"), LEFT + WIDTH / 2.0F, 30.0F, ZooText.INK, 1.25F);
-        float y = 46.0F + ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.accueil"),
-                LEFT, 46.0F, WIDTH, ZooText.INK, 1.0F);
-        y += 8.0F;
+        ZooText.centered(graphics, font, Component.translatable("zoo.compline.titre"), LEFT + WIDTH / 2.0F, 26.0F, ZooText.INK, 2.0F);
+        float y = 48.0F + ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.accueil"),
+                LEFT, 48.0F, WIDTH, ZooText.INK, 1.0F);
+        y = (float) Math.ceil(y + 6.0F);
         for (Stamp stamp : Stamp.values()) {
-            ZooSpreadWidget.drawStamp(context, stamp, ZooTab.TERRE, LEFT, y, 20.0F);
-            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), LEFT + 26.0F, y + 1.0F, ZooText.INK, 1.0F);
-            float help = ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.aide." + stamp.id()),
-                    LEFT + 26.0F, y + 11.0F, WIDTH - 26.0F, ZooText.INK_LIGHT, 1.0F);
-            y += Math.max(26.0F, 15.0F + help);
+            ZooSpreadWidget.drawStamp(context, stamp, ZooTab.TERRE, LEFT, y);
+            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), LEFT + 40.0F, y + 6.0F, ZooText.INK, 1.0F);
+            ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.aide." + stamp.id()),
+                    LEFT + 40.0F, y + 17.0F, WIDTH - 40.0F, ZooText.INK_LIGHT, 1.0F);
+            y += 40.0F;
         }
 
-        ZooText.centered(graphics, font, Component.translatable("zoo.compline.milieux"), RIGHT + WIDTH / 2.0F, 30.0F, ZooText.INK, 1.25F);
+        ZooText.centered(graphics, font, Component.translatable("zoo.compline.milieux"), RIGHT + WIDTH / 2.0F, 26.0F, ZooText.INK, 2.0F);
         int total = 0;
         int spottedTotal = 0;
         int masteredTotal = 0;
@@ -69,22 +69,22 @@ final class ZooIntroWidget extends AbstractWidget {
             total += species.size();
             spottedTotal += spotted;
             masteredTotal += mastered;
-            boolean hovered = ZooSpreadWidget.inside(mouseX, mouseY, RIGHT, rowY, WIDTH, TAB_H - 6.0F);
-            ZooSpreadWidget.drawStamp(context, Stamp.MAITRISER, mastered > 0 ? tab : null, RIGHT, rowY + 1.0F, 24.0F);
+            boolean hovered = ZooSpreadWidget.inside(mouseX, mouseY, RIGHT, rowY, WIDTH, TAB_H - 4.0F);
+            ZooSpreadWidget.drawStamp(context, Stamp.MAITRISER, mastered > 0 ? tab : null, RIGHT, rowY);
             Component name = Component.translatable(tab.nameKey());
             if (hovered) {
                 name = name.copy().withStyle(ChatFormatting.UNDERLINE);
                 tooltip = List.of(Component.translatable("zoo.compline.ouvrir").withStyle(ChatFormatting.GRAY));
             }
-            ZooText.line(graphics, font, name, RIGHT + 30.0F, rowY + 2.0F, 0xFF000000 | tab.color(), 1.0F);
+            ZooText.line(graphics, font, name, RIGHT + 40.0F, rowY + 7.0F, 0xFF000000 | tab.color(), 1.0F);
             ZooText.line(graphics, font, Component.translatable("zoo.compline.bilan", spotted, mastered, species.size()),
-                    RIGHT + 30.0F, rowY + 14.0F, ZooText.INK, 1.0F);
+                    RIGHT + 40.0F, rowY + 18.0F, ZooText.INK, 1.0F);
             rowY += TAB_H;
         }
         ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.total", spottedTotal, masteredTotal, total),
-                RIGHT, rowY + 4.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
+                RIGHT, rowY + 2.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
         ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.touche", ZooClient.guideKey().getTranslatedKeyMessage()),
-                RIGHT, 234.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
+                RIGHT, 240.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
         if (tooltip != null) {
             ZooText.tooltip(tooltip);
         }
@@ -97,7 +97,7 @@ final class ZooIntroWidget extends AbstractWidget {
             if (!ZooGuide.hasTab(tab)) {
                 continue;
             }
-            if (ZooSpreadWidget.inside(context.mouseX(), context.mouseY(), RIGHT, rowY, WIDTH, TAB_H - 6.0F)) {
+            if (ZooSpreadWidget.inside(context.mouseX(), context.mouseY(), RIGHT, rowY, WIDTH, TAB_H - 4.0F)) {
                 context.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
                 return ZooGuide.flipTo(tab);
             }
