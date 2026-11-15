@@ -2130,7 +2130,7 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/server_scripts/cuisine.js"
-hash = "c512574ba663ef97f7d6888f08b69d6a2c918c22eae9475a3d05052fd013b77e"
+hash = "7656d4b36ecb95f7c57d777297473e5094f8b19017141d7fc85168eb5b0d7dd9"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
@@ -2195,6 +2195,10 @@ hash = "f546c061b5f77e38b20b93259e2ce321e36a7068cc222c3d1d0bea867b0bd2b7"
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
 hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
+
+[[files]]
+file = "kubejs/startup_scripts/onglets_creatifs.js"
+hash = "d66a2c9564223874178f349aec35f33c57b7b4ab22f56e07f7ded62180b33ca0"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"

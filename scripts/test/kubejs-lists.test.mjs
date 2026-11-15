@@ -56,3 +56,9 @@ test('tri: Steam \'n\' Rails patterns are the same on the server and in EMI', as
   assert.equal(server.length, 2);
   assert.deepEqual(client, server);
 });
+
+// The creative tabs drop the same items: the startup script is generated from the lists above.
+test('creative tabs: the startup script matches the server lists (npm run gen-creative)', async () => {
+  const { buildScript, outputPath } = await import('../kubejs/creative-tabs.mjs');
+  assert.equal(await readFile(outputPath, 'utf8'), await buildScript());
+});
