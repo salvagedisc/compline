@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 
 /**
- * Une double page d'espèces : seize au plus, huit par page, chacune avec son portrait, son nom et ses quatre
+ * Une double page d'espèces : huit au plus, quatre par page, chacune avec son portrait, son nom et ses quatre
  * tampons, comme la page des tampons d'Archie. Une espèce pas encore aperçue n'a qu'une silhouette à l'encre.
  */
 final class ZooSpreadWidget extends AbstractWidget {
@@ -25,11 +25,13 @@ final class ZooSpreadWidget extends AbstractWidget {
     static final float RIGHT = 304.0F;
     static final float WIDTH = 214.0F;
     static final float HEADER_Y = 32.0F;
-    static final float ROWS_Y = 52.0F;
-    static final float ROW_H = 26.0F;
-    static final float STAMP = 22.0F;
-    static final float STAMP_STEP = 24.0F;
-    static final float STAMPS_X = WIDTH - 4 * STAMP_STEP + 2.0F;
+    static final float ROWS_Y = 50.0F;
+    static final float ROW_H = 52.0F;
+    /** Un tampon fait 34 x 36 (losange et son ombre), comme sur la page des tampons d'Archie, à un texel par unité. */
+    static final float STAMP_W = 34.0F;
+    static final float STAMP_H = 36.0F;
+    static final float STAMP_STEP = 38.0F;
+    static final float STAMPS_X = 40.0F;
 
     private final ZooTab tab;
     private final List<SpeciesInfo> species;
@@ -88,26 +90,28 @@ final class ZooSpreadWidget extends AbstractWidget {
         boolean spotted = Stamp.APERCEVOIR.in(mask);
         List<Component> tooltip = null;
 
-        context.drawSprite(Sprite.of(ZooGuide.FRAME, 0.0F, 0.0F, 24.0F, 24.0F, 24.0F, 24.0F), x, y, 24.0F, 24.0F);
-        if (!Portraits.draw(graphics, info.id(), x + 2.0F, y + 2.0F, 20.0F, !spotted)) {
-            ZooText.centered(graphics, font, Component.literal("?"), x + 12.0F, y + 8.0F, ZooText.INK_LIGHT, 1.0F);
+        context.drawSprite(Sprite.of(ZooGuide.FRAME, 0.0F, 0.0F, STAMP_W, STAMP_H, STAMP_W, STAMP_H), x, y + 6.0F, STAMP_W, STAMP_H);
+        if (!Portraits.draw(graphics, info.id(), x + 6.0F, y + 12.0F, 22.0F, !spotted)) {
+            ZooText.centered(graphics, font, Component.literal("?"), x + 17.0F, y + 19.0F, ZooText.INK_LIGHT, 1.0F);
         }
         Component name = spotted ? ZooText.speciesName(info.id()) : Component.translatable("zoo.compline.inconnue");
-        ZooText.line(graphics, font, ZooText.fit(font, name, STAMPS_X - 32.0F, 1.0F), x + 28.0F, y + 8.0F,
+        float nameWidth = 4 * STAMP_STEP - 4.0F;
+        ZooText.line(graphics, font, ZooText.fit(font, name, nameWidth, 1.0F), x + STAMPS_X, y + 2.0F,
                 spotted ? ZooText.INK : ZooText.INK_LIGHT, 1.0F);
-        if (inside(mouseX, mouseY, x, y, STAMPS_X - 4.0F, 24.0F)) {
+        if (inside(mouseX, mouseY, x, y + 6.0F, STAMP_W, STAMP_W) || inside(mouseX, mouseY, x + STAMPS_X, y, nameWidth, 10.0F)) {
             tooltip = spotted ? List.of(ZooText.speciesName(info.id()))
                     : List.of(Component.translatable("zoo.compline.inconnue.aide").withStyle(ChatFormatting.GRAY));
         }
 
+        int slot = 0;
         for (Stamp stamp : Stamp.values()) {
             if (stamp == Stamp.HEBERGER && !info.housable()) {
                 continue;
             }
-            float sx = x + STAMPS_X + stamp.ordinal() * STAMP_STEP;
-            float sy = y + 1.0F;
-            drawStamp(context, stamp, stamp.in(mask) ? info.tab() : null, sx, sy, STAMP);
-            if (inside(mouseX, mouseY, sx, sy, STAMP, STAMP)) {
+            float sx = x + STAMPS_X + slot++ * STAMP_STEP;
+            float sy = y + 12.0F;
+            drawStamp(context, stamp, stamp.in(mask) ? info.tab() : null, sx, sy);
+            if (inside(mouseX, mouseY, sx + 3.0F, sy + 3.0F, STAMP_W - 6.0F, STAMP_W - 6.0F)) {
                 tooltip = stampTooltip(info, stamp, mask);
             }
         }
@@ -115,10 +119,10 @@ final class ZooSpreadWidget extends AbstractWidget {
     }
 
     /** Dessine un tampon : à l'encre pâle s'il manque ({@code tab} nul), aux couleurs du milieu s'il est obtenu. */
-    static void drawStamp(UIContext context, Stamp stamp, ZooTab tab, float x, float y, float size) {
+    static void drawStamp(UIContext context, Stamp stamp, ZooTab tab, float x, float y) {
         float row = tab == null ? 0.0F : tab.ordinal() + 1.0F;
-        context.drawSprite(Sprite.of(ZooGuide.STAMPS, stamp.ordinal() * 24.0F, row * 24.0F, 24.0F, 24.0F, 96.0F, 120.0F),
-                x, y, size, size);
+        context.drawSprite(Sprite.of(ZooGuide.STAMPS, stamp.ordinal() * STAMP_W, row * STAMP_H, STAMP_W, STAMP_H,
+                4 * STAMP_W, 5 * STAMP_H), x, y, STAMP_W, STAMP_H);
     }
 
     private List<Component> stampTooltip(SpeciesInfo info, Stamp stamp, int mask) {
