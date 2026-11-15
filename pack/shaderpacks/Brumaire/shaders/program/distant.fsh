@@ -45,7 +45,8 @@ void main() {
         return;
     }
 #endif
-    vec3 lit = shade(albedo, normal, vLm, 1.0, vPos, leaf, gl_FragCoord.xy, 1);
+    float indirect;
+    vec3 lit = shade(albedo, normal, vLm, 1.0, vPos, leaf, gl_FragCoord.xy, 1, indirect);
     if (vMat == DH_BLOCK_ILLUMINATED || vMat == DH_BLOCK_LAVA) lit += albedo * 1.5;
     outColor = vec4(lit, vTint.a);
 }

@@ -31,6 +31,8 @@ uniform vec4 brumaireClearing3;
 uniform vec4 brumaireGust0;     // xy : direction / largeur, z : décalage / largeur, w : force de la crête
 uniform vec4 brumaireGust1;
 
+#include "/lib/atmosphere.glsl"
+
 const vec3 LUMA = vec3(0.2126, 0.7152, 0.0722);
 
 vec3 gSunDir;     // vers le soleil, repère monde
@@ -57,48 +59,46 @@ void initEnv() {
     gDay = smoothstep(-0.10, 0.22, e);
     gDusk = 1.0 - smoothstep(0.0, 0.42, abs(e + 0.02));
     // La lumière directe s'éteint quand l'astre passe l'horizon : le relais soleil/lune ne se voit pas.
-    float fade = smoothstep(0.02, 0.13, abs(e));
-    vec3 sun = mix(vec3(1.0, 0.50, 0.22), vec3(1.0, 0.94, 0.84), smoothstep(0.03, 0.40, e)) * 3.4;
-    vec3 moon = vec3(0.36, 0.48, 0.80) * 0.16;
+    float fade = smoothstep(0.0, 0.07, abs(e));
+    // Couleurs lues dans la table du ciel : ce que l'atmosphère laisse du soleil (blanc à midi, orangé puis rouge
+    // au ras de l'horizon) et de la lune (selon sa phase), tirée vers le bleu comme l'œil la voit la nuit.
+    vec3 sun = skyRow(1) / vec3(0.95, 0.88, 0.80) * 3.4;
+    vec3 moon = luma(skyRow(2)) * vec3(0.36, 0.48, 0.80) * 0.26;
     gLightColor = (e > 0.0 ? sun : moon) * fade * (1.0 - 0.85 * rainStrength);
-    vec3 amb = mix(vec3(0.10, 0.14, 0.24) * 0.30, vec3(0.55, 0.68, 0.86) * 1.15, gDay);
-    amb = mix(amb, vec3(0.62, 0.52, 0.56) * 0.5, gDusk * 0.55 * smoothstep(-0.3, 0.0, e));
+    // Lumière du ciel : sa moyenne, un peu désaturée (le ciel n'est jamais d'un seul bleu), plus le soleil renvoyé
+    // par le sol et une lueur nocturne qui ne laisse jamais le noir complet.
+    vec3 sky = skyRow(0);
+    vec3 amb = mix(sky, vec3(luma(sky)), 0.45) * 1.1 + (e > 0.0 ? sun * fade * 0.06 : vec3(0.0));
+    amb += vec3(0.020, 0.026, 0.042);
     gAmbient = mix(amb, vec3(luma(amb)) * vec3(0.86, 0.92, 1.0) * 0.75, rainStrength * 0.7);
 }
 
 /** Couleur du ciel dans une direction (repère monde), sans astres ni brume. */
 vec3 skyAt(vec3 d) {
-    float e = gSunDir.y;
-    float up = clamp(d.y, 0.0, 1.0);
-    float low = exp(-up * 5.0);
-    vec3 zenith = mix(vec3(0.010, 0.016, 0.040), vec3(0.15, 0.34, 0.76), gDay);
-    vec3 horizon = mix(vec3(0.030, 0.045, 0.085), vec3(0.60, 0.76, 0.93), gDay);
-    float toward = dot(normalize(d.xz + 1e-5), normalize(gSunDir.xz + 1e-5)) * 0.5 + 0.5;
-    vec3 warm = mix(vec3(0.80, 0.42, 0.34), vec3(1.0, 0.60, 0.28), toward) * (0.35 + 0.85 * toward);
-    float dusk = gDusk * smoothstep(-0.25, 0.05, e);
-    horizon = mix(horizon, warm, dusk * 0.85);
-    zenith = mix(zenith, zenith * vec3(0.85, 0.80, 1.0), dusk * 0.5);
-    vec3 c = mix(zenith, horizon, low);
-    float cs = max(dot(d, gSunDir), 0.0);
-    c += vec3(1.0, 0.72, 0.42) * (pow(cs, 6.0) * 0.10 + pow(cs, 90.0) * 0.5) * smoothstep(-0.12, 0.05, e) * (1.0 - rainStrength);
-    c += vec3(0.25, 0.33, 0.50) * pow(max(dot(d, -gSunDir), 0.0), 40.0) * 0.05 * (1.0 - gDay);
+    vec3 c = skyScatter(d, gSunDir) + vec3(0.004, 0.006, 0.012) * (1.0 - gDay);
+    // La nuit, l'œil voit en bleu.
+    float night = 1.0 - smoothstep(-0.20, 0.0, gSunDir.y);
+    c = mix(c, vec3(luma(c)) * vec3(0.55, 0.75, 1.30), night * 0.5);
+    // Un ciel d'été voilé : jamais d'un bleu profond.
+    c = mix(c, vec3(luma(c)) * vec3(0.90, 0.96, 1.08), 0.22 * gDay);
     return mix(c, vec3(luma(c)) * vec3(0.78, 0.82, 0.88) * 0.7, rainStrength * 0.85);
 }
 
-/** Le disque du soleil, à ajouter au ciel : rond, à bord doux, chaud près de l'horizon. */
+/** Le disque du soleil, à ajouter au ciel : rond, plus sombre au bord, de la couleur que l'air lui laisse. */
 vec3 sunDisc(vec3 d) {
-    float e = gSunDir.y;
-    float disc = smoothstep(0.99880, 0.99915, dot(d, gSunDir));
-    vec3 color = mix(vec3(1.0, 0.45, 0.16), vec3(1.0, 0.92, 0.78), smoothstep(0.0, 0.35, e));
-    return color * disc * 28.0 * smoothstep(-0.06, 0.0, e) * (1.0 - rainStrength);
+    float c = dot(d, gSunDir);
+    float disc = smoothstep(0.99880, 0.99915, c);
+    float r = clamp(sqrt(max(1.0 - c, 0.0) / (1.0 - 0.99897)), 0.0, 1.0);
+    float limb = 1.0 - 0.55 * (1.0 - sqrt(max(1.0 - r * r, 0.0)));
+    return skyRow(1) * (SUN_POWER * 1.8) * disc * limb * (1.0 - rainStrength);
 }
 
-/** Les verts tirés vers l'olive, à luminance égale. */
+/** Les verts tirés vers un vert de sauge, à luminance égale. */
 vec3 olive(vec3 c) {
     float green = c.g - max(c.r, c.b);
     float w = clamp(green / max(c.g, 1e-4) * 2.5, 0.0, 1.0) * OLIVE;
     float l = luma(c);
-    vec3 hue = vec3(1.02, 0.98, 0.42);
+    vec3 hue = vec3(0.89, 1.0, 0.63);
     vec3 target = mix(l * hue / luma(hue), vec3(l), 0.22) * 0.94;
     return mix(c, target, w);
 }

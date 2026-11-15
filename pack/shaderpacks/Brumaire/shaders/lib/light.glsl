@@ -1,12 +1,20 @@
 // Éclairage direct d'une surface : soleil ou lune avec ombre, ciel, blocs lumineux.
 
+/** Normale (repère monde) rangée dans deux canaux, et relue. */
+vec2 packNormal(vec3 n) {
+    n /= abs(n.x) + abs(n.y) + abs(n.z);
+    vec2 p = n.y >= 0.0 ? n.xz : (1.0 - abs(n.zx)) * vec2(n.x >= 0.0 ? 1.0 : -1.0, n.z >= 0.0 ? 1.0 : -1.0);
+    return p * 0.5 + 0.5;
+}
+
 /**
  * albedo : couleur linéaire ; normal : repère monde ; lm : lumière des blocs et du ciel (0..1) ; ao : occlusion ;
  * pos : repère joueur ; leaf : 0 surface dure, 1 feuillage que la lumière traverse ; frag : gl_FragCoord.xy.
  */
-vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, vec2 frag, int taps) {
+vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, vec2 frag, int taps, out float indirect) {
     float facing = dot(normal, gLightDir);
-    float diffuse = mix(max(facing, 0.0), 0.72, leaf);
+    // Un feuillage reste plus clair du côté du soleil : il garde du volume tout en laissant passer la lumière.
+    float diffuse = mix(max(facing, 0.0) * 0.8 + 0.2 * leaf, 0.72, leaf * 0.55);
     float lit = 0.0;
     if (diffuse > 0.0) {
         float dist = length(pos);
@@ -15,10 +23,13 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         float fallback = smoothstep(0.80, 0.94, lm.y);
         lit = beyond < 1.0 ? mix(shadowAt(pos, normal, dither(frag), taps), fallback, beyond) : fallback;
     }
+    // Une feuille à l'ombre d'une autre reçoit encore le soleil passé à travers le feuillage.
+    lit = max(lit, 0.28 * leaf);
     vec3 light = gLightColor * diffuse * lit;
     // Le feuillage à contre-jour laisse passer un peu de soleil.
     vec3 view = normalize(pos);
     light += gLightColor * leaf * lit * 0.35 * pow(max(dot(view, gLightDir), 0.0), 4.0);
+    float direct = luma(light);
 
     float sky = lm.y * lm.y;
     float occl = ao * ao;
@@ -28,5 +39,7 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     light += vec3(0.016, 0.018, 0.022) * occl;
     light += vec3(0.30, 0.32, 0.34) * nightVision;
     light *= 1.0 - 0.7 * darknessFactor;
+    // Part de la lumière qui vient du ciel et des blocs : c'est elle que l'occlusion d'écran assombrit.
+    indirect = clamp(1.0 - direct * (1.0 - 0.7 * darknessFactor) / max(luma(light), 1e-5), 0.0, 1.0);
     return albedo * light;
 }

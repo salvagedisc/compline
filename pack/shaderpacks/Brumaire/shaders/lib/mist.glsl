@@ -22,8 +22,10 @@ float mistAnchor() {
 float mistNearDensity() {
     // Plus dense à l'aube, la nuit et sous la pluie ; elle ne descend pas dans les grottes.
     float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
-    float hour = mix(1.25, 0.9, gDay) + 0.25 * gDusk;
-    return 0.021 * MIST_DENSITY * hour * (1.0 + 0.6 * rainStrength) * open;
+    float hour = mix(1.25, 0.6, gDay) + 0.35 * gDusk;
+    // L'air du biome : plus de brume là où il est humide, moins dans un désert.
+    float biome = mix(0.75, 1.3, airHumid) * (1.0 - 0.4 * airDust());
+    return 0.021 * MIST_DENSITY * hour * biome * (1.0 + 0.6 * rainStrength) * open;
 }
 
 /** Brume retirée par une clairière : un cylindre vertical, au bord adouci par deux rayons. */
@@ -78,12 +80,37 @@ float mistDepth(vec3 dir, float len, out float nearOnly) {
     return nearOnly + ring;
 }
 
+/**
+ * L'air entre l'œil et un point du paysage : au loin, tout prend la couleur du ciel bas, le bleu d'abord.
+ * Rend la part de la couleur du point qui passe (par canal) ; inscat reçoit la lumière ajoutée.
+ */
+vec3 airVeil(vec3 dir, float len, out vec3 inscat) {
+    vec3 k = vec3(0.50, 0.72, 1.0) * (AIR_DENSITY / 1600.0) * mix(0.8, 1.8, airHumid) * (1.0 + 1.5 * airDust());
+    vec3 pass = exp(-k * len);
+    inscat = skyAt(normalize(vec3(dir.x, max(dir.y, 0.03), dir.z))) * (1.0 - pass);
+    return pass;
+}
+
+/** Teinte de la brume selon le biome : olive dans un marais ou une jungle, bleutée dans le froid, sable au désert. */
+vec3 mistTint() {
+    vec3 t = vec3(1.0);
+    t = mix(t, vec3(0.94, 1.0, 0.86), smoothstep(0.55, 0.9, airHumid) * smoothstep(0.5, 0.9, airHeat));
+    t = mix(t, vec3(0.92, 0.97, 1.06), 1.0 - smoothstep(0.05, 0.4, airHeat));
+    return mix(t, vec3(1.08, 0.98, 0.84), airDust());
+}
+
+/** Diffusion vers l'avant des gouttelettes (Henyey-Greenstein). */
+float mistPhase(float mu, float g) {
+    return 0.0795775 * (1.0 - g * g) / pow(1.0 + g * g - 2.0 * g * mu, 1.5);
+}
+
 /** Couleur de la brume vue dans une direction ; sun : part de soleil qui l'atteint (0 sous un couvert). */
 vec3 mistColor(vec3 dir, float sun) {
-    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.55) * 0.95;
-    // Au lever et au coucher, la nappe prend les couleurs de l'horizon : chaude vers le soleil, mauve à l'opposé.
-    body = mix(body, skyAt(normalize(vec3(dir.x, 0.04, dir.z))) * 0.9, 0.65 * gDusk);
-    float toward = max(dot(dir, gLightDir), 0.0);
-    vec3 beam = gLightColor * (0.055 + 0.30 * pow(toward, 5.0) * SHAFT_STRENGTH);
+    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.75) * vec3(1.03, 1.0, 0.95) * 0.95;
+    body *= mistTint();
+    // Les gouttelettes renvoient surtout la lumière vers l'avant : un halo vers le soleil, un peu en arrière.
+    float mu = dot(dir, gLightDir);
+    float phase = 0.75 * mistPhase(mu, 0.5) + 0.25 * mistPhase(mu, -0.3);
+    vec3 beam = gLightColor * (0.03 + 0.4 * phase * SHAFT_STRENGTH);
     return body + beam * sun;
 }
