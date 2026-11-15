@@ -25,10 +25,15 @@ const TRI_OBJETS_OVERGEARED = [
 ]
 
 // Farmer's Delight et Cold Sweat : salade du Nether, meubles et couteau venus du Nether, cuir
-// de hoglin.
+// de hoglin. La tomate et l'oignon de Farmer's Delight doublaient ceux de Farm & Charm : on
+// garde ceux de Farm & Charm, qui suivent les saisons ; les recettes de Farmer's Delight les
+// demandent par tag (c:crops/tomato, c:crops/onion) et les acceptent.
 const TRI_OBJETS_CUISINE = [
   'farmersdelight:nether_salad', 'farmersdelight:netherite_knife',
   'farmersdelight:crimson_cabinet', 'farmersdelight:warped_cabinet',
+  'farmersdelight:tomato', 'farmersdelight:tomato_seeds', 'farmersdelight:rotten_tomato',
+  'farmersdelight:wild_tomatoes', 'farmersdelight:tomato_crate', 'farmersdelight:onion',
+  'farmersdelight:wild_onions', 'farmersdelight:onion_crate',
   'cold_sweat:hoglin_hide', 'cold_sweat:hoglin_helmet', 'cold_sweat:hoglin_chestplate',
   'cold_sweat:hoglin_leggings', 'cold_sweat:hoglin_boots'
 ]

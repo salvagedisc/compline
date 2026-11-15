@@ -3,6 +3,8 @@
   "values": [
     "farm_and_charm:corn_crop",
     "farm_and_charm:tomato_crop",
-    "farm_and_charm:tomato_crop_body"
+    "farm_and_charm:tomato_crop_body",
+    "farmersdelight:rice",
+    "farmersdelight:rice_panicles"
   ]
 }
