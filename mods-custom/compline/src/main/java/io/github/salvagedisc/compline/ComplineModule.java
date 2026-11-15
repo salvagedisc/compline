@@ -36,7 +36,10 @@ public enum ComplineModule {
     RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS),
     /** Le zoo : les quatre tampons du guide d'Archie's Dinosaurs pour toutes les bêtes (client et serveur). Le suivi
      *  ne demande aucun mod ; les pages du guide demandent Archie's Dinosaurs, la photo demande Exposure. */
-    ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus));
+    ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus)),
+    /** La faune redessinée : le Warden et l'élan d'Alex's Mobs refaits en GeckoLib, avec fondus et mouvements
+     *  réactifs (client). L'élan demande aussi Alex's Mobs. */
+    FAUNE("faune", Dist.CLIENT, bus -> io.github.salvagedisc.compline.faune.FauneModule.start(bus), ModIds.GECKOLIB);
 
     private final String id;
     private final Dist side;

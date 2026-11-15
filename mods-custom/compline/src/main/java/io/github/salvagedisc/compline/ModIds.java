@@ -21,6 +21,8 @@ public final class ModIds {
     public static final String IRIS = "iris";
     public static final String ARCHIES_DINOSAURS = "ec_ad";
     public static final String EXPOSURE = "exposure";
+    public static final String GECKOLIB = "geckolib";
+    public static final String ALEXS_MOBS = "alexsmobs";
 
     private ModIds() {
     }
