@@ -15,7 +15,10 @@
     "CamX": "c.x()",
     "CamY": "c.y()",
     "CamZ": "c.z()",
-    "Temps": "g.time() % 7200"
+    "Temps": "g.time() % 7200",
+    "ForceEau": "config('compline:eau')",
+    "ForceReflets": "config('compline:reflets')",
+    "ForceBrume": "config('compline:brume')"
   },
   "samplers": {
     "Relief": "compline:textures/relief.png"

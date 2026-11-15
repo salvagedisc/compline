@@ -13,5 +13,11 @@
   "config.compline.tons": "Tones",
   "config.compline.tons.tooltip": "Bluish nights, golden dusks, greyer rain, softer contrast. 0 keeps the game's colours.",
   "config.compline.olive": "Olive greens",
-  "config.compline.olive.tooltip": "Pulls vivid greens towards olive. 0 keeps the game's greens."
+  "config.compline.olive.tooltip": "Pulls vivid greens towards olive. 0 keeps the game's greens.",
+  "config.compline.eau": "Underwater",
+  "config.compline.eau.tooltip": "Water that absorbs colours according to its tint, darkens with depth, carries floating specks and shows the sky through a circle at the surface. 0 keeps the game's water.",
+  "config.compline.reflets": "Water reflections",
+  "config.compline.reflets.tooltip": "The sky and the sun's glint on lakes and the sea, stronger at grazing angles. 0 turns them off.",
+  "config.compline.brume": "Low mist",
+  "config.compline.brume.tooltip": "Mist lying on the water and in hollows, mostly at dawn, dusk and in the rain. 0 turns it off."
 }

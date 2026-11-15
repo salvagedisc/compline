@@ -61,7 +61,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 > On by default ([ambiance](plan/ambiance.md)). Settings: Options > Resource Packs > brush button, section Compline. Note the frame rate with `Rendu de Compline` on and off.
 
-- [ ] **It loads** [AM1]: no red message at launch; the section Compline shows seven settings in French; `Rendu de Compline` off gives back the image of the game at once.
+- [ ] **It loads** [AM1]: no red message at launch; the section Compline shows ten settings in French; `Rendu de Compline` off gives back the image of the game at once.
 - [ ] **Sun shadows** [AM2]: at mid-morning in a clearing, trees, hills and a wall cast a shadow on the right side; flecks of sun under a canopy; the shadows do not swim when walking or turning; they soften in the mist and vanish in the rain and at night.
 - [ ] **A change shows** [AM3]: fell a tree, build a wall three blocks high: the shadow follows within a second or two.
 - [ ] **Light** [AM4]: shafts of light between the leaves when looking towards a low sun; torches and lava glow at night without washing out the screen.
@@ -71,6 +71,10 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Distance** [AM8]: with Distant Horizons, note where the look of the near terrain and of the distant terrain differ (no shadow beyond 112 blocks).
 - [ ] **With Brumaire** [AM9]: turn the shader pack on (K): no doubled effects, no black screen; turn it off: the default look is back.
 - [ ] **Without a graphics card to spare** [AM10]: on the weakest machine of the group and on a Mac, frame rate with and without.
+- [ ] **Water from inside** [AM11]: dive in a river, the sea and a swamp: each water keeps its own tint (green, teal, olive) without the game's bright blue; deeper, it darkens; a few specks float and catch the light when looking up; `Sous l'eau` at 0 gives back the game's water.
+- [ ] **Sky through the surface** [AM12]: two blocks under a lake, look up: a bright circle of sky with a dark ring around it; a tree on the bank stays visible inside the circle; under a roof of ice or rock no circle.
+- [ ] **Sky on the water** [AM13]: at a lake at sunset, the water near the horizon shows the sky's colours, little when looking straight down, and the sun leaves a glint; in the rain the reflection breaks up; no reflection on dry ground next to the water.
+- [ ] **Low mist** [AM14]: at dawn in a river valley, a thin mist lies on the water and in the low ground, not on the hilltops; it never paints a band over the sky.
 
 ### With the house shader pack
 

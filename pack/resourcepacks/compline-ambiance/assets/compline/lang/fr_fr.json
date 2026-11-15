@@ -13,5 +13,11 @@
   "config.compline.tons": "Tons",
   "config.compline.tons.tooltip": "Nuits bleutées, crépuscules dorés, pluie plus grise, contraste plus doux. 0 garde les couleurs du jeu.",
   "config.compline.olive": "Verts olive",
-  "config.compline.olive.tooltip": "Tire les verts vifs vers l'olive. 0 garde les verts du jeu."
+  "config.compline.olive.tooltip": "Tire les verts vifs vers l'olive. 0 garde les verts du jeu.",
+  "config.compline.eau": "Sous l'eau",
+  "config.compline.eau.tooltip": "Une eau qui boit les couleurs selon sa teinte, s'assombrit en profondeur, porte des grains en suspension et montre le ciel par un cercle à la surface. 0 garde l'eau du jeu.",
+  "config.compline.reflets": "Reflets sur l'eau",
+  "config.compline.reflets.tooltip": "Le ciel et l'éclat du soleil sur les lacs et la mer, plus forts quand on regarde en rasant. 0 les éteint.",
+  "config.compline.brume": "Brume basse",
+  "config.compline.brume.tooltip": "Une brume qui dort au ras de l'eau et dans les creux, surtout à l'aube, au crépuscule et sous la pluie. 0 l'éteint."
 }
