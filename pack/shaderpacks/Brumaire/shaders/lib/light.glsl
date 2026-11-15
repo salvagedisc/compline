@@ -1,3 +1,4 @@
+#include "/lib/clouds.glsl"
 // Éclairage direct d'une surface : soleil ou lune avec ombre, ciel, blocs lumineux.
 
 /** Normale (repère monde) rangée dans deux canaux, et relue. */
@@ -25,6 +26,8 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     }
     // Une feuille à l'ombre d'une autre reçoit encore le soleil passé à travers le feuillage.
     lit = max(lit, 0.28 * leaf);
+    // L'ombre des nuages qui passent.
+    if (diffuse > 0.0) lit *= cloudShadow(pos + cameraPosition, gLightDir);
     vec3 light = gLightColor * diffuse * lit;
     // Le feuillage à contre-jour laisse passer un peu de soleil.
     vec3 view = normalize(pos);

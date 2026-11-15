@@ -8,6 +8,15 @@
 #define MIST_RING_MAX 512.0 // [256.0 384.0 512.0 768.0 1024.0]
 #define AIR_DENSITY 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5 2.0]
 
+// Nuages
+#define CLOUD_STEPS 16 // [0 10 16 24 32]
+#define CLOUD_HEIGHT 220.0 // [180.0 200.0 220.0 250.0 280.0]
+#define CLOUD_COVERAGE 0.45 // [0.2 0.3 0.45 0.6 0.75]
+#define CLOUD_SPEED 1.0 // [0.0 0.5 1.0 2.0 3.0]
+#define CLOUD_LIGHT 1.0 // [0.6 0.8 1.0 1.2 1.5]
+#define CLOUD_RANGE 3000.0 // [1500.0 2000.0 3000.0 4000.0]
+#define CLOUD_SHADOWS 0.8 // [0.0 0.4 0.6 0.8 1.0]
+
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]
 #define SHADOW_SOFTNESS 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]

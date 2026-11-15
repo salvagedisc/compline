@@ -1,12 +1,14 @@
-// La brume et ses rayons de lumière, puis l'eau quand la caméra y plonge.
+// Les nuages posés sur le ciel, l'air, la brume et ses rayons de lumière, puis l'eau quand la caméra y plonge.
 #define FSH
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/lib/shadow.glsl"
 #include "/lib/mist.glsl"
+#include "/lib/clouds.glsl"
 #include "/program/scene.glsl"
 
 uniform sampler2D colortex0;
+uniform sampler2D colortex3;
 in vec2 vUv;
 
 /* RENDERTARGETS: 0 */
@@ -48,6 +50,23 @@ void main() {
     vec3 pos = scenePosition(vUv, sky, hand);
     float len = sky ? 16384.0 : length(pos);
     vec3 dir = normalize(pos);
+
+#if CLOUD_STEPS > 0
+    // Les nuages (demi-écran, lissés sur quatre prises) ; jamais sur ce qui est plus près qu'eux.
+    if (!hand && isEyeInWater == 0) {
+        float toBase = (cloudBase() - cameraPosition.y) / dir.y;
+        float toTop = (cloudTop() - cameraPosition.y) / dir.y;
+        float enter = max(min(toBase, toTop), 0.0);
+        if (dir.y != 0.0 && max(toBase, toTop) > 0.0 && (sky || len > enter)) {
+            vec2 px = 1.0 / vec2(viewWidth, viewHeight);
+            vec2 half_ = vUv * 0.5;
+            vec4 c = texture(colortex3, half_ + vec2(px.x, px.y) * 0.5) + texture(colortex3, half_ + vec2(-px.x, px.y) * 0.5)
+                   + texture(colortex3, half_ + vec2(px.x, -px.y) * 0.5) + texture(colortex3, half_ - px * 0.5);
+            c *= 0.25;
+            color = color * c.a + c.rgb;
+        }
+    }
+#endif
 
     if (isEyeInWater == 1) {
         float t = 1.0 - exp(-min(len, 512.0) * 0.055);

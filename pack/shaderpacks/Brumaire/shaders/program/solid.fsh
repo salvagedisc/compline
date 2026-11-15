@@ -140,6 +140,10 @@ void main() {
 #elif defined PROGRAM_WEATHER
     outColor = vec4(albedo * (gAmbient * 1.3 + gLightColor * 0.08 + vec3(0.02)), color.a * 0.75);
 #elif defined PROGRAM_CLOUDS
+#if CLOUD_STEPS > 0
+    // Les nuages du jeu laissent la place à ceux du pack (composite).
+    discard;
+#endif
     float under = 0.75 + 0.25 * normal.y;
     outColor = vec4((gAmbient * 1.15 + gLightColor * 0.30 * max(gLightDir.y, 0.0)) * under, 0.82 * color.a);
 #else
