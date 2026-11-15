@@ -1274,7 +1274,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "84c87949dbcf6b107885ba228b6fcebf0e5365e730f9cc86d1c1e374d8fa769c"
+hash = "c3aa74e324410f2a5aabf9d7423a9ef050cae3a2055dbfcbc1989602e6de4631"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1514,7 +1514,7 @@ hash = "2b5f4f6f00a9301f4fb2d1c7f63198b153859c3c37a151b5151c8d6e128bf035"
 
 [[files]]
 file = "kubejs/data/eclipticseasons/tags/block/crops/spring_autumn.json"
-hash = "ef44505beaa0977042895a8a298ba76edabac00adf89a5dcc03840697804699f"
+hash = "997a07e03efaf6e392b0e3601f3a96d24385e79b23df180886fdd56dfb0f7a08"
 
 [[files]]
 file = "kubejs/data/eclipticseasons/tags/block/crops/spring_summer.json"
@@ -1526,7 +1526,7 @@ hash = "7ceb3e204bd4028dd820fe99562ed7dc261cbcab4d3ece1cef2dbc6966f5a8a0"
 
 [[files]]
 file = "kubejs/data/eclipticseasons/tags/block/crops/summer_autumn.json"
-hash = "daa1efc34bed94851ab0d571250046adba950d19edc659b7be8bb65acc1a4349"
+hash = "1297bb741bc12ae3b967a3dedbc3ef411bdccb3cf0b074ff31333556df7141d8"
 
 [[files]]
 file = "kubejs/data/eclipticseasons/tags/worldgen/biome/is_small.json"
@@ -1547,6 +1547,26 @@ hash = "bcfdb551949a118098d12c23320f52a66e73e4b314dd97014a8913af5971ab47"
 [[files]]
 file = "kubejs/data/envelope/tags/worldgen/biome/spawns_passenger_pigeons.json"
 hash = "15e9d6830b82e7aba921b695441ffc54d293b9d9c5a166fe73d79ba02d9fa9cf"
+
+[[files]]
+file = "kubejs/data/farmersdelight/neoforge/biome_modifier/wild_beetroots.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/farmersdelight/neoforge/biome_modifier/wild_carrots.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/farmersdelight/neoforge/biome_modifier/wild_onions.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/farmersdelight/neoforge/biome_modifier/wild_potatoes.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/farmersdelight/neoforge/biome_modifier/wild_tomatoes.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/data/friendsandfoes/tags/worldgen/biome/collections/snowy_forest.json"
@@ -2150,7 +2170,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "bf4e026bcc89045418892c93efb9416cb605cf271353642e945848208035bdcb"
+hash = "b1a0fd2c16e2ee389e4414ed2c589cd791917da32533b6fa5501e4df921650e1"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
