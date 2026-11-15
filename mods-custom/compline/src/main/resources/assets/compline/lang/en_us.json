@@ -50,5 +50,8 @@
   "zoo.compline.aide.photographier": "Take a photo of it.",
   "zoo.compline.aide.heberger": "Tame it, breed it or catch it in a bucket.",
   "zoo.compline.aide.maitriser": "Its other stamps, then watch it up close.",
-  "zoo.compline.observation": "Watched %s s out of %s"
+  "zoo.compline.observation": "Watched %s s out of %s",
+  "tooltip.compline.patine.1": "A little dirty (washes off in water)",
+  "tooltip.compline.patine.2": "Dirty (washes off in water)",
+  "tooltip.compline.patine.3": "Caked in mud (washes off in water)"
 }

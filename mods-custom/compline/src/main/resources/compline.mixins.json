@@ -26,6 +26,7 @@
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
     "horizon.VanillaFadeMixin",
+    "patine.ArmorTextureMixin",
     "rendu.IrisUniformsMixin",
     "vent.CampfireBlockMixin",
     "vent.CampfireSmokeParticleMixin",

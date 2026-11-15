@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.18.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook) and **faune** (house models and animations for the Warden and the moose) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.19.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **faune** (house models and animations for the Warden and the moose) and **patine** (armour that gets dirty and washes off in water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -259,6 +259,20 @@ Config (`compline-client.toml`, `[faune]` section): `enabled` (true), `warden` (
 
 **Checked** on the test bench on 2026-11-15 (dedicated server and client, mod 0.18.0 with GeckoLib 4.9.3, Alex's Mobs 2.2.4 and CodxLib, no other mod): both creatures drawn with the house models; switching `enabled` off in game gives back the vanilla Warden and the Alex's Mobs moose at once; antlers hidden or shown, snow, calf; a Warden angered by a villager on a pillar chases it (measured 0.28 block per tick), hits it, and its sonic boom leaves bent forward then straightening at the moment of the rings; a moose hit by a villager trots and charges with its antlers. Measured speeds: a wandering moose 0.13 block per tick, which is why the trot starts at 0.16. Images in the project files (`faune-2026-11-15/`). Not checked: the emergence and the dig in the deep dark, the listen start, the graze, the joust between two males, the swim, and the look with Iris and Brumaire (tests FA1 to FA6).
 
+## `patine` module
+
+Client and server, no other mod. Worn armour gets dirty and washes off in water, in the spirit of the reference look's washable armour weathering. The dirt is a component of the item, `compline:patine` (0 to 100): it stays on the armour when it changes hands, goes into a chest or onto an armour stand.
+
+- **Getting dirty** (`Patine`, server): every second, each worn armour piece has a chance to gain a point. The chance gives a full cuirass after `minutesToFull` minutes of walking (40), riding or flying count as walking; standing still adds nothing; sprinting ×1.5, walking on dirt, sand or soul sand ×1.6, a fight in the last ten seconds adds the equivalent of two walks. Boots get dirty 1.5 times faster, leggings 1.2, the helmet 0.7. Drawing lots instead of counting keeps no state per player, and each piece gets dirty at its own pace. Creative and spectator players are left alone.
+- **Washing**: in water a piece loses 12 points per second (clean in under ten seconds), the helmet only head under water; rain takes off a point now and then.
+- **Monsters** that spawn with armour wear it already dirty (25 to 90).
+- **The look** (`PatineTextures`, client): three steps (from 12, 35 and 65). The texture that NeoForge gives to the armour layer (`ClientHooks.getArmorTexture`, `patine.ArmorTextureMixin`) is replaced by a soiled copy, made on demand from the original (the game's or a mod's) and kept until the next resource reload. Earth stains about three pixels wide with a pixel fringe, in two tones, spread a little more toward the bottom of the sheet (legs, boots); the same pattern grows from one step to the next and depends only on the texture name, so every player sees the same armour. On bare metal (bright, unsaturated, not leather) a few rust specks at the last step. Trims and the enchantment glint stay clean. Under Brumaire the soiled copy is lit like any armour.
+- **Tooltip**: « Un peu sale », « Sale » or « Couverte de boue », with « se lave dans l'eau ».
+
+Config (`compline-common.toml`, `[patine]` section): `enabled` (true; false stops the dirt and draws every armour clean), `minutesToFull` (40).
+
+**Checked** on the test bench on 2026-11-15 (full pack, Brumaire on): iron armour on armour stands at 0, 20, 50 and 90 shows the three steps, rust at the last one; chainmail, diamond, gold, netherite and leather are soiled too; a player in survival moving for about two minutes gained 17 points on the boots and 10 on the chestplate, none while sitting on a pig that stands still; ten seconds in water took 90 points off every piece. Movement is read from the position one second earlier, because the server does not know the speed of a walking player. Not checked: a fight, the rain, a zombie spawned with armour, a modded armour (tests PA1 to PA5).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -426,6 +440,16 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | FA4 | Follow a moose in a snowy taiga | Walks without feet sliding, trots when fleeing or charging; the head turns toward you; antlers only on males that have them; snow on its back after snowfall |
 | FA5 | Watch two males with antlers, a grazing moose, a moose in water, a calf | Joust head against head; grazing head down between the forelegs; swim; small calf with a big head and no antlers |
 | FA6 | Under Brumaire, then `faune.enabled = false` in `compline-client.toml` | Both creatures lit and shadowed like the others; with the switch off, the vanilla Warden and the Alex's Mobs moose come back at once |
+
+### Armour patina
+
+| # | Test | Expected |
+|---|---|---|
+| PA1 | `/give @s iron_chestplate[compline:patine=20]`, then 50, then 90; put them on an armour stand | Earth stains growing from one to the next, the last one with a few rust specks; the tooltip says « Un peu sale », « Sale », « Couverte de boue » |
+| PA2 | Wear clean iron armour and walk or fight for a while | The boots get dirty first, the helmet last |
+| PA3 | Jump into water, then stand in the rain | In water the armour is clean in a few seconds (the helmet only head under); the rain cleans it slowly |
+| PA4 | A zombie with armour, a modded armour, dyed leather armour | Zombie armour already dirty; the modded armour soiled the same way; leather keeps its dye and gets no rust |
+| PA5 | `patine.enabled = false` in `compline-common.toml` | Every armour drawn clean again, no more dirt |
 
 ### Held items
 

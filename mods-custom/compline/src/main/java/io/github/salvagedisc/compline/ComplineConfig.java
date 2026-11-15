@@ -33,6 +33,8 @@ public final class ComplineConfig {
     private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
     private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
     private static final ModConfigSpec.IntValue ZOO_OBSERVE_SECONDS;
+    private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
+    private static final ModConfigSpec.IntValue PATINE_MINUTES;
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -160,6 +162,17 @@ public final class ComplineConfig {
                         "en plus des autres tampons de l'espèce.")
                 .defineInRange("observeSeconds", 60, 0, 600);
         common.pop();
+
+        common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
+                "les rince lentement. La saleté reste sur l'objet.").push("patine");
+        PATINE_ENABLED = common
+                .comment("Interrupteur du module. Faux : les armures ne se salissent plus et s'affichent propres.")
+                .define("enabled", true);
+        PATINE_MINUTES = common
+                .comment("Minutes d'activité (marche, sans boue ni combat) pour qu'une cuirasse soit couverte de boue.",
+                        "Les bottes vont plus vite, le casque plus lentement.")
+                .defineInRange("minutesToFull", 40, 5, 600);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -246,6 +259,14 @@ public final class ComplineConfig {
 
     public static int zooSpotDistance() {
         return read(COMMON_SPEC, ZOO_SPOT_DISTANCE);
+    }
+
+    public static boolean patineEnabled() {
+        return read(COMMON_SPEC, PATINE_ENABLED);
+    }
+
+    public static int patineMinutesToFull() {
+        return read(COMMON_SPEC, PATINE_MINUTES);
     }
 
     public static int zooObserveSeconds() {
