@@ -13,7 +13,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | Page | Contents |
 |---|---|
 | [monuments.md](monuments.md) | Ancient Remnants on the new terrain: biomes, spacing, ground check, sleeping hearts and guardians, codex pages |
-| [mod-compline.md](mod-compline.md) | The custom `compline` mod 0.13.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments`, `bord`, `rendu` and `relief`): how it works, what is deduced from the code, in-game tests |
+| [mod-compline.md](mod-compline.md) | The custom `compline` mod 0.14.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments`, `bord`, `rendu` and `relief`): how it works, what is deduced from the code, in-game tests |
 | [modules-compline.md](modules-compline.md) | The eight planned modules of the `compline` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Compline takes |
 | [ambiance.md](ambiance.md) | `compline-ambiance`, the default look without a shader pack: the post chain, sun shadows from a height field, settings, comparison with Recrafted, what is left to do |
 | [shader.md](shader.md) | Brumaire, the house shader pack: how a frame is built, the mist, what the `compline` mod gives it, other mods, what is left to do |

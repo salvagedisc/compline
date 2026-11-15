@@ -164,7 +164,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `compline` 0.13.0 | `mods-custom/compline/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)), `rendu` (what the shader pack Brumaire needs, [0028](decisions/0028-house-shader.md)) and `relief` (the height of the world for the sun shadows of the `compline-ambiance` pack, [0029](decisions/0029-look-without-shader.md)) ([mod-compline](plan/mod-compline.md)) |
+| Mod `compline` 0.14.0 | `mods-custom/compline/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)), `rendu` (what the shader pack Brumaire needs, [0028](decisions/0028-house-shader.md)) and `relief` (the height of the world for the sun shadows of the `compline-ambiance` pack, [0029](decisions/0029-look-without-shader.md)) ([mod-compline](plan/mod-compline.md)) |
 
 ## Performance and technical
 
@@ -193,7 +193,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
-| `compline-ambiance` | — (`pack/resourcepacks/`, [page](plan/ambiance.md)) | ✅ (bench only) | The default look, without a shader pack: sun shadows, sun shafts, glow, air, under water, olive greens, paler rain ([0029](decisions/0029-look-without-shader.md)) |
+| `compline-ambiance` | — (`pack/resourcepacks/`, [page](plan/ambiance.md)) | ✅ (bench only) | The default look, without a shader pack: sun shadows, sun shafts, glow, air, low mist, sky reflections on water, under water, olive greens, paler rain ([0029](decisions/0029-look-without-shader.md)) |
 
 ## Libraries
 
