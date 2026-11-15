@@ -36,7 +36,7 @@ Quests made with the in-game editor are saved in the same folder: bring them bac
 ## Next
 - A `fanal` quest line when the module exists; then one per new module (zoo, survivors, clearing spell).
 - Monuments: one vague quest each, appearing with `visit_structure` or after the first encounter. The Friendly Moon, planned as the main thread, left with No Man's Land ([0019](../decisions/0019-leaving-no-mans-land.md)): what replaces it is not decided.
-- Forge (Overgeared), cooking (Kaleidoscope Cookery), the zoo; the atlas, rails and airships in Voyager.
+- Forge (Overgeared), cooking (Farmer's Delight and Hands-On Delight), the zoo; the atlas, rails and airships in Voyager.
 - Hover images (`[text](image:...)`) for the gestures that are hard to describe.
 
 ## In-game tests

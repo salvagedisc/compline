@@ -14,7 +14,7 @@ A vast, damp, almost empty world, in the spirit of the No Man's Land trailer (th
 ## Three pillars
 1. **Exploration** — "I wonder what's over there", not "I need X diamonds". Inspiration: Zelda Breath of the Wild. No coordinates: the map builds itself (Antique Atlas). Monuments and lost letters give the world its enigmas. The main thread that was to tie them together, the Friendly Moon of No Man's Land, left with the mod; what replaces it is to be defined.
 2. **Civilisation** — Forging (Overgeared) → workshop → industry (Create) → rail (Steam 'n' Rails) → aviation (Aeronautics). Each step widens the land one can clear of mist.
-3. **Daily life** — Water → farming → animal husbandry → cooking (Kaleidoscope Cookery) → tannery → expedition.
+3. **Daily life** — Water → farming → animal husbandry → cooking (Farmer's Delight, by hand with Hands-On Delight) → tannery → expedition.
 
 ## Long-term goals
 A zoo and its keeper's ledger, clearings joined into a living territory, a rail and air network, the monuments' codex, a complete atlas, photographs of species and stars.

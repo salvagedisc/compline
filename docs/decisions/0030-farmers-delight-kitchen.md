@@ -1,0 +1,34 @@
+# 0030 — Farmer's Delight replaces Kaleidoscope Cookery
+
+- **Date**: 2026-11-15
+- **Status**: kept (the team's choice of 2026-11-15); starts on a dedicated server, not played. Supersedes the cooking part of [0002](0002-agriculture.md) (A, the condition on Farm & Charm, and F)
+
+## Context
+Kaleidoscope Cookery was the pack's cooking since [0002](0002-agriculture.md). Two young mods make cooking a gesture in the world instead of a window: **Hands-On Delight** (the Farmer's Delight cooking pot, cutting board, skillet, stove and keg used by hand, first-person scenes, stirring stars that give extra servings) and **Cinematic Interactions** (the same idea for the vanilla stations: workbench, furnaces, anvil, grindstone, smithing table, stonecutter, enchanting table, brewing stand, loom, cartography table, lectern, campfire, beacon). The team likes both; Hands-On Delight needs Farmer's Delight, which the pack had turned down because Kaleidoscope Cookery already did the cooking.
+
+Kaleidoscope Cookery has no menus (wok, pot, board and steamer are already used in the world), so neither Cinematic Interactions' API nor Hands-On Delight applies to it; only a house port on Diegesis (Hands-On Delight's library) would, at about 5,000 lines of Java for five stations. Nobody has played the pack yet, so no world depends on Kaleidoscope's blocks.
+
+## Options
+| Criterion | A. Keep Kaleidoscope Cookery | B. Farmer's Delight + Hands-On Delight |
+|---|---|---|
+| Cooking by hand | Already in the world, without scenes | Scenes with the hands, stirring, pouring; menus come back if Hands-On Delight leaves |
+| Style | Chinese kitchen furniture | Close to vanilla |
+| French | Translated by the pack | Farmer's Delight official; Hands-On Delight and Diegesis translated by the pack |
+| Create automation | KaleidoscopeCookery-Automation | Create: Central Kitchen |
+| Maturity | 1.6.0 | Farmer's Delight mature; Hands-On Delight and Diegesis a few days old |
+| Work | None | Swap the mods, adapt three scripts |
+
+## Decision
+Option B, with Cinematic Interactions:
+
+- **Removed**: Kaleidoscope Cookery, Kaleidoscope Compat, KaleidoscopeCookery-Automation, their French translations and `config/kaleidoscope_compat.jsonc`.
+- **Added**: Farmer's Delight 1.21.1-1.3.4 (MIT), Hands-On Delight 1.5.0 and Diegesis 1.0.0-beta.10 (MIT, Modrinth), Create: Central Kitchen 2.6.2b with its library Create: Dragons Plus 1.11.9, Cinematic Interactions 0.18.30 (MIT). Cinematic Interactions is not on Modrinth: its NeoForge build from CurseForge is committed in `pack/mods/`, like the atlas ports.
+- **Scripts**: the forge recipes of the kitchen knives move to Farmer's Delight's iron, golden and diamond knives (`tri_recettes.js`); the Nether items of the pack sort are now the Nether salad, the netherite knife and the crimson and warped cabinets (`tri.js`, both sides); the tannery no longer removes Kaleidoscope's rotten flesh → leather drying recipe, which left with the mod. Farmer's Delight cuts leather armour, horse armour and saddles back into leather: kept, like the other recyclings of existing leather ([tannery](../plan/tannerie.md)).
+- **Farm & Charm**: Kaleidoscope Compat disabled its cooking pot recipes. Nothing does now, because ten of them (yeast, teas, goulash, soups) exist nowhere else; its stations stay usable until the open item "Farm & Charm confined to the farm" is done. Tomato, onion and cabbage/lettuce share the `c:crops/*` tags of both mods, so Farmer's Delight recipes that ask for a tag accept Farm & Charm's crops.
+- **French**: Cinematic Interactions (528 texts), Create: Central Kitchen (63), Hands-On Delight (26) and Diegesis (3) are translated in `pack/kubejs/assets/`.
+
+To judge in game: the extra servings of the stirring stars (no setting), Cinematic Interactions next to Overgeared's anvil and Punchy (its Punchy conflict is fixed since 0.18.1), Hands-On Delight on a Sable ship.
+
+## Rejected
+- House Kaleidoscope port on Diegesis: a code project of its own for the same result.
+- Keeping both cooking mods: two pots, two boards, two sets of knives.

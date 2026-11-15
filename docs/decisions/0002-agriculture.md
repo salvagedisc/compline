@@ -1,7 +1,7 @@
 # 0002 — Farming & animal husbandry
 
 - **Date**: 2026-09-23
-- **Status**: Farm & Charm, Ecliptic Seasons and KaleidoscopeCookery-Automation kept (tested on `test/agriculture`, merged into `main` on 2026-10-10); animal husbandry and preservation pending
+- **Status**: cooking superseded by [0030](0030-farmers-delight-kitchen.md) on 2026-11-15 (Farmer's Delight replaces Kaleidoscope Cookery, Create: Central Kitchen replaces KaleidoscopeCookery-Automation). Farm & Charm, Ecliptic Seasons and KaleidoscopeCookery-Automation kept (tested on `test/agriculture`, merged into `main` on 2026-10-10); animal husbandry and preservation pending
 
 ## Expected functions of a farm
 Kept: **A** processing (production chains), **B** demanding animal husbandry, **C** seasonality, **D** preservation, **F** late Create automation.

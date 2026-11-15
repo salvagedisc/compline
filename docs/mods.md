@@ -48,15 +48,16 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Aeronautics Wind Sound | `aeronautics-wind-sound` | ✅ (added 2026-10-25) | C | Wind in flight, by speed and shelter |
 | Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | The railway (beta) |
 | Overgeared | `overgeared` | ✅ | CS | Forging: blast furnace, hammering, quenching, quality, blueprints |
-| KaleidoscopeCookery-Automation | `kaleidoscopecookery-automation` | ✅ | CS | Create arm on cooking stations ([0002](decisions/0002-agriculture.md)) |
+| Create: Central Kitchen | `create-central-kitchen` | ✅ (2.6.2b, added 2026-11-15) | CS | Create automates Farmer's Delight: deployers cut on the board, the mechanical arm feeds the cooking pot; requires Create: Dragons Plus 1.11.9 ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 
 ## Daily life
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
-| Kaleidoscope Cookery | `kaleidoscope-cookery` | ✅ (1.6.0) | CS | Cooking |
+| Farmer's Delight | `farmers-delight` | ✅ (1.21.1-1.3.4, added 2026-11-15) | CS | Cooking: cooking pot, cutting board, skillet, stove, keg, knives through the forge ([0030](decisions/0030-farmers-delight-kitchen.md)) |
+| Hands-On Delight + Diegesis | `handson-delight`, `diegesis-api` | ✅ (1.5.0 and 1.0.0-beta.10, added 2026-11-15, not seen in game) | CS | Farmer's Delight's stations used by hand in the world, first-person scenes; stirring stars give extra servings (no setting); translated by the pack ([0030](decisions/0030-farmers-delight-kitchen.md)) |
+| Cinematic Interactions | jar in `pack/mods/` | ✅ (0.18.30 beta, added 2026-11-15, not seen in game) | CS | First-person scenes with the hands at the vanilla stations instead of their windows; Sneak + use opens the normal window; MIT, CurseForge only; translated by the pack ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (stay on 1.1.25) | CS | The farm and the oven |
-| Kaleidoscope Compat | `kaleidoscope-compat` | ✅ | CS | Makes the duplicates of the two cooking mods interchangeable |
 | Ecliptic Seasons | `ecliptic-seasons` | ✅ (0.15.5) | CS | Seasons, farming only (`AGRICULTURE`), no heat stroke: Cold Sweat owns the temperature |
 | Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
 | Cold Sweat: Altitude | `cold-sweat-altitude` | ✅ (added 2026-10-25) | CS | Colder as you climb, sheltered areas, windproof lining; supports airships |
@@ -196,7 +197,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow), Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -250,7 +251,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Reactive Music | Silence between tracks capped at 2 min, 295 MB jar, cuts vanilla music ([research](archive/plan/recherche/2026-10-19/musique.md)) |
 | Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](archive/plan/recherche/2026-10-19/enchantement.md)) |
 | Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Content without a strong mechanic, or breaks the mystery |
-| Farmer's Delight (+ addons) | Kaleidoscope Cookery is the pack's cooking |
+| Kaleidoscope Cookery, Kaleidoscope Compat, KaleidoscopeCookery-Automation | Replaced on 2026-11-15 by Farmer's Delight, Hands-On Delight and Create: Central Kitchen ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |
 | Minimaps, waypoints | Contrary to the vision |
 | Animal Husbandry, Spoiled | Judged unreliable |

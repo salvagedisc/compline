@@ -54,8 +54,8 @@ These updates exist on Modrinth but change something that must first be seen in 
 
 ### Rules and configs (sub-project 3)
 - [ ] **Ecliptic Seasons → Cold Sweat bridge** in KubeJS: seasonal temperature felt by the player. Fallback: Serene Seasons ([0002](decisions/0002-agriculture.md)).
-- [ ] **Farm & Charm confined to the farm**: hide or merge its cooking stations and its ingredients that duplicate Kaleidoscope Cookery ([0002](decisions/0002-agriculture.md)).
-- [ ] Lock KC-Automation's automation behind progression ([0002](decisions/0002-agriculture.md)).
+- [ ] **Farm & Charm confined to the farm**: hide or merge its cooking stations and its ingredients that duplicate Farmer's Delight (tomato, onion, lettuce and cabbage, ropes); its cooking pot recipes are active again since Kaleidoscope Compat left ([0002](decisions/0002-agriculture.md), [0030](decisions/0030-farmers-delight-kitchen.md)).
+- [ ] Lock Create: Central Kitchen's automation behind progression ([0002](decisions/0002-agriculture.md), [0030](decisions/0030-farmers-delight-kitchen.md)).
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
 - [x] **Monument guardians**: Wroughtnaut, Frostmaw, Umvuthi and Sacred Pontiff at four monuments, blessing after their defeat (decision 15 of [12.5](archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012)); written on 2026-11-13 with the monuments' placement on the new terrain ([monuments](plan/monuments.md)), fights not seen in game.
 - [ ] **The zoo**: a measurable long-term goal (species housed, aquariums), still without a mechanic.
@@ -95,7 +95,7 @@ In game:
 - [ ] **Rebuild a hamlet**: the `survivants` module as a long-term goal; each survivor found in the mist joins a clearing with a trade, and the hamlet grows by milestones like the zoo (Matcha Flavoured: villages are made, not found).
 - [ ] **Named quest chapters** in Questlog: 8 to 12 chapters (first fire, forge, zoo, sky, monuments, airship, hamlet, and the new main thread once defined), 150 to 250 quests; the first three in order, the rest free.
 - [ ] **A collections page**: zoo species, Exposure: Space objects, Longwings butterflies, monument codex pages, lost letters, dishes; a carved figurine of a species per milestone, to place at home.
-- [ ] **Dishes with a use**: a few Kaleidoscope dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays.
+- [ ] **Dishes with a use**: a few Farmer's Delight dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays.
 - [ ] **A few hand-made enigmas**: three to five unique places, never horror (a set table with warm soup and nobody, an observatory whose log stops), with hints in letters and `echos`.
 - [ ] **Travel as a selling point**: a quest chapter for the atlas, horses, rails and airships; `fanal` lights along the roads.
 - [ ] **Letters written by the community**: lost letters and travellers' notebook pages written and signed by players of the Discord, found in ruins.
