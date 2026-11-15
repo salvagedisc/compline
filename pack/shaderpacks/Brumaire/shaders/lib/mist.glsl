@@ -24,7 +24,7 @@ float mistNearDensity() {
     float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
     float hour = mix(1.25, 0.6, gDay) + 0.35 * gDusk;
     // L'air du biome : plus de brume là où il est humide, moins dans un désert.
-    float biome = mix(0.75, 1.3, airHumid) * (1.0 - 0.4 * airDust());
+    float biome = mix(0.75, 1.3, airHumid) * (1.0 - 0.85 * airDust());
     return 0.021 * MIST_DENSITY * hour * biome * (1.0 + 0.4 * rainStrength) * open;
 }
 

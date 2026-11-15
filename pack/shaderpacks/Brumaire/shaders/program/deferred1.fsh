@@ -48,13 +48,14 @@ float smoothAo(vec2 uv, float depth) {
 }
 
 /**
- * Ce que renvoie une surface mouillée : une flaque reflète le paysage comme un miroir ridé par les gouttes ; un sol
- * seulement trempé luit du ciel, sans image nette. gloss : 1 flaque, jusqu'à 0.4 sol mouillé.
+ * Ce que renvoie une surface qui luit : une flaque reflète le paysage comme un miroir ridé par les gouttes, la glace
+ * tassée comme un miroir terni ; un sol trempé ou la neige luisent du ciel, sans image nette.
+ * gloss : 1 flaque, 0.75 glace, jusqu'à 0.4 sol mouillé ou neige.
  */
 vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
     vec3 world = pos + cameraPosition;
     vec3 eye = normalize(-pos);
-    bool puddle = gloss > 0.6;
+    bool puddle = gloss > 0.95;
     vec3 n = normal;
     if (puddle) {
         vec2 slope = rippleSlope(world.xz, frameTimeCounter) * rainStrength;
@@ -64,12 +65,12 @@ vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
     r.y = max(r.y, 0.01);
     float f = 0.03 + 0.97 * pow(1.0 - max(dot(n, eye), 0.0), 5.0);
     vec3 mirror = skyReflection(world, r);
-    if (puddle) {
+    if (gloss > 0.6) {
         float dist;
         vec3 view = (gbufferModelView * vec4(pos, 1.0)).xyz;
         vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy), 1.0, WET_REFLECTIONS, dist);
         if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
-        return mix(color, mirror, min(f * 1.2 + 0.18, 1.0));
+        return mix(color, mirror, puddle ? min(f * 1.2 + 0.18, 1.0) : f * 0.85 + 0.04);
     }
     // Un sol trempé : un éclat diffus, surtout à jour frisant.
     return mix(color, mirror, f * gloss * 1.4);

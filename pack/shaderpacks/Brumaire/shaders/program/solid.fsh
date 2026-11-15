@@ -6,6 +6,7 @@
 #include "/lib/light.glsl"
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
+#include "/lib/cover.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -112,6 +113,25 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 color = mix(under, mirror, f) + gLightColor * lit * glint * 0.05;
     return vec4(color, 1.0);
 }
+
+/** La glace : sa couleur laisse voir au travers, sa surface lisse reflète le paysage, plus à jour frisant. */
+vec4 ice(vec3 albedo, float alpha, vec3 normal, vec2 lm, float ao) {
+    float indirect;
+    vec3 lit = shade(albedo, normal, lm, ao, vPos, 0.0, gl_FragCoord.xy, SHADOW_FILTER, indirect);
+    vec3 world = vPos + cameraPosition;
+    vec3 eye = normalize(-vPos);
+    vec3 r = reflect(-eye, normal);
+    float f = 0.03 + 0.97 * pow(1.0 - max(dot(normal, eye), 0.0), 5.0);
+    vec3 mirror = skyReflection(world, r) * mix(0.12, 1.0, lm.y * lm.y);
+    float dist;
+    vec3 view = (gbufferModelView * vec4(vPos, 1.0)).xyz;
+    vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy), normal.y > 0.5 ? 1.0 : 0.0, WATER_REFLECTIONS, dist);
+    if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
+    f = f * 0.85 + 0.04;
+    // Mélange sur ce qui est derrière : la glace garde sa transparence, le reflet s'y ajoute.
+    float a = alpha + f * (1.0 - alpha);
+    return vec4((lit * alpha * (1.0 - f) + mirror * f) / max(a, 1e-4), a);
+}
 #endif
 
 void main() {
@@ -194,11 +214,33 @@ void main() {
         outColor = water(vTint.rgb, normal, lm);
         return;
     }
+    if (vMat == 10) {
+        outColor = ice(albedo, color.a, normal, lm, ao);
+        return;
+    }
 #endif
-    // Sous la pluie, le sol fonce et luit ; dans les creux plats, des flaques (leur reflet : deferred1).
+    // Sous la pluie, le sol fonce et luit ; dans les creux plats, des flaques (leur reflet : deferred1). La glace
+    // tassée luit comme un miroir terni, la neige à peine.
     float gloss = 0.0;
+    float sparkle = 0.0;
 #if defined PROGRAM_TERRAIN
-    float wet = leaf > 0.0 || vMat == 8 ? 0.0 : wetAt(lm.y);
+    vec3 world = vPos + cameraPosition;
+    float snow = 0.0;
+    if (vMat == 0 || vMat == 4 || vMat == 9) snow = snowCover(world, normal, lm.y, vMat == 4 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
+    if (snow > 0.0) albedo = mix(albedo, vec3(0.64, 0.67, 0.72), snow);
+    if (vMat == 9 || snow > 0.5) {
+        // La neige du jeu est d'un blanc pur : au soleil elle brûlerait l'image, sans plus rien laisser voir de son grain.
+        if (vMat == 9) albedo *= vec3(0.60, 0.62, 0.66);
+        gloss = 0.3;
+        sparkle = glitter(world, 0.003) * max(normal.y, 0.0);
+    } else if (vMat == 11) {
+        gloss = 0.75;
+    } else if (vMat == 12) {
+        // Le sable boit un peu de lumière et garde sa couleur, sinon il blanchit au soleil comme de la neige.
+        albedo = mix(vec3(luma(albedo)), albedo, 1.25) * 0.55;
+        sparkle = glitter(world, 0.0015) * max(normal.y, 0.0) * 0.6;
+    }
+    float wet = leaf > 0.0 || vMat == 8 || vMat >= 9 || snow > 0.0 ? 0.0 : wetAt(lm.y);
     if (wet > 0.0) {
         float puddle = puddleAt(vPos + cameraPosition, normal, wet);
         float soak = wet * mix(0.55, 1.0, max(normal.y, 0.0));
@@ -211,9 +253,11 @@ void main() {
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
 #ifdef WRITE_SURFACE
     // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre. L'alpha marque une surface (> 0.5) et
-    // porte son éclat mouillé (1 : mat, 0.55 : flaque).
+    // porte son éclat (1 : mat ; 0.55 : flaque, voir deferred1).
     outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0 - 0.45 * gloss);
 #endif
+    // Les grains de neige et de sable qui scintillent, là où le soleil donne.
+    lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
     if (vMat == 8) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));
