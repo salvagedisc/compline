@@ -1,3 +1,4 @@
+profile.TRES_LEGER=Très léger
 profile.LEGER=Léger
 profile.EQUILIBRE=Équilibré
 profile.BEAU=Beau
@@ -92,3 +93,9 @@ option.HEAT_SHIMMER=Air qui tremble
 option.HEAT_SHIMMER.comment=Dans un désert, au soleil, le lointain tremble au ras du sol.
 value.HEAT_SHIMMER.0=Non
 value.HEAT_SHIMMER.1=Oui
+option.SMAA=Anticrénelage
+option.SMAA.comment=Lisse les bords en escalier des blocs et des objets (SMAA). Non : aucun lissage, le plus rapide.
+value.SMAA.0=Non
+value.SMAA.1=Moyen
+value.SMAA.2=Fort
+value.SMAA.3=Très fort

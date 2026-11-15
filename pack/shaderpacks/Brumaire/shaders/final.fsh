@@ -1,2 +1,2 @@
 #version 330 compatibility
-#include "/program/final.fsh"
+#include "/program/smaa.fsh"
