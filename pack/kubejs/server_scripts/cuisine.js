@@ -52,3 +52,67 @@ ServerEvents.recipes(event => {
     result: copie.json.result
   }).id(copie.id))
 })
+
+// Tout à la main (2026-11-15). Hands-On Delight assemble sur la planche à découper les plats
+// de Farmer's Delight faits à l'établi ; config/handson_delight.properties
+// (remove_crafting_recipes=true) les retire de l'établi, et le tag
+// handson_delight:assembled (kubejs/data) y ajoute les plats des autres mods. Ici :
+// - le pain ne se fait plus avec trois blés à l'établi : on pétrit la pâte sur la planche
+//   (blé et seau d'eau, ou œuf), puis on la cuit au four, au fumoir, au feu de camp, à la
+//   poêle ou sur le réchaud ;
+// - la soupe de betterave et le ragoût de champignons se cuisent dans la marmite (Farmer's
+//   Delight a déjà ces recettes), plus à l'établi ;
+// - le concombre des hamsters se tranche au couteau sur la planche ;
+// - tout aliment qui cuit au fumoir peut aussi cuire au feu de camp, donc à la poêle et sur
+//   le réchaud de Farmer's Delight, qui reprennent les recettes du feu de camp.
+
+const CUISINE_RETIREES_ETABLI = [
+  'minecraft:bread', 'minecraft:beetroot_soup', 'minecraft:mushroom_stew',
+  'adorablehamsterpets:sliced_cucumber'
+]
+
+ServerEvents.recipes(event => {
+  CUISINE_RETIREES_ETABLI.forEach(id => event.remove({ id: id }))
+
+  event.custom({
+    type: 'minecraft:campfire_cooking',
+    category: 'food',
+    ingredient: { item: 'farmersdelight:wheat_dough' },
+    result: { id: 'minecraft:bread', count: 1 },
+    cookingtime: 600,
+    experience: 0
+  }).id('compline:cuisine/pain_au_feu')
+
+  event.custom({
+    type: 'farmersdelight:cutting',
+    ingredients: [{ item: 'adorablehamsterpets:cucumber' }],
+    tool: [{ type: 'farmersdelight:item_ability', action: 'knife_dig' }, { tag: 'c:tools/knife' }],
+    result: [{ item: { id: 'adorablehamsterpets:sliced_cucumber', count: 3 } }]
+  }).id('compline:cuisine/concombre_tranche')
+
+  // Fumoir -> feu de camp, quand le feu de camp ne sait pas déjà cuire cet ingrédient.
+  const auFeu = {}
+  event.forEachRecipe({ type: 'minecraft:campfire_cooking' }, recipe => {
+    auFeu[JSON.stringify(JSON.parse(recipe.json.toString()).ingredient)] = true
+  })
+  const aCuire = []
+  event.forEachRecipe({ type: 'minecraft:smoking' }, recipe => {
+    const fume = JSON.parse(recipe.json.toString())
+    const cle = JSON.stringify(fume.ingredient)
+    if (auFeu[cle]) return
+    auFeu[cle] = true
+    aCuire.push({
+      id: 'compline:cuisine/au_feu/' + String(recipe.getId()).replace(':', '/'),
+      json: {
+        type: 'minecraft:campfire_cooking',
+        category: 'food',
+        ingredient: fume.ingredient,
+        result: fume.result,
+        cookingtime: (fume.cookingtime || 100) * 6,
+        experience: 0
+      }
+    })
+  })
+  aCuire.forEach(copie => event.custom(copie.json).id(copie.id))
+  console.info('[cuisine] ' + aCuire.length + ' aliments du fumoir cuisent aussi au feu de camp')
+})

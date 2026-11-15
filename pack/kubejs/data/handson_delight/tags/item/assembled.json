@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cookie",
+    "minecraft:pumpkin_pie",
+    { "id": "farm_and_charm:farmers_breakfast", "required": false },
+    { "id": "farm_and_charm:farmer_salad", "required": false },
+    { "id": "farm_and_charm:oatmeal_with_strawberries", "required": false },
+    { "id": "farm_and_charm:dough", "required": false },
+    { "id": "farm_and_charm:cat_food", "required": false },
+    { "id": "farm_and_charm:dog_food", "required": false },
+    { "id": "alexsmobs:kangaroo_burger", "required": false },
+    { "id": "alexsmobs:sopa_de_macaco", "required": false },
+    { "id": "ec_ad:coral_stew", "required": false },
+    { "id": "longwings:apple_butterfly_brew_bowl", "required": false },
+    { "id": "longwings:berry_butterfly_brew_bowl", "required": false },
+    { "id": "longwings:melon_butterfly_brew_bowl", "required": false },
+    { "id": "longwings:apple_butterfly_brew_bottle", "required": false },
+    { "id": "longwings:berry_butterfly_brew_bottle", "required": false },
+    { "id": "longwings:melon_butterfly_brew_bottle", "required": false }
+  ]
+}
