@@ -20,8 +20,19 @@ in vec3 vNormal;
 in vec3 vPos;
 flat in int vMat;
 
+#if defined PROGRAM_TERRAIN || defined PROGRAM_BLOCK || defined PROGRAM_ENTITIES || defined PROGRAM_CLRWL
+#define WRITE_SURFACE
+#endif
+
+#ifdef WRITE_SURFACE
+// Couche 1 : normale de la surface et part de lumière indirecte, lues par l'occlusion d'écran (deferred).
+/* RENDERTARGETS: 0,1 */
+layout(location = 0) out vec4 outColor;
+layout(location = 1) out vec4 outSurface;
+#else
 /* RENDERTARGETS: 0 */
 layout(location = 0) out vec4 outColor;
+#endif
 
 #ifdef PROGRAM_WATER
 /** Pente de la surface de l'eau : quelques trains d'onde qui se croisent, poussés par le vent. */
@@ -148,7 +159,12 @@ void main() {
         return;
     }
 #endif
-    vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps);
+    float indirect;
+    vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
+#ifdef WRITE_SURFACE
+    // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre.
+    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.5 * leaf), 1.0);
+#endif
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
     if (vMat == 8) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));

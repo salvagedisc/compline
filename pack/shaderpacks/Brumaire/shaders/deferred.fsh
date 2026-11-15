@@ -1,2 +1,2 @@
 #version 330 compatibility
-#include "/program/deferred.fsh"
+#include "/program/ao.fsh"

@@ -53,8 +53,10 @@ void main() {
     float l = dot(color, LUMA);
     // Ombres un peu froides, lumières un peu chaudes.
     color *= mix(vec3(0.96, 1.0, 1.04), vec3(1.03, 1.0, 0.95), smoothstep(0.05, 0.75, l));
-    color = mix(vec3(l), color, SATURATION);
+    color = mix(vec3(l), color, SATURATION * 0.88);
     color = (color - 0.5) * CONTRAST + 0.5;
+    // Une image mate : les noirs à peine levés, les blancs à peine retenus.
+    color = color * 0.95 + 0.022;
     color = pow(max(color, 0.0), vec3(1.0 / 2.2));
     color += (fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715)))) - 0.5) / 255.0;
     outColor = vec4(color, 1.0);

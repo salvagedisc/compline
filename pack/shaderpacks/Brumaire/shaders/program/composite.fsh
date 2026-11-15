@@ -50,6 +50,11 @@ void main() {
         float t = 1.0 - exp(-len * (isEyeInWater == 2 ? 1.2 : 0.7));
         color = mix(color, isEyeInWater == 2 ? vec3(1.6, 0.35, 0.04) : vec3(0.75, 0.82, 0.90), t);
     } else if (!hand) {
+        if (!sky) {
+            vec3 inscat;
+            vec3 pass = airVeil(dir, len, inscat);
+            color = color * pass + inscat;
+        }
         float nearOnly;
         float depth = mistDepth(dir, len, nearOnly);
         float veil = 1.0 - exp(-depth);
@@ -64,7 +69,12 @@ void main() {
                 sun = mix(1.0, sunThrough(dir, reach, density), clamp(inside / veil, 0.0, 1.0));
             }
 #endif
-            color = mix(color, mistColor(dir, sun), veil);
+            // La brume lointaine (l'anneau) prend la couleur du ciel bas dans cette direction : au couchant, elle
+            // rougeoit du côté du soleil ; la brume proche garde sa propre lumière.
+            vec3 mist = mistColor(dir, sun);
+            float far_ = clamp((depth - nearOnly) / max(depth, 1e-4), 0.0, 1.0);
+            mist = mix(mist, skyAt(normalize(vec3(dir.x, 0.03, dir.z))) * mistTint() * 0.9, far_ * 0.75);
+            color = mix(color, mist, veil);
         }
     }
     if (blindness > 0.0) color *= exp(-len * 0.35 * blindness);
