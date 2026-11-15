@@ -50,5 +50,8 @@
   "zoo.compline.aide.photographier": "La prendre en photo.",
   "zoo.compline.aide.heberger": "L'apprivoiser, la faire naître ou la mettre en seau.",
   "zoo.compline.aide.maitriser": "Ses autres tampons, puis l'observer de près.",
-  "zoo.compline.observation": "Observée %s s sur %s"
+  "zoo.compline.observation": "Observée %s s sur %s",
+  "tooltip.compline.patine.1": "Un peu sale (se lave dans l'eau)",
+  "tooltip.compline.patine.2": "Sale (se lave dans l'eau)",
+  "tooltip.compline.patine.3": "Couverte de boue (se lave dans l'eau)"
 }
