@@ -43,6 +43,10 @@
 #define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
 
+// Neige et chaleur
+#define SNOW_COVER 1 // [0 1]
+#define HEAT_SHIMMER 1 // [0 1]
+
 // Couleurs
 #define OLIVE 0.6 // [0.0 0.2 0.4 0.6 0.8 1.0]
 #define SATURATION 1.0 // [0.7 0.8 0.9 1.0 1.1 1.2]

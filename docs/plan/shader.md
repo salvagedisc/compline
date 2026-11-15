@@ -34,8 +34,9 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/water.glsl` | Colour, murk and waves of the water, caustics |
 | `lib/reflect.glsl` | Screen reflections, the mirrored sky, the veil of air on a reflection (water and puddles) |
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
+| `lib/cover.glsl` | Snow laid on trees and ledges, the glitter of snow and sand |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
-| `block.properties` | Which blocks wave, which are water, which glow |
+| `block.properties` | Which blocks wave, which are water, which glow, which are snow, ice or sand |
 | `lang/` | Names of the settings, French and English |
 
 ## Sky, light and air
@@ -84,13 +85,21 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **The air** under rain turns a slightly warm grey and the mist thickens a little.
 - **Lightning**: the bolt (`gbuffers_lightning`) is a bright blue-white line that glows; while it strikes, the sky and the whole landscape flash, less when it falls far away (`lightningBoltPosition`).
 
+## Snow, sand and ice
+
+- **Snow on trees and ledges**: while the player stands in a biome where it snows (`biome_precipitation` 2, smoothed over ten seconds into `snowHere`), the tops of blocks and leaves that see the sky turn white on the 1/16 grid. On leaves the snow holds on the bright needles and leaves the dark hollows, and a band of three to five pixels runs down their sides with a ragged lower edge (`SNOW_COVER`). The whole view follows the player's biome: a forest seen from a snowy biome is frosted too.
+- **Snow** blocks are dimmed a little, so the snow keeps its grain in full sun instead of burning white; a few grains glitter where the sun reaches, and change from time to time.
+- **Sand** keeps its warm colour in the sun (darker and slightly richer than the game's texture, otherwise it reads as snow) and glitters more sparsely.
+- **Ice**: clear ice is drawn with the water, light blue, with the sky and the landscape mirrored in it, more at a low angle; packed and blue ice shine like a tarnished mirror (screen reflection, no ripples).
+- **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
+
 ## The mist
 
 - A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`), integrated exactly along each ray: no steps, no noise.
 - Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius; the opening wave is followed.
 - Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
 - A ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift.
-- No mist underground; thin by day, more at night, thickest at dawn and dusk and in the rain; more in a humid biome, less in a desert.
+- No mist underground; thin by day, more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
 - Its light: the light of the sky, and the sun scattered mostly forward (a halo when looking toward the sun). The far part (the ring) takes the colour of the low sky in that direction: at sunset it glows on the side of the sun.
 
 ## What the `compline` mod gives the shader (`rendu` module)

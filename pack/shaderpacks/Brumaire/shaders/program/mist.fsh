@@ -45,11 +45,33 @@ float shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
 #endif
 }
 
+/** Dans un désert au soleil, l'air chaud fait trembler le lointain au ras du sol : un décalage de l'image. */
+vec2 shimmer(vec2 uv) {
+#if HEAT_SHIMMER > 0
+    float heat = airDust() * gDay * (1.0 - rainStrength) * float(isEyeInWater == 0);
+    if (heat < 0.01) return uv;
+    bool sky, hand;
+    vec3 pos = scenePosition(uv, sky, hand);
+    if (hand) return uv;
+    float len = sky ? 512.0 : length(pos);
+    vec3 dir = pos / max(len, 1e-3);
+    float low = 1.0 - smoothstep(0.02, 0.18, abs(dir.y));
+    float t = frameTimeCounter;
+    float wave = sin(uv.y * viewHeight * 0.31 + t * 7.0 + sin(uv.x * 37.0 + t * 1.3) * 2.0)
+               + 0.5 * sin(uv.y * viewHeight * 0.83 - t * 11.0 + uv.x * 23.0);
+    float amount = heat * low * smoothstep(24.0, 120.0, len) * 1.4;
+    return uv + vec2(wave, 0.4 * wave) * amount / vec2(viewWidth, viewHeight);
+#else
+    return uv;
+#endif
+}
+
 void main() {
     initEnv();
-    vec3 color = texture(colortex0, vUv).rgb;
+    vec2 uv = shimmer(vUv);
+    vec3 color = texture(colortex0, uv).rgb;
     bool sky, hand;
-    vec3 pos = scenePosition(vUv, sky, hand);
+    vec3 pos = scenePosition(uv, sky, hand);
     float len = sky ? 16384.0 : length(pos);
     vec3 dir = normalize(pos);
 
