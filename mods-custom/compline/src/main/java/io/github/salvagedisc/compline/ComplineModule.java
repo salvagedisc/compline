@@ -33,7 +33,10 @@ public enum ComplineModule {
     /** Le vent du pack : direction, force, rafales, et la fumée des feux de camp qui le suit (client). Aucun mod requis. */
     VENT("vent", Dist.CLIENT, bus -> io.github.salvagedisc.compline.vent.VentModule.start(bus)),
     /** Les clairières et le vent du pack donnés au pack de shaders de Compline, sous Iris (client). */
-    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS);
+    RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS),
+    /** Le zoo : les quatre tampons du guide d'Archie's Dinosaurs pour toutes les bêtes (client et serveur). Le suivi
+     *  ne demande aucun mod ; les pages du guide demandent Archie's Dinosaurs, la photo demande Exposure. */
+    ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus));
 
     private final String id;
     private final Dist side;

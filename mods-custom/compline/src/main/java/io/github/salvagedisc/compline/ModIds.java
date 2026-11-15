@@ -19,6 +19,8 @@ public final class ModIds {
     public static final String LITHOSTITCHED = "lithostitched";
     public static final String SABLE = "sable";
     public static final String IRIS = "iris";
+    public static final String ARCHIES_DINOSAURS = "ec_ad";
+    public static final String EXPOSURE = "exposure";
 
     private ModIds() {
     }

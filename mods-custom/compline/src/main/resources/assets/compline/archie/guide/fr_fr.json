@@ -1,0 +1,15 @@
+{
+  "_": "Textes du guide d'Archie's Dinosaurs remplacés au chargement (mixin zoo.GuidebookDataMixin) : les dinosaures que le pack a déplacés hors du Nether et de l'End. page et label comptent depuis 1, parmi les <label> directs de la page ; si : un mot que le texte d'origine doit contenir, sinon le remplacement est sauté (le mod a changé).",
+  "obsidiceratops": [
+    {"page": 1, "label": 3, "si": "âmes", "texte": "Grottes de redstone"},
+    {"page": 1, "label": 4, "si": "carmin", "texte": "Lacs de lave"},
+    {"page": 1, "label": 7, "si": "Nether", "texte": "L'Obsidiceratops est un colosse surchauffé avide de lave. Il hante les grottes de redstone, là où la lave affleure."},
+    {"page": 3, "label": 1, "si": "Nether", "texte": "Une monture massive pour transporter matériaux et lave à travers les profondeurs."}
+  ],
+  "chorusoatl": [
+    {"page": 1, "label": 3, "si": "End", "texte": "Prismachasm"},
+    {"page": 1, "label": 6, "si": "End", "texte": "Le Chorusoatl est un majestueux planeur des gouffres de prismarite, qu'il sillonne par volées. Menacée, la nuée réplique par des cris perçants et des attaques concertées."},
+    {"page": 2, "label": 6, "si": "End", "texte": "Il éclot dans le noir complet, posé sur de la prismoss, avec des pousses ou des cristaux de prismarite tout près. Le fruit de chorus accélère la croissance."},
+    {"page": 3, "label": 1, "si": "End", "texte": "Sellez-le pour planer en toute liberté au-dessus des gouffres."}
+  ]
+}

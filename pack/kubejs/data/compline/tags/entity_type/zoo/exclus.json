@@ -1,0 +1,41 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "ec_ad:lushsaur",
+      "required": false
+    },
+    {
+      "id": "ec_ad:therimoss",
+      "required": false
+    },
+    {
+      "id": "ec_ad:coralosaur",
+      "required": false
+    },
+    {
+      "id": "ec_ad:obsidiceratops",
+      "required": false
+    },
+    {
+      "id": "ec_ad:sculkraptor",
+      "required": false
+    },
+    {
+      "id": "ec_ad:chorusoatl",
+      "required": false
+    },
+    {
+      "id": "ec_ad:sculksaur",
+      "required": false
+    },
+    "minecraft:villager",
+    "minecraft:wandering_trader",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    {
+      "id": "supplementaries:red_merchant",
+      "required": false
+    }
+  ]
+}

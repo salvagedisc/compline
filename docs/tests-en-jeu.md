@@ -117,6 +117,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Dinosaurs** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): a Lushsaur in a lush or bioshroom cave, an Obsidiceratops in a redstone cave (`/locate structure ec_ad:obsidiceratops`), a Therimoss in a jungle, a Coralosaur nest in a warm ocean, a Sculkraptor in the deep dark. Note how each moves and looks next to Fresh Animations, whether the Obsidiceratops finds lava to drink and what it breaks.
 - [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure compline:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
 - [ ] **Amber**: an amber crater and a big one (`/locate structure ec_ad:crater`, `ec_ad:big_crater`): whole, no floating block around, not too many per kilometre. Archie's guidebook and his trades read in French. Ask Archie about the Obsidiceratops and the Chorusoatl: he names the redstone caves and the prismachasm. Tame a Lushsaur and craft its four pieces without killing one: the master advancement and the Lush Totem recipe come; his Lush Core trades open after the taming. Lay a Chorusoatl egg on prismoss in the dark near prismarite: it hatches.
+- [ ] **Zoo** (Archie's guidebook): J opens the guidebook, the green bookmark opens the zoo. Look at a fox, photograph a cow, tame a wolf, catch a cod in a bucket: one stamp each time, with a sound. With three stamps, stay a minute near the species: it is mastered. The stamps stay after death [ZO1 to ZO6].
 
 ## Session 6: terrain, Create and airships
 
@@ -177,7 +178,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |

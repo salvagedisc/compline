@@ -28,7 +28,9 @@
     "horizon.VanillaFadeMixin",
     "rendu.IrisUniformsMixin",
     "vent.CampfireBlockMixin",
-    "vent.CampfireSmokeParticleMixin"
+    "vent.CampfireSmokeParticleMixin",
+    "zoo.CategoryTabsMixin",
+    "zoo.GuidebookDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -107,6 +107,11 @@ dependencies {
     // Module rendu (client) : les uniformes d'Iris
     compileOnly modrinth('iris')
 
+    // Module zoo : le guide d'Archie's Dinosaurs (et sa bibliothèque Astemir Re-Lib, jar du pack), la photo d'Exposure
+    compileOnly modrinth('archies-dinosaurs')
+    compileOnly fileTree(packMods) { include 'astemirlib_re-*.jar' }
+    compileOnly modrinth('exposure')
+
     // Module dissipateur
     compileOnly modrinth('create')
     // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar
