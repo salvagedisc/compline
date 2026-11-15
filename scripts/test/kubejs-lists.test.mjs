@@ -32,6 +32,18 @@ for (const name of ['sans_lapin', 'doublons', 'faune_coupee', 'premiers_gestes',
   });
 }
 
+// Fused items: the keys of the FUSIONS map disappear into another mod's item and are hidden
+// from EMI.
+test('fusions: fused items on the server are the items hidden from EMI', async () => {
+  const source = await readFile(join(kubejsDir, 'server_scripts', 'fusions.js'), 'utf8');
+  const map = source.match(/const FUSIONS = \{([\s\S]*?)\n\}/);
+  assert.ok(map, 'no FUSIONS map');
+  const server = [...map[1].matchAll(/'([a-z0-9_.-]+:[a-z0-9_/.-]+)':/g)].map((match) => match[1]);
+  const client = clientItems(await readFile(join(kubejsDir, 'client_scripts', 'fusions.js'), 'utf8'));
+  assert.ok(server.length > 0);
+  assert.deepEqual([...client].sort(), [...server].sort());
+});
+
 // The Steam 'n' Rails variants are removed by pattern, on both sides.
 test('tri: Steam \'n\' Rails patterns are the same on the server and in EMI', async () => {
   const patterns = (source) => {

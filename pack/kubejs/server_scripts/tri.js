@@ -37,6 +37,10 @@ const TRI_OBJETS_CUISINE = [
   // Farm & Charm garde la ferme ; sa cuisine passe par Farmer's Delight (cuisine.js).
   'farm_and_charm:stove', 'farm_and_charm:cooking_pot', 'farm_and_charm:roaster',
   'farm_and_charm:crafting_bowl', 'farm_and_charm:onion_soup',
+  // Sacs de Farm & Charm en double des caisses de Farmer's Delight (carotte, pomme de terre,
+  // betterave) ou d'un objet fondu (fusions.js : pâtée pour chien, farine).
+  'farm_and_charm:carrot_bag', 'farm_and_charm:potato_bag', 'farm_and_charm:beetroot_bag',
+  'farm_and_charm:dog_food_bag', 'farm_and_charm:flour_bag',
   'cold_sweat:hoglin_hide', 'cold_sweat:hoglin_helmet', 'cold_sweat:hoglin_chestplate',
   'cold_sweat:hoglin_leggings', 'cold_sweat:hoglin_boots'
 ]

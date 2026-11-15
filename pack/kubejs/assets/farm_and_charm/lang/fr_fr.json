@@ -36,5 +36,8 @@
   "tooltip.farm_and_charm.cart.while_pulling": "Pendant la traction :",
   "tooltip.farm_and_charm.sink.info_0": "Clic droit pour remplir d'eau.",
   "tooltip.farm_and_charm.sink.info_1": "Une fois rempli, utilisez un seau pour récupérer l'eau.",
-  "effect.farm_and_charm.rested.description": "Un bon repos."
+  "effect.farm_and_charm.rested.description": "Un bon repos.",
+  "item.farm_and_charm.cooked_cod": "Morue au beurre et aux légumes",
+  "item.farm_and_charm.cooked_salmon": "Saumon au beurre et au maïs",
+  "item.farm_and_charm.roasted_chicken": "Poulet rôti aux pâtes"
 }
