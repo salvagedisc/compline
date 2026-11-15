@@ -1,0 +1,13 @@
+name = "Diegesis"
+filename = "diegesis-neoforge-1.21.1-1.0.0-beta.10.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/pyljrXOa/versions/cvMAdz6u/diegesis-neoforge-1.21.1-1.0.0-beta.10.jar"
+hash-format = "sha512"
+hash = "188b09a575a6fda24ac6de8793a8a95435351dc327a3802abc66454455d46020466a3c4b32375963ef8845f60f881ba616b4383b4d2c029cee2b36d25523cfca"
+
+[update]
+[update.modrinth]
+mod-id = "pyljrXOa"
+version = "cvMAdz6u"
