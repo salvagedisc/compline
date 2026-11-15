@@ -12,23 +12,27 @@ One record per settled decision: the context, the options compared, the choice a
 | [0006](0006-supplementaries.md) | Supplementaries: the essentials only | Config provided |
 | [0007](0007-ambiance-performance.md) | Atmosphere & performance | Kept; Distant Horizons kept by 0011 |
 | [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback |
-| [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `tilth` mod 0.2.0 |
-| [0010](0010-musique.md) | Music | True Adaptive Music and the `tilth` pack kept; Reactive Music rejected |
+| [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `compline` mod 0.2.0 |
+| [0010](0010-musique.md) | Music | True Adaptive Music and the `compline` pack kept; Reactive Music rejected |
 | [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing; Distant Horizons hidden by the mist, `horizon` module; the "on NML" part superseded by 0019 |
 | [0012](0012-sacs-piles-jours.md) | Bags, stack sizes and day length | Reliable Backpacks and Comforts, Sensible Stackables, Better Days 30/15; Ecliptic Seasons kept |
-| [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `tilth` mod and Overgeared's knapping; no new mod |
+| [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `compline` mod and Overgeared's knapping; no new mod |
 | [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
-| [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `tilth-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
-| [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars |
-| [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `tilth` mod |
-| [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `tilth-ambiance` (core shaders, Polytone post shader); `tilth` 0.6.3 keeps what needs new geometry or game data |
+| [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `compline-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
+| [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars; Shine removed by 0026 |
+| [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `compline` mod; all removed by 0026 |
+| [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `compline-ambiance` (core shaders, Polytone post shader); `compline` 0.6.3 keeps what needs new geometry or game data; the pack and Polytone are gone (0024, 0026) |
 | [0019](0019-leaving-no-mans-land.md) | Leaving No Man's Land | Tectonic + Regions Unexplored + Geophilic kept (Lithosphere compared and set aside on 2026-11-13), world of radius 6,000; not played |
-| [0020](0020-clearings-keep-their-biome.md) | Clearings keep their biome | A clearing no longer replaces the biome: the server syncs a list of discs, the client shows the mist lifted and the vivid colours; climate, seasons, crops and fauna stay those of the place (`tilth` 0.8.0) |
+| [0020](0020-clearings-keep-their-biome.md) | Clearings keep their biome | A clearing no longer replaces the biome: the server syncs a list of discs, the client shows the mist lifted and the vivid colours; climate, seasons, crops and fauna stay those of the place (`compline` 0.8.0) |
 | [0021](0021-spelunkery-and-dinosaurs.md) | Spelunkery and Archie's Dinosaurs | Both join the pack; the Nether and End dinosaurs move to cave biomes, Spelunkery is sorted like the other mods, the streams keep their thaw, the dinosaurs' library is kept as a jar |
-| [0022](0022-disc-world.md) | A disc world with an edge | One continent on a computed disc (coast near 5,700, edge at 6,000), north cold and south hot, `scripts/terrain/disc.py`; the `bord` module of the `tilth` mod turns players back at the edge; the edge seen in a test client on 2026-11-13 (on foot, by teleport, in a boat); the continent mapped by sampling on two seeds, not walked yet |
+| [0022](0022-disc-world.md) | A disc world with an edge | One continent on a computed disc (coast near 5,700, edge at 6,000), north cold and south hot, `scripts/terrain/disc.py`; the `bord` module of the `compline` mod turns players back at the edge; the edge seen in a test client on 2026-11-13 (on foot, by teleport, in a boat); the continent mapped by sampling on two seeds, not walked yet |
 | [0023](0023-rename-to-tilth.md) | The pack is renamed Tilth | `fallow` was taken on Modrinth: pack, custom mod, namespaces, resource packs and repository become Tilth / `tilth`; worlds made before lose the mod's blocks |
-| [0024](0024-removing-the-house-resource-packs.md) | The house resource packs leave the pack | `tilth-interface`, `tilth-textures` and `tilth-ambiance` are removed, mist preset and free tracks included; the `titres` module goes (`tilth` 0.10.1); the menus stay in FancyMenu |
-| [0025](0025-native-atlas.md) | The atlas runs natively | Surveyor, Antique Atlas 4 and Antique Transport ported to NeoForge in `salvagedisc/tilth-atlas`; Connector removed, Forgified Fabric API kept for Puddles & Floods |
+| [0024](0024-removing-the-house-resource-packs.md) | The house resource packs leave the pack | `compline-interface`, `compline-textures` and `compline-ambiance` are removed, mist preset and free tracks included; the `titres` module goes (`compline` 0.10.1); the menus stayed in FancyMenu until 0026 |
+| [0025](0025-native-atlas.md) | The atlas runs natively | Surveyor, Antique Atlas 4 and Antique Transport ported to NeoForge in `salvagedisc/compline-atlas`; Connector removed, Forgified Fabric API kept for Puddles & Floods |
+| [0026](0026-second-cleanup.md) | Second cleanup: house effects, menus and leftovers | 15 mods and the Supernova pack removed (FancyMenu and Drippy, the rain mods, Shine, Polytone, Chunky, Biolith copy…), `averse` and `rayons` modules removed (`compline` 0.11.0), Distant Horizons warnings and Hamster Tips book off, music on 30 game tracks; the mist waits for the rendering study |
+| [0027](0027-rename-to-compline.md) | The pack is renamed Compline | Tilth no longer convinced: pack, custom mod, namespaces and repository become Compline / `compline`; worlds made before lose the mod's blocks |
+| [0028](0028-house-shader.md) | A house shader pack written from scratch | Brumaire in `pack/shaderpacks/`, off by default; Iris, Colorwheel and Iris Veil Compat; the mist follows the clearings; forks of Complementary and BSL ruled out by their licences |
+| [0029](0029-look-without-shader.md) | The default look comes from a house resource pack | `compline-ambiance` with Polytone, on by default: sun shadows from a height field given by the `compline` mod, sun shafts, air, under water, grade; Recrafted is the model, none of its files are used; Brumaire stays as an option |
 
 ## Template
 

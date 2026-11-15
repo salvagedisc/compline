@@ -67,5 +67,9 @@
   "config.polytone.far_light_range": "Portée de la lumière lointaine",
   "config.polytone.far_light_range.tooltip": "Largeur en blocs d'un volume de lumière peu détaillé au-delà de la portée de la lumière. Il ne fait que teinter la lumière de bloc vanilla, ce qui permet aux couleurs de porter plus loin pour un coût minime. 0 le désactive.",
   "config.polytone.light_spread_steps": "Propagation de la lumière",
-  "config.polytone.light_spread_steps.tooltip": "Nombre de blocs parcourus par la lumière à chaque image dans le volume de voxels. Plus la valeur est élevée, plus la réaction aux lumières posées ou cassées est rapide, mais plus le GPU est sollicité."
+  "config.polytone.light_spread_steps.tooltip": "Nombre de blocs parcourus par la lumière à chaque image dans le volume de voxels. Plus la valeur est élevée, plus la réaction aux lumières posées ou cassées est rapide, mais plus le GPU est sollicité.",
+  "gui.polytone.color_picker": "Pipette à couleurs",
+  "gui.polytone.color_pick": "Prendre",
+  "config.polytone.texture_light_colors": "Couleurs de lumière automatiques",
+  "config.polytone.texture_light_colors.tooltip": "Déduit la couleur de la lumière des blocs de mods à partir de leur texture. Un pack peut, et devrait, la redéfinir pour un meilleur résultat"
 }

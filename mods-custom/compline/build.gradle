@@ -1,0 +1,143 @@
+// Mod custom Compline (NeoForge 1.21.1). Gabarit : MDK officiel ModDevGradle 1.21.1.
+// Les mods visés ne servent qu'à la compilation (compileOnly) : aucune dépendance dure sauf NeoForge.
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+}
+
+// Coordonnées Modrinth d'un mod du pack : le slug est le nom du fichier pack/mods/<slug>.pw.toml,
+// la version est l'identifiant de version Modrinth écrit dans ce fichier. Le mod se compile donc
+// toujours contre les versions exactes du pack.
+def packMods = rootProject.layout.projectDirectory.dir('../../pack/mods')
+def modrinth = { String slug ->
+    def toml = providers.fileContents(packMods.file("${slug}.pw.toml")).asText.get()
+    def m = toml =~ /(?m)^version\s*=\s*"([^"]+)"/
+    if (!m.find()) {
+        throw new GradleException("Version Modrinth introuvable dans pack/mods/${slug}.pw.toml")
+    }
+    return "maven.modrinth:${slug}:${m.group(1)}"
+}
+
+configurations {
+    createBundle {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+    }
+}
+
+def createBundleFiles = configurations.createBundle
+def createLibs = tasks.register('createLibs', Sync) {
+    from({ createBundleFiles.collect { zipTree(it) } }) {
+        include 'META-INF/jarjar/flywheel-*.jar', 'META-INF/jarjar/ponder-*.jar'
+        eachFile { path = name }
+    }
+    includeEmptyDirs = false
+    into layout.buildDirectory.dir('create-libs')
+}
+
+dependencies {
+    // Module ciel (client)
+    compileOnly modrinth('atmospherics')
+    compileOnly modrinth('enhanced-celestials-2-core')
+    compileOnly modrinth('data-anchor')   // classes parentes des données lunaires d'Enhanced Celestials
+    compileOnly modrinth('corgilib')      // types référencés par l'API d'Enhanced Celestials
+
+    // Module horizon
+    compileOnly modrinth('distanthorizons')
+
+    // Correctif de génération : le prédicat in_structure de Lithostitched
+    compileOnly modrinth('lithostitched')
+
+    // Module rendu (client) : les uniformes d'Iris, le vent de Where Winds Blow
+    compileOnly modrinth('iris')
+    compileOnly modrinth('where-winds-blow')
+    compileOnly modrinth('particular-reforged')
+
+    // Module dissipateur
+    compileOnly modrinth('create')
+    // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar
+    // de Create lui-même (META-INF/jarjar), donc toujours aux versions qu'il embarque. Plus de dépôt
+    // maven.createmod.net, dont le certificat a expiré le 2026-11-03.
+    createBundle modrinth('create')
+    compileOnly files(createLibs).asFileTree
+}
+
+var generateModMetadata = tasks.register('generateModMetadata', ProcessResources) {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+    from 'src/main/templates'
+    into 'build/generated/sources/modMetadata'
+}
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-Xlint:deprecation'
+}

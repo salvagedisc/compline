@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "compline:block/dissipateur"
+    },
+    "axis=z": {
+      "model": "compline:block/dissipateur",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "compline:block/dissipateur",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

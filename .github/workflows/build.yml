@@ -44,7 +44,7 @@ jobs:
         working-directory: pack
         run: |
           version=$(sed -n 's/^version = "\(.*\)"/\1/p' pack.toml)
-          name="Tilth-${version}-${GITHUB_SHA::7}"
+          name="Compline-${version}-${GITHUB_SHA::7}"
           mkdir -p ../dist
           packwiz mr export -o "../dist/${name}.mrpack"
           echo "name=${name}" >> "$GITHUB_OUTPUT"
@@ -58,8 +58,8 @@ jobs:
           # Each pack is ~45 MB: keep the storage quota of a private repo free.
           retention-days: 3
 
-  # Le mod custom tilth (mods-custom/tilth/) doit toujours compiler.
-  mod-tilth:
+  # Le mod custom compline (mods-custom/compline/) doit toujours compiler.
+  mod-compline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -70,18 +70,18 @@ jobs:
           java-version: 21
           cache: gradle
           cache-dependency-path: |
-            mods-custom/tilth/*.gradle
-            mods-custom/tilth/gradle.properties
-            mods-custom/tilth/gradle/wrapper/gradle-wrapper.properties
+            mods-custom/compline/*.gradle
+            mods-custom/compline/gradle.properties
+            mods-custom/compline/gradle/wrapper/gradle-wrapper.properties
             pack/mods/*.pw.toml
 
-      - name: Build tilth mod
-        working-directory: mods-custom/tilth
+      - name: Build compline mod
+        working-directory: mods-custom/compline
         run: ./gradlew build --console=plain
 
       - uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: tilth-mod-${{ github.sha }}
-          path: mods-custom/tilth/build/libs/*.jar
+          name: compline-mod-${{ github.sha }}
+          path: mods-custom/compline/build/libs/*.jar
           retention-days: 3

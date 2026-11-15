@@ -1,5 +1,5 @@
 {
-  "type": "tilth:terrain_checked",
+  "type": "compline:terrain_checked",
   "biomes": "#ancient_remnants:has_structure/sentinel_monolith",
   "step": "surface_structures",
   "spawn_overrides": {},

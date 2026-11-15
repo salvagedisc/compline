@@ -1,6 +1,6 @@
 # Mod registry
 
-Complete list of the pack, updated on 2026-11-13 (after PRs #1 to #32 and the change of terrain base, [0019](decisions/0019-leaving-no-mans-land.md)): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
+Complete list of the pack, updated on 2026-11-14 (after the second cleanup, [0026](decisions/0026-second-cleanup.md), and after PRs #1 to #32 and the change of terrain base, [0019](decisions/0019-leaving-no-mans-land.md)): what is in `pack/mods/`, what remains to be tested and what is dropped. Every mod listed ✅ is in the pack today; nothing is waiting to be added. Updates held back until the in-game tests are listed in the [roadmap](feuille-de-route.md#updates-held-until-the-in-game-tests); the tests themselves are grouped in [tests-en-jeu.md](tests-en-jeu.md). The reasoning behind each choice is in the [plan](plan/README.md), especially chapters [10](archive/plan/10-recentrage.md), [11](archive/plan/11-rendu-et-confort.md) and [12](archive/plan/12-verification.md).
 
 Statuses:
 - ✅ in the pack (`pack/mods/`);
@@ -64,7 +64,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Tannery: Better Leather | `tannery-better-leather` | ✅ (1.0.2, added 2026-10-29, not seen in game) | CS | The tannery: hides, tanning rack, bark and tanning barrel, sinew, fat, studded leather; satchels removed, translated into French ([0014](decisions/0014-tannery.md), [tannery](plan/tannerie.md)) |
 | Reliable Backpacks | `reliable-backpacks` | ✅ (added 2026-10-26) | CS | A single simple bag, three rows, worn on the back (Curios), placeable ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Comforts | `comforts` | ✅ (back on 2026-10-26) | CS | Sleeping bag and hammock ([0012](decisions/0012-sacs-piles-jours.md)) |
-| Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `tilth:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |
+| Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `compline:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Better Days | `betterdays` | ✅ (added 2026-10-26) | CS | 30 minutes of day, 15 of night ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Envelope | `envelope` | ✅ | CS | Mail by pigeon between players, lost letters to find (idea taken from Wayfarer, [research](archive/plan/recherche/2026-10-19/wayfarer.md)) |
 
@@ -115,38 +115,29 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Camera Overhaul | `cameraoverhaul` | ✅ | C | The camera follows movement (set low) |
 | ItemPhysic | `itemphysic` | ✅ | C | Dropped items fall, roll and float |
 | Smooth Swapping | `smooth-swapping` | ✅ | C | Items slide around in the inventory |
-| Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos; `tilth` 0.4.7 stops its equip animation looping with Sensible Stackables ([fix](plan/mod-tilth.md#punchy-and-sensible-stackables-the-hand-that-kept-jumping)) |
+| Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos; `compline` 0.4.7 stops its equip animation looping with Sensible Stackables ([fix](plan/mod-compline.md#punchy-and-sensible-stackables-the-hand-that-kept-jumping)) |
 
 ## Atmosphere, rendering and sound
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | ATMOSPHERICS | `atmospherics` | ✅ | C | Mist, sky, clouds (two layers), sun, moon and stars per biome ([0007](decisions/0007-ambiance-performance.md)) |
-| Polytone | `polytone` | ✅ | C | Reads colours, lights and shaders from resource packs; since the house colours and lights left with `tilth-ambiance` on 2026-11-13, no pack of Tilth uses it ([0024](decisions/0024-removing-the-house-resource-packs.md)) |
-| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves (a little more often, carried by the wind by the `averse` module of the `tilth` mod), cave dust |
+| Particular Reforged | `particular-reforged` | ✅ | C | Water, waterfalls, falling leaves (a little more often), cave dust |
 | Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
 | LambDynamicLights | `lambdynamiclights` | ✅ | C | Light held in hand |
 | More Darkness | `more-darkness` | ✅ | CS | Real nights |
+| Polytone | `polytone` | ✅ (bench only) | C | Post-processing chains and settings for the house resource pack `compline-ambiance`; back on 2026-11-14 ([0029](decisions/0029-look-without-shader.md)) |
 | AmbientSounds | `ambientsounds` | ✅ | C | Biome sounds |
 | Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Echo, muffling |
 | True Adaptive Music | `true-adaptive-music` | ✅ | CS | Music by situation (mist, clearing, season, moon, airship), long silences ([0010](decisions/0010-musique.md)) |
-| `tilth` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 25 tracks chosen by the team (29 until No Man's Land left) |
+| `compline` music pack | — | ✅ (`pack/trueadaptivemusicpacks/`, [page](plan/musique.md)) | CS | The tree of situations and the 25 tracks chosen by the team (29 until No Man's Land left) |
 | Sounds | `sound` | ✅ | C | 170 interface, item and block sounds |
 | Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
-| Puddles & Floods | `puddles-floods` | ✅ | CS | Puddles in the rain and at snowmelt, floods in hollows |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
-| Shine | `shine` | ✅ (2.0.2, seen in game in a test instance) | C | Bloom without shaders, set low in `config/shine.json` (strength 2, threshold 0.75): a halo around fires and lanterns only; its default made the sunlit landscape glow in large blobs. Its coloured light stays off, Polytone owns it ([0016](decisions/0016-vent-et-lumiere.md), [0017](decisions/0017-averse-et-rayons.md)) |
-| Atmospheric Rain Backport | `atmospheric-rain-backport` | ✅ (1.2, not seen in game) | C | Drops on the screen when looking up in the rain ([0017](decisions/0017-averse-et-rayons.md)) |
-| Cool Rain Reforged | `cool-rain-reforged` | ✅ (1.0.2, not seen in game) | C | The sound of rain on metal, glass, fabric, leaves and water, muffled indoors ([0017](decisions/0017-averse-et-rayons.md)) |
-| Sable: Cool Rain | `sable-cool-rain` | ✅ (1.0.1, not seen in game) | C | Cool Rain's sounds on Sable airships and contraptions ([0017](decisions/0017-averse-et-rayons.md)) |
-| Distant Thunders | `distant-thunders` | ✅ (1.1.0, not seen in game) | C | Thunder delayed and dulled with distance ([0017](decisions/0017-averse-et-rayons.md)) |
-| Dynamic Surroundings Rebirth | `dynamic-surroundings-rebirth-by-uawiegrfv` | ✅ (1.4.2, not seen in game) | C | Reduced to drops on plants, drips from eaves and leaves, morning dew; everything else off in `config/dsrebirth/dsrebirth.json` ([0017](decisions/0017-averse-et-rayons.md)) |
-| Soft Imprints | `snow-imprints` | ✅ (2.8.0, not seen in game) | C | Footprints in snow, sand and mud ([0017](decisions/0017-averse-et-rayons.md)) |
-| Wavify | `wavify` | ✅ (1.2.1, not seen in game) | C | Waves breaking on shores and rivers ([0017](decisions/0017-averse-et-rayons.md)) |
-| Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `tilth` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
+| Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `compline` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle the leaves of Regions Unexplored |
 
 ## Interface and comfort
@@ -161,7 +152,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |
 | Default Options | `default-options` | ✅ | C | Key bindings and video settings shipped with the pack |
 | Chat Heads | `chat-heads` | ✅ | C | Player head in the chat |
-| FancyMenu + Drippy Loading Screen | `fancymenu`, `drippy-loading-screen` (+ `konkrete`, `melody`) | ✅ (3.9.14, 3.1.5; added 2026-10-26, not seen in game) | C | Tilth title screen (painting with mist, logo to come) and loading screen (moss, lantern bar); layouts written by `scripts/menu/menus.py`, editor hidden |
 | Lamb Lanterns | `lamb-lanterns` | ✅ | CS | A lantern carried at the hip (Curios slot) gives light as if held in hand |
 
 ## Rules and scripts
@@ -173,25 +163,26 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `tilth` 0.10.1 | `mods-custom/tilth/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `averse` (rain curtains, lightning, leaves in the wind, client) and `rayons` (glints on water, client; [0017](decisions/0017-averse-et-rayons.md); the rain colour and sun rays of `tilth-ambiance` left on 2026-11-13, [0024](decisions/0024-removing-the-house-resource-packs.md)) modules, `monuments` (structures placed only on fitting ground) and `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)) ([mod-tilth](plan/mod-tilth.md)) |
+| Mod `compline` 0.13.0 | `mods-custom/compline/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)), `rendu` (what the shader pack Brumaire needs, [0028](decisions/0028-house-shader.md)) and `relief` (the height of the world for the sun shadows of the `compline-ambiance` pack, [0029](decisions/0029-look-without-shader.md)) ([mod-compline](plan/mod-compline.md)) |
 
 ## Performance and technical
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Sodium | `sodium` | ✅ | C | Rendering |
+| Iris Shaders | `iris` | ✅ (bench only) | C | Loads the house shader pack Brumaire, off by default; 1.8.14-beta.1 is the only build for Sodium 0.8.13 ([0028](decisions/0028-house-shader.md)) |
+| Colorwheel | `colorwheel` | ✅ (bench only) | C | Flywheel models (Create) under a shader pack |
+| Iris Veil Compat | `iris-veil-compat` | ✅ (alpha, bench only) | C | Veil shaders (Sable, Aeronautics levitite) under a shader pack |
 | ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendering |
 | ModernFix | `modernfix` | ✅ | CS | Loading |
 | FerriteCore | `ferrite-core` | ✅ | CS | Memory |
 | Lithium | `lithium` | ✅ | CS | Server logic |
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
-| Chunky | `chunky` | ✅ | CS | Pregeneration; leaves once test H11 has confirmed `/dh pregen` ([pack sort](plan/tri-du-pack.md)) |
 | spark | `spark` | ✅ | CS | Profiling |
 | Dynamic FPS | `dynamic-fps` | ✅ | C | The game slows down in the background |
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
 | Simple Backups | `simple-backups` | ✅ | CS | Backups every hour of play, last 24 kept, plus one when everyone leaves (beta) |
 | Crash Assistant | `crash-assistant` | ✅ | C | Helps read crashes |
-| Forgified Fabric API | `forgified-fabric-api` | ✅ | CS | Required by Puddles & Floods; Connector removed on 2026-11-13 ([0025](decisions/0025-native-atlas.md)) |
 
 ## Resource packs
 
@@ -201,11 +192,11 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
-| Supernova (Original Music Pack) | `supernova-ost` | ✅ (version that does not overwrite vanilla music) | Three tracks of the music pack (CC-BY-NC-SA 4.0, [music](plan/musique.md)) |
+| `compline-ambiance` | — (`pack/resourcepacks/`, [page](plan/ambiance.md)) | ✅ (bench only) | The default look, without a shader pack: sun shadows, sun shafts, glow, air, under water, olive greens, paler rain ([0029](decisions/0029-look-without-shader.md)) |
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, Biolith, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -221,21 +212,29 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Easy Anvils | Replaces the anvil that Overgeared needs ([12](archive/plan/12-verification.md)) |
 | Leaves Be Gone | On Aeronautics' blacklist |
 | Dynamic Surroundings | Touches the sound engine like Sound Physics; duplicates |
+| FancyMenu, Drippy Loading Screen (+ Konkrete, Melody) | The house title and loading screens; removed on 2026-11-14, the game's own menu is back ([0026](decisions/0026-second-cleanup.md)) |
+| Atmospheric Rain Backport, Cool Rain Reforged, Sable: Cool Rain, Distant Thunders, Soft Imprints (`snow-imprints`), Wavify, Dynamic Surroundings Rebirth | The rain, thunder, footprint, wave and drip mods of [0017](decisions/0017-averse-et-rayons.md); removed on 2026-11-14 with the `averse` and `rayons` modules of the `compline` mod ([0026](decisions/0026-second-cleanup.md)) |
+| Shine | Shine's bloom; removed on 2026-11-14 with Polytone ([0026](decisions/0026-second-cleanup.md)). Polytone came back the same day for the house resource pack ([0029](decisions/0029-look-without-shader.md)) |
+| Chunky | Removed on 2026-11-14: the world is pregenerated with `/dh pregen`, or a server owner adds Chunky; the `horizon` fix for it stays ([0026](decisions/0026-second-cleanup.md)) |
+| Supernova (Original Music Pack) | Resource pack with three tracks, removed on 2026-11-14; the music draws on 30 tracks of the game ([music](plan/musique.md), [0026](decisions/0026-second-cleanup.md)) |
+| Biolith (separate copy) | Quark ships Biolith 3.0.14 in its jar and no other mod declares it; removed on 2026-11-14 ([0026](decisions/0026-second-cleanup.md)) |
+| Puddles & Floods, Forgified Fabric API | Removed on 2026-11-14 (maintainer's choice). Puddles & Floods was the last mod that needed Forgified Fabric API, which goes with it: the pack no longer loads any Fabric layer |
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
+| Better Smoke | Fabric only (no NeoForge build on 2026-11-15, the pack loads no Fabric layer). Where Winds Blow already does what it brings: campfire smoke that drifts with the pack's wind and weather, merges into larger plumes over several fires, soul fires included (`enableWindSmoke`, on by default); both patch the same campfire classes. To check in game: test R10 |
 | Better Clouds | Draws the clouds in place of ATMOSPHERICS, whose clouds follow the mist, dusk and rain; removed on 2026-10-29 ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Cirrus, Simple Clouds, Nuit, Stellar View, Caelum | Cirrus replaces ATMOSPHERICS' fog and sky; Simple Clouds needs OpenGL 4.3 (not on macOS); ATMOSPHERICS cancels the vanilla sky, so skybox mods have no effect ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |
 | Capture Nets, Paraglider, GUI Compass, Simple Voice Chat, Hardcore Revival, Create Aeronautics Structures, Cinch's Abandoned Houses, Cattlestrophic!, Easy NPC | Removed by the team on 2026-10-18 |
-| Dark Coffee GUI, Dark Coffee GUI - Extras, Modded Coffee GUI | All rights reserved and the author does not answer; replaced on 2026-10-26 by `tilth-interface`, itself removed on 2026-11-13 ([0024](decisions/0024-removing-the-house-resource-packs.md)) |
+| Dark Coffee GUI, Dark Coffee GUI - Extras, Modded Coffee GUI | All rights reserved and the author does not answer; replaced on 2026-10-26 by `compline-interface`, itself removed on 2026-11-13 ([0024](decisions/0024-removing-the-house-resource-packs.md)) |
 | Untitled Duck Mod | Removed by the team on 2026-10-19; Naturalist's duck replaces it ([wildlife page, archived](archive/plan/faune-nml.md)) |
 | Traveler's Backpack, Sophisticated Backpacks | Too many upgrades and screens; Reliable Backpacks chosen on 2026-10-26 ([0012](decisions/0012-sacs-piles-jours.md)) |
 | ParCool! | Disabled at the team's request |
 | Sanity: Renewed, TheWatcher | The world is enigmatic, not dark |
 | Jade, AppleSkin | Break the mystery |
 | Just Zoom, Zoomify | The vanilla spyglass is enough |
-| Wildex Bestiary | Removed by the team on 2026-10-29; the `zoo` module keeps its own ledger ([modules-tilth](plan/modules-tilth.md)) |
+| Wildex Bestiary | Removed by the team on 2026-10-29; the `zoo` module keeps its own ledger ([modules-compline](plan/modules-compline.md)) |
 | Waystones, Explorer's Compass, Nature's Compass | Erase the journey |
 | Carry On | Incompatible with Aeronautics |
 | Separate Sable Render Distance | To evaluate with Distant Horizons (needs 1.8.7, beta) |

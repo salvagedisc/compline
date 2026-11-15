@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "regions_unexplored:prismoss_sprout",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:prismarite_cluster",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:large_prismarite_cluster",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:hanging_prismarite",
+      "required": false
+    }
+  ]
+}

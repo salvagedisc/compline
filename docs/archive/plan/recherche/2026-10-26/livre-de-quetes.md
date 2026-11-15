@@ -1,4 +1,4 @@
-# Quest and guide book for Tilth
+# Quest and guide book for Compline
 
 Research of 2026-10-26. Target: Minecraft 1.21.1, NeoForge 21.1.265. Versions and dates come from the Modrinth API, queried the same day. The jars of Heracles, GuideME, Modonomicon and KubeJS were opened to check the details. What was not verified is marked "to test".
 
@@ -124,17 +124,17 @@ All files go in `pack/kubejs/`, which KubeJS loads as a datapack and resource pa
 
 | What | Where |
 |---|---|
-| Book, categories, entries | `pack/kubejs/data/tilth/modonomicon/books/carnet/...` (start from the Modonomicon demo book, exact structure to copy) |
-| French texts | `pack/kubejs/assets/tilth/lang/fr_fr.json`, keys with Markdown |
-| Images | `pack/kubejs/assets/tilth/textures/gui/carnet/` (small, one per page) |
-| Unlock advancements | `pack/kubejs/data/tilth/advancement/carnet/*.json`, without a `display` block, so no toast and no pollution of Better Advancements |
+| Book, categories, entries | `pack/kubejs/data/compline/modonomicon/books/carnet/...` (start from the Modonomicon demo book, exact structure to copy) |
+| French texts | `pack/kubejs/assets/compline/lang/fr_fr.json`, keys with Markdown |
+| Images | `pack/kubejs/assets/compline/textures/gui/carnet/` (small, one per page) |
+| Unlock advancements | `pack/kubejs/data/compline/advancement/carnet/*.json`, without a `display` block, so no toast and no pollution of Better Advancements |
 | Fanal multiblock | multiblock JSON in the same datapack |
 
 **Unlocking by progress.**
 1. For most entries, an advancement with a vanilla trigger is enough (item obtained, location, consumption).
-2. For a particular gesture, a KubeJS script calls `player.unlockAdvancement('tilth:carnet/fanal')` (method `kjs$unlockAdvancement`, verified in the KubeJS 2101.7.2 jar).
-3. For the modules of the `tilth` mod, the Java mod registers a criterion trigger, for example `tilth:evenement`, called when the fanal is lit. The datapack then keeps the logic. Another option: a custom Modonomicon condition.
-4. The entry carries `"condition": {"type": "modonomicon:advancement", "advancement_id": "tilth:carnet/fanal"}`.
+2. For a particular gesture, a KubeJS script calls `player.unlockAdvancement('compline:carnet/fanal')` (method `kjs$unlockAdvancement`, verified in the KubeJS 2101.7.2 jar).
+3. For the modules of the `compline` mod, the Java mod registers a criterion trigger, for example `compline:evenement`, called when the fanal is lit. The datapack then keeps the logic. Another option: a custom Modonomicon condition.
+4. The entry carries `"condition": {"type": "modonomicon:advancement", "advancement_id": "compline:carnet/fanal"}`.
 
 **Giving the book.** Hidden advancement on the first tick with a loot table `advancement_reward` (method of the Patchouli guide "Giving new", to adapt to the Modonomicon item). Exact name of the book component: to check with the autocompletion of `/give`.
 
@@ -181,4 +181,4 @@ All files go in `pack/kubejs/`, which KubeJS loads as a datapack and resource pa
 - https://www.curseforge.com/minecraft/modpacks/all-the-mods-10
 - https://modrinth.com/project/phasmcs-no-mans-land and https://modrinth.com/project/wayfarer-dark (`modrinth.index.json` index opened)
 - https://en.wikipedia.org/wiki/Progressive_disclosure
-- Local repository: `docs/vision.md`, `docs/plan/03-civilisation.md` (§3.7), `docs/plan/modules-tilth.md`, `docs/plan/traduction.md`, `docs/plan/mod-tilth.md`
+- Local repository: `docs/vision.md`, `docs/plan/03-civilisation.md` (§3.7), `docs/plan/modules-compline.md`, `docs/plan/traduction.md`, `docs/plan/mod-compline.md`

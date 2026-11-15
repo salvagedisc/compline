@@ -1,4 +1,4 @@
-// Tilth : objets des créatures coupées comme doublons, cachés d'EMI. Même liste que
+// Compline : objets des créatures coupées comme doublons, cachés d'EMI. Même liste que
 // server_scripts/doublons.js.
 RecipeViewerEvents.removeEntriesCompletely('item', event => {
   [

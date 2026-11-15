@@ -11,7 +11,7 @@ the former mist (`MODELS` in models.py):
     pack/kubejs/data/<namespace>/tags/worldgen/biome/. Tags that rely on the common tags
     (`#c:...`, `#minecraft:...`) are left alone: Regions Unexplored fills those itself;
   - wind: for every Where Winds Blow profile that names vanilla biomes, a profile
-    `ru_<name>.json` with the same values in pack/kubejs/{data,assets}/tilth/.
+    `ru_<name>.json` with the same values in pack/kubejs/{data,assets}/compline/.
 
 The biomes of `OTHER_MODELS` in models.py (Hybrid Aquatic, the Streams Reflowing stream)
 inherit the same way from their model, in the tags that know no biome of their mod. The
@@ -24,7 +24,7 @@ matched by `SKIPPED` are left alone too.
 closed dimension: they are written with the rest.
 
 The script owns every entry of these mods' biomes in the pack's biome tags outside the
-`tilth` namespace, and the `ru_*.json` wind profiles: it rewrites them at each run.
+`compline` namespace, and the `ru_*.json` wind profiles: it rewrites them at each run.
 
 Usage, from the repository root, after `npm run check-deps` has filled the jar cache:
   python3 scripts/biomes/biome_rules.py [folder of the pack's jars, default .cache/jars]
@@ -45,11 +45,11 @@ MODS = os.path.join(ROOT, "pack/mods")
 TAG = re.compile(r"^data/([^/]+)/tags/worldgen/biome/(.+)\.json$")
 BIOME = re.compile(r"^data/([^/]+)/worldgen/biome/(.+)\.json$")
 WIND = re.compile(r"^data/where_winds_blow/where_winds_blow/wind_profiles/(.+)\.json$")
-WIND_FOLDER = "tilth/where_winds_blow/wind_profiles"
+WIND_FOLDER = "compline/where_winds_blow/wind_profiles"
 
 # Tags of these namespaces are shared conventions: Regions Unexplored fills them itself.
 COMMON = {"minecraft", "c", "forge", "neoforge"}
-OWN = {NAMESPACE, "tilth"}
+OWN = {NAMESPACE, "compline"}
 # Left as they are: Quark's fallen trunks are of vanilla woods, out of place under maples or redwoods.
 SKIPPED = re.compile(r"^quark:has_(lower_)?fallen_")
 
@@ -98,7 +98,7 @@ def read_jars(jars):
         with zipfile.ZipFile(path) as jar:
             for name in jar.namelist():
                 tag, wind, biome = TAG.match(name), WIND.match(name), BIOME.match(name)
-                if biome and biome.group(1) not in ("minecraft", "tilth"):
+                if biome and biome.group(1) not in ("minecraft", "compline"):
                     biomes.add(f"{biome.group(1)}:{biome.group(2)}")
                 if not tag and not wind:
                     continue

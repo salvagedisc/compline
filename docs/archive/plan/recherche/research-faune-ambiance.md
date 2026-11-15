@@ -1,4 +1,4 @@
-# Research: Wildlife, rare creatures, spawn control and ambience (Tilth, 1.21.1 NeoForge)
+# Research: Wildlife, rare creatures, spawn control and ambience (Compline, 1.21.1 NeoForge)
 
 > Refocused after the project update: base wildlife and ambience are **already chosen** (Naturalist 2.0.4, Alex's Mobs Continued 2.2.2, Hybrid Aquatic 1.7.3, Mowzie's Mobs 1.8.2, Critters and Companions 2.7.0, Untitled Duck Mod, Friends&Foes 4.0.27, Adorable Hamster Pets, Companion, Companions!, Ghost; ATMOSPHERICS, AmbientSounds, Sound Physics Remastered, Subtle Effects, LambDynamicLights 4.8.11, More Darkness). They are not proposed again. This report covers what is missing:
 > 1. removal of vanilla monsters and spawn control, with a per-biome table;
@@ -51,7 +51,7 @@
 
 | Vector | Examples | Proposed treatment | Layer |
 |---|---|---|---|
-| Biome spawn lists | zombie, skeleton, creeper, spider, enderman, witch, slime, husk, stray, bogged, drowned | `neoforge:remove_spawns` on `#minecraft:is_overworld` | Datapack (`pack/kubejs/data/tilth/neoforge/biome_modifier/`) |
+| Biome spawn lists | zombie, skeleton, creeper, spider, enderman, witch, slime, husk, stray, bogged, drowned | `neoforge:remove_spawns` on `#minecraft:is_overworld` | Datapack (`pack/kubejs/data/compline/neoforge/biome_modifier/`) |
 | Structure `spawn_overrides` | guardians (monument), witch (hut), pillagers (outpost), *Nether: fortress* | In Control `deny` (it also applies to overrides) + KubeJS safety net; failing that, JSON override of the structures | In Control / KubeJS |
 | Spawners | `monster_room` dungeons, mineshaft cave spiders, trial spawners (breeze, etc.) | `neoforge:remove_features` on `minecraft:monster_room` and `monster_room_deep` (`underground_structures` step); trial chambers: remove via Sparse Structures or keep empty | Datapack + Sparse Structures |
 | Events handled by gamerule | phantoms, patrols, raids, warden, wandering trader ("survivors" concept) | `doInsomnia false`, `doPatrolSpawning false`, `disableRaids true`, `doWardenSpawning false`, `doTraderSpawning false` (keep `doMobSpawning true` for animals) | KubeJS `ServerEvents.loaded` → commands |
@@ -60,7 +60,7 @@
 
 **Examples (syntax to be validated at first launch).**
 
-`pack/kubejs/data/tilth/neoforge/biome_modifier/remove_vanilla_hostiles.json`
+`pack/kubejs/data/compline/neoforge/biome_modifier/remove_vanilla_hostiles.json`
 ```json
 {
   "type": "neoforge:remove_spawns",
@@ -83,7 +83,7 @@
 
 Naturalist registers its animals through a coded modifier (`naturalist:add_animals`, a single entry) driven by its config. Its three other modifiers (`remove_farm_animals_savanna`, `remove_farm_animals_swamp`, `remove_forest_pigs`) remove vanilla farm animals. To keep, this is consistent with livestock farming (source: GitHub Crispytwig/naturalist, branch `1.21.1-NeoForge`).
 
-**KubeJS safety net** (`pack/kubejs/server_scripts/tilth/no_vanilla_hostiles.js`, KubeJS 2101 API to be validated):
+**KubeJS safety net** (`pack/kubejs/server_scripts/compline/no_vanilla_hostiles.js`, KubeJS 2101 API to be validated):
 ```js
 const BANNED = ['minecraft:zombie','minecraft:zombie_villager','minecraft:husk','minecraft:drowned',
   'minecraft:skeleton','minecraft:stray','minecraft:bogged','minecraft:creeper','minecraft:spider',
@@ -95,7 +95,7 @@ EntityEvents.spawned(event => {
   const e = event.entity
   if (!BANNED.includes(String(e.type))) return
   if (String(e.level.dimension) !== 'minecraft:overworld') return   // Nether: separate decision
-  if (e.tags.contains('tilth_allowed')) return                    // admin /summon with Tags:["tilth_allowed"]
+  if (e.tags.contains('compline_allowed')) return                    // admin /summon with Tags:["compline_allowed"]
   event.cancel()
 })
 ServerEvents.loaded(event => {
@@ -298,7 +298,7 @@ No candidate **requires Iris or Oculus**. Points of attention:
 ## 4. Proposed coherent system
 
 **Ecology (server).**
-1. A `tilth` datapack removes vanilla hostiles from biomes, dungeons and infested blocks.
+1. A `compline` datapack removes vanilla hostiles from biomes, dungeons and infested blocks.
 2. The `neoforge:none` override neutralises unwanted modifiers from other mods.
 3. `add_spawn_costs` spaces out territorial predators: bears, lions, tigers, sharks.
 4. **In Control!**:

@@ -1,0 +1,15 @@
+{
+  "advancement.spot_lushsaur.desc": "Trouvez un lushsaur dans les cavernes luxuriantes ou les grottes de biochampignons.",
+  "advancement.spot_obsidiceratops.desc": "Trouvez un obsidiceratops dans les grottes de redstone.",
+  "advancement.spot_chorusoatl.desc": "Trouvez un chorusoatl dans un prismachasm.",
+  "advancement.spot_coralosaur.desc": "Trouvez un coralosaur dans un océan chaud ou un récif corallien.",
+  "advancement.master_chorusoatl.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le chorusoatl !",
+  "advancement.master_coralosaur.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le coralosaur !",
+  "advancement.master_lushsaur.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le lushsaur !",
+  "advancement.master_obsidiceratops.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser l'obsidiceratops !",
+  "advancement.master_sculkraptor.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le sculkraptor !",
+  "advancement.master_therimoss.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le therimoss !",
+  "gui.ec_ad.archie.on_lushsaur": "On ferait mieux de descendre sous terre.\nTrouve des cavernes luxuriantes ou des grottes de biochampignons, et garde l'œil ouvert. Ils sont maîtres dans l'art du camouflage.",
+  "gui.ec_ad.archie.on_obsidiceratops": "Le seul endroit où il se sent bien est un lieu extrêmement chaud.\nDescends dans les grottes de redstone, et prends de la lave avec toi.",
+  "gui.ec_ad.archie.on_chorusoatl": "Celui-ci est bien plus coriace à dénicher.\nIl niche loin sous terre, dans les prismachasms, ces gouffres tapissés de prismoss.\nPrends des fruits de chorus avec toi : je t'en céderai dès que tu l'auras aperçu."
+}

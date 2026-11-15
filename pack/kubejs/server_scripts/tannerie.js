@@ -1,4 +1,4 @@
-// Tilth : la tannerie, avec le mod Tannery (Beckstation). Recettes, retraits et écorce.
+// Compline : la tannerie, avec le mod Tannery (Beckstation). Recettes, retraits et écorce.
 // Le butin est dans tannerie_butin.js, les sacoches cachées et les messages du tonneau
 // traduits dans client_scripts/tannerie.js. Voir docs/plan/tannerie.md.
 //
@@ -36,13 +36,13 @@ ServerEvents.recipes(event => {
   // mais donnent une peau à sécher au lieu du cuir.
   if (Platform.isLoaded('alexsmobs')) {
     event.shapeless('tannery:goat_hide', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
-      .id('tilth:tannerie/peau_de_kangourou')
+      .id('compline:tannerie/peau_de_kangourou')
   }
 
   // Une peau de Naturalist d'un monde existant se sèche comme une peau de vache.
   if (Platform.isLoaded('naturalist')) {
     event.shapeless('tannery:cow_hide', ['naturalist:hide'])
-      .id('tilth:tannerie/peau_de_naturalist')
+      .id('compline:tannerie/peau_de_naturalist')
   }
 })
 

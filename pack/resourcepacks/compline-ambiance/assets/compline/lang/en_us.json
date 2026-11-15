@@ -1,0 +1,17 @@
+{
+  "config.compline.header": "Compline",
+  "config.compline.rendu": "Compline rendering",
+  "config.compline.rendu.tooltip": "The light, air and colours Compline lays over the game image. Off, the game looks as it does without the pack.",
+  "config.compline.ombres": "Sun shadows",
+  "config.compline.ombres.tooltip": "The shadows of trees, hills and walls, without a shader pack. 0 turns them off.",
+  "config.compline.rayons": "Sun rays",
+  "config.compline.rayons.tooltip": "Sunlight and moonlight through the foliage. 0 turns them off.",
+  "config.compline.halo": "Light glow",
+  "config.compline.halo.tooltip": "The glow around torches, lava and the sun. 0 turns it off.",
+  "config.compline.air": "Air and distance",
+  "config.compline.air.tooltip": "The golden veil towards the sun and the cool tint of distant land. 0 turns it off.",
+  "config.compline.tons": "Tones",
+  "config.compline.tons.tooltip": "Bluish nights, golden dusks, greyer rain, softer contrast. 0 keeps the game's colours.",
+  "config.compline.olive": "Olive greens",
+  "config.compline.olive.tooltip": "Pulls vivid greens towards olive. 0 keeps the game's greens."
+}

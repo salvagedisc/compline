@@ -1,0 +1,14 @@
+{
+  "compline.sante.coeur_ancien": "Le Cœur ancien laisse un éclat de vie entre vos mains.",
+  "compline.sante.plein": "Votre santé est déjà entière : %s cœurs.",
+  "compline.sante.rendu": "Un cœur vous revient : %s / %s.",
+  "compline.sante.reveil": "Vous vous réveillez plus faible. Il vous reste %s cœurs.",
+  "compline.sante.reveil_plancher": "Vous vous réveillez. Il vous reste %s cœurs, vous ne faiblirez pas davantage.",
+  "item.compline.eclat_de_vie": "Éclat de vie",
+  "item.compline.eclat_de_vie.compteur": "Cœurs : %s / %s",
+  "item.compline.eclat_de_vie.tooltip": "Rend un cœur perdu.",
+  "message.compline.tannerie.poudre_manquante": "Le tonneau a besoin de poudre tannique.",
+  "message.compline.tannerie.tonneau_plein": "Le tonneau est plein.",
+  "compline.monument.gardien": "Le gardien du monument se dresse devant vous.",
+  "compline.monument.eveil": "Le Cœur ancien s'éveille : sa bénédiction attend qui l'approchera."
+}

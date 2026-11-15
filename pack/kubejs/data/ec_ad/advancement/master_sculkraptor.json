@@ -1,0 +1,69 @@
+{
+  "parent": "ec_ad:tame_sculkraptor",
+  "criteria": {
+    "craft_bow": {
+      "conditions": {
+        "recipe_id": "ec_ad:sculk_bow"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "spot": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:sculkraptor"
+            }
+          }
+        ]
+      },
+      "trigger": "ec_ad:spotted_entity"
+    },
+    "tame": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:sculkraptor"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.master_sculkraptor.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "ec_ad:sculk_bow"
+    },
+    "title": {
+      "translate": "advancement.master_sculkraptor.title"
+    }
+  },
+  "requirements": [
+    [
+      "spot"
+    ],
+    [
+      "craft_bow"
+    ],
+    [
+      "tame"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ec_ad:echo_totem"
+    ]
+  },
+  "sends_telemetry_event": true
+}

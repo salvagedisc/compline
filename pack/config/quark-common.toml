@@ -1,4 +1,4 @@
-# Tilth — Quark réduit à l'essentiel (voir docs/decisions/0005-quark.md).
+# Compline — Quark réduit à l'essentiel (voir docs/decisions/0005-quark.md).
 # Fichier partiel : Quark complète les options absentes avec leurs valeurs par défaut.
 # Les noms de modules suivent le nom de classe de Quark 4.1 découpé en mots ; à vérifier
 # contre la config générée au premier lancement (npm run sync -- --configs).

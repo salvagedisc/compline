@@ -1,4 +1,4 @@
-// Tilth : l'End n'existe plus et le Nether est fermé (décision 0004).
+// Compline : l'End n'existe plus et le Nether est fermé (décision 0004).
 // Les forteresses de l'End ne se génèrent plus (tag vide
 // data/minecraft/tags/worldgen/biome/has_structure/stronghold.json).
 // Pour rouvrir le Nether : retirer 'minecraft:the_nether' de la liste et passer

@@ -37,13 +37,13 @@ Without shaders, rendering is built in layers. Each layer has **a single** respo
 
 | Candidate | Verdict | Why |
 |---|---|---|
-| **Polytone** | Retained | Client-only, no dependency, by the same author as Moonlight, Supplementaries and Amendments (already in the pack). Everything goes through a Tilth resource pack |
+| **Polytone** | Retained | Client-only, no dependency, by the same author as Moonlight, Supplementaries and Amendments (already in the pack). Everything goes through a Compline resource pack |
 | Vibrancy | Rejected | Colored light and shadows, but development is paused and it replaces the lighting engine: risk with Sodium 0.8 and Sable |
 | Gleam, Colorful Lighting | Rejected | Same risk, very little used (fewer than 8,000 downloads) |
 
-What Polytone does for Tilth, in the `tilth-ambiance` resource pack (the same one that carries the ATMOSPHERICS presets):
+What Polytone does for Compline, in the `compline-ambiance` resource pack (the same one that carries the ATMOSPHERICS presets):
 - **The mist biomes**: grass, leaves and water slightly desaturated, a slightly blue night.
-- **The clearing** (`tilth:clairiere`): a warmer lightmap and vivid colors. When the mist withdraws, the light changes too: this is the most important moment of the pack.
+- **The clearing** (`compline:clairiere`): a warmer lightmap and vivid colors. When the mist withdraws, the light changes too: this is the most important moment of the pack.
 - **The white moon**: a brighter, silvery night (to prototype: we need to see whether a lightmap can follow an Enhanced Celestials event; otherwise the moon keeps its own colors).
 
 ### Particles: Particular Reforged
@@ -153,15 +153,15 @@ The pack would go from about 110 to about 123 files, almost all of the additions
 
 What it is: 7 dinosaurs, each with its own habitat (lush caves, jungle, warm ocean, Nether, Deep Dark ×2, End), taming by ritual, mounts, breeding, a merchant NPC (Archie), a stamp guide, 6 armors, 8 weapons and tools, an end boss. **Java: Forge and Fabric, Minecraft 1.20.1 only**, free, "coming soon" on CurseForge and Modrinth. Bedrock: paid add-on.
 
-**Moving to 1.20.1: no.** Tilth would lose Create Aeronautics, Sable and No Man's Land, which exist only for NeoForge 1.21.1 (and NML will not be ported, according to its authors). The pack is built around them.
+**Moving to 1.20.1: no.** Compline would lose Create Aeronautics, Sable and No Man's Land, which exist only for NeoForge 1.21.1 (and NML will not be ported, according to its authors). The pack is built around them.
 
 **Porting it to 1.21.1: feasible, but not without the authors.**
 - Technically, a move from Forge 1.20.1 to NeoForge 1.21.1 touches item components (end of NBT on items), registries, networking and the GeckoLib version. It is a big job, followed by maintenance at every update of the original mod.
 - Legally, the authors' **permission** is required to redistribute a port, even among friends in a modpack. The license is not yet published, and the Bedrock version is paid: a refusal is possible.
 - The right first step: ask the authors (Eternal Creations and Archie Blocks) whether a NeoForge 1.21.1 version is planned, or whether they accept a port.
 
-**And in Tilth?** Even ported, it would fit poorly as is:
-- 2 species out of 7 live in the Nether or the End, which Tilth closes;
+**And in Compline?** Even ported, it would fit poorly as is:
+- 2 species out of 7 live in the Nether or the End, which Compline closes;
 - the boss, armors and weapons go against the "almost empty" world;
 - its stamp guide duplicates the Wildex bestiary, and Archie is a merchant NPC, which was rejected with Easy NPC;
 - decision 0003 already set prehistory aside.
@@ -196,7 +196,7 @@ To check: four mods now affect the camera (Shoulder Surfing Reloaded, Camera Ove
 
 ### EMI instead of JEI
 
-Version 1.1.24 for NeoForge 1.21.1, no dependency, MIT license. What Tilth does with it:
+Version 1.1.24 for NeoForge 1.21.1, no dependency, MIT license. What Compline does with it:
 - **Groups and categories**: items are grouped (all planks, all Handcrafted furniture, all Twigs blocks) and the index is organized by theme rather than by mod. Everything goes through a datapack and KubeJS, which can talk to EMI.
 - **The recipe tree**: EMI computes everything needed to build a Create machine, step by step. It replaces a notebook of calculations.
 - **The mystery**: recipes that come from blueprints found in the ruins (10.10) can be hidden in EMI for everyone: they are learned by reading the blueprint. EMI cannot show them player by player according to their progress.
@@ -209,7 +209,7 @@ The Wildex 3.0.0 jar was opened. What can and cannot be changed:
 
 | Element | Modifiable? | How |
 |---|---|---|
-| The book image (5 themes: vintage, modern, jungle, runes, steampunk) | **Yes** | Each theme is a 1024×704 image (`assets/wildex/textures/gui/wildex_<theme>.png`) that a resource pack replaces. A **Tilth naturalist's notebook** can be drawn |
+| The book image (5 themes: vintage, modern, jungle, runes, steampunk) | **Yes** | Each theme is a 1024×704 image (`assets/wildex/textures/gui/wildex_<theme>.png`) that a resource pack replaces. A **Compline naturalist's notebook** can be drawn |
 | Tab icons, trophy background | Yes | 64×64 and 128×128 images in the same folder |
 | Layout of the areas, text color | No | Hard-coded; the new drawing must keep the same areas and tones close to the theme it replaces |
 | Page content | No | Generated automatically: statistics, loot, spawn locations, breeding food. No free text or per-creature illustration; the creature is shown in 3D |

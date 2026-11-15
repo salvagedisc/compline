@@ -1,6 +1,6 @@
-// BROUILLON Tilth — verrous de progression Overgeared → Create → rail → aviation (plan/03 §3.4).
+// BROUILLON Compline — verrous de progression Overgeared → Create → rail → aviation (plan/03 §3.4).
 // Les identifiants Create sont ceux de Create 6 ; ceux des addons et d'Overgeared sont à lire dans les .jar.
-// Les pièces tilth:* sont forgées chez Overgeared (recettes à écrire dans overgeared_pieces.js une fois
+// Les pièces compline:* sont forgées chez Overgeared (recettes à écrire dans overgeared_pieces.js une fois
 // les types de recettes d'Overgeared connus : overgeared:forging ? overgeared:alloy_smelting ?).
 
 ServerEvents.recipes(event => {
@@ -11,12 +11,12 @@ ServerEvents.recipes(event => {
 
   // Âge 2 : l'alliage d'andésite demande un rivet forgé.
   event.remove({ output: 'create:andesite_alloy', type: 'minecraft:crafting_shaped' })
-  event.shaped('2x create:andesite_alloy', ['AR', 'RA'], { A: 'minecraft:andesite', R: 'tilth:rivet_forge' })
-    .id('tilth:andesite_alloy_rivet')
+  event.shaped('2x create:andesite_alloy', ['AR', 'RA'], { A: 'minecraft:andesite', R: 'compline:rivet_forge' })
+    .id('compline:andesite_alloy_rivet')
 
   // Âge 2 : presse et mélangeur demandent un marteau d'atelier forgé.
-  event.replaceInput({ output: 'create:mechanical_press' }, 'minecraft:iron_block', 'tilth:marteau_atelier')
-  event.replaceInput({ output: 'create:mechanical_mixer' }, 'create:whisk', 'tilth:marteau_atelier') // à vérifier : garder le fouet ?
+  event.replaceInput({ output: 'create:mechanical_press' }, 'minecraft:iron_block', 'compline:marteau_atelier')
+  event.replaceInput({ output: 'create:mechanical_mixer' }, 'create:whisk', 'compline:marteau_atelier') // à vérifier : garder le fouet ?
 
   // Âge 3 : le moteur à vapeur prend des plaques d'acier (Overgeared) à la place de l'or.
   event.replaceInput({ output: 'create:steam_engine' }, 'create:golden_sheet', '#c:plates/steel') // tag d'acier à vérifier
@@ -29,6 +29,6 @@ ServerEvents.recipes(event => {
   // bogies railways:* : remplacer le caisson par un essieu forgé (identifiants à lire dans le port S'n'R)
 
   // Âge 6-7 : moteurs diesel et hélices (identifiants à lire dans les .jar).
-  // event.replaceInput({ mod: 'createdieselgenerators', output: /engine/ }, '#c:plates/iron', 'tilth:bloc_moteur_forge')
-  // event.replaceInput({ mod: 'aeronautics', output: /propeller/ }, '#c:plates/iron', 'tilth:pale_helice_forgee')
+  // event.replaceInput({ mod: 'createdieselgenerators', output: /engine/ }, '#c:plates/iron', 'compline:bloc_moteur_forge')
+  // event.replaceInput({ mod: 'aeronautics', output: /propeller/ }, '#c:plates/iron', 'compline:pale_helice_forgee')
 })

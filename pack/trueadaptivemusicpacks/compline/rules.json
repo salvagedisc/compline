@@ -1,0 +1,581 @@
+{
+  "version": 3,
+  "root": {
+    "music": [
+      "compline:music.floating_dream",
+      "compline:music.echo_in_the_wind",
+      "compline:music.comforting_memories",
+      "compline:music.an_ordinary_day"
+    ],
+    "ambience": [],
+    "predicates": [
+      {
+        "type": "root",
+        "arguments": {}
+      }
+    ],
+    "events": [],
+    "parameters": {
+      "musicWeights": {},
+      "vanillaMusic": false,
+      "compatibilityMode": false,
+      "disableFading": false,
+      "disableResuming": false,
+      "ignorePersistence": false,
+      "trackDelay": 480,
+      "trackDelayNoise": 240,
+      "enterDelay": 0,
+      "exitDelay": 0,
+      "inheritMusic": false,
+      "inheritAmbience": true,
+      "parallelMusic": false,
+      "requireChildren": false,
+      "loopMusic": false,
+      "loopStartPoints": {},
+      "title": "Compline"
+    },
+    "children": [
+      {
+        "music": [],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "title_screen",
+            "arguments": {}
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": true,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 0,
+          "trackDelayNoise": 0,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Écran titre"
+        },
+        "children": []
+      },
+      {
+        "music": [
+          "compline:music.ancestry",
+          "compline:music.eld_unknown"
+        ],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "custom",
+            "arguments": {
+              "predicateFile": {
+                "fileName": "monument.json"
+              }
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": true,
+          "trackDelay": 1200,
+          "trackDelayNoise": 300,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Monument : un morceau à l'approche, puis la nappe du Cœur ancien"
+        },
+        "children": []
+      },
+      {
+        "music": [],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "boss",
+            "arguments": {
+              "bosses": []
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": true,
+          "trackDelay": 0,
+          "trackDelayNoise": 0,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Boss : le thème du mod seul"
+        },
+        "children": []
+      },
+      {
+        "music": [],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "dimension",
+            "arguments": {
+              "dimensions": [
+                {
+                  "id": {
+                    "namespace": "minecraft",
+                    "path": "the_nether"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": true,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 0,
+          "trackDelayNoise": 0,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Nether"
+        },
+        "children": []
+      },
+      {
+        "music": [
+          "compline:music.aerie",
+          "compline:music.featherfall",
+          "compline:music.wending",
+          "compline:music.stand_tall"
+        ],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "custom",
+            "arguments": {
+              "predicateFile": {
+                "fileName": "a_bord.json"
+              }
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 240,
+          "trackDelayNoise": 120,
+          "enterDelay": 0,
+          "exitDelay": 30,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "À bord d'un engin"
+        },
+        "children": []
+      },
+      {
+        "music": [
+          "compline:music.infinite_amethyst",
+          "compline:music.deeper",
+          "compline:music.a_familiar_room"
+        ],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "height",
+            "arguments": {
+              "direction": "Below",
+              "y": 40
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 600,
+          "trackDelayNoise": 300,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Sous terre"
+        },
+        "children": []
+      },
+      {
+        "music": [
+          "compline:music.sweden",
+          "compline:music.wet_hands",
+          "compline:music.mice_on_venus",
+          "compline:music.key",
+          "compline:music.komorebi",
+          "compline:music.left_to_bloom",
+          "compline:music.bromeliad",
+          "compline:music.yakusoku"
+        ],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "biome",
+            "arguments": {
+              "biomes": [
+                {
+                  "id": {
+                    "namespace": "compline",
+                    "path": "clairiere"
+                  }
+                },
+                {
+                  "id": {
+                    "namespace": "compline",
+                    "path": "clairiere_froide"
+                  }
+                },
+                {
+                  "id": {
+                    "namespace": "compline",
+                    "path": "clairiere_chaude"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 300,
+          "trackDelayNoise": 180,
+          "enterDelay": 30,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Clairière"
+        },
+        "children": [
+          {
+            "music": [
+              "compline:music.subwoofer_lullaby",
+              "compline:music.oxygene",
+              "compline:music.dry_hands"
+            ],
+            "ambience": [],
+            "predicates": [
+              {
+                "type": "night",
+                "arguments": {}
+              }
+            ],
+            "events": [],
+            "parameters": {
+              "musicWeights": {},
+              "vanillaMusic": false,
+              "compatibilityMode": false,
+              "disableFading": false,
+              "disableResuming": false,
+              "ignorePersistence": false,
+              "trackDelay": 600,
+              "trackDelayNoise": 300,
+              "enterDelay": 30,
+              "exitDelay": 0,
+              "inheritMusic": false,
+              "inheritAmbience": true,
+              "parallelMusic": false,
+              "requireChildren": false,
+              "loopMusic": false,
+              "loopStartPoints": {},
+              "title": "Clairière, la nuit"
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "music": [
+          "compline:music.subwoofer_lullaby",
+          "compline:music.oxygene",
+          "compline:music.labyrinthine",
+          "compline:music.firebugs"
+        ],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "night",
+            "arguments": {}
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 720,
+          "trackDelayNoise": 300,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": false,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Nuit"
+        },
+        "children": []
+      },
+      {
+        "music": [],
+        "ambience": [],
+        "predicates": [
+          {
+            "type": "day",
+            "arguments": {}
+          }
+        ],
+        "events": [],
+        "parameters": {
+          "musicWeights": {},
+          "vanillaMusic": false,
+          "compatibilityMode": false,
+          "disableFading": false,
+          "disableResuming": false,
+          "ignorePersistence": false,
+          "trackDelay": 0,
+          "trackDelayNoise": 0,
+          "enterDelay": 0,
+          "exitDelay": 0,
+          "inheritMusic": false,
+          "inheritAmbience": true,
+          "parallelMusic": false,
+          "requireChildren": true,
+          "loopMusic": false,
+          "loopStartPoints": {},
+          "title": "Jour, selon la saison"
+        },
+        "children": [
+          {
+            "music": [
+              "compline:music.floating_dream",
+              "compline:music.bromeliad",
+              "compline:music.one_more_day"
+            ],
+            "ambience": [],
+            "predicates": [
+              {
+                "type": "custom",
+                "arguments": {
+                  "predicateFile": {
+                    "fileName": "printemps.json"
+                  }
+                }
+              }
+            ],
+            "events": [],
+            "parameters": {
+              "musicWeights": {},
+              "vanillaMusic": false,
+              "compatibilityMode": false,
+              "disableFading": false,
+              "disableResuming": false,
+              "ignorePersistence": false,
+              "trackDelay": 480,
+              "trackDelayNoise": 240,
+              "enterDelay": 0,
+              "exitDelay": 0,
+              "inheritMusic": false,
+              "inheritAmbience": true,
+              "parallelMusic": false,
+              "requireChildren": false,
+              "loopMusic": false,
+              "loopStartPoints": {},
+              "title": "Printemps"
+            },
+            "children": []
+          },
+          {
+            "music": [
+              "compline:music.echo_in_the_wind",
+              "compline:music.crescent_dunes",
+              "compline:music.stand_tall"
+            ],
+            "ambience": [],
+            "predicates": [
+              {
+                "type": "custom",
+                "arguments": {
+                  "predicateFile": {
+                    "fileName": "ete.json"
+                  }
+                }
+              }
+            ],
+            "events": [],
+            "parameters": {
+              "musicWeights": {},
+              "vanillaMusic": false,
+              "compatibilityMode": false,
+              "disableFading": false,
+              "disableResuming": false,
+              "ignorePersistence": false,
+              "trackDelay": 480,
+              "trackDelayNoise": 240,
+              "enterDelay": 0,
+              "exitDelay": 0,
+              "inheritMusic": false,
+              "inheritAmbience": true,
+              "parallelMusic": false,
+              "requireChildren": false,
+              "loopMusic": false,
+              "loopStartPoints": {},
+              "title": "Été"
+            },
+            "children": []
+          },
+          {
+            "music": [
+              "compline:music.comforting_memories",
+              "compline:music.an_ordinary_day",
+              "compline:music.wending"
+            ],
+            "ambience": [],
+            "predicates": [
+              {
+                "type": "custom",
+                "arguments": {
+                  "predicateFile": {
+                    "fileName": "automne.json"
+                  }
+                }
+              }
+            ],
+            "events": [],
+            "parameters": {
+              "musicWeights": {},
+              "vanillaMusic": false,
+              "compatibilityMode": false,
+              "disableFading": false,
+              "disableResuming": false,
+              "ignorePersistence": false,
+              "trackDelay": 480,
+              "trackDelayNoise": 240,
+              "enterDelay": 0,
+              "exitDelay": 0,
+              "inheritMusic": false,
+              "inheritAmbience": true,
+              "parallelMusic": false,
+              "requireChildren": false,
+              "loopMusic": false,
+              "loopStartPoints": {},
+              "title": "Automne"
+            },
+            "children": []
+          },
+          {
+            "music": [
+              "compline:music.floating_dream",
+              "compline:music.endless",
+              "compline:music.watcher"
+            ],
+            "ambience": [],
+            "predicates": [
+              {
+                "type": "custom",
+                "arguments": {
+                  "predicateFile": {
+                    "fileName": "hiver.json"
+                  }
+                }
+              }
+            ],
+            "events": [],
+            "parameters": {
+              "musicWeights": {},
+              "vanillaMusic": false,
+              "compatibilityMode": false,
+              "disableFading": false,
+              "disableResuming": false,
+              "ignorePersistence": false,
+              "trackDelay": 480,
+              "trackDelayNoise": 240,
+              "enterDelay": 0,
+              "exitDelay": 0,
+              "inheritMusic": false,
+              "inheritAmbience": true,
+              "parallelMusic": false,
+              "requireChildren": false,
+              "loopMusic": false,
+              "loopStartPoints": {},
+              "title": "Hiver"
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

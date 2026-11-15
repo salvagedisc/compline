@@ -35,7 +35,7 @@ test('parsePwToml without modrinth section returns null ids', () => {
 });
 
 test('readPackMods reads every .pw.toml with its key', async () => {
-  const dir = await mkdtemp(join(tmpdir(), 'tilth-pack-'));
+  const dir = await mkdtemp(join(tmpdir(), 'compline-pack-'));
   await mkdir(join(dir, 'mods'));
   await writeFile(join(dir, 'mods', 'create.pw.toml'), SAMPLE);
   await writeFile(join(dir, 'mods', 'notes.txt'), 'ignored');

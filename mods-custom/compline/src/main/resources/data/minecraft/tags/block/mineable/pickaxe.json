@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "compline:feu_de_veille",
+    "compline:lanterne_de_clairiere",
+    {
+      "id": "compline:dissipateur",
+      "required": false
+    }
+  ]
+}

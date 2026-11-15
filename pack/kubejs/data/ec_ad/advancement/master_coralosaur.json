@@ -1,0 +1,124 @@
+{
+  "parent": "ec_ad:tame_coralosaur",
+  "criteria": {
+    "craft_boots": {
+      "conditions": {
+        "recipe_id": "ec_ad:coralosaur_boots"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_chestplate": {
+      "conditions": {
+        "recipe_id": "ec_ad:coralosaur_chestplate"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_helmet": {
+      "conditions": {
+        "recipe_id": "ec_ad:coralosaur_helmet"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "craft_leggings": {
+      "conditions": {
+        "recipe_id": "ec_ad:coralosaur_leggings"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "spot": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:coralosaur"
+            }
+          }
+        ]
+      },
+      "trigger": "ec_ad:spotted_entity"
+    },
+    "tame": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "ec_ad:coralosaur"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tame_animal"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.master_coralosaur.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "minecraft:attribute_modifiers": {
+          "modifiers": [
+            {
+              "type": "minecraft:generic.armor",
+              "amount": 2.0,
+              "id": "minecraft:armor.helmet",
+              "operation": "add_value",
+              "slot": "head"
+            },
+            {
+              "type": "minecraft:generic.armor_toughness",
+              "amount": 0.0,
+              "id": "minecraft:armor.helmet",
+              "operation": "add_value",
+              "slot": "head"
+            },
+            {
+              "type": "minecraft:generic.knockback_resistance",
+              "amount": 0.10000000149011612,
+              "id": "minecraft:armor.helmet",
+              "operation": "add_value",
+              "slot": "head"
+            }
+          ]
+        },
+        "minecraft:max_damage": 350
+      },
+      "count": 1,
+      "id": "ec_ad:coralosaur_helmet"
+    },
+    "title": {
+      "translate": "advancement.master_coralosaur.title"
+    }
+  },
+  "requirements": [
+    [
+      "spot"
+    ],
+    [
+      "craft_boots"
+    ],
+    [
+      "craft_chestplate"
+    ],
+    [
+      "craft_helmet"
+    ],
+    [
+      "craft_leggings"
+    ],
+    [
+      "tame"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ec_ad:tidal_totem"
+    ]
+  },
+  "sends_telemetry_event": true
+}

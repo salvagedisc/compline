@@ -1,0 +1,118 @@
+{
+    "targets": [
+        "swap",
+        {
+            "name": "rayons",
+            "width": 640,
+            "height": 360
+        },
+        {
+            "name": "rayons_b",
+            "width": 640,
+            "height": 360
+        },
+        {
+            "name": "halo_a",
+            "width": 480,
+            "height": 270
+        },
+        {
+            "name": "halo_b",
+            "width": 480,
+            "height": 270
+        }
+    ],
+    "passes": [
+        {
+            "name": "compline:rayons",
+            "intarget": "minecraft:main",
+            "outtarget": "rayons"
+        },
+        {
+            "name": "compline:flou",
+            "intarget": "rayons",
+            "outtarget": "rayons_b",
+            "use_linear_filter": true,
+            "uniforms": [
+                {
+                    "name": "Sens",
+                    "values": [
+                        1.0,
+                        0.0
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "compline:flou",
+            "intarget": "rayons_b",
+            "outtarget": "rayons",
+            "use_linear_filter": true,
+            "uniforms": [
+                {
+                    "name": "Sens",
+                    "values": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "compline:seuil",
+            "intarget": "minecraft:main",
+            "outtarget": "halo_a",
+            "use_linear_filter": true
+        },
+        {
+            "name": "compline:flou",
+            "intarget": "halo_a",
+            "outtarget": "halo_b",
+            "use_linear_filter": true,
+            "uniforms": [
+                {
+                    "name": "Sens",
+                    "values": [
+                        1.0,
+                        0.0
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "compline:flou",
+            "intarget": "halo_b",
+            "outtarget": "halo_a",
+            "use_linear_filter": true,
+            "uniforms": [
+                {
+                    "name": "Sens",
+                    "values": [
+                        0.0,
+                        1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "compline:tons",
+            "intarget": "minecraft:main",
+            "outtarget": "swap",
+            "auxtargets": [
+                {
+                    "name": "RayonsSampler",
+                    "id": "rayons"
+                },
+                {
+                    "name": "HaloSampler",
+                    "id": "halo_a"
+                }
+            ]
+        },
+        {
+            "name": "compline:copie",
+            "intarget": "swap",
+            "outtarget": "minecraft:main"
+        }
+    ]
+}
