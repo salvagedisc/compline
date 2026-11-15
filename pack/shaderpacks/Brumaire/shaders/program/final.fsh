@@ -12,6 +12,9 @@ uniform float viewHeight;
 #endif
 
 uniform sampler2D colortex0;
+uniform vec3 sunPosition;
+uniform mat4 gbufferModelViewInverse;
+uniform ivec2 eyeBrightnessSmooth;
 in vec2 vUv;
 
 layout(location = 0) out vec4 outColor;
@@ -48,7 +51,11 @@ void main() {
 #ifdef BLOOM
     color += glow() * (0.5 * BLOOM_STRENGTH);
 #endif
-    color *= 0.62 * EXPOSURE;
+    // L'œil s'habitue : la nuit et sous terre, l'image s'éclaircit un peu.
+    float sunUp = normalize(mat3(gbufferModelViewInverse) * sunPosition).y;
+    float adapt = mix(2.2, 1.0, smoothstep(-0.18, 0.12, sunUp));
+    adapt *= mix(1.5, 1.0, smoothstep(0.0, 0.5, float(eyeBrightnessSmooth.y) / 240.0));
+    color *= 0.62 * EXPOSURE * adapt;
     color = tone(color);
     float l = dot(color, LUMA);
     // Ombres un peu froides, lumières un peu chaudes.

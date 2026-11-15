@@ -12,25 +12,32 @@ in vec2 vUv;
 /* RENDERTARGETS: 0 */
 layout(location = 0) out vec4 outColor;
 
-/** Part de soleil qui atteint la brume le long du rayon, lue dans la carte d'ombre. */
-float sunThrough(vec3 dir, float reach, float density) {
+/**
+ * Marche vers le fond de la vue dans la carte d'ombre. mistSun : part de soleil qui atteint la brume (pondérée par
+ * sa densité) ; rend la longueur éclairée du rayon, en blocs, qui fait briller l'air : les rayons sous les arbres.
+ */
+float shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
+    mistSun = 1.0;
 #if LIGHT_SHAFTS > 0
     float base = mistAnchor();
     float stride = reach / float(LIGHT_SHAFTS);
     float t = stride * dither(gl_FragCoord.xy);
     vec3 origin = gbufferModelViewInverse[3].xyz;
-    float sum = 0.0, weight = 0.0;
+    float sum = 0.0, weight = 0.0, lit = 0.0;
     for (int i = 0; i < LIGHT_SHAFTS; i++) {
         vec3 p = origin + dir * t;
         vec3 uv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+        float s = uv.z < 1.0 ? texture(shadowtex1, vec3(uv.xy, uv.z - 0.0002)) : 1.0;
         float w = exp((base - cameraPosition.y - p.y) / MIST_HEIGHT - density * t);
-        sum += w * (uv.z < 1.0 ? texture(shadowtex1, vec3(uv.xy, uv.z - 0.0002)) : 1.0);
+        sum += w * s;
         weight += w;
+        lit += s;
         t += stride;
     }
-    return sum / max(weight, 1e-6);
+    mistSun = sum / max(weight, 1e-6);
+    return lit * stride;
 #else
-    return 1.0;
+    return 0.0;
 #endif
 }
 
@@ -58,17 +65,25 @@ void main() {
         float nearOnly;
         float depth = mistDepth(dir, len, nearOnly);
         float veil = 1.0 - exp(-depth);
-        if (veil > 0.003) {
-            float sun = 1.0;
+        float sun = 1.0;
 #if LIGHT_SHAFTS > 0
-            if (dot(gLightColor, vec3(1.0)) > 0.01) {
-                float reach = min(len, shadowDistance * 0.9);
-                float density = nearOnly / max(len, 1.0);
-                // La part de brume traversée dans la portée de la carte d'ombre ; au-delà, elle est tenue pour éclairée.
-                float inside = 1.0 - exp(-nearOnly * reach / max(len, 1e-3));
-                sun = mix(1.0, sunThrough(dir, reach, density), clamp(inside / veil, 0.0, 1.0));
-            }
+        if (dot(gLightColor, vec3(1.0)) > 0.01) {
+            float reach = min(len, shadowDistance * 0.9);
+            float density = nearOnly / max(len, 1.0);
+            float mistSun;
+            float litLength = shaftMarch(dir, reach, density, mistSun);
+            // La part de brume traversée dans la portée de la carte d'ombre ; au-delà, elle est tenue pour éclairée.
+            float inside = 1.0 - exp(-nearOnly * reach / max(len, 1e-3));
+            sun = mix(1.0, mistSun, clamp(inside / max(veil, 1e-4), 0.0, 1.0));
+            // L'air lui-même renvoie un peu de soleil, surtout vers l'avant : là où l'ombre des feuillages le
+            // découpe, des rayons. Seulement à l'air libre.
+            float mu = dot(dir, gLightDir);
+            float phase = 0.7 * mistPhase(mu, 0.75) + 0.3 * mistPhase(mu, 0.2);
+            float open = smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
+            color += gLightColor * phase * litLength * (0.006 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * open;
+        }
 #endif
+        if (veil > 0.003) {
             // La brume lointaine (l'anneau) prend la couleur du ciel bas dans cette direction : au couchant, elle
             // rougeoit du côté du soleil ; la brume proche garde sa propre lumière.
             vec3 mist = mistColor(dir, sun);

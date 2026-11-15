@@ -22,7 +22,7 @@ float mistAnchor() {
 float mistNearDensity() {
     // Plus dense à l'aube, la nuit et sous la pluie ; elle ne descend pas dans les grottes.
     float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
-    float hour = mix(1.25, 0.9, gDay) + 0.25 * gDusk;
+    float hour = mix(1.25, 0.6, gDay) + 0.35 * gDusk;
     // L'air du biome : plus de brume là où il est humide, moins dans un désert.
     float biome = mix(0.75, 1.3, airHumid) * (1.0 - 0.4 * airDust());
     return 0.021 * MIST_DENSITY * hour * biome * (1.0 + 0.6 * rainStrength) * open;
@@ -85,7 +85,7 @@ float mistDepth(vec3 dir, float len, out float nearOnly) {
  * Rend la part de la couleur du point qui passe (par canal) ; inscat reçoit la lumière ajoutée.
  */
 vec3 airVeil(vec3 dir, float len, out vec3 inscat) {
-    vec3 k = vec3(0.50, 0.72, 1.0) * (AIR_DENSITY / 1100.0) * mix(0.8, 1.8, airHumid) * (1.0 + 1.5 * airDust());
+    vec3 k = vec3(0.50, 0.72, 1.0) * (AIR_DENSITY / 1600.0) * mix(0.8, 1.8, airHumid) * (1.0 + 1.5 * airDust());
     vec3 pass = exp(-k * len);
     inscat = skyAt(normalize(vec3(dir.x, max(dir.y, 0.03), dir.z))) * (1.0 - pass);
     return pass;
@@ -106,7 +106,7 @@ float mistPhase(float mu, float g) {
 
 /** Couleur de la brume vue dans une direction ; sun : part de soleil qui l'atteint (0 sous un couvert). */
 vec3 mistColor(vec3 dir, float sun) {
-    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.55) * 0.95;
+    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.75) * vec3(1.03, 1.0, 0.95) * 0.95;
     body *= mistTint();
     // Les gouttelettes renvoient surtout la lumière vers l'avant : un halo vers le soleil, un peu en arrière.
     float mu = dot(dir, gLightDir);

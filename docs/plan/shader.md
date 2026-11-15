@@ -37,17 +37,19 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **The light follows the sky**: the colour of the sun is what the air leaves of it (white at noon, orange then red near the horizon); the light of the sky is its mean over the vault; at night the eye sees blue and the night never goes fully black.
 - **The air of the biome** (Iris' `rainfall` and `temperature` of the player's biome, eased over about ten seconds): a humid biome has a paler sky, more haze in the distance and more mist, olive in a swamp or a jungle; a cold one has a bluish mist; a hot dry one has dust, a yellowed sky and less mist.
 - **Distant air** (`AIR_DENSITY`): the far landscape takes the colour of the low sky, blue first.
+- **Light in the air** (`LIGHT_SHAFTS`, `SHAFT_STRENGTH`): the air itself scatters a little sun, mostly forward; where foliage or a ridge cuts it in the shadow map, shafts. Only in the open.
+- **The eye adapts**: the image brightens at night (up to 2.2×) and underground (1.5×).
 - **Soft shadows** (`SHADOW_SOFTNESS`): the shader first looks how far the shadow caster is, and widens the edge with that distance, as under a tall tree. Leaves in the shade of other leaves still get some sun through the foliage.
 - **Screen occlusion** (`AO_SAMPLES`, `AO_RADIUS`, `AO_STRENGTH`): only the light of the sky and of blocks is darkened, never the sun; half as much on foliage. Off in the Light profile.
 - **Grade**: greens pulled toward sage, a slightly lower saturation and a matte image (blacks barely lifted).
 
 ## The mist
 
-- A layer whose density halves about every 17 blocks above the ground around the player (`MIST_HEIGHT`), integrated exactly along each ray: no steps, no noise.
+- A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`), integrated exactly along each ray: no steps, no noise.
 - Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius; the opening wave is followed.
 - Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
 - A ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift.
-- No mist underground; more at night, at dawn and in the rain; more in a humid biome, less in a desert.
+- No mist underground; thin by day, more at night, thickest at dawn and dusk and in the rain; more in a humid biome, less in a desert.
 - Its light: the light of the sky, and the sun scattered mostly forward (a halo when looking toward the sun). The far part (the ring) takes the colour of the low sky in that direction: at sunset it glows on the side of the sun.
 
 ## What the `compline` mod gives the shader (`rendu` module)

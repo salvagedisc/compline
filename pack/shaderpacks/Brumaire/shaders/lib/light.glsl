@@ -13,7 +13,8 @@ vec2 packNormal(vec3 n) {
  */
 vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, vec2 frag, int taps, out float indirect) {
     float facing = dot(normal, gLightDir);
-    float diffuse = mix(max(facing, 0.0), 0.72, leaf);
+    // Un feuillage reste plus clair du côté du soleil : il garde du volume tout en laissant passer la lumière.
+    float diffuse = mix(max(facing, 0.0) * 0.8 + 0.2 * leaf, 0.72, leaf * 0.55);
     float lit = 0.0;
     if (diffuse > 0.0) {
         float dist = length(pos);

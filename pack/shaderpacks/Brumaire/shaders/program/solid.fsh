@@ -163,7 +163,7 @@ void main() {
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
 #ifdef WRITE_SURFACE
     // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre.
-    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.5 * leaf), 1.0);
+    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0);
 #endif
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
