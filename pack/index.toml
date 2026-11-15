@@ -277,6 +277,10 @@ file = "config/simplebackups-common.toml"
 hash = "6f8767311c678896646bb75b2113077d1e5601a078615031a2e7b6d24aa0f187"
 
 [[files]]
+file = "config/spark/config.json"
+hash = "e5416ac451c87a3017e7b7b48d359fea8e642f8ae53921f86ac9375b7841a7ee"
+
+[[files]]
 file = "config/streamsreflowing-client.properties"
 hash = "b3cbcd608c06f1eda2dbe212398184f68908f0768261c2db0b3c28636db507de"
 

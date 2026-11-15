@@ -179,7 +179,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FerriteCore | `ferrite-core` | ✅ | CS | Memory |
 | Lithium | `lithium` | ✅ | CS | Server logic |
 | Structure Layout Optimizer | `structure-layout-optimizer` | ✅ | CS | Structure generation |
-| spark | `spark` | ✅ | CS | Profiling |
+| spark | `spark` | ✅ | CS | Profiling; background profiler on the Java engine (`config/spark/config.json`): async-profiler crashes the JVM on Apple Silicon Macs |
 | Dynamic FPS | `dynamic-fps` | ✅ | C | The game slows down in the background |
 | Neruina | `neruina` | ✅ | CS | Prevents a stuck entity from crashing the world |
 | Simple Backups | `simple-backups` | ✅ | CS | Backups every hour of play, last 24 kept, plus one when everyone leaves (beta) |
