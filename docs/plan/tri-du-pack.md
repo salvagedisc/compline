@@ -33,7 +33,7 @@ Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md))
 
 - **Every Compat**: `config/everycomp-hazardous.toml` blacklists Quark's woods, Ghost's haunted wood and leaves, and the Twigs module. Every Compat registers its blocks at startup: a block removed after the world exists turns into air.
 - **Steam 'n' Rails**: `registerMissingTracks = false` written in `config/railways-common.toml` (already the default) so that the 534 compatibility tracks stay out even if the default changes.
-- **Where Winds Blow**: grass halved (dense, medium and sparse 4.0, tall 2.0, fern 1.0, patches 0.5), wild wheat off (Farm & Charm has its own).
+- **Where Winds Blow** (removed on 2026-11-15 with its grass, [0032](../decisions/0032-house-wind.md)): grass halved (dense, medium and sparse 4.0, tall 2.0, fern 1.0, patches 0.5), wild wheat off (Farm & Charm has its own).
 - **Supplementaries galleon**: off.
 - **Mowzie's Umvuthana**: groves cut (a masked tribe attacking in groups), the monastery kept (a rare, enigmatic sun temple).
 

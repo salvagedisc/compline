@@ -38,7 +38,8 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
 | `dissipateur` | both | Create | none |
 | `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
-| `rendu` | client | Iris; Where Winds Blow for the wind | 1, client (`rendu.IrisUniformsMixin`) |
+| `vent` | client | none | 2, client (`vent.CampfireBlockMixin`, `vent.CampfireSmokeParticleMixin`, on vanilla code) |
+| `rendu` | client | Iris | 1, client (`rendu.IrisUniformsMixin`) |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -205,6 +206,14 @@ Client and server, no mod required; everything happens on the server. The world 
 
 **Checked** in the test client on 2026-11-13 (mod 0.10.0, full pack, a world whose new chunks follow the disc): the first message shows at 5,990; a player teleported to 6,010 is back at 5,998; a player swimming east from 5,994 ends at 5,998; a boat driven east from 5,990 for 14 seconds is at 5,998.4 with its rider still seated and the second message on screen; a spectator teleported to 6,010 stays there. The log says that Sable was found. Not checked: a horse, elytra, an airship (tests Z2 to Z4).
 
+## `vent` module
+
+Client, no other mod. `Wind` is the pack's wind, ticked on the client: a direction that turns slowly and a strength that follows the weather (a breeze, stronger in rain and thunder, stronger with altitude), both computed from the world time so every player of a server sees the same wind; gust fronts cross the landscape around each camera, more often in bad weather. The shader pack reads it through the `rendu` module.
+
+`Smoke` replaces the campfire smoke of `CampfireBlock.makeParticles` (client only): the same particle, led by the wind once it has risen, larger and longer-lived when several lit campfires stand within two blocks (their smokes draw together into one plume), bluish over a soul campfire; a block of Farm & Charm's `suppress_campfire_smoke_particles` tag above the fire still hides it. Built after the features of Better Smoke (MIT, Fabric only), without its code.
+
+Switch: `vent.enabled` in `config/compline-client.toml` (the smoke; the wind itself always runs).
+
 ## `rendu` module
 
 Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GLSL cannot read. `rendu.IrisUniformsMixin` adds, at the end of Iris' `CommonUniforms.generalCommonUniforms`, uniforms that any program of a shader pack may declare; `ShaderUniforms` computes them once per frame:
@@ -212,7 +221,8 @@ Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GL
 - `brumaireLink`: 1 when the module runs, so the shader knows the others are live;
 - `brumaireMist`: x is the share of mist lifted around the camera (0 in the mist, 1 eight blocks inside a clearing, eased over 0.8 s); y is the height of the ground around the camera (world surface on five columns, never above the camera, eased over 2 s), where the shader lays the foot of its mist;
 - `brumaireClearing0..3`: the four clearings whose edge is nearest (centre seen from the camera, radius with the opening wave, strength), only for biomes that clear;
-- `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of Where Winds Blow, read in its `DynamicWindManager` (`WindLink`, loaded only when the mod is there; a failure is logged once and the shader keeps its fallback wind).
+- `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of the pack's wind (`vent` module);
+- `brumairePush0..3`: the four living beings nearest the camera (feet seen from the camera, radius of grass they push aside), so the shader bends the grass under their steps.
 
 Switch: `rendu.enabled` in `config/compline-client.toml`. Another shader pack never declares these uniforms and is not affected.
 

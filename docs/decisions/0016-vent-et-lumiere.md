@@ -1,7 +1,7 @@
 # 0016 — Wind, light and sky, without shaders
 
 - **Date**: 2026-10-29
-- **Status**: kept (the team's choice of 2026-10-29); nothing seen in game yet
+- **Status**: kept (the team's choice of 2026-10-29); the wind part is replaced by [0032](0032-house-wind.md) (Where Winds Blow removed on 2026-11-15)
 
 ## Context
 After the first in-game tests (2026-10-28), the team found the world bland wherever the mist is gone, and asked for wind, light, or a light shader that would match the rest of the pack. The mist drawn by ATMOSPHERICS is the core of the pack: the `horizon` and `clairiere` modules of the `compline` mod are built on it.

@@ -7,6 +7,8 @@
 #include "/lib/wind.glsl"
 in vec2 mc_Entity;
 in vec2 mc_midTexCoord;
+#elif defined PROGRAM_WEATHER
+#include "/lib/wind.glsl"
 #endif
 
 out vec2 vUv;
@@ -32,6 +34,14 @@ void main() {
         vPos += windVertex(vMat, top, vPos + cameraPosition, vPos, vLm.y);
         view = gbufferModelView * vec4(vPos, 1.0);
     }
+#endif
+#ifdef PROGRAM_WEATHER
+    // La pluie et la neige penchent avec le vent : le haut des rideaux part vers l'amont.
+    vec2 dir;
+    float force, turbulence;
+    windAt(vPos, dir, force, turbulence);
+    vPos.xz -= dir * force * 0.35 * vPos.y;
+    view = gbufferModelView * vec4(vPos, 1.0);
 #endif
     gl_Position = gl_ProjectionMatrix * view;
 }

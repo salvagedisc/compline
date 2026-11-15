@@ -32,7 +32,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
 | `lib/mist.glsl` | The mist: layer, clearings, far ring, colour |
 | `lib/water.glsl` | Colour, murk and waves of the water, caustics |
-| `lib/wind.glsl` | Movement of a plant vertex |
+| `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
 | `block.properties` | Which blocks wave, which are water, which glow |
 | `lang/` | Names of the settings, French and English |
 
@@ -56,6 +56,13 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - Pushed by the pack's wind; the coverage (`CLOUD_COVERAGE`) grows in humid biomes and in the rain, where they turn grey. Far away they fade into the low sky; the mist ring still closes the horizon.
 - Their shadows pass over the ground (`CLOUD_SHADOWS`).
 - The game's clouds are not drawn; with `CLOUD_STEPS` at 0 they come back.
+
+## Wind
+
+- Grass, flowers, crops, leaves and vines move with the pack's wind (`vent` module of the `compline` mod): a slow swell travelling downwind and a quicker quiver, stronger in the gusts that cross the landscape (`WIND_STRENGTH`). Sheltered plants (little sky light) stay still.
+- Grass and flowers lie down and part around the feet of the four living beings nearest the camera, the player included, even out of the wind.
+- Rain and snow slant with the wind, more in a storm.
+- Without the mod, a steady fallback wind, stronger in the rain.
 
 ## Water
 
@@ -84,7 +91,8 @@ A mixin on Iris adds uniforms any program may declare. Without the mod they read
 | `brumaireLink` | 1 when the module runs | 0 |
 | `brumaireMist` | x: share of mist lifted around the camera; y: smoothed height of the ground | no lift; a little under the camera |
 | `brumaireClearing0..3` | Centre seen from the camera, radius, strength of the four nearest clearings | no hole |
-| `brumaireWind` | Direction, strength and turbulence of Where Winds Blow | a steady wind, stronger in the rain |
+| `brumaireWind` | Direction, strength and turbulence of the pack's wind (`vent` module) | a steady wind, stronger in the rain |
+| `brumairePush0..3` | Feet and reach of the living beings nearest the camera | no grass pushed aside |
 | `brumaireGust0..1` | The two gust fronts nearest to passing | no gusts |
 
 ## Other mods

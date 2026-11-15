@@ -30,6 +30,10 @@ uniform vec4 brumaireClearing2;
 uniform vec4 brumaireClearing3;
 uniform vec4 brumaireGust0;     // xy : direction / largeur, z : décalage / largeur, w : force de la crête
 uniform vec4 brumaireGust1;
+uniform vec4 brumairePush0;     // xyz : pieds d'un être vivant proche, depuis la caméra ; w : rayon d'herbes couchées
+uniform vec4 brumairePush1;
+uniform vec4 brumairePush2;
+uniform vec4 brumairePush3;
 
 #include "/lib/atmosphere.glsl"
 

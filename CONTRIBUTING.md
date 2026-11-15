@@ -31,7 +31,7 @@ Manual scripts, run from the repository root and committed with their output (ne
 
 | Script | Output |
 |---|---|
-| `python3 scripts/biomes/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) and Where Winds Blow profiles extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the tables of `scripts/biomes/models.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
+| `python3 scripts/biomes/biome_rules.py` | Biome tags of other mods (horse breeds, Naturalist animals, pigeons, fish) extended to the Regions Unexplored biomes and to those of `OTHER_MODELS`, from the tables of `scripts/biomes/models.py`; stops when a mod of the pack has a biome no table knows; reads the jar cache filled by `npm run check-deps`; rerun after adding a mod with biomes or biome rules, or updating Regions Unexplored |
 | `python3 scripts/terrain/disc.py [key=value ...]` | The disc world (`pack/kubejs/data/compline/`): the two Lithostitched modifiers that shape the continent and its climate, and `monde/bord.json`, the edge read by the `bord` module; rerun to change the size, the coast or the edge ([0022](docs/decisions/0022-disc-world.md)) |
 | `python3 scripts/structures/chorusoatl_nest.py` | The nest of the Chorusoatl (`pack/kubejs/data/compline/structure/chorusoatl.nbt`): a floor, an air pocket and the animal, like the nests of Archie's Dinosaurs ([0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) |
 
