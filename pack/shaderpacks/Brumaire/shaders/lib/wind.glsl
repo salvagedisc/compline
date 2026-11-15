@@ -1,10 +1,11 @@
-// Vent : le déplacement d'un sommet de plante. La direction, la force et les rafales viennent du mod du pack
-// (qui les lit dans Where Winds Blow) ; sans lui, un vent de repli qui forcit sous la pluie.
+// Vent : le déplacement d'un sommet de plante, et la pente de la pluie. La direction, la force et les rafales
+// viennent du mod du pack (module vent) ; sans lui, un vent de repli qui forcit sous la pluie.
 
-vec3 windBend(vec3 world, vec3 rel, float amp) {
-    vec2 dir = vec2(0.8, 0.6);
-    float force = 0.30 + 0.45 * rainStrength;
-    float turbulence = 0.4;
+/** Le vent au point rel (depuis la caméra) : direction, force rafales comprises, turbulence. */
+void windAt(vec3 rel, out vec2 dir, out float force, out float turbulence) {
+    dir = vec2(0.8, 0.6);
+    force = 0.30 + 0.45 * rainStrength;
+    turbulence = 0.4;
     if (brumaireLink > 0.5 && dot(brumaireWind.xy, brumaireWind.xy) > 0.01) {
         dir = normalize(brumaireWind.xy);
         force = brumaireWind.z;
@@ -14,6 +15,32 @@ vec3 windBend(vec3 world, vec3 rel, float amp) {
         force += brumaireGust0.w * exp(-1.65 * g0 * g0) + brumaireGust1.w * exp(-1.65 * g1 * g1);
     }
     force *= WIND_STRENGTH;
+}
+
+/** Une herbe près des pieds d'un être vivant s'écarte de lui et se couche. */
+vec3 pushFrom(vec4 push, vec3 rel) {
+    if (push.w <= 0.0) return vec3(0.0);
+    vec3 d = rel - push.xyz;
+    if (d.y < -0.6 || d.y > 2.4) return vec3(0.0);
+    float dist = length(d.xz);
+    float k = 1.0 - smoothstep(push.w * 0.35, push.w, dist);
+    vec2 away = d.xz / max(dist, 1e-3);
+    return vec3(away.x, -0.7, away.y) * k;
+}
+
+vec3 pushed(vec3 rel, float amp) {
+    if (brumaireLink < 0.5) return vec3(0.0);
+    vec3 p = pushFrom(brumairePush0, rel) + pushFrom(brumairePush1, rel) + pushFrom(brumairePush2, rel) + pushFrom(brumairePush3, rel);
+    // Plusieurs êtres côte à côte ne couchent pas l'herbe plus loin que le sol.
+    float len = length(p.xz);
+    if (len > 1.0) p /= len;
+    return p * amp * 2.8;
+}
+
+vec3 windBend(vec3 world, vec3 rel, float amp) {
+    vec2 dir;
+    float force, turbulence;
+    windAt(rel, dir, force, turbulence);
     vec2 side = vec2(-dir.y, dir.x);
     float t = frameTimeCounter;
     float along = dot(world.xz, dir);
@@ -35,7 +62,10 @@ vec3 windVertex(int mat, bool top, vec3 world, vec3 rel, float sky) {
     else if (mat == 3) amp = top ? 0.30 : 0.12;
     else if (mat == 4) amp = 0.055;
     else if (mat == 5) amp = 0.04;
+    vec3 bend = vec3(0.0);
+    // Les herbes et les fleurs se couchent sous les pas, même à l'abri du vent.
+    if (mat <= 3 && amp > 0.0) bend += pushed(rel, amp);
     amp *= smoothstep(0.35, 0.9, sky);
-    if (amp <= 0.0) return vec3(0.0);
-    return windBend(world, rel, amp);
+    if (amp <= 0.0) return bend;
+    return bend + windBend(world, rel, amp);
 }

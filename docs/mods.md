@@ -136,7 +136,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
 | Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
-| Where Winds Blow | `where-winds-blow` | ✅ (2.1.0, not seen in game) | CS | Wind: grass, crops, leaves and lanterns sway, slanted rain, drifting snow and smoke, wind profiles; its fog is off, ATMOSPHERICS owns the mist ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `compline` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle the leaves of Regions Unexplored |
 
@@ -195,7 +194,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, ToucanLib (Where Winds Blow), Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -221,7 +220,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
-| Better Smoke | Fabric only (no NeoForge build on 2026-11-15, the pack loads no Fabric layer). Where Winds Blow already does what it brings: campfire smoke that drifts with the pack's wind and weather, merges into larger plumes over several fires, soul fires included (`enableWindSmoke`, on by default); both patch the same campfire classes. To check in game: test R10 |
+| Better Smoke | Fabric only (no NeoForge build on 2026-11-15, the pack loads no Fabric layer). The `vent` module of the `compline` mod does the same, written for the pack: campfire smoke that drifts with the pack's wind and weather, grows into one larger plume over several fires, bluish over soul fires ([0032](decisions/0032-house-wind.md)) |
+| Where Winds Blow (+ ToucanLib) | Removed on 2026-11-15: under Brumaire it turned its own sway off, and the pack's wind, swaying plants, slanted rain and smoke now come from the `vent` module and the shader ([0032](decisions/0032-house-wind.md)). Its grass variants in world generation leave with it |
 | Better Clouds | Draws the clouds in place of ATMOSPHERICS, whose clouds follow the mist, dusk and rain; removed on 2026-10-29 ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Cirrus, Simple Clouds, Nuit, Stellar View, Caelum | Cirrus replaces ATMOSPHERICS' fog and sky; Simple Clouds needs OpenGL 4.3 (not on macOS); ATMOSPHERICS cancels the vanilla sky, so skybox mods have no effect ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |

@@ -25,6 +25,7 @@ public final class ComplineConfig {
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
+    private static final ModConfigSpec.BooleanValue VENT_ENABLED;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
     private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
     private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
@@ -70,8 +71,15 @@ public final class ComplineConfig {
         client.comment("Module rendu (client) : sous Iris, il donne au pack de shaders Brumaire les clairières, le sol et le vent du pack.").push("rendu");
         RENDU_ENABLED = client
                 .comment("Interrupteur du module. Vrai : la brume du pack de shaders se lève dans les clairières et ses plantes",
-                        "ondulent au vent de Where Winds Blow. Faux : le pack de shaders garde une brume uniforme et son vent de repli.",
+                        "ondulent au vent du pack. Faux : le pack de shaders garde une brume uniforme et son vent de repli.",
                         "Sans effet sans shader, ou avec un autre pack de shaders.")
+                .define("enabled", true);
+        client.pop();
+
+        client.comment("Module vent (client) : le vent du pack, que suivent la fumée des feux de camp et les plantes du pack de shaders.").push("vent");
+        VENT_ENABLED = client
+                .comment("Interrupteur de la fumée des feux de camp. Vrai : elle suit le vent, les feux voisins font un seul",
+                        "panache, le feu des âmes bleuit sa fumée. Faux : la fumée du jeu.")
                 .define("enabled", true);
         client.pop();
 
@@ -171,6 +179,10 @@ public final class ComplineConfig {
         return read(CLIENT_SPEC, HORIZON_RING_MAX_DISTANCE);
     }
 
+
+    public static boolean ventEnabled() {
+        return read(CLIENT_SPEC, VENT_ENABLED);
+    }
 
     public static boolean renduEnabled() {
         return read(CLIENT_SPEC, RENDU_ENABLED);

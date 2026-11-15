@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.16.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **relief** (height of the world for the resource pack) and **zoo** (stamps for every creature in Archie's guidebook) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.17.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack) and **zoo** (stamps for every creature in Archie's guidebook) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -38,7 +38,8 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
 | `dissipateur` | both | Create | none |
 | `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
-| `rendu` | client | Iris; Where Winds Blow for the wind | 1, client (`rendu.IrisUniformsMixin`) |
+| `vent` | client | none | 2, client (`vent.CampfireBlockMixin`, `vent.CampfireSmokeParticleMixin`, on vanilla code) |
+| `rendu` | client | Iris | 1, client (`rendu.IrisUniformsMixin`) |
 | `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
@@ -206,6 +207,14 @@ Client and server, no mod required; everything happens on the server. The world 
 
 **Checked** in the test client on 2026-11-13 (mod 0.10.0, full pack, a world whose new chunks follow the disc): the first message shows at 5,990; a player teleported to 6,010 is back at 5,998; a player swimming east from 5,994 ends at 5,998; a boat driven east from 5,990 for 14 seconds is at 5,998.4 with its rider still seated and the second message on screen; a spectator teleported to 6,010 stays there. The log says that Sable was found. Not checked: a horse, elytra, an airship (tests Z2 to Z4).
 
+## `vent` module
+
+Client, no other mod. `Wind` is the pack's wind, ticked on the client: a direction that turns slowly and a strength that follows the weather (a breeze, stronger in rain and thunder, stronger with altitude), both computed from the world time so every player of a server sees the same wind; gust fronts cross the landscape around each camera, more often in bad weather. The shader pack reads it through the `rendu` module.
+
+`Smoke` replaces the campfire smoke of `CampfireBlock.makeParticles` (client only): the same particle, led by the wind once it has risen, larger and longer-lived when several lit campfires stand within two blocks (their smokes draw together into one plume), bluish over a soul campfire; a block of Farm & Charm's `suppress_campfire_smoke_particles` tag above the fire still hides it. Built after the features of Better Smoke (MIT, Fabric only), without its code.
+
+Switch: `vent.enabled` in `config/compline-client.toml` (the smoke; the wind itself always runs).
+
 ## `rendu` module
 
 Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GLSL cannot read. `rendu.IrisUniformsMixin` adds, at the end of Iris' `CommonUniforms.generalCommonUniforms`, uniforms that any program of a shader pack may declare; `ShaderUniforms` computes them once per frame:
@@ -213,7 +222,8 @@ Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GL
 - `brumaireLink`: 1 when the module runs, so the shader knows the others are live;
 - `brumaireMist`: x is the share of mist lifted around the camera (0 in the mist, 1 eight blocks inside a clearing, eased over 0.8 s); y is the height of the ground around the camera (world surface on five columns, never above the camera, eased over 2 s), where the shader lays the foot of its mist;
 - `brumaireClearing0..3`: the four clearings whose edge is nearest (centre seen from the camera, radius with the opening wave, strength), only for biomes that clear;
-- `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of Where Winds Blow, read in its `DynamicWindManager` (`WindLink`, loaded only when the mod is there; a failure is logged once and the shader keeps its fallback wind).
+- `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of the pack's wind (`vent` module);
+- `brumairePush0..3`: the four living beings nearest the camera (feet seen from the camera, radius of grass they push aside), so the shader bends the grass under their steps.
 
 Switch: `rendu.enabled` in `config/compline-client.toml`. Another shader pack never declares these uniforms and is not affected.
 
@@ -233,7 +243,7 @@ Client and server. Design and reasons in [modules-compline](modules-compline.md#
 
 Config (`compline-common.toml`, `[zoo]` section): `enabled` (true), `spotDistance` (25), `observeSeconds` (60).
 
-**Checked** in the test client on 2026-11-15 (mod 0.16.0 with Archie's Dinosaurs, no other mod): 41 species (19 land, 8 water, 2 sky, 12 creatures); the bookmark opens the welcome spread, a habitat tab opens its species with silhouettes and the given stamps, tooltips show over the book; the Obsidiceratops page names the redstone caves. Not checked: the full pack's species list, the photo stamp with Exposure, taming, the bucket, mastery by observation (tests ZO1 to ZO6).
+**Checked** in the test client on 2026-11-15 (mod 0.17.0 with Archie's Dinosaurs, no other mod): 41 species (19 land, 8 water, 2 sky, 12 creatures); the bookmark opens the welcome spread, a habitat tab opens its species with silhouettes and the given stamps, tooltips show over the book; the Obsidiceratops page names the redstone caves. Not checked: the full pack's species list, the photo stamp with Exposure, taming, the bucket, mastery by observation (tests ZO1 to ZO6).
 
 ## Compatibility fixes
 
@@ -421,6 +431,6 @@ Known fragile points:
 
 ## Next modules
 
-Eight modules approved on 2026-10-26 (`voile`, `zoo` (built in 0.16.0), `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-compline.md](modules-compline.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
+Eight modules approved on 2026-10-26 (`voile`, `zoo` (built in 0.17.0), `vie`, `fanal`, `eclaircie`, `sillage`, `echos`, `survivants`) are designed in [modules-compline.md](modules-compline.md), with their order of work. The modules of [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) not yet written (grave, tracks, blueprints, finishing touches) stay possible. Each module will have its section here, its switch and its tests.
 
 **World edge and ships** (after 0.10.0). The `bord` module lets a player aboard a Sable ship pass the edge. Next step: stop the ship itself, by removing the outward part of its speed near the edge (`RigidBodyHandle.addLinearAndAngularVelocity`) and, past the edge, moving it back (`RigidBodyHandle.teleport`). It needs an airship built in a test world to be checked.

@@ -104,10 +104,8 @@ dependencies {
     // Correctif de génération : le prédicat in_structure de Lithostitched
     compileOnly modrinth('lithostitched')
 
-    // Module rendu (client) : les uniformes d'Iris, le vent de Where Winds Blow
+    // Module rendu (client) : les uniformes d'Iris
     compileOnly modrinth('iris')
-    compileOnly modrinth('where-winds-blow')
-    compileOnly modrinth('particular-reforged')
 
     // Module zoo : le guide d'Archie's Dinosaurs (et sa bibliothèque Astemir Re-Lib, jar du pack), la photo d'Exposure
     compileOnly modrinth('archies-dinosaurs')

@@ -27,6 +27,8 @@
     "horizon.GLStateMixin",
     "horizon.VanillaFadeMixin",
     "rendu.IrisUniformsMixin",
+    "vent.CampfireBlockMixin",
+    "vent.CampfireSmokeParticleMixin",
     "zoo.CategoryTabsMixin",
     "zoo.GuidebookDataMixin"
   ],

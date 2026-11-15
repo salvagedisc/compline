@@ -61,7 +61,7 @@ Revised on 2026-11-15: the zoo lives **inside Archie's guidebook** (Archie's Din
 - The badge page is hard-coded: an enum of the seven dinosaurs and, for each, the stamps it shows (the Sculksaur has no tame stamp). Adding a species there needs code.
 - The mod is All Rights Reserved, without public source: overriding its data and resources is fine, copying its code, textures or whole guidebook files into the repository is not.
 
-**Built in `compline` 0.16.0** (module `zoo`, details in [mod-compline](mod-compline.md#zoo-module)).
+**Built in `compline` 0.17.0** (module `zoo`, details in [mod-compline](mod-compline.md#zoo-module)).
 - **Four stamps per species**, kept per player (a data attachment, kept on death), not as advancements: hundreds of advancements would fill the advancement screen and its toasts, and the guidebook is the only place they are read.
   - **Apercevoir**: the species in the player's field of view (a 110° cone), unobstructed, within 25 blocks, checked every half second; Archie's rule, applied to every creature.
   - **Photographier**: the species in a photo taken with an Exposure camera (`FrameAddedEvent`, its entities in frame).
