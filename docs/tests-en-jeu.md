@@ -71,6 +71,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Camera** [SH9]: in the over-the-shoulder view, the character still fades when the camera comes close to it (on the bench a spectator's head stayed opaque).
 - [ ] **Sky and air** [SH10]: at noon a pale blue sky, a soft halo around the sun; at sunset the horizon reddens on the side of the sun and the far mist glows with it; at night a dark blue sky with the moon, landscape still readable, darker at new moon. In a swamp the mist turns olive, in a snowy biome bluish, in a desert thin and sandy, each change over a few seconds.
 - [ ] **Shadows and hollows** [SH11]: the shadow of a tall tree is soft at its edges, the shadow of a fence post sharp; under a canopy, at the foot of a wall and in a doorway the light is darker, never a dark halo around a tree seen against the sky; turning `Occlusion d'écran` to 0 removes it. Note the frame rate with it at 0, 10 and 16.
+- [ ] **Clouds** [SH12]: by day, separate cumulus with darker bases drift with the wind; their shadows cross the ground; under rain the sky closes and turns grey; at sunset they glow on the side of the sun; at night the moon lights them. From an airship above 230, fly through a cloud. Note the frame rate with `Nuages en volume` at 0, 16 and 24.
 - [ ] **Settings** [SH8]: the three profiles change the frame rate; the names are in French; "Verts de sauge" at 0 gives back the greens of the game.
 
 ## Session 3: the night and the moon

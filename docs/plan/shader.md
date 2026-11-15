@@ -14,7 +14,8 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Sky table | `prepare.csh` (compute) | The light scattered by the atmosphere in every direction around the sun, lit by the sun and the moon, in a 192×108 table; its last row holds the mean light of the sky and what the air leaves of the sun and the moon |
 | Geometry | `gbuffers_*`, `dh_terrain`, `dh_water`, `clrwl_gbuffers` | Every surface is lit where it is drawn: sun or moon with soft shadows, sky light, block light, the game's ambient occlusion; solid surfaces also write their normal and their share of indirect light (`colortex1`) |
 | Screen occlusion | `deferred` (half size), `deferred1` | Hollows, foliage and the foot of walls receive less sky light; smoothed without bleeding across edges; then the sky and a round sun are painted behind the terrain, the moon and stars of the game (and of mods) kept |
-| Air and mist | `composite` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the water seen from below |
+| Clouds | `composite` (half size) | Volumetric clouds marched through a 3D noise computed once at load (`setup.csh`) |
+| Air and mist | `composite1` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the water seen from below |
 | Screen | `final` | Glow of the bright lights, exposure, tone curve, grade |
 
 All the geometry programs include `program/solid.vsh` and `program/solid.fsh` with one `PROGRAM_*` define each; the top-level files only hold that define.
@@ -26,6 +27,8 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/atmosphere.glsl`, `program/sky.csh` | The atmosphere: constants, layout of the sky table, the program that fills it |
 | `lib/shadow.glsl`, `lib/light.glsl` | Soft shadows, lighting of a surface |
 | `program/ao.fsh`, `program/deferred1.fsh` | Screen occlusion, sky |
+| `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud density, cloud shadows, the 3D noise, the cloud march |
+| `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
 | `lib/mist.glsl` | The mist: layer, clearings, far ring, colour |
 | `lib/wind.glsl` | Movement of a plant vertex |
 | `block.properties` | Which blocks wave, which are water, which glow |
@@ -42,6 +45,15 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Soft shadows** (`SHADOW_SOFTNESS`): the shader first looks how far the shadow caster is, and widens the edge with that distance, as under a tall tree. Leaves in the shade of other leaves still get some sun through the foliage.
 - **Screen occlusion** (`AO_SAMPLES`, `AO_RADIUS`, `AO_STRENGTH`): only the light of the sky and of blocks is darkened, never the sun; half as much on foliage. Off in the Light profile.
 - **Grade**: greens pulled toward sage, a slightly lower saturation and a matte image (blacks barely lifted).
+
+## Clouds
+
+- One layer of cumulus from `CLOUD_HEIGHT` (220) to 90 blocks above, shaped by a 64³ noise that repeats without seams (smooth noise hollowed by cells for the shape, finer cells for the frayed edges), computed once when the pack loads.
+- Flat bases, rounded tops, clear edges with blue sky between; large masses come and go with a slower, stretched slice of the same noise.
+- Lit by the sun or the moon through four longer and longer steps toward it (darker undersides, bright edges toward the sun), and by the light of the sky, stronger on their tops.
+- Pushed by the pack's wind; the coverage (`CLOUD_COVERAGE`) grows in humid biomes and in the rain, where they turn grey. Far away they fade into the low sky; the mist ring still closes the horizon.
+- Their shadows pass over the ground (`CLOUD_SHADOWS`).
+- The game's clouds are not drawn; with `CLOUD_STEPS` at 0 they come back.
 
 ## The mist
 
