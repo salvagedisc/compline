@@ -93,10 +93,6 @@ file = "config/jei/jei-client.ini"
 hash = "70028d2afc45f39d036621a7a96100275b6d4eadf87e12763757283a48c80ec4"
 
 [[files]]
-file = "config/kaleidoscope_compat.jsonc"
-hash = "0a3a1d27dd6543246c9184d57edabd3156c62c584f5c98e9e8abfb87cb0f46b0"
-
-[[files]]
 file = "config/kiwi-client.yaml"
 hash = "44f6ae879a9a883bdd7eae399a6e97f7d6c871f22b4ead22a1c8b2f6fdfc9374"
 
@@ -294,7 +290,7 @@ hash = "8ff438146e5983ce0a9d19c8558ca926f87795ddb75e18a8d28471e94f38f50d"
 
 [[files]]
 file = "config/supplementaries-common.toml"
-hash = "61922e1d54ea4426cb6fb30591e637e670c5b989f9a072bed69b7b4f6fc447b8"
+hash = "a58c36fc87d1cdb918ac6db872f8ff921097309002c57f81ceec2ad199336968"
 
 [[files]]
 file = "config/tectonic.json"
@@ -757,6 +753,10 @@ file = "kubejs/assets/chat_heads/lang/fr_fr.json"
 hash = "437498949c8a9fcf54e2385d51ed3d19103a0a0759107228a7060a711ff17f67"
 
 [[files]]
+file = "kubejs/assets/cinematic/lang/fr_fr.json"
+hash = "bd862e4d6a69287878d2bb6e2d1a43723df9384991c3b0b3708957b1710e7730"
+
+[[files]]
 file = "kubejs/assets/cloth-config2/lang/fr_fr.json"
 hash = "548808cf0a82c506e9c1b85f03d730ea65a4e9b3b85b1af117bc3a48e942052b"
 
@@ -833,6 +833,10 @@ file = "kubejs/assets/create_aeronautics_automated_logistics/lang/fr_fr.json"
 hash = "b335184bd6a548d60ffd38c6cbeef150c9bc83b706bc2e2d776624d1906f0913"
 
 [[files]]
+file = "kubejs/assets/create_central_kitchen/lang/fr_fr.json"
+hash = "a189e83af1d4533fd6e794d4411beeac267686f47a6bf1dbcbf4f2fd2264ec60"
+
+[[files]]
 file = "kubejs/assets/creativecore/lang/fr_fr.json"
 hash = "76b4ddc4845cfbaa06c27b5b33efa6bbf27326fe9354f2941b24bf61a025e2bf"
 
@@ -847,6 +851,10 @@ hash = "313ec844ff8f3f577d3b4263d02739a4ae2e98f201d7d7e97b2bfc55d2139ba4"
 [[files]]
 file = "kubejs/assets/defaultoptions/lang/fr_fr.json"
 hash = "d9a2ca8642587dc2a19d5bc33856da36e26af74326bd4836b4f84123ea4ba391"
+
+[[files]]
+file = "kubejs/assets/diegesis/lang/fr_fr.json"
+hash = "3a66514f784c9b8c6cc23ab880e6168971f00385e976facdf4b3ddbf743c009f"
 
 [[files]]
 file = "kubejs/assets/distanthorizons/lang/fr_fr.json"
@@ -977,6 +985,10 @@ file = "kubejs/assets/handcrafted/lang/fr_fr.json"
 hash = "e33de2fa6e92e58ad969161a7ad84727551845ab1f7aa31c1df56ac4581148af"
 
 [[files]]
+file = "kubejs/assets/handson_delight/lang/fr_fr.json"
+hash = "fff2e7591152a3aaa84f85059a184d50436728330ce56f38862a6d3829264d33"
+
+[[files]]
 file = "kubejs/assets/hapi/lang/fr_fr.json"
 hash = "2cb9f05fac1b3d925cae5f48caa0186e1ddbe5870dce9fd8cc233ef6c5b5b70d"
 
@@ -1003,18 +1015,6 @@ hash = "086b9b009f44fad479037cb732c72a799d742bb0b622ec9a911b682bcb28f2d0"
 [[files]]
 file = "kubejs/assets/jei/lang/fr_fr.json"
 hash = "8ac32c9b19b65b8c52206d7b2873d365c4f70a6964b159c5235ecc8d73fda0ef"
-
-[[files]]
-file = "kubejs/assets/kaleidoscope_compat/lang/fr_fr.json"
-hash = "487feb315a34762b0b9a6a60a5ce7f80d02df0760d6f59b3857b0f46198b427c"
-
-[[files]]
-file = "kubejs/assets/kaleidoscope_cookery/lang/fr_fr.json"
-hash = "5cbfcfd2b1a0d82d29ccd3583cdb591ddb1975c6b83c59cf09f7ee5d0b67b7cd"
-
-[[files]]
-file = "kubejs/assets/kaleidoscopecookery_automation/lang/fr_fr.json"
-hash = "0e66b0af8eafb1ce4d198d9e7256b87b5d161a987d684730c2a0c9a30223dce8"
 
 [[files]]
 file = "kubejs/assets/kiwi/lang/fr_fr.json"
@@ -1270,7 +1270,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "64ffc0d023a11f7ea4056fb21daf40155ccb78d6bfdf396fde9e59ddefd1b3b2"
+hash = "84c87949dbcf6b107885ba228b6fcebf0e5365e730f9cc86d1c1e374d8fa769c"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -2138,7 +2138,7 @@ hash = "ea30bf7fb58597eb9c000d733928c7404d4196609cd13a557d9c602a02763345"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "74c2f6fae5a7d17c7fd98b0e0c3f2a2eee37c884af487c98d865cf5680bce501"
+hash = "a9cf75eb65e79fb6a80963c71860ac9c76b1fbeab6c545fd8c44cad35862f5c0"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
@@ -2146,11 +2146,11 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "1e835467d0f29098c18e927bf6051684253970938aa0582af8808765e77101c7"
+hash = "bf4e026bcc89045418892c93efb9416cb605cf271353642e945848208035bdcb"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
-hash = "940082b0277d38f50235d11c8d30c9ce69c6d5987a2a94f34bd7ec41a46567aa"
+hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -2254,6 +2254,10 @@ hash = "80455b28c3010ad153ccabc2998cb445b9854b26b386628243a9c8160b8d7e8e"
 metafile = true
 
 [[files]]
+file = "mods/cinematic-interactions-neoforge-1.21.1-0.18.30.jar"
+hash = "4a6bb18685bb8adbd2ee08a242b08088dbd5d9ddf0bf1c3d140269107ba4d7c5"
+
+[[files]]
 file = "mods/cloth-config.pw.toml"
 hash = "75181b55e0407d1fca1e2f346c6501f919f5109545990ddfb66db9cd1b771f8a"
 metafile = true
@@ -2333,6 +2337,16 @@ hash = "3b8895369640b2a52d3e05f7186185ba6798e44d513f11c5427a0fe9c16769e9"
 metafile = true
 
 [[files]]
+file = "mods/create-central-kitchen.pw.toml"
+hash = "3752b1dcdfebbb1e79c97c847095153155d64636576a9c0ac11ffa6506c62922"
+metafile = true
+
+[[files]]
+file = "mods/create-dragons-plus.pw.toml"
+hash = "dcbb37e828a2f915e64a2ef839a742761a553a2e3b923b000ffba95db7503ac3"
+metafile = true
+
+[[files]]
 file = "mods/create-steam-n-rails-1.21.1.pw.toml"
 hash = "80332cead695f1e3c27e99133a48709767d1106f836792bb2fc4d594b88f1a68"
 metafile = true
@@ -2365,6 +2379,11 @@ metafile = true
 [[files]]
 file = "mods/default-options.pw.toml"
 hash = "a6967d761dde867ccc1af53dc9f4e530eb9917a9cb21d0fc15708e8cd2c0f2ba"
+metafile = true
+
+[[files]]
+file = "mods/diegesis-api.pw.toml"
+hash = "3cf8072a209aa43f13977fefec914670379d6edf72e2907beabc1d3445052ad0"
 metafile = true
 
 [[files]]
@@ -2428,6 +2447,11 @@ hash = "b9c7e06aaedf28d4f5fd4d002aa290b755bea76a9c2c0012a4a46efea1a3ef7d"
 metafile = true
 
 [[files]]
+file = "mods/farmers-delight.pw.toml"
+hash = "97347efd9e808841d72fe3599da8a11add8422e97f89ae1c85cdfc0acfa18f96"
+metafile = true
+
+[[files]]
 file = "mods/ferrite-core.pw.toml"
 hash = "73360e397134d238ee8fd21d33fd7f9275e9441f74f8f1b6ed92278877c0b9f1"
 metafile = true
@@ -2465,6 +2489,11 @@ metafile = true
 [[files]]
 file = "mods/handcrafted.pw.toml"
 hash = "0004feab868f7b873c12db05aae0d0dac6c87b497490b48bb66480e7c8d0f340"
+metafile = true
+
+[[files]]
+file = "mods/handson-delight.pw.toml"
+hash = "da30a9c3093ae0d22ebdeb9ba4e61a0349ccb9bbdb7ebf0cd3b260ecf297dfbe"
 metafile = true
 
 [[files]]
@@ -2515,21 +2544,6 @@ metafile = true
 [[files]]
 file = "mods/jei.pw.toml"
 hash = "cfe4d6a3acdd8af529af7da1c844517925a68c8e23929b4345e14d73935df909"
-metafile = true
-
-[[files]]
-file = "mods/kaleidoscope-compat.pw.toml"
-hash = "07e6db970b33163df85b1cc1259ddd54c1ea63671087bbc15486a07bd8ea7ead"
-metafile = true
-
-[[files]]
-file = "mods/kaleidoscope-cookery.pw.toml"
-hash = "dfeca78ef8f2d2de9b227e684f2314b5ae869841c040e2903d1a7429299acbf7"
-metafile = true
-
-[[files]]
-file = "mods/kaleidoscopecookery-automation.pw.toml"
-hash = "e5ecd7b66b29f775eac89dcc96d7ca3e27e9cdde958b49da4e12be4f613e5655"
 metafile = true
 
 [[files]]
