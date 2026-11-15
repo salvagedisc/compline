@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.14.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link) and **relief** (height of the world for the resource pack) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.15.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link) and **relief** (height of the world for the resource pack) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -39,7 +39,6 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `dissipateur` | both | Create | none |
 | `bord` | both (everything happens on the server) | none; Sable for the players aboard a ship | none |
 | `rendu` | client | Iris; Where Winds Blow for the wind | 1, client (`rendu.IrisUniformsMixin`) |
-| `relief` | client | Polytone | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -216,17 +215,6 @@ Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GL
 - `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of Where Winds Blow, read in its `DynamicWindManager` (`WindLink`, loaded only when the mod is there; a failure is logged once and the shader keeps its fallback wind).
 
 Switch: `rendu.enabled` in `config/compline-client.toml`. Another shader pack never declares these uniforms and is not affected.
-
-## `relief` module
-
-Client, needs Polytone. It gives the resource pack `compline-ambiance` ([ambiance](ambiance.md)) what a post effect cannot see: the world outside the screen. `relief.ReliefTexture` keeps a 256×256 texture registered as `compline:textures/relief.png`, which the pack binds through the `samplers` of its post chain:
-
-- one texel per column, stored as a torus (the column (x, z) is the texel (x & 255, z & 255)), so nothing moves when the camera does: red and green hold the height of the surface above the bottom of the world (`MOTION_BLOCKING` heightmap of the client chunk, leaves included), blue what stands on top (255 leaves, 128 water, 0 other), alpha 200 for a known column;
-- the texel (0, 0) is a header: red is the strength of the sun (60 % in the mist, 100 % where a clearing has lifted it, eased over 1.5 s), green the bottom of the world + 128, blue 255 when the camera is under water, alpha 201, or 202 while an Iris shader pack draws the frame (the pack then leaves the image untouched). The pack recognises the texture by that alpha;
-- the texels (1, 0) and (2, 0) describe the water around the camera (since 0.14.0), alpha 203: the first holds the water fog colour of the biome where the camera stands (`Biome.getWaterFogColor`, blended over a few seconds from one biome to the next), the second, when the camera is under water, the height of the surface above the eye in quarter blocks (red) and 255 in green when the open sky is above that surface. Those three texels are not column data: the columns that fall on them are skipped;
-- the 256 chunks of the window are rewritten in a loop, 16 per tick: a felled tree or a new wall shows in the shadows within a second.
-
-Switch: `relief.enabled` in `config/compline-client.toml`. Without Polytone the module does not load.
 
 ## Compatibility fixes
 

@@ -1,6 +1,8 @@
-# compline-ambiance, the look without a shader pack
+# compline-ambiance, the look without a shader pack (archived)
 
-Living page of the resource pack shipped in `pack/resourcepacks/compline-ambiance/` (decision [0029](../decisions/0029-look-without-shader.md)). It is **on by default** and needs Polytone. The model for the look is Recrafted by MR_CHOO (a paid resource pack for the current versions of the game, without a licence: none of its files are used).
+> Removed on 2026-11-15 with Polytone and the `relief` module ([0031](../../decisions/0031-brumaire-is-the-look.md)): the look now comes from Brumaire. Kept as a record of what was tried.
+
+Living page of the resource pack shipped in `pack/resourcepacks/compline-ambiance/` (decision [0029](../../decisions/0029-look-without-shader.md)). It is **on by default** and needs Polytone. The model for the look is Recrafted by MR_CHOO (a paid resource pack for the current versions of the game, without a licence: none of its files are used).
 
 ## What it does
 
@@ -26,7 +28,7 @@ Two core shaders of the game are also replaced (`assets/minecraft/shaders/core/`
 
 ## How the shadows work without a shadow map
 
-A post effect only sees the screen and its depth. It cannot know that a tree outside the view hides the sun. The `relief` module of the `compline` mod ([mod](mod-compline.md#relief-module)) keeps a 256×256 texture, `compline:textures/relief.png`, with the height of the surface (leaves included) of every column within 128 blocks of the camera. For each pixel the final pass rebuilds the position in the world from the depth, then walks towards the sun through that height field (26 steps, longer and longer, soft edge that widens with distance).
+A post effect only sees the screen and its depth. It cannot know that a tree outside the view hides the sun. The `relief` module of the `compline` mod ([mod](../../plan/mod-compline.md#relief-module)) keeps a 256×256 texture, `compline:textures/relief.png`, with the height of the surface (leaves included) of every column within 128 blocks of the camera. For each pixel the final pass rebuilds the position in the world from the depth, then walks towards the sun through that height field (26 steps, longer and longer, soft edge that widens with distance).
 
 Limits of a height field: a point under an overhang or a canopy is always in shade, even when a low sun would reach it from the side; animals, players and Create contraptions cast no shadow; nothing beyond 128 blocks casts one. Polytone documents a real shadow map for post chains, which its 1.21.1 build (5.3.8) does not have yet: the day it does, the walk can be replaced.
 

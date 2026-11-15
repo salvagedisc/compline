@@ -127,7 +127,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Subtle Effects | `subtle-effects` | ✅ | CS | Fire, smoke, steam, body |
 | LambDynamicLights | `lambdynamiclights` | ✅ | C | Light held in hand |
 | More Darkness | `more-darkness` | ✅ | CS | Real nights |
-| Polytone | `polytone` | ✅ (bench only) | C | Post-processing chains and settings for the house resource pack `compline-ambiance`; back on 2026-11-14 ([0029](decisions/0029-look-without-shader.md)) |
 | AmbientSounds | `ambientsounds` | ✅ | C | Biome sounds |
 | Sound Physics Remastered | `sound-physics-remastered` | ✅ | CS | Echo, muffling |
 | True Adaptive Music | `true-adaptive-music` | ✅ | CS | Music by situation (mist, clearing, season, moon, airship), long silences ([0010](decisions/0010-musique.md)) |
@@ -164,14 +163,14 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | LootJS | `lootjs` | ✅ | S | Loot of ruins and monuments |
 | MoreJS | `morejs` | ✅ | CS | Extra events for KubeJS |
 | In Control! | `in-control` | ✅ | S | Spawn rules (beta): no vanilla monsters in the Overworld, at most 8 hostile creatures per player, Mowzie's and cave creatures of Alex's Mobs only in the dark (`pack/config/incontrol/spawn.json`) |
-| Mod `compline` 0.14.0 | `mods-custom/compline/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)), `rendu` (what the shader pack Brumaire needs, [0028](decisions/0028-house-shader.md)) and `relief` (the height of the world for the sun shadows of the `compline-ambiance` pack, [0029](decisions/0029-look-without-shader.md)) ([mod-compline](plan/mod-compline.md)) |
+| Mod `compline` 0.15.0 | `mods-custom/compline/` | ✅ (not tested with a player) | CS | What scripts cannot do: `ciel` (moon visible under ATMOSPHERICS, mist; the Friendly Moon parts were removed in 0.7.0), `xp` (anvil without levels, hidden bar and the bars above it lowered, [0009](decisions/0009-xp.md)), `horizon` (Distant Horizons follows the mist, [0011](decisions/0011-tectonic-streams-distant-horizons.md)), `clairiere` (vigil fire and clearing lantern lift the mist), `dissipateur` (Create kinetic block, radius 64), `outils` (wood and rock need the right tool, [first gestures](plan/premiers-gestes.md)), `monuments` (structures placed only on fitting ground) `bord` (the edge of the disc world, [0022](decisions/0022-disc-world.md)), `rendu` (what the shader pack Brumaire needs, [0028](decisions/0028-house-shader.md)) and `relief` (the height of the world for the sun shadows of the `compline-ambiance` pack, [0029](decisions/0029-look-without-shader.md)) ([mod-compline](plan/mod-compline.md)) |
 
 ## Performance and technical
 
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Sodium | `sodium` | ✅ | C | Rendering |
-| Iris Shaders | `iris` | ✅ (bench only) | C | Loads the house shader pack Brumaire, off by default; 1.8.14-beta.1 is the only build for Sodium 0.8.13 ([0028](decisions/0028-house-shader.md)) |
+| Iris Shaders | `iris` | ✅ (bench only) | C | Loads the house shader pack Brumaire, on by default ([0031](decisions/0031-brumaire-is-the-look.md)); 1.8.14-beta.1 is the only build for Sodium 0.8.13 ([0028](decisions/0028-house-shader.md)) |
 | Colorwheel | `colorwheel` | ✅ (bench only) | C | Flywheel models (Create) under a shader pack |
 | Iris Veil Compat | `iris-veil-compat` | ✅ (alpha, bench only) | C | Veil shaders (Sable, Aeronautics levitite) under a shader pack |
 | ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendering |
@@ -193,7 +192,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | FA: Details, Objects, Emissive | `fresh-animations-details`, `fresh-animations-objects`, `fresh-animations-emissive` | ✅ | Details, animated objects, glowing eyes |
 | FA: Player Extension | `fa-player-extension` | ✅ | The player in the same style |
 | Motschen's Better Leaves | `better-leaves` | ✅ | Bushy foliage |
-| `compline-ambiance` | — (`pack/resourcepacks/`, [page](plan/ambiance.md)) | ✅ (bench only) | The default look, without a shader pack: sun shadows, sun shafts, glow, air, low mist, sky reflections on water, under water, olive greens, paler rain ([0029](decisions/0029-look-without-shader.md)) |
 
 ## Libraries
 
@@ -215,7 +213,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Dynamic Surroundings | Touches the sound engine like Sound Physics; duplicates |
 | FancyMenu, Drippy Loading Screen (+ Konkrete, Melody) | The house title and loading screens; removed on 2026-11-14, the game's own menu is back ([0026](decisions/0026-second-cleanup.md)) |
 | Atmospheric Rain Backport, Cool Rain Reforged, Sable: Cool Rain, Distant Thunders, Soft Imprints (`snow-imprints`), Wavify, Dynamic Surroundings Rebirth | The rain, thunder, footprint, wave and drip mods of [0017](decisions/0017-averse-et-rayons.md); removed on 2026-11-14 with the `averse` and `rayons` modules of the `compline` mod ([0026](decisions/0026-second-cleanup.md)) |
-| Shine | Shine's bloom; removed on 2026-11-14 with Polytone ([0026](decisions/0026-second-cleanup.md)). Polytone came back the same day for the house resource pack ([0029](decisions/0029-look-without-shader.md)) |
+| Shine | Shine's bloom; removed on 2026-11-14 with Polytone ([0026](decisions/0026-second-cleanup.md)). Polytone came back the same day for the house resource pack ([0029](decisions/0029-look-without-shader.md)) and left again with it on 2026-11-15 ([0031](decisions/0031-brumaire-is-the-look.md)) |
 | Chunky | Removed on 2026-11-14: the world is pregenerated with `/dh pregen`, or a server owner adds Chunky; the `horizon` fix for it stays ([0026](decisions/0026-second-cleanup.md)) |
 | Supernova (Original Music Pack) | Resource pack with three tracks, removed on 2026-11-14; the music draws on 30 tracks of the game ([music](plan/musique.md), [0026](decisions/0026-second-cleanup.md)) |
 | Biolith (separate copy) | Quark ships Biolith 3.0.14 in its jar and no other mod declares it; removed on 2026-11-14 ([0026](decisions/0026-second-cleanup.md)) |
