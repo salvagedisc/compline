@@ -966,7 +966,7 @@ hash = "dde2cb743c5207cb9c28421dad13c58afad5086a8aa121df505aefb537b98099"
 
 [[files]]
 file = "kubejs/assets/farm_and_charm/lang/fr_fr.json"
-hash = "ad5a8880b52be841f85c4dae18c3f9886aea0638387ad6a1f8e08dea31c99920"
+hash = "2b60bdaac28192ae2739ae94cd2c9e12121ac9f21cc443784b63eea7b0992778"
 
 [[files]]
 file = "kubejs/assets/flywheel/lang/fr_fr.json"
@@ -1257,6 +1257,10 @@ file = "kubejs/client_scripts/faune_coupee.js"
 hash = "2550e30c1d181e144ed61266ab4903cf4b47cfbe5581290a52b3871dd879e481"
 
 [[files]]
+file = "kubejs/client_scripts/fusions.js"
+hash = "cbb7c73952d87ba5176dc05f9db0f76767f98710324242f483060d8603a7204f"
+
+[[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
 hash = "44d6ba7e64bd839c960fcbd9d3203e9179538f36707945e0c6ae55825b3db621"
 
@@ -1278,7 +1282,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "52f3820a93c5448597a352da06f4fb201a555cdc32dcfa24d4ed02d341167df4"
+hash = "d649d8a76fa0033ad53608a82bed7946cd7b90f79fd8590bc38d19d3803a0639"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1598,7 +1602,7 @@ hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/data/handson_delight/tags/item/assembled.json"
-hash = "80b8acafc2400043529facde85c21040d9d14f6ab1fd882014980cb74a7a3275"
+hash = "d0908bdfc16cc1b1e2485658f0506080ee8e6215daf9501686c43f3648adb1c2"
 
 [[files]]
 file = "kubejs/data/hapi/tags/worldgen/biome/cold_oceans.json"
@@ -2126,7 +2130,7 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/server_scripts/cuisine.js"
-hash = "f1115c9d2d7536dec3632c3eae700d8516ae31665f436c57f16e58a6f8a2370b"
+hash = "c512574ba663ef97f7d6888f08b69d6a2c918c22eae9475a3d05052fd013b77e"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
@@ -2139,6 +2143,10 @@ hash = "768c30116a5233e9693150b66cc0f0aae407ad142235a478d8e86f476411fe28"
 [[files]]
 file = "kubejs/server_scripts/faune_coupee.js"
 hash = "5a956001a784513ff82b0683b26a3266a1723d1a8be29885e4d335fee83ebe1f"
+
+[[files]]
+file = "kubejs/server_scripts/fusions.js"
+hash = "e74d1a5c94e5c4c09c61d9aa0531f41bd701c16f775a2e2b7e43eb585f8c5846"
 
 [[files]]
 file = "kubejs/server_scripts/monuments.js"
@@ -2182,7 +2190,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "5932e9527cb9f2e4e7284bcfd8c45937e6975e7187dd6a8c46b60bd4e75fbb8f"
+hash = "f546c061b5f77e38b20b93259e2ce321e36a7068cc222c3d1d0bea867b0bd2b7"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
