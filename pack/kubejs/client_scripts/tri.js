@@ -25,6 +25,8 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'farmersdelight:tomato', 'farmersdelight:tomato_seeds', 'farmersdelight:rotten_tomato',
     'farmersdelight:wild_tomatoes', 'farmersdelight:tomato_crate', 'farmersdelight:onion',
     'farmersdelight:wild_onions', 'farmersdelight:onion_crate',
+    'farm_and_charm:stove', 'farm_and_charm:cooking_pot', 'farm_and_charm:roaster',
+    'farm_and_charm:crafting_bowl', 'farm_and_charm:onion_soup',
     'cold_sweat:hoglin_hide', 'cold_sweat:hoglin_helmet', 'cold_sweat:hoglin_chestplate',
     'cold_sweat:hoglin_leggings', 'cold_sweat:hoglin_boots', 'exposure:interplanar_projector',
     'exposure:broken_interplanar_projector', 'envelope:crimson_pigeonhole',
