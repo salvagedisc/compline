@@ -1,10 +1,10 @@
 package io.github.salvagedisc.compline.rendu;
 
-import io.github.salvagedisc.compline.ModIds;
-import io.github.salvagedisc.compline.Compline;
 import io.github.salvagedisc.compline.ComplineConfig;
 import io.github.salvagedisc.compline.clairiere.Clearing;
 import io.github.salvagedisc.compline.clairiere.ClearingClient;
+import io.github.salvagedisc.compline.vent.Wind;
+import java.util.Comparator;
 import java.util.List;
 import net.irisshaders.iris.gl.uniform.UniformHolder;
 import net.irisshaders.iris.gl.uniform.UniformUpdateFrequency;
@@ -13,6 +13,8 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector4f;
 
@@ -33,12 +35,15 @@ public final class ShaderUniforms {
     private static final double ANCHOR_SECONDS = 2.0;
     /** Écart des colonnes sondées autour de la caméra pour trouver le sol, en blocs. */
     private static final int ANCHOR_SPREAD = 12;
-    private static final boolean WIND = ModIds.isLoaded(ModIds.WHERE_WINDS_BLOW);
+    static final int PUSHES = 4;
+    /** Rayon autour de la caméra où un être vivant couche les herbes, en blocs. */
+    private static final double PUSH_RANGE = 12.0;
 
     private static final Vector4f MIST = new Vector4f();
     private static final Vector4f WIND_VALUE = new Vector4f();
     private static final Vector4f[] CLEARING_VALUES = new Vector4f[CLEARINGS];
     private static final Vector4f[] GUST_VALUES = new Vector4f[GUSTS];
+    private static final Vector4f[] PUSH_VALUES = new Vector4f[PUSHES];
     private static final double[] EDGES = new double[CLEARINGS];
 
     private static long frame;
@@ -46,7 +51,6 @@ public final class ShaderUniforms {
     private static long lastNanos;
     private static float lift;
     private static float anchor = Float.NaN;
-    private static boolean windFailed;
 
     static {
         for (int i = 0; i < CLEARINGS; i++) {
@@ -54,6 +58,9 @@ public final class ShaderUniforms {
         }
         for (int i = 0; i < GUSTS; i++) {
             GUST_VALUES[i] = new Vector4f();
+        }
+        for (int i = 0; i < PUSHES; i++) {
+            PUSH_VALUES[i] = new Vector4f();
         }
     }
 
@@ -77,6 +84,10 @@ public final class ShaderUniforms {
             Vector4f value = GUST_VALUES[i];
             uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireGust" + i, () -> current(value));
         }
+        for (int i = 0; i < PUSHES; i++) {
+            Vector4f value = PUSH_VALUES[i];
+            uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumairePush" + i, () -> current(value));
+        }
     }
 
     private static Vector4f current(Vector4f value) {
@@ -95,6 +106,9 @@ public final class ShaderUniforms {
             value.zero();
         }
         for (Vector4f value : GUST_VALUES) {
+            value.zero();
+        }
+        for (Vector4f value : PUSH_VALUES) {
             value.zero();
         }
         WIND_VALUE.zero();
@@ -118,13 +132,27 @@ public final class ShaderUniforms {
                 : anchor + (ground - anchor) * (float) (1.0 - Math.exp(-seconds / ANCHOR_SECONDS));
         MIST.set(lift, anchor, 0.0F, 0.0F);
 
-        if (WIND && !windFailed) {
-            try {
-                WindLink.fill(WIND_VALUE, GUST_VALUES, camera);
-            } catch (RuntimeException | LinkageError e) {
-                windFailed = true;
-                Compline.LOGGER.warn("rendu : vent de Where Winds Blow illisible, le pack de shaders garde son vent de repli", e);
+        Wind.fill(WIND_VALUE, GUST_VALUES, camera);
+        pushes(level, camera, partial);
+    }
+
+    /**
+     * Les êtres vivants les plus proches de la caméra, qui couchent les herbes en passant : (x, y, z) de leurs pieds
+     * depuis la caméra, et le rayon qu'ils écartent (0 : rien).
+     */
+    private static void pushes(ClientLevel level, Vec3 camera, float partial) {
+        AABB around = new AABB(camera, camera).inflate(PUSH_RANGE);
+        List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, around,
+                e -> e.isAlive() && !e.isSpectator());
+        near.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        int slot = 0;
+        for (LivingEntity entity : near) {
+            if (slot >= PUSHES) {
+                break;
             }
+            Vec3 feet = entity.getPosition(partial).subtract(camera);
+            float radius = Math.min(entity.getBbWidth() * 0.75F + 0.35F, 2.0F);
+            PUSH_VALUES[slot++].set((float) feet.x, (float) feet.y, (float) feet.z, radius);
         }
     }
 

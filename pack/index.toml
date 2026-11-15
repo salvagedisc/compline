@@ -309,14 +309,6 @@ file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
 
 [[files]]
-file = "config/where_winds_blow-client.toml"
-hash = "7af7072c1788b8b46682bd7a91d1f53233271d522b3b5622945e3d839edb22c4"
-
-[[files]]
-file = "config/where_winds_blow-common.toml"
-hash = "3d0f32feb80c38ca7a18d27b468b3c502b169f5e2f5458f5197e6e2579fe72eb"
-
-[[files]]
 file = "defaultconfigs/emi.css"
 hash = "7dcc95225343da8d6b19ef96a5183194420161f2f115c33e4543d455526733eb"
 
@@ -809,26 +801,6 @@ file = "kubejs/assets/compline/lang/fr_fr.json"
 hash = "254c7a4f308a8dbfbfd3ed663b909c6ff00602bb24a18a26e0ccb25d99eb7694"
 
 [[files]]
-file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
-hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
-
-[[files]]
-file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
-
-[[files]]
-file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_plains.json"
-hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
-
-[[files]]
-file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_snowy.json"
-hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
-
-[[files]]
-file = "kubejs/assets/compline/where_winds_blow/wind_profiles/ru_swamps.json"
-hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
-
-[[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
 hash = "f189e28c0a7b2c224446b6e94a068fc32024c05e2cd2479d3bd33a8c5b3a8a3d"
 
@@ -1233,10 +1205,6 @@ file = "kubejs/assets/wakes/lang/fr_fr.json"
 hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
 
 [[files]]
-file = "kubejs/assets/where_winds_blow/lang/fr_fr.json"
-hash = "97d736253a37ed54114047a0ca1d4ff9d16998ec05dbbffcf27d398b699c7349"
-
-[[files]]
 file = "kubejs/assets/whitenoise/lang/fr_fr.json"
 hash = "7f3040fb17a7e8ad80e59920d5399da65e36a21b3d088f0b6e0495cad4f8114d"
 
@@ -1383,26 +1351,6 @@ hash = "3b97d9b08ae27ab4d401aa6e7e22cd2ffcafab47385f984619f16779a9eb9cc7"
 [[files]]
 file = "kubejs/data/compline/tags/item/pile/8.json"
 hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
-
-[[files]]
-file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_deserts_and_badlands.json"
-hash = "f03f631c105b7b0accf9c01416bd6cf0eb0ba92ebe6f18f57830945684290da0"
-
-[[files]]
-file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_oceans_and_coasts.json"
-hash = "da002766481391adb14bf326502a5d3c74e3aa50868e0fc75b0ff56704b6872c"
-
-[[files]]
-file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_plains.json"
-hash = "90b5d31f614493b35475c2bb28163952caecd43b56a81d2b7a50927667aec495"
-
-[[files]]
-file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_snowy.json"
-hash = "e9e6b68e89dcc780113e64a8db57638fcd8737df1af18165600aa8ebf7ed438f"
-
-[[files]]
-file = "kubejs/data/compline/where_winds_blow/wind_profiles/ru_swamps.json"
-hash = "b733ca4060deef93f792e096508fe7b17482499be1e2e5dd349ab4255db539f6"
 
 [[files]]
 file = "kubejs/data/compline/worldgen/density_function/disque/distance.json"
@@ -2346,8 +2294,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.15.0.jar"
-hash = "376f378adc55a8302f73d074d52bbdc868ae2c31fa10fed786860ab510b98b7c"
+file = "mods/compline-0.16.0.jar"
+hash = "50db4afc6f8efe085400e8d1cc358b8db2a6237084659d2b27dd6d932ca24203"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -2894,11 +2842,6 @@ hash = "b5278a5f57605624aa821ab8058b7c717721444e3e8ca68fa5c815c08c97ad62"
 metafile = true
 
 [[files]]
-file = "mods/toucan.pw.toml"
-hash = "621ed3fadbf439318744d8fc324fee13ce44e18ffbc24c56338ea259e5ff5abb"
-metafile = true
-
-[[files]]
 file = "mods/treechop.pw.toml"
 hash = "da1c1cf28e8d5ffe377998d29d59eae29a2020f2de7a0aea7f7253acdc695cfd"
 metafile = true
@@ -2921,11 +2864,6 @@ metafile = true
 [[files]]
 file = "mods/wakes-reforged.pw.toml"
 hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
-metafile = true
-
-[[files]]
-file = "mods/where-winds-blow.pw.toml"
-hash = "3076b4a06b0da48e20b4698adc0f0d786a98f699955d929c49a2830cc3ceb9db"
 metafile = true
 
 [[files]]
@@ -3194,7 +3132,7 @@ hash = "7025242b819ca07375e61e78da76d1a7a7f474563715a3cde2695bebb97d89c0"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/common.glsl"
-hash = "7bfa1b95218ee9dd2d6c4e572089942e6dad5df8a52d220f0cf41a41bd450fc9"
+hash = "748f050232d0bff9a24eebfa31997cdd1ca5bcd316c69f0dccf556f29bff5389"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/light.glsl"
@@ -3218,7 +3156,7 @@ hash = "3515893ebf2a7ae74aee4a653f437841d5d0312484163d7d0d0c5465b3b82f23"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/wind.glsl"
-hash = "fcaaf7591346b8caa4ce31364807680c5850c8b37a000f49ff8bccb932a03553"
+hash = "5aedd180071725eea418cbcb20a4f90c0a78ce9353f6435353cd64da820f5efe"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/prepare.csh"
@@ -3306,7 +3244,7 @@ hash = "9e3d368b4a5014d2320b075a37fceca6557394a7fa24eb29aedc9822d40935b4"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
-hash = "617b553a0ba2f2b84f4ce873a9fe861bc60687d01a936e3de63bcc632bf465a4"
+hash = "c24a419caada6cdb49868ab2404b0781f1b03c6789e1db7b7f42bfa68d5db3cb"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/setup.csh"

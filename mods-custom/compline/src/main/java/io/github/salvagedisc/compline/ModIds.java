@@ -19,7 +19,6 @@ public final class ModIds {
     public static final String LITHOSTITCHED = "lithostitched";
     public static final String SABLE = "sable";
     public static final String IRIS = "iris";
-    public static final String WHERE_WINDS_BLOW = "where_winds_blow";
 
     private ModIds() {
     }

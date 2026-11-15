@@ -19,7 +19,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `compline` mod and Overgeared's knapping; no new mod |
 | [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
 | [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `compline-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
-| [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars; Shine removed by 0026 |
+| [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow (removed by 0032) and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars; Shine removed by 0026 |
 | [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `compline` mod; all removed by 0026 |
 | [0018](0018-effets-en-pack-de-ressources.md) | Effects in the resource pack | Rain colour, lightning through the mist and sun rays move into `compline-ambiance` (core shaders, Polytone post shader); `compline` 0.6.3 keeps what needs new geometry or game data; the pack and Polytone are gone (0024, 0026) |
 | [0019](0019-leaving-no-mans-land.md) | Leaving No Man's Land | Tectonic + Regions Unexplored + Geophilic kept (Lithosphere compared and set aside on 2026-11-13), world of radius 6,000; not played |
@@ -35,6 +35,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0029](0029-look-without-shader.md) | ~~The default look comes from a house resource pack~~ (replaced by 0031) | `compline-ambiance` with Polytone, on by default: sun shadows from a height field given by the `compline` mod, sun shafts, air, under water, grade; Recrafted is the model, none of its files are used; Brumaire stays as an option |
 | [0030](0030-farmers-delight-kitchen.md) | Farmer's Delight replaces Kaleidoscope Cookery | Farmer's Delight, Hands-On Delight (+ Diegesis), Create: Central Kitchen and Cinematic Interactions; Kaleidoscope Cookery, Compat and Automation leave; knives still go through the forge |
 | [0031](0031-brumaire-is-the-look.md) | Brumaire is the look of the pack | The shader pack is on from the first launch and takes every effect of Recrafted; `compline-ambiance`, Polytone and the `relief` module leave; ATMOSPHERICS stays for players without shader |
+| [0032](0032-house-wind.md) | The pack's own wind | `vent` module of `compline` 0.16.0: wind from the weather, gusts, campfire smoke after Better Smoke; Brumaire bends grass under steps and slants rain; Where Winds Blow and ToucanLib removed |
 
 ## Template
 

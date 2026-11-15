@@ -1,7 +1,7 @@
 """Makes the mods' own biome rules apply to the biomes other mods add (Python 3).
 
 Several mods decide by a list of vanilla biome names where an animal spawns, which breed of
-horse appears or how the wind blows. A Regions Unexplored biome is in none of these lists, so
+horse appears. A Regions Unexplored biome is in none of these lists, so
 the rule ignores it: no horse in a prairie, no capybara in a bayou. This script gives each
 Regions Unexplored biome the rules of the vanilla biome it resembles, with the same table as
 the former mist (`MODELS` in models.py):
@@ -9,9 +9,7 @@ the former mist (`MODELS` in models.py):
   - biome tags: for every tag of a mod that names vanilla biomes directly and knows no
     Regions Unexplored biome, it writes the additions in
     pack/kubejs/data/<namespace>/tags/worldgen/biome/. Tags that rely on the common tags
-    (`#c:...`, `#minecraft:...`) are left alone: Regions Unexplored fills those itself;
-  - wind: for every Where Winds Blow profile that names vanilla biomes, a profile
-    `ru_<name>.json` with the same values in pack/kubejs/{data,assets}/compline/.
+    (`#c:...`, `#minecraft:...`) are left alone: Regions Unexplored fills those itself.
 
 The biomes of `OTHER_MODELS` in models.py (Hybrid Aquatic, the Streams Reflowing stream)
 inherit the same way from their model, in the tags that know no biome of their mod. The
@@ -24,7 +22,7 @@ matched by `SKIPPED` are left alone too.
 closed dimension: they are written with the rest.
 
 The script owns every entry of these mods' biomes in the pack's biome tags outside the
-`compline` namespace, and the `ru_*.json` wind profiles: it rewrites them at each run.
+`compline` namespace: it rewrites them at each run.
 
 Usage, from the repository root, after `npm run check-deps` has filled the jar cache:
   python3 scripts/biomes/biome_rules.py [folder of the pack's jars, default .cache/jars]
@@ -39,13 +37,10 @@ import zipfile
 from models import MODELS, NAMESPACE, OTHER_MODELS, ROOT, UNDERGROUND, write_json
 
 PACK_DATA = os.path.join(ROOT, "pack/kubejs/data")
-PACK_ASSETS = os.path.join(ROOT, "pack/kubejs/assets")
 MODS = os.path.join(ROOT, "pack/mods")
 
 TAG = re.compile(r"^data/([^/]+)/tags/worldgen/biome/(.+)\.json$")
 BIOME = re.compile(r"^data/([^/]+)/worldgen/biome/(.+)\.json$")
-WIND = re.compile(r"^data/where_winds_blow/where_winds_blow/wind_profiles/(.+)\.json$")
-WIND_FOLDER = "compline/where_winds_blow/wind_profiles"
 
 # Tags of these namespaces are shared conventions: Regions Unexplored fills them itself.
 COMMON = {"minecraft", "c", "forge", "neoforge"}
@@ -92,28 +87,25 @@ def entry_id(entry):
 
 
 def read_jars(jars):
-    """Biome tags (tag -> entries, merged like the game does), Where Winds Blow profiles and biomes of the jars."""
-    tags, winds, biomes = {}, {}, set()
+    """Biome tags (tag -> entries, merged like the game does) and biomes of the jars."""
+    tags, biomes = {}, set()
     for path in jars:
         with zipfile.ZipFile(path) as jar:
             for name in jar.namelist():
-                tag, wind, biome = TAG.match(name), WIND.match(name), BIOME.match(name)
+                tag, biome = TAG.match(name), BIOME.match(name)
                 if biome and biome.group(1) not in ("minecraft", "compline"):
                     biomes.add(f"{biome.group(1)}:{biome.group(2)}")
-                if not tag and not wind:
+                if not tag:
                     continue
                 try:
                     data = json.loads(jar.read(name))
                 except ValueError:
                     continue
-                if wind:
-                    winds[wind.group(1)] = data
-                else:
-                    entries = tags.setdefault(f"{tag.group(1)}:{tag.group(2)}", [])
-                    if data.get("replace"):
-                        entries.clear()
-                    entries += [entry_id(entry) for entry in data.get("values", [])]
-    return tags, winds, biomes
+                entries = tags.setdefault(f"{tag.group(1)}:{tag.group(2)}", [])
+                if data.get("replace"):
+                    entries.clear()
+                entries += [entry_id(entry) for entry in data.get("values", [])]
+    return tags, biomes
 
 
 def pack_tag_files():
@@ -154,7 +146,7 @@ def heirs(vanilla, known=()):
 
 
 def main(folder):
-    tags, winds, biomes = read_jars(pack_jars(folder))
+    tags, biomes = read_jars(pack_jars(folder))
     unknown, gone = sorted(biomes - set(ALL_MODELS)), sorted(set(ALL_MODELS) - biomes)
     if unknown or gone:
         sys.exit(f"MODELS and OTHER_MODELS (models.py) do not match the jars: missing {unknown}, "
@@ -202,21 +194,7 @@ def main(folder):
         write_json(path, {"replace": False, "values": [{"id": biome, "required": False} for biome in new]})
         written += 1
 
-    profiles = 0
-    for base in (PACK_DATA, PACK_ASSETS):
-        for old in glob.glob(os.path.join(base, WIND_FOLDER, "ru_*.json")):
-            os.remove(old)
-    for name, profile in sorted(winds.items()):
-        selector = profile.get("biomes")
-        new = heirs(set([selector] if isinstance(selector, str) else selector or []))
-        if not new:
-            continue
-        for base in (PACK_DATA, PACK_ASSETS):
-            os.makedirs(os.path.join(base, WIND_FOLDER), exist_ok=True)
-            write_json(os.path.join(base, WIND_FOLDER, f"ru_{name}.json"), dict(profile, biomes=new))
-        profiles += 1
-
-    print(f"{written} biome tags and {profiles} wind profiles now include the biomes of other mods")
+    print(f"{written} biome tags now include the biomes of other mods")
 
 
 if __name__ == "__main__":

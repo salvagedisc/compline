@@ -104,10 +104,8 @@ dependencies {
     // Correctif de génération : le prédicat in_structure de Lithostitched
     compileOnly modrinth('lithostitched')
 
-    // Module rendu (client) : les uniformes d'Iris, le vent de Where Winds Blow
+    // Module rendu (client) : les uniformes d'Iris
     compileOnly modrinth('iris')
-    compileOnly modrinth('where-winds-blow')
-    compileOnly modrinth('particular-reforged')
 
     // Module dissipateur
     compileOnly modrinth('create')
