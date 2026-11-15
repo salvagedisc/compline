@@ -64,7 +64,7 @@ Revised on 2026-11-15: the zoo lives **inside Archie's guidebook** (Archie's Din
 **Design.**
 - **Four stamps per species**, as advancements in data (`compline:zoo/<species>/<stamp>`), one small file per species listing its entity, its environment tab, its stamps and its French texts:
   - **Apercevoir**: `ec_ad:spotted_entity` with the species as entity predicate.
-  - **Photographier** (proposed in place of *kill* for the ordinary fauna, **to confirm by the maintainer**): `exposure:frame_exposed` with the species in `entities_in_frame`, as Exposure's own `wildlife_archivist` advancement does.
+  - **Photographier** (in place of *kill* for the ordinary fauna, confirmed by the maintainer on 2026-11-15): `exposure:frame_exposed` with the species in `entities_in_frame`, as Exposure's own `wildlife_archivist` advancement does.
   - **Apprivoiser ou héberger**: `minecraft:tame_animal` for tameable creatures; for the others, housed in an enclosure measured by the module (four criteria: usable space, preferred terrain, shelter, food, each with its cause in plain words; group size as the social setting; no manual validation).
   - **Maîtriser**: the three others, plus a behaviour seen (eating, sleeping, moving in a group) where it fits.
   - A species lists only the stamps that make sense (a creature that is never caged has no housing stamp), like the Sculksaur has no tame stamp.
