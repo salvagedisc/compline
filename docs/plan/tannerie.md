@@ -39,6 +39,8 @@ The script writes to the server log any creature table that still drops leather 
 
 Tannery only gives bark for the eight vanilla logs in its `tannery:logs` block tag, and it gives bark on any block of that tag, stripped or not. `pack/kubejs/server_scripts/tannerie.js` adds every log, wood, stem or hyphae that has a `stripped_` version (28 blocks on the test server of 2026-10-29, with No Man's Land's woods; Regions Unexplored's woods now take their place, count to read in the server log), and never a block that is already stripped: otherwise a repeated right-click on the same block would give endless bark. The count is written to the server log (`[tannerie] N bûches donnent de l'écorce`).
 
+Since 2026-11-15 Farmer's Delight's tree bark is merged into Tannery's (`fusions.js`, [0030](../decisions/0030-farmers-delight-kitchen.md)): a log cut with a knife on the cutting board, or sawn by Create, also gives Tannery's bark. Naturalist's fat (boar, whale) is Tannery's animal fat.
+
 ## The recipes
 
 Added or changed (`pack/kubejs/server_scripts/tannerie.js`):
