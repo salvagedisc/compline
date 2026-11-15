@@ -31,6 +31,9 @@
         { "name": "CamX", "type": "float", "count": 1, "values": [ 0.0 ] },
         { "name": "CamY", "type": "float", "count": 1, "values": [ 0.0 ] },
         { "name": "CamZ", "type": "float", "count": 1, "values": [ 0.0 ] },
-        { "name": "Temps", "type": "float", "count": 1, "values": [ 0.0 ] }
+        { "name": "Temps", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "ForceEau", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "ForceReflets", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "ForceBrume", "type": "float", "count": 1, "values": [ 1.0 ] }
     ]
 }

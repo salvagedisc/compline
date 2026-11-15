@@ -29,7 +29,10 @@ import net.neoforged.fml.ModList;
  * <p>Un texel : rouge et vert = hauteur de la surface au-dessus du bas du monde (octet faible, octet fort),
  * bleu = ce qu'il y a au sommet (255 feuillage, 128 eau, 0 autre), alpha = 200 pour une colonne connue (0 sinon).
  * Le texel (0, 0) est l'en-tête : rouge = force du soleil (la brume levée autour de la caméra), vert = bas du monde
- * + 128, bleu = 255 quand la caméra est sous l'eau, alpha = 201 (202 quand un pack de shaders d'Iris dessine l'image). Le pack de ressources reconnaît la texture à cet alpha.</p>
+ * + 128, bleu = 255 quand la caméra est sous l'eau, alpha = 201 (202 quand un pack de shaders d'Iris dessine l'image). Le pack de ressources reconnaît la texture à cet alpha.
+ * Le texel (1, 0) donne la couleur de l'eau du biome où se tient la caméra (rouge, vert, bleu ; alpha 203). Le texel
+ * (2, 0) dit où est la surface quand la caméra est sous l'eau : rouge = sa hauteur au-dessus de l'oeil en quarts de
+ * bloc, vert = 255 si l'air libre est au-dessus d'elle (0 sous un plafond), alpha 203.</p>
  *
  * <p>Les 256 tronçons de la fenêtre sont relus en boucle, {@value #CHUNKS_PER_TICK} par tic : un tour complet toutes
  * les {@code 256 / CHUNKS_PER_TICK} tics, ce qui suffit pour un arbre abattu ou un mur posé.</p>
@@ -44,6 +47,12 @@ final class ReliefTexture {
     private static final int HEADER = 201;
     /** En-tête quand un pack de shaders dessine l'image : le pack de ressources laisse alors l'image telle quelle. */
     private static final int HEADER_SHADER_PACK = 202;
+    /** Les deux texels qui suivent l'en-tête : la couleur de l'eau et la surface au-dessus de la caméra. */
+    private static final int WATER = 203;
+    /** Profondeur de recherche de la surface, en blocs (le rouge du texel (2, 0) va jusqu'à 63,75). */
+    private static final int SURFACE_SEARCH = 63;
+    /** Part de la nouvelle couleur d'eau gardée à chaque tic : un passage d'un biome à l'autre prend quelques secondes. */
+    private static final float WATER_BLEND = 0.04F;
     private static final boolean IRIS = ModList.get().isLoaded(ModIds.IRIS);
     /** Force du soleil dans la brume, et temps que met la brume levée d'une clairière à la porter à 1. */
     private static final float MIST_SUN = 0.6F;
@@ -53,6 +62,9 @@ final class ReliefTexture {
     private static ClientLevel known;
     private static int cursor;
     private static float lift;
+    private static float waterRed = -1.0F;
+    private static float waterGreen;
+    private static float waterBlue;
 
     private ReliefTexture() {
     }
@@ -81,6 +93,7 @@ final class ReliefTexture {
             clear();
             cursor = 0;
             lift = 0.0F;
+            waterRed = -1.0F;
         }
         Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
         int centerX = Mth.floor(camera.x) >> 4;
@@ -100,7 +113,42 @@ final class ReliefTexture {
         boolean underwater = minecraft.gameRenderer.getMainCamera().getFluidInCamera() == FogType.WATER;
         boolean shaderPack = IRIS && ShaderPackCheck.inUse();
         image.setPixelRGBA(0, 0, pack(sun, Mth.clamp(floor + 128, 0, 255), underwater ? 255 : 0, shaderPack ? HEADER_SHADER_PACK : HEADER));
+        writeWater(image, level, camera, underwater, pos);
         texture.upload();
+    }
+
+    /** La couleur de l'eau du biome (lissée d'un biome à l'autre) et la surface au-dessus de la caméra. */
+    private static void writeWater(NativeImage image, ClientLevel level, Vec3 camera, boolean underwater, BlockPos.MutableBlockPos pos) {
+        int color = level.getBiome(BlockPos.containing(camera)).value().getWaterFogColor();
+        float red = (color >> 16 & 255) / 255.0F, green = (color >> 8 & 255) / 255.0F, blue = (color & 255) / 255.0F;
+        if (waterRed < 0.0F) {
+            waterRed = red;
+            waterGreen = green;
+            waterBlue = blue;
+        } else {
+            waterRed = Mth.lerp(WATER_BLEND, waterRed, red);
+            waterGreen = Mth.lerp(WATER_BLEND, waterGreen, green);
+            waterBlue = Mth.lerp(WATER_BLEND, waterBlue, blue);
+        }
+        image.setPixelRGBA(1, 0, pack(Math.round(waterRed * 255.0F), Math.round(waterGreen * 255.0F), Math.round(waterBlue * 255.0F), WATER));
+
+        int above = 0;
+        int open = 0;
+        if (underwater) {
+            int x = Mth.floor(camera.x), z = Mth.floor(camera.z);
+            int start = Mth.floor(camera.y);
+            for (int y = start; y <= start + SURFACE_SEARCH; y++) {
+                pos.set(x, y, z);
+                if (!level.getFluidState(pos).is(FluidTags.WATER)) {
+                    // la surface est en haut de la dernière eau traversée
+                    double surface = y - 1 + level.getFluidState(pos.set(x, y - 1, z)).getHeight(level, pos);
+                    above = Mth.clamp((int) Math.round((surface - camera.y) * 4.0), 0, 255);
+                    open = level.getBlockState(pos.set(x, y, z)).isAir() && level.canSeeSky(pos) ? 255 : 0;
+                    break;
+                }
+            }
+        }
+        image.setPixelRGBA(2, 0, pack(above, open, 0, WATER));
     }
 
     private static void write(NativeImage image, ClientLevel level, int chunkX, int chunkZ, int floor, BlockPos.MutableBlockPos pos) {
@@ -116,7 +164,8 @@ final class ReliefTexture {
                     int kind = state.is(BlockTags.LEAVES) ? 255 : state.getFluidState().is(FluidTags.WATER) ? 128 : 0;
                     texel = pack(height & 255, height >> 8, kind, KNOWN);
                 }
-                if ((x & MASK) != 0 || (z & MASK) != 0) {
+                // la première rangée garde ses trois premiers texels pour l'en-tête
+                if ((z & MASK) != 0 || (x & MASK) > 2) {
                     image.setPixelRGBA(x & MASK, z & MASK, texel);
                 }
             }

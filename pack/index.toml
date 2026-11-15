@@ -2342,8 +2342,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.13.0.jar"
-hash = "2634a00eafff4658b745adb1029343eb10132b051be258ea26846380702d97d6"
+file = "mods/compline-0.14.0.jar"
+hash = "7b0935e0f759121b1703ebf0fc112ed249e95d3f751c498819591281a1ba8a12"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -2946,15 +2946,23 @@ metafile = true
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/lang/en_us.json"
-hash = "0d97e14d62a25acd268a80fb0edb717eb66632b69eefb63289ee4451b1ecdcb1"
+hash = "d93a8bc30d1880ed53502c85674b1a54c204f5428439c501e021bb63feefb07b"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/lang/fr_fr.json"
-hash = "33b0f1f68e1f87d2a223316f1637fe5355fe2155dac51c6f395d6e2e2e32d21c"
+hash = "55d67ccde1a8bea9e8bbdadc597eb30dc3f74952a0cbb180c1951e1aa5af9b34"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/air.json"
 hash = "f055f40f43494554a35a84579e61c0d0c12a64400a0163f9b02aeaa4f3f68751"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/brume.json"
+hash = "83dd2ea3ecdb5cdfc40a86ab1a3c7d2087009e5c45aeea0d2a2e54f3034acaf3"
+
+[[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/eau.json"
+hash = "83a181c905fd8e48c53a013c59ad89175720d4761bf3fd252dc7856e14fcd89f"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/halo.json"
@@ -2973,6 +2981,10 @@ file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/
 hash = "2a71c72fb95efc537bd33dd3c518177c1a1c7d40ec9ae75f81225ccb2f3656fb"
 
 [[files]]
+file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/reflets.json"
+hash = "e2e64b05545191413a7c009184c25f9ca0416817cdaa9b1fbd7acf011a6e0472"
+
+[[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/polytone/config_entries/rendu.json"
 hash = "bf69a8a5fb5695891921f753134a506c674695e222b08206559d85dc831dc06c"
 
@@ -2982,7 +2994,7 @@ hash = "47a0d409e5cca87febb583cad1dc5963284301a8249f3e3b2766eb332aaedbd9"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/polytone/post_chains/rendu.json"
-hash = "a3da61a0ee68c762a2a5f4b756a968b90c3eeff537c09a4fbac0af2ca0ef7b9b"
+hash = "4856c616a22477cef4e6ce8fdeae5e2e75e3bc10e8c7360de84dd50911ae8bf7"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/post_effect/rendu.json"
@@ -3030,11 +3042,11 @@ hash = "2103d8680ec5e82d505e6098c22a4846d6b73f7b54e80b44d8bc0f8e991ee001"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/tons.fsh"
-hash = "329c4b93a912891796d8a6f1fd224e82b08101cdc4413e2484b6d50ffb7da084"
+hash = "bce74104d07adfb5062b5b911e004841b701640b1b4eec47ee3e9ee1650bf4a1"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/shaders/program/tons.json"
-hash = "535aab873e08a40a8467da9f994ebb94a8c418cb74bde77558a70434104ed78d"
+hash = "b1ef7efc2befc7bbceeb22d9dcd64aadb960418435da2361f6030d0aa8f415c6"
 
 [[files]]
 file = "resourcepacks/compline-ambiance/assets/compline/textures/relief.png"
