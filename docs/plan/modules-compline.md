@@ -9,7 +9,7 @@ Nothing here is written yet. Each module will follow the rules of the existing o
 | Module | What the player experiences | Taken from | Size |
 |---|---|---|---|
 | `voile` | Nothing visible: creatures, animated blocks and particles beyond the mist are no longer drawn | Sodium's fog occlusion, the lesson of Entity Culling | Small |
-| `zoo` | Five research levels per species; common fauna is housed in an enclosure the ledger measures, rare creatures are photographed; zoo milestones change the clearing | Menagerie, Pokémon Legends: Arceus, Planet Zoo, Red Dead Redemption 2 | Large |
+| `zoo` | Archie's four stamps (spot, photograph, tame or house, master) for every species, inside Archie's guidebook; enclosures measured; zoo milestones change the clearing | Menagerie, Pokémon Legends: Arceus, Planet Zoo, Red Dead Redemption 2 | Large |
 | `vie` | A clearing grows with the variety of what is done in it, in a visible wave, without a gauge | Dragon Quest Builders, Valheim, Ōkami | Medium |
 | `fanal` | An amber glow pierces the mist at night up to 600 blocks; players find their way home by it | Journey, Sea of Thieves, Death Stranding | Medium |
 | `eclaircie` | A few mornings per season the whole map can be seen; red sky, barometer and a sound announce it the day before | Enhanced Celestials, The Long Dark | Medium |
@@ -46,20 +46,38 @@ The guide book (see the [roadmap](../feuille-de-route.md)) gets a page for each 
 
 **To verify first.** The Sodium log above; frame rate with spark in a misty forest and near a busy base, before and after; an airship in flight.
 
-## `zoo`: the keeper's ledger
+## `zoo`: the stamps of Archie's guidebook
+
+Revised on 2026-11-15: the zoo lives **inside Archie's guidebook** (Archie's Dinosaurs), not in a ledger or a book of its own. The maintainer wants one book for all the fauna, with the guidebook's four stamps and its way of following creatures applied to every species, and no extra menu ([0021](../decisions/0021-spelunkery-and-dinosaurs.md)).
 
 **Lessons.** Menagerie (a zoo modpack on Forge 1.20.1) goes beyond animals (cave, prehistoric and abyssal creatures, a "challenge" section for predators) and pays research papers according to the creature's difficulty; but enclosures are ticked by hand, nothing measures their quality, and almost nothing helps find species. Pokémon Legends: Arceus rewards observing behaviours; Planet Zoo says what is wrong and why; Red Dead Redemption 2 counts study without killing and excludes missable animals; Animal Crossing's museum changes with each donation and its empty cases show what is missing; Monster Hunter's tracks lead to the beast.
 
+**How the guidebook works** (read in the 1.0.4 jar).
+- Each dinosaur has four stamps on the guidebook's badge page: **spot**, **kill**, **tame**, **master**. A stamp is lit when the vanilla advancement `ec_ad:<stamp>_<dino>` is done; the page asks the client advancement list.
+- **Spot** uses the trigger `ec_ad:spotted_entity`: any living entity within 25 blocks (scaled by its visibility), in the player's view and line of sight. It fires for every creature, not only dinosaurs, so a spot advancement can be written for any species in data.
+- **Master** needs the other stamps plus the creature's gear and unlocks the recipe of its totem, which can only be placed with that advancement. Since [#60](https://github.com/salvagedisc/compline/pull/60) mastery no longer asks for a kill, except for the Sculksaur, and Archie's material trades open with the tame stamp.
+- Archie's trades are data (`ec_ad:archie_trade` recipes) and can require an advancement: he can reward stamps.
+- The guidebook's pages are XML read from the resources (`assets/ec_ad/guidebook/<language>.xml`): categories, labels, images, recipes, popups. A resource pack can add or replace categories, but the pages are static.
+- The badge page is hard-coded: an enum of the seven dinosaurs and, for each, the stamps it shows (the Sculksaur has no tame stamp). Adding a species there needs code.
+- The mod is All Rights Reserved, without public source: overriding its data and resources is fine, copying its code, textures or whole guidebook files into the repository is not.
+
 **Design.**
-- Each species goes through five levels: **Aperçu** (glimpsed), **Observé** (spyglass or Exposure photo), **Étudié** (time spent near it), **Hébergé** (housed), **Compris** (a behaviour seen: eating, sleeping, moving in a group). Three to five tasks per species, never an absurd one.
-- Two paths: common fauna is **housed** in an enclosure; rare creatures and Mowzie's beings are never caged and count by **observation and photo**, the photo being the only proof. A rare creature is worth more points towards the milestones.
-- The ledger **measures** the enclosure: four criteria (usable space, preferred terrain, shelter, food), each with its cause in plain words ("terrain : il manque de la mousse"); one social setting, the group size. No manual validation.
-- The species sheet (biome, food) fills in after observation. A vague hint in French and rare tracks (feathers, prints, nests) that fade over time help without a compass.
-- Ledgers of the same clearing add up to one zoo; a species counts once.
-- Milestones change the place, not the inventory: the clearing grows (`vie`), a music opens, a monument to build shows its empty plinths. One line from the keeper at each milestone. Nothing missable blocks completion.
+- **Four stamps per species**, as advancements in data (`compline:zoo/<species>/<stamp>`), one small file per species listing its entity, its environment tab, its stamps and its French texts:
+  - **Apercevoir**: `ec_ad:spotted_entity` with the species as entity predicate.
+  - **Photographier** (proposed in place of *kill* for the ordinary fauna, **to confirm by the maintainer**): `exposure:frame_exposed` with the species in `entities_in_frame`, as Exposure's own `wildlife_archivist` advancement does.
+  - **Apprivoiser ou héberger**: `minecraft:tame_animal` for tameable creatures; for the others, housed in an enclosure measured by the module (four criteria: usable space, preferred terrain, shelter, food, each with its cause in plain words; group size as the social setting; no manual validation).
+  - **Maîtriser**: the three others, plus a behaviour seen (eating, sleeping, moving in a group) where it fits.
+  - A species lists only the stamps that make sense (a creature that is never caged has no housing stamp), like the Sculksaur has no tame stamp.
+- **Pages**: one page per species in the guidebook, grouped in tabs by environment (forest, water, caves, sky, dinosaurs), generated in French by a script into `pack/kubejs/assets/ec_ad/guidebook/` from the species files, with a portrait of each creature taken on the test client and toned like the guidebook's paintings. The dinosaurs keep their own pages.
+- **Badge page**: a mixin of the `compline` mod reads the species list from data instead of the enum and spreads the stamps over several pages. The same graft opens the guidebook with a key, so it does not have to be held (a book held in hand was refused for quests).
+- **Tracks**: rare tracks (feathers, prints, nests) that fade over time and a vague hint in French help find a species without a compass, in the spirit of Archie's "I've tracked every dino in these lands". Archie is the keeper's voice: one line from him at each milestone.
+- Players of the same clearing add up to one zoo; a species counts once. Milestones (5, 15, 30, 50 species mastered) change the place, not the inventory: the clearing grows (`vie`), a music opens, a monument shows its empty plinths. Nothing missable blocks completion.
+- Other mods behind the guidebook: Alex's Mobs' animal dictionary stays hidden; Questlog keeps one chapter that points to the guidebook and its milestones; Exposure photos are the proof for the photo stamp.
 - Kept out: catching rare creatures, money, visitors, random crates, cleanliness or disease gauges.
 
-**To verify first.** Wildex left the pack on 2026-10-29: the ledger keeps its own list of species and its own sheets, so it needs a screen of its own (or a Questlog page per species). Classify by tags which creatures are housed and which are only observed.
+**Risks.** The badge-page mixin targets a closed, very young mod and may have to be redone when it updates. If the mod goes away, the stamps stay in the players' advancements (data of our own) and only the display has to be rebuilt.
+
+**To verify first.** The guidebook override: shipping a whole `fr_fr.xml` of the mod is a copy of All Rights Reserved content; prefer generating our categories at load time from the mixin, or adding files the mod reads alongside its own. Classify by tags which creatures are tamed, housed or only observed. The guidebook pages of the Obsidiceratops and the Chorusoatl still name the Nether and the End.
 
 ## `vie`: the clearing grows when it is lived in
 
