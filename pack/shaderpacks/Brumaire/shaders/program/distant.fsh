@@ -35,7 +35,7 @@ void main() {
         vec3 eye = normalize(-vPos);
         float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(normal, eye), 0.0), 5.0);
         float sky = vLm.y * vLm.y;
-        vec3 body = toLinear(vTint.rgb) * vec3(0.55, 0.80, 0.75) * (gAmbient * sky * 0.55 + gLightColor * 0.10 + vec3(0.012));
+        vec3 body = waterMurk(waterHue(vTint.rgb), max(sky, 0.08), 1.0);
         vec3 r = reflect(-eye, normal);
         r.y = abs(r.y);
         float nearOnly;

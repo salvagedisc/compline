@@ -10,10 +10,11 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 
 | Step | Programs | What it does |
 |---|---|---|
-| Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow |
+| Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow but marks itself (`shadowcolor0`), so the bottom knows it lies under water |
 | Sky table | `prepare.csh` (compute) | The light scattered by the atmosphere in every direction around the sun, lit by the sun and the moon, in a 192×108 table; its last row holds the mean light of the sky and what the air leaves of the sun and the moon |
 | Geometry | `gbuffers_*`, `dh_terrain`, `dh_water`, `clrwl_gbuffers` | Every surface is lit where it is drawn: sun or moon with soft shadows, sky light, block light, the game's ambient occlusion; solid surfaces also write their normal and their share of indirect light (`colortex1`) |
-| Screen occlusion | `deferred` (half size), `deferred1` | Hollows, foliage and the foot of walls receive less sky light; smoothed without bleeding across edges; then the sky and a round sun are painted behind the terrain, the moon and stars of the game (and of mods) kept |
+| Screen occlusion | `deferred` (half size), `deferred1` | Hollows, foliage and the foot of walls receive less sky light; smoothed without bleeding across edges; then the sky and a round sun are painted behind the terrain, the moon and stars of the game (and of mods) kept; the finished opaque scene is copied to `colortex6` for the water |
+| Water | `gbuffers_water` | The surface is drawn whole where it lies: the bottom seen through it (read in `colortex6`, bent by the waves), dimmed by the thickness of water, the banks and the sky mirrored in it |
 | Clouds | `composite` (half size) | Volumetric clouds marched through a 3D noise computed once at load (`setup.csh`) |
 | Air and mist | `composite1` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the water seen from below |
 | Screen | `final` | Glow of the bright lights, exposure, tone curve, grade |
@@ -30,6 +31,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud density, cloud shadows, the 3D noise, the cloud march |
 | `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
 | `lib/mist.glsl` | The mist: layer, clearings, far ring, colour |
+| `lib/water.glsl` | Colour, murk and waves of the water, caustics |
 | `lib/wind.glsl` | Movement of a plant vertex |
 | `block.properties` | Which blocks wave, which are water, which glow |
 | `lang/` | Names of the settings, French and English |
@@ -54,6 +56,15 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - Pushed by the pack's wind; the coverage (`CLOUD_COVERAGE`) grows in humid biomes and in the rain, where they turn grey. Far away they fade into the low sky; the mist ring still closes the horizon.
 - Their shadows pass over the ground (`CLOUD_SHADOWS`).
 - The game's clouds are not drawn; with `CLOUD_STEPS` at 0 they come back.
+
+## Water
+
+- **The waves** come from a few crossing wave trains pushed by the pack's wind (`WATER_WAVES`). With `WATER_PIXELS` they are read on the 1/16 block grid of the textures and their slope goes in steps: the reflections break into hard-edged patches, like a drawn texture.
+- **What shows through**: the bottom, shifted by the waves, fades with the thickness of water crossed (red first) into the colour of the water, which is the biome's pulled toward a grey-green (`WATER_MURK`). Shallows show the bottom, a deep river shows its body.
+- **What it mirrors**: the reflected ray is followed on screen until it meets the banks, the trees or a boat (`WATER_REFLECTIONS` steps; what lies under the surface cannot be mirrored); elsewhere the sky with its mist and the clouds at mid-height of their layer. More at a low angle, as in reality. The sun leaves a glint on the ripples, cut by shadows and clouds.
+- **Under the surface**: the sun reaches the bottom weakened and tinted by the water above it (read in the shadow map), gathered by the waves into moving threads (`WATER_CAUSTICS`).
+- **From below**: the world above shows through a circle (Snell's window), bent by the waves; outside it the surface mirrors the water and the bottom. The view under water fades into the same colour as from above, a little further.
+- Distant Horizons water uses the same colour and the sky reflection, without the screen reflections.
 
 ## The mist
 
@@ -93,5 +104,4 @@ The pack loads without error, day, sunset, night and rain render, a clearing ope
 - Wave the plants of the biome mods (extend `block.properties`).
 - Sort translucent Flywheel models (Colorwheel's `oit`).
 - Nether and End variants, if those dimensions open one day: today every dimension uses the Overworld programs.
-- Reflections of the terrain on water.
 - Colours of the lunar events of Enhanced Celestials (blood moon…): the shader paints its own sky and ignores them for now. The prompt of its shader add-on is hidden by `config/enhancedcelestials2core/shaders-prompt.json`.

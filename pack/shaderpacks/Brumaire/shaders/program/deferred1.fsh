@@ -1,4 +1,5 @@
-// Occlusion lissée et appliquée à la lumière indirecte, puis le ciel peint derrière le terrain.
+// Occlusion lissée et appliquée à la lumière indirecte, puis le ciel peint derrière le terrain. La scène opaque est
+// aussi copiée dans colortex6 : l'eau la relit pour ce qu'on voit à travers elle et ce qu'elle reflète.
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/program/scene.glsl"
@@ -8,8 +9,14 @@ uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 in vec2 vUv;
 
-/* RENDERTARGETS: 0 */
+/*
+const int colortex6Format = R11F_G11F_B10F;
+const bool colortex6Clear = false;
+*/
+
+/* RENDERTARGETS: 0,6 */
 layout(location = 0) out vec4 outColor;
+layout(location = 1) out vec4 outScene;
 
 float linearDepth(float d) { return near * far / (far - d * (far - near)); }
 
@@ -46,4 +53,5 @@ void main() {
     }
 #endif
     outColor = vec4(color, 1.0);
+    outScene = outColor;
 }

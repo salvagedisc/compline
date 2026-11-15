@@ -14,6 +14,7 @@ vec3 shadowWarp(vec3 clip) {
 #ifdef FSH
 uniform sampler2DShadow shadowtex1; // comparaison matérielle : la part éclairée d'une prise
 uniform sampler2D shadowtex0;       // profondeur brute : la distance de ce qui fait de l'ombre
+uniform sampler2D shadowcolor0;     // rouge : 1 là où l'eau est ce que le soleil touche en premier
 
 /** Part de lumière directe reçue en un point (repère joueur), 0 à l'ombre. */
 float shadowAt(vec3 pos, vec3 normal, float noise, int taps) {
@@ -54,5 +55,15 @@ float shadowAt(vec3 pos, vec3 normal, float noise, int taps) {
         sum += texture(shadowtex1, vec3(uv.xy + vec2(cos(a), sin(a)) * r * radius, uv.z));
     }
     return sum / float(taps);
+}
+
+/** Épaisseur d'eau (en blocs) que la lumière de l'astre traverse avant d'atteindre le point ; 0 hors de l'eau. */
+float waterAbove(vec3 pos, vec3 normal) {
+    vec3 clip = (shadowProjection * (shadowModelView * vec4(pos + normal * 0.05, 1.0))).xyz;
+    vec3 uv = shadowWarp(clip) * 0.5 + 0.5;
+    if (uv.z >= 1.0 || any(lessThan(uv.xy, vec2(0.0))) || any(greaterThan(uv.xy, vec2(1.0)))) return 0.0;
+    float surface = texture(shadowtex0, uv.xy).r;
+    if (surface >= uv.z - 0.00005 || texture(shadowcolor0, uv.xy).r < 0.5) return 0.0;
+    return (uv.z - surface) * 2.0 / (SHADOW_DEPTH * abs(shadowProjection[2][2]));
 }
 #endif

@@ -31,6 +31,10 @@
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 #define WATER_WAVES 1.0 // [0.0 0.5 1.0 1.5]
+#define WATER_MURK 1.0 // [0.5 0.75 1.0 1.5 2.0]
+#define WATER_PIXELS 1 // [0 1]
+#define WATER_CAUSTICS 2 // [0 1 2]
+#define WATER_REFLECTIONS 20 // [0 12 20 32]
 
 // Couleurs
 #define OLIVE 0.6 // [0.0 0.2 0.4 0.6 0.8 1.0]

@@ -3190,11 +3190,11 @@ hash = "c61aa1698feda1de65e3b2dbd2914a7dadfc559c39da9c2b0b285755b63c7d6e"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
-hash = "d6fa665b0e5c3085c9d5b089f5e6df5c6aba54e1ad25403b4159cd2a9cf23df3"
+hash = "b1680aaa2d98ecc39cd4da1302ff29b3664f529fd6a446aa8f626ed12fd9ae44"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
-hash = "097e5efe3451b733ab00c8592c0181a4fa655aa8fc690c966f64eeaa4bdde24b"
+hash = "c30c8095649cedc44ff0e4e72c22936aa016003e8c0edfa9e2b8ea325815df51"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/atmosphere.glsl"
@@ -3210,7 +3210,7 @@ hash = "7bfa1b95218ee9dd2d6c4e572089942e6dad5df8a52d220f0cf41a41bd450fc9"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/light.glsl"
-hash = "0339783aa57e05367bf32256fd97bef356cf2617a31e67ab0fd9d68cad7023ee"
+hash = "370634fc9c869a23525d2b9edba8c425b0ff6118e1ad85f8549d96e7d34675a6"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/mist.glsl"
@@ -3218,11 +3218,15 @@ hash = "c608090a930fca12cf9ab2ad6cbb6d7a549f69dcd3a057930c633d5137ceeb21"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
-hash = "632a31159f6060b8bdc97f6d3ca541cdc431625d1ec2ed0ebbafa2ba63f9738f"
+hash = "2198969a198fbc00456ea805dee7eb5e892529a3e5271a9799ec3cb19c80f1b4"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
-hash = "4682a7853617b758c175385b43fd90fb3a1a20c6c3099b48b49a5a7516901139"
+hash = "79a3eeb0373283ebf81c64a7f228c9b2a568100c3d0599a9b6e976eac10631b9"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/water.glsl"
+hash = "3515893ebf2a7ae74aee4a653f437841d5d0312484163d7d0d0c5465b3b82f23"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/wind.glsl"
@@ -3250,11 +3254,11 @@ hash = "65e57b612fda59c7babd6c5ed825eedb74d7bd26093d08a38d1e639c9f3ae497"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/deferred1.fsh"
-hash = "3a45af8d8fc7d07782d090236c3fc821c7ba14db2405ac78b8d6819154f2f9b0"
+hash = "1f757278fd765cda5a3c927d29ef29ed3e515ab75cc68e18589cfcf2a84b4fd7"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/distant.fsh"
-hash = "b908440820ce412250f55c0ec282b708a3c491efb8fbb790ad0b230796ddb9eb"
+hash = "1b2234ab5ff38f5062c9951601657e506d39782ef4e3fcdc09f0088f095c3d5e"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/distant.vsh"
@@ -3282,7 +3286,7 @@ hash = "14a9b7d36fc0669ca98dd1421376136d6713abe91045b78a37805f220e0546a6"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/mist.fsh"
-hash = "1e0ac8ba72a27af7e95ac289c46120db6158b2ea519b3c1fad7fca5c6032f2ea"
+hash = "b453329b7af4f5afddc9fabf8bd6d6504344ca5dd71549bc05e280a2a2aaa8cf"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/noise.csh"
@@ -3298,11 +3302,11 @@ hash = "650b256b387ac2bf0c02aee45e8057a66f4a2359011b51d506551cd64258a2ba"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/shadow.fsh"
-hash = "49913e00d0fee810f12ff69ee7c2fbee3785a5033d0a3af40cecdeef099e554c"
+hash = "1c35201cccc1875e814f6fdfed9eafd22b717d1460a0616fac8e1d9d04274f87"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/shadow.vsh"
-hash = "8742129f28798153722bafded28aa09a001d651bf05613f408d26ce80b4649af"
+hash = "ccf80570f36999fd513b188767b7661b4211f6a0af45745cf2e220999abbadab"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/sky.csh"
@@ -3310,7 +3314,7 @@ hash = "6cd97bfdbc6c1c97090bfab4eb378591bc24fae97bf0d1af9cd3df9c5ba10338"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
-hash = "cb5ae55538c060c8317c3e688b6b6d0cb1b76e7a40acc8ffbdbf0754b42de8f3"
+hash = "9e3d368b4a5014d2320b075a37fceca6557394a7fa24eb29aedc9822d40935b4"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
@@ -3322,7 +3326,7 @@ hash = "1c49e581af7aeae2b37e31144ad5e9788cf3a81ca311a77eafe81887387b9859"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shaders.properties"
-hash = "6fef5f68539ce51eceabe132490c5907cb1ba45eb46a03812cf54e34bc335aca"
+hash = "05a1b5d41dd2654b8f236295c5f824695f69d4d8b6f4d7d526c587af008fdc80"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shadow.fsh"

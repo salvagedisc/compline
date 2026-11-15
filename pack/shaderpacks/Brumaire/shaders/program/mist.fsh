@@ -5,6 +5,7 @@
 #include "/lib/shadow.glsl"
 #include "/lib/mist.glsl"
 #include "/lib/clouds.glsl"
+#include "/lib/water.glsl"
 #include "/program/scene.glsl"
 
 uniform sampler2D colortex0;
@@ -69,9 +70,13 @@ void main() {
 #endif
 
     if (isEyeInWater == 1) {
-        float t = 1.0 - exp(-min(len, 512.0) * 0.055);
-        vec3 deep = vec3(0.03, 0.14, 0.20) * (gAmbient * 1.2 + 0.02) * (float(eyeBrightnessSmooth.y) / 240.0 * 0.8 + 0.2);
-        color = mix(color * mix(vec3(1.0), vec3(0.55, 0.85, 0.90), t), deep, t);
+        // Sous l'eau : la même eau que vue d'en haut, teintée par le biome, qui éteint et voile le lointain.
+        // La couleur du brouillard sous l'eau ne donne que le caractère du biome : bleu franc presque partout.
+        vec3 hue = waterHue(mix(vec3(0.25, 0.46, 0.89), fogColor / max(max(fogColor.r, fogColor.b), 1e-3), 0.35));
+        float open = float(eyeBrightnessSmooth.y) / 240.0;
+        // On y voit un peu plus loin qu'à travers la surface : l'œil s'est fait à la pénombre.
+        vec3 pass = exp(-waterExtinction(hue) * 0.55 * min(len, 512.0));
+        color = color * pass + waterMurk(hue, max(open * open, 0.06), 0.7 * open) * (1.0 - pass);
     } else if (isEyeInWater >= 2) {
         float t = 1.0 - exp(-len * (isEyeInWater == 2 ? 1.2 : 0.7));
         color = mix(color, isEyeInWater == 2 ? vec3(1.6, 0.35, 0.04) : vec3(0.75, 0.82, 0.90), t);
