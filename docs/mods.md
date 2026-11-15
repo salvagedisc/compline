@@ -222,6 +222,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Dragged's Simulated Tree Chopper | "It's too much" (the team) |
 | Not Enough Animations, First-person Model | Replaced by FA: Player Extension (team choice) |
 | More Culling, Fog, Particle Rain | Fight with ATMOSPHERICS |
+| Better Smoke | Fabric only (no NeoForge build on 2026-11-15, the pack loads no Fabric layer). Where Winds Blow already does what it brings: campfire smoke that drifts with the pack's wind and weather, merges into larger plumes over several fires, soul fires included (`enableWindSmoke`, on by default); both patch the same campfire classes. To check in game: test R10 |
 | Better Clouds | Draws the clouds in place of ATMOSPHERICS, whose clouds follow the mist, dusk and rain; removed on 2026-10-29 ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Cirrus, Simple Clouds, Nuit, Stellar View, Caelum | Cirrus replaces ATMOSPHERICS' fog and sky; Simple Clouds needs OpenGL 4.3 (not on macOS); ATMOSPHERICS cancels the vanilla sky, so skybox mods have no effect ([0016](decisions/0016-vent-et-lumiere.md)) |
 | Vibrancy, Gleam, Colorful Lighting, Physics Mod | Lighting or physics engines that are risky with Sodium 0.8 and Sable |

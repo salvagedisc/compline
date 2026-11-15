@@ -50,3 +50,4 @@ After the first in-game tests (2026-10-28), the team found the world bland where
 - R7. Clouds: two layers, mist-coloured in misty biomes, orange at dusk, dark at night and in the rain; mountains rise through the lower layer.
 - R8. Sun, moon and stars: bigger and brighter, still believable; the Enhanced Celestials moon is drawn over ATMOSPHERICS' moon at the right size.
 - R9. No ATMOSPHERICS wind streaks or tumbleweeds next to Where Winds Blow's.
+- R10. Campfire smoke (added on 2026-11-15, when Better Smoke was set aside): it bends with the wind, several fires side by side merge into one larger plume, rain and storm change it, a soul fire keeps its own colour.
