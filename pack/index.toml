@@ -77,6 +77,10 @@ file = "config/friendsandfoes.json"
 hash = "e835d69453c8f89e216418cec71966db955bc75ee264e3ac11275e5bff52cd93"
 
 [[files]]
+file = "config/handson_delight.properties"
+hash = "07f96a2860f85e6bfbc277eb52e6bfea6ce57d09a8eb7d0c42f6dacd5eb9fe34"
+
+[[files]]
 file = "config/hybrid_aquatic.json"
 hash = "12ee2cf37f37fe0ad796fa054e4851b64fbd762d12cb5ad3745191779f2dcd3d"
 
@@ -1593,6 +1597,10 @@ file = "kubejs/data/friendsandfoes/tags/worldgen/biome/has_structure/illusioner_
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
+file = "kubejs/data/handson_delight/tags/item/assembled.json"
+hash = "80b8acafc2400043529facde85c21040d9d14f6ab1fd882014980cb74a7a3275"
+
+[[files]]
 file = "kubejs/data/hapi/tags/worldgen/biome/cold_oceans.json"
 hash = "cc75d501d62cff1f3f689bcec94a9b7477349ca14f3421b0258123a3b995ebae"
 
@@ -2118,7 +2126,7 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/server_scripts/cuisine.js"
-hash = "fcd49be9ab440aa04fbb9a1734ba828d64e3a9b8a2e25f6edfe3d4602d90d412"
+hash = "f1115c9d2d7536dec3632c3eae700d8516ae31665f436c57f16e58a6f8a2370b"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
