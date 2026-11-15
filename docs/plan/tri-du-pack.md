@@ -57,7 +57,7 @@ Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md))
 |---|---|
 | Create, Aeronautics, Simulated | Potato cannon and mounted potato cannon, worldshaper, plunger launcher, creative physics staff, netherite backtank and diving gear, crushed ores of the 9 metals absent from the pack, experience nugget and block |
 | Overgeared | Nether alloy furnace, netherite alloy, Nether tool cast, heated silver, tier A and B anvils |
-| Kaleidoscope Cookery, Cold Sweat | Dishes made from blaze powder, chorus fruit and Nether fungi, crimson and warped furniture, netherite knife; hoglin hide and armour |
+| Farmer's Delight, Cold Sweat | Nether salad, crimson and warped cabinets, netherite knife; hoglin hide and armour (Kaleidoscope Cookery's Nether dishes and furniture until 2026-11-15) |
 | Exposure, Envelope, Amendments, Lootr | Interplanar projectors; crimson and warped pigeonholes, charred pigeon egg; dragon charge; Lootr shulker and trophy |
 | Supplementaries | The items switched off above |
 | Handcrafted | 19 trophies (12 of creatures that no longer exist), the oven, berry jam, 30 crimson and warped furniture pieces |
@@ -93,7 +93,7 @@ The Overgeared plates stay next to Create's sheets: the iron and copper armour o
 
 The maintainer asked whether a mod changes how these levels play; otherwise we do it ourselves. Research of 2026-11-01 (Modrinth, CurseForge, jars):
 
-- **Forge**: Overgeared 1.6.19 already overrides 43 vanilla tool and armour recipes (forged heads, plates, steel for diamond). The only metal objects still made at the workbench were the Kaleidoscope kitchen knives: iron now takes an Overgeared plate, gold a forged gold blade, diamond goes through the smithing table with the Overgeared diamond template, like every diamond tool. Hybrid Aquatic coral and seashell tools stay (sea material, not metal); mod armours are made of creature parts and stay.
+- **Forge**: Overgeared 1.6.19 already overrides 43 vanilla tool and armour recipes (forged heads, plates, steel for diamond). The only metal objects still made at the workbench were the kitchen knives (Kaleidoscope's, Farmer's Delight's since 2026-11-15): iron now takes an Overgeared plate, gold a forged gold blade, diamond goes through the smithing table with the Overgeared diamond template, like every diamond tool. Hybrid Aquatic coral and seashell tools stay (sea material, not metal); mod armours are made of creature parts and stay.
 - **Rope and climbing**: no mod replaces Supplementaries' rope. Rope costs more (3 flax for 2 ropes instead of 3), the rope arrow carries 8, and the pulley needs a Create cogwheel instead of an iron ingot, so loads cannot be lifted before the workshop. Pick Climber and Yori3o's Grappling Hooks can be tried later.
 - **Cooking**: no mod makes the furnace or the campfire less efficient. Cooked meats stay as they are; Well Seasoned and Cook Your Food can be tried later.
 

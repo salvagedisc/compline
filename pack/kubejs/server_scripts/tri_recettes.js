@@ -61,21 +61,21 @@ ServerEvents.recipes(event => {
     C: 'create:cogwheel'
   }).id('compline:tri/poulie')
 
-  // Couteaux de cuisine de Kaleidoscope : ils se faisaient à l'établi avec des lingots, à
+  // Couteaux de Farmer's Delight : ils se faisaient à l'établi avec des lingots, à
   // côté de la forge d'Overgeared. Le fer passe par une plaque forgée, l'or par une lame
   // forgée, le diamant par la table de forgeron comme les autres outils en diamant.
-  event.remove({ id: 'kaleidoscope_cookery:iron_kitchen_knife' })
-  event.remove({ id: 'kaleidoscope_cookery:gold_kitchen_knife' })
-  event.remove({ id: 'kaleidoscope_cookery:diamond_kitchen_knife' })
-  event.shaped('kaleidoscope_cookery:iron_kitchen_knife', ['#', 'S'], {
+  event.remove({ id: 'farmersdelight:iron_knife' })
+  event.remove({ id: 'farmersdelight:golden_knife' })
+  event.remove({ id: 'farmersdelight:diamond_knife' })
+  event.shaped('farmersdelight:iron_knife', ['#', 'S'], {
     '#': 'overgeared:iron_plate',
     S: 'minecraft:stick'
   }).id('compline:tri/couteau_fer')
-  event.shaped('kaleidoscope_cookery:gold_kitchen_knife', ['#', 'S'], {
+  event.shaped('farmersdelight:golden_knife', ['#', 'S'], {
     '#': 'overgeared:golden_sword_blade',
     S: 'minecraft:stick'
   }).id('compline:tri/couteau_or')
-  event.smithing('kaleidoscope_cookery:diamond_kitchen_knife',
+  event.smithing('farmersdelight:diamond_knife',
     'overgeared:diamond_upgrade_smithing_template',
-    'kaleidoscope_cookery:iron_kitchen_knife', 'minecraft:diamond').id('compline:tri/couteau_diamant')
+    'farmersdelight:iron_knife', 'minecraft:diamond').id('compline:tri/couteau_diamant')
 })

@@ -33,6 +33,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0027](0027-rename-to-compline.md) | The pack is renamed Compline | Tilth no longer convinced: pack, custom mod, namespaces and repository become Compline / `compline`; worlds made before lose the mod's blocks |
 | [0028](0028-house-shader.md) | A house shader pack written from scratch | Brumaire in `pack/shaderpacks/`, off by default; Iris, Colorwheel and Iris Veil Compat; the mist follows the clearings; forks of Complementary and BSL ruled out by their licences |
 | [0029](0029-look-without-shader.md) | The default look comes from a house resource pack | `compline-ambiance` with Polytone, on by default: sun shadows from a height field given by the `compline` mod, sun shafts, air, under water, grade; Recrafted is the model, none of its files are used; Brumaire stays as an option |
+| [0030](0030-farmers-delight-kitchen.md) | Farmer's Delight replaces Kaleidoscope Cookery | Farmer's Delight, Hands-On Delight (+ Diegesis), Create: Central Kitchen and Cinematic Interactions; Kaleidoscope Cookery, Compat and Automation leave; knives still go through the forge |
 
 ## Template
 

@@ -92,7 +92,7 @@ All numbers are named constants at the top of the file.
 `MAX_HEALTH` and `max_health` were searched for in all the jars of the pack.
 
 - **Ancient Remnants**: no blessing touches maximum health. "Desperate Vitality" gives Regeneration below 33% health, and the Sentinel's Aegis gives armor.
-- **Cold Sweat, Overgeared, Kaleidoscope Cookery, Thirst Was Reclaimed**: nothing on the player's maximum health. Cold Sweat only uses it for its chameleon.
+- **Cold Sweat, Overgeared, Kaleidoscope Cookery (replaced by Farmer's Delight on 2026-11-15, not re-read), Thirst Was Reclaimed**: nothing on the player's maximum health. Cold Sweat only uses it for its chameleon.
 - **Traveler's Backpack**: the Warden backpack adds +4 with its own identifier `travelersbackpack:warden_backpack_max_health`. The two modifiers add up.
 - **Vanilla Health Boost effect**: it also has its own modifier, and they add up.
 - The script only reads and modifies `compline:mort`. The cap of 10 hearts applies only to the shard: a bonus from another source can still exceed 10.

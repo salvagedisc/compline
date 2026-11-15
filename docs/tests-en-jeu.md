@@ -98,8 +98,11 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 ## Session 4: survival (thirst, anvil, leather, health, altitude)
 
+- [ ] **Cooking by hand** (Farmer's Delight, Hands-On Delight): craft a cooking pot and a stove, cut an onion and a tomato on the cutting board with a flint knife, cook a soup in the pot over the stove while stirring; the stirring stars give extra servings (judge whether it is too generous). Fill the skillet, then a keg. Texts in French. Then Sneak + use on the pot: the Farmer's Delight window still opens.
+- [ ] **Vanilla stations with the hands** (Cinematic Interactions): craft on the workbench top, load a furnace by hand, repair at the vanilla anvil, cut at the stonecutter, read a book on a lectern, sit at a campfire; Sneak + use opens the usual window. Texts and settings screen in French; Punchy and the shoulder view stay correct; Overgeared's smithing anvil keeps its own interface.
+- [ ] **Kitchen and Create** (Create: Central Kitchen): a deployer holding a knife cuts on the cutting board, a mechanical arm feeds the cooking pot and takes the dishes out.
 - [ ] **Bag** (Reliable Backpacks): craft it from 8 tanned leather, wear it on the back (Curios slot, not the chestplate), look at it with Fresh Animations, 3D Skin Layers and the shoulder view, place it on the ground and on an airship, dye it [B1 to B4].
-- [ ] **Stacks**: logs and ingots stop at 16, planks and stone at 32, seeds at 64, chests at 8, Create machines at 4, water bottles at 8; tools never stack. A Kaleidoscope pot (9 dishes) and the Create crusher (18 nuggets) empty without losing anything. Compare `config/sensible_stackables/config.toml` with the generated file [P1 to P5].
+- [ ] **Stacks**: logs and ingots stop at 16, planks and stone at 32, seeds at 64, chests at 8, Create machines at 4, water bottles at 8; tools never stack. A Farmer's Delight cooking pot (its stack of servings) and the Create crusher (18 nuggets) empty without losing anything. Compare `config/sensible_stackables/config.toml` with the generated file [P1 to P5].
 - [ ] **Sleeping bag** (Comforts): sleep in it, the spawn point does not move; is it cold in the snow (Cold Sweat)?
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].

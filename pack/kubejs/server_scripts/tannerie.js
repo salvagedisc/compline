@@ -18,8 +18,6 @@ const TANNERIE_OBJETS = [
 
 // Recettes du pack qui donnent du cuir sans passer par la tannerie.
 const TANNERIE_RECETTES_RETIREES = [
-  // chair putréfiée séchée au soleil sur le plateau en bambou -> cuir
-  'kaleidoscope_cookery:bamboo_tray/drying/rotten_flesh_to_leather',
   // six chairs putréfiées envoyées par pigeon -> cuir
   'envelope:mailing/automated_supply_service/leather',
   // peau de Naturalist cuite au four -> cuir en 10 secondes

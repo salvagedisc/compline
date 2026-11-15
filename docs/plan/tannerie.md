@@ -52,14 +52,13 @@ Removed, because they give leather outside the tannery:
 
 | Recipe | What it did |
 |---|---|
-| `kaleidoscope_cookery:bamboo_tray/drying/rotten_flesh_to_leather` | rotten flesh dried in the sun → leather |
 | `envelope:mailing/automated_supply_service/leather` | 6 rotten flesh sent by pigeon → leather |
 | `naturalist:leather_from_smelting_hide` | Naturalist hide in the furnace → leather in 10 seconds |
 | `alexsmobs:kangaroo_hide_to_leather` | 2 kangaroo hides → leather (replaced, see above) |
 
 Tannery's small and large satchels are removed (recipes, loot, EMI: `TANNERIE_OBJETS` and `client_scripts/tannerie.js`): Reliable Backpacks already gives the single bag of the pack ([0012](../decisions/0012-sacs-piles-jours.md)).
 
-Kept, because they recycle leather that already exists or come from rare loot: Create's saddle at the mill and horse armours at the crusher, Farm & Charm's leather horse armour at the chopper, Quark's bound leather block, Cold Sweat's hoglin hide (Nether closed), leather in a few chests (Envelope's lost letters, the illusioner's shack, vanilla fishing).
+Kept, because they recycle leather that already exists or come from rare loot: Create's saddle at the mill and horse armours at the crusher, Farm & Charm's leather horse armour at the chopper, Farmer's Delight's leather armour, horse armour and saddle cut back on the cutting board, Quark's bound leather block, Cold Sweat's hoglin hide (Nether closed), leather in a few chests (Envelope's lost letters, the illusioner's shack, vanilla fishing).
 
 Leather uses do not change: every recipe keeps `minecraft:leather`. Overgeared 1.6.19 has no leather recipe: its armours are forged from metal plates.
 

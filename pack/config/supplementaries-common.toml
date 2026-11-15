@@ -66,7 +66,7 @@
 			enabled = false
 
 [building]
-	#Crêpes sans cuisson : la cuisine passe par Kaleidoscope Cookery
+	#Crêpes sans cuisson : la cuisine passe par Farmer's Delight
 	pancake = false
 	[building.sconce]
 		enabled = true
