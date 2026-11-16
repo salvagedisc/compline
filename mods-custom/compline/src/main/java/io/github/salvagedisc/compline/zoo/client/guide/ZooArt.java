@@ -159,8 +159,7 @@ final class ZooArt {
             camera = source.load("minecraft", "textures/item/spyglass.png");
         }
 
-        int[] sepia = sepiaTable(row(stampsOn, THERIMOSS), row(stampsOff, THERIMOSS));
-        Img stamps = stampSheet(stampsOn, stampsOff, camera, sepia);
+        Stamps stamps = stamps(stampsOn, stampsOff, camera);
 
         Img[] ribbons = new Img[VARIANTS];
         int[] inks = new int[VARIANTS];
@@ -169,7 +168,7 @@ final class ZooArt {
         ribbons[3] = tint(ribbons[2], SKY);
         inks[3] = inks[2];
         ribbons[4] = ribbon(info, OBSIDICERATOPS, inks, 4);
-        int[] fill = paperPalette(row(stampsOn, THERIMOSS), row(stampsOff, THERIMOSS));
+        int[] fill = paperPalette(stamps.litBases(), stamps.offBases());
         Set<Integer> shadow = new HashSet<>();
         for (int x = 0; x < RIBBON_W; x++) {
             shadow.add(ribbons[1].get(x, RIBBON_H - 1));
@@ -199,7 +198,7 @@ final class ZooArt {
         Img tabs = tabSheet(source, footprint);
         Img bookmark = bookmark(need(source, "ec_ad", GUIDE + "markers/off.png"),
                 need(source, "ec_ad", GUIDE + "markers/on.png"), footprint);
-        return new Art(stamps, bookmark, tabs, banner, bannerInk, ribbonSheet, inks, frames);
+        return new Art(stamps.sheet(), bookmark, tabs, banner, bannerInk, ribbonSheet, inks, frames);
     }
 
     private static Img need(Source source, String namespace, String path) {
@@ -220,91 +219,193 @@ final class ZooArt {
         return out;
     }
 
+    /** La planche des tampons, et les fonds vides d'une ligne allumée et de la ligne éteinte. */
+    private record Stamps(Img sheet, Img[] litBases, Img[] offBases) {
+    }
+
+    /** Le centre du losange d'un tampon (34 sur 34, l'ombre en dessous). */
+    private static final float STAMP_CENTER = (STAMP_W - 1) / 2.0F;
+
     /**
      * Les tampons : une ligne éteinte puis une par milieu, dans l'ordre Apercevoir, Photographier, Héberger, Maîtriser.
-     * Archie a la loupe, le crâne, les cœurs et la coupe ; le crâne laisse la place à l'appareil photo.
+     * Archie a la loupe, le crâne, les cœurs et la coupe ; le crâne laisse la place à l'appareil photo. Chaque dessin
+     * est détaché de son fond et reposé au centre du losange (ceux d'Archie en sont décalés d'un pixel ou deux).
      */
-    private static Img stampSheet(Img on, Img off, Img camera, int[] sepia) {
-        Img sheet = new Img(sheet(STAMP_W, 4), sheet(STAMP_H, VARIANTS));
+    private static Stamps stamps(Img on, Img off, Img camera) {
         Img[][] rows = new Img[VARIANTS][];
         rows[0] = row(off, THERIMOSS);
         rows[1] = row(on, THERIMOSS);
         rows[2] = row(on, CORALOSAUR);
         rows[4] = row(on, OBSIDICERATOPS);
+        boolean[][] masks = glyphMasks(rows[1], rows[2], rows[4]);
+        Img[][] bases = new Img[VARIANTS][];
+        for (int v : new int[] {0, 1, 2, 4}) {
+            bases[v] = bases(rows[v], masks);
+            for (int i = 0; i < 4; i++) {
+                rows[v][i] = recentred(rows[v][i], bases[v][i], masks[i]);
+            }
+        }
         rows[3] = new Img[4];
+        bases[3] = new Img[4];
         for (int i = 0; i < 4; i++) {
             rows[3][i] = tint(rows[2][i], SKY);
+            bases[3][i] = tint(bases[2][i], SKY);
         }
+        if (camera != null) {
+            Img offCamera = engrave(camera, offInk(rows[0], masks));
+            for (int v = 0; v < VARIANTS; v++) {
+                rows[v][1] = centred(bases[v][1], v == 0 ? offCamera : camera);
+            }
+        }
+        Img sheet = new Img(sheet(STAMP_W, 4), sheet(STAMP_H, VARIANTS));
         for (int v = 0; v < VARIANTS; v++) {
-            Empty empty = empty(rows[v]);
-            Img photo = empty.base.copy();
-            if (camera != null) {
-                Img icon = v == 0 ? map(camera, sepia) : camera;
-                int[] box = bounds(icon);
-                int x = Math.round(empty.glyphCenterX - (box[0] + box[2]) / 2.0F);
-                int y = Math.round(empty.glyphCenterY - (box[1] + box[3]) / 2.0F);
-                photo.stamp(icon, x, y);
+            for (int i = 0; i < 4; i++) {
+                sheet.paste(rows[v][i], at(i, STAMP_W), at(v, STAMP_H));
             }
-            sheet.paste(rows[v][0], at(0, STAMP_W), at(v, STAMP_H));
-            sheet.paste(photo, at(1, STAMP_W), at(v, STAMP_H));
-            sheet.paste(rows[v][2], at(2, STAMP_W), at(v, STAMP_H));
-            sheet.paste(rows[v][3], at(3, STAMP_W), at(v, STAMP_H));
         }
-        return sheet;
+        return new Stamps(sheet, bases[1], bases[0]);
     }
 
-    /** Un losange vide, retrouvé en comparant les quatre tampons d'une ligne, et le centre de leurs dessins. */
-    private record Empty(Img base, float glyphCenterX, float glyphCenterY) {
+    /** La profondeur d'un pixel dans le losange d'un tampon : 0 sur son bord, 17 au centre. */
+    private static float depth(int x, int y) {
+        return STAMP_W / 2.0F - (Math.abs(x - STAMP_CENTER) + Math.abs(y - STAMP_CENTER));
     }
 
-    private static Empty empty(Img[] stamps) {
-        int n = STAMP_W * STAMP_H;
-        Set<Integer> ground = new HashSet<>();
-        for (int p = 0; p < n; p++) {
-            int c = stamps[0].argb[p];
-            boolean same = true;
-            for (Img stamp : stamps) {
-                same &= stamp.argb[p] == c;
-            }
-            if (same) {
-                ground.add(c);
-            }
-        }
-        Img base = new Img(STAMP_W, STAMP_H);
-        boolean[] known = new boolean[n];
-        for (int p = 0; p < n; p++) {
-            Map<Integer, Integer> counts = new HashMap<>();
-            for (Img stamp : stamps) {
-                counts.merge(stamp.argb[p], 1, Integer::sum);
-            }
-            int best = 0;
-            for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
-                if (entry.getValue() >= 2 && entry.getValue() > best && ground.contains(entry.getKey())) {
-                    best = entry.getValue();
-                    base.argb[p] = entry.getKey();
-                }
-            }
-            known[p] = best > 0;
-        }
-        nearest(base, known);
-        float cx = 0.0F;
-        float cy = 0.0F;
-        for (Img stamp : stamps) {
-            int minX = STAMP_W, minY = STAMP_H, maxX = -1, maxY = -1;
-            for (int y = 0; y < STAMP_H; y++) {
-                for (int x = 0; x < STAMP_W; x++) {
-                    if (stamp.get(x, y) != base.get(x, y)) {
-                        minX = Math.min(minX, x);
-                        maxX = Math.max(maxX, x);
-                        minY = Math.min(minY, y);
-                        maxY = Math.max(maxY, y);
+    /**
+     * Les dessins des quatre tampons, relevés sur les lignes allumées : à l'intérieur du losange, tout ce qui n'est
+     * pas la couleur vive du fond. Les dessins sont aux mêmes places d'une ligne à l'autre ; la réunion des lignes
+     * rattrape un verre de loupe qui aurait la couleur du fond.
+     */
+    private static boolean[][] glyphMasks(Img[]... lit) {
+        boolean[][] masks = new boolean[4][STAMP_W * STAMP_H];
+        for (Img[] row : lit) {
+            for (int i = 0; i < 4; i++) {
+                float ground = groundHue(row[i]);
+                for (int y = 0; y < STAMP_H; y++) {
+                    for (int x = 0; x < STAMP_W; x++) {
+                        int c = row[i].get(x, y);
+                        float[] hsv = hsv(c);
+                        float gap = Math.abs(hsv[0] - ground);
+                        boolean background = Math.min(gap, 360.0F - gap) < 30.0F && hsv[1] > 0.35F;
+                        if (depth(x, y) > 4.0F && !background) {
+                            masks[i][y * STAMP_W + x] = true;
+                        }
                     }
                 }
             }
-            cx += (minX + maxX) / 2.0F / stamps.length;
-            cy += (minY + maxY) / 2.0F / stamps.length;
         }
-        return new Empty(base, cx, cy);
+        return masks;
+    }
+
+    /** La teinte du fond d'un tampon allumé : la couleur vive la plus courante près de son bord. */
+    private static float groundHue(Img stamp) {
+        Map<Integer, Integer> counts = new HashMap<>();
+        for (int y = 0; y < STAMP_H; y++) {
+            for (int x = 0; x < STAMP_W; x++) {
+                int c = stamp.get(x, y);
+                float d = depth(x, y);
+                if (d > 4.0F && d < 7.0F && hsv(c)[1] > 0.35F) {
+                    counts.merge(c, 1, Integer::sum);
+                }
+            }
+        }
+        return hsv(mostCommon(counts, 0))[0];
+    }
+
+    /**
+     * Le fond vide de chaque tampon d'une ligne : sous son dessin (élargi d'un pixel), le même pixel d'un autre
+     * tampon de la ligne où il n'y a rien, sinon le plus proche pixel connu.
+     */
+    private static Img[] bases(Img[] stamps, boolean[][] masks) {
+        int n = STAMP_W * STAMP_H;
+        boolean[][] wide = new boolean[4][];
+        for (int i = 0; i < 4; i++) {
+            wide[i] = masks[i].clone();
+            dilate(wide[i], STAMP_W, 0, STAMP_W - 1, 0, STAMP_H - 1);
+        }
+        Img[] out = new Img[4];
+        for (int i = 0; i < 4; i++) {
+            Img base = stamps[i].copy();
+            boolean[] known = new boolean[n];
+            for (int p = 0; p < n; p++) {
+                known[p] = !wide[i][p];
+                for (int k = 1; k < 4 && !known[p]; k++) {
+                    int j = (i + k) % 4;
+                    if (!wide[j][p]) {
+                        base.argb[p] = stamps[j].argb[p];
+                        known[p] = true;
+                    }
+                }
+            }
+            nearest(base, known);
+            out[i] = base;
+        }
+        return out;
+    }
+
+    /** Le décalage qui met le rectangle {@code box} au centre du losange ; un demi-pixel se rattrape vers le haut. */
+    private static int[] toCentre(int[] box) {
+        int dx = Math.round(STAMP_CENTER - (box[0] + box[2]) / 2.0F);
+        int dy = (int) Math.floor(STAMP_CENTER - (box[1] + box[3]) / 2.0F);
+        return new int[] {dx, dy};
+    }
+
+    /** Le dessin d'un tampon, reposé au centre de son fond vide. */
+    private static Img recentred(Img stamp, Img base, boolean[] mask) {
+        int minX = STAMP_W, minY = STAMP_H, maxX = -1, maxY = -1;
+        for (int p = 0; p < mask.length; p++) {
+            if (mask[p]) {
+                minX = Math.min(minX, p % STAMP_W);
+                maxX = Math.max(maxX, p % STAMP_W);
+                minY = Math.min(minY, p / STAMP_W);
+                maxY = Math.max(maxY, p / STAMP_W);
+            }
+        }
+        if (maxX < 0) {
+            return stamp;
+        }
+        int[] shift = toCentre(new int[] {minX, minY, maxX, maxY});
+        Img out = base.copy();
+        for (int p = 0; p < mask.length; p++) {
+            if (mask[p]) {
+                out.set(p % STAMP_W + shift[0], p / STAMP_W + shift[1], stamp.argb[p]);
+            }
+        }
+        return out;
+    }
+
+    /** Une icône posée au centre d'un fond vide. */
+    private static Img centred(Img base, Img icon) {
+        int[] box = bounds(icon);
+        int[] shift = toCentre(box);
+        Img out = base.copy();
+        out.stamp(icon, shift[0], shift[1]);
+        return out;
+    }
+
+    /** Les couleurs des dessins éteints d'Archie, gravés dans le papier, de la plus sombre à la plus claire. */
+    private static int[] offInk(Img[] off, boolean[][] masks) {
+        Set<Integer> colors = new HashSet<>();
+        for (int i = 0; i < 4; i++) {
+            if (i == 1) {
+                continue;
+            }
+            for (int p = 0; p < masks[i].length; p++) {
+                int c = off[i].argb[p];
+                if (masks[i][p] && alpha(c) > 0) {
+                    colors.add(c | 0xFF000000);
+                }
+            }
+        }
+        return colors.stream().sorted((a, b) -> luma(a) - luma(b)).mapToInt(Integer::intValue).toArray();
+    }
+
+    /**
+     * Grave une icône comme Archie éteint les siennes : chaque couleur prend, à son rang de clarté, une couleur de ses
+     * dessins éteints.
+     */
+    private static Img engrave(Img icon, int[] ink) {
+        return ink.length == 0 ? icon : fade(icon, ink, Set.of());
     }
 
     /** Remplit chaque pixel inconnu avec le plus proche pixel connu. */
@@ -720,61 +821,18 @@ final class ZooArt {
     // ---------------------------------------------------------------- couleurs
 
     /**
-     * La table qui fait passer un tampon allumé à son état éteint, apprise sur ceux d'Archie : à chaque clarté du
-     * tampon allumé, la couleur moyenne du même pixel éteint.
-     */
-    private static int[] sepiaTable(Img[] on, Img[] off) {
-        long[][] sums = new long[256][4];
-        for (int i = 0; i < on.length; i++) {
-            for (int p = 0; p < on[i].argb.length; p++) {
-                int a = on[i].argb[p];
-                int b = off[i].argb[p];
-                if (alpha(a) == 0 || alpha(b) == 0) {
-                    continue;
-                }
-                long[] sum = sums[luma(a)];
-                sum[0] += (b >> 16) & 0xFF;
-                sum[1] += (b >> 8) & 0xFF;
-                sum[2] += b & 0xFF;
-                sum[3]++;
-            }
-        }
-        int[] table = new int[256];
-        for (int l = 0; l < 256; l++) {
-            int found = -1;
-            for (int d = 0; d < 256 && found < 0; d++) {
-                if (l - d >= 0 && sums[l - d][3] > 0) {
-                    found = l - d;
-                } else if (l + d < 256 && sums[l + d][3] > 0) {
-                    found = l + d;
-                }
-            }
-            long[] sum = sums[Math.max(found, 0)];
-            long n = Math.max(sum[3], 1);
-            table[l] = 0xFF000000 | (int) (sum[0] / n) << 16 | (int) (sum[1] / n) << 8 | (int) (sum[2] / n);
-        }
-        return table;
-    }
-
-    private static Img map(Img img, int[] table) {
-        Img out = img.copy();
-        for (int p = 0; p < out.argb.length; p++) {
-            int c = out.argb[p];
-            if (alpha(c) > 0) {
-                out.argb[p] = (c & 0xFF000000) | (table[luma(c)] & 0xFFFFFF);
-            }
-        }
-        return out;
-    }
-
-    /**
      * Les couleurs du fond d'un tampon éteint d'Archie (là où l'allumé est coloré), de la plus sombre à la plus
      * claire.
      */
-    private static int[] paperPalette(Img[] on, Img[] off) {
-        Img lit = empty(on).base;
-        Img dim = empty(off).base;
+    private static int[] paperPalette(Img[] lit, Img[] dim) {
         Set<Integer> colors = new HashSet<>();
+        for (int i = 0; i < lit.length; i++) {
+            collectPaper(lit[i], dim[i], colors);
+        }
+        return colors.stream().sorted((a, b) -> luma(a) - luma(b)).mapToInt(Integer::intValue).toArray();
+    }
+
+    private static void collectPaper(Img lit, Img dim, Set<Integer> colors) {
         for (int p = 0; p < lit.argb.length; p++) {
             int c = lit.argb[p];
             int r = (c >> 16) & 0xFF;
@@ -786,7 +844,6 @@ final class ZooArt {
                 colors.add(dim.argb[p]);
             }
         }
-        return colors.stream().sorted((a, b) -> luma(a) - luma(b)).mapToInt(Integer::intValue).toArray();
     }
 
     /**
@@ -828,32 +885,17 @@ final class ZooArt {
         if (alpha(c) == 0) {
             return c;
         }
-        float r = ((c >> 16) & 0xFF) / 255.0F;
-        float g = ((c >> 8) & 0xFF) / 255.0F;
-        float b = (c & 0xFF) / 255.0F;
-        float max = Math.max(r, Math.max(g, b));
-        float min = Math.min(r, Math.min(g, b));
-        float delta = max - min;
-        if (max == 0.0F || delta / max < tint.minSaturation()) {
+        float[] hsv = hsv(c);
+        float h = hsv[0];
+        if (hsv[2] == 0.0F || hsv[1] < tint.minSaturation()) {
             return c;
-        }
-        float h;
-        if (max == r) {
-            h = 60.0F * (((g - b) / delta) % 6.0F);
-        } else if (max == g) {
-            h = 60.0F * ((b - r) / delta + 2.0F);
-        } else {
-            h = 60.0F * ((r - g) / delta + 4.0F);
-        }
-        if (h < 0.0F) {
-            h += 360.0F;
         }
         if (h < tint.from() || h > tint.to()) {
             return c;
         }
         h = (h + tint.degrees()) % 360.0F;
-        float s = Math.min(1.0F, delta / max * tint.saturation());
-        float v = Math.min(1.0F, max * tint.value());
+        float s = Math.min(1.0F, hsv[1] * tint.saturation());
+        float v = Math.min(1.0F, hsv[2] * tint.value());
         float k = h / 60.0F;
         int sector = (int) Math.floor(k) % 6;
         float f = k - (float) Math.floor(k);
@@ -869,6 +911,28 @@ final class ZooArt {
             default -> new float[] {v, p, q};
         };
         return (c & 0xFF000000) | Math.round(rgb[0] * 255) << 16 | Math.round(rgb[1] * 255) << 8 | Math.round(rgb[2] * 255);
+    }
+
+    /** Teinte (0 à 360), saturation et clarté (0 à 1). */
+    private static float[] hsv(int c) {
+        float r = ((c >> 16) & 0xFF) / 255.0F;
+        float g = ((c >> 8) & 0xFF) / 255.0F;
+        float b = (c & 0xFF) / 255.0F;
+        float max = Math.max(r, Math.max(g, b));
+        float min = Math.min(r, Math.min(g, b));
+        float delta = max - min;
+        if (delta == 0.0F) {
+            return new float[] {0.0F, 0.0F, max};
+        }
+        float h;
+        if (max == r) {
+            h = 60.0F * (((g - b) / delta) % 6.0F);
+        } else if (max == g) {
+            h = 60.0F * ((b - r) / delta + 2.0F);
+        } else {
+            h = 60.0F * ((r - g) / delta + 4.0F);
+        }
+        return new float[] {h < 0.0F ? h + 360.0F : h, delta / max, max};
     }
 
     private static int mostCommon(Map<Integer, Integer> counts, int fallback) {

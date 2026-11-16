@@ -2306,8 +2306,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.20.1.jar"
-hash = "d077307577e19d8dfbb6a3092a2b29c6cdc466d28c83140368e07f62af5cabd9"
+file = "mods/compline-0.20.2.jar"
+hash = "6013d9cdcae27fadf8fab9d7896f1a03b6b110fffce746a67dc05bf43c330eb4"
 
 [[files]]
 file = "mods/configurable.pw.toml"
