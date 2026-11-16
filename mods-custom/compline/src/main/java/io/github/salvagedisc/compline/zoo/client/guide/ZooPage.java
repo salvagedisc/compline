@@ -39,6 +39,8 @@ final class ZooPage {
     /** La boîte où une bête est dessinée, centrée sur son losange. */
     static final float PORTRAIT_W = 46.0F;
     static final float PORTRAIT_H = 40.0F;
+    /** Le dedans du losange d'un portrait (sa demi-diagonale, 29, moins son cadre) : une bête n'en sort pas. */
+    static final float PORTRAIT_REACH = 24.0F;
 
     private ZooPage() {
     }
@@ -56,12 +58,54 @@ final class ZooPage {
         float w = ZooArt.BANNER_W;
         float h = ZooArt.BANNER_H;
         context.drawSprite(Sprite.of(ZooTextures.BANNER, 0.0F, 0.0F, w, h, w, h), BANNER_X, BANNER_Y, w, h);
-        Component text = Component.literal(title.getString().toUpperCase(Locale.FRENCH));
+        String upper = title.getString().toUpperCase(Locale.FRENCH);
+        StringBuilder plain = new StringBuilder(upper.length());
+        for (char c : upper.toCharArray()) {
+            int accent = ACCENTED.indexOf(c);
+            plain.append(accent >= 0 ? BASES.charAt(accent) : c);
+        }
+        Component text = Component.literal(plain.toString());
         // Les capitales d'Archie font 12 de haut, dès le rang 5 de la bannière, et avancent de 12 : celles du jeu
         // (7 rangs, 6 d'avance) à l'échelle 2 en largeur et 12/7 en hauteur.
+        int ink = 0xFF000000 | ZooTextures.art().bannerInk();
         float x = Math.round(PAGE_CENTER - ZooText.inked(font, text) * BANNER_SCALE_X / 2.0F);
-        ZooText.line(graphics, font, text, x, BANNER_Y + 5.0F, 0xFF000000 | ZooTextures.art().bannerInk(),
-                BANNER_SCALE_X, BANNER_SCALE_Y);
+        float capTop = BANNER_Y + 5.0F;
+        ZooText.line(graphics, font, text, x, capTop, ink, BANNER_SCALE_X, BANNER_SCALE_Y);
+        // Les accents du jeu monteraient au-dessus de la bannière à cette échelle : on les pose à la main, deux rangs
+        // d'un et demi au-dessus de la lettre, avec un d'écart.
+        for (int i = 0; i < upper.length(); i++) {
+            int accent = ACCENTED.indexOf(upper.charAt(i));
+            if (accent < 0) {
+                continue;
+            }
+            float letterX = x + font.width(plain.substring(0, i)) * BANNER_SCALE_X;
+            String[] mark = MARKS[accent];
+            for (int row = 0; row < mark.length; row++) {
+                for (int col = 0; col < mark[row].length(); col++) {
+                    if (mark[row].charAt(col) == '#') {
+                        fill(graphics, letterX + col * BANNER_SCALE_X, capTop - 4.0F + row * 1.5F, BANNER_SCALE_X, 1.5F, ink);
+                    }
+                }
+            }
+        }
+    }
+
+    /** Les capitales accentuées, leur lettre de base et leur accent (rangs 0 et 1 du dessin du jeu). */
+    private static final String ACCENTED = "ÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ";
+    private static final String BASES = "AAAEEEEIIOOUUUY";
+    private static final String[] GRAVE = {".#...", "..#.."};
+    private static final String[] ACUTE = {"...#.", "..#.."};
+    private static final String[] CIRCUMFLEX = {"..#..", ".#.#."};
+    private static final String[] DIAERESIS = {".....", ".#.#."};
+    private static final String[][] MARKS = {GRAVE, CIRCUMFLEX, DIAERESIS, ACUTE, GRAVE, CIRCUMFLEX, DIAERESIS,
+            {".#...", "#.#.."}, {".....", "#.#.."}, CIRCUMFLEX, DIAERESIS, GRAVE, CIRCUMFLEX, DIAERESIS, DIAERESIS};
+
+    private static void fill(GuiGraphics graphics, float x, float y, float width, float height, int color) {
+        graphics.pose().pushPose();
+        graphics.pose().translate(x, y, 0.0F);
+        graphics.pose().scale(width, height, 1.0F);
+        graphics.fill(0, 0, 1, 1, color);
+        graphics.pose().popPose();
     }
 
     /**
@@ -118,7 +162,7 @@ final class ZooPage {
     /** Une bête dans la boîte de son losange. */
     static boolean portrait(GuiGraphics graphics, net.minecraft.resources.ResourceLocation id, float frameX, float top, boolean ink) {
         return Portraits.draw(graphics, id, frameX - PORTRAIT_W / 2.0F, top + FRAME_DY - PORTRAIT_H / 2.0F,
-                PORTRAIT_W, PORTRAIT_H, ink);
+                PORTRAIT_W, PORTRAIT_H, PORTRAIT_REACH, ink);
     }
 
     static boolean inside(double mouseX, double mouseY, float x, float y, float width, float height) {

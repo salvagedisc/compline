@@ -21,6 +21,14 @@ final class ZooTextures {
     static final ResourceLocation BANNER = id("banner");
     static final ResourceLocation RIBBONS = id("ribbons");
     static final ResourceLocation FRAMES = id("frames");
+    /**
+     * Les marque-pages d'Archie, remplacés en mémoire par une copie dont les œufs des onglets de droite sont alignés
+     * (son fichier n'est pas touché ; un rechargement des ressources le relit).
+     */
+    private static final ResourceLocation ARCHIE_MARKERS_OFF =
+            ResourceLocation.fromNamespaceAndPath("ec_ad", "textures/gui/guidebook/markers/off.png");
+    private static final ResourceLocation ARCHIE_MARKERS_ON =
+            ResourceLocation.fromNamespaceAndPath("ec_ad", "textures/gui/guidebook/markers/on.png");
 
     private static ZooArt.Art art;
     private static boolean failed;
@@ -43,6 +51,8 @@ final class ZooTextures {
                 register(BANNER, art.banner());
                 register(RIBBONS, art.ribbons());
                 register(FRAMES, art.frames());
+                register(ARCHIE_MARKERS_OFF, art.markersOff());
+                register(ARCHIE_MARKERS_ON, art.markersOn());
             } catch (RuntimeException error) {
                 Compline.LOGGER.warn("zoo : images du guide impossibles à composer", error);
                 art = null;

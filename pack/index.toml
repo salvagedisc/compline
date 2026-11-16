@@ -1341,12 +1341,24 @@ file = "kubejs/data/compline/tags/entity_type/zoo/absents.json"
 hash = "059ac6988a360f4d70a7f989b6f3e9c53f418de929c75840d5057ca61f9c5ada"
 
 [[files]]
+file = "kubejs/data/compline/tags/entity_type/zoo/ciel.json"
+hash = "7ebee4dea0b2a78e5b36c2d4ff56d6ef4283abb879b41e6d97a52d469295b20a"
+
+[[files]]
+file = "kubejs/data/compline/tags/entity_type/zoo/eaux.json"
+hash = "93a1fabdba3b4eab0b28cb505f6385099039f0c61bffe27cf68a1e9df7de6588"
+
+[[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/exclus.json"
 hash = "e31922a526539a1b6c589aafb045a2ea69c3715d5f4c026b57130ec978e94d57"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/inclus.json"
 hash = "0c615d27d6e7932dab70603593b0d4b2098f06e605c17c7e8549a677ec84ef94"
+
+[[files]]
+file = "kubejs/data/compline/tags/entity_type/zoo/terre.json"
+hash = "92a4c7cd8546359f7e76850da5481d06f42fdf67ddc273c705d341167a68deeb"
 
 [[files]]
 file = "kubejs/data/compline/tags/item/pile/16.json"
@@ -2306,8 +2318,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.20.2.jar"
-hash = "6013d9cdcae27fadf8fab9d7896f1a03b6b110fffce746a67dc05bf43c330eb4"
+file = "mods/compline-0.20.3.jar"
+hash = "a3c2dbb26f21e780f8b5cf62bf408a729e1a8c9d3313b3d64cb6a5f08d8a17b5"
 
 [[files]]
 file = "mods/configurable.pw.toml"

@@ -115,6 +115,7 @@ public final class ZooGuide {
 
     /** Avant chaque image de l'écran du guide : mesure les bêtes en attente, au plus 6 ms par image. */
     public static void beforeRender() {
+        ZooTextures.art();
         Portraits.measurePending(6_000_000L);
     }
 

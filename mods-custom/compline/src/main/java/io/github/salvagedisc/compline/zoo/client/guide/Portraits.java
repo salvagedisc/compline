@@ -37,8 +37,11 @@ final class Portraits {
     private static final int CANVAS = 256;
     private static final float PROBE = 64.0F;
 
-    /** Ce qu'occupe une bête autour de son point d'ancrage, pour une échelle de 1 : gauche, droite, haut, bas. */
-    private record Extent(float left, float right, float top, float bottom) {
+    /**
+     * Ce qu'occupe une bête autour de son point d'ancrage, pour une échelle de 1 : gauche, droite, haut, bas, et la
+     * plus grande distance en losange (|dx| + |dy|) d'un de ses pixels au centre de ce rectangle.
+     */
+    private record Extent(float left, float right, float top, float bottom, float reach) {
     }
 
     private static final Map<ResourceLocation, LivingEntity> cache = new HashMap<>();
@@ -94,9 +97,11 @@ final class Portraits {
 
     /**
      * Dessine l'espèce dans la boîte ({@code x}, {@code y}, {@code width}, {@code height}), centrée et aussi grande
-     * qu'elle y tient ; faux si elle n'a pas de portrait.
+     * qu'elle y tient sans qu'aucun de ses pixels ne sorte du losange de demi-diagonale {@code diamond} centré sur la
+     * boîte ; faux si elle n'a pas de portrait.
      */
-    static boolean draw(GuiGraphics graphics, ResourceLocation id, float x, float y, float width, float height, boolean ink) {
+    static boolean draw(GuiGraphics graphics, ResourceLocation id, float x, float y, float width, float height, float diamond,
+            boolean ink) {
         LivingEntity entity = sample(id);
         if (entity == null) {
             return false;
@@ -108,7 +113,8 @@ final class Portraits {
             }
             extent = estimate(entity);
         }
-        float scale = Math.min(width / (extent.right() - extent.left()), height / (extent.bottom() - extent.top()));
+        float scale = Math.min(Math.min(width / (extent.right() - extent.left()), height / (extent.bottom() - extent.top())),
+                diamond / extent.reach());
         float anchorX = x + width / 2.0F - scale * (extent.left() + extent.right()) / 2.0F;
         float anchorY = y + height / 2.0F - scale * (extent.top() + extent.bottom()) / 2.0F;
         if (ink) {
@@ -131,7 +137,7 @@ final class Portraits {
     private static Extent estimate(LivingEntity entity) {
         float height = Math.max(entity.getBbHeight(), 0.2F);
         float width = Math.max(entity.getBbWidth(), 0.2F) * 0.8F;
-        return new Extent(-width, width, -height, 0.0F);
+        return new Extent(-width, width, -height, 0.0F, width + height / 2.0F);
     }
 
     /**
@@ -182,10 +188,12 @@ final class Portraits {
             InventoryScreen.renderEntityInInventory(graphics, anchorX, anchorY, probe, new Vector3f(), pose(), camera(), entity);
             graphics.flush();
             int[] box;
+            float reach;
             try (NativeImage image = new NativeImage(CANVAS, CANVAS, false)) {
                 RenderSystem.bindTexture(canvas.getColorTextureId());
                 image.downloadTexture(0, false);
                 box = bounds(image);
+                reach = box == null ? 0.0F : reach(image, box);
             }
             if (box == null) {
                 return null;
@@ -196,10 +204,27 @@ final class Portraits {
                 float top = CANVAS - 1 - box[3];
                 float bottom = CANVAS - box[1];
                 return new Extent((box[0] - anchorX) / probe, (box[2] + 1 - anchorX) / probe,
-                        (top - anchorY) / probe, (bottom - anchorY) / probe);
+                        (top - anchorY) / probe, (bottom - anchorY) / probe, Math.max(reach, 1.0F) / probe);
             }
         }
         return null;
+    }
+
+    /** La plus grande distance en losange d'un pixel non transparent au centre du rectangle {@code box}. */
+    private static float reach(NativeImage image, int[] box) {
+        float cx = (box[0] + box[2] + 1) / 2.0F;
+        float cy = (box[1] + box[3] + 1) / 2.0F;
+        float reach = 0.0F;
+        for (int y = box[1]; y <= box[3]; y++) {
+            for (int x = box[0]; x <= box[2]; x++) {
+                if ((image.getPixelRGBA(x, y) >>> 24) > 16) {
+                    float dx = Math.max(Math.abs(x - cx), Math.abs(x + 1 - cx));
+                    float dy = Math.max(Math.abs(y - cy), Math.abs(y + 1 - cy));
+                    reach = Math.max(reach, dx + dy);
+                }
+            }
+        }
+        return reach;
     }
 
     /** Le rectangle des pixels non transparents : {minX, minY, maxX, maxY}, ou {@code null}. */

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:caiman",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:crocodile",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:coconut_crab",
+      "required": false
+    },
+    {
+      "id": "naturalist:alligator",
+      "required": false
+    }
+  ]
+}

@@ -27,11 +27,13 @@ final class ZooIntroWidget extends AbstractWidget {
     private static final float TEXT_W = 2 * (ZooPage.PAGE_CENTER - TEXT_X);
     private static final float QUOTE_Y = 52.0F;
     private static final float LEGEND_STEP = 36.0F;
+    private static final float LEGEND_MAX_STEP = 44.0F;
     private static final float LEGEND_TEXT_DX = ZooArt.STAMP_W + 6.0F;
     /** Le bilan d'un milieu, sous son ruban : le tampon Apercevoir et le tampon Maîtriser, chacun avec son compte. */
     private static final Stamp[] BILAN = {Stamp.APERCEVOIR, Stamp.MAITRISER};
     private static final float COUNT_DX = ZooArt.STAMP_W + 2.0F;
-    private static final float COUNT_DY = ZooPage.STAMPS_DY + ZooArt.STAMP_W / 2.0F - 3.5F;
+    /** Le compte, ses 7 rangs centrés sur le losange du tampon (à un demi-rang près, vers le haut). */
+    private static final float COUNT_DY = ZooPage.STAMPS_DY + 13.0F;
     private static final float KEY_Y = 263.0F;
 
     ZooIntroWidget(float width, float height) {
@@ -49,16 +51,28 @@ final class ZooIntroWidget extends AbstractWidget {
         ZooPage.banner(context, graphics, font, Component.translatable("zoo.compline.titre"));
         float y = QUOTE_Y + ZooText.paragraphCentered(graphics, font, Component.translatable("zoo.compline.accueil"),
                 ZooPage.PAGE_CENTER, QUOTE_Y, TEXT_W, ZooText.INK);
-        y = (float) Math.ceil(y + 4.0F);
+        y += ZooText.paragraphCentered(graphics, font, Component.translatable("zoo.compline.accueil.auteur"),
+                ZooPage.PAGE_CENTER, y, TEXT_W, ZooText.INK_LIGHT);
+        y = (float) Math.ceil(y + 3.0F);
         List<Component> tooltip = null;
+        float textX = TEXT_X + LEGEND_TEXT_DX;
+        float textW = TEXT_X + TEXT_W - textX;
+        // Les quatre tampons répartis à pas égal entre la citation et la ligne de la touche.
+        int count = Stamp.values().length;
+        float step = Math.max(LEGEND_STEP, Math.min(LEGEND_MAX_STEP,
+                (float) Math.floor((KEY_Y - 10.0F - y - ZooArt.STAMP_W) / (count - 1))));
         for (Stamp stamp : Stamp.values()) {
             ZooPage.stamp(context, stamp, ZooTab.TERRE, TEXT_X, y);
-            float textX = TEXT_X + LEGEND_TEXT_DX;
-            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), textX, y + 7.0F, ZooText.INK, 1.0F);
-            ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.aide." + stamp.id()),
-                    textX, y + 18.0F, TEXT_X + TEXT_W - textX, ZooText.INK_LIGHT, 1.0F);
-            y += LEGEND_STEP;
+            // Le nom et l'aide, centrés ensemble sur le losange : 7 rangs, 4 d'écart, puis 10 par ligne d'aide.
+            Component help = Component.translatable("zoo.compline.aide." + stamp.id());
+            int lines = Math.max(1, font.split(help, (int) textW).size());
+            float height = 11.0F + (lines - 1) * (font.lineHeight + 1) + 7.0F;
+            float top = Math.round(y + ZooArt.STAMP_W / 2.0F - height / 2.0F);
+            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), textX, top, ZooText.INK, 1.0F);
+            ZooText.paragraph(graphics, font, help, textX, top + 11.0F, textW, ZooText.INK_LIGHT, 1.0F);
+            y += step;
         }
+        y += ZooArt.STAMP_W - step;
 
         int row = 0;
         for (ZooTab tab : ZooTab.values()) {
