@@ -5,6 +5,10 @@ file = "config/DistantHorizons.toml"
 hash = "e1022cea867ab184771bfc3e14f355163b304dd6c452d2d1dcfe773dd15f6d68"
 
 [[files]]
+file = "config/Koopa's Critters Configurations.toml"
+hash = "1815ea9ca772ffb626395c4a3526c86dc027e58c30bb3ba6fd92ad1c3262e943"
+
+[[files]]
 file = "config/adorablehamsterpets/main.toml"
 hash = "c58df881614688ddaeb1dd84da064e77d406dbf3d29a7e6695cf19b20ccd196e"
 
@@ -110,7 +114,7 @@ hash = "da52a1e74d2100ed61ccf10fb7e088d6cccc78524436040fa94598bebc845ea7"
 
 [[files]]
 file = "config/naturalist-server.toml"
-hash = "c9fc4c1df52508d50dec0f04dfa31006f0676de8c6e7f306e306f7051a08dc27"
+hash = "544976362b0ce9255960da1c062703760ab8c0cd3903d4cc915fc89fe41d6c81"
 
 [[files]]
 file = "config/obscuria/ancient_remnants-common.toml"
@@ -307,6 +311,10 @@ hash = "a58c36fc87d1cdb918ac6db872f8ff921097309002c57f81ceec2ad199336968"
 [[files]]
 file = "config/tectonic.json"
 hash = "f6044165a65a19cdb0fb347add8ec9ecab6a6a8af897a7e49016d0a597dc6126"
+
+[[files]]
+file = "config/wildernature-common.toml"
+hash = "998491117feed817f333e0483f9450eca21c74e2634e5a97ff0dd603ab164897"
 
 [[files]]
 file = "defaultconfigs/emi.css"
@@ -1242,7 +1250,7 @@ hash = "d36d372c211b36f992749dc3bed5bd1fe2dbe2c29acd8ac7efff310bf1e8c527"
 
 [[files]]
 file = "kubejs/client_scripts/doublons.js"
-hash = "f023d93427a60bda56b96d62cc6209b3dbcd731804b2cfeab4ae1183cc0d9264"
+hash = "56eb4cfd2bbc133fc2f66c141c7cb62063b56ba98901ab13f5418746394d0186"
 
 [[files]]
 file = "kubejs/client_scripts/faune_coupee.js"
@@ -1346,7 +1354,7 @@ hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
 
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/doublons.json"
-hash = "0910f7ebbc569b886b06f790a973d3a8b501788c8806f3c94da6a9bce1a3619b"
+hash = "5b55de553ffd6472cba752724352861a32a850155dc623a8033b7e7bf5a5ae08"
 
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/faune_coupee.json"
@@ -1374,7 +1382,7 @@ hash = "63a2fc9a18718999630147d56c0445d691197f8c035c938edcad8e0eef69b52a"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/exclus.json"
-hash = "e31922a526539a1b6c589aafb045a2ea69c3715d5f4c026b57130ec978e94d57"
+hash = "7c7a1852499192f68b2c4c156df7db214549134b8aebbf059efa5c029b08eedb"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/inclus.json"
@@ -1725,6 +1733,74 @@ file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/giant_squid_warm_tren
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/goblin_shark_cold_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/goblin_shark_lukewarm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/goblin_shark_temperate_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/goblin_shark_warm_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manatee_mangroves.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manatee_seagrass_bed.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manatee_tropical_rivers.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manta_ray_lukewarm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manta_ray_temperate_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/manta_ray_warm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/ocean_sunfish_deep_lukewarm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/ocean_sunfish_deep_temperate_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/ocean_sunfish_deep_warm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/octopus_coral_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/octopus_red_meadow.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/octopus_shallow_lukewarm_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/octopus_shallow_temperate_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
 file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/otter_rivers.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
@@ -1802,6 +1878,38 @@ hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
 file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/sea_urchin_red_meadow.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/seahorse_coral_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/seahorse_seagrass_bed.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_cold_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_cold_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_deep_reef.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_temperate_oceans.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_temperate_trench.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/spider_crab_warm_trench.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
@@ -2125,6 +2233,38 @@ file = "kubejs/data/naturalist/tags/worldgen/biome/variant/tiger/white_tiger.jso
 hash = "159af79b05df2d6ab2417042c5196700e22666674f8f3c4583eb8708d49b2a38"
 
 [[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_barracuda.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_clam.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_frequent_hamster.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_hamster.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_herring.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_small_anthill.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_snail.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
+file = "kubejs/data/spawn/neoforge/biome_modifier/add_tuna.json"
+hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
+
+[[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/deep_warm_island_generates.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
@@ -2310,7 +2450,7 @@ hash = "ee09776b3e975b8babb6fb27cf790abd78263b2e7b40eb8071977a277ed417a9"
 
 [[files]]
 file = "kubejs/server_scripts/doublons.js"
-hash = "768c30116a5233e9693150b66cc0f0aae407ad142235a478d8e86f476411fe28"
+hash = "0037f753e932541cd571b3d63ed1d0ddf3c4fcd2a1ca73eb22de53aab540a031"
 
 [[files]]
 file = "kubejs/server_scripts/faune_coupee.js"
@@ -2370,7 +2510,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "d66a2c9564223874178f349aec35f33c57b7b4ab22f56e07f7ded62180b33ca0"
+hash = "eac24b0462e88c6557e3255cd9aee25dc29882ba7c17b52217f40f7e5d29f02c"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"

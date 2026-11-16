@@ -15,6 +15,9 @@
 		crab_removed = true
 		forest_rabbit_removed = true
 		mammoth_removed = true
+		# Dinde et canard d'Hybrid Birds.
+		turkey_removed = true
+		duck_removed = true
 	[disable_mobs.bugs]
 		# Papillons de Longwings ; coupe aussi la chenille.
 		butterfly_removed = true
