@@ -38,10 +38,7 @@ public enum ComplineModule {
      *  ne demande aucun mod ; les pages du guide demandent Archie's Dinosaurs, la photo demande Exposure. */
     ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus)),
     /** La patine : les armures se salissent quand on les porte et se lavent dans l'eau (client et serveur). Aucun mod requis. */
-    PATINE("patine", null, bus -> io.github.salvagedisc.compline.patine.PatineModule.start(bus)),
-    /** La faune redessinée : le Warden et l'élan d'Alex's Mobs refaits en GeckoLib, avec fondus et mouvements
-     *  réactifs (client). L'élan demande aussi Alex's Mobs. */
-    FAUNE("faune", Dist.CLIENT, bus -> io.github.salvagedisc.compline.faune.FauneModule.start(bus), ModIds.GECKOLIB);
+    PATINE("patine", null, bus -> io.github.salvagedisc.compline.patine.PatineModule.start(bus));
 
     private final String id;
     private final Dist side;
