@@ -26,9 +26,6 @@ public final class ComplineConfig {
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
     private static final ModConfigSpec.BooleanValue VENT_ENABLED;
-    private static final ModConfigSpec.BooleanValue FAUNE_ENABLED;
-    private static final ModConfigSpec.BooleanValue FAUNE_WARDEN;
-    private static final ModConfigSpec.BooleanValue FAUNE_MOOSE;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
     private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
     private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
@@ -86,19 +83,6 @@ public final class ComplineConfig {
                 .comment("Interrupteur de la fumée des feux de camp. Vrai : elle suit le vent, les feux voisins font un seul",
                         "panache, le feu des âmes bleuit sa fumée. Faux : la fumée du jeu.")
                 .define("enabled", true);
-        client.pop();
-
-        client.comment("Module faune (client) : des créatures redessinées et réanimées par Compline (GeckoLib), à la place",
-                "de leur modèle d'origine. La créature garde son IA, ses sons et sa boîte de collision ; seul son rendu change.").push("faune");
-        FAUNE_ENABLED = client
-                .comment("Interrupteur du module. Faux : toutes les créatures reprennent leur modèle d'origine, tout de suite.")
-                .define("enabled", true);
-        FAUNE_WARDEN = client
-                .comment("Le Warden de Compline (vrai) ou celui du jeu (faux).")
-                .define("warden", true);
-        FAUNE_MOOSE = client
-                .comment("L'élan de Compline (vrai) ou celui d'Alex's Mobs (faux). Demande Alex's Mobs.")
-                .define("moose", true);
         client.pop();
 
 
@@ -208,14 +192,6 @@ public final class ComplineConfig {
         return read(CLIENT_SPEC, HORIZON_RING_MAX_DISTANCE);
     }
 
-
-    public static boolean fauneWarden() {
-        return read(CLIENT_SPEC, FAUNE_ENABLED) && read(CLIENT_SPEC, FAUNE_WARDEN);
-    }
-
-    public static boolean fauneMoose() {
-        return read(CLIENT_SPEC, FAUNE_ENABLED) && read(CLIENT_SPEC, FAUNE_MOOSE);
-    }
 
     public static boolean ventEnabled() {
         return read(CLIENT_SPEC, VENT_ENABLED);
