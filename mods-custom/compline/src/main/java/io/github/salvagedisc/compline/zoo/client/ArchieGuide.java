@@ -5,13 +5,14 @@ import io.github.salvagedisc.compline.zoo.client.guide.ZooGuide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 
-/** Ouvre le guide d'Archie's Dinosaurs (classe chargée seulement si le mod est là). */
+/** Ouvre le guide d'Archie's Dinosaurs sur le zoo (classe chargée seulement si le mod est là). */
 final class ArchieGuide {
     private ArchieGuide() {
     }
 
     static void open() {
         Minecraft.getInstance().setScreen(new GuidebookScreen());
+        ZooGuide.openOnZoo();
     }
 
     /** Avant le dessin d'un écran : si c'est le guide, on y mesure les bêtes en attente. */

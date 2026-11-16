@@ -713,21 +713,19 @@ final class ZooArt {
     }
 
     /**
-     * Les onglets de côté : l'accueil (brun du Lushsaur, avec l'empreinte d'Archie), puis un par milieu, chacun en
-     * deux états (au repos, survolé).
+     * Les onglets de côté, un par milieu, chacun en deux états (au repos, survolé). La rangée 0 reste vide : l'accueil du
+     * zoo s'ouvre par le marque-page vert, qui porte déjà l'empreinte.
      */
     private static Img tabSheet(Source source, Img footprint) {
-        String[] dinos = {"lushsaur", "therimoss", "coralosaur", "coralosaur", "obsidiceratops"};
+        String[] dinos = {null, "therimoss", "coralosaur", "coralosaur", "obsidiceratops"};
         String[][] signs = {null, ZooGlyphs.PAW, ZooGlyphs.FISH, ZooGlyphs.BIRD, ZooGlyphs.SKULL};
         Img sheet = new Img(sheet(TAB_W, 2), sheet(TAB_H, VARIANTS));
-        for (int v = 0; v < VARIANTS; v++) {
-            Img sign = signs[v] == null ? null : ZooGlyphs.draw(signs[v], ink(footprint));
+        for (int v = 1; v < VARIANTS; v++) {
+            Img sign = ZooGlyphs.draw(signs[v], ink(footprint));
             for (int state = 0; state < 2; state++) {
                 Img tab = subTab(need(source, "ec_ad", GUIDE + "categories/" + dinos[v] + "/markers/" + (state == 0 ? "off" : "on") + ".png"));
-                if (sign != null) {
-                    tab = eraseTab(tab);
-                    placeGlyph(tab, sign);
-                }
+                tab = eraseTab(tab);
+                placeGlyph(tab, sign);
                 if (v == 3) {
                     tab = tint(tab, SKY);
                 }
