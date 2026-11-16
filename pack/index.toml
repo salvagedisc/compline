@@ -1401,6 +1401,10 @@ file = "kubejs/data/compline/tags/item/pile/8.json"
 hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
 
 [[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/aucun.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
 file = "kubejs/data/compline/worldgen/density_function/disque/distance.json"
 hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
 
@@ -2122,15 +2126,19 @@ hash = "159af79b05df2d6ab2417042c5196700e22666674f8f3c4583eb8708d49b2a38"
 
 [[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/deep_warm_island_generates.json"
-hash = "b12024c3bac79fa5144516d8e79b14116a2a601d757a73a06808737e0eb942bc"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/dodo_island_generates.json"
-hash = "40851e744fd9b35383a5e64f30cb4260dc66a88f08c68c397d0f78e8a417d644"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/spawn/tags/worldgen/biome/has_structure/ant_mount.json"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/has_structure/octopolis.json"
-hash = "2dc3e7503d8d8a25c105b0348de0c81f9ab85472461c6bae8734de00d5f4bd88"
+hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/is_cold_ocean.json"
@@ -2215,6 +2223,18 @@ hash = "26af570f0efb74bee0da220fb9dd960e5553bada065a5f9e4a21fec70191777e"
 [[files]]
 file = "kubejs/data/spawn/tags/worldgen/biome/variant_spawns/sunfish_warm_spawns.json"
 hash = "73562434748c359edae176ac635f992e0e7e432299839af4fbce38263c5a614f"
+
+[[files]]
+file = "kubejs/data/spawn/worldgen/structure/cold_island.json"
+hash = "df4f598455cb9e28fa0d075989b588953b6ba45e88522ef1a371487f7d96805e"
+
+[[files]]
+file = "kubejs/data/spawn/worldgen/structure/sandy_island.json"
+hash = "7bf4860e230adcebffa147b392d128872d5181401b851b51fe16cb52df4effc1"
+
+[[files]]
+file = "kubejs/data/spawn/worldgen/structure/tide_pool.json"
+hash = "11a47086bc1e5e1b91d04d7591e0f3e4f7c9c0927b8286b140f00dfb097339c0"
 
 [[files]]
 file = "kubejs/data/spelunkery/tags/worldgen/biome/has_desert_noise.json"
