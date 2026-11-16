@@ -949,6 +949,10 @@ file = "kubejs/assets/flywheel/lang/fr_fr.json"
 hash = "45496e5363f66fa294a594cec029c99c1ba926f9de22886ba97eeb896c2037f1"
 
 [[files]]
+file = "kubejs/assets/foundation/lang/fr_fr.json"
+hash = "7ce403bd11042b3831888949ffb7533f97661e82825c04ec07eacd5abc4697aa"
+
+[[files]]
 file = "kubejs/assets/fragmentum/lang/fr_fr.json"
 hash = "76d410219e9ef47011b4124499adfaf8c146165477c690aceca92307648405c5"
 
@@ -981,6 +985,10 @@ file = "kubejs/assets/hybrid_aquatic/lang/fr_fr.json"
 hash = "1543b57164b89f53956c46f14171f61f9e5005a3ad10aa08888f13cca1760140"
 
 [[files]]
+file = "kubejs/assets/hybrid_birds/lang/fr_fr.json"
+hash = "b72995d91ee840bbd0148547b76d7eb8e9079e94ba12e290babefb8617983407"
+
+[[files]]
 file = "kubejs/assets/icys-better-horses/lang/fr_fr.json"
 hash = "e4ec5172661f94284afc945db73648de795fe9e26321dae14dadd7c64644ff53"
 
@@ -1007,6 +1015,10 @@ hash = "d99383625a6ae8e93970b9838caebd7198bd1e78304ba57ae4e9a58559c99f21"
 [[files]]
 file = "kubejs/assets/knightlib/lang/fr_fr.json"
 hash = "b5321a9b98b603b81eda54822dbbaf52aaa6f86d9f244db4676266db23ebb457"
+
+[[files]]
+file = "kubejs/assets/koopascritters/lang/fr_fr.json"
+hash = "044e537e2faffb727c557ff9a73bc7a19d2f187fea5db93189269a1b241ff7cb"
 
 [[files]]
 file = "kubejs/assets/lamblanterns/lang/fr_fr.json"
@@ -1145,6 +1157,10 @@ file = "kubejs/assets/spatial-gui/lang/fr_fr.json"
 hash = "54922a5b633ef86128653d2199b5c22117abc8402ba975802b2bf6eedf3d8d5e"
 
 [[files]]
+file = "kubejs/assets/spawn/lang/fr_fr.json"
+hash = "6e458f7a9edefce6089abcbf3c81cb691c37d0736e06adeeb7edbb2947e73c67"
+
+[[files]]
 file = "kubejs/assets/spectrelib/lang/fr_fr.json"
 hash = "e10eca48fde63c271d4b0626e6921a4d92f75ae9ef052cb79b070fce9bc8d598"
 
@@ -1167,6 +1183,10 @@ hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
 [[files]]
 file = "kubejs/assets/tannery/lang/fr_fr.json"
 hash = "89fc0bb384a6bf90161aa88f51055b508d923a37cf332649ec9fadae3f9d2ba0"
+
+[[files]]
+file = "kubejs/assets/teallib/lang/fr_fr.json"
+hash = "f6c3e97c7e71cf01e798ceeed0e39b59c01c2f88a2a070252b3ba87983627754"
 
 [[files]]
 file = "kubejs/assets/tectonic/lang/fr_fr.json"
@@ -1207,6 +1227,10 @@ hash = "933b5c7e4e2b6231523d83d7926261a1aa73a164aee1c01ba23e61c324f9ec62"
 [[files]]
 file = "kubejs/assets/whitenoise/lang/fr_fr.json"
 hash = "7f3040fb17a7e8ad80e59920d5399da65e36a21b3d088f0b6e0495cad4f8114d"
+
+[[files]]
+file = "kubejs/assets/wildernature/lang/fr_fr.json"
+hash = "95ad4ac69f0b24bd83841e04f2935be66f852b4c127fbe49dc5334ea4259b080"
 
 [[files]]
 file = "kubejs/assets/yet_another_config_lib_v3/lang/fr_fr.json"
@@ -2527,6 +2551,11 @@ hash = "af60f4cd6512a46528cc606f854354c6a261a79bdf2ced261b89b42905bbd7c0"
 metafile = true
 
 [[files]]
+file = "mods/hybrid-birds.pw.toml"
+hash = "6a80b24c9dd80f5f0968ac9199ed895322d7f3bbf12f135e4fdf65d7b7b7a209"
+metafile = true
+
+[[files]]
 file = "mods/icys-better-horses.pw.toml"
 hash = "d498be350ad6ae068290749fce7d8aa96239cadec42da5ef99b7d8c7e9900af0"
 metafile = true
@@ -2577,6 +2606,11 @@ hash = "0d575a23218100cd338dbb0fd673fe176d2c33279c7f2edb96d4ac7c1fb8890d"
 metafile = true
 
 [[files]]
+file = "mods/koopas-critters.pw.toml"
+hash = "7e8bd73759bfcf3da33ee17b2c3856a350972bbfa2c051bc6763f495f264a1ff"
+metafile = true
+
+[[files]]
 file = "mods/kotlin-for-forge.pw.toml"
 hash = "712a69b3569a8055979de6eea262068535fe182dffb3833e53e5833e9cbf9766"
 metafile = true
@@ -2604,6 +2638,11 @@ metafile = true
 [[files]]
 file = "mods/lets-do-farm-charm.pw.toml"
 hash = "1cb80474d56ee7e47fc996361a7a03b92c297ff239a9b4126d79f47f1a491e58"
+metafile = true
+
+[[files]]
+file = "mods/lets-do-wildernature.pw.toml"
+hash = "abd10ac40f48de18718d8caf910364b077f0e41bf45f041e2303127c37e41a1c"
 metafile = true
 
 [[files]]
@@ -2822,6 +2861,11 @@ hash = "39eac2df2b472e75842d065f3220cfedc4a1c28979e1c82ae5e3f8955c54c7de"
 metafile = true
 
 [[files]]
+file = "mods/spawn-mod.pw.toml"
+hash = "51421cfbef7ed7f78ffb7925cfd3e713a8beb8bbd174975b9b745c1e0cc083b2"
+metafile = true
+
+[[files]]
 file = "mods/spelunkery.pw.toml"
 hash = "cd2c6fa89eecaaa1aadf369b043ceb45e99778cacd590e3fc01b0dcae2e6557d"
 metafile = true
@@ -2853,6 +2897,11 @@ hash = "e34b087ed079f7afa92829b0af9b213dea515d1b4e5b7bee854918932f77d1f9"
 [[files]]
 file = "mods/tannery-better-leather.pw.toml"
 hash = "e79f2c7e151ba0d565e1a6e31bb7380359acfbdd81b58c9129dd99b1fe0bce9c"
+metafile = true
+
+[[files]]
+file = "mods/teallib.pw.toml"
+hash = "99f89e803723e4684bff03fe6bf7c1dae431e198ed50ef06f624d0d6397568ab"
 metafile = true
 
 [[files]]
