@@ -1,6 +1,7 @@
 package io.github.salvagedisc.compline.zoo.client.guide;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -134,7 +135,8 @@ final class ZooArt {
     }
 
     /** Ce qui a été composé, et les encres qui vont avec. */
-    record Art(Img stamps, Img bookmark, Img tabs, Img banner, int bannerInk, Img ribbons, int[] ribbonInk, Img frames) {
+    record Art(Img stamps, Img bookmark, Img tabs, Img banner, int bannerInk, Img ribbons, int[] ribbonInk, Img frames,
+            Img markersOff, Img markersOn) {
     }
 
     private ZooArt() {
@@ -173,7 +175,7 @@ final class ZooArt {
         for (int x = 0; x < RIBBON_W; x++) {
             shadow.add(ribbons[1].get(x, RIBBON_H - 1));
         }
-        ribbons[0] = fade(ribbons[1], fill, shadow);
+        ribbons[0] = calm(fade(ribbons[1], fill, shadow), fill);
         inks[0] = OFF_INK;
         Img ribbonSheet = new Img(RIBBON_W, sheet(RIBBON_H, VARIANTS));
         for (int v = 0; v < VARIANTS; v++) {
@@ -196,9 +198,11 @@ final class ZooArt {
 
         Img footprint = glyph(subTab(need(source, "ec_ad", GUIDE + "categories/lushsaur/markers/off.png")));
         Img tabs = tabSheet(source, footprint);
-        Img bookmark = bookmark(need(source, "ec_ad", GUIDE + "markers/off.png"),
-                need(source, "ec_ad", GUIDE + "markers/on.png"), footprint);
-        return new Art(stamps.sheet(), bookmark, tabs, banner, bannerInk, ribbonSheet, inks, frames);
+        Img markersOff = need(source, "ec_ad", GUIDE + "markers/off.png");
+        Img markersOn = need(source, "ec_ad", GUIDE + "markers/on.png");
+        Img bookmark = bookmark(markersOff, markersOn, footprint);
+        return new Art(stamps.sheet(), bookmark, tabs, banner, bannerInk, ribbonSheet, inks, frames,
+                alignedEggs(markersOff), alignedEggs(markersOn));
     }
 
     private static Img need(Source source, String namespace, String path) {
@@ -485,7 +489,104 @@ final class ZooArt {
             fillRowParity(ribbon, mask, y, 0, last);
         }
         fillRowsNear(ribbon, mask, 0, last, 1, 16);
+        weave(ribbon, info.crop(x0, model.ribbonTop(), RIBBON_W, RIBBON_H), last);
+        // Les lisières et l'ombre du bout gauche, où était le portrait d'Archie : 48 plus loin, pour garder leur damier.
+        for (int y : new int[] {0, 17, 18, 19}) {
+            for (int x = 0; x < 46; x++) {
+                ribbon.set(x, y, ribbon.get(x + 48, y));
+            }
+        }
         return ribbon;
+    }
+
+    /**
+     * Retisse tout le tissu du ruban (rangs 1 à 16) comme Archie l'a tissé : un piqué de ses quelques couleurs, plus
+     * clair à gauche et plus sombre à droite. La clarté de chaque colonne est relevée sur les rangs sans nom
+     * (1 à 4 et 14 à 16) de l'original, lissée sur treize colonnes ; chaque pixel prend l'une des deux couleurs qui
+     * l'encadrent, tirée au sort de façon fixe. Ni lettre effacée ni portrait ne laisse de trace.
+     */
+    private static void weave(Img ribbon, Img original, int last) {
+        int from = 40;
+        int[] rows = {1, 2, 3, 4, 14, 15, 16};
+        Set<Integer> colors = new HashSet<>();
+        for (int x = from; x <= last; x++) {
+            for (int y : rows) {
+                colors.add(original.get(x, y));
+            }
+        }
+        int[] palette = colors.stream().sorted((p, q) -> luma(p) - luma(q)).mapToInt(Integer::intValue).toArray();
+        float[] column = new float[last + 1];
+        for (int x = from; x <= last; x++) {
+            for (int y : rows) {
+                column[x] += luma(original.get(x, y)) / (float) rows.length;
+            }
+        }
+        for (int x = 0; x <= last; x++) {
+            float sum = 0.0F;
+            int n = 0;
+            for (int k = Math.max(from, x - 6); k <= Math.min(last, x + 6); k++) {
+                sum += column[k];
+                n++;
+            }
+            float target = x < from ? -1.0F : sum / n;
+            if (target < 0.0F) {
+                for (int k = from; k <= from + 6; k++) {
+                    target = Math.max(target, 0.0F) + column[k] / 7.0F;
+                }
+            }
+            for (int y = 1; y <= 16; y++) {
+                ribbon.set(x, y, dither(palette, target, hash(x, y)));
+            }
+        }
+    }
+
+    /**
+     * Adoucit le tissu d'un ruban éteint (rangs 1 à 16) : sur le papier, le piqué du ruban vert ferait des taches qui
+     * se lisent comme des lettres. Chaque pixel prend la couleur de {@code paper} la plus proche de la clarté moyenne
+     * de ses voisins (cinq colonnes, trois rangs), piquée entre les deux qui l'encadrent.
+     */
+    private static Img calm(Img ribbon, int[] paper) {
+        Img out = ribbon.copy();
+        int[] palette = Arrays.stream(paper).filter(c -> alpha(c) > 0).toArray();
+        if (palette.length == 0) {
+            return out;
+        }
+        for (int y = 1; y <= 16; y++) {
+            for (int x = 0; x < RIBBON_W; x++) {
+                if (alpha(ribbon.get(x, y)) == 0) {
+                    continue;
+                }
+                float sum = 0.0F;
+                int n = 0;
+                for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -2; dx <= 2; dx++) {
+                        int c = ribbon.get(x + dx, Math.max(1, Math.min(16, y + dy)));
+                        if (alpha(c) > 0) {
+                            sum += luma(c);
+                            n++;
+                        }
+                    }
+                }
+                out.set(x, y, dither(palette, sum / n, hash(x, y)));
+            }
+        }
+        return out;
+    }
+
+    /** La couleur de {@code palette} (rangée par clarté) qui, en piqué, donne en moyenne la clarté {@code target}. */
+    private static int dither(int[] palette, float target, int hash) {
+        if (target <= luma(palette[0])) {
+            return palette[0];
+        }
+        for (int i = 0; i + 1 < palette.length; i++) {
+            float lo = luma(palette[i]);
+            float hi = luma(palette[i + 1]);
+            if (target <= hi) {
+                float frac = hi > lo ? (target - lo) / (hi - lo) : 0.0F;
+                return hash % 1000 < frac * 1000.0F ? palette[i + 1] : palette[i];
+            }
+        }
+        return palette[palette.length - 1];
     }
 
     /** Efface le mot de la bannière ; rend son encre. */
@@ -617,11 +718,10 @@ final class ZooArt {
      */
     private static Img tabSheet(Source source, Img footprint) {
         String[] dinos = {"lushsaur", "therimoss", "coralosaur", "coralosaur", "obsidiceratops"};
-        String[][] signs = {null, {"block", "spruce_sapling"}, {"item", "cod"}, {"item", "feather"}, {"item", "bone"}};
+        String[][] signs = {null, ZooGlyphs.PAW, ZooGlyphs.FISH, ZooGlyphs.BIRD, ZooGlyphs.SKULL};
         Img sheet = new Img(sheet(TAB_W, 2), sheet(TAB_H, VARIANTS));
         for (int v = 0; v < VARIANTS; v++) {
-            Img sign = signs[v] == null ? null : silhouette(source.load("minecraft",
-                    "textures/" + signs[v][0] + "/" + signs[v][1] + ".png"), footprint);
+            Img sign = signs[v] == null ? null : ZooGlyphs.draw(signs[v], ink(footprint));
             for (int state = 0; state < 2; state++) {
                 Img tab = subTab(need(source, "ec_ad", GUIDE + "categories/" + dinos[v] + "/markers/" + (state == 0 ? "off" : "on") + ".png"));
                 if (sign != null) {
@@ -637,25 +737,10 @@ final class ZooArt {
         return sheet;
     }
 
-    /** La silhouette blanche d'un objet du jeu, de la couleur des signes d'Archie. */
-    private static Img silhouette(Img item, Img footprint) {
-        if (item == null) {
-            return null;
-        }
+    /** L'encre des signes d'Archie (le blanc de son empreinte). */
+    private static int ink(Img footprint) {
         int ink = footprint.get(footprint.width / 2, footprint.height - 2);
-        if (alpha(ink) == 0) {
-            ink = 0xFFFFFFFF;
-        }
-        Img out = new Img(16, 16);
-        for (int y = 0; y < 16; y++) {
-            for (int x = 0; x < 16; x++) {
-                if (alpha(item.get(x, y)) >= 128) {
-                    out.set(x, y, ink);
-                }
-            }
-        }
-        int[] box = bounds(out);
-        return out.crop(box[0], box[1], box[2] - box[0] + 1, box[3] - box[1] + 1);
+        return alpha(ink) == 0 ? 0xFFFFFFFF : ink | 0xFF000000;
     }
 
     /** Le marque-page doré des tampons d'Archie, tourné vers le vert, avec l'empreinte à la place de la coupe. */
@@ -690,6 +775,82 @@ final class ZooArt {
             sheet.paste(mark, at(s, BOOKMARK_W), 0);
         }
         return sheet;
+    }
+
+    /** Les onglets des dinosaures d'Archie, à droite du livre : huit de 64 x 32 dès (512, 16). */
+    private static final int EGG_TABS_X = 512;
+    private static final int EGG_TABS_Y = 16;
+    private static final int EGG_TABS = 8;
+    /** Le centre commun des œufs : celui de la plupart des siens (ils en sont à un pixel et demi près). */
+    private static final float EGG_CENTER_X = 42.5F;
+    private static final float EGG_CENTER_Y = 14.5F;
+
+    /**
+     * Les marque-pages d'Archie avec les œufs (et le livre) de ses onglets de droite tous au même centre. Un œuf est
+     * ce qui n'est pas une couleur du tissu de l'onglet (relevées hors de la place de l'œuf) ; sa place vide prend le
+     * tissu d'un autre onglet au même endroit.
+     */
+    static Img alignedEggs(Img markers) {
+        if (markers.width < EGG_TABS_X + TAB_W || markers.height < EGG_TABS_Y + EGG_TABS * TAB_H) {
+            return markers;
+        }
+        Img[] tabs = new Img[EGG_TABS];
+        Set<Integer> cloth = new HashSet<>();
+        for (int i = 0; i < EGG_TABS; i++) {
+            tabs[i] = markers.crop(EGG_TABS_X, EGG_TABS_Y + i * TAB_H, TAB_W, TAB_H);
+            for (int y = 0; y < TAB_H; y++) {
+                for (int x = 0; x < TAB_W; x++) {
+                    if (x < 26 || x > 58 || y < 3 || y > 28) {
+                        cloth.add(tabs[i].get(x, y));
+                    }
+                }
+            }
+        }
+        boolean[][] masks = new boolean[EGG_TABS][TAB_W * TAB_H];
+        for (int i = 0; i < EGG_TABS; i++) {
+            for (int y = 3; y <= 28; y++) {
+                for (int x = 26; x <= 58; x++) {
+                    int c = tabs[i].get(x, y);
+                    masks[i][y * TAB_W + x] = alpha(c) > 0 && !cloth.contains(c);
+                }
+            }
+        }
+        Img out = markers.copy();
+        for (int i = 0; i < EGG_TABS; i++) {
+            int minX = TAB_W, minY = TAB_H, maxX = -1, maxY = -1;
+            for (int p = 0; p < masks[i].length; p++) {
+                if (masks[i][p]) {
+                    minX = Math.min(minX, p % TAB_W);
+                    maxX = Math.max(maxX, p % TAB_W);
+                    minY = Math.min(minY, p / TAB_W);
+                    maxY = Math.max(maxY, p / TAB_W);
+                }
+            }
+            if (maxX < 0) {
+                continue;
+            }
+            Img tab = tabs[i].copy();
+            for (int p = 0; p < masks[i].length; p++) {
+                if (masks[i][p]) {
+                    for (int k = 1; k < EGG_TABS; k++) {
+                        int j = (i + k) % EGG_TABS;
+                        if (!masks[j][p]) {
+                            tab.argb[p] = tabs[j].argb[p];
+                            break;
+                        }
+                    }
+                }
+            }
+            int dx = Math.round(EGG_CENTER_X - (minX + maxX) / 2.0F);
+            int dy = (int) Math.floor(EGG_CENTER_Y - (minY + maxY) / 2.0F + 0.5F);
+            for (int p = 0; p < masks[i].length; p++) {
+                if (masks[i][p]) {
+                    tab.set(p % TAB_W + dx, p / TAB_W + dy, tabs[i].argb[p]);
+                }
+            }
+            out.paste(tab, EGG_TABS_X, EGG_TABS_Y + i * TAB_H);
+        }
+        return out;
     }
 
     // ---------------------------------------------------------------- remplissages

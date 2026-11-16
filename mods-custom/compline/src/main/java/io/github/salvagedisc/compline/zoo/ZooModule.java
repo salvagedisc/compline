@@ -8,6 +8,7 @@ import io.github.salvagedisc.compline.ModIds;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import net.minecraft.commands.CommandSourceStack;
@@ -105,7 +106,11 @@ public final class ZooModule {
         event.getDispatcher().register(Commands.literal(Compline.MOD_ID)
                 .requires(source -> source.hasPermission(2))
                 .then(Commands.literal("zoo")
-                        .then(Commands.literal("especes").executes(ZooModule::countSpecies))
+                        .then(Commands.literal("especes").executes(ZooModule::countSpecies)
+                                .then(Commands.argument("milieu", StringArgumentType.word())
+                                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(
+                                                Arrays.stream(ZooTab.values()).map(ZooTab::id), builder))
+                                        .executes(ZooModule::listSpecies)))
                         .then(Commands.literal("tamponner")
                                 .then(Commands.argument("joueurs", EntityArgument.players())
                                         .then(Commands.argument("espece", ResourceLocationArgument.id())
@@ -133,6 +138,21 @@ public final class ZooModule {
         counts.forEach((tab, count) -> text.append(' ').append(tab.id()).append(' ').append(count));
         context.getSource().sendSuccess(() -> Component.literal(text.toString()), false);
         return ZooSpecies.all().size();
+    }
+
+    /** {@code /compline zoo especes <milieu>} : les espèces d'un milieu, par identifiant. */
+    private static int listSpecies(CommandContext<CommandSourceStack> context) {
+        String id = StringArgumentType.getString(context, "milieu");
+        ZooTab tab = Arrays.stream(ZooTab.values()).filter(t -> t.id().equals(id)).findFirst().orElse(null);
+        if (tab == null) {
+            context.getSource().sendFailure(Component.literal("Milieu inconnu : " + id));
+            return 0;
+        }
+        List<String> ids = ZooSpecies.all().stream().filter(info -> info.tab() == tab)
+                .map(info -> info.id().toString()).sorted().toList();
+        context.getSource().sendSuccess(() -> Component.literal(tab.id() + " (" + ids.size() + ") : "
+                + String.join(", ", ids)), false);
+        return ids.size();
     }
 
     private static int stamp(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

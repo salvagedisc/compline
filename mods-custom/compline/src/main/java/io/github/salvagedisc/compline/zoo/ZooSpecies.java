@@ -24,6 +24,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -157,8 +160,12 @@ public final class ZooSpecies {
             return ZooTab.CREATURES;
         }
         MobCategory category = type.getCategory();
+        // Beaucoup de bêtes marines de mods ne sont ni des WaterAnimal ni rangées dans une catégorie d'eau : elles
+        // naissent dans l'eau, ou ne savent se déplacer qu'en nageant.
         if (sample instanceof WaterAnimal || category == MobCategory.WATER_CREATURE || category == MobCategory.WATER_AMBIENT
-                || category == MobCategory.UNDERGROUND_WATER_CREATURE || category == MobCategory.AXOLOTLS) {
+                || category == MobCategory.UNDERGROUND_WATER_CREATURE || category == MobCategory.AXOLOTLS
+                || SpawnPlacements.getPlacementType(type) == SpawnPlacementTypes.IN_WATER
+                || (sample instanceof Mob mob && mob.getNavigation() instanceof WaterBoundPathNavigation)) {
             return ZooTab.EAUX;
         }
         if (sample instanceof FlyingAnimal || sample instanceof AmbientCreature) {
