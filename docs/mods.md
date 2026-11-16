@@ -74,11 +74,15 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Mod | Slug | Status | Side | Role |
 |---|---|---|---|---|
 | Naturalist | `naturalist` | ✅ | CS | Realistic base fauna ([0003](decisions/0003-faune.md)) |
-| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species; nine creatures with weak animations cut (banana slug, alligator snapping turtle, mungus, triops, sunbird, guster, rocky roller, frilled shark, potoo, [duplicates](plan/doublons.md#creatures-with-weak-animations-2026-10-28)) |
+| Alex's Mobs Continued | `alexs-mobs-continued` | ✅ | CS | Variety, species by species; seal, bison, raccoon and seagull cut on 2026-11-17 for Spawn's, WilderNature's and Hybrid Birds'; nine creatures with weak animations cut (banana slug, alligator snapping turtle, mungus, triops, sunbird, guster, rocky roller, frilled shark, potoo, [duplicates](plan/doublons.md#creatures-with-weak-animations-2026-10-28)) |
 | Hybrid Aquatic | `hybrid-aquatic` | ✅ (biomes disabled) | CS | Oceans; seven near-motionless invertebrates cut (sea urchin, comb jelly, garden eel, nautilus, sea slug, sea cucumber, starfish) |
 | Mowzie's Mobs | `mowzies-mobs` | ✅ | CS | Unique, very rare creatures; Wroughtnaut, Frostmaw and Sculptor guard three monuments; natural spawns rarer (`extra_rarity`), only in the dark, two per player at most; Wroughtnaut chambers, Frostmaw and Umvuthana groves no longer generated, boss weapons removed ([pack sort](plan/tri-du-pack.md)) |
 | Longwings | `longwings` | ✅ | CS | Butterflies to collect |
 | Archie's Dinosaurs | `archies-dinosaurs` | ✅ (1.0.4, added 2026-11-13, not seen in game) | CS | Six dinosaurs to find, tame and ride, amber craters and fossils, the trader Archie; the Nether and End species moved to the redstone caves and the prismachasm; young mod, All Rights Reserved, with a library kept as a jar ([0021](decisions/0021-spelunkery-and-dinosaurs.md)) |
+| Koopa's Critters | `koopas-critters` | ✅ (0.5, added 2026-11-17, not seen in game) | CS | About fifty rare and threatened species for the zoo; its termite mounds off, its goblin shark and manta ray replace Hybrid Aquatic's ([0033](decisions/0033-zoo-animal-mods.md)) |
+| Spawn | `spawn-mod` | ✅ (4.0.8, added 2026-11-17, not seen in game) | CS | Sea life (sea cow, sunfish, seahorse, octopus, seal, spider crab); islands, octopus cities and ant mounds do not generate; herring, tuna, barracuda, hamster, ant, clam and snail cut as [duplicates](plan/doublons.md#zoo-mods-2026-11-17) ([0033](decisions/0033-zoo-animal-mods.md)) |
+| Hybrid Birds | `hybrid-birds` | ✅ (1.3.3, added 2026-11-17, not seen in game) | CS | Peacock, swan, goose, pelican, albatross, puffin, guineafowl, turkey, rooster ([0033](decisions/0033-zoo-animal-mods.md)) |
+| [Let's Do] WilderNature | `lets-do-wildernature` | ✅ (1.1.8, added 2026-11-17, not seen in game) | CS | Bison, raccoon, beaver, cassowary, red wolf, swift fox, squirrel, mini sheep, scorpion, trophies; its deer, boar, turkey, hedgehog and savanna animals off (Naturalist's stay), vanilla farm animals kept (`config/wildernature-common.toml`) ([0033](decisions/0033-zoo-animal-mods.md)) |
 
 ## Companions
 
@@ -194,7 +198,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Teal Lib (Spawn), Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -253,7 +257,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |
 | Minimaps, waypoints | Contrary to the vision |
 | Animal Husbandry, Spoiled | Judged unreliable |
-| Let's Do Bakery, Meadow, Wilder Nature | Duplicates or biomes in conflict with the terrain base (then No Man's Land); not re-evaluated since |
+| Let's Do Bakery, Meadow | Duplicates or biomes in conflict with the terrain base (then No Man's Land); not re-evaluated since (WilderNature joined on 2026-11-17, [0033](decisions/0033-zoo-animal-mods.md)) |
 | Graze | Makes animal husbandry self-sufficient |
 | Integrated Mowzie's Mobs | Too many dependencies |
 | Spawn, Environmental | Add biomes (conflict with the terrain base, then No Man's Land); not re-evaluated since |

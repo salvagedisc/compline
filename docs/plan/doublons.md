@@ -40,7 +40,7 @@ Fresh Animations animates no modded creature: consistency with vanilla is judged
 | Snail | Naturalist | Critters and Companions | More discreet and more animated |
 | Butterfly | Longwings | Naturalist (and its caterpillar) | Readable silhouettes, 70 species to collect |
 | Crab | Friends & Foes, Hybrid Aquatic's crabs | Naturalist | Design from the Mojang vote; Hybrid Aquatic's crabs are other species |
-| Duck | Naturalist | — | Only duck since Untitled Duck Mod was removed |
+| Duck | Naturalist (until 2026-11-17, then Hybrid Birds) | — | Only duck since Untitled Duck Mod was removed |
 
 Kept despite a similar role, because they are different species: Naturalist's whale and Alex's Mobs' sperm whale, ant and leafcutter ant, ostrich and emu, C&C's koi and Hybrid Aquatic's carp, sea slugs, Cold Sweat's lizard and chameleon, boar and tusklin, glare and lantern, the turtles.
 
@@ -83,6 +83,38 @@ Consequences:
 - the buttercup stays (it also grows in the world), as do the shark teeth (seal gifts) and the vanilla nautilus shell;
 - the moobloom's hide loot in `tannerie_butin.js` no longer has any effect;
 - Hybrid Aquatic's argonaut is a craftable submarine, not a creature: it stays.
+
+## Zoo mods (2026-11-17)
+
+Koopa's Critters, Spawn, Hybrid Birds and WilderNature joined for the zoo ([0033](../decisions/0033-zoo-animal-mods.md)). Same rule: one model per species, compared from the jars (parts and cubes, number of animations and keyframes, states such as sleep or eat, buckets, variants). Nothing has been seen in game.
+
+| Species | Kept | Cut | Reason |
+|---|---|---|---|
+| Herring | Hybrid Aquatic | Spawn | Keyframed idle, swim and flop against a procedural 4-part fish |
+| Tuna | Hybrid Aquatic | Spawn (and its egg) | Four tuna species, eat, bite and run |
+| Barracuda | Hybrid Aquatic | Spawn | Idle, eat, bite, run and flop against one swim cycle |
+| Ocean sunfish | Spawn | Hybrid Aquatic | Six times the keyframes, baby stage; Hybrid Aquatic's river sunfish, another species, stays |
+| Seahorse | Spawn | Hybrid Aquatic | Four body shapes, many colours, bucket |
+| Octopus | Spawn | Hybrid Aquatic | Walks on the sea floor, hides in ducts; Hybrid Aquatic's three species are lost |
+| Spider crab | Spawn | Hybrid Aquatic | More cubes, attack and shoot states |
+| Manatee | Spawn (sea cow) | Hybrid Aquatic | Grazes seagrass and gets covered in algae; Hybrid Aquatic's dugong, another species, stays |
+| Seal | Spawn | Alex's Mobs | 18 keyframed animations (surf, applause, lying), baby model, against procedural movement |
+| Goblin shark | Koopa's Critters | Hybrid Aquatic | Bucket, more keyframes, lives in the deep oceans rather than the trenches |
+| Manta ray | Koopa's Critters | Hybrid Aquatic | About 17 times the keyframes |
+| Clam | Naturalist | Spawn | Its meat feeds the kitchen (merged with Hybrid Aquatic's, `fusions.js`); Spawn's clam cases leave with it |
+| Snail | Naturalist | Spawn | Naturalist's snail is the slimeball source of the pack; Spawn's shell tiles leave with it |
+| Ant | Naturalist | Spawn (and its anthills) | Same animation volume; one anthill system |
+| Hamster | Adorable Hamster Pets | Spawn | 76 animations against procedural movement |
+| Bison | WilderNature | Alex's Mobs | Keyframed set with sleep and snort; bison fur and its blocks leave |
+| Raccoon | WilderNature | Alex's Mobs | Washes, opens doors, sleeps; the raccoon tail and the frontier cap leave |
+| Seagull | Hybrid Birds | Alex's Mobs | Keyframed swim and flight, same set as the other sea birds |
+| Turkey | Hybrid Birds | Naturalist, WilderNature | Flies, fat and stuffed models, Turducken |
+| Duck | Hybrid Birds | Naturalist | Flies, baby set, goes into the Turducken with the turkey; Naturalist's bucket and sixteen colours are lost |
+| Boar, deer, elephant, giraffe, hedgehog, hippo, lion | Naturalist | WilderNature | More parts and keyframes on most, one consistent savanna; WilderNature's sleep states are lost |
+
+How: Hybrid Aquatic's per-species files replaced by `neoforge:none` (25 more), the same for Spawn's (`kubejs/data/spawn/neoforge/biome_modifier/`), WilderNature's spawn weights set to 0 (`config/wildernature-common.toml`), Naturalist's turkey and duck in `naturalist-server.toml`, Alex's Mobs' seal, bison, raccoon and seagull (and WilderNature's, as a second lock) in `doublons.json`; `doublons.js` cancels the creatures and removes 76 more items with no source left (spawn eggs, foods, buckets, Spawn's clam cases and shell tiles, Alex's Mobs' bison fur, raccoon tail and frontier cap, WilderNature's deer trophy and turkey meat), hidden from EMI on the client side.
+
+The zoo lists a species from the biome spawn lists, and some cut creatures stayed there (Alex's Mobs' crocodile and frilled shark, C&C's koi, which come in by other paths and are cancelled on joining). Every creature of `doublons.js` and `faune_coupee.js` is now in `tags/entity_type/zoo/exclus.json`.
 
 ## Hybrid Aquatic biomes (2026-10-19)
 
