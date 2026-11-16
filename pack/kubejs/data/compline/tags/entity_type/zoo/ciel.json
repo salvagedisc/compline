@@ -44,6 +44,54 @@
     {
       "id": "naturalist:duck",
       "required": false
+    },
+    {
+      "id": "hybrid_birds:albatross",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:duck",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:goose",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:pelican",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:puffin",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:seagull",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:swan",
+      "required": false
+    },
+    {
+      "id": "koopascritters:burrowing_owl",
+      "required": false
+    },
+    {
+      "id": "koopascritters:emerald_toucanet",
+      "required": false
+    },
+    {
+      "id": "koopascritters:marabou_stork",
+      "required": false
+    },
+    {
+      "id": "koopascritters:roseate_spoonbill",
+      "required": false
+    },
+    {
+      "id": "koopascritters:rock_ptarmigan",
+      "required": false
     }
   ]
 }

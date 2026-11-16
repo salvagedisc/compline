@@ -1366,11 +1366,11 @@ hash = "059ac6988a360f4d70a7f989b6f3e9c53f418de929c75840d5057ca61f9c5ada"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/ciel.json"
-hash = "7ebee4dea0b2a78e5b36c2d4ff56d6ef4283abb879b41e6d97a52d469295b20a"
+hash = "90e4dbc4a2fa6f0b82207854cafbd1ef247b1f580a423e4bf02ff560e396695b"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/eaux.json"
-hash = "93a1fabdba3b4eab0b28cb505f6385099039f0c61bffe27cf68a1e9df7de6588"
+hash = "63a2fc9a18718999630147d56c0445d691197f8c035c938edcad8e0eef69b52a"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/exclus.json"
