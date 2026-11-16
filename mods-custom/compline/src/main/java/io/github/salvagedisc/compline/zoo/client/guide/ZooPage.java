@@ -34,6 +34,8 @@ final class ZooPage {
     static final float BANNER_X = 87.0F;
     static final float BANNER_Y = 23.0F;
     static final float PAGE_CENTER = BANNER_X + (ZooArt.BANNER_W - 1) / 2.0F + 0.5F;
+    private static final float BANNER_SCALE_X = 2.0F;
+    private static final float BANNER_SCALE_Y = 12.0F / 7.0F;
     /** La boîte où une bête est dessinée, centrée sur son losange. */
     static final float PORTRAIT_W = 46.0F;
     static final float PORTRAIT_H = 40.0F;
@@ -55,19 +57,11 @@ final class ZooPage {
         float h = ZooArt.BANNER_H;
         context.drawSprite(Sprite.of(ZooTextures.BANNER, 0.0F, 0.0F, w, h, w, h), BANNER_X, BANNER_Y, w, h);
         Component text = Component.literal(title.getString().toUpperCase(Locale.FRENCH));
-        // Les capitales occupent 14 rangs à l'échelle 2, centrées dans le tissu ; un accent monte de 4 : on
-        // descend d'un rang pour qu'il reste dans la bannière.
-        float y = BANNER_Y + (accented(text.getString()) ? 5.0F : 4.0F);
-        ZooText.centered(graphics, font, text, PAGE_CENTER, y, 0xFF000000 | ZooTextures.art().bannerInk(), 2.0F);
-    }
-
-    private static boolean accented(String text) {
-        for (char c : text.toCharArray()) {
-            if ("ÀÂÄÉÈÊËÎÏÔÖÙÛÜŸ".indexOf(c) >= 0) {
-                return true;
-            }
-        }
-        return false;
+        // Les capitales d'Archie font 12 de haut, dès le rang 5 de la bannière, et avancent de 12 : celles du jeu
+        // (7 rangs, 6 d'avance) à l'échelle 2 en largeur et 12/7 en hauteur.
+        float x = Math.round(PAGE_CENTER - ZooText.inked(font, text) * BANNER_SCALE_X / 2.0F);
+        ZooText.line(graphics, font, text, x, BANNER_Y + 5.0F, 0xFF000000 | ZooTextures.art().bannerInk(),
+                BANNER_SCALE_X, BANNER_SCALE_Y);
     }
 
     /**
