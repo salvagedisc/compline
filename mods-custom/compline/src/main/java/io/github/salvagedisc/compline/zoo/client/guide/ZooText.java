@@ -54,6 +54,20 @@ final class ZooText {
         return lineY * scale;
     }
 
+    /** Écrit un paragraphe coupé à {@code width}, chaque ligne centrée sur {@code centerX} ; rend sa hauteur. */
+    static float paragraphCentered(GuiGraphics graphics, Font font, FormattedText text, float centerX, float y, float width, int color) {
+        List<FormattedCharSequence> lines = font.split(text, (int) width);
+        float lineY = y;
+        for (FormattedCharSequence line : lines) {
+            graphics.pose().pushPose();
+            graphics.pose().translate(Math.round(centerX - font.width(line) / 2.0F), lineY, 0.0F);
+            graphics.drawString(font, line, 0, 0, color, false);
+            graphics.pose().popPose();
+            lineY += font.lineHeight + 1;
+        }
+        return lineY - y;
+    }
+
     /** Coupe un nom trop long pour sa place, avec des points de suspension. */
     static Component fit(Font font, Component text, float width, float scale) {
         int max = (int) (width / scale);

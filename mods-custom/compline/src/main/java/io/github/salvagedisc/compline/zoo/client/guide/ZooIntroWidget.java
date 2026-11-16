@@ -7,6 +7,7 @@ import io.github.salvagedisc.compline.zoo.SpeciesInfo;
 import io.github.salvagedisc.compline.zoo.Stamp;
 import io.github.salvagedisc.compline.zoo.ZooTab;
 import io.github.salvagedisc.compline.zoo.client.ZooClient;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
@@ -15,15 +16,20 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 
 /**
- * La page d'accueil du zoo : à gauche, le mot d'Archie et ce que vaut chaque tampon ; à droite, les milieux, avec
- * ce qu'on en a vu et maîtrisé. Un milieu se lit d'un clic.
+ * La page d'accueil du zoo, mise comme la page des tampons d'Archie. À gauche, sous la bannière, le mot d'Archie et
+ * ce que vaut chaque tampon. À droite, une ligne par milieu : son losange (avec la première bête aperçue), son ruban,
+ * et ce qu'on en a vu et maîtrisé ; un clic ouvre le milieu.
  */
 final class ZooIntroWidget extends AbstractWidget {
-    private static final float LEFT = ZooSpreadWidget.LEFT;
-    private static final float RIGHT = ZooSpreadWidget.RIGHT;
-    private static final float WIDTH = ZooSpreadWidget.WIDTH;
-    private static final float TABS_Y = 52.0F;
-    private static final float TAB_H = 40.0F;
+    /** Le texte de la page de gauche, centré sous la bannière. */
+    private static final float TEXT_X = 72.0F;
+    private static final float TEXT_W = 2 * (ZooPage.PAGE_CENTER - TEXT_X);
+    private static final float QUOTE_Y = 52.0F;
+    private static final float LEGEND_STEP = 36.0F;
+    private static final float LEGEND_TEXT_DX = ZooArt.STAMP_W + 6.0F;
+    /** Le bilan d'un milieu, sous son ruban, aligné sur le premier tampon. */
+    private static final float BILAN_DY = 27.0F;
+    private static final float KEY_Y = 263.0F;
 
     ZooIntroWidget(float width, float height) {
         super(0.0F, 0.0F, width, height);
@@ -37,71 +43,82 @@ final class ZooIntroWidget extends AbstractWidget {
         double mouseX = context.mouseX();
         double mouseY = context.mouseY();
 
-        ZooText.centered(graphics, font, Component.translatable("zoo.compline.titre"), LEFT + WIDTH / 2.0F, 26.0F, ZooText.INK, 2.0F);
-        float y = 48.0F + ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.accueil"),
-                LEFT, 48.0F, WIDTH, ZooText.INK, 1.0F);
-        y = (float) Math.ceil(y + 6.0F);
+        ZooPage.banner(context, graphics, font, Component.translatable("zoo.compline.titre"));
+        float y = QUOTE_Y + ZooText.paragraphCentered(graphics, font, Component.translatable("zoo.compline.accueil"),
+                ZooPage.PAGE_CENTER, QUOTE_Y, TEXT_W, ZooText.INK);
+        y = (float) Math.ceil(y + 4.0F);
+        List<Component> tooltip = null;
         for (Stamp stamp : Stamp.values()) {
-            ZooSpreadWidget.drawStamp(context, stamp, ZooTab.TERRE, LEFT, y);
-            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), LEFT + 40.0F, y + 6.0F, ZooText.INK, 1.0F);
+            ZooPage.stamp(context, stamp, ZooTab.TERRE, TEXT_X, y);
+            float textX = TEXT_X + LEGEND_TEXT_DX;
+            ZooText.line(graphics, font, Component.translatable(stamp.nameKey()), textX, y + 7.0F, ZooText.INK, 1.0F);
             ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.aide." + stamp.id()),
-                    LEFT + 40.0F, y + 17.0F, WIDTH - 40.0F, ZooText.INK_LIGHT, 1.0F);
-            y += 40.0F;
+                    textX, y + 18.0F, TEXT_X + TEXT_W - textX, ZooText.INK_LIGHT, 1.0F);
+            y += LEGEND_STEP;
         }
 
-        ZooText.centered(graphics, font, Component.translatable("zoo.compline.milieux"), RIGHT + WIDTH / 2.0F, 26.0F, ZooText.INK, 2.0F);
-        int total = 0;
-        int spottedTotal = 0;
-        int masteredTotal = 0;
-        float rowY = TABS_Y;
-        List<Component> tooltip = null;
+        int row = 0;
         for (ZooTab tab : ZooTab.values()) {
-            if (!ZooGuide.hasTab(tab)) {
+            if (!ZooGuide.hasTab(tab) || row >= ZooSpreadWidget.RIGHT_ROWS.length) {
                 continue;
             }
-            List<SpeciesInfo> species = ZooGuide.speciesOf(tab);
+            float top = ZooSpreadWidget.RIGHT_ROWS[row++];
+            List<SpeciesInfo> species = ZooGuide.sortedSpecies(tab);
             int spotted = 0;
             int mastered = 0;
+            SpeciesInfo face = null;
             for (SpeciesInfo info : species) {
-                spotted += ZooClient.has(info.id(), Stamp.APERCEVOIR) ? 1 : 0;
+                boolean seen = ZooClient.has(info.id(), Stamp.APERCEVOIR);
+                spotted += seen ? 1 : 0;
                 mastered += ZooClient.has(info.id(), Stamp.MAITRISER) ? 1 : 0;
+                if (seen && face == null) {
+                    face = info;
+                }
             }
-            total += species.size();
-            spottedTotal += spotted;
-            masteredTotal += mastered;
-            boolean hovered = ZooSpreadWidget.inside(mouseX, mouseY, RIGHT, rowY, WIDTH, TAB_H - 4.0F);
-            ZooSpreadWidget.drawStamp(context, Stamp.MAITRISER, mastered > 0 ? tab : null, RIGHT, rowY);
-            Component name = Component.translatable(tab.nameKey());
-            if (hovered) {
-                name = name.copy().withStyle(ChatFormatting.UNDERLINE);
-                tooltip = List.of(Component.translatable("zoo.compline.ouvrir").withStyle(ChatFormatting.GRAY));
+            float frameX = ZooPage.FRAME_X + ZooPage.RIGHT_PAGE;
+            float width = ZooPage.ribbon(context, graphics, font, ZooPage.variant(tab), frameX, top,
+                    Component.translatable(tab.nameKey() + ".court"));
+            ZooPage.frame(context, spotted > 0 ? ZooPage.variant(tab) : 0, frameX, top);
+            SpeciesInfo shown = face != null ? face : species.isEmpty() ? null : species.get(0);
+            if (shown != null) {
+                ZooPage.portrait(graphics, shown.id(), frameX, top, face == null);
             }
-            ZooText.line(graphics, font, name, RIGHT + 40.0F, rowY + 7.0F, 0xFF000000 | tab.color(), 1.0F);
+            float bilanX = ZooPage.STAMPS_X + ZooPage.RIGHT_PAGE;
             ZooText.line(graphics, font, Component.translatable("zoo.compline.bilan", spotted, mastered, species.size()),
-                    RIGHT + 40.0F, rowY + 18.0F, ZooText.INK, 1.0F);
-            rowY += TAB_H;
+                    bilanX, top + BILAN_DY, ZooText.INK, 1.0F);
+            if (hovered(mouseX, mouseY, frameX, top, width)) {
+                List<Component> lines = new ArrayList<>();
+                lines.add(Component.translatable(tab.nameKey()));
+                lines.add(Component.translatable("zoo.compline.ouvrir").withStyle(ChatFormatting.GRAY));
+                tooltip = lines;
+            }
         }
-        ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.total", spottedTotal, masteredTotal, total),
-                RIGHT, rowY + 2.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
-        ZooText.paragraph(graphics, font, Component.translatable("zoo.compline.touche", ZooClient.guideKey().getTranslatedKeyMessage()),
-                RIGHT, 240.0F, WIDTH, ZooText.INK_LIGHT, 1.0F);
+        ZooText.paragraphCentered(graphics, font,
+                Component.translatable("zoo.compline.touche", ZooClient.guideKey().getTranslatedKeyMessage()),
+                ZooPage.PAGE_CENTER + ZooPage.RIGHT_PAGE, KEY_Y, TEXT_W, ZooText.INK_LIGHT);
         if (tooltip != null) {
             ZooText.tooltip(tooltip);
         }
     }
 
+    private static boolean hovered(double mouseX, double mouseY, float frameX, float top, float ribbonWidth) {
+        return ZooPage.onFrame(mouseX, mouseY, frameX, top)
+                || ZooPage.inside(mouseX, mouseY, frameX, top, ribbonWidth, BILAN_DY + 10.0F);
+    }
+
     @Override
     public boolean mouseClicked(UIContext context, int button) {
-        float rowY = TABS_Y;
+        int row = 0;
         for (ZooTab tab : ZooTab.values()) {
-            if (!ZooGuide.hasTab(tab)) {
+            if (!ZooGuide.hasTab(tab) || row >= ZooSpreadWidget.RIGHT_ROWS.length) {
                 continue;
             }
-            if (ZooSpreadWidget.inside(context.mouseX(), context.mouseY(), RIGHT, rowY, WIDTH, TAB_H - 4.0F)) {
+            float top = ZooSpreadWidget.RIGHT_ROWS[row++];
+            float frameX = ZooPage.FRAME_X + ZooPage.RIGHT_PAGE;
+            if (hovered(context.mouseX(), context.mouseY(), frameX, top, ZooArt.RIBBON_W)) {
                 context.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0F, 1.0F);
                 return ZooGuide.flipTo(tab);
             }
-            rowY += TAB_H;
         }
         return super.mouseClicked(context, button);
     }
