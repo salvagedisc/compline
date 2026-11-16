@@ -133,6 +133,11 @@ public final class ZooGuide {
         return firstPage.containsKey(tab);
     }
 
+    /** À l'ouverture par la touche du zoo : le livre tourne jusqu'à l'accueil du zoo. */
+    public static void openOnZoo() {
+        flipTo(null);
+    }
+
     /** Tourne les pages jusqu'au début d'un milieu ({@code null} : la page d'accueil du zoo). */
     static boolean flipTo(ZooTab tab) {
         if (flipper == null || category == null) {
@@ -168,7 +173,6 @@ public final class ZooGuide {
 
         Container container = tabs.addChild(Container.of(0.0F, 0.0F, tabs.bounds().width(), tabs.bounds().height()));
         int row = 0;
-        container.addChild(sideTab(row++, 0, null));
         for (ZooTab tab : ZooTab.values()) {
             if (hasTab(tab)) {
                 container.addChild(sideTab(row++, tab.ordinal() + 1, tab));
