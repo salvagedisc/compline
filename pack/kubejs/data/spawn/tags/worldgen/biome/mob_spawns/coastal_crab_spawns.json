@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "hybrid_aquatic:coral_reef",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:red_meadow",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:seagrass_bed",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:tide_pools",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:grassy_beach",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:gravel_beach",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:rocky_reef",
+      "required": false
+    }
+  ]
+}
