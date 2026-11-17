@@ -171,8 +171,17 @@ void main() {
                 vec3 p = gbufferModelViewInverse[3].xyz + dir * dist;
                 vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
                 float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                // Une poussière ne se voit que sur un fond sombre : devant le ciel ou un sol au soleil, elle se perd
+                // (sauf à contre-jour). Le fond est lu dans la carte d'ombre, un peu en avant de la surface.
+                float back = 1.0;
+                if (!sky && len < shadowDistance * 0.9) {
+                    vec3 q = gbufferModelViewInverse[3].xyz + dir * max(len - 0.15, 0.0);
+                    vec3 buv = shadowWarp((shadowProjection * (shadowModelView * vec4(q, 1.0))).xyz) * 0.5 + 0.5;
+                    back = buv.z < 1.0 ? texture(shadowtex1, vec3(buv.xy, buv.z - 0.0002)) : 1.0;
+                }
                 float mu = dot(dir, gLightDir);
-                float glow = lit * gDay * (0.2 + 1.8 * pow(max(mu, 0.0), 4.0)) * (1.0 - 2.0 * rainStrength);
+                float glow = lit * gDay * (0.2 * (1.0 - 0.9 * back) + 1.8 * pow(max(mu, 0.0), 4.0) * (1.0 - 0.8 * back))
+                           * (1.0 - 2.0 * rainStrength);
                 color += gLightColor * mote * glow * 0.7;
             }
         }
