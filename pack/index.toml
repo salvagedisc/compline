@@ -3407,8 +3407,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.25.0.jar"
-hash = "fc2b2f20924474e3205d752fd7dbebffdf202e2729381ea6cad1826e6dca9892"
+file = "mods/compline-0.26.0.jar"
+hash = "a7a45628cae2f076839a4ea0789d3d4cc16f6613a5ba8f94f09ad69175b54d7d"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -4393,7 +4393,7 @@ hash = "0d7688cecb6a52ec634fadca86b1ce4a692d4c9e5c5e47f68659ece0d29770e0"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/tracks.glsl"
-hash = "7cd0cd60997d832586a8551997261bd74226ac3f70419c2dfd57195072a4a2ef"
+hash = "00a1baf63911ab7f1e4a798e383dc0c246a423f828c266ac09a0bb2b96a1b8b9"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/underwater.glsl"
@@ -4537,7 +4537,7 @@ hash = "3afa37d73608b3d60e30a3aa30eb19f27c16cda2bf76f5048769a36978b5b336"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
-hash = "45144b458e24fc23e78eccefdb3181cf1f4af81b0a146cf95c012a756c9daae9"
+hash = "919a0f9ce3c9b8bf7dc8aa962525986b35eb7b49b2b2872048f53d70f6ad3122"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
@@ -4549,7 +4549,7 @@ hash = "27b739e9fbd16e73f0d298eaa3da1646f1d7af04c930717dc33985941e652d29"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/tracks.csh"
-hash = "f5375eaef11e85060cd7487fc64b25de3fa3227c4f77bab08659f210fc46ad97"
+hash = "16d8f902ceb2c0cea5f93fe71d775a3195b959e1eadfa638bfca3719495e72c1"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/wakes.csh"

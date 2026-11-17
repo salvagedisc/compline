@@ -5,7 +5,10 @@ import io.github.salvagedisc.compline.clairiere.Clearing;
 import io.github.salvagedisc.compline.clairiere.ClearingClient;
 import io.github.salvagedisc.compline.vent.Wind;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import net.irisshaders.iris.gl.uniform.UniformHolder;
 import net.irisshaders.iris.gl.uniform.UniformUpdateFrequency;
 import net.minecraft.client.Minecraft;
@@ -42,6 +45,10 @@ public final class ShaderUniforms {
     static final int PUSHES = 4;
     /** Rayon autour de la caméra où un être vivant couche les herbes, en blocs. */
     private static final double PUSH_RANGE = 12.0;
+    /** Sur combien de blocs de marche hors de l'eau des pieds mouillés finissent de sécher. */
+    private static final double WET_BLOCKS = 24.0;
+    /** En combien de secondes des pieds mouillés sèchent sur place. */
+    private static final double WET_SECONDS = 90.0;
     static final int WAKES = 6;
     /** Rayon autour de la caméra où ce qui flotte ou nage ride l'eau, en blocs. */
     private static final double WAKE_RANGE = 28.0;
@@ -51,6 +58,9 @@ public final class ShaderUniforms {
     private static final Vector4f[] CLEARING_VALUES = new Vector4f[CLEARINGS];
     private static final Vector4f[] GUST_VALUES = new Vector4f[GUSTS];
     private static final Vector4f[] PUSH_VALUES = new Vector4f[PUSHES];
+    private static final Vector4f WET_VALUE = new Vector4f();
+    /** Par être vivant proche (identifiant) : à quel point ses pieds sont mouillés, où il était, quand on l'a vu. */
+    private static final Map<Integer, double[]> WET = new HashMap<>();
     private static final Vector4f[] WAKE_VALUES = new Vector4f[WAKES];
     private static final Vector4f[] WAKE_SPEEDS = new Vector4f[2];
     private static final double[] EDGES = new double[CLEARINGS];
@@ -102,6 +112,7 @@ public final class ShaderUniforms {
             Vector4f value = PUSH_VALUES[i];
             uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumairePush" + i, () -> current(value));
         }
+        uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWet", () -> current(WET_VALUE));
         for (int i = 0; i < WAKES; i++) {
             Vector4f value = WAKE_VALUES[i];
             uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWake" + i, () -> current(value));
@@ -134,6 +145,7 @@ public final class ShaderUniforms {
         for (Vector4f value : WAKE_VALUES) {
             value.zero();
         }
+        WET_VALUE.zero();
         WAKE_SPEEDS[0].zero();
         WAKE_SPEEDS[1].zero();
         WIND_VALUE.zero();
@@ -158,7 +170,7 @@ public final class ShaderUniforms {
         MIST.set(lift, anchor, 0.0F, 0.0F);
 
         Wind.fill(WIND_VALUE, GUST_VALUES, camera);
-        pushes(level, camera, partial);
+        pushes(level, camera, partial, seconds);
         wakes(level, camera, partial);
     }
 
@@ -219,9 +231,10 @@ public final class ShaderUniforms {
 
     /**
      * Les êtres vivants les plus proches de la caméra, qui couchent les herbes en passant : (x, y, z) de leurs pieds
-     * depuis la caméra, et le rayon qu'ils écartent (0 : rien).
+     * depuis la caméra, et le rayon qu'ils écartent (0 : rien). Dans brumaireWet, dans le même ordre, à quel point
+     * leurs pieds sont mouillés (1 en sortant de l'eau, 0 secs) : le pack laisse des pas humides derrière eux.
      */
-    private static void pushes(ClientLevel level, Vec3 camera, float partial) {
+    private static void pushes(ClientLevel level, Vec3 camera, float partial, double seconds) {
         AABB around = new AABB(camera, camera).inflate(PUSH_RANGE);
         List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, around,
                 e -> e.isAlive() && !e.isSpectator());
@@ -233,8 +246,33 @@ public final class ShaderUniforms {
             }
             Vec3 feet = entity.getPosition(partial).subtract(camera);
             float radius = Math.min(entity.getBbWidth() * 0.75F + 0.35F, 2.0F);
+            WET_VALUE.setComponent(slot, (float) wetness(entity, seconds));
             PUSH_VALUES[slot++].set((float) feet.x, (float) feet.y, (float) feet.z, radius);
         }
+        // Un être qu'on n'a plus vu depuis une dizaine de secondes est oublié : il aura séché.
+        for (Iterator<double[]> it = WET.values().iterator(); it.hasNext(); ) {
+            if (frame - it.next()[3] > 600) {
+                it.remove();
+            }
+        }
+    }
+
+    /**
+     * À quel point les pieds de cet être sont mouillés : 1 tant qu'il touche l'eau, puis de moins en moins à
+     * chaque bloc parcouru et à chaque seconde passée hors de l'eau.
+     */
+    private static double wetness(LivingEntity entity, double seconds) {
+        double[] state = WET.computeIfAbsent(entity.getId(), id -> new double[] {0.0, entity.getX(), entity.getZ(), frame});
+        if (entity.isInWater()) {
+            state[0] = 1.0;
+        } else if (state[0] > 0.0) {
+            double walked = Math.hypot(entity.getX() - state[1], entity.getZ() - state[2]);
+            state[0] = Math.max(0.0, state[0] - walked / WET_BLOCKS - seconds / WET_SECONDS);
+        }
+        state[1] = entity.getX();
+        state[2] = entity.getZ();
+        state[3] = frame;
+        return state[0];
     }
 
     /**
