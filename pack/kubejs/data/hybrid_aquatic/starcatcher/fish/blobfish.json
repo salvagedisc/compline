@@ -1,0 +1,84 @@
+{
+  "base_chance": 4,
+  "catch_info": {
+    "entity": "naturalist:blobfish",
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "identifier": "naturalist:blobfish"
+    }
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 40,
+    "missPenalty": 8,
+    "modifiers": [],
+    "speed": 4,
+    "sweetspots": [
+      {
+        "color_as_int": -15732736,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.05
+      },
+      {
+        "color_as_int": -15732736,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.05
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "epic",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [
+        "#starcatcher:is_deep_ocean",
+        "#hapi:all_trenches"
+      ],
+      "blacklist": [
+        "minecraft:deep_frozen_ocean",
+        "minecraft:frozen_ocean"
+      ]
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 30.0,
+    "average_weight_grams": 2000.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 500.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
+}
