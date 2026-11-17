@@ -34,6 +34,8 @@ public final class ComplineConfig {
     private static final ModConfigSpec.IntValue ZOO_OBSERVE_SECONDS;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
+    private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
+    private static final ModConfigSpec.DoubleValue CLIMAT_SEASON_STRENGTH;
     private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
     private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
     private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
@@ -189,6 +191,18 @@ public final class ComplineConfig {
                         "Les bottes vont plus vite, le casque plus lentement.")
                 .defineInRange("minutesToFull", 40, 5, 600);
         common.pop();
+
+        common.comment("Module climat : le climat pèse sur le corps (Cold Sweat). La saison d'Ecliptic Seasons réchauffe ou refroidit",
+                "chaque biome comme Ecliptic le dit pour ses cultures et sa neige : l'hiver mord, l'été écrase.").push("climat");
+        CLIMAT_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : la saison ne change plus la température ressentie.")
+                .define("enabled", true);
+        CLIMAT_SEASON_STRENGTH = common
+                .comment("Force de la saison : l'écart de température d'Ecliptic (en unités de biome, -0,45 au cœur de l'hiver,",
+                        "+0,25 au cœur de l'été dans un biome tempéré) multiplié par ce nombre, puis compté en unités de Cold Sweat",
+                        "(1 = 25 °C). 1,5 : l'hiver retire environ 15 à 17 °C, l'été ajoute environ 9 °C. 0 : aucune saison.")
+                .defineInRange("seasonStrength", 1.5, 0.0, 4.0);
+        common.pop();
         COMMON_SPEC = common.build();
     }
 
@@ -279,6 +293,14 @@ public final class ComplineConfig {
 
     public static int zooObserveSeconds() {
         return read(COMMON_SPEC, ZOO_OBSERVE_SECONDS);
+    }
+
+    public static boolean climatEnabled() {
+        return read(COMMON_SPEC, CLIMAT_ENABLED);
+    }
+
+    public static double climatSeasonStrength() {
+        return climatEnabled() ? read(COMMON_SPEC, CLIMAT_SEASON_STRENGTH) : 0.0;
     }
 
     public static boolean ecranEnabled() {

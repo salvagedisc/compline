@@ -112,6 +112,10 @@ dependencies {
     compileOnly fileTree(packMods) { include 'astemirlib_re-*.jar' }
     compileOnly modrinth('exposure')
 
+    // Module climat : la température de Cold Sweat, la saison d'Ecliptic Seasons
+    compileOnly modrinth('cold-sweat')
+    compileOnly modrinth('ecliptic-seasons')
+
     // Module dissipateur
     compileOnly modrinth('create')
     // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar

@@ -48,7 +48,10 @@ public enum ComplineModule {
     MINAGE("minage", null, bus -> io.github.salvagedisc.compline.minage.MinageModule.start(bus)),
     /** Les filons : de vrais gisements liés au biome, avec des affleurements en surface (serveur ; le type est
      *  enregistré des deux côtés). Aucun mod requis ; les échantillons de surface viennent de Surface Samples, nommés par les données. */
-    FILONS("filons", null, bus -> io.github.salvagedisc.compline.filons.FilonsModule.start(bus));
+    FILONS("filons", null, bus -> io.github.salvagedisc.compline.filons.FilonsModule.start(bus)),
+    /** Le climat qui pèse : la saison d'Ecliptic Seasons donnée à la température de Cold Sweat (serveur ; le monde
+     *  intégré du client compte comme serveur). */
+    CLIMAT("climat", null, bus -> io.github.salvagedisc.compline.climat.ClimatModule.start(bus), ModIds.COLD_SWEAT, ModIds.ECLIPTIC_SEASONS);
 
     private final String id;
     private final Dist side;

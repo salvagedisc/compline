@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.29.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty, takes sand, snow and water, and washes off in water) **acier_noir** (black steel, between steel and diamond), **minage** (a well-forged pickaxe gives more ore), **filons** (ore veins with outcrops above them) and **ecran** (the interface fades when the player does nothing) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.30.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty, takes sand, snow and water, and washes off in water) **acier_noir** (black steel, between steel and diamond), **minage** (a well-forged pickaxe gives more ore), **filons** (ore veins with outcrops above them), **climat** (the season felt by the body, with Cold Sweat and Ecliptic Seasons) and **ecran** (the interface fades when the player does nothing) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -313,6 +313,17 @@ Config (`compline-client.toml`, `[ecran]` section): `enabled` (true; false: the 
 
 **Checked** on the test bench on 2026-11-17 (full pack, Brumaire on): after a slot change the hotbar, hearts, food, thirst drops and Cold Sweat's gauge show, then fade together, items included, and are gone; the chat stays; a body temperature set to 70 kept the interface while the gauge read 56 and let it fade once it fell to 35; thirst read 17 to 18. The bench runs at a few frames per second, so the timing of the fades was not judged there (tests EC1 to EC5).
 
+## `climat` module
+
+Server side (the integrated server in single player), with Cold Sweat (`cold_sweat`) and Ecliptic Seasons (`eclipticseasons`). The climate weighs on the body ([climat](climat.md)): Cold Sweat's body temperature follows Ecliptic's season.
+
+- **The modifier** (`SaisonTempModifier`, `compline:saison`) is registered on Cold Sweat's `TempModifierRegisterEvent` and given to every entity with a temperature on `DefaultTempModifiersEvent`, right after Cold Sweat's biome modifier, refreshed every 60 ticks for a player and 400 for an animal, as Cold Sweat does for Serene Seasons. It adds Ecliptic's temperature offset of the biome under the entity for the current solar term (`BiomeClimateManager.getBiomeClimateSettings(...).getTemperatureChange`), slid towards the next term over the term's days, times `seasonStrength`. It adds 0 where Ecliptic counts no season (`SolarDataManager.isValidDimension`).
+- **Why not Cold Sweat's own seasonal settings.** Cold Sweat reads them only if a seasons mod answered its `FetchSeasonsModsEvent` before its world config was built, during mod construction; the order of construction is not guaranteed, and its curve (one start, middle and end value per season) is the same in every biome. Ecliptic's own offsets already differ by biome and term.
+
+Config (`compline-common.toml`, `[climat]` section): `enabled` (true), `seasonStrength` (1.5).
+
+**Checked** on the bench on 2026-11-17 (development server, Cold Sweat 2.4.3.1, Ecliptic Seasons 0.15.5, one player): see [climat](climat.md#seasons-first-step).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -508,6 +519,12 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | EC3 | Walk around for a minute without touching the hotbar | The interface stays hidden; with `showWhileMoving = true` it stays shown while walking |
 | EC4 | Dive under water, go down to 3 hearts, get hungry or thirsty, stand in a desert at noon | The interface stays shown as long as the air, health, food, thirst or body temperature need watching |
 | EC5 | Ride a horse, open Create's goggles on a machine, use Overgeared's anvil | Jump meter and horse health follow the hotbar; the goggles tooltip and the anvil minigame are never faded |
+
+### Climate
+
+| # | Test | Expected |
+|---|---|---|
+| CL1 to CL5 | Seasons felt by the body | See [climat.md](climat.md#in-game-tests) |
 
 ### Held items
 

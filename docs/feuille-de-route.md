@@ -54,7 +54,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 ## Open work items arising from the decisions
 
 ### Rules and configs (sub-project 3)
-- [ ] **Ecliptic Seasons → Cold Sweat bridge** in KubeJS: seasonal temperature felt by the player. Fallback: Serene Seasons ([0002](decisions/0002-agriculture.md)).
+- [x] **Ecliptic Seasons → Cold Sweat bridge** (2026-11-17): the season of Ecliptic warms or cools the body, biome by biome, through the `compline` mod's `climat` module rather than KubeJS ([climat](plan/climat.md#seasons-first-step)). Snow and sand storms, then hot dishes, follow.
 - [x] **Farm & Charm confined to the farm** (2026-11-15): its stove, cooking pot, roaster and crafting bowl leave the game; their recipes are copied to Farmer's Delight's cooking pot and to the workbench (`cuisine.js`); its tomato and onion are kept, Farmer's Delight's leave ([0030](decisions/0030-farmers-delight-kitchen.md)). Three ropes remain (Farmer's Delight, Farm & Charm, Supplementaries).
 - [ ] Lock Create: Central Kitchen's automation behind progression ([0002](decisions/0002-agriculture.md), [0030](decisions/0030-farmers-delight-kitchen.md)).
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).

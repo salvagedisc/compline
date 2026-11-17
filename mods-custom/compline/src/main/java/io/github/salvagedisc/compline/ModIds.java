@@ -21,6 +21,8 @@ public final class ModIds {
     public static final String IRIS = "iris";
     public static final String ARCHIES_DINOSAURS = "ec_ad";
     public static final String EXPOSURE = "exposure";
+    public static final String COLD_SWEAT = "cold_sweat";
+    public static final String ECLIPTIC_SEASONS = "eclipticseasons";
 
     private ModIds() {
     }
