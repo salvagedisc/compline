@@ -9,6 +9,7 @@
 #include "/lib/rain.glsl"
 #include "/lib/voxel.glsl"
 #include "/lib/precip.glsl"
+#include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
 uniform sampler2D colortex0;
@@ -100,8 +101,27 @@ void main() {
         vec3 hue = waterHue(mix(vec3(0.25, 0.46, 0.89), fogColor / max(max(fogColor.r, fogColor.b), 1e-3), 0.35));
         float open = float(eyeBrightnessSmooth.y) / 240.0;
         // On y voit un peu plus loin qu'à travers la surface : l'œil s'est fait à la pénombre.
-        vec3 pass = exp(-waterExtinction(hue) * 0.55 * min(len, 512.0));
-        color = color * pass + waterMurk(hue, max(open * open, 0.06), 0.7 * open) * (1.0 - pass);
+        vec3 ext = waterExtinction(hue) * 0.55;
+        vec3 pass = exp(-ext * min(len, 512.0));
+        // La lumière du jour baisse d'un cran par bloc d'eau au-dessus de l'œil : près de la surface l'eau reste claire.
+        color = color * pass + waterMurk(hue, max(open, 0.06), open) * (1.0 - pass);
+        float mu = dot(dir, underwaterLightDir());
+#if LIGHT_SHAFTS > 0
+        // Les rayons qui descendent de la surface, plus vifs quand on regarde vers elle, à contre-jour.
+        if (dot(gLightColor, vec3(1.0)) > 0.01 && !hand) {
+            float lit = waterShafts(dir, len, ext);
+            float phase = 0.25 + 1.6 * pow(max(mu, 0.0), 4.0);
+            color += hue * gLightColor * lit * phase * (0.04 * SHAFT_STRENGTH) * open;
+        }
+#endif
+#if WATER_MOTES > 0
+        // La poussière en suspension, qui brille surtout à contre-jour.
+        if (!hand) {
+            float mote = marineSnow(dir, len);
+            vec3 glint = hue * (gAmbient * 0.5 + gLightColor * (0.25 + 0.9 * pow(max(mu, 0.0), 3.0))) * max(open, 0.15);
+            color = mix(color, glint + color * 0.4, mote * 0.4);
+        }
+#endif
     } else if (isEyeInWater >= 2) {
         float t = 1.0 - exp(-len * (isEyeInWater == 2 ? 1.2 : 0.7));
         color = mix(color, isEyeInWater == 2 ? vec3(1.6, 0.35, 0.04) : vec3(0.75, 0.82, 0.90), t);
