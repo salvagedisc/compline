@@ -13,6 +13,20 @@ flat out int vWater;
 in vec4 at_midBlock;
 layout(r32ui) uniform writeonly uimage3D voxelImg;
 uniform int renderStage;
+#if VOXEL_REFLECTIONS > 0
+layout(r32ui) uniform writeonly uimage3D voxTopImg;
+layout(r32ui) uniform writeonly uimage3D voxSideImg;
+uniform sampler2D gtexture;
+
+/** La couleur moyenne de la face (le dernier niveau de réduction de sa texture), teinte du biome comprise. */
+void storeColor(ivec3 c) {
+    vec3 col = textureLod(gtexture, mc_midTexCoord, 4.0).rgb * gl_Color.rgb;
+    uvec3 q = uvec3(clamp(col, 0.0, 1.0) * 255.0 + 0.5);
+    uint word = q.r | (q.g << 8) | (q.b << 16) | (1u << 24);
+    if (gl_Normal.y > 0.5) imageStore(voxTopImg, c, uvec4(word));
+    else imageStore(voxSideImg, c, uvec4(word));
+}
+#endif
 
 /** Range le bloc de ce sommet dans le volume de la lumière colorée : plein, laisse passer, ou lumineux. */
 void storeVoxel(vec3 pos, int mat) {
@@ -28,6 +42,13 @@ void storeVoxel(vec3 pos, int mat) {
     uint code = level > 0u ? level | (uint(lightFamily(mat)) << 4) | VOX_CLEAR : (clear ? VOX_CLEAR : VOX_SOLID);
     bool open = (mat >= 1 && mat <= 3) || mat == 5 || mat == 8 || mat == 16 || mat == 22;
     if (!open) code |= VOX_RAIN;
+#if VOXEL_REFLECTIONS > 0
+    // Ce qui se voit dans un reflet : pas l'eau ni les petites plantes, trop fines pour un bloc entier.
+    if (!open && mat != 6) {
+        code |= VOX_MIRROR;
+        storeColor(c);
+    }
+#endif
     imageStore(voxelImg, c, uvec4(code));
 }
 #endif
