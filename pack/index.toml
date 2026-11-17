@@ -293,6 +293,10 @@ file = "config/spark/config.json"
 hash = "e5416ac451c87a3017e7b7b48d359fea8e642f8ae53921f86ac9375b7841a7ee"
 
 [[files]]
+file = "config/starcatcher-server.toml"
+hash = "4974e503e8247e8c9b0b299145f2b8798e30f0fb86c9cb7ca870350dde912046"
+
+[[files]]
 file = "config/streamsreflowing-client.properties"
 hash = "b3cbcd608c06f1eda2dbe212398184f68908f0768261c2db0b3c28636db507de"
 
@@ -945,6 +949,10 @@ file = "kubejs/assets/fabric-data-attachment-api-v1/lang/fr_fr.json"
 hash = "2bba661d1f0b6ae0c1a65c567ce02b44eeb646d92d4cc6fc2f8f107b53226d68"
 
 [[files]]
+file = "kubejs/assets/fancytabsections/lang/fr_fr.json"
+hash = "1a4512dc8cb48204eda516b795e3e5877866b9acde66d613942d1bb2a3556689"
+
+[[files]]
 file = "kubejs/assets/farm_and_charm/lang/en_us.json"
 hash = "dde2cb743c5207cb9c28421dad13c58afad5086a8aa121df505aefb537b98099"
 
@@ -993,6 +1001,10 @@ file = "kubejs/assets/hybrid_aquatic/lang/fr_fr.json"
 hash = "1543b57164b89f53956c46f14171f61f9e5005a3ad10aa08888f13cca1760140"
 
 [[files]]
+file = "kubejs/assets/hybrid_aquatic_starcatcher_compat/lang/fr_fr.json"
+hash = "d9eaf8637b1858269f067e2a266de2517e29ed7c3f4d3556ed389ebcf33c22b4"
+
+[[files]]
 file = "kubejs/assets/hybrid_birds/lang/fr_fr.json"
 hash = "b72995d91ee840bbd0148547b76d7eb8e9079e94ba12e290babefb8617983407"
 
@@ -1031,6 +1043,10 @@ hash = "044e537e2faffb727c557ff9a73bc7a19d2f187fea5db93189269a1b241ff7cb"
 [[files]]
 file = "kubejs/assets/lamblanterns/lang/fr_fr.json"
 hash = "26e990fe4586a5c9a89aa8a06259054aab11e39bfdab7a2634aa04cddcf91c1e"
+
+[[files]]
+file = "kubejs/assets/libtooltips/lang/fr_fr.json"
+hash = "a809671cb4c434639ee2dad90f24e1a4c5181970df885e1f821df4748ef71da1"
 
 [[files]]
 file = "kubejs/assets/longwings/lang/fr_fr.json"
@@ -1129,6 +1145,10 @@ file = "kubejs/assets/sablephysicscompat/lang/fr_fr.json"
 hash = "e6e82b9957d5c4004a6edd1c1fb9e223ae24afd4194033f4993315fb9e49499e"
 
 [[files]]
+file = "kubejs/assets/selling_bin/lang/fr_fr.json"
+hash = "62e7f85d850de79659a6a3730a5a5e2299f644d19cc3d3b2d7461743ad1f1482"
+
+[[files]]
 file = "kubejs/assets/sensible_stackables/lang/fr_fr.json"
 hash = "1381b70ce0dedf3f8ed1dc0559b8f1b3916e2dcb3f14862f1e01655d752f7206"
 
@@ -1177,6 +1197,14 @@ file = "kubejs/assets/spelunkery/lang/fr_fr.json"
 hash = "6d2e113d3f923ff84026fbad972b8b941153f49288c3c8646748fdf21bfb7745"
 
 [[files]]
+file = "kubejs/assets/starcatcher/lang/fr_fr.json"
+hash = "cba5fef19fc5a7702ea157d7409728f049a0d5332974fe0b63c410325c28500e"
+
+[[files]]
+file = "kubejs/assets/starcatcher_delight/lang/fr_fr.json"
+hash = "536b42f1f05c06101cc4148f165f8f18cbf95a353f86efbf40ebdce3e6a56414"
+
+[[files]]
 file = "kubejs/assets/structure_layout_optimizer/lang/fr_fr.json"
 hash = "d973329458bfcef4321e08457c64ca96e27c8c48237dd756d1b58d864ff1c65d"
 
@@ -1199,6 +1227,10 @@ hash = "f6c3e97c7e71cf01e798ceeed0e39b59c01c2f88a2a070252b3ba87983627754"
 [[files]]
 file = "kubejs/assets/tectonic/lang/fr_fr.json"
 hash = "fb4d739dfddcf3130ee340cab5c1f73c1609c8edc32eccca2d2e6e1f7a0aa8bb"
+
+[[files]]
+file = "kubejs/assets/tinymultiblocklib/lang/fr_fr.json"
+hash = "bb32e3e028f2def534784ea65102872a6ce8d717d1c0aca33be58ba0097d7b74"
 
 [[files]]
 file = "kubejs/assets/toucanlib/lang/fr_fr.json"
@@ -1258,7 +1290,7 @@ hash = "2550e30c1d181e144ed61266ab4903cf4b47cfbe5581290a52b3871dd879e481"
 
 [[files]]
 file = "kubejs/client_scripts/fusions.js"
-hash = "cbb7c73952d87ba5176dc05f9db0f76767f98710324242f483060d8603a7204f"
+hash = "d640ab815226319dcf18434b21501c60989db66ec2326da0830486833ac0e62e"
 
 [[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
@@ -1282,7 +1314,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "d649d8a76fa0033ad53608a82bed7946cd7b90f79fd8590bc38d19d3803a0639"
+hash = "a75b621823f6429bd2578b64a23cbc459ff2c90a917b56bb5290fe779892c573"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1363,6 +1395,18 @@ hash = "48537e1eb4ebb4a505cca42b80c59f7580d9a103541b14b311e826543fdde751"
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
+
+[[files]]
+file = "kubejs/data/compline/starcatcher/fish/bass.json"
+hash = "73800b884a8a0505b2e7f45a86f8a326e3f41bd0b37c7ba13580744945f45b33"
+
+[[files]]
+file = "kubejs/data/compline/starcatcher/fish/bluefish.json"
+hash = "fce11670cab90434e01fb7b415c120cf00d5545e87c5637fe72c5e5fa7e14491"
+
+[[files]]
+file = "kubejs/data/compline/starcatcher/fish/catfish.json"
+hash = "7ab2dd413e33807dae316c39ee5abdb0c22b16e64b81dca32ab808a625159b3c"
 
 [[files]]
 file = "kubejs/data/compline/structure/chorusoatl.nbt"
@@ -1949,6 +1993,30 @@ file = "kubejs/data/hybrid_aquatic/neoforge/biome_modifier/stingray_shallow_warm
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/anglerfish.json"
+hash = "6afde55cf387d78baac9c361b685d07b65e2ee7c1bc79677e1fa7947fd77436c"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/blobfish.json"
+hash = "6d12da817a27e4c822ad77ce634c7209d878923fcd52a42833451fcf74bb90f6"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/ocean_sunfish.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/piranha.json"
+hash = "47327db9c77d69303ef7ea45f4027969f4effc35ad00e76d4829129177b1d036"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/seahorse.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/hybrid_aquatic/starcatcher/fish/stingray.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
 file = "kubejs/data/hybrid_birds/tags/worldgen/biome/duck_spawn_biomes.json"
 hash = "7703ef641825663b2493651c3125d512c21949f635a453b602a81b922580bf5e"
 
@@ -2401,6 +2469,134 @@ file = "kubejs/data/spelunkery/tags/worldgen/biome/has_swamp_noise.json"
 hash = "16ff938f545db43586cf299c3c93587393c0913315fc487207e6d6b534ab6090"
 
 [[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/boner_skin_smithing_template.json"
+hash = "a72083ea3eef9c88d2b443a17068b8a2e72645329d09d0265f4133dd41289bb5"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/cerberay.json"
+hash = "0b084bdeb0a9d4959928ac1809c1754a2a4d6b5386c3545357459ac1585573b9"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/charfish.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/chorus_crab.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/chorus_minnow.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/cinder_squid.json"
+hash = "a6df813a875fa78f123786a9d63f8c5c6308438a3172b47519f00036ba562f91"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/dreamliner.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/embergill.json"
+hash = "d2a23ed76315470a4a6bca1523c45937f06ab557e7edf4dc5e7f1971b05de18b"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/end_glow.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/glowstone_pufferfish.json"
+hash = "8ef92dda1a93078f47fe48b7f9d3dfdddcaacad165615eed9728070c3ad1a0ff"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/glowstone_seeker.json"
+hash = "41473485238d4c4b7c80147b06f57c5c9ec6c1c8fcf15a47d2d9b64e5a0a8a23"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/lava_crab.json"
+hash = "1164dd2899986b713182583887eb6bfac4968825189bc181e46121b39b6dc0cf"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/lava_crab_claw.json"
+hash = "6a309f9a78281b2f569b9e230d17920924131d4d19d9239d3bea33f7e72153c4"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/magma_fish.json"
+hash = "d0b5defcc5b877c9704037530eda5d2e6cdbbb8c56df9758006fd0065e8b25b6"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/magmaforged_skin_smithing_template.json"
+hash = "ffc3a0232738acfbbd905d1ea97a49e9a1f5f42a77a92f8f0125529b32e43624"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/nebula_squid.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/purple_carp.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/scalding_pike.json"
+hash = "79f1c93961b47c5f11b769c6125bbb5223a809550aa9910f4126a1a77b66f93f"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/sea_bass.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/spacejelly.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/stonefish.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/survivor_smithing_template.json"
+hash = "62de5d8507c74ebff30740ca66305ea82a0c0e22f7d713c6c3988be94e5ef817"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/voidbiter.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/voidfin.json"
+hash = "21b11674b18c3fb0d8292095cf7c12bca82ef4054ec3f1cd8d1e0222d1655629"
+
+[[files]]
+file = "kubejs/data/starcatcher/starcatcher/fish/willish.json"
+hash = "d07b04264ac0be47fe4d70d421d71b927b67707d80bbee91ca583cd844af7f86"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_cold_lake.json"
+hash = "20f5a19791501b7e71a7028ca58b84f3de5f3862325f69487524e1996185676c"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_cold_river.json"
+hash = "e9338c6e1c108df2d49649e091e7041bccefffc108a49a6885ea8ca8b2fac884"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_frozen_ocean.json"
+hash = "679cf64bb224e3301fc327d909dddb376ae8c87846b3ecb3e42c92247e832f0c"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_lukewarm_ocean.json"
+hash = "82dc1cd1f753f1304faab88cfd3645db3886e3b1f1086dd870d92ab8b88c8a7a"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_normal_ocean.json"
+hash = "b2aee0b5b3a421e1150b77feeeacb0148619c27f4937861bd367a2b4fe7225f2"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_warm_ocean.json"
+hash = "2485fc17a6a263db4c9e4e1466ee9fa7649a71149afbfd49c4e699d3f21a490b"
+
+[[files]]
+file = "kubejs/data/starcatcher/tags/worldgen/biome/is_warm_river.json"
+hash = "120b6240287323a1335d5264ef177d9ec1527f1f6b8fb5012977b7d11ff72820"
+
+[[files]]
 file = "kubejs/data/streamsreflowing/tags/worldgen/structure/always_generates.json"
 hash = "f8608be1aef25d163c9bcaa7c9ddae688ecb4610437691930c98caab8565afa8"
 
@@ -2442,7 +2638,7 @@ hash = "a78669427b1a39bbc9dbb98b5f59e31a9225622094f6b51919064173047611ff"
 
 [[files]]
 file = "kubejs/server_scripts/cuisine.js"
-hash = "7656d4b36ecb95f7c57d777297473e5094f8b19017141d7fc85168eb5b0d7dd9"
+hash = "6058fb1c209efd770d2254efbed491b58cba0c01eae2e9da7fa79d1333a23bd3"
 
 [[files]]
 file = "kubejs/server_scripts/dimensions_fermees.js"
@@ -2458,7 +2654,7 @@ hash = "5a956001a784513ff82b0683b26a3266a1723d1a8be29885e4d335fee83ebe1f"
 
 [[files]]
 file = "kubejs/server_scripts/fusions.js"
-hash = "e74d1a5c94e5c4c09c61d9aa0531f41bd701c16f775a2e2b7e43eb585f8c5846"
+hash = "cad6bfe8d17bc30368046564850d901ddd126c56c981def9a0ca1f400c7dcb37"
 
 [[files]]
 file = "kubejs/server_scripts/monuments.js"
@@ -2494,7 +2690,7 @@ hash = "ea30bf7fb58597eb9c000d733928c7404d4196609cd13a557d9c602a02763345"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "a9cf75eb65e79fb6a80963c71860ac9c76b1fbeab6c545fd8c44cad35862f5c0"
+hash = "c769c4067a177d7b5c143908f29dd328931e3190672302afb5e724f83095ffd9"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
@@ -2502,7 +2698,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "f546c061b5f77e38b20b93259e2ce321e36a7068cc222c3d1d0bea867b0bd2b7"
+hash = "3272761612cb69c39bd4008607d67bd9431a450a446397fec6a3cf7c1fba1aea"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
@@ -2510,7 +2706,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "eac24b0462e88c6557e3255cd9aee25dc29882ba7c17b52217f40f7e5d29f02c"
+hash = "ae1d931550e5b4f0ab4b3c208ebd05ac225685260571607ef35dee19d9e6cbc7"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -2862,6 +3058,11 @@ hash = "fdc55b26800127cafd9a88b2bd03615fc49ced589cffb036145d98c029af437f"
 metafile = true
 
 [[files]]
+file = "mods/hybrid-aquatic-starcatcher-compatibility.pw.toml"
+hash = "5564fb63b42f92f9662bb9f9551ac23341b64dbfc4f31fff99470b1f329206db"
+metafile = true
+
+[[files]]
 file = "mods/hybrid-aquatic.pw.toml"
 hash = "af60f4cd6512a46528cc606f854354c6a261a79bdf2ced261b89b42905bbd7c0"
 metafile = true
@@ -3184,6 +3385,16 @@ metafile = true
 [[files]]
 file = "mods/spelunkery.pw.toml"
 hash = "cd2c6fa89eecaaa1aadf369b043ceb45e99778cacd590e3fc01b0dcae2e6557d"
+metafile = true
+
+[[files]]
+file = "mods/starcatcher.pw.toml"
+hash = "4e5d0aaa6f9dee74886f345cf81ece00adbf8a4598644b99f73ca15537c2a8ac"
+metafile = true
+
+[[files]]
+file = "mods/starcatchers-delight.pw.toml"
+hash = "efc4b14f73dfbb271c11822faca511777fab8eacb66e644788e190ae6c23c174"
 metafile = true
 
 [[files]]

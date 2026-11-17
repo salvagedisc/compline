@@ -27,6 +27,8 @@ ServerEvents.recipes(event => {
 
   CUISINE_TYPES_CUITS.forEach(type => {
     event.forEachRecipe({ type: type }, recipe => {
+      // Starcatcher's Delight a déjà chaque plat dans la marmite de Farmer's Delight.
+      if (String(recipe.getId()).indexOf('starcatcher_delight:') === 0) return
       const json = lire(recipe)
       if (CUISINE_PAS_RECOPIES.indexOf(json.result.id) >= 0) return
       const copie = {

@@ -8,6 +8,7 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'naturalist:clam_meat', 'naturalist:cooked_clam_meat', 'naturalist:crab_meat',
     'naturalist:cooked_crab_meat', 'farmersdelight:tree_bark', 'naturalist:fat',
     'farmersdelight:rope', 'farm_and_charm:rope', 'overgeared:copper_nugget',
-    'overgeared:diamond_shard', 'hybrid_aquatic:glowstick', 'alexsmobs:shark_tooth'
+    'overgeared:diamond_shard', 'hybrid_aquatic:glowstick', 'alexsmobs:shark_tooth',
+    'minecraft:fishing_rod'
   ].forEach(id => event.remove(id))
 })

@@ -203,10 +203,22 @@ const TRI_OBJETS_DINOSAURES = [
   'ec_ad:theri_claw_netherite'
 ]
 
+// Starcatcher (décision 0034) : le bac de vente, sans monnaie dans Compline ; les prises de
+// l'End, qui n'existe plus ; sa rascasse et son bar, qu'Hybrid Aquatic a déjà. Leurs entrées de
+// pêche sont retirées par scripts/fishing/starcatcher_entries.py.
+const TRI_OBJETS_PECHE = [
+  'selling_bin:selling_bin', 'starcatcher:charfish', 'starcatcher:chorus_crab',
+  'starcatcher:chorus_minnow', 'starcatcher:dreamliner', 'starcatcher:end_glow',
+  'starcatcher:nebula_squid', 'starcatcher:purple_carp', 'starcatcher:spacejelly',
+  'starcatcher:voidbiter', 'starcatcher:voidfin', 'starcatcher:stonefish',
+  'starcatcher:sea_bass'
+]
+
 const TRI_TOUT = [].concat(
   TRI_OBJETS_CREATE, TRI_OBJETS_OVERGEARED, TRI_OBJETS_CUISINE, TRI_OBJETS_DIVERS,
   TRI_OBJETS_HANDCRAFTED, TRI_OBJETS_TWIGS, TRI_OBJETS_ALEXSMOBS, TRI_OBJETS_COMPANIONS,
-  TRI_OBJETS_MOWZIE, TRI_OBJETS_FAUNE, TRI_OBJETS_SPELUNKERY, TRI_OBJETS_DINOSAURES
+  TRI_OBJETS_MOWZIE, TRI_OBJETS_FAUNE, TRI_OBJETS_SPELUNKERY, TRI_OBJETS_DINOSAURES,
+  TRI_OBJETS_PECHE
 )
 
 // Steam 'n' Rails : variantes décoratives. Voies de 3 bois (chêne, épicéa, bouleau), en
