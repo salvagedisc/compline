@@ -11,7 +11,7 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Step | Programs | What it does |
 |---|---|---|
 | Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow but marks itself (`shadowcolor0`), so the bottom knows it lies under water |
-| Coloured light | `shadow`, `shadowcomp.csh` (compute) | The shadow pass also files every terrain block within 64 blocks horizontally and 32 vertically into a 128×64×128 volume (`voxelImg`): solid, letting light through, or glowing with its colour; the compute pass spreads the light one block per frame, like the game's light, into two volumes used in turn (`lightImgA`, `lightImgB`) |
+| Coloured light, shelter | `shadow`, `shadowcomp.csh`, `shadowcomp1.csh` (compute) | The shadow pass also files every terrain block within 64 blocks horizontally and 32 vertically into a 128×64×128 volume (`voxelImg`): solid, letting light through, or glowing with its colour; the compute pass spreads the light one block per frame, like the game's light, into two volumes used in turn (`lightImgA`, `lightImgB`); a second compute pass finds in each column the top of what stops the rain (`shelterImg`) |
 | Sky table | `prepare.csh` (compute) | The light scattered by the atmosphere in every direction around the sun, lit by the sun and the moon, in a 192×108 table; its last row holds the mean light of the sky and what the air leaves of the sun and the moon |
 | Geometry | `gbuffers_*`, `dh_terrain`, `dh_water`, `clrwl_gbuffers` | Every surface is lit where it is drawn: sun or moon with soft shadows, sky light, block light, the game's ambient occlusion; solid surfaces also write their normal and their share of indirect light (`colortex1`) |
 | Screen occlusion | `deferred` (half size), `deferred1` | Hollows, foliage and the foot of walls receive less sky light; smoothed without bleeding across edges; wet ground and puddles take their reflection; then the sky and a round sun are painted behind the terrain, the moon and stars of the game (and of mods) kept; the finished opaque scene is copied to `colortex6` for the water |
@@ -36,6 +36,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/water.glsl` | Colour, murk and waves of the water, caustics |
 | `lib/reflect.glsl` | Screen reflections, the mirrored sky, the veil of air on a reflection (water and puddles) |
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
+| `lib/precip.glsl`, `program/shelter.csh` | Drops and flakes drawn by the shader, the shelter of roofs and trees, the showers |
 | `lib/cover.glsl` | Snow laid on trees and ledges, the glitter of snow and sand |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
 | `lib/smaa.glsl`, `program/smaa.*`, `textures/smaa_*.png` | SMAA by Jorge Jimenez et al. (MIT, `textures/SMAA-LICENSE.txt`), unchanged but for its encoding, its lookup tables, and the three passes that use it |
@@ -97,6 +98,13 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Rain curtains**: beyond the game's drops, thin falling streaks over the distant landscape, leaning with the wind (`RAIN_CURTAINS`).
 - **The air** under rain turns a slightly warm grey and the mist thickens a little.
 - **Lightning**: the bolt (`gbuffers_lightning`) is a bright blue-white line that glows; while it strikes, the sky and the whole landscape flash, less when it falls far away (`lightningBoltPosition`).
+
+### Rain and snow drawn by the shader
+
+- **Drops and flakes** (`SHADER_RAIN`, off in the Very light profile, where the game's rain stays): the game's rain and snow are hidden and the shader draws its own in `composite1` (`lib/precip.glsl`): one drop or flake per column of three quarters of a block, found by walking the columns the view crosses up to 26 blocks; drops fall on the sixteenth-of-a-block grid like the pixels of the textures, one pixel wide, lit by the sky; flakes are pixel squares that drift. The wind slants them.
+- **Shelter**: a compute pass (`shadowcomp1`, `program/shelter.csh`) finds in the coloured-light volume, for each column, the top of the highest block that stops rain (everything but grass, flowers, vines and torches); no drop falls below it, so nothing falls under a roof or a dense tree.
+- **Showers**: patches of about a hundred blocks pushed by the wind: the rain grows heavier and lighter as they pass, and the far rain curtains are thicker where it rains hard.
+- In a snowy biome (the player's), flakes instead of drops.
 
 ## Snow, sand and ice
 

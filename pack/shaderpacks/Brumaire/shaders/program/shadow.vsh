@@ -9,7 +9,7 @@ in vec2 mc_Entity;
 in vec2 mc_midTexCoord;
 out vec2 vUv;
 flat out int vWater;
-#if COLORED_LIGHT > 0
+#ifdef VOXELS
 in vec4 at_midBlock;
 layout(r32ui) uniform writeonly uimage3D voxelImg;
 uniform int renderStage;
@@ -26,6 +26,8 @@ void storeVoxel(vec3 pos, int mat) {
     uint level = uint(clamp(at_midBlock.w + 0.5, 0.0, 15.0));
     bool clear = (mat >= 1 && mat <= 6) || mat == 10 || mat == 13 || mat == 14;
     uint code = level > 0u ? level | (uint(lightFamily(mat)) << 4) | VOX_CLEAR : (clear ? VOX_CLEAR : VOX_SOLID);
+    bool open = (mat >= 1 && mat <= 3) || mat == 5 || mat == 8 || mat == 16 || mat == 22;
+    if (!open) code |= VOX_RAIN;
     imageStore(voxelImg, c, uvec4(code));
 }
 #endif
@@ -37,7 +39,7 @@ void main() {
     // L'eau ne porte pas d'ombre (shadowtex1 l'ignore) mais se marque : le fond saura qu'il est sous l'eau.
     // Les plantes ondulent comme dans la vue.
     vWater = mat == 6 ? 1 : 0;
-#if COLORED_LIGHT > 0
+#ifdef VOXELS
     storeVoxel((shadowModelViewInverse * view).xyz, mat);
 #endif
     if (mat >= 1 && mat <= 5) {

@@ -7,6 +7,8 @@
 #include "/lib/clouds.glsl"
 #include "/lib/water.glsl"
 #include "/lib/rain.glsl"
+#include "/lib/voxel.glsl"
+#include "/lib/precip.glsl"
 #include "/program/scene.glsl"
 
 uniform sampler2D colortex0;
@@ -140,8 +142,21 @@ void main() {
         }
         // Au loin, là où le jeu ne dessine plus de gouttes, les rideaux de pluie.
         float curtain = rainCurtain(dir, len, frameTimeCounter) * rainStrength * rainHere;
+#if SHADER_RAIN > 0
+        // Les averses passent : les rideaux sont plus épais là où il pleut fort.
+        curtain *= mix(0.35, 1.3, showerAt(cameraPosition.xz + dir.xz * min(len, 160.0)));
+#endif
         if (curtain > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.1 + vec3(0.02), min(curtain * 0.2, 0.35));
     }
+#if SHADER_RAIN > 0
+    if (isEyeInWater == 0 && rainStrength > 0.0) {
+        float snow = step(0.5, snowHere);
+        float local = showerAt(cameraPosition.xz);
+        float amount = rainStrength * (snow > 0.5 ? snowHere * mix(0.5, 1.0, local) : rainHere * mix(0.5, 1.0, local));
+        float a = precipitation(dir, len, snow, amount);
+        color = mix(color, precipColor(snow), a);
+    }
+#endif
     if (blindness > 0.0) color *= exp(-len * 0.35 * blindness);
     outColor = vec4(color, 1.0);
 }
