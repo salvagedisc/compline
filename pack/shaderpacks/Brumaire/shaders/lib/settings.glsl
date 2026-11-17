@@ -48,6 +48,8 @@
 // Neige et chaleur
 #define SNOW_COVER 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
+#define TRACKS 1 // [0 1]
+#define TRACK_MINUTES 4.0 // [1.0 2.0 4.0 8.0 15.0]
 
 // Couleurs
 #define OLIVE 0.8 // [0.0 0.2 0.4 0.6 0.8 1.0]
