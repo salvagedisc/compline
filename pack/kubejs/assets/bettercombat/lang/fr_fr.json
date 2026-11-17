@@ -1,0 +1,14 @@
+{
+  "text.autoconfig.bettercombat.option.client.isSwingThruGrassSmart": "Frapper à travers l'herbe avec discernement",
+  "text.autoconfig.bettercombat.option.client.isSwingThruGrassSmart.@Tooltip": "Ne frappe à travers l'herbe que si un ennemi est à portée",
+  "text.autoconfig.bettercombat.option.client.isShowingWeaponTrails": "Traînées des armes",
+  "text.autoconfig.bettercombat.option.client.isShowingWeaponTrails.@Tooltip": "Dessine la traînée de l'arme à chaque coup, quelle que soit la vue",
+  "text.autoconfig.bettercombat.option.client.isTooltipAttackRangeReformat": "Infobulle : portée d'attaque",
+  "text.autoconfig.bettercombat.option.client.isTooltipAttackRangeReformat.@Tooltip": "Affiche la portée d'interaction comme une portée d'attaque",
+  "text.autoconfig.bettercombat.option.client.mineWithWeaponWhitelist": "Armes qui peuvent miner",
+  "text.autoconfig.bettercombat.option.client.mineWithWeaponWhitelist.@Tooltip": "Les armes dont l'identifiant correspond à cette expression peuvent toujours miner, même quand « Miner avec des armes » est désactivé",
+  "text.autoconfig.bettercombat.option.client.firstPersonAnimations": "Animations du joueur en première personne",
+  "text.autoconfig.bettercombat.option.client.firstPersonAnimations.@Tooltip": "Animations d'attaque montrées en première personne. À changer seulement avec un mod de caméra particulier.",
+  "text.autoconfig.bettercombat.option.client.legAnimationThreshold": "Couper l'animation des jambes",
+  "text.autoconfig.bettercombat.option.client.legAnimationThreshold.@Tooltip": "EXPÉRIMENTAL : coupe l'animation des jambes au-delà de cette vitesse de course"
+}
