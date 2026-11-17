@@ -29,6 +29,7 @@ const TABS = [
   'mowziesmobs:mowziesmobs_tab', 'naturalist:item_group', 'overgeared:blueprint_tab',
   'overgeared:lingering_arrows_tab', 'overgeared:overgeared_tab', 'railways:main',
   'railways:palettes', 'railways:tracks', 'regions_unexplored:main', 'simulated:main_tab',
+  'surfacesamples:surface_samples_blocks_tab', 'surfacesamples:surface_samples_items_tab',
   'tannery:tannery', 'thirst:thirst', 'twigs:twig'
 ];
 

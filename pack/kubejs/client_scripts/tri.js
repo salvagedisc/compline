@@ -150,7 +150,10 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'starcatcher:charfish', 'starcatcher:chorus_crab', 'starcatcher:chorus_minnow',
     'starcatcher:dreamliner', 'starcatcher:end_glow', 'starcatcher:nebula_squid',
     'starcatcher:purple_carp', 'starcatcher:spacejelly', 'starcatcher:voidbiter',
-    'starcatcher:voidfin', 'starcatcher:stonefish', 'starcatcher:sea_bass'
+    'starcatcher:voidfin', 'starcatcher:stonefish', 'starcatcher:sea_bass',
+    'surfacesamples:test_sample', 'surfacesamples:testitem', 'surfacesamples:aluminum_ore_sample', 'surfacesamples:lead_ore_sample',
+    'surfacesamples:nickel_ore_sample', 'surfacesamples:osmium_ore_sample', 'surfacesamples:silver_ore_sample', 'surfacesamples:tin_ore_sample',
+    'surfacesamples:uranium_ore_sample', 'surfacesamples:fluorite_ore_sample', 'surfacesamples:nether_gold_ore_sample', 'surfacesamples:nether_quartz_ore_sample'
   ].forEach(id => event.remove(id))
 
   TRI_MOTIFS.forEach(motif => event.remove(motif))

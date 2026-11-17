@@ -45,7 +45,10 @@ public enum ComplineModule {
      *  serveur). Aucun mod requis pour l'enregistrement ; ses recettes et ses tags sont des données du pack. */
     ACIER_NOIR("acier_noir", null, bus -> io.github.salvagedisc.compline.acier.AcierNoirModule.start(bus)),
     /** Le minage : une pioche bien forgée d'Overgeared rend plus de minerai (serveur). Aucun mod requis ; sans Overgeared, rien ne change. */
-    MINAGE("minage", null, bus -> io.github.salvagedisc.compline.minage.MinageModule.start(bus));
+    MINAGE("minage", null, bus -> io.github.salvagedisc.compline.minage.MinageModule.start(bus)),
+    /** Les filons : de vrais gisements liés au biome, avec des affleurements en surface (serveur ; le type est
+     *  enregistré des deux côtés). Aucun mod requis ; les échantillons de surface viennent de Surface Samples, nommés par les données. */
+    FILONS("filons", null, bus -> io.github.salvagedisc.compline.filons.FilonsModule.start(bus));
 
     private final String id;
     private final Dist side;
