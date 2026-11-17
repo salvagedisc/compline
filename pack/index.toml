@@ -1018,7 +1018,7 @@ hash = "1543b57164b89f53956c46f14171f61f9e5005a3ad10aa08888f13cca1760140"
 
 [[files]]
 file = "kubejs/assets/hybrid_aquatic_starcatcher_compat/lang/fr_fr.json"
-hash = "d9eaf8637b1858269f067e2a266de2517e29ed7c3f4d3556ed389ebcf33c22b4"
+hash = "a1d90cf613400e0c3ab99eda1e8359700950ec749bf001ea86a42ad25df57752"
 
 [[files]]
 file = "kubejs/assets/hybrid_birds/lang/fr_fr.json"
@@ -1214,11 +1214,11 @@ hash = "6d2e113d3f923ff84026fbad972b8b941153f49288c3c8646748fdf21bfb7745"
 
 [[files]]
 file = "kubejs/assets/starcatcher/lang/fr_fr.json"
-hash = "f9d2cc1f395765088593b7f5762175791006cd16a6c6e3728306f78051054717"
+hash = "e4d75a936fc781b5dc9ae7019a3eece5224791497c31838af9755708da3d18fb"
 
 [[files]]
 file = "kubejs/assets/starcatcher_delight/lang/fr_fr.json"
-hash = "536b42f1f05c06101cc4148f165f8f18cbf95a353f86efbf40ebdce3e6a56414"
+hash = "0f831910ff1dfec7e4a8e52797279281658aa984bba3b25323da93545b7a9d6d"
 
 [[files]]
 file = "kubejs/assets/structure_layout_optimizer/lang/fr_fr.json"
