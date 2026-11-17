@@ -38,6 +38,7 @@
 #define WATER_REFLECTIONS 20 // [0 12 20 32]
 
 // Pluie
+#define SHADER_RAIN 1 // [0 1]
 #define WETNESS 1.0 // [0.0 0.5 0.75 1.0 1.25]
 #define PUDDLES 1 // [0 1]
 #define PUDDLE_AMOUNT 1.0 // [0.5 0.75 1.0 1.25 1.5]

@@ -184,6 +184,10 @@ void main() {
     // L'éclair : un trait blanc bleuté ; les couches du jeu s'additionnent, le cœur éblouit et le halo reste léger.
     outColor = vec4(vec3(0.80, 0.86, 1.0) * 1.8, color.a);
 #elif defined PROGRAM_WEATHER
+#if SHADER_RAIN > 0
+    // La pluie et la neige sont dessinées par composite1 (lib/precip.glsl).
+    discard;
+#endif
     // Gouttes et flocons prennent la lumière du ciel : de fins traits gris clair, pas les traits bleus du jeu. Ceux
     // qui tombent tout contre l'œil s'effacent, sans quoi ils barrent l'écran.
     bool rain = color.b > color.r + 0.04;
