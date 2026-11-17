@@ -806,11 +806,11 @@ hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
 file = "kubejs/assets/compline/lang/en_us.json"
-hash = "a84fa099f3b91546890068e832d6c22ab1ad028587517484ae9d6682e1619d43"
+hash = "a3afe3ad6613fb850d14c7134109fd7590fdb4528cc7a849c4801ca07786d824"
 
 [[files]]
 file = "kubejs/assets/compline/lang/fr_fr.json"
-hash = "254c7a4f308a8dbfbfd3ed663b909c6ff00602bb24a18a26e0ccb25d99eb7694"
+hash = "62da7bfbdb85887ebdab523eae2ea54d6159e34bb3f411f51d6adffff0bfba9b"
 
 [[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
@@ -1383,6 +1383,10 @@ hash = "44f3679280725b4f328682ecd5a4c02a476127bfd708f9ea917e41a7b89fc9cc"
 [[files]]
 file = "kubejs/data/compline/monde/bord.json"
 hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/diamants_de_la_lave.json"
+hash = "d59708e8e36b8778d69be6db2e603404ec96aeec43dd58db52b460b5b50960c8"
 
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/doublons.json"
@@ -2301,6 +2305,118 @@ file = "kubejs/data/naturalist/tags/worldgen/biome/variant/tiger/white_tiger.jso
 hash = "159af79b05df2d6ab2417042c5196700e22666674f8f3c4583eb8708d49b2a38"
 
 [[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_abandoned_mineshaft.json"
+hash = "8867b6af32fcfef34ef2482a494977d2db3b9b40aceb70180f1e25d244d3e0c2"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_ancient_city.json"
+hash = "a831cf2075a5595d04af68e2691e37bb9287db4a4eabf93a30e8cfb00d7311d5"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_buried_treasure.json"
+hash = "8b490ec665af55b9043f41171668514bd0af662df1f70debcea782e4acf40cd5"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_desert_pyramid.json"
+hash = "5bea98382f2e8f6397ef2b680fb0605d29943b8813d14cbdca3541addc0996f0"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_jungle_temple.json"
+hash = "96bb0a62d8f989273962f6354b07b422cff37c690dd6d7b2ea4d72226dd1e601"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_pillager_outpost.json"
+hash = "71f5ad6f67c38e2dfd30856254befadc80816f4079d087d729eb0c6753ad7c3d"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_shipwreck_treasure.json"
+hash = "68afe3c1f230579588482a7456e190b7e772cbc637d72f3e166ebd68886805fc"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_simple_dungeon.json"
+hash = "d355594d8b0f03025bef671d4ba025d372db188039dfc04f2392dde37bdec491"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_stronghold_corridor.json"
+hash = "2579f9437a8dac8d319a286b37045e365c4e742b1b78044ca51724ce1f952ce6"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_stronghold_crossing.json"
+hash = "37b1b053d51152ce4249513b5ac0c3879da818f518d5f4bf2f055b2dc6816faa"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_stronghold_library.json"
+hash = "ce94e3041ecd9472b9f20e76278871d1976f9ac995fd724df9554e2c58dd00cc"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/diamond_upgrade_from_woodland_mansion.json"
+hash = "a46c5c21b53222b59cbb1abb89a5bebbed7d98eaac5cb6dea112665699f6b60e"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_abandoned_mineshaft.json"
+hash = "1974e2509439aa8f2128bec5048d4f02bce3d42b5434cd584628ed946fa6c6e3"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_abandoned_mineshaft_2.json"
+hash = "1974e2509439aa8f2128bec5048d4f02bce3d42b5434cd584628ed946fa6c6e3"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_ancient_city.json"
+hash = "c0ada6e4f049957c1e9a663a53de46e039651f53fe461643359b2269a824a66f"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_buried_treasure.json"
+hash = "f19e31f7e211e31103cd1eef4451f43d45eb9ff9a4df5bd42a2a064cf41b5012"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_desert_pyramid.json"
+hash = "2876adae9ac7b12bfc149b55fdf165e0f0f9aea74ba248c8631aed5aa70836ea"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_jungle_temple.json"
+hash = "5069f29efbd9524e422c0c462b9e87416b34d9da6280e61910740cfaac00e61b"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_pillager_outpost.json"
+hash = "f08811bc0b839f62b19707b25a48fc7f34c8c2f18a18b1b95aa504f93f216cb4"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_shipwreck_treasure.json"
+hash = "24539d0b8e9d899d14a61d123430d12044f563ded334e96e8fe0c79c4513baaa"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_simple_dungeon.json"
+hash = "a2097dce446321deeeaf3dffeb897b2ef2ab40ae000b16ccc4f0195a8956ce4c"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_simple_dungeon_2.json"
+hash = "a2097dce446321deeeaf3dffeb897b2ef2ab40ae000b16ccc4f0195a8956ce4c"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_stronghold_corridor.json"
+hash = "5e3d0b898140c15cc27e2645230452b1ec88c0209139a5bdbd3c02d1462a107a"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_stronghold_crossing.json"
+hash = "d80bf15cd98bfb67fbd39d5ffbe6939ed9ee978b1a0c3d751ae665ac81983e6d"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_stronghold_library.json"
+hash = "cd1d87a0d72a3ce4fdcf5686611d9332b81668946ea694496d3a0a4f0cc30541"
+
+[[files]]
+file = "kubejs/data/overgeared/loot_modifiers/steel_ingot_from_woodland_mansion.json"
+hash = "f560f13dd6e22dd60954cbd2b3740ed7c370af1224bc8db29133008f8e220042"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/crude_steel_from_alloying.json"
+hash = "1c64952d5ced337762e195dbfdd1a418afbb58a7d433bca7d5c2ce823792cf46"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/crude_steel_from_nether_alloying.json"
+hash = "dc4e8cb3f4e23960f7bf5c3d3da1d3c0852a1ad1bc88236a8abf939b619f2512"
+
+[[files]]
 file = "kubejs/data/spawn/neoforge/biome_modifier/add_barracuda.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
@@ -2658,7 +2774,7 @@ hash = "cad6bfe8d17bc30368046564850d901ddd126c56c981def9a0ca1f400c7dcb37"
 
 [[files]]
 file = "kubejs/server_scripts/monuments.js"
-hash = "9cf427a4879a9b47489b252fe074bd863a65a39766a5f8388c19da1468c0fc4b"
+hash = "c365cda32f25408e3626cc4e23f5ca8d3ec5eb74435773ba09b390a8130835da"
 
 [[files]]
 file = "kubejs/server_scripts/musique.js"

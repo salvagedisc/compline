@@ -154,6 +154,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Edge of the world**: on foot, by boat and in flight the mist turns you back at 6,000 blocks from the centre, with a warning 64 blocks before; an airship is not stopped yet, a message asks to turn back; sailing around the continent, the coast stays away from the edge; north cold, south hot [Z1 to Z6].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
+- [ ] **Rare steel and diamonds**: no diamond ore except rough diamonds beside deep lava; no steel ingot or template in chests; 3 iron + 1 coal → 3 crude steel; a diamond template when a coniferous monument wakes [PG1 to PG4].
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
 - [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
 - [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): glints on the water; footprints in snow and sand, waves on a beach [AV9 to AV11].
@@ -199,6 +200,7 @@ Once the results are in:
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | AV (rain, storm and sunlight) | Removed by [0026](decisions/0026-second-cleanup.md); [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) is kept as history |
 | PE (fishing) | this file, session 4; context in [decisions/0034](decisions/0034-starcatcher-fishing.md) |
+| PG (ores and progression) | [plan/progression.md](plan/progression.md#in-game-tests) |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
