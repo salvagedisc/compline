@@ -28,6 +28,10 @@
     {
       "id": "regions_unexplored:towering_cliffs",
       "required": false
+    },
+    {
+      "id": "spawn:ant_gardens",
+      "required": false
     }
   ]
 }

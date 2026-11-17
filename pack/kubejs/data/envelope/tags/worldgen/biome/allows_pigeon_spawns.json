@@ -40,6 +40,18 @@
     {
       "id": "regions_unexplored:windswept_maple_forest",
       "required": false
+    },
+    {
+      "id": "spawn:ant_gardens",
+      "required": false
+    },
+    {
+      "id": "spawn:rocky_shore",
+      "required": false
+    },
+    {
+      "id": "spawn:volcanic_island",
+      "required": false
     }
   ]
 }

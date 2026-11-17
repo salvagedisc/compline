@@ -262,6 +262,38 @@
       "required": false
     },
     {
+      "id": "spawn:ant_gardens",
+      "required": false
+    },
+    {
+      "id": "spawn:cold_island",
+      "required": false
+    },
+    {
+      "id": "spawn:dodo_island",
+      "required": false
+    },
+    {
+      "id": "spawn:rocky_shore",
+      "required": false
+    },
+    {
+      "id": "spawn:sandy_island",
+      "required": false
+    },
+    {
+      "id": "spawn:tide_pool",
+      "required": false
+    },
+    {
+      "id": "spawn:tropical_island",
+      "required": false
+    },
+    {
+      "id": "spawn:volcanic_island",
+      "required": false
+    },
+    {
       "id": "streamsreflowing:stream",
       "required": false
     }

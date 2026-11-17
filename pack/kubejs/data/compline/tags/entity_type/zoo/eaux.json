@@ -464,6 +464,14 @@
     {
       "id": "minecraft:turtle",
       "required": false
+    },
+    {
+      "id": "spawn:barbed",
+      "required": false
+    },
+    {
+      "id": "spawn:spider_crab",
+      "required": false
     }
   ]
 }

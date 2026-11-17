@@ -36,6 +36,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0030](0030-farmers-delight-kitchen.md) | Farmer's Delight replaces Kaleidoscope Cookery | Farmer's Delight, Hands-On Delight (+ Diegesis), Create: Central Kitchen and Cinematic Interactions; Kaleidoscope Cookery, Compat and Automation leave; knives still go through the forge |
 | [0031](0031-brumaire-is-the-look.md) | Brumaire is the look of the pack | The shader pack is on from the first launch and takes every effect of Recrafted; `compline-ambiance`, Polytone and the `relief` module leave; ATMOSPHERICS stays for players without shader |
 | [0032](0032-house-wind.md) | The pack's own wind | `vent` module of `compline` 0.16.0: wind from the weather, gusts, campfire smoke after Better Smoke; Brumaire bends grass under steps and slants rain; Where Winds Blow and ToucanLib removed |
+| [0033](0033-zoo-animal-mods.md) | Four animal mods for the zoo | Koopa's Critters, Spawn (without its islands and structures), Hybrid Birds and WilderNature; one model per species, the cut ones out of the zoo |
 
 ## Template
 

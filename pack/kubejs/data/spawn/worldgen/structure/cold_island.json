@@ -1,0 +1,9 @@
+{
+  "type": "spawn:cold_island",
+  "island_biome": "spawn:cold_island",
+  "biomes": "#compline:aucun",
+  "step": "surface_structures",
+  "dimension": "minecraft:overworld",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "spawn:tide_pool",
+  "island_biome": "spawn:tide_pool",
+  "biomes": "#compline:aucun",
+  "step": "surface_structures",
+  "dimension": "minecraft:overworld",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

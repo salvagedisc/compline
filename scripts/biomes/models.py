@@ -119,6 +119,16 @@ OTHER_MODELS = {
     "hybrid_aquatic:tropical_river": "river",
     "hybrid_aquatic:warm_trench": "deep_lukewarm_ocean",
     "quark:glimmering_weald": "lush_caves",
+    "spawn:ant_gardens": "meadow",
+    "spawn:cold_island": "snowy_beach",
+    "spawn:deep_warm_ocean": "deep_lukewarm_ocean",
+    "spawn:dodo_island": "beach",
+    "spawn:rocky_shore": "stony_shore",
+    "spawn:sandy_island": "beach",
+    "spawn:seagrass_meadow": "lukewarm_ocean",
+    "spawn:tide_pool": "beach",
+    "spawn:tropical_island": "beach",
+    "spawn:volcanic_island": "stony_shore",
     "streamsreflowing:stream": "river",
 }
 OTHER_NAMESPACES = {name.split(":")[0] for name in OTHER_MODELS}
