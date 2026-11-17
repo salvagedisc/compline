@@ -40,10 +40,12 @@ const C = {
 }
 const DENS = 0.0052
 
+// One fog density shared by every material, thinned when the camera stands far back (phones).
+const densite = { value: DENS }
 const communs = () => ({
   uTemps: { value: 0 },
   uBrouillard: { value: C.brouillard },
-  uDensBrouillard: { value: DENS },
+  uDensBrouillard: densite,
 })
 
 function Ciel() {
@@ -126,7 +128,7 @@ function Repere({ lieu, relief, actif, discret, onChoisir }: { lieu: Lieu; relie
 
 /** Moves the camera towards where the current view wants it, and keeps the clearings in place. */
 function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boolean; relief: Relief; trou: Vector3; pointeur: Vector3 }) {
-  const { camera, size, pointer, raycaster } = useThree()
+  const { camera, size, pointer, raycaster, scene } = useThree()
   const regard = useRef(new Vector3(0, 0, 0))
   const angle = useRef(0.6)
   const premier = useRef(true)
@@ -156,11 +158,13 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
     } else {
       if (!calme) angle.current += dt * 0.018
       const a = angle.current
-      but.pos.set(Math.sin(a) * 118, 96, Math.cos(a) * 118)
+      // Phones look from higher up, so the near wall of mist does not hide the land.
+      if (large) but.pos.set(Math.sin(a) * 118, 96, Math.cos(a) * 118)
+      else but.pos.set(Math.sin(a) * 90, 330, Math.cos(a) * 90)
       but.regard.set(0, -6, 0)
       but.trou = 0
       // The disc sits right of the title on wide screens.
-      but.decal.set(large ? -0.17 : 0, large ? 0 : 0.12)
+      but.decal.set(large ? -0.17 : 0, large ? 0 : 0.3)
     }
     const lent = vue.type === 'lieu' ? 1.1 : 1.6
     if (calme || premier.current) {
@@ -176,6 +180,8 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
       trou.z += (but.trou - trou.z) * Math.min(1, dt * 1.5)
     }
     camera.lookAt(regard.current)
+    densite.value = DENS * Math.min(1, 160 / camera.position.distanceTo(regard.current))
+    if (scene.fog instanceof FogExp2) scene.fog.density = densite.value
     trou.x = but.regard.x
     trou.y = but.regard.z
     const w = size.width, h = size.height

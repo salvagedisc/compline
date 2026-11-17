@@ -31,6 +31,7 @@ export default function Accueil() {
           <Link className="bouton" to="/feuille-de-route">Où en est-on</Link>
         </motion.div>
         <p className="aide pix">Choisissez un lieu sur le disque, ou les touches 1 à 9</p>
+        <p className="mention">Projet entre amis, non officiel, sans lien avec Mojang ni Microsoft.</p>
       </section>
 
       <motion.aside
