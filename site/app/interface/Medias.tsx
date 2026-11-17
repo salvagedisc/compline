@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import type { Media, Zoom } from '../data/lieux'
-import { CARTE_SRC, R_RIVAGE, lireCarte } from './Carte'
+import type { Media, Zoom } from '../donnees/lieux'
+import { R_RIVAGE, lireCarte } from '../donnees/carte'
+import { grande } from '../donnees/images'
+import { Capture } from './Capture'
+
+export const CARTE_SRC = `${import.meta.env.BASE_URL}monde/carte-disque.png`
 
 const LOUPE = 2.6 // magnification of the lens
 const LENTILLE = 200 // lens size in CSS pixels, kept in step with .lentille
@@ -10,7 +14,8 @@ const LENTILLE = 200 // lens size in CSS pixels, kept in step with .lentille
 const pct = (c: number, r: number) => Math.max(0, Math.min(100, ((c - r) / (1 - 2 * r)) * 100))
 
 /** A screenshot with a magnifying lens and named zoom spots. */
-function ImageLoupe({ src, alt, zooms }: { src: string; alt: string; zooms?: Zoom[] }) {
+function ImageLoupe({ capture, alt, zooms }: { capture: string; alt: string; zooms?: Zoom[] }) {
+  const src = grande(capture)
   const boite = useRef<HTMLDivElement>(null)
   const [lens, setLens] = useState<{ x: number; y: number; w: number; h: number } | null>(null)
   const [zoom, setZoom] = useState<Zoom | null>(null)
@@ -22,7 +27,7 @@ function ImageLoupe({ src, alt, zooms }: { src: string; alt: string; zooms?: Zoo
   return (
     <div className="media-image">
       <div className="cadre" ref={boite} onPointerMove={bouger} onPointerLeave={() => setLens(null)}>
-        <img src={src} alt={alt} draggable={false} />
+        <Capture nom={capture} alt={alt} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
         {lens && !zoom && (
           <span
             className="lentille"
@@ -96,8 +101,8 @@ function Comparateur({ media }: { media: Extract<Media, { type: 'comparer' }> })
         onPointerUp={() => { glisse.current = false }}
         onPointerCancel={() => { glisse.current = false }}
       >
-        <img src={s.avant} alt={`${s.nom}, ${media.avantNom}`} draggable={false} />
-        <img className="apres" src={s.apres} alt={`${s.nom}, ${media.apresNom}`} draggable={false} />
+        <Capture nom={s.avant} alt={`${s.nom}, ${media.avantNom}`} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
+        <Capture className="apres" nom={s.apres} alt={`${s.nom}, ${media.apresNom}`} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
         <span className="etiq g pix">{media.avantNom}</span>
         <span className="etiq d pix">{media.apresNom}</span>
         <span className="poignee" />
@@ -245,7 +250,7 @@ function CarteMesure() {
 
 export function MediaVue({ media }: { media: Media }) {
   switch (media.type) {
-    case 'image': return <ImageLoupe src={media.src} alt={media.alt} zooms={media.zooms} />
+    case 'image': return <ImageLoupe capture={media.capture} alt={media.alt} zooms={media.zooms} />
     case 'comparer': return <Comparateur media={media} />
     case 'echelle': return <Echelle />
     case 'zoo': return <Zoo />
