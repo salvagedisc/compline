@@ -1,0 +1,15 @@
+{
+  "tinymultiblocklib.configuration.title": "Tiny Multiblock Lib",
+  "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml.title": "Configuration client de TMBL",
+  "tinymultiblocklib.configuration.section.tinymultiblocklib.client.toml": "Configuration client de TMBL",
+  "tinymultiblocklib.configuration.disable_multiblock_previews": "Désactiver les aperçus de multiblocs",
+  "tinymultiblocklib.configuration.disable_multiblock_previews.tooltip": "Désactive les aperçus fantômes lors du placement d’un multibloc.",
+  "tinymultiblocklib.configuration.previews_for_everything": "Aperçus pour tout",
+  "tinymultiblocklib.configuration.previews_for_everything.tooltip": "Active les aperçus pour tout. Sert au débogage.",
+  "tinymultiblocklib.configuration.preview_whitelist": "Liste blanche des aperçus",
+  "tinymultiblocklib.configuration.preview_whitelist.tooltip": "Liste des blocs dont l’aperçu est affiché.",
+  "tinymultiblocklib.configuration.preview_blacklist": "Liste noire des aperçus",
+  "tinymultiblocklib.configuration.preview_blacklist.tooltip": "Liste des blocs dont l’aperçu est masqué.",
+  "tinymultiblocklib.configuration.preview_whitelist.button": "Modifier",
+  "tinymultiblocklib.configuration.preview_blacklist.button": "Modifier"
+}

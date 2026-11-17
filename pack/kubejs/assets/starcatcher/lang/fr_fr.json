@@ -1,0 +1,23 @@
+{
+  "sounds.starcatcher.minigame_starts": "Début de la pêche !",
+  "entity.starcatcher.fish.no_model": "%s n’a pas de modèle ! Faire apparaître un poisson avec l’objet poisson est une fonction réservée au mode créatif. Ne le signalez pas au développeur si le poisson a été invoqué en mode créatif.",
+  "entity.starcatcher.tackle_box_boat": "Bateau à boîte à pêche",
+  "block.starcatcher.aquarium.dead_fish": "Les poissons morts ne vont pas dans un aquarium...",
+  "starcatcher.message.the_end.0": "",
+  "starcatcher.message.the_end.1": "Je pensais au fait qu’il n’existe",
+  "starcatcher.message.the_end.2": "aucune véritable fin à quoi que ce soit.",
+  "starcatcher.message.the_end.3": "",
+  "starcatcher.message.the_end.4": "Tout vient du même endroit",
+  "starcatcher.message.the_end.5": "et y retourne : nulle part.",
+  "starcatcher.message.the_end.6": "",
+  "starcatcher.message.the_end.7": "",
+  "starcatcher.message.the_end.8": "Alors, si le début est la fin,",
+  "starcatcher.message.the_end.9": "et que la fin est le début,",
+  "starcatcher.message.the_end.10": "qu’est-ce que la fin, au fond ?",
+  "starcatcher.message.the_end.11": "",
+  "starcatcher.message.the_end.12": "Cela vous aide-t-il à mieux dormir ?",
+  "starcatcher.message.the_end.13": "Comme la brume rosée d’un",
+  "starcatcher.message.the_end.14": "ciel d’apocalypse.",
+  "starcatcher.message.the_end.15": "Ou le réconfort d’un mensonge ?",
+  "starcatcher.message.the_end.sender": ""
+}
