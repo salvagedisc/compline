@@ -304,12 +304,23 @@ void main() {
     }
 #endif
     float wet = leaf > 0.0 || emissive(vMat) || (vMat >= 9 && vMat <= 13) || snow > 0.0 ? 0.0 : wetAt(lm.y);
+    float rainWet = wet;
+    float print = 0.0;
+#if defined PROGRAM_TERRAIN && TRACKS > 0
+    // Qui sort de l'eau laisse des pas humides sur le sol, sable compris : la semelle fonce et luit, puis sèche.
+    if (normal.y > 0.9 && leaf == 0.0 && !emissive(vMat) && (vMat < 9 || vMat > 13 || vMat == 12) && snow < 0.5) {
+        print = trackWet(world, frameTimeCounter, lm.y * lm.y * (1.0 - rainStrength)) * (1.0 - rainWet);
+        wet = max(wet, 0.9 * print);
+    }
+#endif
     if (wet > 0.0) {
-        float puddle = puddleAt(vPos + cameraPosition, normal, wet);
+        float puddle = rainWet > 0.0 ? puddleAt(vPos + cameraPosition, normal, rainWet) : 0.0;
         float soak = wet * mix(0.55, 1.0, max(normal.y, 0.0));
         albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
         albedo = mix(albedo, vec3(luma(albedo)) * 0.5, puddle * 0.8);
         gloss = max(0.4 * soak, puddle);
+        // Au soleil, une pierre claire trempée paraît encore blanche : une semelle mouillée fonce davantage.
+        albedo *= 1.0 - 0.55 * print;
     }
 #endif
     float indirect;

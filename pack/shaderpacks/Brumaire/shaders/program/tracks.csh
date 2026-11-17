@@ -19,18 +19,23 @@ uniform vec4 brumairePush0;
 uniform vec4 brumairePush1;
 uniform vec4 brumairePush2;
 uniform vec4 brumairePush3;
+uniform vec4 brumaireWet;
 
 shared int sCount;
 shared vec3 sPrint[5];
 shared vec2 sDir;
 shared float sScale;
+shared float sWet;
 
 const float STRIDE = 0.7;
 
 float sq(float x) { return x * x; }
 
-/** Imprime une empreinte : ce fil s'occupe d'un texel autour du pied, à ± 8 seizièmes de bloc. */
-void stamp(vec3 print, vec2 dir, float scale) {
+/**
+ * Imprime une empreinte : ce fil s'occupe d'un texel autour du pied, à ± 8 seizièmes de bloc. wet (0..6) : à quel
+ * point le pied était mouillé, gardé avec la case (lib/tracks.glsl).
+ */
+void stamp(vec3 print, vec2 dir, float scale, float wet) {
     vec2 texel = floor(print.xz * TRACK_RES) + vec2(gl_LocalInvocationID.xy) - 8.0;
     vec2 world = (texel + 0.5) / TRACK_RES;
     vec2 rel = world - print.xz;
@@ -44,8 +49,8 @@ void stamp(vec3 print, vec2 dir, float scale) {
     vec4 old = imageLoad(trackImg, at);
     float tile = trackTile(world);
     // Un pas sur une vieille empreinte la recreuse ; elle garde sa profondeur si elle était plus marquée.
-    float keep = abs(old.a - tile) < 0.5 && abs(old.b - mod(print.y, 256.0)) < 0.4 ? old.r : 0.0;
-    imageStore(trackImg, at, vec4(max(depth, keep * 0.6), frameTimeCounter * 0.25, mod(print.y, 256.0), tile));
+    float keep = abs(trackCase(old.a) - tile) < 0.5 && abs(old.b - mod(print.y, 256.0)) < 0.4 ? old.r : 0.0;
+    imageStore(trackImg, at, vec4(max(depth, keep * 0.6), frameTimeCounter * 0.25, mod(print.y, 256.0), tile + 256.0 * wet));
 }
 
 void main() {
@@ -67,6 +72,9 @@ void main() {
                 vec2 dir = moved / dist;
                 int n = min(int(dist / STRIDE), 5);
                 sScale = clamp(push.w / 0.8, 0.6, 1.6);
+                // Des pieds qui sortent de l'eau laissent des pas humides, de moins en moins à mesure qu'ils sèchent.
+                float wet = who == 0 ? brumaireWet.x : who == 1 ? brumaireWet.y : who == 2 ? brumaireWet.z : brumaireWet.w;
+                sWet = floor(clamp(wet, 0.0, 1.0) * 6.0 + 0.5);
                 sDir = dir;
                 float side = last.z;
                 for (int k = 0; k < n; k++) {
@@ -81,5 +89,5 @@ void main() {
         }
     }
     barrier();
-    for (int k = 0; k < sCount; k++) stamp(sPrint[k], sDir, sScale);
+    for (int k = 0; k < sCount; k++) stamp(sPrint[k], sDir, sScale, sWet);
 }
