@@ -376,6 +376,10 @@
     {
       "id": "naturalist:duck",
       "required": false
+    },
+    {
+      "id": "#compline:zoo/peche",
+      "required": false
     }
   ]
 }

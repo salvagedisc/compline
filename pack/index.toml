@@ -1602,11 +1602,15 @@ hash = "63a2fc9a18718999630147d56c0445d691197f8c035c938edcad8e0eef69b52a"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/exclus.json"
-hash = "7c7a1852499192f68b2c4c156df7db214549134b8aebbf059efa5c029b08eedb"
+hash = "d19d9bc72a1997cd32dc1e6d95d126216e114498d81dff09467b11ae9fed501d"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/inclus.json"
 hash = "0c615d27d6e7932dab70603593b0d4b2098f06e605c17c7e8549a677ec84ef94"
+
+[[files]]
+file = "kubejs/data/compline/tags/entity_type/zoo/peche.json"
+hash = "51dbc212a190613633951d67b57fface57ce383fbaa4fa9c246d88450f39a6ec"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/terre.json"
