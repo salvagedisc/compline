@@ -1,0 +1,13 @@
+name = "Surface Samples"
+filename = "surfacesamples-0.2.0.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/9ppAg1XD/versions/lMMZRKwr/surfacesamples-0.2.0.jar"
+hash-format = "sha512"
+hash = "9ce2a9237ddfdcdbf2cbbf5e4e9a9b04881c023600112783c0f3e93132e020a5f89ab9c380b64f8f78c6d6d99a59412fb104849b9332b249405f75fd928ba194"
+
+[update]
+[update.modrinth]
+mod-id = "9ppAg1XD"
+version = "lMMZRKwr"

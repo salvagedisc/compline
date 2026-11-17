@@ -58,7 +58,24 @@ Netherite comes to the Overworld, deep down, and is called **orichalque** in Fre
 
 As a well-stirred pot gives more servings in the kitchen, a well-forged pickaxe gives more ore. The `compline` mod's `minage` module adds the loot modifier `compline:rendement_de_la_pioche`: an ore (`#c:ores`) broken with an Overgeared tool of expert, perfect or master quality gives each item of its drop one more piece, with a chance of 10, 20 or 30 %. Nothing with silk touch or on other blocks. On the bench, 150 iron ores with a master pickaxe gave 1.31 raw iron each (1.00 without quality).
 
-Still to come in this step (the study's lot 3): veins that are places, with outcrops on the surface above them (Dynamic Ore Veins and Surface Samples, to be measured on the bench with Spelunkery). Panning already follows the biome: Spelunkery's sluices give gold in badlands, lapis in deserts, emeralds on jagged peaks.
+Panning already follows the biome: Spelunkery's sluices give gold in badlands, lapis in deserts, emeralds on jagged peaks.
+
+## Veins and outcrops (sixth step)
+
+Less scattered ore, real veins tied to the land, and stones on the ground above them that say what lies below. The `compline` mod's `filons` module adds the feature type `compline:filon` ([mod-compline](mod-compline.md#filons-module)); the veins are data in `kubejs/data/compline/worldgen/`, the biomes in `kubejs/data/compline/tags/worldgen/biome/filons/`.
+
+| Vein | Biomes | Chance per chunk | Depth under the ground | Raw blocks | Outcrops |
+|---|---|---|---|---|---|
+| Iron | forests, hills, mountains, taiga | 1 in 7 | 12 to 40 | 3 % | 3 to 6 |
+| Copper | beaches, stony shores, oceans, rivers | 1 in 9 | 10 to 32 | 3 % | 3 to 6 |
+| Gold | badlands, deserts, savannas, dry lands | 1 in 13 | 20 to 56 | 2 % | 2 to 5 |
+| Coal | plains, snowy plains, taiga, old growth | 1 in 8 | 8 to 30 | — | 3 to 6 |
+| Zinc (Create) | swamps, jungles | 1 in 11 | 14 to 44 | 2 % | 2 to 5 |
+
+- **A vein** winds under the ground for 16 to 44 blocks, two to five blocks thick, in every stone Spelunkery knows (stone, deepslate, andesite, diorite, granite, tuff), never further than 12 blocks from where it starts.
+- **Outcrops** are [Surface Samples](../mods.md) stones set on the ground within 8 blocks of the vein's start, in its rock (red sandstone, sandstone, stone), under water too. Broken, they give 1 to 4 iron nuggets, 1 to 3 copper, gold or zinc nuggets, or a coal. Dig straight down from them.
+- **Less scattered ore**: the vanilla middle and mountain iron (`ore_iron_middle`, `ore_iron_upper`), the common gold (`ore_gold`) and the mountain coal (`ore_coal_upper`) are removed (`moins_de_minerai_eparpille.json`). Small iron, deep and badlands gold, the low coal, the vanilla deep ore veins and all scattered copper stay: Create needs copper everywhere.
+- **On the bench**, 576 chunks around the centre of the disc (forests, plains, taiga): iron 80,000 ores before, 31,000 after, of which about 14,000 in some 50 veins (about 270 ores and 4 to 5 outcrops each); gold 15,000 → 1,600; coal 186,000 → 163,000; copper and zinc unchanged. Copper, gold and zinc veins, placed by hand five times each, give 3 to 5 outcrops each.
 
 Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager trades and structure chests can still hold diamonds.
 
@@ -74,3 +91,5 @@ Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager tra
 - [ ] PG8. Deep below, beside a lava lake under y −40: ancient debris inside the rock, never in the open; smelted into scraps (« Fragments d'orichalque »).
 - [ ] PG9. Craft the « Four à alliage de magma », alloy 4 scraps and 4 gold, hammer the heated alloy on a smithing anvil (master minigame): an orichalcum ingot. Archie sells the template after the Obsidiceratops is tamed.
 - [ ] PG10. Mine iron ore with a master-quality pickaxe, then with a plain one: about a third more raw iron with the first; silk touch gives the ore block only.
+- [ ] PG11. In a forest, find a few small rusty stones on the grass (« Affleurement de fer »): dig straight down, a vein of iron ore 12 to 40 blocks under them, with some raw iron blocks; broken, the stone gives iron nuggets.
+- [ ] PG12. On a beach, in a badlands or a swamp: copper, gold or zinc outcrops, on sand in sandstone; under water too. No test or Nether sample in the creative menu or EMI.

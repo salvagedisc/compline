@@ -212,11 +212,21 @@ const TRI_OBJETS_PECHE = [
   'starcatcher:sea_bass'
 ]
 
+// Surface Samples : l'essai du mod, les affleurements du Nether et des métaux absents du pack. Les affleurements
+// gardés sont posés au-dessus des filons (docs/plan/progression.md).
+const TRI_OBJETS_AFFLEUREMENTS = [
+  'surfacesamples:test_sample', 'surfacesamples:testitem', 'surfacesamples:aluminum_ore_sample',
+  'surfacesamples:lead_ore_sample', 'surfacesamples:nickel_ore_sample', 'surfacesamples:osmium_ore_sample',
+  'surfacesamples:silver_ore_sample', 'surfacesamples:tin_ore_sample', 'surfacesamples:uranium_ore_sample',
+  'surfacesamples:fluorite_ore_sample', 'surfacesamples:nether_gold_ore_sample',
+  'surfacesamples:nether_quartz_ore_sample'
+]
+
 const TRI_TOUT = [].concat(
   TRI_OBJETS_CREATE, TRI_OBJETS_OVERGEARED, TRI_OBJETS_CUISINE, TRI_OBJETS_DIVERS,
   TRI_OBJETS_HANDCRAFTED, TRI_OBJETS_TWIGS, TRI_OBJETS_ALEXSMOBS, TRI_OBJETS_COMPANIONS,
   TRI_OBJETS_MOWZIE, TRI_OBJETS_FAUNE, TRI_OBJETS_SPELUNKERY, TRI_OBJETS_DINOSAURES,
-  TRI_OBJETS_PECHE
+  TRI_OBJETS_PECHE, TRI_OBJETS_AFFLEUREMENTS
 )
 
 // Steam 'n' Rails : variantes décoratives. Voies de 3 bois (chêne, épicéa, bouleau), en

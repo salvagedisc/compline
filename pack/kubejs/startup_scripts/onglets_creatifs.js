@@ -18,6 +18,7 @@ const ONGLETS_CREATIFS = [
   'mowziesmobs:mowziesmobs_tab', 'naturalist:item_group', 'overgeared:blueprint_tab',
   'overgeared:lingering_arrows_tab', 'overgeared:overgeared_tab', 'railways:main',
   'railways:palettes', 'railways:tracks', 'regions_unexplored:main', 'simulated:main_tab',
+  'surfacesamples:surface_samples_blocks_tab', 'surfacesamples:surface_samples_items_tab',
   'tannery:tannery', 'thirst:thirst', 'twigs:twig'
 ]
 
@@ -221,7 +222,12 @@ const ONGLETS_RETIRES = [
   'supplementaries:candy', 'supplementaries:gravel_bricks', 'supplementaries:netherite_door',
   'supplementaries:netherite_trapdoor', 'supplementaries:pancake', 'supplementaries:sack',
   'supplementaries:sconce', 'supplementaries:sconce_green', 'supplementaries:sconce_lever',
-  'supplementaries:sconce_soul', 'supplementaries:slice_map', 'tannery:large_satchel',
+  'supplementaries:sconce_soul', 'supplementaries:slice_map', 'surfacesamples:aluminum_ore_sample',
+  'surfacesamples:fluorite_ore_sample', 'surfacesamples:lead_ore_sample',
+  'surfacesamples:nether_gold_ore_sample', 'surfacesamples:nether_quartz_ore_sample',
+  'surfacesamples:nickel_ore_sample', 'surfacesamples:osmium_ore_sample',
+  'surfacesamples:silver_ore_sample', 'surfacesamples:test_sample', 'surfacesamples:testitem',
+  'surfacesamples:tin_ore_sample', 'surfacesamples:uranium_ore_sample', 'tannery:large_satchel',
   'tannery:small_satchel', 'twigs:acacia_table', 'twigs:bamboo_table', 'twigs:birch_table',
   'twigs:bloodstone', 'twigs:bloodstone_slab', 'twigs:bloodstone_stairs', 'twigs:bloodstone_wall',
   'twigs:cherry_table', 'twigs:cracked_polished_bloodstone_bricks',

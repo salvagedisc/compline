@@ -1237,6 +1237,10 @@ file = "kubejs/assets/supplementaries/lang/fr_fr.json"
 hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
 
 [[files]]
+file = "kubejs/assets/surfacesamples/lang/fr_fr.json"
+hash = "8f9aaaa766ea9c528438bde260df2836c0125f0032528f081cdc6878db2306c5"
+
+[[files]]
 file = "kubejs/assets/tannery/lang/fr_fr.json"
 hash = "89fc0bb384a6bf90161aa88f51055b508d923a37cf332649ec9fadae3f9d2ba0"
 
@@ -1334,7 +1338,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "eb23e035cd08228d465c8ff2711436e45133bcdda53054d760cd5b7935bf431a"
+hash = "07d1d78dd21827f5e21b93339e2cada0eb53a63d07b84cf9ad520609707d6c2d"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1451,6 +1455,30 @@ hash = "5b55de553ffd6472cba752724352861a32a850155dc623a8033b7e7bf5a5ae08"
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/faune_coupee.json"
 hash = "48537e1eb4ebb4a505cca42b80c59f7580d9a103541b14b311e826543fdde751"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/filons_charbon.json"
+hash = "a2d7768212a68d08c3ab248274ef7d8aabd6c649b869c0d99ce00bd80a1e5563"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/filons_cuivre.json"
+hash = "6b2a65b234ebdfca5f5b16d5b42adf123b674bbadf5ac8a6139d1e70041b4966"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/filons_fer.json"
+hash = "553408954c45b586f8130f5162b8ca31d2e7446a156296edd236d87bdaa29e6f"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/filons_or.json"
+hash = "77d6074ca36e46be4fc6ec663c77866a8ef61d9512fcecec9d64d3f12a9cd806"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/filons_zinc.json"
+hash = "7d034d90bef7993a1480fd13c76f1bd830cee7d547bd2765713c7cb82686ce81"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/moins_de_minerai_eparpille.json"
+hash = "6ee32fcdbe426e877ee27f5c02623ec47f52305117a5859c1f1ac2712058627d"
 
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/sans_lapin.json"
@@ -1641,6 +1669,26 @@ file = "kubejs/data/compline/tags/worldgen/biome/aucun.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/filons/charbon.json"
+hash = "4f9cdfd3ddea249856998d3c99317bdb80a6376237fa4643d630f9e06674b9a1"
+
+[[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/filons/cuivre.json"
+hash = "72d1429bf929b8b8f4dc64dcf6961ac6e4f521c39a4140a7770fb9c3004a973d"
+
+[[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/filons/fer.json"
+hash = "b2fff0cd5a3a5be9eb4ef32a6f4125d395324da16404bd92f46d1fb90fb3975f"
+
+[[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/filons/or.json"
+hash = "a5e73a5ad6f0e5ddf158313162c9cd82dff6412e0e80722a9e00ed97eafa5773"
+
+[[files]]
+file = "kubejs/data/compline/tags/worldgen/biome/filons/zinc.json"
+hash = "09ca30c9b51eb92a70741eba72e6283b225858988eb9e28b4dd62879f47bc707"
+
+[[files]]
 file = "kubejs/data/compline/weapon_attributes/epee_en_acier_noir.json"
 hash = "b86ad53f7f73ab97153cff9ac5474da9271695c194e5314fbe06df029e09bc2e"
 
@@ -1653,12 +1701,52 @@ file = "kubejs/data/compline/worldgen/configured_feature/debris_du_coeur.json"
 hash = "58cb9d83f3a7ecfc7ececc489473d59c6fb685d77dc385bfcee09946190f1aae"
 
 [[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/filon_d_or.json"
+hash = "72637ad14e7e47d2d87090064f99667666e5f0f7cebc3f7487a5ecca34c206bb"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/filon_de_charbon.json"
+hash = "efcdbf6afcc851debf6ca278094939eea89cd343f464f83a1a78cbf10cabde92"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/filon_de_cuivre.json"
+hash = "3caa3f60d7b42ab4c15033aaf9362639619144b6e9ae7bb1db1f0fc6ce0d8ab5"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/filon_de_fer.json"
+hash = "1646d59d3b63615b8d87434fb8eb814ac7b4255c5987ab84ff779632f777db08"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/filon_de_zinc.json"
+hash = "bb39d2bddf64abd0fa266f6d4f9df5d2b7480f78fb1b2676a7a953b36cf84b68"
+
+[[files]]
 file = "kubejs/data/compline/worldgen/density_function/disque/distance.json"
 hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
 
 [[files]]
 file = "kubejs/data/compline/worldgen/placed_feature/debris_pres_de_la_lave.json"
 hash = "74b6e9509d8e9cb021d307f8eb9537f04a41bfb09a58f35f6ae56286e97f7d85"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/filon_d_or.json"
+hash = "ee1be8ac8e9b557b46a5cdb8b5842e90db6113a944ac73520e139ec933510071"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/filon_de_charbon.json"
+hash = "88027d84172440b82ebd885a3592e47aeda98c85370196927c326cbcdd0e91cd"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/filon_de_cuivre.json"
+hash = "5e8290194cd26e36f1246d6a7488d24435a42b37da0291bb37f89a59ad4d2f18"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/filon_de_fer.json"
+hash = "b07af26724d2b43b27473ff035ff89b5e2137a8df5f426f356bfa35158c7aaf2"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/filon_de_zinc.json"
+hash = "a5962bae0d4f6bebbed4db5abbb6d3eff6a9c9b0b621489ccb966fc5405d5e05"
 
 [[files]]
 file = "kubejs/data/compline/worldgen/structure/chorusoatl.json"
@@ -3246,7 +3334,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "7673555304a11879e3ac2c323534298fc388875082ea516f0626047ba35df6ad"
+hash = "7ff004faa7f509cb2cd2fbc5d17aa441fed35bdda4abc0c3f9a5726999175c7f"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
@@ -3254,7 +3342,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "eaedd3b04da8ae97b63ace03d17bf77ae068c37834649ced744c7ead2b7271f7"
+hash = "41a616b37979195838e6e0860f50b90cf76624d985824ca74043a122ed1ec89c"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -3407,8 +3495,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.28.0.jar"
-hash = "9098eafc9d4741172b23cc6c69d5e1340bdc5acf12ebbed3e5754cf35729ea6b"
+file = "mods/compline-0.29.0.jar"
+hash = "b0d3396fed125970ccc0d08f560f8d56d53857fad6840ba398fc57f4f014b7c6"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -3973,6 +4061,11 @@ metafile = true
 [[files]]
 file = "mods/supplementaries.pw.toml"
 hash = "25fdaaf01546f4083aa00f85b6c1c4b67434f6d068d3e1725d4437576ca34a7a"
+metafile = true
+
+[[files]]
+file = "mods/surface-samples.pw.toml"
+hash = "6fdb50d7e0847bedb0e97f4e866507f06722b4f4a777d1bd1f55903733378bde"
 metafile = true
 
 [[files]]

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#compline:filons/cuivre",
+  "features": "compline:filon_de_cuivre",
+  "step": "underground_ores"
+}
