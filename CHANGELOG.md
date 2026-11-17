@@ -215,6 +215,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/compline-atlas`, jars in `pack/mods/` ([0025](docs/decisions/0025-native-atlas.md)). Mod ids, configs and save formats are unchanged. The ship teleport of Antique Transport is removed.
 
 ### Fixed
+- Fish no longer show a price in emeralds when Shift is held: the selling bin is not in the pack and its sell rate is now 0.
 - **Fishing texts in French fit their frames**: the Starcatcher guidebook pages, the bottled letters, the catch notification, the entry labels and the item descriptions were wider than the page or the screen. They are rewritten to fit (measured in the game's font), the selling page says there is no selling bin, and the descriptions of the fish moved from the Nether speak of the deep lava.
 - The game no longer crashes a minute or two into a world on Apple Silicon Macs: spark's background profiler ran async-profiler, whose native wall-clock thread crashed the JVM (SIGSEGV in `libasyncProfiler`, nothing in the game log). `pack/config/spark/config.json` keeps the background profiler but on spark's Java engine, which has no native code.
 - The atlas book works in French and shows its map when held: the mod recognises a book named "Antique Atlas", so the French strings keep that name ("Atlas ancien" made the renaming hint wrong and left the creative item a plain book), and Punchy leaves `minecraft:book` to the vanilla hand.
