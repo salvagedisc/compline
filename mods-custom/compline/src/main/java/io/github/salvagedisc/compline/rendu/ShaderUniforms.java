@@ -13,7 +13,11 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.vehicle.VehicleEntity;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector4f;
@@ -38,12 +42,17 @@ public final class ShaderUniforms {
     static final int PUSHES = 4;
     /** Rayon autour de la caméra où un être vivant couche les herbes, en blocs. */
     private static final double PUSH_RANGE = 12.0;
+    static final int WAKES = 6;
+    /** Rayon autour de la caméra où ce qui flotte ou nage ride l'eau, en blocs. */
+    private static final double WAKE_RANGE = 28.0;
 
     private static final Vector4f MIST = new Vector4f();
     private static final Vector4f WIND_VALUE = new Vector4f();
     private static final Vector4f[] CLEARING_VALUES = new Vector4f[CLEARINGS];
     private static final Vector4f[] GUST_VALUES = new Vector4f[GUSTS];
     private static final Vector4f[] PUSH_VALUES = new Vector4f[PUSHES];
+    private static final Vector4f[] WAKE_VALUES = new Vector4f[WAKES];
+    private static final Vector4f[] WAKE_SPEEDS = new Vector4f[2];
     private static final double[] EDGES = new double[CLEARINGS];
 
     private static long frame;
@@ -62,6 +71,11 @@ public final class ShaderUniforms {
         for (int i = 0; i < PUSHES; i++) {
             PUSH_VALUES[i] = new Vector4f();
         }
+        for (int i = 0; i < WAKES; i++) {
+            WAKE_VALUES[i] = new Vector4f();
+        }
+        WAKE_SPEEDS[0] = new Vector4f();
+        WAKE_SPEEDS[1] = new Vector4f();
     }
 
     private ShaderUniforms() {
@@ -88,6 +102,12 @@ public final class ShaderUniforms {
             Vector4f value = PUSH_VALUES[i];
             uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumairePush" + i, () -> current(value));
         }
+        for (int i = 0; i < WAKES; i++) {
+            Vector4f value = WAKE_VALUES[i];
+            uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWake" + i, () -> current(value));
+        }
+        uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWakeSpeed0", () -> current(WAKE_SPEEDS[0]));
+        uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWakeSpeed1", () -> current(WAKE_SPEEDS[1]));
     }
 
     private static Vector4f current(Vector4f value) {
@@ -111,6 +131,11 @@ public final class ShaderUniforms {
         for (Vector4f value : PUSH_VALUES) {
             value.zero();
         }
+        for (Vector4f value : WAKE_VALUES) {
+            value.zero();
+        }
+        WAKE_SPEEDS[0].zero();
+        WAKE_SPEEDS[1].zero();
         WIND_VALUE.zero();
 
         Minecraft minecraft = Minecraft.getInstance();
@@ -134,6 +159,62 @@ public final class ShaderUniforms {
 
         Wind.fill(WIND_VALUE, GUST_VALUES, camera);
         pushes(level, camera, partial);
+        wakes(level, camera, partial);
+    }
+
+    /**
+     * Ce qui ride la surface de l'eau près de la caméra : barques et autres véhicules, nageurs et bêtes qui
+     * pataugent, à cheval sur la surface. (x, y, z) : le point de la surface sous eux depuis la caméra, w : leur
+     * demi-largeur ; leur vitesse sur l'eau (blocs par seconde) dans brumaireWakeSpeed0..1. Un passager ne compte pas :
+     * sa barque le fait pour lui.
+     */
+    private static void wakes(ClientLevel level, Vec3 camera, float partial) {
+        AABB around = new AABB(camera, camera).inflate(WAKE_RANGE);
+        List<Entity> near = level.getEntitiesOfClass(Entity.class, around,
+                e -> e.isAlive() && !e.isSpectator() && !e.isPassenger()
+                        && (e instanceof LivingEntity || e instanceof VehicleEntity));
+        near.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        int slot = 0;
+        for (Entity entity : near) {
+            if (slot >= WAKES) {
+                break;
+            }
+            Vec3 at = entity.getPosition(partial);
+            float surface = waterSurface(level, at, entity.getBbHeight());
+            if (Float.isNaN(surface) || at.y > surface + 0.35 || at.y + entity.getBbHeight() < surface - 0.2) {
+                continue;
+            }
+            double dx = entity.getX() - entity.xo;
+            double dz = entity.getZ() - entity.zo;
+            float speed = (float) Math.min(Math.sqrt(dx * dx + dz * dz) * 20.0, 12.0);
+            float radius = Mth.clamp(entity.getBbWidth() * 0.5F, 0.25F, 3.0F);
+            WAKE_VALUES[slot].set((float) (at.x - camera.x), (float) (surface - camera.y), (float) (at.z - camera.z), radius);
+            WAKE_SPEEDS[slot / 4].setComponent(slot % 4, speed);
+            slot++;
+        }
+    }
+
+    /**
+     * Hauteur de la surface de l'eau que traverse une chose, du dessous de ses pieds au-dessus de sa tête : le haut du
+     * premier bloc d'eau sans eau au-dessus. NaN si elle n'en traverse aucune (à sec, ou tout entière sous l'eau).
+     */
+    private static float waterSurface(ClientLevel level, Vec3 at, float height) {
+        int bottom = Mth.floor(at.y - 0.6);
+        int top = Mth.floor(at.y + height + 0.4);
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (int y = bottom; y <= top; y++) {
+            pos.set(at.x, y, at.z);
+            FluidState fluid = level.getFluidState(pos);
+            if (!fluid.is(FluidTags.WATER)) {
+                continue;
+            }
+            pos.setY(y + 1);
+            if (!level.getFluidState(pos).is(FluidTags.WATER)) {
+                pos.setY(y);
+                return y + fluid.getHeight(level, pos);
+            }
+        }
+        return Float.NaN;
     }
 
     /**

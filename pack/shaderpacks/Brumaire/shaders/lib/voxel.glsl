@@ -32,6 +32,11 @@ bool voxelInside(ivec3 c) {
     return all(greaterThanEqual(c, ivec3(0))) && all(lessThan(c, VOX_SIZE));
 }
 
+#if defined FSH && defined VOXELS
+// Le volume tel que la passe d'ombre l'a rangé à cette image (reflets hors écran, écume des rives).
+uniform usampler3D voxelTex;
+#endif
+
 /** Couleur d'une lumière, par famille de blocs (numéros de block.properties et item.properties, 10000 + n). */
 vec3 lightTint(int family) {
     if (family == 1) return vec3(0.30, 0.78, 1.00);  // âmes : torches, lanternes, feux de camp bleus

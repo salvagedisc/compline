@@ -17,6 +17,7 @@ uniform sampler2D colortex6;
 #define REFLECT_COLOR colortex6
 #include "/lib/reflect.glsl"
 #include "/lib/voxtrace.glsl"
+#include "/lib/wakes.glsl"
 #endif
 
 uniform sampler2D gtexture;
@@ -48,8 +49,24 @@ layout(location = 0) out vec4 outColor;
 vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 world = vPos + cameraPosition;
     vec3 n = normal;
+    float foam = 0.0;
     if (abs(normal.y) > 0.5) {
         vec2 slope = waveSlope(world.xz, frameTimeCounter);
+#if WATER_WAKES > 0
+        // Les rides de ce qui passe (lib/wakes.glsl), lues au seizième de bloc comme les vagues.
+        vec2 at = world.xz;
+#if WATER_PIXELS > 0
+        at = (floor(at * 16.0) + 0.5) / 16.0;
+#endif
+        vec3 wake = wakeSlope(at);
+        vec2 ride = clamp(wake.xy * 0.45, -0.45, 0.45);
+#if WATER_PIXELS > 0
+        ride = floor(ride / 0.03 + 0.5) * 0.03;
+#endif
+        slope += ride;
+        foam = wake.z;
+#endif
+        if (normal.y > 0.5) foam = max(foam, shoreFoam(vPos));
         n = normalize(vec3(-slope.x, 1.0, -slope.y));
     }
     vec3 eye = normalize(-vPos);
@@ -121,6 +138,12 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 h = normalize(gLightDir + eye);
     float glint = min(pow(max(dot(n, h), 0.0), 900.0) * (0.6 + 40.0 * f), 24.0);
     vec3 color = mix(under, mirror, f) + gLightColor * lit * glint * 0.05;
+    // L'écume : des pixels blancs qui prennent la lumière du jour et du ciel, sans reflet.
+    float froth = foamPixels(world, foam) * (below ? 0.0 : 1.0);
+    if (froth > 0.0) {
+        vec3 light = gLightColor * lit * max(gLightDir.y, 0.0) * 0.9 + gAmbient * max(sky, 0.1) * 0.9;
+        color = mix(color, vec3(0.62, 0.66, 0.66) * light, 0.8 * froth);
+    }
     return vec4(color, 1.0);
 }
 

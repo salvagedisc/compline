@@ -143,7 +143,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Sounds | `sound` | ✅ | C | 170 interface, item and block sounds |
 | Auroras | `auroras` | ✅ | C | Aurora in cold biomes |
 | Contraption Lights | `contraption-lights` | ✅ | CS | A lantern placed on an airship or contraption lights up the world as it passes (LambDynamicLights mode, colour disabled) |
-| Wakes Reforged | `wakes-reforged` | ✅ | CS | Wakes behind boats, swimmers and Sable contraptions |
+| Wakes Reforged | `wakes-reforged` | ❌ (removed 2026-11-17) | CS | Wakes behind boats, swimmers and Sable contraptions; its trail and splash planes drew over Brumaire's own wakes, which replace it (Sable contraptions no longer leave a wake) |
 | Rainbows | `rainboows` | ✅ | C | Rainbow after the rain |
 | Distant Horizons | `distanthorizons` | ✅ (3.3.3, not seen in game) | CS | Distant landscape (LODs), hidden by the mist and revealed where it is lifted by the `horizon` module of the `compline` mod ([0011](decisions/0011-tectonic-streams-distant-horizons.md)) |
 | Falling Leaves Plus | `falling-leaves-plus` | ⚪ | C | Fallback if Particular does not handle the leaves of Regions Unexplored |
