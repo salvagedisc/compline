@@ -13,10 +13,12 @@
   ],
   "client": [
     "ciel.AtmosphericsFadeMixin",
+    "ciel.AtmosphericsSkyGateMixin",
     "ciel.BiomeBlendUtilInvoker",
     "ciel.ClientPacketListenerMixin",
     "ciel.LevelRendererMixin",
     "ciel.RenderSystemMixin",
+    "ciel.ShaderSkyMixin",
     "clairiere.AtmosphericsBiomeMixin",
     "clairiere.BiomeLookMixin",
     "clairiere.ClientLevelTintMixin",
