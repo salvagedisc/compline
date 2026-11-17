@@ -1,0 +1,13 @@
+name = "Hybrid Aquatic + Starcatcher Compatibility"
+filename = "hybrid_aquatic_starcatcher_compat-0.6.3.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/onrvj8TH/versions/q2eXOCoH/hybrid_aquatic_starcatcher_compat-0.6.3.jar"
+hash-format = "sha512"
+hash = "f7b93b6e1656dd3fd4421861ec255b74cd46bc2a36b59d98ec0f9ff4dd79b9a63d0ae43e15d5311f055c045f4c234a474d91b6af1fd631da6826be884f3daedc"
+
+[update]
+[update.modrinth]
+mod-id = "onrvj8TH"
+version = "q2eXOCoH"
