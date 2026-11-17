@@ -12,10 +12,10 @@ import net.minecraft.world.entity.EntityType;
  * ({@link ZooSpecies#classify}), sauf si un tag {@code compline:zoo/<milieu>} la place ailleurs.
  */
 public enum ZooTab {
-    TERRE(0x4F7A2E),
-    EAUX(0x2F6C8F),
-    CIEL(0x6E9CC0),
-    CREATURES(0x6B3F86);
+    TERRE(0x0D820F),
+    EAUX(0x0C939B),
+    CIEL(0x3F8FD8),
+    CREATURES(0x9717B3);
 
     private final int color;
     private final TagKey<EntityType<?>> tag;
@@ -26,7 +26,7 @@ public enum ZooTab {
                 ResourceLocation.fromNamespaceAndPath(Compline.MOD_ID, "zoo/" + name().toLowerCase(Locale.ROOT)));
     }
 
-    /** Couleur d'encre du milieu (titres, tampons obtenus). */
+    /** Couleur du milieu, celle de ses rubans dans le guide (infobulles des tampons obtenus). */
     public int color() {
         return color;
     }

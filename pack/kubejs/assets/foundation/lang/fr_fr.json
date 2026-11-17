@@ -1,0 +1,21 @@
+{
+  "tooltip.foundation.canbeplaced": "Peut être placé",
+  "tooltip.foundation.hold_shift": "Maintenez %s pour plus d'informations",
+  "tooltip.foundation.recipe_unlocker.already_unlocked": "Vous avez déjà appris cette recette !",
+  "tooltip.foundation.recipe_unlocker.recipe_suffix": " (recette)",
+  "tooltip.foundation.recipe_unlocker.unlocked.prefix": "Recette débloquée :",
+  "tooltip.foundation.recipe_unlocker.unlocks": "Débloque : ",
+  "tooltip.foundation.canbeplacedwall": "Peut être placé sur les murs",
+  "gui.foundation.wall_decoration.edit": "Écrire dessus",
+  "tooltip.foundation.set_bonus": "Bonus de panoplie complète :",
+  "gui.foundation.recipe_book.ingredients": "Ingrédients :",
+  "rarity.foundation.common": "Commun",
+  "rarity.foundation.uncommon": "Peu commun",
+  "rarity.foundation.rare": "Rare",
+  "rarity.foundation.epic": "Épique",
+  "rarity.foundation.mythic": "Mythique",
+  "rarity.foundation.legendary": "Légendaire",
+  "rarity.foundation.celestial": "Céleste",
+  "rarity.foundation.divine": "Divin",
+  "rarity.foundation.eternal": "Éternel"
+}

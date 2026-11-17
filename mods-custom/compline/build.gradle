@@ -112,10 +112,6 @@ dependencies {
     compileOnly fileTree(packMods) { include 'astemirlib_re-*.jar' }
     compileOnly modrinth('exposure')
 
-    // Module faune : GeckoLib pour les modèles maison, Alex's Mobs pour l'état public de l'élan
-    compileOnly modrinth('geckolib')
-    compileOnly modrinth('alexs-mobs-continued')
-
     // Module dissipateur
     compileOnly modrinth('create')
     // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar

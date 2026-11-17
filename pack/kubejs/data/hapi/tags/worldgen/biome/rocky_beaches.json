@@ -4,6 +4,14 @@
     {
       "id": "regions_unexplored:chalk_cliffs",
       "required": false
+    },
+    {
+      "id": "spawn:rocky_shore",
+      "required": false
+    },
+    {
+      "id": "spawn:volcanic_island",
+      "required": false
     }
   ]
 }

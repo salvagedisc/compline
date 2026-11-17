@@ -1,0 +1,9 @@
+{
+  "type": "spawn:sandy_island",
+  "island_biome": "spawn:sandy_island",
+  "biomes": "#compline:aucun",
+  "step": "surface_structures",
+  "dimension": "minecraft:overworld",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

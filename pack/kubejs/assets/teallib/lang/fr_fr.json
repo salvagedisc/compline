@@ -1,0 +1,7 @@
+{
+  "entity.teallib.mannequin": "Mannequin",
+  "item.teallib.mannequin": "Mannequin",
+  "config.teallib.section.vanilla_changes": "Modifications du jeu de base",
+  "config.teallib.bucket_tooltip": "Infobulle du seau",
+  "config.teallib.bucket_tooltip.tooltip": "Indique si les créatures en seau s'affichent dans l'infobulle du seau."
+}

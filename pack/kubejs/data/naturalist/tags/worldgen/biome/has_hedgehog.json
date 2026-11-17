@@ -104,6 +104,10 @@
     {
       "id": "regions_unexplored:wisteria_grove",
       "required": false
+    },
+    {
+      "id": "spawn:ant_gardens",
+      "required": false
     }
   ]
 }

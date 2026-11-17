@@ -4,6 +4,14 @@
     {
       "id": "regions_unexplored:rocky_reef",
       "required": false
+    },
+    {
+      "id": "spawn:deep_warm_ocean",
+      "required": false
+    },
+    {
+      "id": "spawn:seagrass_meadow",
+      "required": false
     }
   ]
 }
