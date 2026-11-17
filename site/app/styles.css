@@ -126,7 +126,7 @@ html:not(.js) .seul-js { display: none !important; }
 .ciel.avec-3d .ciel-statique { opacity: 0; }
 /* The flat map only where there is no 3D sky: without scripts, or without WebGL. */
 html:not(.js) .ciel-statique, .ciel.sans-3d .ciel-statique { background-image: url('/monde/couleurs.webp'); }
-.ciel-canvas { position: absolute !important; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+.ciel-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1.6s ease; }
 .ciel[data-pret] .ciel-canvas { opacity: 1; }
 .ciel-voile {
   position: absolute; inset: 0; pointer-events: none;
@@ -204,6 +204,24 @@ html:not(.js) .ciel-statique, .ciel.sans-3d .ciel-statique { background-image: u
 .repere.a-gauche:hover .repere-nom, .repere.a-gauche:focus-visible .repere-nom { transform: translate(-4px, -4px); }
 .repere:focus-visible .repere-marque { outline: 1px solid var(--chandelle-2); outline-offset: 4px; }
 .reperes.entres .repere { animation: monte 1s var(--doux) both; animation-delay: calc(0.9s + var(--i) * 0.08s); }
+.repere:hover, .repere:focus-visible { z-index: 2; }
+/* Pointing at a pin shows a picture of its place, like a postcard held up over the map. */
+.repere-carte {
+  position: absolute; left: calc(-120px + var(--carte-dx, 0px)); bottom: 92px; width: 240px; height: 150px;
+  border: 1px solid rgba(244, 207, 148, 0.6); border-radius: 3px; overflow: hidden;
+  background: var(--nuit);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), inset 0 0 0 4px rgba(12, 15, 20, 0.55);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(8px) rotate(-1.2deg) scale(0.96); transform-origin: 50% 100%;
+  transition: opacity 0.25s, transform 0.45s var(--doux), visibility 0s 0.25s;
+}
+.repere.carte-bas .repere-carte { bottom: auto; top: 18px; transform-origin: 50% 0; transform: translateY(-8px) rotate(1.2deg) scale(0.96); }
+.repere-carte img { display: block; transition-duration: 0.3s; }
+@media (hover: hover) and (pointer: fine) and (min-width: 761px) and (min-height: 521px) {
+  .repere:hover .repere-carte, .repere:focus-visible .repere-carte {
+    opacity: 1; visibility: visible; transform: none; transition: opacity 0.3s 0.08s, transform 0.5s 0.08s var(--doux), visibility 0s;
+  }
+}
 @keyframes monte { from { opacity: 0; } }
 
 /* ———————————————————————————— Header ———————————————————————————— */

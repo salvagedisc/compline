@@ -4,7 +4,7 @@ The public showcase of the pack for friends. The home page is the disc seen from
 
 ## Stack and commands
 
-React 19 + TypeScript, React Router 8 in framework mode with every page prerendered (`ssr: false`), Vite 8. 3D with three.js and React Three Fiber (custom shaders for ground, sea, mist ring and cloud layers); every interface motion is plain CSS, and a change of page is a view transition where the browser has them. Type: Cormorant Garamond (the site's own copy, with a redrawn lowercase circumflex, in `app/polices/`) and Cormorant SC for titles, Spectral for reading. Icons are hand-drawn line SVG (`app/interface/icones.tsx`). Captures go through `vite-imagetools` (AVIF and WebP at three widths, blurred previews). Ambient sound is synthesised with the Web Audio API, nothing is downloaded. No backend: `npm run build` writes static files to `build/client/`.
+React 19 + TypeScript, React Router 8 in framework mode with every page prerendered (`ssr: false`), Vite 8. 3D in plain three.js (`app/monde/moteur.ts`: custom shaders for ground, sea, mist ring and cloud layers, frames drawn only while something moves); every interface motion is plain CSS, and a change of page is a view transition where the browser has them. Type: Cormorant Garamond (the site's own copy, with a redrawn lowercase circumflex, in `app/polices/`) and Cormorant SC for titles, Spectral for reading. Icons are hand-drawn line SVG (`app/interface/icones.tsx`). Captures go through `vite-imagetools` (AVIF and WebP at three widths, blurred previews). Ambient sound is synthesised with the Web Audio API, nothing is downloaded. No backend: `npm run build` writes static files to `build/client/`.
 
 | Command | Purpose |
 |---|---|
@@ -21,7 +21,7 @@ React 19 + TypeScript, React Router 8 in framework mode with every page prerende
 - `app/donnees/lieux.ts`: all the content (places, features, road map items, journal). Most updates only touch this file. `chemins.ts` derives the prerendered addresses from it.
 - `app/donnees/details.ts`: content of the special chapters (metal tiers, zoo stamps and families).
 - `app/routes/`: home, a place and its chapters (`salle.tsx`, `/cuisine/` and `/cuisine/planche/`), journal, road map, not found.
-- `app/monde/Ciel.tsx`: the 3D sky, its shaders and the camera (drift over the disc, dive onto a place).
+- `app/monde/moteur.ts`: the 3D sky engine, its shaders and the camera (drift over the disc, dive onto a place, pins placed over the canvas); `Ciel.tsx` only hands it a canvas and where to look.
 - `app/interface/`: header, place pins, index, title screen, captures, icons, sound, small shared state, page transitions (`transitions.ts`); `scenes/` holds the full-screen chapter views (still with details, before/after, metal tiers, zoo page, measured map).
 - `app/tampons/`: the zoo stamps and family emblems, cut from the guide screenshot.
 - `app/captures/`: screenshots taken in game, 1920 × 1080, optimised at build time.
