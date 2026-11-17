@@ -62,6 +62,7 @@ int lightFamily(int mat) {
 uniform sampler3D lightTexA;
 uniform sampler3D lightTexB;
 uniform int frameCounter;
+#define HAS_FRAME_COUNTER
 uniform int heldItemId;
 uniform int heldItemId2;
 uniform int heldBlockLightValue;

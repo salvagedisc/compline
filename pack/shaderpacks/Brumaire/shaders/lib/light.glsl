@@ -1,6 +1,7 @@
 #include "/lib/clouds.glsl"
 #include "/lib/water.glsl"
 #include "/lib/voxel.glsl"
+#include "/lib/farshadow.glsl"
 /** Bloc qui éclaire par lui-même (block.properties : 8, 16 à 22). */
 bool emissive(int mat) { return mat == 8 || (mat >= 16 && mat <= 22); }
 
@@ -27,6 +28,10 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         // Au-delà de la carte d'ombre, la lumière du ciel du jeu tient lieu d'ombre.
         float beyond = smoothstep(shadowDistance * 0.82, shadowDistance * 0.98, dist);
         float fallback = smoothstep(0.80, 0.94, lm.y);
+#if FAR_SHADOWS > 0
+        // Plus loin encore, le relief vu par la caméra fait de l'ombre (lib/farshadow.glsl).
+        if (beyond > 0.0) fallback *= farShadow(pos, normal, dither(frag + 5.588238 * float(frameCounter & 63)));
+#endif
         lit = beyond < 1.0 ? mix(shadowAt(pos, normal, dither(frag), taps), fallback, beyond) : fallback;
     }
     // Une feuille à l'ombre d'une autre reçoit encore le soleil passé à travers le feuillage.
