@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "compline:item/epee_en_acier_noir"
+  }
+}

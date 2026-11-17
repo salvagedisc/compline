@@ -19,7 +19,7 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'simulated:creative_physics_staff', 'overgeared:nether_alloy_furnace',
     'overgeared:netherite_alloy', 'overgeared:heated_netherite_alloy',
     'overgeared:nether_tool_cast', 'overgeared:heated_silver_ingot',
-    'overgeared:tier_a_smithing_anvil', 'overgeared:tier_b_smithing_anvil',
+    'overgeared:tier_b_smithing_anvil',
     'farmersdelight:nether_salad', 'farmersdelight:netherite_knife',
     'farmersdelight:crimson_cabinet', 'farmersdelight:warped_cabinet',
     'farmersdelight:tomato', 'farmersdelight:tomato_seeds', 'farmersdelight:rotten_tomato',

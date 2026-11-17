@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:diamond_ores",
+    {
+      "id": "spelunkery:rough_diamond_block",
+      "required": false
+    }
+  ]
+}

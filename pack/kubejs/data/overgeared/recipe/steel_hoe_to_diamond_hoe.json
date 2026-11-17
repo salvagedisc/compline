@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "compline:houe_en_acier_noir"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond_hoe"
+  },
+  "template": {
+    "item": "overgeared:diamond_upgrade_smithing_template"
+  }
+}

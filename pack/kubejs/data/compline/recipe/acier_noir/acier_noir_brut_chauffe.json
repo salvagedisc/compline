@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 160,
+  "experience": 0.0,
+  "group": "acier_noir",
+  "ingredient": {
+    "item": "compline:acier_noir_brut"
+  },
+  "result": {
+    "count": 1,
+    "id": "compline:acier_noir_brut_chauffe"
+  }
+}
