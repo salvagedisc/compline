@@ -9,6 +9,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
 
 ### Added
+- Brumaire, stained glass light: sunlight and moonlight through stained glass colour the floor and the light shafts behind it; tinted glass holds the light back. New `Lumière des vitraux` setting (off in `Très léger`).
 - Brumaire, wakes and foam (`compline` 0.25.0): boats, swimmers and animals wading in ripple the water; a moving boat leaves a wake and a trail of foam pixels, and a narrow fringe of foam comes and goes along the banks. New `Sillages` and `Écume des rives` settings (off in `Très léger`).
 - Brumaire, off-screen reflections: water, ice and puddles now mirror what the screen does not show (the trees above the frame, the bank behind the player, a lantern out of view), found block by block around the camera, instead of an empty sky. New `Reflets hors écran` setting (off in `Très léger`).
 - **Animated combat** ([0036](docs/decisions/0036-better-combat.md)): Better Combat 2.4.0 with playerAnimator 2.0.4. Each weapon type swings with the whole body, in two or three chained strikes, and hits what the blade sweeps through; the black steel sword and axe are included, tools, fishing rods and forged parts are not.
@@ -217,6 +218,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/compline-atlas`, jars in `pack/mods/` ([0025](docs/decisions/0025-native-atlas.md)). Mod ids, configs and save formats are unchanged. The ship teleport of Antique Transport is removed.
 
 ### Fixed
+- Brumaire's light under water (caustics, the blue that deepens with depth) was missing: Iris Veil Compat 0.4.0 left water and stained glass out of the sun's shadow map. The pack goes back to 0.3.0, pinned.
 - Fish no longer show a price in emeralds when Shift is held: the selling bin is not in the pack and its sell rate is now 0.
 - **Fishing texts in French fit their frames**: the Starcatcher guidebook pages, the bottled letters, the catch notification, the entry labels and the item descriptions were wider than the page or the screen. They are rewritten to fit (measured in the game's font), the selling page says there is no selling bin, and the descriptions of the fish moved from the Nether speak of the deep lava.
 - The game no longer crashes a minute or two into a world on Apple Silicon Macs: spark's background profiler ran async-profiler, whose native wall-clock thread crashed the JVM (SIGSEGV in `libasyncProfiler`, nothing in the game log). `pack/config/spark/config.json` keeps the background profiler but on spark's Java engine, which has no native code.

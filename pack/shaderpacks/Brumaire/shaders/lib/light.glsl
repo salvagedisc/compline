@@ -41,6 +41,8 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
             vec3 hue = waterHue(vec3(0.25, 0.46, 0.89));
             light *= exp(-waterExtinction(hue) * water) * caustics(pos + cameraPosition + gLightDir * water);
         }
+        // Passé par un vitrail, le soleil en prend la couleur.
+        light *= glassTint(pos, normal);
     }
     // Le feuillage à contre-jour laisse passer un peu de soleil.
     vec3 view = normalize(pos);

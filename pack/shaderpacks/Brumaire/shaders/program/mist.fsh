@@ -22,16 +22,18 @@ layout(location = 0) out vec4 outColor;
 
 /**
  * Marche vers le fond de la vue dans la carte d'ombre. mistSun : part de soleil qui atteint la brume (pondérée par
- * sa densité) ; rend la longueur éclairée du rayon, en blocs, qui fait briller l'air : les rayons sous les arbres.
+ * sa densité) ; rend la longueur éclairée du rayon, en blocs, qui fait briller l'air : les rayons sous les arbres,
+ * colorés là où ils ont passé un vitrail.
  */
-float shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
+vec3 shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
     mistSun = 1.0;
 #if LIGHT_SHAFTS > 0
     float base = mistAnchor();
     float stride = reach / float(LIGHT_SHAFTS);
     float t = stride * dither(gl_FragCoord.xy);
     vec3 origin = gbufferModelViewInverse[3].xyz;
-    float sum = 0.0, weight = 0.0, lit = 0.0;
+    float sum = 0.0, weight = 0.0;
+    vec3 lit = vec3(0.0);
     for (int i = 0; i < LIGHT_SHAFTS; i++) {
         vec3 p = origin + dir * t;
         vec3 uv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
@@ -39,13 +41,13 @@ float shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
         float w = exp((base - cameraPosition.y - p.y) / MIST_HEIGHT - density * t);
         sum += w * s;
         weight += w;
-        lit += s;
+        if (s > 0.0) lit += s * tintAt(uv);
         t += stride;
     }
     mistSun = sum / max(weight, 1e-6);
     return lit * stride;
 #else
-    return 0.0;
+    return vec3(0.0);
 #endif
 }
 
@@ -141,7 +143,7 @@ void main() {
             float reach = min(len, shadowDistance * 0.9);
             float density = nearOnly / max(len, 1.0);
             float mistSun;
-            float litLength = shaftMarch(dir, reach, density, mistSun);
+            vec3 litLength = shaftMarch(dir, reach, density, mistSun);
             // La part de brume traversée dans la portée de la carte d'ombre ; au-delà, elle est tenue pour éclairée.
             float inside = 1.0 - exp(-nearOnly * reach / max(len, 1e-3));
             sun = mix(1.0, mistSun, clamp(inside / max(veil, 1e-4), 0.0, 1.0));

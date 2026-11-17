@@ -44,6 +44,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 | Spatial GUI | 1.8 | 1.9 | Was held together with Polytone, which left the pack ([0026](decisions/0026-second-cleanup.md)) |
 | Supplementaries | 3.9.9 | 4.x | Major version; our config (0006) must be re-read |
 | Friends & Foes | 4.0.27 | 5.x | Major version; the creatures disabled by config must stay disabled |
+| Iris Veil Compat | 0.3.0 (pinned) | 0.4.0 | 0.4.0 drops water and stained glass from Brumaire's sun shadow map (caustics, light through stained glass); wait for a release that keeps them |
 | Envelope | 0.7.5 | 0.8 | Its JEI mixin crashed once (see the changelog); to retest with JEI 19.51 |
 | Icy's Better Horses | 2.0.1 | 2.1.x | Revival costs experience levels, which no longer exist ([0009](decisions/0009-xp.md)): a replacement cost is needed |
 | Cold Sweat | 2.4.3.1 | 2.4.4 | Breaks Cold Sweat: Altitude until Altitude follows |

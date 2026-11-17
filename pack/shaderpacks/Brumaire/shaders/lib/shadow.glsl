@@ -15,6 +15,7 @@ vec3 shadowWarp(vec3 clip) {
 uniform sampler2DShadow shadowtex1; // comparaison matérielle : la part éclairée d'une prise
 uniform sampler2D shadowtex0;       // profondeur brute : la distance de ce qui fait de l'ombre
 uniform sampler2D shadowcolor0;     // rouge : 1 là où l'eau est ce que le soleil touche en premier
+uniform sampler2D shadowcolor1;     // la teinte du vitrail que le soleil passe en premier, blanc sinon
 
 /** Part de lumière directe reçue en un point (repère joueur), 0 à l'ombre. */
 float shadowAt(vec3 pos, vec3 normal, float noise, int taps) {
@@ -65,5 +66,27 @@ float waterAbove(vec3 pos, vec3 normal) {
     float surface = texture(shadowtex0, uv.xy).r;
     if (surface >= uv.z - 0.00005 || texture(shadowcolor0, uv.xy).r < 0.5) return 0.0;
     return (uv.z - surface) * 2.0 / (SHADOW_DEPTH * abs(shadowProjection[2][2]));
+}
+
+/** Couleur de la lumière de l'astre en un point de la carte d'ombre : celle du vitrail passé avant lui, sinon blanc. */
+vec3 tintAt(vec3 uv) {
+#if GLASS_TINT > 0
+    if (uv.z >= 1.0 || texture(shadowtex0, uv.xy).r >= uv.z - 0.0002) return vec3(1.0);
+    return texture(shadowcolor1, uv.xy).rgb;
+#else
+    return vec3(1.0);
+#endif
+}
+
+/** La même teinte en un point (repère joueur) : le soleil passé par une verrière colore ce qu'il éclaire. */
+vec3 glassTint(vec3 pos, vec3 normal) {
+#if GLASS_TINT > 0
+    vec3 clip = (shadowProjection * (shadowModelView * vec4(pos + normal * 0.05, 1.0))).xyz;
+    vec3 uv = shadowWarp(clip) * 0.5 + 0.5;
+    if (any(lessThan(uv.xy, vec2(0.0))) || any(greaterThan(uv.xy, vec2(1.0)))) return vec3(1.0);
+    return tintAt(uv);
+#else
+    return vec3(1.0);
+#endif
 }
 #endif
