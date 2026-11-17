@@ -18,6 +18,8 @@ in vec2 vUv;
 #define REFLECT_DEPTH depthtex0
 #define REFLECT_COLOR colortex0
 #include "/lib/reflect.glsl"
+#include "/lib/voxel.glsl"
+#include "/lib/voxtrace.glsl"
 
 /*
 const int colortex6Format = R11F_G11F_B10F;
@@ -69,6 +71,13 @@ vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
         float dist;
         vec3 view = (gbufferModelView * vec4(pos, 1.0)).xyz;
         vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy), 1.0, WET_REFLECTIONS, dist);
+#if VOXEL_REFLECTIONS > 0
+        if (hit.a < 0.99 && WET_REFLECTIONS > 0) {
+            float reach;
+            vec4 vox = voxelReflection(pos + normal * 0.02, r, reach);
+            if (vox.a > 0.0) mirror = mix(mirror, veiled(vox.rgb, r * reach * 0.4), vox.a);
+        }
+#endif
         if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
         return mix(color, mirror, puddle ? min(f * 1.2 + 0.18, 1.0) : f * 0.85 + 0.04);
     }

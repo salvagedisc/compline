@@ -15,8 +15,11 @@ const uint VOX_SOLID = 256u;
 const uint VOX_CLEAR = 512u;
 // Bit 10 : le bloc arrête la pluie (tout sauf l'herbe, les fleurs, les lianes et les torches).
 const uint VOX_RAIN = 1024u;
+// Bit 11 : le bloc se voit dans un reflet (lib/voxtrace.glsl) : tout sauf l'eau, les herbes, les fleurs, les lianes et les
+// torches. Sa couleur moyenne est rangée à part, celle du dessus dans voxTopImg, celle des côtés dans voxSideImg.
+const uint VOX_MIRROR = 2048u;
 
-#if COLORED_LIGHT > 0 || SHADER_RAIN > 0
+#if COLORED_LIGHT > 0 || SHADER_RAIN > 0 || VOXEL_REFLECTIONS > 0
 #define VOXELS
 #endif
 

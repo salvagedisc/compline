@@ -16,6 +16,7 @@ uniform sampler2D colortex6;
 #define REFLECT_DEPTH depthtex1
 #define REFLECT_COLOR colortex6
 #include "/lib/reflect.glsl"
+#include "/lib/voxtrace.glsl"
 #endif
 
 uniform sampler2D gtexture;
@@ -101,6 +102,14 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 mirror = skyReflection(world, r) * mix(0.12, 1.0, sky);
     float dist;
     vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, 1.0, WATER_REFLECTIONS, dist);
+#if VOXEL_REFLECTIONS > 0
+    // Ce que l'écran ne montre pas (la rive derrière soi, l'arbre hors du cadre) : cherché bloc par bloc.
+    if (hit.a < 0.99) {
+        float reach;
+        vec4 vox = voxelReflection(vPos + normal * 0.02, r, reach);
+        if (vox.a > 0.0) mirror = mix(mirror, veiled(vox.rgb, r * reach * 0.4), vox.a);
+    }
+#endif
     if (hit.a > 0.0) {
         // Le point reflété, voilé par l'air et la brume de la surface jusqu'à lui (le chemin de la caméra à la
         // surface est voilé par composite1 comme le reste). La brume basse est déjà comptée une fois sur ce
@@ -127,6 +136,13 @@ vec4 ice(vec3 albedo, float alpha, vec3 normal, vec2 lm, float ao) {
     float dist;
     vec3 view = (gbufferModelView * vec4(vPos, 1.0)).xyz;
     vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy), normal.y > 0.5 ? 1.0 : 0.0, WATER_REFLECTIONS, dist);
+#if VOXEL_REFLECTIONS > 0
+    if (hit.a < 0.99) {
+        float reach;
+        vec4 vox = voxelReflection(vPos + normal * 0.02, r, reach);
+        if (vox.a > 0.0) mirror = mix(mirror, veiled(vox.rgb, r * reach * 0.4), vox.a);
+    }
+#endif
     if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
     f = f * 0.85 + 0.04;
     // Mélange sur ce qui est derrière : la glace garde sa transparence, le reflet s'y ajoute.
