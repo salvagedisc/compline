@@ -1,5 +1,5 @@
-// Les trois passes de l'anticrénelage SMAA : les bords des formes (composite4), le poids de chaque bord selon sa forme
-// (composite5), puis le mélange avec les pixels voisins, dans la passe finale.
+// Les trois passes de l'anticrénelage SMAA : les bords des formes (composite5), le poids de chaque bord selon sa forme
+// (composite6), puis le mélange avec les pixels voisins, dans la passe finale.
 #include "/lib/settings.glsl"
 #include "/program/smaa.glsl"
 

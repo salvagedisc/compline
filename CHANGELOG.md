@@ -9,6 +9,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
 
 ### Added
+- Brumaire, motion blur: turning the view quickly streaks the landscape like a film camera, while the hand and the held item stay sharp; standing still changes nothing. New `Flou de mouvement` setting with four strengths (off in `Très léger`).
 - Brumaire, temporal anti-aliasing: distant leaves and grass no longer shimmer when standing still, while near textures keep their sharp pixels; nothing trails behind moving shapes. New `Anticrénelage temporel` setting (off in `Très léger`).
 - Brumaire, stained glass light: sunlight and moonlight through stained glass colour the floor and the light shafts behind it; tinted glass holds the light back. New `Lumière des vitraux` setting (off in `Très léger`).
 - Brumaire, wakes and foam (`compline` 0.25.0): boats, swimmers and animals wading in ripple the water; a moving boat leaves a wake and a trail of foam pixels, and a narrow fringe of foam comes and goes along the banks. New `Sillages` and `Écume des rives` settings (off in `Très léger`).
