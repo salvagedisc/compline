@@ -48,7 +48,7 @@
 #define HEAT_SHIMMER 1 // [0 1]
 
 // Couleurs
-#define OLIVE 0.6 // [0.0 0.2 0.4 0.6 0.8 1.0]
+#define OLIVE 0.8 // [0.0 0.2 0.4 0.6 0.8 1.0]
 #define SATURATION 1.0 // [0.7 0.8 0.9 1.0 1.1 1.2]
 #define CONTRAST 1.0 // [0.9 0.95 1.0 1.05 1.1 1.15]
 #define EXPOSURE 1.0 // [0.7 0.85 1.0 1.15 1.3]

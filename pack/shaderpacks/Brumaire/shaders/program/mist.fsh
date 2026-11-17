@@ -127,7 +127,7 @@ void main() {
             float mu = dot(dir, gLightDir);
             float phase = 0.7 * mistPhase(mu, 0.75) + 0.3 * mistPhase(mu, 0.2);
             float open = smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
-            color += gLightColor * phase * litLength * (0.006 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * open;
+            color += gLightColor * phase * litLength * (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * open;
         }
 #endif
         if (veil > 0.003) {

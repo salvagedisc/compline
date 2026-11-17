@@ -22,10 +22,10 @@ float mistAnchor() {
 float mistNearDensity() {
     // Plus dense à l'aube, la nuit et sous la pluie ; elle ne descend pas dans les grottes.
     float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
-    float hour = mix(1.25, 0.6, gDay) + 0.35 * gDusk;
+    float hour = mix(1.25, 0.32, gDay) + 0.22 * gDusk;
     // L'air du biome : plus de brume là où il est humide, moins dans un désert.
     float biome = mix(0.75, 1.3, airHumid) * (1.0 - 0.85 * airDust());
-    return 0.021 * MIST_DENSITY * hour * biome * (1.0 + 0.4 * rainStrength) * open;
+    return 0.010 * MIST_DENSITY * hour * biome * (1.0 + 0.4 * rainStrength) * open;
 }
 
 /** Brume retirée par une clairière : un cylindre vertical, au bord adouci par deux rayons. */
@@ -85,9 +85,11 @@ float mistDepth(vec3 dir, float len, out float nearOnly) {
  * Rend la part de la couleur du point qui passe (par canal) ; inscat reçoit la lumière ajoutée.
  */
 vec3 airVeil(vec3 dir, float len, out vec3 inscat) {
-    vec3 k = vec3(0.50, 0.72, 1.0) * (AIR_DENSITY / 1600.0) * mix(0.8, 1.8, airHumid) * (1.0 + 1.5 * airDust());
+    vec3 k = vec3(0.50, 0.72, 1.0) * (AIR_DENSITY / 2600.0) * mix(0.8, 1.8, airHumid) * (1.0 + 1.5 * airDust());
     vec3 pass = exp(-k * len);
-    inscat = skyAt(normalize(vec3(dir.x, max(dir.y, 0.03), dir.z))) * (1.0 - pass);
+    vec3 sky = skyAt(normalize(vec3(dir.x, max(dir.y, 0.03), dir.z)));
+    // L'air lointain tire sur le gris chaud des poussières plus que sur le bleu du ciel.
+    inscat = mix(sky, vec3(luma(sky)) * vec3(1.04, 1.0, 0.92), 0.45) * (1.0 - pass);
     return pass;
 }
 
@@ -111,6 +113,6 @@ vec3 mistColor(vec3 dir, float sun) {
     // Les gouttelettes renvoient surtout la lumière vers l'avant : un halo vers le soleil, un peu en arrière.
     float mu = dot(dir, gLightDir);
     float phase = 0.75 * mistPhase(mu, 0.5) + 0.25 * mistPhase(mu, -0.3);
-    vec3 beam = gLightColor * (0.03 + 0.4 * phase * SHAFT_STRENGTH);
+    vec3 beam = gLightColor * (0.03 + 0.3 * phase * SHAFT_STRENGTH);
     return body + beam * sun;
 }
