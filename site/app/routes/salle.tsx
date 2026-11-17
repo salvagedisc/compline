@@ -50,7 +50,7 @@ function Arrivee({ lieu }: { lieu: Lieu }) {
       initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.7, delay: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
     >
-      <p className="pix accent sur-titre"><span className="touche">{lieu.touche}</span>{lieu.theme}</p>
+      <p className="sc accent sur-titre"><span className="touche pix">{lieu.touche}</span>{lieu.theme}</p>
       <Titre id="titre-lieu" key={lieu.id} delai={0.5}>{lieu.nom}</Titre>
       <p className="intro">{lieu.intro}</p>
       <ol className="plans">
@@ -62,14 +62,14 @@ function Arrivee({ lieu }: { lieu: Lieu }) {
                 <b>{f.titre}</b>
                 <Statut f={f} />
               </span>
-              <span className="pix plan-num" aria-hidden="true">{String(k + 1).padStart(2, '0')}</span>
+              <span className="sc plan-num" aria-hidden="true">{String(k + 1).padStart(2, '0')}</span>
             </Link>
           </motion.li>
         ))}
       </ol>
       <footer className="arrivee-pied">
         <Link to={`/${suivant.chemin}`} className="lien-suivant">
-          <span className="pix gris">Lieu suivant</span>
+          <span className="sc gris">Lieu suivant</span>
           <span><Pixel nom={suivant.id} taille={18} /> {suivant.nom} →</span>
         </Link>
       </footer>
@@ -105,7 +105,7 @@ function Plan({ lieu, fonction }: { lieu: Lieu; fonction: Fonction }) {
         >
           <div className="plan-media"><MediaVue media={fonction.media} /></div>
           <div className="plan-legende">
-            <p className="pix sur-titre">
+            <p className="sc sur-titre">
               <Link to={`/${lieu.chemin}`} className="retour">← {lieu.nom}</Link>
               <span className="gris">{k + 1} / {lieu.fonctions.length}</span>
             </p>
@@ -114,7 +114,7 @@ function Plan({ lieu, fonction }: { lieu: Lieu; fonction: Fonction }) {
             <p>{fonction.texte}</p>
             {fonction.points && <ul className="points">{fonction.points.map((p) => <li key={p}>{p}</li>)}</ul>}
             {'provisoire' in fonction.media && fonction.media.provisoire && (
-              <p className="pix provisoire">Image provisoire, en attente d'une capture au banc</p>
+              <p className="sc provisoire">Image provisoire, en attente d'une capture au banc</p>
             )}
           </div>
         </motion.div>

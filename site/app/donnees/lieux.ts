@@ -10,8 +10,12 @@ export const STATUTS: Record<Statut, { nom: string; court: string }> = {
   prevu: { nom: 'Prévu', court: 'Prévu' },
 }
 
-/** A zoomed detail inside a screenshot: x, y and r are fractions of the image width. */
-export interface Zoom { x: number; y: number; r: number; label: string }
+/**
+ * A detail inside a screenshot. x and y place its centre as fractions of the image width and height;
+ * r is half its width as a fraction of the image width; ratio is its height over its width (1, a square,
+ * when omitted). The detail is pushed back inside the image when it would overflow an edge.
+ */
+export interface Zoom { x: number; y: number; r: number; ratio?: number; label: string }
 
 export type Media =
   | { type: 'image'; capture: string; alt: string; zooms?: Zoom[]; provisoire?: boolean }
@@ -55,14 +59,14 @@ export const LIEUX: Lieu[] = [
       { id: 'bord', titre: 'Le bord gardé par la brume', statut: 'atester',
         texte: "Qui s'approche du bord est prévenu, puis ramené en arrière, à pied, à la nage ou en bateau.",
         media: { type: 'image', capture: 'bord.jpg', alt: 'En barque à quelques dizaines de blocs du bord, le message de la brume affiché',
-          zooms: [{ x: 0.5, y: 0.75, r: 0.18, label: 'Le message du bord' }] } },
+          zooms: [{ x: 0.5, y: 0.745, r: 0.3, ratio: 0.3, label: 'Le message du bord' }] } },
       { id: 'atlas', titre: "L'atlas dessiné à la main", statut: 'teste',
         texte: "Pas de coordonnées ni de minicarte : la carte se dessine pendant qu'on explore, et trains et navires y apparaissent.",
         media: { type: 'image', capture: 'atlas-carte.jpg', alt: "L'atlas ouvert autour du point de départ : forêts, collines, rivières et rivages dessinés au fil de l'exploration" } },
       { id: 'dinos', titre: 'Les dinosaures', statut: 'atester',
         texte: "Les dinosaures d'Archie vivent sur le disque. Apprivoisés, ils donnent les armures qui ouvrent les terres extrêmes.",
         media: { type: 'image', capture: 'dinos.jpg', alt: 'Un lushsaur et un obsidicératops dans une forêt de pins',
-          zooms: [{ x: 0.37, y: 0.78, r: 0.12, label: 'Le lushsaur' }, { x: 0.57, y: 0.6, r: 0.1, label: "L'obsidicératops" }] } },
+          zooms: [{ x: 0.378, y: 0.806, r: 0.095, label: 'Le lushsaur' }, { x: 0.584, y: 0.595, r: 0.065, label: "L'obsidicératops" }] } },
     ],
   },
   {
@@ -81,25 +85,25 @@ export const LIEUX: Lieu[] = [
       { id: 'pluie', titre: 'Pluie et orage', statut: 'atester',
         texte: "Des gouttes fines poussées par le vent, rien ne tombe sous les toits ; le sol s'assombrit puis sèche lentement.",
         media: { type: 'image', capture: 'orage.jpg', alt: 'Orage sur une vallée boisée, un éclair au loin',
-          zooms: [{ x: 0.4, y: 0.12, r: 0.12, label: "L'éclair" }, { x: 0.22, y: 0.8, r: 0.12, label: 'La rivière sous la pluie' }] } },
+          zooms: [{ x: 0.386, y: 0.137, r: 0.095, label: "L'éclair" }, { x: 0.247, y: 0.751, r: 0.13, label: 'La rivière sous la pluie' }] } },
       { id: 'neige', titre: 'Neige, glace et sable', statut: 'atester',
         texte: "La neige tient sur le haut des sapins, la glace reflète comme l'eau, le sable scintille au soleil.",
         media: { type: 'image', capture: 'sapins-neige.jpg', alt: 'Taïga enneigée sous les flocons',
-          zooms: [{ x: 0.5, y: 0.25, r: 0.12, label: 'La neige sur les aiguilles' }] } },
+          zooms: [{ x: 0.5, y: 0.22, r: 0.11, label: 'La neige sur les aiguilles' }] } },
       { id: 'traces', titre: 'Traces de pas', statut: 'atester',
         texte: "Le joueur et les bêtes proches laissent des traces dans la neige et le sable, qui s'effacent en quelques minutes.",
         media: { type: 'image', capture: 'traces-pas.jpg', alt: 'Une file de traces de pas laissée dans le sable' } },
       { id: 'lumiere', titre: 'Lumière colorée', statut: 'atester',
         texte: "Torches orange, lumières des âmes bleues, lichen vert : deux lumières voisines mélangent leurs couleurs.",
         media: { type: 'image', capture: 'bru-nuit.jpg', alt: 'De nuit, un feu de camp et des lanternes des âmes',
-          zooms: [{ x: 0.66, y: 0.82, r: 0.14, label: 'Le bleu des âmes sur l’herbe' }, { x: 0.47, y: 0.32, r: 0.13, label: 'Le feu sur le tronc' }] } },
+          zooms: [{ x: 0.633, y: 0.806, r: 0.1, label: 'Le bleu des âmes sur l’herbe' }, { x: 0.443, y: 0.421, r: 0.08, label: 'Le feu sur le tronc' }] } },
       { id: 'eau', titre: "Sous l'eau", statut: 'atester',
         texte: "Des rayons qui descendent de la surface, des particules en suspension, une eau plus claire près de la surface.",
         media: { type: 'image', capture: 'sous-eau.jpg', alt: "Rayons sous l'eau", provisoire: true } },
       { id: 'vent', titre: 'Le vent', statut: 'atester',
         texte: "Un vent commun à tous les joueurs : la fumée des feux le suit, l'herbe se couche sous les pas.",
         media: { type: 'image', capture: 'fumee.jpg', alt: 'Fumée de feux de camp au petit matin',
-          zooms: [{ x: 0.55, y: 0.25, r: 0.14, label: 'La fumée' }] } },
+          zooms: [{ x: 0.532, y: 0.586, r: 0.095, label: 'La fumée' }] } },
     ],
   },
   {
@@ -110,16 +114,16 @@ export const LIEUX: Lieu[] = [
       { id: 'temperature', titre: 'Le froid et la chaleur', statut: 'atester',
         texte: "La température dépend du biome, de l'heure et de l'altitude : plus on monte, plus il fait froid.",
         media: { type: 'image', capture: 'froid.jpg', alt: 'Dans la taïga enneigée, la jauge de température au milieu de la barre',
-          zooms: [{ x: 0.56, y: 0.86, r: 0.1, label: 'Température, soif et faim' }] } },
+          zooms: [{ x: 0.589, y: 0.864, r: 0.105, ratio: 0.5, label: 'Température, soif et faim' }] } },
       { id: 'mort', titre: 'Chaque mort coûte un cœur', statut: 'atester',
         texte: "On perd un cœur à chaque mort, jusqu'à cinq ; des éclats de vie se trouvent dans le monde.",
         points: ['Pas de monstres ordinaires', 'Au plus huit créatures hostiles par joueur', 'Journées de 30 min, nuits de 15'],
         media: { type: 'image', capture: 'mort-coeur.jpg', alt: 'Au réveil après une mort, il reste neuf cœurs',
-          zooms: [{ x: 0.33, y: 0.85, r: 0.18, label: 'Neuf cœurs au réveil' }] } },
+          zooms: [{ x: 0.42, y: 0.86, r: 0.19, ratio: 0.35, label: 'Neuf cœurs au réveil' }] } },
       { id: 'xp', titre: "Pas d'expérience", statut: 'atester',
         texte: "Les outils s'usent et se réparent à l'enclume ; le savoir se trouve dans des livres, pas dans des niveaux.",
         media: { type: 'image', capture: 'ecran-avec.jpg', alt: "La barre d'action sans barre d'expérience",
-          zooms: [{ x: 0.5, y: 0.94, r: 0.2, label: "Pas de barre d'expérience" }] } },
+          zooms: [{ x: 0.5, y: 0.907, r: 0.19, ratio: 0.45, label: "Pas de barre d'expérience" }] } },
       { id: 'ecran', titre: "L'interface s'efface", statut: 'atester',
         texte: "Après six secondes sans geste, la barre et les jauges disparaissent ; elles reviennent au moindre danger.",
         media: { type: 'comparer', avantNom: 'En action', apresNom: 'Au repos', scenes: [
@@ -135,7 +139,7 @@ export const LIEUX: Lieu[] = [
       { id: 'planche', titre: 'La planche et la marmite', statut: 'teste',
         texte: "Farmer's Delight et Hands-On Delight : chaque plat se prépare geste par geste.",
         media: { type: 'image', capture: 'planche.jpg', alt: 'Cuisinière et marmite, planche à découper, poêle sur le feu, poulet rôti et tarte',
-          zooms: [{ x: 0.5, y: 0.42, r: 0.1, label: 'La planche' }, { x: 0.27, y: 0.4, r: 0.12, label: 'La marmite' }, { x: 0.71, y: 0.43, r: 0.11, label: 'La poêle' }] } },
+          zooms: [{ x: 0.275, y: 0.394, r: 0.105, label: 'La marmite' }, { x: 0.5, y: 0.421, r: 0.07, label: 'La planche' }, { x: 0.707, y: 0.443, r: 0.08, label: 'La poêle' }] } },
       { id: 'stations', titre: 'Les stations en scène', statut: 'teste',
         texte: "L'établi, les fours, l'enclume s'utilisent en scènes à la première personne (Cinematic Interactions).",
         media: { type: 'image', capture: 'stations-etabli.jpg', alt: "L'établi en scène, en quatre temps : on s'approche, la caméra plonge sur le plateau, puis les deux mains travaillent dessus" } },
@@ -167,7 +171,7 @@ export const LIEUX: Lieu[] = [
       { id: 'patine', titre: 'Armures qui se salissent', statut: 'atester',
         texte: "La boue s'accumule en courant ou en combattant ; l'eau la lave en quelques secondes, la pluie lentement.",
         media: { type: 'image', capture: 'armures.jpg', alt: 'Quatre armures de fer, de la plus propre à la plus sale',
-          zooms: [{ x: 0.83, y: 0.5, r: 0.13, label: 'La plus sale' }] } },
+          zooms: [{ x: 0.783, y: 0.467, r: 0.09, label: 'La plus sale' }] } },
       { id: 'combat', titre: 'Le combat animé', statut: 'atester',
         texte: "Better Combat : chaque arme frappe avec tout le corps, en deux ou trois coups enchaînés.",
         media: { type: 'image', capture: 'combat.jpg', alt: "Coup d'épée en quatre images", provisoire: true } },

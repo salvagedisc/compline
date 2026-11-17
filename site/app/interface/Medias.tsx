@@ -1,26 +1,101 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import type { Media, Zoom } from '../donnees/lieux'
 import { R_RIVAGE, lireCarte } from '../donnees/carte'
-import { grande } from '../donnees/images'
+import { grande, image } from '../donnees/images'
 import { Capture } from './Capture'
 
 export const CARTE_SRC = `${import.meta.env.BASE_URL}monde/carte-disque.png`
 
+const sansAbonnement = () => () => {}
+
 const LOUPE = 2.6 // magnification of the lens
 const LENTILLE = 200 // lens size in CSS pixels, kept in step with .lentille
 
-// Background position that frames a window of width 2r centred on c (fractions of the image).
-const pct = (c: number, r: number) => Math.max(0, Math.min(100, ((c - r) / (1 - 2 * r)) * 100))
+/** Where a detail sits in its image, as fractions of the image width and height, kept inside the image. */
+function cadrer(z: Zoom, aspect: number) {
+  const l = 2 * z.r // width
+  const h = Math.min(1, 2 * z.r * (z.ratio ?? 1) * aspect) // height
+  const x = Math.max(0, Math.min(1 - l, z.x - l / 2))
+  const y = Math.max(0, Math.min(1 - h, z.y - h / 2))
+  return { x, y, l, h }
+}
 
-/** A screenshot with a magnifying lens and named zoom spots. */
-function ImageLoupe({ capture, alt, zooms }: { capture: string; alt: string; zooms?: Zoom[] }) {
+// Background size and position that show exactly one framed detail of the image.
+function fond(src: string, c: ReturnType<typeof cadrer>): React.CSSProperties {
+  const pos = (debut: number, taille: number) => (taille >= 1 ? 0 : (debut / (1 - taille)) * 100)
+  return {
+    backgroundImage: `url(${src})`,
+    backgroundSize: `${100 / c.l}% ${100 / c.h}%`,
+    backgroundPosition: `${pos(c.x, c.l)}% ${pos(c.y, c.h)}%`,
+  }
+}
+
+/** A detail shown large over the page, pixels kept sharp; arrows go through the details of the image. */
+function Visionneuse({ src, zooms, aspect, i, setI }: { src: string; zooms: Zoom[]; aspect: number; i: number; setI: (i: number | null) => void }) {
+  const z = zooms[i]
+  const c = cadrer(z, aspect)
+  const fermer = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    const avant = document.activeElement as HTMLElement | null
+    fermer.current?.focus({ preventScroll: true })
+    return () => avant?.focus({ preventScroll: true })
+  }, [])
+  useEffect(() => {
+    const touche = (e: KeyboardEvent) => {
+      // Captured before the page's own keys, so Escape and the arrows stay inside the viewer.
+      if (e.key === 'Escape') { e.stopPropagation(); setI(null) }
+      if (e.key === 'ArrowRight') { e.stopPropagation(); setI((i + 1) % zooms.length) }
+      if (e.key === 'ArrowLeft') { e.stopPropagation(); setI((i - 1 + zooms.length) % zooms.length) }
+    }
+    window.addEventListener('keydown', touche, true)
+    return () => window.removeEventListener('keydown', touche, true)
+  }, [i, zooms.length, setI])
+  // Width over height of the detail on screen, from its share of the image.
+  const forme = (c.l * aspect) / c.h
+  return (
+    <motion.div
+      className="visionneuse"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Détail : ${z.label}`}
+      data-echap=""
+      onClick={(e) => { if (e.target === e.currentTarget) setI(null) }}
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+    >
+      <motion.figure
+        key={z.label}
+        className="visionneuse-cadre"
+        style={{ '--forme': forme } as React.CSSProperties}
+        initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3, ease: [0.2, 0.7, 0.2, 1] }}
+      >
+        <div className="visionneuse-image" style={fond(src, c)} role="img" aria-label={z.label} />
+        <figcaption>
+          <span className="nom">{z.label}</span>
+          {zooms.length > 1 && <span className="gris">{i + 1} / {zooms.length}</span>}
+        </figcaption>
+      </motion.figure>
+      <div className="visionneuse-actions">
+        {zooms.length > 1 && <button type="button" className="fleche" onClick={() => setI((i - 1 + zooms.length) % zooms.length)} aria-label="Détail précédent">←</button>}
+        <button type="button" className="bouton" ref={fermer} onClick={() => setI(null)}>Fermer</button>
+        {zooms.length > 1 && <button type="button" className="fleche" onClick={() => setI((i + 1) % zooms.length)} aria-label="Détail suivant">→</button>}
+      </div>
+    </motion.div>
+  )
+}
+
+/** A screenshot with a magnifying lens under the mouse and framed details that open large. */
+function ImageLoupe({ capture, alt, zooms = [] }: { capture: string; alt: string; zooms?: Zoom[] }) {
   const src = grande(capture)
+  const { w, h } = image(capture).img
+  const aspect = w / h
   const boite = useRef<HTMLDivElement>(null)
   const [lens, setLens] = useState<{ x: number; y: number; w: number; h: number } | null>(null)
-  const [zoom, setZoom] = useState<Zoom | null>(null)
+  const [ouvert, setOuvert] = useState<number | null>(null)
+  const client = useSyncExternalStore(sansAbonnement, () => true, () => false) // no page body when prerendering
   const bouger = (e: React.PointerEvent) => {
-    if (e.pointerType === 'touch') return
+    if (e.pointerType !== 'mouse') return
     const r = boite.current!.getBoundingClientRect()
     setLens({ x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height, w: r.width, h: r.height })
   }
@@ -28,7 +103,7 @@ function ImageLoupe({ capture, alt, zooms }: { capture: string; alt: string; zoo
     <div className="media-image">
       <div className="cadre" ref={boite} onPointerMove={bouger} onPointerLeave={() => setLens(null)}>
         <Capture nom={capture} alt={alt} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
-        {lens && !zoom && (
+        {lens && (
           <span
             className="lentille"
             style={{
@@ -40,41 +115,44 @@ function ImageLoupe({ capture, alt, zooms }: { capture: string; alt: string; zoo
             aria-hidden="true"
           />
         )}
-        {zooms?.map((z) => (
-          <button
-            key={z.label}
-            type="button"
-            className={z.y > 0.65 ? 'zone haut' : 'zone'}
-            style={{ left: `${z.x * 100}%`, top: `${z.y * 100}%`, width: `${z.r * 200}%`, height: `${z.r * 200}%` }}
-            onClick={() => setZoom(z)}
-            aria-label={`Zoomer : ${z.label}`}
-          >
-            <span className="pix">{z.label}</span>
-          </button>
-        ))}
-        <AnimatePresence>
-          {zoom && (
-            <motion.button
+        {zooms.map((z, k) => {
+          const c = cadrer(z, aspect)
+          // The name tag sits above the frame, or below when the frame touches the top of the image,
+          // and leans towards the inside when the frame touches a side.
+          const cote = c.x < 0.12 ? ' a-gauche' : c.x + c.l > 0.88 ? ' a-droite' : ''
+          return (
+            <button
+              key={z.label}
               type="button"
-              className="zoom-plein"
-              onClick={() => setZoom(null)}
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.6 }}
-              transition={{ duration: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
-              style={{
-                backgroundImage: `url(${src})`,
-                backgroundSize: `${100 / (zoom.r * 2)}% auto`,
-                backgroundPosition: `${pct(zoom.x, zoom.r)}% ${pct(zoom.y, zoom.r)}%`,
-                transformOrigin: `${zoom.x * 100}% ${zoom.y * 100}%`,
-              }}
-              aria-label="Fermer le zoom"
+              className={`zone${c.y < 0.1 ? ' dessous' : ''}${cote}`}
+              style={{ left: `${c.x * 100}%`, top: `${c.y * 100}%`, width: `${c.l * 100}%`, height: `${c.h * 100}%` }}
+              onClick={() => setOuvert(k)}
+              aria-label={`Voir en grand : ${z.label}`}
             >
-              <span className="pix etiquette">{zoom.label} · cliquer pour revenir</span>
-            </motion.button>
-          )}
-        </AnimatePresence>
+              <span className="zone-num" aria-hidden="true">{k + 1}</span>
+              <span className="zone-nom" aria-hidden="true">{z.label}</span>
+            </button>
+          )
+        })}
       </div>
+      {zooms.length > 0 && (
+        <ul className="details" aria-label="Détails à voir en grand">
+          {zooms.map((z, k) => (
+            <li key={z.label}>
+              <button type="button" className="detail" onClick={() => setOuvert(k)}>
+                <span className="detail-num" aria-hidden="true">{k + 1}</span>{z.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* Rendered at the root of the page: the animated feature around it would otherwise trap a fixed overlay. */}
+      {client && createPortal(
+        <AnimatePresence>
+          {ouvert !== null && <Visionneuse src={src} zooms={zooms} aspect={aspect} i={ouvert} setI={setOuvert} />}
+        </AnimatePresence>,
+        document.body,
+      )}
     </div>
   )
 }
@@ -103,8 +181,8 @@ function Comparateur({ media }: { media: Extract<Media, { type: 'comparer' }> })
       >
         <Capture nom={s.avant} alt={`${s.nom}, ${media.avantNom}`} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
         <Capture className="apres" nom={s.apres} alt={`${s.nom}, ${media.apresNom}`} sizes="(min-width: 900px) 70vw, 100vw" prioritaire />
-        <span className="etiq g pix">{media.avantNom}</span>
-        <span className="etiq d pix">{media.apresNom}</span>
+        <span className="etiq g sc">{media.avantNom}</span>
+        <span className="etiq d sc">{media.apresNom}</span>
         <span className="poignee" />
       </div>
       <div className="sous-barre">
@@ -113,7 +191,7 @@ function Comparateur({ media }: { media: Extract<Media, { type: 'comparer' }> })
             <button key={sc.nom} type="button" role="tab" aria-selected={k === i} className="onglet" onClick={() => setI(k)}>{sc.nom}</button>
           ))}
         </div>
-        <label className="pix curseur-etiq">
+        <label className="sc curseur-etiq">
           Séparation
           <input type="range" min={0} max={100} value={pos} onChange={(e) => setPos(+e.target.value)} />
         </label>
@@ -163,11 +241,11 @@ function Echelle() {
         </motion.div>
       </AnimatePresence>
       <div className="dinos">
-        <span className="pix">À côté : les armures de dinosaures, forgées à l'enclume</span>
+        <span className="sc">À côté : les armures de dinosaures, forgées à l'enclume</span>
         <div className="dinos-grille">
           {DINOS.map(([nom, el, usage, col]) => (
             <div key={nom} className="dino" style={{ '--c': col } as React.CSSProperties}>
-              <span className="pix">{el}</span><b>{nom}</b><span>{usage}</span>
+              <span className="sc">{el}</span><b>{nom}</b><span>{usage}</span>
             </div>
           ))}
         </div>
@@ -200,7 +278,7 @@ function Zoo() {
               onClick={() => { setPoses((p) => p.map((v, j) => (j === k ? !v : v))); setDernier(k) }}
             >
               <span className="encre">{k + 1}</span>
-              <span className="pix">{nom}</span>
+              <span className="sc">{nom}</span>
             </button>
           ))}
         </div>

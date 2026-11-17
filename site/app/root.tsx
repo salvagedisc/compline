@@ -27,11 +27,13 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#111513" />
+        {/* Before the first paint: a visitor who already came in during this visit does not see the title screen flash again. */}
+        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('compline-entre'))document.documentElement.dataset.entre=''}catch(e){}" }} />
         <Meta />
         <Links />
       </head>
@@ -70,6 +72,7 @@ export default function App() {
   const calme = useReducedMotion() ?? false
   const webgl = useWebGL()
   const vue = vueDe(pathname)
+  const plan = pathname.split('/').filter(Boolean).length > 1
   const main = useRef<HTMLElement>(null)
   const premier = useRef(true)
 
@@ -85,11 +88,11 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <a className="evitement" href="#contenu">Aller au contenu</a>
-      <div className={`scene${webgl ? ' avec-3d' : ''}`} data-vue={vue.type} data-plan={pathname.split('/').filter(Boolean).length > 1 || undefined}>
+      <div className={`scene${webgl === true ? ' avec-3d' : ''}${webgl === false ? ' sans-3d' : ''}`} data-vue={vue.type} data-plan={plan || undefined}>
         <div className="fond-statique" aria-hidden="true" />
         {webgl && (
           <Suspense fallback={null}>
-            <Monde vue={vue} calme={calme} onChoisir={choisir} reliefUrl={`${BASE}monde/relief.bin`} />
+            <Monde vue={vue} calme={calme} enPause={plan} onChoisir={choisir} reliefUrl={`${BASE}monde/relief.bin`} />
           </Suspense>
         )}
         <div className="assombri" aria-hidden="true" />
@@ -109,7 +112,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
     <main id="contenu" className="contenu">
       <section className="perdu">
-        <p className="pix accent">{introuvable ? 'Erreur 404' : 'Erreur'}</p>
+        <p className="sc accent">{introuvable ? 'Erreur 404' : 'Erreur'}</p>
         <h1>{introuvable ? 'Perdu dans la brume' : 'Quelque chose a cassé'}</h1>
         <p>{introuvable ? "Cette page n'existe pas, ou plus." : "La page n'a pas pu s'afficher."}</p>
         <a className="bouton" href={BASE}>Revenir au disque</a>

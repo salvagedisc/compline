@@ -1,28 +1,39 @@
-// A heading whose letters come out of the mist one by one (GSAP SplitText), or simply appear
-// when the visitor prefers less motion.
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { SplitText } from 'gsap/SplitText'
-import { useGSAP } from '@gsap/react'
+// A heading whose letters come out of the mist one by one, in a scattered order.
+// Pure CSS: the letters are in the prerendered HTML with their animation, so the title plays without
+// waiting for JavaScript, and simply appears when the visitor prefers less motion (see styles.css).
 
 interface Props { children: string; id?: string; className?: string; niveau?: 1 | 2; delai?: number }
 
+const PAS = 0.035 // seconds between two letters
+
+// Stable scattered order: stepping through the letters by a stride prime to their count visits each
+// rank once, so the same title always comes out of the mist the same way.
+const rang = (k: number, n: number) => {
+  const pas = [7, 11, 13, 5, 3].find((p) => n % p !== 0) ?? 1
+  return (k * pas + 3) % n
+}
+
 export function Titre({ children, id, className, niveau = 1, delai = 0.15 }: Props) {
-  const ref = useRef<HTMLHeadingElement>(null)
-  useGSAP(() => {
-    gsap.registerPlugin(SplitText)
-    gsap.ticker.lagSmoothing(0) // keep titles on time even when the first frames are slow
-    const mm = gsap.matchMedia()
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const decoupe = SplitText.create(ref.current!, { type: 'chars,words', aria: 'auto' })
-      gsap.from(decoupe.chars, {
-        opacity: 0, filter: 'blur(12px)', yPercent: 30, duration: 1.2, delay: delai, ease: 'power3.out',
-        stagger: { each: 0.04, from: 'random' },
-      })
-      return () => decoupe.revert()
-    })
-    return () => mm.revert()
-  }, { scope: ref, dependencies: [children] })
   const H = niveau === 1 ? 'h1' : 'h2'
-  return <H ref={ref} id={id} className={className}>{children}</H>
+  const lettres = children.replace(/\s/g, '').length
+  let k = 0
+  return (
+    <H id={id} className={`titre-brume${className ? ` ${className}` : ''}`}>
+      <span className="lecteur">{children}</span>
+      <span aria-hidden="true">
+        {children.split(' ').map((mot, m) => (
+          <span key={m}>
+            {m > 0 && ' '}
+            <span className="mot">
+              {[...mot].map((c) => {
+                const i = k++
+                const d = delai + rang(i, lettres) * PAS
+                return <span key={i} className="lettre" style={{ animationDelay: `${d.toFixed(3)}s` }}>{c}</span>
+              })}
+            </span>
+          </span>
+        ))}
+      </span>
+    </H>
+  )
 }

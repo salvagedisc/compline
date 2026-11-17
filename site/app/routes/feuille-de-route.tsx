@@ -23,7 +23,7 @@ export default function FeuilleDeRoute() {
   return (
     <section className="page-route" aria-labelledby="titre-route">
       <header className="page-tete">
-        <p className="pix accent">Mis à jour le {MAJ}</p>
+        <p className="sc accent">Mis à jour le {MAJ}</p>
         <Titre id="titre-route">La feuille de route</Titre>
         <p>Presque tout est construit et vérifié sur un banc d'essai, mais le pack n'a pas encore été joué du début à la fin. Prochaine étape : des sessions de test entre amis.</p>
         <div className="jauge" role="img" aria-label={ORDRE.map((s) => `${STATUTS[s].nom} : ${compte(s)}`).join(', ')}>

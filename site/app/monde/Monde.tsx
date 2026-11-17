@@ -22,6 +22,7 @@ export type Vue =
 interface Props {
   vue: Vue
   calme: boolean // reduced motion: no drift, cuts instead of flights
+  enPause: boolean // a page covers the world: draw only when something changes, to spare the battery
   onChoisir: (l: Lieu) => void
   reliefUrl: string
 }
@@ -127,8 +128,8 @@ function Repere({ lieu, relief, actif, discret, onChoisir }: { lieu: Lieu; relie
 }
 
 /** Moves the camera towards where the current view wants it, and keeps the clearings in place. */
-function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boolean; relief: Relief; trou: Vector3; pointeur: Vector3 }) {
-  const { camera, size, pointer, raycaster, scene } = useThree()
+function Camera({ vue, fige, relief, trou, pointeur }: { vue: Vue; fige: boolean; relief: Relief; trou: Vector3; pointeur: Vector3 }) {
+  const { camera, size, pointer, raycaster, scene, invalidate } = useThree()
   const regard = useRef(new Vector3(0, 0, 0))
   const angle = useRef(0.6)
   const premier = useRef(true)
@@ -136,6 +137,9 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
   const touche = useMemo(() => new Vector3(), [])
   const but = useMemo(() => ({ pos: new Vector3(), regard: new Vector3(), trou: 0, decal: new Vector2() }), [])
   const decal = useRef(new Vector2())
+
+  // Without a continuous loop, a change of view still needs one frame to place the camera.
+  useEffect(() => { invalidate() }, [vue, fige, invalidate])
 
   useFrame((_, dt) => {
     const large = size.width > 900
@@ -156,7 +160,7 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
       but.trou = 0
       but.decal.set(0, 0)
     } else {
-      if (!calme) angle.current += dt * 0.018
+      if (!fige) angle.current += dt * 0.018
       const a = angle.current
       // Phones look from higher up, so the near wall of mist does not hide the land.
       if (large) but.pos.set(Math.sin(a) * 118, 96, Math.cos(a) * 118)
@@ -167,7 +171,7 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
       but.decal.set(large ? -0.17 : 0, large ? 0 : 0.3)
     }
     const lent = vue.type === 'lieu' ? 1.1 : 1.6
-    if (calme || premier.current) {
+    if (fige || premier.current) {
       camera.position.copy(but.pos)
       regard.current.copy(but.regard)
       decal.current.copy(but.decal)
@@ -199,7 +203,7 @@ function Camera({ vue, calme, relief, trou, pointeur }: { vue: Vue; calme: boole
   return null
 }
 
-function Scene({ vue, calme, onChoisir, reliefUrl }: Props) {
+function Scene({ vue, calme, enPause, onChoisir, reliefUrl }: Props) {
   const [relief, setRelief] = useState<Relief | null>(null)
   const [geo, setGeo] = useState<BufferGeometry | null>(null)
   const trou = useMemo(() => new Vector3(0, 0, 0), [])
@@ -236,7 +240,7 @@ function Scene({ vue, calme, onChoisir, reliefUrl }: Props) {
       {relief && LIEUX.map((l) => (
         <Repere key={l.id} lieu={l} relief={relief} actif={actif === l.id} discret={vue.type !== 'accueil' && actif !== l.id} onChoisir={onChoisir} />
       ))}
-      {relief && <Camera vue={vue} calme={calme} relief={relief} trou={trou} pointeur={pointeur} />}
+      {relief && <Camera vue={vue} fige={calme || enPause} relief={relief} trou={trou} pointeur={pointeur} />}
     </>
   )
 }
@@ -249,7 +253,7 @@ export default function Monde(props: Props) {
       dpr={0.42}
       gl={{ antialias: false, powerPreference: 'high-performance' }}
       camera={{ fov: 38, near: 0.5, far: 900, position: [0, 46, 66] }}
-      frameloop={props.calme ? 'demand' : 'always'}
+      frameloop={props.calme || props.enPause ? 'demand' : 'always'}
       aria-hidden="true"
     >
       <Scene {...props} />

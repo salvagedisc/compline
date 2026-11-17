@@ -33,7 +33,7 @@ export function Entree() {
         >
           <noscript><style>{'.entree{display:none}'}</style></noscript>
           <div className="entree-corps">
-            <p className="pix entree-sur">Un modpack Minecraft entre amis</p>
+            <p className="sc entree-sur">Un modpack Minecraft entre amis</p>
             <h1 id="entree-titre" className="entree-titre">Compline</h1>
             <p className="entree-texte">Un monde rond de douze kilomètres, et la brume tout autour.</p>
             <div className="entree-charge" aria-live="polite">
@@ -44,7 +44,7 @@ export function Entree() {
               <button type="button" className="bouton principal" onClick={() => choisir(true)} autoFocus>Entrer avec le son</button>
               <button type="button" className="bouton" onClick={() => choisir(false)}>Entrer sans le son</button>
             </div>
-            <p className="pix entree-pied">Le son : du vent et des cloches lointaines, fabriqués dans le navigateur.</p>
+            <p className="sc entree-pied">Le son : du vent et des cloches lointaines, fabriqués dans le navigateur.</p>
           </div>
         </motion.div>
       )}

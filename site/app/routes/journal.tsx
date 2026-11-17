@@ -33,7 +33,7 @@ export default function Journal() {
   return (
     <section className="page-journal" aria-labelledby="titre-journal">
       <header className="page-tete">
-        <p className="pix accent">Jour {total + 1} du projet</p>
+        <p className="sc accent">Jour {total + 1} du projet</p>
         <Titre id="titre-journal">Le journal</Titre>
         <p>Du dépôt vide du 23 septembre au pack d'aujourd'hui, les étapes qui ont compté.</p>
       </header>
@@ -48,10 +48,10 @@ export default function Journal() {
                   className="etape-corps"
                   initial={{ opacity: 0, y: k % 2 ? -14 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + k * 0.08, duration: 0.6 }}
                 >
-                  <time className="pix" dateTime={e.iso}>{e.date}</time>
+                  <time className="sc" dateTime={e.iso}>{e.date}</time>
                   <h2>{e.titre}</h2>
                   <p>{e.texte}</p>
-                  {neuf && <span className="pastille pix">Nouveau</span>}
+                  {neuf && <span className="pastille sc">Nouveau</span>}
                   {lieu && <Link to={`/${lieu.chemin}`} className="lien-lieu">Voir {lieu.nom.toLowerCase()} →</Link>}
                 </motion.div>
                 <motion.span className="etape-borne" aria-hidden="true" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 + k * 0.08, duration: 0.3 }} />
@@ -60,7 +60,7 @@ export default function Journal() {
           })}
         </ol>
       </div>
-      <p className="pix gris aide">Faire défiler la frise, ou les flèches du clavier</p>
+      <p className="sc gris aide">Faire défiler la frise, ou les flèches du clavier</p>
     </section>
   )
 }

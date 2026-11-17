@@ -4,7 +4,7 @@ The public showcase of the pack for friends. The home page is the disc itself in
 
 ## Stack and commands
 
-React 19 + TypeScript, React Router 8 in framework mode with every page prerendered (`ssr: false`), Vite 8. 3D with three.js and React Three Fiber, UI motion with `motion`, title reveals with GSAP SplitText. Captures go through `vite-imagetools` (AVIF and WebP at three widths, blurred previews). Ambient sound is synthesised with the Web Audio API, nothing is downloaded. No backend: `npm run build` writes static files to `build/client/`.
+React 19 + TypeScript, React Router 8 in framework mode with every page prerendered (`ssr: false`), Vite 8. 3D with three.js and React Three Fiber, UI motion with `motion`; titles come out of the mist letter by letter in plain CSS. Captures go through `vite-imagetools` (AVIF and WebP at three widths, blurred previews). Ambient sound is synthesised with the Web Audio API, nothing is downloaded. No backend: `npm run build` writes static files to `build/client/`.
 
 | Command | Purpose |
 |---|---|

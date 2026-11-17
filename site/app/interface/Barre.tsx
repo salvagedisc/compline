@@ -15,6 +15,7 @@ export function Barre() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [survol, setSurvol] = useState<number | null>(null)
+  const actif = CASES.findIndex((c) => pathname === c.chemin || pathname.startsWith(`${c.chemin}/`))
 
   useEffect(() => {
     const touche = (e: KeyboardEvent) => {
@@ -32,15 +33,24 @@ export function Barre() {
     return () => window.removeEventListener('keydown', touche)
   }, [navigate, pathname])
 
+  // As in game, the name of the held slot shows above the bar when it changes, then fades;
+  // pointing at a slot shows its name for as long as the pointer stays.
+  const montre = survol ?? (actif >= 0 ? actif : null)
   return (
     <nav className="barre" aria-label="Lieux du disque">
+      {montre !== null && (
+        <p key={survol === null ? `actif-${pathname}` : `survol-${survol}`} className={`nom-tenu${survol === null ? ' s-efface' : ''}`} aria-hidden="true">
+          <b>{CASES[montre].nom}</b>
+          <span>{CASES[montre].sous}</span>
+        </p>
+      )}
       <ol>
         {CASES.map((c, i) => (
           <li key={c.chemin}>
             <NavLink
               to={c.chemin}
               className="case"
-              onPointerEnter={() => setSurvol(i)}
+              onPointerEnter={(e) => { if (e.pointerType === 'mouse') setSurvol(i) }}
               onPointerLeave={() => setSurvol(null)}
               onFocus={() => setSurvol(i)}
               onBlur={() => setSurvol(null)}
@@ -50,12 +60,6 @@ export function Barre() {
               <Pixel nom={c.icone} taille={30} />
               <span className="case-num pix" aria-hidden="true">{i + 1}</span>
             </NavLink>
-            {survol === i && (
-              <span className="infobulle bulle-case" role="tooltip">
-                <b>{c.nom}</b>
-                <span>{c.sous}</span>
-              </span>
-            )}
           </li>
         ))}
       </ol>
