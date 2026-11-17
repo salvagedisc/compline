@@ -9,6 +9,7 @@
 #include "/lib/rain.glsl"
 #include "/lib/voxel.glsl"
 #include "/lib/precip.glsl"
+#include "/lib/motes.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -160,6 +161,22 @@ void main() {
             mist = mix(mist, skyAt(normalize(vec3(dir.x, 0.03, dir.z))) * mistTint() * 0.9, far_ * 0.75);
             color = mix(color, mist, veil);
         }
+#if AIR_MOTES > 0
+        // Poussière dans la lumière : seulement là où le soleil passe (une trouée sous les arbres, une fenêtre),
+        // à peine visible dos au soleil, nette à contre-jour. Le jour seulement, pas sous la pluie.
+        if (dot(gLightColor, vec3(1.0)) > 0.01 && rainStrength < 0.5) {
+            float dist;
+            float mote = moteAlong(dir, min(len, 12.0), 0.35, 0.25, 12.0, dist);
+            if (mote > 0.0) {
+                vec3 p = gbufferModelViewInverse[3].xyz + dir * dist;
+                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                float mu = dot(dir, gLightDir);
+                float glow = lit * gDay * (0.2 + 1.8 * pow(max(mu, 0.0), 4.0)) * (1.0 - 2.0 * rainStrength);
+                color += gLightColor * mote * glow * 0.7;
+            }
+        }
+#endif
         // Au loin, là où le jeu ne dessine plus de gouttes, les rideaux de pluie.
         float curtain = rainCurtain(dir, len, frameTimeCounter) * rainStrength * rainHere;
 #if SHADER_RAIN > 0

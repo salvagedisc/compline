@@ -37,6 +37,7 @@
 #define WATER_CAUSTICS 2 // [0 1 2]
 #define WATER_REFLECTIONS 20 // [0 12 20 32]
 #define WATER_MOTES 1 // [0 1]
+#define AIR_MOTES 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]

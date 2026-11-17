@@ -34,6 +34,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud density, cloud shadows, the 3D noise, the cloud march |
 | `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
 | `lib/underwater.glsl` | Rays under the surface, marine snow |
+| `lib/motes.glsl` | Suspended specks, one per block cell drawn by lot, walked cell by cell along the view ray (marine snow, dust in the light) |
 | `lib/mist.glsl` | The mist: layer, clearings, far ring, colour |
 | `lib/water.glsl` | Colour, murk and waves of the water, caustics |
 | `lib/reflect.glsl` | Screen reflections, the mirrored sky, the veil of air on a reflection (water and puddles) |
@@ -55,6 +56,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **The air of the biome** (Iris' `rainfall` and `temperature` of the player's biome, eased over about ten seconds): a humid biome has a paler sky, more haze in the distance and more mist, olive in a swamp or a jungle; a cold one has a bluish mist; a hot dry one has dust, a yellowed sky and less mist.
 - **Distant air** (`AIR_DENSITY`): the far landscape fades toward the low sky, blue first, into a warm grey rather than a pure sky blue.
 - **Light in the air** (`LIGHT_SHAFTS`, `SHAFT_STRENGTH`): the air itself scatters a little sun, mostly forward; where foliage or a ridge cuts it in the shadow map, shafts. Only in the open.
+- **Dust in the light** (`AIR_MOTES`): specks of one block pixel float in about one block in three within 12 blocks; only those the shadow map says the sun reaches are drawn, warm with the light, faint with the sun behind and bright against it. A beam through a window or a gap in the canopy shows its dust; the shade and the night show none. Off in the rain and in `Très léger`.
 - **The eye adapts**: the image brightens at night (up to 2.2×) and underground (1.5×).
 - **Soft shadows** (`SHADOW_SOFTNESS`): the shader first looks how far the shadow caster is, and widens the edge with that distance, as under a tall tree. Leaves in the shade of other leaves still get some sun through the foliage.
 - **Screen occlusion** (`AO_SAMPLES`, `AO_RADIUS`, `AO_STRENGTH`): only the light of the sky and of blocks is darkened, never the sun; half as much on foliage. Off in the Light profile.
