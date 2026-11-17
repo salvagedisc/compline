@@ -1,0 +1,93 @@
+// La lumière colorée des blocs : un volume de 128 × 64 × 128 blocs centré sur la caméra. La passe d'ombre y range
+// chaque bloc vu (plein, laisse passer la lumière, ou lumineux avec sa couleur) ; shadowcomp y fait diffuser la
+// lumière de proche en proche, une case par image, arrêtée par les blocs pleins. Le volume ne donne que la teinte : la force
+// de la lumière reste celle du jeu, qui sait déjà ce qui l'arrête.
+
+#define VOX_W 128
+#define VOX_H 64
+const ivec3 VOX_SIZE = ivec3(VOX_W, VOX_H, VOX_W);
+const ivec3 VOX_HALF = ivec3(VOX_W / 2, VOX_H / 2, VOX_W / 2);
+
+// Ce que la passe d'ombre range dans une case (voxelImg) : 0 air ; bit 8 bloc plein ; bit 9 bloc qui laisse passer ;
+// bits 0..3 la lumière émise (0..15), bits 4..7 sa couleur (lightTint).
+const uint VOX_SOLID = 256u;
+const uint VOX_CLEAR = 512u;
+
+/** Case du volume qui contient un point (repère joueur : depuis la caméra). */
+ivec3 voxelCell(vec3 pos, vec3 camFract) {
+    return ivec3(floor(pos + camFract)) + VOX_HALF;
+}
+
+bool voxelInside(ivec3 c) {
+    return all(greaterThanEqual(c, ivec3(0))) && all(lessThan(c, VOX_SIZE));
+}
+
+/** Couleur d'une lumière, par famille de blocs (numéros de block.properties et item.properties, 10000 + n). */
+vec3 lightTint(int family) {
+    if (family == 1) return vec3(0.30, 0.78, 1.00);  // âmes : torches, lanternes, feux de camp bleus
+    if (family == 2) return vec3(1.00, 0.36, 0.08);  // lave, magma
+    if (family == 3) return vec3(1.00, 0.76, 0.42);  // pierre lumineuse, lampe, champylure : un jaune chaud
+    if (family == 4) return vec3(0.78, 0.90, 1.00);  // lanterne aquatique, bâton de l'End, grenouilles nacrées
+    if (family == 5) return vec3(0.62, 1.00, 0.52);  // grenouillumière verte, lichen lumineux
+    if (family == 6) return vec3(0.78, 0.45, 1.00);  // améthyste, obsidienne pleureuse
+    if (family == 7) return vec3(1.00, 0.16, 0.08);  // redstone
+    return vec3(1.00, 0.60, 0.30);                   // flamme : torche, lanterne, feu, citrouille, bougie
+}
+
+/** Poids de la couleur d'une lumière plus faible de gap (en niveau 0..1) que la plus forte : deux niveaux d'écart
+ * la font presque disparaître, à égalité les deux couleurs se mêlent. */
+float mixWeight(float gap) { return exp(-gap * 12.0); }
+
+/** Famille de lumière d'un numéro de matière (block.properties) ; 0 pour une flamme ou un bloc inconnu. */
+int lightFamily(int mat) {
+    return mat >= 16 && mat <= 23 ? mat - 15 : 0;
+}
+
+#if defined FSH && COLORED_LIGHT > 0
+uniform sampler3D lightTexA;
+uniform sampler3D lightTexB;
+uniform int frameCounter;
+uniform int heldItemId;
+uniform int heldItemId2;
+uniform int heldBlockLightValue;
+uniform int heldBlockLightValue2;
+
+/** La lumière répandue autour d'un point : teinte (rgb, la plus forte composante à 1) et niveau (a, 0..1). */
+vec4 voxelLight(vec3 pos, vec3 normal) {
+    vec3 p = pos + normal * 0.55 + fract(cameraPosition);
+    vec3 uvw = (p + vec3(VOX_HALF)) / vec3(VOX_SIZE);
+    if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0)))) return vec4(0.0);
+    // shadowcomp écrit B les images paires, A les impaires.
+    vec4 v = (frameCounter & 1) == 0 ? texture(lightTexB, uvw) : texture(lightTexA, uvw);
+    // Vers le bord du volume, la teinte s'efface : pas de couture quand on s'éloigne.
+    vec3 edge = min(uvw, 1.0 - uvw) * vec3(VOX_SIZE);
+    v.a *= smoothstep(2.0, 10.0, min(edge.x, min(edge.y, edge.z)));
+    return v;
+}
+
+/** Couleur d'un objet tenu en main (item.properties : mêmes numéros que les blocs). */
+vec3 heldTint(int id) { return lightTint(id >= 10016 && id <= 10023 ? id - 10015 : 0); }
+
+/**
+ * Couleur de la lumière des blocs en un point. lmx : lumière des blocs du jeu (0..1), relevée là où ce que tient le
+ * joueur éclaire plus que le jeu (lumière tenue en main sans mod de lumière dynamique). La couleur vient de la plus
+ * forte des lumières proches, volume ou main ; à force égale elles se mêlent.
+ */
+vec3 blockLightTint(vec3 pos, vec3 normal, inout float lmx) {
+    // La main est un peu sous les yeux ; sa lumière porte un peu plus loin que celle d'un bloc posé.
+    float d = length(pos + vec3(0.0, 0.45, 0.0));
+    float h1 = max(float(heldBlockLightValue) - 0.75 * d, 0.0) / 15.0;
+    float h2 = max(float(heldBlockLightValue2) - 0.75 * d, 0.0) / 15.0;
+    lmx = max(lmx, max(h1, h2) * 0.92);
+    vec4 v = voxelLight(pos, normal);
+    float top = max(v.a, max(h1, h2));
+    if (top <= 0.0) return lightTint(0);
+    vec3 c = v.rgb * mixWeight(top - v.a) * step(0.001, v.a);
+    c += heldTint(heldItemId) * mixWeight(top - h1) * step(0.001, h1);
+    c += heldTint(heldItemId2) * mixWeight(top - h2) * step(0.001, h2);
+    float peak = max(c.r, max(c.g, c.b));
+    return peak > 1e-5 ? c / peak : lightTint(0);
+}
+#else
+vec3 blockLightTint(vec3 pos, vec3 normal, inout float lmx) { return lightTint(0); }
+#endif
