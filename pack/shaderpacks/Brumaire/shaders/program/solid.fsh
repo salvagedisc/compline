@@ -7,6 +7,7 @@
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
+#include "/lib/tracks.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -244,6 +245,15 @@ void main() {
         albedo = mix(vec3(luma(albedo)), albedo, 1.25) * 0.55;
         sparkle = glitter(world, 0.0015) * max(normal.y, 0.0) * 0.6;
     }
+#if TRACKS > 0
+    // Les pas creusent le sable et la neige : un creux un peu plus sombre, dont le bord prend la lumière.
+    if ((vMat == 9 || vMat == 12 || snow > 0.5) && normal.y > 0.9) {
+        float track = tracksAt(world, normal, frameTimeCounter, rainStrength * 3.0);
+        // Au fond d'un pas, la neige tassée prend le bleu de l'ombre ; le sable remué est plus sombre.
+        albedo *= mix(vec3(1.0), vMat == 12 ? vec3(0.76, 0.72, 0.66) : vec3(0.80, 0.86, 0.96), track);
+        gloss *= 1.0 - 0.6 * track;
+    }
+#endif
     float wet = leaf > 0.0 || emissive(vMat) || (vMat >= 9 && vMat <= 13) || snow > 0.0 ? 0.0 : wetAt(lm.y);
     if (wet > 0.0) {
         float puddle = puddleAt(vPos + cameraPosition, normal, wet);
