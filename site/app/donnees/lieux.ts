@@ -202,7 +202,7 @@ export const CHANTIERS: Chantier[] = [
   { statut: 'atester', titre: 'Le monde-disque', texte: 'Un continent de 12 km et son bord.', quand: 'Depuis le 13 nov.', lieu: 'disque' },
   { statut: 'atester', titre: 'Clairières contre la brume', texte: 'Feu de veille, lanterne et dissipateur.', quand: 'À revoir avec le nouveau rendu' },
   { statut: 'atester', titre: 'Brumaire', texte: 'Ciel, eau, pluie, neige, traces, lumière colorée.', quand: 'Depuis le 16 nov.', lieu: 'lac' },
-  { statut: 'atester', titre: 'Le zoo du guide', texte: 'Quatre tampons par bête, 265 espèces.', quand: 'Depuis le 16 nov.', lieu: 'zoo' },
+  { statut: 'atester', titre: 'Le zoo du guide', texte: 'Quatre tampons par bête, 266 espèces.', quand: 'Depuis le 16 nov.', lieu: 'zoo' },
   { statut: 'atester', titre: "Quatre mods d'animaux", texte: "Koopa's Critters, Spawn, Hybrid Birds, WilderNature.", quand: 'Depuis le 16 nov.', lieu: 'zoo' },
   { statut: 'atester', titre: 'La pêche', texte: 'Starcatcher, catalogue, trophées.', quand: 'Depuis le 17 nov.', lieu: 'riviere' },
   { statut: 'atester', titre: "L'acier noir", texte: "Le palier entre l'acier et le diamant.", quand: 'Depuis le 17 nov.', lieu: 'forge' },
@@ -221,17 +221,17 @@ export const CHANTIERS: Chantier[] = [
   { statut: 'prevu', titre: 'Le monde permanent', texte: 'Un serveur et un monde prégénéré, version 0.1.0.' },
 ]
 
-export interface Etape { iso: string; date: string; titre: string; texte: string; lieu?: string }
+export interface Etape { iso: string; date: string; titre: string; texte: string; image: string; lieu?: string }
 
 // Newest last.
 export const JOURNAL: Etape[] = [
-  { iso: '2026-09-23', date: '23 sept.', titre: 'Premier jour', texte: 'Le dépôt, les outils et un pack de base de douze mods.' },
-  { iso: '2026-10-19', date: '19 oct.', titre: 'Les choix de la bande', texte: '57 choix appliqués, et tout le pack traduit en français.' },
-  { iso: '2026-10-25', date: '25 oct.', titre: 'Le relief', texte: 'Montagnes de Tectonic, rivières, horizon de Distant Horizons.' },
-  { iso: '2026-11-11', date: '11 nov.', titre: 'Le recentrage', texte: "On quitte No Man's Land ; naît l'idée d'un monde en disque." },
-  { iso: '2026-11-13', date: '13 nov.', titre: 'Le disque', texte: 'Un continent de 12 km et son bord gardé par la brume.', lieu: 'disque' },
-  { iso: '2026-11-14', date: '14 nov.', titre: 'Compline', texte: 'Le pack prend son nom ; premier jet de Brumaire.', lieu: 'lac' },
-  { iso: '2026-11-15', date: '15 nov.', titre: 'Premiers essais', texte: "L'atlas et la cuisine validés ; le zoo dans le guide d'Archie.", lieu: 'foyer' },
-  { iso: '2026-11-16', date: '16 nov.', titre: 'Plus de détails', texte: 'Quatre mods d’animaux ; pluie, traces, givre, fonds marins.', lieu: 'zoo' },
-  { iso: '2026-11-17', date: '17 nov.', titre: 'Pêche et métal', texte: "Starcatcher, l'acier noir, l'orichalque, le combat animé.", lieu: 'riviere' },
+  { iso: '2026-09-23', image: 'van-vallee.jpg', date: '23 sept.', titre: 'Premier jour', texte: 'Le dépôt, les outils et un pack de base de douze mods.' },
+  { iso: '2026-10-19', image: 'van-foret.jpg', date: '19 oct.', titre: 'Les choix de la bande', texte: '57 choix appliqués, et tout le pack traduit en français.' },
+  { iso: '2026-10-25', image: 'van-couchant.jpg', date: '25 oct.', titre: 'Le relief', texte: 'Montagnes de Tectonic, rivières, horizon de Distant Horizons.' },
+  { iso: '2026-11-11', image: 'van-nuit.jpg', date: '11 nov.', titre: 'Le recentrage', texte: "On quitte No Man's Land ; naît l'idée d'un monde en disque." },
+  { iso: '2026-11-13', image: 'bord.jpg', date: '13 nov.', titre: 'Le disque', texte: 'Un continent de 12 km et son bord gardé par la brume.', lieu: 'disque' },
+  { iso: '2026-11-14', image: 'bru-foret.jpg', date: '14 nov.', titre: 'Compline', texte: 'Le pack prend son nom ; premier jet de Brumaire.', lieu: 'lac' },
+  { iso: '2026-11-15', image: 'planche.jpg', date: '15 nov.', titre: 'Premiers essais', texte: "L'atlas et la cuisine validés ; le zoo dans le guide d'Archie.", lieu: 'foyer' },
+  { iso: '2026-11-16', image: 'traces-pas.jpg', date: '16 nov.', titre: 'Plus de détails', texte: 'Quatre mods d’animaux ; pluie, traces, givre, fonds marins.', lieu: 'zoo' },
+  { iso: '2026-11-17', image: 'bru-couchant.jpg', date: '17 nov.', titre: 'Pêche et métal', texte: "Starcatcher, l'acier noir, l'orichalque, le combat animé.", lieu: 'riviere' },
 ]

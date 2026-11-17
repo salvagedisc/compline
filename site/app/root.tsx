@@ -1,28 +1,30 @@
 import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse, useLocation, useNavigate } from 'react-router'
-import { MotionConfig, useReducedMotion } from 'motion/react'
-import '@fontsource/alegreya/latin-400.css'
-import '@fontsource/alegreya/latin-500.css'
-import '@fontsource/alegreya/latin-400-italic.css'
-import '@fontsource/alegreya-sc/latin-500.css'
-import '@fontsource/alegreya-sans/latin-400.css'
-import '@fontsource/alegreya-sans/latin-500.css'
-import '@fontsource/alegreya-sans/latin-700.css'
-import '@fontsource/silkscreen/latin-400.css'
+import '@fontsource/cormorant-garamond/latin-300.css'
+import '@fontsource/cormorant-garamond/latin-400.css'
+import '@fontsource/cormorant-garamond/latin-500.css'
+import '@fontsource/cormorant-garamond/latin-400-italic.css'
+import '@fontsource/cormorant-sc/latin-500.css'
+import '@fontsource/cormorant-sc/latin-600.css'
+import '@fontsource/spectral/latin-300.css'
+import '@fontsource/spectral/latin-400.css'
+import '@fontsource/spectral/latin-300-italic.css'
 import './styles.css'
 import type { Route } from './+types/root'
-import { LIEUX, type Lieu } from './donnees/lieux'
-import type { Vue } from './monde/Monde'
-import { Barre } from './interface/Barre'
+import { LIEUX } from './donnees/lieux'
+import type { Vue } from './monde/Ciel'
+import { Entete } from './interface/Entete'
 import { Entree } from './interface/Entree'
-import { Tete } from './interface/Tete'
+import { Index } from './interface/Index'
+import { Reperes } from './interface/Reperes'
+import { lireEtat, ouvrirIndex, useEtat } from './interface/etat'
 
-const Monde = lazy(() => import('./monde/Monde'))
+const Ciel = lazy(() => import('./monde/Ciel'))
 const BASE = import.meta.env.BASE_URL
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: `${BASE}favicon.svg` },
-  { rel: 'preload', href: `${BASE}monde/relief.bin`, as: 'fetch', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: `${BASE}monde/couleurs.webp`, as: 'image', type: 'image/webp' },
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -31,9 +33,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#111513" />
-        {/* Before the first paint: a visitor who already came in during this visit does not see the title screen flash again. */}
-        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('compline-entre'))document.documentElement.dataset.entre=''}catch(e){}" }} />
+        <meta name="theme-color" content="#0f1217" />
+        {/* Before the first paint: scripts are on, and a visitor who already came in during this visit skips the title screen. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');try{if(sessionStorage.getItem('compline-entre'))document.documentElement.dataset.entre=''}catch(e){}" }} />
         <Meta />
         <Links />
       </head>
@@ -46,13 +48,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   )
 }
 
-/** Which way the 3D camera looks, from the address. */
+/** Where the camera looks, from the address. */
 function vueDe(chemin: string): Vue {
   const premier = chemin.split('/').filter(Boolean)[0]
   if (!premier) return { type: 'accueil' }
   const lieu = LIEUX.find((l) => l.chemin === premier)
-  if (lieu) return { type: 'lieu', lieu }
-  return { type: 'haut' }
+  return lieu ? { type: 'lieu', lieu } : { type: 'haut' }
 }
 
 function useWebGL() {
@@ -60,50 +61,94 @@ function useWebGL() {
   useEffect(() => {
     try {
       const c = document.createElement('canvas')
-      setOk(!!(c.getContext('webgl2') || c.getContext('webgl')))
+      setOk(!!c.getContext('webgl2'))
     } catch { setOk(false) }
   }, [])
   return ok
 }
 
+function useMedia(requete: string) {
+  const [ok, setOk] = useState(false)
+  useEffect(() => {
+    const m = window.matchMedia(requete)
+    setOk(m.matches)
+    const f = () => setOk(m.matches)
+    m.addEventListener('change', f)
+    return () => m.removeEventListener('change', f)
+  }, [requete])
+  return ok
+}
+
+/** Keys: 1 to 7 for the places, J for the journal, R for the road map, I for the index. */
+function useClavier() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      const t = e.target as HTMLElement
+      if (t.closest('input, textarea, [contenteditable]')) return
+      const n = Number(e.key)
+      if (n >= 1 && n <= LIEUX.length) { ouvrirIndex(false); navigate(`/${LIEUX[n - 1].chemin}/`); return }
+      const k = e.key.toLowerCase()
+      if (k === 'j') { ouvrirIndex(false); navigate('/journal/') }
+      else if (k === 'r') { ouvrirIndex(false); navigate('/feuille-de-route/') }
+      else if (k === 'i') ouvrirIndex(!lireEtat().index)
+    }
+    window.addEventListener('keydown', f)
+    return () => window.removeEventListener('keydown', f)
+  }, [navigate])
+}
+
 export default function App() {
   const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const calme = useReducedMotion() ?? false
+  const { entre, mondePret } = useEtat()
+  const calme = useMedia('(prefers-reduced-motion: reduce)')
+  const mobile = useMedia('(max-width: 760px), (pointer: coarse)')
   const webgl = useWebGL()
   const vue = vueDe(pathname)
-  const plan = pathname.split('/').filter(Boolean).length > 1
   const main = useRef<HTMLElement>(null)
   const premier = useRef(true)
+  const reperes = useRef<(HTMLElement | null)[]>([])
+  useClavier()
+
+  // The sky stops drawing a few seconds after a page has covered it, and starts again on the way back.
+  const [actif, setActif] = useState(true)
+  useEffect(() => {
+    if (vue.type === 'accueil') { setActif(true); return }
+    setActif(true)
+    const t = window.setTimeout(() => setActif(false), 2600)
+    return () => window.clearTimeout(t)
+  }, [vue.type, pathname])
 
   // After each change of page, move focus to the new heading so keyboard and screen reader users follow.
   useEffect(() => {
+    ouvrirIndex(false)
     if (premier.current) { premier.current = false; return }
     const h = main.current?.querySelector<HTMLElement>('h1')
     if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }) }
   }, [pathname])
 
-  const choisir = (l: Lieu) => navigate(`/${l.chemin}`)
-
   return (
-    <MotionConfig reducedMotion="user">
+    <>
       <a className="evitement" href="#contenu">Aller au contenu</a>
-      <div className={`scene${webgl === true ? ' avec-3d' : ''}${webgl === false ? ' sans-3d' : ''}`} data-vue={vue.type} data-plan={plan || undefined}>
-        <div className="fond-statique" aria-hidden="true" />
+      <div className={`ciel${webgl ? ' avec-3d' : ''}${webgl === false ? ' sans-3d' : ''}`} data-vue={vue.type} data-entre={entre || undefined} data-pret={mondePret || undefined}>
+        <div className="ciel-statique" aria-hidden="true" />
         {webgl && (
           <Suspense fallback={null}>
-            <Monde vue={vue} calme={calme} enPause={plan} onChoisir={choisir} reliefUrl={`${BASE}monde/relief.bin`} />
+            <Ciel vue={vue} calme={calme} actif={actif} mobile={mobile} base={BASE} reperes={reperes} />
           </Suspense>
         )}
-        <div className="assombri" aria-hidden="true" />
+        <div className="ciel-voile" aria-hidden="true" />
       </div>
-      <Tete />
+      <Reperes refs={reperes} visibles={vue.type === 'accueil'} />
+      <Entete />
       <main id="contenu" ref={main} className="contenu">
         <Outlet />
       </main>
-      <Barre />
+      <Index />
       <Entree />
-    </MotionConfig>
+      <div className="grain" aria-hidden="true" />
+    </>
   )
 }
 
@@ -112,10 +157,10 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return (
     <main id="contenu" className="contenu">
       <section className="perdu">
-        <p className="sc accent">{introuvable ? 'Erreur 404' : 'Erreur'}</p>
+        <p className="petites-caps">{introuvable ? 'Erreur 404' : 'Erreur'}</p>
         <h1>{introuvable ? 'Perdu dans la brume' : 'Quelque chose a cassé'}</h1>
         <p>{introuvable ? "Cette page n'existe pas, ou plus." : "La page n'a pas pu s'afficher."}</p>
-        <a className="bouton" href={BASE}>Revenir au disque</a>
+        <a className="lien-trait" href={BASE}>Revenir au disque</a>
       </section>
     </main>
   )

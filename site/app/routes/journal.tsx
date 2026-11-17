@@ -1,66 +1,76 @@
-// The journal as a frieze: one station per milestone along a line drawn from the first day to today.
-import { useEffect, useRef } from 'react'
+// The journal as a reel: one milestone at a time over its picture, the milestones strung along a line at the
+// bottom from the first day to today. Arrows and keys move along it; it opens on the newest.
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import { motion } from 'motion/react'
 import type { Route } from './+types/journal'
 import { JOURNAL, LIEUX } from '../donnees/lieux'
 import { metas } from '../donnees/site'
+import { Icone } from '../interface/icones'
+import { Plan } from '../interface/scenes/Plan'
+import { lireEtat } from '../interface/etat'
 import { estNouveau, useDejaVu } from '../interface/visite'
-import { Titre } from '../interface/Titre'
 
 export const meta: Route.MetaFunction = () => metas('Le journal', 'Les grandes étapes de Compline, du premier jour à aujourd’hui.')
 
 const jours = (a: string, b: string) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5)
+const rien = () => {}
 
 export default function Journal() {
   const vu = useDejaVu()
-  const frise = useRef<HTMLDivElement>(null)
-  const debut = JOURNAL[0].iso, fin = JOURNAL[JOURNAL.length - 1].iso
-  const total = jours(debut, fin)
+  const [k, setK] = useState(JOURNAL.length - 1)
+  const e = JOURNAL[k]
+  const lieu = LIEUX.find((l) => l.id === e.lieu)
+  const debut = JOURNAL[0].iso
 
-  // Start on the newest milestone; the mouse wheel scrolls the frieze sideways.
   useEffect(() => {
-    const f = frise.current
-    if (!f) return
-    f.scrollLeft = f.scrollWidth
-    const roue = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { f.scrollLeft += e.deltaY; e.preventDefault() }
+    const f = (ev: KeyboardEvent) => {
+      if (ev.metaKey || ev.ctrlKey || ev.altKey || lireEtat().index) return
+      if (ev.key === 'ArrowLeft') { ev.preventDefault(); setK((n) => Math.max(0, n - 1)) }
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); setK((n) => Math.min(JOURNAL.length - 1, n + 1)) }
     }
-    f.addEventListener('wheel', roue, { passive: false })
-    return () => f.removeEventListener('wheel', roue)
+    window.addEventListener('keydown', f)
+    return () => window.removeEventListener('keydown', f)
   }, [])
 
   return (
-    <section className="page-journal" aria-labelledby="titre-journal">
-      <header className="page-tete">
-        <p className="sc accent">Jour {total + 1} du projet</p>
-        <Titre id="titre-journal">Le journal</Titre>
-        <p>Du dépôt vide du 23 septembre au pack d'aujourd'hui, les étapes qui ont compté.</p>
-      </header>
-      <div className="frise" ref={frise} tabIndex={0} role="region" aria-label="Frise des étapes, de la plus ancienne à la plus récente">
-        <ol className="frise-piste">
-          {JOURNAL.map((e, k) => {
-            const lieu = LIEUX.find((l) => l.id === e.lieu)
-            const neuf = estNouveau(e.iso, vu)
-            return (
-              <li key={e.iso} className={`etape${k % 2 ? ' bas' : ' haut'}${neuf ? ' nouveau' : ''}`}>
-                <motion.div
-                  className="etape-corps"
-                  initial={{ opacity: 0, y: k % 2 ? -14 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + k * 0.08, duration: 0.6 }}
-                >
-                  <time className="sc" dateTime={e.iso}>{e.date}</time>
-                  <h2>{e.titre}</h2>
-                  <p>{e.texte}</p>
-                  {neuf && <span className="pastille sc">Nouveau</span>}
-                  {lieu && <Link to={`/${lieu.chemin}`} className="lien-lieu">Voir {lieu.nom.toLowerCase()} →</Link>}
-                </motion.div>
-                <motion.span className="etape-borne" aria-hidden="true" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 + k * 0.08, duration: 0.3 }} />
-              </li>
-            )
-          })}
-        </ol>
+    <article className="journal">
+      <div className="journal-image" key={e.iso}>
+        <Plan capture={e.image} alt="" zoom={null} onZoom={rien} />
       </div>
-      <p className="sc gris aide">Faire défiler la frise, ou les flèches du clavier</p>
-    </section>
+      <div className="voile-bas" aria-hidden="true" />
+      <section className="cartouche journal-cartouche" aria-labelledby="titre-journal">
+        <p className="petites-caps cartouche-sur">Journal · jour {jours(debut, e.iso) + 1} du projet</p>
+        <h1 id="titre-journal" className="visuellement-cache">Le journal</h1>
+        <div key={e.iso} className="journal-entree" aria-live="polite">
+          <time className="journal-date" dateTime={e.iso}>{e.date}</time>
+          <h2 className="cartouche-titre">{e.titre}</h2>
+          <p className="cartouche-texte">{e.texte}</p>
+          {lieu && <Link to={`/${lieu.chemin}/`} className="lien-trait">Voir {lieu.nom.toLowerCase()}</Link>}
+        </div>
+      </section>
+      <nav className="journal-frise" aria-label="Étapes du journal">
+        <button type="button" className="film-fleche" onClick={() => setK(Math.max(0, k - 1))} disabled={k === 0} aria-label="Étape précédente">
+          <Icone nom="gauche" taille={26} />
+        </button>
+        <ol>
+          {JOURNAL.map((x, n) => (
+            <li key={x.iso}>
+              <button
+                type="button"
+                className={`journal-cran${estNouveau(x.iso, vu) ? ' nouveau' : ''}`}
+                aria-current={n === k ? 'step' : undefined}
+                onClick={() => setK(n)}
+              >
+                <span className="journal-cran-date">{x.date}</span>
+                <span className="journal-cran-titre">{x.titre}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+        <button type="button" className="film-fleche" onClick={() => setK(Math.min(JOURNAL.length - 1, k + 1))} disabled={k === JOURNAL.length - 1} aria-label="Étape suivante">
+          <Icone nom="droite" taille={26} />
+        </button>
+      </nav>
+    </article>
   )
 }

@@ -1,17 +1,20 @@
-// A place of the disc. Its address alone shows the arrival: the camera has dived onto the place and the
-// panel lists what there is to see. With a feature in the address (/cuisine/planche) the feature takes the
-// whole screen, and the arrows move from one feature to the next.
-import { useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router'
-import { AnimatePresence, motion } from 'motion/react'
+// A place of the disc, told as a short film in chapters. Its address alone opens the title card (the camera
+// has just dived onto the place); /cuisine/planche opens a chapter. Arrows, keys and swipes move along the
+// chapters and on to the next place.
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router'
 import type { Route } from './+types/salle'
 import { LIEUX, STATUTS, type Fonction, type Lieu } from '../donnees/lieux'
+import { ROMAINS } from '../donnees/details'
 import { grande } from '../donnees/images'
 import { metas } from '../donnees/site'
-import { Capture } from '../interface/Capture'
-import { MediaVue } from '../interface/Medias'
-import { Pixel } from '../interface/Pixel'
-import { Titre } from '../interface/Titre'
+import { Icone, type NomIcone } from '../interface/icones'
+import { lireEtat } from '../interface/etat'
+import { Comparer } from '../interface/scenes/Comparer'
+import { Mesure } from '../interface/scenes/Mesure'
+import { Paliers } from '../interface/scenes/Paliers'
+import { Plan } from '../interface/scenes/Plan'
+import { Zoo } from '../interface/scenes/Zoo'
 import Introuvable from './introuvable'
 
 const trouver = (salle?: string, plan?: string) => {
@@ -20,11 +23,12 @@ const trouver = (salle?: string, plan?: string) => {
   return { lieu, fonction }
 }
 
-/** The capture that stands for a feature in lists and link previews. */
-export function vignette(f: Fonction, l: Lieu): string {
+/** The capture that stands for a chapter in link previews. */
+function vignette(f: Fonction, l: Lieu): string {
   switch (f.media.type) {
     case 'image': return f.media.capture
     case 'comparer': return f.media.scenes[0].apres
+    case 'zoo': return 'zoo-guide.jpg'
     default: return l.fond
   }
 }
@@ -36,113 +40,185 @@ export const meta: Route.MetaFunction = ({ params }) => {
   return metas(`${lieu.nom}, ${lieu.theme.toLowerCase()}`, lieu.intro, grande(lieu.fond))
 }
 
+/** Every stop of the visit in order: each place's title card, then its chapters. */
+const ETAPES = LIEUX.flatMap((l) => [`/${l.chemin}/`, ...l.fonctions.map((f) => `/${l.chemin}/${f.id}/`)])
+
 function Statut({ f }: { f: Fonction }) {
-  return <span className={`statut s-${f.statut}`}><span className="puce" aria-hidden="true" />{STATUTS[f.statut].nom}</span>
+  return <span className={`statut s-${f.statut}`}><span className="statut-marque" aria-hidden="true" />{STATUTS[f.statut].nom}</span>
 }
 
-function Arrivee({ lieu }: { lieu: Lieu }) {
-  const i = LIEUX.indexOf(lieu)
-  const suivant = LIEUX[(i + 1) % LIEUX.length]
+const rien = () => {}
+
+function Couverture({ lieu, i }: { lieu: Lieu; i: number }) {
   return (
-    <motion.section
-      className="arrivee"
-      aria-labelledby="titre-lieu"
-      initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-      transition={{ duration: 0.7, delay: 0.35, ease: [0.2, 0.7, 0.2, 1] }}
-    >
-      <p className="sc accent sur-titre"><span className="touche pix">{lieu.touche}</span>{lieu.theme}</p>
-      <Titre id="titre-lieu" key={lieu.id} delai={0.5}>{lieu.nom}</Titre>
-      <p className="intro">{lieu.intro}</p>
-      <ol className="plans">
-        {lieu.fonctions.map((f, k) => (
-          <motion.li key={f.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 + k * 0.07, duration: 0.5 }}>
-            <Link to={`/${lieu.chemin}/${f.id}`} className="plan-lien">
-              <Capture nom={vignette(f, lieu)} alt="" sizes="9rem" className="plan-vignette" />
-              <span className="plan-texte">
-                <b>{f.titre}</b>
-                <Statut f={f} />
-              </span>
-              <span className="sc plan-num" aria-hidden="true">{String(k + 1).padStart(2, '0')}</span>
-            </Link>
-          </motion.li>
-        ))}
-      </ol>
-      <footer className="arrivee-pied">
-        <Link to={`/${suivant.chemin}`} className="lien-suivant">
-          <span className="sc gris">Lieu suivant</span>
-          <span><Pixel nom={suivant.id} taille={18} /> {suivant.nom} →</span>
-        </Link>
-      </footer>
-    </motion.section>
-  )
-}
-
-function Plan({ lieu, fonction }: { lieu: Lieu; fonction: Fonction }) {
-  const navigate = useNavigate()
-  const k = lieu.fonctions.indexOf(fonction)
-  const prec = lieu.fonctions[k - 1], suiv = lieu.fonctions[k + 1]
-
-  useEffect(() => {
-    const touche = (e: KeyboardEvent) => {
-      if ((e.target as HTMLElement).closest('input, textarea, select')) return
-      if (e.key === 'ArrowRight' && suiv) navigate(`/${lieu.chemin}/${suiv.id}`)
-      if (e.key === 'ArrowLeft' && prec) navigate(`/${lieu.chemin}/${prec.id}`)
-    }
-    window.addEventListener('keydown', touche)
-    return () => window.removeEventListener('keydown', touche)
-  }, [lieu, prec, suiv, navigate])
-
-  return (
-    <section className="plan" aria-labelledby="titre-plan">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={fonction.id}
-          className="plan-scene"
-          initial={{ opacity: 0, scale: 0.985, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 1.01, filter: 'blur(8px)' }}
-          transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <div className="plan-media"><MediaVue media={fonction.media} /></div>
-          <div className="plan-legende">
-            <p className="sc sur-titre">
-              <Link to={`/${lieu.chemin}`} className="retour">← {lieu.nom}</Link>
-              <span className="gris">{k + 1} / {lieu.fonctions.length}</span>
-            </p>
-            <Titre id="titre-plan" key={fonction.id} delai={0.1}>{fonction.titre}</Titre>
-            <Statut f={fonction} />
-            <p>{fonction.texte}</p>
-            {fonction.points && <ul className="points">{fonction.points.map((p) => <li key={p}>{p}</li>)}</ul>}
-            {'provisoire' in fonction.media && fonction.media.provisoire && (
-              <p className="sc provisoire">Image provisoire, en attente d'une capture au banc</p>
-            )}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      <nav className="plan-nav" aria-label={`Les plans de ${lieu.nom.toLowerCase()}`}>
-        {prec ? <Link className="fleche" to={`/${lieu.chemin}/${prec.id}`} aria-label={`Précédent : ${prec.titre}`} aria-keyshortcuts="ArrowLeft">←</Link> : <span className="fleche vide" />}
-        <ol className="pellicule">
-          {lieu.fonctions.map((f) => (
-            <li key={f.id}>
-              <Link to={`/${lieu.chemin}/${f.id}`} aria-current={f === fonction ? 'page' : undefined} aria-label={f.titre}>
-                <Capture nom={vignette(f, lieu)} alt="" sizes="6rem" />
+    <>
+      <Plan capture={lieu.fond} alt="" zoom={null} onZoom={rien} />
+      <div className="voile-bas" aria-hidden="true" />
+      <section className="couverture" aria-labelledby="titre-lieu">
+        <p className="couverture-num" aria-hidden="true">{ROMAINS[i]}</p>
+        <p className="petites-caps couverture-theme">
+          <Icone nom={lieu.id as NomIcone} taille={22} /> {lieu.theme}
+        </p>
+        <h1 id="titre-lieu" className="couverture-titre">{lieu.nom}</h1>
+        <p className="couverture-intro">{lieu.intro}</p>
+        <ol className="sommaire">
+          {lieu.fonctions.map((f, k) => (
+            <li key={f.id} style={{ '--k': k } as React.CSSProperties}>
+              <Link to={`/${lieu.chemin}/${f.id}/`}>
+                <span className="sommaire-num">{ROMAINS[k]}</span>
+                <span className="sommaire-titre">{f.titre}</span>
+                <span className={`sommaire-statut s-${f.statut}`} title={STATUTS[f.statut].nom}>
+                  <span className="statut-marque" aria-hidden="true" />
+                  <span className="visuellement-cache">{STATUTS[f.statut].nom}</span>
+                </span>
               </Link>
             </li>
           ))}
         </ol>
-        {suiv ? <Link className="fleche" to={`/${lieu.chemin}/${suiv.id}`} aria-label={`Suivant : ${suiv.titre}`} aria-keyshortcuts="ArrowRight">→</Link> : <span className="fleche vide" />}
-      </nav>
-    </section>
+      </section>
+    </>
   )
+}
+
+function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: number }) {
+  const [zoom, setZoom] = useState<number | null>(null)
+  const [scene, setScene] = useState(0)
+  const m = f.media
+  const zooms = m.type === 'image' ? m.zooms ?? [] : []
+
+  let vue: React.ReactNode
+  switch (m.type) {
+    case 'image': vue = <Plan capture={m.capture} alt={m.alt} zooms={zooms} zoom={zoom} onZoom={setZoom} />; break
+    case 'comparer': {
+      const s = m.scenes[scene]
+      vue = <Comparer key={s.nom} avant={s.avant} apres={s.apres} avantNom={m.avantNom} apresNom={m.apresNom} alt={s.nom} />
+      break
+    }
+    case 'echelle': vue = <Paliers />; break
+    case 'zoo': vue = <Zoo />; break
+    case 'carte': vue = <Mesure />; break
+  }
+
+  const special = m.type === 'echelle' || m.type === 'zoo' || m.type === 'carte'
+  return (
+    <div className={`chapitre chapitre-${m.type}${zoom !== null ? ' en-zoom' : ''}`}>
+      {vue}
+      {!special && <div className="voile-bas" aria-hidden="true" />}
+      <section className={`cartouche${special ? ' a-cote' : ''}`} aria-labelledby="titre-chapitre">
+        <p className="petites-caps cartouche-sur">
+          <span aria-hidden="true">{ROMAINS[i]} · </span>{lieu.nom}
+          <span className="cartouche-rang"> · chapitre {k + 1} sur {lieu.fonctions.length}</span>
+        </p>
+        <h1 id="titre-chapitre" className="cartouche-titre">{f.titre}</h1>
+        <p className="cartouche-texte">{f.texte}</p>
+        {f.points && <ul className="cartouche-points">{f.points.map((p) => <li key={p}>{p}</li>)}</ul>}
+        {m.type === 'comparer' && m.scenes.length > 1 && (
+          <div className="choix-scenes" role="group" aria-label="Point de vue">
+            {m.scenes.map((s, n) => (
+              <button key={s.nom} type="button" aria-pressed={n === scene} onClick={() => setScene(n)}>{s.nom}</button>
+            ))}
+          </div>
+        )}
+        {zooms.length > 0 && (
+          <div className="details-liste" role="group" aria-label="Regarder de près">
+            <span className="petites-caps">De près</span>
+            {zooms.map((z, n) => (
+              <button key={z.label} type="button" aria-pressed={zoom === n} onClick={() => setZoom(zoom === n ? null : n)}>
+                <span className="details-num" aria-hidden="true">{n + 1}</span>{z.label}
+              </button>
+            ))}
+          </div>
+        )}
+        <p className="cartouche-pied">
+          <Statut f={f} />
+          {'provisoire' in m && m.provisoire && <span className="provisoire">Image provisoire, à refaire en jeu</span>}
+        </p>
+      </section>
+    </div>
+  )
+}
+
+function useBalayage(suivant: () => void, precedent: () => void) {
+  const depart = useRef<{ x: number; y: number; t: number } | null>(null)
+  useEffect(() => {
+    const debut = (e: TouchEvent) => {
+      const t = e.target as HTMLElement
+      if (t.closest('.scene-comparer, .mesure-carte, .chapitre.en-zoom, button, a')) { depart.current = null; return }
+      depart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: performance.now() }
+    }
+    const fin = (e: TouchEvent) => {
+      const d = depart.current
+      depart.current = null
+      if (!d) return
+      const dx = e.changedTouches[0].clientX - d.x, dy = e.changedTouches[0].clientY - d.y
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && performance.now() - d.t < 700) (dx < 0 ? suivant : precedent)()
+    }
+    window.addEventListener('touchstart', debut, { passive: true })
+    window.addEventListener('touchend', fin, { passive: true })
+    return () => { window.removeEventListener('touchstart', debut); window.removeEventListener('touchend', fin) }
+  }, [suivant, precedent])
 }
 
 export default function Salle() {
   const { salle, plan } = useParams()
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
   const { lieu, fonction } = trouver(salle, plan)
+  const ici = ETAPES.indexOf(pathname.endsWith('/') ? pathname : `${pathname}/`)
+  const avant = ETAPES[(ici - 1 + ETAPES.length) % ETAPES.length]
+  const apres = ETAPES[(ici + 1) % ETAPES.length]
+  const suivant = useCallback(() => navigate(apres), [navigate, apres])
+  const precedent = useCallback(() => navigate(avant), [navigate, avant])
+  useBalayage(suivant, precedent)
+
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || lireEtat().index) return
+      if ((e.target as HTMLElement).closest('[role="slider"], [role="tab"], input')) return
+      if (e.key === 'ArrowRight') { e.preventDefault(); suivant() }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); precedent() }
+      else if (e.key === 'Escape') navigate('/')
+    }
+    window.addEventListener('keydown', f)
+    return () => window.removeEventListener('keydown', f)
+  }, [suivant, precedent, navigate])
+
+  // Arriving from the map, the picture waits for the camera to come through the clouds.
+  const [plongee] = useState(() => lireEtat().plongee > 0 && performance.now() - lireEtat().plongee < 1500)
+
   if (!lieu || (plan && !fonction)) return <Introuvable />
+  const i = LIEUX.indexOf(lieu)
+  const k = fonction ? lieu.fonctions.indexOf(fonction) : -1
+  const nomEtape = (chemin: string) => {
+    const [s, p] = chemin.split('/').filter(Boolean)
+    const l = LIEUX.find((x) => x.chemin === s)!
+    return p ? l.fonctions.find((x) => x.id === p)!.titre : l.nom
+  }
+
   return (
-    <AnimatePresence mode="wait">
-      {fonction ? <Plan key="plan" lieu={lieu} fonction={fonction} /> : <Arrivee key={lieu.id} lieu={lieu} />}
-    </AnimatePresence>
+    <article className={`salle${plongee ? ' apres-plongee' : ''}`} key={pathname}>
+      {fonction ? <Chapitre lieu={lieu} f={fonction} i={i} k={k} /> : <Couverture lieu={lieu} i={i} />}
+      <nav className="film" aria-label="Chapitres">
+        <Link to={avant} className="film-fleche" aria-label={`Précédent : ${nomEtape(avant)}`}>
+          <Icone nom="gauche" taille={26} />
+        </Link>
+        <ol className="film-reperes">
+          <li>
+            <Link to={`/${lieu.chemin}/`} aria-current={k === -1 ? 'page' : undefined} aria-label={`${lieu.nom}, ouverture`} className="film-cran ouverture" />
+          </li>
+          {lieu.fonctions.map((x, n) => (
+            <li key={x.id}>
+              <Link to={`/${lieu.chemin}/${x.id}/`} aria-current={n === k ? 'page' : undefined} aria-label={x.titre} className="film-cran">
+                <span className="film-bulle" aria-hidden="true">{x.titre}</span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+        <Link to={apres} className="film-fleche suivant" aria-label={`Suivant : ${nomEtape(apres)}`}>
+          <span className="film-suivant-nom" aria-hidden="true">{nomEtape(apres)}</span>
+          <Icone nom="droite" taille={26} />
+        </Link>
+      </nav>
+    </article>
   )
 }
