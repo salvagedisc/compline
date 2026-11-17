@@ -1,0 +1,9 @@
+{
+  "type": "compline:rendement_de_la_pioche",
+  "conditions": [],
+  "chances": {
+    "expert": 0.1,
+    "perfect": 0.2,
+    "master": 0.3
+  }
+}
