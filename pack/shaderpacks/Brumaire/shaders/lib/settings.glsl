@@ -71,6 +71,7 @@
 
 const int shadowMapResolution = 2048; // [1024 1536 2048 3072 4096]
 const float shadowDistance = 112.0; // [64.0 80.0 96.0 112.0 128.0 160.0 192.0]
+#define FAR_SHADOWS 24 // [0 16 24 32]
 const float sunPathRotation = -28.0; // [-40.0 -28.0 -15.0 0.0 15.0 28.0 40.0]
 const bool shadowHardwareFiltering0 = false;
 const bool shadowHardwareFiltering1 = true;
