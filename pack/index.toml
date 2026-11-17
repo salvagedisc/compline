@@ -910,7 +910,7 @@ hash = "41dd63d5ed56732c11e2342f1239cc1b5a833e80740111b1fa1fbb26b433044f"
 
 [[files]]
 file = "kubejs/assets/emi/lang/fr_fr.json"
-hash = "4d9d0f283b38c4a03922ffb20971b0cccd2f28d45413230de0b4e1a00b3aec5b"
+hash = "82a2432f4c4546e42a09281bb4860c2acd4e74942673da155aa2455d82a19bbb"
 
 [[files]]
 file = "kubejs/assets/enhancedcelestials2core/lang/fr_fr.json"
@@ -1062,7 +1062,7 @@ hash = "2613b535223fe0842411931622d675814121b67ebb23bf2940ed35b64d46054d"
 
 [[files]]
 file = "kubejs/assets/minecraft/lang/fr_fr.json"
-hash = "535c4ce9207776da34e0d469972840f9693b7b82116327eae87ebc5cbef7825f"
+hash = "6f77c5a609d5313f46f10010709743365af0c5335615d228333527f3fd66c736"
 
 [[files]]
 file = "kubejs/assets/modernfix/lang/fr_fr.json"
@@ -1094,7 +1094,7 @@ hash = "3eca0c0f43e5acec3d500b9509a9774b713d5447cc39ca69708d5214ae220ec7"
 
 [[files]]
 file = "kubejs/assets/overgeared/lang/fr_fr.json"
-hash = "091f66d6399741b459ed978368b233f4148b3be09305dbf8aa36f0bf0a14cfe0"
+hash = "20600088923fda52e62e7fa5b7255f3794176b544fdaf53058959688ab2378f3"
 
 [[files]]
 file = "kubejs/assets/particular/lang/fr_fr.json"
@@ -1202,7 +1202,7 @@ hash = "6d2e113d3f923ff84026fbad972b8b941153f49288c3c8646748fdf21bfb7745"
 
 [[files]]
 file = "kubejs/assets/starcatcher/lang/fr_fr.json"
-hash = "cba5fef19fc5a7702ea157d7409728f049a0d5332974fe0b63c410325c28500e"
+hash = "f9d2cc1f395765088593b7f5762175791006cd16a6c6e3728306f78051054717"
 
 [[files]]
 file = "kubejs/assets/starcatcher_delight/lang/fr_fr.json"
@@ -1318,7 +1318,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "6ed13d9fe13545703e6f0ef2705d53650ada4fc4c7d1b01eae599d47db372d02"
+hash = "eb23e035cd08228d465c8ff2711436e45133bcdda53054d760cd5b7935bf431a"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1419,6 +1419,10 @@ hash = "44f3679280725b4f328682ecd5a4c02a476127bfd708f9ea917e41a7b89fc9cc"
 [[files]]
 file = "kubejs/data/compline/monde/bord.json"
 hash = "e5b801f62f155d09aa90d2cfac871c299ee9d2d1806a373428074249caa62625"
+
+[[files]]
+file = "kubejs/data/compline/neoforge/biome_modifier/coeur_brulant_lave.json"
+hash = "8c7b71e62bc92eaf3c85596097262452c832529a163fb55559d5ebefbee650ed"
 
 [[files]]
 file = "kubejs/data/compline/neoforge/biome_modifier/diamants_de_la_lave.json"
@@ -1617,8 +1621,16 @@ file = "kubejs/data/compline/tags/worldgen/biome/aucun.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
+file = "kubejs/data/compline/worldgen/configured_feature/debris_du_coeur.json"
+hash = "58cb9d83f3a7ecfc7ececc489473d59c6fb685d77dc385bfcee09946190f1aae"
+
+[[files]]
 file = "kubejs/data/compline/worldgen/density_function/disque/distance.json"
 hash = "23e4043c6b2d7a603ab27ea16bf85ddbcbc5cbd0512f6fcadf4750db4b5eb166"
+
+[[files]]
+file = "kubejs/data/compline/worldgen/placed_feature/debris_pres_de_la_lave.json"
+hash = "74b6e9509d8e9cb021d307f8eb9537f04a41bfb09a58f35f6ae56286e97f7d85"
 
 [[files]]
 file = "kubejs/data/compline/worldgen/structure/chorusoatl.json"
@@ -1667,6 +1679,10 @@ hash = "d70b815994e5814485f162c704164eaf2742ad28d2e31e4465e9511ffcbc8844"
 [[files]]
 file = "kubejs/data/ec_ad/recipe/archie_trade/buy_horn.json"
 hash = "c93fa6c539ada10f7aeee76e1732bad7abc63b5e16ecbf958e46a04d3c045ddb"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/archie_trade/buy_netherite_template.json"
+hash = "d5c6b8e9f0fbc9fd0f27251174a77d1aaceafd94d581959cd9065d1503310185"
 
 [[files]]
 file = "kubejs/data/ec_ad/recipe/archie_trade/buy_rib.json"
@@ -2513,6 +2529,10 @@ file = "kubejs/data/minecraft/loot_table/entities/sheep.json"
 hash = "a3d563f6d2d52a31e2ca286745210de99cddea86071b2b8c5811ef2c11a035ac"
 
 [[files]]
+file = "kubejs/data/minecraft/recipe/netherite_upgrade_smithing_template.json"
+hash = "d3dccf42b20aa532b597f49bb8605e7b8b1cc4a2c4f3b6b24ae3bf4073523922"
+
+[[files]]
 file = "kubejs/data/minecraft/tags/block/incorrect_for_gold_tool.json"
 hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
 
@@ -2735,6 +2755,10 @@ hash = "dc4e8cb3f4e23960f7bf5c3d3da1d3c0852a1ad1bc88236a8abf939b619f2512"
 [[files]]
 file = "kubejs/data/overgeared/recipe/diamond_upgrade_smithing_template.json"
 hash = "36f1e1a697f4286bbae5f41590a6e0d44325acf5eff72eda8dde0783c30209c1"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/nether_alloy_furnace.json"
+hash = "20030f62702dd12078c39db0d2c174fd0c1db91e11037739bf53e973dfaf4a4c"
 
 [[files]]
 file = "kubejs/data/overgeared/recipe/steel_axe_to_diamond_axe.json"
@@ -3194,7 +3218,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "48d06cbdd0341b5e8a49f814d94b715ccb5b86656452b8fc59a27188076e3ab9"
+hash = "7673555304a11879e3ac2c323534298fc388875082ea516f0626047ba35df6ad"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
@@ -3202,7 +3226,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "ce5e0155ca5a1f7495c4b45db59ced88c4bebd66a22926c9a6904f81913621b6"
+hash = "eaedd3b04da8ae97b63ace03d17bf77ae068c37834649ced744c7ead2b7271f7"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"

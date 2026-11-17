@@ -1,0 +1,28 @@
+{
+  "type": "ec_ad:archie_trade",
+  "input": {
+    "item": "ec_ad:obsidian_horn",
+    "max": 10,
+    "min": 8
+  },
+  "max_uses": 1,
+  "output": [
+    {
+      "item": "minecraft:netherite_upgrade_smithing_template",
+      "max": 1,
+      "min": 1
+    }
+  ],
+  "requirement": "ec_ad:tame_obsidiceratops",
+  "reward_exp": 10,
+  "sort": [
+    {
+      "ordinal": 11,
+      "weight": 1
+    },
+    {
+      "ordinal": 12,
+      "weight": 1
+    }
+  ]
+}

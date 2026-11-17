@@ -16,12 +16,10 @@ const TRI_OBJETS_CREATE = [
   'simulated:creative_physics_staff'
 ]
 
-// Overgeared : la chaîne de la netherite et de l'argent, l'enclume du palier B (le palier A est l'enclume de
-// maître de l'acier noir).
+// Overgeared : l'argent, le moule du Nether, l'enclume du palier B (le palier A est l'enclume de maître de
+// l'acier noir). La chaîne de la netherite revient avec le cœur brûlant (docs/plan/progression.md).
 const TRI_OBJETS_OVERGEARED = [
-  'overgeared:nether_alloy_furnace', 'overgeared:netherite_alloy',
-  'overgeared:heated_netherite_alloy', 'overgeared:nether_tool_cast',
-  'overgeared:heated_silver_ingot', 'overgeared:tier_b_smithing_anvil'
+  'overgeared:nether_tool_cast', 'overgeared:heated_silver_ingot', 'overgeared:tier_b_smithing_anvil'
 ]
 
 // Farmer's Delight et Cold Sweat : salade du Nether, meubles et couteau venus du Nether, cuir
