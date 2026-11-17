@@ -39,6 +39,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0033](0033-zoo-animal-mods.md) | Four animal mods for the zoo | Koopa's Critters, Spawn (without its islands and structures), Hybrid Birds and WilderNature; one model per species, the cut ones out of the zoo |
 | [0034](0034-starcatcher-fishing.md) | Fishing with Starcatcher | Starcatcher, its Hybrid Aquatic addon and Starcatcher's Delight; one rod, catches fitted to a world without End and with a closed Nether, one model per species |
 | [0035](0035-ore-progression.md) | Ores and armour progression | Kept; built in five steps ([progression](../plan/progression.md)) |
+| [0036](0036-better-combat.md) | Animated combat with Better Combat | Better Combat and playerAnimator: a swing of the whole body per weapon type, tools and forged parts excluded, black steel weapons added |
 
 ## Template
 

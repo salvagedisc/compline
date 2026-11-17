@@ -124,6 +124,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | ItemPhysic | `itemphysic` | ✅ | C | Dropped items fall, roll and float |
 | Smooth Swapping | `smooth-swapping` | ✅ | C | Items slide around in the inventory |
 | Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos; `compline` 0.4.7 stops its equip animation looping with Sensible Stackables ([fix](plan/mod-compline.md#punchy-and-sensible-stackables-the-hand-that-kept-jumping)) |
+| Better Combat | `better-combat` | ✅ (2.4.0, added 2026-11-17, not seen in game) | CS | A swing of the whole body per weapon type and combos, hits along the blade; tools, fishing rods and forged parts excluded, black steel sword and axe added ([0036](decisions/0036-better-combat.md)) |
+| playerAnimator | `playeranimator` | ✅ (2.0.4, added 2026-11-17) | CS | Animation library of Better Combat |
 
 ## Atmosphere, rendering and sound
 

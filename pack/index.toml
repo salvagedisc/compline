@@ -21,6 +21,10 @@ file = "config/amendments-common.toml"
 hash = "bb0da40e6e0a140dfdb497345774b56e44bd5db7847ada59227e947a63a677b8"
 
 [[files]]
+file = "config/bettercombat/fallback_compatibility.json"
+hash = "136498fdf980cf2a3de1c0b0061247d21e29d0d54ace29c8c5d8d714fe8ae3ed"
+
+[[files]]
 file = "config/betterdays-common.toml"
 hash = "8acfbad73bb7c379656d8f15f9e814bc90349274aef2f1080ba23e2c153709a8"
 
@@ -759,6 +763,10 @@ hash = "49fd275feac43a47285d16553b3bda996a2bf4443ce3488cc22459b7f98c5c17"
 [[files]]
 file = "kubejs/assets/betteradvancedtooltips/lang/fr_fr.json"
 hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
+
+[[files]]
+file = "kubejs/assets/bettercombat/lang/fr_fr.json"
+hash = "b34fe301c3cc67c2410debc0cefb11c2829bfc7a996016452532f245e065134e"
 
 [[files]]
 file = "kubejs/assets/biolith/lang/fr_fr.json"
@@ -1623,6 +1631,14 @@ hash = "035b483d430f2c377267c810f33de2a6df98c388b3464f3dfdb875162de5805c"
 [[files]]
 file = "kubejs/data/compline/tags/worldgen/biome/aucun.json"
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
+
+[[files]]
+file = "kubejs/data/compline/weapon_attributes/epee_en_acier_noir.json"
+hash = "b86ad53f7f73ab97153cff9ac5474da9271695c194e5314fbe06df029e09bc2e"
+
+[[files]]
+file = "kubejs/data/compline/weapon_attributes/hache_en_acier_noir.json"
+hash = "8e6a603562bb5fef30edaba6031f3e1ea6523b939bbc64fbaf6cdc1e436cfa8b"
 
 [[files]]
 file = "kubejs/data/compline/worldgen/configured_feature/debris_du_coeur.json"
@@ -3319,6 +3335,11 @@ hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
 metafile = true
 
 [[files]]
+file = "mods/better-combat.pw.toml"
+hash = "438170e7e704a1b8ed67bf0521dc5d77cdeeaabf6f729dba9f8dfdad75330acf"
+metafile = true
+
+[[files]]
 file = "mods/betterdays.pw.toml"
 hash = "f567df6f58cbb28cd6e28dfa72dde29ed8c787afc6e4694c797b0896fa07c8f6"
 metafile = true
@@ -3784,6 +3805,11 @@ metafile = true
 [[files]]
 file = "mods/pick-up-notifier.pw.toml"
 hash = "49c0bacf8e4cb3ade6c384ad379282f92d7fa3075f2affd8e3093feb685288dd"
+metafile = true
+
+[[files]]
+file = "mods/playeranimator.pw.toml"
+hash = "93284ca7f2f23f0bb76d42b797cabf2aea1914ee9825bec82bf6ffe4c60dda0d"
 metafile = true
 
 [[files]]
