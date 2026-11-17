@@ -33,6 +33,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `program/ao.fsh`, `program/deferred1.fsh` | Screen occlusion, sky |
 | `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud density, cloud shadows, the 3D noise, the cloud march |
 | `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
+| `lib/underwater.glsl` | Rays under the surface, marine snow |
 | `lib/mist.glsl` | The mist: layer, clearings, far ring, colour |
 | `lib/water.glsl` | Colour, murk and waves of the water, caustics |
 | `lib/reflect.glsl` | Screen reflections, the mirrored sky, the veil of air on a reflection (water and puddles) |
@@ -90,7 +91,8 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **What shows through**: the bottom, shifted by the waves, fades with the thickness of water crossed (red first) into the colour of the water, which is the biome's pulled toward a grey-green (`WATER_MURK`). Shallows show the bottom, a deep river shows its body.
 - **What it mirrors**: the reflected ray is followed on screen until it meets the banks, the trees or a boat (`WATER_REFLECTIONS` steps; what lies under the surface cannot be mirrored); elsewhere the sky with its mist and the clouds at mid-height of their layer. More at a low angle, as in reality. The sun leaves a glint on the ripples, cut by shadows and clouds.
 - **Under the surface**: the sun reaches the bottom weakened and tinted by the water above it (read in the shadow map), gathered by the waves into moving threads (`WATER_CAUSTICS`).
-- **From below**: the world above shows through a circle (Snell's window), bent by the waves; outside it the surface mirrors the water and the bottom. The view under water fades into the same colour as from above, a little further.
+- **From below**: the world above shows through a circle (Snell's window), bent by the waves; outside it the surface mirrors the water and the bottom. The view under water fades into the same colour as from above, a little further; it stays clear near the surface and darkens with each block of water over the eye (the sky light at the eye).
+- **Diving**: rays come down from the surface, slanted by refraction, cut by the shadow of what floats or overhangs and rippling with the same pattern as the caustics, brightest when looking toward the light (`LIGHT_SHAFTS`, `SHAFT_STRENGTH`). Suspended specks of one block pixel (marine snow) drift slowly in about one block in three within 20 blocks and twinkle, brighter against the light (`WATER_MOTES`).
 - Distant Horizons water uses the same colour and the sky reflection, without the screen reflections.
 
 ## Rain

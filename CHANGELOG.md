@@ -9,6 +9,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
 
 ### Added
+- Brumaire, under water: rays coming down from the surface, cut by the shadows of what floats above and rippling with the waves; suspended specks that drift and catch the light; clearer water near the surface. New `Neige marine` setting (off in `Très léger`).
 - Brumaire, living foliage: frost on cool clear nights, a pixel rime on grass and leaves that melts by mid-morning (new `Givre` setting); leaves lean away and quiver when the player or an animal brushes against them.
 - Brumaire, footprints in sand and snow: the player and the nearest animals leave a trail of pixel prints, left then right, whose hollows take the shade (bluish on snow) and fade after a few minutes, faster under rain or snow. New `Traces de pas` and `Durée des traces` settings.
 - Brumaire, rain and snow drawn by the shader: thin pixel drops lit by the sky and slanted by the wind, pixel snowflakes that drift, nothing falling under roofs or dense trees, and showers pushed by the wind that make the rain heavier and lighter as they pass. New `Pluie du shader` setting (off in `Très léger`, where the game's rain stays).
