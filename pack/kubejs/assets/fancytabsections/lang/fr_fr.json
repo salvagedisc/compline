@@ -1,0 +1,15 @@
+{
+  "fancytabsections.configuration.index_expanded": "Index développé",
+  "itemGroup.fancytabsections.fancy_things": "[FTS dev uniquement] Objets brillants",
+  "itemGroup.fancytabsections.dirty_tools": "[FTS dev uniquement] Outils sales",
+  "section.fancytabsections.shiny_things": "Objets brillants",
+  "section.fancytabsections.pretty_things": "Jolis objets !",
+  "section.fancytabsections.secret_things": "Section secrète au nom très long pour montrer le défilement...",
+  "section.fancytabsections.hotbar": "Ordre correct de la barre d’accès rapide",
+  "section.fancytabsections.dirt": "Terre",
+  "section.fancytabsections.stone": "Pierre",
+  "section.fancytabsections.colors": "COULEURS !",
+  "section.fancytabsections.empty": "Section vide...",
+  "section.fancytabsections.very_dirty_tools": "Outils très sales",
+  "section.fancytabsections.decently_dirty_tools": "Outils assez sales"
+}

@@ -16,10 +16,9 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'create:crushed_raw_quicksilver', 'create:crushed_raw_silver', 'create:crushed_raw_tin',
     'create:crushed_raw_uranium', 'create:experience_nugget', 'create:experience_block',
     'aeronautics:mounted_potato_cannon', 'simulated:plunger_launcher',
-    'simulated:creative_physics_staff', 'overgeared:nether_alloy_furnace',
-    'overgeared:netherite_alloy', 'overgeared:heated_netherite_alloy',
+    'simulated:creative_physics_staff',
     'overgeared:nether_tool_cast', 'overgeared:heated_silver_ingot',
-    'overgeared:tier_a_smithing_anvil', 'overgeared:tier_b_smithing_anvil',
+    'overgeared:tier_b_smithing_anvil',
     'farmersdelight:nether_salad', 'farmersdelight:netherite_knife',
     'farmersdelight:crimson_cabinet', 'farmersdelight:warped_cabinet',
     'farmersdelight:tomato', 'farmersdelight:tomato_seeds', 'farmersdelight:rotten_tomato',
@@ -147,7 +146,11 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'spelunkery:granite_lead_ore', 'spelunkery:tuff_lead_ore', 'spelunkery:andesite_silver_ore',
     'spelunkery:diorite_silver_ore', 'spelunkery:granite_silver_ore', 'spelunkery:tuff_silver_ore',
     'spelunkery:andesite_jade_ore', 'spelunkery:diorite_jade_ore', 'spelunkery:granite_jade_ore',
-    'spelunkery:tuff_jade_ore', 'ec_ad:theri_claw_netherite'
+    'spelunkery:tuff_jade_ore', 'ec_ad:theri_claw_netherite', 'selling_bin:selling_bin',
+    'starcatcher:charfish', 'starcatcher:chorus_crab', 'starcatcher:chorus_minnow',
+    'starcatcher:dreamliner', 'starcatcher:end_glow', 'starcatcher:nebula_squid',
+    'starcatcher:purple_carp', 'starcatcher:spacejelly', 'starcatcher:voidbiter',
+    'starcatcher:voidfin', 'starcatcher:stonefish', 'starcatcher:sea_bass'
   ].forEach(id => event.remove(id))
 
   TRI_MOTIFS.forEach(motif => event.remove(motif))

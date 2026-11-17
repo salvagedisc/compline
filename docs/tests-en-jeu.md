@@ -100,6 +100,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Bag** (Reliable Backpacks): craft it from 8 tanned leather, wear it on the back (Curios slot, not the chestplate), look at it with Fresh Animations, 3D Skin Layers and the shoulder view, place it on the ground and on an airship, dye it [B1 to B4].
 - [ ] **Stacks**: logs and ingots stop at 16, planks and stone at 32, seeds at 64, chests at 8, Create machines at 4, water bottles at 8; tools never stack. A Farmer's Delight cooking pot (its stack of servings) and the Create crusher (18 nuggets) empty without losing anything. Compare `config/sensible_stackables/config.toml` with the generated file [P1 to P5].
 - [ ] **Sleeping bag** (Comforts): sleep in it, the spawn point does not move; is it cold in the snow (Cold Sweat)?
+- [ ] **Fishing** (Starcatcher, [0034](decisions/0034-starcatcher-fishing.md)): craft a hook and a bobber, then Starcatcher's rod; in EMI no vanilla fishing rod, the carrot on a stick asks for Starcatcher's rod. Fish a river, a lake and the sea: the minigame opens, a perfect catch gives more, a miss can lose the fish; Hybrid Aquatic's fish come out where they live (no piranha in a pond) [PE1]. Open the catalogue: entries for Hybrid Aquatic, Naturalist (bass, catfish at night, anglerfish, blobfish, piranha) and Spawn (bluefish), none for the End [PE2]. Put a Hybrid Aquatic hook on the rod, swap attachments in the tackle box [PE3]. Below y = -40, fish in lava with a rod that can: Nether catches such as the magma fish come out [PE4]. Build an aquarium and put a catch in it, a fish plaque on a wall: the Naturalist and Spawn fish show their model [PE5]. Cut a catch on the board into a fillet and cook a Starcatcher's Delight dish in the pot; no selling bin in EMI; texts in French [PE6].
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
@@ -154,6 +155,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Edge of the world**: on foot, by boat and in flight the mist turns you back at 6,000 blocks from the centre, with a warning 64 blocks before; an airship is not stopped yet, a message asks to turn back; sailing around the continent, the coast stays away from the edge; north cold, south hot [Z1 to Z6].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
+- [ ] **Ores and progression**: no diamond ore except rough diamonds beside deep lava; no steel ingot or template in chests; 3 iron + 1 coal → 3 crude steel; a diamond template when a coniferous monument wakes; black steel from steel and magnetite, the master anvil, diamond mined only with a black steel pickaxe; dinosaur armour forged at the anvil with its Cold Sweat bonus, no Chorusoatl teleport; ancient debris beside deep lava and orichalcum through Overgeared's chain; a master pickaxe gives more ore [PG1 to PG10, AN1 to AN5].
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
 - [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
 - [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): glints on the water; footprints in snow and sand, waves on a beach [AV9 to AV11].
@@ -184,7 +186,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
@@ -198,6 +200,8 @@ Once the results are in:
 | B (bags), P (stacks), J (day length) | [decisions/0012](decisions/0012-sacs-piles-jours.md#conditions-and-tests) |
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | AV (rain, storm and sunlight) | Removed by [0026](decisions/0026-second-cleanup.md); [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) is kept as history |
+| PE (fishing) | this file, session 4; context in [decisions/0034](decisions/0034-starcatcher-fishing.md) |
+| PG (ores and progression) | [plan/progression.md](plan/progression.md#in-game-tests) |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).

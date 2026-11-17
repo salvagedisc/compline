@@ -71,7 +71,7 @@ The processor lists `ancient_remnants:monolith` and `ancient_remnants:monument` 
 ## What the monuments are for
 
 1. **A choice of path.** The blessing is a lasting trait (one at a time, kept after death). Changing it means travelling to another monument. The floating monoliths keep their Elderheart about 86 blocks up: reaching it is a building or airship goal.
-2. **Sleeping hearts and their guardians** (decision 15 of [12.5](../archive/plan/12-verification.md), report 6). Four Elderhearts are asleep: they give nothing until their guardian is beaten. The guardian rises on the ground, between the player and the monument, when a player comes within 64 blocks; at its death the heart awakens and blesses as usual. A guardian that disappears without dying can come back after a minute.
+2. **Sleeping hearts and their guardians** (decision 15 of [12.5](../archive/plan/12-verification.md), report 6). Four Elderhearts are asleep: they give nothing until their guardian is beaten. The guardian rises on the ground, between the player and the monument, when a player comes within 64 blocks; at its death the heart awakens and blesses as usual. A guardian that disappears without dying can come back after a minute. When the coniferous monument wakes, each player within 64 blocks also gets a diamond template ([progression](progression.md)).
 
    | Monument | Guardian |
    |---|---|

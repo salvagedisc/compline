@@ -1,0 +1,16 @@
+{
+  "type": "overgeared:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "compline:tete_de_pelle_en_acier_noir"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "compline:pelle_en_acier_noir"
+  }
+}

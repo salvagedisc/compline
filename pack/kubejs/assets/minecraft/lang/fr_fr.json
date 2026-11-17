@@ -1,4 +1,24 @@
 {
   "container.repair.cost": "Usure : %1$s",
-  "container.repair.expensive": "Trop usé !"
+  "container.repair.expensive": "Trop usé !",
+  "advancements.husbandry.netherite_hoe.description": "Utilisez un lingot d'orichalque pour améliorer une houe, puis réévaluez vos choix de vie.",
+  "advancements.nether.netherite_armor.description": "Obtenez une armure complète en orichalque.",
+  "block.minecraft.netherite_block": "Bloc d'orichalque",
+  "item.minecraft.netherite_axe": "Hache en orichalque",
+  "item.minecraft.netherite_boots": "Bottes en orichalque",
+  "item.minecraft.netherite_chestplate": "Plastron en orichalque",
+  "item.minecraft.netherite_helmet": "Casque en orichalque",
+  "item.minecraft.netherite_hoe": "Houe en orichalque",
+  "item.minecraft.netherite_ingot": "Lingot d'orichalque",
+  "item.minecraft.netherite_leggings": "Jambières en orichalque",
+  "item.minecraft.netherite_pickaxe": "Pioche en orichalque",
+  "item.minecraft.netherite_scrap": "Fragments d'orichalque",
+  "item.minecraft.netherite_shovel": "Pelle en orichalque",
+  "item.minecraft.netherite_sword": "Épée en orichalque",
+  "item.minecraft.netherite_upgrade_smithing_template.new": "Amélioration en orichalque",
+  "item.minecraft.smithing_template.netherite_upgrade.additions_slot_description": "Ajoutez un lingot d'orichalque",
+  "item.minecraft.smithing_template.netherite_upgrade.ingredients": "Lingot d'orichalque",
+  "subtitles.item.armor.equip_netherite": "Tintement d'armure en orichalque",
+  "trim_material.minecraft.netherite": "En orichalque",
+  "upgrade.minecraft.netherite_upgrade": "Amélioration en orichalque"
 }

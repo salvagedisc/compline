@@ -1,0 +1,25 @@
+{
+  "type": "overgeared:forging",
+  "category": "ARMORS",
+  "hammering": 4,
+  "has_quality": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "key": {
+    "O": {
+      "item": "ec_ad:obsidian_horn"
+    },
+    "P": {
+      "item": "overgeared:steel_plate"
+    }
+  },
+  "pattern": [
+    "O O",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ec_ad:obsidiceratops_boots"
+  },
+  "show_notification": false
+}

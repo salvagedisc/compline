@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.20.4 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook) and **patine** (armour that gets dirty and washes off in water) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.23.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty and washes off in water) **acier_noir** (black steel, between steel and diamond) and **minage** (a well-forged pickaxe gives more ore) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -259,6 +259,23 @@ Config (`compline-common.toml`, `[patine]` section): `enabled` (true; false stop
 
 **Checked** on the test bench on 2026-11-15 (full pack, Brumaire on): iron armour on armour stands at 0, 20, 50 and 90 shows the three steps, rust at the last one; chainmail, diamond, gold, netherite and leather are soiled too; a player in survival moving for about two minutes gained 17 points on the boots and 10 on the chestplate, none while sitting on a pig that stands still; ten seconds in water took 90 points off every piece. Movement is read from the position one second earlier, because the server does not know the speed of a walking player. Not checked: a fight, the rain, a zombie spawned with armour, a modded armour (tests PA1 to PA5).
 
+## `acier_noir` module
+
+Client and server, no other mod for the items; the recipes need Overgeared and Spelunkery. Black steel is the step between Overgeared's steel and diamond ([progression](progression.md#black-steel-second-step)). The module only registers what data cannot: items, the block, the tool tier and the armour material. Recipes, tags and heat are data of the pack (`kubejs/data/`).
+
+- **Items** (`AcierNoirModule`): raw and heated raw black steel, heated and cold ingot, plate, block, four tool heads and a sword blade, pickaxe, axe, shovel, hoe, sword, and four armour pieces. The heated items are plain items in `overgeared:heated_metals`: Overgeared burns the hand that holds them without tongs and cools them in water.
+- **Tier**: durability 900, speed 7.5, attack bonus 3, enchantability 12, repaired with an ingot. What it cannot mine is the tag `compline:incorrect_for_black_steel_tool` (what needs a netherite tool or Spelunkery's compression blast miner).
+- **Armour**: 3/7/6/3 (19), toughness 1.5 per piece, no knockback resistance, durability ×30 (chestplate 480), equip sound of iron. Overgeared's quality applies to every piece like to its own.
+- **Textures** (provisional, to be approved by the team): Overgeared's steel textures (MIT, StirDrem) recoloured to a dark blue-grey; notice in `assets/compline/textures/CREDITS.txt`.
+
+**Checked** on the test bench on 2026-11-17 (full pack): the module loads; the 28 black steel recipes and the 10 Overgeared recipes that now take black steel are read without error; a deepslate diamond ore and Spelunkery's rough diamond block are in `overgeared:incorrect_for_steel_tool` and not in the black steel tag; obsidian is no longer refused to steel; ancient debris is refused to black steel. Not checked: the forging itself, which needs a player (tests AN1 to AN5).
+
+## `minage` module
+
+Server, no other mod; without Overgeared nothing changes. It registers one global loot modifier type, `compline:rendement_de_la_pioche` (`RendementDeLaPioche`), and the mod's data turns it on (`data/compline/loot_modifiers/rendement_de_la_pioche.json`, listed in NeoForge's `global_loot_modifiers.json`). When a block of `#c:ores` is broken with a tool that carries Overgeared's `overgeared:forging_quality`, each item of the drop gains one with the chance set for that quality in `chances` (expert 0.1, perfect 0.2, master 0.3; poor and well nothing). The component is read through the registry, so the mod does not compile against Overgeared. A drop that holds the ore block itself (silk touch) is left alone.
+
+**Checked** on the test bench on 2026-11-17: 150 iron ores and 150 coal ores mined with `/loot ... mine` and an iron pickaxe: 1.00 item each without quality, 1.31 and 1.29 with master quality. Not checked: a player's pickaxe, Spelunkery's nugget drops (test PG10).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -292,6 +309,10 @@ Fixes between two mods of the pack, outside any module: they have no switch and 
 **Fix** (0.9.2). `compat.InStructureMixin` answers the predicate from the region being generated when there is one (`WorldGenRegion.getChunk`, as the game does for its own features): the structure references of the chunk and of its direct neighbours and the structure starts up to eight chunks away are already there, and no thread is waited for. Outside generation (a command, bone meal) the original code runs. `require = 0`; applied only with Lithostitched.
 
 **Checked** on the test server, same world and same request (square of radius 800, 10,201 chunks, full pack): without the fix the task stopped at 3,259 chunks; with it the 10,201 chunks were generated in 13 min 06 s at a steady 12 to 15 chunks per second, with no error in the log. The debug log shows `Mixing compat.InStructureMixin from compline.mixins.json into dev.worldgen.lithostitched.worldgen.blockpredicate.InStructurePredicate`. A structure start nine chunks away, seen from a neighbouring chunk, is outside the region and is left out: a first version read it and stopped the generation with "Requested chunk unavailable during world generation".
+
+### Archie's Dinosaurs: the Chorusoatl armour no longer teleports
+
+`dinos.ChorusoatlArmorMixin` (needs Archie's Dinosaurs): `ChorusoatlArmorItem.hasAbility` answers false, so the armour key gives the mod's "no ability" message, and `activateServerSetAbility` does nothing in case a client sends the request anyway. A 45-block jump every 15 seconds would erase the heights that the set is meant to open ([progression](progression.md#dinosaur-armour-third-step)). Slow falling stays. The tooltip text is replaced in the pack (`kubejs/assets/ec_ad/lang/`). Checked on the test bench on 2026-11-17: the mixin applies without error; the key itself needs a player (PG7).
 
 ## In-game tests
 
@@ -425,6 +446,16 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | PA3 | Jump into water, then stand in the rain | In water the armour is clean in a few seconds (the helmet only head under); the rain cleans it slowly |
 | PA4 | A zombie with armour, a modded armour, dyed leather armour | Zombie armour already dirty; the modded armour soiled the same way; leather keeps its dye and gets no rust |
 | PA5 | `patine.enabled = false` in `compline-common.toml` | Every armour drawn clean again, no more dirt |
+
+### Black steel
+
+| # | Test | Expected |
+|---|---|---|
+| AN1 | Alloy furnace: a steel ingot, two raw magnetite, a charcoal | One raw black steel; in a blast furnace it turns heated |
+| AN2 | Hammer the heated raw black steel on a smithing anvil, then cool the ingot in water | A black steel ingot; holding the heated one without tongs burns |
+| AN3 | Nine ingots → a block; sneak and right-click the block with a smithing hammer | The block becomes the master anvil (« Enclume de maître »); plates, heads and armour are forged there only |
+| AN4 | Steel pickaxe on diamond ore, on rough diamond, on obsidian; then the black steel pickaxe | Steel: no drop on diamond, obsidian mined; black steel: diamond and rough diamond drop, ancient debris refused |
+| AN5 | Smithing table: a black steel piece, the diamond template and a diamond | The diamond piece; a steel piece is refused |
 
 ### Held items
 

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "MDM",
+    "D#D",
+    "MDM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:magma_block"
+    },
+    "D": {
+      "item": "minecraft:deepslate_bricks"
+    },
+    "#": {
+      "item": "minecraft:blast_furnace"
+    }
+  },
+  "result": {
+    "id": "overgeared:nether_alloy_furnace",
+    "count": 1
+  }
+}

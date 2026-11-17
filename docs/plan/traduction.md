@@ -39,6 +39,7 @@ Style: short sentences, formal "vous" or impersonal form in tooltips and configu
 ## What stays in English or needs watching
 
 - **Longwings**: 4 messages hard-coded in the code ("New Discovery!", "Check your handbook", "Your handbook has been updated!", "This isnt functional yet"). Only a fix to the mod itself would translate them.
+- **Starcatcher**: the headings of its guidebook (« All about fishing », « Fishes in the area », « All fishes ») are drawn in its textures; only a redrawn texture would translate them.
 - **Envelope**: the descriptions of the configuration options, the message "Mail Service does not operate in this dimension." and the command messages are hard-coded in the code.
 - **Regions Unexplored**: the mod ships no French. `pack/kubejs/assets/regions_unexplored/lang/fr_fr.json` translates its 933 texts. Wood names: maple = érable, pine = pin, willow = saule, redwood = séquoia, larch = mélèze, cypress = cyprès, palm = palmier, kapok = kapokier, joshua = arbre de Josué, wisteria = glycine, blackwood = bois noir. The invented names of the mod (Prismoss, Prismarite) stay as they are, and Bioshroom becomes biochampignon. Not seen in game.
 - **Ancient Remnants**: the codex title font has no accented letters. `pack/kubejs/assets/ancient_remnants/font/header.json` adds the default font as a fallback: accented letters are displayed, in the vanilla style. To be checked in game.

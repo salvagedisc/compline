@@ -38,7 +38,12 @@ public enum ComplineModule {
      *  ne demande aucun mod ; les pages du guide demandent Archie's Dinosaurs, la photo demande Exposure. */
     ZOO("zoo", null, bus -> io.github.salvagedisc.compline.zoo.ZooModule.start(bus)),
     /** La patine : les armures se salissent quand on les porte et se lavent dans l'eau (client et serveur). Aucun mod requis. */
-    PATINE("patine", null, bus -> io.github.salvagedisc.compline.patine.PatineModule.start(bus));
+    PATINE("patine", null, bus -> io.github.salvagedisc.compline.patine.PatineModule.start(bus)),
+    /** L'acier noir, palier entre l'acier d'Overgeared et le diamant : objets, armure et palier d'outil (client et
+     *  serveur). Aucun mod requis pour l'enregistrement ; ses recettes et ses tags sont des données du pack. */
+    ACIER_NOIR("acier_noir", null, bus -> io.github.salvagedisc.compline.acier.AcierNoirModule.start(bus)),
+    /** Le minage : une pioche bien forgée d'Overgeared rend plus de minerai (serveur). Aucun mod requis ; sans Overgeared, rien ne change. */
+    MINAGE("minage", null, bus -> io.github.salvagedisc.compline.minage.MinageModule.start(bus));
 
     private final String id;
     private final Dist side;

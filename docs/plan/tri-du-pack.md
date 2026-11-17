@@ -56,7 +56,7 @@ Chunky left the pack on 2026-11-14 ([0026](../decisions/0026-second-cleanup.md))
 | Mod | Items |
 |---|---|
 | Create, Aeronautics, Simulated | Potato cannon and mounted potato cannon, worldshaper, plunger launcher, creative physics staff, netherite backtank and diving gear, crushed ores of the 9 metals absent from the pack, experience nugget and block |
-| Overgeared | Nether alloy furnace, netherite alloy, Nether tool cast, heated silver, tier A and B anvils |
+| Overgeared | Nether tool cast, heated silver, tier B anvil (the tier A anvil is the master anvil of black steel and the netherite chain is back with the burning heart since 2026-11-17, [progression](progression.md)) |
 | Farmer's Delight, Cold Sweat | Nether salad, crimson and warped cabinets, netherite knife; tomato and onion with their seeds, wild plants and crates (Farm & Charm's are kept, [0030](../decisions/0030-farmers-delight-kitchen.md)); Farm & Charm's stove, cooking pot, roaster, crafting bowl and onion soup (its recipes move to Farmer's Delight, `cuisine.js`); hoglin hide and armour (Kaleidoscope Cookery's Nether dishes and furniture until 2026-11-15) |
 | Exposure, Envelope, Amendments, Lootr | Interplanar projectors; crimson and warped pigeonholes, charred pigeon egg; dragon charge; Lootr shulker and trophy |
 | Supplementaries | The items switched off above |
