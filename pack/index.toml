@@ -281,6 +281,10 @@ file = "config/reliable_backpacks.json"
 hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
 
 [[files]]
+file = "config/selling_bin-server.toml"
+hash = "bc3f184461aee290d41bf3aa2c45543da9508757204180908cd2aa38ddf89b74"
+
+[[files]]
 file = "config/sensible_stackables/config.toml"
 hash = "8fc3745e70f64fbacb6945fa5abe09c8b1a7bec25ce630de6519d1c3af0df268"
 

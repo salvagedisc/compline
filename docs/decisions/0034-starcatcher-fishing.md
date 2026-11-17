@@ -32,7 +32,7 @@ Fitted to Compline:
 - **Biomes**: `scripts/biomes/biome_rules.py` gives Starcatcher's biome tags that list only vanilla biomes (cold lakes, warm ocean, rivers…) the Regions Unexplored, Hybrid Aquatic and Spawn biomes that resemble them.
 - **Bare hands at the start** ([first steps](../plan/premiers-gestes.md)): no rod and no guide given on joining (`config/starcatcher-server.toml`, `give_rod` and `give_guide` off); both are crafted. Bait is worms, from bone meal on farmland.
 - **Leather only through the tannery**: the fished old boot no longer turns into leather (`tannerie.js`).
-- **No money**: the selling bin (wd's Selling Bin, nested in Starcatcher) has no currency set and is removed (`tri.js`).
+- **No money**: the selling bin (wd's Selling Bin, nested in Starcatcher) has no currency set and is removed (`tri.js`); its sell rate is set to 0 (`config/selling_bin-server.toml`), so items no longer show a price in emeralds when Shift is held.
 - **Cooking**: Starcatcher's Delight also ships Farm & Charm pot recipes; `cuisine.js` no longer copies them, since the Farmer's Delight pot already has every dish.
 - **One book per fish** (the team, 2026-11-17): the 53 species that are both a zoo animal and a Starcatcher catch (Hybrid Aquatic's, Naturalist's and vanilla fish, Spawn's bluefish) leave the zoo (tag `compline:zoo/peche`, part of `compline:zoo/exclus`) and are followed in the fishing guide only. The zoo keeps the sea creatures nobody fishes (whales, sharks, jellyfish, crabs…).
 - **French**: 367 texts translated (Starcatcher's Delight 206, Selling Bin 48, the addon 43, LibTooltips 23, Starcatcher 21, Fancy Tab Sections 13, Tiny Multiblock Lib 13); Starcatcher ships its own French for the rest.
