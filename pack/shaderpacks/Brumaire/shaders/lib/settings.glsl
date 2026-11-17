@@ -28,6 +28,7 @@
 #define AO_STRENGTH 1.6 // [0.8 1.2 1.6 2.0 2.5]
 #define BLOOM_STRENGTH 1.0 // [0.5 0.75 1.0 1.25 1.5]
 #define COLORED_LIGHT 1 // [0 1]
+#define GLASS_TINT 1 // [0 1]
 
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]

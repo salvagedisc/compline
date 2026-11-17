@@ -9,6 +9,7 @@ in vec2 mc_Entity;
 in vec2 mc_midTexCoord;
 out vec2 vUv;
 flat out int vWater;
+flat out int vGlass;
 #ifdef VOXELS
 in vec4 at_midBlock;
 layout(r32ui) uniform writeonly uimage3D voxelImg;
@@ -60,6 +61,7 @@ void main() {
     // L'eau ne porte pas d'ombre (shadowtex1 l'ignore) mais se marque : le fond saura qu'il est sous l'eau.
     // Les plantes ondulent comme dans la vue.
     vWater = mat == 6 ? 1 : 0;
+    vGlass = mat == 13 ? 1 : 0;
 #ifdef VOXELS
     storeVoxel((shadowModelViewInverse * view).xyz, mat);
 #endif

@@ -180,7 +180,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Sodium | `sodium` | ✅ | C | Rendering |
 | Iris Shaders | `iris` | ✅ (bench only) | C | Loads the house shader pack Brumaire, on by default ([0031](decisions/0031-brumaire-is-the-look.md)); 1.8.14-beta.1 is the only build for Sodium 0.8.13 ([0028](decisions/0028-house-shader.md)) |
 | Colorwheel | `colorwheel` | ✅ (bench only) | C | Flywheel models (Create) under a shader pack |
-| Iris Veil Compat | `iris-veil-compat` | ✅ (alpha, bench only) | C | Veil shaders (Sable, Aeronautics levitite) under a shader pack |
+| Iris Veil Compat | `iris-veil-compat` | ✅ (0.3.0, pinned; bench only) | C | Veil shaders (Sable, Aeronautics levitite) under a shader pack. Kept on 0.3.0: 0.4.0 drops water and stained glass from the shader's sun shadow map, which turns off the light under water and the light through stained glass |
 | ImmediatelyFast | `immediatelyfast` | ✅ | C | Rendering |
 | ModernFix | `modernfix` | ✅ | CS | Loading |
 | FerriteCore | `ferrite-core` | ✅ | CS | Memory |

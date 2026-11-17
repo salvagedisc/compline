@@ -10,7 +10,7 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 
 | Step | Programs | What it does |
 |---|---|---|
-| Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow but marks itself (`shadowcolor0`), so the bottom knows it lies under water |
+| Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow but marks itself (`shadowcolor0`), so the bottom knows it lies under water; stained glass casts no shadow either but leaves the colour it gives the light (`shadowcolor1`) |
 | Coloured light, shelter | `shadow`, `shadowcomp.csh`, `shadowcomp1.csh` (compute) | The shadow pass also files every terrain block within 64 blocks horizontally and 32 vertically into a 128×64×128 volume (`voxelImg`): solid, letting light through, or glowing with its colour; the compute pass spreads the light one block per frame, like the game's light, into two volumes used in turn (`lightImgA`, `lightImgB`); a second compute pass finds in each column the top of what stops the rain (`shelterImg`) |
 | Sky table | `prepare.csh` (compute) | The light scattered by the atmosphere in every direction around the sun, lit by the sun and the moon, in a 192×108 table; its last row holds the mean light of the sky and what the air leaves of the sun and the moon |
 | Footprints | `prepare1.csh` (compute) | Each of the four living beings nearest the camera (`brumairePush0..3`) sets a foot every 0.7 block, left then right, into a 1024×1024 map at 1/16 block that wraps every 64 blocks (`trackImg`); `trackStateImg` keeps where each set its last foot |
@@ -71,6 +71,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **How**: the shadow pass files the terrain around the camera into a volume; a compute pass spreads the light block by block like the game's own (one level lost per block, stopped by solid blocks, through glass, plants and partial blocks). Each cell keeps the colour of its strongest light; two lights of the same strength mix. Only the colour comes from the volume: the brightness stays the game's, which already knows what blocks the light.
 - **Light in hand**: what the player holds lights around them in its colour, a little further than a placed block, even without a dynamic-light mod; with LambDynamicLights the brighter of the two wins, never both.
 - Beyond the volume (64 blocks around, Distant Horizons terrain) block light keeps the warm colour of a flame.
+- **Stained glass light** (`GLASS_TINT`, off in the Very light profile): sunlight and moonlight that pass stained glass take its colour, on what they light and in the shafts of light in the air; the more opaque the pane, the purer the colour, and dark or tinted glass holds most of the light back. Read from the shadow map, so it reaches as far as the sun's shadows. It needs Iris Veil Compat 0.3.0: 0.4.0 leaves water and stained glass out of the shadow map.
 
 ## Clouds
 
