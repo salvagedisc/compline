@@ -9,6 +9,7 @@ No version has been published yet: everything below will make up `0.1.0`.
 No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no-mans-land.md)). The older entries below that mention it, the Friendly Moon, its fauna or its music record what the pack contained before that date; the last entries of each section and the Removed section say what changed.
 
 ### Added
+- Armour takes the world (`compline` 0.28.0, `patine` module): walking on sand leaves pale grains that climb from the boots and fall off elsewhere; falling snow settles on the helmet and shoulders and packs around the boots, then melts away from the cold; out of water or in the rain the armour turns dark with bright drops and dries in under a minute. Dyed leather keeps white snow. Monsters spawned in deserts or snowy biomes wear sandy or snowy armour.
 - Brumaire, wet prints (`compline` 0.26.0): the player and the animals walking out of water leave a trail of wet, darker soles on the ground that thins out over some twenty blocks and dries in a couple of minutes.
 - Brumaire, distant shadows: beyond the reach of the sun's shadow map, hills, cliffs and forests still cast their shadow on the far landscape, Distant Horizons included, so valleys darken at sunset. New `Ombres lointaines` setting (off in `Très léger`).
 - Brumaire, motion blur: turning the view quickly streaks the landscape like a film camera, while the hand and the held item stay sharp; standing still changes nothing. New `Flou de mouvement` setting with four strengths (off in `Très léger`).

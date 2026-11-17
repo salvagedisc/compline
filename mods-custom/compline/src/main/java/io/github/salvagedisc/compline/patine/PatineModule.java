@@ -17,7 +17,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 /**
- * Module patine : les armures se salissent quand on les porte (marche, terre, combat) et se lavent dans l'eau. La
+ * Module patine : les armures se salissent quand on les porte (marche, terre, combat) et se lavent dans l'eau ; elles
+ * prennent aussi le sable, la neige et l'eau ({@link #COAT}). La
  * saleté est un composant de l'objet ({@link #PATINE}, 0 à 100) : elle suit l'armure d'un joueur à l'autre, d'un
  * coffre à un porte-armure. Le serveur la fait varier ({@link Patine}) ; le client salit la texture de l'armure
  * portée ({@code patine.client}).
@@ -27,6 +28,9 @@ public final class PatineModule {
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Compline.MOD_ID);
     public static final Supplier<DataComponentType<Integer>> PATINE = COMPONENTS.registerComponentType("patine",
             builder -> builder.persistent(ExtraCodecs.intRange(0, Patine.MAX)).networkSynchronized(ByteBufCodecs.VAR_INT));
+    /** Le sable, la neige et l'eau pris par l'armure ({@link Coat}). */
+    public static final Supplier<DataComponentType<Coat>> COAT = COMPONENTS.registerComponentType("coat",
+            builder -> builder.persistent(Coat.CODEC).networkSynchronized(Coat.STREAM_CODEC));
 
     private PatineModule() {
     }
@@ -48,6 +52,6 @@ public final class PatineModule {
         if (FMLEnvironment.dist.isClient()) {
             io.github.salvagedisc.compline.patine.client.PatineClient.start(modBus);
         }
-        Compline.LOGGER.info("patine : les armures se salissent et se lavent dans l'eau");
+        Compline.LOGGER.info("patine : les armures se salissent, prennent le sable, la neige et l'eau");
     }
 }
