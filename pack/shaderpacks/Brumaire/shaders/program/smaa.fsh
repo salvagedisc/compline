@@ -1,5 +1,5 @@
-// Les trois passes de l'anticrénelage SMAA : les bords des formes (composite3), le poids de chaque bord selon sa forme
-// (composite4), puis le mélange avec les pixels voisins, dans la passe finale.
+// Les trois passes de l'anticrénelage SMAA : les bords des formes (composite4), le poids de chaque bord selon sa forme
+// (composite5), puis le mélange avec les pixels voisins, dans la passe finale.
 #include "/lib/settings.glsl"
 #include "/program/smaa.glsl"
 
@@ -71,9 +71,23 @@ layout(location = 0) out vec4 outColor;
 
 void main() {
 #if SMAA > 0
-    outColor = vec4(SMAANeighborhoodBlendingPS(vUv, vOffset[0], colortex7, colortex9).rgb, 1.0);
+    vec3 color = SMAANeighborhoodBlendingPS(vUv, vOffset[0], colortex7, colortex9).rgb;
 #else
-    outColor = vec4(texture(colortex7, vUv).rgb, 1.0);
+    vec3 color = texture(colortex7, vUv).rgb;
 #endif
+#if TAA > 0
+    // L'anticrénelage temporel adoucit un peu le grain des textures : on le redonne, sans dépasser les teintes
+    // voisines (pas de liseré clair autour des formes).
+    ivec2 p = ivec2(gl_FragCoord.xy);
+    ivec2 top = ivec2(viewWidth, viewHeight) - 1;
+    vec3 c = texelFetch(colortex7, p, 0).rgb;
+    vec3 a = texelFetch(colortex7, clamp(p + ivec2(1, 0), ivec2(0), top), 0).rgb;
+    vec3 b = texelFetch(colortex7, clamp(p - ivec2(1, 0), ivec2(0), top), 0).rgb;
+    vec3 d = texelFetch(colortex7, clamp(p + ivec2(0, 1), ivec2(0), top), 0).rgb;
+    vec3 e = texelFetch(colortex7, clamp(p - ivec2(0, 1), ivec2(0), top), 0).rgb;
+    vec3 sharp = c + (4.0 * c - a - b - d - e) * 0.45;
+    color += clamp(sharp, min(c, min(min(a, b), min(d, e))), max(c, max(max(a, b), max(d, e)))) - c;
+#endif
+    outColor = vec4(color, 1.0);
 }
 #endif

@@ -1,6 +1,7 @@
 // Paysage lointain de Distant Horizons : des blocs unis, sans texture.
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
+#include "/lib/taa.glsl"
 
 
 out vec2 vLm;
@@ -16,5 +17,5 @@ void main() {
     vec4 view = gl_ModelViewMatrix * gl_Vertex;
     vPos = (gbufferModelViewInverse * view).xyz;
     vMat = dhMaterialId;
-    gl_Position = gl_ProjectionMatrix * view;
+    gl_Position = taaJitter(gl_ProjectionMatrix * view);
 }

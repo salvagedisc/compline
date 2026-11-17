@@ -127,3 +127,7 @@ value.SMAA.0=Non
 value.SMAA.1=Moyen
 value.SMAA.2=Fort
 value.SMAA.3=Très fort
+option.TAA=Anticrénelage temporel
+option.TAA.comment=Fond chaque image avec les précédentes : le feuillage, les clôtures et les bords lointains ne scintillent plus quand on bouge. Peu coûteux.
+value.TAA.0=Non
+value.TAA.1=Oui

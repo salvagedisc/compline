@@ -21,7 +21,8 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Clouds | `composite` (half size) | Volumetric clouds marched through a 3D noise computed once at load (`setup.csh`) |
 | Air and mist | `composite1` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the rain curtains beyond the game's drops, the water seen from below |
 | Grade | `composite2` | Glow of the bright lights, exposure, tone curve, grade, into an 8-bit image (`colortex7`) |
-| Anti-aliasing | `composite3`, `composite4`, `final` | SMAA: the edges of shapes (`colortex8`), their blending weights (`colortex9`), then the blend with the neighbours on screen |
+| Temporal anti-aliasing | `composite3` | The image blended with its history (`colortex10`), brought back to where each point stood in the previous frame |
+| Anti-aliasing | `composite4`, `composite5`, `final` | SMAA: the edges of shapes (`colortex8`), their blending weights (`colortex9`), then the blend with the neighbours on screen |
 
 All the geometry programs include `program/solid.vsh` and `program/solid.fsh` with one `PROGRAM_*` define each; the top-level files only hold that define.
 
@@ -130,6 +131,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 ## Anti-aliasing and profiles
 
 - **SMAA** (`SMAA`: off, medium, high, ultra; on the first page of the settings) smooths the stair-stepped silhouettes of blocks, plants and creatures. Edges are found on the luminance of the finished image, then kept only where the depth jumps by more than 2 % between neighbours: the pixels of the textures stay sharp, only shapes are smoothed. The grade moved from `final` to `composite2` so that SMAA works on the image as it will be shown.
+- **Temporal anti-aliasing** (`TAA`, off in the Very light profile): the camera is shifted by a fraction of a pixel each frame (eight positions), and `composite3` blends the new frame with the history, reprojected from the depth and the previous camera. The history is clipped to the box of the current neighbours (mean and spread in YCoCg) and read with a Catmull-Rom filter, so a moving shape leaves no trail and the history does not soften frame after frame. Pixels of texture larger than a screen pixel keep mostly the current frame and stay sharp; the full blend only applies where the texture's pixels become finer than the screen, in the distance, where they shimmered. `final` then gives back a little of the texture grain, clamped to the neighbouring colours so no light rim appears. The hand is not reprojected, the sky only follows the camera's rotation.
 - **Four profiles**: Très léger (very light: no reflections, no screen occlusion, no shafts, the game's clouds, 1024 shadow map over 64 blocks with hard edges, no anti-aliasing), Léger, Équilibré (the default) and Beau. Every profile sets every option it touches, so switching back and forth restores them.
 
 ## The mist
