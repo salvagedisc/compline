@@ -1,7 +1,7 @@
 // Builds the voxel relief of the disc from the bench sample (see scripts/relief.py).
 // Scene units: one unit is 100 blocks across; heights are exaggerated so the relief reads from far away.
 
-import { BufferGeometry, Float32BufferAttribute } from 'three'
+import { BufferAttribute, BufferGeometry } from 'three'
 
 export const N = 259 // cells per side
 export const PAS = 0.48 // cell size in scene units (3 samples of 16 blocks)
@@ -49,15 +49,49 @@ const bruit = (i: number, j: number) => {
   return s - Math.floor(s)
 }
 
+// The four side walls of a cell: neighbour offset, outward normal, and the two corners of the wall's
+// top edge as (x, z) picks from the cell's [x0, x1] and [z0, z1], wound so the wall faces outwards.
+const MURS: { di: number; dj: number; n: [number, number, number]; p: [number, number]; q: [number, number] }[] = [
+  { di: 1, dj: 0, n: [1, 0, 0], p: [1, 1], q: [1, 0] },
+  { di: -1, dj: 0, n: [-1, 0, 0], p: [0, 0], q: [0, 1] },
+  { di: 0, dj: 1, n: [0, 0, 1], p: [0, 1], q: [1, 1] },
+  { di: 0, dj: -1, n: [0, 0, -1], p: [1, 0], q: [0, 0] },
+]
+
+/**
+ * Builds one indexed mesh for the whole relief: a top face per cell and a darker wall towards each lower
+ * neighbour. Typed arrays are sized in a first pass, normals and colours are stored as normalised bytes,
+ * so the geometry costs about a third of the memory of plain float triangles, which matters on phones.
+ */
 export function construireRelief(r: Relief): BufferGeometry {
-  const pos: number[] = [], nor: number[] = [], col: number[] = []
-  const quad = (
-    a: number[], b: number[], c: number[], d: number[],
-    n: number[], rgb: number[],
-  ) => {
-    for (const p of [a, b, c, a, c, d]) { pos.push(p[0], p[1], p[2]); nor.push(n[0], n[1], n[2]); col.push(rgb[0], rgb[1], rgb[2]) }
-  }
   const h = (i: number, j: number) => (i < 0 || j < 0 || i >= N || j >= N ? NaN : r.hauteurs[j * N + i])
+  const basVoisin = (i: number, j: number) => { const y = h(i, j); return Number.isNaN(y) ? FOND : y }
+
+  let quads = 0
+  for (let j = 0; j < N; j++) {
+    for (let i = 0; i < N; i++) {
+      const y = h(i, j)
+      if (Number.isNaN(y)) continue
+      quads++
+      for (const m of MURS) if (basVoisin(i + m.di, j + m.dj) < y) quads++
+    }
+  }
+
+  const pos = new Float32Array(quads * 12)
+  const nor = new Int8Array(quads * 12)
+  const col = new Uint8Array(quads * 12)
+  const idx = new Uint32Array(quads * 6)
+  let q = 0
+  const quad = (coins: number[], n: readonly number[], rgb: readonly number[]) => {
+    const v = q * 4
+    for (let c = 0; c < 4; c++) {
+      pos.set(coins.slice(c * 3, c * 3 + 3), (v + c) * 3)
+      nor.set([n[0] * 127, n[1] * 127, n[2] * 127], (v + c) * 3)
+      col.set(rgb, (v + c) * 3)
+    }
+    idx.set([v, v + 1, v + 2, v, v + 2, v + 3], q * 6)
+    q++
+  }
 
   for (let j = 0; j < N; j++) {
     for (let i = 0; i < N; i++) {
@@ -65,30 +99,25 @@ export function construireRelief(r: Relief): BufferGeometry {
       if (Number.isNaN(y)) continue
       const k = (j * N + i) * 3
       const v = 0.94 + bruit(i, j) * 0.12
-      const rgb = [r.couleurs[k] / 255 * v, r.couleurs[k + 1] / 255 * v, r.couleurs[k + 2] / 255 * v]
-      const x0 = -DEMI + i * PAS - PAS / 2, x1 = x0 + PAS
-      const z0 = -DEMI + j * PAS - PAS / 2, z1 = z0 + PAS
-      quad([x0, y, z0], [x0, y, z1], [x1, y, z1], [x1, y, z0], [0, 1, 0], rgb)
+      const rgb = [0, 1, 2].map((c) => Math.min(255, Math.round(r.couleurs[k + c] * v)))
+      const xs = [-DEMI + i * PAS - PAS / 2, -DEMI + i * PAS + PAS / 2]
+      const zs = [-DEMI + j * PAS - PAS / 2, -DEMI + j * PAS + PAS / 2]
+      quad([xs[0], y, zs[0], xs[0], y, zs[1], xs[1], y, zs[1], xs[1], y, zs[0]], [0, 1, 0], rgb)
       // Walls down to each lower neighbour, a little darker like the side of a block.
-      const cote = rgb.map((c) => c * 0.78)
-      const murs: [number, number, number[], number[][]][] = [
-        [i + 1, j, [1, 0, 0], [[x1, 0, z1], [x1, 0, z0]]],
-        [i - 1, j, [-1, 0, 0], [[x0, 0, z0], [x0, 0, z1]]],
-        [i, j + 1, [0, 0, 1], [[x0, 0, z1], [x1, 0, z1]]],
-        [i, j - 1, [0, 0, -1], [[x1, 0, z0], [x0, 0, z0]]],
-      ]
-      for (const [ni, nj, n, [p, q]] of murs) {
-        const yn = h(ni, nj)
-        const bas = Number.isNaN(yn) ? FOND : yn
+      const cote = rgb.map((c) => Math.round(c * 0.78))
+      for (const m of MURS) {
+        const bas = basVoisin(i + m.di, j + m.dj)
         if (bas >= y) continue
-        quad([q[0], bas, q[2]], [q[0], y, q[2]], [p[0], y, p[2]], [p[0], bas, p[2]], n, cote)
+        const px = xs[m.p[0]], pz = zs[m.p[1]], qx = xs[m.q[0]], qz = zs[m.q[1]]
+        quad([qx, bas, qz, qx, y, qz, px, y, pz, px, bas, pz], m.n, cote)
       }
     }
   }
   const g = new BufferGeometry()
-  g.setAttribute('position', new Float32BufferAttribute(pos, 3))
-  g.setAttribute('normal', new Float32BufferAttribute(nor, 3))
-  g.setAttribute('color', new Float32BufferAttribute(col, 3))
+  g.setAttribute('position', new BufferAttribute(pos, 3))
+  g.setAttribute('normal', new BufferAttribute(nor, 3, true))
+  g.setAttribute('color', new BufferAttribute(col, 3, true))
+  g.setIndex(new BufferAttribute(idx, 1))
   g.computeBoundingSphere()
   return g
 }
