@@ -12,7 +12,7 @@ Ladder, from the bench:
 | Diamond | 20 | 2 per piece | 1561, 8 | Diamonds near deep lava, the template from the coniferous monument, a black steel piece as base |
 | Orichalcum (renamed netherite) | 20 + | 3 per piece | — | The burning heart (planned) |
 
-Dinosaur armours are a side branch: forged at the anvil from plates, with quality, each set opening one part of the world (planned).
+Dinosaur armours are a side branch: forged at the anvil with steel plates, with quality, each set opening one part of the world.
 
 ## Steel and diamonds become rare (first step)
 
@@ -30,6 +30,21 @@ Overgeared has no black steel; it is the pack's own, after waccyy's Fantasia, an
 - **Diamond needs black steel.** Diamond ores and Spelunkery's rough diamond block (`compline:needs_black_steel_tool`) are refused to every tier below black steel, steel included. Steel can now mine obsidian, which Overgeared had refused to it with everything that needs a diamond tool.
 - **Diamond pieces start from black steel**: the ten smithing recipes take a black steel piece instead of a steel one, and copying the template takes a black steel ingot.
 
+## Dinosaur armour (third step)
+
+Archie's Dinosaurs armour is a side branch, not a step above steel: 10 to 18 armour, no toughness, each full set with its power. It is forged now, no longer crafted: the 24 workbench recipes are replaced (same ids, `kubejs/data/ec_ad/recipe/`) by Overgeared forging recipes on the smithing anvil, with quality. Each piece takes fewer of the creature's parts and some steel plates: helmet 4 parts and 1 plate, chestplate 5 and 3, leggings 6 and 1, boots 2 and 2 (17 parts and 7 plates for a set, was 24 parts). The stats are the mod's (its server config `armor_settings`), Overgeared's quality adds to them.
+
+Each set opens part of the world, in the spirit of Breath of the Wild, through Cold Sweat set bonuses (`kubejs/data/compline/cold_sweat/item/insulator/`, the tooltip says it):
+
+| Set | Opens | Cold Sweat bonus (full set) | The mod's own power |
+|---|---|---|---|
+| Obsidiceratops | The burning heart (lava, heat) | Burning point +1.0, heat dampening 0.5 | Walks on lava, immune to fire |
+| Chorusoatl | Heights and cold (the Elderheart of a floating monolith, about 86 blocks up) | Freezing point −1.0 | Slow falling; **its 45-block teleport is removed** (`compline` mixin `dinos.ChorusoatlArmorMixin`) |
+| Coralosaur | The depths | Water no longer chills, freezing point −0.4 | Full ocean adaptation, allied guardians |
+| Therimoss | Arid lands and long roads | Burning point +0.6 | Less hunger, burst of speed |
+| Sculksaur | Ancient cities in silence (the Warden is kept there only) | — | Silent steps, sound decoy |
+| Lushsaur | Shy wildlife (zoo photos) | — | Camouflage when sneaking |
+
 Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager trades and structure chests can still hold diamonds.
 
 ## In-game tests
@@ -39,3 +54,5 @@ Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager tra
 - [ ] PG3. Alloy furnace: 3 iron ingots + 1 coal give 3 crude steel.
 - [ ] PG4. Kill the Frostmaw of a coniferous monument and wake its Elderheart: a diamond template and the gold message, for each player nearby; nothing at the other monuments.
 - [ ] PG5. The black steel chain, the master anvil and the diamond rule: tests AN1 to AN5 of [mod-compline](mod-compline.md#black-steel).
+- [ ] PG6. Forge an Obsidiceratops chestplate on the smithing anvil (5 horns, 3 steel plates): it has a quality; the workbench recipe is gone. Wear the full set in a hot place: Cold Sweat's heat stays bearable; the tooltip names the bonus.
+- [ ] PG7. Full Chorusoatl set, sneak and press the armour key: no teleport, the « no ability » message; slow falling stays; the tooltip no longer offers the teleport.

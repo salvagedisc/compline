@@ -11,5 +11,6 @@
   "advancement.master_therimoss.desc": "Découvrez, apprivoisez et fabriquez de l'équipement pour maîtriser le therimoss !",
   "gui.ec_ad.archie.on_lushsaur": "On ferait mieux de descendre sous terre.\nTrouve des cavernes luxuriantes ou des grottes de biochampignons, et garde l'œil ouvert. Ils sont maîtres dans l'art du camouflage.",
   "gui.ec_ad.archie.on_obsidiceratops": "Le seul endroit où il se sent bien est un lieu extrêmement chaud.\nDescends dans les grottes de redstone, et prends de la lave avec toi.",
-  "gui.ec_ad.archie.on_chorusoatl": "Celui-ci est bien plus coriace à dénicher.\nIl niche loin sous terre, dans les prismachasms, ces gouffres tapissés de prismoss.\nPrends des fruits de chorus avec toi : je t'en céderai dès que tu l'auras aperçu."
+  "gui.ec_ad.archie.on_chorusoatl": "Celui-ci est bien plus coriace à dénicher.\nIl niche loin sous terre, dans les prismachasms, ces gouffres tapissés de prismoss.\nPrends des fruits de chorus avec toi : je t'en céderai dès que tu l'auras aperçu.",
+  "item.ec_ad.armor.chorusoatl.desc.set_bonus": "  §9Chute lente"
 }

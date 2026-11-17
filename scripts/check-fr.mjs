@@ -45,6 +45,12 @@ for (const file of await readdir(join(packDir, 'mods'))) {
 }
 
 const assetsDir = join(packDir, 'kubejs', 'assets');
+// Our English overrides replace the mod's text (a removed feature, a fixed name): compare against them.
+for (const ns of await readdir(assetsDir)) {
+  let text;
+  try { text = await readFile(join(assetsDir, ns, 'lang', 'en_us.json'), 'utf8'); } catch { continue; }
+  Object.assign((en[ns] ??= {}), parseLang(text) ?? {});
+}
 const ours = {};
 let errors = 0;
 for (const ns of await readdir(assetsDir)) {
