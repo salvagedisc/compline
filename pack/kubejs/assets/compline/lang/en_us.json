@@ -11,5 +11,9 @@
   "message.compline.tannerie.tonneau_plein": "The barrel is full.",
   "compline.monument.gardien": "The monument's guardian rises before you.",
   "compline.monument.eveil": "The Elderheart awakens: its blessing awaits whoever comes near.",
-  "compline.monument.savoir.architect_reach": "Inside the Elderheart, knowledge of the mountain dwarves: a template to forge diamond."
+  "compline.monument.savoir.architect_reach": "Inside the Elderheart, knowledge of the mountain dwarves: a template to forge diamond.",
+  "compline.isolant.obsidiceratops": "Full set: withstands the heat of the burning heart",
+  "compline.isolant.chorusoatl": "Full set: withstands the cold of the heights",
+  "compline.isolant.coralosaur": "Full set: water no longer chills, withstands the cold of the depths",
+  "compline.isolant.therimoss": "Full set: withstands the heat of the arid lands"
 }

@@ -35,6 +35,7 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
             Map.entry("compat.PunchyEquipMixin", List.of(ModIds.PUNCHY, ModIds.SENSIBLE_STACKABLES)),
             Map.entry("compat.IceThawMixin", List.of(ModIds.STREAMS_REFLOWING, ModIds.SPELUNKERY)),
             Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)),
+            Map.entry("dinos.ChorusoatlArmorMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("zoo.CategoryTabsMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("zoo.GuidebookDataMixin", List.of(ModIds.ARCHIES_DINOSAURS)));
 

@@ -1,0 +1,45 @@
+{
+  "required_mods": [
+    "ec_ad"
+  ],
+  "type": "armor",
+  "item": {
+    "items": [
+      "ec_ad:therimoss_chestplate"
+    ]
+  },
+  "entity": {
+    "entities": [
+      "*"
+    ],
+    "equipment": {
+      "head": {
+        "items": [
+          "ec_ad:therimoss_helmet"
+        ]
+      },
+      "legs": {
+        "items": [
+          "ec_ad:therimoss_leggings"
+        ]
+      },
+      "feet": {
+        "items": [
+          "ec_ad:therimoss_boots"
+        ]
+      }
+    }
+  },
+  "attributes": {
+    "cold_sweat:burning_point": [
+      {
+        "name": "compline:therimoss_set",
+        "amount": 0.6,
+        "operation": "add_value"
+      }
+    ]
+  },
+  "hint": {
+    "key": "compline.isolant.therimoss"
+  }
+}

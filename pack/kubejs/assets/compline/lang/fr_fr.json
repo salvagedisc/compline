@@ -11,5 +11,9 @@
   "message.compline.tannerie.tonneau_plein": "Le tonneau est plein.",
   "compline.monument.gardien": "Le gardien du monument se dresse devant vous.",
   "compline.monument.eveil": "Le Cœur ancien s'éveille : sa bénédiction attend qui l'approchera.",
-  "compline.monument.savoir.architect_reach": "Dans le Cœur, un savoir des nains des montagnes : un gabarit pour forger le diamant."
+  "compline.monument.savoir.architect_reach": "Dans le Cœur, un savoir des nains des montagnes : un gabarit pour forger le diamant.",
+  "compline.isolant.obsidiceratops": "Ensemble complet : supporte la chaleur du cœur brûlant",
+  "compline.isolant.chorusoatl": "Ensemble complet : supporte le froid des hauteurs",
+  "compline.isolant.coralosaur": "Ensemble complet : l'eau ne refroidit plus, supporte le froid des fonds",
+  "compline.isolant.therimoss": "Ensemble complet : supporte la chaleur des terres arides"
 }

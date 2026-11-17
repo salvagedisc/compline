@@ -1,0 +1,26 @@
+{
+  "type": "overgeared:forging",
+  "category": "ARMORS",
+  "hammering": 7,
+  "has_quality": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "key": {
+    "O": {
+      "item": "ec_ad:obsidian_horn"
+    },
+    "P": {
+      "item": "overgeared:steel_plate"
+    }
+  },
+  "pattern": [
+    "O O",
+    "PPP",
+    "OOO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ec_ad:obsidiceratops_chestplate"
+  },
+  "show_notification": false
+}

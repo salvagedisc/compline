@@ -1,0 +1,25 @@
+{
+  "type": "overgeared:forging",
+  "category": "ARMORS",
+  "hammering": 5,
+  "has_quality": true,
+  "has_polishing": false,
+  "need_quenching": false,
+  "key": {
+    "O": {
+      "item": "ec_ad:mossy_claw"
+    },
+    "P": {
+      "item": "overgeared:steel_plate"
+    }
+  },
+  "pattern": [
+    "OPO",
+    "O O"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ec_ad:therimoss_helmet"
+  },
+  "show_notification": false
+}

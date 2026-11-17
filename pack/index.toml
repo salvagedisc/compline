@@ -806,11 +806,11 @@ hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
 file = "kubejs/assets/compline/lang/en_us.json"
-hash = "a3afe3ad6613fb850d14c7134109fd7590fdb4528cc7a849c4801ca07786d824"
+hash = "d952222df5b953ba6845aab19447922eff841b011ee0442abab4bdb536089675"
 
 [[files]]
 file = "kubejs/assets/compline/lang/fr_fr.json"
-hash = "62da7bfbdb85887ebdab523eae2ea54d6159e34bb3f411f51d6adffff0bfba9b"
+hash = "846224a4c05bab8f642c26c1262869f12087f0669b6288aa9c99f0d3d0b3e0fd"
 
 [[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
@@ -861,8 +861,12 @@ file = "kubejs/assets/dynamic_fps/lang/fr_fr.json"
 hash = "ec7c8c515cbe1bfcaea11cedbc9404f7c1cdadb29fe337b0e41e35d8d62afb07"
 
 [[files]]
+file = "kubejs/assets/ec_ad/lang/en_us.json"
+hash = "b7dd5fe7ff838f3e34b2b18ce4c3643256f88621b088ebbac5d5b86682033e8e"
+
+[[files]]
 file = "kubejs/assets/ec_ad/lang/fr_fr.json"
-hash = "7dddaa0412947518969bdbfd6c3648410406be2afa5337fb337cdf6b68d40291"
+hash = "d490b40e56f2b435612b3a913abf4e51eb6c74b5ce4c4902e56503dac700682d"
 
 [[files]]
 file = "kubejs/assets/eclipticseasons/lang/fr_fr.json"
@@ -1389,6 +1393,22 @@ file = "kubejs/data/companions/worldgen/structure_set/companions_tent.json"
 hash = "579c797d04257d6b5eb7bfa4d112def8e1cc8f4d0b1f3d73da4400507debae21"
 
 [[files]]
+file = "kubejs/data/compline/cold_sweat/item/insulator/chorusoatl.json"
+hash = "af7a4918c8d068a97c8a53bb1abfb40c135b745a9d4e5ab9505235ddd874aedf"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/insulator/coralosaur.json"
+hash = "201868c8cd1196c7852b053ba4b51d895613eb2f09a6e7a28a51bb8b124b2c57"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/insulator/obsidiceratops.json"
+hash = "be127d7cd83ea0af8b373fbdacbfaa3d2b5b3cd91e6b8419eec6d664be65c665"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/insulator/therimoss.json"
+hash = "b308d2fea6ff1de139856bb67371ce2551443d975c8e216036b8cfa501e75703"
+
+[[files]]
 file = "kubejs/data/compline/lithostitched/worldgen_modifier/disque_climat.json"
 hash = "60571bbf67fe5afbedf88e8371663c75b99766e57ff6cf72837775129b6b6b25"
 
@@ -1675,6 +1695,102 @@ hash = "0e9706c350487985b3deb86986d41cb542724e18fa1d2c1f8ce940df79c479e1"
 [[files]]
 file = "kubejs/data/ec_ad/recipe/archie_trade/egg_to_talon.json"
 hash = "3ddbb8857eb721062e44cbb75edff4e6d46d155bf938196a356c6c49e9c416c6"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/chorusoatl_boots.json"
+hash = "78bc80b7955580434534ba7a423dd6926b9f80cadfdcef54dc3147960639439e"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/chorusoatl_chestplate.json"
+hash = "371ecc495b718405b01edecbd25b768592f4c57e7149daba13bc9af8a14e0ae5"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/chorusoatl_helmet.json"
+hash = "e225129bd00e97500a0cfa8879ea37e524d8810a27baa79314d71dbb3c09b2d8"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/chorusoatl_leggings.json"
+hash = "0ab91d0b3a2e6320e44d6f4ae9be1d018030dc9c70c9a9af5c5653046f88ae09"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/coralosaur_boots.json"
+hash = "4a2459c5b89900e3cfdd2df94ecd584e6487ac0d0935f1be83ea997e0f233f60"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/coralosaur_chestplate.json"
+hash = "7b2796579f1b74b71c527c0c343ae2c4a0503e797baae7587d7b3818de8791b4"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/coralosaur_helmet.json"
+hash = "68374c39a0267ca683e9c5ee3e2961e67e0c1eebdbefbc6baf1477b182e20b5b"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/coralosaur_leggings.json"
+hash = "3e06afe964d747f1aad92bb23436c42d37f876710772c025c441e21cfe899508"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/lushsaur_boots.json"
+hash = "b620e88a7f9dc725c172bf8804b4c7487e3b1b9b774b2be6f0807d1cd3bc93de"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/lushsaur_chestplate.json"
+hash = "5e35c2cc60b4ab52657b4bd7905e62258eb726ef23c2dda4c5dbb6ca4ce7a95c"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/lushsaur_helmet.json"
+hash = "d374064703fb4cd11b9cfb4ff5d3a744a68de363634fc3a2c625dba5abeb69f7"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/lushsaur_leggings.json"
+hash = "46a610121eb872506d550c0fbaea2979789760c6672d055a5493c55b5ac2f546"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/obsidiceratops_boots.json"
+hash = "f74681f28213cb6131b7b845db73ec20378792dcb02fee8108997d0bae2d9b18"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/obsidiceratops_chestplate.json"
+hash = "25358f44b2686d0cd469734ff686753b30dbc5412977042f6288eee7c1a73aba"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/obsidiceratops_helmet.json"
+hash = "aa48a5685f57641b0930ec7e1d5ab29a7760e934d4166c42b009e1d7ecbb0e0c"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/obsidiceratops_leggings.json"
+hash = "68e811b106290944e56cc08137ca9963c651414248be423c1d097540c93c9423"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/sculksaur_boots.json"
+hash = "f95ceda5bbdb1f263ad3f60f837a74750d55e1280f8763d116bc01869be24cc7"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/sculksaur_chestplate.json"
+hash = "1278fdd3eb24cee662bed6660667f1763db272da5dbd689285fb308cb104ea9b"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/sculksaur_helmet.json"
+hash = "2b469876fef09a50cf1b9f8302023b00c56d06665622fc653fc46b7aded1d92f"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/sculksaur_leggings.json"
+hash = "df79cc6eb88678c90cf3dbc13def84634afc3c8941e9bcff42b3987a994565a0"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/therimoss_boots.json"
+hash = "81a488b4b442f414e481f14fd7ffc48c6283910603db797c1cc04bba75593999"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/therimoss_chestplate.json"
+hash = "e5e835c7b1e348821cfd2179e3440eea83a1f583de93615b126b97759bf894c9"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/therimoss_helmet.json"
+hash = "137526debfa6e864e62ed3a2321a781c93b54fa40c51f2f298c845ed0e51263a"
+
+[[files]]
+file = "kubejs/data/ec_ad/recipe/therimoss_leggings.json"
+hash = "8b0dbff6e9c55c8ea2b1b6e823ae52933b78c6b7d0d1e352f94119289276d764"
 
 [[files]]
 file = "kubejs/data/ec_ad/tags/block/chorusoatl_egg_chorus.json"
@@ -3234,8 +3350,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.21.0.jar"
-hash = "4d69b9372d8e9260332e929deae84f355aaf5a46ad0c712bcf3b270c2f2f0757"
+file = "mods/compline-0.22.0.jar"
+hash = "252a5d896ed4bd61f7299751d68974462e976c7107b31756829112580c385b39"
 
 [[files]]
 file = "mods/configurable.pw.toml"
