@@ -35,16 +35,38 @@ void main() {
 
 #ifdef PROGRAM_DH_WATER
     if (vMat == DH_BLOCK_WATER) {
+        // L'eau au loin : les mêmes lois que de près (lib/water.glsl), mais ses vagues sont plus fines que le pixel ;
+        // toute leur pente est devenue rugosité, qui étale l'éclat de l'astre en un chemin de lumière.
         vec3 eye = normalize(-vPos);
-        float fresnel = 0.02 + 0.98 * pow(1.0 - max(dot(normal, eye), 0.0), 5.0);
         float sky = vLm.y * vLm.y;
-        vec3 body = waterMurk(waterHue(vTint.rgb), max(sky, 0.08), 1.0);
+        vec3 world = vPos + cameraPosition;
+        float lit = cloudShadow(world, gLightDir);
+        vec3 hue = waterHue(vTint.rgb);
+        WaveEnv env = waveEnvDefault();
+        env.open = 1.0;
+        ivec3 trains;
+        vec3 rms;
+        waveBands(WATER_WAVE_COUNT, env, trains, rms);
+        float rough = clamp(sqrt(2.0 * dot(rms, rms) + 0.0009 + 0.004 * rainStrength), 0.04, 0.45);
+        float cosV = max(dot(normal, eye), 0.0);
+        float F = min(fresnel(cosV, 1.0, WATER_IOR) * 1.35 + 0.012, 1.0);
+        vec3 down = refract(-eye, normal, 1.0 / WATER_IOR);
+        float sunIn = 1.0 - fresnel(max(gLightDir.y, 0.0), 1.0, WATER_IOR);
+        vec3 body = waterInscatter(hue, down, 64.0, gLightColor * lit * sunIn, gAmbient * max(sky, 0.06));
         vec3 r = reflect(-eye, normal);
         r.y = abs(r.y);
         float nearOnly;
         float veil = 1.0 - exp(-mistDepth(r, 4096.0, nearOnly));
         vec3 mirror = mix(skyAt(r), mistColor(r, 1.0), veil) * mix(0.15, 1.0, sky);
-        outColor = vec4(mix(body, mirror, fresnel), max(0.9, fresnel));
+        vec3 color = mix(body, mirror, F);
+        float nl = max(gLightDir.y, 0.0);
+        if (nl > 0.0) {
+            vec3 h = normalize(gLightDir + eye);
+            float spec = ggx(max(h.y, 0.0), rough) * smithG1(nl, rough) * smithG1(max(cosV, 1e-3), rough)
+                * fresnel(max(dot(eye, h), 0.0), 1.0, WATER_IOR) / (4.0 * max(cosV, 0.05));
+            color += gLightColor * lit * min(spec, 30.0) * (1.0 - 0.8 * rainStrength) * (1.0 - veil);
+        }
+        outColor = vec4(color, max(0.9, F));
         return;
     }
 #endif

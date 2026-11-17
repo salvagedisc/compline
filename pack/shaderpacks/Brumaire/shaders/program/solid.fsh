@@ -18,6 +18,8 @@ uniform sampler2D colortex6;
 #include "/lib/reflect.glsl"
 #include "/lib/voxtrace.glsl"
 #include "/lib/wakes.glsl"
+#include "/lib/rain.glsl"
+#include "/lib/waterfoam.glsl"
 #endif
 
 uniform sampler2D gtexture;
@@ -46,106 +48,7 @@ layout(location = 0) out vec4 outColor;
 #endif
 
 #ifdef PROGRAM_WATER
-vec4 water(vec3 biome, vec3 normal, vec2 lm) {
-    vec3 world = vPos + cameraPosition;
-    vec3 n = normal;
-    float foam = 0.0;
-    if (abs(normal.y) > 0.5) {
-        vec2 slope = waveSlope(world.xz, frameTimeCounter);
-#if WATER_WAKES > 0
-        // Les rides de ce qui passe (lib/wakes.glsl), lues au seizième de bloc comme les vagues.
-        vec2 at = world.xz;
-#if WATER_PIXELS > 0
-        at = (floor(at * 16.0) + 0.5) / 16.0;
-#endif
-        vec3 wake = wakeSlope(at);
-        vec2 ride = clamp(wake.xy * 0.45, -0.45, 0.45);
-#if WATER_PIXELS > 0
-        ride = floor(ride / 0.03 + 0.5) * 0.03;
-#endif
-        slope += ride;
-        foam = wake.z;
-#endif
-        if (normal.y > 0.5) foam = max(foam, shoreFoam(vPos));
-        n = normalize(vec3(-slope.x, 1.0, -slope.y));
-    }
-    vec3 eye = normalize(-vPos);
-    bool below = isEyeInWater == 1;
-    if (below) n = -n;
-    if (dot(n, eye) < 0.05) n = normalize(n + eye * (0.05 - dot(n, eye)));
-    float lit = shadowAt(vPos, normal, dither(gl_FragCoord.xy), 4) * cloudShadow(world, gLightDir);
-    float sky = lm.y * lm.y;
-    vec3 hue = waterHue(biome);
-    vec3 ext = waterExtinction(hue);
-    vec3 murk = waterMurk(hue, max(sky, 0.08), lit);
-
-    vec2 frag = gl_FragCoord.xy / vec2(viewWidth, viewHeight);
-    vec3 view = (gbufferModelView * vec4(vPos, 1.0)).xyz;
-    float jitter = dither(gl_FragCoord.xy);
-
-    if (below) {
-        // Vue d'en dessous : le monde du dessus passe par la fenêtre de Snell, au-delà l'eau se reflète elle-même.
-        vec3 t = refract(-eye, n, WATER_IOR);
-        vec3 r = reflect(-eye, n);
-        float dist;
-        vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, -1.0, WATER_REFLECTIONS, dist);
-        vec3 inner = mix(murk, hit.rgb, hit.a);
-        if (dot(t, t) < 1e-4) return vec4(inner, 1.0);
-        vec3 s = screenOf(view + mat3(gbufferModelView) * t * 12.0);
-        vec3 above = texture(colortex6, clamp(s.xy, 0.001, 0.999)).rgb;
-        if (s.z > 1.0 || any(lessThan(s.xy, vec2(0.0))) || any(greaterThan(s.xy, vec2(1.0)))) above = skyAt(t) * sky;
-        float cosT = max(dot(t, -n), 0.0);
-        float f = 0.02 + 0.98 * pow(1.0 - cosT, 5.0);
-        return vec4(mix(above, inner, f), 1.0);
-    }
-
-    // Ce qu'on voit à travers : le fond décalé par les vagues, éteint et voilé par l'épaisseur d'eau.
-    float surface = -view.z;
-    float straight = texelFetch(depthtex1, ivec2(gl_FragCoord.xy), 0).r;
-    float deep0 = straight >= 1.0 ? 64.0 : length(viewAt(frag, straight)) - length(view);
-    vec3 bend = mat3(gbufferModelView) * vec3(n.x, 0.0, n.z);
-    vec2 uv = frag + bend.xy * gbufferProjection[1][1] * 0.35 * min(deep0, 3.0) / max(surface, 1.0);
-    float depth = texture(depthtex1, uv).r;
-    if (depth < 1.0 && viewAt(uv, depth).z > view.z - 0.02) { uv = frag; depth = straight; }
-    float deep = depth >= 1.0 ? 64.0 : max(length(viewAt(uv, depth)) - length(view), 0.0);
-    vec3 pass = exp(-ext * deep);
-    vec3 under = texture(colortex6, uv).rgb * pass + murk * (1.0 - pass);
-
-    // Ce qu'elle reflète : la scène quand le rayon la trouve à l'écran, sinon le ciel.
-    vec3 r = reflect(-eye, n);
-    r.y = max(r.y, 0.01);
-    // Un peu plus de reflet que la physique ne le veut : l'eau se lit d'abord par ce qu'elle reflète.
-    float f = 0.04 + 0.96 * pow(1.0 - max(dot(n, eye), 0.0), 4.0);
-    vec3 mirror = skyReflection(world, r) * mix(0.12, 1.0, sky);
-    float dist;
-    vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, jitter, 1.0, WATER_REFLECTIONS, dist);
-#if VOXEL_REFLECTIONS > 0
-    // Ce que l'écran ne montre pas (la rive derrière soi, l'arbre hors du cadre) : cherché bloc par bloc.
-    if (hit.a < 0.99) {
-        float reach;
-        vec4 vox = voxelReflection(vPos + normal * 0.02, r, reach);
-        if (vox.a > 0.0) mirror = mix(mirror, veiled(vox.rgb, r * reach * 0.4), vox.a);
-    }
-#endif
-    if (hit.a > 0.0) {
-        // Le point reflété, voilé par l'air et la brume de la surface jusqu'à lui (le chemin de la caméra à la
-        // surface est voilé par composite1 comme le reste). La brume basse est déjà comptée une fois sur ce
-        // chemin : le reflet n'en reprend qu'une part, sans quoi les rives disparaîtraient de l'eau.
-        mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
-    }
-
-    // L'éclat du soleil sur les rides.
-    vec3 h = normalize(gLightDir + eye);
-    float glint = min(pow(max(dot(n, h), 0.0), 900.0) * (0.6 + 40.0 * f), 24.0);
-    vec3 color = mix(under, mirror, f) + gLightColor * lit * glint * 0.05;
-    // L'écume : des pixels blancs qui prennent la lumière du jour et du ciel, sans reflet.
-    float froth = foamPixels(world, foam) * (below ? 0.0 : 1.0);
-    if (froth > 0.0) {
-        vec3 light = gLightColor * lit * max(gLightDir.y, 0.0) * 0.9 + gAmbient * max(sky, 0.1) * 0.9;
-        color = mix(color, vec3(0.62, 0.66, 0.66) * light, 0.8 * froth);
-    }
-    return vec4(color, 1.0);
-}
+#include "/lib/watershade.glsl"
 
 /** La glace : sa couleur laisse voir au travers, sa surface lisse reflète le paysage, plus à jour frisant. */
 vec4 ice(vec3 albedo, float alpha, vec3 normal, vec2 lm, float ao) {

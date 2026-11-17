@@ -107,7 +107,9 @@ void main() {
         vec3 ext = waterExtinction(hue) * 0.55;
         vec3 pass = exp(-ext * min(len, 512.0));
         // La lumière du jour baisse d'un cran par bloc d'eau au-dessus de l'œil : près de la surface l'eau reste claire.
-        color = color * pass + waterMurk(hue, max(open, 0.06), open) * (1.0 - pass);
+        // Ce que l'eau diffuse d'elle-même entre l'œil et ce qu'on regarde : plus clair vers la surface et vers l'astre.
+        color = color * pass + waterScatterPath(ext, waterAlbedo(hue), dir, len, gLightColor * open, gAmbient * max(open, 0.06))
+            + vec3(0.004, 0.006, 0.007) * hue * (1.0 - pass);
         float mu = dot(dir, underwaterLightDir());
 #if LIGHT_SHAFTS > 0
         // Les rayons qui descendent de la surface, plus vifs quand on regarde vers elle, à contre-jour.

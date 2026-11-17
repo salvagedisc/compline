@@ -18,6 +18,8 @@ const uint VOX_RAIN = 1024u;
 // Bit 11 : le bloc se voit dans un reflet (lib/voxtrace.glsl) : tout sauf l'eau, les herbes, les fleurs, les lianes et les
 // torches. Sa couleur moyenne est rangée à part, celle du dessus dans voxTopImg, celle des côtés dans voxSideImg.
 const uint VOX_MIRROR = 2048u;
+// Bit 12 : de l'eau (lib/waterfoam.glsl : rives, chutes, étendue libre).
+const uint VOX_WATER = 4096u;
 
 #if COLORED_LIGHT > 0 || SHADER_RAIN > 0 || VOXEL_REFLECTIONS > 0
 #define VOXELS
