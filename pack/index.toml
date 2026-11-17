@@ -4416,7 +4416,7 @@ hash = "effac3ca4ede47835e907152fb2fbc3b4470185f798f6e7065f528085e57e29c"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/mist.fsh"
-hash = "4118617362ba3971c98eefdbb26f2434f23e1f4c161f97747c1d317ffe76fa64"
+hash = "e914da587b63fd699b37ef3db5cdf4208dc6821d39ba64141b9a4760505acb43"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/noise.csh"
