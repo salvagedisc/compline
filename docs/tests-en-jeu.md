@@ -105,6 +105,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Stacks**: logs and ingots stop at 16, planks and stone at 32, seeds at 64, chests at 8, Create machines at 4, water bottles at 8; tools never stack. A Farmer's Delight cooking pot (its stack of servings) and the Create crusher (18 nuggets) empty without losing anything. Compare `config/sensible_stackables/config.toml` with the generated file [P1 to P5].
 - [ ] **Sleeping bag** (Comforts): sleep in it, the spawn point does not move; is it cold in the snow (Cold Sweat)?
 - [ ] **Fishing** (Starcatcher, [0034](decisions/0034-starcatcher-fishing.md)): craft a hook and a bobber, then Starcatcher's rod; in EMI no vanilla fishing rod, the carrot on a stick asks for Starcatcher's rod. Fish a river, a lake and the sea: the minigame opens, a perfect catch gives more, a miss can lose the fish; Hybrid Aquatic's fish come out where they live (no piranha in a pond) [PE1]. Open the catalogue: entries for Hybrid Aquatic, Naturalist (bass, catfish at night, anglerfish, blobfish, piranha) and Spawn (bluefish), none for the End [PE2]. Put a Hybrid Aquatic hook on the rod, swap attachments in the tackle box [PE3]. Below y = -40, fish in lava with a rod that can: Nether catches such as the magma fish come out [PE4]. Build an aquarium and put a catch in it, a fish plaque on a wall: the Naturalist and Spawn fish show their model [PE5]. Cut a catch on the board into a fillet and cook a Starcatcher's Delight dish in the pot; no selling bin in EMI; texts in French [PE6].
+- [ ] **Interface that fades** (`ecran` module): change slot, then stand still 6 seconds: the hotbar, hearts, food, thirst and temperature gauge fade together and come back as soon as you scroll, hit, eat or get hit; walking alone leaves them hidden; under water, at 3 hearts, hungry, thirsty or too hot they stay [EC1 to EC5].
 - [ ] **Anvil without levels**: rename, repair with ingots, merge two enchanted pickaxes. Green cost « Usure : n » (wear: n), the item can be taken. At 40: « Trop usé ! » (too worn!) [X2, X3]. Blue moon: the cost drops [X8].
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
@@ -190,7 +191,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel), EC (fading interface) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |

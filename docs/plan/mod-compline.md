@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.23.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty and washes off in water) **acier_noir** (black steel, between steel and diamond) and **minage** (a well-forged pickaxe gives more ore) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.24.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty and washes off in water) **acier_noir** (black steel, between steel and diamond), **minage** (a well-forged pickaxe gives more ore) and **ecran** (the interface fades when the player does nothing) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -41,6 +41,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `vent` | client | none | 2, client (`vent.CampfireBlockMixin`, `vent.CampfireSmokeParticleMixin`, on vanilla code) |
 | `rendu` | client | Iris | 1, client (`rendu.IrisUniformsMixin`) |
 | `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
+| `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -276,6 +277,20 @@ Server, no other mod; without Overgeared nothing changes. It registers one globa
 
 **Checked** on the test bench on 2026-11-17: 150 iron ores and 150 coal ores mined with `/loot ... mine` and an iron pickaxe: 1.00 item each without quality, 1.31 and 1.29 with master quality. Not checked: a player's pickaxe, Spelunkery's nugget drops (test PG10).
 
+## `ecran` module
+
+Client only, no other mod. The interface fades when the player does nothing, so the landscape fills the screen: after `idleSeconds` (6) without a gesture, the hotbar, health, food, armour, air and the gauges next to them fade out in under a second, and come back in a quarter of a second.
+
+- **What brings it back** (`EcranClient`, every tick): a screen open (inventory, chat, a chest), the attack, use, pick, drop or swap keys held, another slot or another item in either hand (a tool wearing down does not count), a change of health, absorption, food, armour, thirst or mount, a hit taken.
+- **What keeps it**: health at 30 % or less, food or thirst at 6 or less, head under water or air not full, a body temperature of ±50 or more on Cold Sweat's gauge (damage starts at ±100). Walking does not keep it unless `showWhileMoving` is on.
+- **Layers**: only the NeoForge GUI layers listed in `layers` fade: the game's hotbar group (hotbar, jump meter, experience, health, armour, food, mount health, air, item name), Create's backtank air, Cold Sweat's body and vague temperature gauges. Thirst is drawn by Thirst Was Reclaimed inside the food layer and fades with it. The crosshair, chat, titles, action bar messages, effects, boss bars and every interactive overlay (Create's goggles and toolbox, Overgeared's anvil, Supplementaries' quiver) are not listed and never fade. The layers of the full pack were listed on the bench (55 layers).
+- **The fade**: during the fade only, each listed layer is drawn into a separate image cleared to transparent, then laid on the screen with the current opacity (`ONE, ONE_MINUS_SRC_ALPHA`, the image holds colours already multiplied by their opacity). Lowering the shader colour alone is not enough: hotbar items are drawn opaque and would stay solid inside a half-faded bar. Outside the fade a layer is drawn as usual (opacity 1) or cancelled (opacity 0), so nothing costs anything at rest. The listener runs last (`LOWEST`): a layer another mod or the `xp` module cancels is left alone.
+- **Mod gauges** (`EcranGauges`, by reflection, no dependency): thirst from Thirst Was Reclaimed's `thirst:player_thirst` attachment (`getThirst`), body temperature from Cold Sweat's `Overlays.BLEND_BODY_TEMP`, the value its gauge shows. A failed read logs a warning and drops that gauge.
+
+Config (`compline-client.toml`, `[ecran]` section): `enabled` (true; false: the game's interface, always shown), `idleSeconds` (6), `showWhileMoving` (false), `layers` (the list above).
+
+**Checked** on the test bench on 2026-11-17 (full pack, Brumaire on): after a slot change the hotbar, hearts, food, thirst drops and Cold Sweat's gauge show, then fade together, items included, and are gone; the chat stays; a body temperature set to 70 kept the interface while the gauge read 56 and let it fade once it fell to 35; thirst read 17 to 18. The bench runs at a few frames per second, so the timing of the fades was not judged there (tests EC1 to EC5).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -457,6 +472,16 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | AN4 | Steel pickaxe on diamond ore, on rough diamond, on obsidian; then the black steel pickaxe | Steel: no drop on diamond, obsidian mined; black steel: diamond and rough diamond drop, ancient debris refused |
 | AN5 | Smithing table: a black steel piece, the diamond template and a diamond | The diamond piece; a steel piece is refused |
 
+### Fading interface
+
+| # | Test | Expected |
+|---|---|---|
+| EC1 | In survival, change slot, then do nothing for 6 seconds | The hotbar, hearts, food, thirst and temperature gauge fade out together in under a second, items included; the crosshair and chat stay |
+| EC2 | Scroll the hotbar, hit, place a block, eat, get hit | The interface is back within a quarter of a second each time |
+| EC3 | Walk around for a minute without touching the hotbar | The interface stays hidden; with `showWhileMoving = true` it stays shown while walking |
+| EC4 | Dive under water, go down to 3 hearts, get hungry or thirsty, stand in a desert at noon | The interface stays shown as long as the air, health, food, thirst or body temperature need watching |
+| EC5 | Ride a horse, open Create's goggles on a machine, use Overgeared's anvil | Jump meter and horse health follow the hotbar; the goggles tooltip and the anvil minigame are never faded |
+
 ### Held items
 
 | # | Test | Expected |
@@ -477,12 +502,13 @@ Known fragile points:
 - ATMOSPHERICS: its mixin at the head of `renderSky`, the `moon_phases.png` texture, the name of `BiomeBlendUtil.resetCache`;
 - Enhanced Celestials 2: `ECWorldRenderer.changeMoonColor`, `LunarEvent.getMoonTextureLocation` and `getMoonSize` (mod id `enhancedcelestials2core`);
 - Traveler's Backpack: the `EffectFluid` constructor and the moment it empties its registry;
-- Thirst Was Reclaimed: `WaterPurity` and `ThirstHelper`.
+- Thirst Was Reclaimed: `WaterPurity` and `ThirstHelper`; for `ecran`, the `thirst:player_thirst` attachment and its `getThirst` method.
+- Cold Sweat: for `ecran`, the `Overlays.BLEND_BODY_TEMP` field and the names of its GUI layers (`cold_sweat:body_temp`, `cold_sweat:vague_temp`).
 - Distant Horizons: the `DhApiBeforeFogRenderEvent` and `DhApiBeforeRenderEvent` events (API 7), `GLState.saveState`, `AbstractChunkyAccessor.tryRunFirstTimeSetup` and its `listenerBound` field.
 - Punchy!: the `HandEquipStateMachine.shouldIgnoreComponentForEquipDiff` method (class `punchy.client.state.HandEquipStateMachine`). If an update of Punchy! or Sensible Stackables fixes the mismatch on its side, the mixin can go.
 - Create: `KineticBlockEntity` (`write`/`read`, `addToGoggleTooltip`), `RotatedPillarKineticBlock`, `BlockStressValues.IMPACTS`; the compile classpath pins Ponder and Flywheel to the versions Create bundles (`build.gradle`).
 - Clearings: the names of the ATMOSPHERICS methods that read the biome (`BiomeBlendUtil.collect`, `AtmosphericEnvironmentVisuals.getBiomeId`, `AirHazeBiomeSettings.smooth`, `HorizonHazeCometRenderer.renderHaze` and `getCurrentBiomeSettings`), True Adaptive Music's `BiomePredicate.test`, Sodium's `LevelColorCache.updateColorBuffers`. All use `require = 0`: a renamed method leaves that part of the look off (mist, music or colours) without an error, so check K1, K6 and K2 after an update.
-- Minecraft and NeoForge: `ClientLevel.calculateBlockTint`, `Biome.getGrassColor`, `getFoliageColor` and `getWaterColor`, `MobSpawnEvent.PositionCheck`, `ChunkAccess.fillBiomesFromNoise` and `ChunkMap.resendBiomesForChunks` (clearings, the last two for old worlds only); the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers, the cancellation of `AnvilUpdateEvent`.
+- Minecraft and NeoForge: `ClientLevel.calculateBlockTint`, `Biome.getGrassColor`, `getFoliageColor` and `getWaterColor`, `MobSpawnEvent.PositionCheck`, `ChunkAccess.fillBiomesFromNoise` and `ChunkMap.resendBiomesForChunks` (clearings, the last two for old worlds only); the read of `Player.experienceLevel` in `AnvilMenu.mayPickup`, the names of the `EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers and of the hotbar group faded by `ecran`, the cancellation of `AnvilUpdateEvent`.
 
 ## Next modules
 

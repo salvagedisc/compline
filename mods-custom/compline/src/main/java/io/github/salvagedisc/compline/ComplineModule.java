@@ -31,6 +31,8 @@ public enum ComplineModule {
      *  (client et serveur ; tout se passe sur le serveur). Aucun mod requis. */
     BORD("bord", null, bus -> io.github.salvagedisc.compline.bord.BordModule.start(bus)),
     /** Le vent du pack : direction, force, rafales, et la fumée des feux de camp qui le suit (client). Aucun mod requis. */
+    /** L'interface qui s'efface quand on ne fait rien (client). Aucun mod requis. */
+    ECRAN("ecran", Dist.CLIENT, bus -> io.github.salvagedisc.compline.ecran.EcranModule.start(bus)),
     VENT("vent", Dist.CLIENT, bus -> io.github.salvagedisc.compline.vent.VentModule.start(bus)),
     /** Les clairières et le vent du pack donnés au pack de shaders de Compline, sous Iris (client). */
     RENDU("rendu", Dist.CLIENT, bus -> io.github.salvagedisc.compline.rendu.RenduModule.start(bus), ModIds.IRIS),

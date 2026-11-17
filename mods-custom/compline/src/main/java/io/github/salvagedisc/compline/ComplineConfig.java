@@ -1,5 +1,7 @@
 package io.github.salvagedisc.compline;
 
+import java.util.List;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
@@ -32,6 +34,17 @@ public final class ComplineConfig {
     private static final ModConfigSpec.IntValue ZOO_OBSERVE_SECONDS;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
+    private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
+    private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
+    private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> ECRAN_LAYERS;
+
+    /** La barre d'action et ce qui l'entoure : couches du jeu, air du scaphandre de Create, température du corps de Cold Sweat. La soif de Thirst est dessinée dans la couche de la faim. */
+    private static final List<String> ECRAN_DEFAULT_LAYERS = List.of(
+            "minecraft:hotbar", "minecraft:jump_meter", "minecraft:experience_bar", "minecraft:player_health",
+            "minecraft:armor_level", "minecraft:food_level", "minecraft:vehicle_health", "minecraft:air_level",
+            "minecraft:selected_item_name", "minecraft:experience_level",
+            "create:remaining_air", "cold_sweat:body_temp", "cold_sweat:vague_temp");
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -85,6 +98,25 @@ public final class ComplineConfig {
                 .define("enabled", true);
         client.pop();
 
+        client.comment("Module ecran (client) : l'interface s'efface quand on ne fait rien.").push("ecran");
+        ECRAN_ENABLED = client
+                .comment("Interrupteur du module. Vrai : après quelques secondes sans geste, la barre d'action, la vie, la faim,",
+                        "l'armure et les jauges voisines s'effacent en fondu ; elles reviennent dès qu'on change d'objet, frappe,",
+                        "utilise, prend un coup ou qu'une valeur bouge, et restent quand la vie ou la faim sont basses et sous l'eau.",
+                        "Faux : l'interface du jeu, toujours affichée.")
+                .define("enabled", true);
+        ECRAN_IDLE_SECONDS = client
+                .comment("Secondes sans geste avant que l'interface s'efface.")
+                .defineInRange("idleSeconds", 6, 1, 120);
+        ECRAN_SHOW_WHILE_MOVING = client
+                .comment("Marcher, nager ou sauter garde aussi l'interface. Faux : elle s'efface même en marche, comme au repos.")
+                .define("showWhileMoving", false);
+        ECRAN_LAYERS = client
+                .comment("Couches de l'interface qui s'effacent (noms NeoForge des couches). Le viseur, le chat, les titres,",
+                        "les effets et les messages ne sont pas dans la liste et restent toujours visibles.")
+                .defineListAllowEmpty("layers", ECRAN_DEFAULT_LAYERS, () -> "minecraft:hotbar",
+                        o -> o instanceof String text && ResourceLocation.tryParse(text) != null);
+        client.pop();
 
         CLIENT_SPEC = client.build();
 
@@ -247,6 +279,22 @@ public final class ComplineConfig {
 
     public static int zooObserveSeconds() {
         return read(COMMON_SPEC, ZOO_OBSERVE_SECONDS);
+    }
+
+    public static boolean ecranEnabled() {
+        return read(CLIENT_SPEC, ECRAN_ENABLED);
+    }
+
+    public static int ecranIdleSeconds() {
+        return read(CLIENT_SPEC, ECRAN_IDLE_SECONDS);
+    }
+
+    public static boolean ecranShowWhileMoving() {
+        return read(CLIENT_SPEC, ECRAN_SHOW_WHILE_MOVING);
+    }
+
+    public static List<? extends String> ecranLayers() {
+        return CLIENT_SPEC.isLoaded() ? ECRAN_LAYERS.get() : ECRAN_DEFAULT_LAYERS;
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
