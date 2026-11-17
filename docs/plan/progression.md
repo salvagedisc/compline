@@ -10,7 +10,7 @@ Ladder, from the bench:
 | Steel (Overgeared) | 17 | 1 per piece | 500, 7 | Alloy furnace: 3 iron + 1 coal → 3 crude steel |
 | Black steel (`compline`) | 19 | 1.5 per piece | 900, 7.5 | Steel, Spelunkery magnetite and charcoal; master anvil |
 | Diamond | 20 | 2 per piece | 1561, 8 | Diamonds near deep lava, the template from the coniferous monument, a black steel piece as base |
-| Orichalcum (renamed netherite) | 20 + | 3 per piece | — | The burning heart (planned) |
+| Orichalcum (netherite, renamed in French) | 20 | 3 per piece | 2031, 9 | Ancient debris beside deep lava, Overgeared's master forging, the template from Archie |
 
 Dinosaur armours are a side branch: forged at the anvil with steel plates, with quality, each set opening one part of the world.
 
@@ -45,6 +45,15 @@ Each set opens part of the world, in the spirit of Breath of the Wild, through C
 | Sculksaur | Ancient cities in silence (the Warden is kept there only) | — | Silent steps, sound decoy |
 | Lushsaur | Shy wildlife (zoo photos) | — | Camouflage when sneaking |
 
+## The burning heart and orichalcum (fourth step)
+
+Netherite comes to the Overworld, deep down, and is called **orichalque** in French (the team's choice: a name that does not point to a closed world). Only the French texts change: vanilla items, Overgeared's alloy, Starcatcher's upgraded rod (lava fishing still needs an orichalcum rod or the amethyst hook), EMI's tag names (`kubejs/assets/*/lang/fr_fr.json`); the English stays "netherite".
+
+- **Ancient debris beside deep lava**, mined with a diamond pickaxe (black steel cannot: the chain is black steel, diamond, orichalcum). `compline:debris_pres_de_la_lave` (24 tries per chunk between y −64 and −40, kept only where lava lies within 2 or 3 blocks) places `compline:debris_du_coeur`: Overgeared-sized clusters of up to 3 ancient debris in stone, deepslate, magma, basalt or blackstone, never touching air. On the bench, 256 chunks: 99 ancient debris (about 25 ingots). Regions Unexplored's scorching caves were meant as a second source, but `/locate` finds none on the disc.
+- **Overgeared's netherite chain is back**: 4 netherite scraps and 4 gold in the alloy furnace for netherite, now made from a blast furnace, deepslate bricks and magma blocks (« Four à alliage de magma »), the heated alloy hammered with a master-level minigame (a failure gives the scraps back). Removed from the sort lists in `tri.js`.
+- **The template comes from Archie**: once the Obsidiceratops is tamed (it lives in the redstone caves), Archie trades one netherite upgrade template for 8 to 10 obsidian horns, once. It is copied at the workbench with a magma block instead of netherrack.
+- **Heat**: the Obsidiceratops set (fire immunity, Cold Sweat heat bonus) is the way to stay down there; lava already heats the air in Cold Sweat. To be tuned in game.
+
 Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager trades and structure chests can still hold diamonds.
 
 ## In-game tests
@@ -56,3 +65,5 @@ Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager tra
 - [ ] PG5. The black steel chain, the master anvil and the diamond rule: tests AN1 to AN5 of [mod-compline](mod-compline.md#black-steel).
 - [ ] PG6. Forge an Obsidiceratops chestplate on the smithing anvil (5 horns, 3 steel plates): it has a quality; the workbench recipe is gone. Wear the full set in a hot place: Cold Sweat's heat stays bearable; the tooltip names the bonus.
 - [ ] PG7. Full Chorusoatl set, sneak and press the armour key: no teleport, the « no ability » message; slow falling stays; the tooltip no longer offers the teleport.
+- [ ] PG8. Deep below, beside a lava lake under y −40: ancient debris inside the rock, never in the open; smelted into scraps (« Fragments d'orichalque »).
+- [ ] PG9. Craft the « Four à alliage de magma », alloy 4 scraps and 4 gold, hammer the heated alloy on a smithing anvil (master minigame): an orichalcum ingot. Archie sells the template after the Obsidiceratops is tamed.
