@@ -23,10 +23,24 @@ in vec2 vUv;
 layout(location = 0) out vec4 outColor;
 
 const vec3 LUMA = vec3(0.2126, 0.7152, 0.0722);
+#define TONE_HUE_NORM 0.5
 
 /** Courbe de tons : une épaule douce pour les hautes lumières, un pied qui garde du noir. */
-vec3 tone(vec3 x) {
+float tone(float x) {
     return clamp(x * (2.51 * x + 0.03) / (x * (2.43 * x + 0.59) + 0.14), 0.0, 1.0);
+}
+
+/**
+ * La courbe appliquée à l'intensité plutôt qu'à chaque canal : un sable ou une neige au soleil gardent leur teinte
+ * au lieu de blanchir. L'intensité mêle luminance et canal le plus fort, pour qu'un rouge vif ne déborde pas ;
+ * seul ce qui dépasse encore le blanc pâlit, comme une pellicule qui sature.
+ */
+vec3 toneColor(vec3 x) {
+    float n = max(mix(dot(x, LUMA), max(x.r, max(x.g, x.b)), TONE_HUE_NORM), 1e-5);
+    vec3 c = x * (tone(n) / n);
+    float over = max(c.r, max(c.g, c.b));
+    if (over > 1.0) c = mix(c / over, vec3(1.0), clamp((over - 1.0) * 0.5, 0.0, 1.0));
+    return clamp(c, 0.0, 1.0);
 }
 
 #ifdef BLOOM
@@ -59,14 +73,15 @@ void main() {
     float adapt = mix(2.2, 1.0, smoothstep(-0.18, 0.12, sunUp));
     adapt *= mix(1.5, 1.0, smoothstep(0.0, 0.5, float(eyeBrightnessSmooth.y) / 240.0));
     color *= 0.62 * EXPOSURE * adapt;
-    color = tone(color);
+    color = toneColor(color);
     float l = dot(color, LUMA);
     // Ombres un peu froides, lumières un peu chaudes.
-    color *= mix(vec3(0.96, 1.0, 1.04), vec3(1.03, 1.0, 0.95), smoothstep(0.05, 0.75, l));
-    color = mix(vec3(l), color, SATURATION * 0.88);
+    color *= mix(vec3(0.99, 1.0, 1.01), vec3(1.04, 1.0, 0.93), smoothstep(0.05, 0.75, l));
+    // Les ombres gardent leur couleur : une pellicule, pas une vidéo délavée.
+    color = mix(vec3(l), color, SATURATION * mix(1.3, 1.08, smoothstep(0.04, 0.45, l)));
     color = (color - 0.5) * CONTRAST + 0.5;
     // Une image mate : les noirs à peine levés, les blancs à peine retenus.
-    color = color * 0.95 + 0.022;
+    color = color * 0.96 + 0.016;
     color = pow(max(color, 0.0), vec3(1.0 / 2.2));
     color += (fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715)))) - 0.5) / 255.0;
     outColor = vec4(color, 1.0);

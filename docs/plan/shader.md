@@ -25,7 +25,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | File | Content |
 |---|---|
 | `lib/settings.glsl` | Every setting shown in the Iris menu |
-| `lib/common.glsl` | Time of day, colours of the light read in the sky table, sky, sage greens |
+| `lib/common.glsl` | Time of day, colours of the light read in the sky table, sky, olive greens |
 | `lib/atmosphere.glsl`, `program/sky.csh` | The atmosphere: constants, layout of the sky table, the program that fills it |
 | `lib/shadow.glsl`, `lib/light.glsl` | Soft shadows, lighting of a surface |
 | `program/ao.fsh`, `program/deferred1.fsh` | Screen occlusion, sky |
@@ -46,12 +46,13 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **The sky is physical**: air scatters blue (Rayleigh), fine haze scatters around the sun (Mie), ozone keeps the blue of the zenith at twilight. The sunset reddens by itself; the sun and the moon light the same atmosphere, the moon by its phase. A summer sky is never deep blue.
 - **The light follows the sky**: the colour of the sun is what the air leaves of it (white at noon, orange then red near the horizon); the light of the sky is its mean over the vault; at night the eye sees blue and the night never goes fully black.
 - **The air of the biome** (Iris' `rainfall` and `temperature` of the player's biome, eased over about ten seconds): a humid biome has a paler sky, more haze in the distance and more mist, olive in a swamp or a jungle; a cold one has a bluish mist; a hot dry one has dust, a yellowed sky and less mist.
-- **Distant air** (`AIR_DENSITY`): the far landscape takes the colour of the low sky, blue first.
+- **Distant air** (`AIR_DENSITY`): the far landscape fades toward the low sky, blue first, into a warm grey rather than a pure sky blue.
 - **Light in the air** (`LIGHT_SHAFTS`, `SHAFT_STRENGTH`): the air itself scatters a little sun, mostly forward; where foliage or a ridge cuts it in the shadow map, shafts. Only in the open.
 - **The eye adapts**: the image brightens at night (up to 2.2×) and underground (1.5×).
 - **Soft shadows** (`SHADOW_SOFTNESS`): the shader first looks how far the shadow caster is, and widens the edge with that distance, as under a tall tree. Leaves in the shade of other leaves still get some sun through the foliage.
 - **Screen occlusion** (`AO_SAMPLES`, `AO_RADIUS`, `AO_STRENGTH`): only the light of the sky and of blocks is darkened, never the sun; half as much on foliage. Off in the Light profile.
-- **Grade**: greens pulled toward sage, a slightly lower saturation and a matte image (blacks barely lifted).
+- **Tone curve that keeps the hue**: the curve is applied to the intensity of a colour (a mix of its luminance and its strongest channel) instead of to each channel, so sand, snow or a sunlit field keep their colour instead of bleaching; only what still exceeds white fades to it, like film.
+- **Grade** (calibrated on Recrafted screenshots, 2026-11-17): greens pulled toward a warm olive (`OLIVE`), a warm sun and a less blue sky light, shadows that keep their colour (more saturation in the darks than in the lights), a matte image (blacks barely lifted).
 
 ## Clouds
 
@@ -106,7 +107,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius; the opening wave is followed.
 - Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
 - A ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift.
-- No mist underground; thin by day, more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
+- No mist underground; barely there at noon (near air stays clear, as in Recrafted), more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
 - Its light: the light of the sky, and the sun scattered mostly forward (a halo when looking toward the sun). The far part (the ring) takes the colour of the low sky in that direction: at sunset it glows on the side of the sun.
 
 ## What the `compline` mod gives the shader (`rendu` module)

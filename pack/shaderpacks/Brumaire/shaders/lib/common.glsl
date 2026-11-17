@@ -68,13 +68,13 @@ void initEnv() {
     float fade = smoothstep(0.0, 0.07, abs(e));
     // Couleurs lues dans la table du ciel : ce que l'atmosphère laisse du soleil (blanc à midi, orangé puis rouge
     // au ras de l'horizon) et de la lune (selon sa phase), tirée vers le bleu comme l'œil la voit la nuit.
-    vec3 sun = skyRow(1) / vec3(0.95, 0.88, 0.80) * 3.4;
+    vec3 sun = skyRow(1) / vec3(0.97, 0.89, 0.78) * 3.4;
     vec3 moon = luma(skyRow(2)) * vec3(0.36, 0.48, 0.80) * 0.26;
     gLightColor = (e > 0.0 ? sun : moon) * fade * (1.0 - 0.85 * rainStrength);
     // Lumière du ciel : sa moyenne, un peu désaturée (le ciel n'est jamais d'un seul bleu), plus le soleil renvoyé
     // par le sol et une lueur nocturne qui ne laisse jamais le noir complet.
     vec3 sky = skyRow(0);
-    vec3 amb = mix(sky, vec3(luma(sky)), 0.45) * 1.1 + (e > 0.0 ? sun * fade * 0.06 : vec3(0.0));
+    vec3 amb = mix(sky, vec3(luma(sky)) * vec3(1.02, 1.0, 0.95), 0.6) * 1.1 + (e > 0.0 ? sun * fade * 0.06 : vec3(0.0));
     amb += vec3(0.020, 0.026, 0.042);
     gAmbient = mix(amb, vec3(luma(amb)) * vec3(0.95, 0.95, 0.93) * 0.75, rainStrength * 0.7);
     // Un éclair qui frappe blanchit tout d'un coup, en vacillant, moins quand il tombe loin.
@@ -105,12 +105,12 @@ vec3 sunDisc(vec3 d) {
     return skyRow(1) * (SUN_POWER * 1.8) * disc * limb * (1.0 - rainStrength);
 }
 
-/** Les verts tirés vers un vert de sauge, à luminance égale. */
+/** Les verts tirés vers un vert olive chaud, à luminance égale. */
 vec3 olive(vec3 c) {
     float green = c.g - max(c.r, c.b);
     float w = clamp(green / max(c.g, 1e-4) * 2.5, 0.0, 1.0) * OLIVE;
     float l = luma(c);
-    vec3 hue = vec3(0.89, 1.0, 0.63);
-    vec3 target = mix(l * hue / luma(hue), vec3(l), 0.22) * 0.94;
+    vec3 hue = vec3(0.94, 1.0, 0.50);
+    vec3 target = l * hue / luma(hue);
     return mix(c, target, w);
 }
