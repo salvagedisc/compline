@@ -1,6 +1,6 @@
 # The custom `compline` mod
 
-The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.26.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty and washes off in water) **acier_noir** (black steel, between steel and diamond), **minage** (a well-forged pickaxe gives more ore) and **ecran** (the interface fades when the player does nothing) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
+The mod proposed in [12.4](../archive/plan/12-verification.md#124-the-custom-compline-mod) and retained by decision 17 of [12.5](../archive/plan/12-verification.md#125-decisions-that-are-added-continuing-1012). It is made of modules that are enabled one by one. Version 0.27.0 contains the **ciel** (sky), **xp**, **horizon** (Distant Horizons), **clairiere** (clearings), **dissipateur** (dissipator), **outils** (tools), **monuments**, **bord** (world edge), **rendu** (shader link), **vent** (wind), **relief** (height of the world for the resource pack), **zoo** (stamps for every creature in Archie's guidebook), **patine** (armour that gets dirty and washes off in water) **acier_noir** (black steel, between steel and diamond), **minage** (a well-forged pickaxe gives more ore) and **ecran** (the interface fades when the player does nothing) modules, plus [compatibility fixes](#compatibility-fixes) (Punchy! and Sensible Stackables, Streams Reflowing and Spelunkery, Lithostitched, Archie's Dinosaurs' Chorusoatl armour). The **titres** module (each screen's name on a plate drawn by the `compline-interface` pack) left in 0.10.1 with that pack ([0024](../decisions/0024-removing-the-house-resource-packs.md)); the **averse** (rain, storm, leaves in the wind) and **rayons** (glints on water) modules left in 0.11.0, with their textures ([0026](../decisions/0026-second-cleanup.md)): rain, storms and foliage are those of the game and of Where Winds Blow.
 
 > **Status as of 2026-10-26.** Version 0.4.1 compiles (`./gradlew build`, against Enhanced Celestials 2, Distant Horizons 3.3.3 and Create 6.0.10) and the full pack starts on a dedicated server with it; the clearing conversion and the dissipator were checked on that server with commands. **Nothing has been tested in game with a player**. Everything below comes from reading the code of the targeted mods (jars opened with `javap`). The list of [in-game tests](#in-game-tests) says what must be checked before relying on it.
 
@@ -32,7 +32,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
-| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon | 4, all client (6 before 0.7.0) |
+| `ciel` | client | ATMOSPHERICS; Enhanced Celestials for the moon; Iris for the shader sky | 6, all client (4 from 0.7.0 to 0.26.0) |
 | `xp` | both (the anvil on both sides, the bar on the client) | none | 1, common (`xp.AnvilMenuMixin`, on vanilla code) |
 | `horizon` | both (the fog on the client, the Chunky fix on both sides) | Distant Horizons (Chunky for its fix, only if a server owner adds it) | 5: `horizon.FogRendererMixin`, `horizon.VanillaFadeMixin`, `horizon.FarFadeMixin` and `horizon.GLStateMixin` client, `horizon.ChunkyAccessorMixin` common |
 | `clairiere` | both (the blocks and the list of clearings on the server, their look on the client) | none; ATMOSPHERICS, True Adaptive Music and Sodium each for its part of the look | 5, all client: `clairiere.ClientLevelTintMixin`, `clairiere.BiomeLookMixin` (vanilla code), `clairiere.SodiumTintMixin`, `clairiere.AtmosphericsBiomeMixin`, `clairiere.MusicBiomeMixin` |
@@ -85,6 +85,14 @@ ATMOSPHERICS computes the mist from the biomes around the player. It keeps the r
   It returns `true` if the cache was cleared, or scheduled to be cleared on the render thread. It returns `false` if ATMOSPHERICS is absent, if the module is off or if we are on a server. `ComplineSky.isFogCacheAvailable()` answers the same question without clearing anything. KubeJS may require the class to be allowed in its class filter. A server script that wants to trigger the clearing on players' machines must send them a packet, for example with `NetworkEvents.dataReceived` on the client side.
 
 The cache is cleared by `BiomeBlendUtil.resetCache()`, a private ATMOSPHERICS method, reached through a mixin accessor (`@Invoker`).
+
+### Shader packs: the pack draws the sky again
+
+**The problem** (seen on 2026-11-17 on the bench and by the showcase captures). ATMOSPHERICS cancels `renderSky` and draws its own dome. Under Iris with Brumaire, the pack paints the sky itself (deferred pass) and only keeps the stars and the moon of the game's sky; with ATMOSPHERICS' dome instead, the night had no stars and a hollow grey square in place of the moon, and depending on the order in which mods apply their mixins the whole sky could turn dark grey with stars at noon.
+
+**The fix** (0.27.0). ATMOSPHERICS already steps aside when No Man's Land is loaded and its friendly moon is up (`Atmospherics.isNoMansLandLoaded` and `isFriendMoonActive`, read at the start of its sky). `ShaderSkyMixin` wraps the `renderSky` call in `renderLevel` and marks it when `IrisApi.isShaderPackInUse()` is true; during that call only, `AtmosphericsSkyGateMixin` makes both methods answer true. The vanilla sky then runs, Iris hands it to the pack, and Enhanced Celestials draws its own moon (`MoonOverlay` sees the vanilla body and stays out of it). Elsewhere (fog colour, sky colour) and without a shader pack, ATMOSPHERICS is unchanged. `require = 0`; applied only with ATMOSPHERICS and Iris.
+
+**Checked** on the bench on 2026-11-17 (Brumaire, ATMOSPHERICS 2.6.5, Enhanced Celestials): at midnight, before the fix no stars and a hollow square moon off its place; after it, Brumaire's stars, the moon in its phase at its place with its halo. Noon and dawn unchanged. No mixin error in the log.
 
 ### The Friendly Moon under ATMOSPHERICS
 
@@ -350,6 +358,7 @@ None of this has been done. These tests are also gathered with those of the othe
 | C10 | Log at startup | "Module ciel chargé", no `compline` mixin warning |
 | C11 | Frames per second at night, with and without the module | No visible difference |
 | C12 | Instance without Enhanced Celestials, then without ATMOSPHERICS | The game starts; moon mixins not applied, or module ignored |
+| C13 | Brumaire on, clear night then noon; then shaders off (Iris menu) | With Brumaire: stars, the moon in its phase, a blue sky at noon. Shaders off: ATMOSPHERICS' sky as before |
 
 ### XP
 

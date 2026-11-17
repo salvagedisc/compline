@@ -23,6 +23,8 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
             Map.entry("ciel.BiomeBlendUtilInvoker", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("ciel.ClientPacketListenerMixin", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("ciel.AtmosphericsFadeMixin", List.of(ModIds.ATMOSPHERICS)),
+            Map.entry("ciel.AtmosphericsSkyGateMixin", List.of(ModIds.ATMOSPHERICS, ModIds.IRIS)),
+            Map.entry("ciel.ShaderSkyMixin", List.of(ModIds.ATMOSPHERICS, ModIds.IRIS)),
             Map.entry("clairiere.AtmosphericsBiomeMixin", List.of(ModIds.ATMOSPHERICS)),
             Map.entry("clairiere.MusicBiomeMixin", List.of(ModIds.TRUE_ADAPTIVE_MUSIC)),
             Map.entry("clairiere.SodiumTintMixin", List.of(ModIds.SODIUM)),

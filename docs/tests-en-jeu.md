@@ -99,6 +99,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then harvest moon and super moon: colour and size specific to each, with no vanilla moon behind [C2, C3].
 - [ ] Rain then thunderstorm: the moon fades with the sky [C4]. Underwater and blinded: no double moon, no vanishing moon [C5].
 - [ ] Frames per second at night: no visible difference with the `ciel` (sky) module turned off [C11].
+- [ ] With Brumaire on: stars and the moon in its phase at night, a blue sky at noon; with shaders off in the Iris menu, ATMOSPHERICS' sky as before [C13].
 - [ ] `/ec lunarForecast`: no blood moon.
 - [ ] Several moons can show together if Enhanced Celestials rolls them: the Friendly Moon rule "one moon at a time" no longer applies. Note what you see.
 - [ ] Nights are truly dark (More Darkness), auroras in cold biomes.
