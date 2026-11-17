@@ -65,7 +65,7 @@ export const LIEUX: Lieu[] = [
     ],
   },
   {
-    id: 'lac', touche: 2, nom: 'Le lac', theme: 'Le rendu', x: 0.52, y: 0.27,
+    id: 'lac', touche: 2, nom: 'Le lac', theme: 'Le rendu', x: 0.51, y: 0.25,
     intro: "Brumaire, un shader écrit de zéro pour Compline et allumé par défaut. Il garde les pixels du jeu nets et donne au monde sa lumière.",
     fond: c('bru-couchant.jpg'),
     fonctions: [

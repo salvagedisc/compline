@@ -5,7 +5,9 @@ import { Brume } from './Brume'
 import { Pixel } from './Pixel'
 
 const BORD = 6000 // blocks from the centre to the edge
-const R_IMG = 374 / 760 // edge radius as a fraction of the map image
+// The map image spans -6200..6200 blocks at one pixel per 16 blocks (775 px).
+export const R_IMG = 6000 / 12400 // edge radius as a fraction of the map image
+export const R_RIVAGE = 5700 / 12400 // open sea starts here
 
 export const CARTE_SRC = `${import.meta.env.BASE_URL}captures/carte-disque.png`
 
@@ -54,7 +56,7 @@ export function Carte({ intro, actif, onChoisir, reduit }: Props) {
       b.disc = {
         x: ((r.left - s.left + r.width / 2) / s.width) * b.cols,
         y: ((r.top - s.top + r.height / 2) / s.height) * b.rows,
-        r: (r.width / 2 / s.width) * b.cols * (369 / 380),
+        r: (r.width / s.width) * b.cols * R_IMG,
       }
       b.holes = LIEUX.map((l) => ({
         x: ((r.left - s.left + l.x * r.width) / s.width) * b.cols,

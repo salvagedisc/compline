@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import type { Media, Zoom } from '../data/lieux'
-import { CARTE_SRC, lireCarte } from './Carte'
+import { CARTE_SRC, R_RIVAGE, lireCarte } from './Carte'
 
 const LOUPE = 2.6 // magnification of the lens
 const LENTILLE = 200 // lens size in CSS pixels, kept in step with .lentille
@@ -230,7 +230,7 @@ function CarteMesure() {
       <div className="carte-mesure" onPointerMove={bouger} onPointerDown={bouger}>
         <img src={CARTE_SRC} alt="Carte des biomes du disque" draggable={false} />
         <svg viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r={(355 / 760) * 100} fill="none" stroke="var(--lanterne)" strokeWidth="0.3" strokeDasharray="1 1" />
+          <circle cx="50" cy="50" r={R_RIVAGE * 100} fill="none" stroke="var(--lanterne)" strokeWidth="0.3" strokeDasharray="1 1" />
           {l && <line x1="50" y1="50" x2={l.fx * 100} y2={l.fy * 100} stroke="var(--lanterne)" strokeWidth="0.5" />}
           <circle cx="50" cy="50" r="0.8" fill="var(--lanterne)" />
         </svg>
