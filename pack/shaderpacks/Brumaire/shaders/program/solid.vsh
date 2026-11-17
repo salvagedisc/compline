@@ -1,6 +1,7 @@
 // Sommets de toute la géométrie éclairée : terrain, eau, entités, blocs-entités, main, particules.
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
+#include "/lib/taa.glsl"
 
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
 #define HAS_BLOCK_ID
@@ -43,5 +44,5 @@ void main() {
     vPos.xz -= dir * force * 0.35 * vPos.y;
     view = gbufferModelView * vec4(vPos, 1.0);
 #endif
-    gl_Position = gl_ProjectionMatrix * view;
+    gl_Position = taaJitter(gl_ProjectionMatrix * view);
 }

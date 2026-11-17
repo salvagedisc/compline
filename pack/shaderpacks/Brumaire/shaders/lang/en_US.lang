@@ -127,3 +127,7 @@ value.SMAA.0=Off
 value.SMAA.1=Medium
 value.SMAA.2=High
 value.SMAA.3=Ultra
+option.TAA=Temporal anti-aliasing
+option.TAA.comment=Blends each frame with the previous ones: foliage, fences and distant edges stop shimmering as you move. Cheap.
+value.TAA.0=Off
+value.TAA.1=On
