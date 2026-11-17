@@ -19,7 +19,9 @@ import net.neoforged.neoforge.common.NeoForge;
  *   <li>{@code brumaireWind} : direction (x, z), force et turbulence du vent du pack (module vent) ;</li>
  *   <li>{@code brumaireGust0..1} : ses fronts de rafale les plus proches, déjà réduits à une bande à traverser ;</li>
  *   <li>{@code brumairePush0..3} : les êtres vivants les plus proches, (x, y, z) de leurs pieds depuis la caméra et le
- *   rayon d'herbes qu'ils couchent.</li>
+ *   rayon d'herbes qu'ils couchent ;</li>
+ *   <li>{@code brumaireWake0..5} et {@code brumaireWakeSpeed0..1} : ce qui ride l'eau près de la caméra (barques,
+ *   nageurs, bêtes qui pataugent), le point de la surface sous eux, leur demi-largeur et leur vitesse.</li>
  * </ul>
  *
  * Un pack qui ne déclare pas ces uniformes n'en voit rien : le module ne change le rendu d'aucun autre pack.

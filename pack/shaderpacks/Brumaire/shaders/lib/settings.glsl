@@ -38,6 +38,8 @@
 #define WATER_REFLECTIONS 20 // [0 12 20 32]
 #define VOXEL_REFLECTIONS 64 // [0 32 64 96]
 #define WATER_MOTES 1 // [0 1]
+#define WATER_WAKES 1 // [0 1]
+#define WATER_FOAM 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
 
 // Pluie

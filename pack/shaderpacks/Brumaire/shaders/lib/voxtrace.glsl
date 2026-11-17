@@ -7,7 +7,6 @@
 // Demande avant lui : common.glsl, shadow.glsl, clouds.glsl, voxel.glsl.
 
 #if VOXEL_REFLECTIONS > 0
-uniform usampler3D voxelTex;
 uniform usampler3D voxTopTex;
 uniform usampler3D voxSideTex;
 
