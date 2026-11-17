@@ -54,6 +54,12 @@ Netherite comes to the Overworld, deep down, and is called **orichalque** in Fre
 - **The template comes from Archie**: once the Obsidiceratops is tamed (it lives in the redstone caves), Archie trades one netherite upgrade template for 8 to 10 obsidian horns, once. It is copied at the workbench with a magma block instead of netherrack.
 - **Heat**: the Obsidiceratops set (fire immunity, Cold Sweat heat bonus) is the way to stay down there; lava already heats the air in Cold Sweat. To be tuned in game.
 
+## Mining: the forge shows in the yield (fifth step)
+
+As a well-stirred pot gives more servings in the kitchen, a well-forged pickaxe gives more ore. The `compline` mod's `minage` module adds the loot modifier `compline:rendement_de_la_pioche`: an ore (`#c:ores`) broken with an Overgeared tool of expert, perfect or master quality gives each item of its drop one more piece, with a chance of 10, 20 or 30 %. Nothing with silk touch or on other blocks. On the bench, 150 iron ores with a master pickaxe gave 1.31 raw iron each (1.00 without quality).
+
+Still to come in this step (the study's lot 3): veins that are places, with outcrops on the surface above them (Dynamic Ore Veins and Surface Samples, to be measured on the bench with Spelunkery). Panning already follows the biome: Spelunkery's sluices give gold in badlands, lapis in deserts, emeralds on jagged peaks.
+
 Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager trades and structure chests can still hold diamonds.
 
 ## In-game tests
@@ -67,3 +73,4 @@ Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager tra
 - [ ] PG7. Full Chorusoatl set, sneak and press the armour key: no teleport, the « no ability » message; slow falling stays; the tooltip no longer offers the teleport.
 - [ ] PG8. Deep below, beside a lava lake under y −40: ancient debris inside the rock, never in the open; smelted into scraps (« Fragments d'orichalque »).
 - [ ] PG9. Craft the « Four à alliage de magma », alloy 4 scraps and 4 gold, hammer the heated alloy on a smithing anvil (master minigame): an orichalcum ingot. Archie sells the template after the Obsidiceratops is tamed.
+- [ ] PG10. Mine iron ore with a master-quality pickaxe, then with a plain one: about a third more raw iron with the first; silk touch gives the ore block only.
