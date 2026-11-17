@@ -39,7 +39,7 @@ function ImageLoupe({ src, alt, zooms }: { src: string; alt: string; zooms?: Zoo
           <button
             key={z.label}
             type="button"
-            className="zone"
+            className={z.y > 0.65 ? 'zone haut' : 'zone'}
             style={{ left: `${z.x * 100}%`, top: `${z.y * 100}%`, width: `${z.r * 200}%`, height: `${z.r * 200}%` }}
             onClick={() => setZoom(z)}
             aria-label={`Zoomer : ${z.label}`}
