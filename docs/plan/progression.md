@@ -8,7 +8,7 @@ Ladder, from the bench:
 |---|---|---|---|---|
 | Iron (Overgeared) | 15 | 0 | 250, 6 | Forge |
 | Steel (Overgeared) | 17 | 1 per piece | 500, 7 | Alloy furnace: 3 iron + 1 coal → 3 crude steel |
-| Black steel (`compline`) | 19 | 1.5 per piece | 900, 7.5 | Steel, Spelunkery magnetite and charcoal; master anvil (next step) |
+| Black steel (`compline`) | 19 | 1.5 per piece | 900, 7.5 | Steel, Spelunkery magnetite and charcoal; master anvil |
 | Diamond | 20 | 2 per piece | 1561, 8 | Diamonds near deep lava, the template from the coniferous monument, a black steel piece as base |
 | Orichalcum (renamed netherite) | 20 + | 3 per piece | — | The burning heart (planned) |
 
@@ -21,6 +21,15 @@ Dinosaur armours are a side branch: forged at the anvil from plates, with qualit
 - **Diamonds only near lava.** The biome modifier `compline:diamants_de_la_lave` removes the four vanilla diamond features (`ore_diamond`, `_medium`, `_large`, `_buried`; Spelunkery's stone variants hang on them). What remains is Spelunkery's `diamond_ore_lava`: rough diamond blocks beside lava, from y −64 to 16. On the bench, 256 chunks: about 5,500 vanilla diamond ores before, 0 after; 20 rough diamond blocks (9 rough diamonds each) in both cases.
 - **The diamond template is a place.** When the Elderheart of a coniferous monument wakes (its Frostmaw is dead), every player within 64 blocks gets one `overgeared:diamond_upgrade_smithing_template`, with a message (`monuments.js`, `MON_SAVOIR`). It is copied at the workbench as before (7 diamonds and the base metal), for friends who were not there.
 
+## Black steel (second step)
+
+Overgeared has no black steel; it is the pack's own, after waccyy's Fantasia, and the `compline` mod's `acier_noir` module ([mod-compline](mod-compline.md#acier_noir-module)).
+
+- **Raw black steel**: a steel ingot, two Spelunkery raw magnetite (from its magnetite geodes, obsidian shells deep underground) and a charcoal at the alloy furnace. Heated in a blast furnace, hammered on any smithing anvil into a heated ingot, cooled in water. Nine ingots make a block.
+- **The master anvil**: Overgeared's tier A anvil is turned on (`overgeared-common.toml`, `enableTierA`) and named « Enclume de maître ». It is made by sneaking and right-clicking a block of black steel with a smithing hammer, the only block in `overgeared:tier_a_anvil_bases`. Plates (1 ingot → 2), the four heads, the sword blade and the armour are forged there only, with Overgeared's quality; tool heads need the tool's blueprint, as for steel.
+- **Diamond needs black steel.** Diamond ores and Spelunkery's rough diamond block (`compline:needs_black_steel_tool`) are refused to every tier below black steel, steel included. Steel can now mine obsidian, which Overgeared had refused to it with everything that needs a diamond tool.
+- **Diamond pieces start from black steel**: the ten smithing recipes take a black steel piece instead of a steel one, and copying the template takes a black steel ingot.
+
 Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager trades and structure chests can still hold diamonds.
 
 ## In-game tests
@@ -29,3 +38,4 @@ Known ways around: Create drills and Mine-o-mite ignore tool tiers; villager tra
 - [ ] PG2. A mineshaft or dungeon chest never holds a steel ingot or a diamond template.
 - [ ] PG3. Alloy furnace: 3 iron ingots + 1 coal give 3 crude steel.
 - [ ] PG4. Kill the Frostmaw of a coniferous monument and wake its Elderheart: a diamond template and the gold message, for each player nearby; nothing at the other monuments.
+- [ ] PG5. The black steel chain, the master anvil and the diamond rule: tests AN1 to AN5 of [mod-compline](mod-compline.md#black-steel).

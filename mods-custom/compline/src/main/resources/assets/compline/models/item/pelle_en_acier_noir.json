@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "compline:item/pelle_en_acier_noir"
+  }
+}

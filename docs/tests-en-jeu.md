@@ -154,7 +154,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Edge of the world**: on foot, by boat and in flight the mist turns you back at 6,000 blocks from the centre, with a warning 64 blocks before; an airship is not stopped yet, a message asks to turn back; sailing around the continent, the coast stays away from the edge; north cold, south hot [Z1 to Z6].
 - [ ] A Nether portal does not light; no eye of ender; `/locate structure minecraft:stronghold` finds nothing.
 - [ ] Exposure camera: take and develop a photo; Exposure: Space, photograph the moon.
-- [ ] **Rare steel and diamonds**: no diamond ore except rough diamonds beside deep lava; no steel ingot or template in chests; 3 iron + 1 coal → 3 crude steel; a diamond template when a coniferous monument wakes [PG1 to PG4].
+- [ ] **Rare steel and diamonds**: no diamond ore except rough diamonds beside deep lava; no steel ingot or template in chests; 3 iron + 1 coal → 3 crude steel; a diamond template when a coniferous monument wakes; black steel from steel and magnetite, the master anvil, diamond mined only with a black steel pickaxe [PG1 to PG5, AN1 to AN5].
 - [ ] **Pack sort, world**: calcite crushed into levitite powder; no Wroughtnaut chamber, Frostmaw, Umvuthana grove or Companions! structure, the monastery is still there [TR3, TR11].
 - [ ] **Rain and storm** (`/weather rain`, then `/weather thunder`): rain curtains in the distance, the new lightning and sky flash, leaves carried by the wind and torn off by the storm, rain sounds by material, drops on the screen and drips on plants [AV1 to AV8].
 - [ ] **Sunlight** (`/time set 1000` in a dense forest, then by a lake): glints on the water; footprints in snow and sand, waves on a beach [AV9 to AV11].
@@ -185,7 +185,7 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |

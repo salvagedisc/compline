@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "compline:jambieres_en_acier_noir"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:diamond_leggings"
+  },
+  "template": {
+    "item": "overgeared:diamond_upgrade_smithing_template"
+  }
+}

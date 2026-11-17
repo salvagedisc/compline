@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "group": "acier_noir",
+  "category": "misc",
+  "ingredient": {
+    "tag": "c:ingots/black_steel"
+  },
+  "result": {
+    "id": "compline:lingot_d_acier_noir_chauffe"
+  },
+  "experience": 0,
+  "cookingtime": 120
+}

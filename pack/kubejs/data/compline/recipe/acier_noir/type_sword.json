@@ -1,0 +1,9 @@
+{
+  "type": "overgeared:item_to_tooltype",
+  "item": [
+    {
+      "item": "compline:lame_d_epee_en_acier_noir"
+    }
+  ],
+  "tooltype": "sword"
+}

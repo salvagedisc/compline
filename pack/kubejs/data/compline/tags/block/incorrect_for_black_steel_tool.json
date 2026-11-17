@@ -1,0 +1,23 @@
+{
+  "values": [
+    "minecraft:netherite_block",
+    "minecraft:respawn_anchor",
+    "minecraft:ancient_debris",
+    {
+      "id": "spelunkery:compression_blast_miner",
+      "required": false
+    },
+    {
+      "id": "supplementaries:netherite_door",
+      "required": false
+    },
+    {
+      "id": "supplementaries:netherite_trapdoor",
+      "required": false
+    },
+    {
+      "id": "supplementaries:safe",
+      "required": false
+    }
+  ]
+}

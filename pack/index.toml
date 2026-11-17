@@ -122,7 +122,7 @@ hash = "ec4f015beaab46f7ecf19348a95213c2e077f9164d09e80a2808aa51b502b63f"
 
 [[files]]
 file = "config/overgeared-common.toml"
-hash = "c66f6ea42e430a4ab33abd8b4a966d28377e6f15ff97d34b25d97ed8c108bc8b"
+hash = "3ddf5c1864acd5decfaffdcc4eba7e878e051994d0cd1f941fe849607e1fd070"
 
 [[files]]
 file = "config/particular-common.toml"
@@ -1090,7 +1090,7 @@ hash = "3eca0c0f43e5acec3d500b9509a9774b713d5447cc39ca69708d5214ae220ec7"
 
 [[files]]
 file = "kubejs/assets/overgeared/lang/fr_fr.json"
-hash = "1910aa564c151eee8f3db3e11c06d552d1fcc6a0f1ad031ee294bf71b934ef39"
+hash = "091f66d6399741b459ed978368b233f4148b3be09305dbf8aa36f0bf0a14cfe0"
 
 [[files]]
 file = "kubejs/assets/particular/lang/fr_fr.json"
@@ -1314,7 +1314,7 @@ hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
-hash = "a75b621823f6429bd2578b64a23cbc459ff2c90a917b56bb5290fe779892c573"
+hash = "6ed13d9fe13545703e6f0ef2705d53650ada4fc4c7d1b01eae599d47db372d02"
 
 [[files]]
 file = "kubejs/data/alexsmobs/tags/entity_type/roadrunner_targets.json"
@@ -1351,6 +1351,22 @@ hash = "744584012aed45439727f3912f0523046059d2e748e4f298d19f49f77f3537c5"
 [[files]]
 file = "kubejs/data/ancient_remnants/worldgen/structure/warrior_monolith.json"
 hash = "47cc23a8ba1037994ddf1a0db4719b636d075d918c1ba8cde67aadd614472dd8"
+
+[[files]]
+file = "kubejs/data/c/tags/block/storage_blocks/black_steel.json"
+hash = "d1513b973f9583b95126a3a70269fe42097a478e2906dd2d1487186e9aecd409"
+
+[[files]]
+file = "kubejs/data/c/tags/item/ingots.json"
+hash = "6029bea2286260d05940bbf256062a74ce7238bd6b6e266e6d4b79d3013f6d87"
+
+[[files]]
+file = "kubejs/data/c/tags/item/ingots/black_steel.json"
+hash = "6029bea2286260d05940bbf256062a74ce7238bd6b6e266e6d4b79d3013f6d87"
+
+[[files]]
+file = "kubejs/data/c/tags/item/storage_blocks/black_steel.json"
+hash = "d1513b973f9583b95126a3a70269fe42097a478e2906dd2d1487186e9aecd409"
 
 [[files]]
 file = "kubejs/data/companions/worldgen/structure_set/companions_babayaga.json"
@@ -1401,6 +1417,118 @@ file = "kubejs/data/compline/neoforge/biome_modifier/sans_lapin.json"
 hash = "02b4c6a360e4d268f6177a75a58465c9255e34dae6c0b60816314f518c372fac"
 
 [[files]]
+file = "kubejs/data/compline/recipe/acier_noir/acier_noir_brut.json"
+hash = "8128f02b90686bf522b5641a0cba050cd62f957addc5b1734129d6a4f4d08950"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/acier_noir_brut_chauffe.json"
+hash = "c412bcd0f1e2df958a70e77f6b437cbca1537f08367ce511305f859757b7f08f"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/bloc.json"
+hash = "dfea8c88e49a14fded07e24e2c7383e0e31515dfe6b32b4271a471cf0a6a0b7d"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/bottes.json"
+hash = "adb4ad07ff3ef0ab45e96aac7eeaab074efaea7f89d6631fa93c78b341d0ed6d"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/brut_refroidi.json"
+hash = "62d9d0a01d5971ebe4c9472ed98f5dc8887d7a914c95ae2a418c7df328ea8c58"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/casque.json"
+hash = "3e8ea335daed9301e3cd503dc26432bc61529cc4b9ffecdca07b257e39b5ace8"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/jambieres.json"
+hash = "59864fb16db11985bdd14094f527e1012fba5f3743f1a114a1efe1c14f19e501"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/lingot_chauffe.json"
+hash = "8d47e7e3e163522604dc0dfae269a42ebd9baa37b2ba2ee0bf9df73eb345e962"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/lingot_rechauffe.json"
+hash = "cd0c58878069c13162910acb0567186ccda5a061877fbc12f3bad3df1351a320"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/lingot_refroidi.json"
+hash = "b8aa9440520352273a653ddc584d38e3d5ec402fff4a5741cd40d84bf862c8cf"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/lingots_du_bloc.json"
+hash = "d390ab487334c0167df5d63d528674466382d11f45046294db7cf33b898b1505"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/outil_epee.json"
+hash = "230af6527e4c1c2abd410f459dcd572937e8734764ffcdde0ea8d7d72e25bfba"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/outil_hache.json"
+hash = "412b2180ac799b21b5e4e3f38758747c91e051235b1c52d0a1ba5680456d5ce6"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/outil_houe.json"
+hash = "c6c92629e0832fb669416efd4103568ce5199a48a1bb0cb796b400752cfc2833"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/outil_pelle.json"
+hash = "d441283aa7444c4b8dca4f1975096a2f624ea784c09022e5dfcec9d104b0d8b6"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/outil_pioche.json"
+hash = "8219d6f7c7204dcd857cf89a7b390c911340e05bea8c57c5b279d0e82abd567c"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/plaque.json"
+hash = "290ed1e5cea66b174221e6441b9b78e497ca96bf069e13a57c5beffa27c457e7"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/plastron.json"
+hash = "d089fa54f39c773c370538967f8d2083211b1349c2a1e751f1955b24434bde3c"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/tete_epee.json"
+hash = "3d1106fa97313d68a8511798bad913ab98c18af743eeaed77660db9de32b4872"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/tete_hache.json"
+hash = "0326c1af47e2a59a4e672ab3ba9fd2c28af495283455e9019afcfc458033e6c0"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/tete_houe.json"
+hash = "258bd74389f948cfefdbc2cefe25714a707d033e7fd64691b3da585eb368ce81"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/tete_pelle.json"
+hash = "47238c5f5863c466619b02744d7a5c90a6f2f8b734c760cad4ba6607d54db24c"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/tete_pioche.json"
+hash = "472a61e98c42988e5ee8df66da3ebd5f89e836a27a448806f38ff843d545c0be"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/type_axe.json"
+hash = "af4be3261fefffed7772d89820b2582629910e6062e1ad77f6e72517babafef3"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/type_hoe.json"
+hash = "0b51ac1b44e608cd54bd8f23638c106ee17a4d4d5f8f9a6308549e2f9a8a8b7c"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/type_pickaxe.json"
+hash = "a3912e66d457bd178895a89a7261bb757fe38fc695c0b4445f35c912e6b99443"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/type_shovel.json"
+hash = "6a0608d51491a61e1305e051ace1fe5693f73c9133890158bdcdad2fce5195d7"
+
+[[files]]
+file = "kubejs/data/compline/recipe/acier_noir/type_sword.json"
+hash = "4bfb937a6a3ecfb2a9b9d68e85b4cd68c9055ffbaf44c3541369f7b5650cc5c2"
+
+[[files]]
 file = "kubejs/data/compline/starcatcher/fish/bass.json"
 hash = "73800b884a8a0505b2e7f45a86f8a326e3f41bd0b37c7ba13580744945f45b33"
 
@@ -1415,6 +1543,14 @@ hash = "7ab2dd413e33807dae316c39ee5abdb0c22b16e64b81dca32ab808a625159b3c"
 [[files]]
 file = "kubejs/data/compline/structure/chorusoatl.nbt"
 hash = "6b8bb16f9a63d69ea19a308b4472754f31eb53a7868fb5cceef7f50bc0f85736"
+
+[[files]]
+file = "kubejs/data/compline/tags/block/incorrect_for_black_steel_tool.json"
+hash = "2941220d45d69f3db74eef6e61aa4b4c6217a32b7a2776d3b10cac9846b9d475"
+
+[[files]]
+file = "kubejs/data/compline/tags/block/needs_black_steel_tool.json"
+hash = "94a97082fe44bef7c757a935dc42da5c94cabce693c96e565de8532aee50b467"
 
 [[files]]
 file = "kubejs/data/compline/tags/entity_type/zoo/absents.json"
@@ -2261,6 +2397,70 @@ file = "kubejs/data/minecraft/loot_table/entities/sheep.json"
 hash = "a3d563f6d2d52a31e2ca286745210de99cddea86071b2b8c5811ef2c11a035ac"
 
 [[files]]
+file = "kubejs/data/minecraft/tags/block/incorrect_for_gold_tool.json"
+hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/block/incorrect_for_iron_tool.json"
+hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/block/incorrect_for_stone_tool.json"
+hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/block/incorrect_for_wooden_tool.json"
+hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/block/mineable/pickaxe.json"
+hash = "d1513b973f9583b95126a3a70269fe42097a478e2906dd2d1487186e9aecd409"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/block/needs_iron_tool.json"
+hash = "d1513b973f9583b95126a3a70269fe42097a478e2906dd2d1487186e9aecd409"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/axes.json"
+hash = "eb8ed79e91fdef35f56c7e860c475fa864c52af392c318d0b2cb54bc8144d242"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/chest_armor.json"
+hash = "b813ac63d87fd8131ba07f10287c93eecebcf8c8f0b46b53aa2c1ddf40ba4a80"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/foot_armor.json"
+hash = "5a794c97575a56d8abae3a58bd0ead88963e2aaf517535ce8d4f6d9771c4e0b9"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/head_armor.json"
+hash = "56d2acfcaf6965eab239b62d846cfd19074452baf5f5b221c1a81e92bbda7fa2"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/hoes.json"
+hash = "83e1b0b24290f8920b7c254c4de5cb44ce270bc3caa7a48a3bd122786c8be25e"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/leg_armor.json"
+hash = "60eb7bde06d09bc7a335e07d6ea598fce5eb2020d6ba5ec0d0d18072693d9ba3"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/pickaxes.json"
+hash = "4f26239e3dd1b8b80124e9f93b1cf9ffdb17675ae1fd6eda49ba1aee52fb7f34"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/shovels.json"
+hash = "f70890d5e285d17fb66195a5abd491acada4d747d6dbefa4521e931b78316717"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/swords.json"
+hash = "4be00e311aac45034987cf64661cf8b541e6f298fb8e95c27f214788974094a3"
+
+[[files]]
+file = "kubejs/data/minecraft/tags/item/trimmable_armor.json"
+hash = "5183289f86ba1efa7734e8b8670c6cf0a4415b996973b16fd831d4535ee4129c"
+
+[[files]]
 file = "kubejs/data/minecraft/tags/worldgen/biome/has_structure/stronghold.json"
 hash = "cee09dec79eaf898a5ecbf50767dd2b9b1f258be79f2a44406b694f555022cd2"
 
@@ -2415,6 +2615,70 @@ hash = "1c64952d5ced337762e195dbfdd1a418afbb58a7d433bca7d5c2ce823792cf46"
 [[files]]
 file = "kubejs/data/overgeared/recipe/crude_steel_from_nether_alloying.json"
 hash = "dc4e8cb3f4e23960f7bf5c3d3da1d3c0852a1ad1bc88236a8abf939b619f2512"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/diamond_upgrade_smithing_template.json"
+hash = "36f1e1a697f4286bbae5f41590a6e0d44325acf5eff72eda8dde0783c30209c1"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_axe_to_diamond_axe.json"
+hash = "5661186d1d9a7e89be5ec875d06254c266aed76d6decfade889802fc04464470"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_boots_to_diamond_boots.json"
+hash = "4c47b754d247260ad3179e9b5f551e9fe7a6be67d587293a57b3fa45a3d8f1d6"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_chestplate_to_diamond_chestplate.json"
+hash = "621c000dcbfacfa67acb829956d22dc200d5311ef1b22a9f8b8d3b26fa37a0b9"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_helmet_to_diamond_helmet.json"
+hash = "292d991c230984d24dba59977583fc4cefe234d3c86c9fd3bd6ef56460123788"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_hoe_to_diamond_hoe.json"
+hash = "f1683c1b028417031afb468a7700fb0c295e4d324fd373454cb02e4c5c386442"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_leggings_to_diamond_leggings.json"
+hash = "ce937e864e129f19ef35ba4e3459917149f80d9b25bb18358011de23e4db965e"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_pickaxe_to_diamond_pickaxe.json"
+hash = "f1aca744e600b22d1407e59f6e189898d95798d988e18b4450961f6e92ea45b7"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_shovel_to_diamond_shovel.json"
+hash = "6438ff2749a850ed9891619e5d67783572e816debc6f915368082cbdc30a43a6"
+
+[[files]]
+file = "kubejs/data/overgeared/recipe/steel_sword_to_diamond_sword.json"
+hash = "bb3b8c272342959edbef8ea7ee0952816a5aa99b3a68a5f5ea184ae981c2d59f"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/block/incorrect_for_copper_tool.json"
+hash = "de1030b6b9dbbaec11ae7addf9daef404a7f96453265194971563f50d5e66801"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/block/incorrect_for_steel_tool.json"
+hash = "0d8ed605613206ba8ecdcacbb2125996bf1a87704d6939d0c6118a067a146b19"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/block/tier_a_anvil_bases.json"
+hash = "d1513b973f9583b95126a3a70269fe42097a478e2906dd2d1487186e9aecd409"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/item/heated_metals.json"
+hash = "359912c6b3c349b5bad08f47b9c8e3a5e8128910458cd029b9b35b62ae7ee60c"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/item/tier_a_smithing_hammers.json"
+hash = "f4de14bbd2c2648b1bc1b82e3ff55ee2655b9344ff674f49ecb9f37b60e1c553"
+
+[[files]]
+file = "kubejs/data/overgeared/tags/item/tool_parts.json"
+hash = "e31b63c3b3bc5c1080212f122920ffd5dba8b7b1eb2a8b339ca07a5eea724b87"
 
 [[files]]
 file = "kubejs/data/spawn/neoforge/biome_modifier/add_barracuda.json"
@@ -2814,7 +3078,7 @@ hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
-hash = "3272761612cb69c39bd4008607d67bd9431a450a446397fec6a3cf7c1fba1aea"
+hash = "48d06cbdd0341b5e8a49f814d94b715ccb5b86656452b8fc59a27188076e3ab9"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
@@ -2822,7 +3086,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "ae1d931550e5b4f0ab4b3c208ebd05ac225685260571607ef35dee19d9e6cbc7"
+hash = "ce5e0155ca5a1f7495c4b45db59ced88c4bebd66a22926c9a6904f81913621b6"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -2970,8 +3234,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.20.4.jar"
-hash = "7333831c0800ea59dee9c24ae809054d54f893f8c348615c45d6548a90b179f5"
+file = "mods/compline-0.21.0.jar"
+hash = "4d69b9372d8e9260332e929deae84f355aaf5a46ad0c712bcf3b270c2f2f0757"
 
 [[files]]
 file = "mods/configurable.pw.toml"
