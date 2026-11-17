@@ -20,6 +20,13 @@ const MON_GARDIENS = {
   'ancient_remnants:bountiful_harvest': 'companions:sacred_pontiff',    // Monument de la forêt
 }
 
+// Le savoir qu'un monument rend quand son Cœur s'éveille, à chaque joueur présent (voir
+// docs/plan/progression.md) : le gabarit de diamant vient des nains des montagnes. Il se copie
+// ensuite à l'établi (7 diamants et 1 lingot), pour les amis qui n'étaient pas là.
+const MON_SAVOIR = {
+  'ancient_remnants:architect_reach': 'overgeared:diamond_upgrade_smithing_template',
+}
+
 const MON_PERIODE = 40               // ticks entre deux recherches autour d'un joueur (2 s)
 const MON_RAYON_EVEIL = 64           // blocs (à l'horizontale) : un joueur plus près réveille le gardien
 const MON_HAUTEUR = 160              // blocs vers le haut et vers le bas : le Cœur d'un monolithe flotte haut
@@ -72,10 +79,15 @@ function monEveiller(coeur) {
   nbt.putString('Blessing', benediction)
   coeur.nbt = nbt
   coeur.persistentData.putBoolean(MON_CLE_EVEILLE, true)
+  const savoir = MON_SAVOIR[benediction]
   coeur.level.getPlayers().forEach(joueur => {
     const dx = joueur.x - coeur.x, dz = joueur.z - coeur.z
     if (dx * dx + dz * dz > MON_RAYON_EVEIL * MON_RAYON_EVEIL) return
     joueur.tell(Text.lightPurple(Text.translatable('compline.monument.eveil')))
+    if (savoir) {
+      joueur.give(Item.of(savoir))
+      joueur.tell(Text.gold(Text.translatable('compline.monument.savoir.' + benediction.split(':')[1])))
+    }
   })
   coeur.playSound('minecraft:block.beacon.activate', 2.0, 0.8)
 }
