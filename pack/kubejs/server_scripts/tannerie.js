@@ -23,7 +23,9 @@ const TANNERIE_RECETTES_RETIREES = [
   // peau de Naturalist cuite au four -> cuir en 10 secondes
   'naturalist:leather_from_smelting_hide',
   // deux peaux de kangourou -> cuir (remplacé plus bas par une peau de Tannery)
-  'alexsmobs:kangaroo_hide_to_leather'
+  'alexsmobs:kangaroo_hide_to_leather',
+  // vieille botte pêchée (Starcatcher) -> cuir
+  'starcatcher:leather_from_boot'
 ]
 
 ServerEvents.recipes(event => {

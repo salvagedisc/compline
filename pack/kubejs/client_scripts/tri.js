@@ -147,7 +147,11 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'spelunkery:granite_lead_ore', 'spelunkery:tuff_lead_ore', 'spelunkery:andesite_silver_ore',
     'spelunkery:diorite_silver_ore', 'spelunkery:granite_silver_ore', 'spelunkery:tuff_silver_ore',
     'spelunkery:andesite_jade_ore', 'spelunkery:diorite_jade_ore', 'spelunkery:granite_jade_ore',
-    'spelunkery:tuff_jade_ore', 'ec_ad:theri_claw_netherite'
+    'spelunkery:tuff_jade_ore', 'ec_ad:theri_claw_netherite', 'selling_bin:selling_bin',
+    'starcatcher:charfish', 'starcatcher:chorus_crab', 'starcatcher:chorus_minnow',
+    'starcatcher:dreamliner', 'starcatcher:end_glow', 'starcatcher:nebula_squid',
+    'starcatcher:purple_carp', 'starcatcher:spacejelly', 'starcatcher:voidbiter',
+    'starcatcher:voidfin', 'starcatcher:stonefish', 'starcatcher:sea_bass'
   ].forEach(id => event.remove(id))
 
   TRI_MOTIFS.forEach(motif => event.remove(motif))

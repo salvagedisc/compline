@@ -37,7 +37,11 @@ const FUSIONS = {
   'overgeared:copper_nugget': 'create:copper_nugget',
   'overgeared:diamond_shard': 'spelunkery:diamond_shard',
   'hybrid_aquatic:glowstick': 'spelunkery:glowstick',
-  'alexsmobs:shark_tooth': 'hybrid_aquatic:shark_tooth'
+  'alexsmobs:shark_tooth': 'hybrid_aquatic:shark_tooth',
+  // Pêche (décision 0034) : une seule canne, celle de Starcatcher, qui lance le mini-jeu et
+  // porte hameçon, flotteur et appât. La canne vanilla pêchait encore au hasard dans la table
+  // de butin ; la carotte et le champignon sur un bâton demandent désormais celle de Starcatcher.
+  'minecraft:fishing_rod': 'starcatcher:starcatcher_rod'
 }
 
 // Recettes retirées sans être fondues : elles referaient un raccourci ou un doublon.
@@ -52,7 +56,9 @@ const FUSIONS_RECETTES_RETIREES = [
   'farm_and_charm:dog_food_bag', 'farm_and_charm:dog_food_from_bag',
   'farm_and_charm:flour_bag', 'farm_and_charm:flour_from_bag',
   'farm_and_charm:carrot_from_bag', 'farm_and_charm:potato_from_bag',
-  'farm_and_charm:beetroot_from_bag'
+  'farm_and_charm:beetroot_from_bag',
+  // canne vanilla : trois bâtons et deux ficelles redonneraient une canne sans hameçon
+  'minecraft:fishing_rod'
 ]
 
 // Remplace chaque id fondu dans le texte JSON d'une recette, là où il nomme un objet
