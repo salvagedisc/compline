@@ -59,7 +59,7 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         at = (floor(at * 16.0) + 0.5) / 16.0;
 #endif
         vec3 wake = wakeSlope(at);
-        vec2 ride = clamp(wake.xy * 0.35, -0.5, 0.5);
+        vec2 ride = clamp(wake.xy * 0.45, -0.45, 0.45);
 #if WATER_PIXELS > 0
         ride = floor(ride / 0.03 + 0.5) * 0.03;
 #endif

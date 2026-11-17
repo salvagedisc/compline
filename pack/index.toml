@@ -4012,11 +4012,6 @@ hash = "2684f71394862cff4c20d0f4d8491c0f86f12e66879381295e9088e0eded025d"
 metafile = true
 
 [[files]]
-file = "mods/wakes-reforged.pw.toml"
-hash = "8e464c45945b7311b01d0be50a714e8a64d389dc27331f4a27d7981fd29131b9"
-metafile = true
-
-[[files]]
 file = "mods/yacl.pw.toml"
 hash = "539f362e9e192cf3b2813e0dfdfc51a5e6814129c6e82a9733842529beea6242"
 metafile = true
@@ -4502,7 +4497,7 @@ hash = "3afa37d73608b3d60e30a3aa30eb19f27c16cda2bf76f5048769a36978b5b336"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
-hash = "1665ffc4b4a6623e01eedc915c084118aa76afb8b39e1d1451a44c1131dc5a16"
+hash = "ee17aae53032c862a8602ebcc6b514949d7121c83ea9baef2da30fdc6ea6a087"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
@@ -4514,7 +4509,7 @@ hash = "f5375eaef11e85060cd7487fc64b25de3fa3227c4f77bab08659f210fc46ad97"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/wakes.csh"
-hash = "2625950b8c5a17811ea09f82a97b5f7a066f68914f6a87e3bf67cb13be1e78f4"
+hash = "76833a9ea6cb2063d90ae4f0bf2b05e6b3617ed6bad90738e91e55710c4d5d58"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/setup.csh"

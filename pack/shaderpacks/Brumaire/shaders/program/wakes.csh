@@ -25,8 +25,8 @@ uniform vec4 brumaireWakeSpeed1;
 
 /** Vitesse des ondes, en blocs par seconde ; amortissement de leur vitesse et de leur hauteur, par seconde. */
 const float WAVE_SPEED = 2.6;
-const float DRAG = 1.1;
-const float SETTLE = 0.25;
+const float DRAG = 0.5;
+const float SETTLE = 0.6;
 
 vec4 before(ivec2 c) {
     c &= WAKE_SIZE - 1;
@@ -77,12 +77,17 @@ void main() {
         float q = length(world - (w.xz + cameraPosition.xz)) / w.w;
         if (q >= 1.0) continue;
         float fall = 1.0 - q * q;
-        float speed = speeds[i];
-        // L'eau s'enfonce sous ce qui avance ; immobile, elle frémit à peine autour.
-        v -= fall * (0.35 * sin(frameTimeCounter * 5.0 + float(i)) + 1.6 * min(speed, 6.0)) * dt * 4.0;
-        foam = max(foam, fall * smoothstep(1.0, 4.0, speed) * 0.9);
+        float speed = min(speeds[i], 6.0);
+        // Ce qui flotte creuse l'eau sous lui, un peu plus en avançant, et la rend en partant : c'est ce creux
+        // relâché, case après case, que l'équation d'onde change en sillage. Immobile, il ne fait que bercer.
+        float target = -fall * (0.08 + 0.04 * speed + 0.015 * sin(frameTimeCounter * 3.0 + float(i) * 1.7));
+        h = min(h, mix(h, target, min(fall * 2.0, 1.0)));
+        // Derrière ce qui file, l'eau battue blanchit.
+        foam = max(foam, fall * smoothstep(0.5, 3.0, speed) * 0.85);
     }
-    // Là où les rides se cassent, l'écume naît aussi.
-    foam = max(foam, smoothstep(0.15, 0.4, abs(lap)) * 0.35);
+    // Là où la ride devient trop raide, elle se brise en écume.
+    vec2 grad = vec2(before(c + ivec2(1, 0)).r - before(c - ivec2(1, 0)).r,
+                     before(c + ivec2(0, 1)).r - before(c - ivec2(0, 1)).r) * (WAKE_RES * 0.5);
+    foam = max(foam, smoothstep(0.45, 0.9, length(grad)) * 0.45);
     store(c, vec4(clamp(h, -1.0, 1.0), clamp(v, -20.0, 20.0), clamp(foam, 0.0, 1.0), 0.0));
 }
