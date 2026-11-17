@@ -226,7 +226,7 @@ void main() {
 #if defined PROGRAM_TERRAIN
     vec3 world = vPos + cameraPosition;
     float snow = 0.0;
-    if (vMat == 0 || vMat == 4 || vMat == 9) snow = snowCover(world, normal, lm.y, vMat == 4 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
+    if (vMat == 0 || vMat == 4 || vMat == 9 || vMat == 14) snow = snowCover(world, normal, lm.y, vMat == 4 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
     if (snow > 0.0) albedo = mix(albedo, vec3(0.64, 0.67, 0.72), snow);
     if (vMat == 9 || snow > 0.5) {
         // La neige du jeu est d'un blanc pur : au soleil elle brûlerait l'image, sans plus rien laisser voir de son grain.
@@ -240,7 +240,7 @@ void main() {
         albedo = mix(vec3(luma(albedo)), albedo, 1.25) * 0.55;
         sparkle = glitter(world, 0.0015) * max(normal.y, 0.0) * 0.6;
     }
-    float wet = leaf > 0.0 || vMat == 8 || vMat >= 9 || snow > 0.0 ? 0.0 : wetAt(lm.y);
+    float wet = leaf > 0.0 || emissive(vMat) || (vMat >= 9 && vMat <= 13) || snow > 0.0 ? 0.0 : wetAt(lm.y);
     if (wet > 0.0) {
         float puddle = puddleAt(vPos + cameraPosition, normal, wet);
         float soak = wet * mix(0.55, 1.0, max(normal.y, 0.0));
@@ -260,7 +260,7 @@ void main() {
     lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
-    if (vMat == 8) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));
+    if (emissive(vMat)) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));
 #endif
     outColor = vec4(lit, color.a);
 #endif

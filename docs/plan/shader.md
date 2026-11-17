@@ -11,6 +11,7 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Step | Programs | What it does |
 |---|---|---|
 | Shadow map | `shadow`, `clrwl_shadow` | Sun or moon view, bent so the centre is finer; plants wave as in the main view; water casts no shadow but marks itself (`shadowcolor0`), so the bottom knows it lies under water |
+| Coloured light | `shadow`, `shadowcomp.csh` (compute) | The shadow pass also files every terrain block within 64 blocks horizontally and 32 vertically into a 128×64×128 volume (`voxelImg`): solid, letting light through, or glowing with its colour; the compute pass spreads the light one block per frame, like the game's light, into two volumes used in turn (`lightImgA`, `lightImgB`) |
 | Sky table | `prepare.csh` (compute) | The light scattered by the atmosphere in every direction around the sun, lit by the sun and the moon, in a 192×108 table; its last row holds the mean light of the sky and what the air leaves of the sun and the moon |
 | Geometry | `gbuffers_*`, `dh_terrain`, `dh_water`, `clrwl_gbuffers` | Every surface is lit where it is drawn: sun or moon with soft shadows, sky light, block light, the game's ambient occlusion; solid surfaces also write their normal and their share of indirect light (`colortex1`) |
 | Screen occlusion | `deferred` (half size), `deferred1` | Hollows, foliage and the foot of walls receive less sky light; smoothed without bleeding across edges; wet ground and puddles take their reflection; then the sky and a round sun are painted behind the terrain, the moon and stars of the game (and of mods) kept; the finished opaque scene is copied to `colortex6` for the water |
@@ -38,7 +39,9 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/cover.glsl` | Snow laid on trees and ledges, the glitter of snow and sand |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
 | `lib/smaa.glsl`, `program/smaa.*`, `textures/smaa_*.png` | SMAA by Jorge Jimenez et al. (MIT, `textures/SMAA-LICENSE.txt`), unchanged but for its encoding, its lookup tables, and the three passes that use it |
-| `block.properties` | Which blocks wave, which are water, which glow, which are snow, ice or sand |
+| `lib/voxel.glsl`, `program/lightfill.csh` | Coloured light: the volume, the colours of the lights, the spread, the light held in hand |
+| `block.properties` | Which blocks wave, which are water, which glow and in which colour, which are snow, ice, sand, glass or partial blocks that let light through |
+| `item.properties` | Which held items glow, and in which colour |
 | `lang/` | Names of the settings, French and English |
 
 ## Sky, light and air
@@ -53,6 +56,13 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Screen occlusion** (`AO_SAMPLES`, `AO_RADIUS`, `AO_STRENGTH`): only the light of the sky and of blocks is darkened, never the sun; half as much on foliage. Off in the Light profile.
 - **Tone curve that keeps the hue**: the curve is applied to the intensity of a colour (a mix of its luminance and its strongest channel) instead of to each channel, so sand, snow or a sunlit field keep their colour instead of bleaching; only what still exceeds white fades to it, like film.
 - **Grade** (calibrated on Recrafted screenshots, 2026-11-17): greens pulled toward a warm olive (`OLIVE`), a warm sun and a less blue sky light, shadows that keep their colour (more saturation in the darks than in the lights), a matte image (blacks barely lifted).
+
+## Coloured light
+
+- **Blocks light in their colour** (`COLORED_LIGHT`, off in the Very light profile): torches, lanterns, fire and campfires orange; soul torches, lanterns and fire blue; lava and magma red-orange; glowstone, shroomlight, lamps and ochre froglights warm yellow; sea lanterns, end rods and pearlescent froglights bluish white; verdant froglights and glow lichen green; amethyst, crying obsidian and portals violet; redstone red. Lights of other mods keep the warm colour of a flame.
+- **How**: the shadow pass files the terrain around the camera into a volume; a compute pass spreads the light block by block like the game's own (one level lost per block, stopped by solid blocks, through glass, plants and partial blocks). Each cell keeps the colour of its strongest light; two lights of the same strength mix. Only the colour comes from the volume: the brightness stays the game's, which already knows what blocks the light.
+- **Light in hand**: what the player holds lights around them in its colour, a little further than a placed block, even without a dynamic-light mod; with LambDynamicLights the brighter of the two wins, never both.
+- Beyond the volume (64 blocks around, Distant Horizons terrain) block light keeps the warm colour of a flame.
 
 ## Clouds
 

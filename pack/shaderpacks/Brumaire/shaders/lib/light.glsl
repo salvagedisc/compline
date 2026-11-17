@@ -1,5 +1,9 @@
 #include "/lib/clouds.glsl"
 #include "/lib/water.glsl"
+#include "/lib/voxel.glsl"
+/** Bloc qui éclaire par lui-même (block.properties : 8, 16 à 22). */
+bool emissive(int mat) { return mat == 8 || (mat >= 16 && mat <= 22); }
+
 // Éclairage direct d'une surface : soleil ou lune avec ombre, ciel, blocs lumineux.
 
 /** Normale (repère monde) rangée dans deux canaux, et relue. */
@@ -46,8 +50,12 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     float sky = lm.y * lm.y;
     float occl = ao * ao;
     light += gAmbient * (0.70 + 0.30 * normal.y) * sky * occl;
-    float glow = lm.x * lm.x * (0.30 + 2.3 * lm.x * lm.x * lm.x);
-    light += vec3(1.0, 0.60, 0.30) * glow * mix(occl, 1.0, lm.x * lm.x);
+    // La lumière des blocs prend la couleur de ce qui éclaire autour (lib/voxel.glsl) : orangée pour une flamme,
+    // bleue pour une âme, rouge pour la lave…
+    float blockLm = lm.x;
+    vec3 tint = blockLightTint(pos, normal, blockLm);
+    float glow = blockLm * blockLm * (0.30 + 2.3 * blockLm * blockLm * blockLm);
+    light += tint * glow * mix(occl, 1.0, blockLm * blockLm);
     light += vec3(0.016, 0.018, 0.022) * occl;
     light += vec3(0.30, 0.32, 0.34) * nightVision;
     light *= 1.0 - 0.7 * darknessFactor;
