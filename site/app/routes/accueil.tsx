@@ -10,7 +10,7 @@ import { ouvrirIndex } from '../interface/etat'
 
 export const meta: Route.MetaFunction = () => metas(
   'Compline',
-  "Un modpack Minecraft entre amis : un monde rond de douze kilomètres sous la brume. Ce qu'on y trouve, et où en est le projet.",
+  "Un modpack Minecraft entre amis : un monde rond de douze kilomètres sous la brume. Ce qu'on y trouve, et où en est le projet.",
   grande('bru-vallee.jpg'),
 )
 
@@ -26,7 +26,7 @@ export default function Accueil() {
         <h1 id="titre-accueil" className="titre-geant">Compline</h1>
         <p className="accueil-accroche">
           Un seul continent, rond, large de douze kilomètres. Froid au nord, chaud au sud, et au bord une brume
-          que personne ne traverse. On y survit à plusieurs : pas de monstres la nuit, mais le froid, la soif et le prix de chaque mort.
+          que personne ne traverse. On y survit à plusieurs : pas de monstres la nuit, mais le froid, la soif et le prix de chaque mort.
         </p>
         <p className="accueil-aide">
           <span className="seul-pointeur">Choisissez un lieu sur le disque</span>
@@ -39,12 +39,12 @@ export default function Accueil() {
           <span id="titre-nouveau">Dernière page du journal</span>
           {nouveaux > 0 && <span className="pastille">{nouveaux} depuis votre visite</span>}
         </p>
-        <Link to="/journal/" className="accueil-nouveau-lien">
+        <Link viewTransition prefetch="intent" to="/journal/" className="accueil-nouveau-lien">
           <span className="date">{dernier.date}</span>
           <b>{dernier.titre}</b>
           <span>{dernier.texte}</span>
         </Link>
-        <Link to="/feuille-de-route/" className="accueil-avance">
+        <Link viewTransition prefetch="intent" to="/feuille-de-route/" className="accueil-avance">
           <span className="jauge" aria-hidden="true"><i style={{ width: `${(faits / CHANTIERS.length) * 100}%` }} /></span>
           {faits} chantiers sur {CHANTIERS.length} construits
         </Link>

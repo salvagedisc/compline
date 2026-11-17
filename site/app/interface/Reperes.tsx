@@ -6,12 +6,12 @@ import { ROMAINS } from '../donnees/details'
 import { Icone, type NomIcone } from './icones'
 import { signalerPlongee, useEtat } from './etat'
 
-export function Reperes({ refs, visibles }: { refs: React.RefObject<(HTMLElement | null)[]>; visibles: boolean }) {
+export function Reperes({ refs, visibles, inerte }: { refs: React.RefObject<(HTMLElement | null)[]>; visibles: boolean; inerte: boolean }) {
   const { entre } = useEtat()
   return (
-    <nav className={`reperes${visibles ? '' : ' caches'}${entre ? ' entres' : ''}`} aria-label="Les sept lieux du disque" aria-hidden={!visibles || undefined} inert={!visibles}>
+    <nav className={`reperes${visibles ? '' : ' caches'}${entre ? ' entres' : ''}`} aria-label="Les sept lieux du disque" aria-hidden={!visibles || undefined} inert={!visibles || inerte}>
       {LIEUX.map((l, i) => (
-        <Link
+        <Link viewTransition prefetch="render"
           key={l.id}
           to={`/${l.chemin}/`}
           ref={(el) => { refs.current[i] = el }}

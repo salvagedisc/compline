@@ -154,13 +154,15 @@ const MER_FRAG = /* glsl */ `
   void main() {
     float r = length(vMonde.xz);
     vec3 col = mix(uMer, uMerLoin, smoothstep(60.0, 140.0, r));
-    // Slow swell catching the low sun.
-    vec2 p = vMonde.xz * 0.02 + vec2(uTemps * 0.004, uTemps * -0.003);
-    float h = texture2D(uNuages, p).g;
+    // A long, slow swell catching the low sun: a broad sheen rather than glints, which read as specks from the sky.
+    vec2 p = vMonde.xz * 0.006 + vec2(uTemps * 0.0016, uTemps * -0.0011);
+    vec2 q = vMonde.xz * 0.013 + vec2(uTemps * -0.0009, uTemps * 0.0014);
+    vec2 pente = vec2(texture2D(uNuages, p).g + texture2D(uNuages, q + 0.37).g * 0.6,
+                      texture2D(uNuages, p + 0.51).g + texture2D(uNuages, q + 0.13).g * 0.6) - 0.8;
     vec3 v = normalize(cameraPosition - vMonde);
-    vec3 n = normalize(vec3((h - 0.5) * 0.5, 1.0, (texture2D(uNuages, p + 0.37).g - 0.5) * 0.5));
-    float spec = pow(max(dot(reflect(-uSoleil, n), v), 0.0), 40.0);
-    col += vec3(1.0, 0.78, 0.55) * spec * 0.35;
+    vec3 n = normalize(vec3(pente.x * 0.22, 1.0, pente.y * 0.22));
+    float spec = pow(max(dot(reflect(-uSoleil, n), v), 0.0), 14.0);
+    col += vec3(1.0, 0.8, 0.6) * spec * 0.16 * (1.0 - smoothstep(110.0, 260.0, r));
     gl_FragColor = vec4(brumer(col, length(vMonde - cameraPosition)), 1.0);
     #include <colorspace_fragment>
   }
@@ -308,9 +310,22 @@ function lecteurHauteurs(img: HTMLImageElement | ImageBitmap) {
 const versMonde = (l: Lieu, h: (fx: number, fy: number) => number) =>
   new Vector3((l.x - 0.5) * DEMI * 2, h(l.x, l.y), (l.y - 0.5) * DEMI * 2)
 
+/**
+ * Where the whole disc should sit on screen at home, in CSS pixels: the part of the screen the text leaves free.
+ * Wide screens keep a column on the left for the title; phones held upright keep the top for it.
+ */
+function zoneLibre(w: number, h: number) {
+  if (w / h < 1) return { x0: 0, x1: w, y0: h * 0.36, y1: h - 56 }
+  if (h < 520) return { x0: w * 0.4, x1: w, y0: 0, y1: h }
+  return { x0: w * (w < 1200 ? 0.4 : 0.36), x1: w, y0: 40, y1: h }
+}
+
+const RAYON = 60 // the disc edge
+const PENTE = new Vector3(0, 0.9, 0.44).normalize() // direction from what the camera looks at, back to the camera
+
 /** Camera director: a slow drift over the whole disc at home, a dive through the clouds onto a place. */
-function Camera({ vue, calme, mobile, points, reperes }: {
-  vue: Vue; calme: boolean; mobile: boolean; points: Map<string, Vector3>; reperes: Props['reperes']
+function Camera({ vue, calme, points, reperes }: {
+  vue: Vue; calme: boolean; points: Map<string, Vector3>; reperes: Props['reperes']
 }) {
   const { camera, size, invalidate } = useThree()
   const pointer = useMemo(() => new Vector2(), [])
@@ -322,29 +337,31 @@ function Camera({ vue, calme, mobile, points, reperes }: {
   const cible = useRef(new Vector3(0, 0, 4))
   const premier = useRef(true)
   const tmp = useMemo(() => new Vector3(), [])
+  // Where the centre of the view sits on screen, as an offset from the middle in pixels (eased like the camera).
+  const centre = useMemo(() => ({ voulu: new Vector2(), actuel: new Vector2() }), [])
   const voulu = useMemo(() => ({ pos: new Vector3(), cible: new Vector3() }), [])
+  const fov = size.width / size.height < 1 ? 46 : 34
 
   const placer = (t: number) => {
-    const portrait = size.width / size.height < 1
     if (vue.type === 'lieu') {
       const p = points.get(vue.lieu.id)!
       voulu.cible.copy(p)
       voulu.pos.set(p.x + 3, p.y + 16, p.z + 11)
-    } else {
-      // Far enough for the whole disc to fit; phones in portrait stand further back.
-      const recul = portrait ? 290 : mobile ? 175 : 158
-      const derive = calme ? 0 : 1
-      // On wide screens the disc sits right of centre, leaving the sea on the left for the title.
-      const decale = portrait ? 0 : -Math.min(24, (size.width / size.height - 1) * 32)
-      // In portrait the title takes the top of the screen: the camera looks north of the disc so it sits lower.
-      voulu.cible.set(decale + Math.sin(t * 0.021) * 3 * derive, 0, (portrait ? -44 : 5) + Math.cos(t * 0.017) * 2 * derive)
-      voulu.pos.set(
-        voulu.cible.x + (calme ? 0 : pointer.x * 4),
-        recul * 0.9,
-        voulu.cible.z + recul * 0.44 + (calme ? 0 : -pointer.y * 3),
-      )
-      if (vue.type === 'haut') voulu.pos.y += 30
+      centre.voulu.set(0, 0)
+      return
     }
+    // Far enough back for the disc to fill the free part of the screen, and that part's centre as the view's centre.
+    const z = vue.type === 'accueil' ? zoneLibre(size.width, size.height) : { x0: 0, x1: size.width, y0: 0, y1: size.height }
+    const echelle = size.height / (2 * Math.tan((fov * Math.PI) / 360)) // pixels per unit at distance 1
+    const recul = Math.max(
+      (2 * RAYON * echelle) / ((z.x1 - z.x0) * 1.04),
+      (2 * RAYON * PENTE.y * echelle) / ((z.y1 - z.y0) * 1.02),
+    ) * (vue.type === 'haut' ? 1.15 : 1)
+    centre.voulu.set((z.x0 + z.x1) / 2 - size.width / 2, (z.y0 + z.y1) / 2 - size.height / 2)
+    const derive = calme ? 0 : 1
+    voulu.cible.set(Math.sin(t * 0.021) * 3 * derive, 0, 2 + Math.cos(t * 0.017) * 2 * derive)
+    voulu.pos.copy(voulu.cible).addScaledVector(PENTE, recul)
+    if (!calme) { voulu.pos.x += pointer.x * 4; voulu.pos.z -= pointer.y * 3 }
   }
 
   useFrame((s, dt) => {
@@ -356,35 +373,81 @@ function Camera({ vue, calme, mobile, points, reperes }: {
     if (premier.current || calme) {
       camera.position.copy(voulu.pos)
       cible.current.copy(voulu.cible)
+      centre.actuel.copy(centre.voulu)
       premier.current = false
     } else {
       const lent = vue.type === 'lieu' ? 0.9 : 1.3
-      easing.damp3(camera.position, voulu.pos, lent, Math.min(dt, 0.05))
-      easing.damp3(cible.current, voulu.cible, lent * 0.8, Math.min(dt, 0.05))
+      const pas = Math.min(dt, 0.05)
+      easing.damp3(camera.position, voulu.pos, lent, pas)
+      easing.damp3(cible.current, voulu.cible, lent * 0.8, pas)
+      easing.damp2(centre.actuel, centre.voulu, lent * 0.8, pas)
     }
     camera.lookAt(cible.current)
+
+    // Off-axis view: the camera still looks straight at the disc, only the picture is slid towards the free part.
+    const c = camera as PerspectiveCamera
+    const W = size.width, H = size.height
+    const cx = W / 2 + centre.actuel.x, cy = H / 2 + centre.actuel.y
+    const FW = 2 * Math.max(cx, W - cx), FH = 2 * Math.max(cy, H - cy)
+    c.fov = (360 / Math.PI) * Math.atan(Math.tan((fov * Math.PI) / 360) * (FH / H))
+    c.setViewOffset(FW, FH, FW / 2 - cx, FH / 2 - cy, W, H)
     DEBUT_BRUME.value = camera.position.distanceTo(cible.current) * 0.85
 
-    // Move the place pins over the canvas, without going through React.
+    // Move the place pins over the canvas, without going through React. Each name goes to the right of its
+    // mark unless that would leave the screen or cover another pin; then it hangs on the left.
     const els = reperes.current
+    const petit = W <= 760 || H <= 520
+    const ecart = petit ? 20 : 28, dessous = petit ? 33 : 40, marque = petit ? 16 : 20, haut = petit ? 62 : 76
+    const boites: number[][] = []
+    const ordre: { el: HTMLElement; x: number; y: number }[] = []
     LIEUX.forEach((l, i) => {
       const el = els?.[i]
       const p = points.get(l.id)
       if (!el || !p) return
       tmp.copy(p); tmp.y += 0.4
       tmp.project(camera)
-      const x = (tmp.x * 0.5 + 0.5) * size.width
-      const y = (-tmp.y * 0.5 + 0.5) * size.height
+      const x = (tmp.x * 0.5 + 0.5) * W
+      const y = (-tmp.y * 0.5 + 0.5) * H
       el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+      ordre.push({ el, x, y })
+      boites.push([x - marque, y - haut, x + marque, y - haut + marque * 2])
+    })
+    const touche = (b: number[]) => boites.some((o) => b[0] < o[2] && b[2] > o[0] && b[1] < o[3] && b[3] > o[1])
+    ordre.sort((a, b) => a.y - b.y).forEach(({ el, x, y }) => {
+      const nom = el.lastElementChild as HTMLElement
+      const w = nom.offsetWidth, h = nom.offsetHeight
+      const droite = [x + ecart, y - dessous - h, x + ecart + w, y - dessous]
+      const gauche = [x - ecart - w, droite[1], x - ecart, droite[3]]
+      const aGauche = (droite[2] > W - 8 || touche(droite)) && gauche[0] > 8 && !touche(gauche)
+      el.classList.toggle('a-gauche', aGauche)
+      boites.push(aGauche ? gauche : droite)
     })
   })
 
   useEffect(() => { invalidate() }, [vue, size, invalidate])
-  useLayoutEffect(() => {
-    const c = camera as PerspectiveCamera
-    c.fov = size.width / size.height < 1 ? 46 : 34
-    c.updateProjectionMatrix()
-  }, [camera, size])
+  useLayoutEffect(() => () => (camera as PerspectiveCamera).clearViewOffset(), [camera])
+  return null
+}
+
+/**
+ * Keeps the sky smooth on modest machines: when frames come too slowly for a couple of seconds, the canvas draws
+ * fewer pixels (down to one per screen pixel). It never goes back up during the visit.
+ */
+function Regulateur({ max }: { max: number }) {
+  const setDpr = useThree((s) => s.setDpr)
+  const mesure = useRef({ n: 0, total: 0, dpr: max })
+  useFrame((_, dt) => {
+    const m = mesure.current
+    if (dt > 0.25) return // a hidden tab or a stall, not the drawing
+    m.n++; m.total += dt
+    if (m.n < 90) return
+    const moyenne = m.total / m.n
+    m.n = 0; m.total = 0
+    if (moyenne > 1 / 42 && m.dpr > 1) {
+      m.dpr = Math.max(1, Math.round((m.dpr - 0.25) * 100) / 100)
+      setDpr(m.dpr)
+    }
+  })
   return null
 }
 
@@ -421,7 +484,8 @@ function Scene({ vue, calme, mobile, base, reperes }: Props) {
       <Sol couleurs={couleurs} hauteurs={hauteurs} nuages={nuages} mobile={mobile} />
       <AnneauDeBrume nuages={nuages} />
       {couches.map((c, i) => <Nuage key={c.y} {...c} i={i} nuages={nuages} />)}
-      <Camera vue={vue} calme={calme} mobile={mobile} points={points} reperes={reperes} />
+      <Camera vue={vue} calme={calme} points={points} reperes={reperes} />
+      <Regulateur max={Math.min(window.devicePixelRatio, mobile ? 1.5 : 1.75)} />
     </>
   )
 }

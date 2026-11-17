@@ -23,7 +23,7 @@ export default function FeuilleDeRoute() {
       <header className="page-tete">
         <p className="petites-caps">Mis à jour le {MAJ}</p>
         <h1 id="titre-route" className="page-titre">La feuille de route</h1>
-        <p>Presque tout est construit et vérifié sur un banc d'essai, mais le pack n'a pas encore été joué du début à la fin. Prochaine étape : des sessions de test entre amis.</p>
+        <p>Presque tout est construit et vérifié sur un banc d'essai, mais le pack n'a pas encore été joué du début à la fin. Prochaine étape : des sessions de test entre amis.</p>
         <div className="jauge" role="img" aria-label={ORDRE.map((s) => `${STATUTS[s].nom} : ${compte(s)}`).join(', ')}>
           {ORDRE.map((s, k) => (
             <i key={s} className={`s-${s}`} style={{ '--n': compte(s), '--k': k } as React.CSSProperties} />
@@ -32,7 +32,7 @@ export default function FeuilleDeRoute() {
       </header>
       <div className="onglets-route" role="tablist" aria-label="Colonnes">
         {ORDRE.map((s) => (
-          <button key={s} type="button" role="tab" aria-selected={colonne === s} className={`onglet s-${s}`} onClick={() => setColonne(s)}>
+          <button key={s} type="button" role="tab" id={`onglet-${s}`} aria-selected={colonne === s} aria-controls={`colonne-${s}`} className={`onglet s-${s}`} onClick={() => setColonne(s)}>
             <span className="statut-marque" aria-hidden="true" />{STATUTS[s].court} <span className="nb">{compte(s)}</span>
           </button>
         ))}
@@ -41,6 +41,7 @@ export default function FeuilleDeRoute() {
         {ORDRE.map((s, k) => (
           <section
             key={s}
+            id={`colonne-${s}`}
             className={`colonne s-${s}${colonne === s ? ' choisie' : ''}`}
             aria-labelledby={`col-${s}`}
             style={{ '--k': k } as React.CSSProperties}
@@ -59,7 +60,7 @@ export default function FeuilleDeRoute() {
                     {(c.quand || lieu) && (
                       <span className="fiche-pied">
                         {c.quand && <span>{c.quand}</span>}
-                        {lieu && <Link to={`/${lieu.chemin}/`}>{lieu.nom}</Link>}
+                        {lieu && <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/`}>{lieu.nom}</Link>}
                       </span>
                     )}
                   </li>

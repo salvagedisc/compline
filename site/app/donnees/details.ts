@@ -18,11 +18,11 @@ export const PALIERS: Palier[] = [
   { nom: 'Acier', ou: 'Le four à alliage', teinte: '#8e9aa3', objet: 'Acier brut',
     lignes: ['Trois fers et un charbon au four à alliage donnent trois aciers bruts, à marteler.', "On n'en trouve plus tout prêt dans les coffres."] },
   { nom: 'Acier noir', ou: "L'enclume de maître", teinte: '#47709a', objet: "Lingot d'acier noir",
-    lignes: ["Acier, magnétite et charbon de bois, martelé puis refroidi : une teinte d'acier bleui.", "Seule sa pioche peut miner le diamant."] },
+    lignes: ["Acier, magnétite et charbon de bois, martelé puis refroidi : une teinte d'acier bleui.", "Seule sa pioche peut miner le diamant."] },
   { nom: 'Diamant', ou: 'Près de la lave profonde', teinte: '#8ad8d2', objet: 'Diamant brut',
     lignes: ['Les diamants ne viennent plus que de pierres brutes près de la lave, tout en bas.', "Le gabarit se gagne en réveillant le cœur ancien d'un monument des conifères."] },
   { nom: 'Orichalque', ou: 'Le cœur brûlant', teinte: '#c08454', objet: "Lingot d'orichalque",
-    lignes: ['Des débris antiques dorment près des lacs de lave, sous la couche −40.', "Le four se bâtit en magma ; Archie vend le gabarit une fois l'obsidicératops apprivoisé."] },
+    lignes: ['Des débris antiques dorment près des lacs de lave, sous la couche −40.', "Le four se bâtit en magma ; Archie vend le gabarit une fois l'obsidicératops apprivoisé."] },
 ]
 
 export const PIOCHE = "Une pioche experte, parfaite ou de maître donne 10, 20 ou 30 % de chances d'un minerai en plus."

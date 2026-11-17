@@ -19,7 +19,7 @@ export function Mesure() {
     <div className="scene scene-mesure">
       <div className="mesure">
         <div className="mesure-carte" onPointerMove={bouger} onPointerDown={bouger} onPointerLeave={() => setL(null)}>
-          <img src={CARTE} alt="Carte du disque relevée sur le serveur d'essai : montagnes enneigées au nord, forêts et prairies au centre, lacs et rivières" draggable={false} width={775} height={775} />
+          <img src={CARTE} alt="Carte du disque relevée sur le serveur d'essai : montagnes enneigées au nord, forêts et prairies au centre, lacs et rivières" draggable={false} width={775} height={775} />
           <svg viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r={R_IMG * 100} className="mesure-bord" />
             <circle cx="50" cy="50" r={R_RIVAGE * 100} className="mesure-rivage" />
@@ -43,17 +43,17 @@ export function Mesure() {
           <span className="mesure-s petites-caps" aria-hidden="true">Sud · chaud</span>
           <div className="mesure-echelle" aria-hidden="true" style={{ width: `${mille * 3}%` }}>
             <span><i /><i /><i /></span>
-            <small>3 000 blocs</small>
+            <small>3 000 blocs</small>
           </div>
         </div>
         <div className="mesure-legende">
           <p className="mesure-lecture" aria-live="polite">
-            <b>{l ? l.titre : '6 000 blocs du centre au bord'}</b>
+            <b>{l ? l.titre : '6 000 blocs du centre au bord'}</b>
             <span>{l ? l.texte : 'Survolez la carte pour mesurer.'}</span>
           </p>
           <ul className="mesure-cles">
-            <li><span className="cle-rivage" aria-hidden="true" />La côte, vers 5 700 blocs</li>
-            <li><span className="cle-bord" aria-hidden="true" />Le bord, à 6 000 blocs</li>
+            <li><span className="cle-rivage" aria-hidden="true" />La côte, vers 5 700 blocs</li>
+            <li><span className="cle-bord" aria-hidden="true" />Le bord, à 6 000 blocs</li>
           </ul>
         </div>
       </div>

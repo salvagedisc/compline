@@ -6,10 +6,11 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router'
 import type { Route } from './+types/salle'
 import { LIEUX, STATUTS, type Fonction, type Lieu } from '../donnees/lieux'
 import { ROMAINS } from '../donnees/details'
-import { grande } from '../donnees/images'
+import { grande, image } from '../donnees/images'
 import { metas } from '../donnees/site'
 import { Icone, type NomIcone } from '../interface/icones'
 import { lireEtat } from '../interface/etat'
+import { SENS, TAILLES_PLAN } from '../interface/transitions'
 import { Comparer } from '../interface/scenes/Comparer'
 import { Mesure } from '../interface/scenes/Mesure'
 import { Paliers } from '../interface/scenes/Paliers'
@@ -43,6 +44,40 @@ export const meta: Route.MetaFunction = ({ params }) => {
 /** Every stop of the visit in order: each place's title card, then its chapters. */
 const ETAPES = LIEUX.flatMap((l) => [`/${l.chemin}/`, ...l.fonctions.map((f) => `/${l.chemin}/${f.id}/`)])
 
+/** The pictures a stop shows first, so the next and previous stops can be fetched ahead. */
+function imagesDe(chemin: string): string[] {
+  const [s, p] = chemin.split('/').filter(Boolean)
+  const { lieu, fonction } = trouver(s, p)
+  if (!lieu) return []
+  if (!fonction) return [lieu.fond]
+  const m = fonction.media
+  switch (m.type) {
+    case 'image': return [m.capture]
+    case 'comparer': return [m.scenes[0].avant, m.scenes[0].apres]
+    case 'echelle': return ['forge.jpg']
+    case 'zoo': return ['zoo-guide.jpg']
+    default: return []
+  }
+}
+
+function precharger(chemin: string) {
+  // A detached <picture> picks the same source as the one on the page will, and leaves it in the cache.
+  for (const nom of imagesDe(chemin)) {
+    const { sources, img } = image(nom)
+    const pic = document.createElement('picture')
+    for (const [f, srcset] of Object.entries(sources)) {
+      if (f === 'jpeg' || f === 'jpg') continue
+      const src = document.createElement('source')
+      src.type = `image/${f}`; src.srcset = srcset; src.sizes = TAILLES_PLAN
+      pic.append(src)
+    }
+    const i = new Image()
+    i.decoding = 'async'
+    pic.append(i)
+    i.src = img.src
+  }
+}
+
 function Statut({ f }: { f: Fonction }) {
   return <span className={`statut s-${f.statut}`}><span className="statut-marque" aria-hidden="true" />{STATUTS[f.statut].nom}</span>
 }
@@ -64,7 +99,7 @@ function Couverture({ lieu, i }: { lieu: Lieu; i: number }) {
         <ol className="sommaire">
           {lieu.fonctions.map((f, k) => (
             <li key={f.id} style={{ '--k': k } as React.CSSProperties}>
-              <Link to={`/${lieu.chemin}/${f.id}/`}>
+              <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/${f.id}/`} onClick={() => SENS('avant')}>
                 <span className="sommaire-num">{ROMAINS[k]}</span>
                 <span className="sommaire-titre">{f.titre}</span>
                 <span className={`sommaire-statut s-${f.statut}`} title={STATUTS[f.statut].nom}>
@@ -167,8 +202,8 @@ export default function Salle() {
   const ici = ETAPES.indexOf(pathname.endsWith('/') ? pathname : `${pathname}/`)
   const avant = ETAPES[(ici - 1 + ETAPES.length) % ETAPES.length]
   const apres = ETAPES[(ici + 1) % ETAPES.length]
-  const suivant = useCallback(() => navigate(apres), [navigate, apres])
-  const precedent = useCallback(() => navigate(avant), [navigate, avant])
+  const suivant = useCallback(() => { SENS('avant'); navigate(apres, { viewTransition: true }) }, [navigate, apres])
+  const precedent = useCallback(() => { SENS('arriere'); navigate(avant, { viewTransition: true }) }, [navigate, avant])
   useBalayage(suivant, precedent)
 
   useEffect(() => {
@@ -177,11 +212,17 @@ export default function Salle() {
       if ((e.target as HTMLElement).closest('[role="slider"], [role="tab"], input')) return
       if (e.key === 'ArrowRight') { e.preventDefault(); suivant() }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); precedent() }
-      else if (e.key === 'Escape') navigate('/')
+      else if (e.key === 'Escape') navigate('/', { viewTransition: true })
     }
     window.addEventListener('keydown', f)
     return () => window.removeEventListener('keydown', f)
   }, [suivant, precedent, navigate])
+
+  // Once this stop is shown, fetch the pictures of the stops on either side.
+  useEffect(() => {
+    const t = window.setTimeout(() => { precharger(apres); precharger(avant) }, 900)
+    return () => window.clearTimeout(t)
+  }, [apres, avant])
 
   // Arriving from the map, the picture waits for the camera to come through the clouds.
   const [plongee] = useState(() => lireEtat().plongee > 0 && performance.now() - lireEtat().plongee < 1500)
@@ -196,29 +237,32 @@ export default function Salle() {
   }
 
   return (
-    <article className={`salle${plongee ? ' apres-plongee' : ''}`} key={pathname}>
-      {fonction ? <Chapitre lieu={lieu} f={fonction} i={i} k={k} /> : <Couverture lieu={lieu} i={i} />}
+    <>
+      <article className={`salle${plongee ? ' apres-plongee' : ''}`} key={pathname}>
+        {fonction ? <Chapitre lieu={lieu} f={fonction} i={i} k={k} /> : <Couverture lieu={lieu} i={i} />}
+      </article>
+      {/* Outside the page that changes, so the reel stays in place from one chapter to the next. */}
       <nav className="film" aria-label="Chapitres">
-        <Link to={avant} className="film-fleche" aria-label={`Précédent : ${nomEtape(avant)}`}>
+        <Link viewTransition prefetch="intent" to={avant} onClick={() => SENS('arriere')} className="film-fleche" aria-label={`Précédent : ${nomEtape(avant)}`}>
           <Icone nom="gauche" taille={26} />
         </Link>
         <ol className="film-reperes">
           <li>
-            <Link to={`/${lieu.chemin}/`} aria-current={k === -1 ? 'page' : undefined} aria-label={`${lieu.nom}, ouverture`} className="film-cran ouverture" />
+            <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/`} onClick={() => SENS(k > -1 ? 'arriere' : null)} aria-current={k === -1 ? 'page' : undefined} aria-label={`${lieu.nom}, ouverture`} className="film-cran ouverture" />
           </li>
           {lieu.fonctions.map((x, n) => (
             <li key={x.id}>
-              <Link to={`/${lieu.chemin}/${x.id}/`} aria-current={n === k ? 'page' : undefined} aria-label={x.titre} className="film-cran">
+              <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/${x.id}/`} onClick={() => SENS(n > k ? 'avant' : n < k ? 'arriere' : null)} aria-current={n === k ? 'page' : undefined} aria-label={x.titre} className="film-cran">
                 <span className="film-bulle" aria-hidden="true">{x.titre}</span>
               </Link>
             </li>
           ))}
         </ol>
-        <Link to={apres} className="film-fleche suivant" aria-label={`Suivant : ${nomEtape(apres)}`}>
+        <Link viewTransition prefetch="intent" to={apres} onClick={() => SENS('avant')} className="film-fleche suivant" aria-label={`Suivant : ${nomEtape(apres)}`}>
           <span className="film-suivant-nom" aria-hidden="true">{nomEtape(apres)}</span>
           <Icone nom="droite" taille={26} />
         </Link>
       </nav>
-    </article>
+    </>
   )
 }

@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react'
 import { image } from '../../donnees/images'
 import { Capture } from '../Capture'
+import { TAILLES_PLAN } from '../transitions'
 
 interface Props {
   avant: string
@@ -34,11 +35,11 @@ export function Comparer({ avant, apres, avantNom, apresNom, alt }: Props) {
       onPointerCancel={() => setGlisse(false)}
     >
       <div className="cadre">
-        <Capture nom={apres} alt={`${apresNom} : ${alt}`} prioritaire sizes="max(100vw, 178vh)" />
+        <Capture nom={apres} alt={`${apresNom} : ${alt}`} prioritaire sizes={TAILLES_PLAN} />
       </div>
       <div className="comparer-avant" aria-hidden="true">
         <div className="cadre">
-          <Capture nom={avant} alt="" prioritaire sizes="max(100vw, 178vh)" />
+          <Capture nom={avant} alt="" prioritaire sizes={TAILLES_PLAN} />
         </div>
       </div>
       <span className="comparer-nom gauche" aria-hidden="true">{avantNom}</span>

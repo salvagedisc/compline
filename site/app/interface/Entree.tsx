@@ -48,7 +48,7 @@ export function Entree() {
           {mondePret ? 'Le disque attend sous la brume' : 'Le disque se dessine…'}
         </p>
       </div>
-      <p className="entree-pied">Le son : le vent et des cloches lointaines, joués par le navigateur.</p>
+      <p className="entree-pied">Le son : le vent et des cloches lointaines, joués par le navigateur.</p>
     </div>
   )
 }

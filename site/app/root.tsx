@@ -1,9 +1,8 @@
 import { Suspense, lazy, useEffect, useRef, useState } from 'react'
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse, useLocation, useNavigate } from 'react-router'
-import '@fontsource/cormorant-garamond/latin-300.css'
-import '@fontsource/cormorant-garamond/latin-400.css'
-import '@fontsource/cormorant-garamond/latin-500.css'
-import '@fontsource/cormorant-garamond/latin-400-italic.css'
+import { Links, Meta, Outlet, PrefetchPageLinks, Scripts, ScrollRestoration, isRouteErrorResponse, useLocation, useNavigate } from 'react-router'
+import './polices/polices.css'
+import titre300 from './polices/cormorant-300-normal.woff2?url'
+import titreSc600 from '@fontsource/cormorant-sc/files/cormorant-sc-latin-600-normal.woff2?url'
 import '@fontsource/cormorant-sc/latin-500.css'
 import '@fontsource/cormorant-sc/latin-600.css'
 import '@fontsource/spectral/latin-300.css'
@@ -24,7 +23,13 @@ const BASE = import.meta.env.BASE_URL
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/svg+xml', href: `${BASE}favicon.svg` },
-  { rel: 'preload', href: `${BASE}monde/couleurs.webp`, as: 'image', type: 'image/webp' },
+  // The two faces of the title screen, so its words do not swap font as it appears.
+  { rel: 'preload', href: titre300, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: titreSc600, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  // The sky's three textures, fetched the way the 3D loader asks for them so the preloads are used.
+  { rel: 'preload', href: `${BASE}monde/couleurs.webp`, as: 'image', type: 'image/webp', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: `${BASE}monde/hauteurs.png`, as: 'image', type: 'image/png', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: `${BASE}monde/nuages.webp`, as: 'image', type: 'image/webp', crossOrigin: 'anonymous' },
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -88,10 +93,10 @@ function useClavier() {
       const t = e.target as HTMLElement
       if (t.closest('input, textarea, [contenteditable]')) return
       const n = Number(e.key)
-      if (n >= 1 && n <= LIEUX.length) { ouvrirIndex(false); navigate(`/${LIEUX[n - 1].chemin}/`); return }
+      if (n >= 1 && n <= LIEUX.length) { ouvrirIndex(false); navigate(`/${LIEUX[n - 1].chemin}/`, { viewTransition: true }); return }
       const k = e.key.toLowerCase()
-      if (k === 'j') { ouvrirIndex(false); navigate('/journal/') }
-      else if (k === 'r') { ouvrirIndex(false); navigate('/feuille-de-route/') }
+      if (k === 'j') { ouvrirIndex(false); navigate('/journal/', { viewTransition: true }) }
+      else if (k === 'r') { ouvrirIndex(false); navigate('/feuille-de-route/', { viewTransition: true }) }
       else if (k === 'i') ouvrirIndex(!lireEtat().index)
     }
     window.addEventListener('keydown', f)
@@ -101,7 +106,12 @@ function useClavier() {
 
 export default function App() {
   const { pathname } = useLocation()
-  const { entre, mondePret } = useEtat()
+  const { entre, mondePret, index } = useEtat()
+  // While the title screen or the index covers the page, what lies behind it is out of reach (set only once
+  // hydrated, so the page prerendered for visitors without scripts stays usable).
+  const [hydrate, setHydrate] = useState(false)
+  useEffect(() => setHydrate(true), [])
+  const cache = hydrate && (!entre || index)
   const calme = useMedia('(prefers-reduced-motion: reduce)')
   const mobile = useMedia('(max-width: 760px), (pointer: coarse)')
   const webgl = useWebGL()
@@ -140,13 +150,15 @@ export default function App() {
         )}
         <div className="ciel-voile" aria-hidden="true" />
       </div>
-      <Reperes refs={reperes} visibles={vue.type === 'accueil'} />
-      <Entete />
-      <main id="contenu" ref={main} className="contenu">
+      <Reperes refs={reperes} visibles={vue.type === 'accueil'} inerte={cache} />
+      <Entete inerte={hydrate && !entre} />
+      <main id="contenu" ref={main} className="contenu" inert={cache || undefined}>
         <Outlet />
       </main>
       <Index />
       <Entree />
+      {/* Once the page is up, the code of the other pages is fetched too, so no click ever waits for it. */}
+      {hydrate && ['/le-disque/', '/journal/', '/feuille-de-route/'].map((p) => <PrefetchPageLinks key={p} page={p} />)}
       <div className="grain" aria-hidden="true" />
     </>
   )

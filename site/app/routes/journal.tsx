@@ -1,6 +1,7 @@
 // The journal as a reel: one milestone at a time over its picture, the milestones strung along a line at the
 // bottom from the first day to today. Arrows and keys move along it; it opens on the newest.
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { Link } from 'react-router'
 import type { Route } from './+types/journal'
 import { JOURNAL, LIEUX } from '../donnees/lieux'
@@ -9,6 +10,7 @@ import { Icone } from '../interface/icones'
 import { Plan } from '../interface/scenes/Plan'
 import { lireEtat } from '../interface/etat'
 import { estNouveau, useDejaVu } from '../interface/visite'
+import { SENS } from '../interface/transitions'
 
 export const meta: Route.MetaFunction = () => metas('Le journal', 'Les grandes étapes de Compline, du premier jour à aujourd’hui.')
 
@@ -17,7 +19,18 @@ const rien = () => {}
 
 export default function Journal() {
   const vu = useDejaVu()
-  const [k, setK] = useState(JOURNAL.length - 1)
+  const [k, setKBrut] = useState(JOURNAL.length - 1)
+  const actuel = useRef(k)
+  useLayoutEffect(() => { actuel.current = k }, [k])
+  // Moving along the reel plays the same transition as a change of page, the picture sliding the way we go.
+  const setK = useCallback((suite: number | ((n: number) => number)) => {
+    const n = typeof suite === 'function' ? suite(actuel.current) : suite
+    if (n === actuel.current) return
+    const changer = () => flushSync(() => setKBrut(n))
+    SENS(n > actuel.current ? 'avant' : 'arriere')
+    if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(changer)
+    else changer()
+  }, [])
   const e = JOURNAL[k]
   const lieu = LIEUX.find((l) => l.id === e.lieu)
   const debut = JOURNAL[0].iso
@@ -30,7 +43,7 @@ export default function Journal() {
     }
     window.addEventListener('keydown', f)
     return () => window.removeEventListener('keydown', f)
-  }, [])
+  }, [setK])
 
   return (
     <article className="journal">
@@ -45,7 +58,7 @@ export default function Journal() {
           <time className="journal-date" dateTime={e.iso}>{e.date}</time>
           <h2 className="cartouche-titre">{e.titre}</h2>
           <p className="cartouche-texte">{e.texte}</p>
-          {lieu && <Link to={`/${lieu.chemin}/`} className="lien-trait">Voir {lieu.nom.toLowerCase()}</Link>}
+          {lieu && <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/`} className="lien-trait">Voir {lieu.nom.toLowerCase()}</Link>}
         </div>
       </section>
       <nav className="journal-frise" aria-label="Étapes du journal">

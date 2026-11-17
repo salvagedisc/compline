@@ -43,7 +43,7 @@ export function Index() {
         <ol className="index-liste">
           {LIEUX.map((l, i) => (
             <li key={l.id} style={{ '--i': i } as React.CSSProperties}>
-              <Link
+              <Link viewTransition prefetch="intent"
                 to={`/${l.chemin}/`}
                 className={i === survol ? 'actif' : undefined}
                 onClick={fermer}
@@ -65,7 +65,7 @@ export function Index() {
           <ul className="index-chapitres">
             {lieu.fonctions.map((f, k) => (
               <li key={f.id}>
-                <Link to={`/${lieu.chemin}/${f.id}/`} onClick={fermer} tabIndex={-1}>
+                <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/${f.id}/`} onClick={fermer} tabIndex={-1}>
                   <span>{ROMAINS[k]}</span> {f.titre}
                 </Link>
               </li>
@@ -73,9 +73,9 @@ export function Index() {
           </ul>
         </aside>
         <div className="index-pied">
-          <Link to="/journal/" onClick={fermer} className="index-annexe"><Icone nom="journal" taille={26} /> Journal <kbd aria-hidden="true">J</kbd></Link>
-          <Link to="/feuille-de-route/" onClick={fermer} className="index-annexe"><Icone nom="route" taille={26} /> Feuille de route <kbd aria-hidden="true">R</kbd></Link>
-          <Link to="/" onClick={fermer} className="index-annexe"><Icone nom="disque" taille={26} /> Le disque vu du ciel</Link>
+          <Link viewTransition prefetch="intent" to="/journal/" onClick={fermer} className="index-annexe"><Icone nom="journal" taille={26} /> Journal <kbd aria-hidden="true">J</kbd></Link>
+          <Link viewTransition prefetch="intent" to="/feuille-de-route/" onClick={fermer} className="index-annexe"><Icone nom="route" taille={26} /> Feuille de route <kbd aria-hidden="true">R</kbd></Link>
+          <Link viewTransition prefetch="intent" to="/" onClick={fermer} className="index-annexe"><Icone nom="disque" taille={26} /> Le disque vu du ciel</Link>
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ export function Zoo() {
   const changer = (n: number) => { setF(n); setPoses([false, false, false, false]); setDernier(null) }
 
   const message = dernier === -1
-    ? "Pas encore : il faut d'abord les trois autres tampons."
+    ? "Pas encore : il faut d'abord les trois autres tampons."
     : dernier === null
       ? 'Touchez un tampon pour le gagner.'
       : TAMPONS[dernier].comment
@@ -37,10 +37,21 @@ export function Zoo() {
               key={x.id}
               type="button"
               role="tab"
+              id={`famille-${k}`}
               aria-selected={k === f}
+              aria-controls="zoo-page"
+              tabIndex={k === f ? 0 : -1}
               className="zoo-famille"
               style={{ '--c': x.couleur } as React.CSSProperties}
               onClick={() => changer(k)}
+              onKeyDown={(e) => {
+                const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
+                if (!d) return
+                e.preventDefault(); e.stopPropagation()
+                const n = (k + d + FAMILLES.length) % FAMILLES.length
+                changer(n)
+                document.getElementById(`famille-${n}`)?.focus()
+              }}
             >
               <img src={x.image} alt="" width={167} height={167} />
               <span className="zoo-famille-nom">{x.nom}</span>
@@ -50,7 +61,7 @@ export function Zoo() {
           <p className="zoo-total">{TOTAL_ESPECES} espèces au total, toutes dans le guide d'Archie.</p>
         </div>
 
-        <div className={`zoo-page${complete ? ' complete' : ''}`} role="tabpanel">
+        <div id="zoo-page" className={`zoo-page${complete ? ' complete' : ''}`} role="tabpanel" aria-labelledby={`famille-${f}`}>
           <div className="zoo-page-tete" style={{ '--c': famille.couleur } as React.CSSProperties}>
             <span className={`zoo-portrait${vue ? ' vue' : ''}`}>
               <img src={famille.image} alt={vue ? `Une bête de la famille ${famille.nom}` : 'Une silhouette à l’encre'} width={167} height={167} />
@@ -83,12 +94,12 @@ export function Zoo() {
               )
             })}
           </ol>
-          <p id="zoo-message" className="zoo-message" aria-live="polite">
-            {complete ? 'Page complète : la bête est maîtrisée, sans jamais avoir été tuée.' : message}
-          </p>
-          {poses.some(Boolean) && (
-            <button type="button" className="lien-trait zoo-encore" onClick={() => changer(f)}>Une autre bête</button>
-          )}
+          <div className="zoo-pied">
+            <p id="zoo-message" className="zoo-message" aria-live="polite">
+              {complete ? 'Page complète : la bête est maîtrisée, sans jamais avoir été tuée.' : message}
+            </p>
+            <button type="button" className="lien-trait zoo-encore" onClick={() => changer(f)} hidden={!poses.some(Boolean)}>Une autre bête</button>
+          </div>
         </div>
       </div>
     </div>

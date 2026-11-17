@@ -6,7 +6,7 @@ import { Icone } from './icones'
 import { basculerSon, ouvrirIndex, useEtat } from './etat'
 import { couperSon, demarrerSon } from './son'
 
-export function Entete() {
+export function Entete({ inerte }: { inerte: boolean }) {
   const { pathname } = useLocation()
   const { son, index } = useEtat()
   const premier = pathname.split('/').filter(Boolean)[0]
@@ -19,8 +19,8 @@ export function Entete() {
   }
 
   return (
-    <header className="entete">
-      <Link to="/" className="marque" aria-label="Compline, retour au disque">Compline</Link>
+    <header className="entete" inert={inerte || undefined}>
+      <Link viewTransition prefetch="intent" to="/" className="marque" aria-label="Compline, retour au disque">Compline</Link>
       {ici && <span className="ici" aria-hidden="true">{ici}</span>}
       <div className="entete-actions">
         <button type="button" className="entete-bouton seul-js" onClick={sonner} aria-pressed={son} aria-label={son ? 'Couper le son' : 'Mettre le son'}>

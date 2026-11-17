@@ -72,7 +72,7 @@ export function Paliers() {
           <p className="palier-note">{PIOCHE}</p>
         </div>
         <div className="paliers-dinos">
-          <p className="petites-caps">À côté du métal : les armures de dinosaures</p>
+          <p className="petites-caps">À côté du métal : les armures de dinosaures</p>
           <ul>
             {DINOS.map((d) => (
               <li key={d.nom}><b>{d.nom}</b><span>{d.milieu}</span><span>{d.ouvre}</span></li>
