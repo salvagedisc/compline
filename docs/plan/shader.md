@@ -38,9 +38,9 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/reflect.glsl` | Screen reflections, the mirrored sky, the veil of air on a reflection (water and puddles) |
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
 | `lib/precip.glsl`, `program/shelter.csh` | Drops and flakes drawn by the shader, the shelter of roofs and trees, the showers |
-| `lib/cover.glsl` | Snow laid on trees and ledges, the glitter of snow and sand |
+| `lib/cover.glsl` | Snow laid on trees and ledges, frost, the glitter of snow and sand |
 | `lib/tracks.glsl`, `program/tracks.csh` | Footprints: the map, the stamping of a step, the hollow and its tilted edges on the ground |
-| `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, slant of the rain |
+| `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, leaves brushed, slant of the rain |
 | `lib/smaa.glsl`, `program/smaa.*`, `textures/smaa_*.png` | SMAA by Jorge Jimenez et al. (MIT, `textures/SMAA-LICENSE.txt`), unchanged but for its encoding, its lookup tables, and the three passes that use it |
 | `lib/voxel.glsl`, `program/lightfill.csh` | Coloured light: the volume, the colours of the lights, the spread, the light held in hand |
 | `block.properties` | Which blocks wave, which are water, which glow and in which colour, which are snow, ice, sand, glass or partial blocks that let light through |
@@ -80,6 +80,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 
 - Grass, flowers, crops, leaves and vines move with the pack's wind (`vent` module of the `compline` mod): a slow swell travelling downwind and a quicker quiver, stronger in the gusts that cross the landscape (`WIND_STRENGTH`). Sheltered plants (little sky light) stay still.
 - Grass and flowers lie down and part around the feet of the four living beings nearest the camera, the player included, even out of the wind.
+- Leaves brushed by one of those beings (walking along a hedge, standing on a canopy) lean away from it and quiver quickly while it stays against them, even out of the wind. Falling leaves stay Particular's particles: textured, they read better than leaves drawn by the shader, which were tried and dropped.
 - Rain and snow slant with the wind, more in a storm.
 - Without the mod, a steady fallback wind, stronger in the rain.
 
@@ -114,6 +115,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Snow** blocks are dimmed a little, so the snow keeps its grain in full sun instead of burning white; a few grains glitter where the sun reaches, and change from time to time.
 - **Sand** keeps its warm colour in the sun (darker and slightly richer than the game's texture, otherwise it reads as snow) and glitters more sparsely.
 - **Ice**: clear ice is drawn with the water, light blue, with the sky and the landscape mirrored in it, more at a low angle; packed and blue ice shine like a tarnished mirror (screen reflection, no ripples).
+- **Frost** (`FROST`): in a cool biome (taiga, windswept hills; barely in the plains, never in a warm one) on a clear night, grass blocks, grass, flowers and leaves that see the sky take a pale veil and a rime on their brightest texels, about a third of them at the coldest, following the drawing of the texture on the 1/16 grid. It forms from dusk, holds at sunrise and melts by mid-morning; none under rain, where snow already covers, or near a light.
 - **Footprints**: the player and the animals nearest to them leave a print every 0.7 block, left then right, on sand, snow blocks, snow layers and snow-covered ground. A print is a sole four pixels wide on the 1/16 grid, wider at the front than at the heel, turned in the walking direction and sized by the being's width. Its hollow is darker (bluish on snow, brown on sand) and its edges tilt the normal, so one side catches the light and the other falls in shade. A print records the foot's height, so a flying player or a block placed on top shows none. Prints fade over `TRACK_MINUTES` (4 by default), faster under rain or falling snow; the map covers 64 blocks around the camera, so a trail left farther away is forgotten when the player comes back (`TRACKS`).
 - **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
 

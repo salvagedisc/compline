@@ -233,6 +233,12 @@ void main() {
     float snow = 0.0;
     if (vMat == 0 || vMat == 4 || vMat == 9 || vMat == 14) snow = snowCover(world, normal, lm.y, vMat == 4 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
     if (snow > 0.0) albedo = mix(albedo, vec3(0.64, 0.67, 0.72), snow);
+    // Le givre : les herbes et les feuillages blanchissent au pixel les matins froids.
+    bool grass = vMat == 0 && vTint.g > vTint.b + 0.08;
+    if (snow < 0.5 && (grass || (vMat >= 1 && vMat <= 4))) {
+        float frost = frostCover(world, normal, lm, vMat >= 1 && vMat <= 3 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
+        albedo = mix(albedo, vec3(0.56, 0.60, 0.66), frost * 0.7);
+    }
     if (vMat == 9 || snow > 0.5) {
         // La neige du jeu est d'un blanc pur : au soleil elle brûlerait l'image, sans plus rien laisser voir de son grain.
         if (vMat == 9) albedo *= vec3(0.60, 0.62, 0.66);

@@ -37,6 +37,25 @@ vec3 pushed(vec3 rel, float amp) {
     return p * amp * 2.8;
 }
 
+/** Un feuillage que traverse ou frôle un être vivant s'écarte de lui et frémit, tant qu'il reste contre. */
+vec3 brushFrom(vec4 push, vec3 rel, vec3 world) {
+    if (push.w <= 0.0) return vec3(0.0);
+    vec3 d = rel - push.xyz;
+    if (d.y < -0.6 || d.y > 2.4) return vec3(0.0);
+    float dist = length(d.xz);
+    float k = 1.0 - smoothstep(0.3, 0.3 + push.w, dist);
+    if (k <= 0.0) return vec3(0.0);
+    vec2 away = d.xz / max(dist, 1e-3);
+    float t = frameTimeCounter;
+    vec3 quiver = vec3(sin(t * 13.0 + world.x * 5.1 + world.y * 3.3), sin(t * 11.0 + world.z * 4.7) * 0.6, sin(t * 15.0 + world.z * 5.3 + world.y * 2.9));
+    return (vec3(away.x, 0.15, away.y) * 0.12 + quiver * 0.05) * k;
+}
+
+vec3 brushed(vec3 rel, vec3 world) {
+    if (brumaireLink < 0.5) return vec3(0.0);
+    return brushFrom(brumairePush0, rel, world) + brushFrom(brumairePush1, rel, world) + brushFrom(brumairePush2, rel, world) + brushFrom(brumairePush3, rel, world);
+}
+
 vec3 windBend(vec3 world, vec3 rel, float amp) {
     vec2 dir;
     float force, turbulence;
@@ -65,6 +84,8 @@ vec3 windVertex(int mat, bool top, vec3 world, vec3 rel, float sky) {
     vec3 bend = vec3(0.0);
     // Les herbes et les fleurs se couchent sous les pas, même à l'abri du vent.
     if (mat <= 3 && amp > 0.0) bend += pushed(rel, amp);
+    // Les feuillages s'écartent et frémissent au passage, eux aussi même à l'abri.
+    if (mat == 4) bend += brushed(rel, world);
     amp *= smoothstep(0.35, 0.9, sky);
     if (amp <= 0.0) return bend;
     return bend + windBend(world, rel, amp);
