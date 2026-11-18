@@ -26,7 +26,7 @@ Requirements: Node.js ≥ 20, [packwiz](https://packwiz.infra.link/installation/
 | `cd pack && packwiz refresh` | Regenerates `index.toml` after any change to `pack/` (CI fails if it is stale) | yes |
 | `cd pack && packwiz mr export` | Builds the `.mrpack` locally | yes |
 | `cd mods-custom/compline && ./gradlew build` | Builds the custom `compline` mod; copy the jar to `pack/mods/` and bump `mod_version` in `gradle.properties` | yes |
-| `node scripts/boot/server.mjs` | Boot check: starts a dedicated server with every server-side mod, config and KubeJS script plus the freshly built `compline` jar (`--jar`), fails on a crash, on an error in the logs not listed in `scripts/boot/known-errors.txt`, or on an item of the KubeJS removal lists that does not exist; needs JDK 21 and about 6 GB of memory | yes (`boot` job) |
+| `node scripts/boot/server.mjs` | Boot check: starts a dedicated server with every server-side mod, config and KubeJS script plus the freshly built `compline` jar (`--jar`), fails on a crash, on an error in the logs not listed in `scripts/boot/known-errors.txt`, or on an item of the KubeJS removal lists that does not exist; needs JDK 21 and about 6 GB of memory | yes (`boot` workflow, PRs touching the pack or the mod) |
 
 Manual scripts, run from the repository root and committed with their output (never run in CI):
 
@@ -76,7 +76,8 @@ Datapacks go through KubeJS: NeoForge does not load a global datapack without an
 
 - `main` is **always playable**; the `vX.Y.Z` tags are placed on it. Every push to `main` refreshes the `dev` pre-release ([dev-sync](docs/dev-sync.md)).
 - Work happens on descriptive branches (`feat/…`, `fix/…`, `docs/…`; experiments on `test/<subject>`), merged into `main` by PR or abandoned. Merged branches are deleted automatically.
-- Every push and every PR runs `build`: tests, dependency and translation checks, up-to-date index, custom mod build, `.mrpack` export as an artifact. A PR is merged only when it is green.
+- Every PR and every push to `main` runs `build`: tests, dependency and translation checks, up-to-date index, custom mod build, `.mrpack` export as an artifact. A branch without a PR is not checked (`build` can be started by hand from the Actions tab). PRs that touch `pack/`, `mods-custom/` or `scripts/boot/` also run `boot`, the full-pack dedicated server (about 15 minutes). A PR is merged only when it is green.
+- The repository is private: GitHub Actions minutes are counted against a monthly allowance. Push a branch when it is ready for review rather than after every commit.
 - Two PRs that touch `pack/index.toml` conflict only on `pack/pack.toml`, whose `hash` is the sha256 of `pack/index.toml`: run `packwiz refresh` after rebasing.
 
 **Versions and release**
