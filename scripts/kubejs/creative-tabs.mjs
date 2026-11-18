@@ -30,11 +30,11 @@ const TABS = [
   'overgeared:lingering_arrows_tab', 'overgeared:overgeared_tab', 'railways:main',
   'railways:palettes', 'railways:tracks', 'regions_unexplored:main', 'simulated:main_tab',
   'surfacesamples:surface_samples_blocks_tab', 'surfacesamples:surface_samples_items_tab',
-  'tannery:tannery', 'thirst:thirst', 'twigs:twig'
+  'thirst:thirst', 'twigs:twig'
 ];
 
 // Server scripts whose `*_OBJETS` lists remove items from the pack.
-const LISTS = ['sans_lapin', 'doublons', 'faune_coupee', 'premiers_gestes', 'tannerie', 'tri'];
+const LISTS = ['sans_lapin', 'doublons', 'faune_coupee', 'premiers_gestes', 'tri'];
 
 const quotedIds = (text) => [...text.matchAll(/'([a-z0-9_.-]+:[a-z0-9_/.-]+)'/g)].map((match) => match[1]);
 const server = (name) => readFile(join(kubejs, 'server_scripts', `${name}.js`), 'utf8');

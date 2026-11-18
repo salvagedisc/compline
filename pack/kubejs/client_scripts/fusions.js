@@ -6,7 +6,7 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'farm_and_charm:lamb_ham', 'farm_and_charm:raw_pasta', 'farm_and_charm:dough', 'create:dough',
     'farm_and_charm:flour', 'farm_and_charm:dog_food', 'naturalist:cooked_egg',
     'naturalist:clam_meat', 'naturalist:cooked_clam_meat', 'naturalist:crab_meat',
-    'naturalist:cooked_crab_meat', 'farmersdelight:tree_bark', 'naturalist:fat',
+    'naturalist:cooked_crab_meat',
     'farmersdelight:rope', 'farm_and_charm:rope', 'overgeared:copper_nugget',
     'overgeared:diamond_shard', 'hybrid_aquatic:glowstick', 'alexsmobs:shark_tooth',
     'minecraft:fishing_rod'

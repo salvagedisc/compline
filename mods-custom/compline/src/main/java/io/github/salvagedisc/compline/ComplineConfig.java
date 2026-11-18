@@ -42,6 +42,12 @@ public final class ComplineConfig {
     private static final ModConfigSpec.IntValue REPOS_REST_SECONDS;
     private static final ModConfigSpec.DoubleValue REPOS_BASE_MINUTES;
     private static final ModConfigSpec.DoubleValue REPOS_MINUTES_PER_COMFORT;
+    private static final ModConfigSpec.BooleanValue TANNERIE_ENABLED;
+    private static final ModConfigSpec.IntValue TANNERIE_STROKES;
+    private static final ModConfigSpec.DoubleValue TANNERIE_TANNING_MINUTES;
+    private static final ModConfigSpec.IntValue TANNERIE_DRYING_POINTS;
+    private static final ModConfigSpec.DoubleValue TANNERIE_BARK_CHANCE;
+    private static final ModConfigSpec.DoubleValue TANNERIE_FAT_CHANCE;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -247,6 +253,31 @@ public final class ComplineConfig {
                 .defineInRange("minutesPerComfort", 1.5, 0.0, 10.0);
         common.pop();
 
+        common.comment("Module tannerie : la peau brute se racle au couteau sur le chevalet, trempe dans la cuve à tan (eau et",
+                "écorce), puis sèche sur le séchoir avant de donner du cuir. Le séchage dépend du ciel, de la pluie, du froid et",
+                "d'un feu proche (tag compline:foyers).").push("tannerie");
+        TANNERIE_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : plus d'écorce à la hache ; les blocs restent mais ne travaillent plus.")
+                .define("enabled", true);
+        TANNERIE_STROKES = common
+                .comment("Coups de couteau pour racler une peau sur le chevalet.")
+                .defineInRange("strokes", 6, 1, 15);
+        TANNERIE_TANNING_MINUTES = common
+                .comment("Minutes de trempage dans la cuve à tan, pour toutes les peaux de la cuve à la fois.")
+                .defineInRange("tanningMinutes", 5.0, 0.5, 120.0);
+        TANNERIE_DRYING_POINTS = common
+                .comment("Points de séchage pour qu'un cuir soit sec. Le séchoir en gagne toutes les 20 secondes : 2 au soleil,",
+                        "1 à l'ombre ou la nuit, 2 de plus près d'un feu, 1 de moins par temps de neige ; la pluie le mouille (−1).",
+                        "Avec 15 : 2 min 30 au soleil, 5 minutes sous un toit, 1 min 40 sous un toit près d'un feu.")
+                .defineInRange("dryingPoints", 15, 1, 15);
+        TANNERIE_BARK_CHANCE = common
+                .comment("Chance qu'une bûche écorcée à la hache donne un morceau d'écorce (celle de Farmer's Delight).")
+                .defineInRange("barkChance", 0.5, 0.0, 1.0);
+        TANNERIE_FAT_CHANCE = common
+                .comment("Chance qu'une peau raclée laisse un morceau de gras (celui de Naturalist).")
+                .defineInRange("fatChance", 0.33, 0.0, 1.0);
+        common.pop();
+
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
                 "les rince lentement. La saleté reste sur l'objet.").push("patine");
         PATINE_ENABLED = common
@@ -412,6 +443,30 @@ public final class ComplineConfig {
 
     public static double reposMinutesPerComfort() {
         return read(COMMON_SPEC, REPOS_MINUTES_PER_COMFORT);
+    }
+
+    public static boolean tannerieEnabled() {
+        return read(COMMON_SPEC, TANNERIE_ENABLED);
+    }
+
+    public static int tannerieStrokes() {
+        return read(COMMON_SPEC, TANNERIE_STROKES);
+    }
+
+    public static double tannerieTanningMinutes() {
+        return read(COMMON_SPEC, TANNERIE_TANNING_MINUTES);
+    }
+
+    public static int tannerieDryingPoints() {
+        return read(COMMON_SPEC, TANNERIE_DRYING_POINTS);
+    }
+
+    public static double tannerieBarkChance() {
+        return read(COMMON_SPEC, TANNERIE_BARK_CHANCE);
+    }
+
+    public static double tannerieFatChance() {
+        return read(COMMON_SPEC, TANNERIE_FAT_CHANCE);
     }
 
     public static boolean climatEnabled() {

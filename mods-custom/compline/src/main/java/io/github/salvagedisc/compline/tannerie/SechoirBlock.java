@@ -1,0 +1,218 @@
+package io.github.salvagedisc.compline.tannerie;
+
+import com.mojang.serialization.MapCodec;
+import io.github.salvagedisc.compline.ComplineConfig;
+import java.util.Locale;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+/**
+ * Le séchoir : un cadre de bois où le cuir mouillé est tendu. Il sèche par à-coups (toutes les 20 secondes) selon
+ * l'endroit, voir {@link #rate}. Main vide, on décroche le cuir sec, ou on lit où en est le séchage.
+ */
+public class SechoirBlock extends HorizontalDirectionalBlock {
+    public static final MapCodec<SechoirBlock> CODEC = simpleCodec(SechoirBlock::new);
+    public static final EnumProperty<Etat> ETAT = EnumProperty.create("etat", Etat.class);
+    public static final IntegerProperty SECHAGE = IntegerProperty.create("sechage", 0, 15);
+    static final int INTERVAL = 400;
+    private static final VoxelShape SHAPE_NS = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
+    private static final VoxelShape SHAPE_EW = Block.box(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
+
+    public enum Etat implements StringRepresentable {
+        VIDE, HUMIDE, SEC;
+
+        @Override
+        public String getSerializedName() {
+            return name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    public SechoirBlock(Properties properties) {
+        super(properties);
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ETAT, Etat.VIDE).setValue(SECHAGE, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, ETAT, SECHAGE);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(FACING).getAxis() == Direction.Axis.Z ? SHAPE_NS : SHAPE_EW;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+            InteractionHand hand, BlockHitResult hit) {
+        if (!stack.is(TannerieModule.CUIR_MOUILLE.get())) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (state.getValue(ETAT) != Etat.VIDE) {
+            if (!level.isClientSide()) {
+                player.displayClientMessage(Component.translatable("tannerie.compline.sechoir.occupe"), true);
+            }
+            return ItemInteractionResult.CONSUME;
+        }
+        if (!level.isClientSide()) {
+            if (!ComplineConfig.tannerieEnabled()) {
+                return ItemInteractionResult.FAIL;
+            }
+            stack.consume(1, player);
+            level.setBlock(pos, state.setValue(ETAT, Etat.HUMIDE).setValue(SECHAGE, 0), Block.UPDATE_ALL);
+            level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.BLOCKS, 1.0F, 0.8F);
+            level.scheduleTick(pos, this, INTERVAL);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        Etat etat = state.getValue(ETAT);
+        if (etat == Etat.VIDE) {
+            return InteractionResult.PASS;
+        }
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        if (etat == Etat.HUMIDE) {
+            int percent = state.getValue(SECHAGE) * 100 / needed();
+            player.displayClientMessage(Component.translatable("tannerie.compline.sechoir.seche", percent,
+                    Component.translatable("tannerie.compline.sechoir.cause." + cause(level, pos))), true);
+            return InteractionResult.CONSUME;
+        }
+        level.setBlock(pos, state.setValue(ETAT, Etat.VIDE).setValue(SECHAGE, 0), Block.UPDATE_ALL);
+        ItemStack leather = new ItemStack(Items.LEATHER);
+        if (!player.addItem(leather)) {
+            player.drop(leather, false);
+        }
+        level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.BLOCKS, 1.0F, 1.2F);
+        return InteractionResult.CONSUME;
+    }
+
+    private static int needed() {
+        return Math.max(1, Math.min(15, ComplineConfig.tannerieDryingPoints()));
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(ETAT) != Etat.HUMIDE) {
+            return;
+        }
+        if (ComplineConfig.tannerieEnabled()) {
+            int points = Math.max(0, Math.min(15, state.getValue(SECHAGE) + rate(level, pos)));
+            if (points >= needed()) {
+                level.setBlock(pos, state.setValue(ETAT, Etat.SEC).setValue(SECHAGE, 0), Block.UPDATE_ALL);
+                return;
+            }
+            if (points != state.getValue(SECHAGE)) {
+                level.setBlock(pos, state.setValue(SECHAGE, points), Block.UPDATE_CLIENTS);
+            }
+        }
+        level.scheduleTick(pos, this, INTERVAL);
+    }
+
+    /**
+     * Points de séchage gagnés en 20 secondes : la pluie mouille (−1) ; sinon 2 au soleil, 1 à l'ombre ou la nuit,
+     * 2 de plus près d'un feu allumé (4 blocs), 1 de moins quand il neige là (biome froid, ou l'hiver d'Ecliptic
+     * Seasons, qui change la neige du biome).
+     */
+    static int rate(Level level, BlockPos pos) {
+        BlockPos above = pos.above();
+        boolean sky = level.canSeeSky(above);
+        if (sky && level.isRainingAt(above)) {
+            return -1;
+        }
+        int rate = sky && level.isDay() ? 2 : 1;
+        if (nearFire(level, pos)) {
+            rate += 2;
+        }
+        if (cold(level, pos)) {
+            rate -= 1;
+        }
+        return rate;
+    }
+
+    private static String cause(Level level, BlockPos pos) {
+        BlockPos above = pos.above();
+        boolean sky = level.canSeeSky(above);
+        if (sky && level.isRainingAt(above)) {
+            return "pluie";
+        }
+        if (nearFire(level, pos)) {
+            return "feu";
+        }
+        if (cold(level, pos)) {
+            return "froid";
+        }
+        return sky && level.isDay() ? "soleil" : "ombre";
+    }
+
+    private static boolean cold(Level level, BlockPos pos) {
+        return level.getBiome(pos).value().coldEnoughToSnow(pos)
+                || level.getBiome(pos).value().getPrecipitationAt(pos) == net.minecraft.world.level.biome.Biome.Precipitation.SNOW;
+    }
+
+    private static boolean nearFire(Level level, BlockPos pos) {
+        for (BlockPos p : BlockPos.betweenClosed(pos.offset(-4, -2, -4), pos.offset(4, 2, 4))) {
+            BlockState state = level.getBlockState(p);
+            if (state.is(TannerieModule.FOYERS)
+                    && (!state.hasProperty(BlockStateProperties.LIT) || state.getValue(BlockStateProperties.LIT))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(ETAT) == Etat.HUMIDE && random.nextInt(8) == 0) {
+            level.addParticle(net.minecraft.core.particles.ParticleTypes.DRIPPING_WATER, pos.getX() + 0.2 + random.nextDouble() * 0.6,
+                    pos.getY() + 0.2, pos.getZ() + 0.2 + random.nextDouble() * 0.6, 0.0, 0.0, 0.0);
+        }
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (!state.is(newState.getBlock()) && state.getValue(ETAT) != Etat.VIDE) {
+            Block.popResource(level, pos, new ItemStack(state.getValue(ETAT) == Etat.SEC ? Items.LEATHER
+                    : TannerieModule.CUIR_MOUILLE.get()));
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+}
