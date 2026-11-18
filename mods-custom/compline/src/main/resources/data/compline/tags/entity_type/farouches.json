@@ -1,0 +1,120 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fox",
+    "minecraft:ocelot",
+    "minecraft:rabbit",
+    {
+      "id": "naturalist:deer",
+      "required": false
+    },
+    {
+      "id": "naturalist:zebra",
+      "required": false
+    },
+    {
+      "id": "naturalist:giraffe",
+      "required": false
+    },
+    {
+      "id": "naturalist:ostrich",
+      "required": false
+    },
+    {
+      "id": "naturalist:turkey",
+      "required": false
+    },
+    {
+      "id": "naturalist:lizard",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:gazelle",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:moose",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:kangaroo",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:roadrunner",
+      "required": false
+    },
+    {
+      "id": "wildernature:deer",
+      "required": false
+    },
+    {
+      "id": "wildernature:bison",
+      "required": false
+    },
+    {
+      "id": "wildernature:beaver",
+      "required": false
+    },
+    {
+      "id": "wildernature:squirrel",
+      "required": false
+    },
+    {
+      "id": "wildernature:swift_fox",
+      "required": false
+    },
+    {
+      "id": "wildernature:raccoon",
+      "required": false
+    },
+    {
+      "id": "wildernature:turkey",
+      "required": false
+    },
+    {
+      "id": "koopascritters:giant_muntjac",
+      "required": false
+    },
+    {
+      "id": "koopascritters:mountain_viscacha",
+      "required": false
+    },
+    {
+      "id": "koopascritters:hyrax",
+      "required": false
+    },
+    {
+      "id": "koopascritters:tibetan_fox",
+      "required": false
+    },
+    {
+      "id": "koopascritters:california_quail",
+      "required": false
+    },
+    {
+      "id": "koopascritters:rock_ptarmigan",
+      "required": false
+    },
+    {
+      "id": "koopascritters:helmeted_guineafowl",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:peacock",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:guinea_fowl",
+      "required": false
+    },
+    {
+      "id": "hybrid_birds:turkey",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:red_panda",
+      "required": false
+    }
+  ]
+}

@@ -64,9 +64,8 @@ public final class Wind {
         float rain = level.getRainLevel(1.0F);
         float thunder = level.getThunderLevel(1.0F);
 
-        // Direction : une lente dérive, plus vive sous l'orage ; même valeur pour tous les clients du monde.
-        double drift = seconds / 900.0;
-        double angle = 2.0 * Math.PI * smoothNoise(drift) * 1.6 + 0.6 * smoothNoise(seconds / 140.0 + 31.7) * (0.3 + thunder);
+        // Direction : une lente dérive, plus vive sous l'orage ; même valeur pour tous les clients du monde (et le serveur).
+        double angle = WindField.angle(level.getGameTime(), thunder);
         float targetX = (float) Math.cos(angle);
         float targetZ = (float) Math.sin(angle);
         float ease = ready ? 0.02F : 1.0F;
@@ -79,11 +78,9 @@ public final class Wind {
         }
 
         // Force : une brise, plus forte sous la pluie et l'orage, et en altitude.
-        float calm = (float) smoothNoise(seconds / 300.0 + 7.3);
-        float altitude = Mth.clamp((float) (camera.y - 90.0) / 140.0F, 0.0F, 0.35F);
-        float targetStrength = 0.18F + 0.24F * calm + 0.32F * rain + 0.35F * thunder + altitude;
+        float targetStrength = WindField.strength(level.getGameTime(), rain, thunder, camera.y);
         strength = Mth.lerp(ready ? 0.01F : 1.0F, strength, targetStrength);
-        turbulence = Mth.lerp(ready ? 0.01F : 1.0F, turbulence, 0.25F + 0.35F * rain + 0.4F * thunder);
+        turbulence = Mth.lerp(ready ? 0.01F : 1.0F, turbulence, WindField.turbulence(rain, thunder));
         ready = true;
 
         // Rafales : plus fréquentes et plus fortes par mauvais temps.
@@ -122,22 +119,6 @@ public final class Wind {
         float peak = (0.35F + RANDOM.nextFloat() * 0.5F) * (0.6F + strength);
         double life = back * 2.0 / speed;
         GUSTS[slot] = new Gust(ox, oz, gx, gz, speed, width, peak, seconds, life);
-    }
-
-    /** Valeur lisse entre 0 et 1, qui varie d'une unité de t à l'autre. */
-    private static double smoothNoise(double t) {
-        long i = (long) Math.floor(t);
-        double f = t - i;
-        f = f * f * (3.0 - 2.0 * f);
-        return Mth.lerp(f, hash(i), hash(i + 1));
-    }
-
-    private static double hash(long i) {
-        long v = i * 0x9E3779B97F4A7C15L;
-        v ^= v >>> 31;
-        v *= 0xBF58476D1CE4E5B9L;
-        v ^= v >>> 29;
-        return (v >>> 11) * 0x1.0p-53;
     }
 
     /** Temps du vent, en secondes, interpolé dans le tick pour une image. */
