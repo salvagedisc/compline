@@ -123,6 +123,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s compline:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
+- [ ] **Seasons felt by the body** (`climat` module, [climat](plan/climat.md)): `/eclipticseasons solar set 64` (winter solstice), then `/temp debug @s world`: `compline:saison` about −0.64 after the biome, the gauge falls outdoors [CL1]; `solar set 34` (greater heat) in a desert at noon: about +0.3 [CL2]; the offset moves a little each day, never in one jump [CL3]; nothing in the Nether [CL4]; `seasonStrength = 0` turns it off without a restart [CL5].
 - [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
 - [ ] **Pack sort, recipes**: mincer refuses ores, stone and logs; Immersive Enchanting costs without Nether items; 3 flax for 2 ropes, rope arrow of 8, pulley with a cogwheel, kitchen knives through the forge; Farm & Charm crops follow the seasons [TR4 to TR7].
 
@@ -218,6 +219,7 @@ Once the results are in:
 | PE (fishing) | this file, session 4; context in [decisions/0034](decisions/0034-starcatcher-fishing.md) |
 | BC (combat) | this file, session 4; context in [decisions/0036](decisions/0036-better-combat.md) |
 | PG (ores and progression) | [plan/progression.md](plan/progression.md#in-game-tests) |
+| CL (climate) | [plan/climat.md](plan/climat.md#in-game-tests) |
 | TR (pack sort) | [plan/tri-du-pack.md](plan/tri-du-pack.md#in-game-tests) |
 
 Tests without a code come from the mods added on 2026-10-25 and from [the mod registry](mods.md).
