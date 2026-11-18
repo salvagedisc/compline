@@ -139,6 +139,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **No XP anywhere**: mine coal, smelt iron, kill, breed, fish: no orb; `/xp add @s 10 points` changes nothing [XP3].
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
 - [ ] **Tannery**: a cow and a horse give their hide; the hide dries on a tanning rack; stripping a log with an axe gives bark, two barks give tannic powder; dry hide in the tanning barrel → leather; the barrel messages are in French; EMI shows no satchel [T].
+- [ ] **The body left behind** (Sable: Ragdoll Corpse, [0037](decisions/0037-ragdoll-corpse.md)): die with a full inventory and the bag on the back: nothing falls, the body keeps everything and opens with a right-click, « Corps de … » in French; empty it, it vanishes [RC1]. Drag it, throw it, lift it with an airship [RC2]. Die far away: the atlas grave and the recovery compass lead back to it, it survives a restart [RC3]; in lava and deep water too [RC4]; the H key does nothing [RC5].
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s compline:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
@@ -238,6 +239,7 @@ Once the results are in:
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | AV (rain, storm and sunlight) | Removed by [0026](decisions/0026-second-cleanup.md); [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) is kept as history |
 | PE (fishing) | this file, session 4; context in [decisions/0034](decisions/0034-starcatcher-fishing.md) |
+| RC (the body left behind) | [decisions/0037](decisions/0037-ragdoll-corpse.md#in-game-tests) |
 | BC (combat) | this file, session 4; context in [decisions/0036](decisions/0036-better-combat.md) |
 | PG (ores and progression) | [plan/progression.md](plan/progression.md#in-game-tests) |
 | CL (climate) | [plan/climat.md](plan/climat.md#in-game-tests) |

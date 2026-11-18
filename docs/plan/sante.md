@@ -11,6 +11,7 @@ Idea 3 drawn from Wayfarer ([research of 2026-10-19](../archive/plan/recherche/2
 - Shards are found by exploring: in vanilla dungeons, temples and shipwrecks, in ocean ruins and archaeology sites, and near the Elderhearts of the monuments. No creature drops them, and no recipe makes them.
 - The shard's tooltip shows your current hearts (for example "Cœurs : 7 / 10", i.e. "Hearts: 7 / 10").
 - Your lost hearts stay lost after a disconnection or a server restart.
+- Your items are not lost: since 2026-11-18 they stay in the body you leave behind, until you come back for it ([0037](../decisions/0037-ragdoll-corpse.md)).
 
 ## Files
 

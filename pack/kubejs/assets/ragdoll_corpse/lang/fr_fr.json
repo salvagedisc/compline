@@ -1,0 +1,8 @@
+{
+  "ragdoll_corpse.configuration.title": "Corps du joueur",
+  "ragdoll_corpse.configuration.spawn_empty_inventory_corpses": "Laisser un corps même sans inventaire",
+  "ragdoll_corpse.configuration.corpse_lifetime_minutes": "Durée de vie d'un corps",
+  "ragdoll_corpse.configuration.empty_corpse_despawn_seconds": "Délai avant qu'un corps vidé disparaisse",
+  "container.ragdoll_corpse.corpse": "Corps de %s",
+  "container.ragdoll_corpse.release": "Laisser le corps"
+}
