@@ -36,6 +36,11 @@ vec3 hemisphereLight(vec3 normal, float sky) {
 
 // La lumière de l'astre qui atteint le dernier point éclairé par shade() (ombre, nuages, eau et vitraux compris).
 vec3 gSunReach = vec3(0.0);
+// La lumière des blocs au même point (gBlockReach), d'où elle vient (gBlockDir, unitaire) et combien elle vient d'un
+// seul côté (gBlockSide : 0 de partout, 1 d'une seule source) : solid.fsh y prend le reflet des torches.
+vec3 gBlockReach = vec3(0.0);
+vec3 gBlockDir = vec3(0.0, 1.0, 0.0);
+float gBlockSide = 0.0;
 
 /**
  * albedo : couleur linéaire ; normal : repère monde ; lm : lumière des blocs et du ciel (0..1) ; ao : occlusion ;
@@ -118,6 +123,7 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     float blockLm = lm.x;
     vec3 tint = blockLightTint(pos, normal, blockLm);
     float glow = blockLm * blockLm * (0.30 + 2.3 * blockLm * blockLm * blockLm);
+    gBlockSide = 0.0;
 #if BLOCK_LIGHT_SHAPE > 0
     if (blockLm > 0.02) {
         // D'où vient la lumière : la face tournée vers la torche en reçoit plus que celle qui lui tourne le dos.
@@ -126,6 +132,8 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         if (strength > 0.05) {
             float toward = dot(normal, slope / length(slope));
             glow *= mix(1.0, 0.62 + 0.55 * max(toward, -0.7), strength * 0.85);
+            gBlockDir = slope / length(slope);
+            gBlockSide = strength;
         }
         // Une flamme vacille : un souffle lent et un frémissement, différents d'un bloc à l'autre, d'autant moins
         // sensibles qu'on est loin d'elle.
@@ -138,6 +146,7 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     }
 #endif
     light += tint * glow * mix(occl, 1.0, blockLm * blockLm);
+    gBlockReach = tint * glow;
     light += vec3(0.016, 0.018, 0.022) * occl;
     light += vec3(0.30, 0.32, 0.34) * nightVision;
     light *= 1.0 - 0.7 * darknessFactor;
