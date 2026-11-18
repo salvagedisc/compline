@@ -23,6 +23,7 @@ public final class ModIds {
     public static final String EXPOSURE = "exposure";
     public static final String COLD_SWEAT = "cold_sweat";
     public static final String ECLIPTIC_SEASONS = "eclipticseasons";
+    public static final String THIRST = "thirst";
 
     private ModIds() {
     }

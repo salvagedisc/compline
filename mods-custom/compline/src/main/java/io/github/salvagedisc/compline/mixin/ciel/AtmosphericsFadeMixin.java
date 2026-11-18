@@ -2,6 +2,7 @@ package io.github.salvagedisc.compline.mixin.ciel;
 
 import com.beash.atmospherics.util.AtmosphericEnvironmentVisuals;
 import io.github.salvagedisc.compline.ciel.FogCache;
+import io.github.salvagedisc.compline.climat.client.StormView;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * La brume lissée d'ATMOSPHERICS ({@code getSmoothedFog} rend un tableau neuf {@code r, g, b, début, fin})
  * passe par {@link FogCache#smooth}, qui ralentit le changement de distance quand une clairière s'ouvre
- * ou se referme. Appliqué seulement avec ATMOSPHERICS ; sans effet si la méthode change ({@code require = 0}).
+ * ou se referme, puis par {@link StormView#apply}, qui la ferme dans une tempête (module climat, sinon sans effet).
+ * Appliqué seulement avec ATMOSPHERICS ; sans effet si la méthode change ({@code require = 0}).
  */
 @Mixin(value = AtmosphericEnvironmentVisuals.class, remap = false)
 abstract class AtmosphericsFadeMixin {
@@ -21,6 +23,7 @@ abstract class AtmosphericsFadeMixin {
         float[] fog = cir.getReturnValue();
         if (fog != null && fog.length >= 5) {
             FogCache.smooth(fog);
+            StormView.apply(fog);
         }
     }
 }
