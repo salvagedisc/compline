@@ -15,6 +15,9 @@
 #include "/lib/cavedrips.glsl"
 #include "/lib/drift.glsl"
 #include "/lib/seasmoke.glsl"
+#include "/lib/embers.glsl"
+#include "/lib/spray.glsl"
+#include "/lib/fluff.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -329,6 +332,35 @@ void main() {
         {
             float amount = fireflySeason();
             if (amount > 0.01) color += vec3(0.62, 1.0, 0.22) * firefliesAlong(dir, min(len, 40.0), amount) * 0.9;
+        }
+#endif
+#if SEED_FLUFF > 0 && SHADER_RAIN > 0
+        // Les duvets des journées douces : blancs et translucides, ils s'allument à contre-jour.
+        {
+            float amount = fluffAmount();
+            if (amount > 0.01) {
+                float fluffDist;
+                float fluff = fluffAlong(dir, min(len, 32.0), amount, fluffDist);
+                if (fluff > 0.0) {
+                    vec3 p = gbufferModelViewInverse[3].xyz + dir * fluffDist;
+                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                    float mu = max(dot(dir, gLightDir), 0.0);
+                    vec3 light = gAmbient * 1.1 + gLightColor * lit * (0.45 + 2.2 * pow(mu, 6.0));
+                    color = mix(color, light, fluff * 0.65);
+                }
+            }
+        }
+#endif
+#if LAVA_EMBERS > 0 && defined VOXELS
+        // Les braises de la lave : leur lumière s'ajoute, l'éclat (bloom) en fait des points qui rayonnent.
+        if (isEyeInWater == 0) color += embersAlong(dir, min(len, 24.0));
+#endif
+#if FALL_SPRAY > 0 && defined VOXELS
+        // Les embruns autour des cascades : un voile blanc de fines gouttes, éclairé par le ciel et le soleil.
+        if (isEyeInWater == 0) {
+            float spray = sprayAlong(dir, len);
+            if (spray > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.5, spray);
         }
 #endif
 #if WATER_STEAM > 0 && defined VOXELS

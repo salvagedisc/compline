@@ -15,6 +15,7 @@
 #define CAVE_DETAIL 1 // [0 1]
 // Les gouttes qui tombent des voûtes des grottes, dans la lumière des torches (lib/cavedrips.glsl).
 #define CAVE_DRIPS 1 // [0 1]
+#define LAVA_EMBERS 1 // [0 1]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]
@@ -98,10 +99,12 @@
 #define WATER_FLOW 1 // [0 1]
 #define WATER_WHITECAPS 1 // [0 1]
 #define WATER_FALLS 1 // [0 1]
+#define FALL_SPRAY 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
 // Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
 #define FIREFLIES 1 // [0 1]
+#define SEED_FLUFF 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]
