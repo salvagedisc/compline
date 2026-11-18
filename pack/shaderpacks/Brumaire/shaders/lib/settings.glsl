@@ -96,6 +96,8 @@
 #define WATER_FALLS 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
+// Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
+#define FIREFLIES 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]
@@ -105,6 +107,10 @@
 #define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define PATCHY_DRYING 1 // [0 1]
 #define WALL_RIVULETS 1 // [0 1]
+// Les gouttes qui perlent et coulent sur les vitres sous la pluie (lib/rain.glsl).
+#define WINDOW_RAIN 1 // [0 1]
+// Les êtres et le joueur trempés sous la pluie, plus sombres et luisants (program/solid.fsh).
+#define WET_ENTITIES 1 // [0 1]
 #define RAIN_SPLASHES 1 // [0 1]
 #define PRECIP_GLOW 1 // [0 1]
 #define SNOW_BLIZZARD 1 // [0 1]
@@ -137,6 +143,8 @@
 #define LABPBR 1 // [0 1]
 #define SPECULAR_STRENGTH 1.0 // [0.0 0.25 0.5 0.75 1.0 1.25 1.5 2.0]
 #define FROST 1 // [0 1]
+// La rosée des matins doux sur l'herbe et les plantes (lib/cover.glsl).
+#define DEW 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
 #define TRACKS 1 // [0 1]
 #define TRACK_MINUTES 4.0 // [1.0 2.0 4.0 8.0 15.0]

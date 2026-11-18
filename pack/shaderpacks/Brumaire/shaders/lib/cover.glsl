@@ -47,8 +47,10 @@ float snowCover(vec3 world, vec3 normal, float sky, float leaf, float grain) {
     return 0.0;
 }
 
-#if FROST > 0
+#if FROST > 0 || DEW > 0
 uniform float sunAngle;
+#endif
+#if FROST > 0
 
 /**
  * Givre des nuits froides (0..1 par texel) : il prend dans les biomes frais la nuit, tient jusqu'au milieu de la
@@ -74,6 +76,21 @@ float frostCover(vec3 world, vec3 normal, vec2 lm, float plant, float grain) {
 #else
 float frostCover(vec3 world, vec3 normal, vec2 lm, float plant, float grain) { return 0.0; }
 #endif
+
+/**
+ * La rosée des matins doux (0..1) : dans les biomes tièdes et humides, du lever du soleil au milieu de la matinée,
+ * sur l'herbe et les plantes qui voient le ciel ; ni sous la pluie (tout est déjà mouillé), ni là où il gèle ou neige.
+ * lm : lumière (blocs, ciel).
+ */
+float dewAmount(vec2 lm) {
+#if DEW > 0
+    float mild = smoothstep(0.45, 0.65, airHeat) * (1.0 - smoothstep(1.1, 1.4, airHeat)) * smoothstep(0.3, 0.6, airHumid);
+    float hour = sunAngle < 0.5 ? 1.0 - smoothstep(0.06, 0.13, sunAngle) : smoothstep(0.96, 0.99, sunAngle);
+    return mild * hour * (1.0 - snowHere) * (1.0 - rainStrength) * smoothstep(0.80, 0.95, lm.y);
+#else
+    return 0.0;
+#endif
+}
 
 /** Les grains qui scintillent au soleil sur la neige et le sable : quelques pixels, qui changent de temps en temps. */
 float glitter(vec3 world, float density) {

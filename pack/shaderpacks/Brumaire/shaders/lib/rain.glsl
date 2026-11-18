@@ -99,6 +99,42 @@ vec2 rivuletAt(vec3 world, vec3 normal, float t, float wet) {
 }
 
 /**
+ * La pluie sur une vitre, au seizième de bloc : des perles d'un pixel posées çà et là, qui sèchent et reviennent, et
+ * sur les faces debout des gouttes qui dévalent une colonne de pixels en laissant une traînée. wet : pluie reçue (0..1).
+ * Rend x : part du texel couverte d'eau, y : éclat (la tête de la goutte, les perles qui prennent la lumière).
+ */
+vec2 windowRain(vec3 world, vec3 normal, float t, float wet) {
+#if WINDOW_RAIN > 0
+    if (wet <= 0.02) return vec2(0.0);
+    bool upright = abs(normal.y) < 0.5;
+    vec3 tang = upright ? normalize(cross(normal, vec3(0.0, 1.0, 0.0))) : vec3(1.0, 0.0, 0.0);
+    float face = dot(floor(world - normal * 0.5), normal);
+    vec2 px = floor(vec2(dot(world, tang), upright ? world.y : world.z) * 16.0);
+    // Les perles : une case de trois pixels sur trois en porte une de temps en temps, à une place tirée pour elle.
+    vec2 cell = floor(px / 3.0);
+    float k = t * 0.18 + rainHash(cell + face * 3.7);
+    vec2 seed = cell + floor(k) * 7.31 + face;
+    float bead = 0.0;
+    if (rainHash(seed) < 0.22 * wet && all(equal(px, cell * 3.0 + floor(vec2(rainHash(seed + 1.3), rainHash(seed + 2.9)) * 3.0)))) {
+        bead = 1.0 - smoothstep(0.7, 1.0, fract(k));
+    }
+    float streak = 0.0, head = 0.0;
+    if (upright) {
+        // Les coulures : une colonne sur dix, une goutte qui descend vite et laisse quelques pixels mouillés derrière elle.
+        float h = rainHash(vec2(px.x, face * 5.13));
+        if (h < 0.10 * wet) {
+            float pos = fract((px.y + floor(t * (14.0 + 30.0 * h))) / 48.0 + rainHash(vec2(px.x * 1.9, face)));
+            head = step(pos, 1.0 / 48.0);
+            streak = pos < 0.18 ? 1.0 - pos / 0.18 : 0.0;
+        }
+    }
+    return vec2(max(bead, streak * 0.7), max(bead * 0.6, head)) * min(wet * 1.5, 1.0);
+#else
+    return vec2(0.0);
+#endif
+}
+
+/**
  * Les gouttes qui éclatent sur un sol mouillé : au seizième de bloc, un pixel clair puis une petite couronne de quatre
  * pixels qui s'efface, en quelques centièmes de seconde, ici et là. Rend leur éclat (0..1).
  */

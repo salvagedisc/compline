@@ -11,6 +11,7 @@
 #include "/lib/precip.glsl"
 #include "/lib/motes.glsl"
 #include "/lib/leaffall.glsl"
+#include "/lib/fireflies.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -304,6 +305,13 @@ void main() {
                     color += blk.rgb * blk.a * blk.a * blk.a * mote * under * 0.35;
                 }
             }
+        }
+#endif
+#if FIREFLIES > 0 && SHADER_RAIN > 0
+        // Les lucioles des nuits douces : leur lumière s'ajoute, l'éclat (bloom) en fait des points qui rayonnent.
+        {
+            float amount = fireflySeason();
+            if (amount > 0.01) color += vec3(0.62, 1.0, 0.22) * firefliesAlong(dir, min(len, 40.0), amount) * 0.9;
         }
 #endif
 #if FALLING_LEAVES > 0 && defined VOXELS
