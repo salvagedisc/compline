@@ -9,6 +9,7 @@
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
 #include "/lib/snow.glsl"
+#include "/lib/cave.glsl"
 #include "/lib/tracks.glsl"
 #endif
 #ifdef PROGRAM_WATER
@@ -276,6 +277,7 @@ void main() {
     // tassée luit comme un miroir terni, la neige à peine.
     float gloss = 0.0;
     float sparkle = 0.0;
+    float damp = 0.0;
 #if defined PROGRAM_TERRAIN
     vec3 world = vPos + cameraPosition;
     float snow = 0.0;
@@ -359,6 +361,14 @@ void main() {
         // Au soleil, une pierre claire trempée paraît encore blanche : une semelle mouillée fonce davantage.
         albedo *= 1.0 - 0.55 * print;
     }
+#if CAVE_DETAIL > 0
+    // Dans une grotte, la roche suinte : des plaques plus sombres et lisses, où la lumière des torches fait un reflet.
+    if ((vMat == 0 || vMat == 14) && surf.metal < 0.5 && snow <= 0.0 && wet <= 0.0) {
+        damp = caveDamp(world, normal, lm.y);
+        albedo *= mix(1.0, 0.72, damp);
+        surf.rough = mix(surf.rough, 0.16, damp);
+    }
+#endif
 #endif
     float indirect;
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
@@ -399,6 +409,24 @@ void main() {
         float rough = mix(surf.rough, 0.10, clamp(gloss, 0.0, 1.0) * float(wet > 0.0));
         vec3 eye = -normalize(vPos);
         lit += gSunReach * sunSpecular(nS, eye, gLightDir, rough, wet > 0.0 ? max(f0, vec3(0.02)) : f0) * SPECULAR_STRENGTH * (1.0 - leaf);
+#if COLORED_LIGHT > 0 && BLOCK_LIGHT_SHAPE > 0
+        // Le reflet des torches, de la lave et des lanternes, du côté d'où vient leur lumière : une lueur large sur la
+        // pierre, un éclat net sur la roche mouillée et le métal.
+        if (gBlockSide > 0.05 && leaf == 0.0 && !emissive(vMat)) {
+            // Sur la roche mouillée, chaque texel penche un peu à sa façon : la lumière s'y accroche en points vifs,
+            // sur un lustre plus large.
+            vec3 nB = nS;
+            if (damp > 0.0) {
+                vec3 q = floor(world * 16.0 + normal * 0.5);
+                vec3 jit = vec3(rainHash(q.xz + q.y * 7.3), rainHash(q.zy + 3.1), rainHash(q.yx * 1.7 + 5.9)) - 0.5;
+                nB = normalize(nS + (jit - normal * dot(jit, normal)) * 0.55 * damp);
+            }
+            vec3 fB = max(f0, vec3(0.03));
+            vec3 spec = sunSpecular(nB, eye, gBlockDir, max(rough, 0.12), fB)
+                      + sunSpecular(nS, eye, gBlockDir, 0.40, fB) * 0.8 * damp;
+            lit += gBlockReach * spec * gBlockSide * 3.0 * SPECULAR_STRENGTH;
+        }
+#endif
         // Ce que reflète un métal : le ciel dans la direction du reflet (assombri sous un toit) et la lumière des blocs
         // proches, teints de sa couleur. Une surface rugueuse mêle davantage d'hémisphère, plus terne.
         if (surf.metal > 0.0) {
@@ -443,7 +471,16 @@ void main() {
 #endif
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
+#if CAVE_DETAIL > 0
+    // La lave et le magma rougeoient selon leur chaleur ; les autres blocs qui éclairent gardent leur couleur vive.
+    if (vMat == 17) lit = albedo * 0.15 + molten(color.rgb / max(vTint.rgb, vec3(0.05)), world, normal.y > 0.9, frameTimeCounter);
+    else if (emissive(vMat)) {
+        vec3 vivid = max(mix(vec3(luma(albedo)), albedo, 1.35), vec3(0.0));
+        lit += vivid * 1.9 * smoothstep(0.22, 0.80, luma(color.rgb));
+    }
+#else
     if (emissive(vMat)) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));
+#endif
 #endif
     outColor = vec4(lit, color.a);
 #endif

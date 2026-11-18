@@ -12,6 +12,7 @@
 #define FOG_BILLOWS 1.0 // [0.0 0.5 1.0 1.5]
 #define FOG_BLOCK_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
+#define CAVE_DETAIL 1 // [0 1]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]

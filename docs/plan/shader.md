@@ -197,6 +197,17 @@ With a resource pack in the labPBR format (`LABPBR`, needs `RELIEF`), Iris binds
 
 A face with a specular map but no normal map is not detected and keeps the table.
 
+## Caves and lava
+
+`CAVE_DETAIL` (off in Very light), `lib/cave.glsl` and `program/mist.fsh`:
+
+- **Molten lava** (family 17, lava and magma): the texel's brightness sets a heat from 0 to 1, mapped through a hot-body ramp (dark red crust, red, orange, pale yellow) and an emission that grows with its square. On the top face, two octaves of slow value noise in texel steps draw plates of cooler crust with sharp edges, a brighter rim around them and ridged veins between them, so a lake no longer repeats the same tile.
+- **Heat haze**: in `mist.fsh`, ten steps over the first twenty blocks of the view ray look one and two cells below each point in the voxel volume for lava (light family 2, level 12 or more); the share found shifts the image in waves that rise up the screen. Under `HEAT_SHIMMER`, with the desert haze.
+- **Damp rock**: where the sky light is under about 0.25, full and partial ordinary blocks get damp patches (more on ceilings and deeper down) and narrow vertical streaks on walls, darker and with a roughness of 0.16. The texel normal of a damp texel is jittered so block light catches it in points.
+- **Block light reflection**: `shade()` exports the block light reaching the point and the direction it comes from (the slope of the voxel light level). Every non-emissive, non-foliage surface adds a GGX reflection of it, with a wider second lobe on damp rock; it shows on metal and wet rock, faintly elsewhere. Needs `COLORED_LIGHT` and `BLOCK_LIGHT_SHAPE`.
+- **Dust in the light**: underground (eye sky light low), the motes of `AIR_MOTES` glow in the colour and with the cube of the block light level read in the voxel volume.
+- **Glowing blocks** keep a more saturated colour (glow lichen, froglights).
+
 ## Block relief
 
 Without a normal-map resource pack, `lib/relief.glsl` draws a relief from the textures themselves, on full blocks, sand and partial blocks (not on plants, leaves, water, ice, glass or glowing blocks), within `RELIEF_RANGE` blocks (24 by default; it fades over the last 40 %).
