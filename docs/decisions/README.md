@@ -40,6 +40,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0034](0034-starcatcher-fishing.md) | Fishing with Starcatcher | Starcatcher, its Hybrid Aquatic addon and Starcatcher's Delight; one rod, catches fitted to a world without End and with a closed Nether, one model per species |
 | [0035](0035-ore-progression.md) | Ores and armour progression | Kept; built in five steps ([progression](../plan/progression.md)) |
 | [0036](0036-better-combat.md) | Animated combat with Better Combat | Better Combat and playerAnimator: a swing of the whole body per weapon type, tools and forged parts excluded, black steel weapons added |
+| [0037](0037-ragdoll-corpse.md) | The body left behind | Sable: Ragdoll Corpse and Sable: Ragdolls: on death the inventory stays in a ragdoll body, no self-ragdoll key |
 
 ## Template
 

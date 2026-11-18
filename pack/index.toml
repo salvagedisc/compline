@@ -281,6 +281,10 @@ file = "config/reliable_backpacks.json"
 hash = "929e656ebc10876fe3dec38c20e99c2bad8c22b93e6100c28c8491f823f07d49"
 
 [[files]]
+file = "config/sable_player_ragdoll-server.toml"
+hash = "2840b6d626ce4fc92f03a9d7d18c87b2c2000bd87a7975781a0052fc2736659d"
+
+[[files]]
 file = "config/selling_bin-server.toml"
 hash = "bc3f184461aee290d41bf3aa2c45543da9508757204180908cd2aa38ddf89b74"
 
@@ -1137,6 +1141,10 @@ file = "kubejs/assets/questlog/lang/fr_fr.json"
 hash = "a1d4ae23caf06f0167e1b4400b2de996dfb3692845b69400d5d55fec9bb2d4d3"
 
 [[files]]
+file = "kubejs/assets/ragdoll_corpse/lang/fr_fr.json"
+hash = "e0358f1194fa881519fe9cd67b7b4b1b9288f76e14952c343096eac8f6163d02"
+
+[[files]]
 file = "kubejs/assets/railways/lang/fr_fr.json"
 hash = "2589790d55171c03e407d895854a63466034d03c512116795659844d90dd04ac"
 
@@ -1159,6 +1167,10 @@ hash = "8f029235a7a1b69a7bef9bc63f3097537a471cbadc8ab656388ef67629980ce0"
 [[files]]
 file = "kubejs/assets/sable/lang/fr_fr.json"
 hash = "cf5a6666f36aead1a480809375c301ea25e2a6c9569cce5bf04954502409c581"
+
+[[files]]
+file = "kubejs/assets/sable_player_ragdoll/lang/fr_fr.json"
+hash = "5601ebb64773a911bf66152398a8a0e8be6d611bbd5e23a5a2c2b2cc0397167e"
 
 [[files]]
 file = "kubejs/assets/sablephysicscompat/lang/fr_fr.json"
@@ -3992,6 +4004,16 @@ metafile = true
 [[files]]
 file = "mods/rhino.pw.toml"
 hash = "e55ca32b338a0e0540f4fec5170675d860566255ae0f45692a00cb4ebf2eb535"
+metafile = true
+
+[[files]]
+file = "mods/sable-ragdoll-corpse.pw.toml"
+hash = "9c418d8a79d2e1cbe199b2e1e78d36dd51e18a0858c7de90de4e64ac7dc5484f"
+metafile = true
+
+[[files]]
+file = "mods/sable-ragdolls.pw.toml"
+hash = "b3ed49355ebdaebfecc279916f873901b57ee9f10e8b7a50c3a46d41ce28df96"
 metafile = true
 
 [[files]]
