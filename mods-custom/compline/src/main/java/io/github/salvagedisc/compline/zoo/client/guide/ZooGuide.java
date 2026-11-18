@@ -109,8 +109,21 @@ public final class ZooGuide {
     }
 
     /** Les espèces d'un milieu. */
+    private static final Map<ZooTab, List<SpeciesInfo>> BY_TAB = new EnumMap<>(ZooTab.class);
+    private static int byTabVersion = -1;
+
+    /** Les espèces d'un milieu, gardées d'une image à l'autre tant que la liste du serveur n'a pas changé. */
     static List<SpeciesInfo> speciesOf(ZooTab tab) {
-        return ZooClient.species().stream().filter(info -> info.tab() == tab).toList();
+        if (byTabVersion != ZooClient.speciesVersion()) {
+            BY_TAB.clear();
+            byTabVersion = ZooClient.speciesVersion();
+        }
+        return BY_TAB.computeIfAbsent(tab, key -> ZooClient.species().stream().filter(info -> info.tab() == key).toList());
+    }
+
+    /** Le joueur quitte le monde : les portraits lâchent les bêtes qu'ils tenaient. */
+    public static void forgetWorld() {
+        Portraits.forgetWorld();
     }
 
     /** Avant chaque image de l'écran du guide : mesure les bêtes en attente, au plus 6 ms par image. */
@@ -122,6 +135,7 @@ public final class ZooGuide {
     /** Les ressources ont été rechargées : les images du zoo seront recomposées avec elles. */
     public static void resourcesReloaded() {
         ZooTextures.invalidate();
+        Portraits.forgetMeasures();
     }
 
     /** Les espèces d'un milieu dans l'ordre alphabétique des pages. */

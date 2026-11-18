@@ -2,6 +2,7 @@ package io.github.salvagedisc.compline.tannerie;
 
 import com.mojang.serialization.MapCodec;
 import io.github.salvagedisc.compline.ComplineConfig;
+import io.github.salvagedisc.compline.commun.Foyers;
 import java.util.Locale;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +25,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
@@ -198,14 +198,7 @@ public class SechoirBlock extends HorizontalDirectionalBlock {
     }
 
     private static boolean nearFire(Level level, BlockPos pos) {
-        for (BlockPos p : BlockPos.betweenClosed(pos.offset(-4, -2, -4), pos.offset(4, 2, 4))) {
-            BlockState state = level.getBlockState(p);
-            if (state.is(TannerieModule.FOYERS)
-                    && (!state.hasProperty(BlockStateProperties.LIT) || state.getValue(BlockStateProperties.LIT))) {
-                return true;
-            }
-        }
-        return false;
+        return Foyers.near(level, pos, 4, 2);
     }
 
     @Override

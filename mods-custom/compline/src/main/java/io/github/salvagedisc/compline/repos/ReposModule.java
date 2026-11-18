@@ -1,6 +1,7 @@
 package io.github.salvagedisc.compline.repos;
 
 import io.github.salvagedisc.compline.Compline;
+import io.github.salvagedisc.compline.commun.Foyers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,7 +22,7 @@ public final class ReposModule {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, Compline.MOD_ID);
     public static final DeferredHolder<MobEffect, ReposeEffect> REPOSE = EFFECTS.register("repose", ReposeEffect::new);
     /** Les feux qui font un foyer, quand ils sont allumés (propriété {@code lit}) ou s'ils n'en ont pas. */
-    public static final TagKey<Block> FOYERS = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Compline.MOD_ID, "foyers"));
+    public static final TagKey<Block> FOYERS = Foyers.TAG;
 
     private ReposModule() {
     }

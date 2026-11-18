@@ -54,6 +54,20 @@ final class Portraits {
     private Portraits() {
     }
 
+    /** Monde quitté : les bêtes d'exemple appartiennent à son niveau, on les lâche. */
+    static void forgetWorld() {
+        cache.clear();
+        cachedLevel = null;
+        pending.clear();
+    }
+
+    /** Ressources rechargées : les modèles ont pu changer, chaque bête sera remesurée. */
+    static void forgetMeasures() {
+        measured.clear();
+        broken.clear();
+        pending.clear();
+    }
+
     private static Quaternionf pose() {
         return new Quaternionf().rotateZ((float) Math.PI).mul(camera());
     }

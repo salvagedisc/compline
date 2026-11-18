@@ -31,6 +31,8 @@ import org.lwjgl.glfw.GLFW;
  */
 public final class ZooClient {
     private static final Map<ResourceLocation, SpeciesInfo> species = new LinkedHashMap<>();
+    /** Change à chaque modification de la liste des espèces : le guide garde ses listes par milieu jusque-là. */
+    private static int speciesVersion;
     private static final Map<ResourceLocation, Integer> stamps = new HashMap<>();
     private static int observeSeconds = 60;
     private static final KeyMapping OPEN_GUIDE = new KeyMapping("key.compline.guide", KeyConflictContext.IN_GAME,
@@ -56,7 +58,12 @@ public final class ZooClient {
         }
         NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> {
             species.clear();
+            speciesVersion++;
             stamps.clear();
+            if (ModIds.isLoaded(ModIds.ARCHIES_DINOSAURS)) {
+                // Les portraits tiennent des bêtes du monde quitté : on les lâche avec lui.
+                io.github.salvagedisc.compline.zoo.client.guide.ZooGuide.forgetWorld();
+            }
         });
     }
 
@@ -69,7 +76,12 @@ public final class ZooClient {
         for (SpeciesInfo info : sync.species()) {
             species.put(info.id(), info);
         }
+        speciesVersion++;
         stamps.putAll(sync.stamps());
+    }
+
+    public static int speciesVersion() {
+        return speciesVersion;
     }
 
     public static Collection<SpeciesInfo> species() {

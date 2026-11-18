@@ -1,17 +1,16 @@
 package io.github.salvagedisc.compline.repos;
 
 import io.github.salvagedisc.compline.ComplineConfig;
+import io.github.salvagedisc.compline.commun.Foyers;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.WeakHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -27,13 +26,18 @@ public final class Repos {
     private static final int COMFORT_HEIGHT = 4;
     /** Déplacement en blocs, entre deux contrôles, au-delà duquel le joueur ne se repose pas. */
     private static final double STILL = 0.6;
+    /** Le confort compté reste valable 15 secondes tant que le joueur n'a pas bougé de plus de 2 blocs. */
+    private static final int COMFORT_TTL = 300;
 
-    private static final Map<UUID, State> STATES = new WeakHashMap<>();
+    private static final Map<UUID, State> STATES = new HashMap<>();
 
     private static final class State {
         Vec3 last;
         int restTicks;
         boolean announced;
+        BlockPos comfortAt;
+        int comfortTick;
+        int comfort;
     }
 
     private Repos() {
@@ -43,6 +47,8 @@ public final class Repos {
         if (!ComplineConfig.reposEnabled() || server.getTickCount() % INTERVAL != 0) {
             return;
         }
+        // Les joueurs partis n'ont plus d'état.
+        STATES.keySet().removeIf(id -> server.getPlayerList().getPlayer(id) == null);
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (!player.isAlive() || player.isSpectator()) {
                 STATES.remove(player.getUUID());
@@ -62,7 +68,7 @@ public final class Repos {
             if (state.restTicks < ComplineConfig.reposRestSeconds() * 20) {
                 continue;
             }
-            int comfort = Confort.count(level, player.blockPosition(), COMFORT_RADIUS, COMFORT_HEIGHT);
+            int comfort = comfort(state, level, player.blockPosition(), server.getTickCount());
             int duration = (int) ((ComplineConfig.reposBaseMinutes() + ComplineConfig.reposMinutesPerComfort() * comfort) * 60 * 20);
             MobEffectInstance current = player.getEffect(ReposModule.REPOSE);
             if (current == null || current.getDuration() < duration - INTERVAL * 2) {
@@ -81,19 +87,16 @@ public final class Repos {
     }
 
     static boolean nearFire(ServerLevel level, BlockPos center) {
-        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-        for (int y = -2; y <= 2; y++) {
-            for (int x = -FIRE_RADIUS; x <= FIRE_RADIUS; x++) {
-                for (int z = -FIRE_RADIUS; z <= FIRE_RADIUS; z++) {
-                    pos.setWithOffset(center, x, y, z);
-                    BlockState state = level.getBlockState(pos);
-                    if (state.is(ReposModule.FOYERS)
-                            && (!state.hasProperty(BlockStateProperties.LIT) || state.getValue(BlockStateProperties.LIT))) {
-                        return true;
-                    }
-                }
-            }
+        return Foyers.near(level, center, FIRE_RADIUS, 2);
+    }
+
+    /** Les familles de confort autour du joueur, recomptées toutes les 15 secondes ou quand il a bougé. */
+    private static int comfort(State state, ServerLevel level, BlockPos pos, int tick) {
+        if (state.comfortAt == null || tick - state.comfortTick >= COMFORT_TTL || state.comfortAt.distManhattan(pos) > 2) {
+            state.comfort = Confort.count(level, pos, COMFORT_RADIUS, COMFORT_HEIGHT);
+            state.comfortAt = pos.immutable();
+            state.comfortTick = tick;
         }
-        return false;
+        return state.comfort;
     }
 }

@@ -254,8 +254,18 @@ public final class ClearingClient {
         for (int x = (cx - hi) >> 4; x <= (cx + hi) >> 4; x++) {
             for (int z = (cz - hi) >> 4; z <= (cz + hi) >> 4; z++) {
                 if (crosses(x, z, cx, cz, lo, hi)) {
-                    Minecraft.getInstance().levelRenderer.setBlocksDirty(x << 4, level.getMinBuildHeight(), z << 4,
-                            (x << 4) + 15, level.getMaxBuildHeight() - 1, (z << 4) + 15);
+                    // Seule la surface change de teinte : on ne redessine que les sections autour du sol du tronçon,
+                    // pas ses 24 sections de haut en bas (la roche des profondeurs ne bouge pas).
+                    int bottom = Integer.MAX_VALUE, top = Integer.MIN_VALUE;
+                    for (int corner = 0; corner < 5; corner++) {
+                        int bx = (x << 4) + (corner == 4 ? 8 : (corner & 1) * 15);
+                        int bz = (z << 4) + (corner == 4 ? 8 : (corner >> 1) * 15);
+                        int surface = level.getHeight(Heightmap.Types.WORLD_SURFACE, bx, bz);
+                        bottom = Math.min(bottom, surface);
+                        top = Math.max(top, surface);
+                    }
+                    Minecraft.getInstance().levelRenderer.setBlocksDirty(x << 4, Math.max(level.getMinBuildHeight(), bottom - 24),
+                            z << 4, (x << 4) + 15, Math.min(level.getMaxBuildHeight() - 1, top + 8), (z << 4) + 15);
                 }
             }
         }
