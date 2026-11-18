@@ -99,3 +99,61 @@ float snowGlints(vec3 world, vec3 normal, vec3 view, vec3 light, float density) 
     float mirror = max(dot(reflect(-light, facet), -view), 0.0);
     return pow(mirror, 180.0) * 6.0;
 }
+
+/**
+ * Hauteur du sable au texel (repère monde, plan horizontal) : des rides serrées en travers du vent, en pente douce
+ * côté vent et raide de l'autre, tordues lentement et effacées par endroits, sur de larges ondulations.
+ */
+float sandHeight(vec2 q, vec2 wind) {
+    float warp = snowNoise(q * 0.4 + 61.0) * 2.4 + snowNoise(q * 1.3 + 7.0) * 0.5;
+    float x = fract(dot(q, wind) * 2.9 + warp);
+    float ripple = x < 0.72 ? x / 0.72 : (1.0 - x) / 0.28;
+    float keep = smoothstep(0.25, 0.60, snowNoise(q * 0.5 + 13.0));
+    return ripple * 0.25 * (0.35 + 0.65 * keep) + snowNoise(q * 0.18 + 31.0) * 0.5;
+}
+
+/** Pente du sable au texel, en normale (repère monde) pour un dessus de bloc ; depth : force (0..1). */
+vec3 sandNormal(vec3 world, vec2 wind, float depth) {
+    vec2 q = (floor(world.xz * 16.0) + 0.5) / 16.0;
+    float h = sandHeight(q, wind);
+    float hx = sandHeight(q + vec2(1.0 / 16.0, 0.0), wind);
+    float hz = sandHeight(q + vec2(0.0, 1.0 / 16.0), wind);
+    vec2 slope = vec2(hx - h, hz - h) * 16.0 * 0.45 * depth;
+    return normalize(vec3(-slope.x, 1.0, -slope.y));
+}
+
+/** Clarté du sable au texel : les crêtes des rides un peu plus claires, leurs creux un peu plus sombres. */
+float sandShade(vec3 world, vec2 wind) {
+    vec2 q = (floor(world.xz * 16.0) + 0.5) / 16.0;
+    float x = fract(dot(q, wind) * 2.9 + snowNoise(q * 0.4 + 61.0) * 2.4 + snowNoise(q * 1.3 + 7.0) * 0.5);
+    float keep = smoothstep(0.25, 0.60, snowNoise(q * 0.5 + 13.0));
+    return 1.0 + (smoothstep(0.45, 0.72, x) * (1.0 - smoothstep(0.72, 0.80, x)) * 0.14 - smoothstep(0.80, 1.0, x) * 0.12) * keep;
+}
+
+/**
+ * La glace au texel (repère monde) : des fissures blanches qui suivent les bords de grandes cellules, quelques fêlures
+ * plus fines, et des bulles prises dedans. Rend (fissure, bulle), 0..1.
+ */
+vec2 iceDetail(vec3 world, vec3 normal) {
+    vec3 q = (floor(world * 16.0 + normal * 0.5) + 0.5) / 16.0;
+    vec2 p = abs(normal.y) > 0.5 ? q.xz : vec2(abs(normal.x) > 0.5 ? q.z : q.x, q.y);
+    // Les cellules : la distance au bord le plus proche (deuxième voisin moins le premier).
+    vec2 cell = floor(p / 1.6);
+    float d1 = 9.0, d2 = 9.0;
+    for (int j = -1; j <= 1; j++) {
+        for (int i = -1; i <= 1; i++) {
+            vec2 c = cell + vec2(i, j);
+            vec2 at = (c + vec2(rainHash(c + 0.3), rainHash(c + 7.7)) * 0.8 + 0.1) * 1.6;
+            float d = length(p - at);
+            if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) d2 = d;
+        }
+    }
+    float crack = 1.0 - step(0.045, d2 - d1);
+    // Une fissure n'est pas continue : elle s'interrompt et reprend.
+    crack *= step(0.35, snowNoise(p * 2.0 + 17.0));
+    // Les fêlures : de courts traits pris dans un bruit étiré.
+    float hair = step(0.93, 1.0 - abs(snowNoise(p * vec2(3.0, 0.8) + 41.0) * 2.0 - 1.0)) * step(0.55, snowNoise(p * 1.1 + 5.0));
+    float bubble = step(0.985, rainHash(p * 16.0 + 23.0)) * step(0.4, snowNoise(p * 0.9 + 3.0));
+    return vec2(max(crack, hair * 0.6), bubble);
+}
+

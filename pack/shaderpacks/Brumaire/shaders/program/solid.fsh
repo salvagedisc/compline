@@ -23,6 +23,10 @@ uniform sampler2D colortex6;
 #include "/lib/wakes.glsl"
 #include "/lib/rain.glsl"
 #include "/lib/waterfoam.glsl"
+#if ICE_DETAIL > 0
+#include "/lib/cover.glsl"
+#include "/lib/snow.glsl"
+#endif
 #endif
 
 uniform sampler2D gtexture;
@@ -294,6 +298,13 @@ void main() {
         return;
     }
     if (vMat == 10) {
+#if ICE_DETAIL > 0
+        // La glace claire : ses fissures et ses bulles sont blanches et couvrantes, le reste laisse voir au travers.
+        vec2 iceD = iceDetail(vPos + cameraPosition, normal);
+        float white = iceD.x * 0.6 + iceD.y * 0.8;
+        albedo = mix(albedo, vec3(0.72, 0.80, 0.88), white);
+        color.a = mix(color.a, 0.85, white);
+#endif
         outColor = ice(albedo, color.a, normal, lm, ao);
         return;
     }
@@ -351,7 +362,24 @@ void main() {
         // Le sable boit un peu de lumière et garde sa couleur, sinon il blanchit au soleil comme de la neige.
         albedo = mix(vec3(luma(albedo)), albedo, 1.25) * 0.55;
         sparkle = glitter(world, 0.0015) * max(normal.y, 0.0) * 0.6;
+#if SAND_DETAIL > 0
+        // Le vent ride le sable : des rides en travers du vent, dont la crête prend le soleil (proches seulement).
+        if (normal.y > 0.9) {
+            snowBump = (1.0 - smoothstep(20.0, 32.0, length(vPos))) * (1.0 - rainStrength * 0.7);
+            if (snowBump > 0.0) {
+                snowN = sandNormal(world, snowWind, snowBump);
+                albedo *= mix(1.0, sandShade(world, snowWind), snowBump);
+            }
+        }
+#endif
     }
+#if ICE_DETAIL > 0
+    if (vMat == 11) {
+        // La glace tassée : des fissures blanches et des bulles prises dedans.
+        vec2 iceD = iceDetail(world, normal);
+        albedo = mix(albedo, vec3(0.70, 0.78, 0.86), iceD.x * 0.55 + iceD.y * 0.7);
+    }
+#endif
 #if TRACKS > 0
     // Les pas creusent le sable et la neige : un creux un peu plus sombre, dont le bord prend la lumière.
     if ((vMat == 9 || vMat == 12 || snow > 0.5) && normal.y > 0.9) {
@@ -428,7 +456,7 @@ void main() {
         lit *= 1.0 - 0.5 * (1.0 - dot(reliefN, normal));
     }
 #endif
-#if defined PROGRAM_TERRAIN && SNOW_DETAIL > 0
+#if defined PROGRAM_TERRAIN && (SNOW_DETAIL > 0 || SAND_DETAIL > 0)
     if (snowBump > 0.0) {
         // La neige suit sa propre pente au soleil (la face, elle, est déjà ombrée), et ses creux à l'ombre prennent le
         // bleu du ciel, qui l'éclaire seul.

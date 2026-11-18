@@ -40,6 +40,8 @@
 
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]
+// Les ombres calées sur les pixels des blocs : leur bord avance texel par texel (lib/light.glsl).
+#define PIXEL_SHADOWS 1 // [0 1]
 #define SHADOW_SOFTNESS 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]
 #define SHADOW_SEARCH 10 // [6 10 16]
 #define CONTACT_SHADOWS 1 // [0 1]
@@ -117,6 +119,10 @@
 #define SNOW_DETAIL 1 // [0 1]
 // La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.
 #define SNOW_BUILDUP 1 // [0 1]
+// Le sable ridé par le vent (lib/snow.glsl).
+#define SAND_DETAIL 1 // [0 1]
+// La glace fissurée, avec ses bulles (lib/snow.glsl).
+#define ICE_DETAIL 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.
