@@ -12,6 +12,7 @@
 #define FOG_BILLOWS 1.0 // [0.0 0.5 1.0 1.5]
 #define FOG_BLOCK_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
+#define CAVE_DETAIL 1 // [0 1]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]
@@ -89,6 +90,8 @@
 #define PRECIP_GLOW 1 // [0 1]
 #define SNOW_BLIZZARD 1 // [0 1]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
+#define ROUGH_REFLECTIONS 1 // [0 1]
+#define ROUGH_REFLECTIONS_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 
 // Neige et chaleur
 #define RELIEF 1 // [0 1]
