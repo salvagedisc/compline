@@ -33,6 +33,10 @@ export type Media =
   | { type: 'echelle' }
   | { type: 'zoo' }
   | { type: 'carte' }
+  // A hands-on model of the mechanism, built on the game's real numbers; the capture stays one click away.
+  | { type: 'demo'; demo: NomDemo; capture: string; alt: string; mise?: 'haut' }
+
+export type NomDemo = 'traces' | 'lumiere' | 'bord' | 'peche' | 'coeurs' | 'interface' | 'patine'
 
 export interface Fonction {
   id: string
@@ -65,11 +69,10 @@ export const LIEUX: Lieu[] = [
     fonctions: [
       { id: 'forme', titre: 'Un monde rond', statut: 'atester', media: { type: 'carte' },
         texte: "Quelle que soit la graine, le monde est un disque : la côte vers 5 700 blocs du centre, le bord à 6 000.",
-        points: ['Environ 74 km² de terre', 'Climat réglé par la latitude', 'Mer tout autour'] },
+        points: ['De 63 à 73 km² de terre selon la graine', 'Climat réglé par la latitude', 'Mer tout autour'] },
       { id: 'bord', titre: 'Le bord gardé par la brume', statut: 'atester',
         texte: "Qui s'approche du bord est prévenu, puis ramené en arrière, à pied, à la nage ou en bateau.",
-        media: { type: 'image', capture: 'bord.jpg', mise: 'haut', alt: 'En barque à quelques dizaines de blocs du bord, le message de la brume affiché',
-          zooms: [{ x: 0.5, y: 0.745, r: 0.3, ratio: 0.12, label: 'Le message du bord', point: 'dessus' }] } },
+        media: { type: 'demo', demo: 'bord', capture: 'bord.jpg', alt: 'En barque à quelques dizaines de blocs du bord, le message de la brume affiché' } },
       { id: 'atlas', titre: "L'atlas dessiné à la main", statut: 'teste',
         texte: "Pas de coordonnées ni de minicarte : la carte se dessine pendant qu'on explore, et trains et navires y apparaissent.",
         media: { type: 'image', capture: 'atlas-carte.jpg', mise: 'expose', alt: "L'atlas ouvert autour du point de départ : forêts, collines, rivières et rivages dessinés au fil de l'exploration" } },
@@ -102,11 +105,10 @@ export const LIEUX: Lieu[] = [
           zooms: [{ x: 0.5, y: 0.22, r: 0.11, label: 'La neige sur les aiguilles' }] } },
       { id: 'traces', titre: 'Traces de pas', statut: 'atester',
         texte: "Le joueur et les bêtes proches laissent des traces dans la neige et le sable, qui s'effacent en quelques minutes.",
-        media: { type: 'image', capture: 'traces-pas.jpg', alt: 'Une file de traces de pas laissée dans le sable' } },
+        media: { type: 'demo', demo: 'traces', capture: 'traces-pas.jpg', alt: 'Une file de traces de pas laissée dans le sable' } },
       { id: 'lumiere', titre: 'Lumière colorée', statut: 'atester',
         texte: "Torches orange, lumières des âmes bleues, lichen vert : deux lumières voisines mélangent leurs couleurs.",
-        media: { type: 'image', capture: 'bru-nuit.jpg', alt: 'De nuit, un feu de camp et des lanternes des âmes',
-          zooms: [{ x: 0.633, y: 0.806, r: 0.1, label: 'Le bleu des âmes sur l’herbe' }, { x: 0.443, y: 0.421, r: 0.08, label: 'Le feu sur le tronc' }] } },
+        media: { type: 'demo', demo: 'lumiere', capture: 'bru-nuit.jpg', alt: 'De nuit, un feu de camp et des lanternes des âmes' } },
       { id: 'eau', titre: "Sous l'eau", statut: 'atester',
         texte: "Des rayons qui descendent de la surface, des particules en suspension, une eau plus claire près de la surface.",
         media: { type: 'image', capture: 'sous-eau.jpg', alt: "Rayons sous l'eau", provisoire: true } },
@@ -128,17 +130,14 @@ export const LIEUX: Lieu[] = [
       { id: 'mort', titre: 'Chaque mort coûte un cœur', statut: 'atester',
         texte: "On perd un cœur à chaque mort, jusqu'à cinq ; des éclats de vie se trouvent dans le monde.",
         points: ['Pas de monstres ordinaires', 'Au plus huit créatures hostiles par joueur', 'Journées de 30 min, nuits de 15'],
-        media: { type: 'image', capture: 'mort-coeur.jpg', mise: 'haut', alt: 'Au réveil après une mort, il reste neuf cœurs',
-          zooms: [{ x: 0.42, y: 0.86, r: 0.19, ratio: 0.35, label: 'Neuf cœurs au réveil', point: 'dessus' }] } },
+        media: { type: 'demo', demo: 'coeurs', capture: 'mort-coeur.jpg', alt: 'Au réveil après une mort, il reste neuf cœurs' } },
       { id: 'xp', titre: "Pas d'expérience", statut: 'atester',
         texte: "Les outils s'usent et se réparent à l'enclume ; le savoir se trouve dans des livres, pas dans des niveaux.",
         media: { type: 'image', capture: 'ecran-avec.jpg', alt: "La barre d'action sans barre d'expérience",
           zooms: [{ x: 0.5, y: 0.907, r: 0.19, ratio: 0.45, label: "Pas de barre d'expérience", point: 'dessus' }] } },
       { id: 'ecran', titre: "L'interface s'efface", statut: 'atester',
         texte: "Après six secondes sans geste, la barre et les jauges disparaissent ; elles reviennent au moindre danger.",
-        media: { type: 'comparer', avantNom: 'En action', apresNom: 'Au repos', scenes: [
-          { nom: 'Clairière', avant: 'ecran-avec.jpg', apres: 'ecran-sans.jpg' },
-        ] } },
+        media: { type: 'demo', demo: 'interface', capture: 'ecran-avec.jpg', alt: "La barre d'action et les jauges en bas de l'écran" } },
     ],
   },
   {
@@ -162,7 +161,7 @@ export const LIEUX: Lieu[] = [
     fonctions: [
       { id: 'ferrer', titre: 'Ferrer le poisson', statut: 'atester',
         texte: "Chaque espèce a son rythme : il faut ferrer au bon moment, plus ou moins vite.",
-        media: { type: 'image', capture: 'mini-jeu-riviere.jpg', alt: 'Mini-jeu de pêche', provisoire: true } },
+        media: { type: 'demo', demo: 'peche', capture: 'mini-jeu-riviere.jpg', alt: 'Mini-jeu de pêche' } },
       { id: 'catalogue', titre: 'Le catalogue', statut: 'atester',
         texte: "Chaque prise se range avec sa rareté, son biome et ses records ; trophées et aquarium à la clé.",
         media: { type: 'image', capture: 'peche-catalogue.jpg', mise: 'expose', alt: 'Le guide de pêche : les poissons du coin à gauche, toutes les espèces à droite, les prises déjà faites dessinées en couleur' } },
@@ -180,8 +179,7 @@ export const LIEUX: Lieu[] = [
         texte: "Fer, acier, acier noir, diamant, orichalque : choisissez un palier." },
       { id: 'patine', titre: 'Armures qui se salissent', statut: 'atester',
         texte: "La boue s'accumule en courant ou en combattant ; l'eau la lave en quelques secondes, la pluie lentement.",
-        media: { type: 'image', capture: 'armures.jpg', alt: 'Quatre armures de fer, de la plus propre à la plus sale',
-          zooms: [{ x: 0.783, y: 0.467, r: 0.09, label: 'La plus sale' }] } },
+        media: { type: 'demo', demo: 'patine', capture: 'armures.jpg', alt: 'Quatre armures de fer, de la plus propre à la plus sale' } },
       { id: 'combat', titre: 'Le combat animé', statut: 'atester',
         texte: "Better Combat : chaque arme frappe avec tout le corps, en deux ou trois coups enchaînés.",
         media: { type: 'image', capture: 'combat.jpg', alt: "Coup d'épée en quatre images", provisoire: true } },

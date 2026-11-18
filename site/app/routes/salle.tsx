@@ -17,6 +17,7 @@ import { Mesure } from '../interface/scenes/Mesure'
 import { Paliers } from '../interface/scenes/Paliers'
 import { Plan } from '../interface/scenes/Plan'
 import { Zoo } from '../interface/scenes/Zoo'
+import { Demo } from '../interface/demos/Demo'
 import Introuvable from './introuvable'
 
 const trouver = (salle?: string, plan?: string) => {
@@ -31,6 +32,7 @@ function vignette(f: Fonction, l: Lieu): string {
     case 'image': return f.media.capture
     case 'comparer': return f.media.scenes[0].apres
     case 'zoo': return 'zoo-guide.jpg'
+    case 'demo': return f.media.capture
     default: return l.fond
   }
 }
@@ -57,6 +59,7 @@ function imagesDe(chemin: string): string[] {
     case 'comparer': return [m.scenes[0].avant, m.scenes[0].apres]
     case 'echelle': return ['forge.jpg']
     case 'zoo': return ['zoo-guide.jpg']
+    case 'demo': return [m.capture]
     default: return []
   }
 }
@@ -105,6 +108,7 @@ function Couverture({ lieu, i }: { lieu: Lieu; i: number }) {
 function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: number }) {
   const [zoom, setZoom] = useState<number | null>(null)
   const [scene, setScene] = useState(0)
+  const [enJeu, setEnJeu] = useState(false) // a demonstration's chapter, showing the capture instead
   const m = f.media
   const zooms = m.type === 'image' ? m.zooms ?? [] : []
 
@@ -119,11 +123,17 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
     case 'echelle': vue = <Paliers />; break
     case 'zoo': vue = <Zoo />; break
     case 'carte': vue = <Mesure />; break
+    case 'demo': vue = (
+      <>
+        <Demo nom={m.demo} />
+        {enJeu && <div className="demo-en-jeu"><Plan capture={m.capture} alt={m.alt} zoom={null} onZoom={rien} /></div>}
+      </>
+    ); break
   }
 
   const special = m.type === 'echelle' || m.type === 'zoo' || m.type === 'carte'
   return (
-    <div className={`chapitre chapitre-${m.type}${m.type === 'image' && m.mise ? ` mise-${m.mise}` : ''}${zoom !== null ? ' en-zoom' : ''}`}>
+    <div className={`chapitre chapitre-${m.type}${m.type === 'demo' ? ` demo-${m.demo}` : ''}${(m.type === 'image' || m.type === 'demo') && m.mise ? ` mise-${m.mise}` : ''}${zoom !== null ? ' en-zoom' : ''}${enJeu ? ' montre-jeu' : ''}`}>
       {vue}
       {!special && <div className="voile-bas" aria-hidden="true" />}
       <section className={`cartouche${special ? ' a-cote' : ''}`} aria-labelledby={`titre-${f.id}`}>
@@ -150,6 +160,11 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
               </button>
             ))}
           </div>
+        )}
+        {m.type === 'demo' && (
+          <button type="button" className="voir-en-jeu" aria-pressed={enJeu} onClick={() => setEnJeu(!enJeu)}>
+            {enJeu ? 'Revenir à la démonstration' : 'Voir la capture en jeu'}
+          </button>
         )}
         <p className="cartouche-pied">
           <Statut f={f} />
@@ -203,7 +218,7 @@ function useBalayage(suivant: () => void, precedent: () => void) {
   useEffect(() => {
     const debut = (e: TouchEvent) => {
       const t = e.target as HTMLElement
-      if (t.closest('.scene-comparer, .mesure-carte, .chapitre.en-zoom, button, a')) { depart.current = null; return }
+      if (t.closest('.scene-comparer, .mesure-carte, .demo, .chapitre.en-zoom, button, a')) { depart.current = null; return }
       depart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: performance.now() }
     }
     const fin = (e: TouchEvent) => {
@@ -249,7 +264,7 @@ export default function Salle() {
   useEffect(() => {
     const f = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || lireEtat().index) return
-      if ((e.target as HTMLElement).closest('[role="slider"], [role="tab"], input')) return
+      if ((e.target as HTMLElement).closest('[role="slider"], [role="tab"], input, [data-clavier]')) return
       if (e.key === 'ArrowRight') { e.preventDefault(); suivant() }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); precedent() }
       else if (e.key === 'Escape') navigate('/', { viewTransition: true })
