@@ -5,6 +5,7 @@
 // Demande clouds.glsl avant lui (le bruit de la Voie lactée). Directions en repère monde.
 
 uniform int moonPhase;
+uniform int worldDay;
 
 float starHash(vec3 p) {
     p = fract(p * vec3(0.1031, 0.1030, 0.0973));
@@ -102,6 +103,82 @@ vec3 milkyWay(vec3 c, out float band) {
     return tint * glow;
 }
 
+/** Bruit de valeur lissé sur un plan, pour les draperies de l'aurore. */
+float auroraNoise(vec2 p) {
+    vec2 i = floor(p), f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = starHash(vec3(i, 7.0)), b = starHash(vec3(i + vec2(1.0, 0.0), 7.0));
+    float c = starHash(vec3(i + vec2(0.0, 1.0), 7.0)), e = starHash(vec3(i + 1.0, 7.0));
+    return mix(mix(a, b, f.x), mix(c, e, f.x), f.y);
+}
+
+/**
+ * L'aurore polaire, dans le froid seulement, certaines nuits plus que d'autres : des draperies qui pendent d'un ruban
+ * tordu, vertes en bas et pourpres en haut, qui ondulent lentement. Le ruban est un tracé sur un plan du ciel, à
+ * quelques hauteurs empilées ; chaque hauteur le décale un peu, ce qui fait les plis verticaux du rideau.
+ * strength : 0..1, selon la nuit, le froid et le ciel clair.
+ */
+vec3 aurora(vec3 d, float strength) {
+    if (strength <= 0.001 || d.y < 0.02) return vec3(0.0);
+    float t = frameTimeCounter * 0.025;
+    vec3 sum = vec3(0.0);
+    const int LAYERS = 14;
+    for (int i = 0; i < LAYERS; i++) {
+        float k = float(i) / float(LAYERS - 1);
+        // Le ciel vu comme un plafond : plus haut à chaque couche, la draperie se lit de bas en haut.
+        vec2 p = d.xz / (d.y + 0.12) * (1.0 + 0.55 * k) * 1.6;
+        // Le ruban : une ligne tordue par deux octaves de bruit, qui dérive.
+        float warp = auroraNoise(p * 0.55 + vec2(t, -t * 0.6)) * 2.2 + auroraNoise(p * 1.7 - vec2(t * 1.7, 0.0)) * 0.6;
+        float along = p.x * 0.35 + p.y * 0.18 + warp;
+        float line = abs(fract(along * 0.5) - 0.5);
+        // Le bas du rideau est un bord net ; plus haut, la lumière s'étale et pâlit.
+        float width = 0.018 + 0.05 * k;
+        float ribbon = exp(-sq(line / width)) + 0.25 * exp(-sq(line / (width * 4.0)));
+        // Les rais verticaux : des fils serrés le long du ruban, qui glissent et changent d'éclat.
+        float u = (p.x - p.y) * 9.0;
+        float rays = auroraNoise(vec2(u + t * 6.0, float(i) * 0.15)) * 0.6 + auroraNoise(vec2(u * 2.7 - t * 9.0, 5.0)) * 0.4;
+        rays = 0.15 + 1.4 * rays * rays;
+        vec3 hue = mix(vec3(0.10, 1.00, 0.40), vec3(0.70, 0.18, 0.95), smoothstep(0.30, 1.0, k));
+        sum += hue * ribbon * rays * pow(1.0 - k, 1.4);
+    }
+    // Basse sur l'horizon, elle s'enfonce dans l'air ; tout en haut, elle s'amincit.
+    float fade = smoothstep(0.02, 0.18, d.y) * (1.0 - 0.5 * smoothstep(0.6, 1.0, d.y));
+    return sum / float(LAYERS) * fade * strength * 0.30;
+}
+
+/**
+ * Les étoiles filantes : toutes les quelques secondes, parfois, un trait vif traverse une part du ciel en une
+ * demi-seconde et laisse une traînée qui s'efface. c : direction dans le repère du ciel ; pix : taille d'un pixel.
+ */
+vec3 meteors(vec3 c, float pix) {
+    vec3 sum = vec3(0.0);
+    for (int lane = 0; lane < 2; lane++) {
+        float period = 7.0 + 4.0 * float(lane);
+        float slot = floor((frameTimeCounter + float(lane) * 3.1) / period);
+        float phase = fract((frameTimeCounter + float(lane) * 3.1) / period) * period;
+        vec3 id = vec3(slot, float(lane) * 17.0, 5.0);
+        if (starHash(id) > 0.45) continue;
+        float life = 0.6 + 0.5 * starHash(id + 1.3);
+        if (phase > life + 0.8) continue;
+        // Un départ et une direction tirés au sort, haut dans le ciel.
+        vec3 start = normalize(vec3(starHash(id + 2.1) * 2.0 - 1.0, starHash(id + 3.7) * 2.0 - 1.0, 0.45 + starHash(id + 4.9)));
+        vec3 side = normalize(cross(start, vec3(starHash(id + 6.2) - 0.5, starHash(id + 7.4) - 0.5, 0.3)));
+        float span = 0.25 + 0.3 * starHash(id + 8.8);
+        float head = span * clamp(phase / life, 0.0, 1.0);
+        // Position le long du trait (angle depuis le départ) et écart au trait.
+        float along = atan(dot(c, side), dot(c, start));
+        float off = abs(dot(c, normalize(cross(start, side))));
+        if (along < 0.0 || along > head) continue;
+        float width = pix * 0.9;
+        float core = exp(-sq(off / width));
+        // La traînée : vive à la tête, qui s'éteint derrière elle et après le passage.
+        float tail = exp(-(head - along) / (0.06 + 0.10 * span));
+        float fadeOut = 1.0 - smoothstep(life, life + 0.8, phase);
+        sum += vec3(0.85, 0.92, 1.0) * core * tail * fadeOut * (1.2 + 2.0 * starHash(id + 9.9));
+    }
+    return sum;
+}
+
 /** Le ciel de nuit à ajouter au ciel peint, dans la direction d (repère monde). */
 vec3 nightSky(vec3 d) {
 #if SKY_STARS > 0 || SKY_MILKY_WAY > 0
@@ -134,7 +211,17 @@ vec3 nightSky(vec3 d) {
     stars += starLayer(c, 420.0, 0.012 + 0.10 * band, 3.0, pix, t, low) * 0.3 * mix(1.0, 0.25, full);
     sky += stars * 0.22;
 #endif
-    return result + sky * night * air;
+#if SKY_METEORS > 0
+    sky += meteors(c, pix) * 0.25;
+#endif
+    vec3 lights = vec3(0.0);
+#if SKY_AURORA > 0
+    // L'aurore : seulement dans le froid (biome ou hiver), une nuit sur trois environ, plus ou moins forte.
+    float cold = 1.0 - smoothstep(0.05, 0.35, airHeat);
+    float tonight = smoothstep(0.62, 0.85, starHash(vec3(float(worldDay), 3.0, 11.0)));
+    lights += aurora(d, cold * tonight * SKY_AURORA_STRENGTH);
+#endif
+    return result + (sky + lights) * night * air;
 #else
     return vec3(0.0);
 #endif

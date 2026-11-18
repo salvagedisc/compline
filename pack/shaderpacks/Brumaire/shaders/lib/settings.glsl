@@ -31,6 +31,9 @@
 // Ciel
 #define SKY_STARS 1 // [0 1]
 #define SKY_MILKY_WAY 1 // [0 1]
+#define SKY_METEORS 1 // [0 1]
+#define SKY_AURORA 1 // [0 1]
+#define SKY_AURORA_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 #define SKY_HALO 1 // [0 1]
 #define SKY_RAINBOW 1 // [0 1]
 
