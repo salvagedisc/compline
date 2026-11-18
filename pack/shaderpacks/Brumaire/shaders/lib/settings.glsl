@@ -54,6 +54,8 @@
 
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
+#define FOLIAGE_SHEEN 1.0 // [0.0 0.5 1.0 1.5]
+#define LEAF_FLUTTER 1 // [0 1]
 #define WATER_WAVES 1.0 // [0.0 0.5 1.0 1.5]
 #define WATER_MURK 1.0 // [0.5 0.75 1.0 1.5 2.0]
 #define WATER_PIXELS 1 // [0 1]
@@ -117,6 +119,8 @@
 // Image
 #define SMAA 2 // [0 1 2 3]
 #define TAA 1 // [0 1]
+#define TAA_SHARPEN 0.45 // [0.0 0.25 0.45 0.65 0.85]
+#define TAA_DISOCCLUSION 1 // [0 1]
 #define MOTION_BLUR 2 // [0 1 2 3 4]
 
 const int shadowMapResolution = 2048; // [1024 1536 2048 3072 4096]

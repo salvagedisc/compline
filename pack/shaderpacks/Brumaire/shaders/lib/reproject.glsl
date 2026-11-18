@@ -19,3 +19,17 @@ vec2 previousUv(vec2 uv, float depth) {
     vec4 clip = gbufferPreviousProjection * (gbufferPreviousModelView * vec4(pos, 1.0));
     return clip.xy / clip.w * 0.5 + 0.5;
 }
+
+/** Distance à la caméra, à l'image d'avant, du point vu en uv à cette profondeur (blocs). */
+float previousDistance(vec2 uv, float depth) {
+    vec4 view = gbufferProjectionInverse * vec4(vec3(uv, depth) * 2.0 - 1.0, 1.0);
+    view /= view.w;
+    vec3 pos = mat3(gbufferModelViewInverse) * view.xyz + gbufferModelViewInverse[3].xyz + cameraPosition - previousCameraPosition;
+    return length((gbufferPreviousModelView * vec4(pos, 1.0)).xyz);
+}
+
+/** Distance à la caméra du point vu en uv (blocs). */
+float viewDistanceAt(vec2 uv, float depth) {
+    vec4 view = gbufferProjectionInverse * vec4(vec3(uv, depth) * 2.0 - 1.0, 1.0);
+    return length(view.xyz / view.w);
+}

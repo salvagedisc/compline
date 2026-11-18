@@ -24,6 +24,9 @@ out vec4 vTint;
 out vec3 vNormal;
 out vec3 vPos;
 flat out int vMat;
+#if defined PROGRAM_TERRAIN
+out float vBend;
+#endif
 
 void main() {
     vUv = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
@@ -43,10 +46,19 @@ void main() {
     vSpriteMid = mc_midTexCoord;
     vSpriteHalf = abs(vUv - mc_midTexCoord);
 #endif
+#if defined PROGRAM_TERRAIN
+    vBend = 0.0;
+#endif
     if (vMat >= 1 && vMat <= 5) {
         bool top = gl_MultiTexCoord0.t < mc_midTexCoord.t;
-        vPos += windVertex(vMat, top, vPos + cameraPosition, vPos, vLm.y);
+        vec3 sway = windVertex(vMat, top, vPos + cameraPosition, vPos, vLm.y);
+        vPos += sway;
         view = gbufferModelView * vec4(vPos, 1.0);
+#if defined PROGRAM_TERRAIN
+        // Combien ce sommet est couché par le vent ou les pas, rapporté à ce que sa plante peut plier : les brins
+        // couchés montrent leur revers plus clair (solid.fsh).
+        vBend = clamp(length(sway.xz) / (vMat == 4 ? 0.07 : 0.22), 0.0, 1.0);
+#endif
     }
 #endif
 #ifdef PROGRAM_WEATHER
