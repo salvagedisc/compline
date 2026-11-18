@@ -165,12 +165,14 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 
 ## The mist
 
-- A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`), integrated exactly along each ray: no steps, no noise.
-- Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius; the opening wave is followed.
-- Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
-- A ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift.
-- No mist underground; barely there at noon (near air stays clear, as in Recrafted), more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
-- Its light: the light of the sky, and the sun scattered mostly forward (a halo when looking toward the sun). The far part (the ring) takes the colour of the low sky in that direction: at sunset it glows on the side of the sun.
+- A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`). Barely there at noon (near air stays clear), more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
+- **Marched in volume near the player** (`FOG_STEPS`: 0, 8, 12, 16, 24 steps; 0 in the Very light profile, 8 in Light, 12 in Balanced, 16 in Beautiful) over `FOG_RANGE` blocks (48 to 128, 96 by default). The steps grow with the square of the distance (fine near the eye, coarse far away) and are shifted by a per-pixel dither that the temporal anti-aliasing averages. Each step is integrated exactly (Beer-Lambert over its length), so the result does not depend on the number of steps, only its detail does. With `FOG_STEPS` at 0 the former analytic veil comes back unchanged.
+- **Banks** (`FOG_BILLOWS`, 0 to 1.5): two octaves of the cloud noise, one wide (about 55 blocks) and one fine (about 16), shape the density into banks and holes. They drift with the wind of the `compline` mod (its direction and strength), the fine octave faster than the wide one, and slowly rise.
+- **Sun and moon through it**: each step reads the shadow map (and the tint of stained glass) inside its range, so the mist is lit only where the light reaches: rays under the trees, shadow behind a wall, coloured beams behind a window. Forward scattering of the mist (two lobes, one forward and one backward) and of clear air (a sharper forward lobe) is computed per step: the air alone, even without mist, draws the rays where foliage cuts the sun. Both need `LIGHT_SHAFTS`.
+- **Block light in the mist** (`FOG_BLOCK_GLOW`, 0 to 2; needs `COLORED_LIGHT`): each step reads the coloured light volume, so a torch, a lantern or a lava pool wraps itself in a halo of its colour, stronger where the mist is dense. The light falls with the cube of its level, so a halo stays a few blocks wide.
+- **Cave haze** (`CAVE_HAZE`, 0 to 1.5): under the ground (the sky light the eye receives is low) a faint dust replaces the mist. It is invisible in the dark and only shows around torches and in the beams that fall through an opening.
+- Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius, with a soft edge; the opening wave is followed. Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
+- **Beyond the marched range**, the rest of the layer is still integrated exactly, and a ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift. This far part takes the colour of the low sky in that direction: at sunset it glows on the side of the sun. It is applied first, then the marched near part in front of it.
 
 ## What the `compline` mod gives the shader (`rendu` module)
 
