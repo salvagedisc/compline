@@ -20,6 +20,7 @@
 #include "/lib/fluff.glsl"
 #include "/lib/eaves.glsl"
 #include "/lib/soilsteam.glsl"
+#include "/lib/dustdevil.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -392,6 +393,17 @@ void main() {
                 float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
                 vec3 light = gAmbient * 0.9 + gLightColor * lit * max(gLightDir.y, 0.2) * 0.9;
                 color = mix(color, litterTint * light, litter);
+            }
+        }
+#endif
+#if DUST_DEVILS > 0
+        // Les tourbillons de poussière du désert, de la couleur du sable, éclairés par le soleil et le ciel.
+        if (isEyeInWater == 0) {
+            float amount = devilAmount();
+            if (amount > 0.01) {
+                float devilDist;
+                float devil = devilsAlong(dir, min(len, 90.0), cameraPosition.y - 1.62, devilDist) * amount;
+                if (devil > 0.0) color = mix(color, vec3(0.95, 0.80, 0.58) * (gAmbient * 0.9 + gLightColor * 0.7), devil);
             }
         }
 #endif
