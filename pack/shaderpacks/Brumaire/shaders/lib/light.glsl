@@ -34,6 +34,9 @@ vec3 hemisphereLight(vec3 normal, float sky) {
     return mix(ground, fromAbove, smoothstep(0.0, 0.62, up)) * sky;
 }
 
+// La lumière de l'astre qui atteint le dernier point éclairé par shade() (ombre, nuages, eau et vitraux compris).
+vec3 gSunReach = vec3(0.0);
+
 /**
  * albedo : couleur linéaire ; normal : repère monde ; lm : lumière des blocs et du ciel (0..1) ; ao : occlusion ;
  * pos : repère joueur ; leaf : 0 surface dure, 1 feuillage que la lumière traverse ; frag : gl_FragCoord.xy.
@@ -82,15 +85,19 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         light *= mix(vec3(1.0), mix(vec3(1.0), tint, 0.6), share);
     }
     // Sous l'eau, la lumière arrive affaiblie et teintée, rassemblée en filets par les vagues.
+    vec3 pass = vec3(1.0);
     if (lit > 0.0) {
         float water = waterAbove(pos, normal);
         if (water > 0.0) {
             vec3 hue = waterHue(vec3(0.25, 0.46, 0.89));
-            light *= exp(-waterExtinction(hue) * water) * causticLight(pos + cameraPosition, water, WATER_WAVE_COUNT);
+            pass *= exp(-waterExtinction(hue) * water) * causticLight(pos + cameraPosition, water, WATER_WAVE_COUNT);
         }
         // Passé par un vitrail, le soleil en prend la couleur.
-        light *= glassTint(pos, normal);
+        pass *= glassTint(pos, normal);
+        light *= pass;
     }
+    // Ce que l'astre apporte au point, ombre comprise : solid.fsh y prend le reflet des surfaces lisses.
+    gSunReach = leaf > 0.0 ? vec3(0.0) : gLightColor * lit * pass;
     // Le feuillage à contre-jour : la lumière diffusée vers l'avant dans la feuille, verte et vive, d'autant plus que la
     // feuille est mince devant le soleil.
     vec3 view = normalize(pos);
