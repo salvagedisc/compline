@@ -82,12 +82,14 @@ void main() {
     vec3 dir = normalize(pos);
 
 #if CLOUD_STEPS > 0
-    // Les nuages (demi-écran, lissés sur quatre prises) ; jamais sur ce qui est plus près qu'eux.
+    // Le ciel en volume (demi-écran, lissé sur quatre prises) ; jamais sur ce qui est plus près que lui.
     if (!hand && isEyeInWater == 0) {
         float toBase = (cloudBase() - cameraPosition.y) / dir.y;
         float toTop = (cloudTop() - cameraPosition.y) / dir.y;
         float enter = max(min(toBase, toTop), 0.0);
-        if (dir.y != 0.0 && max(toBase, toTop) > 0.0 && (sky || len > enter)) {
+        // Le ciel les reçoit toujours (l'arc-en-ciel et les cirrus sont plus loin que tout), le paysage seulement
+        // quand la couche est plus près que lui.
+        if (sky || (dir.y != 0.0 && max(toBase, toTop) > 0.0 && len > enter)) {
             vec2 px = 1.0 / vec2(viewWidth, viewHeight);
             vec2 half_ = vUv * 0.5;
             vec4 c = texture(colortex3, half_ + vec2(px.x, px.y) * 0.5) + texture(colortex3, half_ + vec2(-px.x, px.y) * 0.5)

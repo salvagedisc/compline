@@ -1,10 +1,23 @@
-// Les nuages, marchés sur un demi-écran : lumière diffusée vers l'œil (rgb) et part du fond qui passe (a).
-// composite1 les relit, les lisse et les pose sur le ciel et le paysage.
+// Le ciel en volume, marché sur un demi-écran : la lumière diffusée vers l'œil (rgb) et la part du fond qui passe (a).
+// D'avant en arrière : l'arc-en-ciel dans la pluie qui s'éloigne, la couche de nuages (lib/clouds.glsl), puis tout
+// en haut le voile de cirrus et le halo que ses cristaux dessinent autour de l'astre (lib/skyoptics.glsl).
+// mist.fsh relit le tout, le lisse et le pose sur le ciel et le paysage.
+//
+// La lumière dans la couche :
+//  - l'astre, atténué le long d'un cône de pas qui s'allongent vers lui ; la diffusion multiple est faite d'octaves
+//    (chacune moins éteinte, moins orientée, moins forte que la précédente), qui laissent la lumière traverser le
+//    cœur d'un cumulus au lieu de le laisser noir ;
+//  - le ciel, d'autant moins qu'il y a de nuage au-dessus ;
+//  - le sol, qui renvoie un peu de soleil sous le ventre des nuages ;
+//  - l'éclair, qui allume les tours de l'intérieur.
 #define FSH
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/lib/clouds.glsl"
+#include "/lib/skyoptics.glsl"
 #include "/program/scene.glsl"
+
+uniform float wetness;
 
 in vec2 vUv;
 
@@ -16,9 +29,162 @@ const vec4 colortex3ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
 /* RENDERTARGETS: 3 */
 layout(location = 0) out vec4 outClouds;
 
-/** Diffusion des gouttelettes : vers l'avant surtout (Henyey-Greenstein). */
+// Extinction des gouttelettes par unité de densité (par bloc).
+const float CLOUD_SIGMA = 0.09;
+
+/** Diffusion des gouttelettes (Henyey-Greenstein), normalisée sur la sphère. */
 float cloudPhase(float mu, float g) {
-    return 0.0795775 * (1.0 - g * g) / pow(1.0 + g * g - 2.0 * g * mu, 1.5);
+    return 0.0795775 * (1.0 - g * g) / pow(max(1.0 + g * g - 2.0 * g * mu, 1e-4), 1.5);
+}
+
+/**
+ * La phase des gouttelettes de nuage : un pic très en avant (la frange d'argent quand l'astre est derrière), un lobe
+ * en arrière plus large, et la gloire qui revient tout droit vers l'astre. g se resserre avec les octaves.
+ */
+float dropletPhase(float mu, float spread) {
+    float forward = cloudPhase(mu, 0.82 * spread);
+    float back = cloudPhase(mu, -0.28 * spread);
+    float wide = cloudPhase(mu, 0.35 * spread);
+    return forward * 0.42 + wide * 0.40 + back * 0.18;
+}
+
+/** Huit directions fixes, pour écarter les pas de la marche vers l'astre en un cône. */
+vec3 coneKernel(int i) {
+    const vec3 k[8] = vec3[8](
+        vec3(0.38, -0.60, 0.70), vec3(-0.75, 0.24, -0.62), vec3(0.62, 0.48, -0.62), vec3(-0.28, 0.86, 0.43),
+        vec3(0.09, -0.92, -0.38), vec3(0.86, -0.12, 0.49), vec3(-0.59, -0.55, 0.59), vec3(-0.13, 0.40, -0.91));
+    return k[i & 7];
+}
+
+float cloudHash(vec3 p) {
+    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yxz + 33.33);
+    return fract((p.x + p.y) * p.z);
+}
+
+/**
+ * Épaisseur optique vers l'astre, depuis p : des pas qui doublent, écartés en un cône qui s'ouvre, et un dernier pas
+ * très loin pour qu'une tour voisine fasse de l'ombre. Le détail fin n'est lu que sur les deux premiers pas.
+ */
+float lightDepth(vec3 p, float coverage, float jitter) {
+    float od = 0.0;
+    float reach = 5.0;
+    float walked = 0.0;
+    vec3 side = normalize(cross(gLightDir, vec3(0.0, 1.0, 0.001)));
+    vec3 up = cross(side, gLightDir);
+    for (int j = 0; j < CLOUD_LIGHT_STEPS; j++) {
+        float stride = reach * (0.75 + 0.5 * jitter);
+        walked += stride;
+        vec3 k = coneKernel(j + int(jitter * 8.0));
+        vec3 q = p + gLightDir * walked + (side * k.x + up * k.y) * walked * 0.22;
+        od += cloudDensity(q, coverage, j < 2) * stride;
+        reach *= 1.8;
+    }
+    // Un dernier regard loin vers l'astre : l'ombre d'une tour sur sa voisine.
+    vec3 far_ = p + gLightDir * (walked + 260.0);
+    od += cloudDensity(far_, coverage, false) * 120.0;
+    return od;
+}
+
+/**
+ * Éclairs dans les nuages : celui qui frappe allume la colonne qu'il traverse, et sous l'orage des lueurs naissent
+ * au hasard dans des cellules de quatre cents blocs, vives puis éteintes en une fraction de seconde.
+ */
+vec3 cloudLightning(vec3 p, float h) {
+#if CLOUD_LIGHTNING > 0
+    vec3 glow = vec3(0.0);
+    if (lightningBoltPosition.w > 0.5) {
+        vec3 bolt = cameraPosition + lightningBoltPosition.xyz;
+        float across = length(p.xz - bolt.xz);
+        glow += gFlash * exp(-across / 140.0) * (0.6 + 0.4 * (1.0 - h)) * 9.0;
+    }
+    if (thunderStrength > 0.05) {
+        vec2 cell = floor(p.xz / 400.0);
+        float beat = floor(frameTimeCounter * 2.5);
+        float roll = cloudHash(vec3(cell, beat));
+        if (roll > 0.985) {
+            vec2 centre = (cell + 0.5 + (vec2(cloudHash(vec3(cell, beat + 0.5)), cloudHash(vec3(cell + 3.1, beat))) - 0.5) * 0.6) * 400.0;
+            float age = fract(frameTimeCounter * 2.5);
+            float pulse = exp(-age * 7.0) * (0.7 + 0.3 * sin(age * 90.0));
+            float near_ = exp(-length(p.xz - centre) / 90.0) * smoothstep(0.1, 0.5, h);
+            glow += near_ * pulse * thunderStrength * 5.0;
+        }
+    }
+    return glow * vec3(0.70, 0.76, 1.0);
+#else
+    return vec3(0.0);
+#endif
+}
+
+/** La marche dans la couche de nuages. light et pass s'accumulent d'avant en arrière ; rend la distance moyenne vue. */
+float marchLayer(vec3 eye, vec3 dir, float sceneLen, float coverage, float noise, inout vec3 light, inout float pass) {
+    if (abs(dir.y) < 1e-4) return 0.0;
+    float a = (cloudBase() - eye.y) / dir.y;
+    float b = (cloudTop() - eye.y) / dir.y;
+    float t0 = max(min(a, b), 0.0);
+    float t1 = min(max(a, b), min(sceneLen, CLOUD_RANGE));
+    if (eye.y > cloudBase() && eye.y < cloudTop()) {
+        t0 = 0.0;
+        t1 = min(dir.y > 0.0 ? b : a, min(sceneLen, CLOUD_RANGE));
+    }
+    if (t1 <= t0) return 0.0;
+
+    // Plus de pas quand le trajet est long (regard rasant), sans dépasser le double.
+    float span = t1 - t0;
+    int steps = int(float(CLOUD_STEPS) * mix(1.0, 2.0, smoothstep(CLOUD_TOP_SPAN * 2.0, CLOUD_TOP_SPAN * 12.0, span)));
+    float stride = span / float(steps);
+    float t = t0 + stride * noise;
+    float mu = dot(dir, gLightDir);
+    vec3 sun = gLightColor * CLOUD_LIGHT;
+    // Le sol sous la couche : un vert-brun qui renvoie l'astre et un peu de ciel vers le ventre des nuages.
+    vec3 ground = vec3(0.16, 0.17, 0.12) * (gLightColor * max(gLightDir.y, 0.0) * 0.9 + gAmbient * 0.5);
+    float depthSum = 0.0, depthWeight = 0.0;
+    int empty = 0;
+    for (int i = 0; i < 64; i++) {
+        if (i >= steps) break;
+        vec3 p = eye + dir * t;
+        // Hors des nuages, la forme seule suffit ; le détail n'est lu qu'au bord ou dedans.
+        float d = cloudDensity(p, coverage, true);
+        if (d > 0.002) {
+            float h = clamp((p.y - cloudBase()) / CLOUD_TOP_SPAN, 0.0, 1.0);
+            float od = lightDepth(p, coverage, fract(noise + float(i) * 0.618));
+            // La poudre : un bord fin, peu chargé de gouttes, renvoie moins vers l'arrière qu'un cœur dense. Ne se voit
+            // qu'à contre-jour de l'astre (dos au soleil, les nuages sont pleins de lumière).
+            float powder = 1.0 - exp(-d * CLOUD_SIGMA * 24.0);
+            powder = mix(1.0, powder, 0.65 * smoothstep(0.6, -0.4, mu));
+            // Diffusion multiple en octaves.
+            vec3 direct = vec3(0.0);
+            float strength = 1.0, ext = 1.0, spread = 1.0;
+            for (int n = 0; n < CLOUD_MULTISCATTER; n++) {
+                direct += strength * exp(-od * CLOUD_SIGMA * ext) * dropletPhase(mu, spread);
+                strength *= 0.5;
+                ext *= 0.38;
+                spread *= 0.55;
+            }
+            direct *= sun * powder * 4.4;
+            // Le ciel : vu d'en haut un nuage est plein, dessous il en reçoit moins ; un nuage au-dessus l'assombrit.
+            float above = cloudDensity(p + vec3(0.0, CLOUD_TOP_SPAN * 0.22, 0.0), coverage, false) * CLOUD_TOP_SPAN * 0.22;
+            vec3 skyLit = gAmbient * mix(0.22, 1.0, h) * exp(-above * CLOUD_SIGMA * 0.35) * 0.95;
+            vec3 bounce = ground * sq(1.0 - h) * 1.4;
+            vec3 inscatter = direct + skyLit + bounce + cloudLightning(p, h);
+            float sigma = d * CLOUD_SIGMA;
+            float through = exp(-sigma * stride);
+            // Intégrale exacte sur le pas : la lumière diffusée s'éteint déjà dans le pas lui-même.
+            float taken = pass * (1.0 - through);
+            light += taken * inscatter;
+            depthSum += taken * t;
+            depthWeight += taken;
+            pass *= through;
+            if (pass < 0.015) break;
+            empty = 0;
+        } else {
+            // Dans le ciel libre, des pas plus longs jusqu'au prochain nuage.
+            empty++;
+        }
+        t += stride * (empty > 2 ? 1.6 : 1.0);
+        if (t > t1) break;
+    }
+    return depthWeight > 1e-4 ? depthSum / depthWeight : t0;
 }
 
 void main() {
@@ -31,60 +197,37 @@ void main() {
     vec3 dir = normalize(pos);
     float sceneLen = sky ? 1e9 : length(pos);
     vec3 eye = cameraPosition;
-
-    // Entrée et sortie de la couche le long du regard.
-    float t0, t1;
-    if (abs(dir.y) < 1e-4) return;
-    float a = (cloudBase() - eye.y) / dir.y;
-    float b = (cloudTop() - eye.y) / dir.y;
-    t0 = max(min(a, b), 0.0);
-    t1 = min(max(a, b), min(sceneLen, CLOUD_RANGE));
-    if (t1 <= t0) return;
-
     float coverage = cloudCoverage();
-    int steps = CLOUD_STEPS;
-    float stride = (t1 - t0) / float(steps);
     float noise = dither(gl_FragCoord.xy);
-    float t = t0 + stride * noise;
-    float mu = dot(dir, gLightDir);
-    float phase = mix(cloudPhase(mu, 0.65), cloudPhase(mu, -0.25), 0.3);
-    vec3 sun = gLightColor * CLOUD_LIGHT;
-    // Le ciel éclaire le haut des nuages plus que leur ventre.
-    vec3 skyLight = gAmbient * 0.9;
+
     vec3 light = vec3(0.0);
     float pass = 1.0;
-    const float SIGMA = 0.09;
-    for (int i = 0; i < steps; i++) {
-        vec3 p = eye + dir * t;
-        float d = cloudDensity(p, coverage, true);
-        if (d > 0.002) {
-            // Lumière de l'astre qui arrive jusque-là : quatre pas de plus en plus longs vers lui.
-            float od = 0.0;
-            float reach = 6.0;
-            vec3 q = p;
-            for (int j = 0; j < 4; j++) {
-                q += gLightDir * reach;
-                od += cloudDensity(q, coverage, j == 0) * reach;
-                reach *= 2.0;
-            }
-            float beer = exp(-od * SIGMA) * 0.7 + exp(-od * SIGMA * 0.25) * 0.3;
-            float powder = 1.0 - exp(-d * stride * SIGMA * 2.0);
-            float h = clamp((p.y - cloudBase()) / CLOUD_TOP_SPAN, 0.0, 1.0);
-            vec3 inscatter = sun * beer * phase * mix(0.5, 1.0, powder) * 4.0 + skyLight * mix(0.25, 0.9, h * h);
-            float ext = d * SIGMA;
-            float step_ = exp(-ext * stride);
-            light += pass * inscatter * (1.0 - step_);
-            pass *= step_;
-            if (pass < 0.02) break;
-        }
-        t += stride;
+
+    // L'arc-en-ciel est le plus proche : dans la pluie qui s'en va, entre l'œil et les nuages.
+    if (sky) {
+        vec4 bow = rainbow(dir, wetness, eye);
+        light += bow.rgb;
+        pass *= bow.a;
     }
-    // Au loin, les nuages se fondent dans le ciel bas.
-    float fade = exp(-max(t0, 0.0) / (CLOUD_RANGE * 0.45));
+
+    vec3 cloudLight = vec3(0.0);
+    float cloudPass = 1.0;
+    float seen = marchLayer(eye, dir, sceneLen, coverage, noise, cloudLight, cloudPass);
+    // Au loin, les nuages se fondent dans le ciel bas : la perspective aérienne, à la distance où on les voit vraiment.
+    float fade = exp(-seen / (CLOUD_RANGE * 0.5));
     vec3 horizon = skyAt(normalize(vec3(dir.x, max(dir.y, 0.03), dir.z)));
-    light = mix(horizon * (1.0 - pass), light, fade);
+    cloudLight = mix(horizon * (1.0 - cloudPass), cloudLight, fade);
     // Sous la pluie, des nuages gris.
-    light = mix(light, vec3(luma(light)) * 0.6, rainStrength * 0.6);
+    cloudLight = mix(cloudLight, vec3(luma(cloudLight)) * 0.6, rainStrength * 0.6);
+    light += pass * cloudLight;
+    pass *= cloudPass;
+
+    // Tout en haut : le voile de cirrus, et le halo que ses cristaux dessinent.
+    if (sky && dir.y > 0.0) {
+        vec4 veil = cirrusLayer(eye, dir);
+        light += pass * veil.rgb;
+        pass *= 1.0 - veil.a;
+    }
     outClouds = vec4(light, pass);
 #endif
 }

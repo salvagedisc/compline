@@ -8,6 +8,7 @@
 #include "/lib/shadow.glsl"
 #include "/lib/mist.glsl"
 #include "/lib/clouds.glsl"
+#include "/lib/nightsky.glsl"
 #include "/lib/rain.glsl"
 
 uniform sampler2D colortex0;
@@ -92,7 +93,7 @@ void main() {
     initEnv();
     if (sky) {
         vec3 dir = normalize(pos);
-        color += skyAt(dir) + sunDisc(dir);
+        color += skyAt(dir) + sunDisc(dir) + nightSky(dir);
     } else if (!hand) {
         vec4 surface = texture(colortex1, vUv);
 #if AO_SAMPLES > 0
