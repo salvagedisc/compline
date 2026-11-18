@@ -107,6 +107,12 @@
 #define SATURATION 1.0 // [0.7 0.8 0.9 1.0 1.1 1.2]
 #define CONTRAST 1.0 // [0.9 0.95 1.0 1.05 1.1 1.15]
 #define EXPOSURE 1.0 // [0.7 0.85 1.0 1.15 1.3]
+#define EXPOSURE_AUTO 1 // [0 1]
+#define EXPOSURE_AUTO_AMOUNT 1.0 // [0.5 1.0 1.5]
+#define EXPOSURE_SPEED 1.0 // [0.5 1.0 2.0]
+#define DOF 0 // [0 1 2]
+#define PURKINJE 1 // [0 1]
+#define VIGNETTE 1 // [0 1]
 
 // Image
 #define SMAA 2 // [0 1 2 3]
