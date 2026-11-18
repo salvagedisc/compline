@@ -127,6 +127,8 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Punchy! | `punchy-fpa` | ✅ (2.8g, pinned version) | C | Gestures and animated arms in first person, set to a restrained level; alone in animating the first-person arm (EMF option), blacklist for Create and Aeronautics items and Exposure photos; `compline` 0.4.7 stops its equip animation looping with Sensible Stackables ([fix](plan/mod-compline.md#punchy-and-sensible-stackables-the-hand-that-kept-jumping)) |
 | Better Combat | `better-combat` | ✅ (2.4.0, added 2026-11-17, not seen in game) | CS | A swing of the whole body per weapon type and combos, hits along the blade; tools, fishing rods and forged parts excluded, black steel sword and axe added ([0036](decisions/0036-better-combat.md)) |
 | playerAnimator | `playeranimator` | ✅ (2.0.4, added 2026-11-17) | CS | Animation library of Better Combat |
+| Sable: Ragdoll Corpse | `sable-ragdoll-corpse` | ✅ (0.4.0, added 2026-11-18, ARR) | CS | On death the player leaves a ragdoll body that keeps the whole inventory, Curios included, until it is emptied; it can be dragged, thrown or lifted by an airship; the recovery compass points to it ([0037](decisions/0037-ragdoll-corpse.md)) |
+| Sable: Ragdolls | `sable-ragdolls` | ✅ (0.8.1, added 2026-11-18, Apache-2.0) | CS | Ragdoll library of the body above; the key that throws oneself to the ground is off on the server (`config/sable_player_ragdoll-server.toml`) |
 
 ## Atmosphere, rendering and sound
 
