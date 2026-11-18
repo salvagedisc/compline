@@ -28,18 +28,30 @@ float showerAt(vec2 world) {
 
 float precipHash(vec2 p, float k) { return fract(sin(dot(p, vec2(127.1, 311.7)) + k * 74.7) * 43758.5453); }
 
+/** La tempête de neige : sous l'orage dans un biome enneigé, le vent couche les flocons et les serre. */
+float blizzard(float snow) {
+#if SNOW_BLIZZARD > 0
+    return snow * thunderStrength;
+#else
+    return 0.0;
+#endif
+}
+
 /**
  * Gouttes ou flocons vus le long d'un rayon ; rend leur opacité (0..1). dir : direction (repère monde) ; len :
- * distance de ce qu'on voit ; snow : 0 pluie, 1 neige ; amount : densité (0..1).
+ * distance de ce qu'on voit ; snow : 0 pluie, 1 neige ; amount : densité (0..1). glow : la lumière des torches et
+ * des lanternes que les gouttes proches renvoient, déjà pondérée par leur opacité.
  */
-float precipitation(vec3 dir, float len, float snow, float amount) {
+float precipitation(vec3 dir, float len, float snow, float amount, out vec3 glow) {
+    glow = vec3(0.0);
     if (amount <= 0.001) return 0.0;
+    float storm = blizzard(snow);
     float t0 = 0.35;
     float t1 = min(len, PRECIP_REACH);
     if (t1 <= t0) return 0.0;
     // Le vent penche la chute ; dans un repère cisaillé, chaque goutte tombe droit.
     vec2 wind = brumaireLink > 0.5 ? brumaireWind.xy * brumaireWind.z : vec2(0.2, 0.1);
-    vec2 slant = wind * mix(0.35, 0.12, snow);
+    vec2 slant = wind * mix(0.35, 0.12, snow) * (1.0 + 4.0 * storm);
     vec3 o = vec3(mod(cameraPosition.xz, 4096.0), cameraPosition.y).xzy;
     vec2 q0 = o.xz + slant * o.y;
     vec2 qd = dir.xz + slant * dir.y;
@@ -49,7 +61,7 @@ float precipitation(vec3 dir, float len, float snow, float amount) {
     // La largeur d'un pixel à une distance donnée : une goutte n'est jamais plus fine qu'un pixel.
     float pixel = 2.0 / (gbufferProjection[1][1] * viewHeight);
     float size = 1.0 / 16.0;
-    float density = amount * mix(0.55, 0.45, snow);
+    float density = amount * mix(0.55, 0.45, snow) * (1.0 + 0.6 * storm);
 
     // Traversée des colonnes du sol cisaillé que croise le rayon (DDA).
     vec2 qd2 = vec2(abs(qd.x) < 1e-5 ? 1e-5 : qd.x, abs(qd.y) < 1e-5 ? 1e-5 : qd.y);
@@ -76,17 +88,31 @@ float precipitation(vec3 dir, float len, float snow, float amount) {
             tc = clamp(dd > 1e-8 ? dot(centre - q0, qd) / dd : t, t, tExit);
             vec2 off = q0 + qd * tc - centre;
             float y = o.y + dir.y * tc;
-            float width = mix(tc * pixel * 0.6 + 0.004, max(size * 0.5, tc * pixel * 0.75), snow);
+            // Des flocons d'un pixel, d'autres de deux qui tournoient (un sur deux images à plat, puis de chant).
+            float big = snow > 0.5 ? step(0.68, precipHash(cell, 5.0)) : 0.0;
+            float tumble = big * step(0.5, fract(frameTimeCounter * (1.5 + precipHash(cell, 6.0)) + phase));
+            float flake = size * (1.0 + big) * mix(1.0, 0.5, tumble);
+            float width = mix(tc * pixel * 0.6 + 0.004, max(flake * 0.5, tc * pixel * 0.75), snow);
             if (dot(off, off) < width * width) {
-                // Le long de la colonne, une goutte tous les period blocs, qui tombe ; au seizième de bloc.
-                float yy = floor((y + frameTimeCounter * speed + phase) * 16.0) / 16.0;
+                // Le long de la colonne, une goutte tous les period blocs, qui tombe ; au seizième de bloc. Les gouttes
+                // n'ont pas toutes la même longueur : les grosses tombent en traits plus longs.
+                float yy = floor((y + frameTimeCounter * speed * (1.0 + 0.6 * storm) + phase) * 16.0) / 16.0;
                 float f = mod(yy, period);
-                float on = snow > 0.5 ? step(f, max(size, width * 2.0)) : step(f, drop) * (0.55 + 0.45 * f / drop);
+                float len_ = drop * (0.65 + 0.6 * precipHash(cell, 7.0));
+                float on = snow > 0.5 ? step(f, max(flake, width * 2.0) * (1.0 + 2.0 * storm)) : step(f, len_) * (0.55 + 0.45 * f / len_);
                 if (on > 0.0) {
                     vec2 ground = centre - slant * y - o.xz;
                     if (y > shelterAt(ground)) {
                         float fade = (1.0 - smoothstep(PRECIP_REACH * 0.55, PRECIP_REACH, tc)) * smoothstep(mix(1.0, 1.8, snow), mix(4.0, 5.0, snow), tc);
-                        clear *= 1.0 - on * fade * mix(0.32, 0.85, snow);
+                        float a = on * fade * mix(0.32, 0.85, snow);
+#if PRECIP_GLOW > 0 && COLORED_LIGHT > 0
+                        // Près d'une torche, la goutte s'allume de sa couleur.
+                        if (tc < 16.0) {
+                            vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * tc, vec3(0.0));
+                            glow += blk.rgb * sq(blk.a) * blk.a * mix(2.2, 1.4, snow) * a * clear;
+                        }
+#endif
+                        clear *= 1.0 - a;
                     }
                 }
             }
@@ -99,9 +125,14 @@ float precipitation(vec3 dir, float len, float snow, float amount) {
     return 1.0 - clear;
 }
 
-/** Couleur des gouttes et des flocons : la lumière du ciel, un peu de soleil, rien de bleu. */
-vec3 precipColor(float snow) {
-    vec3 light = gAmbient * 1.35 + gLightColor * 0.14 + vec3(0.02);
+/**
+ * Couleur des gouttes et des flocons vus dans la direction dir : la lumière du ciel, un peu de soleil, rien de bleu.
+ * Une goutte est une petite lentille : vers le soleil ou la lune, elle étincelle ; un flocon diffuse plus large.
+ */
+vec3 precipColor(float snow, vec3 dir) {
+    float mu = max(dot(dir, gLightDir), 0.0);
+    float lens = mix(pow(mu, 12.0) * 2.4, pow(mu, 3.0) * 0.6, snow) * (1.0 - 0.7 * rainStrength * (1.0 - snow));
+    vec3 light = gAmbient * 1.35 + gLightColor * (0.14 + lens) + vec3(0.02);
     return light * mix(vec3(0.82, 0.85, 0.88), vec3(1.05), snow);
 }
 #endif

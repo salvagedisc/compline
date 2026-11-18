@@ -81,6 +81,11 @@
 #define PUDDLES 1 // [0 1]
 #define PUDDLE_AMOUNT 1.0 // [0.5 0.75 1.0 1.25 1.5]
 #define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
+#define PATCHY_DRYING 1 // [0 1]
+#define WALL_RIVULETS 1 // [0 1]
+#define RAIN_SPLASHES 1 // [0 1]
+#define PRECIP_GLOW 1 // [0 1]
+#define SNOW_BLIZZARD 1 // [0 1]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
 
 // Neige et chaleur

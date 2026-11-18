@@ -218,12 +218,20 @@ void main() {
         wet = max(wet, 0.9 * print);
     }
 #endif
+    float splash = 0.0;
     if (wet > 0.0) {
         float puddle = rainWet > 0.0 ? puddleAt(vPos + cameraPosition, normal, rainWet) : 0.0;
-        float soak = wet * mix(0.55, 1.0, max(normal.y, 0.0));
+        // Le relief du texel : sa clarté contre la moyenne de sa texture (un niveau de mipmap lointain).
+        vec3 mean = toLinear(textureLod(gtexture, vUv, 4.0).rgb * vTint.rgb);
+        float relief = clamp((luma(albedo) - luma(mean)) / max(luma(mean), 0.03) * 1.6, -1.0, 1.0);
+        vec2 ws = rainWet > 0.0 ? wetSurface(world, normal, rainWet, relief) : vec2(0.0);
+        ws = max(ws, vec2(0.9, 0.36) * print);
+        vec2 riv = rainWet > 0.0 ? rivuletAt(world, normal, frameTimeCounter, rainWet) : vec2(0.0);
+        float soak = max(ws.x * mix(0.55, 1.0, max(normal.y, 0.0)), riv.x);
         albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
         albedo = mix(albedo, vec3(luma(albedo)) * 0.5, puddle * 0.8);
-        gloss = max(0.4 * soak, puddle);
+        gloss = max(max(ws.y, riv.y * 0.55), puddle);
+        splash = rainWet > 0.0 ? splashAt(world, normal, frameTimeCounter, rainWet * rainStrength * rainHere) : 0.0;
         // Au soleil, une pierre claire trempée paraît encore blanche : une semelle mouillée fonce davantage.
         albedo *= 1.0 - 0.55 * print;
     }
@@ -238,6 +246,10 @@ void main() {
 #endif
     // Les grains de neige et de sable qui scintillent, là où le soleil donne.
     lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
+#if defined PROGRAM_TERRAIN
+    // Les gouttes qui éclatent : la lumière du ciel renvoyée par un pixel d'eau.
+    lit += (gAmbient * 1.1 + gLightColor * 0.15 + vec3(0.008)) * splash;
+#endif
 #if defined PROGRAM_TERRAIN
     // Les blocs qui éclairent brillent par eux-mêmes.
     if (emissive(vMat)) lit += albedo * 1.7 * smoothstep(0.25, 0.85, luma(color.rgb));

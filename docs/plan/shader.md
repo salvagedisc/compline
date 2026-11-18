@@ -132,7 +132,10 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 ## Rain
 
 - **The drops** of the game are drawn as thin light-grey streaks lit by the sky, fainter than the game's blue ones and fading right in front of the eye; snow keeps its flakes.
-- **Wet ground**: where it rains (the biome under the player has rain, not snow, read through `biome_precipitation`) and a surface sees the sky, it darkens and shines at a low angle (`WETNESS`). Iris smooths the rain into `wetness`: the ground soaks in about a minute and dries in a few minutes after the rain stops. Leaves, plants and glowing blocks stay as they are.
+- **Wet ground**: where it rains (the biome under the player has rain, not snow, read through `biome_precipitation`) and a surface sees the sky, it darkens and shines at a low angle (`WETNESS`). Iris smooths the rain into `wetness`: the ground soaks in about a minute and dries in a few minutes after the rain stops (`drynessHalfLife` is set to one minute, six times the default, so that the drying patches can be seen). Leaves, plants and glowing blocks stay as they are.
+- **The grain of wet ground** (`PATCHY_DRYING`): each texel is compared with the mean colour of its texture (a far mipmap level of the atlas). Darker texels are hollows: they soak and darken the most. Brighter ones are bumps: they darken less and shine more. When the rain stops, the ground dries in patches on the 1/16 grid (a wide pattern of the cloud noise, a grain per texel and the relief), the bumps and exposed places first, the hollows and the foot of walls last. While it rains hard, everything is soaked.
+- **Rivulets on walls** (`WALL_RIVULETS`): on vertical faces that see the sky, about one pixel column in six carries a dark wet line for two blocks, then jumps aside or stops. Now and then a bright drop slides down it, one pixel at a time, with a fading wet trail behind.
+- **Splashes** (`RAIN_SPLASHES`): on wet flat ground, drops burst on the 1/16 grid: one bright pixel, then a crown of four pixels that fades, in a few hundredths of a second, more often in heavy rain.
 - **Puddles** gather on flat ground in patches with hard edges on the 1/16 block grid, larger as the ground soaks (`PUDDLES`, `PUDDLE_AMOUNT`). They mirror the landscape like the water, on screen (`WET_REFLECTIONS` steps) or the sky, and the drops draw rings on them. The terrain marks them in the alpha of `colortex1`; `deferred1` draws their reflection.
 - **Rain curtains**: beyond the game's drops, thin falling streaks over the distant landscape, leaning with the wind (`RAIN_CURTAINS`).
 - **The air** under rain turns a slightly warm grey and the mist thickens a little.
@@ -144,6 +147,9 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Shelter**: a compute pass (`shadowcomp1`, `program/shelter.csh`) finds in the coloured-light volume, for each column, the top of the highest block that stops rain (everything but grass, flowers, vines and torches); no drop falls below it, so nothing falls under a roof or a dense tree.
 - **Showers**: patches of about a hundred blocks pushed by the wind: the rain grows heavier and lighter as they pass, and the far rain curtains are thicker where it rains hard.
 - In a snowy biome (the player's), flakes instead of drops.
+- **Drops of different sizes**: rain streaks have different lengths; flakes are one or two pixels wide, and the larger ones tumble (flat, then edge-on).
+- **Light in the drops** (`PRECIP_GLOW`): drops and flakes within 16 blocks read the coloured light volume, so near a torch or a lantern they take its colour. Each drop is a small lens: toward the sun or the moon it sparkles (a narrow forward lobe), a flake scatters wider and softer.
+- **Blizzard** (`SNOW_BLIZZARD`): under a thunderstorm in a snowy biome, the wind lays the flakes down (five times the slant), they fall faster, denser and stretched into short streaks.
 
 ## Snow, sand and ice
 

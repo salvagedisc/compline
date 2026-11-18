@@ -131,7 +131,7 @@ float fogMarch(vec3 dir, float reach, float sunAmount, out vec3 light) {
     if (FOG_BLOCK_GLOW > 0.0) {
         float haloReach = min(reach, 32.0);
         float hdt = haloReach / 10.0;
-        float glowAir = 0.008 + 0.016 * airHumid + 0.03 * rainStrength + cave * 2.0;
+        float glowAir = 0.008 + 0.016 * airHumid + 0.012 * rainStrength + cave * 2.0;
         vec3 glow = vec3(0.0);
         for (int i = 0; i < 10; i++) {
             float t = (float(i) + noise) * hdt;
@@ -324,8 +324,9 @@ void main() {
         float snow = step(0.5, snowHere);
         float local = showerAt(cameraPosition.xz);
         float amount = rainStrength * (snow > 0.5 ? snowHere * mix(0.5, 1.0, local) : rainHere * mix(0.5, 1.0, local));
-        float a = precipitation(dir, len, snow, amount);
-        color = mix(color, precipColor(snow), a);
+        vec3 glow;
+        float a = precipitation(dir, len, snow, amount, glow);
+        color = mix(color, precipColor(snow, dir), a) + glow;
     }
 #endif
     if (blindness > 0.0) color *= exp(-len * 0.35 * blindness);
