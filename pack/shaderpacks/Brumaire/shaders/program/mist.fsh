@@ -13,6 +13,8 @@
 #include "/lib/leaffall.glsl"
 #include "/lib/fireflies.glsl"
 #include "/lib/cavedrips.glsl"
+#include "/lib/drift.glsl"
+#include "/lib/seasmoke.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -327,6 +329,46 @@ void main() {
         {
             float amount = fireflySeason();
             if (amount > 0.01) color += vec3(0.62, 1.0, 0.22) * firefliesAlong(dir, min(len, 40.0), amount) * 0.9;
+        }
+#endif
+#if WATER_STEAM > 0 && defined VOXELS
+        // Les matins frais, l'eau fume : des volutes pâles, de la couleur de l'air, au ras des lacs et des rivières.
+        if (isEyeInWater == 0) {
+            float amount = steamAmount();
+            if (amount > 0.01) {
+                float steam = steamAlong(dir, len, amount);
+                color = mix(color, mistColor(dir, 1.0) * 1.15, steam);
+            }
+        }
+#endif
+#if GROUND_DRIFT > 0 && SHADER_RAIN > 0
+        // Par grand vent, la neige ou le sable filent au ras du sol, éclairés comme l'air : soleil et ciel.
+        {
+            vec2 kind = driftAmount();
+            float amount = max(kind.x, kind.y);
+            if (amount > 0.01) {
+                float drift = driftAlong(dir, len, amount);
+                vec3 tint = kind.x >= kind.y ? vec3(0.85, 0.90, 1.0) : vec3(0.95, 0.80, 0.58);
+                color = mix(color, tint * (gAmbient * 0.9 + gLightColor * 0.55), drift);
+            }
+        }
+#endif
+#if CANOPY_DRIPS > 0 && defined VOXELS
+        // Sous les arbres, pendant et après la pluie, l'eau s'égoutte des feuilles ; chargées de neige, les branches
+        // en lâchent des paquets quand le vent souffle.
+        {
+            float water = max(rainStrength, wetness) * rainHere;
+            float force = brumaireLink > 0.5 ? brumaireWind.z : 0.3;
+            float snowLoad = snowStorm * (0.3 + 0.7 * smoothstep(0.2, 0.8, force));
+            float dripDist, dripKind;
+            float drip = canopyDripAlong(dir, min(len, 16.0), water, snowLoad, dripDist, dripKind);
+            if (drip > 0.0) {
+                vec3 p = gbufferModelViewInverse[3].xyz + dir * dripDist;
+                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                vec3 light = dripKind > 0.5 ? gAmbient * 0.85 + gLightColor * lit * 0.7 : gAmbient * 1.3 + gLightColor * lit * 0.6;
+                color = mix(color, light, drip * (dripKind > 0.5 ? 0.9 : 0.55));
+            }
         }
 #endif
 #if FALLING_LEAVES > 0 && defined VOXELS
