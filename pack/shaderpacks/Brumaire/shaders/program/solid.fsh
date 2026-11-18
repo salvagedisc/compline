@@ -169,10 +169,6 @@ void main() {
 #ifndef PROGRAM_CLRWL
     if (color.a < alphaTestRef) discard;
 #endif
-#if defined FAR_RECORD && FAR_SHADOWS > 0
-    // Le relief pour les ombres lointaines : les plantes et les lianes n'arrêtent pas le soleil de loin.
-    if (!(vMat >= 1 && vMat <= 3) && vMat != 5) farRecord(vPos + cameraPosition, gl_FragCoord.xy);
-#endif
 #if defined PROGRAM_ENTITIES
     color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
 #endif

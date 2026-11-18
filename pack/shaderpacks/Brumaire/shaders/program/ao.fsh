@@ -17,14 +17,7 @@ uniform int frameCounter;
 
 in vec2 vUv;
 
-/*
-const int colortex1Format = RGBA16;
-const int colortex2Format = RGBA16F;
-const int colortex4Format = RGBA8;
-*/
-const vec4 colortex1ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
-const vec4 colortex2ClearColor = vec4(1.0, 0.0, 0.0, 0.0);
-const vec4 colortex4ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
+// Formats et couleurs de fond de colortex1, 2 et 4 : dans deferred1, toujours actif (cette passe peut être coupée).
 
 /* RENDERTARGETS: 2 */
 layout(location = 0) out vec4 outAo;

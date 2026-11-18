@@ -231,6 +231,15 @@ Without a normal-map resource pack, `lib/relief.glsl` draws a relief from the te
 - **Motion blur** (`MOTION_BLUR`: off, light, medium, strong, very strong; medium by default, off in the Very light profile): `composite4` takes twelve samples along the path each point took on screen since the previous frame (`lib/reproject.glsl`, shared with the temporal anti-aliasing), over a quarter of a frame per step of the setting, so the streak follows the frame rate like a film camera's shutter. It runs after the temporal anti-aliasing so the history stays sharp. The streak is capped at 6 % of the screen height, tiny motions (walking, head bob) barely blur, the hand never blurs and never bleeds into the landscape. Only the camera's motion counts: an animal running across a still view stays sharp.
 - **Four profiles**: Très léger (very light: no reflections, no screen occlusion, no shafts, the game's clouds, 1024 shadow map over 64 blocks with hard edges, no anti-aliasing), Léger, Équilibré (the default) and Beau. Every profile sets every option it touches, so switching back and forth restores them.
 
+## Cost
+
+- **Passes switched off**: `program.<pass>.enabled` takes an option name; Iris replaces it by the option's value, 0 disables the pass and any other number keeps it (with a "unknown option" warning in the log for values other than 0 and 1, checked on the bench with `TAA`). The clouds and near mist (`composite`, `CLOUD_STEPS || FOG_STEPS`), occlusion and bounce (`deferred`, `AO_SAMPLES || SSGI`) and the first two SMAA passes (`composite5`, `composite6`, `SMAA`) stop when their setting is 0. Their buffer formats and clear colours are declared in passes that always run (`deferred1`, `mist`), and the clear colours mean "no clouds", "no fog" and "no occlusion".
+- **Early depth test on terrain**: the far-shadow height map is written per vertex in `gbuffers_terrain.vsh` and `dh_terrain.vsh`, not per pixel, so the terrain fragment shaders no longer write to an image and keep the early depth test.
+- **Near mist at half resolution**: `fogMarch` (`lib/fogmarch.glsl`) runs in the half-resolution `composite` pass into `colortex11` (light, transmittance); `mist.fsh` brings it back with a four-tap bilinear filter weighted by depth.
+- **Occlusion upsampling**: `deferred1` reads the half-resolution occlusion and bounce from the four nearest cells, weighted bilinearly, by depth and by normal, instead of a 4 × 4 blur; the temporal anti-aliasing smooths the rest.
+- **Caps in the Beautiful profile**: 20 wave trains, 20 water reflection steps, 64 voxel reflection steps, 16 cloud steps and 6 cloud light steps (the higher values stay available). Whitecap trails follow only the larger half of the wave trains, skipping those finer than a texel.
+- The game's dryness half-life is 1 200 ticks both in `shaders.properties` and in the shader's constant.
+
 ## The mist
 
 - A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`). Barely there at noon (near air stays clear), more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.

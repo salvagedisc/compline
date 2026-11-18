@@ -142,9 +142,10 @@ float whitecaps(vec2 p, float t, WaveEnv env, float foldNow) {
     if (drive <= 0.02) return 0.0;
     float edge = mix(0.60, 0.80, drive);
     float now = smoothstep(edge, edge - 0.22, foldNow);
-    int big = WATER_WAVE_COUNT - WATER_WAVE_COUNT / 4;
-    float before = waveFold(waveSum(p, t - 0.7, env, WATER_WAVE_COUNT, 0, big, 0.0));
-    float older = waveFold(waveSum(p, t - 1.5, env, WATER_WAVE_COUNT, 0, big, 0.0));
+    // La traînée ne suit que les grands trains : la moitié des vagues suffit à dire où une crête a déferlé.
+    int big = WATER_WAVE_COUNT / 2;
+    float before = waveFold(waveSum(p, t - 0.7, env, WATER_WAVE_COUNT, 0, big, 1.0 / 16.0));
+    float older = waveFold(waveSum(p, t - 1.5, env, WATER_WAVE_COUNT, 0, big, 1.0 / 16.0));
     float trail = max(smoothstep(edge, edge - 0.22, before) * 0.55, smoothstep(edge, edge - 0.22, older) * 0.28);
     return drive * max(now, trail);
 #else

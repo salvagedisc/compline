@@ -40,12 +40,11 @@ float farHeight(ivec2 c) {
 
 #ifdef FAR_RECORD
 /**
- * Note une surface vue (repère monde). Un pixel sur quatre suffit : la carte se remplit en quelques images et garde
- * ce qu'elle a vu. Une case qui servait à une colonne plus loin est reprise par la colonne proche.
+ * Note un sommet du terrain dessiné (repère monde). L'écriture se fait dans le shader de sommets : dans celui des
+ * pixels, elle priverait le terrain du test de profondeur anticipé. Une case qui servait à une colonne plus loin est
+ * reprise par la colonne proche.
  */
-void farRecord(vec3 world, vec2 frag) {
-    ivec2 p = ivec2(frag);
-    if (((p.x + p.y * 3 + frameCounter) & 3) != 0) return;
+void farRecord(vec3 world) {
     ivec2 c = farCell(world.xz);
     if (!farInside(c)) return;
     uint v = (farTag(c) << 12) | uint(clamp((world.y + 128.0) * 4.0, 1.0, 4095.0));

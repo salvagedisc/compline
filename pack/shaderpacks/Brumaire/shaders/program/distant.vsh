@@ -2,6 +2,9 @@
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/lib/taa.glsl"
+#ifdef FAR_RECORD
+#include "/lib/farshadow.glsl"
+#endif
 
 
 out vec2 vLm;
@@ -17,5 +20,8 @@ void main() {
     vec4 view = gl_ModelViewMatrix * gl_Vertex;
     vPos = (gbufferModelViewInverse * view).xyz;
     vMat = dhMaterialId;
+#if defined FAR_RECORD && FAR_SHADOWS > 0
+    farRecord(vPos + cameraPosition);
+#endif
     gl_Position = taaJitter(gl_ProjectionMatrix * view);
 }

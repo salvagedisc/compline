@@ -143,9 +143,10 @@ const float shadowDistanceRenderMul = 1.0;
 const float shadowIntervalSize = 2.0;
 const float entityShadowDistanceMul = 0.5;
 const float ambientOcclusionLevel = 1.0;
-// Iris lisse la pluie en « wetness » : le sol se mouille en une minute environ et sèche en trois.
+// Iris lisse la pluie en « wetness » (en ticks) : le sol se mouille vite et sèche lentement, une minute de demi-vie,
+// la même valeur que drynessHalfLife dans shaders.properties.
 const float wetnessHalflife = 300.0;
-const float drynessHalflife = 900.0;
+const float drynessHalflife = 1200.0;
 
 // Forme de la carte d'ombre : le centre est grossi, les lointains tassés.
 #define SHADOW_BEND 0.86

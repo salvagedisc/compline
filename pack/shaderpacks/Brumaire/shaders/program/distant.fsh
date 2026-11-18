@@ -25,9 +25,6 @@ void main() {
 #ifdef PROGRAM_DH_WATER
     if (texelFetch(depthtex0, ivec2(gl_FragCoord.xy), 0).r < 1.0) discard;
 #endif
-#if defined FAR_RECORD && FAR_SHADOWS > 0
-    farRecord(vPos + cameraPosition, gl_FragCoord.xy);
-#endif
     initEnv();
     vec3 normal = normalize(vNormal);
     vec3 albedo = olive(toLinear(vTint.rgb));
