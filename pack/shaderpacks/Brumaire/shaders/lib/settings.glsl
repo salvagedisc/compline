@@ -118,6 +118,10 @@
 #define RAIN_SPLASHES 1 // [0 1]
 #define PRECIP_GLOW 1 // [0 1]
 #define SNOW_BLIZZARD 1 // [0 1]
+// La neige et le sable soufflés au ras du sol par grand vent (lib/drift.glsl).
+#define GROUND_DRIFT 1 // [0 1]
+// La brume qui fume sur l'eau les matins frais (lib/seasmoke.glsl).
+#define WATER_STEAM 1 // [0 1]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
 #define ROUGH_REFLECTIONS 1 // [0 1]
 #define ROUGH_REFLECTIONS_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
@@ -141,6 +145,8 @@
 #define ICE_DETAIL 1 // [0 1]
 // Les feuilles qui tombent des arbres, plus nombreuses quand le feuillage a roussi (lib/leaffall.glsl).
 #define FALLING_LEAVES 1 // [0 1]
+// L'eau qui s'égoutte des arbres après la pluie, et la neige qui tombe des branches au vent (lib/leaffall.glsl).
+#define CANOPY_DRIPS 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.
