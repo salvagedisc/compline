@@ -26,7 +26,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 ## Principles
 
-- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/compline-client.toml` for `ciel`, `config/compline-common.toml` for most modules, and the world's `serverconfig/compline-server.toml` for the switches the client must share with the server (`xp`, `outils`): NeoForge sends that file to every player who joins. The values are re-read at each use, so a change in game takes effect immediately.
+- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/compline-client.toml` for `ciel`, `config/compline-common.toml` for most modules, and the world's `serverconfig/compline-server.toml` for the switches the client must share with the server (`xp`, `outils`): NeoForge sends that file to every player who joins. The values are re-read at each use, so a change in game takes effect immediately. Exceptions: `dissipateur` follows the `clairiere` switch; `monuments`, `acier_noir`, `minage` and `filons` have none, because they register content (a structure type, items, a tool tier, a feature) that saved worlds and the pack's data name, or are pure data rules; turning them off would break a world rather than disable a feature.
 - **A module loads only if its mods are present.** At startup, `Compline` checks with `ModList` the mods each module depends on. It writes "Module X chargé" or "Module X ignoré" to the log. Mixins go through `ComplineMixinPlugin`, which applies them only if the targeted mods are in `LoadingModList`. The only hard dependency is NeoForge.
 - **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible.
 

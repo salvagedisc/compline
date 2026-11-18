@@ -3443,7 +3443,7 @@ metafile = true
 
 [[files]]
 file = "mods/better-advanced-tooltips.pw.toml"
-hash = "03084ff4f74cedc1b8ac6c85a98842f75956fb4fa811d285d8ca7caa8d54da5d"
+hash = "d9f912d43efb74c5ed07a3a9ef1cb078cec2bcdf369e05637d698e84f1fb67d6"
 metafile = true
 
 [[files]]
@@ -3511,8 +3511,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.34.3.jar"
-hash = "d20ad829186af23c6d6ccb2695cc016a5b28da291ff6e2f06ea090cc380502f7"
+file = "mods/compline-0.34.4.jar"
+hash = "d3684f167f82b6aa230cf2d592d4fe8519801688e2ce8b94e306daf4614ded06"
 
 [[files]]
 file = "mods/configurable.pw.toml"
