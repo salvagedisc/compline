@@ -51,7 +51,10 @@ public enum ComplineModule {
     FILONS("filons", null, bus -> io.github.salvagedisc.compline.filons.FilonsModule.start(bus)),
     /** Le climat qui pèse : la saison d'Ecliptic Seasons donnée à la température de Cold Sweat (serveur ; le monde
      *  intégré du client compte comme serveur). */
-    CLIMAT("climat", null, bus -> io.github.salvagedisc.compline.climat.ClimatModule.start(bus), ModIds.COLD_SWEAT, ModIds.ECLIPTIC_SEASONS);
+    CLIMAT("climat", null, bus -> io.github.salvagedisc.compline.climat.ClimatModule.start(bus), ModIds.COLD_SWEAT, ModIds.ECLIPTIC_SEASONS),
+    /** L'approche : les bêtes farouches sentent le joueur quand le vent porte son odeur, et fuient (serveur ; le monde
+     *  intégré du client compte comme serveur). Aucun mod requis ; le vent est celui du module vent, recalculé. */
+    APPROCHE("approche", null, bus -> io.github.salvagedisc.compline.approche.ApprocheModule.start(bus));
 
     private final String id;
     private final Dist side;

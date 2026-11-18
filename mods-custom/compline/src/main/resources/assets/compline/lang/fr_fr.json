@@ -81,5 +81,8 @@
   "item.compline.casque_en_acier_noir": "Casque en acier noir",
   "item.compline.plastron_en_acier_noir": "Plastron en acier noir",
   "item.compline.jambieres_en_acier_noir": "Jambières en acier noir",
-  "item.compline.bottes_en_acier_noir": "Bottes en acier noir"
+  "item.compline.bottes_en_acier_noir": "Bottes en acier noir",
+  "approche.compline.indice.odeur": "Le vent a porté votre odeur jusqu'à lui.",
+  "approche.compline.indice.vue": "Il vous a vu : accroupissez-vous pour approcher.",
+  "approche.compline.indice.ouie": "Il vous a entendu."
 }

@@ -32,6 +32,12 @@ public final class ComplineConfig {
     private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
     private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
     private static final ModConfigSpec.IntValue ZOO_OBSERVE_SECONDS;
+    private static final ModConfigSpec.IntValue ZOO_SPYGLASS_DISTANCE;
+    private static final ModConfigSpec.BooleanValue APPROCHE_ENABLED;
+    private static final ModConfigSpec.DoubleValue APPROCHE_SCENT_RANGE;
+    private static final ModConfigSpec.DoubleValue APPROCHE_SIGHT_RANGE;
+    private static final ModConfigSpec.DoubleValue APPROCHE_HEARING_RANGE;
+    private static final ModConfigSpec.BooleanValue APPROCHE_HINTS;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -191,6 +197,32 @@ public final class ComplineConfig {
                 .comment("Secondes d'observation (une bête de l'espèce en vue à moins de 16 blocs) demandées par le tampon Maîtriser,",
                         "en plus des autres tampons de l'espèce.")
                 .defineInRange("observeSeconds", 60, 0, 600);
+        ZOO_SPYGLASS_DISTANCE = common
+                .comment("Distance en blocs à laquelle une bête vue dans la longue-vue (au centre de l'image) vaut le tampon Apercevoir.")
+                .defineInRange("spyglassDistance", 64, 4, 128);
+        common.pop();
+
+        common.comment("Module approche : les bêtes farouches (tag compline:farouches) sentent le joueur quand le vent porte son",
+                "odeur vers elles, l'entendent quand il court et le voient quand il se tient debout à découvert ; elles lèvent",
+                "la tête, puis fuient. Approcher contre le vent et accroupi permet de s'en approcher.").push("approche");
+        APPROCHE_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : les bêtes ne se soucient plus du vent ni de la posture.")
+                .define("enabled", true);
+        APPROCHE_SCENT_RANGE = common
+                .comment("Portée de l'odeur en blocs, sous le vent, par vent moyen. Le vent fort la porte jusqu'à 30 % plus loin,",
+                        "la pluie l'abrège ; hors du cône de 70° autour du vent, aucune odeur.")
+                .defineInRange("scentRange", 32.0, 0.0, 96.0);
+        APPROCHE_SIGHT_RANGE = common
+                .comment("Distance en blocs à laquelle une bête voit un joueur debout, sans obstacle. Accroupi : 45 % ;",
+                        "en courant : 130 % ; dans l'ombre ou la nuit : 60 %.")
+                .defineInRange("sightRange", 14.0, 0.0, 64.0);
+        APPROCHE_HEARING_RANGE = common
+                .comment("Distance en blocs à laquelle une bête entend un joueur qui marche. En courant : le double ; accroupi : 30 %.")
+                .defineInRange("hearingRange", 6.0, 0.0, 32.0);
+        APPROCHE_HINTS = common
+                .comment("Vrai : quand une bête fuit, un mot dans la barre d'action dit ce qui a trahi le joueur (au plus une",
+                        "fois toutes les 90 secondes).")
+                .define("hints", true);
         common.pop();
 
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
@@ -318,6 +350,30 @@ public final class ComplineConfig {
 
     public static int zooObserveSeconds() {
         return read(COMMON_SPEC, ZOO_OBSERVE_SECONDS);
+    }
+
+    public static int zooSpyglassDistance() {
+        return read(COMMON_SPEC, ZOO_SPYGLASS_DISTANCE);
+    }
+
+    public static boolean approcheEnabled() {
+        return read(COMMON_SPEC, APPROCHE_ENABLED);
+    }
+
+    public static double approcheScentRange() {
+        return read(COMMON_SPEC, APPROCHE_SCENT_RANGE);
+    }
+
+    public static double approcheSightRange() {
+        return read(COMMON_SPEC, APPROCHE_SIGHT_RANGE);
+    }
+
+    public static double approcheHearingRange() {
+        return read(COMMON_SPEC, APPROCHE_HEARING_RANGE);
+    }
+
+    public static boolean approcheHints() {
+        return read(COMMON_SPEC, APPROCHE_HINTS);
     }
 
     public static boolean climatEnabled() {

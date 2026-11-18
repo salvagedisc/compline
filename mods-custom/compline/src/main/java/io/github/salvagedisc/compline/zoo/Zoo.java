@@ -24,7 +24,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
  * Le zoo côté serveur : qui a quel tampon, et comment on les gagne.
  *
  * <p>Apercevoir : toutes les demi-secondes, chaque joueur regarde autour de lui ; une bête dans son champ de vision
- * (un cône de 110°), sans obstacle, à moins de {@code spotDistance} blocs, vaut le tampon. La même vue, à moins de
+ * (un cône de 110°), sans obstacle, à moins de {@code spotDistance} blocs, vaut le tampon ; dans la longue-vue, une bête
+ * au centre de l'image compte jusqu'à {@code spyglassDistance} blocs. La même vue, à moins de
  * 16 blocs, compte comme temps d'observation pour Maîtriser. Les autres tampons arrivent par les événements que
  * branche {@link ZooModule} (apprivoisement, naissance, seau, photo d'Exposure).
  */
@@ -33,6 +34,8 @@ public final class Zoo {
     private static final double OBSERVE_DISTANCE = 16.0;
     /** Cosinus du demi-angle du champ de vision retenu (55°). */
     private static final double VIEW_COS = Math.cos(Math.toRadians(55.0));
+    /** Dans la longue-vue, seul le centre de l'image compte (8°). */
+    private static final double SCOPE_COS = Math.cos(Math.toRadians(8.0));
 
     private Zoo() {
     }
@@ -121,6 +124,11 @@ public final class Zoo {
         ZooRecord record = record(player);
         Vec3 eye = player.getEyePosition();
         Vec3 look = player.getViewVector(1.0F);
+        boolean scoping = player.isScoping();
+        if (scoping) {
+            spotDistance = Math.max(spotDistance, ComplineConfig.zooSpyglassDistance());
+        }
+        double viewCos = scoping ? SCOPE_COS : VIEW_COS;
         double maxSq = (double) spotDistance * spotDistance;
         Set<ResourceLocation> observedNow = new HashSet<>();
         List<SpeciesInfo> changed = new ArrayList<>();
@@ -135,7 +143,7 @@ public final class Zoo {
                 continue;
             }
             double distSq = mob.getEyePosition().distanceToSqr(eye);
-            if (distSq > maxSq || !inView(eye, look, mob) || !player.hasLineOfSight(mob)) {
+            if (distSq > maxSq || !inView(eye, look, mob, viewCos) || !player.hasLineOfSight(mob)) {
                 continue;
             }
             SpeciesInfo info = ZooSpecies.admit(mob);
@@ -162,10 +170,10 @@ public final class Zoo {
         }
     }
 
-    private static boolean inView(Vec3 eye, Vec3 look, LivingEntity target) {
+    private static boolean inView(Vec3 eye, Vec3 look, LivingEntity target, double viewCos) {
         Vec3 to = target.getBoundingBox().getCenter().subtract(eye);
         double length = to.length();
-        return length < 2.0 || look.dot(to) / length >= VIEW_COS;
+        return length < 2.0 || look.dot(to) / length >= viewCos;
     }
 
     static void send(ServerPlayer player, ResourceLocation species, ZooRecord record) {
