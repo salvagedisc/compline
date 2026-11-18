@@ -61,6 +61,8 @@
 #define SUN_GLARE_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 // Les couleurs qui se séparent un peu vers les bords de l'image.
 #define CHROMATIC_ABERRATION 1 // [0 1]
+// Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
+#define LENS_DROPS 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
 #define GLASS_TINT 1 // [0 1]
 // Le verre qui se raccorde à ses voisins : une verrière sans cadres entre ses blocs (lib/glass.glsl).

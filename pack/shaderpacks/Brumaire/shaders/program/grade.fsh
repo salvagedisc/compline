@@ -161,6 +161,44 @@ vec3 sunGlare() {
 }
 #endif
 
+#if LENS_DROPS > 0
+uniform float lensWet;
+uniform float lensDive;
+uniform int isEyeInWater;
+
+float dropHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
+/**
+ * La goutte posée sur l'objectif en ce point de l'écran : (position dans la goutte, -1..1), sa présence (0..1) et son
+ * rayon (hauteur d'écran). wet : 0..1. Trois tailles, les petites plus nombreuses ; chacune vit quelques secondes,
+ * rétrécit en séchant, puis une autre se pose ailleurs dans sa case. Les grosses glissent lentement vers le bas.
+ */
+vec4 lensDrop(vec2 uv, float wet, float t) {
+    vec2 p = uv * vec2(viewWidth / viewHeight, 1.0);
+    vec4 found = vec4(0.0);
+    for (int layer = 0; layer < 3; layer++) {
+        float size = layer == 0 ? 0.030 : (layer == 1 ? 0.055 : 0.090);
+        vec2 g = p / size + float(layer) * 7.31;
+        vec2 cell = floor(g);
+        float period = 5.0 + 7.0 * dropHash(cell + 3.1);
+        float phase = t / period + dropHash(cell);
+        float age = fract(phase);
+        vec2 seed = cell + floor(phase) * 13.7;
+        if (dropHash(seed + 0.7) > wet * (layer == 0 ? 0.22 : (layer == 1 ? 0.16 : 0.10))) continue;
+        float r = (0.20 + 0.16 * dropHash(seed + 1.9)) * (1.0 - 0.45 * smoothstep(0.3, 1.0, age));
+        vec2 c = vec2(dropHash(seed + 4.3), dropHash(seed + 5.9)) * (1.0 - 2.0 * r) + r;
+        if (layer == 2) c.y = mix(c.y, r, smoothstep(0.2, 1.0, age) * step(0.5, dropHash(seed + 8.2)));
+        vec2 d = (fract(g) - c) / r;
+        // Une goutte pend un peu : plus ronde en bas qu'en haut.
+        d.y *= d.y > 0.0 ? 1.15 : 0.9;
+        if (dot(d, d) >= 1.0) continue;
+        float life = smoothstep(0.0, 0.03, age) * (1.0 - smoothstep(0.65, 1.0, age));
+        found = vec4(d, life, r * size);
+    }
+    return found;
+}
+#endif
+
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
 #if CHROMATIC_ABERRATION > 0
@@ -174,6 +212,31 @@ void main() {
     vec4 lens = texelFetch(lensTex, ivec2(0), 0);
 #if DOF > 0
     color = depthOfField(color, max(lens.y, 0.5));
+#endif
+#if LENS_DROPS > 0
+    // Les gouttes sur l'objectif : chacune est une petite lentille qui montre le paysage retourné et resserré, flou,
+    // cerclée d'un bord sombre, avec un point de lumière en haut. Moins quand on regarde le sol.
+    {
+        float up = -gbufferModelViewInverse[2].y;
+        float wet = isEyeInWater == 0 ? max(lensWet * (0.45 + 0.55 * smoothstep(-0.5, 0.4, up)), lensDive) : 0.0;
+        if (wet > 0.01) {
+            vec4 drop = lensDrop(vUv, wet, frameTimeCounter);
+            if (drop.z > 0.0) {
+                float l2 = dot(drop.xy, drop.xy);
+                vec2 at = clamp(vUv - drop.xy * drop.w * vec2(viewHeight / viewWidth, 1.0) * 3.0, 0.002, 0.998);
+#ifdef BLOOM
+                vec3 inside = textureLod(colortex0, at, 1.5).rgb;
+#else
+                vec3 inside = texture(colortex0, at).rgb;
+#endif
+                inside *= 1.0 - 0.35 * smoothstep(0.65, 1.0, l2);
+                // Le bas de la goutte rassemble la lumière : un croissant plus clair.
+                inside *= 1.0 + 0.30 * smoothstep(0.55, 0.95, l2) * smoothstep(0.2, 0.7, -drop.y / sqrt(max(l2, 1e-4)));
+                inside += inside * 0.6 * smoothstep(0.10, 0.0, length(drop.xy - vec2(-0.30, 0.38)));
+                color = mix(color, inside, drop.z);
+            }
+        }
+    }
 #endif
     // L'œil s'habitue : la nuit et sous terre, l'image s'éclaircit un peu.
     float sunUp = normalize(mat3(gbufferModelViewInverse) * sunPosition).y;
