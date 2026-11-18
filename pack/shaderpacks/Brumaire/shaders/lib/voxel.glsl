@@ -83,6 +83,24 @@ vec4 voxelLight(vec3 pos, vec3 normal) {
     return v;
 }
 
+/**
+ * D'où vient la lumière des blocs autour d'un point : le sens où son niveau monte (non unitaire, 0 si elle vient de
+ * partout ou de nulle part). Lu de part et d'autre du point dans le volume, sur les trois axes.
+ */
+vec3 voxelLightSlope(vec3 pos, vec3 normal) {
+    vec3 p = pos + normal * 0.55 + fract(cameraPosition);
+    vec3 uvw = (p + vec3(VOX_HALF)) / vec3(VOX_SIZE);
+    if (any(lessThan(uvw, vec3(0.02))) || any(greaterThan(uvw, vec3(0.98)))) return vec3(0.0);
+    vec3 e = 0.75 / vec3(VOX_SIZE);
+    bool b = (frameCounter & 1) == 0;
+    #define LV(o) (b ? texture(lightTexB, uvw + (o)).a : texture(lightTexA, uvw + (o)).a)
+    vec3 g = vec3(LV(vec3(e.x, 0.0, 0.0)) - LV(vec3(-e.x, 0.0, 0.0)),
+                  LV(vec3(0.0, e.y, 0.0)) - LV(vec3(0.0, -e.y, 0.0)),
+                  LV(vec3(0.0, 0.0, e.z)) - LV(vec3(0.0, 0.0, -e.z)));
+    #undef LV
+    return g * 15.0 / 1.5;
+}
+
 /** Couleur d'un objet tenu en main (item.properties : mêmes numéros que les blocs). */
 vec3 heldTint(int id) { return lightTint(id >= 10016 && id <= 10023 ? id - 10015 : 0); }
 
@@ -108,4 +126,5 @@ vec3 blockLightTint(vec3 pos, vec3 normal, inout float lmx) {
 }
 #else
 vec3 blockLightTint(vec3 pos, vec3 normal, inout float lmx) { return lightTint(0); }
+vec3 voxelLightSlope(vec3 pos, vec3 normal) { return vec3(0.0); }
 #endif

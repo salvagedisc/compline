@@ -39,9 +39,11 @@ flat in int vMat;
 
 #ifdef WRITE_SURFACE
 // Couche 1 : normale de la surface et part de lumière indirecte, lues par l'occlusion d'écran (deferred).
-/* RENDERTARGETS: 0,1 */
+// Couche 4 : la couleur propre de la surface (avant la lumière), pour la lumière qu'elle reçoit de ses voisines.
+/* RENDERTARGETS: 0,1,4 */
 layout(location = 0) out vec4 outColor;
 layout(location = 1) out vec4 outSurface;
+layout(location = 2) out vec4 outAlbedo;
 #else
 /* RENDERTARGETS: 0 */
 layout(location = 0) out vec4 outColor;
@@ -232,6 +234,7 @@ void main() {
     // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre. L'alpha marque une surface (> 0.5) et
     // porte son éclat (1 : mat ; 0.55 : flaque, voir deferred1).
     outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0 - 0.45 * gloss);
+    outAlbedo = vec4(sqrt(clamp(albedo, 0.0, 1.0)), 1.0);
 #endif
     // Les grains de neige et de sable qui scintillent, là où le soleil donne.
     lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
