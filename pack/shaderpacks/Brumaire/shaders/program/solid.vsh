@@ -6,6 +6,21 @@
 #include "/lib/farshadow.glsl"
 #endif
 
+#ifdef BUSHY_PASS
+// Le feuillage touffu (program/bushy.gsh) : les sorties passent par le shader de géométrie, qui les rend sous leur nom.
+#define vUv gUv
+#define vLm gLm
+#define vTint gTint
+#define vNormal gNormal
+#define vPos gPos
+#define vMat gMat
+#define vSurf gSurf
+#define vBend gBend
+#define vTangent gTangent
+#define vSpriteMid gSpriteMid
+#define vSpriteHalf gSpriteHalf
+#endif
+
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
 #define HAS_BLOCK_ID
 #include "/lib/wind.glsl"

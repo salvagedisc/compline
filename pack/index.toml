@@ -4406,6 +4406,18 @@ file = "shaderpacks/Brumaire/shaders/gbuffers_terrain.vsh"
 hash = "26340e55be5edc961cc56c332fac579c2dabbfefd6c468d09b9f822e66742507"
 
 [[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain_cutout.fsh"
+hash = "84bbcea7875ce68303d645f4f441f297e2fb65021a9154bb2829832c6c83f0dc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain_cutout.gsh"
+hash = "8997a0706c1d2ee119f0aa1245fc0efdac633186904b0be8164321ee8af9f508"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/gbuffers_terrain_cutout.vsh"
+hash = "d9d15bec85612e586302f9ec7c14ae9ae1e509672bf9687b4607c0fc96fc349d"
+
+[[files]]
 file = "shaderpacks/Brumaire/shaders/gbuffers_textured.fsh"
 hash = "6a5f3d268dfe5e0b96e4f4f6125941bc063ac5799de997f62f649bd2410ec65a"
 
@@ -4443,11 +4455,11 @@ hash = "068bca7547b96b1c186dd81e0df02a730a923a2e307ec4e851e5396870b7c712"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
-hash = "e93895795b0ca779d4777587a9c481b9982a870eb82fb2482eeea792dda9aeba"
+hash = "e73c88bd23fefd4f299b0f8dd3b7b1ac3cce13f9b8a200f2a1da54b4f12a748f"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
-hash = "0fe2a51235d99481777ffca3a957a346db48a1d38d0352c933abb5b62452317e"
+hash = "d3fd02ba0c3ec4ba2fed1f77234c651654c5feced8e6bc62a38b9a6f314a8b0d"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/atmosphere.glsl"
@@ -4527,7 +4539,7 @@ hash = "76beef503a31c9ce4b7cfa7c4cab1770fc7b236dce5c0d956141ed39bbe327ee"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
-hash = "e0e53d88fcbd94731d44debb3c9befda45485e3f26ad28ea8e9257b336e197e5"
+hash = "ca06cae175c413dca9bf207a5e6b42fb1f46507a34eef28e7708106d6a0a77ea"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
@@ -4608,6 +4620,10 @@ hash = "30f19e1e2ad835a45f022d727ac6723fbfed35b3673b0e4a0eb3f1bae0ca5719"
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/ao.fsh"
 hash = "40213df67d804fc4c3d5b34285aae8f307d77979c120776b2dc802b8d77b40e1"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/program/bushy.gsh"
+hash = "b961dbfe79f4aee642156abe2303076d6ea4bc6d2e516b3b79444faa872e8817"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/canopy.csh"
@@ -4719,7 +4735,7 @@ hash = "0c10450f617626449ffef84d067d14a220c6ee2efefde21e8550592f6d74f840"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
-hash = "6ff2b1d3c0d2b813c0cf92b31f751e3e7439a90b970edf38be5c9c51c9ca58b6"
+hash = "b90f0bd28e1e524c5f869b1a411377fdd54112be2603a7cdd6270912c3cd3c63"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/taa.fsh"
@@ -4739,7 +4755,7 @@ hash = "1c49e581af7aeae2b37e31144ad5e9788cf3a81ca311a77eafe81887387b9859"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shaders.properties"
-hash = "77dd06219c1cd2444284667d94535c9fd5de1fc835a7db45eaf4dfa41e6f952c"
+hash = "be15f5b248924e129cfb76c6ee1feca909d242442b76233bb1cceddccf97f1b6"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shadow.fsh"
