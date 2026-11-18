@@ -507,6 +507,19 @@ void main() {
             if (eave > 0.0) color = mix(color, gAmbient * 1.4 + gLightColor * 0.4, eave * 0.6);
         }
 #endif
+#if ICICLES > 0 && SHADER_RAIN > 0 && defined VOXELS
+        // Par grand froid, des glaçons pendent au bord des toits : une glace bleutée, plus claire vers la pointe, qui
+        // prend l'éclat du soleil.
+        if (isEyeInWater == 0) {
+            float cold = max(snowHere, 1.0 - smoothstep(0.10, 0.45, airHeat));
+            float iceDist, iceTip;
+            float ice = iciclesAlong(dir, min(len, 24.0), cold, iceDist, iceTip);
+            if (ice > 0.0) {
+                vec3 iceColor = gAmbient * vec3(0.90, 1.0, 1.20) + gLightColor * (0.25 + 0.45 * iceTip);
+                color = mix(color, iceColor, ice * (0.40 + 0.30 * iceTip));
+            }
+        }
+#endif
 #if FALLING_LEAVES > 0 && defined VOXELS
         // Les feuilles qui tombent des arbres proches, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
         {

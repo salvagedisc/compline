@@ -64,6 +64,7 @@
 #define SUN_GLARE 1 // [0 1]
 #define SUN_GLARE_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 // Les couleurs qui se séparent un peu vers les bords de l'image.
+#define LENS_DIRT 1 // [0 1]
 #define CHROMATIC_ABERRATION 1 // [0 1]
 // Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
 #define LENS_DROPS 1 // [0 1]
@@ -125,7 +126,9 @@
 #define WINDOW_RAIN 1 // [0 1]
 #define WINDOW_FROST 1 // [0 1]
 #define EAVES_DRIPS 1 // [0 1]
+#define ICICLES 1 // [0 1]
 // Les êtres et le joueur trempés sous la pluie, plus sombres et luisants (program/solid.fsh).
+#define SNOWY_ENTITIES 1 // [0 1]
 #define WET_ENTITIES 1 // [0 1]
 #define RAIN_SPLASHES 1 // [0 1]
 #define PRECIP_GLOW 1 // [0 1]
