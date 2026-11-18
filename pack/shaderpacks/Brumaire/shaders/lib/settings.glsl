@@ -40,6 +40,7 @@
 #define SKY_AURORA_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 #define SKY_HALO 1 // [0 1]
 #define SKY_RAINBOW 1 // [0 1]
+#define SKY_MOONBOW 1 // [0 1]
 
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]
@@ -166,6 +167,7 @@
 // La rosée des matins doux sur l'herbe et les plantes (lib/cover.glsl).
 #define DEW 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
+#define DUST_DEVILS 1 // [0 1]
 #define TRACKS 1 // [0 1]
 #define TRACK_MINUTES 4.0 // [1.0 2.0 4.0 8.0 15.0]
 

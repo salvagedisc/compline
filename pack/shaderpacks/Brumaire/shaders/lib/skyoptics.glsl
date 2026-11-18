@@ -110,16 +110,31 @@ vec3 bowSpectrum(float x) {
 }
 
 /**
- * L'arc-en-ciel autour du point opposé au soleil, quand il revient sur la pluie qui s'éloigne : il faut le sol encore
+ * L'arc-en-ciel autour du point opposé au soleil (ou, la nuit, à la pleine lune : un arc blanc), quand il revient sur la pluie qui s'éloigne : il faut le sol encore
  * mouillé (wetness), la pluie presque partie et le soleil assez bas pour que l'arc passe au-dessus de l'horizon.
  * Rend sa lumière (rgb) et la part du ciel qu'il laisse passer (a : la bande d'Alexandre est plus sombre).
  */
+#if SKY_RAINBOW > 0 && SKY_MOONBOW > 0
+uniform int moonPhase;
+#endif
+
 vec4 rainbow(vec3 dir, float wet, vec3 eye) {
 #if SKY_RAINBOW > 0
     float amount = smoothstep(0.12, 0.55, wet) * (1.0 - smoothstep(0.08, 0.45, rainStrength));
-    amount *= smoothstep(0.02, 0.10, gSunDir.y) * (1.0 - smoothstep(0.55, 0.70, gSunDir.y));
+    // L'astre qui fait l'arc : le soleil, ou la nuit la lune (à l'opposé du soleil), pleine ou presque.
+    vec3 source = gSunDir;
+    float moon = 0.0;
+#if SKY_MOONBOW > 0
+    if (gSunDir.y < -0.05) {
+        source = -gSunDir;
+        float fromFull = float(min(moonPhase, 8 - moonPhase));
+        moon = 1.0 - smoothstep(0.5, 1.5, fromFull);
+        amount *= moon;
+    }
+#endif
+    amount *= smoothstep(0.02, 0.10, source.y) * (1.0 - smoothstep(0.55, 0.70, source.y));
     if (amount <= 0.001) return vec4(0.0, 0.0, 0.0, 1.0);
-    float a = angleBetween(dir, -gSunDir);
+    float a = angleBetween(dir, -source);
     if (a > 58.0) return vec4(0.0, 0.0, 0.0, 1.0);
     // La pluie n'est pas partout : l'arc se montre par morceaux, plus franc vers le bas où elle tombe encore.
     float patch_ = cloudNoise(dir * 0.9 + vec3(0.17, 0.0, 0.41) + frameTimeCounter * 0.003).r;
@@ -134,6 +149,8 @@ vec4 rainbow(vec3 dir, float wet, vec3 eye) {
     // Contre le ciel derrière lui : un arc vif double presque la lumière de la bande où il passe.
     vec3 sun = gLightColor * 0.03 + vec3(luma(skyAt(dir))) * 0.45;
     vec3 bow = (primary + secondary) * sun + inner * sun * 0.6;
+    // Sous la lune, l'œil voit à peine les couleurs : un arc blanc, à peine teinté, qui tient à la lumière de la lune.
+    if (moon > 0.0) bow = mix(bow, vec3(luma(bow)), 0.75) * 0.8 + luma(primary + secondary) * gLightColor * 0.6;
     return vec4(bow * amount, 1.0 - alexander * 0.14 * amount);
 #else
     return vec4(0.0, 0.0, 0.0, 1.0);
