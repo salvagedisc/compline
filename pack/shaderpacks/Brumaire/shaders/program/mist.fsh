@@ -407,6 +407,14 @@ void main() {
             }
         }
 #endif
+#if SHORE_SPRAY > 0 && defined VOXELS
+        // Par grand vent, les vagues qui battent les rives lâchent des embruns blancs que le vent emporte.
+        if (isEyeInWater == 0) {
+            float gale = smoothstep(0.55, 0.9, brumaireLink > 0.5 ? brumaireWind.z : 0.0);
+            float spray = shoreSprayAlong(dir, len, gale);
+            if (spray > 0.0) color = mix(color, gAmbient * 1.3 + gLightColor * 0.45, spray);
+        }
+#endif
 #if WATER_STEAM > 0 && defined VOXELS
         // Les matins frais, l'eau fume : des volutes pâles, de la couleur de l'air, au ras des lacs et des rivières.
         if (isEyeInWater == 0) {

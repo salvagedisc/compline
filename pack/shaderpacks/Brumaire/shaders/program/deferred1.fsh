@@ -109,6 +109,34 @@ float contactShadow(vec3 pos, vec3 normal, float noise) {
 #endif
 }
 
+#if PUDDLE_STEPS > 0
+uniform vec3 previousCameraPosition;
+uniform float frameTime;
+
+/**
+ * Les rides que lèvent les pas du joueur dans une flaque : tant qu'il marche, un rond toutes les deux tiers de seconde
+ * part de l'endroit où était son pied et s'élargit d'un bloc en s'effaçant. Rend la pente de la surface.
+ */
+vec2 stepRipples(vec3 world) {
+    vec3 vel = (cameraPosition - previousCameraPosition) / max(frameTime, 1e-3);
+    float speed = length(vel.xz);
+    float moving = smoothstep(0.8, 2.5, speed) * (1.0 - smoothstep(12.0, 20.0, speed));
+    float feet = cameraPosition.y - 1.62;
+    if (moving <= 0.0 || abs(world.y - feet) > 0.7) return vec2(0.0);
+    vec2 slope = vec2(0.0);
+    float t = frameTimeCounter;
+    for (int k = 0; k < 3; k++) {
+        float phase = fract(t * 1.6 + float(k) / 3.0);
+        vec2 centre = cameraPosition.xz - vel.xz * phase / 1.6;
+        vec2 d = world.xz - centre;
+        float r = length(d);
+        float ring = exp(-sq((r - 0.1 - phase * 1.1) / 0.06)) * (1.0 - phase);
+        slope += d / max(r, 1e-3) * ring * 0.6;
+    }
+    return slope * moving;
+}
+#endif
+
 /**
  * Ce que renvoie une surface qui luit : une flaque reflète le paysage comme un miroir ridé par les gouttes, la glace
  * tassée comme un miroir terni ; un sol trempé ou la neige luisent du ciel, sans image nette.
@@ -119,10 +147,18 @@ vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
     vec3 eye = normalize(-pos);
     bool puddle = gloss > 0.95;
     vec3 n = normal;
-    if (puddle) {
-        vec2 slope = rippleSlope(world.xz, frameTimeCounter) * rainStrength;
-        n = normalize(vec3(-slope.x, 1.0, -slope.y));
+    // Les ronds des pas : ils plient le reflet, et leurs crêtes s'éclairent ou s'assombrissent selon leur pente vers l'œil.
+    float ringShade = 1.0;
+    vec2 slope = puddle ? rippleSlope(world.xz, frameTimeCounter) * rainStrength : vec2(0.0);
+#if PUDDLE_STEPS > 0
+    // Les pas ridant toute eau qui fait miroir, même une flaque qui commence à sécher.
+    if (gloss > 0.6 && normal.y > 0.9) {
+        vec2 steps = stepRipples(world);
+        slope += steps;
+        ringShade = 1.0 + 0.8 * dot(steps, normalize(eye.xz + vec2(1e-4, 0.0)));
     }
+#endif
+    if (dot(slope, slope) > 0.0) n = normalize(vec3(-slope.x, 1.0, -slope.y));
     vec3 r = reflect(-eye, n);
     r.y = max(r.y, 0.01);
     float f = 0.03 + 0.97 * pow(1.0 - max(dot(n, eye), 0.0), 5.0);
@@ -139,7 +175,7 @@ vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
         }
 #endif
         if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
-        return mix(color, mirror, puddle ? min(f * 1.2 + 0.18, 1.0) : f * 0.85 + 0.04);
+        return mix(color, mirror, puddle ? min(f * 1.2 + 0.18, 1.0) : f * 0.85 + 0.04) * ringShade;
     }
     // Un sol trempé : un éclat diffus, surtout à jour frisant.
     return mix(color, mirror, f * gloss * 1.4);

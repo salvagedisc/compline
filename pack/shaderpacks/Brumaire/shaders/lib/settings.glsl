@@ -105,6 +105,7 @@
 #define PLANKTON_STRENGTH 0.10 // [0.04 0.06 0.10 0.15 0.25]
 #define WATER_FALLS 1 // [0 1]
 #define FALL_SPRAY 1 // [0 1]
+#define SHORE_SPRAY 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
 // Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
@@ -116,6 +117,7 @@
 #define WETNESS 1.0 // [0.0 0.5 0.75 1.0 1.25]
 #define PUDDLES 1 // [0 1]
 #define PUDDLE_AMOUNT 1.0 // [0.5 0.75 1.0 1.25 1.5]
+#define PUDDLE_STEPS 1 // [0 1]
 #define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define PATCHY_DRYING 1 // [0 1]
 #define WALL_RIVULETS 1 // [0 1]

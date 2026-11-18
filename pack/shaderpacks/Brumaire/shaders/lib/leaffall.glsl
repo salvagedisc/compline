@@ -210,7 +210,8 @@ float litterAlong(vec3 dir, float t1, out float dist, out vec3 tint) {
                          && (texelFetch(voxelTex, b, 0).r & VOX_SOLID) != 0u;
             if (onGround) {
                 vec4 canopy = canopyAbove(vec3(wc.x + 0.5, wc.y + 0.5, wc.z + 0.5));
-                float autumn = smoothstep(0.02, 0.15, canopy.r - canopy.g);
+                // Un vrai feuillage d'automne, roux ou jaune : pas le vert olive de l'été.
+                float autumn = smoothstep(0.10, 0.22, canopy.r - canopy.g);
                 if (canopy.a > 0.0 && h < 0.5 * gust * autumn) {
                     // Elle traverse la case dans le sens du vent, par bonds, et revient de l'autre bord.
                     float speed = 0.6 + 1.2 * force;
@@ -220,7 +221,8 @@ float litterAlong(vec3 dir, float t1, out float dist, out vec3 tint) {
                     float y = wc.y + 0.04 + 0.25 * hop * gust;
                     vec3 p = vec3(wc.x + 0.5 + along.x, y, wc.z + 0.5 + along.y) - cameraPosition;
                     float s = dot(p, dir);
-                    if (s > 0.4 && s < t1) {
+                    // Pas sous le nez : une feuille à moins d'un bloc et demi masquerait la vue.
+                    if (s > 1.5 && s < t1) {
                         vec3 off = dir * s - p;
                         float size = max(1.2 / 16.0, s * pixel * 0.7);
                         // Plate quand elle glisse, dressée quand elle bondit : plus haute que large en l'air.
@@ -229,7 +231,7 @@ float litterAlong(vec3 dir, float t1, out float dist, out vec3 tint) {
                         if (length(off.xz) < size && abs(off.y) < tall && edge > 0.01) {
                             dist = s;
                             // Une feuille morte : la couleur du feuillage, tirée vers le brun.
-                            vec3 leaf = pow(canopy.rgb, vec3(2.2));
+                            vec3 leaf = toLinear(canopy.rgb);
                             tint = mix(leaf, vec3(0.30, 0.13, 0.04), 0.35 + 0.3 * moteHash(wc, 76.0));
                             return edge * (1.0 - smoothstep(t1 * 0.6, t1, s));
                         }
