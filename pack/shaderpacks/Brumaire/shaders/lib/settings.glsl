@@ -89,6 +89,13 @@
 #define WET_REFLECTIONS 12 // [0 8 12 20]
 
 // Neige et chaleur
+#define RELIEF 1 // [0 1]
+#define RELIEF_STRENGTH 1.0 // [0.5 0.75 1.0 1.5 2.0]
+#define RELIEF_DEPTH 0.06 // [0.03 0.06 0.1 0.15]
+#define RELIEF_STEPS 12 // [0 8 12 20]
+#define RELIEF_SHADOWS 1 // [0 1]
+#define RELIEF_BEVEL 1 // [0 1]
+#define RELIEF_RANGE 24.0 // [12.0 24.0 32.0 48.0]
 #define SNOW_COVER 1 // [0 1]
 #define FROST 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]

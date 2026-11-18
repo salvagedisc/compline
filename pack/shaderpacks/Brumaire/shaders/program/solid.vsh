@@ -8,6 +8,12 @@
 #include "/lib/wind.glsl"
 in vec2 mc_Entity;
 in vec2 mc_midTexCoord;
+#if defined PROGRAM_TERRAIN && RELIEF > 0
+in vec4 at_tangent;
+out vec4 vTangent;
+out vec2 vSpriteMid;
+out vec2 vSpriteHalf;
+#endif
 #elif defined PROGRAM_WEATHER
 #include "/lib/wind.glsl"
 #endif
@@ -30,6 +36,13 @@ void main() {
 #ifdef HAS_BLOCK_ID
     int id = int(mc_Entity.x + 0.5) - 10000;
     vMat = id > 0 && id < 32 ? id : 0;
+#if defined PROGRAM_TERRAIN && RELIEF > 0
+    // Le repère de la face (pour le relief) et le rectangle de sa texture dans l'atlas : chaque coin est à la même
+    // distance du centre, la demi-taille reste donc la même sur toute la face.
+    vTangent = vec4(mat3(gbufferModelViewInverse) * (gl_NormalMatrix * at_tangent.xyz), at_tangent.w);
+    vSpriteMid = mc_midTexCoord;
+    vSpriteHalf = abs(vUv - mc_midTexCoord);
+#endif
     if (vMat >= 1 && vMat <= 5) {
         bool top = gl_MultiTexCoord0.t < mc_midTexCoord.t;
         vPos += windVertex(vMat, top, vPos + cameraPosition, vPos, vLm.y);

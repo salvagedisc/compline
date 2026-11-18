@@ -32,6 +32,12 @@ in vec4 vTint;
 in vec3 vNormal;
 in vec3 vPos;
 flat in int vMat;
+#if defined PROGRAM_TERRAIN && RELIEF > 0
+in vec4 vTangent;
+in vec2 vSpriteMid;
+in vec2 vSpriteHalf;
+#include "/lib/relief.glsl"
+#endif
 
 #if defined PROGRAM_TERRAIN || defined PROGRAM_BLOCK || defined PROGRAM_ENTITIES || defined PROGRAM_CLRWL
 #define WRITE_SURFACE
@@ -97,7 +103,31 @@ void main() {
     lm = lightCoord(light);
 #elif defined PROGRAM_TERRAIN || defined PROGRAM_WATER
     // Sur le terrain, l'alpha du sommet porte l'occlusion (separateAo).
+#if defined PROGRAM_TERRAIN && RELIEF > 0
+    // Le relief des blocs (lib/relief.glsl) : sur les blocs pleins, le sable et les blocs partiels, pas sur les plantes,
+    // les feuillages, l'eau, la glace, le verre ni ce qui éclaire.
+    vec2 uvDx = dFdx(vUv);
+    vec2 uvDy = dFdy(vUv);
+    vec2 reliefUv = vUv;
+    vec3 reliefN = normal;
+    float reliefShade = 0.0;
+    float reliefFade = (1.0 - smoothstep(RELIEF_RANGE * 0.6, RELIEF_RANGE, length(vPos)))
+                     * float((vMat == 0 || vMat == 12 || vMat == 14) && vSpriteHalf.x > 1e-6 && vSpriteHalf.y > 1e-6);
+    if (reliefFade > 0.0) {
+        Sprite sp = Sprite(vSpriteMid, vSpriteHalf, 1.0 / vec2(atlasSize));
+        float mean = luma(textureLod(gtexture, vUv, 4.0).rgb);
+        vec3 t = normalize(vTangent.xyz - normal * dot(normal, vTangent.xyz));
+        vec3 b = cross(normal, t) * (vTangent.w < 0.0 ? -1.0 : 1.0);
+        mat3 tbn = mat3(t, b, normal);
+        float h;
+        reliefUv = reliefParallax(sp, vUv, normalize(-vPos) * tbn, mean, reliefFade, h);
+        reliefN = reliefNormal(sp, reliefUv, t, b, normal, mean, reliefFade);
+        reliefShade = reliefShadow(sp, reliefUv, h, gLightDir * tbn, mean, reliefFade);
+    }
+    vec4 color = textureGrad(gtexture, reliefUv, uvDx, uvDy);
+#else
     vec4 color = texture(gtexture, vUv);
+#endif
     color.rgb *= vTint.rgb;
     ao = vTint.a;
 #else
@@ -238,6 +268,16 @@ void main() {
 #endif
     float indirect;
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
+#if defined PROGRAM_TERRAIN && RELIEF > 0
+    if (reliefFade > 0.0) {
+        // La lumière directe suit la pente du texel (rapportée à celle de la face, dont l'ombre est déjà comptée) et
+        // l'ombre propre du relief ; la lumière du ciel baisse un peu dans les texels qui se détournent du dehors.
+        float geoL = dot(normal, gLightDir);
+        float ratio = geoL > 0.03 ? clamp(max(dot(reliefN, gLightDir), 0.0) / geoL, 0.0, 2.0) : 1.0;
+        lit *= mix(1.0, ratio * (1.0 - 0.7 * reliefShade), 1.0 - indirect);
+        lit *= 1.0 - 0.5 * (1.0 - dot(reliefN, normal));
+    }
+#endif
 #ifdef WRITE_SURFACE
     // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre. L'alpha marque une surface (> 0.5) et
     // porte son éclat (1 : mat ; 0.55 : flaque, voir deferred1).
