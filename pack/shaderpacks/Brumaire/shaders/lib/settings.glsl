@@ -7,6 +7,11 @@
 #define MIST_RING 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define MIST_RING_MAX 512.0 // [256.0 384.0 512.0 768.0 1024.0]
 #define AIR_DENSITY 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5 2.0]
+#define FOG_STEPS 12 // [0 8 12 16 24]
+#define FOG_RANGE 96.0 // [48.0 64.0 96.0 128.0]
+#define FOG_BILLOWS 1.0 // [0.0 0.5 1.0 1.5]
+#define FOG_BLOCK_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
+#define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]
