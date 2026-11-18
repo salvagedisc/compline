@@ -9,6 +9,9 @@
 uniform float rainSoak;
 uniform float swimSoak;
 #endif
+#if defined PROGRAM_ENTITIES && SNOWY_ENTITIES > 0
+uniform float snowSoak;
+#endif
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
@@ -315,6 +318,22 @@ void main() {
             albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.15 * soaked) * (1.0 - 0.28 * soaked * (1.0 - surf.metal));
             surf.gloss = max(surf.gloss, 0.40 * soaked);
             surf.rough = mix(surf.rough, min(surf.rough, 0.25), soaked);
+        }
+    }
+#endif
+#if defined PROGRAM_ENTITIES && SNOWY_ENTITIES > 0
+    // Dans la neige qui tombe à ciel ouvert, les flocons se posent sur le dos des bêtes, les épaules et les casques :
+    // des pixels blancs de leur propre texture (ils suivent l'être qui bouge), d'abord épars puis de plus en plus
+    // nombreux, sur ce qui regarde le ciel.
+    {
+        float settle = snowSoak * smoothstep(0.80, 0.95, lm.y) * smoothstep(0.25, 0.75, normal.y);
+        if (settle > 0.01) {
+            vec2 texel = floor(vUv * vec2(textureSize(gtexture, 0)));
+            float h = fract(sin(dot(texel, vec2(127.1, 311.7))) * 43758.5453);
+            if (h < settle * 0.55) {
+                albedo = mix(albedo, vec3(0.70, 0.73, 0.78), 0.85);
+                surf.gloss = max(surf.gloss, 0.15);
+            }
         }
     }
 #endif

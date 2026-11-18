@@ -120,6 +120,36 @@ vec3 glow(float threshold) {
 }
 #endif
 
+#if defined BLOOM && LENS_DIRT > 0
+float dirtHash(vec2 p) { return fract(sin(dot(p, vec2(41.3, 289.1))) * 43758.5453); }
+
+/**
+ * La poussière et les traces sur l'objectif (0..1) : des taches rondes et floues de toutes tailles, posées une fois
+ * pour toutes sur l'image, invisibles tant qu'aucune lumière vive ne passe derrière elles.
+ */
+float lensDirt(vec2 uv) {
+    vec2 p = uv * vec2(viewWidth / viewHeight, 1.0) * 5.0;
+    float dirt = 0.0;
+    for (int layer = 0; layer < 2; layer++) {
+        vec2 cell = floor(p);
+        vec2 f = p - cell;
+        for (int y = -1; y <= 1; y++) {
+            for (int x = -1; x <= 1; x++) {
+                vec2 c = cell + vec2(x, y) + float(layer) * 17.0;
+                float h = dirtHash(c);
+                if (h < 0.35) continue;
+                vec2 centre = vec2(x, y) + vec2(dirtHash(c + 3.1), dirtHash(c + 7.7));
+                float r = 0.12 + 0.38 * dirtHash(c + 1.9);
+                float spot = smoothstep(r, r * 0.25, length(f - centre));
+                dirt += spot * (0.25 + 0.75 * dirtHash(c + 5.3)) * (layer == 0 ? 1.0 : 0.6);
+            }
+        }
+        p = p * 2.7 + 3.3;
+    }
+    return clamp(dirt, 0.0, 1.5);
+}
+#endif
+
 #if defined BLOOM && SUN_GLARE > 0
 /**
  * L'éclat du soleil dans l'œil : des rais fins qui partent de lui, un voile autour, et quelques reflets de l'objectif
@@ -433,7 +463,14 @@ void main() {
 #endif
 #ifdef BLOOM
     // Le seuil du halo suit l'exposition : ce qui éblouit l'œil, pas une valeur fixe.
-    color += glow(1.5 * 0.62 * EXPOSURE * adapt / exposure) * (0.5 * BLOOM_STRENGTH);
+    vec3 halo = glow(1.5 * 0.62 * EXPOSURE * adapt / exposure);
+    color += halo * (0.5 * BLOOM_STRENGTH);
+#if LENS_DIRT > 0
+    // Face à une lumière vive, la poussière de l'objectif s'allume là où le halo passe, et un peu plus loin.
+    vec3 wide = textureLod(colortex0, vUv, 7.0).rgb;
+    vec3 dirtLight = halo + max(wide - vec3(0.8 * 0.62 * EXPOSURE * adapt / exposure), 0.0) * 0.6;
+    color += dirtLight * lensDirt(vUv) * 2.0;
+#endif
 #endif
 #if defined BLOOM && SUN_GLARE > 0
     color += sunGlare() * smoothstep(-0.02, 0.06, sunUp);
