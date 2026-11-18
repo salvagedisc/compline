@@ -3330,7 +3330,7 @@ hash = "1a5563d5ebc8672ec80d09bbc41613c1cc03fd05ee774d48c700a1fb8a12818f"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
-hash = "5025ab7df6ad861fb6193a83cb74810f10c2fa12de12b5836ffd0f6587dd43a6"
+hash = "ec4f0568a1833c0320f78bedeeb70d2926fca9cb6167be8bade6591157a163ce"
 
 [[files]]
 file = "kubejs/server_scripts/sante.js"
