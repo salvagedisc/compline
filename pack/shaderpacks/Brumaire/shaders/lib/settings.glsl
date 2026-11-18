@@ -123,6 +123,7 @@
 #define WALL_RIVULETS 1 // [0 1]
 // Les gouttes qui perlent et coulent sur les vitres sous la pluie (lib/rain.glsl).
 #define WINDOW_RAIN 1 // [0 1]
+#define WINDOW_FROST 1 // [0 1]
 #define EAVES_DRIPS 1 // [0 1]
 // Les êtres et le joueur trempés sous la pluie, plus sombres et luisants (program/solid.fsh).
 #define WET_ENTITIES 1 // [0 1]
@@ -168,7 +169,9 @@
 #define FROST 1 // [0 1]
 // La rosée des matins doux sur l'herbe et les plantes (lib/cover.glsl).
 #define DEW 1 // [0 1]
+#define WET_FOLIAGE 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
+#define FLAME_SHIMMER 1 // [0 1]
 #define DUST_DEVILS 1 // [0 1]
 #define TRACKS 1 // [0 1]
 #define TRACK_MINUTES 4.0 // [1.0 2.0 4.0 8.0 15.0]
