@@ -245,6 +245,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Antique Atlas 4, Surveyor and Antique Transport run natively on NeoForge: unofficial ports in the public repository `salvagedisc/compline-atlas`, jars in `pack/mods/` ([0025](docs/decisions/0025-native-atlas.md)). Mod ids, configs and save formats are unchanged. The ship teleport of Antique Transport is removed.
 
 ### Fixed
+- Surface Samples' glowquartz block can be crushed again: removing Create's experience nugget from crushing recipes also dropped the whole recipe when one of its outputs belonged to a mod the pack does not have (found by the first boot check).
 - The sky under Brumaire with ATMOSPHERICS (`compline` 0.27.0): ATMOSPHERICS replaced the game's sky with its own dome, so the night lost its stars and showed a hollow grey square for a moon, and the sky could turn dark grey at noon. With a shader pack on, the pack draws the sky again; without one, ATMOSPHERICS' sky is unchanged ([details](docs/plan/mod-compline.md#shader-packs-the-pack-draws-the-sky-again)).
 - Brumaire's light under water (caustics, the blue that deepens with depth) was missing: Iris Veil Compat 0.4.0 left water and stained glass out of the sun's shadow map. The pack goes back to 0.3.0, pinned.
 - Fish no longer show a price in emeralds when Shift is held: the selling bin is not in the pack and its sell rate is now 0.
