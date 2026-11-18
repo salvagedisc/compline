@@ -54,8 +54,15 @@
 #define AO_RADIUS 1.2 // [0.6 0.9 1.2 1.6 2.0]
 #define AO_STRENGTH 1.6 // [0.8 1.2 1.6 2.0 2.5]
 #define BLOOM_STRENGTH 1.0 // [0.5 0.75 1.0 1.25 1.5]
+// L'éclat du soleil dans l'œil : rais, voile et reflets de l'objectif (program/grade.fsh).
+#define SUN_GLARE 1 // [0 1]
+#define SUN_GLARE_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
+// Les couleurs qui se séparent un peu vers les bords de l'image.
+#define CHROMATIC_ABERRATION 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
 #define GLASS_TINT 1 // [0 1]
+// Le verre qui se raccorde à ses voisins : une verrière sans cadres entre ses blocs (lib/glass.glsl).
+#define CONNECTED_GLASS 1 // [0 1]
 
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
@@ -108,6 +115,8 @@
 #define SNOW_COVER 1 // [0 1]
 // La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
 #define SNOW_DETAIL 1 // [0 1]
+// La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.
+#define SNOW_BUILDUP 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.

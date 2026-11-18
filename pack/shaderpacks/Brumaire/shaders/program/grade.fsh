@@ -21,6 +21,8 @@ uniform sampler2D colortex0;
 uniform vec3 sunPosition;
 uniform mat4 gbufferModelViewInverse;
 uniform ivec2 eyeBrightnessSmooth;
+uniform mat4 gbufferProjection;
+uniform float frameTimeCounter;
 in vec2 vUv;
 
 /* RENDERTARGETS: 7 */
@@ -118,8 +120,57 @@ vec3 glow(float threshold) {
 }
 #endif
 
+#if defined BLOOM && SUN_GLARE > 0
+/**
+ * L'éclat du soleil dans l'œil : des rais fins qui partent de lui, un voile autour, et quelques reflets de l'objectif
+ * alignés sur le centre de l'image. Tout suit la lumière qui entoure vraiment le soleil à l'écran (un nuage, un arbre
+ * ou une colline l'éteignent), lue dans un niveau flou de l'image.
+ */
+vec3 sunGlare() {
+    vec4 clip = gbufferProjection * vec4(sunPosition, 1.0);
+    if (clip.w <= 0.0) return vec3(0.0);
+    vec2 sun = clip.xy / clip.w * 0.5 + 0.5;
+    // Hors de l'écran, l'éclat s'efface en quelques pas.
+    vec2 out_ = max(-sun, sun - 1.0);
+    float onScreen = 1.0 - smoothstep(0.0, 0.06, max(out_.x, out_.y));
+    if (onScreen <= 0.0) return vec3(0.0);
+    vec2 at = clamp(sun, vec2(0.002), vec2(0.998));
+    // La lumière autour du soleil, moins le ciel qui l'entoure : ce qui reste, c'est l'astre lui-même, vu ou caché.
+    vec3 disc = textureLod(colortex0, at, 3.0).rgb;
+    vec3 around = textureLod(colortex0, at, 6.0).rgb;
+    vec3 src = max(disc - around * 0.8, 0.0) * onScreen;
+    if (dot(src, vec3(1.0)) <= 1e-4) return vec3(0.0);
+    vec2 aspect = vec2(viewWidth / viewHeight, 1.0);
+    vec2 d = (vUv - sun) * aspect;
+    float r = length(d);
+    // Les rais : six branches fines et quelques plus faibles, qui tournent à peine quand on bouge la tête.
+    float a = atan(d.y, d.x) + 0.15;
+    float rays = pow(abs(cos(a * 3.0)), 140.0) + 0.35 * pow(abs(cos(a * 7.0 + 0.6)), 180.0);
+    vec3 glare = src * (rays * exp(-r * 11.0) * 0.16 + exp(-r * 30.0) * 0.20 + exp(-r * 4.0) * 0.012);
+    // Les reflets de l'objectif : des disques pâles de couleur sur la ligne du soleil au centre, au-delà du centre.
+    vec2 axis = (vec2(0.5) - sun);
+    const vec3 ghostTint[4] = vec3[](vec3(1.0, 0.70, 0.35), vec3(0.45, 0.85, 1.0), vec3(0.70, 1.0, 0.60), vec3(1.0, 0.55, 0.80));
+    const float ghostAt[4] = float[](0.55, 1.25, 1.55, 2.10);
+    const float ghostSize[4] = float[](0.030, 0.070, 0.025, 0.110);
+    for (int i = 0; i < 4; i++) {
+        vec2 g = (vUv - (sun + axis * ghostAt[i])) * aspect;
+        float disk = smoothstep(ghostSize[i], ghostSize[i] * 0.7, length(g));
+        glare += src * ghostTint[i] * disk * 0.005;
+    }
+    return glare * SUN_GLARE_STRENGTH;
+}
+#endif
+
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
+#if CHROMATIC_ABERRATION > 0
+    // L'objectif sépare un peu les couleurs vers les bords : le rouge glisse dehors, le bleu dedans.
+    {
+        vec2 off = (vUv - 0.5) * sq(length(vUv - 0.5) * 1.6) * 0.0012;
+        color.r = texture(colortex0, vUv + off).r;
+        color.b = texture(colortex0, vUv - off).b;
+    }
+#endif
     vec4 lens = texelFetch(lensTex, ivec2(0), 0);
 #if DOF > 0
     color = depthOfField(color, max(lens.y, 0.5));
@@ -138,6 +189,9 @@ void main() {
 #ifdef BLOOM
     // Le seuil du halo suit l'exposition : ce qui éblouit l'œil, pas une valeur fixe.
     color += glow(1.5 * 0.62 * EXPOSURE * adapt / exposure) * (0.5 * BLOOM_STRENGTH);
+#endif
+#if defined BLOOM && SUN_GLARE > 0
+    color += sunGlare() * smoothstep(-0.02, 0.06, sunUp);
 #endif
     color *= exposure;
 #if PURKINJE > 0

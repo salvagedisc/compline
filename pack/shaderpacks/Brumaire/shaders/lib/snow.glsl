@@ -44,6 +44,28 @@ float snowPatch(vec3 world, float cover) {
 }
 
 /**
+ * La neige plaquée par le vent sur les faces qui lui font front (0..1 au texel) : les troncs, les murs et les rochers
+ * exposés se couvrent par plaques pendant une chute, d'abord en haut et sur les reliefs clairs, et le gardent tant
+ * qu'il fait froid. sky : lumière du ciel (0..1) ; wind : direction du vent (xz) ; grain : clarté du texel (0..1).
+ */
+float snowPlaster(vec3 world, vec3 normal, float sky, vec2 wind, float grain) {
+#if SNOW_BUILDUP > 0
+    if (abs(normal.y) > 0.2) return 0.0;
+    float front = smoothstep(0.15, 0.75, dot(normal.xz, -wind));
+    float amount = snowHere * snowStorm * front * smoothstep(0.75, 0.92, sky);
+    if (amount <= 0.01) return 0.0;
+    vec3 q = (floor(world * 16.0 + normal * 0.5) + 0.5) / 16.0;
+    vec2 p = vec2(abs(normal.x) > 0.5 ? q.z : q.x, q.y);
+    float n = snowNoise(p * 1.2 + 23.0) * 0.6 + snowNoise(p * 4.0 + 9.0) * 0.25 + rainHash(p * 16.0 + 3.0) * 0.15;
+    // Plus haut dans le bloc, plus de neige ; les texels clairs (reliefs) la retiennent d'abord.
+    n += fract(world.y) * 0.18 + (grain - 0.5) * 0.25;
+    return step(1.0 - amount * 0.45, n);
+#else
+    return 0.0;
+#endif
+}
+
+/**
  * Pente de la neige au texel, sous forme de normale (repère monde) pour un dessus de bloc. depth : force des reliefs
  * (0..1). Les dérivées sont prises d'un texel à l'autre, pour un relief en marches de pixels.
  */

@@ -3,6 +3,17 @@
 
 // Le joueur se tient dans un biome où il neige, lissé sur une dizaine de secondes.
 uniform float snowHere;
+// La chute de neige en cours, accumulée sur quelques minutes et qui retombe lentement après (0..1).
+uniform float snowStorm;
+
+/** Ce que la chute a déjà accumulé (0..1), nul sans le réglage. */
+float snowBuild() {
+#if SNOW_BUILDUP > 0
+    return snowStorm;
+#else
+    return 0.0;
+#endif
+}
 
 // Seuil de clarté des aiguilles qui retiennent la neige.
 #define SNOW_GRAIN 0.45
@@ -15,20 +26,22 @@ uniform float snowHere;
  */
 float snowCover(vec3 world, vec3 normal, float sky, float leaf, float grain) {
 #if SNOW_COVER > 0
-    float cold = snowHere * smoothstep(0.80, 0.95, sky);
+    // Pendant une chute, la neige gagne sous les arbres et sous les avancées.
+    float build = snowBuild();
+    float cold = snowHere * smoothstep(0.80 - 0.22 * build, 0.95 - 0.12 * build, sky);
     if (cold <= 0.0) return 0.0;
     vec3 q = (floor(world * 16.0) + 0.5) / 16.0;
     if (normal.y > 0.5) {
         // Un rebord est couvert en entier ; un feuillage, sur ses aiguilles claires, avec quelques trous en plus.
         if (leaf <= 0.0) return cold;
-        return cold * step(SNOW_GRAIN, grain) * step(0.12, rainHash(q.xz * 7.13));
+        return cold * step(SNOW_GRAIN - 0.20 * build, grain) * step(0.12 - 0.10 * build, rainHash(q.xz * 7.13));
     }
     if (leaf > 0.0 && abs(normal.y) < 0.2) {
         // Le liseré : trois à cinq pixels sous l'arête du haut, selon la colonne, sur les aiguilles claires.
         vec2 column = abs(normal.x) > 0.5 ? q.zy : q.xy;
         float depth = (3.0 + floor(rainHash(vec2(column.x * 16.0, floor(world.y) + 0.5)) * 3.0)) / 16.0;
         float fromTop = 1.0 - fract(world.y);
-        return cold * step(fromTop, depth) * step(SNOW_GRAIN - 0.1, grain);
+        return cold * step(fromTop, depth) * step(SNOW_GRAIN - 0.1 - 0.10 * build, grain);
     }
 #endif
     return 0.0;
