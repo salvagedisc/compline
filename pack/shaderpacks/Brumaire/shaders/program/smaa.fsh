@@ -85,8 +85,15 @@ void main() {
     vec3 b = texelFetch(colortex7, clamp(p - ivec2(1, 0), ivec2(0), top), 0).rgb;
     vec3 d = texelFetch(colortex7, clamp(p + ivec2(0, 1), ivec2(0), top), 0).rgb;
     vec3 e = texelFetch(colortex7, clamp(p - ivec2(0, 1), ivec2(0), top), 0).rgb;
-    vec3 sharp = c + (4.0 * c - a - b - d - e) * 0.45;
-    color += clamp(sharp, min(c, min(min(a, b), min(d, e))), max(c, max(max(a, b), max(d, e)))) - c;
+    // Un renfort qui suit le contraste (à la manière d'un « contrast adaptive sharpening ») : fort dans une zone
+    // douce, retenu là où les voisins sont déjà très différents, pour ne pas faire crier les arêtes.
+    vec3 mn = min(c, min(min(a, b), min(d, e)));
+    vec3 mx = max(c, max(max(a, b), max(d, e)));
+    float lmn = dot(mn, vec3(0.2126, 0.7152, 0.0722));
+    float lmx = dot(mx, vec3(0.2126, 0.7152, 0.0722));
+    float room = sqrt(clamp(min(lmn, 1.0 - lmx) / max(lmx, 1e-4), 0.0, 1.0));
+    vec3 sharp = c + (4.0 * c - a - b - d - e) * TAA_SHARPEN * mix(0.45, 1.25, room);
+    color += clamp(sharp, mn, mx) - c;
 #endif
     outColor = vec4(color, 1.0);
 }

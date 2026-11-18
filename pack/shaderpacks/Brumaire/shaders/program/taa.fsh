@@ -70,10 +70,12 @@ void main() {
     }
     vec3 mean = m1 / 9.0;
     vec3 spread = sqrt(max(m2 / 9.0 - mean * mean, 0.0));
-    vec3 lo = mean - 1.25 * spread, hi = mean + 1.25 * spread;
 
     vec2 uv = gl_FragCoord.xy / size;
     vec2 before = previousUv(uv, depth);
+    // Plus le point a bougé à l'écran, plus la boîte se resserre : en mouvement, l'historique doit coller au présent.
+    float moved = length((uv - before) * size);
+    vec3 hi = mean + mix(1.25, 0.85, clamp(moved / 4.0, 0.0, 1.0)) * spread;
     if (all(greaterThanEqual(before, vec2(0.0))) && all(lessThanEqual(before, vec2(1.0)))) {
         vec3 now = toYCoCg(color);
         vec3 past = toYCoCg(historyAt(before, size));
@@ -82,8 +84,16 @@ void main() {
         vec3 reach = max(hi - mean, vec3(1e-4)) / max(abs(toPast), vec3(1e-4));
         past = mean + toPast * clamp(min(reach.x, min(reach.y, reach.z)), 0.0, 1.0);
         // Plus le point a bougé à l'écran, moins on garde du passé : le flou de reprise reste court.
-        float moved = length((uv - before) * size);
         float keep = mix(0.9, 0.72, clamp(moved / 12.0, 0.0, 1.0));
+#if TAA_DISOCCLUSION > 0
+        // Ce qui vient d'apparaître derrière un objet qui s'écarte : l'historique gardait l'objet, pas ce point. On le
+        // reconnaît à la distance gardée avec l'historique, qui ne correspond pas à celle où le point était.
+        if (depth < 1.0 && !isHand(depth)) {
+            float was = texelFetch(colortex10, ivec2(before * size), 0).a * 1024.0;
+            float expect = previousDistance(uv, depth);
+            if (was > 0.0 && abs(was - expect) > 0.25 + 0.06 * expect) keep = min(keep, 0.25);
+        }
+#endif
         // Un pixel de texture plus grand qu'un pixel d'écran n'a pas besoin d'être lissé : on garde surtout l'image
         // du moment pour que le dessin des blocs proches reste net. Le lissage complet ne sert qu'au loin, là où
         // les pixels de texture deviennent plus fins que l'écran et scintillent.
@@ -93,9 +103,15 @@ void main() {
             float texel = gbufferProjection[1][1] * 0.5 * size.y / (16.0 * max(length(view.xyz / view.w), 1e-3));
             keep = min(keep, mix(0.9, 0.5, smoothstep(0.6, 1.4, texel)));
         }
-        color = clamp(fromYCoCg(mix(now, past, keep)), 0.0, 1.0);
+        // Fondu pondéré par la clarté : un pixel très clair qui clignote ne domine plus la moyenne (moins de
+        // scintillement sur les éclats de l'eau et de la neige).
+        float wn = (1.0 - keep) / (1.0 + now.x);
+        float wp = keep / (1.0 + past.x);
+        color = clamp(fromYCoCg((now * wn + past * wp) / (wn + wp)), 0.0, 1.0);
     }
 #endif
     outColor = vec4(color, 1.0);
-    outHistory = vec4(color, 1.0);
+    // L'alpha de l'historique garde la distance du point (1024 blocs au plus), pour reconnaître une désocclusion.
+    float here0 = texelFetch(depthtex0, pixel, 0).r;
+    outHistory = vec4(color, here0 < 1.0 ? clamp(viewDistanceAt(gl_FragCoord.xy / vec2(viewWidth, viewHeight), here0) / 1024.0, 0.0, 1.0) : 0.0);
 }

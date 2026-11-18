@@ -32,6 +32,9 @@ in vec4 vTint;
 in vec3 vNormal;
 in vec3 vPos;
 flat in int vMat;
+#if defined PROGRAM_TERRAIN
+in float vBend;
+#endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
 in vec4 vTangent;
 in vec2 vSpriteMid;
@@ -188,6 +191,11 @@ void main() {
     albedo = olive(albedo);
     if (vMat >= 1 && vMat <= 5) leaf = vMat == 4 ? 0.55 : 1.0;
 #endif
+#if defined PROGRAM_TERRAIN
+    // Le vent couche les herbes : un brin couché montre son revers, plus clair et plus jaune. Les rafales passent sur
+    // une prairie en vagues claires.
+    if (vMat >= 1 && vMat <= 4) albedo = mix(albedo, albedo * 1.35 + vec3(0.010, 0.012, 0.003), vBend * (vMat == 4 ? 0.25 : 0.5) * FOLIAGE_SHEEN);
+#endif
 #if defined PROGRAM_PARTICLES || defined PROGRAM_BASIC
     leaf = 1.0;
     taps = 1;
@@ -286,6 +294,18 @@ void main() {
 #endif
     // Les grains de neige et de sable qui scintillent, là où le soleil donne.
     lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
+#if defined PROGRAM_TERRAIN && LEAF_FLUTTER > 0
+    // Dans le vent, des feuilles se retournent et renvoient le soleil un instant : quelques texels du feuillage
+    // s'allument et s'éteignent, plus souvent quand il souffle fort.
+    if (vMat == 4) {
+        float force = brumaireLink > 0.5 ? clamp(brumaireWind.z, 0.0, 2.0) : 0.3 + 0.45 * rainStrength;
+        vec3 q = floor((vPos + cameraPosition) * 16.0 + normal * 0.5);
+        float h = fract(sin(dot(q, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
+        float beat = fract(frameTimeCounter * (0.8 + 1.6 * h) * (0.5 + force) + h * 7.0);
+        float flash = step(0.86 - 0.06 * force, h) * smoothstep(0.0, 0.08, beat) * (1.0 - smoothstep(0.12, 0.3, beat));
+        lit += gLightColor * albedo * flash * (1.0 - indirect) * 1.6 * min(force + 0.2, 1.0);
+    }
+#endif
 #if defined PROGRAM_TERRAIN
     // Les gouttes qui éclatent : la lumière du ciel renvoyée par un pixel d'eau.
     lit += (gAmbient * 1.1 + gLightColor * 0.15 + vec3(0.008)) * splash;
