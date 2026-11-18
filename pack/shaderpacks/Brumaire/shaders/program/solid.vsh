@@ -24,6 +24,8 @@ out vec4 vTint;
 out vec3 vNormal;
 out vec3 vPos;
 flat out int vMat;
+// La matière du bloc (lib/material.glsl) : le numéro de block.properties divisé par 32.
+flat out int vSurf;
 #if defined PROGRAM_TERRAIN
 out float vBend;
 #endif
@@ -36,9 +38,11 @@ void main() {
     vec4 view = gl_ModelViewMatrix * gl_Vertex;
     vPos = (gbufferModelViewInverse * view).xyz;
     vMat = 0;
+    vSurf = 0;
 #ifdef HAS_BLOCK_ID
     int id = int(mc_Entity.x + 0.5) - 10000;
-    vMat = id > 0 && id < 32 ? id : 0;
+    vMat = id > 0 ? id % 32 : 0;
+    vSurf = id >= 32 ? id / 32 : 0;
 #if defined PROGRAM_TERRAIN && RELIEF > 0
     // Le repère de la face (pour le relief) et le rectangle de sa texture dans l'atlas : chaque coin est à la même
     // distance du centre, la demi-taille reste donc la même sur toute la face.

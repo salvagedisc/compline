@@ -4,6 +4,7 @@
 #include "/lib/common.glsl"
 #include "/lib/shadow.glsl"
 #include "/lib/light.glsl"
+#include "/lib/material.glsl"
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
@@ -33,6 +34,7 @@ in vec4 vTint;
 in vec3 vNormal;
 in vec3 vPos;
 flat in int vMat;
+flat in int vSurf;
 #if defined PROGRAM_TERRAIN
 in float vBend;
 #endif
@@ -192,6 +194,32 @@ void main() {
     albedo = olive(albedo);
     if (vMat >= 1 && vMat <= 5) leaf = vMat == 4 ? 0.55 : 1.0;
 #endif
+    // La matière : rugosité, métal, éclat. Les minerais et la blackstone dorée la prennent texel par texel : le
+    // minéral brille, la pierre autour reste mate. Un métal garde sa couleur pour ses reflets, pas pour sa diffusion.
+    Surface surf = surfaceOf(0);
+    vec3 f0 = vec3(0.04);
+    float texelGlow = 0.0;
+#if defined PROGRAM_TERRAIN && MATERIALS > 0
+    surf = surfaceOf(vSurf);
+    if (vMat == 9) surf = Surface(0.62, 0.0, 0.0, 0.0);
+    else if (vMat == 11) surf = Surface(0.10, 0.0, 0.0, 0.0);
+    else if (vMat == 12) surf = Surface(0.92, 0.0, 0.0, 0.0);
+    if (vSurf == 12 || vSurf == 19) {
+        vec3 mean = toLinear(textureLod(gtexture, vUv, 4.0).rgb * vTint.rgb);
+        float mineral = mineralTexel(albedo, mean);
+        surf.rough = mix(surf.rough, vSurf == 19 ? 0.28 : 0.22, mineral);
+        surf.metal = vSurf == 19 ? mineral : mineral * 0.5;
+        surf.gloss = 0.30 * mineral;
+    }
+    if (vSurf == 15) {
+        // Le sculk : ses veines cyan luisent faiblement dans le noir.
+        texelGlow = smoothstep(0.10, 0.30, (albedo.g + albedo.b) * 0.5 - albedo.r) * smoothstep(0.04, 0.16, luma(albedo));
+    }
+    // Un métal sombre (netherite) reste sombre dans ses reflets ; un métal clair (fer, or) reflète presque tout.
+    f0 = mix(vec3(0.04), clamp(albedo * 1.7, 0.04, 1.0), surf.metal);
+    if (vSurf == 10 || vSurf == 14) f0 = vec3(0.08);
+    albedo *= 1.0 - 0.65 * surf.metal;
+#endif
 #if defined PROGRAM_TERRAIN
     // Le vent couche les herbes : un brin couché montre son revers, plus clair et plus jaune. Les rafales passent sur
     // une prairie en vagues claires.
@@ -324,6 +352,36 @@ void main() {
         // La lumière qui traverse la couche : un bord à contre-jour s'éclaire doucement.
         float rim = pow(1.0 - max(dot(normal, -normalize(vPos)), 0.0), 3.0);
         lit += gLightColor * albedo * rim * 0.12 * (1.0 - indirect);
+    }
+#endif
+#if defined PROGRAM_TERRAIN && MATERIALS > 0
+    // Le reflet de l'astre, sur la pente du texel quand le relief ou la neige en donnent une. Un sol trempé devient
+    // lisse : le soleil y fait une traînée vive.
+    {
+        vec3 nS = normal;
+#if RELIEF > 0
+        if (reliefFade > 0.0) nS = reliefN;
+#endif
+        if (snowBump > 0.0) nS = snowN;
+        float rough = mix(surf.rough, 0.10, clamp(gloss, 0.0, 1.0) * float(wet > 0.0));
+        vec3 eye = -normalize(vPos);
+        lit += gSunReach * sunSpecular(nS, eye, gLightDir, rough, wet > 0.0 ? max(f0, vec3(0.02)) : f0) * SPECULAR_STRENGTH * (1.0 - leaf);
+        // Ce que reflète un métal : le ciel dans la direction du reflet (assombri sous un toit) et la lumière des blocs
+        // proches, teints de sa couleur. Une surface rugueuse mêle davantage d'hémisphère, plus terne.
+        if (surf.metal > 0.0) {
+            vec3 r = reflect(-eye, nS);
+            vec3 env = hemisphereLight(normalize(mix(r, nS, rough * rough)), lm.y * lm.y) * 1.1;
+            float near_ = lm.x;
+            vec3 hue = blockLightTint(vPos, nS, near_);
+            env += hue * near_ * near_ * (0.30 + 2.3 * pow(near_, 3.0)) * 0.6;
+            // Au ras d'un métal, le reflet blanchit moins que sur une pierre : l'or reste doré vu de loin.
+            vec3 fm = mix(f0, vec3(1.0), pow(1.0 - max(dot(nS, eye), 0.0), 5.0) * 0.35);
+            lit += env * fm * mix(1.0, 0.55, rough) * surf.metal * ao;
+        }
+        // Le velours de la laine : un liseré clair au soleil rasant.
+        lit += gSunReach * albedo * surf.sheen * pow(1.0 - max(dot(normal, eye), 0.0), 4.0) * 0.35;
+        gloss = max(gloss, surf.gloss);
+        lit += albedo * texelGlow * 1.4;
     }
 #endif
 #ifdef WRITE_SURFACE

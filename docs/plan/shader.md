@@ -50,6 +50,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
 | `lib/precip.glsl`, `program/shelter.csh` | Drops and flakes drawn by the shader, the shelter of roofs and trees, the showers |
 | `lib/cover.glsl` | Snow laid on trees and ledges, frost, the glitter of snow and sand |
+| `lib/material.glsl` | Block materials (roughness, metal, sky sheen), the sun's glint (GGX), mineral texels of ores |
 | `lib/snow.glsl` | The material of laid snow: patches, drifts, wind ripples, slope per texel, glints that follow the eye |
 | `lib/tracks.glsl`, `program/tracks.csh` | Footprints: the map, the stamping of a step, the hollow and its tilted edges on the ground |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, leaves brushed, slant of the rain |
@@ -174,6 +175,17 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Depth of field** (`DOF`: off, soft, photo; soft in the Beautiful profile only): the focus is the nearest of five points around the centre of the screen, followed in about a quarter of a second. Each pixel is blurred by a disc sized by the gap between the inverse distances (a lens's circle of confusion), up to 6 or 12 pixels at 720p, with 24 taps on a golden spiral; a tap only counts if it is itself blurred enough to reach the pixel, so a sharp foreground does not bleed over the background. The hand stays sharp.
 - **Night vision** (`PURKINJE`): in the darkest parts of the image, colours fade toward a slightly blue luminance, as rods take over from cones.
 - **Vignette** (`VIGNETTE`): the corners darken by up to a fifth.
+
+## Block materials
+
+`block.properties` gives each block a family (its number modulo 32, read everywhere as before) and, for ordinary full blocks, a material (the number divided by 32, read by `lib/material.glsl`). There are 21 materials: polished stone and quartz, glazed terracotta, concrete, iron, gold, fresh, tarnished (exposed and weathered) and oxidised copper, netherite, gem blocks, obsidian, ores, prismarine, amethyst, sculk, terracotta, wool, mud and clay, gilded blackstone, and Create's brass and zinc. Each sets a roughness, a metalness and how much sky deferred1 reflects (`MATERIALS`).
+
+- **The sun's glint**: every lit surface gets a GGX reflection of the sun or moon, scaled by the light that actually reaches it (shadow, clouds, water above and stained glass, exported by `shade()` as `gSunReach`). Rough stone gives a broad faint sheen at a grazing angle, polished stone and gems a sharp spot, metals a glint in their own colour. The glint follows the texel slope when the relief or the snow gives one (`SPECULAR_STRENGTH`).
+- **Metals** lose two thirds of their diffuse colour and reflect in it instead: the sky in the reflected direction (darker under a roof, blurrier on rougher metal) and the nearby block light, tinted by their colour, with a Fresnel that whitens less than stone so gold stays golden at a grazing angle. Copper turns from metal to matte as it oxidises.
+- **Ores and gilded blackstone** are handled texel by texel: a texel more saturated and brighter than its texture's mean (mip level 4) is mineral and turns smooth and half-metallic (fully metallic gold in gilded blackstone), while the stone around stays matte.
+- **Wool** gets a soft sheen at a grazing angle instead of a glint; **sculk** veins (cyan texels) glow faintly in the dark.
+- **Wet ground** turns smooth as it soaks: the sun draws a bright streak on a wet road or a puddle.
+- Snow, packed ice and sand get their own roughness from their family.
 
 ## Block relief
 

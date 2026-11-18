@@ -59,6 +59,8 @@ void main() {
     vUv = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
     vec4 view = gl_ModelViewMatrix * gl_Vertex;
     int mat = int(mc_Entity.x + 0.5) - 10000;
+    // Le numéro porte aussi la matière (au-delà de 32) : seule la famille compte ici.
+    if (mat > 0) mat %= 32;
     // L'eau ne porte pas d'ombre (shadowtex1 l'ignore) mais se marque : le fond saura qu'il est sous l'eau.
     // Les plantes ondulent comme dans la vue.
     vWater = mat == 6 ? 1 : 0;

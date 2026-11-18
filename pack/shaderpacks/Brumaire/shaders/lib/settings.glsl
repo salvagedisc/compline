@@ -101,6 +101,9 @@
 #define SNOW_COVER 1 // [0 1]
 // La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
 #define SNOW_DETAIL 1 // [0 1]
+// Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
+#define MATERIALS 1 // [0 1]
+#define SPECULAR_STRENGTH 1.0 // [0.0 0.25 0.5 0.75 1.0 1.25 1.5 2.0]
 #define FROST 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
 #define TRACKS 1 // [0 1]
