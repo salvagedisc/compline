@@ -4507,10 +4507,6 @@ file = "shaderpacks/Brumaire/shaders/lib/light.glsl"
 hash = "4651e3f5c7981408eb585af38b69a43400c1ac0f7d3728049ef28a2c3ace81d7"
 
 [[files]]
-file = "shaderpacks/Brumaire/shaders/lib/material.glsl"
-hash = "f75d4609ac2c1abb3b7d557b9515753e62a1a0575a45d51911ffe83063cf9eda"
-
-[[files]]
 file = "shaderpacks/Brumaire/shaders/lib/mist.glsl"
 hash = "ca7b74118c82a6fa577aad8157da9b740a7fc930bad847b82e131623cb077bc6"
 
