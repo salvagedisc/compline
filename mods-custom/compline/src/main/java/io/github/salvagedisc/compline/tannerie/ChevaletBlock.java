@@ -83,8 +83,12 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
         if (!stack.is(TannerieModule.COUTEAUX)) {
-            if (stack.is(TannerieModule.PEAU_BRUTE.get()) && !level.isClientSide()) {
-                player.displayClientMessage(Component.translatable("tannerie.compline.chevalet.occupe"), true);
+            if (stack.is(TannerieModule.PEAU_BRUTE.get())) {
+                // Une peau est déjà tendue : le dire, sans la reprendre aussitôt (useWithoutItem).
+                if (!level.isClientSide()) {
+                    player.displayClientMessage(Component.translatable("tannerie.compline.chevalet.occupe"), true);
+                }
+                return ItemInteractionResult.CONSUME;
             }
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -117,7 +121,8 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!state.getValue(PEAU)) {
+        // Main vide seulement : un bloc en main se pose contre le chevalet au lieu de reprendre la peau.
+        if (!state.getValue(PEAU) || !player.getMainHandItem().isEmpty()) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide()) {

@@ -10,5 +10,8 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'farmersdelight:rope', 'farm_and_charm:rope', 'overgeared:copper_nugget',
     'overgeared:diamond_shard', 'hybrid_aquatic:glowstick', 'alexsmobs:shark_tooth',
     'minecraft:fishing_rod'
-  ].forEach(id => event.remove(id))
+  ].forEach(id => {
+    // Un identifiant disparu ne doit pas arrêter le reste de la liste.
+    try { event.remove(id) } catch (e) { console.warn(`EMI : ${id} introuvable, ignoré`) }
+  })
 })

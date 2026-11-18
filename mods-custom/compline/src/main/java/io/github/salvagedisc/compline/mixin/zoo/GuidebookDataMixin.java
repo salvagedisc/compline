@@ -16,13 +16,13 @@ import org.w3c.dom.Document;
  */
 @Mixin(value = GuidebookData.class, remap = false)
 public abstract class GuidebookDataMixin {
-    @ModifyExpressionValue(method = "parseXML", at = @At(value = "INVOKE",
+    @ModifyExpressionValue(method = "parseXML", require = 0, at = @At(value = "INVOKE",
             target = "Ljavax/xml/parsers/DocumentBuilder;parse(Ljava/io/InputStream;)Lorg/w3c/dom/Document;"))
     private static Document compline$patchTexts(Document document) {
         return GuidePatches.apply(document);
     }
 
-    @Inject(method = "loadData", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "loadData", require = 0, at = @At("RETURN"), cancellable = true)
     private static void compline$addZoo(CallbackInfoReturnable<GuidebookData> cir) {
         cir.setReturnValue(ZooGuide.withZoo(cir.getReturnValue()));
     }

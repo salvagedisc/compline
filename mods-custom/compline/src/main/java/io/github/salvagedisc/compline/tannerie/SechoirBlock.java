@@ -130,6 +130,15 @@ public class SechoirBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        // Déplacé par un piston ou une machine de Create, le séchoir perd son tick prévu : il faut le reprendre.
+        if (!oldState.is(this) && !level.isClientSide() && state.getValue(ETAT) == Etat.HUMIDE) {
+            level.scheduleTick(pos, this, INTERVAL);
+        }
+    }
+
+    @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (state.getValue(ETAT) != Etat.HUMIDE) {
             return;

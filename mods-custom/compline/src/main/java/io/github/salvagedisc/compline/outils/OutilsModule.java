@@ -43,7 +43,7 @@ public final class OutilsModule {
         NeoForge.EVENT_BUS.addListener(PlayerEvent.BreakSpeed.class, OutilsModule::onBreakSpeed);
         NeoForge.EVENT_BUS.addListener(PlayerEvent.HarvestCheck.class, OutilsModule::onHarvestCheck);
         // La config n'est pas encore chargée ici : ses valeurs sont lues à chaque usage.
-        Compline.LOGGER.info("outils : le bois et la roche demandent le bon outil (selon config/compline-common.toml)");
+        Compline.LOGGER.info("outils : le bois et la roche demandent le bon outil (selon serverconfig/compline-server.toml du monde)");
     }
 
     /** Vrai si ce bloc demande un outil que le joueur n'a pas en main. */

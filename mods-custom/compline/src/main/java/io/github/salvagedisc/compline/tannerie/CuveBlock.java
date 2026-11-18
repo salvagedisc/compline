@@ -86,7 +86,8 @@ public class CuveBlock extends Block {
             }
             if (!level.isClientSide()) {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.WATER_BUCKET)));
-                level.setBlock(pos, defaultBlockState(), Block.UPDATE_ALL);
+                // Seule l'eau s'en va : l'écorce reste au fond pour la prochaine eau.
+                level.setBlock(pos, state.setValue(EAU, false), Block.UPDATE_ALL);
                 level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
@@ -160,9 +161,28 @@ public class CuveBlock extends Block {
         return InteractionResult.CONSUME;
     }
 
+    /** Vrai tant que des peaux trempent : la cuve attend alors son prochain pas de tannage. */
+    private static boolean soaking(BlockState state) {
+        return state.getValue(PEAUX) > 0 && !ready(state) && state.getValue(EAU);
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        // Déplacée par un piston ou une machine de Create, la cuve perd son tick prévu : il faut le reprendre.
+        if (!oldState.is(this) && !level.isClientSide() && soaking(state)) {
+            level.scheduleTick(pos, this, stepTicks());
+        }
+    }
+
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (state.getValue(PEAUX) == 0 || ready(state) || !state.getValue(EAU) || !ComplineConfig.tannerieEnabled()) {
+        if (!soaking(state)) {
+            return;
+        }
+        if (!ComplineConfig.tannerieEnabled()) {
+            // Module coupé : le tannage attend sans s'arrêter, pour reprendre quand on le rallume.
+            level.scheduleTick(pos, this, stepTicks());
             return;
         }
         int step = state.getValue(TANNAGE) + 1;

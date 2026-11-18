@@ -32,5 +32,8 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'hybrid_aquatic:garden_eel_spawn_egg', 'hybrid_aquatic:nautilus_spawn_egg',
     'hybrid_aquatic:sea_slug_spawn_egg', 'hybrid_aquatic:sea_cucumber_spawn_egg',
     'hybrid_aquatic:starfish_spawn_egg', 'hybrid_aquatic:starfish'
-  ].forEach(id => event.remove(id))
+  ].forEach(id => {
+    // Un identifiant disparu ne doit pas arrêter le reste de la liste.
+    try { event.remove(id) } catch (e) { console.warn(`EMI : ${id} introuvable, ignoré`) }
+  })
 })

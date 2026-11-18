@@ -71,6 +71,16 @@ public final class Clearings {
         }
     }
 
+    /**
+     * Ouvre la clairière de {@code center} si aucune n'y est posée : pour une source déplacée (piston, machine
+     * de Create) ou posée sans joueur (distributeur, structure), qui n'a pas reçu {@code setPlacedBy}.
+     */
+    public static void ensureOpen(ServerLevel level, BlockPos center, int radius) {
+        if (level.dimension() == Level.OVERWORLD && !ClearingSources.get(level).has(center)) {
+            open(level, center, radius, null);
+        }
+    }
+
     /** Ce qui tenait la clairière de {@code center} a disparu : la brume revient, sauf là où une autre la retient. */
     public static void close(ServerLevel level, BlockPos center, @Nullable ServerPlayer player) {
         if (level.dimension() != Level.OVERWORLD) {

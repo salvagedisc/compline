@@ -26,6 +26,8 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
 
     private int charge;
     private boolean done;
+    /** Vrai une fois vérifié, après un chargement, que la clairière de ce dissipateur est bien ouverte ici. */
+    private boolean checked;
 
     public DissipateurBlockEntity(BlockPos pos, BlockState state) {
         super(DissipateurModule.DISSIPATEUR_BE.get(), pos, state);
@@ -44,6 +46,11 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
             }
             return;
         }
+        if (done && !checked && ComplineConfig.clairiereEnabled()) {
+            // Déplacé chargé (machine de Create) : sa clairière a été refermée à l'ancienne place.
+            checked = true;
+            Clearings.ensureOpen((ServerLevel) level, worldPosition, RADIUS);
+        }
         if (done || !running || !ComplineConfig.clairiereEnabled()) {
             if (!running && charge > 0 && !done) {
                 charge = 0;
@@ -56,6 +63,7 @@ public class DissipateurBlockEntity extends KineticBlockEntity {
         }
         if (charge >= CHARGE_TICKS) {
             done = true;
+            checked = true;
             setChanged();
             Clearings.open((ServerLevel) level, worldPosition, RADIUS, null);
             sendData();

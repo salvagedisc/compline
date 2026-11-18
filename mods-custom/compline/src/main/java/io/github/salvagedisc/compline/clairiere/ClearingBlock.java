@@ -22,7 +22,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
- * Feu de veille et lanterne de clairière : posés par un joueur, ils ouvrent une clairière autour d'eux.
+ * Feu de veille et lanterne de clairière : posés, ils ouvrent une clairière autour d'eux (par un joueur, qui en
+ * reçoit le message, ou autrement : distributeur, piston, machine de Create, un tick plus tard).
  * Retirés (cassés, soufflés), ils rendent la brume à leur disque, sauf là où une autre clairière la retient
  * encore.
  */
@@ -47,6 +48,22 @@ public class ClearingBlock extends Block {
         super.setPlacedBy(level, pos, state, placer, stack);
         if (level instanceof ServerLevel server && placer instanceof ServerPlayer player && ComplineConfig.clairiereEnabled()) {
             Clearings.open(server, pos, radius, player);
+        }
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (!oldState.is(this) && !level.isClientSide()) {
+            // Posé par un joueur, setPlacedBy l'ouvre aussitôt et ce tick ne trouve plus rien à faire.
+            level.scheduleTick(pos, this, 1);
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (ComplineConfig.clairiereEnabled()) {
+            Clearings.ensureOpen(level, pos, radius);
         }
     }
 

@@ -13,7 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
  * charge ses chunks d'apparition avant que Chunky démarre : {@code ChunkyProvider.get()} lève
  * « Chunky is not loaded » et le serveur plante à la création du monde (vu sur le serveur de test de Compline).
  * On rattrape l'erreur et on remet le drapeau à faux : Distant Horizons réessaie au chunk suivant, une fois
- * Chunky prêt. {@code require = 0} : sans effet si une version future change ce code.
+ * Chunky prêt. {@code require = 0} et le contrôle des membres de {@code ComplineMixinPlugin} : sans effet si une
+ * version future change ce code.
  */
 @Mixin(value = AbstractChunkyAccessor.class, remap = false)
 abstract class ChunkyAccessorMixin {

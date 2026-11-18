@@ -6,12 +6,18 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * Configuration de Compline : un booléen par module, plus quelques réglages.
- * {@code config/compline-client.toml} pour les modules client, {@code config/compline-common.toml} pour les autres.
+ * {@code config/compline-client.toml} pour les modules client, {@code config/compline-common.toml} pour les autres,
+ * {@code serverconfig/compline-server.toml} (dans le monde, envoyé aux joueurs) pour ce que client et serveur partagent.
  * Les valeurs sont relues à chaque usage : couper un module en jeu prend effet tout de suite.
  */
 public final class ComplineConfig {
     public static final ModConfigSpec CLIENT_SPEC;
     public static final ModConfigSpec COMMON_SPEC;
+    /**
+     * Réglages que le client doit partager avec le serveur (vitesse de minage, enclume) : réglages de serveur,
+     * envoyés aux joueurs à la connexion, dans {@code serverconfig/compline-server.toml} du monde.
+     */
+    public static final ModConfigSpec SERVER_SPEC;
 
     private static final ModConfigSpec.BooleanValue CIEL_ENABLED;
     private static final ModConfigSpec.BooleanValue CIEL_REDRAW_MOON;
@@ -150,21 +156,32 @@ public final class ComplineConfig {
 
         CLIENT_SPEC = client.build();
 
-        ModConfigSpec.Builder common = new ModConfigSpec.Builder();
-        common.comment("Module xp : Compline n'a plus d'expérience. Les orbes et les gains sont coupés par",
-                "kubejs/server_scripts/sans_xp.js ; ce module règle l'enclume et cache la barre.").push("xp");
-        XP_ENABLED = common
+        ModConfigSpec.Builder server = new ModConfigSpec.Builder();
+        server.comment("Module xp : Compline n'a plus d'expérience. Les orbes et les gains sont coupés par",
+                "kubejs/server_scripts/sans_xp.js ; ce module règle l'enclume (la barre se règle dans compline-common.toml).").push("xp");
+        XP_ENABLED = server
                 .comment("Interrupteur du module. Vrai : l'enclume ne demande plus de niveaux ; son coût devient une usure",
-                        "(à 40, « Trop usé ! »). Faux : l'enclume vanilla, qui demande des niveaux.",
-                        "Client et serveur doivent avoir la même valeur.")
+                        "(à 40, « Trop usé ! »). Faux : l'enclume vanilla, qui demande des niveaux.")
                 .define("enabled", true);
-        XP_HIDE_BAR = common
-                .comment("Cacher la barre d'expérience et le chiffre du niveau (client). La jauge de saut à cheval reste.")
-                .define("hideBar", true);
-        XP_BLOCK_ENCHANT_MERGE = common
+        XP_BLOCK_ENCHANT_MERGE = server
                 .comment("L'enclume refuse un second objet qui porte des enchantements (livre enchanté, objet enchanté) :",
                         "l'enchantement ne passe plus que par la table. Faux : l'enclume fusionne comme en vanilla.")
                 .define("blockEnchantMerge", false);
+        server.pop();
+
+        server.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag compline:outil_requis),",
+                "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
+        OUTILS_ENABLED = server
+                .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.")
+                .define("enabled", true);
+        server.pop();
+        SERVER_SPEC = server.build();
+
+        ModConfigSpec.Builder common = new ModConfigSpec.Builder();
+        common.comment("Module xp : la barre d'expérience (le reste du module est dans compline-server.toml).").push("xp");
+        XP_HIDE_BAR = common
+                .comment("Cacher la barre d'expérience et le chiffre du niveau (client). La jauge de saut à cheval reste.")
+                .define("hideBar", true);
         common.pop();
 
         common.comment("Modules clairiere et dissipateur : poser un feu de veille (rayon 16), une lanterne de clairière (32)",
@@ -177,14 +194,6 @@ public final class ComplineConfig {
                 .comment("La clairière s'ouvre (et se referme) en vague, un anneau de 4 blocs tous les tant de ticks.",
                         "6 : une lanterne (32 blocs) en 2,7 secondes, un dissipateur (64) en 5. 1 : presque d'un coup.")
                 .defineInRange("ringTicks", 6, 1, 40);
-        common.pop();
-
-        common.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag compline:outil_requis),",
-                "et les blocs qui ne lâcheraient rien sans le bon outil (roches, minerais) ne se cassent plus sans lui.").push("outils");
-        OUTILS_ENABLED = common
-                .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.",
-                        "Client et serveur doivent avoir la même valeur.")
-                .define("enabled", true);
         common.pop();
 
         common.comment("Module bord : le monde est un disque. Le cercle de data/compline/monde/bord.json (centre et rayon, écrit par",
@@ -358,7 +367,7 @@ public final class ComplineConfig {
     }
 
     public static boolean xpEnabled() {
-        return read(COMMON_SPEC, XP_ENABLED);
+        return read(SERVER_SPEC, XP_ENABLED);
     }
 
     public static boolean xpHideBar() {
@@ -366,7 +375,7 @@ public final class ComplineConfig {
     }
 
     public static boolean xpBlockEnchantMerge() {
-        return xpEnabled() && read(COMMON_SPEC, XP_BLOCK_ENCHANT_MERGE);
+        return xpEnabled() && read(SERVER_SPEC, XP_BLOCK_ENCHANT_MERGE);
     }
 
     public static boolean clairiereEnabled() {
@@ -378,7 +387,7 @@ public final class ComplineConfig {
     }
 
     public static boolean outilsEnabled() {
-        return read(COMMON_SPEC, OUTILS_ENABLED);
+        return read(SERVER_SPEC, OUTILS_ENABLED);
     }
 
     public static boolean bordEnabled() {

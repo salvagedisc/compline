@@ -31,7 +31,7 @@ public final class XpModule {
             XpClient.register();
         }
         // La config n'est pas encore chargée ici : ses valeurs sont lues à chaque usage.
-        Compline.LOGGER.info("xp : enclume sans niveaux, barre d'expérience cachée (selon config/compline-common.toml)");
+        Compline.LOGGER.info("xp : enclume sans niveaux, barre d'expérience cachée (selon serverconfig/compline-server.toml du monde)");
     }
 
     /** Tourne chez le client et sur le serveur, à chaque changement d'un emplacement de l'enclume. */
