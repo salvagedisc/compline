@@ -528,6 +528,7 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 |---|---|---|
 | CL1 to CL5 | Seasons felt by the body | See [climat.md](climat.md#in-game-tests) |
 | CL6 to CL10 | Snow and sand storms | See [climat.md](climat.md#in-game-tests) |
+| CL11 to CL13 | Hot dishes (pack data, not the mod) | See [climat.md](climat.md#in-game-tests) |
 
 ### Held items
 

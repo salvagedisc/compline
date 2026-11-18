@@ -4,7 +4,7 @@ The team's study of 2026-11-17 ("fonctions à ajouter"), chosen the same evening
 
 1. **Seasons**: Ecliptic Seasons' season warms or cools the body (this page, first step).
 2. **Storms**: snow and sand storms (second step).
-3. **Hot dishes**: Farmer's Delight's soups and stews warm, cold dishes cool (planned).
+3. **Hot dishes**: soups, stews and hot drinks warm the body, ices and fresh dishes cool it (third step).
 
 ## Seasons (first step)
 
@@ -49,6 +49,26 @@ Config: `compline-common.toml` `[climat]`: `snowCold` (0.12), `snowWet` (0.2), `
 - In the savanna, the server saw a sand storm (Ecliptic: no precipitation; data: no rain; base temperature 2.0); in 75 seconds in the open, thirst fell from 14 to 11, with Thirst's own thirst on top; under a stone roof, the exhaustion stopped moving.
 - The mist turned sand-coloured and closed in the savanna (open sky then under a roof) and greyed under the snow storm (with `stormVisuals` off, then on). The bench has no graphics card and runs at a few frames per second: the density of the dust was not judged.
 
+## Hot dishes (third step)
+
+**Before.** Cold Sweat gives a body effect to a food only through its `cold_sweat:item/food` data, and ships none: in Compline, a beef stew eaten in a blizzard did nothing against the cold.
+
+**Now.** Data only, no code: nine files in `pack/kubejs/data/compline/cold_sweat/item/food/`, one per family and per mod. Eating applies Cold Sweat's own `cold_sweat:food` modifier to the body's base temperature for a while (Cold Sweat's scale: 0 is comfortable, ±100 is danger); eating the same family again renews it rather than stacking.
+
+| Family | Items | Body | Lasts |
+|---|---|---|---|
+| Hot soups and stews | mushroom, rabbit and suspicious stew, beetroot soup; Farmer's Delight's beef stew, chicken, vegetable, pumpkin, noodle and onion soup, fish and baked cod stew, bone broth; Farm & Charm's barley, potato and tomato soup, goulash; Starcatcher's Delight's cactifish and sludge stew, weather soup | +25 | 5 min |
+| Hot drinks | Farmer's Delight's hot cocoa; Farm & Charm's nettle, ribwort and strawberry tea | +15 | 3 min |
+| Ices | Farmer's Delight's melon popsicle | −25 | 3 min |
+| Cool drinks | Farmer's Delight's melon juice | −15 | 3 min |
+| Fresh dishes | Farmer's Delight's fruit salad, glow berry custard, mixed salad | −10 | 2 min |
+
+- **Why these values.** A hot soup takes a quarter of the way from comfort to danger off the cold: enough to cross a snowy pass or wait out a storm by the fire, not enough to ignore winter clothes. Tea and cocoa are a lighter, shorter help; the popsicle is the desert's answer to the soup.
+- **A hot and a cold dish cancel out**: each family is its own modifier, so a popsicle after a stew brings the body back to 0 until one of them wears off.
+- **Other mods.** Each mod's file loads only when the mod is there (`neoforge:conditions`, `mod_loaded`): Cold Sweat's `required_mods` alone does not stop a missing item from failing the whole registry, which stops the world from loading. Farm & Charm's onion soup is left out because the pack hides it (Farmer's Delight's stands for it).
+
+**Checked** on the bench on 2026-11-18 (development server with Cold Sweat and Farmer's Delight, without Farm & Charm and Starcatcher's Delight, a client joined): the world loads with the two absent mods' files skipped; after eating a beef stew, `/temp debug Dev base` shows `cold_sweat:food` at +25 and the body temperature reads 25; a melon popsicle then adds −25 and the body goes back to 0; a second stew renews the first instead of adding to it.
+
 ## In-game tests
 
 | # | Test | Expected |
@@ -63,3 +83,6 @@ Config: `compline-common.toml` `[climat]`: `snowCold` (0.12), `snowWet` (0.2), `
 | CL8 | `/weather thunder` in a desert (or `/weather rain`), stand in the open | Dust blows with the wind, the mist closes to about 20 blocks and turns sand-coloured (without shaders); thirst drops about every 20 to 30 seconds |
 | CL9 | Same, under a roof or in a house | Thirst goes back to its usual pace; the storm is still seen outside, fainter |
 | CL10 | Savanna in Ecliptic's rainy season | Rain, not sand |
+| CL11 | In winter in the open, eat a beef stew, then `/temp debug @s base` | `cold_sweat:food` +25 for five minutes: the gauge climbs back toward comfort |
+| CL12 | Eat a second stew at once, then a hot cocoa | The stew is renewed, not doubled; the cocoa adds +15 on top for three minutes |
+| CL13 | In a desert at noon in summer, eat a melon popsicle | `cold_sweat:food` −25: the body cools for three minutes |
