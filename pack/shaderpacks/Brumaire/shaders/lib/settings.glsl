@@ -90,6 +90,8 @@
 #define PRECIP_GLOW 1 // [0 1]
 #define SNOW_BLIZZARD 1 // [0 1]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
+#define ROUGH_REFLECTIONS 1 // [0 1]
+#define ROUGH_REFLECTIONS_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 
 // Neige et chaleur
 #define RELIEF 1 // [0 1]

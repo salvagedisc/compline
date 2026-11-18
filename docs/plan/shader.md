@@ -197,6 +197,10 @@ With a resource pack in the labPBR format (`LABPBR`, needs `RELIEF`), Iris binds
 
 A face with a specular map but no normal map is not detected and keeps the table.
 
+## Reflections by roughness
+
+`ROUGH_REFLECTIONS` (off in Very light) and `ROUGH_REFLECTIONS_STRENGTH`, in `program/deferred1.fsh`. The surface alpha of colortex1 carries the gloss in 1/255 steps, and a half step more marks a metal. For a gloss from 0.15 to 0.6 (the material table, wet ground), one ray per pixel is reflected around a GGX microfacet normal drawn from the roughness (1 - 1.6 × gloss) with a per-frame dither, so the temporal anti-aliasing averages a sharp or blurred reflection. The ray is searched on screen (`WET_REFLECTIONS` steps), then in the voxel volume; the sky is used only when the surface cell is not covered within eight blocks above, otherwise the dim ambient of the place. Dielectrics mix it with a Schlick Fresnel doubled (a polished block shows its surroundings), metals add it tinted by their F0 and keep half of the hemisphere reflection drawn in `solid.fsh`. Puddles and ice (gloss 0.6 and more) keep the mirror path.
+
 ## Caves and lava
 
 `CAVE_DETAIL` (off in Very light), `lib/cave.glsl` and `program/mist.fsh`:
