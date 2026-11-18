@@ -353,6 +353,20 @@ Config (`compline-common.toml`, `[repos]`): `enabled` (true), `restSeconds` (20)
 
 **Checked** on the bench on 2026-11-18: see [repos](repos.md).
 
+## `tannerie` module
+
+Client and server (blocks and items are registered on both sides), no other mod. The house tannery ([tannery](tannerie.md), [0038](../decisions/0038-house-tannery.md)).
+
+- **Items**: `peau_brute`, `peau_raclee`, `cuir_mouille`; **blocks** (axe, wood): `chevalet`, `cuve_a_tan`, `sechoir`, all their state in block states (no block entity).
+- **`ChevaletBlock`** (`facing`, `peau`, `raclage` 0 to 15): a raw hide lays on it; each right-click with an item of `c:tools/knife` wears it by one and counts a stroke; at `strokes` the scraped hide pops up, with Naturalist's `fat` at `fatChance`.
+- **`CuveBlock`** (`eau`, `tanin` 0 to 8, `peaux` 0 to 4, `tannage` 0 to 5): water bucket in and out, one item of `compline:tanins` per level, a scraped hide needs `tanin` > `peaux`; a scheduled tick every `tanningMinutes` / 5 moves `tannage`; at 5 an empty hand takes out the wet leather and uses up that much `tanin`.
+- **`SechoirBlock`** (`facing`, `etat` vide/humide/sec, `sechage` 0 to 15): a scheduled tick every 400 ticks adds `rate`: −1 under rain with the sky above, otherwise 2 by day under the sky or 1, +2 with a lit `compline:foyers` block within 4 blocks, −1 where the biome is cold enough to snow or its precipitation is snow (Ecliptic Seasons' winter). Dry at `dryingPoints`.
+- **Bark** (`TannerieModule.onStrip`, `BlockToolModificationEvent`, server, not simulated, `AXE_STRIP` that changes the block and is not in `compline:sans_ecorce`): Farmer's Delight's `tree_bark` at `barkChance`.
+
+Config (`compline-common.toml`, `[tannerie]`): `enabled` (true), `strokes` (6), `tanningMinutes` (5.0), `dryingPoints` (15), `barkChance` (0.5), `fatChance` (0.33).
+
+**Checked** on the bench on 2026-11-18: see [tannery](tannerie.md).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -568,6 +582,12 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | # | Test | Expected |
 |---|---|---|
 | RE1 to RE7 | Rest by the hearth, comfort, effect | See [repos.md](repos.md#in-game-tests) |
+
+### Tannery
+
+| # | Test | Expected |
+|---|---|---|
+| TA1 to TA7 | Hides, fleshing beam, bark, vat, drying frame, fat, quest | See [tannerie.md](tannerie.md#in-game-tests) |
 
 ### Held items
 

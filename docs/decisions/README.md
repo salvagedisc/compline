@@ -17,7 +17,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing; Distant Horizons hidden by the mist, `horizon` module; the "on NML" part superseded by 0019 |
 | [0012](0012-sacs-piles-jours.md) | Bags, stack sizes and day length | Reliable Backpacks and Comforts, Sensible Stackables, Better Days 30/15; Ecliptic Seasons kept |
 | [0013](0013-premiers-gestes.md) | First gestures: tools needed for logs and rock | `outils` module of the `compline` mod and Overgeared's knapping; no new mod |
-| [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed |
+| [0014](0014-tannery.md) | Tannery mod instead of the scripted tannery | Tannery: Better Leather, hides for every leather animal, satchels removed (replaced by 0038) |
 | [0015](0015-textures.md) | Texture pack for the world | Vanilla Evolved as `compline-textures`, without its sky, foliage colours and creatures; mod textures left as they are |
 | [0016](0016-vent-et-lumiere.md) | Wind, light and sky | Where Winds Blow (removed by 0032) and Shine, no shader pack; Better Clouds removed, ATMOSPHERICS draws clouds, sun, moon and stars; Shine removed by 0026 |
 | [0017](0017-averse-et-rayons.md) | Rain, storm and sunlight | Seven client mods (rain sounds and drops, distant thunder, drips, footprints, waves), olive greens, `averse` and `rayons` modules of the `compline` mod; all removed by 0026 |
@@ -41,6 +41,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0035](0035-ore-progression.md) | Ores and armour progression | Kept; built in five steps ([progression](../plan/progression.md)) |
 | [0036](0036-better-combat.md) | Animated combat with Better Combat | Better Combat and playerAnimator: a swing of the whole body per weapon type, tools and forged parts excluded, black steel weapons added |
 | [0037](0037-ragdoll-corpse.md) | The body left behind | Sable: Ragdoll Corpse and Sable: Ragdolls: on death the inventory stays in a ragdoll body, no self-ragdoll key |
+| [0038](0038-house-tannery.md) | A house tannery instead of the Tannery mod | `tannerie` module: raw hide scraped on a fleshing beam, tanned in a vat with bark, dried on a frame by sun or fire; Tannery removed |
 
 ## Template
 

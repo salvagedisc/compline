@@ -250,7 +250,7 @@ hash = "7ef36bc6f85da92f3141fda48d4b6376ae24b28027df61756a587a75ed0192f7"
 
 [[files]]
 file = "config/questlog/quests/metiers_tannerie.json"
-hash = "a4e15bdadbc116510c4c78e1f67076273bf6bece04a1203e85a79515e7bd9f98"
+hash = "28e2c228ca1938d674d38454ec34a04f27157cf590f090f4e054f5a0868eeae9"
 
 [[files]]
 file = "config/questlog/quests/survivre_froid.json"
@@ -826,11 +826,11 @@ hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
 file = "kubejs/assets/compline/lang/en_us.json"
-hash = "d952222df5b953ba6845aab19447922eff841b011ee0442abab4bdb536089675"
+hash = "24da28286f78ef732f6d455ed3526b62e69df3b98e688a9b77dc56f5c16e54e8"
 
 [[files]]
 file = "kubejs/assets/compline/lang/fr_fr.json"
-hash = "846224a4c05bab8f642c26c1262869f12087f0669b6288aa9c99f0d3d0b3e0fd"
+hash = "d07514b62c7f3057acdada0c2eac08cc5468d4c8a90a704eecad6a64bf3346af"
 
 [[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
@@ -1253,10 +1253,6 @@ file = "kubejs/assets/surfacesamples/lang/fr_fr.json"
 hash = "8f9aaaa766ea9c528438bde260df2836c0125f0032528f081cdc6878db2306c5"
 
 [[files]]
-file = "kubejs/assets/tannery/lang/fr_fr.json"
-hash = "89fc0bb384a6bf90161aa88f51055b508d923a37cf332649ec9fadae3f9d2ba0"
-
-[[files]]
 file = "kubejs/assets/teallib/lang/fr_fr.json"
 hash = "f6c3e97c7e71cf01e798ceeed0e39b59c01c2f88a2a070252b3ba87983627754"
 
@@ -1326,7 +1322,7 @@ hash = "2550e30c1d181e144ed61266ab4903cf4b47cfbe5581290a52b3871dd879e481"
 
 [[files]]
 file = "kubejs/client_scripts/fusions.js"
-hash = "d640ab815226319dcf18434b21501c60989db66ec2326da0830486833ac0e62e"
+hash = "8156cf0ca3313146d90e8fed0bcd847d48e1b49bc72fc7c3599829a6e75154c4"
 
 [[files]]
 file = "kubejs/client_scripts/premiers_gestes.js"
@@ -1343,10 +1339,6 @@ hash = "766733bc90d6163cb99242e55ecd4c100fc676202c724ea331e32fef3491517c"
 [[files]]
 file = "kubejs/client_scripts/sante.js"
 hash = "111e02d12580734b9ea2ed8f2cdab4bf0ebbf8d05e81f269132b09259b7d9e4c"
-
-[[files]]
-file = "kubejs/client_scripts/tannerie.js"
-hash = "ba28b13306ff558070c0c1189b2cdf2a586d2b33010c2c7896fc68ec4f6edfb2"
 
 [[files]]
 file = "kubejs/client_scripts/tri.js"
@@ -2669,30 +2661,6 @@ file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jung
 hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
 
 [[files]]
-file = "kubejs/data/minecraft/loot_table/entities/cow.json"
-hash = "b4fed92e5c0068f160f28e54bfcf52120dc97646d202244420ebf24600cf5a28"
-
-[[files]]
-file = "kubejs/data/minecraft/loot_table/entities/donkey.json"
-hash = "ebc1fe4b85d605fbf54a1913e168ec9e37daf0882f757d54aaff87b37070a858"
-
-[[files]]
-file = "kubejs/data/minecraft/loot_table/entities/goat.json"
-hash = "64607c4f134775a9f7fa3a8ff3fc325977bb7119dbd12e693298dad4411e48cb"
-
-[[files]]
-file = "kubejs/data/minecraft/loot_table/entities/horse.json"
-hash = "ec75aaecbfa0191ae31463e83b857674d184697ce1bff38996a83bc915b80e3c"
-
-[[files]]
-file = "kubejs/data/minecraft/loot_table/entities/pig.json"
-hash = "e38231836b8cd3e27358afa87e46e47462da4f9386403edddb37ffe620076bb3"
-
-[[files]]
-file = "kubejs/data/minecraft/loot_table/entities/sheep.json"
-hash = "a3d563f6d2d52a31e2ca286745210de99cddea86071b2b8c5811ef2c11a035ac"
-
-[[files]]
 file = "kubejs/data/minecraft/recipe/netherite_upgrade_smithing_template.json"
 hash = "d3dccf42b20aa532b597f49bb8605e7b8b1cc4a2c4f3b6b24ae3bf4073523922"
 
@@ -3338,7 +3306,7 @@ hash = "5a956001a784513ff82b0683b26a3266a1723d1a8be29885e4d335fee83ebe1f"
 
 [[files]]
 file = "kubejs/server_scripts/fusions.js"
-hash = "cad6bfe8d17bc30368046564850d901ddd126c56c981def9a0ca1f400c7dcb37"
+hash = "d8f85338041315f438c9faab6cf193c147a074552d9359f0eac332e4610492cf"
 
 [[files]]
 file = "kubejs/server_scripts/monuments.js"
@@ -3374,11 +3342,11 @@ hash = "ea30bf7fb58597eb9c000d733928c7404d4196609cd13a557d9c602a02763345"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "c769c4067a177d7b5c143908f29dd328931e3190672302afb5e724f83095ffd9"
+hash = "af2aeba316075fbf333e53a74175c04c51ecb9494aaf31c90dcf7cfbca9a9c05"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
-hash = "dcbb122467f26b151b39d6a38de4f2a247f9b8b2f7787c140907486063bee98f"
+hash = "58fe1cff49a26ec671cfd31f28c09ea6416a7c9a0cf7692e7ea59b010222102d"
 
 [[files]]
 file = "kubejs/server_scripts/tri.js"
@@ -3390,7 +3358,7 @@ hash = "1ac461cbcb68e755b5e12885af22ce1cb4b1a6516f13d891a10be3b4882be444"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "41a616b37979195838e6e0860f50b90cf76624d985824ca74043a122ed1ec89c"
+hash = "e22c13fa2512c0bdfc4ed3ec6cb1130c5816fbb28c4f20f762009c2ec34f82a6"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -3543,8 +3511,8 @@ hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
 metafile = true
 
 [[files]]
-file = "mods/compline-0.33.0.jar"
-hash = "d0955a77ee4b77a6ba0b041b64dc1ddc208612e8675ccf4bdb36ab828f374db9"
+file = "mods/compline-0.34.0.jar"
+hash = "10e75b2a72f93fda554cc9f63909b3c864248b818370dbe28409ec667c186847"
 
 [[files]]
 file = "mods/configurable.pw.toml"
@@ -4129,11 +4097,6 @@ metafile = true
 [[files]]
 file = "mods/surveyor-1.2.4+1.21-neoforge.1.jar"
 hash = "e34b087ed079f7afa92829b0af9b213dea515d1b4e5b7bee854918932f77d1f9"
-
-[[files]]
-file = "mods/tannery-better-leather.pw.toml"
-hash = "e79f2c7e151ba0d565e1a6e31bb7380359acfbdd81b58c9129dd99b1fe0bce9c"
-metafile = true
 
 [[files]]
 file = "mods/teallib.pw.toml"

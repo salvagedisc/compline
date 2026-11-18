@@ -1,7 +1,7 @@
 # 0014 — Tannery mod instead of the scripted tannery
 
 - **Date**: 2026-10-29
-- **Status**: kept (team choice on 2026-10-29); checked on a test server, nothing seen in game yet
+- **Status**: replaced on 2026-11-18 by [0038](0038-house-tannery.md) (house tannery); kept from 2026-10-29 (team choice), checked on a test server
 
 ## Context
 Since 2026-10-19 the pack had its own tannery in KubeJS: animals dropped a raw hide (two items reusing the rabbit hide texture), prepared with ashes at the crafting table, then soaked on Kaleidoscope Cookery's bamboo tray in the rain or under a dripstone. Seeing the texture, the team thought it only covered the rabbit and pointed to an existing mod. [Tannery: Better Leather](https://modrinth.com/mod/tannery-better-leather) (Beckstation, NeoForge 1.21.1, 1.0.2 of 2026-06-26, All Rights Reserved, about 1,000 downloads) has hides per animal, a tanning rack, a tanning barrel, bark from stripped logs, sinew, fat, studded leather and satchels. Jar read: Tannery 1.0.2.

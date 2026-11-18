@@ -1,20 +1,15 @@
-// Compline : la tannerie, avec le mod Tannery (Beckstation). Recettes, retraits et écorce.
-// Le butin est dans tannerie_butin.js, les sacoches cachées et les messages du tonneau
-// traduits dans client_scripts/tannerie.js. Voir docs/plan/tannerie.md.
+// Compline : la tannerie maison (module tannerie de compline). Recettes ; le butin est
+// dans tannerie_butin.js. Voir docs/plan/tannerie.md.
 //
-// La chaîne (celle du mod, inchangée) :
-//   animal -> peau (vache, mouton, chèvre, cochon, cheval)
-//   1. séchoir à peaux : la peau sèche à l'air -> peau séchée
-//   2. écorce (bûche écorcée à la hache) x2 -> poudre tannique, versée dans le tonneau à tanner
-//   3. tonneau à tanner : peau séchée -> cuir
-// La chair putréfiée suit le même chemin : séchée, elle donne des tendons, de la viande
-// séchée, ou du cuir au tonneau.
-
-// Sacoches de Tannery : retirées et cachées d'EMI (client_scripts/tannerie.js, même liste).
-// Les sacs à dos de Reliable Backpacks tiennent déjà ce rôle.
-const TANNERIE_OBJETS = [
-  'tannery:small_satchel', 'tannery:large_satchel'
-]
+// La chaîne :
+//   animal -> peau brute (compline:peau_brute)
+//   1. chevalet à écharner : la peau se racle au couteau -> peau raclée (parfois du gras)
+//   2. cuve à tan : un seau d'eau, une écorce par peau, quatre peaux au plus, 5 minutes
+//      -> cuir mouillé
+//   3. séchoir à cuir : il sèche au soleil, à l'ombre, plus vite près d'un feu, pas sous
+//      la pluie -> cuir
+// L'écorce tombe des bûches écorcées à la hache (module tannerie) ; c'est celle de
+// Farmer's Delight, qui sort aussi de sa planche à découper.
 
 // Recettes du pack qui donnent du cuir sans passer par la tannerie.
 const TANNERIE_RECETTES_RETIREES = [
@@ -22,46 +17,42 @@ const TANNERIE_RECETTES_RETIREES = [
   'envelope:mailing/automated_supply_service/leather',
   // peau de Naturalist cuite au four -> cuir en 10 secondes
   'naturalist:leather_from_smelting_hide',
-  // deux peaux de kangourou -> cuir (remplacé plus bas par une peau de Tannery)
+  // deux peaux de kangourou -> cuir (remplacé plus bas par une peau brute)
   'alexsmobs:kangaroo_hide_to_leather',
   // vieille botte pêchée (Starcatcher) -> cuir
-  'starcatcher:leather_from_boot'
+  'starcatcher:leather_from_boot',
+  // chair putréfiée salée (Spelunkery) -> 4 cuirs
+  'spelunkery:leather',
+  // quatre peaux de reptile (Koopa's Critters) -> cuir (remplacé plus bas par une peau brute)
+  'koopascritters:reptilehiderecipe'
 ]
 
 ServerEvents.recipes(event => {
-  event.remove({ output: TANNERIE_OBJETS })
   TANNERIE_RECETTES_RETIREES.forEach(id => event.remove({ id: id }))
 
   // Les peaux de kangourou d'Alex's Mobs gardent leur rapport (2 pour 1),
-  // mais donnent une peau à sécher au lieu du cuir.
+  // mais donnent une peau brute au lieu du cuir.
   if (Platform.isLoaded('alexsmobs')) {
-    event.shapeless('tannery:goat_hide', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
+    event.shapeless('compline:peau_brute', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
       .id('compline:tannerie/peau_de_kangourou')
   }
 
-  // Une peau de Naturalist d'un monde existant se sèche comme une peau de vache.
-  if (Platform.isLoaded('naturalist')) {
-    event.shapeless('tannery:cow_hide', ['naturalist:hide'])
-      .id('compline:tannerie/peau_de_naturalist')
+  // Quatre peaux de reptile de Koopa's Critters font une peau brute.
+  if (Platform.isLoaded('koopascritters')) {
+    event.shapeless('compline:peau_brute', ['4x koopascritters:reptile_hide'])
+      .id('compline:tannerie/peau_de_reptile')
   }
-})
 
-// Écorce : Tannery n'en donne qu'aux huit bûches vanilla de son tag `tannery:logs`, et sur
-// tout bloc du tag, écorcé ou non. On y met chaque bûche ou bois qui a une version écorcée
-// (Regions Unexplored et les autres essences), et rien de déjà écorcé : sinon un clic droit
-// répété sur la même bûche donnerait de l'écorce sans fin.
-ServerEvents.tags('block', event => {
-  let ids = new Set()
-  Block.getTypeList().forEach(id => ids.add(String(id)))
-  let ajoutees = 0
-  ids.forEach(id => {
-    let [ns, path] = id.split(':')
-    if (path.startsWith('stripped_') || !/_(log|wood|stem|hyphae)$/.test(path)) return
-    if (!ids.has(`${ns}:stripped_${path}`)) return
-    event.add('tannery:logs', id)
-    ajoutees++
-  })
-  console.info(`[tannerie] ${ajoutees} bûches donnent de l'écorce`)
+  // Une peau de Naturalist d'un monde existant devient une peau brute.
+  if (Platform.isLoaded('naturalist')) {
+    event.shapeless('compline:peau_brute', ['naturalist:hide'])
+      .id('compline:tannerie/peau_de_naturalist')
+    // Le gras que laisse le raclage : deux torches avec un bâton, une bougie avec une ficelle.
+    event.shapeless('2x minecraft:torch', ['naturalist:fat', '#c:rods/wooden'])
+      .id('compline:tannerie/torches_au_gras')
+    event.shapeless('minecraft:candle', ['naturalist:fat', '#c:strings'])
+      .id('compline:tannerie/chandelle_de_suif')
+  }
 })
 
 // Contrôle au chargement : liste dans le journal du serveur toutes les recettes

@@ -1,0 +1,46 @@
+{
+  "textures": {
+    "peau": "compline:block/cuir_mouille_tendu",
+    "particle": "compline:block/cuir_mouille_tendu"
+  },
+  "elements": [
+    {
+      "from": [
+        3.5,
+        13,
+        4
+      ],
+      "to": [
+        12.5,
+        13.6,
+        12
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          8,
+          13,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "texture": "#peau"
+        },
+        "south": {
+          "texture": "#peau"
+        },
+        "east": {
+          "texture": "#peau"
+        },
+        "west": {
+          "texture": "#peau"
+        },
+        "up": {
+          "texture": "#peau"
+        }
+      }
+    }
+  ]
+}
