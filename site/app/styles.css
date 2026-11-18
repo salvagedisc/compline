@@ -374,6 +374,8 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
 /* A picture whose message sits low takes its caption at the top; a book or menu capture is shown whole beside its
    caption, so no writing of the game lies under the site's own. On phones the picture is a band above the caption. */
 .fond-expose { display: none; }
+.scene-plan.expose .cadre { width: min(100cqw, calc(100cqh * var(--a))); height: min(100cqh, calc(100cqw / var(--a))); }
+.scene-plan.expose .derive { animation: none; }
 @media (min-width: 761px) and (min-height: 521px) {
   .mise-haut .cartouche { bottom: auto; top: calc(var(--haut) + 3vh); }
   .mise-haut .voile-bas {
@@ -389,12 +391,10 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
     top: calc(var(--haut) + 2vh); bottom: calc(var(--bas) + 8px);
   }
   .scene-plan.expose .cadre {
-    width: min(100cqw, calc(100cqh * var(--a))); height: min(100cqh, calc(100cqw / var(--a)));
     outline: 1px solid rgba(244, 207, 148, 0.22); outline-offset: 6px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   }
   .scene-plan.expose.zoomee .cadre { outline-color: transparent; }
-  .scene-plan.expose .derive { animation: none; }
 }
 
 /* Details inside the picture: a numbered point, and corner marks around the region on hover. */
@@ -894,6 +894,7 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
   .paliers-escalier { min-height: 0; gap: 2px; }
   .palier { margin-bottom: calc(var(--k) * 12px); padding: 4px 0; }
   .palier-nom { font-size: 15px; }
+  .paliers { grid-template-columns: minmax(0, 1fr); }
   .zoo-famille-nom { font-size: 15px; }
   .zoo-famille-n { display: none; }
   .zoo-famille img { width: 46px; height: 46px; }
@@ -962,6 +963,9 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
   .sommaire-titre { font-size: 17px; }
   .comparer-nom { top: calc(var(--haut) + 4px); }
   .zoom-legende { bottom: 10px; }
+  /* The stair, the zoo and the map stand beside their caption rather than under it, above the reel. */
+  .chapitre-echelle, .chapitre-zoo, .chapitre-carte { display: grid; grid-template-columns: minmax(0, 34vw) minmax(0, 1fr); column-gap: 4vw; align-items: start; }
+  .chapitre-echelle .scene, .chapitre-zoo .scene, .chapitre-carte .scene { margin-top: 0; }
 }
 
 /* ———————————————————————————— Page transitions ————————————————————————————
