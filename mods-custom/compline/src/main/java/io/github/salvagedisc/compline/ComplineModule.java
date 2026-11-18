@@ -54,7 +54,10 @@ public enum ComplineModule {
     CLIMAT("climat", null, bus -> io.github.salvagedisc.compline.climat.ClimatModule.start(bus), ModIds.COLD_SWEAT, ModIds.ECLIPTIC_SEASONS),
     /** L'approche : les bêtes farouches sentent le joueur quand le vent porte son odeur, et fuient (serveur ; le monde
      *  intégré du client compte comme serveur). Aucun mod requis ; le vent est celui du module vent, recalculé. */
-    APPROCHE("approche", null, bus -> io.github.salvagedisc.compline.approche.ApprocheModule.start(bus));
+    APPROCHE("approche", null, bus -> io.github.salvagedisc.compline.approche.ApprocheModule.start(bus)),
+    /** Le repos au foyer : l'effet « Reposé » près d'un feu, sous un toit, selon le confort de la maison (client et
+     *  serveur : l'effet est enregistré des deux côtés). Aucun mod requis. */
+    REPOS("repos", null, bus -> io.github.salvagedisc.compline.repos.ReposModule.start(bus));
 
     private final String id;
     private final Dist side;

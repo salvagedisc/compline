@@ -140,6 +140,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] Immersive Enchanting: copy an ancient book, transmute it with 4 amethyst shards [XP6].
 - [ ] **Tannery**: a cow and a horse give their hide; the hide dries on a tanning rack; stripping a log with an axe gives bark, two barks give tannic powder; dry hide in the tanning barrel → leather; the barrel messages are in French; EMI shows no satchel [T].
 - [ ] **The body left behind** (Sable: Ragdoll Corpse, [0037](decisions/0037-ragdoll-corpse.md)): die with a full inventory and the bag on the back: nothing falls, the body keeps everything and opens with a right-click, « Corps de … » in French; empty it, it vanishes [RC1]. Drag it, throw it, lift it with an airship [RC2]. Die far away: the atlas grave and the recovery compass lead back to it, it survives a restart [RC3]; in lava and deep water too [RC4]; the H key does nothing [RC5].
+- [ ] **Rest by the hearth** (`repos` module, [repos](plan/repos.md)): a campfire in the open does nothing [RE1]; under a roof, 20 s standing still or seated by it give « Reposé » for about 2 minutes [RE2, RE6], about 15 in a home with a bed, a chair, a table, a carpet, a chest, books, a candle, a flower pot and a cooking pot [RE3]; put the fire out: no more rest [RE4]; health comes back with half a food bar [RE5]; effect in French [RE7].
 - [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s compline:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
@@ -240,6 +241,7 @@ Once the results are in:
 | R (wind, light and sky) | [decisions/0016](decisions/0016-vent-et-lumiere.md#conditions-and-tests) |
 | AV (rain, storm and sunlight) | Removed by [0026](decisions/0026-second-cleanup.md); [decisions/0017](decisions/0017-averse-et-rayons.md#in-game-checks) is kept as history |
 | PE (fishing) | this file, session 4; context in [decisions/0034](decisions/0034-starcatcher-fishing.md) |
+| RE (rest by the hearth) | [plan/repos.md](plan/repos.md#in-game-tests) |
 | AP (the approach) | [plan/approche.md](plan/approche.md#in-game-tests) |
 | RC (the body left behind) | [decisions/0037](decisions/0037-ragdoll-corpse.md#in-game-tests) |
 | BC (combat) | this file, session 4; context in [decisions/0036](decisions/0036-better-combat.md) |

@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#handcrafted:tables",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:desks",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:side_tables",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:nightstands",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:counters",
+      "required": false
+    }
+  ]
+}

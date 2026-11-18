@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:candles",
+    "minecraft:lantern",
+    "minecraft:soul_lantern",
+    {
+      "id": "#supplementaries:sconces",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:candle_holders",
+      "required": false
+    }
+  ]
+}

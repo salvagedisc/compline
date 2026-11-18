@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:beds",
+    {
+      "id": "#handcrafted:fancy_beds",
+      "required": false
+    },
+    {
+      "id": "#comforts:sleeping_bags",
+      "required": false
+    },
+    {
+      "id": "#comforts:hammocks",
+      "required": false
+    }
+  ]
+}
