@@ -175,6 +175,8 @@
 #define WET_FOLIAGE 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
 #define FLAME_SHIMMER 1 // [0 1]
+#define MIRAGE 1 // [0 1]
+#define DIAMOND_DUST 1 // [0 1]
 #define DUST_DEVILS 1 // [0 1]
 #define TRACKS 1 // [0 1]
 #define TRACK_MINUTES 4.0 // [1.0 2.0 4.0 8.0 15.0]

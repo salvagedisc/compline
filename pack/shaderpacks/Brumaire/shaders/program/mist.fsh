@@ -214,6 +214,21 @@ void main() {
     vec3 pos = scenePosition(uv, sky, hand);
     float len = sky ? 16384.0 : length(pos);
     vec3 dir = normalize(pos);
+#if MIRAGE > 0
+    // Le mirage des déserts brûlants : au loin, le sol qui file vers l'horizon renvoie le ciel, en une nappe
+    // tremblante qu'on croirait d'eau. Il recule quand on s'en approche.
+    if (!sky && !hand && isEyeInWater == 0) {
+        float heat = airDust() * gDay * (1.0 - rainStrength);
+        float graze = 1.0 - smoothstep(0.004, 0.035, -dir.y);
+        float far_ = smoothstep(45.0, 110.0, len) * (1.0 - smoothstep(300.0, 420.0, len));
+        float m = heat * graze * far_ * smoothstep(0.002, -0.002, dir.y);
+        if (m > 0.01) {
+            float wave = sin(dir.x * 420.0 + frameTimeCounter * 3.1) * sin(dir.z * 380.0 - frameTimeCounter * 2.3);
+            vec3 mirrored = normalize(vec3(dir.x, max(-dir.y, 0.003) + 0.002 * wave, dir.z));
+            color = mix(color, skyAt(mirrored), m * (0.65 + 0.15 * wave));
+        }
+    }
+#endif
 
 #if CLOUD_STEPS > 0
     // Le ciel en volume (demi-écran, lissé sur quatre prises) ; jamais sur ce qui est plus près que lui.
@@ -342,6 +357,25 @@ void main() {
                 float glow = lit * gDay * (0.2 * (1.0 - 0.9 * back) + 1.8 * pow(max(mu, 0.0), 4.0) * (1.0 - 0.8 * back))
                            * (1.0 - 2.0 * rainStrength);
                 color += gLightColor * mote * glow * 0.7;
+            }
+        }
+#endif
+#if DIAMOND_DUST > 0
+        // La poussière de diamant : par grand froid sec et clair, au soleil, l'air est plein de minuscules cristaux de
+        // glace qui s'allument un à un, surtout en regardant vers le soleil.
+        {
+            float frozen = (1.0 - smoothstep(0.0, 0.25, airHeat)) * gDay * (1.0 - smoothstep(0.05, 0.3, rainStrength));
+            if (frozen > 0.01 && isEyeInWater == 0 && dot(gLightColor, vec3(1.0)) > 0.01) {
+                float dist;
+                float mote = moteAlong(dir, min(len, 16.0), 0.55, 0.6, 16.0, dist);
+                if (mote > 0.0) {
+                    vec3 p = gbufferModelViewInverse[3].xyz + dir * dist;
+                    vec3 cellId = floor(p + cameraPosition);
+                    // Chaque cristal ne renvoie le soleil qu'un instant, quand sa face passe dans le bon angle.
+                    float flash = pow(max(sin(frameTimeCounter * (1.5 + 2.0 * moteHash(cellId, 9.0)) + moteHash(cellId, 8.0) * 40.0), 0.0), 12.0);
+                    float mu = max(dot(dir, gLightDir), 0.0);
+                    color += gLightColor * mote * frozen * (0.6 * flash + 2.0 * pow(mu, 4.0) * (0.3 + flash));
+                }
             }
         }
 #endif
