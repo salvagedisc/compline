@@ -13,6 +13,7 @@ interface Props {
   zoom: number | null
   onZoom: (i: number | null) => void
   prioritaire?: boolean
+  expose?: boolean // the whole picture beside the caption, over a dark blurred copy of itself
 }
 
 /** Whatever stands over the picture: a detail point behind one of these is hidden (it stays in the caption's list). */
@@ -47,7 +48,7 @@ function useDegager(scene: React.RefObject<HTMLDivElement | null>, n: number) {
 /** Scale used to bring a detail of half-width r (fraction of the picture width) up close. */
 const echelle = (r: number) => Math.min(3.4, Math.max(1.6, 0.3 / r))
 
-export function Plan({ capture, alt, zooms = [], zoom, onZoom, prioritaire = true }: Props) {
+export function Plan({ capture, alt, zooms = [], zoom, onZoom, prioritaire = true, expose = false }: Props) {
   const { w, h } = image(capture).img
   const a = w / h
   const z = zoom === null ? null : zooms[zoom]
@@ -71,7 +72,9 @@ export function Plan({ capture, alt, zooms = [], zoom, onZoom, prioritaire = tru
   const flou = apercu(capture)
 
   return (
-    <div ref={scene} className={`scene scene-plan${z ? ' zoomee' : ''}`} onClick={z ? () => onZoom(null) : undefined}>
+    <>
+    {expose && <div className="scene-fond-sombre fond-expose" aria-hidden="true"><Capture nom={capture} alt="" sizes={TAILLES_PLAN} /></div>}
+    <div ref={scene} className={`scene scene-plan${expose ? ' expose' : ''}${z ? ' zoomee' : ''}`} onClick={z ? () => onZoom(null) : undefined}>
       {flou && <div className="scene-flou" style={{ backgroundImage: `url(${flou})` }} aria-hidden="true" />}
       <div className="cadre" style={style as React.CSSProperties}>
         <div className="derive">
@@ -80,7 +83,7 @@ export function Plan({ capture, alt, zooms = [], zoom, onZoom, prioritaire = tru
             <button
               key={d.label}
               type="button"
-              className={`detail${zoom === i ? ' actif' : ''}`}
+              className={`detail${zoom === i ? ' actif' : ''}${d.point ? ` point-${d.point}` : ''}`}
               style={{
                 '--x': d.x, '--y': d.y, '--r': d.r, '--ratio': d.ratio ?? 1,
               } as React.CSSProperties}
@@ -103,5 +106,6 @@ export function Plan({ capture, alt, zooms = [], zoom, onZoom, prioritaire = tru
         </p>
       )}
     </div>
+    </>
   )
 }

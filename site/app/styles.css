@@ -371,6 +371,32 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
 }
 .en-zoom .voile-bas { opacity: 0.3; }
 
+/* A picture whose message sits low takes its caption at the top; a book or menu capture is shown whole beside its
+   caption, so no writing of the game lies under the site's own. On phones the picture is a band above the caption. */
+.fond-expose { display: none; }
+@media (min-width: 761px) and (min-height: 521px) {
+  .mise-haut .cartouche { bottom: auto; top: calc(var(--haut) + 3vh); }
+  .mise-haut .voile-bas {
+    background:
+      linear-gradient(rgba(8, 10, 14, 0.85) 0%, rgba(8, 10, 14, 0.4) 34%, transparent 58%),
+      linear-gradient(to right, rgba(8, 10, 14, 0.55) 0%, transparent 46%);
+  }
+  .fond-expose { display: block; }
+  .mise-expose .voile-bas { display: none; }
+  .mise-expose .cartouche { width: min(400px, 30vw); }
+  .scene-plan.expose {
+    left: max(36vw, calc(var(--g) + 440px)); right: var(--g);
+    top: calc(var(--haut) + 2vh); bottom: calc(var(--bas) + 8px);
+  }
+  .scene-plan.expose .cadre {
+    width: min(100cqw, calc(100cqh * var(--a))); height: min(100cqh, calc(100cqw / var(--a)));
+    outline: 1px solid rgba(244, 207, 148, 0.22); outline-offset: 6px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
+  .scene-plan.expose.zoomee .cadre { outline-color: transparent; }
+  .scene-plan.expose .derive { animation: none; }
+}
+
 /* Details inside the picture: a numbered point, and corner marks around the region on hover. */
 .detail {
   position: absolute;
@@ -417,6 +443,7 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
   opacity: 0; transition: opacity 0.3s;
 }
 .detail:hover .detail-nom { opacity: 1; }
+.point-dessus .detail-point, .point-dessus .detail-nom { top: -22px; }
 .zoomee { cursor: zoom-out; }
 .zoom-legende {
   position: absolute; left: 50%; bottom: calc(var(--bas) + 12px); transform: translateX(-50%);
@@ -560,7 +587,7 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
 }
 
 /* Metal: ingots on a rising stair. */
-.paliers { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(200px, 1fr); grid-template-rows: auto 1fr; gap: clamp(18px, 3.4vh, 30px) 4vw; align-content: start; }
+.paliers { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(200px, 1fr); grid-template-rows: max-content auto; gap: clamp(18px, 3.4vh, 30px) 4vw; align-content: start; }
 .paliers-escalier { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 6px; min-height: clamp(150px, 26vh, 230px); border-bottom: 1px solid var(--trait-fort); padding-bottom: 14px; }
 .palier {
   flex: 1; display: grid; justify-items: center; gap: 6px; text-align: center;
@@ -747,6 +774,11 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
 .journal-cran[aria-current='step'] { color: var(--chandelle-2); }
 .journal-cran[aria-current='step']::after { background: var(--chandelle); border-color: var(--chandelle); box-shadow: 0 0 12px var(--chandelle); }
 .journal-cran.nouveau .journal-cran-date::after { content: ' · nouveau'; color: var(--chandelle-2); }
+/* Where the notches get narrow, only the open page keeps its title: the others would be cut to a few letters. */
+@media (max-width: 1180px) {
+  .journal-cran:not([aria-current='step']) .journal-cran-titre { opacity: 0; }
+  .journal-cran[aria-current='step'] .journal-cran-titre { overflow: visible; max-width: none; }
+}
 
 /* ———————————————————————————— Road map ———————————————————————————— */
 

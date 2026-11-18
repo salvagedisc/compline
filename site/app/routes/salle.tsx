@@ -109,7 +109,7 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
 
   let vue: React.ReactNode
   switch (m.type) {
-    case 'image': vue = <Plan capture={m.capture} alt={m.alt} zooms={zooms} zoom={zoom} onZoom={setZoom} />; break
+    case 'image': vue = <Plan capture={m.capture} alt={m.alt} zooms={zooms} zoom={zoom} onZoom={setZoom} expose={m.mise === 'expose'} />; break
     case 'comparer': {
       const s = m.scenes[scene]
       vue = <Comparer key={s.nom} avant={s.avant} apres={s.apres} avantNom={m.avantNom} apresNom={m.apresNom} alt={s.nom} />
@@ -122,7 +122,7 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
 
   const special = m.type === 'echelle' || m.type === 'zoo' || m.type === 'carte'
   return (
-    <div className={`chapitre chapitre-${m.type}${zoom !== null ? ' en-zoom' : ''}`}>
+    <div className={`chapitre chapitre-${m.type}${m.type === 'image' && m.mise ? ` mise-${m.mise}` : ''}${zoom !== null ? ' en-zoom' : ''}`}>
       {vue}
       {!special && <div className="voile-bas" aria-hidden="true" />}
       <section className={`cartouche${special ? ' a-cote' : ''}`} aria-labelledby="titre-chapitre">

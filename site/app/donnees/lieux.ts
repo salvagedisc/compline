@@ -15,10 +15,20 @@ export const STATUTS: Record<Statut, { nom: string; court: string }> = {
  * r is half its width as a fraction of the image width; ratio is its height over its width (1, a square,
  * when omitted). The detail is pushed back inside the image when it would overflow an edge.
  */
-export interface Zoom { x: number; y: number; r: number; ratio?: number; label: string }
+export interface Zoom {
+  x: number; y: number; r: number; ratio?: number; label: string
+  point?: 'dessus' // the numbered point sits just above the detail instead of on it, for writing or a game gauge
+}
+
+/**
+ * How a picture shares the screen with its caption. By default it fills the screen under the caption. 'haut' puts
+ * the caption at the top, for a picture whose message sits low; 'expose' shows the whole picture beside the caption,
+ * for book and menu captures whose writing must stay readable.
+ */
+export type Mise = 'haut' | 'expose'
 
 export type Media =
-  | { type: 'image'; capture: string; alt: string; zooms?: Zoom[]; provisoire?: boolean }
+  | { type: 'image'; capture: string; alt: string; zooms?: Zoom[]; mise?: Mise; provisoire?: boolean }
   | { type: 'comparer'; scenes: { nom: string; avant: string; apres: string }[]; avantNom: string; apresNom: string; provisoire?: boolean }
   | { type: 'echelle' }
   | { type: 'zoo' }
@@ -58,11 +68,11 @@ export const LIEUX: Lieu[] = [
         points: ['Environ 74 km² de terre', 'Climat réglé par la latitude', 'Mer tout autour'] },
       { id: 'bord', titre: 'Le bord gardé par la brume', statut: 'atester',
         texte: "Qui s'approche du bord est prévenu, puis ramené en arrière, à pied, à la nage ou en bateau.",
-        media: { type: 'image', capture: 'bord.jpg', alt: 'En barque à quelques dizaines de blocs du bord, le message de la brume affiché',
-          zooms: [{ x: 0.5, y: 0.745, r: 0.3, ratio: 0.3, label: 'Le message du bord' }] } },
+        media: { type: 'image', capture: 'bord.jpg', mise: 'haut', alt: 'En barque à quelques dizaines de blocs du bord, le message de la brume affiché',
+          zooms: [{ x: 0.5, y: 0.745, r: 0.3, ratio: 0.12, label: 'Le message du bord', point: 'dessus' }] } },
       { id: 'atlas', titre: "L'atlas dessiné à la main", statut: 'teste',
         texte: "Pas de coordonnées ni de minicarte : la carte se dessine pendant qu'on explore, et trains et navires y apparaissent.",
-        media: { type: 'image', capture: 'atlas-carte.jpg', alt: "L'atlas ouvert autour du point de départ : forêts, collines, rivières et rivages dessinés au fil de l'exploration" } },
+        media: { type: 'image', capture: 'atlas-carte.jpg', mise: 'expose', alt: "L'atlas ouvert autour du point de départ : forêts, collines, rivières et rivages dessinés au fil de l'exploration" } },
       { id: 'dinos', titre: 'Les dinosaures', statut: 'atester',
         texte: "Les dinosaures d'Archie vivent sur le disque. Apprivoisés, ils donnent les armures qui ouvrent les terres extrêmes.",
         media: { type: 'image', capture: 'dinos.jpg', alt: 'Un lushsaur et un obsidicératops dans une forêt de pins',
@@ -114,16 +124,16 @@ export const LIEUX: Lieu[] = [
       { id: 'temperature', titre: 'Le froid et la chaleur', statut: 'atester',
         texte: "La température dépend du biome, de l'heure et de l'altitude : plus on monte, plus il fait froid.",
         media: { type: 'image', capture: 'froid.jpg', alt: 'Dans la taïga enneigée, la jauge de température au milieu de la barre',
-          zooms: [{ x: 0.589, y: 0.864, r: 0.105, ratio: 0.5, label: 'Température, soif et faim' }] } },
+          zooms: [{ x: 0.589, y: 0.864, r: 0.105, ratio: 0.5, label: 'Température, soif et faim', point: 'dessus' }] } },
       { id: 'mort', titre: 'Chaque mort coûte un cœur', statut: 'atester',
         texte: "On perd un cœur à chaque mort, jusqu'à cinq ; des éclats de vie se trouvent dans le monde.",
         points: ['Pas de monstres ordinaires', 'Au plus huit créatures hostiles par joueur', 'Journées de 30 min, nuits de 15'],
-        media: { type: 'image', capture: 'mort-coeur.jpg', alt: 'Au réveil après une mort, il reste neuf cœurs',
-          zooms: [{ x: 0.42, y: 0.86, r: 0.19, ratio: 0.35, label: 'Neuf cœurs au réveil' }] } },
+        media: { type: 'image', capture: 'mort-coeur.jpg', mise: 'haut', alt: 'Au réveil après une mort, il reste neuf cœurs',
+          zooms: [{ x: 0.42, y: 0.86, r: 0.19, ratio: 0.35, label: 'Neuf cœurs au réveil', point: 'dessus' }] } },
       { id: 'xp', titre: "Pas d'expérience", statut: 'atester',
         texte: "Les outils s'usent et se réparent à l'enclume ; le savoir se trouve dans des livres, pas dans des niveaux.",
         media: { type: 'image', capture: 'ecran-avec.jpg', alt: "La barre d'action sans barre d'expérience",
-          zooms: [{ x: 0.5, y: 0.907, r: 0.19, ratio: 0.45, label: "Pas de barre d'expérience" }] } },
+          zooms: [{ x: 0.5, y: 0.907, r: 0.19, ratio: 0.45, label: "Pas de barre d'expérience", point: 'dessus' }] } },
       { id: 'ecran', titre: "L'interface s'efface", statut: 'atester',
         texte: "Après six secondes sans geste, la barre et les jauges disparaissent ; elles reviennent au moindre danger.",
         media: { type: 'comparer', avantNom: 'En action', apresNom: 'Au repos', scenes: [
@@ -155,10 +165,10 @@ export const LIEUX: Lieu[] = [
         media: { type: 'image', capture: 'mini-jeu-riviere.jpg', alt: 'Mini-jeu de pêche', provisoire: true } },
       { id: 'catalogue', titre: 'Le catalogue', statut: 'atester',
         texte: "Chaque prise se range avec sa rareté, son biome et ses records ; trophées et aquarium à la clé.",
-        media: { type: 'image', capture: 'peche-catalogue.jpg', alt: 'Le guide de pêche : les poissons du coin à gauche, toutes les espèces à droite, les prises déjà faites dessinées en couleur' } },
+        media: { type: 'image', capture: 'peche-catalogue.jpg', mise: 'expose', alt: 'Le guide de pêche : les poissons du coin à gauche, toutes les espèces à droite, les prises déjà faites dessinées en couleur' } },
       { id: 'fiche', titre: 'Où pêcher quoi', statut: 'atester',
         texte: "Biome, profondeur, heure, météo et appât décident de ce qui mord.",
-        media: { type: 'image', capture: 'peche-fiche.jpg', alt: 'La fiche du poisson-chat vaseux : peu commun, marais, en surface, préfère l\'appât des eaux' } },
+        media: { type: 'image', capture: 'peche-fiche.jpg', mise: 'expose', alt: 'La fiche du poisson-chat vaseux : peu commun, marais, en surface, préfère l\'appât des eaux' } },
     ],
   },
   {
@@ -186,10 +196,10 @@ export const LIEUX: Lieu[] = [
         texte: "Apercevoir, photographier, apprivoiser ou héberger, maîtriser." },
       { id: 'guide', titre: 'Le guide', statut: 'atester',
         texte: "Touche J, marque-page vert : les bêtes en 3D, une silhouette à l'encre tant qu'on ne les a pas vues.",
-        media: { type: 'image', capture: 'zoo-guide.jpg', alt: "Le guide ouvert sur le zoo : les quatre tampons à gauche, les quatre familles et leurs compteurs à droite" } },
+        media: { type: 'image', capture: 'zoo-guide.jpg', mise: 'expose', alt: "Le guide ouvert sur le zoo : les quatre tampons à gauche, les quatre familles et leurs compteurs à droite" } },
       { id: 'grandbleu', titre: 'Le Grand bleu', statut: 'atester',
         texte: '96 espèces marines à recenser, sans compter les poissons du catalogue de pêche.',
-        media: { type: 'image', capture: 'zoo-grand-bleu.jpg', alt: "Première page du Grand bleu : les bêtes pas encore vues restent des silhouettes, nommées « ??? »" } },
+        media: { type: 'image', capture: 'zoo-grand-bleu.jpg', mise: 'expose', alt: "Première page du Grand bleu : les bêtes pas encore vues restent des silhouettes, nommées « ??? »" } },
     ],
   },
 ]
