@@ -103,6 +103,8 @@
 #define SNOW_DETAIL 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
+// Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.
+#define LABPBR 1 // [0 1]
 #define SPECULAR_STRENGTH 1.0 // [0.0 0.25 0.5 0.75 1.0 1.25 1.5 2.0]
 #define FROST 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]

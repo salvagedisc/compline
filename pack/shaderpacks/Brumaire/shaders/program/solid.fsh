@@ -109,6 +109,7 @@ void main() {
     lm = lightCoord(light);
 #elif defined PROGRAM_TERRAIN || defined PROGRAM_WATER
     // Sur le terrain, l'alpha du sommet porte l'occlusion (separateAo).
+    float pbrAo = 1.0;
 #if defined PROGRAM_TERRAIN && RELIEF > 0
     // Le relief des blocs (lib/relief.glsl) : sur les blocs pleins, le sable et les blocs partiels, pas sur les plantes,
     // les feuillages, l'eau, la glace, le verre ni ce qui éclaire.
@@ -117,25 +118,43 @@ void main() {
     vec2 reliefUv = vUv;
     vec3 reliefN = normal;
     float reliefShade = 0.0;
+    bool sprite = vSpriteHalf.x > 1e-6 && vSpriteHalf.y > 1e-6;
+    // Un pack labPBR donne ses propres cartes : elles valent pour tous les blocs (pas l'eau), à toute distance ; sans
+    // lui, le relief est tiré de la clarté des textures, sur les blocs pleins, le sable et les blocs partiels.
+    bool pbr = false;
+#if LABPBR > 0
+    pbr = sprite && vMat != 6 && labPbrPresent(vUv);
+    gPbrHeight = pbr;
+#endif
     float reliefFade = (1.0 - smoothstep(RELIEF_RANGE * 0.6, RELIEF_RANGE, length(vPos)))
-                     * float((vMat == 0 || vMat == 12 || vMat == 14) && vSpriteHalf.x > 1e-6 && vSpriteHalf.y > 1e-6);
-    if (reliefFade > 0.0) {
+                     * float((pbr || vMat == 0 || vMat == 12 || vMat == 14) && sprite);
+    float reliefLight = pbr ? 1.0 : reliefFade;
+    if (reliefLight > 0.0) {
         Sprite sp = Sprite(vSpriteMid, vSpriteHalf, 1.0 / vec2(atlasSize));
         float mean = luma(textureLod(gtexture, vUv, 4.0).rgb);
         vec3 t = normalize(vTangent.xyz - normal * dot(normal, vTangent.xyz));
         vec3 b = cross(normal, t) * (vTangent.w < 0.0 ? -1.0 : 1.0);
         mat3 tbn = mat3(t, b, normal);
-        float h;
-        reliefUv = reliefParallax(sp, vUv, normalize(-vPos) * tbn, mean, reliefFade, h);
-        reliefN = reliefNormal(sp, reliefUv, t, b, normal, mean, reliefFade);
-        reliefShade = reliefShadow(sp, reliefUv, h, gLightDir * tbn, mean, reliefFade);
+        float h = 1.0;
+        if (reliefFade > 0.0) {
+            reliefUv = reliefParallax(sp, vUv, normalize(-vPos) * tbn, mean, reliefFade, h);
+            reliefN = reliefNormal(sp, reliefUv, t, b, normal, mean, reliefFade);
+            reliefShade = reliefShadow(sp, reliefUv, h, gLightDir * tbn, mean, reliefFade);
+        }
+#if LABPBR > 0
+        if (pbr) {
+            vec4 nm = textureGrad(normals, reliefUv, uvDx, uvDy);
+            reliefN = normalize(tbn * labPbrNormal(nm));
+            pbrAo = nm.b;
+        }
+#endif
     }
     vec4 color = textureGrad(gtexture, reliefUv, uvDx, uvDy);
 #else
     vec4 color = texture(gtexture, vUv);
 #endif
     color.rgb *= vTint.rgb;
-    ao = vTint.a;
+    ao = vTint.a * pbrAo;
 #else
     vec4 color = texture(gtexture, vUv) * vTint;
 #endif
@@ -218,6 +237,20 @@ void main() {
     // Un métal sombre (netherite) reste sombre dans ses reflets ; un métal clair (fer, or) reflète presque tout.
     f0 = mix(vec3(0.04), clamp(albedo * 1.7, 0.04, 1.0), surf.metal);
     if (vSurf == 10 || vSurf == 14) f0 = vec3(0.08);
+#if RELIEF > 0 && LABPBR > 0
+    // La carte de matière d'un pack labPBR remplace la table : lissé, réflectance ou métal, émission.
+    if (pbr) {
+        vec4 sm = textureGrad(specular, reliefUv, uvDx, uvDy);
+        if (any(greaterThan(sm, vec4(0.002)))) {
+            surf.rough = (1.0 - sm.r) * (1.0 - sm.r);
+            surf.metal = sm.g * 255.0 >= 229.5 ? 1.0 : 0.0;
+            surf.gloss = (1.0 - surf.rough) * 0.55;
+            surf.sheen = 0.0;
+            f0 = surf.metal > 0.5 ? clamp(albedo * 1.7, 0.04, 1.0) : vec3(sm.g);
+            if (sm.a * 255.0 < 254.5) texelGlow = max(texelGlow, sm.a * 1.6);
+        }
+    }
+#endif
     albedo *= 1.0 - 0.65 * surf.metal;
 #endif
 #if defined PROGRAM_TERRAIN
@@ -330,7 +363,7 @@ void main() {
     float indirect;
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
 #if defined PROGRAM_TERRAIN && RELIEF > 0
-    if (reliefFade > 0.0) {
+    if (reliefLight > 0.0) {
         // La lumière directe suit la pente du texel (rapportée à celle de la face, dont l'ombre est déjà comptée) et
         // l'ombre propre du relief ; la lumière du ciel baisse un peu dans les texels qui se détournent du dehors.
         float geoL = dot(normal, gLightDir);
@@ -360,7 +393,7 @@ void main() {
     {
         vec3 nS = normal;
 #if RELIEF > 0
-        if (reliefFade > 0.0) nS = reliefN;
+        if (reliefLight > 0.0) nS = reliefN;
 #endif
         if (snowBump > 0.0) nS = snowN;
         float rough = mix(surf.rough, 0.10, clamp(gloss, 0.0, 1.0) * float(wet > 0.0));

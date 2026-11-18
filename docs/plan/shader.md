@@ -187,6 +187,16 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Wet ground** turns smooth as it soaks: the sun draws a bright streak on a wet road or a puddle.
 - Snow, packed ice and sand get their own roughness from their family.
 
+## Resource pack PBR maps
+
+With a resource pack in the labPBR format (`LABPBR`, needs `RELIEF`), Iris binds its `_n` and `_s` maps as `normals` and `specular`. A face whose normal map is neither all black nor a full flat normal (the neutral maps Iris binds without a pack) is taken as having maps, on every block but water and at any distance:
+
+- the normal (rg, z rebuilt) replaces the relief drawn from the texture, and the occlusion (b) multiplies the vertex occlusion;
+- the height (a) drives the parallax and the self-shadow instead of the texel brightness, within `RELIEF_RANGE`;
+- the specular map replaces the material table: perceptual smoothness (r) gives the roughness, reflectance (g) the F0 below 230 and a metal above, emission (a, below 255) makes the texel glow.
+
+A face with a specular map but no normal map is not detected and keeps the table.
+
 ## Block relief
 
 Without a normal-map resource pack, `lib/relief.glsl` draws a relief from the textures themselves, on full blocks, sand and partial blocks (not on plants, leaves, water, ice, glass or glowing blocks), within `RELIEF_RANGE` blocks (24 by default; it fades over the last 40 %).
