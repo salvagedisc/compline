@@ -57,7 +57,10 @@ public enum ComplineModule {
     APPROCHE("approche", null, bus -> io.github.salvagedisc.compline.approche.ApprocheModule.start(bus)),
     /** Le repos au foyer : l'effet « Reposé » près d'un feu, sous un toit, selon le confort de la maison (client et
      *  serveur : l'effet est enregistré des deux côtés). Aucun mod requis. */
-    REPOS("repos", null, bus -> io.github.salvagedisc.compline.repos.ReposModule.start(bus));
+    REPOS("repos", null, bus -> io.github.salvagedisc.compline.repos.ReposModule.start(bus)),
+    /** La tannerie : chevalet, cuve à tan et séchoir, de la peau brute au cuir (client et serveur : blocs et objets
+     *  enregistrés des deux côtés). Aucun mod requis ; l'écorce est celle de Farmer's Delight, le gras celui de Naturalist. */
+    TANNERIE("tannerie", null, bus -> io.github.salvagedisc.compline.tannerie.TannerieModule.start(bus));
 
     private final String id;
     private final Dist side;

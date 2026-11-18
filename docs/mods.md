@@ -66,7 +66,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
 | Cold Sweat: Altitude | `cold-sweat-altitude` | ✅ (added 2026-10-25) | CS | Colder as you climb, sheltered areas, windproof lining; supports airships |
 | Thirst Was Reclaimed | `thirst-was-reclaimed` | ✅ | CS | Thirst |
-| Tannery: Better Leather | `tannery-better-leather` | ✅ (1.0.2, added 2026-10-29, not seen in game) | CS | The tannery: hides, tanning rack, bark and tanning barrel, sinew, fat, studded leather; satchels removed, translated into French ([0014](decisions/0014-tannery.md), [tannery](plan/tannerie.md)) |
 | Reliable Backpacks | `reliable-backpacks` | ✅ (added 2026-10-26) | CS | A single simple bag, three rows, worn on the back (Curios), placeable ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Comforts | `comforts` | ✅ (back on 2026-10-26) | CS | Sleeping bag and hammock ([0012](decisions/0012-sacs-piles-jours.md)) |
 | Sensible Stackables | `sensible-stackables` | ✅ (added 2026-10-26) | CS | Stack sizes by kind of item, set by the `compline:pile/N` tags ([0012](decisions/0012-sacs-piles-jours.md)) |

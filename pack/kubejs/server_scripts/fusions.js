@@ -26,10 +26,6 @@ const FUSIONS = {
   'naturalist:cooked_clam_meat': 'hybrid_aquatic:cooked_clam',
   'naturalist:crab_meat': 'hybrid_aquatic:raw_crab',
   'naturalist:cooked_crab_meat': 'hybrid_aquatic:cooked_crab',
-  // Tannerie : l'écorce que la planche tire des bûches et la graisse des sangliers et des
-  // baleines servent à tanner.
-  'farmersdelight:tree_bark': 'tannery:wood_bark',
-  'naturalist:fat': 'tannery:animal_fat',
   // Autres : une seule corde (celle de Supplementaries, en lin, tri_recettes.js), une pépite
   // de cuivre, un éclat de diamant, un bâton lumineux, une dent de requin.
   'farmersdelight:rope': 'supplementaries:rope',
