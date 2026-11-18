@@ -36,6 +36,10 @@ public final class ComplineConfig {
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
     private static final ModConfigSpec.DoubleValue CLIMAT_SEASON_STRENGTH;
+    private static final ModConfigSpec.DoubleValue CLIMAT_SNOW_COLD;
+    private static final ModConfigSpec.DoubleValue CLIMAT_SNOW_WET;
+    private static final ModConfigSpec.DoubleValue CLIMAT_SAND_THIRST;
+    private static final ModConfigSpec.BooleanValue CLIMAT_STORM_VISUALS;
     private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
     private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
     private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
@@ -120,6 +124,14 @@ public final class ComplineConfig {
                         o -> o instanceof String text && ResourceLocation.tryParse(text) != null);
         client.pop();
 
+        client.comment("Module climat (client) : ce qu'on voit des tempêtes.").push("climat");
+        CLIMAT_STORM_VISUALS = client
+                .comment("Vrai : dans une tempête de sable, la poussière vole avec le vent du pack et la brume se ferme et prend la",
+                        "couleur du sable ; dans une tempête de neige, la neige est soufflée et la brume blanchit. Faux : rien de plus",
+                        "que la neige du jeu (le froid et la soif restent).")
+                .define("stormVisuals", true);
+        client.pop();
+
         CLIENT_SPEC = client.build();
 
         ModConfigSpec.Builder common = new ModConfigSpec.Builder();
@@ -202,6 +214,19 @@ public final class ComplineConfig {
                         "+0,25 au cœur de l'été dans un biome tempéré) multiplié par ce nombre, puis compté en unités de Cold Sweat",
                         "(1 = 25 °C). 1,5 : l'hiver retire environ 15 à 17 °C, l'été ajoute environ 9 °C. 0 : aucune saison.")
                 .defineInRange("seasonStrength", 1.5, 0.0, 4.0);
+        CLIMAT_SNOW_COLD = common
+                .comment("Froid de la neige qui tombe sur soi, à découvert, en unités de Cold Sweat (1 = 25 °C). 0,12 : environ 3 °C",
+                        "sous une neige simple ; deux fois et demie plus (environ 7,5 °C) sous une tempête de neige (neige et orage).")
+                .defineInRange("snowCold", 0.12, 0.0, 1.0);
+        CLIMAT_SNOW_WET = common
+                .comment("Froid de la neige posée sur les vêtements quand on en est couvert (elle se pose en une minute et demie",
+                        "de neige, une demi-minute de tempête, et fond à l'abri). 0,2 : environ 5 °C.")
+                .defineInRange("snowWet", 0.2, 0.0, 1.0);
+        CLIMAT_SAND_THIRST = common
+                .comment("Fatigue de soif (Thirst Was Reclaimed) ajoutée chaque seconde à découvert dans une tempête de sable sous",
+                        "l'orage, 60 % sans orage. 4 de fatigue font une goutte : 0,15, une goutte toutes les 27 secondes en plus de la",
+                        "soif ordinaire. 0 : le sable n'assoiffe pas.")
+                .defineInRange("sandThirst", 0.15, 0.0, 4.0);
         common.pop();
         COMMON_SPEC = common.build();
     }
@@ -301,6 +326,22 @@ public final class ComplineConfig {
 
     public static double climatSeasonStrength() {
         return climatEnabled() ? read(COMMON_SPEC, CLIMAT_SEASON_STRENGTH) : 0.0;
+    }
+
+    public static double climatSnowCold() {
+        return read(COMMON_SPEC, CLIMAT_SNOW_COLD);
+    }
+
+    public static double climatSnowWet() {
+        return read(COMMON_SPEC, CLIMAT_SNOW_WET);
+    }
+
+    public static double climatSandThirst() {
+        return read(COMMON_SPEC, CLIMAT_SAND_THIRST);
+    }
+
+    public static boolean climatStormVisuals() {
+        return read(CLIENT_SPEC, CLIMAT_STORM_VISUALS);
     }
 
     public static boolean ecranEnabled() {
