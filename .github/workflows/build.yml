@@ -1,9 +1,16 @@
 name: build
 
+# Branch pushes are checked through their pull request only: a push to a branch with an open PR
+# used to run every job twice (push + pull_request), which emptied the monthly Actions minutes.
 on:
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:

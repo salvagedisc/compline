@@ -8,13 +8,11 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="salvagedisc"
 description='''
-Liens entre les mods du modpack Compline, en modules activables (config/compline-client.toml, config/compline-common.toml).
-ciel : la lune d'Enhanced Celestials redessinée sous ATMOSPHERICS, cache de brume vidé après un changement de biome.
-xp : l'enclume sans niveaux d'expérience (son coût devient une usure), barre d'expérience cachée.
-horizon : le paysage lointain de Distant Horizons caché par la brume et révélé là où elle se lève.
-clairiere : feu de veille et lanterne de clairière, la brume se lève autour d'eux.
-dissipateur : bloc Create qui éclaircit un grand disque (avec Create).
-rendu : sous Iris, les clairières et le vent du pack donnés au pack de shaders de Compline.
+Liens entre les mods du modpack Compline et fonctions maison, en modules. Interrupteurs : config/compline-client.toml, config/compline-common.toml et, pour ceux que le serveur impose, serverconfig/compline-server.toml du monde.
+Ciel et brume : ciel (la lune sous ATMOSPHERICS), horizon (Distant Horizons suit la brume), clairiere et dissipateur (la brume se lève autour d'un feu, d'une lanterne ou d'un bloc Create), bord (le cercle du monde), rendu (la brume et le vent donnés au shader Brumaire sous Iris).
+Interface : ecran (l'interface s'efface au repos), xp (l'enclume sans niveaux), zoo (les tampons du guide d'Archie pour toutes les bêtes).
+Monde : vent, monuments (Ancient Remnants posés sur un bon terrain), filons (gisements liés au biome), climat (les saisons d'Ecliptic sur la température de Cold Sweat).
+Survie : outils (le bon outil pour le bois et la roche), patine (armures salies), acier_noir, minage (une pioche bien forgée rend plus), approche (les bêtes sentent le vent), repos (le repos au foyer), tannerie.
 Chaque module ne se charge que si les mods qu'il relie sont présents.
 '''
 

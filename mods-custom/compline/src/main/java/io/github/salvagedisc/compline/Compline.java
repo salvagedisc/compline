@@ -20,6 +20,8 @@ public final class Compline {
     public Compline(IEventBus modBus, ModContainer container, Dist dist) {
         container.registerConfig(ModConfig.Type.COMMON, ComplineConfig.COMMON_SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ComplineConfig.CLIENT_SPEC);
+        container.registerConfig(ModConfig.Type.SERVER, ComplineConfig.SERVER_SPEC);
+        BootCheck.register();
 
         for (ComplineModule module : ComplineModule.values()) {
             if (!module.runsOn(dist)) {

@@ -34,8 +34,12 @@ public record Clearing(BlockPos center, int radius, long since, long until) {
 
     /** Rayon dégagé à l'heure {@code time}, quand un anneau passe tous les {@code ringTicks} ticks. */
     public int radiusAt(long time, int ringTicks) {
-        int opened = swept(time - since, ringTicks);
-        return closing() ? Math.max(0, Math.min(opened, radius - swept(time - until, ringTicks))) : opened;
+        if (!closing() || time < until) {
+            return swept(time - since, ringTicks);
+        }
+        // La vague qui referme part du rayon atteint à la fermeture, pas du plein rayon : une lanterne reprise
+        // avant d'avoir tout dégagé ne continue pas d'ouvrir pendant que la brume revient.
+        return Math.max(0, swept(until - since, ringTicks) - swept(time - until, ringTicks));
     }
 
     /**
@@ -43,8 +47,10 @@ public record Clearing(BlockPos center, int radius, long since, long until) {
      * à chaque image ({@code time} compte la fraction du tick en cours).
      */
     public float smoothRadiusAt(double time, int ringTicks) {
-        float opened = sweptSmooth(time - since, ringTicks);
-        return closing() ? Math.max(0.0F, Math.min(opened, radius - sweptSmooth(time - until, ringTicks))) : opened;
+        if (!closing() || time < until) {
+            return sweptSmooth(time - since, ringTicks);
+        }
+        return Math.max(0.0F, sweptSmooth(until - since, ringTicks) - sweptSmooth(time - until, ringTicks));
     }
 
     private float sweptSmooth(double ticks, int ringTicks) {

@@ -60,5 +60,8 @@ RecipeViewerEvents.removeEntriesCompletely('item', event => {
     'wildernature:hippo_spawn_egg', 'wildernature:lion_spawn_egg', 'wildernature:turkey_spawn_egg',
     'wildernature:turkey_meat', 'wildernature:cooked_turkey_meat', 'wildernature:turkey_egg',
     'naturalist:duck_spawn_egg', 'naturalist:duck', 'naturalist:cooked_duck', 'naturalist:duck_bucket', 'naturalist:duck_egg'
-  ].forEach(id => event.remove(id))
+  ].forEach(id => {
+    // Un identifiant disparu ne doit pas arrêter le reste de la liste.
+    try { event.remove(id) } catch (e) { console.warn(`EMI : ${id} introuvable, ignoré`) }
+  })
 })

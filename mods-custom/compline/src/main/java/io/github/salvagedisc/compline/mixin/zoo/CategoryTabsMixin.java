@@ -25,7 +25,7 @@ public abstract class CategoryTabsMixin {
     @Final
     private Map<CategoryData, AbstractWidget> categorySubTabs;
 
-    @Inject(method = "<init>", at = @At("TAIL"))
+    @Inject(method = "<init>", require = 0, at = @At("TAIL"))
     private void compline$addZooTabs(float width, float height, AnimatedBookFlipper flipper, GuidebookData data, CallbackInfo ci) {
         ZooGuide.decorate((CategoryTabs) (Object) this, book, categorySubTabs);
     }

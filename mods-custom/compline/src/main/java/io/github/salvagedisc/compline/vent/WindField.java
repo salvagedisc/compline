@@ -15,7 +15,10 @@ public final class WindField {
     public static double angle(long gameTime, float thunder) {
         double seconds = gameTime / 20.0;
         double drift = seconds / 900.0;
-        return 2.0 * Math.PI * smoothNoise(drift) * 1.6 + 0.6 * smoothNoise(seconds / 140.0 + 31.7) * (0.3 + thunder);
+        // Direction d'un vecteur fait de deux bruits centrés : toutes les directions sont aussi probables
+        // (un seul bruit étiré sur 1,6 tour revenait deux fois sur la même moitié du cercle).
+        double base = Math.atan2(smoothNoise(drift + 57.31) - 0.5, smoothNoise(drift) - 0.5);
+        return base + 0.6 * smoothNoise(seconds / 140.0 + 31.7) * (0.3 + thunder);
     }
 
     /** Force du vent (environ 0,2 par temps calme, plus de 1 sous l'orage en altitude). */

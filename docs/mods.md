@@ -156,7 +156,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | EMI | `emi` | ✅ | C (S optional) | Recipe viewer, without panels or search (`pack/defaultconfigs/emi.css`): R and U on an item open its recipes |
 | JEI | `jei` | ✅ (hidden, stay on 19.51.0.418) | CS | Bridge for mods that only have a JEI plugin; from 19.52, Envelope 0.7.5's mixin no longer finds its target and the game crashes when entering a world |
-| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | CS | Tooltips; KubeJS bundles it anyway, so it cannot leave the pack |
+| Better Advanced Tooltips | `better-advanced-tooltips` | ✅ | C | Tooltips; KubeJS declares it as an optional client dependency, client only |
 | Pick Up Notifier | `pick-up-notifier` | ✅ | C | Discreet list of picked-up items |
 | Mouse Tweaks | `mouse-tweaks` | ✅ | C | Mouse-driven inventory |
 | Controlling + Searchables | `controlling`, `searchables` | ✅ | C | Search in key bindings |

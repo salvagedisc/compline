@@ -15,12 +15,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(value = ChorusoatlArmorItem.class, remap = false)
 public abstract class ChorusoatlArmorMixin {
-    @Inject(method = "hasAbility", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hasAbility", require = 0, at = @At("HEAD"), cancellable = true)
     private void compline$noAbility(CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(false);
     }
 
-    @Inject(method = "activateServerSetAbility", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "activateServerSetAbility", require = 0, at = @At("HEAD"), cancellable = true)
     private void compline$noTeleport(ServerPlayer player, Vec3 position, Vec3 look, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(false);
     }

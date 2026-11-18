@@ -212,10 +212,10 @@ const TRI_OBJETS_PECHE = [
   'starcatcher:sea_bass'
 ]
 
-// Surface Samples : l'essai du mod, les affleurements du Nether et des métaux absents du pack. Les affleurements
+// Surface Samples : les affleurements du Nether et des métaux absents du pack. Les affleurements
 // gardés sont posés au-dessus des filons (docs/plan/progression.md).
 const TRI_OBJETS_AFFLEUREMENTS = [
-  'surfacesamples:test_sample', 'surfacesamples:testitem', 'surfacesamples:aluminum_ore_sample',
+  'surfacesamples:aluminum_ore_sample',
   'surfacesamples:lead_ore_sample', 'surfacesamples:nickel_ore_sample', 'surfacesamples:osmium_ore_sample',
   'surfacesamples:silver_ore_sample', 'surfacesamples:tin_ore_sample', 'surfacesamples:uranium_ore_sample',
   'surfacesamples:fluorite_ore_sample', 'surfacesamples:nether_gold_ore_sample',

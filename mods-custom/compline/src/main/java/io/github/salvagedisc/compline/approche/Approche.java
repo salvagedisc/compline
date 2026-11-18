@@ -2,6 +2,7 @@ package io.github.salvagedisc.compline.approche;
 
 import io.github.salvagedisc.compline.ComplineConfig;
 import io.github.salvagedisc.compline.vent.WindField;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -43,7 +44,8 @@ public final class Approche {
 
     /** État des bêtes inquiètes (serveur seulement ; une bête déchargée sort d'elle-même de la table). */
     private static final Map<PathfinderMob, Alarm> ALARMS = new WeakHashMap<>();
-    private static final Map<UUID, Long> HINTS = new WeakHashMap<>();
+    // Une entrée par joueur venu sur le serveur : quelques octets, sans besoin de ménage.
+    private static final Map<UUID, Long> HINTS = new HashMap<>();
 
     enum Sense {
         ODEUR, VUE, OUIE
@@ -86,13 +88,15 @@ public final class Approche {
             if (players.isEmpty()) {
                 continue;
             }
+            // Le vent ne dépend que du monde : calculé une fois par passe, pas une fois par bête.
+            WindNow wind = WindNow.of(level);
             for (ServerPlayer player : players) {
                 if (player.isSpectator() || player.isCreative() || !player.isAlive() || player.isInvisible()) {
                     continue;
                 }
                 AABB box = player.getBoundingBox().inflate(reach, 12.0, reach);
                 for (PathfinderMob mob : level.getEntitiesOfClass(PathfinderMob.class, box, Approche::wild)) {
-                    Sense sense = perceives(level, mob, player);
+                    Sense sense = perceives(level, mob, player, wind);
                     if (sense != null) {
                         startle(level, mob, player, sense);
                     }
@@ -118,8 +122,17 @@ public final class Approche {
                 Math.max(ComplineConfig.approcheSightRange() * 1.3, ComplineConfig.approcheHearingRange() * 2.0));
     }
 
+    /** Le vent de fond d'un monde à cet instant : direction (cosinus, sinus), pluie et orage. */
+    record WindNow(long gameTime, float rain, float thunder, double cos, double sin) {
+        static WindNow of(ServerLevel level) {
+            float thunder = level.getThunderLevel(1.0F);
+            double angle = WindField.angle(level.getGameTime(), thunder);
+            return new WindNow(level.getGameTime(), level.getRainLevel(1.0F), thunder, Math.cos(angle), Math.sin(angle));
+        }
+    }
+
     /** Le sens par lequel la bête perçoit le joueur, ou {@code null}. */
-    static Sense perceives(ServerLevel level, PathfinderMob mob, ServerPlayer player) {
+    static Sense perceives(ServerLevel level, PathfinderMob mob, ServerPlayer player, WindNow wind) {
         Vec3 to = mob.position().subtract(player.position());
         double flat = Math.sqrt(to.x * to.x + to.z * to.z);
         double distance = to.length();
@@ -135,13 +148,10 @@ public final class Approche {
 
         // L'odeur, portée par le vent de fond du pack.
         if (flat > 0.5) {
-            float rain = level.getRainLevel(1.0F);
-            float thunder = level.getThunderLevel(1.0F);
-            double angle = WindField.angle(level.getGameTime(), thunder);
-            double along = (to.x * Math.cos(angle) + to.z * Math.sin(angle)) / flat;
+            double along = (to.x * wind.cos() + to.z * wind.sin()) / flat;
             if (along > SCENT_COS) {
-                float strength = WindField.strength(level.getGameTime(), rain, thunder, player.getY());
-                double carry = Math.min(1.3, 0.6 + 0.6 * strength) * (1.0 - 0.3 * rain);
+                float strength = WindField.strength(wind.gameTime(), wind.rain(), wind.thunder(), player.getY());
+                double carry = Math.min(1.3, 0.6 + 0.6 * strength) * (1.0 - 0.3 * wind.rain());
                 double cone = (along - SCENT_COS) / (1.0 - SCENT_COS);
                 double scent = ComplineConfig.approcheScentRange() * carry * (0.35 + 0.65 * cone);
                 if (distance < scent * wary) {

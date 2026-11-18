@@ -92,6 +92,11 @@ def createLibs = tasks.register('createLibs', Sync) {
 }
 
 dependencies {
+    // Tests unitaires de la logique pure (vent, clairières, bord) : aucun démarrage du jeu.
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     // Module ciel (client)
     compileOnly modrinth('atmospherics')
     compileOnly modrinth('enhanced-celestials-2-core')
@@ -148,4 +153,10 @@ neoForge.ideSyncTask generateModMetadata
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-Xlint:deprecation'
+}
+
+neoForge.addModdingDependenciesTo(sourceSets.test)
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
 }

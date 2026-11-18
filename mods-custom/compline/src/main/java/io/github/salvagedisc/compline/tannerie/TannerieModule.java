@@ -1,6 +1,7 @@
 package io.github.salvagedisc.compline.tannerie;
 
 import io.github.salvagedisc.compline.Compline;
+import io.github.salvagedisc.compline.commun.Foyers;
 import io.github.salvagedisc.compline.ComplineConfig;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -47,7 +48,7 @@ public final class TannerieModule {
     /** Les couteaux qui raclent, ceux de Farmer's Delight et des autres mods. */
     public static final TagKey<Item> COUTEAUX = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife"));
     /** Les feux qui sèchent le cuir, les mêmes que ceux du repos. */
-    public static final TagKey<Block> FOYERS = TagKey.create(Registries.BLOCK, id("foyers"));
+    public static final TagKey<Block> FOYERS = Foyers.TAG;
     /** Les bûches qui ne donnent pas d'écorce (déjà écorcées, ou tenues à part par un pack). */
     public static final TagKey<Block> SANS_ECORCE = TagKey.create(Registries.BLOCK, id("sans_ecorce"));
 

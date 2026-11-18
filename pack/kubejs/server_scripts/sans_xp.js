@@ -26,12 +26,20 @@ PlayerEvents.loggedIn(event => {
 //    est recopiée sans elle, sous le même identifiant (sorties, chances et durée gardées).
 const SANS_XP_PEPITE = 'create:experience_nugget'
 
+// Une sortie qui nomme l'objet d'un mod absent (Surface Samples prévoit le fragment de quartz
+// d'Overworld Quartz Ore) fait refuser toute la copie : on ne la recopie pas. Les fluides restent.
+function sansXpSortieValable(result) {
+  if (result.amount !== undefined) return true
+  const id = String(result.id || result.item || '')
+  return id.indexOf(':') > 0 && Platform.isLoaded(id.split(':')[0])
+}
+
 ServerEvents.recipes(event => {
   const copies = []
   event.forEachRecipe({ type: 'create:crushing' }, recipe => {
     const json = JSON.parse(recipe.json.toString())
     const results = json.results || []
-    const kept = results.filter(result => (result.id || result.item) !== SANS_XP_PEPITE)
+    const kept = results.filter(result => (result.id || result.item) !== SANS_XP_PEPITE).filter(sansXpSortieValable)
     if (kept.length === results.length) return
     delete json['neoforge:conditions'] // la recette est chargée : ses conditions sont remplies
     json.results = kept

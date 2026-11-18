@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.spongepowered.asm.service.MixinService;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
@@ -13,6 +16,10 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
  * N'applique un mixin que si les mods qu'il vise sont présents. La table {@link #REQUIRED} associe
  * chaque mixin (nom relatif au paquet {@code mixin}) aux identifiants de mods qu'il suppose.
  * Un mixin absent de la table s'applique toujours.
+ *
+ * <p>Les mixins qui visent l'intérieur d'un mod tiers listent aussi, dans {@link #MEMBERS}, les champs et méthodes
+ * qu'ils supposent : si une mise à jour du mod en retire un, le mixin est écarté avec un avertissement dans le journal
+ * au lieu d'empêcher le jeu de démarrer (un {@code @Shadow} manquant plante même avec {@code require = 0}).
  */
 public final class ComplineMixinPlugin implements IMixinConfigPlugin {
     private static final String PACKAGE = "io.github.salvagedisc.compline.mixin.";
@@ -41,6 +48,12 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
             Map.entry("zoo.CategoryTabsMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("zoo.GuidebookDataMixin", List.of(ModIds.ARCHIES_DINOSAURS)));
 
+    private static final Map<String, List<String>> MEMBERS = Map.of(
+            "horizon.ChunkyAccessorMixin", List.of("listenerBound", "tryRunFirstTimeSetup"),
+            "dinos.ChorusoatlArmorMixin", List.of("hasAbility", "activateServerSetAbility"),
+            "zoo.CategoryTabsMixin", List.of("book", "categorySubTabs", "<init>"),
+            "zoo.GuidebookDataMixin", List.of("parseXML", "loadData"));
+
     @Override
     public void onLoad(String mixinPackage) {
     }
@@ -60,7 +73,35 @@ public final class ComplineMixinPlugin implements IMixinConfigPlugin {
                 return false;
             }
         }
+        List<String> members = MEMBERS.get(shortName);
+        if (members != null) {
+            String missing = missingMember(targetClassName, members);
+            if (missing != null) {
+                Compline.LOGGER.warn("Mixin {} écarté : {} introuvable dans {} (le mod a-t-il changé de version ?)",
+                        shortName, missing, targetClassName);
+                return false;
+            }
+        }
         return true;
+    }
+
+    /** Le premier des champs ou méthodes attendus qui manque à la classe visée ; {@code null} si tous sont là. */
+    private static String missingMember(String targetClassName, List<String> members) {
+        ClassNode node;
+        try {
+            node = MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
+        } catch (Throwable e) {
+            // Impossible de lire la classe ici : on laisse Mixin décider, comme avant.
+            return null;
+        }
+        for (String member : members) {
+            boolean found = node.fields.stream().map((FieldNode field) -> field.name).anyMatch(member::equals)
+                    || node.methods.stream().map((MethodNode method) -> method.name).anyMatch(member::equals);
+            if (!found) {
+                return member;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -36,6 +36,16 @@ final class ClearingSources extends SavedData {
         setDirty();
     }
 
+    /** Vrai si une clairière est posée en {@code center}. */
+    boolean has(BlockPos center) {
+        for (Clearing clearing : clearings) {
+            if (clearing.center().equals(center)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     Clearing add(BlockPos center, int radius, long since) {
         clearings.removeIf(clearing -> clearing.center().equals(center));
         Clearing clearing = new Clearing(center.immutable(), radius, since, Clearing.OPEN);

@@ -26,7 +26,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 ## Principles
 
-- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/compline-client.toml` for `ciel`, `config/compline-common.toml` for `xp`. The values are re-read at each use, so a change in game takes effect immediately.
+- **One module = one switch.** Each module has its `enabled` boolean in the config: `config/compline-client.toml` for `ciel`, `config/compline-common.toml` for most modules, and the world's `serverconfig/compline-server.toml` for the switches the client must share with the server (`xp`, `outils`): NeoForge sends that file to every player who joins. The values are re-read at each use, so a change in game takes effect immediately. Exceptions: `dissipateur` follows the `clairiere` switch; `monuments`, `acier_noir`, `minage` and `filons` have none, because they register content (a structure type, items, a tool tier, a feature) that saved worlds and the pack's data name, or are pure data rules; turning them off would break a world rather than disable a feature.
 - **A module loads only if its mods are present.** At startup, `Compline` checks with `ModList` the mods each module depends on. It writes "Module X chargé" or "Module X ignoré" to the log. Mixins go through `ComplineMixinPlugin`, which applies them only if the targeted mods are in `LoadingModList`. The only hard dependency is NeoForge.
 - **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible.
 
@@ -116,7 +116,7 @@ The mixin applies on both sides: the client also refuses to take the item if it 
 
 **The hidden bar.** On the client, `XpClient` cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump meter (`JUMP_METER`) is another layer and stays. The space the bar left is taken back: `Gui.leftHeight` and `rightHeight`, reset to 39 at each frame, are set to 34 in the same event, just before the health and food layers read them. Hearts, armor, hunger, air and what mods stack above them with these fields (Thirst Was Reclaimed's thirst) come down 5 pixels, leaving one pixel above the hotbar's selection frame. Not while the jump meter is shown (on a horse), where everything keeps its vanilla height. Cold Sweat places its body temperature icon by itself: `pack/config/coldsweat/client.toml` moves it down by the same 5 pixels (`Body Temperature Icon Offset`, `Body Temperature Readout Offset`).
 
-Config (`compline-common.toml`, `[xp]` section): `enabled` (true), `hideBar` (true), `blockEnchantMerge` (false). The last two only matter if `enabled` is true. To roll back: `enabled = false` and delete `sans_xp.js`.
+Config (`serverconfig/compline-server.toml`, `[xp]` section): `enabled` (true), `blockEnchantMerge` (false); `compline-common.toml`, `[xp]` section: `hideBar` (true). The last two only matter if `enabled` is true. To roll back: `enabled = false` and delete `sans_xp.js`.
 
 ## `horizon` module
 
@@ -196,7 +196,7 @@ Verified on the test server on 2026-10-25: driven by a creative motor at 64 RPM 
 
 Server and client, no mod required ([first gestures](premiers-gestes.md)). With bare hands, you gather but you do not cut. A block needs a tool when it is in the `compline:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`, shipped in the jar) or when it would drop nothing without the correct tool (`BlockState.requiresCorrectToolForDrops()`: stone, ores, bricks, metal blocks). If the main-hand item is not correct for it (`ItemStack.isCorrectToolForDrops`), `PlayerEvent.BreakSpeed` sets the speed to 0 on both sides, so the client never predicts a break the server refuses, and `PlayerEvent.HarvestCheck` refuses the drops. On the client, a hint shows in the action bar at most every 40 ticks: « Il te faut une hache / une pioche / une pelle / une houe / un outil », chosen from the vanilla `mineable/*` tags, or « Ton outil n'est pas assez solide » when the held item is of the right kind but too weak. The `compline:sans_outil` tag keeps what grows (`#minecraft:sword_efficient`, bamboo, azaleas, a few mod plants) and snow breakable by hand. Creative players and `FakePlayer`s (Create deployers) are left alone. Both tags can be extended by datapack without recompiling.
 
-Config (`compline-common.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back; client and server must agree).
+Config (`serverconfig/compline-server.toml`, `[outils]` section): `enabled` (true; false gives vanilla breaking back). The server sends it to the players, so a client can no longer disagree with it and stop mining altogether.
 
 ## `monuments` module
 

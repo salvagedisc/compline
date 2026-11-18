@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import net.irisshaders.iris.gl.uniform.UniformHolder;
 import net.irisshaders.iris.gl.uniform.UniformUpdateFrequency;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -61,6 +62,13 @@ public final class ShaderUniforms {
     private static final Vector4f WET_VALUE = new Vector4f();
     /** Par être vivant proche (identifiant) : à quel point ses pieds sont mouillés, où il était, quand on l'a vu. */
     private static final Map<Integer, double[]> WET = new HashMap<>();
+    private static final long FORGET_MILLIS = 10_000L;
+    private static List<Entity> wakeNear = List.of();
+    private static List<LivingEntity> pushNear = List.of();
+    private static long wakeTick = Long.MIN_VALUE;
+    private static long pushTick = Long.MIN_VALUE;
+    private static ClientLevel wakeLevel;
+    private static ClientLevel pushLevel;
     private static final Vector4f[] WAKE_VALUES = new Vector4f[WAKES];
     private static final Vector4f[] WAKE_SPEEDS = new Vector4f[2];
     private static final double[] EDGES = new double[CLEARINGS];
@@ -181,15 +189,23 @@ public final class ShaderUniforms {
      * sa barque le fait pour lui.
      */
     private static void wakes(ClientLevel level, Vec3 camera, float partial) {
-        AABB around = new AABB(camera, camera).inflate(WAKE_RANGE);
-        List<Entity> near = level.getEntitiesOfClass(Entity.class, around,
-                e -> e.isAlive() && !e.isSpectator() && !e.isPassenger()
-                        && (e instanceof LivingEntity || e instanceof VehicleEntity));
-        near.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        // La liste des plus proches change au rythme du jeu (20 fois par seconde), pas de l'image : on la garde d'un tick.
+        if (wakeTick != level.getGameTime() || wakeLevel != level) {
+            wakeTick = level.getGameTime();
+            wakeLevel = level;
+            AABB around = new AABB(camera, camera).inflate(WAKE_RANGE);
+            wakeNear = level.getEntitiesOfClass(Entity.class, around,
+                    e -> e.isAlive() && !e.isSpectator() && !e.isPassenger()
+                            && (e instanceof LivingEntity || e instanceof VehicleEntity));
+            wakeNear.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        }
         int slot = 0;
-        for (Entity entity : near) {
+        for (Entity entity : wakeNear) {
             if (slot >= WAKES) {
                 break;
+            }
+            if (entity.isRemoved()) {
+                continue;
             }
             Vec3 at = entity.getPosition(partial);
             float surface = waterSurface(level, at, entity.getBbHeight());
@@ -235,23 +251,31 @@ public final class ShaderUniforms {
      * leurs pieds sont mouillés (1 en sortant de l'eau, 0 secs) : le pack laisse des pas humides derrière eux.
      */
     private static void pushes(ClientLevel level, Vec3 camera, float partial, double seconds) {
-        AABB around = new AABB(camera, camera).inflate(PUSH_RANGE);
-        List<LivingEntity> near = level.getEntitiesOfClass(LivingEntity.class, around,
-                e -> e.isAlive() && !e.isSpectator());
-        near.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        if (pushTick != level.getGameTime() || pushLevel != level) {
+            pushTick = level.getGameTime();
+            pushLevel = level;
+            AABB around = new AABB(camera, camera).inflate(PUSH_RANGE);
+            pushNear = level.getEntitiesOfClass(LivingEntity.class, around, e -> e.isAlive() && !e.isSpectator());
+            pushNear.sort(Comparator.comparingDouble(e -> e.distanceToSqr(camera)));
+        }
         int slot = 0;
-        for (LivingEntity entity : near) {
+        for (LivingEntity entity : pushNear) {
             if (slot >= PUSHES) {
                 break;
+            }
+            if (entity.isRemoved()) {
+                continue;
             }
             Vec3 feet = entity.getPosition(partial).subtract(camera);
             float radius = Math.min(entity.getBbWidth() * 0.75F + 0.35F, 2.0F);
             WET_VALUE.setComponent(slot, (float) wetness(entity, seconds));
             PUSH_VALUES[slot++].set((float) feet.x, (float) feet.y, (float) feet.z, radius);
         }
-        // Un être qu'on n'a plus vu depuis une dizaine de secondes est oublié : il aura séché.
+        // Un être qu'on n'a plus vu depuis dix secondes est oublié : il aura séché (en temps réel, quelle que soit la
+        // cadence d'images).
+        long now = Util.getMillis();
         for (Iterator<double[]> it = WET.values().iterator(); it.hasNext(); ) {
-            if (frame - it.next()[3] > 600) {
+            if (now - it.next()[3] > FORGET_MILLIS) {
                 it.remove();
             }
         }
@@ -262,7 +286,7 @@ public final class ShaderUniforms {
      * chaque bloc parcouru et à chaque seconde passée hors de l'eau.
      */
     private static double wetness(LivingEntity entity, double seconds) {
-        double[] state = WET.computeIfAbsent(entity.getId(), id -> new double[] {0.0, entity.getX(), entity.getZ(), frame});
+        double[] state = WET.computeIfAbsent(entity.getId(), id -> new double[] {0.0, entity.getX(), entity.getZ(), Util.getMillis()});
         if (entity.isInWater()) {
             state[0] = 1.0;
         } else if (state[0] > 0.0) {
@@ -271,7 +295,7 @@ public final class ShaderUniforms {
         }
         state[1] = entity.getX();
         state[2] = entity.getZ();
-        state[3] = frame;
+        state[3] = Util.getMillis();
         return state[0];
     }
 

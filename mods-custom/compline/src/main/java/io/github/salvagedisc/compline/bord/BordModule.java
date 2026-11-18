@@ -109,8 +109,13 @@ public final class BordModule {
                 || player.level().dimension() != Level.OVERWORLD) {
             return;
         }
+        // Les parcelles de Sable sont loin hors du disque : un joueur bien à l'intérieur est à terre, et la
+        // question à Sable n'est posée que près du bord ou à bord d'un navire.
+        if (!ComplineConfig.bordEnabled() || !current.isNear(player.getX(), player.getZ())) {
+            return;
+        }
         Vec3 position = Ships.worldPosition(player);
-        if (!current.isNear(position.x, position.z) || !ComplineConfig.bordEnabled()) {
+        if (!current.isNear(position.x, position.z)) {
             return;
         }
         Vec3 back = current.inside(position.x, position.y, position.z);

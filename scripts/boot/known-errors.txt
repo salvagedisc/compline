@@ -1,0 +1,25 @@
+# Errors the boot check accepts (scripts/boot/server.mjs). One regular expression per line,
+# matched against the error line without its timestamp; a comment above each says why it is harmless.
+# Anything else written at ERROR level by the server or KubeJS fails the check.
+
+# wdutils declares an access transformer file it does not ship; nothing to transform, nothing missing.
+Access transformer file META-INF/accesstransformer\.cfg provided by mod wdutils does not exist
+# Mixin configs that also target client classes probe them on the dedicated server; Mixin catches it
+# (a WARN "Error loading class" follows) and the server starts normally.
+RuntimeDistCleaner/DISTXFORM\]: Attempted to load class net/minecraft/client/.* for invalid dist DEDICATED_SERVER
+# Optional compat data of other mods for mods that are not in the pack: Steam 'n' Rails tracks for
+# other wood mods, Surface Samples ore samples for other ore mods, Sable physics for The Aether,
+# Starcatcher fish from a newer Hybrid Aquatic, Spawn's anthill archaeology loot.
+loot_table\]:railways:blocks/track_.* - Unknown registry key
+loot_table\]:surfacesamples:blocks/[a-z_]+_ore_sample - Unknown registry key
+loot_table\]:spawn:archaeology/anthill - Unknown registry key
+Couldn't read tag list sable:bouncy from sable:tags/block/bouncy\.json in data pack mod/sablephysicscompat
+Sable/\]: Error while loading physics block properties entry: .*aether:
+specified in data map for registry starcatcher:fish doesn't exist
+# Overgeared disables the vanilla diamond tool and armour recipes by replacing them with air, on purpose:
+# diamond gear comes from its smithing recipes.
+(Error parsing|Parsing error loading) recipe minecraft:diamond_(sword|axe|pickaxe|shovel|hoe|helmet|chestplate|leggings|boots): .*minecraft:air
+# Thirst's Create compat recipes use an older Create fluid format; only those two compat recipes are lost.
+(Error parsing|Parsing error loading) recipe thirst:compat/create/(cactus|terracotta_water_bowl):
+# Koopa's Critters ships an advancement for a cat variant it does not register.
+Couldn't load advancements: \[koopascritters:kopje_cat\]

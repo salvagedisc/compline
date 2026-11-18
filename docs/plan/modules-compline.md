@@ -80,7 +80,7 @@ Revised on 2026-11-15: the zoo lives **inside Archie's guidebook** (Archie's Din
 - Other mods behind the guidebook: Alex's Mobs' animal dictionary stays hidden; Questlog keeps one chapter that points to the guidebook and its milestones.
 - Kept out: catching rare creatures, money, visitors, random crates, cleanliness or disease gauges.
 
-**Risks.** The guidebook graft (two mixins on Archie's `GuidebookData` and `CategoryTabs`) targets a closed, very young mod and may have to be redone when it updates; the module logs and skips what it cannot find. If the mod goes away, the stamps stay in the players' data and only the display has to be rebuilt.
+**Risks.** The guidebook graft (two mixins on Archie's `GuidebookData` and `CategoryTabs`) targets a closed, very young mod and may have to be redone when it updates. `ComplineMixinPlugin` checks that the fields and methods they use still exist and skips them with a warning in the log otherwise, and their injections are optional (`require = 0`): an update can leave the guide without the zoo, not stop the game. If the mod goes away, the stamps stay in the players' data and only the display has to be rebuilt.
 
 ## `vie`: the clearing grows when it is lived in
 

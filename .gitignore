@@ -4,5 +4,6 @@ node_modules/
 .cache/
 mods-custom/compline/build/
 mods-custom/compline/run/
+mods-custom/compline/logs/
 .gradle/
 __pycache__/
