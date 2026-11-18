@@ -26,6 +26,7 @@ Requirements: Node.js ≥ 20, [packwiz](https://packwiz.infra.link/installation/
 | `cd pack && packwiz refresh` | Regenerates `index.toml` after any change to `pack/` (CI fails if it is stale) | yes |
 | `cd pack && packwiz mr export` | Builds the `.mrpack` locally | yes |
 | `cd mods-custom/compline && ./gradlew build` | Builds the custom `compline` mod; copy the jar to `pack/mods/` and bump `mod_version` in `gradle.properties` | yes |
+| `cd mods-custom/compline && ./gradlew test` | JUnit tests of the mod's pure logic (wind, clearings, world edge), without starting the game; also run by `build` | yes |
 | `node scripts/boot/server.mjs` | Boot check: starts a dedicated server with every server-side mod, config and KubeJS script plus the freshly built `compline` jar (`--jar`), fails on a crash, on an error in the logs not listed in `scripts/boot/known-errors.txt`, or on an item of the KubeJS removal lists that does not exist; needs JDK 21 and about 6 GB of memory | yes (`boot` workflow, PRs touching the pack or the mod) |
 
 Manual scripts, run from the repository root and committed with their output (never run in CI):
