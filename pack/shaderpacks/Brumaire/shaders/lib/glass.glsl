@@ -43,7 +43,7 @@ vec4 connectGlass(vec4 color, vec3 world, vec3 n, vec2 uv, vec3 tint) {
 vec4 connectGlass(vec4 color, vec3 world, vec3 n, vec2 uv, vec3 tint) { return color; }
 #endif
 
-#if WINDOW_FROST > 0 && defined FSH
+#if WINDOW_FROST > 0 && defined FSH && (defined PROGRAM_TERRAIN || defined PROGRAM_WATER)
 /**
  * Le givre d'une vitre, au seizième de bloc : il part du cadre et avance vers le milieu, plus loin le long de traits en
  * diagonale (des fougères). Une verrière raccordée ne givre que sur son pourtour. cold : froid (0..1).
