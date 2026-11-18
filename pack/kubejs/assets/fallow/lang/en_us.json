@@ -1,0 +1,17 @@
+{
+  "fallow.sante.coeur_ancien": "The Elderheart leaves a shard of life in your hands.",
+  "fallow.sante.plein": "Your health is already whole: %s hearts.",
+  "fallow.sante.rendu": "A heart returns to you: %s / %s.",
+  "fallow.sante.reveil": "You wake up weaker. %s hearts remain.",
+  "fallow.sante.reveil_plancher": "You wake up. %s hearts remain; you will grow no weaker.",
+  "item.fallow.eclat_de_vie": "Shard of Life",
+  "item.fallow.eclat_de_vie.compteur": "Hearts: %s / %s",
+  "item.fallow.eclat_de_vie.tooltip": "Restores a lost heart.",
+  "fallow.monument.gardien": "The monument's guardian rises before you.",
+  "fallow.monument.eveil": "The Elderheart awakens: its blessing awaits whoever comes near.",
+  "fallow.monument.savoir.architect_reach": "Inside the Elderheart, knowledge of the mountain dwarves: a template to forge diamond.",
+  "fallow.isolant.obsidiceratops": "Full set: withstands the heat of the burning heart",
+  "fallow.isolant.chorusoatl": "Full set: withstands the cold of the heights",
+  "fallow.isolant.coralosaur": "Full set: water no longer chills, withstands the cold of the depths",
+  "fallow.isolant.therimoss": "Full set: withstands the heat of the arid lands"
+}

@@ -1,0 +1,22 @@
+{
+  "type": "overgeared:forging",
+  "tier": "above_a",
+  "category": "ARMORS",
+  "hammering": 5,
+  "has_polishing": false,
+  "key": {
+    "#": {
+      "item": "fallow:plaque_d_acier_noir"
+    }
+  },
+  "need_quenching": false,
+  "pattern": [
+    "###",
+    "# #"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fallow:casque_en_acier_noir"
+  },
+  "show_notification": false
+}

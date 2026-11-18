@@ -21,7 +21,7 @@ The pack gets its own shader pack, **Brumaire** (working name), written from scr
 - **Off by default**: Iris does not support Apple Silicon Macs officially. Default Options writes `config/iris.properties` on first launch with Brumaire selected and shaders off; a player turns them on in the video settings or with K.
 - **Light on the machine**: one lighting pass in the geometry programs, one shadow map, one full-screen pass for the mist, one for the tone curve. No deferred lighting, no temporal pass. Three profiles (Léger, Équilibré, Beau).
 - **The mist is the shader's**: a layer that thins with height above the ground around the player, holes where a clearing is open, and a ring at the horizon that never lifts, with or without Distant Horizons. Under a shader pack the fog of the game and ATMOSPHERICS' preset are not drawn.
-- **The `rendu` module of the `compline` mod** gives the shader what GLSL cannot read: the open clearings, the height of the ground, and the wind of Where Winds Blow (its own plant sway is off under a shader pack, the shader redoes it). Without the mod the shader pack still works, with fallbacks.
+- **The `rendu` module of the `fallow` mod** gives the shader what GLSL cannot read: the open clearings, the height of the ground, and the wind of Where Winds Blow (its own plant sway is off under a shader pack, the shader redoes it). Without the mod the shader pack still works, with fallbacks.
 - **Olive greens** (point 5 of the cleanup list) are a setting of the shader, applied to the colour of terrain.
 
 Details and settings: [shader](../plan/shader.md).

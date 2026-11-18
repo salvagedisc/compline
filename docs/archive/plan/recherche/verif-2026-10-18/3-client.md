@@ -64,10 +64,10 @@ NML texture variants: `data/nomansland/mixed_litter/variants/` covers bee, cat, 
 ### 1.3 ATMOSPHERICS: the clearing is recognised, on one condition
 
 - Presets are shipped in a resource pack, under `assets/atmospherics/preset/*.json` (read through `listResources("preset")`, namespace `atmospherics`, suffix `.json`) [jar].
-- They are **applied automatically**, once per fingerprint, when no screen is open (`tickResourcePackPresetPrompt` → `applyPresetAndReload`) [jar]. The fingerprint is the list of preset IDs: a preset modified under the same name **is not reapplied**. It must be renamed at each version (`compline_v1.json`, `compline_v2.json`…) [jar, inferred].
+- They are **applied automatically**, once per fingerprint, when no screen is open (`tickResourcePackPresetPrompt` → `applyPresetAndReload`) [jar]. The fingerprint is the list of preset IDs: a preset modified under the same name **is not reapplied**. It must be renamed at each version (`fallow_v1.json`, `fallow_v2.json`…) [jar, inferred].
 - The active preset is copied into `config/ambientfog/biome_fog.json`. Local presets go in `config/ambientfog/presets/` [jar].
-- Biomes are indexed by **ID string**, so `compline:clairiere` is accepted as is. A biome absent from the preset receives a default profile (`computeIfAbsent`), copied from `minecraft:plains` [jar].
-- The base preset contains only 65 vanilla biomes, **no NML biome** [jar]. The Compline preset must name them one by one, otherwise all NML forests get the mist of the plains.
+- Biomes are indexed by **ID string**, so `fallow:clairiere` is accepted as is. A biome absent from the preset receives a default profile (`computeIfAbsent`), copied from `minecraft:plains` [jar].
+- The base preset contains only 65 vanilla biomes, **no NML biome** [jar]. The Fallow preset must name them one by one, otherwise all NML forests get the mist of the plains.
 - The biome is read by `ClientLevel.getBiome` at the player's position, blended on a grid of 4-block cells (`BiomeBlendUtil`, `GRID_RADIUS` 1, step of 4) [jar].
 
 ### 1.4 /fillbiome: the mist follows, with a delay
@@ -132,7 +132,7 @@ The visual grouping "all planks" is therefore done through order (creative tabs 
 
 | # | Link | Tool | Detail |
 |---|---|---|---|
-| L1 | The clearing in ATMOSPHERICS | resource pack `compline-ambiance`, `assets/atmospherics/preset/compline_v1.json` | An entry `compline:clairiere` (almost no mist, frank light) and **one entry per NML biome**. Rename the file at each version (1.3) |
+| L1 | The clearing in ATMOSPHERICS | resource pack `fallow-ambiance`, `assets/atmospherics/preset/fallow_v1.json` | An entry `fallow:clairiere` (almost no mist, frank light) and **one entry per NML biome**. Rename the file at each version (1.3) |
 | L2 | The clearing in AmbientSounds | biome tag in a KubeJS datapack (`kubejs/data/minecraft/tags/worldgen/biome/is_forest.json` or `c:` tag) | AmbientSounds associates sounds by tag (`#is_forest`) or by name fragment [jar]. Without a tag, the clearing is silent |
 | L3 | The clearing in colours | the biome JSON (`grass_color`, `foliage_color`, `water_color`, `effects`) | This is the safest route. Polytone can refine it through `biome_modifiers`, without `fog_color` or `sky_color` (3.3) |
 | L4 | Mixed Litter and Fresh Animations | `config/mixed_litter-startup.toml`, shipped by Default Options | Choose species by species. Proposal: NML keeps pig, cow, mooshroom, sheep and squid (the trailer's style), FA takes chicken and rabbit if they look better in game |
@@ -141,10 +141,10 @@ The visual grouping "all planks" is therefore done through order (creative tabs 
 | L7 | A single source of variants | `pack/config/quark-common.toml`, `"Variant Animal Textures" = false` (line 173) | Duplicates NML; its textures break FA's UVs (3.5) |
 | L8 | A single source of fireflies, waterfalls, dust | Particular, Subtle Effects, NML configs | See table 3.7: one owner per effect |
 | L9 | NML leaves in Particular | Particular config (leaf block → particle mapping) | No NML wood is listed there [jar]: willow, walnut, maple fall as generic leaves. Add the entries, or keep Falling Leaves Plus as a fallback |
-| L10 | EMI index order by theme | `kubejs/assets/compline/emi/index/stacks/compline.json` (`added` + `after`), or `creative` index + KubeJS creative tabs | Replaces the plan's "groups" |
-| L11 | Create gestures visible in EMI | `emi/recipe/additions/*.json` of type `emi:world_interaction` and `emi:info` | For Compline's "in-world" recipes (clearing, rituals, ruin blueprints) that no mod declares |
+| L10 | EMI index order by theme | `kubejs/assets/fallow/emi/index/stacks/fallow.json` (`added` + `after`), or `creative` index + KubeJS creative tabs | Replaces the plan's "groups" |
+| L11 | Create gestures visible in EMI | `emi/recipe/additions/*.json` of type `emi:world_interaction` and `emi:info` | For Fallow's "in-world" recipes (clearing, rituals, ruin blueprints) that no mod declares |
 | L12 | Blueprint recipes hidden then learned | AStages (EMI) **or** `RecipeViewerEvents.removeRecipes` (KubeJS, for everyone) | AStages allows "per player"; KubeJS alone hides for everyone |
-| L13 | Settings shipped once | Default Options: `config/defaultoptions/extra/` | Files are copied **only if missing** [jar]: they serve as a starting point and the player keeps their choices. Resource packs (`compline-ambiance`, FA, MB-3D, Better Leaves) are enabled by default (`DefaultResourcePacksHandler`) [jar] |
+| L13 | Settings shipped once | Default Options: `config/defaultoptions/extra/` | Files are copied **only if missing** [jar]: they serve as a starting point and the player keeps their choices. Resource packs (`fallow-ambiance`, FA, MB-3D, Better Leaves) are enabled by default (`DefaultResourcePacksHandler`) [jar] |
 | L14 | Camera Overhaul in first person | `cameraoverhaul.toml`: `general.enableInThirdPerson = false`, contexts `vehicles` and `mounts` at 0 | Leaves third person to SSR, and prevents the camera from tilting aboard airships (3.4) |
 | L15 | Spatial GUI away from books | its screen list | Exclude Wildex, the Ancient Remnants codex, Patchouli, Modonomicon, the atlas, and EMI's screens |
 | L16 | Enhanced Celestials moon under ATMOSPHERICS | **custom mod** (4.3) | KubeJS cannot touch sky rendering |
@@ -176,7 +176,7 @@ The visual grouping "all planks" is therefore done through order (creative tabs 
 
 - Polytone changes the fog colour through a `WrapOperation` on `gaussianSampleVec3` in `setupColor`, and the sky colour through a `WrapOperation` on `getSkyColor` [jar].
 - ATMOSPHERICS rewrites these values later (`TAIL` and `RETURN`) [jar]. What Polytone writes is overwritten [inferred].
-- So in the `compline-ambiance` pack, **no `fog_color`, `sky_color` or `fog_radius` on the Polytone side**. Polytone keeps only grass, leaves, water and particles.
+- So in the `fallow-ambiance` pack, **no `fog_color`, `sky_color` or `fog_radius` on the Polytone side**. Polytone keeps only grass, leaves, water and particles.
 
 ### 3.4 Four mods on the camera
 
@@ -279,7 +279,7 @@ Only NML's Friend Moon is handled by ATMOSPHERICS itself [jar]. EC events still 
 | ATMOSPHERICS preset | Name all NML biomes, version the file name | 1.3 |
 | MB-3D Items | Place under Amendments in the pack order | 3.9 |
 
-### 4.3 Add: a small custom mod "compline-ciel" (client, NeoForge 1.21.1)
+### 4.3 Add: a small custom mod "fallow-ciel" (client, NeoForge 1.21.1)
 
 KubeJS can do nothing about sky or moon rendering, nor about ATMOSPHERICS' cache. A client mod of about a hundred lines, with two mixins, would do three things:
 1. **Render the Enhanced Celestials moon under ATMOSPHERICS.** After ATMOSPHERICS' sky, read the active lunar event in EC's client API and redraw the moon with its colour, size and texture.
@@ -298,7 +298,7 @@ The first two points are necessary if the white moon and the clearing that "open
 ### 4.5 What is missing for the "Realism Craft" finish
 
 - **Footsteps by ground type**: nothing on NeoForge 1.21.1 replaces Presence Footsteps (3.6 for Dynamic Surroundings, §11.2 of the plan for Presence Footsteps). The footstep sounds of NML and Twigs blocks stay those of their material. A custom mod lead if the maintainer wants it: play a footstep sound per block tag. Not a priority.
-- **A single `compline-ambiance` pack** carrying together the ATMOSPHERICS presets, the Polytone `biome_modifiers`, the Particular leaf entries if it reads them as resources, and the client-side EMI overrides. Enabled by Default Options (L13).
+- **A single `fallow-ambiance` pack** carrying together the ATMOSPHERICS presets, the Polytone `biome_modifiers`, the Particular leaf entries if it reads them as resources, and the client-side EMI overrides. Enabled by Default Options (L13).
 - **The moon seen in the sky**, currently lost (3.8, 4.3).
 
 ---

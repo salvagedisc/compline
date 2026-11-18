@@ -1,0 +1,95 @@
+{
+  "type": "fallow:filon",
+  "config": {
+    "cibles": [
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        },
+        "state": {
+          "Name": "create:zinc_ore"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        },
+        "state": {
+          "Name": "create:deepslate_zinc_ore"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:andesite"
+        },
+        "state": {
+          "Name": "spelunkery:andesite_zinc_ore"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:diorite"
+        },
+        "state": {
+          "Name": "spelunkery:diorite_zinc_ore"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:granite"
+        },
+        "state": {
+          "Name": "spelunkery:granite_zinc_ore"
+        }
+      },
+      {
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:tuff"
+        },
+        "state": {
+          "Name": "spelunkery:tuff_zinc_ore"
+        }
+      }
+    ],
+    "bloc_brut": {
+      "Name": "create:raw_zinc_block"
+    },
+    "chance_brut": 0.02,
+    "longueur": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 18,
+      "max_inclusive": 30
+    },
+    "rayon": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 1.4,
+      "max_exclusive": 2.4
+    },
+    "densite": 0.4,
+    "profondeur": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 14,
+      "max_inclusive": 44
+    },
+    "y_min": -48,
+    "echantillon": {
+      "Name": "surfacesamples:zinc_ore_sample",
+      "Properties": {
+        "flavour": "stony",
+        "waterlogged": "false"
+      }
+    },
+    "affleurements": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 2,
+      "max_inclusive": 5
+    },
+    "etendue": 8
+  }
+}

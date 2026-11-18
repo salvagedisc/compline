@@ -14,7 +14,7 @@ import os
 import struct
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TARGET = os.path.join(ROOT, "pack/kubejs/data/compline/structure/chorusoatl.nbt")
+TARGET = os.path.join(ROOT, "pack/kubejs/data/fallow/structure/chorusoatl.nbt")
 DATA_VERSION = 3955  # Minecraft 1.21.1
 SIZE = (7, 6, 7)
 FLOOR, AIR = "regions_unexplored:deepslate_prismoss", "minecraft:air"

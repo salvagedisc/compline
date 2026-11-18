@@ -1,0 +1,9 @@
+{
+  "type": "overgeared:cooling",
+  "input": {
+    "item": "fallow:lingot_d_acier_noir_chauffe"
+  },
+  "output": {
+    "id": "fallow:lingot_d_acier_noir"
+  }
+}

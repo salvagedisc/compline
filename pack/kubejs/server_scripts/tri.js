@@ -1,4 +1,4 @@
-// Compline : tri du pack (docs/plan/tri-du-pack.md). Objets qui n'ont plus leur place :
+// Fallow : tri du pack (docs/plan/tri-du-pack.md). Objets qui n'ont plus leur place :
 // dimensions fermées (décision 0004), téléportation et repérage, armes de boss, doublons
 // d'un autre mod. Ils perdent leurs recettes et sortent du butin ; ils sont aussi cachés
 // d'EMI (client_scripts/tri.js, mêmes listes). Ids relevés dans le registre du serveur de test.
@@ -201,7 +201,7 @@ const TRI_OBJETS_DINOSAURES = [
   'ec_ad:theri_claw_netherite'
 ]
 
-// Starcatcher (décision 0034) : le bac de vente, sans monnaie dans Compline ; les prises de
+// Starcatcher (décision 0034) : le bac de vente, sans monnaie dans Fallow ; les prises de
 // l'End, qui n'existe plus ; sa rascasse et son bar, qu'Hybrid Aquatic a déjà. Leurs entrées de
 // pêche sont retirées par scripts/fishing/starcatcher_entries.py.
 const TRI_OBJETS_PECHE = [

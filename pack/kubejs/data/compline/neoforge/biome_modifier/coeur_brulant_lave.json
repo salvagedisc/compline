@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#minecraft:is_overworld",
-  "features": "compline:debris_pres_de_la_lave",
-  "step": "underground_ores"
-}

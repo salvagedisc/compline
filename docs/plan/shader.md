@@ -111,7 +111,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 
 ## Wind
 
-- Grass, flowers, crops, leaves and vines move with the pack's wind (`vent` module of the `compline` mod): a slow swell travelling downwind and a quicker quiver, stronger in the gusts that cross the landscape (`WIND_STRENGTH`). Sheltered plants (little sky light) stay still.
+- Grass, flowers, crops, leaves and vines move with the pack's wind (`vent` module of the `fallow` mod): a slow swell travelling downwind and a quicker quiver, stronger in the gusts that cross the landscape (`WIND_STRENGTH`). Sheltered plants (little sky light) stay still.
 - Grass and flowers lie down and part around the feet of the four living beings nearest the camera, the player included, even out of the wind.
 - Leaves brushed by one of those beings (walking along a hedge, standing on a canopy) lean away from it and quiver quickly while it stays against them, even out of the wind. Falling leaves stay Particular's particles: textured, they read better than leaves drawn by the shader, which were tried and dropped.
 - **Grass sheen** (`FOLIAGE_SHEEN`): each vertex of grass, flowers and leaves passes how far it is bent, relative to what its plant can bend (`vBend`), to the fragment. A bent blade shows its paler, yellower underside, more toward the tip, so the gusts cross a meadow in light waves and a trampled path stays paler.
@@ -165,7 +165,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Ice**: clear ice is drawn with the water, light blue, with the sky and the landscape mirrored in it, more at a low angle; packed and blue ice shine like a tarnished mirror (screen reflection, no ripples).
 - **Frost** (`FROST`): in a cool biome (taiga, windswept hills; barely in the plains, never in a warm one) on a clear night, grass blocks, grass, flowers and leaves that see the sky take a pale veil and a rime on their brightest texels, about a third of them at the coldest, following the drawing of the texture on the 1/16 grid. It forms from dusk, holds at sunrise and melts by mid-morning; none under rain, where snow already covers, or near a light.
 - **Footprints**: the player and the animals nearest to them leave a print every 0.7 block, left then right, on sand, snow blocks, snow layers and snow-covered ground. A print is a sole four pixels wide on the 1/16 grid, wider at the front than at the heel, turned in the walking direction and sized by the being's width. Its hollow is darker (bluish on snow, brown on sand) and its edges tilt the normal, so one side catches the light and the other falls in shade. A print records the foot's height, so a flying player or a block placed on top shows none. Prints fade over `TRACK_MINUTES` (4 by default), faster under rain or falling snow; the map covers 64 blocks around the camera, so a trail left farther away is forgotten when the player comes back (`TRACKS`).
-- **Wet prints**: a being that walks out of water (`brumaireWet`, from the `compline` mod) leaves wet soles on any ground, sand included, snow and ice excepted: darker and slightly glossy, fewer and fainter as its feet dry over some 24 blocks. Each print dries in about two minutes, faster in the sun, from its edges inward. The wetness is kept in the print's texel (`a` = tile + 256 × wetness 0..6). Under rain the ground is already wet and the prints are not drawn.
+- **Wet prints**: a being that walks out of water (`brumaireWet`, from the `fallow` mod) leaves wet soles on any ground, sand included, snow and ice excepted: darker and slightly glossy, fewer and fainter as its feet dry over some 24 blocks. Each print dries in about two minutes, faster in the sun, from its edges inward. The wetness is kept in the print's texel (`a` = tile + 256 × wetness 0..6). Under rain the ground is already wet and the prints are not drawn.
 - **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
 
 ## The finished image
@@ -235,14 +235,14 @@ Without a normal-map resource pack, `lib/relief.glsl` draws a relief from the te
 
 - A layer whose density halves about every 11 blocks above the ground around the player (`MIST_HEIGHT`). Barely there at noon (near air stays clear), more at night, thickest at dawn and dusk and in the rain; more in a humid biome, almost none near the player in a desert.
 - **Marched in volume near the player** (`FOG_STEPS`: 0, 8, 12, 16, 24 steps; 0 in the Very light profile, 8 in Light, 12 in Balanced, 16 in Beautiful) over `FOG_RANGE` blocks (48 to 128, 96 by default). The steps grow with the square of the distance (fine near the eye, coarse far away) and are shifted by a per-pixel dither that the temporal anti-aliasing averages. Each step is integrated exactly (Beer-Lambert over its length), so the result does not depend on the number of steps, only its detail does. With `FOG_STEPS` at 0 the former analytic veil comes back unchanged.
-- **Banks** (`FOG_BILLOWS`, 0 to 1.5): two octaves of the cloud noise, one wide (about 55 blocks) and one fine (about 16), shape the density into banks and holes. They drift with the wind of the `compline` mod (its direction and strength), the fine octave faster than the wide one, and slowly rise.
+- **Banks** (`FOG_BILLOWS`, 0 to 1.5): two octaves of the cloud noise, one wide (about 55 blocks) and one fine (about 16), shape the density into banks and holes. They drift with the wind of the `fallow` mod (its direction and strength), the fine octave faster than the wide one, and slowly rise.
 - **Sun and moon through it**: each step reads the shadow map (and the tint of stained glass) inside its range, so the mist is lit only where the light reaches: rays under the trees, shadow behind a wall, coloured beams behind a window. Forward scattering of the mist (two lobes, one forward and one backward) and of clear air (a sharper forward lobe) is computed per step: the air alone, even without mist, draws the rays where foliage cuts the sun. Both need `LIGHT_SHAFTS`.
 - **Block light in the mist** (`FOG_BLOCK_GLOW`, 0 to 2; needs `COLORED_LIGHT`): each step reads the coloured light volume, so a torch, a lantern or a lava pool wraps itself in a halo of its colour, stronger where the mist is dense. The light falls with the cube of its level, so a halo stays a few blocks wide.
 - **Cave haze** (`CAVE_HAZE`, 0 to 1.5): under the ground (the sky light the eye receives is low) a faint dust replaces the mist. It is invisible in the dark and only shows around torches and in the beams that fall through an opening.
 - Each open clearing (the four nearest) removes the mist inside a vertical cylinder of its radius, with a soft edge; the opening wave is followed. Standing in a clearing lifts part of the mist of the whole view (`MIST_LIFT`, 70 %).
 - **Beyond the marched range**, the rest of the layer is still integrated exactly, and a ring closes the horizon at the render distance, or at the Distant Horizons distance capped by `MIST_RING_MAX` (512 blocks). It does not lift. This far part takes the colour of the low sky in that direction: at sunset it glows on the side of the sun. It is applied first, then the marched near part in front of it.
 
-## What the `compline` mod gives the shader (`rendu` module)
+## What the `fallow` mod gives the shader (`rendu` module)
 
 A mixin on Iris adds uniforms any program may declare. Without the mod they read zero and the shader falls back.
 
@@ -265,7 +265,7 @@ A mixin on Iris adds uniforms any program may declare. Without the mod they read
 
 ## Verified on the bench (full pack, software rendering)
 
-The pack loads without error, day, sunset, night and rain render, a clearing opened with `/compline clairiere 32` opens the mist, a Create water wheel, a cow, glowstone and a lantern are lit at night. Frame rate was not measured: the bench has no graphics card.
+The pack loads without error, day, sunset, night and rain render, a clearing opened with `/fallow clairiere 32` opens the mist, a Create water wheel, a cow, glowstone and a lantern are lit at night. Frame rate was not measured: the bench has no graphics card.
 
 ## To do
 

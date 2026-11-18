@@ -7,9 +7,9 @@ import { join } from 'node:path';
 import { run } from '../sync-from-instance.mjs';
 
 async function fixture() {
-  const root = await mkdtemp(join(tmpdir(), 'compline-cli-'));
+  const root = await mkdtemp(join(tmpdir(), 'fallow-cli-'));
   const packDir = join(root, 'pack');
-  const inst = join(root, 'Compline test');
+  const inst = join(root, 'Fallow test');
   await mkdir(join(packDir, 'mods'), { recursive: true });
   await mkdir(join(inst, 'mods'), { recursive: true });
   await writeFile(join(inst, 'mods', 'new.jar'), 'NEW');
@@ -78,7 +78,7 @@ test('--configs copies config files before refresh, even without mod changes', a
 });
 
 test('empty instance mods folder aborts instead of proposing to remove the whole pack', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'compline-empty-'));
+  const root = await mkdtemp(join(tmpdir(), 'fallow-empty-'));
   const packDir = join(root, 'pack');
   const inst = join(root, 'inst');
   await mkdir(join(packDir, 'mods'), { recursive: true });

@@ -1,4 +1,4 @@
-// Compline : objets fondus dans celui d'un autre mod, cachés d'EMI. Mêmes ids que les clés de
+// Fallow : objets fondus dans celui d'un autre mod, cachés d'EMI. Mêmes ids que les clés de
 // FUSIONS dans server_scripts/fusions.js.
 RecipeViewerEvents.removeEntriesCompletely('item', event => {
   [

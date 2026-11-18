@@ -1,10 +1,10 @@
 # Seasons and day length (research of 2026-10-26)
 
-Compline pack, Minecraft 1.21.1, NeoForge 21.1.265. The mention "jar" means: read with `javap`. Nothing is tested in game.
+Fallow pack, Minecraft 1.21.1, NeoForge 21.1.265. The mention "jar" means: read with `javap`. Nothing is tested in game.
 
 ## Short answers
 
-- **A.** Ecliptic is not "better" at everything. It is richer (snow, DH, KubeJS API). Serene is simpler and better integrated with Cold Sweat, Polytone and Better Days. For Compline: **keep Ecliptic**, Serene as a fallback.
+- **A.** Ecliptic is not "better" at everything. It is richer (snow, DH, KubeJS API). Serene is simpler and better integrated with Cold Sweat, Polytone and Better Days. For Fallow: **keep Ecliptic**, Serene as a fallback.
 - **B.** **Better Days** (the only maintained 1.21.1 NeoForge mod that sets day and night separately) with `DynamicDaylightDuration = false` on the Ecliptic side. A gamerule alone is not enough: sleep and sky synchronization would have to be rewritten.
 
 ## A. Ecliptic Seasons versus Serene Seasons
@@ -113,7 +113,7 @@ Yes, but less well. With `doDaylightCycle false` and a KubeJS script that adds t
 - **smoothness**: the client no longer advances on its own, the sky updates once per second, without interpolation (known vanilla behavior, not tested here);
 - **robustness**: rounding, `/time set`, saving the remainder.
 
-A Java `jour` (day) module in the `compline` mod would fix the smoothness, but this would be rewriting Better Days. To keep in reserve if it fails in game.
+A Java `jour` (day) module in the `fallow` mod would fix the smoothness, but this would be rewriting Better Days. To keep in reserve if it fails in game.
 
 Sketch (KubeJS 7 API to confirm):
 
@@ -193,6 +193,6 @@ Modrinth API (listings, versions, changelogs, jars):
 - https://api.modrinth.com/v2/project/cold-sweat (and `/version`)
 - https://api.modrinth.com/v2/project/betterdays, `day-length`, `time-adjustment`, `extendedtime`, `extra-long-days`, `opticmanager`, `daylight-dynamics`, `longer-days`, `dynamic-daytime`, `enhanced-celestials-2-core`, `true-adaptive-music`
 
-Jars read (javap): Ecliptic Seasons 0.15.5, Serene Seasons 10.1.0.9, Cold Sweat 2.4.3.1, Better Days 3.3.6.3, Enhanced Celestials 2 Core 2.0.3.3, True Adaptive Music 2.9.3, Polytone 5.1.3, ATMOSPHERICS 2.6.5. Repository files: `docs/decisions/0002-agriculture.md`, `pack/config/eclipticseasons-common.toml`, `docs/plan/recherche/verif-2026-10-18/` (2-kaleidoscope, 3-client), `pack/trueadaptivemusicpacks/compline/`.
+Jars read (javap): Ecliptic Seasons 0.15.5, Serene Seasons 10.1.0.9, Cold Sweat 2.4.3.1, Better Days 3.3.6.3, Enhanced Celestials 2 Core 2.0.3.3, True Adaptive Music 2.9.3, Polytone 5.1.3, ATMOSPHERICS 2.6.5. Repository files: `docs/decisions/0002-agriculture.md`, `pack/config/eclipticseasons-common.toml`, `docs/plan/recherche/verif-2026-10-18/` (2-kaleidoscope, 3-client), `pack/trueadaptivemusicpacks/fallow/`.
 
 Searches only, not opened (clues to check): listing of the Serene/Ecliptic stub on moddex.gg (403), result lists on the stub's 1.21.1 files.

@@ -85,7 +85,7 @@ sync-chunk-writes=true       # safety for a permanent world
 difficulty=normal
 ```
 
-**Gamerules** (function `compline:init` run on load, see [7](07-kubejs-et-datapack.md)):
+**Gamerules** (function `fallow:init` run on load, see [7](07-kubejs-et-datapack.md)):
 `reducedDebugInfo true`, `doInsomnia false`, `doPatrolSpawning false`, `disableRaids true`, `doWardenSpawning false`, `doTraderSpawning false`, `playersSleepingPercentage 50`, `keepInventory false`, `spectatorsGenerateChunks false`, `announceAdvancements true`, `logAdminCommands true`. `mobGriefing` stays `true` (sheep, villagers). `naturalRegeneration` is to be settled together with survival ([4](04-vie-quotidienne.md)).
 
 **Memory**: Java 21, 8 GB for the server (10 GB with DH), 6 to 8 GB per client. G1 with Aikar's flags, or generational ZGC on a machine with at least 4 cores.

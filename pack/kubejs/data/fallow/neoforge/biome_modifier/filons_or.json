@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fallow:filons/or",
+  "features": "fallow:filon_d_or",
+  "step": "underground_ores"
+}

@@ -1,4 +1,4 @@
-# Research: technical foundation, server, QoL and KubeJS tooling (Compline, 1.21.1 NeoForge)
+# Research: technical foundation, server, QoL and KubeJS tooling (Fallow, 1.21.1 NeoForge)
 
 > Scope refocused after the plan update. This does not re-propose what is already selected (Sodium 0.8.13, ImmediatelyFast, Entity Culling, ModernFix, FerriteCore, Lithium, Clumps, Structure Layout Optimizer, Chunky, spark, Connector + FFAPI) nor what is ruled out (C2ME, Noisium, MoreCulling, Ksyxis). It does, however, flag **two risks on mods already selected** (Entity Culling, Distant Horizons).
 >
@@ -194,7 +194,7 @@ Legend: **Avail.** = 1.21.1 NeoForge version on Modrinth. **S** = foundation · 
 
 **36. ProbeJS** · [GitHub](https://github.com/Prunoideae/ProbeJS) (1.21 branch)
 - Autocompletion in VSCode: extension, `/probejs` then dump, open the instance in VSCode.
-- **Development tool only, not to be shipped in `pack/`.** To install in the "Compline test" instance.
+- **Development tool only, not to be shipped in `pack/`.** To install in the "Fallow test" instance.
 - **R (dev)**.
 
 **37. Almost Unified** · `almostunified` · [GitHub](https://github.com/AlmostReliable/almostunified) (1.21.1 branch, NeoForge/Fabric)
@@ -209,7 +209,7 @@ Legend: **Avail.** = 1.21.1 NeoForge version on Modrinth. **S** = foundation · 
 - Proposal: a "Settler's Notebook" under Patchouli. Its chapters open with custom vanilla advancements: water, first forge, first mill, first rail, first flight.
 - **GuideME** ([GitHub](https://github.com/AppliedEnergistics/GuideME)): Markdown guide with 3D scenes and search, but no Modrinth link in the README. **O**. Akashic Tome: not verified, **X**.
 
-**Quests.** FTB Quests only points to CurseForge in its README (**X** under the constraint). Recommended instead: **vanilla advancements in datapack** (`kubejs/data/compline/advancement/…`), displayed with **Better Advancements** (`better-advancements`, not verified, **O**). They play the role of a journal without an RPG-style task list, which fits "no end, one perfects".
+**Quests.** FTB Quests only points to CurseForge in its README (**X** under the constraint). Recommended instead: **vanilla advancements in datapack** (`kubejs/data/fallow/advancement/…`), displayed with **Better Advancements** (`better-advancements`, not verified, **O**). They play the role of a journal without an RPG-style task list, which fits "no end, one perfects".
 
 ### 1.9 Distant Horizons (kept conditionally, "pending"): settings for the mist
 
@@ -299,13 +299,13 @@ The dimension technically still exists, but remains inaccessible and is never ge
 kubejs/startup_scripts/   registries (rare)
 kubejs/server_scripts/    00_constants.js, no_end.js, recipes/*.js (per mod), loot/*.js, trades.js (MoreJS), spawns.js, seasons_coldsweat.js
 kubejs/client_scripts/    recipe_viewer.js (hiding), tooltips.js
-kubejs/data/compline/       function/init.mcfunction, advancement/**, patchouli_books/**
+kubejs/data/fallow/       function/init.mcfunction, advancement/**, patchouli_books/**
 kubejs/data/minecraft/    tags/worldgen/** (empty stronghold), structure_set (villages)
 kubejs/assets/            textures/gui/title/background/panorama_*.png, texts/splashes.txt, patchouli_books (content)
 ```
 
 ### 5.3 Gamerules applied automatically
-`kubejs/data/compline/function/init.mcfunction`, plus `kubejs/data/minecraft/tags/function/load.json` → `["compline:init"]`:
+`kubejs/data/fallow/function/init.mcfunction`, plus `kubejs/data/minecraft/tags/function/load.json` → `["fallow:init"]`:
 ```
 gamerule reducedDebugInfo true
 gamerule doInsomnia false

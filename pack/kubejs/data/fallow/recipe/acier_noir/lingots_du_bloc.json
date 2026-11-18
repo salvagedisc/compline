@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fallow:bloc_d_acier_noir"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "fallow:lingot_d_acier_noir"
+  }
+}

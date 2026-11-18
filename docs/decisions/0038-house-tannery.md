@@ -16,7 +16,7 @@ Since 2026-10-29 leather came from the Tannery: Better Leather mod (Beckstation,
 | Items | Five hides, dry hide, bark, tannic powder, fat, sinew, jerky, hardened, treated and studded leather, satchels | Raw hide, scraped hide, wet leather; bark and fat from Farmer's Delight and Naturalist |
 
 ## Decision
-Option B, in `compline` 0.34.0 ([tannery](../plan/tannerie.md)). One raw hide for every animal, three blocks, and the drying ties into the place: a frame in the sun, a shed by the fire, nothing in the rain. It reuses what the pack has: Farmer's Delight's knives and bark, Naturalist's fat, the `compline:foyers` hearths of rest by the hearth, Ecliptic Seasons' snow for winter.
+Option B, in `fallow` 0.34.0 ([tannery](../plan/tannerie.md)). One raw hide for every animal, three blocks, and the drying ties into the place: a frame in the sun, a shed by the fire, nothing in the rain. It reuses what the pack has: Farmer's Delight's knives and bark, Naturalist's fat, the `fallow:foyers` hearths of rest by the hearth, Ecliptic Seasons' snow for winter.
 
 Gone with Tannery: sinew (string comes from spiders and flax), jerky, hardened, treated and studded leather and the tanner's table (armour is Overgeared's forge), fat blocks. Fat now makes torches and candles.
 

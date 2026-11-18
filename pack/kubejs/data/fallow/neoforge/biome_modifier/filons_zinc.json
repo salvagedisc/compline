@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fallow:filons/zinc",
+  "features": "fallow:filon_de_zinc",
+  "step": "underground_ores"
+}

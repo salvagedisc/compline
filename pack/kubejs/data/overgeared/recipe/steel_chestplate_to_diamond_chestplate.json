@@ -4,7 +4,7 @@
     "item": "minecraft:diamond"
   },
   "base": {
-    "item": "compline:plastron_en_acier_noir"
+    "item": "fallow:plastron_en_acier_noir"
   },
   "result": {
     "count": 1,

@@ -171,14 +171,14 @@ File names follow the tree of chapter 07.
 | **Plates** | `#c:plates/iron` contains `create:iron_sheet` (Create tag) **and** `overgeared:iron_plate` (Overgeared tag). The 16 Create recipes that require `#c:plates/iron` therefore already accept hand-forged plates. In the other direction, Overgeared's armors require the exact item `overgeared:iron_plate` | Recommended option: rewrite the 4 iron, 4 copper and 4 steel armors with `{"tag":"c:plates/iron"}` (then copper, steel). The **press makes the plates** (quantity), the anvil makes the **armor** (quality). `event.replaceInput({type:'overgeared:forging'}, 'overgeared:iron_plate', '#c:plates/iron')`, to check: `replaceInput` must traverse the keys of this custom type, otherwise rewrite as `event.custom` |
 | **Steel plates at the press** | `create:pressing`: `#c:ingots/steel` → `overgeared:steel_plate`. Create only does this for Immersive Engineering (`compat/immersiveengineering/plate_steel.json`, condition `mod_loaded`) | `event.recipes.create.pressing('overgeared:steel_plate', '#c:ingots/steel')` |
 | **Steam engine, rails** (`progression.js`) | `#c:plates/steel` and `#c:nuggets/steel` **do exist** (Overgeared tags). The draft's lines are correct | — |
-| **Critical parts with a minimum quality** | An `overgeared:forging` recipe with `has_quality: true` on the KubeJS items `compline:rivet_forge`, `compline:essieu_forge`, `compline:pale_helice_forgee`… marks them with the `overgeared:forging_quality` component. In the Create or crafting table recipe, the ingredient filters the quality with the NeoForge ingredient **`neoforge:components`** (`{"type":"neoforge:components","items":"compline:pale_helice_forgee","components":{"overgeared:forging_quality":"perfect"},"strict":false}`). For "at least excellent", group several values in `neoforge:compound` | Datapack or `event.custom`. To check: that EMI and Create's sequenced assembly display and accept these ingredients (deduced: Create 6 reads the vanilla `Ingredient` codec, which understands NeoForge ingredients) |
+| **Critical parts with a minimum quality** | An `overgeared:forging` recipe with `has_quality: true` on the KubeJS items `fallow:rivet_forge`, `fallow:essieu_forge`, `fallow:pale_helice_forgee`… marks them with the `overgeared:forging_quality` component. In the Create or crafting table recipe, the ingredient filters the quality with the NeoForge ingredient **`neoforge:components`** (`{"type":"neoforge:components","items":"fallow:pale_helice_forgee","components":{"overgeared:forging_quality":"perfect"},"strict":false}`). For "at least excellent", group several values in `neoforge:compound` | Datapack or `event.custom`. To check: that EMI and Create's sequenced assembly display and accept these ingredients (deduced: Create 6 reads the vanilla `Ingredient` codec, which understands NeoForge ingredients) |
 | **Deployer on the anvil** | A recipe without quality or mini-game (plates, bucket) advances with a hammer right-click (`increaseForgingProgress`). A deployer holding a hammer could therefore forge plates on its own | To test. If it must be forbidden: `BlockEvents.rightClicked` in KubeJS, cancel if `event.player.isFake()` and the block is in `#overgeared:smithing_anvil` |
 | **Tools made by Create** | No Create recipe makes a metal tool (analysis of the Create 6.0.10 jar: only wrench, goggles, copper diving gear, cardboard sword) | — |
 
 ### 2.2 Create Ore Excavation
 
 The mod is not yet in the pack: identifiers to be read in its jar when it is added.
-- The drill can require a forged head: `overgeared:steel_pickaxe_head` filtered by quality with `neoforge:components` (§2.1), rather than a new item `compline:tete_foreuse_forgee`. The real pickaxe head, and its quality, are thus reused.
+- The drill can require a forged head: `overgeared:steel_pickaxe_head` filtered by quality with `neoforge:components` (§2.1), rather than a new item `fallow:tete_foreuse_forgee`. The real pickaxe head, and its quality, are thus reused.
 - Deduced: if COE drills wear out, a drill coming from a `has_quality: true` forging gains the **durability bonus** of its quality. The `IItemStackExtensionMixin` mixin acts on any item that wears out and carries the component. To test.
 - The extracted raw ore then goes through the normal chain: blast furnace or fan, then anvil.
 
@@ -191,12 +191,12 @@ The mod is not yet in the pack: identifiers to be read in its jar when it is add
 ### 2.4 The Clearing Lantern (tier 32, §10.3)
 
 "Parts forged at Overgeared" is replaced by a real forging recipe that directly gives the KubeJS block:
-- **Startup**: the block `compline:lanterne_de_clairiere` is already in `clairieres.js`.
+- **Startup**: the block `fallow:lanterne_de_clairiere` is already in `clairieres.js`.
 - **Config** `overgeared-common.toml`:
   - `availableToolTypes = ["sword","axe","pickaxe","shovel","hoe","lanterne"]`;
   - `hiddenToolTypes = ["lanterne"]`, so that no drafting table produces it.
 - **Language**: `kubejs/assets/overgeared/lang/fr_fr.json` → `"tooltype.overgeared.lanterne": "Lanterne de clairière"`.
-- **Recipe** (`recipes/forge_compline.js`, `event.custom`):
+- **Recipe** (`recipes/forge_fallow.js`, `event.custom`):
 
 ```json
 {
@@ -215,7 +215,7 @@ The mod is not yet in the pack: identifiers to be read in its jar when it is add
     "L": {"item": "minecraft:lantern"},
     "S": {"item": "overgeared:heated_steel_ingot", "requires_heated": true}
   },
-  "result": {"id": "compline:lanterne_de_clairiere"},
+  "result": {"id": "fallow:lanterne_de_clairiere"},
   "result_failed": {"id": "overgeared:steel_plate", "count": 2},
   "show_notification": true
 }
@@ -282,7 +282,7 @@ Only the recipes that yield a tool, weapon or armor were examined (scan script, 
 
 - **Lit blast furnace, furnace, smoker**: Cold Sweat already handles them (`FurnaceBlockTemp` targets `AbstractFurnaceBlock` with `LIT`). Nothing to do.
 - **Alloy furnace and casting furnace**: they do not derive from `AbstractFurnaceBlock` (class `BaseEntityBlock`), but their block has the `lit` state (blockstate). Two ways to add them:
-  - in a datapack, in `data/compline/cold_sweat/block/block_temp/forge.json` (registry folder `block/block_temp` confirmed in `ModRegistries`). Fields: `block` (with the state `lit: true`), `temperature`, `range`, `max_effect`, `fade`, `units`. The exact format of the `block` sub-object is to be copied from the Cold Sweat wiki;
+  - in a datapack, in `data/fallow/cold_sweat/block/block_temp/forge.json` (registry folder `block/block_temp` confirmed in `ModRegistries`). Fields: `block` (with the state `lit: true`), `temperature`, `range`, `max_effect`, `fade`, `units`. The exact format of the `block` sub-object is to be copied from the Cold Sweat wiki;
   - in KubeJS: `ColdSweatEvents.registries(e => e.addBlockTemperature(temp, 'F', b => b.blocks('overgeared:alloy_furnace','overgeared:casting_furnace').state('lit', true).range(5).maxEffect(…)))`. The signature `addBlockTemperature(double, String, Consumer)` and the constructor are read in `ModRegistriesEventJS` and `BlockTempBuilderJS`.
 - **Hot ingot held in hand**: registry `item/item_temp`. The tag `#overgeared:heated_metals` can warm the player carrying it a little. A nice detail: forging in the cold, in winter, becomes a refuge.
 - **Steel and copper armor**: Cold Sweat does not know them. Add them to `item/insulator` like iron armor (to tune).
@@ -315,7 +315,7 @@ Only the recipes that yield a tool, weapon or armor were examined (scan script, 
 ### 2.12 EMI
 
 - Native (§1.6). Recipes added by datapack or `event.custom` of the same type display on their own: the plugin reads the recipe manager by type (deduced).
-- Hide in EMI what does not exist in Compline: netherite, Nether alloy furnace, Nether mold, diamond tools at the crafting table (air recipes).
+- Hide in EMI what does not exist in Fallow: netherite, Nether alloy furnace, Nether mold, diamond tools at the crafting table (air recipes).
 - Setting: `kubejs/client_scripts`, `RecipeViewerEvents.removeEntries` (KubeJS 2101), to validate.
 
 ### 2.13 Sounds, Particular, Subtle Effects: the sparks
@@ -416,7 +416,7 @@ What is done:
 | 06, foundation table (JEI) | "native plugin in … Overgeared": false for JEI; **EMI** plugin | §1.6 |
 | 07, uncertainties and `overgeared_pieces.js` | Fill in: component `overgeared:forging_quality`; recipe types (§1.5); KubeJS via `event.custom` | §1.4 and §1.5 |
 | 08, step 11 | Closed: component, recipe types, vanilla tools, tin (absent), template loot, Nether (§3.2) | — |
-| `objets_compline.js` | Keep `compline:rivet_forge`, `essieu_forge`, `pale_helice_forgee`… as **products of a `has_quality: true` forging**. Replace `compline:tete_foreuse_forgee` with `overgeared:steel_pickaxe_head`, filtered by quality. The `compline:plan_*` items become **Overgeared blueprints of hidden types** (§2.5) | Reuse the mod's mechanics instead of duplicating them |
+| `objets_fallow.js` | Keep `fallow:rivet_forge`, `essieu_forge`, `pale_helice_forgee`… as **products of a `has_quality: true` forging**. Replace `fallow:tete_foreuse_forgee` with `overgeared:steel_pickaxe_head`, filtered by quality. The `fallow:plan_*` items become **Overgeared blueprints of hidden types** (§2.5) | Reuse the mod's mechanics instead of duplicating them |
 | `plans_ingenieur.js` | Reduce to nothing, or to the sole case of a crafting table recipe without a forged part. The lock goes through `requires_blueprint` | More robust than `recipe give/take` and `doLimitedCrafting` |
 | `zoo.js` (§10.10) | Reward for the 25 species = `overgeared:blueprint` of type `lanterne` | §2.4 |
 | §10.3, tier 2 | "Parts forged at Overgeared" → "forged on the **smith's anvil** from a lantern blueprint, plates and hot steel" (§2.4) | A precise recipe |
@@ -428,8 +428,8 @@ What is done:
 | New `pack/config/overgeared-common.toml` | Hidden blueprint types; loot quality weights; `coolingBlockEntityBlacklist` (+ Quark furnaces); `enableQualityBreakSystem` to decide | §1.5 |
 | New `kubejs/assets/overgeared/lang/fr_fr.json` | French translation | §1.1 |
 | New `recipes/forge_create.js` | Mixer → crude steel; press → steel plate; brass at the alloy furnace; armors accepting `#c:plates/*`; `_manual_only` option | §2.1 |
-| New `recipes/forge_compline.js` | Lantern, critical parts, Kaleidoscope Cookery knives at the forge | §2.4, §2.6 |
-| New `data/compline/cold_sweat/block/block_temp/forge.json` and tag `supplementaries:bellows_tickable` | Heat and bellows | §2.8, §2.9 |
+| New `recipes/forge_fallow.js` | Lantern, critical parts, Kaleidoscope Cookery knives at the forge | §2.4, §2.6 |
+| New `data/fallow/cold_sweat/block/block_temp/forge.json` and tag `supplementaries:bellows_tickable` | Heat and bellows | §2.8, §2.9 |
 | Decisions | A record `docs/decisions/00xx-overgeared.md`: manual forging and industrial heat; Overgeared blueprints; Easy Anvils; Nether | Repository rule |
 
 **Is a custom mod needed?** **No** for the gameplay links: datapack, config, tags and KubeJS (`event.custom`, KubeJS Create, LootJS, Cold Sweat's KubeJS API) cover everything. **Yes, optionally**, for a single finishing detail: a small client mod that replaces the hammering `CRIT` sparks with embers and orange sparks (§2.13). If one day a Create machine must produce an item with an imposed quality, and Create cannot put a component into its results, this mod could also handle it. It is not necessary with the principle of §2.1.

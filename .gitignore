@@ -2,8 +2,8 @@ dist/
 node_modules/
 *.mrpack
 .cache/
-mods-custom/compline/build/
-mods-custom/compline/run/
-mods-custom/compline/logs/
+mods-custom/fallow/build/
+mods-custom/fallow/run/
+mods-custom/fallow/logs/
 .gradle/
 __pycache__/

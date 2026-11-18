@@ -11,7 +11,7 @@ Overgeared's steel arrives fast: chests give steel ingots and diamond templates,
 |---|---|---|
 | Steel plateau | Lives through Overgeared's quality; steel and templates out of chests | A new tier per material |
 | Diamond | Only near deep lava (Spelunkery), template from the coniferous monument, mined with a black steel pickaxe | Vanilla rates |
-| Between steel and diamond | Black steel (`compline` items, Overgeared recipes, master anvil) | Nothing |
+| Between steel and diamond | Black steel (`fallow` items, Overgeared recipes, master anvil) | Nothing |
 | Netherite | "Burning heart" (Regions Unexplored's Inferno caves and lava below −40), renamed orichalcum in French | Oh My Meteors meteorites |
 | Dinosaur armour | Side branch forged at the anvil with quality; each set opens part of the world (Cold Sweat insulators); Chorusoatl teleport removed by code | Rare top tier |
 | Mining | Prospecting (outcrops, panning) | Prospector's hammer, shoring and cave-ins, Create Ore Excavation, dense ores |

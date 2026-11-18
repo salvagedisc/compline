@@ -21,7 +21,7 @@ Read in the jars on 2026-11-17, all for NeoForge 1.21.1:
 ## Decision
 Option C (the team, 2026-11-17: "very complete, customisable and polished"). Starcatcher 3.3.10, Hybrid Aquatic + Starcatcher Compatibility 0.6.3, Starcatcher's Delight 3.2 (fish dishes in Farmer's Delight's pot and on its board).
 
-Fitted to Compline:
+Fitted to Fallow:
 
 - **One rod**: the vanilla fishing rod merges into Starcatcher's (`fusions.js`): its recipe leaves, the carrot and the warped fungus on a stick ask for Starcatcher's rod, loot gives it. Starcatcher's rod needs a hook (iron) and a bobber (planks, wool). Hybrid Aquatic's hooks go on it through the addon.
 - **Catches fitted to the world** (`scripts/fishing/starcatcher_entries.py`, which writes `pack/kubejs/data/*/starcatcher/fish/`):
@@ -34,7 +34,7 @@ Fitted to Compline:
 - **Leather only through the tannery**: the fished old boot no longer turns into leather (`tannerie.js`).
 - **No money**: the selling bin (wd's Selling Bin, nested in Starcatcher) has no currency set and is removed (`tri.js`); its sell rate is set to 0 (`config/selling_bin-server.toml`), so items no longer show a price in emeralds when Shift is held.
 - **Cooking**: Starcatcher's Delight also ships Farm & Charm pot recipes; `cuisine.js` no longer copies them, since the Farmer's Delight pot already has every dish.
-- **One book per fish** (the team, 2026-11-17): the 53 species that are both a zoo animal and a Starcatcher catch (Hybrid Aquatic's, Naturalist's and vanilla fish, Spawn's bluefish) leave the zoo (tag `compline:zoo/peche`, part of `compline:zoo/exclus`) and are followed in the fishing guide only. The zoo keeps the sea creatures nobody fishes (whales, sharks, jellyfish, crabs…).
+- **One book per fish** (the team, 2026-11-17): the 53 species that are both a zoo animal and a Starcatcher catch (Hybrid Aquatic's, Naturalist's and vanilla fish, Spawn's bluefish) leave the zoo (tag `fallow:zoo/peche`, part of `fallow:zoo/exclus`) and are followed in the fishing guide only. The zoo keeps the sea creatures nobody fishes (whales, sharks, jellyfish, crabs…).
 - **French**: 367 texts translated (Starcatcher's Delight 206, Selling Bin 48, the addon 43, LibTooltips 23, Starcatcher 21, Fancy Tab Sections 13, Tiny Multiblock Lib 13); Starcatcher ships its own French for the rest.
 
 ## Rejected

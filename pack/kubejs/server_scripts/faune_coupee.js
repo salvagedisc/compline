@@ -1,4 +1,4 @@
-// Compline : créatures retirées par décision de l'équipe, hors doublons. Voir
+// Fallow : créatures retirées par décision de l'équipe, hors doublons. Voir
 // docs/plan/doublons.md, « Autres créatures retirées ».
 // - Alex's Mobs : Murmur, Farseer, Skelewag, mouche, cafard (direction artistique, 5.3) ;
 // - Friends & Foes : iceologer, illusioner, wildfire (hostiles, décision 0003), et leurs
@@ -13,7 +13,7 @@
 //   jardinière, nautile, limace et concombre de mer, étoile de mer d'Hybrid Aquatic (fichiers
 //   d'apparition remplacés dans kubejs/data/hybrid_aquatic/neoforge/biome_modifier/).
 // Leurs apparitions par biome sont retirées par
-// kubejs/data/compline/neoforge/biome_modifier/faune_coupee.json. Ce script fait le reste.
+// kubejs/data/fallow/neoforge/biome_modifier/faune_coupee.json. Ce script fait le reste.
 
 // Créatures qui entrent aussi dans le monde par d'autres chemins : raids, évènements
 // propres au mod, structures, ootheca de cafard.

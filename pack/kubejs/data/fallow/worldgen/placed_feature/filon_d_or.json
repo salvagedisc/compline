@@ -1,0 +1,19 @@
+{
+  "feature": "fallow:filon_d_or",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 13
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

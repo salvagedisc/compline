@@ -1,4 +1,4 @@
-# Compline : les termitières sont celles de WilderNature, qui a les termites.
+# Fallow : les termitières sont celles de WilderNature, qui a les termites.
 ["Natural Generating Features"]
 	#Enable or Disable Kopje Trees from naturally spawning (True by default)
 	"Spawn Kopje Trees" = true

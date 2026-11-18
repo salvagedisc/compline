@@ -1,9 +1,9 @@
-# Compline : Overgeared sans la recette du souffle du dragon (l'End est fermé).
+# Fallow : Overgeared sans la recette du souffle du dragon (l'End est fermé).
 # Fichier partiel : les options absentes gardent leur valeur par défaut.
 ["Arrow Fletching Settings"]
 	enableDragonBreathRecipe = false
 
-# Compline : l'enclume de palier A devient l'enclume de maître de l'acier noir, posée sur un bloc d'acier noir
+# Fallow : l'enclume de palier A devient l'enclume de maître de l'acier noir, posée sur un bloc d'acier noir
 # (docs/plan/progression.md). Le palier B reste coupé.
 ["Anvil Conversion"]
 	enableTierA = true

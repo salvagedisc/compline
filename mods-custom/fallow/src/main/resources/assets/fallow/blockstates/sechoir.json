@@ -1,0 +1,120 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "etat": "humide"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_humide",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "etat": "sec"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_sec",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "etat": "humide"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_humide",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "etat": "sec"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_sec",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "etat": "humide"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_humide",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "etat": "sec"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_sec",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "etat": "humide"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_humide",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "etat": "sec"
+      },
+      "apply": {
+        "model": "fallow:block/sechoir_sec",
+        "y": 270
+      }
+    }
+  ]
+}

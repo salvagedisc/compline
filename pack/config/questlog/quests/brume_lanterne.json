@@ -1,10 +1,10 @@
 {
-  "chapter": "questlog:compline_brume",
+  "chapter": "questlog:fallow_brume",
   "sort_order": 11,
   "title": "Une lanterne de clairière",
   "description": "Une lanterne sur pied, autour d’un éclat d’améthyste : deux plaques de fer forgées, deux vitres et un éclat d’améthyste.\n\nElle lève la brume sur 32 blocs, tant qu’elle reste en place.",
   "icon": {
-    "item": "compline:lanterne_de_clairiere"
+    "item": "fallow:lanterne_de_clairiere"
   },
   "requirements": [
     {
@@ -15,7 +15,7 @@
   "objectives": [
     {
       "type": "questlog:block_place",
-      "block": "compline:lanterne_de_clairiere"
+      "block": "fallow:lanterne_de_clairiere"
     }
   ],
   "rewards": []

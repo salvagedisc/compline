@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "compline:block/bloc_d_acier_noir"
-  }
-}

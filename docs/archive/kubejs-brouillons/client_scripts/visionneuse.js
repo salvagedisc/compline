@@ -1,4 +1,4 @@
-// BROUILLON Compline — masquer dans JEI ce qui n'existe pas dans le pack (KubeJS 2101 : RecipeViewerEvents).
+// BROUILLON Fallow — masquer dans JEI ce qui n'existe pas dans le pack (KubeJS 2101 : RecipeViewerEvents).
 
 RecipeViewerEvents.removeEntries('item', event => {
   ['minecraft:elytra', 'minecraft:ender_eye', 'minecraft:end_crystal', 'minecraft:dragon_egg',

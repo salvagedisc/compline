@@ -1,4 +1,4 @@
-"""Fits Starcatcher's fishing entries to Compline (Python 3).
+"""Fits Starcatcher's fishing entries to Fallow (Python 3).
 
 Starcatcher reads its catches from a datapack registry (`data/<namespace>/starcatcher/fish/`),
 and so does the Hybrid Aquatic + Starcatcher Compatibility addon. A datapack can override an
@@ -12,7 +12,7 @@ entries read in the jars:
     below y = -40, where the deep heat already is;
   - swapped: Hybrid Aquatic's anglerfish, blobfish and piranha give Naturalist's, the model the
     pack keeps (docs/plan/doublons.md);
-  - added (namespace compline): Naturalist's bass and catfish and Spawn's bluefish, fish of the
+  - added (namespace fallow): Naturalist's bass and catfish and Spawn's bluefish, fish of the
     pack that no entry knew.
 
 Usage, from the repository root, after `npm run check-deps` has filled the jar cache:
@@ -118,7 +118,7 @@ def moved_to_deep_lava(entry):
 def main():
     folder = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, ".cache/jars")
     found = entries(folder)
-    for namespace in ("starcatcher", "hybrid_aquatic", "compline"):
+    for namespace in ("starcatcher", "hybrid_aquatic", "fallow"):
         shutil.rmtree(os.path.join(DATA, namespace, "starcatcher", "fish"), ignore_errors=True)
     counts = {"removed": 0, "moved": 0, "swapped": 0, "added": 0}
     for namespace, names in REMOVED.items():
@@ -148,7 +148,7 @@ def main():
         entry["base_chance"] = chance
         entry["restrictions"] = restrictions
         entry["size_and_weight"] = size
-        write("compline", name, entry)
+        write("fallow", name, entry)
         counts["added"] += 1
     print(", ".join(f"{count} {kind}" for kind, count in counts.items()))
 

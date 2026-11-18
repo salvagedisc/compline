@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "compline:item/tete_de_houe_en_acier_noir"
-  }
-}

@@ -1,4 +1,4 @@
-// Compline : objets que deux mods ont chacun en double, fondus en un seul (vérification du
+// Fallow : objets que deux mods ont chacun en double, fondus en un seul (vérification du
 // 2026-11-15, décision 0030). Pour chaque paire, l'objet de gauche disparaît : les recettes
 // qui le donnaient ou le demandaient donnent ou demandent celui de droite, le butin aussi, et
 // il est caché d'EMI (client_scripts/fusions.js, mêmes ids). Les recettes gardent leur
@@ -103,7 +103,7 @@ ServerEvents.recipes(event => {
   })
   aRefaire.forEach(recette => {
     event.remove({ id: recette.id })
-    event.custom(recette.json).id('compline:fusion/' + recette.id.replace(':', '/'))
+    event.custom(recette.json).id('fallow:fusion/' + recette.id.replace(':', '/'))
   })
   console.info('[fusions] ' + aRefaire.length + ' recettes refaites avec les objets gardés')
 })

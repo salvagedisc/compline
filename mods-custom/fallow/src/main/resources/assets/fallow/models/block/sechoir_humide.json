@@ -1,0 +1,28 @@
+{
+  "textures": {
+    "peau": "fallow:block/cuir_mouille_tendu",
+    "particle": "fallow:block/cuir_mouille_tendu"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        3.5,
+        7.5
+      ],
+      "to": [
+        13.5,
+        13.5,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#peau"
+        },
+        "south": {
+          "texture": "#peau"
+        }
+      }
+    }
+  ]
+}

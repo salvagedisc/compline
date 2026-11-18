@@ -4,7 +4,7 @@
     "item": "minecraft:diamond"
   },
   "base": {
-    "item": "compline:houe_en_acier_noir"
+    "item": "fallow:houe_en_acier_noir"
   },
   "result": {
     "count": 1,

@@ -1,4 +1,4 @@
-# Compline : packs de ressources activés au premier lancement. Du moins prioritaire
+# Fallow : packs de ressources activés au premier lancement. Du moins prioritaire
 # au plus prioritaire : les feuilles de Better Leaves, Fresh Animations et ses
 # extensions. Le rendu vient du pack de shaders Brumaire (config/iris.properties).
 # Default Options ne sélectionne que les packs de cette liste : les ressources des

@@ -1,0 +1,9 @@
+{
+  "type": "overgeared:item_to_tooltype",
+  "item": [
+    {
+      "item": "fallow:tete_de_pioche_en_acier_noir"
+    }
+  ],
+  "tooltype": "pickaxe"
+}

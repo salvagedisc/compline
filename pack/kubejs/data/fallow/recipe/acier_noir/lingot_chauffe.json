@@ -1,0 +1,19 @@
+{
+  "type": "overgeared:forging",
+  "hammering": 5,
+  "has_quality": false,
+  "key": {
+    "#": {
+      "item": "fallow:acier_noir_brut_chauffe"
+    }
+  },
+  "need_quenching": false,
+  "pattern": [
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fallow:lingot_d_acier_noir_chauffe"
+  },
+  "show_notification": false
+}

@@ -1,5 +1,5 @@
 {
-  "name": "compline-tools",
+  "name": "fallow-tools",
   "private": true,
   "type": "module",
   "engines": { "node": ">=20" },

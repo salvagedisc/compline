@@ -1,14 +1,14 @@
 # Wayfarer, the modpack and server of the No Man's Land team
 
-Research of 2026-10-19 for Compline. Legend: **[V]** verified (link in the line or in the sources), **[D]** deduced from what is seen or heard in the videos, without written confirmation. "Already there" means present in Compline as described by `docs/mods.md`. **Correction of 2026-10-19:** the pack still contains NML **1.5.12**; what comes from 1.6 (ancestral tools, oath sword) only arrives with the upgrade to 1.6.1, already planned.
+Research of 2026-10-19 for Fallow. Legend: **[V]** verified (link in the line or in the sources), **[D]** deduced from what is seen or heard in the videos, without written confirmation. "Already there" means present in Fallow as described by `docs/mods.md`. **Correction of 2026-10-19:** the pack still contains NML **1.5.12**; what comes from 1.6 (ancestral tools, oath sword) only arrives with the upgrade to 1.6.1, already planned.
 
 ## Summary
 
 1. Wayfarer is a **private modpack** (about 200 mods, NeoForge 1.21.1) made by **Monad Modding**, the No Man's Land team (Farcr, tazer…), with an **official SMP server** opened around July 2026. It is accessed through the "Wayfarer" Patreon tier; the "Discoverer" tier only gives pre-releases **[V]**.
-2. A large part of what is seen in the videos comes from **NML 1.5 and 1.6**, so **Compline already has it**: the talking Friendly Moon, the alchemist ruins, the ancestral tools, the effigies, the bandages, the strata, the ancient jars **[V]**.
+2. A large part of what is seen in the videos comes from **NML 1.5 and 1.6**, so **Fallow already has it**: the talking Friendly Moon, the alchemist ruins, the ancestral tools, the effigies, the bandages, the strata, the ancient jars **[V]**.
 3. The rest mixes **public mods** (Envelope, Tree Physics, Sable Ragdolls, Tolerable Creepers, Clutter No More, Supplementaries, Farmer's Delight, Exposure, Distant Horizons) and **in-house content** that cannot be found online: Bronze Age, bloomery, max health lost on death and "life shards", rift sediment, "anomalies", dense ores, no XP **[D]**.
 4. The YouTuber says the mod list is "public", but **it was not found anywhere**; it is probably on the Discord, which requires an account **[D]**. The transcript of GreenLikeable's video about the SMP could not be retrieved either.
-5. To retain for Compline: **Envelope** (pigeon mail and lost letters), **the Friendly Moon quest already in NML**, **a max health that drops on death and is regained by exploring** (KubeJS), a **tannery** (KubeJS) and, to be studied, **XP removed**.
+5. To retain for Fallow: **Envelope** (pigeon mail and lost letters), **the Friendly Moon quest already in NML**, **a max health that drops on death and is regained by exploring** (KubeJS), a **tannery** (KubeJS) and, to be studied, **XP removed**.
 
 ## What Wayfarer is
 
@@ -30,12 +30,12 @@ Research of 2026-10-19 for Compline. Legend: **[V]** verified (link in the line 
 | **Friendly Moon**: a talking moon, dreams, "companions" (Buddy, Frienderman), an ascension ritual; it is the main quest of the "Friendship Update" | NML 1.5 **[V]** ([posts](https://www.patreon.com/monad_modding/posts/nml-1-5-0-build-155392325), languages of the 1.6.1 jar) | **Already there** (NML 1.6.1). Dialogues translated into French **[V]** | Settle the pending decision (conflict with Enhanced Celestials, see [report 4](../verif-2026-10-18/4-monde-et-objectifs.md)) in favour of the Friendly Moon | **Yes**. It is the pack's enigmatic thread and it is free |
 | **Alchemist ruins** (underground ancestral ruins, "strangely peaceful"), ruin maps | NML 1.5 **[V]** | **Already there** | Keep; slip fragments of the monolith codex into them (LootJS, already planned for the NML ruins) | Yes |
 | **Ancestral tools**: a ritual pickaxe that "resonates" to listen to the earth, a pacifist oath sword, an ancient bronze chisel and bell, with dialogues | NML 1.6 **[V]** ([RC1](https://www.patreon.com/monad_modding/posts/no-mans-land-1-6-170725863)) | **Already there**. **47 texts of 1.6 without French** **[V]** (including the ritual pickaxe and the sword) | Upgrade NML to 1.6.1, then translate into `pack/kubejs/assets/nomansland/lang/fr_fr.json` (`npm run check-fr` will flag them) | Yes, to be translated |
-| **Warding effigies**: no hostile creature spawns around them | NML **[V]** ([post](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343)) | **Already there** | Nothing | Little effect in Compline, which has few monsters |
+| **Warding effigies**: no hostile creature spawns around them | NML **[V]** ([post](https://www.patreon.com/monad_modding/posts/warding-effigies-125052343)) | **Already there** | Nothing | Little effect in Fallow, which has few monsters |
 | **Bandages** (healing, antidote, potion effects) with animation | NML 1.5 **[V]** | **Already there**, in French | Nothing | Yes, fits survival through the environment |
 | **Rock strata and rare veins**: granite, diorite and andesite rare but in large deposits | NML 1.5 **[V]** (classes `StrataStateProvider`, `OreVeinSystem` of the jar) | **Already there** | Nothing | Yes |
 | **Ancient jars** that must be broken, archaeology in the ruins | NML 1.5 + vanilla **[V]** | **Already there** | Nothing | Yes |
 | Parhelia, deer (antlers that fall off), tortoises, resin tap, incendiary bombs, wooden scaffolding, thatch, straw bed | NML **[V]** | **Already there** | Nothing | Yes |
-| Signs that indicate a village and its distance ("700 blocks that way") | Not found (absent from NML's files) **[D]** | No | — | No: Compline's villages are ruins |
+| Signs that indicate a village and its distance ("700 blocks that way") | Not found (absent from NML's files) **[D]** | No | — | No: Fallow's villages are ruins |
 
 ### Progression and crafting
 
@@ -50,7 +50,7 @@ Research of 2026-10-19 for Compline. Legend: **[V]** verified (link in the line 
 | **Handmade paper** (bark → paste in the mortar → paper); a map requires a writing kit (ink, feather, vial) and a scribe's table | In-house **[D]** | Feasible | KubeJS on Antique Atlas's atlas recipe | Possible, to keep in reserve |
 | **No XP bar** or progress displayed; enchanting exists but requires diamonds | In-house or setting **[D]** (video 1, 34:12; video 2, 10:30) | Feasible | KubeJS (remove the orbs) + hide the bar; check Immersive Enchanting, the anvil and Envelope (address paid in levels, adjustable) | **To be studied** (recommendation 5) |
 | Hammers that mine 3×3 | Not found **[D]** | — | — | No |
-| Farmer's Delight cooking (cutting board, sandwiches, effects) | Farmer's Delight **[V]** (video 1) | Yes | — | No: Compline's cooking is Kaleidoscope |
+| Farmer's Delight cooking (cutting board, sandwiches, effects) | Farmer's Delight **[V]** (video 1) | Yes | — | No: Fallow's cooking is Kaleidoscope |
 | Brewin' and Chewin' 5.0 (wine, ageing barrel) | Monad mod **[V]** | `4.5.0` (5.0 is in pre-release) | — | No: extension of Farmer's Delight |
 | Bags that slow you down, bundles, rope, rope arrow, flax → string, lunch basket, bubble blower | **Supplementaries** **[D]** (identical names) | **Already there** (repository decision 0006, `docs/decisions/0006-supplementaries.md`) | Nothing | — |
 | Camera, black-and-white film, framed photo | **Exposure** **[D]** | **Already there** | Nothing | — |
@@ -66,10 +66,10 @@ Research of 2026-10-19 for Compline. Legend: **[V]** verified (link in the line 
 | The player leaves a **body** that keeps their inventory | Probably [Sable: Ragdoll Corpse](https://modrinth.com/mod/sable-ragdoll-corpse) **[D]** | `0.3.0` alpha | — | No: alpha, and close to GraveStone, which was removed |
 | Creatures in **ragdoll** on death (one has to hit a second time for the loot) | Probably [Sable: Ragdolls](https://modrinth.com/mod/sable-ragdolls) **[D]** | `0.7.5` | — | No: ragdolls were judged "out of tone" (chapter 11) |
 | **Falling trees** with real physics, that float, and that can be walked on | [Tree Physics](https://modrinth.com/mod/tree-physics) (Monad, requires Sable) **[V]** | `neoforge-2.4`, English only | Would replace HT's TreeChop | No: very close to Dragged's Simulated Tree Chopper ("that's too much") |
-| Creepers that release "creepies" | [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers) (Monad) **[V]** | `2.2.4` | — | No: no vanilla monsters in Compline |
+| Creepers that release "creepies" | [Tolerable Creepers](https://modrinth.com/mod/tolerable-creepers) (Monad) **[V]** | `2.2.4` | — | No: no vanilla monsters in Fallow |
 | "**Anomalies**": silhouettes that copy the player and their equipment, very resistant, that drop "anomalous quicksilver" | In-house **[D]** (video 3, 10:00 and 72:00) | No | — | **No**: the YouTuber finds them "terrifying". It is horror |
 
-### Nether (closed in Compline)
+### Nether (closed in Fallow)
 
 | Feature | Source | Available to us | How to integrate it | Opinion |
 |---|---|---|---|---|
@@ -91,11 +91,11 @@ Research of 2026-10-19 for Compline. Legend: **[V]** verified (link in the line 
 
 ## Ranked recommendations
 
-1. **Envelope: pigeon mail** (new mod). Compline describes a handful of players who end up living far from one another. Envelope gives them a slow, physical link, without teleportation: a pigeon takes time depending on the distance, can be hunted by a fox, and only goes through mailboxes that have a name, not coordinates. It adds a species to Wildex and an exchange of items between settlements. The lost letters of the collapsed postal relay tell, in small pieces, of those who lived there before: enigma without darkness. It has a fix for Sable, so a mailbox on an airship should work **[D]**. To do: translate into French, set the cost of an address in XP (`MAILBOX_ADDRESS_EXPERIENCE_LEVELS_COST`), decide whether the relay above the clouds stays (it slightly breaks the "almost empty") and test with Sable and Aeronautics.
+1. **Envelope: pigeon mail** (new mod). Fallow describes a handful of players who end up living far from one another. Envelope gives them a slow, physical link, without teleportation: a pigeon takes time depending on the distance, can be hunted by a fox, and only goes through mailboxes that have a name, not coordinates. It adds a species to Wildex and an exchange of items between settlements. The lost letters of the collapsed postal relay tell, in small pieces, of those who lived there before: enigma without darkness. It has a fix for Sable, so a mailbox on an airship should work **[D]**. To do: translate into French, set the cost of an address in XP (`MAILBOX_ADDRESS_EXPERIENCE_LEVELS_COST`), decide whether the relay above the clouds stays (it slightly breaks the "almost empty") and test with Sable and Aeronautics.
 2. **Keep the Friendly Moon quest of NML 1.6.1** (already there, no mod to add). It is the heart of what makes Wayfarer "enigmatic": a talking moon, dreams, peaceful ruins and tools with a mysterious past. The pending decision against Enhanced Celestials must be settled (for example, the white moon stays rare and the Friendly Moon stays in dreams), the 47 texts of 1.6 translated, and the alchemist ruins made into a place where fragments of the monolith codex are found.
 3. **A max health that drops on death and is regained by exploring** (KubeJS script). Death finally has a price without one more fight, and repairing it pushes one to set out: life shards deep in caves or in geodes under the sea, in the NML ruins, as a monolith blessing, or in the calm of a clearing. No new gauge, only the hearts. Better than Unhealthy Dying, where health is regained by killing. To settle: a floor (5 hearts like Wayfarer), a loss of one heart per death, then a trial with two players.
 4. **A tannery** (KubeJS script). Cows, NML's deer and horses give a raw hide. Leather requires wax, or ash and rotten flesh, and time. Leather becomes a small trade tied to fauna and husbandry, which feeds the pack, the saddle and the armours. Light, in French through our own texts. To check beforehand: the leather recipes of Overgeared and Traveler's Backpack.
-5. **Remove XP** (KubeJS and hiding the bar), to be studied. Compline already pays for enchanting in materials, so the XP bar has almost no role left. Removing it takes away a gauge, makes the world less "video game" and gives more value to knowledge found (books, blueprints). Risks to list beforehand: the anvil, Quark, Create, Immersive Enchanting, Envelope and XP farms. If the cost is too high, XP is kept and the idea dropped.
+5. **Remove XP** (KubeJS and hiding the bar), to be studied. Fallow already pays for enchanting in materials, so the XP bar has almost no role left. Removing it takes away a gauge, makes the world less "video game" and gives more value to knowledge found (books, blueprints). Risks to list beforehand: the anvil, Quark, Create, Immersive Enchanting, Envelope and XP farms. If the cost is too high, XP is kept and the idea dropped.
 
 Ruled out: the anomalies (horror), the dense ores (as with Create Ore Excavation), Tree Physics (as with Dragged's), ragdolls and the body (out of tone), the whole Nether (closed), Tolerable Creepers (no vanilla monsters), Brewin' and Chewin' (Farmer's Delight), Distant Horizons and voice chat (already refused).
 
@@ -110,8 +110,8 @@ A later pass read the Wayfarer channel of the Monad Modding Discord. The full re
   - flint, bronze, iron then steel;
   - the End is closed, and Create is only there for Aeronautics.
 - **Corrected**: the "anomalies" appear nowhere on the Discord. The Friendly Moon only appears there in jokes, but it is indeed a mechanic of No Man's Land 1.6.1, verified in the jar ([lune-amie.md](../../../../plan/lune-amie.md)).
-- **The Monad team's method**: an in-house mod, *Wayfarer Core*, with many mixins, plus KubeJS and LootJS for recipes and loot. It is the same approach as Compline, with our `compline` mod and our scripts.
-- **What we do not do**: Farcr asks that Wayfarer not be copied, and *Wayfarer Core* will never be published. Compline takes neither code nor resources: only gameplay ideas, written in our own way (names, rates, sources), with public mods. The Monad team also says it encourages addons.
+- **The Monad team's method**: an in-house mod, *Wayfarer Core*, with many mixins, plus KubeJS and LootJS for recipes and loot. It is the same approach as Fallow, with our `fallow` mod and our scripts.
+- **What we do not do**: Farcr asks that Wayfarer not be copied, and *Wayfarer Core* will never be published. Fallow takes neither code nor resources: only gameplay ideas, written in our own way (names, rates, sources), with public mods. The Monad team also says it encourages addons.
 - **Ideas in reserve**:
   - a writing tool that wears out, required for signs and books;
   - wax taken from the honeycomb or from pork;

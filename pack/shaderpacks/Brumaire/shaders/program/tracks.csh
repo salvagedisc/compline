@@ -1,4 +1,4 @@
-// Les pas des êtres vivants proches (brumairePush0..3, donnés par le mod compline) dans la carte des traces
+// Les pas des êtres vivants proches (brumairePush0..3, donnés par le mod fallow) dans la carte des traces
 // (lib/tracks.glsl). Un groupe par être : le premier fil pose les pieds le long du chemin parcouru depuis le dernier
 // (tous les 0,7 bloc, le gauche puis le droit, jusqu'à cinq par image), puis chaque fil imprime un texel de chaque
 // empreinte, une semelle au seizième de bloc tournée dans le sens de la marche. trackStateImg garde, pour chacun, où

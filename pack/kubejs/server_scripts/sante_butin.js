@@ -1,11 +1,11 @@
-// Compline : où trouver l'« Éclat de vie ». Uniquement en explorant : jamais sur une créature,
+// Fallow : où trouver l'« Éclat de vie ». Uniquement en explorant : jamais sur une créature,
 // jamais par artisanat. Voir docs/plan/sante.md (taux, sources, réglage).
 //
 // Chaque taux est la chance qu'UN tirage de la table donne un éclat :
 // un coffre ouvert ou un bloc suspect brossé. Avec Lootr, chaque joueur
 // a son propre tirage par coffre. Tables du jeu de base (Minecraft 1.21.1).
 
-const SANTE_BUTIN_ECLAT = 'compline:eclat_de_vie'
+const SANTE_BUTIN_ECLAT = 'fallow:eclat_de_vie'
 
 // Coffres : l'éclat s'AJOUTE au butin normal.
 const SANTE_BUTIN_COFFRES = {

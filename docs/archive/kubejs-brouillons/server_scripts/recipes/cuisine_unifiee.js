@@ -1,4 +1,4 @@
-// BROUILLON Compline — Farm & Charm cantonné à la ferme, KC seul système de cuisine (décision 0002, plan/04 §4.7).
+// BROUILLON Fallow — Farm & Charm cantonné à la ferme, KC seul système de cuisine (décision 0002, plan/04 §4.7).
 // Kaleidoscope Compat fait déjà l'essentiel (fusion des doublons, recettes de marmite rejouées au stockpot KC).
 // Ce script ne couvre que ce qu'il laisse : postes de cuisine F&C et mangeoire. Identifiants à lire dans le .jar F&C.
 

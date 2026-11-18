@@ -4,22 +4,22 @@ List set aside on 2026-10-25 for when there is time to play. None of this has be
 
 Updated on 2026-11-14 after the second cleanup ([0026](decisions/0026-second-cleanup.md)): the title and loading screens are the game's own, and the tests of Shine and of the rain, storm and sunlight effects are gone. Updated on 2026-11-13, after No Man's Land left the pack ([0019](decisions/0019-leaving-no-mans-land.md)): the checks that needed it (Friendly Moon session, its fauna, the alchemists' ruins, the Meeting Point) are gone, and checks for Regions Unexplored and Geophilic are added. Neither mod has been seen in game.
 
-It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Compline instance → Logs, or `crash-reports/`) to the report.
+It is split into **8 sessions of about one hour**, in the order the game brings them up. Tick items as you go. When something goes wrong, note its number and attach the log (Modrinth App → Fallow instance → Logs, or `crash-reports/`) to the report.
 
 The code in brackets, such as [K1], points to the detailed test in the repository. A French copy of this checklist is kept for the team outside the repository.
 
 ## Before starting
 
 - [ ] Import the latest `.mrpack` (Actions tab of the repository → latest build → artifact) into the Modrinth App, with **8 GB of memory** for the instance.
-- [ ] Create a **Creative world with commands allowed**, seed `compline`. A new world per session if possible: many settings are only read at world creation.
+- [ ] Create a **Creative world with commands allowed**, seed `fallow`. A new world per session if possible: many settings are only read at world creation.
 - [ ] Keep F3 handy: it shows the biome (useful for the clearings).
 
 ## Session 1: first launch and first steps
 
-- [ ] The game is in French, Fresh Animations and Better Leaves are active and no `compline-*` pack is listed, graphics set to "Fancy" (« Détaillés »), music at 40%.
+- [ ] The game is in French, Fresh Animations and Better Leaves are active and no `fallow-*` pack is listed, graphics set to "Fancy" (« Détaillés »), music at 40%.
 - [ ] First launch: no narrator voice and no accessibility screen; creating then reopening a world shows no experimental settings warning; no Adorable Hamster Pets bell on the HUD or in the inventory, no update notice ([0024](decisions/0024-removing-the-house-resource-packs.md)).
-- [ ] The log shows no `compline`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
-- [ ] The `compline` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
+- [ ] The log shows no `fallow`, KubeJS or mixin errors. It should contain « Module ciel chargé » (sky module loaded), « Module xp chargé » (xp module loaded), « Module horizon chargé » (horizon module loaded), « Module outils chargé » (tools module loaded) [C10, X1, H1, F1, D1, L1].
+- [ ] The `fallow` music pack is selected in Options → Music & Sounds → True Adaptive Music, with no "Problems detected" [M1, M2, M7].
 - [ ] Music: after the first silence, a track of the game plays from the new list (30 tracks, no resource pack needed) and the others follow in the clearing, at night, underground and aboard [M7].
 - [ ] No « Hamster Tips » book is handed out on first login or at the first hamster seen (it can still be crafted).
 - [ ] Distant Horizons writes no compatibility, render distance, garbage collector, object pool, replay or slow generation warning at start-up or in chat; only the low-memory warning may show, and only if Java lacks memory.
@@ -39,14 +39,14 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 
 - [ ] **Quest journal** (Questlog): opens from the inventory; five chapters in French; guides complete when read; the tannery and machines quests appear with a hide or a Create part; placing the vigil fire and the lantern completes their quests [N1 to N5].
 - [ ] Place a **vigil fire** (*feu de veille*) in a misty forest: « La brume se retire. » (the mist withdraws), the mist thins and the grass turns vivid within a few seconds [K1].
-- [ ] F3 inside the disc and at its edge: the real biome everywhere (never `compline:clairiere`: since `compline` 0.8.0 a clearing no longer changes the biome); the vivid grass stops on a round edge [K2].
+- [ ] F3 inside the disc and at its edge: the real biome everywhere (never `fallow:clairiere`: since `fallow` 0.8.0 a clearing no longer changes the biome); the vivid grass stops on a round edge [K2].
 - [ ] A **clearing lantern** (*lanterne de clairière*) in a snowy taiga (bluish green, snow still falls), a fire in a savanna (yellow green) [K3].
 - [ ] A clearing on a coast: the ocean and the beach keep their mist; a river crossing it clears [K4]. Note whether a Streams brook stays misty [W10].
 - [ ] Leave the fire, go away, come back, restart: the clearing stays [K5].
 - [ ] **Break** the fire, then the lantern: « La brume revient. » (the mist returns) and the mist comes back over their disc; a fire broken inside a lantern's disc changes nothing [K12, K13]. A charged dissipator broken: same over 64 blocks [K14].
 - [ ] Place a lantern and watch: the grass turns green ring by ring from the lantern outwards, cloud puffs drift away and the mist thins over a few seconds; break it: the reverse, from the edge inwards [K16].
 - [ ] The new fire (stone brazier, pale flame) and lantern (standing), by day and at night: neither looks like a vanilla campfire or lantern [K15].
-- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the mist lifts and the grass turns vivid, as in a vanilla biome, and F3 still shows the Regions Unexplored biome [K1, K2]. Biomes from the `compline:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
+- [ ] A clearing opened in a Regions Unexplored biome (for example a redwood forest, a bayou, a steppe): the mist lifts and the grass turns vivid, as in a vanilla biome, and F3 still shows the Regions Unexplored biome [K1, K2]. Biomes from the `fallow:peut_devenir_clairiere` tag only: a beach, a desert or an ocean refuses, with its message.
 - [ ] « Clairière » (clearing) music after 30 s [K6].
 - [ ] **Far view**: from a clearing on a hill, the Distant Horizons landscape shows in the distance, with no seam [K7, H3]. In the mist, no distant landscape shows, even from a summit [H2].
 - [ ] **Mist ring**: from that clearing, the landscape always dissolves into the haze before about 500 blocks by day and 260 at night: no far mountain as a pale silhouette against the sky [H13, H14]. Back in the mist, no frozen relief at the edge of the terrain [H15].
@@ -145,10 +145,10 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Tannery** (`tannerie` module, [tannery](plan/tannerie.md)): a cow, a horse and a pig give raw hides [TA1]; six knife strokes on the fleshing beam give a scraped hide and sometimes fat [TA2]; stripping a log gives bark about one time in two [TA3]; water, bark and hides in the tanning vat give wet leather after 5 minutes, with French messages when something is missing [TA4]; the drying frame dries it faster in the sun or by a fire, the rain wets it [TA5]; fat makes torches and candles [TA6]; the quest follows [TA7].
 - [ ] **The body left behind** (Sable: Ragdoll Corpse, [0037](decisions/0037-ragdoll-corpse.md)): die with a full inventory and the bag on the back: nothing falls, the body keeps everything and opens with a right-click, « Corps de … » in French; empty it, it vanishes [RC1]. Drag it, throw it, lift it with an airship [RC2]. Die far away: the atlas grave and the recovery compass lead back to it, it survives a restart [RC3]; in lava and deep water too [RC4]; the H key does nothing [RC5].
 - [ ] **Rest by the hearth** (`repos` module, [repos](plan/repos.md)): a campfire in the open does nothing [RE1]; under a roof, 20 s standing still or seated by it give « Reposé » for about 2 minutes [RE2, RE6], about 15 in a home with a bed, a chair, a table, a carpet, a chest, books, a candle, a flower pot and a cooking pot [RE3]; put the fire out: no more rest [RE4]; health comes back with half a food bar [RE5]; effect in French [RE7].
-- [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s compline:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
+- [ ] **Health**: die 6 times → 9, 8, 7, 6, 5, then 5 hearts, with the messages [V1]. `/give @s fallow:eclat_de_vie 3`: each shard restores one heart, refused at 10 hearts [V3]. Log out and back in: health stays [V2].
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
-- [ ] **Seasons felt by the body** (`climat` module, [climat](plan/climat.md)): `/eclipticseasons solar set 64` (winter solstice), then `/temp debug @s world`: `compline:saison` about −0.64 after the biome, the gauge falls outdoors [CL1]; `solar set 34` (greater heat) in a desert at noon: about +0.3 [CL2]; the offset moves a little each day, never in one jump [CL3]; nothing in the Nether [CL4]; `seasonStrength = 0` turns it off without a restart [CL5].
+- [ ] **Seasons felt by the body** (`climat` module, [climat](plan/climat.md)): `/eclipticseasons solar set 64` (winter solstice), then `/temp debug @s world`: `fallow:saison` about −0.64 after the biome, the gauge falls outdoors [CL1]; `solar set 34` (greater heat) in a desert at noon: about +0.3 [CL2]; the offset moves a little each day, never in one jump [CL3]; nothing in the Nether [CL4]; `seasonStrength = 0` turns it off without a restart [CL5].
 - [ ] **Storms** (`climat` module, [climat](plan/climat.md#storms-second-step)): in winter, `/weather thunder` in a forest: falling snow chills at once, settled snow chills more within a minute and melts under a roof [CL6]; blown flakes and a white mist without shaders, flakes only with Brumaire [CL7]. In a desert under rain or thunder: dust in the wind, a sand-coloured mist, thirst about every 20 to 30 seconds in the open [CL8], the usual pace under a roof [CL9]; a savanna in its rainy season gets rain, not sand [CL10].
 - [ ] **Hot dishes** (Cold Sweat data, [climat](plan/climat.md#hot-dishes-third-step)): in winter, a beef stew warms the body by 25 for five minutes [CL11]; a second stew renews it, a hot cocoa adds a little more [CL12]; in a desert, a melon popsicle cools the body [CL13].
 - [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
@@ -164,7 +164,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] No vanilla monsters in the Overworld, even at night, no patrol, no phantom. Never more than 8 hostile creatures around you.
 - [ ] **Pack sort, wildlife**: at most 2 Naturalist lions, tigers or bears of each species near you; Icy's Paint, harness and Andalusian without their banned effects; depth charge, ominous conch and hook, ghosts and giant crabs to judge [TR8, TR10, TR12].
 - [ ] **Dinosaurs** ([0021](decisions/0021-spelunkery-and-dinosaurs.md)): a Lushsaur in a lush or bioshroom cave, an Obsidiceratops in a redstone cave (`/locate structure ec_ad:obsidiceratops`), a Therimoss in a jungle, a Coralosaur nest in a warm ocean, a Sculkraptor in the deep dark. Note how each moves and looks next to Fresh Animations, whether the Obsidiceratops finds lava to drink and what it breaks.
-- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure compline:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
+- [ ] **Chorusoatl**: find its nest in a prismachasm (`/locate structure fallow:chorusoatl`): a floor of deepslate prismoss and one Chorusoatl. Can it fly there, is the place too dangerous, does the nest look right in the cave. Its egg hatches in full darkness.
 - [ ] **Amber**: an amber crater and a big one (`/locate structure ec_ad:crater`, `ec_ad:big_crater`): whole, no floating block around, not too many per kilometre. Archie's guidebook and his trades read in French. Ask Archie about the Obsidiceratops and the Chorusoatl: he names the redstone caves and the prismachasm. Tame a Lushsaur and craft its four pieces without killing one: the master advancement and the Lush Totem recipe come; his Lush Core trades open after the taming. Lay a Chorusoatl egg on prismoss in the dark near prismarite: it hatches.
 - [ ] **Zoo** (Archie's guidebook): J opens the guidebook on the zoo; from Archie's pages, the green bookmark leads back to it. Look at a fox, photograph a cow, tame a wolf, catch a cod in a bucket: one stamp each time, with a sound. With three stamps, stay a minute near the species: it is mastered. The stamps stay after death [ZO1 to ZO6].
 - [ ] **The approach** (`approche` module, [approche](plan/approche.md)): light a campfire to read the wind, then walk toward a herd of deer with the smoke blowing to them: they flee from 25 to 35 blocks, together, with « Le vent a porté votre odeur jusqu'à lui. » [AP1]; against the wind, standing, they stare at about 14 blocks then bolt [AP2]; crouched, you get within 6 or 7 blocks [AP3]; sprinting, they hear you at about 12 [AP4]; tamed, leashed, farm animals and bears never flee by scent [AP5]; through the spyglass, a new species 40 to 60 blocks away earns « Apercevoir » [AP6].
@@ -230,13 +230,13 @@ Once the results are in:
 
 | Code | Detailed list |
 | --- | --- |
-| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel), EC (fading interface) | [plan/mod-compline.md](plan/mod-compline.md#in-game-tests) |
+| C (sky), X (anvil), H (far view), W (terrain), K (clearings), A (held items), Z (world edge and disc), ZO (zoo), FA (house wildlife), AN (black steel), EC (fading interface) | [plan/mod-fallow.md](plan/mod-fallow.md#in-game-tests) |
 | G | [plan/premiers-gestes.md](plan/premiers-gestes.md#in-game-tests) |
 | SH (house shader pack) | this file, session 2; context in [plan/shader.md](plan/shader.md) |
 | L, F (archived, No Man's Land left the pack) | [archive/plan/lune-amie.md](archive/plan/lune-amie.md), [archive/plan/faune-nml.md](archive/plan/faune-nml.md#in-game-tests); only F6 (no rabbit) and L2 (no blood moon) still apply |
 | D | [plan/doublons.md](plan/doublons.md#in-game-tests) |
 | M (numbered items of "To test in game") | [plan/musique.md](plan/musique.md#to-test-in-game) |
-| I (numbered items) | [archive/resource-packs/compline-interface.md](archive/resource-packs/compline-interface.md#limits-and-in-game-tests) (pack removed; nothing of it still applies) |
+| I (numbered items) | [archive/resource-packs/fallow-interface.md](archive/resource-packs/fallow-interface.md#limits-and-in-game-tests) (pack removed; nothing of it still applies) |
 | XP (numbered items of "Remaining to test in game") | [plan/xp.md](plan/xp.md#remaining-to-test-in-game) |
 | TA (tannery) | [plan/tannerie.md](plan/tannerie.md#in-game-tests) |
 | V (bullets in order, V1 = first) | [plan/sante.md](plan/sante.md#what-remains-to-be-tested-in-game) |
