@@ -25,12 +25,16 @@ vec3 unpackNormal(vec2 p) {
  * Reflet d'écran : le rayon réfléchi avance dans la vue jusqu'à passer derrière la scène.
  * side : 1 si le reflet part au-dessus de la surface, -1 en dessous ; ce qui est de l'autre côté du plan (le fond vu
  * à travers l'eau, ou la rive vue d'en dessous) ne peut pas se refléter.
+ * Le point de passage est resserré par dichotomie, puis vérifié : si le rayon y est loin derrière ce que montre
+ * l'écran, il est passé derrière un objet (un tronc, une rive) sans le toucher ; il continue sa route au lieu d'en
+ * étirer l'image vers le bas.
  * Rend la couleur trouvée et sa part (0 : rien trouvé, le ciel prend le relais) ; dist : chemin parcouru.
  */
 vec4 screenReflection(vec3 start, vec3 ray, float jitter, float side, int steps, out float dist) {
     dist = 0.0;
     if (steps <= 0) return vec4(0.0);
     float stride = 0.35 + 0.025 * length(start);
+    float widest = 3.0 + 0.12 * length(start);
     float level = (gbufferModelViewInverse * vec4(start, 1.0)).y;
     float t = stride * (0.5 + jitter);
     float last = 0.0;
@@ -44,24 +48,29 @@ vec4 screenReflection(vec3 start, vec3 ray, float jitter, float side, int steps,
             vec3 found = viewAt(s.xy, d);
             float scene = found.z;
             bool across = ((gbufferModelViewInverse * vec4(found, 1.0)).y - level) * side < -0.15;
-            if (!across && p.z < scene && scene - p.z < stride * 2.0 + 0.6) {
+            if (!across && p.z < scene) {
                 // Affinage : on recule de moitié en moitié jusqu'au bord de l'objet.
                 float lo = last, hi = t;
-                for (int k = 0; k < 4; k++) {
+                for (int k = 0; k < 6; k++) {
                     float mid = 0.5 * (lo + hi);
                     vec3 q = screenOf(start + ray * mid);
                     if (start.z + ray.z * mid < viewAt(q.xy, texture(REFLECT_DEPTH, q.xy).r).z) hi = mid; else lo = mid;
                 }
-                s = screenOf(start + ray * hi);
-                dist = hi;
-                vec2 edge = min(s.xy, 1.0 - s.xy);
-                float fade = smoothstep(0.0, 0.06, min(edge.x, edge.y)) * (1.0 - smoothstep(0.7, 1.0, float(i) / float(steps)));
-                return vec4(texture(REFLECT_COLOR, s.xy).rgb, fade);
+                vec3 q = start + ray * hi;
+                s = screenOf(q);
+                float gap = viewAt(s.xy, texture(REFLECT_DEPTH, s.xy).r).z - q.z;
+                // L'épaisseur qu'on prête à ce qu'on voit : un bloc de près, un peu plus au loin.
+                if (gap < 0.6 + 0.035 * -q.z + (hi - lo) * abs(ray.z) * 2.0) {
+                    dist = hi;
+                    vec2 edge = min(s.xy, 1.0 - s.xy);
+                    float fade = smoothstep(0.0, 0.06, min(edge.x, edge.y)) * (1.0 - smoothstep(0.7, 1.0, float(i) / float(steps)));
+                    return vec4(texture(REFLECT_COLOR, s.xy).rgb, fade);
+                }
             }
         }
         last = t;
         t += stride;
-        stride *= 1.28;
+        stride = min(stride * 1.28, widest);
     }
     return vec4(0.0);
 }

@@ -41,6 +41,16 @@
 #define WATER_MOTES 1 // [0 1]
 #define WATER_WAKES 1 // [0 1]
 #define WATER_FOAM 1 // [0 1]
+#define WATER_WAVE_COUNT 20 // [8 12 20 28]
+#define WATER_SWELL 1.0 // [0.0 0.5 1.0 1.5]
+#define WATER_CHOP 1.0 // [0.0 0.5 1.0 1.5]
+#define WATER_REFRACTION 8 // [0 5 8 12]
+#define WATER_BLUR 1 // [0 1]
+#define WATER_DISPERSION 1 // [0 1]
+#define WATER_FLOW 1 // [0 1]
+#define WATER_WHITECAPS 1 // [0 1]
+#define WATER_FALLS 1 // [0 1]
+#define WATER_RAIN_RINGS 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
 
 // Pluie
