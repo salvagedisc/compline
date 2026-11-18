@@ -20,7 +20,8 @@ Brumaire is **on from the first launch** (`config/iris.properties`, written once
 | Water | `gbuffers_water` | The surface is drawn whole where it lies: the bottom found at the end of the refracted ray (read in `colortex6`), dimmed along that path while the water scatters light into it, the banks and the sky mirrored in it, blurred where the ripples are finer than the pixel, the sun's glint and the foam |
 | Clouds | `composite` (half size) | Volumetric clouds marched through a 3D noise computed once at load (`setup.csh`) |
 | Air and mist | `composite1` | The far landscape takes the colour of the low sky, the mist, the light shafts read in the shadow map, the rain curtains beyond the game's drops, the water seen from below |
-| Grade | `composite2` | Glow of the bright lights, exposure, tone curve, grade, into an 8-bit image (`colortex7`) |
+| Eye and lens | `composite2_a.csh` (compute) | Once per frame: the log-average brightness of the scene (centre-weighted) that the eye slowly adapts to, and the distance of what the centre of the screen looks at, both kept in `lensImg` (one texel) |
+| Grade | `composite2` | Depth of field, eye adaptation, glow of the bright lights, night vision, vignette, tone curve, grade, into an 8-bit image (`colortex7`) |
 | Temporal anti-aliasing | `composite3` | The image blended with its history (`colortex10`), brought back to where each point stood in the previous frame |
 | Motion blur | `composite4` | The image streaked along the path each point took on screen since the previous frame |
 | Anti-aliasing | `composite5`, `composite6`, `final` | SMAA: the edges of shapes (`colortex8`), their blending weights (`colortex9`), then the blend with the neighbours on screen |
@@ -161,6 +162,14 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Footprints**: the player and the animals nearest to them leave a print every 0.7 block, left then right, on sand, snow blocks, snow layers and snow-covered ground. A print is a sole four pixels wide on the 1/16 grid, wider at the front than at the heel, turned in the walking direction and sized by the being's width. Its hollow is darker (bluish on snow, brown on sand) and its edges tilt the normal, so one side catches the light and the other falls in shade. A print records the foot's height, so a flying player or a block placed on top shows none. Prints fade over `TRACK_MINUTES` (4 by default), faster under rain or falling snow; the map covers 64 blocks around the camera, so a trail left farther away is forgotten when the player comes back (`TRACKS`).
 - **Wet prints**: a being that walks out of water (`brumaireWet`, from the `compline` mod) leaves wet soles on any ground, sand included, snow and ice excepted: darker and slightly glossy, fewer and fainter as its feet dry over some 24 blocks. Each print dries in about two minutes, faster in the sun, from its edges inward. The wetness is kept in the print's texel (`a` = tile + 256 × wetness 0..6). Under rain the ground is already wet and the prints are not drawn.
 - **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
+
+## The finished image
+
+- **Eye adaptation** (`EXPOSURE_AUTO`, off in Very light; `EXPOSURE_AUTO_AMOUNT`, `EXPOSURE_SPEED`): `lens.csh` measures the log-average brightness of a 32×18 grid (each point a small cross, the centre weighted more) and follows it over time, in about a second toward light and several seconds toward darkness. The grade opens a dark scene and closes a dazzling one, partially only (a power of 0.3, clamped between 0.75 and 1.25), on top of the former day, night and underground adaptation; a typical forest by day is unchanged, a bright panorama a little darker, a cave a little brighter.
+- **Glow** (`BLOOM`): five levels of the mipmap chain, from a tight core to a wide trail; a soft-knee threshold, so lights approaching the threshold already glow a little, and the threshold follows the eye's adaptation.
+- **Depth of field** (`DOF`: off, soft, photo; soft in the Beautiful profile only): the focus is the nearest of five points around the centre of the screen, followed in about a quarter of a second. Each pixel is blurred by a disc sized by the gap between the inverse distances (a lens's circle of confusion), up to 6 or 12 pixels at 720p, with 24 taps on a golden spiral; a tap only counts if it is itself blurred enough to reach the pixel, so a sharp foreground does not bleed over the background. The hand stays sharp.
+- **Night vision** (`PURKINJE`): in the darkest parts of the image, colours fade toward a slightly blue luminance, as rods take over from cones.
+- **Vignette** (`VIGNETTE`): the corners darken by up to a fifth.
 
 ## Block relief
 
