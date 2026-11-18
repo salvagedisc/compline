@@ -16,6 +16,17 @@
 #define CLOUD_LIGHT 1.0 // [0.6 0.8 1.0 1.2 1.5]
 #define CLOUD_RANGE 3000.0 // [1500.0 2000.0 3000.0 4000.0]
 #define CLOUD_SHADOWS 0.8 // [0.0 0.4 0.6 0.8 1.0]
+#define CLOUD_TYPES 1 // [0 1]
+#define CLOUD_CIRRUS 2 // [0 1 2 3]
+#define CLOUD_MULTISCATTER 4 // [1 2 3 4]
+#define CLOUD_LIGHT_STEPS 6 // [3 4 6 8]
+#define CLOUD_LIGHTNING 1 // [0 1]
+
+// Ciel
+#define SKY_STARS 1 // [0 1]
+#define SKY_MILKY_WAY 1 // [0 1]
+#define SKY_HALO 1 // [0 1]
+#define SKY_RAINBOW 1 // [0 1]
 
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]

@@ -34,7 +34,8 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/atmosphere.glsl`, `program/sky.csh` | The atmosphere: constants, layout of the sky table, the program that fills it |
 | `lib/shadow.glsl`, `lib/light.glsl` | Soft shadows, lighting of a surface |
 | `program/ao.fsh`, `program/deferred1.fsh` | Screen occlusion, sky |
-| `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud density, cloud shadows, the 3D noise, the cloud march |
+| `lib/clouds.glsl`, `program/noise.csh`, `program/clouds.fsh` | Cloud kinds and density, cirrus, cloud shadows, the 3D noise, the cloud march |
+| `lib/skyoptics.glsl`, `lib/nightsky.glsl` | Cirrus lighting, ice halos, rainbow; stars, Milky Way, moon aureole |
 | `program/mist.fsh` | Clouds laid on the frame, distant air, mist, light shafts, under water |
 | `lib/underwater.glsl` | Rays under the surface, marine snow |
 | `lib/motes.glsl` | Suspended specks, one per block cell drawn by lot, walked cell by cell along the view ray (marine snow, dust in the light) |
@@ -81,12 +82,24 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 
 ## Clouds
 
-- One layer of cumulus from `CLOUD_HEIGHT` (220) to 90 blocks above, shaped by a 64³ noise that repeats without seams (smooth noise hollowed by cells for the shape, finer cells for the frayed edges), computed once when the pack loads.
-- Flat bases, rounded tops, clear edges with blue sky between; large masses come and go with a slower, stretched slice of the same noise.
-- Lit by the sun or the moon through four longer and longer steps toward it (darker undersides, bright edges toward the sun), and by the light of the sky, stronger on their tops.
-- Pushed by the pack's wind; the coverage (`CLOUD_COVERAGE`) grows in humid biomes and in the rain, where they turn grey. Far away they fade into the low sky; the mist ring still closes the horizon.
+- **One layer, several kinds**: from `CLOUD_HEIGHT` (220) to 90 blocks above, shaped by a 64³ noise that repeats without seams (smooth noise hollowed by cells for the shape, finer cells for the frayed edges), computed once when the pack loads. A slow weather map drifting with the wind decides, place by place, how covered the sky is and which kind grows there (`CLOUD_TYPES`): flat stratocumulus banks that stay low and even, round cumulus that billow up to two thirds of the layer, and under thunder towers that reach the top of the layer and spread into anvils. Light rain flattens them into a grey sheet, thunder raises them.
+- **Shape**: flat bases, a sharp threshold so cumulus have clear edges with blue sky between. The fine cells, twisted by a slow swirl so their grid never shows, fray the bottoms and make cauliflower tops (the pattern is inverted with height). The upper wind pushes the top of the layer further than its base: towers lean downwind.
+- **Light** (`CLOUD_LIGHT_STEPS`, `CLOUD_MULTISCATTER`): from each sample a cone of steps that double in length is walked toward the sun or the moon (fine detail on the first two), plus one look far ahead so a tower shades its neighbour. Multiple scattering is approximated by octaves, each less extinguished, less forward and weaker than the one before, so light glows through the heart of a cumulus instead of leaving it black. The droplet phase has a narrow forward peak (silver lining against the sun), a wide lobe and a backward lobe. The powder term darkens thin edges seen against the sun. The sky lights the tops more than the bellies, less under another cloud; the sunlit ground sends a warm-green bounce under the bellies.
+- **Lightning** (`CLOUD_LIGHTNING`): a strike lights the column of cloud it crosses; under thunder, sheet lightning flickers in random cells of 400 blocks.
+- **Aerial perspective**: far clouds fade into the low sky at the distance where they are actually seen (mean of the march weighted by what is taken), not where the ray enters the layer.
+- **Cirrus** (`CLOUD_CIRRUS`): 760 blocks above the layer, a thin veil of ice streaks stretched along the upper wind (three octaves, the fine pulled by the coarse), coming and going over hours, more in humid weather and before rain. Ice scatters strongly forward: bright near the sun, barely brighter than the sky away from it, pink at sunset. It softens the sun on the ground a little.
+- Pushed by the pack's wind; the coverage (`CLOUD_COVERAGE`) grows in humid biomes and in the rain, where they turn grey. The mist ring still closes the horizon.
 - Their shadows pass over the ground (`CLOUD_SHADOWS`).
 - The game's clouds are not drawn; with `CLOUD_STEPS` at 0 they come back.
+
+## Sky optics and night sky
+
+- **Ice halos** (`SKY_HALO`, `lib/skyoptics.glsl`): where cirrus crosses the sun or the moon, the 22° halo (red inside, sharp inner edge, fading outward) and a fainter 46° halo; with a low light, sun dogs at the same height left and right of it, a little beyond 22°.
+- **Rainbow** (`SKY_RAINBOW`): around the antisolar point when the ground is still wet (`wetness`) and the rain has almost gone, with the sun low enough for the bow to stand above the horizon: the primary bow (40.5° to 42.4°, red outside), the secondary (50° to 53.5°, reversed, about a third as bright), a darker Alexander band between them and a brighter sky under the primary. It shows in patches, stronger low down where rain still falls.
+- **Stars** (`SKY_STARS`, `lib/nightsky.glsl`): three layers drawn on a cube around the sky, each cell holding at most one star at a random place, with a brightness drawn from a steep law (a few bright, many faint) and a colour from orange to blue-white. They are fixed in a frame that turns with the sun around the celestial pole (tilted by `sunPathRotation`), so the night sky rotates. They twinkle, more near the horizon, and fade through the thicker air there. The game's stars are no longer drawn; at `Du jeu` they come back.
+- **Milky Way** (`SKY_MILKY_WAY`): a band tilted across the celestial equator with a ragged width, a warmer bulge toward its centre, grain from unresolved stars, dark dust lanes slightly off its middle, and more faint stars along it. A full moon pales it and drowns the faintest stars.
+- **Moon aureole**: haze scatters a soft glow around the moon, wider in humid biomes and in rain.
+- Clouds and cirrus are laid over the stars and the bows (front to back: the bow, the cloud layer, the cirrus veil with its halos).
 
 ## Wind
 
