@@ -7,6 +7,7 @@
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
+#include "/lib/snow.glsl"
 #include "/lib/tracks.glsl"
 #endif
 #ifdef PROGRAM_WATER
@@ -218,7 +219,26 @@ void main() {
     vec3 world = vPos + cameraPosition;
     float snow = 0.0;
     if (vMat == 0 || vMat == 4 || vMat == 9 || vMat == 14) snow = snowCover(world, normal, lm.y, vMat == 4 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
-    if (snow > 0.0) albedo = mix(albedo, vec3(0.64, 0.67, 0.72), snow);
+    // Le vent de la neige : celui du mod quand il est là, sinon un vent d'ouest régulier.
+    vec2 snowWind = brumaireLink > 0.5 && dot(brumaireWind.xy, brumaireWind.xy) > 0.01 ? normalize(brumaireWind.xy) : vec2(0.8, 0.6);
+    bool snowTop = normal.y > 0.9 && vMat != 4;
+#if SNOW_DETAIL > 0
+    if (snowTop && snow > 0.0) {
+        // Sous les arbres et autour des lumières, la neige ne fait plus un voile : elle se pose par plaques, et fond
+        // en cercle près d'une torche.
+        snow = snowPatch(world, snow * (1.0 - smoothstep(0.80, 0.94, lm.x)));
+    }
+#endif
+    if (snow > 0.0) albedo = mix(albedo, snowTop ? snowAlbedo(world, snowWind) : vec3(0.64, 0.67, 0.72), snow);
+    // La pente de la neige au texel : congères, rides du vent et grain, sur les dessus enneigés (proches).
+    float snowBump = 0.0;
+    vec3 snowN = normal;
+#if SNOW_DETAIL > 0
+    if (snowTop && (vMat == 9 || snow > 0.5)) {
+        snowBump = 1.0 - smoothstep(20.0, 32.0, length(vPos));
+        if (snowBump > 0.0) snowN = snowNormal(world, snowWind, snowBump);
+    }
+#endif
     // Le givre : les herbes et les feuillages blanchissent au pixel les matins froids.
     bool grass = vMat == 0 && vTint.g > vTint.b + 0.08;
     if (snow < 0.5 && (grass || (vMat >= 1 && vMat <= 4))) {
@@ -227,9 +247,14 @@ void main() {
     }
     if (vMat == 9 || snow > 0.5) {
         // La neige du jeu est d'un blanc pur : au soleil elle brûlerait l'image, sans plus rien laisser voir de son grain.
-        if (vMat == 9) albedo *= vec3(0.60, 0.62, 0.66);
+        if (vMat == 9) albedo *= snowTop ? snowAlbedo(world, snowWind) * 0.95 : vec3(0.60, 0.62, 0.66);
         gloss = 0.3;
+#if SNOW_DETAIL > 0
+        // Des facettes de glace qui renvoient l'astre vers l'œil : les éclats changent quand on bouge.
+        sparkle = snowGlints(world, snowN, normalize(vPos), gLightDir, 0.05) * 0.45 * max(normal.y, 0.0);
+#else
         sparkle = glitter(world, 0.003) * max(normal.y, 0.0);
+#endif
     } else if (vMat == 11) {
         gloss = 0.75;
     } else if (vMat == 12) {
@@ -284,6 +309,21 @@ void main() {
         float ratio = geoL > 0.03 ? clamp(max(dot(reliefN, gLightDir), 0.0) / geoL, 0.0, 2.0) : 1.0;
         lit *= mix(1.0, ratio * (1.0 - 0.7 * reliefShade), 1.0 - indirect);
         lit *= 1.0 - 0.5 * (1.0 - dot(reliefN, normal));
+    }
+#endif
+#if defined PROGRAM_TERRAIN && SNOW_DETAIL > 0
+    if (snowBump > 0.0) {
+        // La neige suit sa propre pente au soleil (la face, elle, est déjà ombrée), et ses creux à l'ombre prennent le
+        // bleu du ciel, qui l'éclaire seul.
+        float geoL = dot(normal, gLightDir);
+        float ratio = geoL > 0.03 ? clamp(max(dot(snowN, gLightDir), 0.0) / geoL, 0.0, 2.0) : 1.0;
+        lit *= mix(1.0, ratio, (1.0 - indirect) * snowBump);
+    }
+    if (vMat == 9 || snow > 0.5) {
+        lit *= mix(vec3(1.0), vec3(0.86, 0.94, 1.12), indirect * 0.7);
+        // La lumière qui traverse la couche : un bord à contre-jour s'éclaire doucement.
+        float rim = pow(1.0 - max(dot(normal, -normalize(vPos)), 0.0), 3.0);
+        lit += gLightColor * albedo * rim * 0.12 * (1.0 - indirect);
     }
 #endif
 #ifdef WRITE_SURFACE
