@@ -22,6 +22,9 @@ in vec2 vUv;
 #include "/lib/reflect.glsl"
 #include "/lib/voxel.glsl"
 #include "/lib/voxtrace.glsl"
+#ifndef HAS_FRAME_COUNTER
+uniform int frameCounter;
+#endif
 
 /*
 const int colortex6Format = R11F_G11F_B10F;
@@ -126,6 +129,64 @@ vec3 wetReflection(vec3 color, vec3 pos, vec3 normal, float gloss) {
     return mix(color, mirror, f * gloss * 1.4);
 }
 
+/**
+ * Reflet d'une surface lisse sans être un miroir (pierre polie, gemme, métal, sol trempé) : un seul rayon par pixel,
+ * penché au hasard autour du reflet parfait selon la rugosité (une facette tirée suivant GGX) ; l'anticrénelage
+ * temporel en fait la moyenne d'une image à l'autre, d'où un reflet net sur une gemme et flou sur une pierre polie.
+ * Le rayon cherche d'abord dans l'image, puis dans le volume des blocs ; le ciel n'y entre que si la surface le voit
+ * (rien de plein au-dessus d'elle). Un métal teint son reflet de sa couleur.
+ */
+vec3 roughReflection(vec3 color, vec3 pos, vec3 normal, float gloss, bool metal) {
+    vec3 eye = normalize(-pos);
+    float nv = max(dot(normal, eye), 0.0);
+    float rough = clamp(1.0 - 1.6 * gloss, 0.06, 1.0);
+    float a = rough * rough;
+    vec2 frame = vec2(float(frameCounter & 255) * 5.588238, float(frameCounter & 255) * 3.1415);
+    float u1 = dither(gl_FragCoord.xy + frame);
+    float u2 = dither(gl_FragCoord.yx * 1.37 + frame.yx + 11.0);
+    float phi = 6.2831853 * u1;
+    float cosT = sqrt((1.0 - u2) / (1.0 + (a * a - 1.0) * u2));
+    float sinT = sqrt(max(1.0 - cosT * cosT, 0.0));
+    vec3 tx = normalize(abs(normal.y) < 0.99 ? cross(vec3(0.0, 1.0, 0.0), normal) : cross(vec3(1.0, 0.0, 0.0), normal));
+    vec3 ty = cross(normal, tx);
+    vec3 h = normalize(tx * cos(phi) * sinT + ty * sin(phi) * sinT + normal * cosT);
+    vec3 r = reflect(-eye, h);
+    if (dot(r, normal) < 0.02) r = reflect(-eye, normal);
+
+    // Le ciel, s'il est vu ; sous un toit ou dans une grotte, la pénombre du lieu.
+    vec3 world = pos + cameraPosition;
+    vec3 mirror = skyReflection(world, r);
+#if VOXEL_REFLECTIONS > 0
+    ivec3 here = voxelCell(pos + normal * 0.5, fract(cameraPosition));
+    if (voxelInside(here) && voxCovered(here)) mirror = gAmbient * 0.12 + vec3(0.010, 0.011, 0.013);
+#endif
+    float dist;
+    vec3 view = (gbufferModelView * vec4(pos, 1.0)).xyz;
+    vec4 hit = screenReflection(view, mat3(gbufferModelView) * r, dither(gl_FragCoord.xy + frame.yx), 1.0, WET_REFLECTIONS, dist);
+#if VOXEL_REFLECTIONS > 0
+    if (hit.a < 0.99) {
+        float reach;
+        vec4 vox = voxelReflection(pos + normal * 0.02, r, reach);
+        if (vox.a > 0.0) mirror = mix(mirror, veiled(vox.rgb, r * reach * 0.4), vox.a);
+    }
+#endif
+    if (hit.a > 0.0) mirror = mix(mirror, veiled(hit.rgb, r * dist * 0.4), hit.a);
+
+    float fres = pow(1.0 - nv, 5.0);
+    float strength = clamp(gloss / 0.55, 0.0, 1.0);
+    if (metal) {
+        // Le métal : sa couleur était gardée dans colortex4, assombrie pour la diffusion (solid.fsh).
+        vec3 albedo = sq3(texture(colortex4, vUv).rgb) / 0.35;
+        vec3 f0 = clamp(albedo * 1.7, 0.04, 1.0);
+        vec3 fm = f0 + (1.0 - f0) * fres * 0.35;
+        return color + mirror * fm * (0.65 - 0.3 * rough) * ROUGH_REFLECTIONS_STRENGTH;
+    }
+    // Un peu plus que la seule réflectance d'une pierre (4 % de face) : la pierre polie et les gemmes doivent montrer ce
+    // qui les entoure, comme le jeu les dessine plus lisses qu'elles ne sont.
+    float f = clamp((0.05 + 0.95 * fres) * 2.2, 0.0, 0.8);
+    return mix(color, mirror, f * strength * ROUGH_REFLECTIONS_STRENGTH);
+}
+
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
     bool sky, hand;
@@ -154,8 +215,16 @@ void main() {
 #endif
 #endif
         }
-        float gloss = surface.a > 0.5 ? (1.0 - surface.a) / 0.45 : 0.0;
+        // L'éclat (gloss, au 1/255) et, dans le demi-pas qui suit, la marque d'un métal (solid.fsh).
+        float gx = (1.0 - surface.a) / 0.45 * 255.0;
+        float gloss = surface.a > 0.5 ? floor(gx + 0.1) / 255.0 : 0.0;
+        bool metal = surface.a > 0.5 && fract(gx + 0.1) > 0.35;
+#if ROUGH_REFLECTIONS > 0
+        if (gloss >= 0.15 && gloss < 0.6) color = roughReflection(color, pos, unpackNormal(surface.rg), gloss, metal);
+        else if (gloss >= 0.6 || (gloss > 0.02 && !metal)) color = wetReflection(color, pos, unpackNormal(surface.rg), gloss);
+#else
         if (gloss > 0.02) color = wetReflection(color, pos, unpackNormal(surface.rg), gloss);
+#endif
     }
     outColor = vec4(color, 1.0);
     outScene = outColor;
