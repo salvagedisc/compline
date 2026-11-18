@@ -50,6 +50,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 | `lib/rain.glsl` | Wet ground, puddles and their ripples, rain curtains |
 | `lib/precip.glsl`, `program/shelter.csh` | Drops and flakes drawn by the shader, the shelter of roofs and trees, the showers |
 | `lib/cover.glsl` | Snow laid on trees and ledges, frost, the glitter of snow and sand |
+| `lib/snow.glsl` | The material of laid snow: patches, drifts, wind ripples, slope per texel, glints that follow the eye |
 | `lib/tracks.glsl`, `program/tracks.csh` | Footprints: the map, the stamping of a step, the hollow and its tilted edges on the ground |
 | `lib/wind.glsl` | Movement of a plant vertex, grass pushed aside, leaves brushed, slant of the rain |
 | `lib/smaa.glsl`, `program/smaa.*`, `textures/smaa_*.png` | SMAA by Jorge Jimenez et al. (MIT, `textures/SMAA-LICENSE.txt`), unchanged but for its encoding, its lookup tables, and the three passes that use it |
@@ -157,6 +158,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 ## Snow, sand and ice
 
 - **Snow on trees and ledges**: while the player stands in a biome where it snows (`biome_precipitation` 2, smoothed over ten seconds into `snowHere`), the tops of blocks and leaves that see the sky turn white on the 1/16 grid. On leaves the snow holds on the bright needles and leaves the dark hollows, and a band of three to five pixels runs down their sides with a ragged lower edge (`SNOW_COVER`). The whole view follows the player's biome: a forest seen from a snowy biome is frosted too.
+- **Laid snow as a material** (`SNOW_DETAIL`): snow on the top of blocks is no longer a flat white plate. Where the cover is partial (under trees, where the sky is half hidden) it lies in patches on the 1/16 grid that join as the cover grows, and it melts in a ring around torches and lanterns. Its height mixes drifts a few blocks wide, ripples drawn across the wind (the mod's wind when present) and a grain per texel; the sun follows that slope, the hollows are slightly greyer. In the shade the snow takes the blue of the sky that lights it alone, and its edges glow faintly against the light. Glints are tiny ice facets drawn by lot, one per chosen texel, each with its own tilt: they flash only when the eye stands in their reflection, so they move as the player walks. Vanilla snow layers and blocks get the same slope, shade and glints over their own texture. Beyond about 30 blocks the slope fades out.
 - **Snow** blocks are dimmed a little, so the snow keeps its grain in full sun instead of burning white; a few grains glitter where the sun reaches, and change from time to time.
 - **Sand** keeps its warm colour in the sun (darker and slightly richer than the game's texture, otherwise it reads as snow) and glitters more sparsely.
 - **Ice**: clear ice is drawn with the water, light blue, with the sky and the landscape mirrored in it, more at a low angle; packed and blue ice shine like a tarnished mirror (screen reflection, no ripples).

@@ -99,6 +99,8 @@
 #define RELIEF_BEVEL 1 // [0 1]
 #define RELIEF_RANGE 24.0 // [12.0 24.0 32.0 48.0]
 #define SNOW_COVER 1 // [0 1]
+// La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
+#define SNOW_DETAIL 1 // [0 1]
 #define FROST 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]
 #define TRACKS 1 // [0 1]
