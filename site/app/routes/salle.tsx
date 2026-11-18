@@ -6,11 +6,11 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router'
 import type { Route } from './+types/salle'
 import { LIEUX, STATUTS, type Fonction, type Lieu } from '../donnees/lieux'
 import { ROMAINS } from '../donnees/details'
-import { grande, image } from '../donnees/images'
+import { grande } from '../donnees/images'
 import { metas } from '../donnees/site'
 import { Icone, type NomIcone } from '../interface/icones'
 import { lireEtat } from '../interface/etat'
-import { SENS, TAILLES_PLAN } from '../interface/transitions'
+import { prechargerPlan, SENS } from '../interface/transitions'
 import { Comparer } from '../interface/scenes/Comparer'
 import { Mesure } from '../interface/scenes/Mesure'
 import { Paliers } from '../interface/scenes/Paliers'
@@ -61,21 +61,7 @@ function imagesDe(chemin: string): string[] {
 }
 
 function precharger(chemin: string) {
-  // A detached <picture> picks the same source as the one on the page will, and leaves it in the cache.
-  for (const nom of imagesDe(chemin)) {
-    const { sources, img } = image(nom)
-    const pic = document.createElement('picture')
-    for (const [f, srcset] of Object.entries(sources)) {
-      if (f === 'jpeg' || f === 'jpg') continue
-      const src = document.createElement('source')
-      src.type = `image/${f}`; src.srcset = srcset; src.sizes = TAILLES_PLAN
-      pic.append(src)
-    }
-    const i = new Image()
-    i.decoding = 'async'
-    pic.append(i)
-    i.src = img.src
-  }
+  for (const nom of imagesDe(chemin)) prechargerPlan(nom)
 }
 
 function Statut({ f }: { f: Fonction }) {
