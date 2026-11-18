@@ -2,7 +2,7 @@
 
 Idea 2 of the study of features to add (2026-11-17), chosen by the team on 2026-11-18. Shy wild animals notice the player by scent, sight or hearing, raise their head, then flee with their herd. Coming up against the wind, crouched, lets a player get close enough for the zoo's photo or observation; the spyglass spots a species from much further away. It changes how animals behave, never their models.
 
-Status: checked on a dedicated server of the full pack with one player on 2026-11-18 (`compline` 0.32.0), not played.
+Status: checked on a dedicated server of the full pack with one player on 2026-11-18 (`fallow` 0.32.0), not played.
 
 ## The rule, for a player
 
@@ -18,7 +18,7 @@ Never concerned: tamed, leashed, ridden or AI-less animals, and every species ou
 
 ## Which animals
 
-`compline:farouches` (entity type tag, in the `compline` mod's data; a datapack or `pack/kubejs/data/compline/tags/entity_type/farouches.json` can extend it). Every entry outside vanilla is optional, so a mod that leaves the pack does not break the tag.
+`fallow:farouches` (entity type tag, in the `fallow` mod's data; a datapack or `pack/kubejs/data/fallow/tags/entity_type/farouches.json` can extend it). Every entry outside vanilla is optional, so a mod that leaves the pack does not break the tag.
 
 | Mod | Species |
 |---|---|
@@ -34,9 +34,9 @@ Bears, big cats, boars, elephants, rhinos and other animals that stand their gro
 
 ## How it works
 
-See [mod-compline.md](mod-compline.md#approche-module). In short: every half second, for each player in survival, each animal of the tag within reach asks whether it perceives them; a flee goal added on top of its own goals stops it (alert) or runs it away from the player's last known position (`DefaultRandomPos.getPosAway`, speed ×1.5). The game's panic when hit keeps its place.
+See [mod-fallow.md](mod-fallow.md#approche-module). In short: every half second, for each player in survival, each animal of the tag within reach asks whether it perceives them; a flee goal added on top of its own goals stops it (alert) or runs it away from the player's last known position (`DefaultRandomPos.getPosAway`, speed ×1.5). The game's panic when hit keeps its place.
 
-Config (`compline-common.toml`, `[approche]`): `enabled` (true), `scentRange` (32), `sightRange` (14), `hearingRange` (6), `hints` (true); `[zoo]` `spyglassDistance` (64).
+Config (`fallow-common.toml`, `[approche]`): `enabled` (true), `scentRange` (32), `sightRange` (14), `hearingRange` (6), `hints` (true); `[zoo]` `spyglassDistance` (64).
 
 ## Checked on the bench
 

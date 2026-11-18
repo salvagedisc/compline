@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:campfires",
+    "minecraft:fire",
+    "minecraft:furnace",
+    "minecraft:smoker",
+    "minecraft:blast_furnace",
+    "fallow:feu_de_veille",
+    {
+      "id": "farmersdelight:stove",
+      "required": false
+    },
+    {
+      "id": "supplementaries:fire_pit",
+      "required": false
+    },
+    {
+      "id": "cold_sweat:hearth_bottom",
+      "required": false
+    },
+    {
+      "id": "cold_sweat:boiler",
+      "required": false
+    }
+  ]
+}

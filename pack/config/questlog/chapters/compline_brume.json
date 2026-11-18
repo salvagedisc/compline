@@ -1,9 +1,0 @@
-{
-  "name": "La brume",
-  "icon": {
-    "item": "compline:lanterne_de_clairiere"
-  },
-  "order": 3,
-  "default_chapter": false,
-  "hidden": false
-}

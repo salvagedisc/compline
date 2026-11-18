@@ -12,8 +12,8 @@ their inputs:
   goes below -0.47: under -0.5 Tectonic switches to its island mode and makes land again.
 - `minecraft:overworld/temperature`: the latitude replaces most of the seed's temperature.
 
-The same numbers give the edge of the world, read by the `bord` module of the `compline` mod
-(`data/compline/monde/bord.json`).
+The same numbers give the edge of the world, read by the `bord` module of the `fallow` mod
+(`data/fallow/monde/bord.json`).
 
 Usage, from the repository root:
   python3 scripts/terrain/disc.py [key=value ...]   (keys: see PARAMS; all distances in blocks)
@@ -23,7 +23,7 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA = os.path.join(ROOT, "pack/kubejs/data/compline")
+DATA = os.path.join(ROOT, "pack/kubejs/data/fallow")
 
 PARAMS = {
     "edge": 6000,        # radius of the edge of the world: nobody goes further
@@ -66,7 +66,7 @@ def cached(function):
 
 def spline(points):
     return {"type": "minecraft:spline", "spline": {
-        "coordinate": "compline:disque/distance",
+        "coordinate": "fallow:disque/distance",
         "points": [{"location": float(a), "value": float(b), "derivative": 0} for a, b in points]}}
 
 

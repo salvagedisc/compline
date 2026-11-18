@@ -4,7 +4,7 @@
 - **Status**: kept (the team's choice of 2026-11-16); starts on a dedicated server, not played. Adds to [0003](0003-faune.md), which had set WilderNature aside
 
 ## Context
-The zoo of the `compline` mod gives stamps for every creature of the Overworld. The team wants it full of good-looking animals. House remakes of Alex's Mobs creatures were tried on 2026-11-16 (realistic, then in the vanilla style) and turned down: their models and hand-written animations did not reach the level of the best fauna mods. A survey of the NeoForge 1.21.1 fauna mods on Modrinth followed, with a gallery for the team.
+The zoo of the `fallow` mod gives stamps for every creature of the Overworld. The team wants it full of good-looking animals. House remakes of Alex's Mobs creatures were tried on 2026-11-16 (realistic, then in the vanilla style) and turned down: their models and hand-written animations did not reach the level of the best fauna mods. A survey of the NeoForge 1.21.1 fauna mods on Modrinth followed, with a gallery for the team.
 
 ## Options
 | Criterion | A. House models | B. More fauna mods |
@@ -18,7 +18,7 @@ The zoo of the `compline` mod gives stamps for every creature of the Overworld. 
 Option B, four mods:
 
 - **Koopa's Critters** 0.5 (rare and threatened species: binturong, Pallas's cat, penguins, takahe, manta ray, goblin shark…). Its termite mounds are off (`config/Koopa's Critters Configurations.toml`): WilderNature's have the termites. Its red panda has no entity in 0.5.
-- **Spawn** 4.0.8 with Teal Lib (sea life: sea cow, sunfish, seahorse, octopus, seal, spider crab…). Its creatures stay; **its islands (cold, sandy, tide pool, tropical, volcanic, dodo), octopus cities and ant mounds do not generate** (the team's choice of 2026-11-16): the biome tags of the jigsaw and island structures are emptied in `kubejs/data/spawn/tags/worldgen/biome/`, and the three islands placed by biome name point to the empty tag `compline:aucun`. Its two Biolith biomes stay, like Hybrid Aquatic's underwater biomes: rocky shore (part of the warm beaches) and deep warm ocean. `scripts/biomes/models.py` maps its biomes for the biome rules.
+- **Spawn** 4.0.8 with Teal Lib (sea life: sea cow, sunfish, seahorse, octopus, seal, spider crab…). Its creatures stay; **its islands (cold, sandy, tide pool, tropical, volcanic, dodo), octopus cities and ant mounds do not generate** (the team's choice of 2026-11-16): the biome tags of the jigsaw and island structures are emptied in `kubejs/data/spawn/tags/worldgen/biome/`, and the three islands placed by biome name point to the empty tag `fallow:aucun`. Its two Biolith biomes stay, like Hybrid Aquatic's underwater biomes: rocky shore (part of the warm beaches) and deep warm ocean. `scripts/biomes/models.py` maps its biomes for the biome rules.
 - **Hybrid Birds** 1.3.3 (peacock, swan, goose, pelican, albatross, puffin, guineafowl, turkey, rooster), same author and library as Hybrid Aquatic. Its flamingo is not registered in 1.3.3.
 - **[Let's Do] WilderNature** 1.1.8 (bison, raccoon, beaver, cassowary, red wolf, swift fox, squirrel, mini sheep, scorpion, termite, hunting trophies). The vanilla farm animals keep spawning in forests, jungles, savannas and swamps (`config/wildernature-common.toml`).
 

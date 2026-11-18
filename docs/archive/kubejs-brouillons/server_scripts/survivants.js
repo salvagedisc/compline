@@ -1,4 +1,4 @@
-// BROUILLON Compline — règles des survivants (décision 0004, plan/03 §3.6).
+// BROUILLON Fallow — règles des survivants (décision 0004, plan/03 §3.6).
 // Le Mending est retiré des échanges par les tags data/minecraft/tags/enchantment/*.json.
 // Dépend de MoreJS (version 1.21.1 à confirmer) ; syntaxe à vérifier avec ProbeJS.
 

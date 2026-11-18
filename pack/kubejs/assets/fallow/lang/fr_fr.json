@@ -1,0 +1,17 @@
+{
+  "fallow.sante.coeur_ancien": "Le Cœur ancien laisse un éclat de vie entre vos mains.",
+  "fallow.sante.plein": "Votre santé est déjà entière : %s cœurs.",
+  "fallow.sante.rendu": "Un cœur vous revient : %s / %s.",
+  "fallow.sante.reveil": "Vous vous réveillez plus faible. Il vous reste %s cœurs.",
+  "fallow.sante.reveil_plancher": "Vous vous réveillez. Il vous reste %s cœurs, vous ne faiblirez pas davantage.",
+  "item.fallow.eclat_de_vie": "Éclat de vie",
+  "item.fallow.eclat_de_vie.compteur": "Cœurs : %s / %s",
+  "item.fallow.eclat_de_vie.tooltip": "Rend un cœur perdu.",
+  "fallow.monument.gardien": "Le gardien du monument se dresse devant vous.",
+  "fallow.monument.eveil": "Le Cœur ancien s'éveille : sa bénédiction attend qui l'approchera.",
+  "fallow.monument.savoir.architect_reach": "Dans le Cœur, un savoir des nains des montagnes : un gabarit pour forger le diamant.",
+  "fallow.isolant.obsidiceratops": "Ensemble complet : supporte la chaleur du cœur brûlant",
+  "fallow.isolant.chorusoatl": "Ensemble complet : supporte le froid des hauteurs",
+  "fallow.isolant.coralosaur": "Ensemble complet : l'eau ne refroidit plus, supporte le froid des fonds",
+  "fallow.isolant.therimoss": "Ensemble complet : supporte la chaleur des terres arides"
+}

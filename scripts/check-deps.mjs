@@ -25,7 +25,7 @@ const addToml = (jarName, buf, nestedOnly) => {
 };
 
 for (const mod of await readPackMods(packDir)) {
-  const buf = await loadJar(cacheDir, mod, 'salvagedisc/compline check-deps');
+  const buf = await loadJar(cacheDir, mod, 'salvagedisc/fallow check-deps');
   addToml(mod.filename, buf, false);
   // Jar-in-jar: embedded mods count as provided.
   const metadata = readEntry(buf, 'META-INF/jarjar/metadata.json');

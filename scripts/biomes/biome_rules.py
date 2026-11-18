@@ -22,7 +22,7 @@ matched by `SKIPPED` are left alone too.
 closed dimension: they are written with the rest.
 
 The script owns every entry of these mods' biomes in the pack's biome tags outside the
-`compline` namespace: it rewrites them at each run.
+`fallow` namespace: it rewrites them at each run.
 
 Usage, from the repository root, after `npm run check-deps` has filled the jar cache:
   python3 scripts/biomes/biome_rules.py [folder of the pack's jars, default .cache/jars]
@@ -44,7 +44,7 @@ BIOME = re.compile(r"^data/([^/]+)/worldgen/biome/(.+)\.json$")
 
 # Tags of these namespaces are shared conventions: Regions Unexplored fills them itself.
 COMMON = {"minecraft", "c", "forge", "neoforge"}
-OWN = {NAMESPACE, "compline"}
+OWN = {NAMESPACE, "fallow"}
 # Left as they are: Quark's fallen trunks are of vanilla woods, out of place under maples or redwoods.
 SKIPPED = re.compile(r"^quark:has_(lower_)?fallen_")
 
@@ -93,7 +93,7 @@ def read_jars(jars):
         with zipfile.ZipFile(path) as jar:
             for name in jar.namelist():
                 tag, biome = TAG.match(name), BIOME.match(name)
-                if biome and biome.group(1) not in ("minecraft", "compline"):
+                if biome and biome.group(1) not in ("minecraft", "fallow"):
                     biomes.add(f"{biome.group(1)}:{biome.group(2)}")
                 if not tag:
                     continue

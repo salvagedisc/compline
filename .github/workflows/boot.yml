@@ -1,6 +1,6 @@
 name: boot
 
-# Démarre un serveur dédié avec tout le pack (côté serveur) et le mod compline de la PR : échoue sur
+# Démarre un serveur dédié avec tout le pack (côté serveur) et le mod fallow de la PR : échoue sur
 # un plantage, une erreur des journaux non listée dans scripts/boot/known-errors.txt, ou un objet
 # inconnu dans les listes KubeJS. Une quinzaine de minutes : seulement pour les PR qui touchent au
 # pack, au mod ou au contrôle lui-même, ou à la demande.
@@ -34,9 +34,9 @@ jobs:
           java-version: 21
           cache: gradle
           cache-dependency-path: |
-            mods-custom/compline/*.gradle
-            mods-custom/compline/gradle.properties
-            mods-custom/compline/gradle/wrapper/gradle-wrapper.properties
+            mods-custom/fallow/*.gradle
+            mods-custom/fallow/gradle.properties
+            mods-custom/fallow/gradle/wrapper/gradle-wrapper.properties
             pack/mods/*.pw.toml
 
       - uses: actions/cache@v4
@@ -53,12 +53,12 @@ jobs:
           key: neoforge-server-${{ hashFiles('pack/pack.toml') }}
           restore-keys: neoforge-server-
 
-      - name: Build compline mod
-        working-directory: mods-custom/compline
+      - name: Build fallow mod
+        working-directory: mods-custom/fallow
         run: ./gradlew build --console=plain
 
       - name: Boot the pack on a dedicated server
-        run: node scripts/boot/server.mjs --jar "$(ls mods-custom/compline/build/libs/compline-*.jar | grep -v sources | head -1)"
+        run: node scripts/boot/server.mjs --jar "$(ls mods-custom/fallow/build/libs/fallow-*.jar | grep -v sources | head -1)"
 
       - uses: actions/upload-artifact@v4
         if: always()

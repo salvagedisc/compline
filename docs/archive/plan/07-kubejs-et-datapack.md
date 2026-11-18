@@ -9,9 +9,9 @@ Everything that ties the mods together goes through KubeJS (already in the pack)
 ```
 pack/kubejs/
 ├── startup_scripts/
-│   └── objets_compline.js            engineer blueprints, forged parts, ember core, saltpetre
+│   └── objets_fallow.js            engineer blueprints, forged parts, ember core, saltpetre
 ├── server_scripts/
-│   ├── 00_compline_constants.js      shared lists (banned hostiles, blueprints → recipes)
+│   ├── 00_fallow_constants.js      shared lists (banned hostiles, blueprints → recipes)
 │   ├── no_end_no_nether.js         End and Nether closed
 │   ├── spawns_safety.js            vanilla monster safety net
 │   ├── survivants.js               breeding blocked, trades filtered (MoreJS)
@@ -23,23 +23,23 @@ pack/kubejs/
 │   │   ├── remplacements.js        slime, gunpowder, Blaze Burner, quartz
 │   │   ├── gisements_coe.js        finite deposits per biome
 │   │   ├── cuisine_unifiee.js      Farm & Charm confined to the farm, season tags
-│   │   └── overgeared_pieces.js    forge recipes for compline:* parts (recipe types to be read)
+│   │   └── overgeared_pieces.js    forge recipes for fallow:* parts (recipe types to be read)
 │   └── loot/
 │       └── butin.js                elytra and eye removed, bones, blueprints, orbs (LootJS)
 ├── client_scripts/
 │   └── visionneuse.js              entries hidden in JEI
 ├── data/
-│   ├── compline/function/init.mcfunction          gamerules on load
-│   ├── minecraft/tags/function/load.json        → compline:init
-│   ├── compline/neoforge/biome_modifier/*.json    monsters, dungeons, infested blocks removed
+│   ├── fallow/function/init.mcfunction          gamerules on load
+│   ├── minecraft/tags/function/load.json        → fallow:init
+│   ├── fallow/neoforge/biome_modifier/*.json    monsters, dungeons, infested blocks removed
 │   ├── minecraft/tags/worldgen/biome/has_structure/stronghold.json   no more strongholds
 │   ├── minecraft/tags/enchantment/{tradeable,on_traded_equipment}.json   no more traded Mending
 │   ├── minecraft/worldgen/template_pool/village/*/town_centers.json  ruined villages (to be written)
 │   ├── minecraft/worldgen/structure_set/*.json  structures removed (to be written)
-│   ├── compline/advancement/**                    settler's notebook achievements (to be written)
+│   ├── fallow/advancement/**                    settler's notebook achievements (to be written)
 │   └── <mod>/neoforge/biome_modifier/*.json     {"type":"neoforge:none"} to neutralise a modifier
 └── assets/
-    ├── compline/…                    textures and French names of the items
+    ├── fallow/…                    textures and French names of the items
     ├── ambientsounds/…             rare distant sounds (see 5.6)
     └── minecraft/…                 menu panorama, splashes in French
 pack/config/incontrol/spawn.json    In Control! rules
@@ -49,13 +49,13 @@ pack/config/incontrol/spawn.json    In Control! rules
 
 | # | Script or data | What it does | Depends on | Draft |
 |---|---|---|---|---|
-| 1 | `compline:init` + `load.json` | World gamerules, including `reducedDebugInfo` and `doLimitedCrafting` | — | ✅ |
+| 1 | `fallow:init` + `load.json` | World gamerules, including `reducedDebugInfo` and `doLimitedCrafting` | — | ✅ |
 | 2 | `no_end_no_nether.js` + stronghold tag | End and Nether closed, eye recipes removed | `NativeEvents` | ✅ |
 | 3 | Biome modifiers + `spawns_safety.js` + `incontrol/spawn.json` | No more vanilla monsters, modded hostiles capped | In Control! | ✅ |
 | 4 | `saisons_cold_sweat.js` | Seasonal felt temperature | Ecliptic and Cold Sweat bindings | ✅ |
 | 5 | `recipes/remplacements.js` | Slime, gunpowder, Blaze Burner, quartz | KubeJS Create | ✅ |
 | 6 | `recipes/cuisine_unifiee.js` + Kaleidoscope Compat | Farm & Charm confined to the farm, KC as the only cooking system, feeder removed | Kaleidoscope Compat | ✅ |
-| 7 | `objets_compline.js` + `recipes/overgeared_pieces.js` | Forged parts that lock the machines | Overgeared recipe types | partial |
+| 7 | `objets_fallow.js` + `recipes/overgeared_pieces.js` | Forged parts that lock the machines | Overgeared recipe types | partial |
 | 8 | `recipes/progression.js` | Locks by age | 7, KubeJS Create | ✅ |
 | 9 | `plans_ingenieur.js` + `loot/butin.js` | Blueprints found while exploring that unlock recipes | 7, LootJS, Quark Auto Unlock cut | ✅ |
 | 10 | `survivants.js` + enchantment tags | Survivors: no breeding, filtered trades | MoreJS | ✅ |
@@ -65,10 +65,10 @@ pack/config/incontrol/spawn.json    In Control! rules
 | 14 | `visionneuse.js` | Hide what does not exist | — | ✅ |
 | 15 | Achievements + Modonomicon notebook | Settler's guide by age | — | to be written |
 | 16 | Assets: AmbientSounds sounds, LambDynamicLights luminances, ATMOSPHERICS presets, panorama | Ambience | — | to be written |
-| 17 | `clairieres.js` (startup + server) + `compline:clairiere` biome + ATMOSPHERICS preset ([10.3](10-recentrage.md#103-the-mist-that-lifts)) | Clearing fires: the mist recedes around the base | ATMOSPHERICS, Overgeared, Create | ✅ (draft) |
+| 17 | `clairieres.js` (startup + server) + `fallow:clairiere` biome + ATMOSPHERICS preset ([10.3](10-recentrage.md#103-the-mist-that-lifts)) | Clearing fires: the mist recedes around the base | ATMOSPHERICS, Overgeared, Create | ✅ (draft) |
 | 18 | `zoo.js` + `lune_blanche.json` | Wildex bestiary rewards; white moon | Wildex Bestiary, Enhanced Celestials | moon ✅ (draft), zoo to be written |
 
-Numbers 1 to 6 must exist **before the first serious test world**: without them, the generated world is not Compline's (monsters, strongholds, basic recipes).
+Numbers 1 to 6 must exist **before the first serious test world**: without them, the generated world is not Fallow's (monsters, strongholds, basic recipes).
 
 ## 7.3 API points to confirm
 

@@ -1,4 +1,4 @@
-// Compline : le rôle des monuments d'Ancient Remnants dans la survie. Voir docs/plan/monuments.md.
+// Fallow : le rôle des monuments d'Ancient Remnants dans la survie. Voir docs/plan/monuments.md.
 //
 // 1. Cœurs endormis et gardiens. Quatre monuments sont gardés : leur Cœur ancien ne donne pas sa
 //    bénédiction tant que leur gardien n'est pas vaincu. Le gardien apparaît au sol quand un joueur
@@ -35,12 +35,12 @@ const MON_DELAI_GARDIEN = 1200       // ticks avant qu'un gardien disparu puisse
 const MON_DISTANCE_APPARITION = 12   // blocs entre le joueur et le gardien qui apparaît, vers le monument
 
 // Identifiants enregistrés dans les mondes : ne pas les changer sur un monde en cours.
-const MON_TAG_GARDIEN = 'compline_gardien'
-const MON_CLE_BENEDICTION = 'compline_benediction'
-const MON_CLE_EVEILLE = 'compline_eveille'
-const MON_CLE_PROCHAIN = 'compline_gardien_prochain'
-const MON_CLE_COEUR = 'compline_coeur'
-const MON_CLE_EN_ATTENTE = 'compline_coeurs_a_eveiller'   // données du serveur : Cœurs à éveiller hors chargement
+const MON_TAG_GARDIEN = 'fallow_gardien'
+const MON_CLE_BENEDICTION = 'fallow_benediction'
+const MON_CLE_EVEILLE = 'fallow_eveille'
+const MON_CLE_PROCHAIN = 'fallow_gardien_prochain'
+const MON_CLE_COEUR = 'fallow_coeur'
+const MON_CLE_EN_ATTENTE = 'fallow_coeurs_a_eveiller'   // données du serveur : Cœurs à éveiller hors chargement
 
 const MON_HEIGHTMAP = Java.loadClass('net.minecraft.world.level.levelgen.Heightmap$Types')
 
@@ -83,10 +83,10 @@ function monEveiller(coeur) {
   coeur.level.getPlayers().forEach(joueur => {
     const dx = joueur.x - coeur.x, dz = joueur.z - coeur.z
     if (dx * dx + dz * dz > MON_RAYON_EVEIL * MON_RAYON_EVEIL) return
-    joueur.tell(Text.lightPurple(Text.translatable('compline.monument.eveil')))
+    joueur.tell(Text.lightPurple(Text.translatable('fallow.monument.eveil')))
     if (savoir) {
       joueur.give(Item.of(savoir))
-      joueur.tell(Text.gold(Text.translatable('compline.monument.savoir.' + benediction.split(':')[1])))
+      joueur.tell(Text.gold(Text.translatable('fallow.monument.savoir.' + benediction.split(':')[1])))
     }
   })
   coeur.playSound('minecraft:block.beacon.activate', 2.0, 0.8)
@@ -134,7 +134,7 @@ function monAppeler(coeur, joueur) {
   const y = level.getHeight(MON_HEIGHTMAP.MOTION_BLOCKING_NO_LEAVES, x, z)
   const gardien = level.createEntity(type)
   if (!gardien) {
-    console.warn(`[Compline] monuments.js : gardien ${type} introuvable`)
+    console.warn(`[Fallow] monuments.js : gardien ${type} introuvable`)
     return
   }
   gardien.setPos(x + 0.5, y, z + 0.5)
@@ -144,7 +144,7 @@ function monAppeler(coeur, joueur) {
   gardien.spawn()
   level.getPlayers().forEach(p => {
     const ex = p.x - x, ez = p.z - z
-    if (ex * ex + ez * ez <= MON_RAYON_EVEIL * MON_RAYON_EVEIL) p.tell(Text.gold(Text.translatable('compline.monument.gardien')))
+    if (ex * ex + ez * ez <= MON_RAYON_EVEIL * MON_RAYON_EVEIL) p.tell(Text.gold(Text.translatable('fallow.monument.gardien')))
   })
 }
 

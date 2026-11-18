@@ -1,27 +1,27 @@
 {
-  "chapter": "questlog:compline_metiers",
+  "chapter": "questlog:fallow_metiers",
   "sort_order": 14,
   "title": "La tannerie",
   "description": "Un animal donne une peau brute. Posez-la sur un chevalet à écharner et raclez-la au couteau : elle devient une peau raclée, et laisse parfois un morceau de gras.\n\nÉcorcez une bûche à la hache : il en tombe parfois de l’écorce. Remplissez une cuve à tan d’un seau d’eau, ajoutez une écorce par peau, puis jusqu’à quatre peaux raclées. Après quelques minutes, sortez le cuir mouillé, la main vide.\n\nTendez-le sur un séchoir : il sèche au soleil, plus lentement à l’ombre, vite près d’un feu, et la pluie le mouille. Main vide sur le séchoir, on voit où il en est.",
   "icon": {
-    "item": "compline:peau_brute"
+    "item": "fallow:peau_brute"
   },
   "requirements": [
     {
       "type": "questlog:item_obtain",
-      "item": "compline:peau_brute",
+      "item": "fallow:peau_brute",
       "required_amount": 1
     }
   ],
   "objectives": [
     {
       "type": "questlog:item_obtain",
-      "item": "compline:peau_raclee",
+      "item": "fallow:peau_raclee",
       "required_amount": 1
     },
     {
       "type": "questlog:item_obtain",
-      "item": "compline:cuir_mouille",
+      "item": "fallow:cuir_mouille",
       "required_amount": 1
     },
     {

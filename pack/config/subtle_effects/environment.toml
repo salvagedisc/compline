@@ -3,7 +3,7 @@ version = 1
 biomeColorRain = true
 
 [biomes]
-# Compline : pollen et spores aussi dans les prairies, vergers et marais à champignons de Regions Unexplored.
+# Fallow : pollen et spores aussi dans les prairies, vergers et marais à champignons de Regions Unexplored.
 mushroomSporeDensity = 0.5
 mushroomSporeBiomes = [
     "minecraft:mushroom_fields",
@@ -63,7 +63,7 @@ bubbleGeyserActiveTime = 300
 bubbleGeyserInactiveTime = 500
 
 [fireflies]
-# Compline : les lucioles sont celles de Particular (fleurs, herbe, nuits tièdes) ; celles-ci les doublaient.
+# Fallow : les lucioles sont celles de Particular (fleurs, herbe, nuits tièdes) ; celles-ci les doublaient.
 firefliesEnabled = false
 dimensionBlocklist = [
     "twilightforest:twilight_forest_type"

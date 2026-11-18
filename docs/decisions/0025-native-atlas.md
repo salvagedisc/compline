@@ -19,7 +19,7 @@ The three mods are small (about 17,000 lines of Java, 12 mixins) and LGPL-licens
 The team refused Map Atlases. Remnants Minimap and Mapwright, the native maps found, change what the map is (Elden Ring theme, or a map the player draws).
 
 ## Decision
-Option C. The ports live in their own public repository, `salvagedisc/compline-atlas`, as the LGPL requires; the jars are committed in `pack/mods/` like the `compline` jar.
+Option C. The ports live in their own public repository, `salvagedisc/fallow-atlas`, as the LGPL requires; the jars are committed in `pack/mods/` like the `fallow` jar.
 
 - Surveyor 1.2.4, Antique Atlas 3.1.2 and Antique Transport 1.3.0, version suffix `-neoforge.1`.
 - Mod ids, packets, configs and save formats are unchanged, so maps and waypoints explored before the port load as they are (seen on the server with data written by the Fabric builds; not tried with a client's own save).
@@ -28,6 +28,6 @@ Option C. The ports live in their own public repository, `salvagedisc/compline-a
 - The atlas book is recognised by its name, "Antique Atlas", whatever the language: the French strings keep that name ("Atlas ancien" made the renaming hint wrong). Punchy leaves `minecraft:book` to the vanilla hand, otherwise the held atlas is drawn as a plain item instead of the open map.
 
 ## Consequences
-- Upstream updates are merged by hand into `compline-atlas`. Antique Atlas was last released in January 2026, Surveyor in May.
+- Upstream updates are merged by hand into `fallow-atlas`. Antique Atlas was last released in January 2026, Surveyor in May.
 - Seen on the test bench: the client joins a dedicated server, terrain syncs, the atlas opens with the M key, a book renamed "Antique Atlas" shows the map when held, the client map is saved on disconnect.
 - Still to check in game: structures are discovered, markers and waypoints sync between players, Create trains and Sable ships show.

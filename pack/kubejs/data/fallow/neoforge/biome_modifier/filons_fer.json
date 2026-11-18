@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fallow:filons/fer",
+  "features": "fallow:filon_de_fer",
+  "step": "underground_ores"
+}

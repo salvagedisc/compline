@@ -1,8 +1,8 @@
-// Compline : la tannerie maison (module tannerie de compline). Recettes ; le butin est
+// Fallow : la tannerie maison (module tannerie de fallow). Recettes ; le butin est
 // dans tannerie_butin.js. Voir docs/plan/tannerie.md.
 //
 // La chaîne :
-//   animal -> peau brute (compline:peau_brute)
+//   animal -> peau brute (fallow:peau_brute)
 //   1. chevalet à écharner : la peau se racle au couteau -> peau raclée (parfois du gras)
 //   2. cuve à tan : un seau d'eau, une écorce par peau, quatre peaux au plus, 5 minutes
 //      -> cuir mouillé
@@ -33,25 +33,25 @@ ServerEvents.recipes(event => {
   // Les peaux de kangourou d'Alex's Mobs gardent leur rapport (2 pour 1),
   // mais donnent une peau brute au lieu du cuir.
   if (Platform.isLoaded('alexsmobs')) {
-    event.shapeless('compline:peau_brute', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
-      .id('compline:tannerie/peau_de_kangourou')
+    event.shapeless('fallow:peau_brute', ['alexsmobs:kangaroo_hide', 'alexsmobs:kangaroo_hide'])
+      .id('fallow:tannerie/peau_de_kangourou')
   }
 
   // Quatre peaux de reptile de Koopa's Critters font une peau brute.
   if (Platform.isLoaded('koopascritters')) {
-    event.shapeless('compline:peau_brute', ['4x koopascritters:reptile_hide'])
-      .id('compline:tannerie/peau_de_reptile')
+    event.shapeless('fallow:peau_brute', ['4x koopascritters:reptile_hide'])
+      .id('fallow:tannerie/peau_de_reptile')
   }
 
   // Une peau de Naturalist d'un monde existant devient une peau brute.
   if (Platform.isLoaded('naturalist')) {
-    event.shapeless('compline:peau_brute', ['naturalist:hide'])
-      .id('compline:tannerie/peau_de_naturalist')
+    event.shapeless('fallow:peau_brute', ['naturalist:hide'])
+      .id('fallow:tannerie/peau_de_naturalist')
     // Le gras que laisse le raclage : deux torches avec un bâton, une bougie avec une ficelle.
     event.shapeless('2x minecraft:torch', ['naturalist:fat', '#c:rods/wooden'])
-      .id('compline:tannerie/torches_au_gras')
+      .id('fallow:tannerie/torches_au_gras')
     event.shapeless('minecraft:candle', ['naturalist:fat', '#c:strings'])
-      .id('compline:tannerie/chandelle_de_suif')
+      .id('fallow:tannerie/chandelle_de_suif')
   }
 })
 

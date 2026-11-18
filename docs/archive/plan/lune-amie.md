@@ -1,8 +1,8 @@
 > Archived since 2026-11-13: No Man's Land left the pack ([decision 0019](../../decisions/0019-leaving-no-mans-land.md)). This page is kept as history.
 
-# The Friendly Moon: the central mystery of Compline
+# The Friendly Moon: the central mystery of Fallow
 
-Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Compline makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
+Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfarer.md), recommendation 2). No Man's Land (NML 1.6.1) already contains a quest: a moon that talks. Fallow makes it its main thread, and has it coexist with the moons of Enhanced Celestials, including the white moon. This document settles points 6 and 18 of [report 4](recherche/verif-2026-10-18/4-monde-et-objectifs.md).
 
 > **Status as of 2026-10-19.** Everything comes from reading the jars (NML 1.6.1, Enhanced Celestials 6.0.2.6 then Enhanced Celestials 2 Core 2.0.3.3, ATMOSPHERICS 2.6.5, KubeJS 2101.7.2, LootJS 3.7.0), decompiled with `javap` and Vineflower. A first pass on the test server without a player validated the server side ([results](#test-server-2026-10-19)). **Nothing has been tested with a player.** The list of [tests](#what-remains-to-be-checked-in-game) says what to check.
 
@@ -16,7 +16,7 @@ Idea 2 taken from Wayfarer ([research of 2026-10-19](recherche/2026-10-19/wayfar
 
 ## The Friendly Moon, for a player
 
-1. **The ruins.** The alchemists' ruins are underground, in cave biomes, between heights 10 and 40. The heart of each ruin opens onto a moon sanctuary, with a large carving in the shape of a moon face. Smaller carvings also decorate some ruins. A crumpled note, sometimes found in the jars, mentions it (Compline addition).
+1. **The ruins.** The alchemists' ruins are underground, in cave biomes, between heights 10 and 40. The heart of each ruin opens onto a moon sanctuary, with a large carving in the shape of a moon face. Smaller carvings also decorate some ruins. A crumpled note, sometimes found in the jars, mentions it (Fallow addition).
 2. **The carving.** It is enough to look at the carving for 2 seconds, within 24 blocks. The image zooms and a sound rings out. Nothing else announces it.
 3. **The dream.** During the next 3 game days (counted while connected), a player sleeping in a bed has a dream: an avenue of monoliths, with no interface bar, unable to run. At the end, a pool. You have to look up at the moon and watch it for 10 seconds. Leaving the avenue wakes the player with no result. Achievement: "First Contact".
 4. **The shadow.** For the 8 nights following the dream, a moon shadow appears in the sky, towards the Meeting Point. It fades when you arrive. After 8 nights, it no longer returns: you have to go back and look at a carving, then dream again.
@@ -48,13 +48,13 @@ What it gives: three achievements, the "Guidance" disc, one more star in the sky
 ### The companions
 
 - **The Companion** (`nomansland:buddy`) is born in mushroom rings, on **mushroom islands** only (`mushroom_fields`). It can follow players, and it is made happy by feeding it. Bringing it to the Meeting Point is a real journey: boat, train or airship.
-- **The Frienderman** replaces 1% of the endermen that spawn naturally in the Overworld. Compline removes endermen, so **it will not appear**. Its mask exchange also requires the Vanity mod, which is absent. It is not needed for the quest.
+- **The Frienderman** replaces 1% of the endermen that spawn naturally in the Overworld. Fallow removes endermen, so **it will not appear**. Its mask exchange also requires the Vanity mod, which is absent. It is not needed for the quest.
 
 ### The config keys
 
 All in `config/nomansland-common.toml` (**common** config, not serverconfig), section `[meeting_point]`:
 
-| Key | Default | Compline | Why |
+| Key | Default | Fallow | Why |
 |---|---|---|---|
 | `minMeetingPointDistance` | 1000 | 1000 | Written to be visible. A real expedition, without being out of reach |
 | `maxMeetingPointDistance` | 2500 | 2500 | Same |
@@ -71,18 +71,18 @@ Since 2026-10-19, the pack uses **Enhanced Celestials 2**: Core 2.0.3.3 and Defa
 - No config file for the moons: everything goes through datapacks, under `data/<ns>/enhancedcelestials2core/lunar/`. An event (`event/`) is only a list of modifiers (`event_modifier/`: colour, size, texture, sound, texts, spawns, sleep…). Its rarity is separate, in `event_probability/`: per dimension, a **weight**, a priority and rules (`min_nights_between`, `valid_moon_phase`).
 - Ids: the ordinary moon is `enhancedcelestials2core:default`, the supplied moons are `enhancedcelestials2defaultlunarevents:<id>` (`blood_moon`, `blue_moon`, `harvest_moon`, `super_moon` and their `super_` variants).
 - Overworld (`data/minecraft/enhancedcelestials2core/lunar/dimension_settings/overworld.json`): the lunar night starts at 12500 (13000 before) and at least 3 days are needed between two moons (2 before).
-- As before, a moon only occurs under a clear sky; Compline is humid, so its moons will be rare.
+- As before, a moon only occurs under a clear sky; Fallow is humid, so its moons will be rare.
 - Only setting supplied: `config/enhancedcelestials2core/translations.json` set to `DISABLED`. By default, the mod downloads community translations and **replaces** existing texts, including ours (`pack/kubejs/assets/enhancedcelestials2core/`, `…defaultlunarevents/`).
 
-### Active moons in Compline
+### Active moons in Fallow
 
-| Moon | Effect | In Compline |
+| Moon | Effect | In Fallow |
 |---|---|---|
 | Harvest moon, super harvest moon | More abundant harvests | Kept |
 | Blue moon, super blue moon | Blue colour | Kept |
 | Super moon | Bigger moon | Kept |
 | Blood moon, super blood moon | More monsters, **sleep forbidden** | **Removed** |
-| White moon (Compline draft) | Pale moon, nothing hostile | Absent |
+| White moon (Fallow draft) | Pale moon, nothing hostile | Absent |
 
 The frequencies simulated for Enhanced Celestials 6 (about 6 nights in 100 for blue and harvest moons) no longer apply: EC2 draws with weights. They need to be measured again with `/ec lunarForecast` on a new world.
 
@@ -90,7 +90,7 @@ The blood moon is removed by two files that empty its dimension list (`"dimensio
 
 ### The white moon
 
-The draft `docs/plan/kubejs-brouillons/data/compline/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `compline:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
+The draft `docs/plan/kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json` is in the Enhanced Celestials 6 format and no longer loads. To enable it, it must be rewritten in the EC2 format: an event `fallow:lune_blanche` (list of modifiers), its modifiers (pale colour, size, name and announcement text, no `minecraft:ambient.cave` loop, which would be unsettling, [music](recherche/2026-10-19/musique.md)), and a probability on the Overworld (full moon, at least 10 nights apart, a weight to tune against the weights of the supplied moons, 5 to 10).
 
 ## The chosen coexistence
 
@@ -108,30 +108,30 @@ Why the Friendly Moon wins: it is the central mystery, and it only comes if a pl
 
 If a script error occurs (a class renamed after an update), the script stops once and for all and writes it to the log. A Java exception can escape the `catch`: KubeJS then writes it every 2 seconds in `logs/kubejs/server.log`, without crashing the server.
 
-### Proposal for the `compline` mod (not coded, last resort)
+### Proposal for the `fallow` mod (not coded, last resort)
 
 If the maintainer prefers the white moon to continue for the other players, the solution goes through the client, in the `ciel` module. Option `ciel.luneAmieSeule`: as long as NML draws the Friendly Moon (`FriendMoonRenderer.getFriendMoonOpacity() > 0`, the value ATMOSPHERICS already reads), the module draws the ordinary Enhanced Celestials moon. It also cuts its night tint and its sound loop, **for that player only**. The server changes nothing and the moon stays up elsewhere. The cost: 1 or 2 more client mixins on `ECWorldRenderer` and `LunarSoundHandler`, to be reviewed at each update of the two mods. The KubeJS script is enough as long as nobody complains.
 
 ## Entering the thread through exploration
 
 - **Already in NML.** The heart of each alchemists' ruin leads to a moon sanctuary. Underground exploration therefore leads by itself to the carving, and the "First Contact" achievement follows that of the ruins.
-- **Added: a crumpled note.** In the "alchemy" jars of the ruins (`nomansland:chests/alchemist_pot_alchemy`), 4% chance per jar, on top of the normal loot. It is a vanilla sheet of paper with a name and three lines of text: "At the bottom of the ruins, a moon face is carved into the stone. / I looked at it for a long time. The following nights, I dreamt of her. / Since then, a shadow in the sky shows me a path." It says what to do without quite saying it. Jars refill, so a lost note comes back. Texts: keys `compline.lune.*`.
+- **Added: a crumpled note.** In the "alchemy" jars of the ruins (`nomansland:chests/alchemist_pot_alchemy`), 4% chance per jar, on top of the normal loot. It is a vanilla sheet of paper with a name and three lines of text: "At the bottom of the ruins, a moon face is carved into the stone. / I looked at it for a long time. The following nights, I dreamt of her. / Since then, a shadow in the sky shows me a path." It says what to do without quite saying it. Jars refill, so a lost note comes back. Texts: keys `fallow.lune.*`.
 - **Ideas not done, to keep.**
   - *Monoliths*: the dream and the Meeting Point are made of monoliths and menhirs. A page of the Ancient Remnants codex, or a fragment found near a monolith, could speak of a "moon that listens". This is to be linked to the planned work on codex fragments in NML ruins.
-  - *Clearings*: a clearing opened at night could let the moon's shadow be seen more clearly. This requires the `compline` mod, so it is not lightweight.
+  - *Clearings*: a clearing opened at night could let the moon's shadow be seen more clearly. This requires the `fallow` mod, so it is not lightweight.
 
 ## French texts
 
 - The 7 dialogue pools have a `fr_fr` in the jar: `contextual` 8, `greeting` 17, `leaving` 14, `negative` 26, `offering` 80, `passive` 48, `special` 2. The keys are complete.
-- `offering`: Compline already supplies the complete file (the jar was missing 9 lines). It gains the `scute` line. The jar has a dialogue file for scutes (turtle, NML turtle, armadillo), but no language text, even in English. Without a key, the game displayed the English sentence from the data file.
+- `offering`: Fallow already supplies the complete file (the jar was missing 9 lines). It gains the `scute` line. The jar has a dialogue file for scutes (turtle, NML turtle, armadillo), but no language text, even in English. Without a key, the game displayed the English sentence from the data file.
 - `negative`: new complete file, copied from the jar, where the only line left in English ("Oopsie.") becomes "Oupsi.".
 - The achievements, the blocks (Gravure de la lune, Bassin du clair de lune, Bougie du clair de lune), the Companion and the disc are translated in NML's main `fr_fr`.
-- Compline's texts (`compline.lune.efface`, `compline.lune.note*`) go into `pack/kubejs/assets/compline/lang/` (language files merged separately).
+- Fallow's texts (`fallow.lune.efface`, `fallow.lune.note*`) go into `pack/kubejs/assets/fallow/lang/` (language files merged separately).
 - `npm run check-fr` does not read the dialogue pools: to be rechecked at each NML version upgrade.
 
 ## Under ATMOSPHERICS
 
-The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `compline` 0.4.10 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](../../plan/mod-compline.md#the-friendly-moon-under-atmospherics)).
+The first in-game test (2026-10-28) found that the Friendly Moon never appeared at the Meeting Point. ATMOSPHERICS replaces the vanilla sky and gives it back to NML only once the Friendly Moon is visible, while NML can only make it visible from inside the vanilla sky. The same lock hid the shadow that shows the way after the dream. The `ciel` module of `fallow` 0.4.10 makes NML's call itself after ATMOSPHERICS' sky, which breaks the lock, and leaves the sky to the dream ([mechanism](../../plan/mod-fallow.md#the-friendly-moon-under-atmospherics)).
 
 ## What remains to be checked in game
 
@@ -140,23 +140,23 @@ The first in-game test (2026-10-28) found that the Friendly Moon never appeared 
 | L1 | Log at startup | No `lune.js` error. Enhanced Celestials lists the possible Overworld moons, without `blood_moon` or `super_blood_moon` |
 | L2 | `/ec lunarForecast` on a new world | No blood moon in the forecast. **Done on the test server** |
 | L3 | Alchemists' ruin, look at the carving for 2 s | Zoom and sound. Sleeping within the 3 days starts the dream |
-| L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`). Before `compline` 0.4.10 the shadow could not show under ATMOSPHERICS (test C14) |
-| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`compline` mod](../../plan/mod-compline.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `compline` 0.4.10 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
-| L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then go to the Point | Within 2 s at most: Enhanced Celestials message and Compline message, the blue moon fades. `/ec lunarForecast` shows the rest unchanged. The setting itself is validated on the server; the messages and detection of a real player remain |
+| L4 | Dream to the end | Achievement "First Contact". The following night, the shadow in the sky towards the Point (compare with `/meetingpoint`). Before `fallow` 0.4.10 the shadow could not show under ATMOSPHERICS (test C14) |
+| L5 | Meeting Point, at night, look at the moon | The face appears then wakes, as with NML alone, with ATMOSPHERICS and the `ciel` module (tests C6 and C13 of the [`fallow` mod](../../plan/mod-fallow.md)). No coloured Enhanced Celestials moon next to it. **Failed on 2026-10-28** (nothing appeared): ATMOSPHERICS prevented NML from ever drawing the Friendly Moon; fixed in `fallow` 0.4.10 (checked in a development client with NML and ATMOSPHERICS only), to be tested again in the pack |
+| L6 | `/ec setLunarEvent enhancedcelestials2defaultlunarevents:blue_moon`, then go to the Point | Within 2 s at most: Enhanced Celestials message and Fallow message, the blue moon fades. `/ec lunarForecast` shows the rest unchanged. The setting itself is validated on the server; the messages and detection of a real player remain |
 | L7 | Same with a player far from the Point | Nothing changes for them as long as nobody is at the Point |
 | L8 | Offerings: bone, flower, blank map, turtle scute | Lines in French, map of the pool, `scute` line in French |
 | L9 | Put out one candle, then all | "Negative" lines in French, then angry moon |
 | L10 | Bring a Companion from a mushroom island | Ascension, "Guidance" disc, achievement "Friend of My Friend". Check that it can be transported (lead, boat, train, airship) |
 | L11 | Break "alchemy" jars | The crumpled note sometimes drops, name and lines in French |
 | L12 | A rainy night at the Point | Does the Friendly Moon appear in the rain? And does the Enhanced Celestials moon that returns when the rain stops set properly? |
-| L13 | Real distance of the Point with Compline's generation | Between 1,000 and 2,500 blocks from the centre, on accessible terrain |
+| L13 | Real distance of the Point with Fallow's generation | Between 1,000 and 2,500 blocks from the centre, on accessible terrain |
 | L14 | Frequency of the alchemists' ruins | Enough ruins to find a carving (Sparse Structures could make them rarer, [12-verification](12-verification.md)) |
 
 ## Test server (2026-10-19)
 
 These results date from Enhanced Celestials 6.0.2.6; with EC2, redo at least L1, L2, L5 and L6.
 
-Headless NeoForge server, new world (seed "compline"), **without a player**. The Enhanced Celestials commands are written `/ec setLunarEvent …` and `/ec lunarForecast` (or `/enhancedcelestials …`), not `/setLunarEvent` alone.
+Headless NeoForge server, new world (seed "fallow"), **without a player**. The Enhanced Celestials commands are written `/ec setLunarEvent …` and `/ec lunarForecast` (or `/enhancedcelestials …`), not `/setLunarEvent` alone.
 
 | Point | Result |
 |---|---|
@@ -166,9 +166,9 @@ Headless NeoForge server, new world (seed "compline"), **without a player**. The
 | Enhanced Celestials datapack | No error. Log: "Possible lunar events for dimension "minecraft:overworld" are [super_blue_moon, blue_moon, super_moon, super_harvest_moon, harvest_moon]", so no more blood moon. `/ec lunarForecast`: 14 blue or harvest moons in 100 days, no blood moon |
 | Meeting Point | `/meetingpoint`: (616, −1288), about 1,430 blocks from the centre |
 | Moon setting | Night (`/time set 14000`) and blue moon forced. Without a player, the moon stays up, as expected. With detection forced to true (temporary change, removed afterwards), the script sets it in 2 s at most: log "enhancedcelestials:blue_moon couchée", and the day 0 moon disappears from `/ec lunarForecast` while the following ones remain |
-| Crumpled note | 300 draws of `/loot spawn … loot nomansland:chests/alchemist_pot_alchemy`: at least 13 notes (expected ≈ 12). The item carries `custom_name` `{"translate":"compline.lune.note"}` and three translatable grey `lore` lines |
+| Crumpled note | 300 draws of `/loot spawn … loot nomansland:chests/alchemist_pot_alchemy`: at least 13 notes (expected ≈ 12). The item carries `custom_name` `{"translate":"fallow.lune.note"}` and three translatable grey `lore` lines |
 
-Not verifiable without a player: detection of a player near the Point, the messages (Enhanced Celestials and Compline), the sky rendering, the dream and the dialogues.
+Not verifiable without a player: detection of a player near the Point, the messages (Enhanced Celestials and Fallow), the sky rendering, the dream and the dialogues.
 
 ## Files
 
@@ -183,6 +183,6 @@ Not verifiable without a player: detection of a player near the Point, the messa
 
 ## Questions for the maintainer
 
-1. The Friendly Moon makes the current moon set **for the whole server**. Is that acceptable, or is the client-side solution of the `compline` mod needed?
-2. Should the white moon be enabled now? It is enough to copy the draft into `pack/kubejs/data/compline/` and give it a sound and texts.
+1. The Friendly Moon makes the current moon set **for the whole server**. Is that acceptable, or is the client-side solution of the `fallow` mod needed?
+2. Should the white moon be enabled now? It is enough to copy the draft into `pack/kubejs/data/fallow/` and give it a sound and texts.
 3. The Frienderman will not appear, since endermen are removed. Should it be made to appear another way (In Control!), or left aside?

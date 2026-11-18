@@ -1,4 +1,4 @@
-// Compline : les objets retirés du pack sortent aussi des onglets du mode créatif. Fichier
+// Fallow : les objets retirés du pack sortent aussi des onglets du mode créatif. Fichier
 // généré par scripts/kubejs/creative-tabs.mjs (npm run gen-creative) à partir des listes des
 // scripts serveur (*_OBJETS, FUSIONS, motifs de Steam 'n' Rails) : ne pas l'éditer à la main.
 

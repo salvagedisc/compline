@@ -4,7 +4,7 @@
     "item": "minecraft:diamond"
   },
   "base": {
-    "item": "compline:pelle_en_acier_noir"
+    "item": "fallow:pelle_en_acier_noir"
   },
   "result": {
     "count": 1,

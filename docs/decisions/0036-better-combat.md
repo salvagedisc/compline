@@ -18,9 +18,9 @@ Combat was still the vanilla click: the arm jerks, the weapon does not move thro
 ## Decision
 Option B (the team, 2026-11-17). Better Combat 2.4.0 with its library playerAnimator 2.0.4 (Cloth Config was already there).
 
-Fitted to Compline:
+Fitted to Fallow:
 
-- **Weapons of the pack**: vanilla, Overgeared, Mowzie's Mobs, Hybrid Aquatic and Alex's Mobs weapons are recognised by Better Combat's own data or by its name rules (sword, axe, spear, mace, trident; Farmer's Delight's knives should get the dagger swing by name, not checked on the bench). The black steel sword and axe of the `compline` mod get the sword and axe swings (`pack/kubejs/data/compline/weapon_attributes/`).
+- **Weapons of the pack**: vanilla, Overgeared, Mowzie's Mobs, Hybrid Aquatic and Alex's Mobs weapons are recognised by Better Combat's own data or by its name rules (sword, axe, spear, mace, trident; Farmer's Delight's knives should get the dagger swing by name, not checked on the bench). The black steel sword and axe of the `fallow` mod get the sword and axe swings (`pack/kubejs/data/fallow/weapon_attributes/`).
 - **Tools stay tools**: `config/bettercombat/fallback_compatibility.json` keeps Better Combat's name rules and adds a blacklist so that pickaxes, the smithing hammer, Handcrafted's and Quark's hammers, fishing rods and the forged blades and tool heads (Overgeared, black steel) are never treated as weapons.
 - **Settings**: Better Combat's defaults otherwise (arms hidden in first person, where Punchy! already animates them). Its French comes with the mod; the 12 missing texts are in `pack/kubejs/assets/bettercombat/lang/fr_fr.json`.
 

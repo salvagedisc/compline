@@ -1,6 +1,6 @@
 # The tannery
 
-Idea 4 from Wayfarer ([research](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, a knife, bark, water and time. Since 2026-11-18 the chain is the `tannerie` module of the `compline` mod (0.34.0), which replaced the Tannery: Better Leather mod (All Rights Reserved, fragile, satchels and studded leather the pack did not use): decision [0038](../decisions/0038-house-tannery.md), after [0014](../decisions/0014-tannery.md).
+Idea 4 from Wayfarer ([research](../archive/plan/recherche/2026-10-19/wayfarer.md), recommendation 4). Leather no longer drops ready-made from animals: it takes a hide, a knife, bark, water and time. Since 2026-11-18 the chain is the `tannerie` module of the `fallow` mod (0.34.0), which replaced the Tannery: Better Leather mod (All Rights Reserved, fragile, satchels and studded leather the pack did not use): decision [0038](../decisions/0038-house-tannery.md), after [0014](../decisions/0014-tannery.md).
 
 Status: checked on a dedicated server of the full pack with one player on 2026-11-18, not played.
 
@@ -21,7 +21,7 @@ Every 20 seconds the frame gains drying points; at 15 the leather is dry.
 |---|---|---|
 | Open sky, day | 2 | 2 min 30 |
 | Under a roof, or at night | 1 | 5 min |
-| Lit fire within 4 blocks (block tag `compline:foyers`, the same as rest by the hearth) | +2 | 1 min 40 sheltered by a fire |
+| Lit fire within 4 blocks (block tag `fallow:foyers`, the same as rest by the hearth) | +2 | 1 min 40 sheltered by a fire |
 | Where it snows (cold biome, or Ecliptic Seasons' winter, which changes the biome's precipitation) | −1 | a shelter without fire no longer dries in winter |
 | Rain falling on it | −1 (it gets wet again) | |
 
@@ -39,13 +39,13 @@ Breaking a block gives back what is on it (raw hide, scraped hides, wet leather 
 
 `pack/kubejs/server_scripts/tannerie_butin.js` changes the tables themselves (LootJS), so every mod that points to them follows. The script writes to the server log any creature table that still drops leather (`[tannerie] créature qui lâche encore du cuir`).
 
-Alex's Mobs kangaroo: two kangaroo hides make a raw hide (`compline:tannerie/peau_de_kangourou`). Koopa's Critters: four reptile hides make a raw hide (`compline:tannerie/peau_de_reptile`). A Naturalist hide left over makes a raw hide (`compline:tannerie/peau_de_naturalist`).
+Alex's Mobs kangaroo: two kangaroo hides make a raw hide (`fallow:tannerie/peau_de_kangourou`). Koopa's Critters: four reptile hides make a raw hide (`fallow:tannerie/peau_de_reptile`). A Naturalist hide left over makes a raw hide (`fallow:tannerie/peau_de_naturalist`).
 
 ## The recipes
 
-In the mod (`data/compline/recipe`): `chevalet` (two logs diagonally over two sticks), `cuve_a_tan` (logs in a U over three planks), `sechoir` (a frame of sticks around a string).
+In the mod (`data/fallow/recipe`): `chevalet` (two logs diagonally over two sticks), `cuve_a_tan` (logs in a U over three planks), `sechoir` (a frame of sticks around a string).
 
-In the pack (`pack/kubejs/server_scripts/tannerie.js`): kangaroo and Naturalist hides, `compline:tannerie/torches_au_gras` (fat + stick → 2 torches), `compline:tannerie/chandelle_de_suif` (fat + string → candle).
+In the pack (`pack/kubejs/server_scripts/tannerie.js`): kangaroo and Naturalist hides, `fallow:tannerie/torches_au_gras` (fat + stick → 2 torches), `fallow:tannerie/chandelle_de_suif` (fat + string → candle).
 
 Removed, because they give leather outside the tannery: `envelope:mailing/automated_supply_service/leather` (6 rotten flesh by pigeon), `naturalist:leather_from_smelting_hide`, `alexsmobs:kangaroo_hide_to_leather`, `starcatcher:leather_from_boot`, `spelunkery:leather` (salted rotten flesh → 4 leather), `koopascritters:reptilehiderecipe` (replaced, see above). The server log lists the recipes that still give leather (`[tannerie] recette donnant du cuir`).
 
@@ -53,12 +53,12 @@ Kept, because they recycle leather that already exists or come from rare loot: C
 
 ## Configuration
 
-`compline-common.toml`, `[tannerie]`: `enabled` (true; false stops the work and the bark, the blocks stay), `strokes` (6), `tanningMinutes` (5.0), `dryingPoints` (15), `barkChance` (0.5), `fatChance` (0.33).
+`fallow-common.toml`, `[tannerie]`: `enabled` (true; false stops the work and the bark, the blocks stay), `strokes` (6), `tanningMinutes` (5.0), `dryingPoints` (15), `barkChance` (0.5), `fatChance` (0.33).
 
 ## Files
 
-- `mods-custom/compline/src/main/java/io/github/salvagedisc/compline/tannerie/`: the module, the three blocks.
-- `mods-custom/compline/src/main/resources/`: block states, models, textures, loot of the blocks, recipes, tags `compline:tanins` (items that tan: Farmer's Delight's bark), `compline:sans_ecorce` (logs that never give bark: stripped ones), `minecraft:mineable/axe`, texts.
+- `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/tannerie/`: the module, the three blocks.
+- `mods-custom/fallow/src/main/resources/`: block states, models, textures, loot of the blocks, recipes, tags `fallow:tanins` (items that tan: Farmer's Delight's bark), `fallow:sans_ecorce` (logs that never give bark: stripped ones), `minecraft:mineable/axe`, texts.
 - `pack/kubejs/server_scripts/tannerie.js`, `tannerie_butin.js`: recipes and loot.
 - Quest « La tannerie » (`pack/config/questlog/quests/metiers_tannerie.json`): appears with the first raw hide; scraped hide, wet leather, leather.
 

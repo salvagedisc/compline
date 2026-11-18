@@ -3,7 +3,7 @@ with the vanilla biome it resembles (Python 3). biome_rules.py gives each biome 
 rules of its model (animal spawns, horse breeds, wind).
 
 The table first chose the mist of each biome in the ATMOSPHERICS preset of the former
-`compline-ambiance` resource pack (removed on 2026-11-13, decision 0024): hence the families
+`fallow-ambiance` resource pack (removed on 2026-11-13, decision 0024): hence the families
 named below (misty, veiled, cave).
 """
 import json

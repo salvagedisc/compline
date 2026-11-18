@@ -1,4 +1,4 @@
-// Compline : la tannerie, le butin. Les animaux à cuir lâchent une peau brute, qui se
+// Fallow : la tannerie, le butin. Les animaux à cuir lâchent une peau brute, qui se
 // racle, se tanne et sèche avant de donner du cuir. Les recettes sont dans tannerie.js.
 // Voir docs/plan/tannerie.md.
 //
@@ -6,7 +6,7 @@
 // les chevaux d'Icy's Better Horses renvoient vers minecraft:entities/horse, et une
 // table modifiée l'est pour tous ceux qui l'appellent.
 
-const TANNERIE_PEAU = 'compline:peau_brute'
+const TANNERIE_PEAU = 'fallow:peau_brute'
 
 // Tables où le cuir (ou la peau de Naturalist) devient une peau brute.
 // Les quantités et le bonus de Butin d'origine sont gardés.

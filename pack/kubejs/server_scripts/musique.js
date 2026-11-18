@@ -1,10 +1,10 @@
-// Compline : états que le paquet musical TAM « compline » ne peut pas voir depuis le client.
+// Fallow : états que le paquet musical TAM « fallow » ne peut pas voir depuis le client.
 // Voir docs/plan/musique.md. Le script pose ou retire deux tags sur chaque joueur ; les
-// prédicats personnalisés du paquet (trueadaptivemusicpacks/compline/predicates/*.json) sont
+// prédicats personnalisés du paquet (trueadaptivemusicpacks/fallow/predicates/*.json) sont
 // des conditions de butin que TAM fait évaluer par le serveur, et lisent ces tags.
 //
-// - compline_monument : un Cœur ancien d'Ancient Remnants est proche (silence à l'approche) ;
-// - compline_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
+// - fallow_monument : un Cœur ancien d'Ancient Remnants est proche (silence à l'approche) ;
+// - fallow_a_bord   : le joueur est sur un engin Sable (debout sur le pont ou assis).
 //
 // Classe lue dans le jar : Sable 2.0.6 (Sable.HELPER, ActiveSableCompanion.getTrackingOrVehicleSubLevel).
 
@@ -16,7 +16,7 @@ let MUSIQUE_SABLE = null
 try {
   MUSIQUE_SABLE = Java.loadClass('dev.ryanhcode.sable.Sable')
 } catch (e) {
-  console.warn(`[Compline] musique.js : Sable introuvable, pas de musique de voyage (${e})`)
+  console.warn(`[Fallow] musique.js : Sable introuvable, pas de musique de voyage (${e})`)
 }
 
 let musiqueTicks = 0
@@ -40,8 +40,8 @@ function musiquePresDUnMonument(player) {
 
 function musiqueMettreAJour(server) {
   server.getPlayerList().getPlayers().forEach(player => {
-    musiqueTag(player, 'compline_a_bord', musiqueABord(player))
-    musiqueTag(player, 'compline_monument', musiquePresDUnMonument(player))
+    musiqueTag(player, 'fallow_a_bord', musiqueABord(player))
+    musiqueTag(player, 'fallow_monument', musiquePresDUnMonument(player))
   })
 }
 
@@ -53,6 +53,6 @@ ServerEvents.tick(event => {
     musiqueMettreAJour(event.server)
   } catch (e) {
     musiqueEnPanne = true
-    console.error(`[Compline] musique.js : états musicaux coupés après une erreur (${e})`)
+    console.error(`[Fallow] musique.js : états musicaux coupés après une erreur (${e})`)
   }
 })

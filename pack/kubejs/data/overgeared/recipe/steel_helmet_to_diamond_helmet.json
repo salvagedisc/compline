@@ -4,7 +4,7 @@
     "item": "minecraft:diamond"
   },
   "base": {
-    "item": "compline:casque_en_acier_noir"
+    "item": "fallow:casque_en_acier_noir"
   },
   "result": {
     "count": 1,

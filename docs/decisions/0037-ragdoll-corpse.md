@@ -18,7 +18,7 @@ Death already costs a heart of maximum health ([health](../plan/sante.md)). The 
 ## Decision
 Option B. Sable is already loaded for Create Aeronautics, and a body that tumbles down a slope or that friends carry home with an airship fits the pack better than a frozen model. It needs **Sable: Ragdolls** 0.8.1 (Apache-2.0), the ragdoll library of the same author.
 
-Fitted to Compline (`pack/config/sable_player_ragdoll-server.toml`):
+Fitted to Fallow (`pack/config/sable_player_ragdoll-server.toml`):
 
 - **No self-ragdoll**: the library lets a player throw themselves to the ground with a key (H by default); `allowManualTrigger = false` keeps the body for death only. Explosions can still knock a player down as a ragdoll, with the library's own impact damage.
 - **Debug log off** (`debugLogging = false`); the rest stays at the defaults of both mods: bodies never despawn while they hold something, an emptied body vanishes after 1.5 seconds, even an empty inventory leaves a body.

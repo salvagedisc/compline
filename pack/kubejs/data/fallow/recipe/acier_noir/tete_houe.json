@@ -1,0 +1,22 @@
+{
+  "type": "overgeared:forging",
+  "tier": "above_a",
+  "blueprint": [
+    "hoe"
+  ],
+  "category": "TOOL_HEADS",
+  "hammering": 5,
+  "key": {
+    "#": {
+      "item": "fallow:lingot_d_acier_noir_chauffe"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fallow:tete_de_houe_en_acier_noir"
+  },
+  "show_notification": false
+}

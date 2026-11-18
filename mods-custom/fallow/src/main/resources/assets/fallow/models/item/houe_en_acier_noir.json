@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "fallow:item/houe_en_acier_noir"
+  }
+}

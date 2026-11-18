@@ -38,17 +38,17 @@ The v1 aimed for about 100 mods and 140 files with libraries. Every mod passed t
 
 ATMOSPHERICS sets fog, sky and mist **per biome**, with separate settings for day and night. Its presets can be shipped in a resource pack (`assets/atmospherics/preset/<name>.json`).
 
-The Compline preset splits the No Man's Land biomes into two families:
+The Fallow preset splits the No Man's Land biomes into two families:
 - **Misty**: dense forests, swamps, bogs, taiga, valleys.
 - **Clear**: meadows, flower fields, maple forests, highlands.
 
 ### Layer 2: the sky (Enhanced Celestials)
 
-The blood moon is removed. The harvest moon and the blue moon are kept, and a **white moon** is added: a pale sky, a strange night, nothing hostile. Draft: `kubejs-brouillons/data/compline/enhancedcelestials/lunar/event/lune_blanche.json`.
+The blood moon is removed. The harvest moon and the blue moon are kept, and a **white moon** is added: a pale sky, a strange night, nothing hostile. Draft: `kubejs-brouillons/data/fallow/enhancedcelestials/lunar/event/lune_blanche.json`.
 
-### Layer 3: the clearings (Compline mechanic, KubeJS)
+### Layer 3: the clearings (Fallow mechanic, KubeJS)
 
-The player places a **clearing fire**. The script converts the biome within a radius around it into **`compline:clairiere`** with the vanilla `/fillbiome` command. This biome has:
+The player places a **clearing fire**. The script converts the biome within a radius around it into **`fallow:clairiere`** with the vanilla `/fillbiome` command. This biome has:
 - a clear mist (ATMOSPHERICS preset);
 - grass and foliage of a vivid green;
 - animal spawns;
@@ -62,7 +62,7 @@ The player places a **clearing fire**. The script converts the biome within a ra
 
 The change is permanent and applied only once, in 8 × 64 × 8 columns spread over several ticks: it costs nothing continuously. Rivers, oceans and caves are not affected.
 
-Drafts: `startup_scripts/clairieres.js`, `server_scripts/clairieres.js`, `data/compline/worldgen/biome/clairiere.json`.
+Drafts: `startup_scripts/clairieres.js`, `server_scripts/clairieres.js`, `data/fallow/worldgen/biome/clairiere.json`.
 
 To check in game:
 - Does ATMOSPHERICS recognise a datapack biome in a preset?
@@ -75,7 +75,7 @@ To check in game:
 |---|---|---|
 | **The zoo** | Find the species, bring them back alive, build them an enclosure resembling their biome in a clearing. Animals are brought back on a lead, by boat, in an Icy's cart or in a Create wagon | Selected wildlife and companions, Icy's Better Horses, Create, clearings |
 | **The bestiary** | Discover each species with the spyglass or by **photographing** it with Exposure. A pedestal displays the hologram of each discovered species: it is the zoo's showcase | **Wildex Bestiary** |
-| **The clearings** | Push back the mist around the base, then outposts, tier by tier | Compline script |
+| **The clearings** | Push back the mist around the base, then outposts, tier by tier | Fallow script |
 | **The network** | A railway between the clearings, then an airfield | Create, Steam 'n' Rails, Create Aeronautics |
 | **The atlas** | A map that draws itself as you walk, without coordinates | Antique Atlas 4 (AA4 Atlas removed on 2026-10-19, see the [registry](../../mods.md)) |
 | **The house** | A furnished base, covered with real roofs, in the wood of the region | Handcrafted, Macaw's, Twigs, Every Compat (10.6) |
@@ -211,7 +211,7 @@ This is the work that makes the difference between a list of mods and a smooth w
 |---|---|
 | `garde_manger.js`, `raison.js` | **Removed** |
 | `plans_ingenieur.js` + `loot/butin.js` | Blueprints no longer come from Create Aeronautics Structures wrecks: they come out of the ruins and dungeons of No Man's Land and vanilla structures |
-| **17. `clairieres.js`** (startup + server) + `compline:clairiere` biome + ATMOSPHERICS preset | The clearing fires (10.3) |
+| **17. `clairieres.js`** (startup + server) + `fallow:clairiere` biome + ATMOSPHERICS preset | The clearing fires (10.3) |
 | **18. `zoo.js`** | Rewards for the Wildex bestiary milestones, for example the Clearing Lantern blueprint after 25 species |
 | All the others | Kept |
 

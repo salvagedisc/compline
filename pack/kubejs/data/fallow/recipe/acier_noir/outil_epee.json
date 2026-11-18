@@ -1,0 +1,16 @@
+{
+  "type": "overgeared:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "fallow:lame_d_epee_en_acier_noir"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "fallow:epee_en_acier_noir"
+  }
+}

@@ -1,7 +1,7 @@
 // Les rides de ce qui passe sur l'eau : une carte de 512 × 512 texels au huitième de bloc (64 blocs de côté),
 // accrochée au monde et réutilisée en boucle autour de la caméra. Chaque texel garde la hauteur de la surface (r), sa
 // vitesse (g) et l'écume (b). prepare2 (program/wakes.csh) y fait courir les ondes d'une image à l'autre et y pousse
-// l'eau sous les barques, les nageurs et les bêtes qui pataugent (brumaireWake0..5, donnés par le mod compline) :
+// l'eau sous les barques, les nageurs et les bêtes qui pataugent (brumaireWake0..5, donnés par le mod fallow) :
 // une source qui avance laisse d'elle-même un sillage en V. La surface de l'eau (program/solid.fsh) s'y penche et y
 // prend l'écume. Chaque image fait deux demi-pas, de A vers B puis de B vers A : A tient toujours le dernier état.
 

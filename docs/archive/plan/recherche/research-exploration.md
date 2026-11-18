@@ -1,4 +1,4 @@
-# Research: Exploration pillar (Compline, 1.21.1 NeoForge)
+# Research: Exploration pillar (Fallow, 1.21.1 NeoForge)
 
 > Researcher's report, 2026-10-10. Takes into account the updated registry (46 mods, decisions 0002 to 0007). **Retained, therefore not proposed again**: Sparse Structures, Icy's Better Horses, Supplementaries (rope/pulley, hand-placed direction signs, ancient ink, map markers; structure location disabled), Quark (essentials). **Rejected, therefore not proposed again**: YUNG's Better *, Structory and Structory: Towers, Explorify, Moog's Voyager, Trek, Adorabuild, When Dungeons Arise, Dungeons and Taverns, Explorer's Compass, Nature's Compass, Waystones, Terralith alone.
 >
@@ -183,7 +183,7 @@
 - Config read from the source (1.21.1 branch):
   - `paraglider-common` → `features.spiritOrbGens`, `features.heartContainers`, `features.staminaVessels`, `features.villageStructures` (true by default).
   - `paraglider-server` → `updraft` (true), `paraglidingSpeed` (1.0), `paragliderDurability` (0 = no wear), `paragliderInTowersOfTheWild`, `spiritOrbs.enderDragonDropsVessel`, `spiritOrbs.witherDropsVessel`, `spiritOrbs.raidGivesVessel`, `spiritOrbs.elderGuardianDropsSpiritOrb`, `spiritOrbs.spawnerSpiritOrbDrops` (1.0), `spiritOrbs.trialSpiritOrbDrops` (2.0), `spiritOrbs.ominousTrialSpiritOrbDrops` (4.0), `spiritOrbs.spiritOrbLoots` (true), `vessels.startingHearts` (10), `vessels.maxHeartContainers` (20), `vessels.startingStamina` (1000), `vessels.maxStaminaVessels` (10), `vessels.staminaIncreasePerVessel` (200), `stamina.paraglidingConsumesStamina` (true), `stamina.runningAndSwimmingConsumesStamina` (false).
-- Proposed settings for Compline:
+- Proposed settings for Fallow:
   - `heartContainers = false` (no extra hearts: survival stays environmental).
   - `raidGivesVessel = false`, `witherDropsVessel = false` (no Wither or raids wanted).
   - `spawnerSpiritOrbDrops = 0`, `trial*SpiritOrbDrops = 0` (trial chambers will be removed or emptied).

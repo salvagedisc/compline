@@ -18,9 +18,9 @@ Standing decision: **all the fauna and companions stay**. This report proposes n
 ## 0. Summary in ten points
 
 1. **AR's monuments do not read a tag supplied by a datapack.** Their biomes come from the config `config/obscuria/ancient_remnants-common.toml`, injected at load time into an empty tag. **Sparse Structures does not space them out**, for lack of a `spacing` key in their JSON. Everything is therefore set in AR's config.
-2. **The monuments' guardians are vanilla `minecraft:breeze` spawners**, and the breeze is in `global.COMPLINE.bannedVanilla`. As written, the drafts therefore empty the monuments of their guardians. A decision is needed.
+2. **The monuments' guardians are vanilla `minecraft:breeze` spawners**, and the breeze is in `global.FALLOW.bannedVanilla`. As written, the drafts therefore empty the monuments of their guardians. A decision is needed.
 3. **The Elderheart is an entity, not a block.** Approaching within 16 blocks is enough: the blessing is given every 100 ticks. No event is emitted. The clearing must therefore go through KubeJS polling.
-4. **Blessings:** only one at a time, permanent, kept on death, replaced by the next. The warrior monolith's is almost null in Compline, because of the few monsters.
+4. **Blessings:** only one at a time, permanent, kept on death, replaced by the next. The warrior monolith's is almost null in Fallow, because of the few monsters.
 5. **Codex fragments almost never drop.** One gets 0.2% per mob killed by a player, and the "outpost" table is linked to nothing. **The "wandering trader" of §11.8 does not exist.** The fragments must be injected ourselves, into NML's loot (Lootr included).
 6. **Clearings through `/fillbiome`: feasible.** Necessary corrections:
    - columns aligned on 4 and full height;
@@ -351,7 +351,7 @@ In `config/obscuria/ancient_remnants-common.toml`, **replace** the default lists
 
 ### 2.2 The guardians (breezes): to decide
 
-Finding: `00_compline_constants.js` bans `minecraft:breeze`, and `spawns_safety.js` cancels `EntityEvents.spawned` for any banned entity in the Overworld. **The monuments' spawners will therefore run empty.** Three options:
+Finding: `00_fallow_constants.js` bans `minecraft:breeze`, and `spawns_safety.js` cancels `EntityEvents.spawned` for any banned entity in the Overworld. **The monuments' spawners will therefore run empty.** Three options:
 
 - **A. Keep the breezes, only there** (recommended if a guardian is wanted):
   - in `spawns_safety.js`, let the breeze through when it comes out of a spawner (`event.entity.persistentData` cannot be used here; test `entity.spawnType === 'SPAWNER'`, or an Elderheart within 32 blocks) [deduced];
@@ -379,15 +379,15 @@ ServerEvents.tick(event => {
     const box = p.boundingBox.inflate(16)
     p.level.getEntitiesWithin(box).forEach(e => {
       if (String(e.type) !== 'ancient_remnants:elderheart') return
-      if (e.tags.contains('compline_eveille')) return
-      e.addTag('compline_eveille')                    // only once per monument
-      global.complineOuvrirClairiere(p.level, e.blockPosition(), 32, p)
+      if (e.tags.contains('fallow_eveille')) return
+      e.addTag('fallow_eveille')                    // only once per monument
+      global.fallowOuvrirClairiere(p.level, e.blockPosition(), 32, p)
     })
   })
 })
 ```
 
-- `global.complineOuvrirClairiere` takes over the loop from `clairieres.js`, to be factored out.
+- `global.fallowOuvrirClairiere` takes over the loop from `clairieres.js`, to be factored out.
 - The entity tag is saved with the entity: the clearing opens only once [deduced].
 - Radius 32: same tier as the lantern. Own message: "La brume se retire autour du monument."
 - Cost: one entity search in a 33-block box per player, every 5 s. It is negligible.
@@ -405,14 +405,14 @@ ServerEvents.tick(event => {
 
 | Biome | Temperature | Replaces |
 |---|---|---|
-| `compline:clairiere_froide` | ≈ 0.0 | `#compline:clairiere_source_froide` = `#c:is_cold/overworld` + cold `#minecraft:is_taiga` (snowy_taiga, grove…) |
-| `compline:clairiere` | 0.7 | `#compline:peut_devenir_clairiere` |
-| `compline:clairiere_chaude` | ≈ 0.95, `has_precipitation` true | `#compline:clairiere_source_chaude` = land `#c:is_hot/overworld` |
+| `fallow:clairiere_froide` | ≈ 0.0 | `#fallow:clairiere_source_froide` = `#c:is_cold/overworld` + cold `#minecraft:is_taiga` (snowy_taiga, grove…) |
+| `fallow:clairiere` | 0.7 | `#fallow:peut_devenir_clairiere` |
+| `fallow:clairiere_chaude` | ≈ 0.95, `has_precipitation` true | `#fallow:clairiere_source_chaude` = land `#c:is_hot/overworld` |
 
 - Order of passes for each column: cold, then hot, then temperate. Each pass only touches its filter; this goes from 4 to 12 commands per tick (deduced, low cost).
 - Without these variants, a clearing in the snowy taiga no longer has snow in winter, and a clearing in the hot prairie changes agricultural climate.
 
-**Tag `compline:peut_devenir_clairiere` to complete**
+**Tag `fallow:peut_devenir_clairiere` to complete**
 
 - Add: `#minecraft:is_forest` (already present), `#minecraft:is_taiga`, `#c:is_plains`, `#c:is_swamp` **except** `blackwater_river`, `nomansland:old_growth_forest_clearing` and `nomansland:mud_beach`.
 - Exclude: all rivers, beaches, oceans, `#nomansland:caves`, `nomansland:alchemist_ruins` and `nomansland:dream`.
@@ -423,7 +423,7 @@ ServerEvents.tick(event => {
 - Do **not** put the clearings in `#c:is_forest` or `#minecraft:is_forest`: they would receive NML's deer and the AR monuments. This is not necessarily wanted.
 - Add them to the chosen `naturalist:has_<mob>`, for example butterfly, firefly, rabbit, hedgehog, birds. This is how they become "verdant".
 - They only take the spawns in small doses: CREATUREs appear mostly at chunk generation, then only in slow passes, every 400 ticks [deduced].
-- **In Control**: rule `{"biome":["compline:clairiere","compline:clairiere_froide","compline:clairiere_chaude"],"hostile":true,"result":"deny"}`. A biome without a `monster` list is enough for vanilla, but not for mods that spawn through their own code (Mowzie's, lunar events…).
+- **In Control**: rule `{"biome":["fallow:clairiere","fallow:clairiere_froide","fallow:clairiere_chaude"],"hostile":true,"result":"deny"}`. A biome without a `monster` list is enough for vanilla, but not for mods that spawn through their own code (Mowzie's, lunar events…).
 
 **The rest**
 
@@ -456,7 +456,7 @@ ServerEvents.tick(event => {
 - A name given with a name tag also works.
 - It was not reliably checked which species disappear on their own: see §5.
 
-**Feeding.** The Wildex sheets already give the husbandry food. Nothing to build, except making sure that Naturalist's and AM's foods exist in Compline's food chain (report 2, Kaleidoscope).
+**Feeding.** The Wildex sheets already give the husbandry food. Nothing to build, except making sure that Naturalist's and AM's foods exist in Fallow's food chain (report 2, Kaleidoscope).
 
 **Escapes and fights**
 
@@ -480,22 +480,22 @@ Wildex does not recognise enclosures (§1.4): the goal is built alongside.
    const Bridge = Java.loadClass('de.coldfang.wildex.integration.kubejs.WildexKubeJsScriptBridge')
    Bridge.onDiscoveryChanged(d => {
      const p = Utils.server.getPlayer(d.playerUuid); if (!p) return
-     const set = p.persistentData.getCompound('compline_wildex'); set.putBoolean(d.mobId, true)
-     p.persistentData.put('compline_wildex', set)
-     global.complinePaliersBestiaire(p, d.discovered)       // milestones of 25 / 50 / 100 / 150 species
+     const set = p.persistentData.getCompound('fallow_wildex'); set.putBoolean(d.mobId, true)
+     p.persistentData.put('fallow_wildex', set)
+     global.fallowPaliersBestiaire(p, d.discovered)       // milestones of 25 / 50 / 100 / 150 species
    })
    ```
 
    The form of the callback (Java interface or function) remains to be checked at the first attempt. It is also possible to go through `NativeEvents.onEvent('de.coldfang.wildex.api.event.WildexDiscoveryChangedEvent', e => …)`.
-2. **Block `compline:plaque_enclos`** (startup: `StartupEvents.registry('block')`). On right click (`BlockEvents.rightClicked`):
+2. **Block `fallow:plaque_enclos`** (startup: `StartupEvents.registry('block')`). On right click (`BlockEvents.rightClicked`):
    - list the `Animal`s within a radius of 24 blocks;
    - keep those that are leashed, named, tamed or already registered;
    - make them persistent;
-   - count the **distinct species** already discovered in Wildex (`compline_wildex`);
+   - count the **distinct species** already discovered in Wildex (`fallow_wildex`);
    - store the result in the world data (`server.persistentData`), per plaque.
 3. **Zoo score** = number of distinct species across all of the player's plaques.
    - Wild species that cannot be tamed (deer, moose, bison, giraffe…) are worth more, since they have to be transported (§2.5).
-   - Bonus if the plaque is in a clearing: `level.getBiome(pos)` is `compline:clairiere*`.
+   - Bonus if the plaque is in a clearing: `level.getBiome(pos)` is `fallow:clairiere*`.
 4. **Rewards** (score or `discovered` milestones):
    - AR blessing chosen through `/ancient_remnants blessing set`;
    - engineer blueprints (`plans_ingenieur.js`);
@@ -536,7 +536,7 @@ Where to inject:
 | `nomansland:chests/alchemist_pot_*` | 5% | the jars refill: low chance, otherwise they can be closed in a loop |
 | `nomansland:chests/water_well` | 10% | |
 
-- **Compline pages**: add entries `data/compline/ancient_remnants/research/<id>.json` (text and 350×210 texture), with `biomes` pointing to NML tags. The codex then also tells the story of Compline's world; the same tables distribute them.
+- **Fallow pages**: add entries `data/fallow/ancient_remnants/research/<id>.json` (text and 350×210 texture), with `biomes` pointing to NML tags. The codex then also tells the story of Fallow's world; the same tables distribute them.
 - **Recipe `paper_from_research_scrap`**: remove it (`ServerEvents.recipes` → `event.remove({id:'ancient_remnants:paper_from_research_scrap'})`), since it destroys the goal [deduced].
 - Keep the 0.2% drop on killed mobs: it is a rare bonus.
 
@@ -544,8 +544,8 @@ Where to inject:
 
 - The blueprints of `plans_ingenieur.js` are read on right click and consumed. With Lootr, each player finds their own copy in the same chest: this is good for a server.
 - Hook into `loot/butin.js`:
-  - `compline:plan_atelier` in `nomansland:chests/small_dungeon_core` and `redstone_parts`;
-  - `compline:plan_vapeur` in `sniffer_monument`.
+  - `fallow:plan_atelier` in `nomansland:chests/small_dungeon_core` and `redstone_parts`;
+  - `fallow:plan_vapeur` in `sniffer_monument`.
 - Lootr: `loot_table_blacklist` empty; do not set `decay`. Enable `refresh` only for NML's small dungeons, if renewable loot is wanted.
 
 ### 2.10 Antique Atlas ↔ ruins (resource pack + config)
@@ -554,7 +554,7 @@ Where to inject:
   - `assets/nomansland/atlas/structure/start/<id>.json` for bell_sanctuary, menhirs, creature_monuments, alchemist_ruins and deep_well;
   - `assets/ancient_remnants/atlas/structure/start/<id>.json` for the six monuments, each with its own marker;
   - `assets/nomansland/atlas/biome/<biome>.json` so that the 24 NML biomes have tiles, otherwise the atlas draws them with a default tile.
-- Also create tiles for the three `compline:clairiere*`, so that the clearings show on the map. This rewards the "lifted mist" map [deduced].
+- Also create tiles for the three `fallow:clairiere*`, so that the clearings show on the map. This rewards the "lifted mist" map [deduced].
 - **Add AA4 Atlas 1.1.2**: the atlas becomes an item (book + compass), with `requireItem = true`, and Antique Atlas goes from `side = "client"` to `both`, to be checked. A map that has to be crafted and carried fits the vision.
 - **Surveyor**: `globalSharing = false` (everyone discovers their own world); `discoveryMessages = true` for monuments ("Vous découvrez…"); `playerDeathWaypoints = true`.
 
@@ -593,7 +593,7 @@ One version per species and per biome, according to 0003:
 
 | Key | Value | Reason |
 |---|---|---|
-| `shareOffersPaymentEnabled` | false | no emerald economy in Compline |
+| `shareOffersPaymentEnabled` | false | no emerald economy in Fallow |
 | `newEntryXpAmount` | 5, or 0 if XP is used elsewhere (Icy's carts, enchantments) | |
 | `spyglassDiscoveryRange` | ≈ 48 | 98 blocks is discovering without approaching |
 | `hiddenMode`, `requireBookForKeybind`, `giveBookOnFirstJoin` | true | default |
@@ -607,7 +607,7 @@ Remove the Analyzer recipe (`ServerEvents.recipes`): discovering a mob by droppi
 1. **Breezes against `bannedVanilla`** (§2.2): monuments without guardians, or else a vanilla mob outside the art direction. To decide.
 2. **Spawners of NML's small dungeons** (spider, skeleton, zombie): the In Control rule `"mob":[…zombie…skeleton…spider…],"result":"deny"` and `spawns_safety.js` cancel them. The spawners will therefore run empty [deduced].
    - This is consistent with "no vanilla monsters".
-   - They can also be replaced by a processor, on the model of §2.2 B, with a Compline hostile.
+   - They can also be replaced by a processor, on the model of §2.2 B, with a Fallow hostile.
 3. **Sparse Structures** spaces out NML (sets with a `spacing` key) **but not AR**. With `spreadFactor 3` (§02), NML's small dungeons go from 10 to about 30 chunks, and the alchemist ruins from 50 to about 150 chunks, i.e. 2,400 blocks. They risk becoming too rare [deduced].
    - Put an exception `nomansland:*` in Sparse Structures;
    - or a factor of 1.5 to 2.
@@ -620,7 +620,7 @@ Remove the Analyzer recipe (`ServerEvents.recipes`): discovering a mob by droppi
 8. **NML jars that refill**: it is a loot farm if fragments or blueprints are put in them. Low chances (§2.8).
 9. **Wildex's Spyglass Pulse**: no switch. It reveals mobs within 32 blocks, but only after completion: it can be accepted as a final reward. Otherwise, a small custom mod with a mixin that cancels the action (five lines).
 10. **Wildex's Analyzer** is a shortcut (§2.12).
-11. **Warrior blessing almost null**: it counts the `Monster`s within 12 blocks, and Compline has very few. Replace its content by datapack (`data/ancient_remnants/tags/ancient_remnants/blessing/warrior_monolith.json`, `replace: true`) with another existing blessing. A new one cannot be created without a mod [jar].
+11. **Warrior blessing almost null**: it counts the `Monster`s within 12 blocks, and Fallow has very few. Replace its content by datapack (`data/ancient_remnants/tags/ancient_remnants/blessing/warrior_monolith.json`, `replace: true`) with another existing blessing. A new one cannot be created without a mod [jar].
 12. **Single, replaced blessing**: visiting a second monument overwrites the first. This permanent choice must be **announced** to the player (codex text or KubeJS message), otherwise it is frustrating [jar + deduced].
 13. **Clearings and fragments**: the clearings take areas out of the page tags, so they no longer give fragments on mobs (§2.4).
 14. **Predators against horses and livestock**: `lion_hostiles` contains `minecraft:horse` (§2.5).
@@ -636,7 +636,7 @@ Remove the Analyzer recipe (`ServerEvents.recipes`): discovering a mob by droppi
 | §11.8 | **Remove** "fragments left by a wandering trader"; **replace** with: fragments in NML archaeology and chests (§2.8), monument photo (§2.7), rare 0.2% drop | the trader does not exist [jar AR] |
 | §10.3 / `clairieres.js` | columns aligned on 4, full height (`c.y−16` to 319); 3 variants; explicit filter tag with the NML biomes; Elderheart trigger | §2.3 and §2.4 |
 | `clairiere.json` | add `clairiere_froide` and `clairiere_chaude`; add the chosen Naturalist tags; anti-hostile In Control rule | Ecliptic, spawns |
-| `00_compline_constants.js` / `spawns_safety.js` | decision on the breezes (§2.2) | direct conflict with AR |
+| `00_fallow_constants.js` / `spawns_safety.js` | decision on the breezes (§2.2) | direct conflict with AR |
 | §10.10 and new script | `zoo.js` → enclosure plaque + Wildex bridge; `wildex_bestiaire.js` for the milestones | Wildex has no enclosures |
 | §02 (Sparse Structures) | exception or reduced factor for NML; **remove** the idea of spacing AR through Sparse Structures; AR spacing in its own config | §1.3, §3.3 |
 | `loot/butin.js` | fragments (`random_research_scrap`) and blueprints in the NML tables listed in §2.8 and §2.9 | |
@@ -660,7 +660,7 @@ No custom mod is **necessary** for these links: config, tags, datapack, resource
 1. The exact keys of the biome list in `ancient_remnants-common.toml`, and whether a tag (`#minecraft:is_badlands`) is accepted there.
 2. Where the monuments land in NML biomes: a 7-piece jigsaw monument on NML terrain, a sentinel monolith in `frozen_shore`.
 3. `spawns_safety.js`: `event.cancel()` on a spawner breeze; does the spawner keep running empty? Is an `entity.spawnType` needed for the exception (§2.2 A)? Does the `append_static` override replace `SpawnData` (§2.2 B)?
-4. Elderheart polling: does `getEntitiesWithin` find it? Does the `compline_eveille` tag survive chunk unloading?
+4. Elderheart polling: does `getEntitiesWithin` find it? Does the `fallow_eveille` tag survive chunk unloading?
 5. `/fillbiome` launched by `runCommandSilent`: is the return of the biomes to the client immediate (ATMOSPHERICS mist)? How long for a radius of 64 at full height? (about 200 columns × 3 passes, at 4 columns per tick, i.e. 50 ticks)
 6. Ecliptic in the three clearings: does snow fall and melt as in the original biome? Do crops grow at the same pace?
 7. Wildex's KubeJS bridge: the exact form of the callback accepted by `onDiscoveryChanged` (JS function or interface); does it hold after `/reload`?

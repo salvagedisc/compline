@@ -1,8 +1,8 @@
 {
   "values": [
-    "compline:casque_en_acier_noir",
-    "compline:plastron_en_acier_noir",
-    "compline:jambieres_en_acier_noir",
-    "compline:bottes_en_acier_noir"
+    "fallow:casque_en_acier_noir",
+    "fallow:plastron_en_acier_noir",
+    "fallow:jambieres_en_acier_noir",
+    "fallow:bottes_en_acier_noir"
   ]
 }

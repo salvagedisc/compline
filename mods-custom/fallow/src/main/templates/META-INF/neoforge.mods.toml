@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="salvagedisc"
+description='''
+Liens entre les mods du modpack Fallow et fonctions maison, en modules. Interrupteurs : config/fallow-client.toml, config/fallow-common.toml et, pour ceux que le serveur impose, serverconfig/fallow-server.toml du monde.
+Ciel et brume : ciel (la lune sous ATMOSPHERICS), horizon (Distant Horizons suit la brume), clairiere et dissipateur (la brume se lève autour d'un feu, d'une lanterne ou d'un bloc Create), bord (le cercle du monde), rendu (la brume et le vent donnés au shader Brumaire sous Iris).
+Interface : ecran (l'interface s'efface au repos), xp (l'enclume sans niveaux), zoo (les tampons du guide d'Archie pour toutes les bêtes).
+Monde : vent, monuments (Ancient Remnants posés sur un bon terrain), filons (gisements liés au biome), climat (les saisons d'Ecliptic sur la température de Cold Sweat).
+Survie : outils (le bon outil pour le bois et la roche), patine (armures salies), acier_noir, minage (une pioche bien forgée rend plus), approche (les bêtes sentent le vent), repos (le repos au foyer), tannerie.
+Chaque module ne se charge que si les mods qu'il relie sont présents.
+'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+# Seule dépendance dure : NeoForge (et Minecraft). Les mods reliés sont détectés au chargement.
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

@@ -1,7 +1,7 @@
 {
   "replace": true,
   "values": [
-    "#compline:needs_black_steel_tool",
+    "#fallow:needs_black_steel_tool",
     "minecraft:netherite_block",
     "minecraft:respawn_anchor",
     "minecraft:ancient_debris",

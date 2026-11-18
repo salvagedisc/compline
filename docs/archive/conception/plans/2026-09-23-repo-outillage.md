@@ -1,7 +1,7 @@
-# Compline — Repo & tooling: implementation plan
+# Fallow — Repo & tooling: implementation plan
 
 
-**Goal:** Turn the `salvagedisc/compline` repo into the packwiz source of truth of the Compline modpack, with a base pack, documentation, a synchronisation script from the Modrinth App and CI that produces/publishes the `.mrpack`.
+**Goal:** Turn the `salvagedisc/fallow` repo into the packwiz source of truth of the Fallow modpack, with a base pack, documentation, a synchronisation script from the Modrinth App and CI that produces/publishes the `.mrpack`.
 
 **Architecture:** The pack lives in `pack/` (packwiz root). A dependency-free Node.js script (`scripts/sync/`) compares the Modrinth App test instance with the pack via the Modrinth API and drives `packwiz`. Two GitHub Actions workflows: `build.yml` (check + export on every push) and `release.yml` (release on tag, Modrinth step disabled by default).
 
@@ -14,7 +14,7 @@
 - Minecraft **1.21.1**, loader **NeoForge 21.1.251** (pinned in `pack/pack.toml`).
 - Every mod must come from **Modrinth** and exist for 1.21.1 NeoForge; an unavailable mod is flagged, never replaced by a third-party source.
 - Only `pack/` ends up in the `.mrpack`; docs, scripts and CI never do.
-- Datapack data in `pack/kubejs/data/compline/`, no `datapacks/` folder.
+- Datapack data in `pack/kubejs/data/fallow/`, no `datapacks/` folder.
 - Mod updates one by one; never `packwiz update --all`.
 - Commit messages: `feat(mods): add <Name>`, `chore(mods): update <Name> x → y`, `feat(mods)!: remove <Name>`, `docs: …`, `ci: …`, `feat(sync): …`.
 - The sync script **never modifies** the Modrinth App instance.
@@ -27,7 +27,7 @@
 - **Mod disabled in the Modrinth App** (`xxx.jar.disabled`): must be considered absent from the instance, not a mod to add. → Task 5 test.
 - **Jar absent from Modrinth** (mod imported by hand): must be listed as "unknown / non-compliant" and trigger neither an addition nor a removal. → Task 6 test.
 - **Same project, other version**: must appear as a single version change, not as a removal + an addition of two different mods. → Task 6 test.
-- **Instance path with spaces and accents** (`C:\Users\Prénom Nom\…\profiles\Compline test`): the script must find and read it. → Task 5 test.
+- **Instance path with spaces and accents** (`C:\Users\Prénom Nom\…\profiles\Fallow test`): the script must find and read it. → Task 5 test.
 - **Network / Modrinth API failure**: the script stops before any packwiz command (no partial application). → Task 7 test.
 
 ---
@@ -44,7 +44,7 @@ pack/
   mods/*.pw.toml
   config/.gitkeep, defaultconfigs/.gitkeep
   kubejs/{startup_scripts,server_scripts,client_scripts}/.gitkeep
-  kubejs/data/compline/.gitkeep
+  kubejs/data/fallow/.gitkeep
 scripts/
   sync-from-instance.mjs       ← CLI (argument parsing, confirmation, orchestration)
   sync/
@@ -93,7 +93,7 @@ If `packwiz` is not found directly, add `%USERPROFILE%\go\bin` to the user PATH 
 
 **Interfaces:**
 - Consumes: `packwiz` (Task 1).
-- Produces: `pack/pack.toml` with `name = "Compline"`, `version = "0.1.0"`, `[versions] minecraft = "1.21.1"`, `neoforge = "21.1.251"`.
+- Produces: `pack/pack.toml` with `name = "Fallow"`, `version = "0.1.0"`, `[versions] minecraft = "1.21.1"`, `neoforge = "21.1.251"`.
 
 - [ ] **Step 1: Repo files**
 
@@ -115,7 +115,7 @@ node_modules/
 `package.json`:
 ```json
 {
-  "name": "compline-tools",
+  "name": "fallow-tools",
   "private": true,
   "type": "module",
   "engines": { "node": ">=20" },
@@ -130,7 +130,7 @@ node_modules/
 
 ```bash
 mkdir -p pack && cd pack
-packwiz init --name "Compline" --author "salvagedisc" --version "0.1.0" \
+packwiz init --name "Fallow" --author "salvagedisc" --version "0.1.0" \
   --mc-version 1.21.1 --modloader neoforge --neoforge-version 21.1.251 -r
 ```
 Expected: `pack/pack.toml` and `pack/index.toml` created. Open `pack.toml` and check that `minecraft = "1.21.1"` and `neoforge = "21.1.251"` are present under `[versions]`.
@@ -138,8 +138,8 @@ Expected: `pack/pack.toml` and `pack/index.toml` created. Open `pack.toml` and c
 - [ ] **Step 3: Directory tree and exclusions**
 
 ```bash
-mkdir -p pack/config pack/defaultconfigs pack/kubejs/startup_scripts pack/kubejs/server_scripts pack/kubejs/client_scripts pack/kubejs/data/compline
-for d in config defaultconfigs kubejs/startup_scripts kubejs/server_scripts kubejs/client_scripts kubejs/data/compline; do touch "pack/$d/.gitkeep"; done
+mkdir -p pack/config pack/defaultconfigs pack/kubejs/startup_scripts pack/kubejs/server_scripts pack/kubejs/client_scripts pack/kubejs/data/fallow
+for d in config defaultconfigs kubejs/startup_scripts kubejs/server_scripts kubejs/client_scripts kubejs/data/fallow; do touch "pack/$d/.gitkeep"; done
 ```
 
 `pack/.packwizignore`:
@@ -215,9 +215,9 @@ Expected: no output from `git status`.
 - [ ] **Step 4: Export and launch test (manual, maintainer)**
 
 ```bash
-cd pack && packwiz mr export -o ../dist/Compline-0.1.0-dev.mrpack && cd ..
+cd pack && packwiz mr export -o ../dist/Fallow-0.1.0-dev.mrpack && cd ..
 ```
-Ask the maintainer: Modrinth App → "+" → *Import from file* → `dist/Compline-0.1.0-dev.mrpack`, name the instance **`Compline test`**, launch, create a world, walk for 2 minutes. They report: launch OK / crash (provide `logs/latest.log` or the crash report).
+Ask the maintainer: Modrinth App → "+" → *Import from file* → `dist/Fallow-0.1.0-dev.mrpack`, name the instance **`Fallow test`**, launch, create a world, walk for 2 minutes. They report: launch OK / crash (provide `logs/latest.log` or the crash report).
 Expected: world created without a crash. In case of a crash: read the log, identify the faulty mod, report it — do not fix by changing version without approval.
 
 ---
@@ -232,7 +232,7 @@ Expected: world created without a crash. In case of a crash: read the log, ident
 - [ ] **Step 1: `docs/vision.md`**
 
 ```markdown
-# Compline — Vision
+# Fallow — Vision
 
 ## Pitch
 A huge, damp and almost abandoned world. A handful of players arrive, settle, then slowly push back the frontier: cabin, farm, hamlet, railway, factory, airfield, distant colonies. There is no end: the permanent world is for perfecting one's installations.
@@ -352,21 +352,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versions: `0.x
 - [ ] **Step 5: `README.md`**
 
 ````markdown
-# Compline
+# Fallow
 
 **Minecraft 1.21.1 / NeoForge** modpack for a permanent world among friends: exploration in the mist, colonies, Create and aviation, long-term farming.
 
 ## Play
 1. Install the [Modrinth App](https://modrinth.com/app).
-2. Accept the *Share* invitation received, **or** download the `.mrpack` of the latest [release](https://github.com/salvagedisc/compline/releases) then *+ → Import from file*.
+2. Accept the *Share* invitation received, **or** download the `.mrpack` of the latest [release](https://github.com/salvagedisc/fallow/releases) then *+ → Import from file*.
 
 ## Develop
 - Pack: `pack/` (managed by [packwiz](https://packwiz.infra.link/)).
 - Vision: `docs/vision.md` · Mod registry: `docs/mods.md` · Decisions: `docs/decisions/`.
-- Bring back the mods tested in the "Compline test" instance:
+- Bring back the mods tested in the "Fallow test" instance:
 
 ```bash
-npm run sync -- --instance "Compline test"
+npm run sync -- --instance "Fallow test"
 ```
 ````
 
@@ -430,7 +430,7 @@ test('parsePwToml without modrinth section returns null ids', () => {
 });
 
 test('readPackMods reads every .pw.toml with its key', async () => {
-  const dir = await mkdtemp(join(tmpdir(), 'compline-pack-'));
+  const dir = await mkdtemp(join(tmpdir(), 'fallow-pack-'));
   await mkdir(join(dir, 'mods'));
   await writeFile(join(dir, 'mods', 'create.pw.toml'), SAMPLE);
   await writeFile(join(dir, 'mods', 'notes.txt'), 'ignored');
@@ -454,8 +454,8 @@ import { resolveInstanceDir, readInstanceJars } from '../sync/instance.mjs';
 test('resolveInstanceDir maps a name to the Modrinth App profiles folder', () => {
   const env = { APPDATA: 'C:\\Users\\Prénom Nom\\AppData\\Roaming' };
   assert.equal(
-    resolveInstanceDir('Compline test', env),
-    join('C:\\Users\\Prénom Nom\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Compline test'),
+    resolveInstanceDir('Fallow test', env),
+    join('C:\\Users\\Prénom Nom\\AppData\\Roaming', 'ModrinthApp', 'profiles', 'Fallow test'),
   );
 });
 
@@ -464,7 +464,7 @@ test('resolveInstanceDir keeps absolute paths', () => {
 });
 
 test('readInstanceJars hashes .jar files and skips disabled ones (path with spaces and accents)', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'compline inst é-'));
+  const root = await mkdtemp(join(tmpdir(), 'fallow inst é-'));
   await mkdir(join(root, 'mods'));
   await writeFile(join(root, 'mods', 'a.jar'), 'AAA');
   await writeFile(join(root, 'mods', 'b.jar.disabled'), 'BBB');
@@ -589,7 +589,7 @@ test('lookupVersions posts sha512 hashes and maps the response', async () => {
   const map = await lookupVersions(['h1', 'h2'], { fetch });
   assert.equal(calls[0].url, 'https://api.modrinth.com/v2/version_files');
   assert.deepEqual(JSON.parse(calls[0].init.body), { hashes: ['h1', 'h2'], algorithm: 'sha512' });
-  assert.match(calls[0].init.headers['User-Agent'], /compline/);
+  assert.match(calls[0].init.headers['User-Agent'], /fallow/);
   assert.deepEqual(map.get('h1'), { projectId: 'p1', versionId: 'v1', versionNumber: '1.0' });
   assert.equal(map.has('h2'), false);
 });
@@ -643,7 +643,7 @@ Expected: FAIL (modules not found).
 `scripts/sync/modrinth.mjs`:
 ```js
 const API = 'https://api.modrinth.com/v2';
-const HEADERS = { 'User-Agent': 'salvagedisc/compline sync-from-instance', 'Content-Type': 'application/json' };
+const HEADERS = { 'User-Agent': 'salvagedisc/fallow sync-from-instance', 'Content-Type': 'application/json' };
 
 async function call(fetch, url, init) {
   const res = await fetch(url, { ...init, headers: HEADERS });
@@ -773,9 +773,9 @@ import { join } from 'node:path';
 import { run } from '../sync-from-instance.mjs';
 
 async function fixture() {
-  const root = await mkdtemp(join(tmpdir(), 'compline-cli-'));
+  const root = await mkdtemp(join(tmpdir(), 'fallow-cli-'));
   const packDir = join(root, 'pack');
-  const inst = join(root, 'Compline test');
+  const inst = join(root, 'Fallow test');
   await mkdir(join(packDir, 'mods'), { recursive: true });
   await mkdir(join(inst, 'mods'), { recursive: true });
   await writeFile(join(inst, 'mods', 'new.jar'), 'NEW');
@@ -902,13 +902,13 @@ import { toPackwizCommands } from './sync/commands.mjs';
 import { diffConfigs, copyConfigs } from './sync/configs.mjs';
 
 const USAGE = `Usage: npm run sync -- --instance <nom|chemin> [--configs] [--dry-run] [--yes]
-  --instance  Nom de l'instance Modrinth App (défaut : "Compline test") ou chemin absolu
+  --instance  Nom de l'instance Modrinth App (défaut : "Fallow test") ou chemin absolu
   --configs   Rapatrie aussi les fichiers de config/ modifiés
   --dry-run   Affiche le diff et les commandes sans rien appliquer
   --yes       N'attend pas de confirmation`;
 
 function parseArgs(argv) {
-  const opts = { instance: 'Compline test', configs: false, dryRun: false, yes: false, help: false };
+  const opts = { instance: 'Fallow test', configs: false, dryRun: false, yes: false, help: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--instance') opts.instance = argv[++i];
@@ -987,10 +987,10 @@ if (isMain) {
 Run: `npm test`
 Expected: PASS (16 tests).
 
-- [ ] **Step 5: Real test against the "Compline test" instance (Task 3)**
+- [ ] **Step 5: Real test against the "Fallow test" instance (Task 3)**
 
 Ask the maintainer to add any mod (e.g. `Create: Copycats+`) to the instance via the Modrinth App.
-Run: `npm run sync -- --instance "Compline test" --dry-run`
+Run: `npm run sync -- --instance "Fallow test" --dry-run`
 Expected: a line `+ Create: Copycats+ …`, `= 12+ mod(s) inchangé(s)` (+ dependencies), no `-`. Then without `--dry-run`, answer `o` and check that `pack/mods/copycats.pw.toml` appears. If `packwiz modrinth add <version url>` is not accepted by the pinned version, replace the URL with `--project-id <P> --version-id <V>` in `commands.mjs` and its test. **Then undo this test mod** (`git checkout -- pack && git clean -fd pack`): it is not retained.
 
 - [ ] **Step 6: Commit**
@@ -1007,7 +1007,7 @@ git add scripts && git commit -m "feat(sync): add sync-from-instance CLI with pa
 - Create: `.github/workflows/build.yml`
 
 **Interfaces:**
-- Produces: artifact `Compline-<version>-<sha7>` containing the `.mrpack`.
+- Produces: artifact `Fallow-<version>-<sha7>` containing the `.mrpack`.
 
 - [ ] **Step 1: Workflow**
 
@@ -1047,7 +1047,7 @@ jobs:
         working-directory: pack
         run: |
           version=$(sed -n 's/^version = "\(.*\)"/\1/p' pack.toml)
-          name="Compline-${version}-${GITHUB_SHA::7}"
+          name="Fallow-${version}-${GITHUB_SHA::7}"
           mkdir -p ../dist
           packwiz mr export -o "../dist/${name}.mrpack"
           echo "name=${name}" >> "$GITHUB_OUTPUT"
@@ -1065,7 +1065,7 @@ git add .github && git commit -m "ci: build and export .mrpack on every push"
 git push
 gh run watch --exit-status
 ```
-Expected: green run; `gh run view --log` shows `npm test` OK and the artifact `Compline-0.1.0-xxxxxxx` is listed by `gh run view`.
+Expected: green run; `gh run view --log` shows `npm test` OK and the artifact `Fallow-0.1.0-xxxxxxx` is listed by `gh run view`.
 
 ---
 
@@ -1115,12 +1115,12 @@ jobs:
         working-directory: pack
         run: |
           mkdir -p ../dist
-          packwiz mr export -o "../dist/Compline-${{ steps.meta.outputs.version }}.mrpack"
+          packwiz mr export -o "../dist/Fallow-${{ steps.meta.outputs.version }}.mrpack"
 
       - name: GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Compline ${{ steps.meta.outputs.version }}" --notes-file notes.md
+        run: gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Fallow ${{ steps.meta.outputs.version }}" --notes-file notes.md
 
       # Disabled until the Modrinth project exists: define the variable MODRINTH_PROJECT_ID
       # and the secret MODRINTH_TOKEN (created by the maintainer) to enable it.
@@ -1131,13 +1131,13 @@ jobs:
           version="${{ steps.meta.outputs.version }}"
           case "$version" in 0.*) type=beta ;; *) type=release ;; esac
           data=$(jq -n --arg p "$MODRINTH_PROJECT_ID" --arg v "$version" --arg t "$type" --rawfile c notes.md \
-            '{project_id:$p, name:("Compline " + $v), version_number:$v, changelog:$c, version_type:$t,
+            '{project_id:$p, name:("Fallow " + $v), version_number:$v, changelog:$c, version_type:$t,
               game_versions:["1.21.1"], loaders:["neoforge"], dependencies:[], featured:true, file_parts:["file"]}')
           curl --fail-with-body -sS -X POST https://api.modrinth.com/v2/version \
             -H "Authorization: ${MODRINTH_TOKEN}" \
-            -H "User-Agent: salvagedisc/compline release" \
+            -H "User-Agent: salvagedisc/fallow release" \
             -F "data=${data}" \
-            -F "file=@dist/Compline-${version}.mrpack;type=application/x-modrinth-modpack+zip"
+            -F "file=@dist/Fallow-${version}.mrpack;type=application/x-modrinth-modpack+zip"
 ```
 
 - [ ] **Step 2: Commit and push**
@@ -1151,12 +1151,12 @@ git push && gh run watch --exit-status
 
 Ask the maintainer for confirmation, then:
 ```bash
-git tag -a v0.1.0 -m "Compline 0.1.0 — pack de base"
+git tag -a v0.1.0 -m "Fallow 0.1.0 — pack de base"
 git push origin v0.1.0
 gh run watch --exit-status
 gh release view v0.1.0
 ```
-Expected: release `Compline 0.1.0` with `Compline-0.1.0.mrpack` and the CHANGELOG notes; the "Publish to Modrinth" step appears **skipped**.
+Expected: release `Fallow 0.1.0` with `Fallow-0.1.0.mrpack` and the CHANGELOG notes; the "Publish to Modrinth" step appears **skipped**.
 
 - [ ] **Step 4: Update the CHANGELOG**
 

@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const read = (path) => JSON.parse(readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8'));
 const ids = (tag) => tag.values.map((value) => (typeof value === 'string' ? value : value.id));
-const TAGS = 'pack/kubejs/data/compline/tags/entity_type/zoo';
+const TAGS = 'pack/kubejs/data/fallow/tags/entity_type/zoo';
 
 test('zoo: every Overworld mob that In Control refuses is absent from the zoo list', () => {
   const rules = read('pack/config/incontrol/spawn.json');
@@ -24,7 +24,7 @@ test('zoo: the dinosaurs keep their own stamp page, out of the zoo list', () => 
 });
 
 test('zoo: the guidebook text patches have a French and an English file with the same targets', () => {
-  const dir = 'mods-custom/compline/src/main/resources/assets/compline/archie/guide';
+  const dir = 'mods-custom/fallow/src/main/resources/assets/fallow/archie/guide';
   const targets = (file) => Object.entries(read(`${dir}/${file}`))
     .filter(([key]) => key !== '_')
     .flatMap(([category, patches]) => patches.map((p) => `${category}/${p.page}/${p.label}`));

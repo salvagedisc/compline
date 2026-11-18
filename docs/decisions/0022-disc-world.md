@@ -9,7 +9,7 @@ Since [0019](0019-leaving-no-mans-land.md) the terrain is Tectonic with the Regi
 Drehmal is a painted map (12,000 blocks wide, about 4 GB, shipped outside Modrinth, years of work by a team). Modrinth caps a file at 500 MiB, and a painted map would freeze the terrain mods of the pack. The world has to stay generated.
 
 ## Options
-| Criterion | A. Vanilla world border | B. Chunky Border | C. Computed disc and an edge in the `compline` mod |
+| Criterion | A. Vanilla world border | B. Chunky Border | C. Computed disc and an edge in the `fallow` mod |
 |---|---|---|---|
 | Shape of the limit | Square | Round | Round |
 | What is inside | Whatever the seed gives: maybe mostly sea | Same | One continent, whatever the seed |
@@ -21,11 +21,11 @@ Drehmal is a painted map (12,000 blocks wide, about 4 GB, shipped outside Modrin
 ## Decision
 Option C.
 
-**The disc** ([`scripts/terrain/disc.py`](../../scripts/terrain/disc.py), data written to `pack/kubejs/data/compline/`). Two Lithostitched modifiers wrap two inputs of the terrain; Tectonic and the biome mods still generate everything from the seed.
+**The disc** ([`scripts/terrain/disc.py`](../../scripts/terrain/disc.py), data written to `pack/kubejs/data/fallow/`). Two Lithostitched modifiers wrap two inputs of the terrain; Tectonic and the biome mods still generate everything from the seed.
 - `tectonic:noise/raw_continents`: inside the disc a floor turns most of the sea of the seed into low land and a slow noise keeps a few inland seas; from about 550 blocks before the coast a cap brings the value down, to the coast at a mean radius of 5,700 and to deep sea beyond. Three noises make the coast wander by a few hundred blocks. The cap stops at -0.47: under -0.5 Tectonic switches to its island mode and makes land again.
 - `minecraft:overworld/temperature`: the latitude replaces most of the seed's temperature. The north is cold and the south hot, with bent limits.
 
-**The edge** (`bord` module of the `compline` mod, 0.10.0, [details](../plan/mod-compline.md#bord-module)). A circle of radius 6,000 around 0, 0, read from `data/compline/monde/bord.json`, written by the same script. A player who passes it is brought back two blocks inside, with the boat or the mount; a message warns 64 blocks before. Spectators pass.
+**The edge** (`bord` module of the `fallow` mod, 0.10.0, [details](../plan/mod-fallow.md#bord-module)). A circle of radius 6,000 around 0, 0, read from `data/fallow/monde/bord.json`, written by the same script. A player who passes it is brought back two blocks inside, with the boat or the mount; a message warns 64 blocks before. Spectators pass.
 
 **Size.** The disc was measured by sampling the generator every 64 blocks, without generating a chunk (bench command, two seeds). Inside the edge, 63 to 73 km² are land, out of the 113 km² of the circle; the furthest land is about 5,800 blocks from the centre, so the coast stays about 200 blocks from the edge. From coast to coast the continent is about 11,400 blocks: some 45 minutes of walking in a straight line on flat ground, far more with the relief, the mist and no elytra. The test seed has 81 land biomes. Drehmal's map is 12,000 blocks wide: the two worlds have the same span. A radius of 6,000 is kept for the first world; more land comes by extension (below), not by a larger first disc that the pack could not fill with places worth the walk.
 

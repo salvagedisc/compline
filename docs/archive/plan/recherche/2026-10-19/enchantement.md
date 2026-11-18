@@ -169,8 +169,8 @@ The parallel with Overgeared is direct: **blueprint found → drawing table → 
 |---|---|---|
 | Add the mod | `pack/mods/immersive-enchanting.pw.toml`, `pack/mods/alfinolib.pw.toml` | `packwiz modrinth add immersive-enchanting` (pulls AlfinoLib) |
 | Server config | `pack/defaultconfigs/immersiveenchanting-server.toml`: defaults kept; `bookshelfSearchY = 3`; decide `allowEnchantmentRemoval` | config |
-| Compline costs | `kubejs/data/immersiveenchanting/enchantment_costs/minecraft/*.json` (43) + the 9 enchantments of the other mods (§1.6). Start from `/immersiveenchanting generate_empty_datapack` | datapack |
-| Books in the NML ruins | `kubejs/data/compline/loot_modifiers/savoirs_*.json` of type `immersiveenchanting:ancient_book_loot_modifier`, condition `neoforge:loot_table_id` + `minecraft:random_chance`, and `kubejs/data/neoforge/loot_modifiers/global_loot_modifiers.json` (`replace: false`) | datapack (the mod's modifier, **no LootJS needed**) |
+| Fallow costs | `kubejs/data/immersiveenchanting/enchantment_costs/minecraft/*.json` (43) + the 9 enchantments of the other mods (§1.6). Start from `/immersiveenchanting generate_empty_datapack` | datapack |
+| Books in the NML ruins | `kubejs/data/fallow/loot_modifiers/savoirs_*.json` of type `immersiveenchanting:ancient_book_loot_modifier`, condition `neoforge:loot_table_id` + `minecraft:random_chance`, and `kubejs/data/neoforge/loot_modifiers/global_loot_modifiers.json` (`replace: false`) | datapack (the mod's modifier, **no LootJS needed**) |
 | Books from guardians and the bestiary | `kubejs/server_scripts/savoirs.js` | KubeJS (§2.5, §2.6) |
 | Translation | `kubejs/assets/immersiveenchanting/lang/fr_fr.json` ("Livre ancien", "Savoir de", "Reproduire", "Transmuter"...) | KubeJS assets |
 | Registry | `docs/mods.md`: Immersive Enchanting ➕ under "Building and workshops", AlfinoLib under libraries, Easy Magic ❌ | doc |
@@ -226,14 +226,14 @@ Principles for rewriting the 43 files (to be validated with the maintainer):
 
 ### 2.8 What not to link
 
-- **Moons** of Enhanced Celestials: nothing in Immersive Enchanting reads the moon. A link would require a "lunar" material made by KubeJS, and moon detection already goes through the future `compline` mod (chapter 12.4). To keep for later.
+- **Moons** of Enhanced Celestials: nothing in Immersive Enchanting reads the moon. A link would require a "lunar" material made by KubeJS, and moon detection already goes through the future `fallow` mod (chapter 12.4). To keep for later.
 - **Overgeared quality**: no hook. Limiting enchantments according to quality would require a small mod (mixin on IE's menu). Not necessary.
 - **Ancient Remnants codex**: do not use "Research Scrap" as a cost: these are the codex pages.
 
 ### 2.9 If the Quark Matrix fallback is taken
 
 - `pack/config/quark-common.toml`: `oddities = true` in `[categories]`, then an `[oddities]` section with `"Matrix Enchanting" = true` and `false` for Backpack, Crate, Magnets, Pipes, Tiny Potato, Totem of Holding.
-- Compline influences through `statesToInfluences`: NML blocks, clearing lantern, creature skulls...
+- Fallow influences through `statesToInfluences`: NML blocks, clearing lantern, creature skulls...
 - Rare knowledge: remove Silk Touch, Fortune, Looting, Mending from the tag `minecraft:in_enchanting_table` (datapack) so that they only come from **books** that have been found (LootJS in the NML ruins), applied at the vanilla anvil.
 - Easy Magic stays out of the pack: Quark's conversion expects `minecraft:enchanting_table`, which Easy Magic replaces (deduced).
 
@@ -247,7 +247,7 @@ Principles for rewriting the 43 files (to be validated with the maintainer):
 | Young mod, single author | Medium | "My first mod" (Modrinth page), 37,000 downloads, but maintained in 2026 (6.0.1, bugs #74 and #76 fixed) [API]. Fallback ready: Quark Matrix |
 | Enchantments of other mods disabled | Medium | Without a cost file, they disappear: write the 9 files (§1.6) |
 | Mending | Medium | Enabled by default if the book is found (Nether star): cut it |
-| Merging enchanted items at the anvil | Low | Two enchanted items found on creatures can still be combined. Rare in Compline |
+| Merging enchanted items at the anvil | Low | Two enchanted items found on creatures can still be combined. Rare in Fallow |
 | 3D interface | Low | IE's screen is an interface of its own: to test with Spatial GUI and Shoulder Surfing |
 | No EMI | Low | Costs are not in EMI; IE's interface shows them on hover. Quark's tooltip (`enchantingTooltips`) remains |
 | No French | Low | `fr_fr.json` file to ship, as for Overgeared |

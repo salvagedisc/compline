@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " O ",
+    "PCP",
+    " S "
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:honeycomb"
+    },
+    "P": {
+      "item": "minecraft:smooth_stone_slab"
+    },
+    "C": {
+      "item": "minecraft:charcoal"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "id": "fallow:feu_de_veille",
+    "count": 1
+  }
+}

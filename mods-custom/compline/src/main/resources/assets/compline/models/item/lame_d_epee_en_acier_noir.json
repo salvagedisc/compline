@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "compline:item/lame_d_epee_en_acier_noir"
-  }
-}

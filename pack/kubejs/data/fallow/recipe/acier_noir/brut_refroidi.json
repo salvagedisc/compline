@@ -1,0 +1,9 @@
+{
+  "type": "overgeared:cooling",
+  "input": {
+    "item": "fallow:acier_noir_brut_chauffe"
+  },
+  "output": {
+    "id": "fallow:acier_noir_brut"
+  }
+}

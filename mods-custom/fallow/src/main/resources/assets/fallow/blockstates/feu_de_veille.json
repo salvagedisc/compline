@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fallow:block/feu_de_veille"
+    }
+  }
+}

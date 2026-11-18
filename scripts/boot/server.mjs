@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // Boot check: starts a dedicated server with every server-side mod, config and KubeJS script of the
-// pack, lets the compline mod write its registries once the world is ready (-Dcompline.bootcheck),
+// pack, lets the fallow mod write its registries once the world is ready (-Dfallow.bootcheck),
 // then fails on a crash, on any error the server or KubeJS logs that scripts/boot/known-errors.txt
 // does not accept, and on any item of the KubeJS removal lists that does not exist.
-// Usage: node scripts/boot/server.mjs [--jar <compline jar>] [--dir <work dir>] [--timeout <minutes>]
+// Usage: node scripts/boot/server.mjs [--jar <fallow jar>] [--dir <work dir>] [--timeout <minutes>]
 import { spawn, execFileSync } from 'node:child_process';
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -55,10 +55,10 @@ await mkdir(join(work, 'mods'), { recursive: true });
 await mkdir(jarCache, { recursive: true });
 const mods = (await readPackMods(packDir)).filter((mod) => mod.side !== 'client');
 for (const mod of mods) {
-  await writeFile(join(work, 'mods', mod.filename), await loadJar(jarCache, mod, 'salvagedisc/compline boot-check'));
+  await writeFile(join(work, 'mods', mod.filename), await loadJar(jarCache, mod, 'salvagedisc/fallow boot-check'));
 }
 for (const name of (await readdir(join(packDir, 'mods'))).filter((n) => n.endsWith('.jar'))) {
-  const replaced = args.jar && name.startsWith('compline-');
+  const replaced = args.jar && name.startsWith('fallow-');
   await cp(replaced ? args.jar : join(packDir, 'mods', name), join(work, 'mods', replaced ? basename(args.jar) : name));
 }
 for (const name of ['config', 'defaultconfigs', 'kubejs']) {
@@ -66,14 +66,14 @@ for (const name of ['config', 'defaultconfigs', 'kubejs']) {
 }
 await writeFile(join(work, 'eula.txt'), 'eula=true\n');
 await writeFile(join(work, 'server.properties'), [
-  'online-mode=false', 'level-seed=compline', 'max-tick-time=-1', 'enable-rcon=false', 'server-port=25599', '',
+  'online-mode=false', 'level-seed=fallow', 'max-tick-time=-1', 'enable-rcon=false', 'server-port=25599', '',
 ].join('\n'));
 console.log(`${mods.length} mods de Modrinth et ${(await readdir(join(work, 'mods'))).length - mods.length} jars du dépôt`);
 
-// 3. Start it and wait for the compline mod to stop it.
+// 3. Start it and wait for the fallow mod to stop it.
 const started = Date.now();
 const code = await new Promise((resolve) => {
-  const java = spawn('java', [`-Xmx${args.memory}`, `-Dcompline.bootcheck=${registriesFile}`, `@${argsFile}`, 'nogui'],
+  const java = spawn('java', [`-Xmx${args.memory}`, `-Dfallow.bootcheck=${registriesFile}`, `@${argsFile}`, 'nogui'],
     { cwd: work, stdio: ['ignore', 'ignore', 'inherit'] });
   const timer = setTimeout(() => {
     annotate(`le serveur n'est pas prêt après ${args.timeout} minutes`);
