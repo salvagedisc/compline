@@ -15,6 +15,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [progression.md](progression.md) | Ores and armour progression: rare steel and diamonds, black steel, dinosaur armour, burning heart, prospecting; in-game tests |
 | [climat.md](climat.md) | The climate that weighs: Ecliptic's seasons felt by the body through Cold Sweat, snow and sand storms (cold, settled snow, thirst, dust and mist), hot and cool dishes; in-game tests |
 | [approche.md](approche.md) | The approach: shy wild animals smell the player downwind, see them standing, hear them sprinting, then flee with their herd; the spyglass spots species at 64 blocks; in-game tests AP1 to AP7 |
+| [repos.md](repos.md) | Rest by the hearth: the « Reposé » effect by a lit fire under a roof, longer in a varied home (nine families of comfort); in-game tests RE1 to RE7 |
 | [monuments.md](monuments.md) | Ancient Remnants on the new terrain: biomes, spacing, ground check, sleeping hearts and guardians, codex pages |
 | [mod-compline.md](mod-compline.md) | The custom `compline` mod 0.15.0 (modules `ciel`, `xp`, `horizon`, `clairiere`, `dissipateur`, `outils`, `monuments`, `bord`, and `rendu`): how it works, what is deduced from the code, in-game tests |
 | [modules-compline.md](modules-compline.md) | The eight planned modules of the `compline` mod (2026-10-26): mist culling, zoo, growing clearings, beacon, clear mornings, airship bubble, echoes, survivors; what other games do well and what Compline takes |

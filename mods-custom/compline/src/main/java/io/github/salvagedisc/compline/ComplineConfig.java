@@ -38,6 +38,10 @@ public final class ComplineConfig {
     private static final ModConfigSpec.DoubleValue APPROCHE_SIGHT_RANGE;
     private static final ModConfigSpec.DoubleValue APPROCHE_HEARING_RANGE;
     private static final ModConfigSpec.BooleanValue APPROCHE_HINTS;
+    private static final ModConfigSpec.BooleanValue REPOS_ENABLED;
+    private static final ModConfigSpec.IntValue REPOS_REST_SECONDS;
+    private static final ModConfigSpec.DoubleValue REPOS_BASE_MINUTES;
+    private static final ModConfigSpec.DoubleValue REPOS_MINUTES_PER_COMFORT;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -225,6 +229,24 @@ public final class ComplineConfig {
                 .define("hints", true);
         common.pop();
 
+        common.comment("Module repos : immobile ou assis près d'un feu allumé (5 blocs), sous un toit, le joueur se repose et",
+                "gagne l'effet « Reposé » : un demi-cœur toutes les 6 secondes et un quart de faim en moins. L'effet dure",
+                "d'autant plus que la maison est variée (familles de confort, tags compline:confort/*, à 8 blocs).").push("repos");
+        REPOS_ENABLED = common
+                .comment("Interrupteur du module (serveur). Faux : plus de repos ; un effet en cours va à son terme sans réduire la faim.")
+                .define("enabled", true);
+        REPOS_REST_SECONDS = common
+                .comment("Secondes de repos au foyer avant de gagner l'effet.")
+                .defineInRange("restSeconds", 20, 0, 300);
+        REPOS_BASE_MINUTES = common
+                .comment("Durée de l'effet sans aucun confort, en minutes.")
+                .defineInRange("baseMinutes", 2.0, 0.5, 60.0);
+        REPOS_MINUTES_PER_COMFORT = common
+                .comment("Minutes ajoutées par famille de confort trouvée (lit, siège, table, tapis, rangement, livres, lumière,",
+                        "décoration, cuisine). Avec les 9 : 2 + 9 × 1,5 = 15,5 minutes.")
+                .defineInRange("minutesPerComfort", 1.5, 0.0, 10.0);
+        common.pop();
+
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
                 "les rince lentement. La saleté reste sur l'objet.").push("patine");
         PATINE_ENABLED = common
@@ -374,6 +396,22 @@ public final class ComplineConfig {
 
     public static boolean approcheHints() {
         return read(COMMON_SPEC, APPROCHE_HINTS);
+    }
+
+    public static boolean reposEnabled() {
+        return read(COMMON_SPEC, REPOS_ENABLED);
+    }
+
+    public static int reposRestSeconds() {
+        return read(COMMON_SPEC, REPOS_REST_SECONDS);
+    }
+
+    public static double reposBaseMinutes() {
+        return read(COMMON_SPEC, REPOS_BASE_MINUTES);
+    }
+
+    public static double reposMinutesPerComfort() {
+        return read(COMMON_SPEC, REPOS_MINUTES_PER_COMFORT);
     }
 
     public static boolean climatEnabled() {

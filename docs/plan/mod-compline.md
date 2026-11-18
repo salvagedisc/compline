@@ -341,6 +341,18 @@ Config (`compline-common.toml`): `[approche]` `enabled` (true), `scentRange` (32
 
 **Checked** on the bench on 2026-11-18 (full pack, one player, Naturalist deer): see [approche](approche.md#checked-on-the-bench).
 
+## `repos` module
+
+Client and server (the effect is registered on both sides), no other mod. Rest by the hearth ([repos](repos.md)).
+
+- **The effect** (`ReposeEffect`, `compline:repose`, beneficial, ember orange, icon `textures/mob_effect/repose.png`): every 120 ticks it heals 1 point if food is at 6 or more. `mixin.repos.PlayerExhaustionMixin` multiplies `Player.causeFoodExhaustion` by 0.75 while the player has it.
+- **The rule** (`Repos`, every 40 ticks for each player): still (under 0.6 blocks since the last check) or a passenger, `canSeeSky` false above the eyes, a block of `compline:foyers` within 5 blocks and 2 up or down, lit if it has a `lit` property. After `restSeconds` the duration is `baseMinutes` + `minutesPerComfort` × the families found by `Confort.count` (17 × 9 × 17 blocks, stopped early once all are found); the effect is renewed whenever it has fallen 4 seconds below that. An action bar message the first time in each rest.
+- **Comfort** (`Confort`): nine block tags `compline:confort/*`, a bit per family.
+
+Config (`compline-common.toml`, `[repos]`): `enabled` (true), `restSeconds` (20), `baseMinutes` (2.0), `minutesPerComfort` (1.5).
+
+**Checked** on the bench on 2026-11-18: see [repos](repos.md).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -550,6 +562,12 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | # | Test | Expected |
 |---|---|---|
 | AP1 to AP7 | Scent, sight, hearing, herd, spyglass | See [approche.md](approche.md#in-game-tests) |
+
+### Rest
+
+| # | Test | Expected |
+|---|---|---|
+| RE1 to RE7 | Rest by the hearth, comfort, effect | See [repos.md](repos.md#in-game-tests) |
 
 ### Held items
 
