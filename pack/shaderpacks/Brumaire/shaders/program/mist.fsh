@@ -150,22 +150,62 @@ float fogMarch(vec3 dir, float reach, float sunAmount, out vec3 light) {
     return pass;
 }
 
-/** Dans un désert au soleil, l'air chaud fait trembler le lointain au ras du sol : un décalage de l'image. */
+/**
+ * Au-dessus de la lave, l'air brûlant : la part du rayon qui passe à un ou deux blocs au-dessus d'une nappe, lue dans
+ * le volume des blocs (une case de lave éclaire au niveau 15), sur les vingt premiers blocs.
+ */
+float lavaHeat(vec3 dir, float len) {
+#if defined VOXELS && CAVE_DETAIL > 0
+    float reach = min(len, 20.0);
+    float dt = reach / 10.0;
+    vec3 origin = gbufferModelViewInverse[3].xyz;
+    vec3 camF = fract(cameraPosition);
+    float noise = dither(gl_FragCoord.xy + 3.7);
+    float heat = 0.0;
+    for (int i = 0; i < 10; i++) {
+        vec3 p = origin + dir * (float(i) + noise) * dt;
+        for (int k = 1; k <= 2; k++) {
+            ivec3 c = voxelCell(p - vec3(0.0, float(k), 0.0), camF);
+            if (!voxelInside(c)) continue;
+            uint v = texelFetch(voxelTex, c, 0).r;
+            if (((v >> 4u) & 15u) == 2u && (v & 15u) >= 12u) heat += k == 1 ? 1.0 : 0.55;
+        }
+    }
+    return clamp(heat * dt * 0.10, 0.0, 1.0);
+#else
+    return 0.0;
+#endif
+}
+
+/**
+ * L'air chaud fait trembler l'image : dans un désert au soleil, le lointain au ras du sol ; partout, ce qu'on voit
+ * à travers l'air qui monte d'une nappe de lave, en ondes qui s'élèvent.
+ */
 vec2 shimmer(vec2 uv) {
 #if HEAT_SHIMMER > 0
-    float heat = airDust() * gDay * (1.0 - rainStrength) * float(isEyeInWater == 0);
-    if (heat < 0.01) return uv;
+    if (isEyeInWater != 0) return uv;
     bool sky, hand;
     vec3 pos = scenePosition(uv, sky, hand);
     if (hand) return uv;
     float len = sky ? 512.0 : length(pos);
     vec3 dir = pos / max(len, 1e-3);
-    float low = 1.0 - smoothstep(0.02, 0.18, abs(dir.y));
     float t = frameTimeCounter;
-    float wave = sin(uv.y * viewHeight * 0.31 + t * 7.0 + sin(uv.x * 37.0 + t * 1.3) * 2.0)
-               + 0.5 * sin(uv.y * viewHeight * 0.83 - t * 11.0 + uv.x * 23.0);
-    float amount = heat * low * smoothstep(24.0, 120.0, len) * 1.4;
-    return uv + vec2(wave, 0.4 * wave) * amount / vec2(viewWidth, viewHeight);
+    vec2 shift = vec2(0.0);
+    float heat = airDust() * gDay * (1.0 - rainStrength);
+    if (heat >= 0.01) {
+        float low = 1.0 - smoothstep(0.02, 0.18, abs(dir.y));
+        float wave = sin(uv.y * viewHeight * 0.31 + t * 7.0 + sin(uv.x * 37.0 + t * 1.3) * 2.0)
+                   + 0.5 * sin(uv.y * viewHeight * 0.83 - t * 11.0 + uv.x * 23.0);
+        shift += vec2(wave, 0.4 * wave) * heat * low * smoothstep(24.0, 120.0, len) * 1.4;
+    }
+    float lava = lavaHeat(dir, len);
+    if (lava > 0.0) {
+        // Des ondes plus serrées qui montent : leur phase avance vers le haut de l'image.
+        float rise = sin(uv.y * viewHeight * 0.20 - t * 6.0 + sin(uv.x * 53.0 + t * 1.9) * 2.4)
+                   + 0.6 * sin(uv.y * viewHeight * 0.47 - t * 9.5 + uv.x * 31.0);
+        shift += vec2(rise * 0.8, rise) * lava * 2.2;
+    }
+    return uv + shift / vec2(viewWidth, viewHeight);
 #else
     return uv;
 #endif
@@ -308,6 +348,20 @@ void main() {
                 float glow = lit * gDay * (0.2 * (1.0 - 0.9 * back) + 1.8 * pow(max(mu, 0.0), 4.0) * (1.0 - 0.8 * back))
                            * (1.0 - 2.0 * rainStrength);
                 color += gLightColor * mote * glow * 0.7;
+            }
+        }
+#endif
+#if AIR_MOTES > 0 && COLORED_LIGHT > 0 && CAVE_DETAIL > 0
+        // Sous terre, la poussière ne se voit que dans la lumière d'une torche ou de la lave, de sa couleur.
+        {
+            float under = 1.0 - smoothstep(0.0, 0.45, float(eyeBrightnessSmooth.y) / 240.0);
+            if (under > 0.01) {
+                float dist;
+                float mote = moteAlong(dir, min(len, 10.0), 0.30, 0.30, 10.0, dist);
+                if (mote > 0.0) {
+                    vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * dist, vec3(0.0));
+                    color += blk.rgb * blk.a * blk.a * blk.a * mote * under * 0.35;
+                }
             }
         }
 #endif
