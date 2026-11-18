@@ -93,7 +93,13 @@ function useClavier() {
       const t = e.target as HTMLElement
       if (t.closest('input, textarea, [contenteditable]')) return
       const n = Number(e.key)
-      if (n >= 1 && n <= LIEUX.length) { ouvrirIndex(false); navigate(`/${LIEUX[n - 1].chemin}/`, { viewTransition: true }); return }
+      if (n >= 1 && n <= LIEUX.length) {
+        ouvrirIndex(false)
+        // From one place to another the page slides by itself (Pellicule); a view transition would fight it.
+        const dansUnLieu = LIEUX.some((l) => location.pathname.startsWith(`/${l.chemin}/`))
+        navigate(`/${LIEUX[n - 1].chemin}/`, { viewTransition: !dansUnLieu })
+        return
+      }
       const k = e.key.toLowerCase()
       if (k === 'j') { ouvrirIndex(false); navigate('/journal/', { viewTransition: true }) }
       else if (k === 'r') { ouvrirIndex(false); navigate('/feuille-de-route/', { viewTransition: true }) }

@@ -975,10 +975,10 @@ html:not(.js) .entree, html[data-entre] .entree { display: none; }
 .entete { view-transition-name: entete; }
 .film { view-transition-name: film; }
 .journal-frise { view-transition-name: frise; }
-.salle .scene, .journal-image { view-transition-name: scene; }
+.salle.couche.la .scene, .journal-image { view-transition-name: scene; }
 /* After a dive from the map the picture waits for the camera (its own delayed reveal): it stays out of the transition. */
 .salle.apres-plongee .scene, .salle.apres-plongee .couverture, .salle.apres-plongee .cartouche { view-transition-name: none; }
-.salle .cartouche, .couverture, .journal-cartouche { view-transition-name: texte; }
+.salle.couche.la .cartouche, .salle.couche.la .couverture, .journal-cartouche { view-transition-name: texte; }
 
 @supports (view-transition-name: none) {
   /* The transition does the crossfade: the new page must not also fade in from nothing. */
@@ -1006,6 +1006,24 @@ html[data-sens='arriere']::view-transition-new(scene) { animation-name: vt-scene
 @keyframes vt-scene-entre-droite { from { opacity: 0; transform: translateX(9%) scale(1.04); } }
 @keyframes vt-scene-sort-droite { to { opacity: 0; transform: translateX(7%) scale(1.02); } }
 @keyframes vt-scene-entre-gauche { from { opacity: 0; transform: translateX(-9%) scale(1.04); } }
+
+/* From one stop of a place to the next (Pellicule): the next page is drawn hidden until its pictures are ready,
+   then it fades in over the old one while both pictures slide the way the visit goes. */
+.salle.couche.attente { visibility: hidden; }
+.salle.couche.attente * { animation-play-state: paused !important; }
+.salle.couche.entre { z-index: 2; background: transparent; animation: couche-entre 0.6s ease both; }
+.salle.couche.sort { z-index: 1; pointer-events: none; animation: couche-reste 0.95s linear both; }
+.salle.couche.entre .scene { animation: scene-entre 1s var(--doux) both; }
+.salle.couche.sort .scene { animation: scene-sort 0.95s var(--glisse) both; }
+.salle.couche.entre[data-sens='avant'] .scene { --de: 7%; }
+.salle.couche.entre[data-sens='arriere'] .scene { --de: -7%; }
+.salle.couche.sort[data-sens='avant'] .scene { --vers: -5%; }
+.salle.couche.sort[data-sens='arriere'] .scene { --vers: 5%; }
+.salle.couche.sort .cartouche, .salle.couche.sort .couverture, .salle.couche.sort .scene-fond-sombre { animation: vt-fond 0.35s ease both; }
+@keyframes couche-entre { from { opacity: 0; } }
+@keyframes couche-reste { to { opacity: 1; } }
+@keyframes scene-entre { from { transform: translateX(var(--de, 0)) scale(1.04); } }
+@keyframes scene-sort { to { transform: translateX(var(--vers, 0)) scale(1.02); } }
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }

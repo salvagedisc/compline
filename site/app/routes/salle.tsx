@@ -11,6 +11,7 @@ import { metas } from '../donnees/site'
 import { Icone, type NomIcone } from '../interface/icones'
 import { lireEtat } from '../interface/etat'
 import { prechargerPlan, SENS } from '../interface/transitions'
+import { Pellicule } from '../interface/Pellicule'
 import { Comparer } from '../interface/scenes/Comparer'
 import { Mesure } from '../interface/scenes/Mesure'
 import { Paliers } from '../interface/scenes/Paliers'
@@ -75,17 +76,17 @@ function Couverture({ lieu, i }: { lieu: Lieu; i: number }) {
     <>
       <Plan capture={lieu.fond} alt="" zoom={null} onZoom={rien} />
       <div className="voile-bas" aria-hidden="true" />
-      <section className="couverture" aria-labelledby="titre-lieu">
+      <section className="couverture" aria-labelledby={`titre-${lieu.id}`}>
         <p className="couverture-num" aria-hidden="true">{ROMAINS[i]}</p>
         <p className="petites-caps couverture-theme">
           <Icone nom={lieu.id as NomIcone} taille={22} /> {lieu.theme}
         </p>
-        <h1 id="titre-lieu" className="couverture-titre">{lieu.nom}</h1>
+        <h1 id={`titre-${lieu.id}`} className="couverture-titre">{lieu.nom}</h1>
         <p className="couverture-intro">{lieu.intro}</p>
         <ol className="sommaire">
           {lieu.fonctions.map((f, k) => (
             <li key={f.id} style={{ '--k': k } as React.CSSProperties}>
-              <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/${f.id}/`} onClick={() => SENS('avant')}>
+              <Link prefetch="intent" to={`/${lieu.chemin}/${f.id}/`} onClick={() => SENS('avant')}>
                 <span className="sommaire-num">{ROMAINS[k]}</span>
                 <span className="sommaire-titre">{f.titre}</span>
                 <span className={`sommaire-statut s-${f.statut}`} title={STATUTS[f.statut].nom}>
@@ -125,12 +126,12 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
     <div className={`chapitre chapitre-${m.type}${m.type === 'image' && m.mise ? ` mise-${m.mise}` : ''}${zoom !== null ? ' en-zoom' : ''}`}>
       {vue}
       {!special && <div className="voile-bas" aria-hidden="true" />}
-      <section className={`cartouche${special ? ' a-cote' : ''}`} aria-labelledby="titre-chapitre">
+      <section className={`cartouche${special ? ' a-cote' : ''}`} aria-labelledby={`titre-${f.id}`}>
         <p className="petites-caps cartouche-sur">
           <span aria-hidden="true">{ROMAINS[i]} · </span>{lieu.nom}
           <span className="cartouche-rang"> · chapitre {k + 1} sur {lieu.fonctions.length}</span>
         </p>
-        <h1 id="titre-chapitre" className="cartouche-titre">{f.titre}</h1>
+        <h1 id={`titre-${f.id}`} className="cartouche-titre">{f.titre}</h1>
         <p className="cartouche-texte">{f.texte}</p>
         {f.points && <ul className="cartouche-points">{f.points.map((p) => <li key={p}>{p}</li>)}</ul>}
         {m.type === 'comparer' && m.scenes.length > 1 && (
@@ -159,6 +160,44 @@ function Chapitre({ lieu, f, i, k }: { lieu: Lieu; f: Fonction; i: number; k: nu
   )
 }
 
+/**
+ * The mouse wheel or a trackpad swipe turns the page, one stop per gesture, unless what is under the pointer can
+ * still scroll that way itself (a list, a long caption) or takes the wheel for its own use (a demonstration).
+ */
+function useMolette(suivant: () => void, precedent: () => void) {
+  const actions = useRef({ suivant, precedent })
+  useEffect(() => { actions.current = { suivant, precedent } })
+  useEffect(() => {
+    let cumul = 0, dernier = 0, bloque = 0
+    const f = (e: WheelEvent) => {
+      if (lireEtat().index || e.ctrlKey) return
+      const t = e.target as HTMLElement
+      if (t.closest('[data-molette], .chapitre.en-zoom')) return
+      const maintenant = performance.now()
+      const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX
+      // Something under the pointer still scrolls this way: it takes the whole gesture, and the page only
+      // turns on a new gesture once it has reached its end.
+      for (let el: HTMLElement | null = t; el && el !== document.body; el = el.parentElement) {
+        if (!/(auto|scroll)/.test(getComputedStyle(el).overflowY) || el.scrollHeight <= el.clientHeight + 1) continue
+        if ((d > 0 && el.scrollTop + el.clientHeight < el.scrollHeight - 1) || (d < 0 && el.scrollTop > 0)) {
+          bloque = maintenant + 350
+          return
+        }
+      }
+      if (maintenant < bloque) { bloque = Math.max(bloque, maintenant + 160); return } // the tail of a gesture already used
+      if (maintenant - dernier > 250) cumul = 0
+      dernier = maintenant
+      cumul += e.deltaMode === 1 ? d * 30 : d
+      if (Math.abs(cumul) < 70) return
+      ;(cumul > 0 ? actions.current.suivant : actions.current.precedent)()
+      cumul = 0
+      bloque = maintenant + 900
+    }
+    window.addEventListener('wheel', f, { passive: true })
+    return () => window.removeEventListener('wheel', f)
+  }, [])
+}
+
 function useBalayage(suivant: () => void, precedent: () => void) {
   const depart = useRef<{ x: number; y: number; t: number } | null>(null)
   useEffect(() => {
@@ -180,6 +219,20 @@ function useBalayage(suivant: () => void, precedent: () => void) {
   }, [suivant, precedent])
 }
 
+/** Position of a stop in the visit. */
+const ordre = (chemin: string) => ETAPES.indexOf(chemin)
+
+/** One stop of the visit, from its address: a place's title card or one of its chapters. */
+function rendu(chemin: string) {
+  const [s, p] = chemin.split('/').filter(Boolean)
+  const { lieu, fonction } = trouver(s, p)
+  if (!lieu) return null
+  const i = LIEUX.indexOf(lieu)
+  return fonction
+    ? <Chapitre key={chemin} lieu={lieu} f={fonction} i={i} k={lieu.fonctions.indexOf(fonction)} />
+    : <Couverture key={chemin} lieu={lieu} i={i} />
+}
+
 export default function Salle() {
   const { salle, plan } = useParams()
   const { pathname } = useLocation()
@@ -188,9 +241,10 @@ export default function Salle() {
   const ici = ETAPES.indexOf(pathname.endsWith('/') ? pathname : `${pathname}/`)
   const avant = ETAPES[(ici - 1 + ETAPES.length) % ETAPES.length]
   const apres = ETAPES[(ici + 1) % ETAPES.length]
-  const suivant = useCallback(() => { SENS('avant'); navigate(apres, { viewTransition: true }) }, [navigate, apres])
-  const precedent = useCallback(() => { SENS('arriere'); navigate(avant, { viewTransition: true }) }, [navigate, avant])
+  const suivant = useCallback(() => { SENS('avant'); navigate(apres) }, [navigate, apres])
+  const precedent = useCallback(() => { SENS('arriere'); navigate(avant) }, [navigate, avant])
   useBalayage(suivant, precedent)
+  useMolette(suivant, precedent)
 
   useEffect(() => {
     const f = (e: KeyboardEvent) => {
@@ -214,7 +268,7 @@ export default function Salle() {
   const [plongee] = useState(() => lireEtat().plongee > 0 && performance.now() - lireEtat().plongee < 1500)
 
   if (!lieu || (plan && !fonction)) return <Introuvable />
-  const i = LIEUX.indexOf(lieu)
+  const chemin = pathname.endsWith('/') ? pathname : `${pathname}/`
   const k = fonction ? lieu.fonctions.indexOf(fonction) : -1
   const nomEtape = (chemin: string) => {
     const [s, p] = chemin.split('/').filter(Boolean)
@@ -224,27 +278,25 @@ export default function Salle() {
 
   return (
     <>
-      <article className={`salle${plongee ? ' apres-plongee' : ''}`} key={pathname}>
-        {fonction ? <Chapitre lieu={lieu} f={fonction} i={i} k={k} /> : <Couverture lieu={lieu} i={i} />}
-      </article>
+      <Pellicule chemin={chemin} ordre={ordre} rendu={rendu} classe={plongee ? 'apres-plongee' : undefined} />
       {/* Outside the page that changes, so the reel stays in place from one chapter to the next. */}
       <nav className="film" aria-label="Chapitres">
-        <Link viewTransition prefetch="intent" to={avant} onClick={() => SENS('arriere')} className="film-fleche" aria-label={`Précédent : ${nomEtape(avant)}`}>
+        <Link prefetch="intent" to={avant} onClick={() => SENS('arriere')} className="film-fleche" aria-label={`Précédent : ${nomEtape(avant)}`}>
           <Icone nom="gauche" taille={26} />
         </Link>
         <ol className="film-reperes">
           <li>
-            <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/`} onClick={() => SENS(k > -1 ? 'arriere' : null)} aria-current={k === -1 ? 'page' : undefined} aria-label={`${lieu.nom}, ouverture`} className="film-cran ouverture" />
+            <Link prefetch="intent" to={`/${lieu.chemin}/`} onClick={() => SENS(k > -1 ? 'arriere' : null)} aria-current={k === -1 ? 'page' : undefined} aria-label={`${lieu.nom}, ouverture`} className="film-cran ouverture" />
           </li>
           {lieu.fonctions.map((x, n) => (
             <li key={x.id}>
-              <Link viewTransition prefetch="intent" to={`/${lieu.chemin}/${x.id}/`} onClick={() => SENS(n > k ? 'avant' : n < k ? 'arriere' : null)} aria-current={n === k ? 'page' : undefined} aria-label={x.titre} className="film-cran">
+              <Link prefetch="intent" to={`/${lieu.chemin}/${x.id}/`} onClick={() => SENS(n > k ? 'avant' : n < k ? 'arriere' : null)} aria-current={n === k ? 'page' : undefined} aria-label={x.titre} className="film-cran">
                 <span className="film-bulle" aria-hidden="true">{x.titre}</span>
               </Link>
             </li>
           ))}
         </ol>
-        <Link viewTransition prefetch="intent" to={apres} onClick={() => SENS('avant')} className="film-fleche suivant" aria-label={`Suivant : ${nomEtape(apres)}`}>
+        <Link prefetch="intent" to={apres} onClick={() => SENS('avant')} className="film-fleche suivant" aria-label={`Suivant : ${nomEtape(apres)}`}>
           <span className="film-suivant-nom" aria-hidden="true">{nomEtape(apres)}</span>
           <Icone nom="droite" taille={26} />
         </Link>
