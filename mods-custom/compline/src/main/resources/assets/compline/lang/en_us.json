@@ -81,5 +81,12 @@
   "item.compline.casque_en_acier_noir": "Black Steel Helmet",
   "item.compline.plastron_en_acier_noir": "Black Steel Chestplate",
   "item.compline.jambieres_en_acier_noir": "Black Steel Leggings",
-  "item.compline.bottes_en_acier_noir": "Black Steel Boots"
+  "item.compline.bottes_en_acier_noir": "Black Steel Boots",
+  "approche.compline.indice.odeur": "The wind carried your scent to it.",
+  "approche.compline.indice.vue": "It saw you: crouch to get closer.",
+  "approche.compline.indice.ouie": "It heard you.",
+  "effect.compline.repose": "Rested",
+  "effect.compline.repose.description": "By the fire, under a roof: you heal faster and get hungry slower. The more varied the home, the longer it lasts.",
+  "repos.compline.repose": "You rest by the fire.",
+  "repos.compline.bien_repose": "You rest, warm and snug at home."
 }

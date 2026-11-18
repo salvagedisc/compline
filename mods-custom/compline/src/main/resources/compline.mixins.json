@@ -9,6 +9,7 @@
     "compat.InStructureMixin",
     "dinos.ChorusoatlArmorMixin",
     "horizon.ChunkyAccessorMixin",
+    "repos.PlayerExhaustionMixin",
     "xp.AnvilMenuMixin"
   ],
   "client": [

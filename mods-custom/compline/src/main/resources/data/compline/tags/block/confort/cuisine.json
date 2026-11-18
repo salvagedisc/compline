@@ -1,0 +1,38 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:smoker",
+    {
+      "id": "farmersdelight:cooking_pot",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cutting_board",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:stove",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:skillet",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:crockery",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:plates",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:cups",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:bowls",
+      "required": false
+    }
+  ]
+}

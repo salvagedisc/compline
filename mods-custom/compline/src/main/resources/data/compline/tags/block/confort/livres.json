@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bookshelf",
+    "minecraft:chiseled_bookshelf",
+    "minecraft:lectern",
+    {
+      "id": "#supplementaries:globes",
+      "required": false
+    }
+  ]
+}

@@ -326,6 +326,33 @@ Config (`compline-common.toml`, `[climat]` section): `enabled` (true), `seasonSt
 
 **Checked** on the bench on 2026-11-17 (development server, Cold Sweat 2.4.3.1, Ecliptic Seasons 0.15.5, one player): see [climat](climat.md#seasons-first-step).
 
+## `approche` module
+
+Server side (the integrated server in single player), no other mod. Shy wild animals smell, see and hear the player and flee ([approche](approche.md)).
+
+- **The wind** (`vent.WindField`, common): the direction and strength of the pack's background wind, a function of the world time, rain, thunder and height only. `vent.Wind` (client) eases toward it and adds the gusts; the server reads it directly, so both agree with no packet.
+- **The animals** (`ApprocheModule`): every `PathfinderMob` whose type is in `compline:farouches` gets a `FuiteGoal` at priority 1 when it joins a server level. `Approche.wild` leaves out leashed, ridden, AI-less animals and any with an owner (`OwnableEntity`) or a tamed horse.
+- **The rule** (`Approche`, every 10 ticks): for each player in survival or adventure, the animals of the tag within reach (1.3 × the longest range) test hearing, then scent, then sight with a line of sight (`perceives`). A first notice from afar sets an alert of 30 ticks (the goal stops the animal and turns its head to the player); a notice that persists after it, or one within 1.5 × the hearing range, starts a flight of 140 ticks, renewed while the animal still perceives the player, and spreads to the same species within 12 blocks. The state lives in a weak map on the server thread; nothing is saved.
+- **The goal** (`FuiteGoal`, flags MOVE and LOOK): during the alert, navigation stopped and the look on the player; during the flight, a position 20 blocks away from where the player was, chosen again each second once reached, at 1.5 × speed.
+- **Hints**: action bar keys `approche.compline.indice.{odeur,vue,ouie}`, once per player every 90 s.
+- **Spyglass** (`zoo.Zoo`): while the player scopes, the spot distance becomes `spyglassDistance` and the view cone 8°.
+
+Config (`compline-common.toml`): `[approche]` `enabled` (true), `scentRange` (32), `sightRange` (14), `hearingRange` (6), `hints` (true); `[zoo]` `spyglassDistance` (64).
+
+**Checked** on the bench on 2026-11-18 (full pack, one player, Naturalist deer): see [approche](approche.md#checked-on-the-bench).
+
+## `repos` module
+
+Client and server (the effect is registered on both sides), no other mod. Rest by the hearth ([repos](repos.md)).
+
+- **The effect** (`ReposeEffect`, `compline:repose`, beneficial, ember orange, icon `textures/mob_effect/repose.png`): every 120 ticks it heals 1 point if food is at 6 or more. `mixin.repos.PlayerExhaustionMixin` multiplies `Player.causeFoodExhaustion` by 0.75 while the player has it.
+- **The rule** (`Repos`, every 40 ticks for each player): still (under 0.6 blocks since the last check) or a passenger, `canSeeSky` false above the eyes, a block of `compline:foyers` within 5 blocks and 2 up or down, lit if it has a `lit` property. After `restSeconds` the duration is `baseMinutes` + `minutesPerComfort` × the families found by `Confort.count` (17 × 9 × 17 blocks, stopped early once all are found); the effect is renewed whenever it has fallen 4 seconds below that. An action bar message the first time in each rest.
+- **Comfort** (`Confort`): nine block tags `compline:confort/*`, a bit per family.
+
+Config (`compline-common.toml`, `[repos]`): `enabled` (true), `restSeconds` (20), `baseMinutes` (2.0), `minutesPerComfort` (1.5).
+
+**Checked** on the bench on 2026-11-18: see [repos](repos.md).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -529,6 +556,18 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | CL1 to CL5 | Seasons felt by the body | See [climat.md](climat.md#in-game-tests) |
 | CL6 to CL10 | Snow and sand storms | See [climat.md](climat.md#in-game-tests) |
 | CL11 to CL13 | Hot dishes (pack data, not the mod) | See [climat.md](climat.md#in-game-tests) |
+
+### Approach
+
+| # | Test | Expected |
+|---|---|---|
+| AP1 to AP7 | Scent, sight, hearing, herd, spyglass | See [approche.md](approche.md#in-game-tests) |
+
+### Rest
+
+| # | Test | Expected |
+|---|---|---|
+| RE1 to RE7 | Rest by the hearth, comfort, effect | See [repos.md](repos.md#in-game-tests) |
 
 ### Held items
 

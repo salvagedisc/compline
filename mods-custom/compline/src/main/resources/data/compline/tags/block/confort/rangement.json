@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:chest",
+    "minecraft:trapped_chest",
+    "minecraft:barrel",
+    {
+      "id": "#handcrafted:cupboards",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:drawers",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:shelves",
+      "required": false
+    },
+    {
+      "id": "#farmersdelight:cabinets",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:item_shelves",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:sacks",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:flower_pots",
+    "#minecraft:banners",
+    "minecraft:decorated_pot",
+    {
+      "id": "#handcrafted:trophies",
+      "required": false
+    },
+    {
+      "id": "#handcrafted:pots",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:flags",
+      "required": false
+    },
+    {
+      "id": "#supplementaries:buntings",
+      "required": false
+    }
+  ]
+}
