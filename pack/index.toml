@@ -4439,11 +4439,11 @@ hash = "17c4855ecd4bc6f427bd87f7f112b09d9b90166bb110a41ad4d84fff339abae5"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
-hash = "e47a5ffa32c9066013355c0c051c5a33bb721b16e3bf4bd3c64f616139797fbc"
+hash = "d02378190ce8840a3462e3c5c6d5ff6921209334153ae88f6245414f8cb0b265"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
-hash = "b437d3bf063a2ef289c983cfdfe67c9ac7deff9d459b9ee119bb08b507597533"
+hash = "819197a6ac4040efb962ffa3f517d71ab225bd31a741488e3c3bb3bc8f803b71"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/atmosphere.glsl"
@@ -4455,7 +4455,7 @@ hash = "9ce090ac31cfc895d185bba1b6796c105f5406da4ea0f2dd41031e3b8cb7680f"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/clouds.glsl"
-hash = "07f651333087162c449be02a22f3c72fb60d1659f62105c3967c9c5b650a0e2c"
+hash = "5e8780539be796b66cfa5c1077f2bc880a9323e9a0a393260368f2dea5d26fda"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/common.glsl"
@@ -4515,7 +4515,7 @@ hash = "76beef503a31c9ce4b7cfa7c4cab1770fc7b236dce5c0d956141ed39bbe327ee"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
-hash = "402632d3ce63f14c562b796959dfc17b8e906d2303ddb65692bbdcbd41dbb23d"
+hash = "730919ca33bd61a733805d392f847906fe1a393cdb5e2fddd3fd4ffc9dbb4b65"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
@@ -4523,7 +4523,7 @@ hash = "a47aacea3c41da6c61e9558d94521cf5c03028b68be5c2d1b1a5d8fcc460d2a8"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/skyoptics.glsl"
-hash = "74d27d13c28a6a1334d7762768125c86f69c019c03ee8545a796823c925c5b25"
+hash = "e5d9b92500a3edb873e7853910262bcd3831e5c0d5bc56db613000250b9e1bef"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/smaa.glsl"
@@ -4599,7 +4599,7 @@ hash = "40213df67d804fc4c3d5b34285aae8f307d77979c120776b2dc802b8d77b40e1"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/clouds.fsh"
-hash = "c930ec9e2c72a6de4d95c1b6462865a29dd7adefad17456210cdd51bbc8226b4"
+hash = "42b48385c276e5b4dfe915017025fd6ef0692bdd81b8bb628b322901f2351eaf"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/clrwl_shadow.fsh"
@@ -4723,7 +4723,7 @@ hash = "1c49e581af7aeae2b37e31144ad5e9788cf3a81ca311a77eafe81887387b9859"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shaders.properties"
-hash = "37cb02a068c883217255fa6ef677fd930db5f25d782e9100561ed12bd8a6e38e"
+hash = "464301e011ba32881df8d6a0aff9bd2187b43dbd6fa23f3f775cbc0343c6670b"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shadow.fsh"

@@ -24,6 +24,7 @@
 #define CLOUD_SHADOWS 0.8 // [0.0 0.4 0.6 0.8 1.0]
 #define CLOUD_TYPES 1 // [0 1]
 #define CLOUD_CIRRUS 2 // [0 1 2 3]
+#define CLOUD_ALTO 2 // [0 1 2 3]
 #define CLOUD_MULTISCATTER 4 // [1 2 3 4]
 #define CLOUD_LIGHT_STEPS 6 // [3 4 6 8]
 #define CLOUD_LIGHTNING 1 // [0 1]

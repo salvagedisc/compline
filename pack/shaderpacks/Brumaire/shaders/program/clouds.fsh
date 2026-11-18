@@ -242,8 +242,11 @@ void main() {
     light += pass * cloudLight;
     pass *= cloudPass;
 
-    // Tout en haut : le voile de cirrus, et le halo que ses cristaux dessinent.
+    // Au-dessus : la nappe d'altocumulus, puis tout en haut le voile de cirrus et le halo que ses cristaux dessinent.
     if (sky && dir.y > 0.0) {
+        vec4 alto = altoLayer(eye, dir);
+        light += pass * alto.rgb;
+        pass *= 1.0 - alto.a;
         vec4 veil = cirrusLayer(eye, dir);
         light += pass * veil.rgb;
         pass *= 1.0 - veil.a;

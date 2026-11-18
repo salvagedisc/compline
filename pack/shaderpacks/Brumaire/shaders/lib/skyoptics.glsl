@@ -51,6 +51,33 @@ vec3 iceHalo(vec3 dir) {
 #endif
 }
 
+/**
+ * La nappe d'altocumulus vue le long de dir, depuis eye : sa lumière (rgb) et ce qu'elle cache du fond (a). Chaque
+ * cellule a son côté d'ombre, à l'opposé de l'astre, et ses bords minces s'allument à contre-jour.
+ */
+vec4 altoLayer(vec3 eye, vec3 dir) {
+#if CLOUD_ALTO > 0
+    float t = (altoHeight() - eye.y) / dir.y;
+    if (t <= 0.0) return vec4(0.0);
+    vec3 p = eye + dir * t;
+    float d = altoCover(p.xz);
+    float seen = smoothstep(0.015, 0.12, dir.y) * exp(-t / 14000.0);
+    float a = d * seen;
+    if (a <= 0.002) return vec4(0.0);
+    vec3 ld = gLightDir;
+    // L'ombre propre : la nappe un peu plus loin vers l'astre ; une cellule voisine épaisse assombrit ce côté-ci.
+    float occl = altoCover(p.xz + ld.xz / max(abs(ld.y), 0.2) * 14.0);
+    float mu = dot(dir, ld);
+    float phase = 0.75 + 0.06 * skyHG(mu, 0.6);
+    float rim = (1.0 - d) * 0.012 * skyHG(mu, 0.85);
+    vec3 lit = gLightColor * CLOUD_LIGHT * (0.32 * phase * (1.0 - 0.6 * occl) + rim) + gAmbient * 0.72;
+    lit = mix(lit, vec3(luma(lit)) * 0.7, rainStrength * 0.7);
+    return vec4(lit * a, a * 0.92);
+#else
+    return vec4(0.0);
+#endif
+}
+
 /** Le voile de cirrus vu le long de dir, depuis eye : sa lumière (rgb) et ce qu'il cache du fond (a). */
 vec4 cirrusLayer(vec3 eye, vec3 dir) {
 #if CLOUD_CIRRUS > 0

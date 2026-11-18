@@ -1,7 +1,8 @@
 // Les nuages : une couche en volume poussée par le vent, faite de plusieurs familles selon une carte du temps qui
 // dérive lentement : des bancs plats de stratocumulus, des cumulus ronds, et sous l'orage des tours qui montent
 // jusqu'au sommet de la couche et s'y étalent en enclume. Le vent souffle plus fort en haut : les tours penchent.
-// Au-dessus, très haut, un voile de cirrus en traînées (program/clouds.fsh).
+// Au-dessus, une nappe mince d'altocumulus en petites cellules, et très haut un voile de cirrus en traînées
+// (program/clouds.fsh).
 // Le bruit vient de setup.csh (64³ texels qui se répètent ; rouge : la forme, vert : les cellules fines).
 // Unités : blocs, repère monde.
 
@@ -17,6 +18,9 @@ const float CIRRUS_LIFT = 760.0;
 float cloudBase() { return CLOUD_HEIGHT; }
 float cloudTop() { return CLOUD_HEIGHT + CLOUD_TOP_SPAN; }
 float cirrusHeight() { return CLOUD_HEIGHT + CIRRUS_LIFT; }
+// La nappe d'altocumulus, entre la couche et les cirrus.
+const float ALTO_LIFT = 340.0;
+float altoHeight() { return CLOUD_HEIGHT + ALTO_LIFT; }
 
 /** Lecture du bruit qui se répète : les coordonnées sont ramenées aux centres des texels du bord. */
 vec2 cloudNoise(vec3 p) {
@@ -142,6 +146,28 @@ float cirrusCover(vec2 xz) {
 #endif
 }
 
+/**
+ * La nappe d'altocumulus en un point du ciel (xz, repère monde) : des bancs qui vont et viennent sur des heures, faits
+ * de petites cellules rondes serrées (le ciel pommelé), plus fournis par temps humide et avant la pluie.
+ * Rend leur épaisseur (0..1).
+ */
+float altoCover(vec2 xz) {
+#if CLOUD_ALTO > 0
+    vec2 q = xz + cloudDrift().xz * 1.3;
+    float slow = frameTimeCounter * 0.0003;
+    float field = cloudNoise(vec3(xz * 0.00012, 0.47 + slow)).r;
+    float amount = clamp((field - 0.47) * 2.4 + 0.25 * airHumid + 0.3 * rainStrength, 0.0, 1.0) * float(CLOUD_ALTO) * 0.34;
+    if (amount <= 0.0) return 0.0;
+    // Les bancs, puis les cellules qui les découpent, un peu tirées par le vent.
+    float bank = cloudNoise(vec3(q / 1100.0, 0.33)).r;
+    float cells = cloudNoise(vec3(q / 260.0 + bank * 0.35, 0.71)).g;
+    float v = cells * 0.65 + bank * 0.35;
+    return smoothstep(1.0 - amount, 1.0 - amount + 0.20, v);
+#else
+    return 0.0;
+#endif
+}
+
 /** Ombre des nuages sur le sol, au point p (repère monde) : la lumière qui traverse la couche vers l'astre. */
 float cloudShadow(vec3 p, vec3 light) {
     if (light.y < 0.05) return 1.0;
@@ -154,5 +180,7 @@ float cloudShadow(vec3 p, vec3 light) {
     }
     // Le voile de cirrus retient un peu du soleil, sans ombre nette.
     float veil = cirrusCover((p + light * ((cirrusHeight() - p.y) / light.y)).xz);
-    return mix(1.0, exp(-depth * 2.2) * (1.0 - 0.3 * veil), CLOUD_SHADOWS);
+    // La nappe d'altocumulus, un peu plus, en taches douces.
+    float alto = altoCover((p + light * ((altoHeight() - p.y) / light.y)).xz);
+    return mix(1.0, exp(-depth * 2.2) * (1.0 - 0.3 * veil) * (1.0 - 0.35 * alto), CLOUD_SHADOWS);
 }
