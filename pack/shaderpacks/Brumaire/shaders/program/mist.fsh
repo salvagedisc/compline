@@ -19,6 +19,7 @@
 #include "/lib/spray.glsl"
 #include "/lib/fluff.glsl"
 #include "/lib/eaves.glsl"
+#include "/lib/soilsteam.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -362,6 +363,36 @@ void main() {
         if (isEyeInWater == 0) {
             float spray = sprayAlong(dir, len);
             if (spray > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.5, spray);
+        }
+#endif
+#if SOIL_STEAM > 0 && SHADER_RAIN > 0
+        // Après l'averse, au soleil, la terre trempée fume : une vapeur blanche, là où le soleil touche le sol.
+        if (isEyeInWater == 0) {
+            float amount = soilSteamAmount();
+            if (amount > 0.01 && !sky && len < shadowDistance * 0.9) {
+                vec3 q = gbufferModelViewInverse[3].xyz + dir * max(len - 0.15, 0.0);
+                vec3 quv = shadowWarp((shadowProjection * (shadowModelView * vec4(q, 1.0))).xyz) * 0.5 + 0.5;
+                float sunOn = quv.z < 1.0 ? texture(shadowtex1, vec3(quv.xy, quv.z - 0.0002)) : 1.0;
+                float steam = soilSteamAlong(dir, len, amount * sunOn);
+                // Une vapeur blanche que le soleil traverse : plus vive à contre-jour.
+                vec3 vapour = gAmbient * 1.3 + gLightColor * (0.45 + 1.2 * pow(max(dot(dir, gLightDir), 0.0), 4.0));
+                color = mix(color, vapour, steam);
+            }
+        }
+#endif
+#if LEAF_LITTER > 0 && defined VOXELS
+        // Les feuilles mortes qui roulent au sol, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
+        {
+            float litterDist;
+            vec3 litterTint;
+            float litter = litterAlong(dir, min(len, 24.0), litterDist, litterTint);
+            if (litter > 0.0) {
+                vec3 p = gbufferModelViewInverse[3].xyz + dir * litterDist;
+                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                vec3 light = gAmbient * 0.9 + gLightColor * lit * max(gLightDir.y, 0.2) * 0.9;
+                color = mix(color, litterTint * light, litter);
+            }
         }
 #endif
 #if WATER_STEAM > 0 && defined VOXELS

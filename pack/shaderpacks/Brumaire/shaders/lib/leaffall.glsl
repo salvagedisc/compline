@@ -3,7 +3,7 @@
 // l'automne) en perd bien davantage. Le feuillage de chaque colonne est tiré du volume des blocs par shadowcomp2.
 // Demande voxel.glsl et motes.glsl (moteHash) avant lui.
 
-#if (FALLING_LEAVES > 0 || CANOPY_DRIPS > 0) && defined VOXELS
+#if (FALLING_LEAVES > 0 || CANOPY_DRIPS > 0 || LEAF_LITTER > 0) && defined VOXELS
 uniform sampler2D canopyTex;
 
 /**
@@ -163,6 +163,75 @@ float leafAlong(vec3 dir, float t1, out float dist, out vec3 tint) {
                             dist = s;
                             tint = toLinear(canopy.rgb) * (0.75 + 0.5 * moteHash(col, 7.0)) * (uv.y > 0.0 ? 1.15 : 0.85);
                             return (1.0 - smoothstep(t1 * 0.6, t1, s));
+                        }
+                    }
+                }
+            }
+        }
+        if (tExit >= t1) break;
+        if (next.x < next.y && next.x < next.z) { next.x += tDelta.x; cell.x += stepDir.x; }
+        else if (next.y < next.z) { next.y += tDelta.y; cell.y += stepDir.y; }
+        else { next.z += tDelta.z; cell.z += stepDir.z; }
+    }
+    return 0.0;
+}
+#endif
+#if LEAF_LITTER > 0
+/**
+ * Les feuilles mortes qui roulent au sol, le long d'un rayon jusqu'à t1 (blocs) : à l'automne, sous un feuillage
+ * roussi et quand le vent souffle, des feuilles traversent les cases posées sur le sol (de l'air sur un bloc plein)
+ * dans le sens du vent, par petits bonds. Rend 1 si le rayon en touche une, sa distance dans dist et sa couleur
+ * (linéaire) dans tint. 32 cases au plus.
+ */
+float litterAlong(vec3 dir, float t1, out float dist, out vec3 tint) {
+    dist = 0.0;
+    tint = vec3(0.0);
+    float force = brumaireLink > 0.5 ? brumaireWind.z : 0.0;
+    float gust = smoothstep(0.25, 0.6, force);
+    if (t1 <= 0.4 || gust <= 0.01) return 0.0;
+    vec2 wind = normalize(brumaireWind.xy + vec2(1e-4, 0.0));
+    vec3 camFloor = floor(cameraPosition);
+    vec3 o = cameraPosition - camFloor;
+    vec3 d = vec3(abs(dir.x) < 1e-5 ? 1e-5 : dir.x, abs(dir.y) < 1e-5 ? 1e-5 : dir.y, abs(dir.z) < 1e-5 ? 1e-5 : dir.z);
+    vec3 cell = floor(o + dir * 0.4);
+    vec3 stepDir = sign(d);
+    vec3 tDelta = abs(1.0 / d);
+    vec3 next = (cell + max(stepDir, 0.0) - o) / d;
+    float pixel = 2.0 / (gbufferProjection[1][1] * viewHeight);
+    float time = frameTimeCounter;
+    for (int i = 0; i < 32; i++) {
+        float tExit = min(min(next.x, next.y), min(next.z, t1));
+        vec3 wc = cell + camFloor;
+        float h = moteHash(wc, 71.0);
+        if (h < 0.5 * gust) {
+            ivec3 c = ivec3(cell) + VOX_HALF;
+            ivec3 b = c - ivec3(0, 1, 0);
+            bool onGround = voxelInside(c) && voxelInside(b) && (texelFetch(voxelTex, c, 0).r & VOX_SOLID) == 0u
+                         && (texelFetch(voxelTex, b, 0).r & VOX_SOLID) != 0u;
+            if (onGround) {
+                vec4 canopy = canopyAbove(vec3(wc.x + 0.5, wc.y + 0.5, wc.z + 0.5));
+                float autumn = smoothstep(0.02, 0.15, canopy.r - canopy.g);
+                if (canopy.a > 0.0 && h < 0.5 * gust * autumn) {
+                    // Elle traverse la case dans le sens du vent, par bonds, et revient de l'autre bord.
+                    float speed = 0.6 + 1.2 * force;
+                    float u = fract(time * speed * (0.7 + 0.6 * moteHash(wc, 72.0)) + h * 9.0);
+                    vec2 along = (u - 0.5) * 0.9 * wind + vec2(-wind.y, wind.x) * (moteHash(wc, 73.0) - 0.5) * 0.6;
+                    float hop = abs(sin((u + moteHash(wc, 74.0)) * 6.2832 * (1.0 + floor(moteHash(wc, 75.0) * 2.0))));
+                    float y = wc.y + 0.04 + 0.25 * hop * gust;
+                    vec3 p = vec3(wc.x + 0.5 + along.x, y, wc.z + 0.5 + along.y) - cameraPosition;
+                    float s = dot(p, dir);
+                    if (s > 0.4 && s < t1) {
+                        vec3 off = dir * s - p;
+                        float size = max(1.2 / 16.0, s * pixel * 0.7);
+                        // Plate quand elle glisse, dressée quand elle bondit : plus haute que large en l'air.
+                        float tall = size * (0.45 + 0.55 * hop);
+                        float edge = 1.0 - smoothstep(0.38, 0.5, abs(u - 0.5));
+                        if (length(off.xz) < size && abs(off.y) < tall && edge > 0.01) {
+                            dist = s;
+                            // Une feuille morte : la couleur du feuillage, tirée vers le brun.
+                            vec3 leaf = pow(canopy.rgb, vec3(2.2));
+                            tint = mix(leaf, vec3(0.30, 0.13, 0.04), 0.35 + 0.3 * moteHash(wc, 76.0));
+                            return edge * (1.0 - smoothstep(t1 * 0.6, t1, s));
                         }
                     }
                 }
