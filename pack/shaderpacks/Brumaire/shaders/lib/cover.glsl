@@ -47,8 +47,16 @@ float snowCover(vec3 world, vec3 normal, float sky, float leaf, float grain) {
     return 0.0;
 }
 
-#if FROST > 0 || DEW > 0
+#if FROST > 0 || DEW > 0 || WINDOW_FROST > 0
 uniform float sunAngle;
+#endif
+#if WINDOW_FROST > 0
+/** Le froid qui givre les vitres (0..1) : les biomes froids et les hivers où il neige, plus fort la nuit et au matin. */
+float windowCold() {
+    float cold = max(snowHere, 1.0 - smoothstep(0.10, 0.45, airHeat));
+    float night = sunAngle < 0.5 ? 1.0 - smoothstep(0.04, 0.20, sunAngle) : smoothstep(0.50, 0.70, sunAngle);
+    return cold * (0.55 + 0.45 * night);
+}
 #endif
 #if FROST > 0
 

@@ -130,6 +130,42 @@ float lavaHeat(vec3 dir, float len) {
 }
 
 /**
+ * Au-dessus des flammes nues (feu, feu de camp, lanterne : famille des flammes au niveau 15, pas un bloc plein), l'air
+ * qui monte : la part du rayon qui passe dans la colonne d'un à trois blocs au-dessus, sur les douze premiers blocs, au
+ * bloc près. Le haut de la colonne tremble moins que le bas.
+ */
+float flameHeat(vec3 dir, float len) {
+#if defined VOXELS && FLAME_SHIMMER > 0
+    float reach = min(len, 12.0);
+    if (reach <= 0.3) return 0.0;
+    float dt = reach / 12.0;
+    vec3 origin = gbufferModelViewInverse[3].xyz;
+    vec3 camF = fract(cameraPosition);
+    float noise = dither(gl_FragCoord.xy + 1.3);
+    float heat = 0.0;
+    for (int i = 0; i < 12; i++) {
+        vec3 p = origin + dir * (float(i) + noise) * dt;
+        ivec3 here = voxelCell(p, camF);
+        if (!voxelInside(here) || (texelFetch(voxelTex, here, 0).r & VOX_SOLID) != 0u) continue;
+        for (int k = 1; k <= 3; k++) {
+            ivec3 c = here - ivec3(0, k, 0);
+            if (!voxelInside(c)) continue;
+            uint v = texelFetch(voxelTex, c, 0).r;
+            if (((v >> 4u) & 15u) == 0u && (v & 15u) >= 15u && (v & VOX_SOLID) == 0u) {
+                // Au centre de la colonne plus qu'à ses bords : la chaleur monte en filet.
+                vec2 off = fract(p.xz + camF.xz) - 0.5;
+                heat += (1.0 - smoothstep(0.15, 0.5, length(off))) * (1.0 - 0.25 * float(k - 1));
+                break;
+            }
+        }
+    }
+    return clamp(heat * dt * 0.6, 0.0, 1.0);
+#else
+    return 0.0;
+#endif
+}
+
+/**
  * L'air chaud fait trembler l'image : dans un désert au soleil, le lointain au ras du sol ; partout, ce qu'on voit
  * à travers l'air qui monte d'une nappe de lave, en ondes qui s'élèvent.
  */
@@ -156,6 +192,13 @@ vec2 shimmer(vec2 uv) {
         float rise = sin(uv.y * viewHeight * 0.20 - t * 6.0 + sin(uv.x * 53.0 + t * 1.9) * 2.4)
                    + 0.6 * sin(uv.y * viewHeight * 0.47 - t * 9.5 + uv.x * 31.0);
         shift += vec2(rise * 0.8, rise) * lava * 2.2;
+    }
+    float flame = flameHeat(dir, len);
+    if (flame > 0.0) {
+        // Au-dessus d'un feu, un filet d'air qui ondule vite en montant.
+        float rise = sin(uv.y * viewHeight * 0.35 - t * 9.0 + sin(uv.x * 71.0 + t * 2.3) * 2.0)
+                   + 0.5 * sin(uv.y * viewHeight * 0.9 - t * 13.0 + uv.x * 47.0);
+        shift += vec2(rise, 0.5 * rise) * flame * 3.0;
     }
     return uv + shift / vec2(viewWidth, viewHeight);
 #else

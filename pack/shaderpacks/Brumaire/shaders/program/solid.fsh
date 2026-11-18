@@ -27,7 +27,7 @@ uniform sampler2D colortex6;
 #include "/lib/wakes.glsl"
 #include "/lib/rain.glsl"
 #include "/lib/waterfoam.glsl"
-#if ICE_DETAIL > 0
+#if ICE_DETAIL > 0 || WINDOW_FROST > 0
 #include "/lib/cover.glsl"
 #include "/lib/snow.glsl"
 #endif
@@ -177,6 +177,14 @@ void main() {
         vec2 drops = windowRain(vPos + cameraPosition, normal, frameTimeCounter, rainStrength * rainHere * smoothstep(0.85, 0.97, vLm.y));
         color.rgb = mix(color.rgb, vec3(0.70, 0.76, 0.82) * (0.6 + 0.6 * drops.y), drops.x * 0.45);
         color.a = max(color.a, drops.x * (0.30 + 0.35 * drops.y));
+    }
+#endif
+#if WINDOW_FROST > 0
+    // Par grand froid, le givre pousse sur les vitres depuis leurs bords : des fougères blanches au pixel.
+    if (vMat == 13) {
+        vec2 rime = windowFrost(vPos + cameraPosition, normal, windowCold());
+        color.rgb = mix(color.rgb, vec3(0.82, 0.88, 0.94) * (0.85 + 0.3 * rime.y), rime.x * 0.65);
+        color.a = max(color.a, rime.x * (0.32 + 0.3 * rime.y));
     }
 #endif
 #endif
@@ -372,13 +380,23 @@ void main() {
     if (snow < 0.5 && (grass || (vMat >= 1 && vMat <= 4))) {
         float frost = frostCover(world, normal, lm, vMat >= 1 && vMat <= 3 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
         albedo = mix(albedo, vec3(0.56, 0.60, 0.66), frost * 0.7);
-#if DEW > 0
+#if DEW > 0 || WET_FOLIAGE > 0
         // La rosée : les brins se couvrent de gouttes qui renvoient le soleil bas vers l'œil, une à une quand on bouge,
         // et l'herbe luit un peu.
-        float dew = dewAmount(lm) * (1.0 - frost);
+        float dew = dewAmount(lm);
+        float glintDensity = 0.06;
+#if WET_FOLIAGE > 0
+        // Après l'averse, feuilles et herbes restent couvertes de gouttes : quand le soleil revient, la forêt
+        // scintille, et le feuillage trempé fonce un peu.
+        float soaked = clamp(wetness * rainHere * WETNESS, 0.0, 1.0) * smoothstep(0.80, 0.95, lm.y);
+        albedo *= 1.0 - 0.10 * soaked;
+        // Les gouttes de pluie sont plus grosses et plus nombreuses que la rosée : trois fois plus d'éclats.
+        if (soaked * (1.0 - 0.6 * rainStrength) > dew) { dew = soaked * (1.0 - 0.6 * rainStrength); glintDensity = 0.18; }
+#endif
+        dew *= 1.0 - frost;
         if (dew > 0.01 && (grass ? normal.y > 0.5 : true)) {
 #if SNOW_DETAIL > 0
-            sparkle = max(sparkle, snowGlints(world, normal, normalize(vPos), gLightDir, 0.06 * dew) * 0.6);
+            sparkle = max(sparkle, snowGlints(world, normal, normalize(vPos), gLightDir, glintDensity * dew) * 0.6);
 #else
             sparkle = max(sparkle, glitter(world, 0.004 * dew) * 0.5);
 #endif
