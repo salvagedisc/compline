@@ -10,6 +10,14 @@
 
 #if RELIEF > 0
 uniform ivec2 atlasSize;
+#if LABPBR > 0
+// Les cartes d'un pack de ressources au format labPBR : normale (rg), occlusion (b) et hauteur (a) ; lissé (r),
+// réflectance ou métal (g), porosité (b), émission (a).
+uniform sampler2D normals;
+uniform sampler2D specular;
+#endif
+// Vrai quand la face en cours a une carte labPBR : la hauteur vient alors de la carte, pas de la clarté du texel.
+bool gPbrHeight = false;
 
 /** Le rectangle de la texture du bloc dans l'atlas : son centre et sa demi-taille (uv). */
 struct Sprite { vec2 mid; vec2 half_; vec2 texel; };
@@ -27,6 +35,9 @@ vec2 texelCentre(Sprite s, vec2 uv) {
 
 /** Hauteur d'un texel, de 0 (creux) à 1 (bosse) ; mean : clarté moyenne de la texture. Un texel vide est un creux. */
 float reliefHeight(Sprite s, vec2 uv, float mean) {
+#if LABPBR > 0
+    if (gPbrHeight) return textureLod(normals, texelCentre(s, spriteWrap(s, uv)), 0.0).a;
+#endif
     vec4 t = textureLod(gtexture, texelCentre(s, spriteWrap(s, uv)), 0.0);
     float l = luma(t.rgb);
     return clamp(0.5 + (l - mean) / max(mean, 0.05) * 0.9, 0.0, 1.0) * step(0.1, t.a);
@@ -101,4 +112,23 @@ vec3 reliefNormal(Sprite s, vec2 uv, vec3 t, vec3 b, vec3 n, float mean, float f
 #endif
     return normalize(t * slope.x + b * slope.y + n);
 }
+
+#if LABPBR > 0
+/**
+ * Une carte labPBR est-elle là ? Sans pack, Iris lie une carte neutre : toute noire, ou une normale plate pleine
+ * (0.5, 0.5, 1, 1). Un texel qui ressemble à l'une ou l'autre compte comme absent.
+ */
+bool labPbrPresent(vec2 uv) {
+    vec4 n = textureLod(normals, uv, 0.0);
+    bool black = all(lessThan(n, vec4(0.004)));
+    bool flat_ = all(lessThan(abs(n - vec4(0.5, 0.5, 1.0, 1.0)), vec4(0.004)));
+    return !black && !flat_;
+}
+
+/** Normale d'une carte labPBR (repère de la face) : x et y rangés dans rg, z reconstruit. */
+vec3 labPbrNormal(vec4 n) {
+    vec2 xy = n.xy * 2.0 - 1.0;
+    return vec3(xy, sqrt(max(1.0 - dot(xy, xy), 0.0)));
+}
+#endif
 #endif
