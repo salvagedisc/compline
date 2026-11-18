@@ -42,6 +42,88 @@ vec2 rippleSlope(vec2 p, float t) {
     return slope * 0.45;
 }
 
+float rainHash3(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+
+/**
+ * Le grain d'une surface mouillée, texel par texel. relief : de -1 (texel plus sombre que la moyenne du bloc, un creux)
+ * à 1 (plus clair, une bosse). Les creux boivent l'eau et foncent le plus ; les bosses foncent peu mais luisent.
+ * Quand la pluie cesse, la surface sèche par plaques au seizième de bloc : les bosses et les endroits exposés
+ * d'abord, les creux et le pied des murs en dernier. Rend x : part trempée (qui fonce), y : éclat (0..1).
+ */
+vec2 wetSurface(vec3 world, vec3 normal, float wet, float relief) {
+    if (wet <= 0.0) return vec2(0.0);
+    float local = wet;
+#if PATCHY_DRYING > 0
+    // Le seuil de séchage de ce texel : une tache large du bruit des nuages, un grain par texel, et son relief.
+    vec3 q = (floor(world * 16.0 - normal * 0.5) + 0.5) / 16.0;
+    float patch_ = cloudNoise(q * 0.23 + 0.17).g * 0.6 + rainHash3(floor(q * 16.0)) * 0.25;
+    // Sous un mur, l'eau qui coule le long garde le pied mouillé plus longtemps.
+    float foot = normal.y > 0.5 ? 0.0 : 0.15 * (1.0 - fract(world.y));
+    float hold = clamp(patch_ + 0.25 * relief - foot, 0.0, 1.0);
+    // Tant qu'il pleut fort, tout est trempé ; ensuite chaque texel sèche quand l'eau tombe sous son seuil.
+    float dry = smoothstep(hold * 0.85, hold * 0.85 + 0.12, wet);
+    local = mix(dry * wet, wet, smoothstep(0.35, 0.75, rainStrength));
+#endif
+    float soak = local * clamp(0.80 - 0.35 * relief, 0.35, 1.0);
+    float shine = local * clamp(0.32 + 0.30 * max(relief, 0.0) + 0.12 * normal.y, 0.0, 0.7);
+    return vec2(soak, shine);
+}
+
+/**
+ * Les filets d'eau qui coulent le long d'un mur sous la pluie, au seizième de bloc : certaines colonnes de pixels
+ * restent plus sombres (l'eau y ruisselle) et une goutte claire y descend par moments, suivie d'une traînée.
+ * Rend x : assombrissement du filet, y : éclat de la goutte.
+ */
+vec2 rivuletAt(vec3 world, vec3 normal, float t, float wet) {
+#if WALL_RIVULETS > 0
+    if (abs(normal.y) > 0.3 || wet <= 0.05) return vec2(0.0);
+    vec3 tang = normalize(cross(normal, vec3(0.0, 1.0, 0.0)));
+    float face = dot(floor(world - normal * 0.5), normal);
+    float u = floor(dot(world, tang) * 16.0);
+    float h = rainHash(vec2(u, face * 7.31));
+    if (h > 0.16) return vec2(0.0);
+    // Un filet suit sa colonne sur deux blocs, puis saute d'un pixel de côté : l'eau trouve un autre chemin.
+    float v = world.y * 16.0;
+    float run = floor(v / 32.0);
+    float jog = rainHash(vec2(u + run * 3.0, face));
+    if (jog > 0.75) return vec2(0.0);
+    float streak = 0.45 + 0.35 * rainHash(vec2(u, run + face));
+    // La goutte : sa tête descend la colonne, d'un pixel à la fois ; derrière elle, l'eau luit encore quelques pixels.
+    float speed = 9.0 + 9.0 * h / 0.16;
+    float head = fract((floor(v) + floor(t * speed)) / 40.0 + rainHash(vec2(u * 1.7, face)));
+    float tail = head < 0.025 ? 1.0 : (head < 0.15 ? 1.0 - (head - 0.025) / 0.125 : 0.0);
+    return vec2(streak * wet, tail * wet * rainStrength);
+#else
+    return vec2(0.0);
+#endif
+}
+
+/**
+ * Les gouttes qui éclatent sur un sol mouillé : au seizième de bloc, un pixel clair puis une petite couronne de quatre
+ * pixels qui s'efface, en quelques centièmes de seconde, ici et là. Rend leur éclat (0..1).
+ */
+float splashAt(vec3 world, vec3 normal, float t, float amount) {
+#if RAIN_SPLASHES > 0
+    if (normal.y < 0.9 || amount <= 0.01) return 0.0;
+    vec2 px = floor(world.xz * 16.0);
+    // Des cases de quatre pixels : chacune reçoit une goutte de temps à autre, à une place tirée pour cette chute.
+    vec2 cell = floor(px / 4.0);
+    float rate = 1.6 + 1.4 * amount;
+    float k = t * rate + rainHash(cell * 1.3);
+    float n = floor(k);
+    float age = fract(k) * 6.0;
+    if (age > 1.0) return 0.0;
+    if (rainHash(cell + n * 0.71) > amount * 0.55) return 0.0;
+    vec2 at = cell * 4.0 + floor(vec2(rainHash(cell + n), rainHash(cell.yx + n * 1.9)) * 4.0);
+    vec2 d = abs(px - at);
+    float centre = float(d.x + d.y < 0.5) * (1.0 - smoothstep(0.0, 0.4, age));
+    float crown = float(abs(d.x + d.y - 1.0) < 0.5) * smoothstep(0.1, 0.35, age) * (1.0 - smoothstep(0.5, 1.0, age));
+    return max(centre * 0.8, crown * 0.45);
+#else
+    return 0.0;
+#endif
+}
+
 /**
  * Les rideaux de pluie au loin, au-delà des gouttes que dessine le jeu : de fins traits clairs qui tombent, accrochés
  * à la direction du regard dans le monde. dir : direction (repère monde) ; len : distance de ce qu'on voit.
