@@ -30,11 +30,8 @@ const SANS_XP_PEPITE = 'create:experience_nugget'
 // d'Overworld Quartz Ore) fait refuser toute la copie : on ne la recopie pas. Les fluides restent.
 function sansXpSortieValable(result) {
   if (result.amount !== undefined) return true
-  try {
-    return !Item.of(result.id || result.item).isEmpty()
-  } catch (e) {
-    return false
-  }
+  const id = String(result.id || result.item || '')
+  return id.indexOf(':') > 0 && Platform.isLoaded(id.split(':')[0])
 }
 
 ServerEvents.recipes(event => {
