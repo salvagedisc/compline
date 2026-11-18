@@ -5,6 +5,10 @@
 #include "/lib/shadow.glsl"
 #include "/lib/light.glsl"
 #include "/lib/material.glsl"
+#if (defined PROGRAM_ENTITIES || defined PROGRAM_HAND) && WET_ENTITIES > 0
+uniform float rainSoak;
+uniform float swimSoak;
+#endif
 #ifdef PROGRAM_TERRAIN
 #include "/lib/rain.glsl"
 #include "/lib/cover.glsl"
@@ -167,6 +171,14 @@ void main() {
     color.rgb *= vTint.rgb;
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
     if (vMat == 13) color = connectGlass(color, vPos + cameraPosition, normal, vUv, vTint.rgb);
+#if WINDOW_RAIN > 0
+    // Sous la pluie, l'eau perle et coule sur les vitres exposées au ciel : un peu de lumière et d'opacité en plus.
+    if (vMat == 13) {
+        vec2 drops = windowRain(vPos + cameraPosition, normal, frameTimeCounter, rainStrength * rainHere * smoothstep(0.85, 0.97, vLm.y));
+        color.rgb = mix(color.rgb, vec3(0.70, 0.76, 0.82) * (0.6 + 0.6 * drops.y), drops.x * 0.45);
+        color.a = max(color.a, drops.x * (0.30 + 0.35 * drops.y));
+    }
+#endif
 #endif
     ao = vTint.a * pbrAo;
 #else
@@ -283,6 +295,21 @@ void main() {
         }
     }
 #endif
+#if (defined PROGRAM_ENTITIES || defined PROGRAM_HAND) && WET_ENTITIES > 0
+    // Sous la pluie à ciel ouvert, les êtres, leurs armures et le bras du joueur sont trempés : plus sombres, plus
+    // saturés et luisants ; en sortant de l'eau, le joueur ruisselle, puis tout sèche en une demi-minute.
+    {
+        float soaked = rainSoak * smoothstep(0.80, 0.95, lm.y);
+#if defined PROGRAM_HAND
+        soaked = max(soaked, swimSoak);
+#endif
+        if (soaked > 0.01) {
+            albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.15 * soaked) * (1.0 - 0.28 * soaked * (1.0 - surf.metal));
+            surf.gloss = max(surf.gloss, 0.40 * soaked);
+            surf.rough = mix(surf.rough, min(surf.rough, 0.25), soaked);
+        }
+    }
+#endif
 #if defined PROGRAM_TERRAIN
     // Le vent couche les herbes : un brin couché montre son revers, plus clair et plus jaune. Les rafales passent sur
     // une prairie en vagues claires.
@@ -345,6 +372,20 @@ void main() {
     if (snow < 0.5 && (grass || (vMat >= 1 && vMat <= 4))) {
         float frost = frostCover(world, normal, lm, vMat >= 1 && vMat <= 3 ? 1.0 : 0.0, luma(color.rgb / max(vTint.rgb, vec3(0.05))));
         albedo = mix(albedo, vec3(0.56, 0.60, 0.66), frost * 0.7);
+#if DEW > 0
+        // La rosée : les brins se couvrent de gouttes qui renvoient le soleil bas vers l'œil, une à une quand on bouge,
+        // et l'herbe luit un peu.
+        float dew = dewAmount(lm) * (1.0 - frost);
+        if (dew > 0.01 && (grass ? normal.y > 0.5 : true)) {
+#if SNOW_DETAIL > 0
+            sparkle = max(sparkle, snowGlints(world, normal, normalize(vPos), gLightDir, 0.06 * dew) * 0.6);
+#else
+            sparkle = max(sparkle, glitter(world, 0.004 * dew) * 0.5);
+#endif
+            gloss = max(gloss, 0.18 * dew);
+            albedo *= 1.0 - 0.06 * dew;
+        }
+#endif
     }
     if (vMat == 9 || snow > 0.5) {
         // La neige du jeu est d'un blanc pur : au soleil elle brûlerait l'image, sans plus rien laisser voir de son grain.

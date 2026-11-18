@@ -199,6 +199,41 @@ vec4 lensDrop(vec2 uv, float wet, float t) {
 }
 #endif
 
+#if COLD_BREATH > 0
+uniform float airHeat;
+uniform float snowHere;
+#if LENS_DROPS == 0
+uniform int isEyeInWater;
+#endif
+
+float breathNoise(vec2 p) {
+    vec2 i = floor(p), f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = fract(sin(dot(i, vec2(127.1, 311.7))) * 43758.5453);
+    float b = fract(sin(dot(i + vec2(1.0, 0.0), vec2(127.1, 311.7))) * 43758.5453);
+    float c = fract(sin(dot(i + vec2(0.0, 1.0), vec2(127.1, 311.7))) * 43758.5453);
+    float d = fract(sin(dot(i + vec2(1.0, 1.0), vec2(127.1, 311.7))) * 43758.5453);
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+/**
+ * La buée du souffle par grand froid (0..1 en ce point de l'écran) : toutes les trois secondes et demie, un nuage pâle
+ * sort du bas de l'image, monte en s'ouvrant et se dissipe en un peu plus d'une seconde.
+ */
+float breathPuff(vec2 uv, float t) {
+    float cycle = 3.6;
+    float age = mod(t, cycle) / 1.4;
+    if (age > 1.0) return 0.0;
+    float n = floor(t / cycle);
+    vec2 aspect = vec2(viewWidth / viewHeight, 1.0);
+    vec2 centre = vec2(0.5 + 0.04 * sin(n * 2.3), -0.02 + 0.22 * sqrt(age));
+    vec2 q = (uv - centre) * aspect / (0.10 + 0.16 * age);
+    float body = 1.0 - smoothstep(0.35, 1.0, length(q * vec2(1.0, 1.25)));
+    float wisp = breathNoise(q * 2.2 + vec2(n * 7.1, -t * 0.8)) * 0.6 + breathNoise(q * 5.0 + n * 3.3) * 0.4;
+    return clamp(body * (wisp * 1.4 - 0.25), 0.0, 1.0) * smoothstep(0.0, 0.12, age) * (1.0 - smoothstep(0.35, 1.0, age));
+}
+#endif
+
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
 #if CHROMATIC_ABERRATION > 0
@@ -235,6 +270,16 @@ void main() {
                 inside += inside * 0.6 * smoothstep(0.10, 0.0, length(drop.xy - vec2(-0.30, 0.38)));
                 color = mix(color, inside, drop.z);
             }
+        }
+    }
+#endif
+#if COLD_BREATH > 0
+    // Par grand froid, le souffle fait de la buée devant les yeux : un voile pâle de la couleur de la lumière ambiante.
+    {
+        float cold = max(1.0 - smoothstep(0.05, 0.22, airHeat), snowHere * 0.8) * float(isEyeInWater == 0);
+        if (cold > 0.01) {
+            float puff = breathPuff(vUv, frameTimeCounter) * cold;
+            if (puff > 0.001) color = mix(color, color * 0.85 + vec3(0.92, 0.96, 1.0) * max(lens.x, 0.02) * 4.0, puff * 0.45);
         }
     }
 #endif

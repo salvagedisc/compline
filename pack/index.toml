@@ -4455,11 +4455,11 @@ hash = "733afa76798b27aaa427450b596fccba3d15f1380e66bbeae34e001a07a85c92"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/en_US.lang"
-hash = "e73c88bd23fefd4f299b0f8dd3b7b1ac3cce13f9b8a200f2a1da54b4f12a748f"
+hash = "83c909f5be3ea52fa18de0686d87d94b352c206fffd867b827c409e33a5fc2fb"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lang/fr_FR.lang"
-hash = "d3fd02ba0c3ec4ba2fed1f77234c651654c5feced8e6bc62a38b9a6f314a8b0d"
+hash = "5acdbca3315ca7aafc747d26666a0bee956546a151d92c921ced370b95c2d7b8"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/atmosphere.glsl"
@@ -4468,6 +4468,10 @@ hash = "69c5f3fdae937ae4555d721bbe73b71ac09367f694e41641a5fd1166d5d66722"
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/cave.glsl"
 hash = "9ce090ac31cfc895d185bba1b6796c105f5406da4ea0f2dd41031e3b8cb7680f"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/cavedrips.glsl"
+hash = "8d5ae2b56ed070a3e57d51bab8ea2fb660ab9a990ef9cf57d431134ff77964a0"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/clouds.glsl"
@@ -4479,11 +4483,15 @@ hash = "6a03233b2f0d3d620f5e1fb317242562e66c209557fffbdd4753951495417d09"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/cover.glsl"
-hash = "bbd70ed618a2a697d35eb279657dab41f6a1269ea18a60536de42b19aa38e021"
+hash = "33d01dc841510549c98aef6010bf0fc144e258ad5ee5bc0115f0e5aac8408b4f"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/farshadow.glsl"
 hash = "aa5d6e99a19c200844e46f669b4d36e072a1e318b49d2689760e161d8f909bbc"
+
+[[files]]
+file = "shaderpacks/Brumaire/shaders/lib/fireflies.glsl"
+hash = "e39a7fab2f1dfb893b647137506b966c8f64f668610b4f2cb0f959826e89fdec"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/fogmarch.glsl"
@@ -4523,7 +4531,7 @@ hash = "f907de2eaf5d9d58c7d23c82352795a5b8b0c0b2d327eae85668e3d8b9e531fb"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/rain.glsl"
-hash = "3af2d739b02531b674d11ebf851e9452d83ced4f286b6581905353792bab8043"
+hash = "ca4d22f36b5f71b58a6de2e383640d3c9d60766d493d45dbc81272048b57da58"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/reflect.glsl"
@@ -4539,7 +4547,7 @@ hash = "76beef503a31c9ce4b7cfa7c4cab1770fc7b236dce5c0d956141ed39bbe327ee"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/settings.glsl"
-hash = "ca06cae175c413dca9bf207a5e6b42fb1f46507a34eef28e7708106d6a0a77ea"
+hash = "ecfc1783ac622146563c458dc38d958f050e0d558a8da5f6cb9f350272371903"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/shadow.glsl"
@@ -4671,7 +4679,7 @@ hash = "14a9b7d36fc0669ca98dd1421376136d6713abe91045b78a37805f220e0546a6"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/grade.fsh"
-hash = "47d5a97bece6e78e88477b0a08cb57d6526281cb7e1984aa1cf6b531f44b2d08"
+hash = "4577e9ce97ea40ae3cd7b4d6b25e0817062879edab6ec8f9785e78cedde8c97a"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/lens.csh"
@@ -4683,7 +4691,7 @@ hash = "effac3ca4ede47835e907152fb2fbc3b4470185f798f6e7065f528085e57e29c"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/mist.fsh"
-hash = "0f6245a9d4f3d56b8bbadea167de9231f9aedeea3c7ba38f2f40444daabcb121"
+hash = "79c5ea62a3ae04c345a97befbae056288314a103f18415e9c3734a42e0ab5c93"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/motion.fsh"
@@ -4731,7 +4739,7 @@ hash = "3afa37d73608b3d60e30a3aa30eb19f27c16cda2bf76f5048769a36978b5b336"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.fsh"
-hash = "0c10450f617626449ffef84d067d14a220c6ee2efefde21e8550592f6d74f840"
+hash = "7249fc08a6865e5a8ae6955b9a918b2705fdd17d151cc2f171d241f7130aa315"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/solid.vsh"
@@ -4755,7 +4763,7 @@ hash = "1c49e581af7aeae2b37e31144ad5e9788cf3a81ca311a77eafe81887387b9859"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shaders.properties"
-hash = "be15f5b248924e129cfb76c6ee1feca909d242442b76233bb1cceddccf97f1b6"
+hash = "e75c21c9c9791cb05f46b870b3f30f94e0fddb740ff217df5a8a8a0e855f4c03"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/shadow.fsh"
