@@ -4519,7 +4519,7 @@ hash = "434ec1512a83f7fb21b57636b00452556e6244185a76552b393a92bc1d3094e4"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/glass.glsl"
-hash = "b47e88edab0dea3e8c82e4d9c5a51efdee2245afcc695d0d74f91fa24dda305c"
+hash = "cd87e27b00e360a39f06b83d634ede490ef143778caeb17de6c8ec6dc9d08f78"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/leaffall.glsl"
