@@ -162,6 +162,16 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Wet prints**: a being that walks out of water (`brumaireWet`, from the `compline` mod) leaves wet soles on any ground, sand included, snow and ice excepted: darker and slightly glossy, fewer and fainter as its feet dry over some 24 blocks. Each print dries in about two minutes, faster in the sun, from its edges inward. The wetness is kept in the print's texel (`a` = tile + 256 × wetness 0..6). Under rain the ground is already wet and the prints are not drawn.
 - **Heat shimmer**: in a dry, hot biome by day, the air near the horizon trembles a few pixels, more with distance (`HEAT_SHIMMER`). A desert also clears the near mist.
 
+## Block relief
+
+Without a normal-map resource pack, `lib/relief.glsl` draws a relief from the textures themselves, on full blocks, sand and partial blocks (not on plants, leaves, water, ice, glass or glowing blocks), within `RELIEF_RANGE` blocks (24 by default; it fades over the last 40 %).
+
+- **Height of a texel**: its luminance against the mean of its texture (mip level 4 of the atlas, one pixel for a 16-pixel texture). A darker texel is a hollow, a lighter one a bump. Everything is read at texel centres, so the relief stays on the 1/16 grid, in steps, never smooth. The texture rectangle comes from `mc_midTexCoord` (its centre) and the distance of each corner to it (its half-size), so a relief that crosses an edge wraps to the opposite edge, as the texture repeats.
+- **Texel normals** (`RELIEF_STRENGTH`): the slope toward the four neighbours tilts the normal, in the face frame (`at_tangent`). Direct light follows the tilt, measured against the face's own lighting, so the shadow map and its bias are unchanged; the sky light drops a little in texels that turn away from the open air.
+- **Parallax occlusion** (`RELIEF_STEPS`: off, 8, 12, 20; off in Very light and Light, 12 in Balanced, 20 in Beautiful; `RELIEF_DEPTH`, 0.06 block by default): the eye ray marches down through the height layers until it meets the relief. At a grazing angle, bumps hide the hollows behind them and mortar lines shift. Fewer steps are taken when looking straight at the face.
+- **Relief shadows** (`RELIEF_SHADOWS`): from the point seen, six steps climb toward the sun or moon; a bump above the ray shades the hollow, more softly the farther it is.
+- **Block edges** (`RELIEF_BEVEL`): the outer texel of each face leans outward, so the edges of blocks catch the light.
+
 ## Anti-aliasing and profiles
 
 - **SMAA** (`SMAA`: off, medium, high, ultra; on the first page of the settings) smooths the stair-stepped silhouettes of blocks, plants and creatures. Edges are found on the luminance of the finished image, then kept only where the depth jumps by more than 2 % between neighbours: the pixels of the textures stay sharp, only shapes are smoothed. The grade moved from `final` to `composite2` so that SMAA works on the image as it will be shown.
