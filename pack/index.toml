@@ -1413,6 +1413,42 @@ file = "kubejs/data/companions/worldgen/structure_set/companions_tent.json"
 hash = "579c797d04257d6b5eb7bfa4d112def8e1cc8f4d0b1f3d73da4400507debae21"
 
 [[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/cool_dishes_farmersdelight.json"
+hash = "371cdfd5cd8ce32d1393ca2aa76a694f225e1ecea4caebe662e0cd332a194582"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/cool_drinks_farmersdelight.json"
+hash = "aef35a130e659d09d33a2b2ee429ad28cc697c707197ce6851918ea40f87b6bb"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_drinks_farm_and_charm.json"
+hash = "0a3714f570da2ace1a0dd56be7180c9e0f9c0c1a9c71bf7f8a8a022db509d2b1"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_drinks_farmersdelight.json"
+hash = "0ed8697060b7294b20442610fe6cc4d896fe1f1137abe44ae7d8784a8d2ed109"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_soups_farm_and_charm.json"
+hash = "f52e5140ccea954ed3db0b5c972ea6824668b8c9adb59266b0651d3dd560fd95"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_soups_farmersdelight.json"
+hash = "526d2c494a737c00f7c50e56352ce284842f3eda32900828844c75a4ced44b4a"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_soups_minecraft.json"
+hash = "e22a682b784d571eea76cd073bf3c62c14e588030726cad67c7a727a64404e5d"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/hot_soups_starcatcher_delight.json"
+hash = "0c8a8691660d17208df759f3fb790efb53a820fb7d894ce9de3df8cb66bfa6fd"
+
+[[files]]
+file = "kubejs/data/compline/cold_sweat/item/food/ices_farmersdelight.json"
+hash = "977b5d96417a37550e66103821d4da9b174797597822e945bc3e0aae5a9c7ccd"
+
+[[files]]
 file = "kubejs/data/compline/cold_sweat/item/insulator/chorusoatl.json"
 hash = "af7a4918c8d068a97c8a53bb1abfb40c135b745a9d4e5ab9505235ddd874aedf"
 
