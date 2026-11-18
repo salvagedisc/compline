@@ -18,6 +18,7 @@
 #include "/lib/embers.glsl"
 #include "/lib/spray.glsl"
 #include "/lib/fluff.glsl"
+#include "/lib/eaves.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -401,6 +402,15 @@ void main() {
                 vec3 light = dripKind > 0.5 ? gAmbient * 0.85 + gLightColor * lit * 0.7 : gAmbient * 1.3 + gLightColor * lit * 0.6;
                 color = mix(color, light, drip * (dripKind > 0.5 ? 0.9 : 0.55));
             }
+        }
+#endif
+#if EAVES_DRIPS > 0 && SHADER_RAIN > 0 && defined VOXELS
+        // Le bord des toits goutte pendant et après la pluie : des traits clairs, éclairés par le ciel.
+        {
+            float water = max(rainStrength, wetness) * rainHere;
+            float eaveDist;
+            float eave = eavesAlong(dir, min(len, 20.0), water, eaveDist);
+            if (eave > 0.0) color = mix(color, gAmbient * 1.4 + gLightColor * 0.4, eave * 0.6);
         }
 #endif
 #if FALLING_LEAVES > 0 && defined VOXELS
