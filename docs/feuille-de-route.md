@@ -54,7 +54,7 @@ These updates exist on Modrinth but change something that must first be seen in 
 ## Open work items arising from the decisions
 
 ### Rules and configs (sub-project 3)
-- [x] **Ecliptic Seasons → Cold Sweat bridge** (2026-11-17): the season of Ecliptic warms or cools the body, biome by biome, through the `compline` mod's `climat` module rather than KubeJS ([climat](plan/climat.md#seasons-first-step)). Snow and sand storms, then hot dishes, follow.
+- [x] **Ecliptic Seasons → Cold Sweat bridge** (2026-11-17): the season of Ecliptic warms or cools the body, biome by biome, through the `compline` mod's `climat` module rather than KubeJS ([climat](plan/climat.md#seasons-first-step)). Snow and sand storms followed (2026-11-18, [climat](plan/climat.md#storms-second-step)); hot and cool dishes followed (2026-11-18, [climat](plan/climat.md#hot-dishes-third-step)). Brumaire does not yet close its mist in a storm.
 - [x] **Farm & Charm confined to the farm** (2026-11-15): its stove, cooking pot, roaster and crafting bowl leave the game; their recipes are copied to Farmer's Delight's cooking pot and to the workbench (`cuisine.js`); its tomato and onion are kept, Farmer's Delight's leave ([0030](decisions/0030-farmers-delight-kitchen.md)). Three ropes remain (Farmer's Delight, Farm & Charm, Supplementaries).
 - [ ] Lock Create: Central Kitchen's automation behind progression ([0002](decisions/0002-agriculture.md), [0030](decisions/0030-farmers-delight-kitchen.md)).
 - [ ] **"Survivor" villagers**: ruined villages, rare survivors to bring back, breeding blocked, trades filtered (no Mending, no bypassing Overgeared) ([0004](decisions/0004-structures.md)).
@@ -96,7 +96,7 @@ In game:
 - [ ] **Rebuild a hamlet**: the `survivants` module as a long-term goal; each survivor found in the mist joins a clearing with a trade, and the hamlet grows by milestones like the zoo (Matcha Flavoured: villages are made, not found).
 - [ ] **Named quest chapters** in Questlog: 8 to 12 chapters (first fire, forge, zoo, sky, monuments, airship, hamlet, and the new main thread once defined), 150 to 250 quests; the first three in order, the rest free.
 - [ ] **A collections page**: zoo species, Exposure: Space objects, Longwings butterflies, monument codex pages, lost letters, dishes; a carved figurine of a species per milestone, to place at home.
-- [ ] **Dishes with a use**: a few Farmer's Delight dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays.
+- [ ] **Dishes with a use**: a few Farmer's Delight dishes give an effect tied to the pack's systems (see further in the mist, warmth for Cold Sweat, thirst delayed, soft steps near wildlife). Hunger stays. Warmth and coolness are done (2026-11-18, [climat](plan/climat.md#hot-dishes-third-step)).
 - [ ] **A few hand-made enigmas**: three to five unique places, never horror (a set table with warm soup and nobody, an observatory whose log stops), with hints in letters and `echos`.
 - [ ] **Travel as a selling point**: a quest chapter for the atlas, horses, rails and airships; `fanal` lights along the roads.
 - [ ] **Letters written by the community**: lost letters and travellers' notebook pages written and signed by players of the Discord, found in ruins.

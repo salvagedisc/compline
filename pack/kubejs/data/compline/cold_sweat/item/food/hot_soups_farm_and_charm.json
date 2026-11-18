@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "farm_and_charm"
+    }
+  ],
+  "required_mods": [
+    "farm_and_charm"
+  ],
+  "item": {
+    "items": [
+      "farm_and_charm:barley_soup",
+      "farm_and_charm:potato_soup",
+      "farm_and_charm:simple_tomato_soup",
+      "farm_and_charm:goulash"
+    ]
+  },
+  "temperature": 25,
+  "duration": 6000
+}

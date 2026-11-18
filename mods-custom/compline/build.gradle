@@ -115,6 +115,7 @@ dependencies {
     // Module climat : la température de Cold Sweat, la saison d'Ecliptic Seasons
     compileOnly modrinth('cold-sweat')
     compileOnly modrinth('ecliptic-seasons')
+    compileOnly modrinth('thirst-was-reclaimed') // la soif du vent de sable
 
     // Module dissipateur
     compileOnly modrinth('create')
