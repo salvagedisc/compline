@@ -123,6 +123,8 @@
 #define SAND_DETAIL 1 // [0 1]
 // La glace fissurée, avec ses bulles (lib/snow.glsl).
 #define ICE_DETAIL 1 // [0 1]
+// Les feuilles qui tombent des arbres, plus nombreuses quand le feuillage a roussi (lib/leaffall.glsl).
+#define FALLING_LEAVES 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.

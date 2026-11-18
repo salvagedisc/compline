@@ -10,6 +10,7 @@
 #include "/lib/voxel.glsl"
 #include "/lib/precip.glsl"
 #include "/lib/motes.glsl"
+#include "/lib/leaffall.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -302,6 +303,21 @@ void main() {
                     vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * dist, vec3(0.0));
                     color += blk.rgb * blk.a * blk.a * blk.a * mote * under * 0.35;
                 }
+            }
+        }
+#endif
+#if FALLING_LEAVES > 0 && defined VOXELS
+        // Les feuilles qui tombent des arbres proches, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
+        {
+            float leafDist;
+            vec3 leafTint;
+            float leaf = leafAlong(dir, min(len, 16.0), leafDist, leafTint);
+            if (leaf > 0.0) {
+                vec3 p = gbufferModelViewInverse[3].xyz + dir * leafDist;
+                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                vec3 light = gAmbient * 0.75 + gLightColor * lit * 0.55;
+                color = mix(color, leafTint * light, leaf);
             }
         }
 #endif
