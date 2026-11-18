@@ -437,6 +437,10 @@ void main() {
             env += hue * near_ * near_ * (0.30 + 2.3 * pow(near_, 3.0)) * 0.6;
             // Au ras d'un métal, le reflet blanchit moins que sur une pierre : l'or reste doré vu de loin.
             vec3 fm = mix(f0, vec3(1.0), pow(1.0 - max(dot(nS, eye), 0.0), 5.0) * 0.35);
+#if ROUGH_REFLECTIONS > 0
+            // deferred1 y ajoute ce que le métal reflète vraiment (l'image, les blocs) : ici, la moitié de l'ambiance.
+            env *= 0.5;
+#endif
             lit += env * fm * mix(1.0, 0.55, rough) * surf.metal * ao;
         }
         // Le velours de la laine : un liseré clair au soleil rasant.
@@ -448,7 +452,9 @@ void main() {
 #ifdef WRITE_SURFACE
     // Le feuillage laisse passer la lumière : l'occlusion y est moitié moindre. L'alpha marque une surface (> 0.5) et
     // porte son éclat (1 : mat ; 0.55 : flaque, voir deferred1).
-    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0 - 0.45 * gloss);
+    // L'éclat au 1/255 ; un métal le marque d'un demi-pas de plus (relu par deferred1).
+    float glossStep = floor(clamp(gloss, 0.0, 1.0) * 255.0 + 0.5) / 255.0;
+    outSurface = vec4(packNormal(normal), indirect * (1.0 - 0.2 * leaf), 1.0 - 0.45 * (glossStep + step(0.5, surf.metal) * 0.5 / 255.0));
     outAlbedo = vec4(sqrt(clamp(albedo, 0.0, 1.0)), 1.0);
 #endif
     // Les grains de neige et de sable qui scintillent, là où le soleil donne.
