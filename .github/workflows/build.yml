@@ -85,3 +85,58 @@ jobs:
           name: compline-mod-${{ github.sha }}
           path: mods-custom/compline/build/libs/*.jar
           retention-days: 3
+
+  # Démarre un serveur dédié avec tout le pack (côté serveur) et le mod compline de cette branche :
+  # échoue sur un plantage, une erreur des journaux non listée dans scripts/boot/known-errors.txt,
+  # ou un objet inconnu dans les listes KubeJS.
+  boot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+          cache-dependency-path: |
+            mods-custom/compline/*.gradle
+            mods-custom/compline/gradle.properties
+            mods-custom/compline/gradle/wrapper/gradle-wrapper.properties
+            pack/mods/*.pw.toml
+
+      - uses: actions/cache@v4
+        with:
+          path: .cache/jars
+          key: jars-${{ hashFiles('pack/mods/*.pw.toml') }}
+          restore-keys: jars-
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            .cache/server/libraries
+            .cache/neoforge-*-installer.jar
+          key: neoforge-server-${{ hashFiles('pack/pack.toml') }}
+          restore-keys: neoforge-server-
+
+      - name: Build compline mod
+        working-directory: mods-custom/compline
+        run: ./gradlew build --console=plain
+
+      - name: Boot the pack on a dedicated server
+        run: node scripts/boot/server.mjs --jar "$(ls mods-custom/compline/build/libs/compline-*.jar | grep -v sources | head -1)"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        continue-on-error: true
+        with:
+          name: boot-logs-${{ github.sha }}
+          path: |
+            .cache/server/logs/
+            .cache/server/crash-reports/
+          retention-days: 3

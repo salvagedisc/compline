@@ -1,27 +1,18 @@
 #!/usr/bin/env node
 // Vérifie que chaque dépendance requise déclarée DANS les jars du pack est fournie par le pack
 // (Modrinth ne déclare pas toujours toutes les dépendances). Usage : npm run check-deps [-- <cacheDir>]
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readPackMods } from './sync/pwtoml.mjs';
 import { listEntries, readEntry } from './deps/zip.mjs';
+import { loadJar } from './deps/jars.mjs';
 import { parseModsToml, findMissing, nestedJarPaths } from './deps/modstoml.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const packDir = join(root, 'pack');
 const cacheDir = process.argv[2] ?? join(root, '.cache', 'jars');
 await mkdir(cacheDir, { recursive: true });
-
-async function loadJar(mod) {
-  const path = join(cacheDir, mod.filename);
-  try { return await readFile(path); } catch { /* not cached yet */ }
-  const res = await fetch(mod.url, { headers: { 'User-Agent': 'salvagedisc/compline check-deps' } });
-  if (!res.ok) throw new Error(`download ${mod.filename}: HTTP ${res.status}`);
-  const buf = Buffer.from(await res.arrayBuffer());
-  await writeFile(path, buf);
-  return buf;
-}
 
 const provided = new Set();
 const deps = [];
@@ -34,7 +25,7 @@ const addToml = (jarName, buf, nestedOnly) => {
 };
 
 for (const mod of await readPackMods(packDir)) {
-  const buf = await loadJar(mod);
+  const buf = await loadJar(cacheDir, mod, 'salvagedisc/compline check-deps');
   addToml(mod.filename, buf, false);
   // Jar-in-jar: embedded mods count as provided.
   const metadata = readEntry(buf, 'META-INF/jarjar/metadata.json');

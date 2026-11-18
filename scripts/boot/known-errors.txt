@@ -1,0 +1,3 @@
+# Errors the boot check accepts (scripts/boot/server.mjs). One regular expression per line,
+# matched against the error line without its timestamp; a comment above each says why it is harmless.
+# Anything else written at ERROR level by the server or KubeJS fails the check.
