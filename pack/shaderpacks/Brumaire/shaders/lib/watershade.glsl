@@ -264,5 +264,21 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         vec3 light = gLightColor * lit * (0.25 + 0.75 * max(gLightDir.y, 0.0)) * 0.9 + gAmbient * max(sky, 0.1) * 0.9;
         color = mix(color, vec3(0.64, 0.68, 0.67) * light, 0.85 * cover);
     }
+#if PLANKTON > 0
+    // Le plancton des mers chaudes : la nuit, ce qui remue l'eau (vagues qui déferlent, sillages, pluie) s'allume
+    // d'un bleu froid, semé de points plus vifs qui clignent. Une eau chaude se reconnaît à sa teinte (vert-bleu).
+    if (top && foam > 0.01) {
+        float dark = 1.0 - smoothstep(0.05, 0.35, gDay);
+        float gb = biome.g / max(biome.b, 1e-3);
+        float warm = smoothstep(0.6, 0.85, gb) * (1.0 - smoothstep(0.95, 1.1, gb));
+        if (dark * warm > 0.01) {
+            vec2 speck = floor(world.xz * 16.0);
+            float hs = fract(sin(dot(speck, vec2(127.1, 311.7))) * 43758.5453);
+            float blink = pow(max(sin(t * 2.5 + hs * 60.0), 0.0), 6.0) * step(0.85, hs);
+            float glow = foam * (0.35 + 2.5 * blink);
+            color += vec3(0.12, 0.55, 1.0) * glow * dark * warm * PLANKTON_STRENGTH;
+        }
+    }
+#endif
     return vec4(color, 1.0);
 }

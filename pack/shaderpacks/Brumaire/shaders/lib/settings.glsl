@@ -100,6 +100,8 @@
 #define WATER_DISPERSION 1 // [0 1]
 #define WATER_FLOW 1 // [0 1]
 #define WATER_WHITECAPS 1 // [0 1]
+#define PLANKTON 1 // [0 1]
+#define PLANKTON_STRENGTH 0.10 // [0.04 0.06 0.10 0.15 0.25]
 #define WATER_FALLS 1 // [0 1]
 #define FALL_SPRAY 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
@@ -128,6 +130,7 @@
 #define GROUND_DRIFT 1 // [0 1]
 // La brume qui fume sur l'eau les matins frais (lib/seasmoke.glsl).
 #define WATER_STEAM 1 // [0 1]
+#define SOIL_STEAM 1 // [0 1]
 #define WET_REFLECTIONS 12 // [0 8 12 20]
 #define ROUGH_REFLECTIONS 1 // [0 1]
 #define ROUGH_REFLECTIONS_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
@@ -151,6 +154,7 @@
 #define ICE_DETAIL 1 // [0 1]
 // Les feuilles qui tombent des arbres, plus nombreuses quand le feuillage a roussi (lib/leaffall.glsl).
 #define FALLING_LEAVES 1 // [0 1]
+#define LEAF_LITTER 1 // [0 1]
 // L'eau qui s'égoutte des arbres après la pluie, et la neige qui tombe des branches au vent (lib/leaffall.glsl).
 #define CANOPY_DRIPS 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
