@@ -31,6 +31,12 @@
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]
 #define SHADOW_SOFTNESS 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]
+#define SHADOW_SEARCH 10 // [6 10 16]
+#define CONTACT_SHADOWS 1 // [0 1]
+#define SSGI 6 // [0 4 6 8]
+#define SSGI_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]
+#define LEAF_TRANSLUCENCY 1.0 // [0.0 0.5 1.0 1.5]
+#define BLOCK_LIGHT_SHAPE 1 // [0 1]
 #define LIGHT_SHAFTS 10 // [0 6 10 16 24]
 #define SHAFT_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 #define BLOOM

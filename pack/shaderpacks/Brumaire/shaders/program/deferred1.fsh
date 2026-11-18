@@ -14,6 +14,7 @@
 uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
+uniform sampler2D colortex4;
 in vec2 vUv;
 
 #define REFLECT_DEPTH depthtex0
@@ -32,22 +33,61 @@ layout(location = 0) out vec4 outColor;
 layout(location = 1) out vec4 outScene;
 
 float linearDepth(float d) { return near * far / (far - d * (far - near)); }
+vec3 sq3(vec3 v) { return v * v; }
 
-/** L'occlusion du demi-écran, lissée sans déborder d'un objet sur ce qui est derrière lui. */
-float smoothAo(vec2 uv, float depth) {
+/** L'occlusion (r) et le rebond (gba) du demi-écran, lissés sans déborder d'un objet sur ce qui est derrière lui. */
+vec4 smoothAo(vec2 uv, float depth, vec3 normal) {
     vec2 texel = 2.0 / vec2(viewWidth, viewHeight);
     float centre = linearDepth(depth);
-    float sum = 0.0, weight = 0.0;
+    vec4 sum = vec4(0.0);
+    float weight = 0.0;
     for (int y = -2; y <= 1; y++) {
         for (int x = -2; x <= 1; x++) {
             vec2 o = (vec2(x, y) + 0.5) * texel;
             float d = linearDepth(texture(depthtex0, uv + o).r);
             float w = 1.0 / (1e-3 + abs(d - centre) / centre * 40.0);
-            sum += texture(colortex2, (uv + o) * 0.5).r * w;
+            // Le rebond ne passe pas d'une face à l'autre d'un même bloc.
+            vec4 s = texture(colortex1, uv + o);
+            w *= s.a > 0.5 ? pow(max(dot(unpackNormal(s.rg), normal), 0.0), 8.0) + 0.01 : 0.01;
+            sum += texture(colortex2, (uv + o) * 0.5) * w;
             weight += w;
         }
     }
     return sum / weight;
+}
+
+/**
+ * Ombre de contact : la carte d'ombre est trop grossière pour les petites choses (herbes, rebords, objets posés) ;
+ * un court trajet vers l'astre à l'écran retrouve ce qui les cache de tout près.
+ */
+float contactShadow(vec3 pos, vec3 normal, float noise) {
+#if CONTACT_SHADOWS > 0
+    float dist = length(pos);
+    if (dist > 48.0 || dot(normal, gLightDir) <= 0.02) return 1.0;
+    vec3 view = (gbufferModelView * vec4(pos + normal * (0.02 + dist * 0.002), 1.0)).xyz;
+    vec3 dir = mat3(gbufferModelView) * gLightDir;
+    float span = 0.35 + dist * 0.012;
+    float shadow = 0.0;
+    for (int i = 0; i < 10; i++) {
+        float f = (float(i) + noise) / 10.0;
+        vec3 q = view + dir * span * f;
+        vec4 clip = gbufferProjection * vec4(q, 1.0);
+        vec2 quv = clip.xy / clip.w * 0.5 + 0.5;
+        if (any(lessThan(quv, vec2(0.0))) || any(greaterThan(quv, vec2(1.0)))) break;
+        float d = texture(depthtex0, quv).r;
+        if (d < 0.56) continue;
+        vec4 v = gbufferProjectionInverse * vec4(vec3(quv, d) * 2.0 - 1.0, 1.0);
+        float behind = v.z / v.w - q.z;
+        // Caché par une surface juste devant le trajet (pas par un objet bien plus proche de l'œil).
+        if (behind > 0.01 && behind < 0.12 + span * 0.25) {
+            shadow = 1.0 - f * 0.6;
+            break;
+        }
+    }
+    return 1.0 - shadow * (1.0 - smoothstep(32.0, 48.0, dist));
+#else
+    return 1.0;
+#endif
 }
 
 /**
@@ -96,9 +136,24 @@ void main() {
         color += skyAt(dir) + sunDisc(dir) + nightSky(dir);
     } else if (!hand) {
         vec4 surface = texture(colortex1, vUv);
+        if (surface.a > 0.5) {
+            vec3 normal = unpackNormal(surface.rg);
+            // La part directe (1 - b) passe l'ombre de contact ; la part indirecte (b) l'occlusion.
+            float contact = contactShadow(pos, normal, dither(gl_FragCoord.xy));
+            color *= 1.0 - (1.0 - surface.b) * (1.0 - contact);
+#if AO_SAMPLES > 0 || SSGI > 0
+            vec4 g = smoothAo(vUv, texture(depthtex0, vUv).r, normal);
 #if AO_SAMPLES > 0
-        if (surface.a > 0.5) color *= mix(1.0, smoothAo(vUv, texture(depthtex0, vUv).r), surface.b);
+            color *= mix(1.0, g.r, surface.b);
 #endif
+#if SSGI > 0
+            // Le rebond, reçu par la couleur propre de la surface. Les rayons qui sortent de l'écran ou s'arrêtent avant
+            // de toucher ne rapportent rien : le rebond trouvé est relevé d'autant.
+            vec3 albedo = sq3(texture(colortex4, vUv).rgb);
+            color += albedo * g.gba * (1.6 * SSGI_STRENGTH) * mix(1.0, g.r, 0.5);
+#endif
+#endif
+        }
         float gloss = surface.a > 0.5 ? (1.0 - surface.a) / 0.45 : 0.0;
         if (gloss > 0.02) color = wetReflection(color, pos, unpackNormal(surface.rg), gloss);
     }

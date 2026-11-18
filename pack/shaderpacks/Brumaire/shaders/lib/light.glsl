@@ -14,17 +14,43 @@ vec2 packNormal(vec3 n) {
     return p * 0.5 + 0.5;
 }
 
+/** Bruit de valeur lisse sur une droite, pour le vacillement des flammes. */
+float flickerNoise(float t) {
+    float i = floor(t), f = fract(t);
+    float a = fract(sin(i * 12.9898) * 43758.5453), b = fract(sin((i + 1.0) * 12.9898) * 43758.5453);
+    return mix(a, b, f * f * (3.0 - 2.0 * f));
+}
+
+/**
+ * La lumière du ciel qu'une surface reçoit selon où elle regarde : le ciel par le haut, l'horizon plus pâle sur les
+ * côtés, et par le bas le sol qui renvoie le soleil (un vert-brun chaud). sky : la part de ciel que le jeu voit là.
+ */
+vec3 hemisphereLight(vec3 normal, float sky) {
+    float up = normal.y * 0.5 + 0.5;
+    vec3 zenith = gAmbient * 1.05;
+    vec3 horizon = mix(gAmbient, vec3(luma(gAmbient)), 0.35) * 0.85;
+    vec3 ground = vec3(0.30, 0.29, 0.20) * (gLightColor * max(gLightDir.y, 0.0) * 0.35 + gAmbient * 0.70);
+    vec3 fromAbove = mix(horizon, zenith, smoothstep(0.5, 1.0, up));
+    return mix(ground, fromAbove, smoothstep(0.0, 0.62, up)) * sky;
+}
+
 /**
  * albedo : couleur linéaire ; normal : repère monde ; lm : lumière des blocs et du ciel (0..1) ; ao : occlusion ;
  * pos : repère joueur ; leaf : 0 surface dure, 1 feuillage que la lumière traverse ; frag : gl_FragCoord.xy.
+ *
+ * La lumière directe passe l'ombre douce de la carte, puis les nuages, l'eau et les vitraux. Une feuille reçoit en
+ * plus ce qui traverse le feuillage devant elle : d'autant moins qu'il est épais, teint du vert des feuilles qu'il a
+ * traversées, plus vif à contre-jour. La lumière du ciel vient d'un hémisphère (ciel, horizon, sol). La lumière des
+ * blocs prend sa couleur dans le volume, vient du côté de sa source et vacille un peu quand c'est une flamme.
  */
 vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, vec2 frag, int taps, out float indirect) {
     float facing = dot(normal, gLightDir);
     // Un feuillage reste plus clair du côté du soleil : il garde du volume tout en laissant passer la lumière.
     float diffuse = mix(max(facing, 0.0) * 0.8 + 0.2 * leaf, 0.72, leaf * 0.55);
     float lit = 0.0;
+    float thick = 0.0;
+    float dist = length(pos);
     if (diffuse > 0.0) {
-        float dist = length(pos);
         // Au-delà de la carte d'ombre, la lumière du ciel du jeu tient lieu d'ombre.
         float beyond = smoothstep(shadowDistance * 0.82, shadowDistance * 0.98, dist);
         float fallback = smoothstep(0.80, 0.94, lm.y);
@@ -32,13 +58,29 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         // Plus loin encore, le relief vu par la caméra fait de l'ombre (lib/farshadow.glsl).
         if (beyond > 0.0) fallback *= farShadow(pos, normal, dither(frag + 5.588238 * float(frameCounter & 63)));
 #endif
-        lit = beyond < 1.0 ? mix(shadowAt(pos, normal, dither(frag), taps), fallback, beyond) : fallback;
+        float near_ = beyond < 1.0 ? shadowDepth(pos, normal, dither(frag), taps, thick) : 1.0;
+        lit = beyond < 1.0 ? mix(near_, fallback, beyond) : fallback;
+        thick *= 1.0 - beyond;
     }
-    // Une feuille à l'ombre d'une autre reçoit encore le soleil passé à travers le feuillage.
-    lit = max(lit, 0.28 * leaf);
+    // Une feuille à l'ombre d'autres feuilles reçoit encore le soleil passé à travers elles, moins à chaque bloc
+    // traversé ; au-delà de la carte d'ombre, une part fixe.
+    float through = 0.0;
+    if (leaf > 0.0) {
+        float layers = thick > 0.0 ? thick : 1.2;
+        through = exp(-layers * 0.55) * 0.75 * LEAF_TRANSLUCENCY * leaf;
+        through = max(through, 0.20 * leaf);
+        lit = max(lit, through);
+    }
     // L'ombre des nuages qui passent.
-    if (diffuse > 0.0) lit *= cloudShadow(pos + cameraPosition, gLightDir);
+    float clouds = diffuse > 0.0 ? cloudShadow(pos + cameraPosition, gLightDir) : 1.0;
+    lit *= clouds;
     vec3 light = gLightColor * diffuse * lit;
+    // Ce qui a traversé du feuillage en sort teint de vert.
+    if (leaf > 0.0 && through > 0.0) {
+        vec3 tint = albedo / max(max(albedo.r, max(albedo.g, albedo.b)), 1e-3);
+        float share = clamp(through / max(lit, 1e-3), 0.0, 1.0);
+        light *= mix(vec3(1.0), mix(vec3(1.0), tint, 0.6), share);
+    }
     // Sous l'eau, la lumière arrive affaiblie et teintée, rassemblée en filets par les vagues.
     if (lit > 0.0) {
         float water = waterAbove(pos, normal);
@@ -49,19 +91,45 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         // Passé par un vitrail, le soleil en prend la couleur.
         light *= glassTint(pos, normal);
     }
-    // Le feuillage à contre-jour laisse passer un peu de soleil.
+    // Le feuillage à contre-jour : la lumière diffusée vers l'avant dans la feuille, verte et vive, d'autant plus que la
+    // feuille est mince devant le soleil.
     vec3 view = normalize(pos);
-    light += gLightColor * leaf * lit * 0.35 * pow(max(dot(view, gLightDir), 0.0), 4.0);
+    float behind = dot(view, gLightDir);
+    if (leaf > 0.0) {
+        float forward = pow(max(behind, 0.0), 4.0) * 0.55 + pow(max(behind, 0.0), 24.0) * 0.9;
+        vec3 green = albedo / max(luma(albedo), 1e-3) * 0.5;
+        float reach = exp(-max(thick, 0.0) * 0.5) * clouds * max(lit, through);
+        light += gLightColor * leaf * forward * reach * mix(vec3(1.0), green, 0.7) * 0.6 * LEAF_TRANSLUCENCY;
+    }
     float direct = luma(light);
 
     float sky = lm.y * lm.y;
     float occl = ao * ao;
-    light += gAmbient * (0.70 + 0.30 * normal.y) * sky * occl;
+    light += hemisphereLight(normal, sky) * occl;
     // La lumière des blocs prend la couleur de ce qui éclaire autour (lib/voxel.glsl) : orangée pour une flamme,
     // bleue pour une âme, rouge pour la lave…
     float blockLm = lm.x;
     vec3 tint = blockLightTint(pos, normal, blockLm);
     float glow = blockLm * blockLm * (0.30 + 2.3 * blockLm * blockLm * blockLm);
+#if BLOCK_LIGHT_SHAPE > 0
+    if (blockLm > 0.02) {
+        // D'où vient la lumière : la face tournée vers la torche en reçoit plus que celle qui lui tourne le dos.
+        vec3 slope = voxelLightSlope(pos, normal);
+        float strength = clamp(length(slope), 0.0, 1.0);
+        if (strength > 0.05) {
+            float toward = dot(normal, slope / length(slope));
+            glow *= mix(1.0, 0.62 + 0.55 * max(toward, -0.7), strength * 0.85);
+        }
+        // Une flamme vacille : un souffle lent et un frémissement, différents d'un bloc à l'autre, d'autant moins
+        // sensibles qu'on est loin d'elle.
+        float flame = 1.0 - smoothstep(0.08, 0.35, length(tint - lightTint(0)));
+        vec3 cell = floor(pos + cameraPosition + 0.5);
+        float seed = dot(cell, vec3(0.37, 0.71, 0.13));
+        float t = frameTimeCounter;
+        float waver = (flickerNoise(t * 2.1 + seed) - 0.5) * 0.10 + (flickerNoise(t * 9.3 + seed * 3.0) - 0.5) * 0.05;
+        glow *= 1.0 + waver * flame * blockLm;
+    }
+#endif
     light += tint * glow * mix(occl, 1.0, blockLm * blockLm);
     light += vec3(0.016, 0.018, 0.022) * occl;
     light += vec3(0.30, 0.32, 0.34) * nightVision;
