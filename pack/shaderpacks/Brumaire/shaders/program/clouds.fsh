@@ -16,18 +16,23 @@
 #include "/lib/clouds.glsl"
 #include "/lib/skyoptics.glsl"
 #include "/program/scene.glsl"
+#if FOG_STEPS > 0
+#include "/lib/shadow.glsl"
+#include "/lib/mist.glsl"
+#include "/lib/voxel.glsl"
+#include "/lib/fogmarch.glsl"
+#endif
 
 uniform float wetness;
 
 in vec2 vUv;
 
-/*
-const int colortex3Format = RGBA16F;
-*/
-const vec4 colortex3ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
+// Format et fond de colortex3 : dans mist.fsh, toujours actif (cette passe est coupée sans nuages).
 
-/* RENDERTARGETS: 3 */
+/* RENDERTARGETS: 3,11 */
 layout(location = 0) out vec4 outClouds;
+// La brume proche en volume (lib/fogmarch.glsl) : la lumière qu'elle ajoute (rgb) et la part du fond qui passe (a).
+layout(location = 1) out vec4 outFog;
 
 // Extinction des gouttelettes par unité de densité (par bloc).
 const float CLOUD_SIGMA = 0.09;
@@ -189,6 +194,21 @@ float marchLayer(vec3 eye, vec3 dir, float sceneLen, float coverage, float noise
 
 void main() {
     outClouds = vec4(0.0, 0.0, 0.0, 1.0);
+    outFog = vec4(0.0, 0.0, 0.0, 1.0);
+#if FOG_STEPS > 0
+    // La brume proche se marche ici, sur un demi-écran : mist.fsh la ramène au pixel en suivant la profondeur.
+    if (isEyeInWater == 0) {
+        bool fogSky, fogHand;
+        vec3 fogPos = scenePosition(vUv, fogSky, fogHand);
+        if (!fogHand) {
+            initEnv();
+            float fogLen = fogSky ? 16384.0 : length(fogPos);
+            vec3 fogLight;
+            float fogPass = fogMarch(normalize(fogPos), min(fogLen, FOG_RANGE), 1.0, fogLight);
+            outFog = vec4(fogLight, fogPass);
+        }
+    }
+#endif
 #if CLOUD_STEPS > 0
     bool sky, hand;
     vec3 pos = scenePosition(vUv, sky, hand);
@@ -222,8 +242,11 @@ void main() {
     light += pass * cloudLight;
     pass *= cloudPass;
 
-    // Tout en haut : le voile de cirrus, et le halo que ses cristaux dessinent.
+    // Au-dessus : la nappe d'altocumulus, puis tout en haut le voile de cirrus et le halo que ses cristaux dessinent.
     if (sky && dir.y > 0.0) {
+        vec4 alto = altoLayer(eye, dir);
+        light += pass * alto.rgb;
+        pass *= 1.0 - alto.a;
         vec4 veil = cirrusLayer(eye, dir);
         light += pass * veil.rgb;
         pass *= 1.0 - veil.a;

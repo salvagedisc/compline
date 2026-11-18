@@ -29,7 +29,15 @@ uniform int frameCounter;
 /*
 const int colortex6Format = R11F_G11F_B10F;
 const bool colortex6Clear = false;
+const int colortex1Format = RGBA16;
+const int colortex2Format = RGBA16F;
+const int colortex4Format = RGBA8;
 */
+// La couche des surfaces (solid.fsh), l'occlusion et le rebond (ao.fsh, qui peut être coupé : l'occlusion reste à 1),
+// la couleur propre des surfaces.
+const vec4 colortex1ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
+const vec4 colortex2ClearColor = vec4(1.0, 0.0, 0.0, 0.0);
+const vec4 colortex4ClearColor = vec4(0.0, 0.0, 0.0, 0.0);
 
 /* RENDERTARGETS: 0,6 */
 layout(location = 0) out vec4 outColor;
@@ -38,25 +46,33 @@ layout(location = 1) out vec4 outScene;
 float linearDepth(float d) { return near * far / (far - d * (far - near)); }
 vec3 sq3(vec3 v) { return v * v; }
 
-/** L'occlusion (r) et le rebond (gba) du demi-écran, lissés sans déborder d'un objet sur ce qui est derrière lui. */
+/**
+ * L'occlusion (r) et le rebond (gba) du demi-écran, ramenés à l'écran entier : les quatre cases du demi-écran autour
+ * du pixel, pesées comme un filtre bilinéaire et retirées quand elles sont à une autre profondeur ou tournées
+ * autrement (le rebond ne passe pas d'un objet à ce qui est derrière, ni d'une face à l'autre d'un même bloc).
+ * L'anticrénelage temporel finit de lisser le grain.
+ */
 vec4 smoothAo(vec2 uv, float depth, vec3 normal) {
-    vec2 texel = 2.0 / vec2(viewWidth, viewHeight);
+    vec2 halfSize = vec2(viewWidth, viewHeight) * 0.5;
+    vec2 at = uv * halfSize - 0.5;
+    vec2 base = floor(at);
+    vec2 f = at - base;
     float centre = linearDepth(depth);
     vec4 sum = vec4(0.0);
     float weight = 0.0;
-    for (int y = -2; y <= 1; y++) {
-        for (int x = -2; x <= 1; x++) {
-            vec2 o = (vec2(x, y) + 0.5) * texel;
-            float d = linearDepth(texture(depthtex0, uv + o).r);
-            float w = 1.0 / (1e-3 + abs(d - centre) / centre * 40.0);
-            // Le rebond ne passe pas d'une face à l'autre d'un même bloc.
-            vec4 s = texture(colortex1, uv + o);
-            w *= s.a > 0.5 ? pow(max(dot(unpackNormal(s.rg), normal), 0.0), 8.0) + 0.01 : 0.01;
-            sum += texture(colortex2, (uv + o) * 0.5) * w;
-            weight += w;
-        }
+    for (int k = 0; k < 4; k++) {
+        vec2 o = vec2(k & 1, k >> 1);
+        vec2 cell = (base + o + 0.5) / halfSize;
+        // La case du demi-écran couvre deux pixels sur deux : sa profondeur et sa normale sont lues à son centre.
+        float d = linearDepth(texture(depthtex0, cell).r);
+        float w = (o.x > 0.5 ? f.x : 1.0 - f.x) * (o.y > 0.5 ? f.y : 1.0 - f.y) + 1e-3;
+        w /= 1e-3 + abs(d - centre) / centre * 40.0;
+        vec4 sf = texture(colortex1, cell);
+        w *= sf.a > 0.5 ? pow(max(dot(unpackNormal(sf.rg), normal), 0.0), 8.0) + 0.01 : 0.01;
+        sum += texture(colortex2, cell * 0.5) * w;
+        weight += w;
     }
-    return sum / weight;
+    return sum / max(weight, 1e-6);
 }
 
 /**

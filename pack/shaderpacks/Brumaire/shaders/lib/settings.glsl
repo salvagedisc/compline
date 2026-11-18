@@ -24,6 +24,7 @@
 #define CLOUD_SHADOWS 0.8 // [0.0 0.4 0.6 0.8 1.0]
 #define CLOUD_TYPES 1 // [0 1]
 #define CLOUD_CIRRUS 2 // [0 1 2 3]
+#define CLOUD_ALTO 2 // [0 1 2 3]
 #define CLOUD_MULTISCATTER 4 // [1 2 3 4]
 #define CLOUD_LIGHT_STEPS 6 // [3 4 6 8]
 #define CLOUD_LIGHTNING 1 // [0 1]
@@ -31,11 +32,16 @@
 // Ciel
 #define SKY_STARS 1 // [0 1]
 #define SKY_MILKY_WAY 1 // [0 1]
+#define SKY_METEORS 1 // [0 1]
+#define SKY_AURORA 1 // [0 1]
+#define SKY_AURORA_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 #define SKY_HALO 1 // [0 1]
 #define SKY_RAINBOW 1 // [0 1]
 
 // Lumière
 #define SHADOW_FILTER 8 // [1 4 6 8 12 16]
+// Les ombres calées sur les pixels des blocs : leur bord avance texel par texel (lib/light.glsl).
+#define PIXEL_SHADOWS 1 // [0 1]
 #define SHADOW_SOFTNESS 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]
 #define SHADOW_SEARCH 10 // [6 10 16]
 #define CONTACT_SHADOWS 1 // [0 1]
@@ -50,13 +56,26 @@
 #define AO_RADIUS 1.2 // [0.6 0.9 1.2 1.6 2.0]
 #define AO_STRENGTH 1.6 // [0.8 1.2 1.6 2.0 2.5]
 #define BLOOM_STRENGTH 1.0 // [0.5 0.75 1.0 1.25 1.5]
+// L'éclat du soleil dans l'œil : rais, voile et reflets de l'objectif (program/grade.fsh).
+#define SUN_GLARE 1 // [0 1]
+#define SUN_GLARE_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
+// Les couleurs qui se séparent un peu vers les bords de l'image.
+#define CHROMATIC_ABERRATION 1 // [0 1]
+// Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
+#define LENS_DROPS 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
 #define GLASS_TINT 1 // [0 1]
+// Le verre qui se raccorde à ses voisins : une verrière sans cadres entre ses blocs (lib/glass.glsl).
+#define CONNECTED_GLASS 1 // [0 1]
 
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 #define FOLIAGE_SHEEN 1.0 // [0.0 0.5 1.0 1.5]
 #define LEAF_FLUTTER 1 // [0 1]
+// Le feuillage touffu : deux plans de plus par face de feuilles, décollés et penchés (program/bushy.gsh).
+#define BUSHY_LEAVES 1 // [0 1]
+// Jusqu'où (blocs) le feuillage est touffu.
+#define BUSHY_DISTANCE 64 // [32 48 64 96 128]
 #define WATER_WAVES 1.0 // [0.0 0.5 1.0 1.5]
 #define WATER_MURK 1.0 // [0.5 0.75 1.0 1.5 2.0]
 #define WATER_PIXELS 1 // [0 1]
@@ -104,6 +123,14 @@
 #define SNOW_COVER 1 // [0 1]
 // La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
 #define SNOW_DETAIL 1 // [0 1]
+// La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.
+#define SNOW_BUILDUP 1 // [0 1]
+// Le sable ridé par le vent (lib/snow.glsl).
+#define SAND_DETAIL 1 // [0 1]
+// La glace fissurée, avec ses bulles (lib/snow.glsl).
+#define ICE_DETAIL 1 // [0 1]
+// Les feuilles qui tombent des arbres, plus nombreuses quand le feuillage a roussi (lib/leaffall.glsl).
+#define FALLING_LEAVES 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).
 #define MATERIALS 1 // [0 1]
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.
@@ -143,9 +170,10 @@ const float shadowDistanceRenderMul = 1.0;
 const float shadowIntervalSize = 2.0;
 const float entityShadowDistanceMul = 0.5;
 const float ambientOcclusionLevel = 1.0;
-// Iris lisse la pluie en « wetness » : le sol se mouille en une minute environ et sèche en trois.
+// Iris lisse la pluie en « wetness » (en ticks) : le sol se mouille vite et sèche lentement, une minute de demi-vie,
+// la même valeur que drynessHalfLife dans shaders.properties.
 const float wetnessHalflife = 300.0;
-const float drynessHalflife = 900.0;
+const float drynessHalflife = 1200.0;
 
 // Forme de la carte d'ombre : le centre est grossi, les lointains tassés.
 #define SHADOW_BEND 0.86

@@ -44,6 +44,8 @@ void storeVoxel(vec3 pos, int mat) {
     bool open = (mat >= 1 && mat <= 3) || mat == 5 || mat == 8 || mat == 16 || mat == 22;
     if (!open) code |= VOX_RAIN;
     if (mat == 6) code |= VOX_WATER;
+    if (mat == 13) code |= VOX_GLASS;
+    if (mat == 4) code |= VOX_LEAF;
 #if VOXEL_REFLECTIONS > 0
     // Ce qui se voit dans un reflet : pas l'eau ni les petites plantes, trop fines pour un bloc entier.
     if (!open && mat != 6) {

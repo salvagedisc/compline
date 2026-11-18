@@ -66,7 +66,20 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
         // Plus loin encore, le relief vu par la caméra fait de l'ombre (lib/farshadow.glsl).
         if (beyond > 0.0) fallback *= farShadow(pos, normal, dither(frag + 5.588238 * float(frameCounter & 63)));
 #endif
-        float near_ = beyond < 1.0 ? shadowDepth(pos, normal, dither(frag), taps, thick) : 1.0;
+        vec3 shadowPos = pos;
+        float shadowNoise = dither(frag);
+#if PIXEL_SHADOWS > 0 && defined PROGRAM_TERRAIN
+        // Les ombres au pixel du jeu : chaque texel d'une face prend l'ombre de son centre, et le bord d'une ombre
+        // avance texel par texel, comme le reste du dessin. De près seulement : au loin un texel est plus petit
+        // qu'un pixel de l'écran.
+        if (dist < 40.0 && max(abs(normal.x), max(abs(normal.y), abs(normal.z))) > 0.9) {
+            vec3 w = pos + cameraPosition;
+            vec3 cell = floor(w * 16.0 - normal * 0.25);
+            shadowPos = (cell + 0.5) / 16.0 + normal * (0.5 / 16.0) - cameraPosition;
+            shadowNoise = fract(sin(dot(cell, vec3(12.9898, 78.233, 37.719))) * 43758.5453);
+        }
+#endif
+        float near_ = beyond < 1.0 ? shadowDepth(shadowPos, normal, shadowNoise, taps, thick) : 1.0;
         lit = beyond < 1.0 ? mix(near_, fallback, beyond) : fallback;
         thick *= 1.0 - beyond;
     }

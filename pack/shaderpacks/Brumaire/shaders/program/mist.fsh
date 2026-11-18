@@ -10,11 +10,52 @@
 #include "/lib/voxel.glsl"
 #include "/lib/precip.glsl"
 #include "/lib/motes.glsl"
+#include "/lib/leaffall.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
+/*
+const int colortex3Format = RGBA16F;
+*/
+/*
+const int colortex11Format = RGBA16F;
+*/
+// Les nuages du demi-écran (clouds.fsh) ; sans nuages, le fond laisse tout passer. De même pour la brume proche.
+const vec4 colortex3ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
+const vec4 colortex11ClearColor = vec4(0.0, 0.0, 0.0, 1.0);
+
 uniform sampler2D colortex0;
 uniform sampler2D colortex3;
+uniform sampler2D colortex11;
+
+float linearDepthAt(vec2 uv) {
+    float d = texture(depthtex0, uv).r;
+    return near * far / (far - d * (far - near));
+}
+
+/**
+ * La brume proche marchée sur le demi-écran (clouds.fsh), ramenée au pixel : les quatre cases autour de lui, pesées
+ * comme un filtre bilinéaire et retirées quand elles sont à une autre profondeur (la brume d'un tronc ne déborde pas
+ * sur le lointain derrière lui).
+ */
+vec4 fogAt(vec2 uv) {
+    vec2 halfSize = vec2(viewWidth, viewHeight) * 0.5;
+    vec2 at = uv * halfSize - 0.5;
+    vec2 base = floor(at);
+    vec2 f = at - base;
+    float centre = linearDepthAt(uv);
+    vec4 sum = vec4(0.0);
+    float weight = 0.0;
+    for (int k = 0; k < 4; k++) {
+        vec2 o = vec2(k & 1, k >> 1);
+        vec2 cell = (base + o + 0.5) / halfSize;
+        float w = (o.x > 0.5 ? f.x : 1.0 - f.x) * (o.y > 0.5 ? f.y : 1.0 - f.y) + 1e-3;
+        w /= 1e-3 + abs(linearDepthAt(cell) - centre) / centre * 30.0;
+        sum += texture(colortex11, cell * 0.5) * w;
+        weight += w;
+    }
+    return sum / max(weight, 1e-6);
+}
 in vec2 vUv;
 
 /* RENDERTARGETS: 0 */
@@ -49,105 +90,6 @@ vec3 shaftMarch(vec3 dir, float reach, float density, out float mistSun) {
 #else
     return vec3(0.0);
 #endif
-}
-
-/**
- * La brume proche en volume, marchée de l'œil jusqu'à reach (au plus FOG_RANGE) : des pas resserrés près de l'œil.
- * À chaque pas :
- *  - sa densité : la nappe qui s'amincit avec la hauteur, roulée en bancs par deux octaves de bruit qui dérivent avec
- *    le vent (des écharpes plus denses, des trouées), retirée dans les clairières ; et sous terre, une fine poussière ;
- *  - sa lumière : le ciel, le soleil ou la lune là où la carte d'ombre les laisse passer (les rayons sous les arbres,
- *    colorés par les vitraux), et la lumière des blocs alentour lue dans le volume coloré : un halo orangé autour des
- *    torches, bleu autour des lanternes d'âme ;
- *  - l'air lui-même renvoie un peu de soleil, sans brume : les rayons par temps clair.
- * Intégrée exactement pas à pas. Rend la part du fond qui passe ; light reçoit ce que la brume ajoute.
- */
-float fogMarch(vec3 dir, float reach, float sunAmount, out vec3 light) {
-    light = vec3(0.0);
-    float pass = 1.0;
-#if FOG_STEPS > 0
-    vec3 origin = gbufferModelViewInverse[3].xyz;
-    float base = mistAnchor();
-    float h = MIST_HEIGHT;
-    float open = smoothstep(0.0, 0.55, float(eyeBrightnessSmooth.y) / 240.0);
-    float dens0 = mistNearDensity() * (1.0 - MIST_LIFT * brumaireMist.x);
-    // Sous terre, une poussière que seules les torches font voir.
-    float cave = (1.0 - open) * 0.0035 * CAVE_HAZE;
-    float mu = dot(dir, gLightDir);
-    float phaseMist = 0.75 * mistPhase(mu, 0.5) + 0.25 * mistPhase(mu, -0.3);
-    float phaseAir = 0.7 * mistPhase(mu, 0.75) + 0.3 * mistPhase(mu, 0.2);
-    vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.75) * vec3(1.03, 1.0, 0.95) * 0.95 * mistTint();
-    vec3 beam = gLightColor * (0.03 + 0.4 * phaseMist * SHAFT_STRENGTH) * sunAmount;
-    float airGlow = (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
-    bool sunUp = dot(gLightColor, vec3(1.0)) > 0.01;
-    // Les bancs dérivent avec le vent, plus vite en haut.
-    vec2 wind = brumaireLink > 0.5 && dot(brumaireWind.xy, brumaireWind.xy) > 0.01 ? normalize(brumaireWind.xy) * (0.6 + 1.2 * brumaireWind.z) : vec2(0.8, 0.35);
-    vec3 drift = vec3(wind.x, 0.0, wind.y) * frameTimeCounter * 0.9;
-    float noise = dither(gl_FragCoord.xy);
-    float prev = 0.0;
-    for (int i = 0; i < FOG_STEPS; i++) {
-        float next = reach * sq(float(i + 1) / float(FOG_STEPS));
-        float dt = next - prev;
-        float t = prev + dt * noise;
-        prev = next;
-        vec3 p = origin + dir * t;
-        vec3 w = p + cameraPosition;
-        float d = dens0 * exp(clamp((base - w.y) / h, -30.0, 3.0));
-#if FOG_BILLOWS > 0
-        if (d > 1e-5) {
-            float n1 = cloudNoise((w - drift) * 0.018 + vec3(0.0, frameTimeCounter * 0.0012, 0.0)).r;
-            float n2 = cloudNoise((w - drift * 1.6) * 0.062 + 0.37).g;
-            float n = n1 * 0.7 + n2 * 0.3;
-            d *= max(mix(1.0, smoothstep(0.25, 0.75, n) * 2.4, 0.8 * FOG_BILLOWS), 0.0);
-        }
-#endif
-        // Les clairières : la brume y est retirée, le bord adouci.
-        vec4 cs[4] = vec4[4](brumaireClearing0, brumaireClearing1, brumaireClearing2, brumaireClearing3);
-        for (int k = 0; k < 4; k++) {
-            if (cs[k].z > 0.0) d *= 1.0 - cs[k].w * (1.0 - smoothstep(cs[k].z * 0.72, cs[k].z, length(p.xz - cs[k].xy)));
-        }
-        d += cave;
-        // Soleil ou lune à ce point : la carte d'ombre, teinte des vitraux comprise.
-        vec3 sun = vec3(sunUp ? 1.0 : 0.0);
-#if LIGHT_SHAFTS > 0
-        if (sunUp && t < shadowDistance * 0.9) {
-            vec3 uv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-            float s = uv.z < 1.0 ? texture(shadowtex1, vec3(uv.xy, uv.z - 0.0002)) : 1.0;
-            sun = s > 0.0 ? s * tintAt(uv) : vec3(0.0);
-        }
-#endif
-        vec3 local = body * open + beam * sun;
-        float through = exp(-d * dt);
-        light += pass * (1.0 - through) * local;
-        // L'air, sans brume, renvoie le soleil vers l'avant : ses rayons là où des feuillages le découpent.
-        light += pass * gLightColor * sun * phaseAir * airGlow * dt;
-        pass *= through;
-        if (pass < 0.01) break;
-    }
-#if COLORED_LIGHT > 0
-    // Le halo des torches, des lanternes et de la lave : une marche à part, serrée sur les premiers blocs, car un halo
-    // n'a que quelques blocs de large et la marche de la brume y passe en grands pas. L'air humide autour d'une flamme
-    // suffit à le montrer, même sans brume ; il s'éteint avec la brume traversée devant lui.
-    if (FOG_BLOCK_GLOW > 0.0) {
-        float haloReach = min(reach, 32.0);
-        float hdt = haloReach / 10.0;
-        float glowAir = 0.008 + 0.016 * airHumid + 0.012 * rainStrength + cave * 2.0;
-        vec3 glow = vec3(0.0);
-        for (int i = 0; i < 10; i++) {
-            float t = (float(i) + noise) * hdt;
-            vec4 blk = voxelLight(origin + dir * t, vec3(0.0));
-            if (blk.a < 0.3) continue;
-            // Le niveau de lumière baisse d'un cran par bloc : son cube fait la lueur large, une haute puissance
-            // le cœur serré autour de la flamme.
-            float a = blk.a;
-            float k = a * a * a * 0.45 + pow(a, 10.0) * 5.0;
-            glow += blk.rgb * k * exp(-(dens0 + cave) * t);
-        }
-        light += glow * hdt * (glowAir + dens0) * FOG_BLOCK_GLOW;
-    }
-#endif
-#endif
-    return pass;
 }
 
 /**
@@ -293,9 +235,8 @@ void main() {
                 mist = mix(mist, skyAt(normalize(vec3(dir.x, 0.03, dir.z))) * mistTint() * 0.9, ringShare * 0.75);
                 color = mix(color, mist, farVeil);
             }
-            vec3 fogLight;
-            float fogPass = fogMarch(dir, reach, 1.0, fogLight);
-            color = color * fogPass + fogLight;
+            vec4 fog = fogAt(uv);
+            color = color * fog.a + fog.rgb;
         }
 #else
         float veil = 1.0 - exp(-depth);
@@ -362,6 +303,21 @@ void main() {
                     vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * dist, vec3(0.0));
                     color += blk.rgb * blk.a * blk.a * blk.a * mote * under * 0.35;
                 }
+            }
+        }
+#endif
+#if FALLING_LEAVES > 0 && defined VOXELS
+        // Les feuilles qui tombent des arbres proches, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
+        {
+            float leafDist;
+            vec3 leafTint;
+            float leaf = leafAlong(dir, min(len, 16.0), leafDist, leafTint);
+            if (leaf > 0.0) {
+                vec3 p = gbufferModelViewInverse[3].xyz + dir * leafDist;
+                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                vec3 light = gAmbient * 0.75 + gLightColor * lit * 0.55;
+                color = mix(color, leafTint * light, leaf);
             }
         }
 #endif

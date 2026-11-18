@@ -23,11 +23,21 @@ uniform sampler2D colortex6;
 #include "/lib/wakes.glsl"
 #include "/lib/rain.glsl"
 #include "/lib/waterfoam.glsl"
+#if ICE_DETAIL > 0
+#include "/lib/cover.glsl"
+#include "/lib/snow.glsl"
+#endif
 #endif
 
 uniform sampler2D gtexture;
+#include "/lib/glass.glsl"
 uniform float alphaTestRef;
 uniform vec4 entityColor;
+#if (defined PROGRAM_ENTITIES || defined PROGRAM_HAND) && MATERIALS > 0
+// L'objet rendu (outil, armure portée, objet posé ou tenu) et la créature, numérotés comme les blocs (lib/material.glsl).
+uniform int currentRenderedItemId;
+uniform int entityId;
+#endif
 
 in vec2 vUv;
 in vec2 vLm;
@@ -155,6 +165,9 @@ void main() {
     vec4 color = texture(gtexture, vUv);
 #endif
     color.rgb *= vTint.rgb;
+#if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
+    if (vMat == 13) color = connectGlass(color, vPos + cameraPosition, normal, vUv, vTint.rgb);
+#endif
     ao = vTint.a * pbrAo;
 #else
     vec4 color = texture(gtexture, vUv) * vTint;
@@ -168,10 +181,6 @@ void main() {
 
 #ifndef PROGRAM_CLRWL
     if (color.a < alphaTestRef) discard;
-#endif
-#if defined FAR_RECORD && FAR_SHADOWS > 0
-    // Le relief pour les ombres lointaines : les plantes et les lianes n'arrêtent pas le soleil de loin.
-    if (!(vMat >= 1 && vMat <= 3) && vMat != 5) farRecord(vPos + cameraPosition, gl_FragCoord.xy);
 #endif
 #if defined PROGRAM_ENTITIES
     color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
@@ -254,6 +263,26 @@ void main() {
 #endif
     albedo *= 1.0 - 0.65 * surf.metal;
 #endif
+#if (defined PROGRAM_ENTITIES || defined PROGRAM_HAND) && MATERIALS > 0
+    // Les outils, armures et lingots de métal ou de pierre précieuse, la créature de fer : leur matière, texel par
+    // texel (le manche de bois d'une épée reste mat).
+    {
+        int kind = itemKind(currentRenderedItemId);
+#if defined PROGRAM_ENTITIES
+        if (kind == 0) kind = itemKind(entityId);
+#endif
+        if (kind > 0) {
+            float part = itemTexel(kind, color.rgb);
+            Surface m = surfaceOf(kind);
+            // Un objet est plus clair que son bloc (une armure de fer presque blanche) : sa réflectance est tenue plus
+            // bas, sans quoi il renvoie tout le ciel et blanchit.
+            surf = Surface(mix(surf.rough, m.rough, part), m.metal * part, m.gloss * part * 0.6, 0.0);
+            f0 = mix(vec3(0.04), clamp(albedo * 1.05, 0.04, 0.85), surf.metal);
+            if (kind == 10) f0 = mix(f0, vec3(0.08), part);
+            albedo *= 1.0 - 0.65 * surf.metal;
+        }
+    }
+#endif
 #if defined PROGRAM_TERRAIN
     // Le vent couche les herbes : un brin couché montre son revers, plus clair et plus jaune. Les rafales passent sur
     // une prairie en vagues claires.
@@ -269,6 +298,13 @@ void main() {
         return;
     }
     if (vMat == 10) {
+#if ICE_DETAIL > 0
+        // La glace claire : ses fissures et ses bulles sont blanches et couvrantes, le reste laisse voir au travers.
+        vec2 iceD = iceDetail(vPos + cameraPosition, normal);
+        float white = iceD.x * 0.6 + iceD.y * 0.8;
+        albedo = mix(albedo, vec3(0.72, 0.80, 0.88), white);
+        color.a = mix(color.a, 0.85, white);
+#endif
         outColor = ice(albedo, color.a, normal, lm, ao);
         return;
     }
@@ -285,6 +321,8 @@ void main() {
     // Le vent de la neige : celui du mod quand il est là, sinon un vent d'ouest régulier.
     vec2 snowWind = brumaireLink > 0.5 && dot(brumaireWind.xy, brumaireWind.xy) > 0.01 ? normalize(brumaireWind.xy) : vec2(0.8, 0.6);
     bool snowTop = normal.y > 0.9 && vMat != 4;
+    // Pendant une chute, la neige se plaque aussi sur les faces qui font front au vent.
+    if ((vMat == 0 || vMat == 14) && !snowTop) snow = max(snow, snowPlaster(world, normal, lm.y, snowWind, luma(color.rgb / max(vTint.rgb, vec3(0.05)))));
 #if SNOW_DETAIL > 0
     if (snowTop && snow > 0.0) {
         // Sous les arbres et autour des lumières, la neige ne fait plus un voile : elle se pose par plaques, et fond
@@ -324,7 +362,24 @@ void main() {
         // Le sable boit un peu de lumière et garde sa couleur, sinon il blanchit au soleil comme de la neige.
         albedo = mix(vec3(luma(albedo)), albedo, 1.25) * 0.55;
         sparkle = glitter(world, 0.0015) * max(normal.y, 0.0) * 0.6;
+#if SAND_DETAIL > 0
+        // Le vent ride le sable : des rides en travers du vent, dont la crête prend le soleil (proches seulement).
+        if (normal.y > 0.9) {
+            snowBump = (1.0 - smoothstep(20.0, 32.0, length(vPos))) * (1.0 - rainStrength * 0.7);
+            if (snowBump > 0.0) {
+                snowN = sandNormal(world, snowWind, snowBump);
+                albedo *= mix(1.0, sandShade(world, snowWind), snowBump);
+            }
+        }
+#endif
     }
+#if ICE_DETAIL > 0
+    if (vMat == 11) {
+        // La glace tassée : des fissures blanches et des bulles prises dedans.
+        vec2 iceD = iceDetail(world, normal);
+        albedo = mix(albedo, vec3(0.70, 0.78, 0.86), iceD.x * 0.55 + iceD.y * 0.7);
+    }
+#endif
 #if TRACKS > 0
     // Les pas creusent le sable et la neige : un creux un peu plus sombre, dont le bord prend la lumière.
     if ((vMat == 9 || vMat == 12 || snow > 0.5) && normal.y > 0.9) {
@@ -372,6 +427,25 @@ void main() {
 #endif
     float indirect;
     vec3 lit = shade(albedo, normal, lm, ao, vPos, leaf, gl_FragCoord.xy, taps, indirect);
+#if (defined PROGRAM_ENTITIES || defined PROGRAM_HAND) && MATERIALS > 0
+    // Le reflet de l'astre sur un objet, et pour un métal ce qu'il reflète autour de lui, teint de sa couleur.
+    if (surf.metal > 0.0 || surf.gloss > 0.0) {
+        vec3 eye = -normalize(vPos);
+        lit += gSunReach * sunSpecular(normal, eye, gLightDir, surf.rough, f0) * SPECULAR_STRENGTH;
+        if (surf.metal > 0.0) {
+            vec3 r = reflect(-eye, normal);
+            vec3 env = hemisphereLight(normalize(mix(r, normal, surf.rough * surf.rough)), lm.y * lm.y) * 1.1;
+            float near_ = lm.x;
+            env += lightTint(0) * near_ * near_ * (0.30 + 2.3 * pow(near_, 3.0)) * 0.6;
+            vec3 fm = mix(f0, vec3(1.0), pow(1.0 - max(dot(normal, eye), 0.0), 5.0) * 0.35);
+#if ROUGH_REFLECTIONS > 0 && defined WRITE_SURFACE
+            env *= 0.5;
+#endif
+            lit += env * fm * mix(1.0, 0.55, surf.rough) * surf.metal * ao * 0.6;
+        }
+        gloss = max(gloss, surf.gloss);
+    }
+#endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
     if (reliefLight > 0.0) {
         // La lumière directe suit la pente du texel (rapportée à celle de la face, dont l'ombre est déjà comptée) et
@@ -382,7 +456,7 @@ void main() {
         lit *= 1.0 - 0.5 * (1.0 - dot(reliefN, normal));
     }
 #endif
-#if defined PROGRAM_TERRAIN && SNOW_DETAIL > 0
+#if defined PROGRAM_TERRAIN && (SNOW_DETAIL > 0 || SAND_DETAIL > 0)
     if (snowBump > 0.0) {
         // La neige suit sa propre pente au soleil (la face, elle, est déjà ombrée), et ses creux à l'ombre prennent le
         // bleu du ciel, qui l'éclaire seul.

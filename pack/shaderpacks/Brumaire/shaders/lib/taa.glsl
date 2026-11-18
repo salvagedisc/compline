@@ -3,7 +3,10 @@
 // Les arêtes fines (feuillage, clôtures, bords lointains) cessent de scintiller quand la caméra bouge.
 
 #if TAA > 0
+#ifndef HAS_FRAME_COUNTER
 uniform int frameCounter;
+#define HAS_FRAME_COUNTER
+#endif
 
 /** Décalage de cette image, en pixels, entre -0,5 et 0,5. */
 vec2 taaOffset() {

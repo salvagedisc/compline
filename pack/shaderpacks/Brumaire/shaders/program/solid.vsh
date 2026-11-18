@@ -2,6 +2,24 @@
 #include "/lib/settings.glsl"
 #include "/lib/common.glsl"
 #include "/lib/taa.glsl"
+#ifdef FAR_RECORD
+#include "/lib/farshadow.glsl"
+#endif
+
+#ifdef BUSHY_PASS
+// Le feuillage touffu (program/bushy.gsh) : les sorties passent par le shader de géométrie, qui les rend sous leur nom.
+#define vUv gUv
+#define vLm gLm
+#define vTint gTint
+#define vNormal gNormal
+#define vPos gPos
+#define vMat gMat
+#define vSurf gSurf
+#define vBend gBend
+#define vTangent gTangent
+#define vSpriteMid gSpriteMid
+#define vSpriteHalf gSpriteHalf
+#endif
 
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
 #define HAS_BLOCK_ID
@@ -43,6 +61,10 @@ void main() {
     int id = int(mc_Entity.x + 0.5) - 10000;
     vMat = id > 0 ? id % 32 : 0;
     vSurf = id >= 32 ? id / 32 : 0;
+#if defined FAR_RECORD && FAR_SHADOWS > 0
+    // Le relief pour les ombres lointaines : les plantes et les lianes n'arrêtent pas le soleil de loin.
+    if (!(vMat >= 1 && vMat <= 3) && vMat != 5) farRecord(vPos + cameraPosition);
+#endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
     // Le repère de la face (pour le relief) et le rectangle de sa texture dans l'atlas : chaque coin est à la même
     // distance du centre, la demi-taille reste donc la même sur toute la face.

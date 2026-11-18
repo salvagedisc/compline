@@ -61,6 +61,33 @@ vec3 fresnel(vec3 f0, float cosine) {
 }
 
 /**
+ * Matière d'un objet ou d'une créature, d'après les numéros de item.properties et entity.properties (10000 + 32 ×
+ * matière, comme les blocs) ; 0 hors de la table.
+ */
+int itemKind(int id) {
+    if (id < 10032 || id >= 10032 + 32 * 32 || (id - 10000) % 32 != 0) return 0;
+    return (id - 10000) / 32;
+}
+
+/**
+ * Part du texel d'un objet qui est faite de la matière (0..1) : la lame d'une épée de fer, pas son manche de bois ;
+ * les pierres d'une armure de diamant. texel : couleur de la texture (sRGB).
+ */
+float itemTexel(int kind, vec3 texel) {
+    float hi = max(texel.r, max(texel.g, texel.b));
+    float lo = min(texel.r, min(texel.g, texel.b));
+    float sat = (hi - lo) / max(hi, 1e-3);
+    float l = luma(texel);
+    if (kind == 4 || kind == 21) return smoothstep(0.30, 0.18, sat) * smoothstep(0.06, 0.14, l);
+    if (kind == 5) return smoothstep(0.66, 0.76, texel.g / max(texel.r, 1e-3)) * step(texel.b, texel.g * 0.8) * smoothstep(0.30, 0.45, texel.r);
+    if (kind >= 6 && kind <= 8) return smoothstep(0.50, 0.65, texel.r) * step(texel.b, texel.r * 0.8) + step(texel.r + 0.06, texel.g) * smoothstep(0.25, 0.40, texel.g) * float(kind != 6);
+    if (kind == 9) return smoothstep(0.42, 0.28, l) * smoothstep(0.40, 0.25, sat);
+    if (kind == 10) return max(smoothstep(0.06, 0.16, texel.b - texel.r), smoothstep(0.10, 0.22, texel.g - texel.r));
+    if (kind == 20) return smoothstep(0.55, 0.70, texel.r) * step(texel.b, texel.g * 0.85);
+    return 1.0;
+}
+
+/**
  * Reflet de l'astre sur une surface (GGX, ombrage de Smith par Schlick, Fresnel de Schlick), déjà multiplié par le
  * cosinus d'incidence. n : normale ; v : direction vers l'œil ; l : direction vers l'astre.
  */
