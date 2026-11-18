@@ -12,6 +12,7 @@
 #include "/lib/motes.glsl"
 #include "/lib/leaffall.glsl"
 #include "/lib/fireflies.glsl"
+#include "/lib/cavedrips.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
 
@@ -303,6 +304,20 @@ void main() {
                 if (mote > 0.0) {
                     vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * dist, vec3(0.0));
                     color += blk.rgb * blk.a * blk.a * blk.a * mote * under * 0.35;
+                }
+            }
+        }
+#endif
+#if CAVE_DRIPS > 0 && defined VOXELS && COLORED_LIGHT > 0
+        // Sous terre, les gouttes qui tombent des voûtes brillent de la lumière des torches et de la lave.
+        {
+            float under = 1.0 - smoothstep(0.0, 0.45, float(eyeBrightnessSmooth.y) / 240.0);
+            if (under > 0.01) {
+                float dist;
+                float drip = dripAlong(dir, min(len, 16.0), dist);
+                if (drip > 0.0) {
+                    vec4 blk = voxelLight(gbufferModelViewInverse[3].xyz + dir * dist, vec3(0.0));
+                    color = mix(color, blk.rgb * (0.04 + 1.6 * blk.a * blk.a) + vec3(0.004, 0.006, 0.008), drip * under * 0.85);
                 }
             }
         }

@@ -13,6 +13,8 @@
 #define FOG_BLOCK_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
 #define CAVE_DETAIL 1 // [0 1]
+// Les gouttes qui tombent des voûtes des grottes, dans la lumière des torches (lib/cavedrips.glsl).
+#define CAVE_DRIPS 1 // [0 1]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]
@@ -63,6 +65,8 @@
 #define CHROMATIC_ABERRATION 1 // [0 1]
 // Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
 #define LENS_DROPS 1 // [0 1]
+// La buée du souffle par grand froid, devant les yeux (program/grade.fsh).
+#define COLD_BREATH 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
 #define GLASS_TINT 1 // [0 1]
 // Le verre qui se raccorde à ses voisins : une verrière sans cadres entre ses blocs (lib/glass.glsl).
