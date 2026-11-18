@@ -66,6 +66,8 @@
 #define CHROMATIC_ABERRATION 1 // [0 1]
 // Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
 #define LENS_DROPS 1 // [0 1]
+#define LENS_SNOW 1 // [0 1]
+#define LENS_FROST 1 // [0 1]
 // La buée du souffle par grand froid, devant les yeux (program/grade.fsh).
 #define COLD_BREATH 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
@@ -116,6 +118,7 @@
 #define WALL_RIVULETS 1 // [0 1]
 // Les gouttes qui perlent et coulent sur les vitres sous la pluie (lib/rain.glsl).
 #define WINDOW_RAIN 1 // [0 1]
+#define EAVES_DRIPS 1 // [0 1]
 // Les êtres et le joueur trempés sous la pluie, plus sombres et luisants (program/solid.fsh).
 #define WET_ENTITIES 1 // [0 1]
 #define RAIN_SPLASHES 1 // [0 1]

@@ -199,6 +199,111 @@ vec4 lensDrop(vec2 uv, float wet, float t) {
 }
 #endif
 
+#if LENS_SNOW > 0 || LENS_FROST > 0
+float frostHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
+float frostNoise(vec2 p) {
+    vec2 i = floor(p), f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(mix(frostHash(i), frostHash(i + vec2(1.0, 0.0)), f.x), mix(frostHash(i + vec2(0.0, 1.0)), frostHash(i + vec2(1.0, 1.0)), f.x), f.y);
+}
+#endif
+
+#if LENS_SNOW > 0
+uniform float lensSnow;
+
+/**
+ * Le flocon posé sur l'objectif en ce point de l'écran : sa présence (0..1) et sa fonte (0 entier, 1 devenu goutte).
+ * Deux tailles ; chacun vit quatre à huit secondes : il se pose, ses six branches fondent et il finit en une goutte
+ * ronde qui sèche.
+ */
+vec2 lensFlake(vec2 uv, float amount, float t) {
+    vec2 p = uv * vec2(viewWidth / viewHeight, 1.0);
+    vec2 found = vec2(0.0);
+    for (int layer = 0; layer < 2; layer++) {
+        float size = layer == 0 ? 0.06 : 0.10;
+        vec2 g = p / size + float(layer) * 5.17 + 2.3;
+        vec2 cell = floor(g);
+        float period = 4.0 + 4.0 * frostHash(cell + 1.7);
+        float phase = t / period + frostHash(cell + 0.3);
+        float age = fract(phase);
+        vec2 seed = cell + floor(phase) * 17.3;
+        if (frostHash(seed + 0.9) > amount * (layer == 0 ? 0.08 : 0.05)) continue;
+        float r = 0.22 + 0.14 * frostHash(seed + 2.1);
+        vec2 c = vec2(frostHash(seed + 3.3), frostHash(seed + 4.7)) * (1.0 - 2.0 * r) + r;
+        vec2 d = (fract(g) - c) / r;
+        float melt = smoothstep(0.35, 0.8, age);
+        // Six branches fines, tournées au hasard, qui se fondent en un disque.
+        float ang = atan(d.y, d.x) + frostHash(seed + 6.1) * 3.14;
+        float arms = 0.25 + 0.75 * pow(abs(cos(3.0 * ang)), 10.0);
+        float twigs = 0.12 * pow(abs(cos(9.0 * ang)), 6.0) * step(0.4, length(d));
+        float edge = mix(arms + twigs, 0.5, melt) * (1.0 - 0.35 * melt);
+        float l = length(d);
+        if (l >= edge) continue;
+        float life = smoothstep(0.0, 0.04, age) * (1.0 - smoothstep(0.85, 1.0, age));
+        found = vec2(life * (1.0 - 0.4 * smoothstep(0.7, 1.0, l / edge)), melt);
+    }
+    return found;
+}
+#endif
+
+#if LENS_FROST > 0
+uniform float lensFrost;
+
+/**
+ * Le givre sur l'objectif (0..1 en ce point) : il part des coins et gagne les bords en fougères, d'autant plus loin
+ * que l'objectif a eu froid longtemps (amount).
+ */
+float segDist(vec2 p, vec2 a, vec2 b) {
+    vec2 pa = p - a, ba = b - a;
+    return length(pa - ba * clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0));
+}
+
+/**
+ * Les aiguilles du givre autour d'un point (en cases de taille size) : dans chaque case, une aiguille droite pointée
+ * vers le centre de l'image, et deux paires de rameaux à soixante degrés, comme une fougère. 0..1.
+ */
+float frostNeedles(vec2 p, vec2 centre, float size) {
+    vec2 g = p / size;
+    vec2 base = floor(g);
+    float best = 0.0;
+    for (int i = 0; i < 9; i++) {
+        vec2 cell = base + vec2(float(i % 3) - 1.0, float(i / 3) - 1.0);
+        vec2 c = cell + 0.5 + (vec2(frostHash(cell + 0.7), frostHash(cell + 2.9)) - 0.5) * 0.6;
+        vec2 inward = normalize(centre / size - c + 1e-4);
+        float a = (frostHash(cell + 5.3) - 0.5) * 0.8;
+        vec2 dir = mat2(cos(a), sin(a), -sin(a), cos(a)) * inward;
+        vec2 side = vec2(-dir.y, dir.x);
+        float d = segDist(g, c - dir * 0.9, c + dir * 0.9);
+        for (int k = 0; k < 2; k++) {
+            vec2 at = c + dir * (k == 0 ? 0.35 : -0.25);
+            float len = k == 0 ? 0.35 : 0.5;
+            d = min(d, segDist(g, at, at + (dir * 0.5 + side * 0.866) * len));
+            d = min(d, segDist(g, at, at + (dir * 0.5 - side * 0.866) * len));
+        }
+        best = max(best, exp(-d * d / 0.004));
+    }
+    return best;
+}
+
+float lensFrostAt(vec2 uv, float amount, out float crystal) {
+    vec2 aspect = vec2(viewWidth / viewHeight, 1.0);
+    vec2 q = (uv - 0.5) * aspect;
+    float v = length(q * vec2(0.85, 1.0)) / length(vec2(0.5 * aspect.x * 0.85, 0.5));
+    // Des aiguilles droites et ramifiées, en deux tailles, et un bruit large qui découpe le front.
+    vec2 p = uv * aspect;
+    vec2 centre = 0.5 * aspect;
+    crystal = max(frostNeedles(p, centre, 0.055), frostNeedles(p + 3.7, centre + 3.7, 0.024) * 0.8);
+    float fern = frostNoise(uv * 7.0 + 4.1) * 0.6 + frostNoise(uv * 19.0) * 0.4;
+    float front = 1.0 - 0.42 * amount;
+    float cover = smoothstep(front, front + 0.06, v + 0.22 * (fern - 0.5));
+    // Au front, il ne reste que les aiguilles ; plus loin dans le coin, un voile les relie.
+    float veil = smoothstep(front + 0.05, front + 0.25, v + 0.22 * (fern - 0.5));
+    crystal *= cover;
+    return max(crystal * 0.9, veil * 0.6) * amount;
+}
+#endif
+
 #if COLD_BREATH > 0
 uniform float airHeat;
 uniform float snowHere;
@@ -270,6 +375,38 @@ void main() {
                 inside += inside * 0.6 * smoothstep(0.10, 0.0, length(drop.xy - vec2(-0.30, 0.38)));
                 color = mix(color, inside, drop.z);
             }
+        }
+    }
+#endif
+#if LENS_SNOW > 0
+    // Les flocons posés sur l'objectif : blancs et nets, ils fondent en gouttes qui brouillent un peu l'image.
+    if (lensSnow > 0.01) {
+        vec2 flake = lensFlake(vUv, lensSnow, frameTimeCounter);
+        if (flake.x > 0.0) {
+            vec3 white = vec3(0.92, 0.96, 1.0) * max(lens.x, 0.02) * 5.0;
+#ifdef BLOOM
+            vec3 soft = textureLod(colortex0, vUv, 2.0).rgb;
+#else
+            vec3 soft = color;
+#endif
+            color = mix(color, mix(white, soft * 1.08, flake.y), flake.x * mix(0.8, 0.5, flake.y));
+        }
+    }
+#endif
+#if LENS_FROST > 0
+    // Le givre des grands froids : un voile blanc et flou qui gagne les coins, semé de points qui brillent.
+    if (lensFrost > 0.01) {
+        float crystal;
+        float frost = lensFrostAt(vUv, lensFrost, crystal);
+        if (frost > 0.001) {
+#ifdef BLOOM
+            vec3 soft = textureLod(colortex0, vUv, 3.0).rgb;
+#else
+            vec3 soft = color;
+#endif
+            float glint = step(0.985, frostHash(floor(vUv * vec2(viewWidth, viewHeight) * 0.5)));
+            vec3 ice = soft * 0.8 + vec3(0.82, 0.90, 1.0) * max(lens.x, 0.02) * (1.5 + 4.0 * crystal + 6.0 * glint * crystal);
+            color = mix(color, ice, frost * 0.75);
         }
     }
 #endif
