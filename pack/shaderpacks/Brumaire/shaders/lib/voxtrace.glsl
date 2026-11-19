@@ -52,6 +52,14 @@ vec4 voxelReflection(vec3 start, vec3 dir, out float dist) {
 
         vec3 n = vec3(0.0);
         n[axis] = -sgn[axis];
+#if REFLECT_LEAF_GAPS > 0
+        // Un feuillage n'est pas un mur : par endroits, au quart de bloc, le rayon passe entre les feuilles et va
+        // chercher plus loin (le ciel, un tronc) ; une cime reflétée se lit ajourée au lieu d'une masse pleine.
+        if ((code & VOX_LEAF) != 0u) {
+            vec3 key = floor((p + dir * t) * 4.0 - n * 0.02) + floor(cameraPosition) * 4.0;
+            if (fract(sin(dot(key, vec3(127.1, 311.7, 74.7))) * 43758.5453) < 0.42) continue;
+        }
+#endif
         uint top = texelFetch(voxTopTex, cell, 0).r;
         uint side = texelFetch(voxSideTex, cell, 0).r;
         uint word = axis == 1 && stepv.y < 0 ? (top != 0u ? top : side) : (side != 0u ? side : top);

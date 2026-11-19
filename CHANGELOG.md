@@ -33,6 +33,7 @@ No Man's Land left the pack on 2026-11-13 ([0019](docs/decisions/0019-leaving-no
 - Brumaire, fire, rain and frost: hot air ripples above fires, campfires and lanterns, leaves and grass keep their drops after a shower and sparkle when the sun returns, and frost grows on windows from the frame in bitter cold. New `Air chaud des feux`, `Feuillage mouillé` and `Givre sur les vitres` settings.
 - Brumaire, deep winter and bright light: icicles hang from overhanging roofs in bitter cold, falling snow settles on animals' backs and on shoulders and helmets, and dust on the lens lights up in soft spots when facing the sun or a bright light. New `Glaçons`, `Êtres enneigés` and `Poussière sur l'objectif` settings.
 - Brumaire, mirages and diamond dust: the far ground of scorching deserts reflects the sky like a sheet of water, and bitter, clear cold fills the sunlit air with glittering ice crystals. New `Mirages` and `Poussière de diamant` settings.
+- Brumaire: trees reflected in the water from out of frame show gaps of sky between their leaves.
 - Brumaire: the green edge of grass blocks hangs a few ragged pixels further down their sides.
 - Brumaire: the lunar events of Enhanced Celestials colour the night: red under a blood moon, teal under a blue moon, golden under a harvest moon.
 - Brumaire: distant lakes and seas reflect the clouds by day and the stars at night, like the near water.

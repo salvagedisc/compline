@@ -104,6 +104,7 @@
 #define WATER_CAUSTICS 2 // [0 1 2]
 #define WATER_REFLECTIONS 20 // [0 12 20 32]
 #define VOXEL_REFLECTIONS 64 // [0 32 64 96]
+#define REFLECT_LEAF_GAPS 1 // [0 1]
 #define WATER_MOTES 1 // [0 1]
 #define WATER_WAKES 1 // [0 1]
 #define WATER_FOAM 1 // [0 1]
