@@ -226,6 +226,7 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     float rain = rainStrength * rainHere * smoothstep(0.80, 0.95, lm.y);
     vec3 n = normal;
     float foam = 0.0;
+    float riseSheen = 0.0;
     float rough = 0.06;
     bool falling = false;
     WaveSample wave = WaveSample(0.0, vec2(0.0), vec3(1.0, 1.0, 0.0), vec3(0.0), 0.0, 0.0);
@@ -255,6 +256,14 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         foam = wake.z;
 #endif
         foam = max(foam, rainOnWater(world, t, rain, slope));
+#if FISH_RISES > 0
+        if (normal.y > 0.5 && !below) {
+            // Les poissons gobent sur l'eau dormante : ni courant, ni vent fort, ni pluie, ni gel, ni nuit noire.
+            float calm = (1.0 - smoothstep(0.3, 1.0, length(env.flow))) * (1.0 - smoothstep(0.5, 0.9, env.force))
+                       * (1.0 - smoothstep(0.05, 0.3, rain)) * smoothstep(0.15, 0.30, airHeat) * max(gDay, gDusk * 0.8);
+            foam = max(foam, fishRise(world, t, calm, slope, riseSheen));
+        }
+#endif
         foam = max(foam, fallChurn(around, world, t, slope));
         if (normal.y > 0.5) {
             float energy = clamp(luma(vec3(env.force, env.storm, env.open)) * 1.6, 0.0, 1.0);
@@ -394,6 +403,10 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
 #endif
     }
 
+#if FISH_RISES > 0
+    // Les ronds des poissons : un liseré qui renvoie le ciel, plus clair que l'eau autour.
+    if (riseSheen > 0.0) color = mix(color, gAmbient * max(sky, 0.15) * 1.5 + gLightColor * lit * 0.15, riseSheen * 0.45);
+#endif
     // L'écume : une matière blanche et mate posée sur l'eau, qui prend le jour et le ciel et cache le reflet.
     float cover = top ? foamLace(world, foam, t) : foam;
     if (falling) cover = max(cover, 0.22);

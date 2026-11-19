@@ -141,6 +141,7 @@
 #define SPRAY_RAINBOW 1 // [0 1]
 #define SHORE_WET 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
+#define FISH_RISES 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
 // Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
 #define FIREFLIES 1 // [0 1]
