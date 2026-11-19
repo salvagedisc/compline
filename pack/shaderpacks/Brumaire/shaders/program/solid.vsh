@@ -63,7 +63,7 @@ void main() {
     vSurf = id >= 32 ? id / 32 : 0;
 #if defined FAR_RECORD && FAR_SHADOWS > 0
     // Le relief pour les ombres lointaines : les plantes et les lianes n'arrêtent pas le soleil de loin.
-    if (!(vMat >= 1 && vMat <= 3) && vMat != 5) farRecord(vPos + cameraPosition);
+    if (!(vMat >= 1 && vMat <= 3) && vMat != 5 && vMat != 7) farRecord(vPos + cameraPosition);
 #endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
     // Le repère de la face (pour le relief) et le rectangle de sa texture dans l'atlas : chaque coin est à la même
@@ -89,6 +89,13 @@ void main() {
         vBend.y = (top ? 1.0 : 0.0) + (vMat == 3 ? 1.0 : 0.0);
 #endif
     }
+#if WATER_PLANT_SWAY > 0
+    // Les plantes de l'eau suivent le courant ; les nénuphars dansent sur les rides.
+    if (vMat == 7) {
+        vPos += currentVertex(vPos + cameraPosition, vPos, abs(vNormal.y) > 0.9);
+        view = gbufferModelView * vec4(vPos, 1.0);
+    }
+#endif
 #endif
 #ifdef PROGRAM_WEATHER
     // La pluie et la neige penchent avec le vent : le haut des rideaux part vers l'amont.

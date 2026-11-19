@@ -39,9 +39,9 @@ void storeVoxel(vec3 pos, int mat) {
     ivec3 c = voxelCell(pos + at_midBlock.xyz / 64.0, fract(cameraPosition));
     if (!voxelInside(c)) return;
     uint level = uint(clamp(at_midBlock.w + 0.5, 0.0, 15.0));
-    bool clear = (mat >= 1 && mat <= 6) || mat == 10 || mat == 13 || mat == 14;
+    bool clear = (mat >= 1 && mat <= 7) || mat == 10 || mat == 13 || mat == 14;
     uint code = level > 0u ? level | (uint(lightFamily(mat)) << 4) | VOX_CLEAR : (clear ? VOX_CLEAR : VOX_SOLID);
-    bool open = (mat >= 1 && mat <= 3) || mat == 5 || mat == 8 || mat == 16 || mat == 22;
+    bool open = (mat >= 1 && mat <= 3) || mat == 5 || mat == 7 || mat == 8 || mat == 16 || mat == 22;
     if (!open) code |= VOX_RAIN;
     if (mat == 6) code |= VOX_WATER;
     if (mat == 13) code |= VOX_GLASS;
@@ -76,6 +76,13 @@ void main() {
         pos += windVertex(mat, gl_MultiTexCoord0.t < mc_midTexCoord.t, pos + cameraPosition, pos, lm.y);
         view = shadowModelView * vec4(pos, 1.0);
     }
+#if WATER_PLANT_SWAY > 0
+    if (mat == 7) {
+        vec3 pos = (shadowModelViewInverse * view).xyz;
+        pos += currentVertex(pos + cameraPosition, pos, abs(gl_Normal.y) > 0.9);
+        view = shadowModelView * vec4(pos, 1.0);
+    }
+#endif
     vec4 clip = gl_ProjectionMatrix * view;
     gl_Position = vec4(shadowWarp(clip.xyz), clip.w);
 }
