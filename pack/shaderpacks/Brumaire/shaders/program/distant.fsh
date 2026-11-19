@@ -5,6 +5,12 @@
 #include "/lib/light.glsl"
 #ifdef PROGRAM_DH_WATER
 #include "/lib/mist.glsl"
+#if FAR_WATER_SKY > 0
+#if WATER_STARS > 0
+#include "/lib/nightsky.glsl"
+#endif
+#include "/lib/reflect.glsl"
+#endif
 #endif
 #ifdef PROGRAM_DH_TERRAIN
 #include "/lib/alpenglow.glsl"
@@ -106,7 +112,13 @@ void main() {
         r.y = abs(r.y);
         float nearOnly;
         float veil = 1.0 - exp(-mistDepth(r, 4096.0, nearOnly));
+#if FAR_WATER_SKY > 0
+        // Le même ciel que dans l'eau proche (lib/reflect.glsl) : les nuages qui passent et, la nuit, les étoiles ;
+        // sans quoi le lac au loin reste d'un bleu uni sous un ciel chargé.
+        vec3 mirror = skyReflection(world, r) * mix(0.15, 1.0, sky);
+#else
         vec3 mirror = mix(skyAt(r), mistColor(r, 1.0), veil) * mix(0.15, 1.0, sky);
+#endif
         vec3 color = mix(body, mirror, F);
         float nl = max(gLightDir.y, 0.0);
         if (nl > 0.0) {

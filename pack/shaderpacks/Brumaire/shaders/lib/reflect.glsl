@@ -1,6 +1,6 @@
 // Reflets : la scène vue dans un miroir (eau, flaques, surfaces mouillées), et le ciel quand elle n'y est pas.
 // Demande mist.glsl et clouds.glsl avant lui, et deux définitions : REFLECT_DEPTH, la profondeur où chercher, et
-// REFLECT_COLOR, la couleur de ce qu'on y trouve.
+// REFLECT_COLOR, la couleur de ce qu'on y trouve. Sans REFLECT_DEPTH (le lointain), seul le ciel reflété est fourni.
 
 /** Position dans la vue (repère caméra) d'un point de l'écran. */
 vec3 viewAt(vec2 uv, float depth) {
@@ -21,6 +21,7 @@ vec3 unpackNormal(vec2 p) {
     return normalize(n);
 }
 
+#ifdef REFLECT_DEPTH
 /**
  * Reflet d'écran : le rayon réfléchi avance dans la vue jusqu'à passer derrière la scène.
  * side : 1 si le reflet part au-dessus de la surface, -1 en dessous ; ce qui est de l'autre côté du plan (le fond vu
@@ -74,6 +75,7 @@ vec4 screenReflection(vec3 start, vec3 ray, float jitter, float side, int steps,
     }
     return vec4(0.0);
 }
+#endif
 
 /** Le ciel reflété : voilé par la même brume que le vrai, avec les nuages à mi-hauteur de leur couche. */
 vec3 skyReflection(vec3 world, vec3 r) {
