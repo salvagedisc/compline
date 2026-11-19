@@ -123,6 +123,7 @@
 #define WATER_FALLS 1 // [0 1]
 #define FALL_SPRAY 1 // [0 1]
 #define SHORE_SPRAY 1 // [0 1]
+#define SPRAY_RAINBOW 1 // [0 1]
 #define SHORE_WET 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]

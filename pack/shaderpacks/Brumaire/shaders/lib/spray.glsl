@@ -98,4 +98,27 @@ float shoreSprayAlong(vec3 dir, float t1, float gale) {
     return clamp(opacity * gale, 0.0, 0.8);
 }
 #endif
+#if SPRAY_RAINBOW > 0
+/** Les couleurs d'un arc, x de 0 (violet, dedans) à 1 (rouge, dehors), noires hors de l'arc. */
+vec3 sprayBowColor(float x) {
+    float r = smoothstep(0.42, 0.80, x) + 0.30 * (1.0 - smoothstep(0.0, 0.18, x));
+    float g = 1.0 - clamp(abs(x - 0.52) / 0.30, 0.0, 1.0);
+    float b = 1.0 - smoothstep(0.12, 0.48, x);
+    return vec3(r, g, b) * smoothstep(-0.12, 0.08, x) * (1.0 - smoothstep(0.92, 1.12, x));
+}
+
+/**
+ * L'arc des embruns : le soleil dans le dos, les gouttes d'une cascade ou des embruns d'une rive dessinent un bout
+ * d'arc-en-ciel à 42° du point opposé au soleil, et plus pâle le second, inversé, vers 52°. Il n'existe que dans les
+ * gouttes : rend une lumière à multiplier par leur part.
+ */
+vec3 sprayBow(vec3 dir) {
+    float day = smoothstep(0.0, 0.12, gSunDir.y) * step(0.5, dot(gLightDir, gSunDir));
+    if (day <= 0.0) return vec3(0.0);
+    float a = degrees(acos(clamp(dot(dir, -gSunDir), -1.0, 1.0)));
+    if (a < 38.0 || a > 56.0) return vec3(0.0);
+    vec3 bow = sprayBowColor((a - 40.4) / 2.0) + 0.35 * sprayBowColor((53.8 - a) / 3.4);
+    return bow * gLightColor * day * 0.9;
+}
+#endif
 #endif
