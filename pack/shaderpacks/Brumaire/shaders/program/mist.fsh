@@ -492,6 +492,17 @@ void main() {
             if (spray > 0.0) color = mix(color, gAmbient * 1.3 + gLightColor * 0.45, spray);
         }
 #endif
+#if LAVA_STEAM > 0 && defined VOXELS
+        // Sous la pluie, la lave à ciel ouvert bout : de grosses volutes blanches, éclairées par dessous de son orange.
+        if (isEyeInWater == 0) {
+            float amount = max(rainStrength, wetness * 0.4) * max(rainHere, snowHere);
+            if (amount > 0.01) {
+                float steam = lavaSteamAlong(dir, len, amount);
+                vec3 tint = mistColor(dir, 1.0) * 1.3 + vec3(1.0, 0.42, 0.12) * 0.25;
+                color = mix(color, tint, steam);
+            }
+        }
+#endif
 #if WATER_STEAM > 0 && defined VOXELS
         // Les matins frais, l'eau fume : des volutes pâles, de la couleur de l'air, au ras des lacs et des rivières.
         if (isEyeInWater == 0) {

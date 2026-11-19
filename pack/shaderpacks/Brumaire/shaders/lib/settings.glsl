@@ -17,6 +17,7 @@
 #define GLOWWORMS 1 // [0 1]
 #define CAVE_DRIPS 1 // [0 1]
 #define LAVA_EMBERS 1 // [0 1]
+#define LAVA_STEAM 1 // [0 1]
 
 // Nuages
 #define CLOUD_STEPS 16 // [0 10 16 24 32]
