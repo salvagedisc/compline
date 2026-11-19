@@ -441,6 +441,9 @@ void main() {
         if (isEyeInWater == 0) {
             float spray = sprayAlong(dir, len);
             if (spray > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.5, spray);
+#if SPRAY_RAINBOW > 0
+            if (spray > 0.0) color += sprayBow(dir) * spray;
+#endif
         }
 #endif
 #if SOIL_STEAM > 0 && SHADER_RAIN > 0
@@ -490,6 +493,9 @@ void main() {
             float gale = smoothstep(0.55, 0.9, brumaireLink > 0.5 ? brumaireWind.z : 0.0);
             float spray = shoreSprayAlong(dir, len, gale);
             if (spray > 0.0) color = mix(color, gAmbient * 1.3 + gLightColor * 0.45, spray);
+#if SPRAY_RAINBOW > 0
+            if (spray > 0.0) color += sprayBow(dir) * spray;
+#endif
         }
 #endif
 #if LAVA_STEAM > 0 && defined VOXELS
