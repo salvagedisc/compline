@@ -8,6 +8,7 @@
 #endif
 #ifdef PROGRAM_DH_TERRAIN
 #include "/lib/alpenglow.glsl"
+#include "/lib/auroraglow.glsl"
 #endif
 
 uniform sampler2D depthtex0;
@@ -18,8 +19,14 @@ in vec3 vNormal;
 in vec3 vPos;
 flat in int vMat;
 
+#ifdef PROGRAM_DH_TERRAIN
+/* RENDERTARGETS: 0,1 */
+layout(location = 0) out vec4 outColor;
+layout(location = 1) out vec4 outMark;
+#else
 /* RENDERTARGETS: 0 */
 layout(location = 0) out vec4 outColor;
+#endif
 
 void main() {
     // Le terrain du jeu passe devant : le lointain s'efface là où il existe, et tout près de la caméra.
@@ -27,6 +34,11 @@ void main() {
     if (dist < far * 0.78 - 20.0 * dither(gl_FragCoord.xy)) discard;
 #ifdef PROGRAM_DH_WATER
     if (texelFetch(depthtex0, ivec2(gl_FragCoord.xy), 0).r < 1.0) discard;
+#endif
+#ifdef PROGRAM_DH_TERRAIN
+    // La marque du lointain dans la couche des surfaces (0,25 : sous le seuil des surfaces de solid.fsh, sans
+    // occlusion ni reflet) : program/scene.glsl ne croit la profondeur de Distant Horizons que là où elle est posée.
+    outMark = vec4(0.0, 0.0, 0.0, 0.25);
 #endif
     initEnv();
     vec3 normal = normalize(vNormal);
@@ -75,6 +87,9 @@ void main() {
     if (vMat == DH_BLOCK_ILLUMINATED || vMat == DH_BLOCK_LAVA) lit += albedo * 1.5;
 #if defined PROGRAM_DH_TERRAIN && ALPENGLOW > 0 && defined DH_BLOCK_SNOW
     if (vMat == DH_BLOCK_SNOW) lit += alpenglow(albedo, normal, vPos + cameraPosition, vLm.y * vLm.y);
+#endif
+#if defined PROGRAM_DH_TERRAIN && AURORA_GLOW > 0 && SKY_AURORA > 0
+    lit += auroraGlow(albedo, normal, vPos + cameraPosition, vLm.y * vLm.y);
 #endif
     outColor = vec4(lit, vTint.a);
 }

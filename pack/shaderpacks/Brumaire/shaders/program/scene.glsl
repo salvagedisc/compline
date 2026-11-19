@@ -1,6 +1,8 @@
 // Position d'un pixel de l'écran : terrain du jeu, ou paysage lointain de Distant Horizons.
 
 uniform sampler2D depthtex0;
+// La couche des surfaces (solid.fsh) : le paysage lointain y laisse sa marque (distant.fsh).
+uniform sampler2D colortex1;
 #ifdef DISTANT_HORIZONS
 uniform sampler2D dhDepthTex0;
 uniform mat4 dhProjectionInverse;
@@ -15,8 +17,12 @@ vec3 scenePosition(vec2 uv, out bool sky, out bool hand) {
 #ifdef DISTANT_HORIZONS
     if (sky) {
         float distant = texture(dhDepthTex0, uv).r;
-        sky = distant >= 1.0;
-        view = dhProjectionInverse * vec4(vec3(uv, distant) * 2.0 - 1.0, 1.0);
+        // Le paysage lointain marque les pixels qu'il dessine (distant.fsh). Sans marque, sa profondeur est un reste
+        // (une image passée, ou des blocs proches que distant.fsh a écartés) : ce n'est pas du terrain, et le prendre
+        // pour tel figeait des silhouettes noires dans le ciel.
+        float mark = texture(colortex1, uv).a;
+        sky = distant >= 1.0 || mark < 0.1 || mark > 0.4;
+        if (!sky) view = dhProjectionInverse * vec4(vec3(uv, distant) * 2.0 - 1.0, 1.0);
     }
 #endif
     return mat3(gbufferModelViewInverse) * (view.xyz / view.w);

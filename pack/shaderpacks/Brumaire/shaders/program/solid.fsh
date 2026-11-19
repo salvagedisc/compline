@@ -20,6 +20,7 @@ uniform float snowSoak;
 #include "/lib/tracks.glsl"
 #include "/lib/shore.glsl"
 #include "/lib/alpenglow.glsl"
+#include "/lib/auroraglow.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -595,6 +596,10 @@ void main() {
 #if defined PROGRAM_TERRAIN && ALPENGLOW > 0
     // Les cimes enneigées gardent le soleil couchant un moment après la vallée.
     if (vMat == 9 || snow > 0.3) lit += alpenglow(albedo, normal, world, lm.y * lm.y) * (vMat == 9 ? 1.0 : snow);
+#endif
+#if defined PROGRAM_TERRAIN && AURORA_GLOW > 0 && SKY_AURORA > 0
+    // Les nuits d'aurore, le paysage à découvert prend son vert, la neige surtout.
+    lit += auroraGlow(albedo, normal, world, lm.y * lm.y) * (1.0 + 0.6 * max(float(vMat == 9), snow)) * (1.0 - 0.5 * leaf);
 #endif
 #if defined PROGRAM_TERRAIN && MATERIALS > 0
     // Le reflet de l'astre, sur la pente du texel quand le relief ou la neige en donnent une. Un sol trempé devient
