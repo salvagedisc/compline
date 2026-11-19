@@ -67,6 +67,7 @@
 #define SSGI 6 // [0 4 6 8]
 #define SSGI_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.5 2.0]
 #define LEAF_TRANSLUCENCY 1.0 // [0.0 0.5 1.0 1.5]
+#define CANOPY_SHADE 1 // [0 1 2]
 #define BLOCK_LIGHT_SHAPE 1 // [0 1]
 #define LIGHT_SHAFTS 10 // [0 6 10 16 24]
 #define SHAFT_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
