@@ -5,6 +5,9 @@
 
 #define SKY_W 192
 #define SKY_H 108
+// Dernière ligne de la table : 0 ciel moyen, 1 soleil, 2 lune (sky.csh) ; 3 la teinte de la lune, écrite par
+// gbuffers_skytextured.vsh (les lunes d'Enhanced Celestials).
+#define SKY_LUNAR 3
 const float PI = 3.14159265;
 const float HALF_PI = 1.57079633;
 const float ATM_GROUND = 6360.0;
