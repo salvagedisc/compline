@@ -540,3 +540,7 @@ option.SKY_RAYS=Rayons crépusculaires
 option.SKY_RAYS.comment=Au coucher et au lever, entre des nuages épars, des bandes d'ombre et de lumière partent du soleil en éventail et se rejoignent à l'opposé du ciel.
 value.SKY_RAYS.0=Non
 value.SKY_RAYS.1=Oui
+option.HEAT_LIGHTNING=Éclairs de chaleur
+option.HEAT_LIGHTNING.comment=Les nuits chaudes et lourdes, des orages trop lointains pour être entendus allument en silence des bancs de nuages au ras de l'horizon.
+value.HEAT_LIGHTNING.0=Non
+value.HEAT_LIGHTNING.1=Oui
