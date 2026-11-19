@@ -21,6 +21,9 @@ uniform sampler2D colortex0;
 uniform vec3 sunPosition;
 uniform mat4 gbufferModelViewInverse;
 uniform ivec2 eyeBrightnessSmooth;
+#if RAIN_GLOOM > 0
+uniform float rainStrength;
+#endif
 uniform mat4 gbufferProjection;
 uniform float frameTimeCounter;
 #if NIGHT_GRAIN > 0
@@ -464,6 +467,15 @@ void main() {
     float seen = max(lens.x, 1e-5) * exposure;
     exposure *= clamp(pow(0.10 / seen, 0.3 * EXPOSURE_AUTO_AMOUNT), 0.75, 1.25);
 #endif
+#if RAIN_GLOOM > 0
+    // Sous la pluie, l'œil ne rouvre pas tout : un jour gris reste un jour sombre, d'un gris un peu chaud, celui des
+    // nuages chargés. Seulement dehors : sous un toit ou sous terre, la pluie ne se voit pas.
+    // Réglé sur les images de Recrafted : ciel autour de 160 sur 255, sol autour de 50.
+    float gloom = rainStrength * smoothstep(0.3, 0.8, float(eyeBrightnessSmooth.y) / 240.0);
+    // La nuit est déjà réglée pour elle-même : la pluie n'y pèse qu'à moitié.
+    gloom *= mix(0.5, 1.0, smoothstep(-0.18, 0.12, sunUp));
+    exposure *= mix(1.0, RAIN_GLOOM > 1 ? 0.5 : 0.6, gloom);
+#endif
 #ifdef BLOOM
     // Le seuil du halo suit l'exposition : ce qui éblouit l'œil, pas une valeur fixe.
     vec3 halo = glow(1.5 * 0.62 * EXPOSURE * adapt / exposure);
@@ -479,6 +491,9 @@ void main() {
     color += sunGlare() * smoothstep(-0.02, 0.06, sunUp);
 #endif
     color *= exposure;
+#if RAIN_GLOOM > 0
+    color *= mix(vec3(1.0), RAIN_GLOOM > 1 ? vec3(1.07, 1.0, 0.82) : vec3(1.06, 1.0, 0.86), gloom);
+#endif
 #if NIGHT_GRAIN > 0
     // La clarté vue par l'œil, avant les bâtonnets : le grain ne vient que dans le noir.
     float grainDark = 1.0 - smoothstep(0.003, 0.06, dot(color, LUMA));
