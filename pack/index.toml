@@ -4707,7 +4707,7 @@ hash = "d9b17cbb8a47f2a6215e3758f138d7dc40d3952ad7067feb8f0e793830e32aa6"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/distant.fsh"
-hash = "437622976c9c614d07ff9459474db75531853eae011925d9ccb03a6c1924a2de"
+hash = "33b36773524ecf7cc1bce2e55ff479c8ece46600e52ce2130c049a1e0a3b1c7d"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/distant.vsh"
