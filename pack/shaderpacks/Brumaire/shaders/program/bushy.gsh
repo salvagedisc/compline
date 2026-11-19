@@ -16,7 +16,7 @@ in vec3 gNormal[];
 in vec3 gPos[];
 flat in int gMat[];
 flat in int gSurf[];
-in float gBend[];
+in vec2 gBend[];
 #if RELIEF > 0
 in vec4 gTangent[];
 in vec2 gSpriteMid[];
@@ -30,7 +30,7 @@ out vec3 vNormal;
 out vec3 vPos;
 flat out int vMat;
 flat out int vSurf;
-out float vBend;
+out vec2 vBend;
 #if RELIEF > 0
 out vec4 vTangent;
 out vec2 vSpriteMid;
