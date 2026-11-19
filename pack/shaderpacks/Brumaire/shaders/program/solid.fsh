@@ -86,6 +86,7 @@ layout(location = 0) out vec4 outColor;
 #endif
 
 #ifdef PROGRAM_WATER
+#include "/lib/shoreice.glsl"
 #include "/lib/watershade.glsl"
 
 /** La glace : sa couleur laisse voir au travers, sa surface lisse reflète le paysage, plus à jour frisant. */

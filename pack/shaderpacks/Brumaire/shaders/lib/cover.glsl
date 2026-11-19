@@ -49,6 +49,7 @@ float snowCover(vec3 world, vec3 normal, float sky, float leaf, float grain) {
 
 #if FROST > 0 || DEW > 0 || WINDOW_FROST > 0 || PUDDLE_ICE > 0
 uniform float sunAngle;
+#define SUN_ANGLE_DECLARED
 #endif
 #if WINDOW_FROST > 0
 /** Le froid qui givre les vitres (0..1) : les biomes froids et les hivers où il neige, plus fort la nuit et au matin. */
