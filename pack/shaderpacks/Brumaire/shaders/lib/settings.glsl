@@ -246,6 +246,7 @@
 #define EXPOSURE_AUTO 1 // [0 1]
 #define EXPOSURE_AUTO_AMOUNT 1.0 // [0.5 1.0 1.5]
 #define EXPOSURE_SPEED 1.0 // [0.5 1.0 2.0]
+#define RAIN_GLOOM 1 // [0 1 2]
 #define DOF 0 // [0 1 2]
 #define PURKINJE 1 // [0 1]
 #define NIGHT_GRAIN 1 // [0 1]
