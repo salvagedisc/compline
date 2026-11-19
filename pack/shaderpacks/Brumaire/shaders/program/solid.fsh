@@ -270,7 +270,7 @@ void main() {
     int taps = SHADOW_FILTER;
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
     albedo = olive(albedo);
-    if (vMat >= 1 && vMat <= 5) leaf = vMat == 4 ? 0.55 : 1.0;
+    if ((vMat >= 1 && vMat <= 5) || vMat == 7) leaf = vMat == 4 ? 0.55 : 1.0;
 #endif
 #if defined PROGRAM_TERRAIN && GROUND_TINT > 0
     // Les nuances du paysage, sur ce qui n'est ni lumière ni neige.

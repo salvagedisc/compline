@@ -90,3 +90,29 @@ vec3 windVertex(int mat, bool top, vec3 world, vec3 rel, float sky) {
     if (amp <= 0.0) return bend;
     return bend + windBend(world, rel, amp);
 }
+
+#if WATER_PLANT_SWAY > 0
+/**
+ * Le courant sous l'eau : les herbes marines et les algues ondulent lentement, d'un balancement qui monte le long de la
+ * tige. Le déplacement ne dépend que de la position (pas du haut ou du bas du quad) : les sommets partagés par deux
+ * tronçons d'une algue bougent ensemble, la tige reste d'un seul tenant. Le courant suit le vent de surface, en plus
+ * lent. Un nénuphar (flat) se soulève et penche un peu au passage des rides, et glisse sur place.
+ */
+vec3 currentVertex(vec3 world, vec3 rel, bool flat_) {
+    vec2 dir;
+    float force, turbulence;
+    windAt(rel, dir, force, turbulence);
+    float t = frameTimeCounter;
+    float phase = dot(world.xz, vec2(0.37, 0.23));
+    if (flat_) {
+        float bob = sin(t * 1.3 + dot(world.xz, vec2(2.1, 1.7))) * 0.010 * (0.5 + force);
+        vec2 drift = dir * sin(t * 0.4 + phase) * 0.03 * (0.4 + force);
+        return vec3(drift.x, bob, drift.y);
+    }
+    float s = sin(t * 0.8 + world.y * 0.55 + phase) + 0.45 * sin(t * 1.7 - world.y * 1.1 + phase * 2.3);
+    float k = sin(t * 0.6 + world.y * 0.4 + phase * 1.7 + 1.9);
+    vec2 side = vec2(-dir.y, dir.x);
+    vec2 push = dir * (0.03 + 0.04 * s) + side * 0.05 * k;
+    return vec3(push.x, 0.0, push.y);
+}
+#endif
