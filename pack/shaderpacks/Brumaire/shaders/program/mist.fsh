@@ -18,11 +18,16 @@
 #include "/lib/embers.glsl"
 #include "/lib/spray.glsl"
 #include "/lib/fluff.glsl"
+#include "/lib/butterflies.glsl"
 #include "/lib/eaves.glsl"
 #include "/lib/soilsteam.glsl"
 #include "/lib/dustdevil.glsl"
 #include "/lib/underwater.glsl"
 #include "/program/scene.glsl"
+#if SHADER_RAIN == 0
+// La neige ici : lib/precip.glsl ne la déclare qu'avec la pluie du shader, mais la vapeur de la lave la lit aussi.
+uniform float snowHere;
+#endif
 
 /*
 const int colortex3Format = RGBA16F;
@@ -428,6 +433,24 @@ void main() {
                     float mu = max(dot(dir, gLightDir), 0.0);
                     vec3 light = gAmbient * 1.1 + gLightColor * lit * (0.45 + 2.2 * pow(mu, 6.0));
                     color = mix(color, light, fluff * 0.65);
+                }
+            }
+        }
+#endif
+#if BUTTERFLIES > 0 && SHADER_RAIN > 0
+        // Les papillons des journées chaudes : opaques, éclairés par le ciel et le soleil (ombre comprise).
+        {
+            float amount = butterflyAmount();
+            if (amount > 0.01) {
+                float flyDist;
+                vec3 wingTint;
+                float fly = butterfliesAlong(dir, min(len, 24.0), amount, flyDist, wingTint);
+                if (fly > 0.0) {
+                    vec3 p = gbufferModelViewInverse[3].xyz + dir * flyDist;
+                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                    vec3 light = gAmbient * 1.2 + gLightColor * lit * (0.55 + 0.45 * max(gLightDir.y, 0.0));
+                    color = mix(color, wingTint * light, fly);
                 }
             }
         }

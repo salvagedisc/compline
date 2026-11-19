@@ -145,6 +145,8 @@
 // Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
 #define FIREFLIES 1 // [0 1]
 #define SEED_FLUFF 1 // [0 1]
+// Les papillons des journées chaudes au-dessus des prés (lib/butterflies.glsl).
+#define BUTTERFLIES 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]
