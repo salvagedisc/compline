@@ -173,6 +173,7 @@
 #define SNOW_COVER 1 // [0 1]
 #define ALPENGLOW 1 // [0 1]
 #define AURORA_GLOW 1 // [0 1]
+#define SHORE_ICE 1 // [0 1]
 // La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
 #define SNOW_DETAIL 1 // [0 1]
 // La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.

@@ -401,6 +401,20 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         vec3 light = gLightColor * lit * (0.25 + 0.75 * max(gLightDir.y, 0.0)) * 0.9 + gAmbient * max(sky, 0.1) * 0.9;
         color = mix(color, vec3(0.64, 0.68, 0.67) * light, 0.85 * cover);
     }
+#if SHORE_ICE > 0 && defined VOXELS
+    // La glace des rives : mate et pâle, ses fêlures plus claires, un liseré de givre au bord de l'eau libre. Une eau
+    // qui court ne gèle pas.
+    if (top && !below && !falling && length(env.flow) < 0.3) {
+        float reach = shoreIceReach();
+        vec3 ice = reach > 0.0 ? shoreIce(vPos, reach) : vec3(0.0);
+        if (ice.x > 0.0) {
+            vec3 light = gLightColor * lit * (0.25 + 0.75 * max(gLightDir.y, 0.0)) + gAmbient * max(sky, 0.1);
+            vec3 tint = mix(vec3(0.20, 0.25, 0.30), vec3(0.74, 0.79, 0.84), max(ice.y, ice.z * 0.45));
+            // L'eau, et son reflet, passent encore un peu au travers de la glace jeune.
+            color = mix(color, tint * light, 0.68 * ice.x + 0.28 * ice.y);
+        }
+    }
+#endif
 #if FLOATING_LEAVES > 0 && defined VOXELS
     if (top && !below && !falling) {
         vec3 leafTint;
