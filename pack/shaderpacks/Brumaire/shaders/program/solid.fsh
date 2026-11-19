@@ -62,7 +62,7 @@ in vec3 vPos;
 flat in int vMat;
 flat in int vSurf;
 #if defined PROGRAM_TERRAIN
-in float vBend;
+in vec2 vBend;
 #endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
 in vec4 vTangent;
@@ -365,7 +365,18 @@ void main() {
 #if defined PROGRAM_TERRAIN
     // Le vent couche les herbes : un brin couché montre son revers, plus clair et plus jaune. Les rafales passent sur
     // une prairie en vagues claires.
-    if (vMat >= 1 && vMat <= 4) albedo = mix(albedo, albedo * 1.35 + vec3(0.010, 0.012, 0.003), vBend * (vMat == 4 ? 0.25 : 0.5) * FOLIAGE_SHEEN);
+    if (vMat >= 1 && vMat <= 4) albedo = mix(albedo, albedo * 1.35 + vec3(0.010, 0.012, 0.003), vBend.x * (vMat == 4 ? 0.25 : 0.5) * FOLIAGE_SHEEN);
+#if PLANT_ROOTS > 0
+    // Le pied des herbes et des fleurs : dans une touffe, les brins se font de l'ombre ; le bas reste sombre et un peu
+    // plus froid, le haut prend toute la lumière. Une grande herbe s'assombrit sur sa moitié basse. Les plans couchés
+    // (pétales au sol) n'ont pas de pied.
+    if (vMat >= 1 && vMat <= 3 && abs(vNormal.y) < 0.5) {
+        float h = vBend.y * (vMat == 1 ? 1.0 : 0.5);
+        float shade = 1.0 - PLANT_ROOTS_DEPTH * (1.0 - smoothstep(0.0, 0.7, h));
+        shade = mix(1.0, shade, 1.0 - smoothstep(64.0, 128.0, length(vPos)));
+        albedo *= shade * mix(vec3(0.95, 1.0, 0.97), vec3(1.0), shade);
+    }
+#endif
 #endif
 #if defined PROGRAM_PARTICLES || defined PROGRAM_BASIC
     leaf = 1.0;

@@ -45,7 +45,7 @@ flat out int vMat;
 // La matière du bloc (lib/material.glsl) : le numéro de block.properties divisé par 32.
 flat out int vSurf;
 #if defined PROGRAM_TERRAIN
-out float vBend;
+out vec2 vBend;
 #endif
 
 void main() {
@@ -73,7 +73,7 @@ void main() {
     vSpriteHalf = abs(vUv - mc_midTexCoord);
 #endif
 #if defined PROGRAM_TERRAIN
-    vBend = 0.0;
+    vBend = vec2(0.0);
 #endif
     if (vMat >= 1 && vMat <= 5) {
         bool top = gl_MultiTexCoord0.t < mc_midTexCoord.t;
@@ -83,7 +83,10 @@ void main() {
 #if defined PROGRAM_TERRAIN
         // Combien ce sommet est couché par le vent ou les pas, rapporté à ce que sa plante peut plier : les brins
         // couchés montrent leur revers plus clair (solid.fsh).
-        vBend = clamp(length(sway.xz) / (vMat == 4 ? 0.07 : 0.22), 0.0, 1.0);
+        vBend.x = clamp(length(sway.xz) / (vMat == 4 ? 0.07 : 0.22), 0.0, 1.0);
+        // La hauteur dans la touffe (0 au sol, 1 en haut d'une herbe, 2 en haut d'une grande herbe) : le pied des
+        // plantes s'assombrit (solid.fsh).
+        vBend.y = (top ? 1.0 : 0.0) + (vMat == 3 ? 1.0 : 0.0);
 #endif
     }
 #endif

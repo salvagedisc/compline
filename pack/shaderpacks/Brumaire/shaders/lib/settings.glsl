@@ -93,6 +93,9 @@
 // Vent et eau
 #define WIND_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
 #define FOLIAGE_SHEEN 1.0 // [0.0 0.5 1.0 1.5]
+// Le pied des herbes et des fleurs s'assombrit, comme dans une touffe où les brins se font de l'ombre.
+#define PLANT_ROOTS 1 // [0 1]
+#define PLANT_ROOTS_DEPTH 0.35 // [0.2 0.35 0.5]
 #define LEAF_FLUTTER 1 // [0 1]
 // Le feuillage touffu : deux plans de plus par face de feuilles, décollés et penchés (program/bushy.gsh).
 #define BUSHY_LEAVES 1 // [0 1]
