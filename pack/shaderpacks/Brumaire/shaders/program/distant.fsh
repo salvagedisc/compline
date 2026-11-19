@@ -10,6 +10,9 @@
 #include "/lib/alpenglow.glsl"
 #include "/lib/auroraglow.glsl"
 #include "/lib/groundtint.glsl"
+#if SNOW_COVER > 0
+uniform float snowHere;
+#endif
 #endif
 
 uniform sampler2D depthtex0;
@@ -47,6 +50,17 @@ void main() {
     float leaf = vMat == DH_BLOCK_LEAVES ? 0.55 : 0.0;
 #if defined PROGRAM_DH_TERRAIN && GROUND_TINT > 0
     if (vMat != DH_BLOCK_ILLUMINATED && vMat != DH_BLOCK_LAVA) albedo = groundTint(albedo, vPos + cameraPosition, groundGreen(vTint.rgb));
+#endif
+#if defined PROGRAM_DH_TERRAIN && SNOW_COVER > 0
+    // La neige que le terrain proche reçoit (lib/cover.glsl) gagne aussi le lointain : le dessus de ce qui voit le
+    // ciel blanchit, un feuillage en partie, sans quoi l'hiver s'arrête net au bord des blocs du jeu. Le sable des
+    // déserts et des badlands, qui ne voit jamais la neige, reste nu.
+    if (snowHere > 0.0 && vMat != DH_BLOCK_WATER && vMat != DH_BLOCK_LAVA && vMat != DH_BLOCK_ILLUMINATED) {
+        float sandy = smoothstep(0.10, 0.20, albedo.r - albedo.b) * step(albedo.g, albedo.r) * smoothstep(0.15, 0.30, luma(albedo));
+        float top = smoothstep(0.5, 0.8, normal.y) * smoothstep(0.80, 0.95, vLm.y);
+        float s = snowHere * top * (vMat == DH_BLOCK_LEAVES ? 0.65 : 1.0) * (1.0 - sandy);
+        albedo = mix(albedo, vec3(0.56, 0.59, 0.64) * 0.95, s);
+    }
 #endif
 
 #ifdef PROGRAM_DH_WATER
