@@ -246,7 +246,11 @@ void main() {
     initEnv();
     if (sky) {
         vec3 dir = normalize(pos);
-        color += skyAt(dir) + sunDisc(dir) + nightSky(dir);
+        vec3 painted = skyAt(dir);
+#if SKY_TWILIGHT_BELT > 0
+        painted = twilightBelt(dir, painted);
+#endif
+        color += painted + sunDisc(dir) + nightSky(dir);
     } else if (!hand) {
         vec4 surface = texture(colortex1, vUv);
         if (surface.a > 0.5) {
