@@ -21,6 +21,9 @@ uniform float snowSoak;
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
+#if WATER_STARS > 0
+#include "/lib/nightsky.glsl"
+#endif
 uniform sampler2D depthtex1;
 uniform sampler2D colortex6;
 #define REFLECT_DEPTH depthtex1
