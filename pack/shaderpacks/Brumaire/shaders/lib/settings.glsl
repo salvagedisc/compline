@@ -185,6 +185,7 @@
 #define SNOW_DETAIL 1 // [0 1]
 // La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.
 #define SNOW_BUILDUP 1 // [0 1]
+#define SNOW_SLOPES 1 // [0 1]
 // Le sable ridé par le vent (lib/snow.glsl).
 #define SAND_DETAIL 1 // [0 1]
 // La glace fissurée, avec ses bulles (lib/snow.glsl).
