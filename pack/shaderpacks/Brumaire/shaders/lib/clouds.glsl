@@ -61,6 +61,17 @@ vec3 cloudWeather(vec2 q, float coverage) {
     float w1 = cloudNoise(vec3(q * (CLOUD_SHAPE_SCALE * 0.22), 0.37).xzy).r;
     float w2 = cloudNoise(vec3(q * (CLOUD_SHAPE_SCALE * 0.09) + 0.41, 0.83).xzy).r;
     float cover = clamp(coverage * (0.78 + 0.5 * w1), 0.0, 1.0);
+#if RAIN_ROLLS > 0
+    // Sous la pluie, la couche grise n'est pas égale : de longs rouleaux en travers du vent, séparés par des bandes plus
+    // minces où le jour passe un peu, comme sous une nappe de stratocumulus ondulés.
+    if (rainStrength > 0.01) {
+        float force;
+        vec2 wd = cloudWind(force);
+        float across = dot(q, wd) / 520.0 + w1 * 1.6;
+        float gap = smoothstep(0.55, 0.95, 0.5 + 0.5 * sin(across * 6.2832));
+        cover *= 1.0 - gap * rainStrength * 0.32 * float(RAIN_ROLLS);
+    }
+#endif
 #if CLOUD_TYPES > 0
     float kind = smoothstep(0.30, 0.72, w2);
     // L'orage fait monter les cumulus en tours, la pluie fine les étale en couche grise.
