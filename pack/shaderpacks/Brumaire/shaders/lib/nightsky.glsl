@@ -179,9 +179,122 @@ vec3 meteors(vec3 c, float pix) {
     return sum;
 }
 
+#if SKY_TWILIGHT_BELT > 0
+/**
+ * L'ombre de la Terre et la ceinture de Vénus : au coucher et au lever, à l'opposé du soleil, une bande gris-bleu
+ * monte de l'horizon (le ciel qui n'est plus au soleil), coiffée d'une bande rose (l'air encore éclairé par le soleil
+ * rouge). L'ombre monte à mesure que le soleil descend. Rend le ciel sky retouché.
+ */
+vec3 twilightBelt(vec3 d, vec3 sky) {
+    float e = asin(clamp(gSunDir.y, -1.0, 1.0));
+    float amount = (1.0 - smoothstep(0.02, 0.08, e)) * smoothstep(-0.20, -0.11, e) * (1.0 - rainStrength);
+    if (amount <= 0.001 || d.y < -0.08) return sky;
+    vec2 antiH = normalize(-gSunDir.xz + vec2(1e-5, 0.0));
+    vec2 dirH = normalize(d.xz + vec2(1e-5, 0.0));
+    float side = smoothstep(-0.35, 0.85, dot(antiH, dirH));
+    float a = asin(clamp(d.y, -1.0, 1.0));
+    // Le bord de l'ombre : au ras de l'horizon au coucher, jusqu'à une dizaine de degrés quand le soleil est descendu.
+    // (Le brouillard couvre les premiers degrés : l'ombre part de plus haut pour rester lisible.)
+    float edge = clamp(-e * 1.4, 0.0, 0.20) + 0.06;
+    float shadow = 1.0 - smoothstep(edge - 0.025, edge + 0.015, a);
+    float belt = exp(-sq((a - edge - 0.07) / 0.065));
+    float l = luma(sky);
+    vec3 dusk = mix(sky, vec3(l) * vec3(0.58, 0.66, 0.98) * 0.62, shadow * side * amount * 0.9);
+    return dusk + vec3(1.0, 0.55, 0.65) * l * 1.3 * belt * side * amount;
+}
+#endif
+
+#if SKY_VENUS > 0
+/**
+ * L'étoile du berger : Vénus, à 25 à 46 degrés du soleil selon les semaines, qui s'allume avant toutes les étoiles
+ * au crépuscule (ou les dernières à l'aube) et brille plus qu'aucune. Un point vif, sans scintillement, à peine
+ * jaune, avec la petite auréole que l'œil lui voit.
+ */
+vec3 eveningStar(vec3 d, float pix) {
+    float e = gSunDir.y;
+    float seen = (1.0 - smoothstep(-0.06, 0.0, e)) * (1.0 - smoothstep(0.05, 0.25, rainStrength));
+    if (seen <= 0.001) return vec3(0.0);
+    mat3 f = celestialFrame();
+    float elong = radians(25.0 + 21.0 * (0.5 + 0.5 * sin(float(worldDay) * 6.2832 / 58.0)));
+    vec3 east = cos(elong) * f[0] + sin(elong) * f[1];
+    vec3 west = cos(elong) * f[0] - sin(elong) * f[1];
+    // Du côté où elle est le plus haut : après le soleil le soir, avant lui le matin.
+    vec3 star = east.y > west.y ? east : west;
+    if (star.y < -0.02) return vec3(0.0);
+    float r = length(d - star);
+    float core = exp(-sq(r / (pix * 0.95)));
+    float glow = exp(-r / (pix * 4.0)) * 0.12;
+    float air = exp(-0.10 / max(star.y + 0.04, 0.02));
+    return vec3(1.0, 0.96, 0.86) * (core * 3.2 + glow) * seen * air;
+}
+#endif
+
+#if SKY_COMET > 0
+/**
+ * La comète : quelques nuits de suite, de loin en loin, une tête floue et deux queues tournées à l'opposé du soleil,
+ * la queue de poussière, large, jaunâtre et courbée, et la queue de gaz, fine, droite et bleutée. Fixe parmi les
+ * étoiles d'une nuit à l'autre. c est la direction dans le repère du ciel, où le soleil est sur le premier axe.
+ */
+vec3 comet(vec3 c, float pix) {
+    float period = floor(float(worldDay) / 18.0);
+    if (starHash(vec3(period, 23.0, 7.0)) > 0.45 || mod(float(worldDay), 18.0) > 4.0) return vec3(0.0);
+    float th = radians(50.0 + 30.0 * starHash(vec3(period, 1.0, 2.0)));
+    float ph = (starHash(vec3(period, 3.0, 4.0)) - 0.5) * 2.2;
+    vec3 head = vec3(cos(th), sin(th) * cos(ph), sin(th) * sin(ph));
+    if (starHash(vec3(period, 5.0, 6.0)) > 0.5) head.y = -head.y;
+    vec3 rel = c - head;
+    if (dot(rel, rel) > 0.25) return vec3(0.0);
+    vec3 sun = vec3(1.0, 0.0, 0.0);
+    vec3 t = normalize(head * dot(head, sun) - sun);
+    vec3 b = cross(head, t);
+    float along = dot(rel, t);
+    float perp = dot(rel, b);
+    float r = length(rel);
+    vec3 light = vec3(0.0);
+    // La tête : un noyau presque ponctuel dans une chevelure ronde.
+    light += vec3(0.85, 1.0, 0.92) * (exp(-sq(r / (pix * 1.2))) * 1.4 + exp(-r / 0.006) * 0.35);
+    if (along > 0.0) {
+        float bend = perp - along * along * 0.9;
+        float wDust = 0.005 + along * 0.16;
+        light += vec3(1.0, 0.90, 0.72) * exp(-along / 0.11) * exp(-sq(bend / wDust)) * 0.45;
+        float wGas = 0.0025 + along * 0.025;
+        float streak = 0.75 + 0.25 * sin(perp / wGas * 3.0 + along * 40.0);
+        light += vec3(0.55, 0.75, 1.0) * exp(-along / 0.22) * exp(-sq(perp / wGas)) * streak * 0.22;
+    }
+    return light;
+}
+#endif
+
+#if SKY_ZODIACAL > 0
+/**
+ * La lumière zodiacale : par nuit noire, une heure après le coucher ou avant le lever, un cône de lueur très pâle qui
+ * monte de l'horizon le long du chemin du soleil, la poussière du plan des planètes qu'il éclaire. c dans le repère du
+ * ciel (soleil sur le premier axe, pôle sur le troisième).
+ */
+vec3 zodiacalLight(vec3 c) {
+    float fromSun = acos(clamp(c.x, -1.0, 1.0));
+    float width = 0.10 + 0.22 * smoothstep(1.4, 0.3, fromSun);
+    float cone = exp(-sq(c.z / width)) * exp(-(fromSun - 0.3) / 0.45) * smoothstep(0.25, 0.45, fromSun);
+    return vec3(1.0, 0.94, 0.84) * cone;
+}
+#endif
+
+#if SKY_AIRGLOW > 0
+/**
+ * La luminescence de l'air : par nuit sans lune, loin des lumières, une bande d'un vert très pâle à une dizaine de
+ * degrés au-dessus de l'horizon, l'oxygène de la haute atmosphère qui rend la nuit la lumière reçue le jour, en
+ * grandes ondulations lentes.
+ */
+vec3 airglow(vec3 d) {
+    float band = exp(-sq((d.y - 0.13) / 0.075));
+    float waves = cloudNoise(vec3(d.xz / max(d.y + 0.3, 0.3) * 0.8, 0.61) + frameTimeCounter * 0.0015).r;
+    return vec3(0.38, 1.0, 0.50) * band * (0.45 + 0.9 * smoothstep(0.30, 0.75, waves));
+}
+#endif
+
 /** Le ciel de nuit à ajouter au ciel peint, dans la direction d (repère monde). */
 vec3 nightSky(vec3 d) {
-#if SKY_STARS > 0 || SKY_MILKY_WAY > 0
+#if SKY_STARS > 0 || SKY_MILKY_WAY > 0 || SKY_VENUS > 0 || SKY_COMET > 0 || SKY_ZODIACAL > 0 || SKY_AIRGLOW > 0
     float night = (1.0 - smoothstep(-0.30, -0.05, gSunDir.y)) * (1.0 - rainStrength);
     vec3 result = vec3(0.0);
     // L'auréole de la lune : la brume en diffuse un peu tout autour d'elle.
@@ -191,13 +304,18 @@ vec3 nightSky(vec3 d) {
         float haze = 0.6 + 0.8 * airHumid + 1.5 * rainStrength;
         result += gLightColor * (exp(-a / 0.030) * 0.30 + exp(-a / 0.20) * 0.05) * haze * smoothstep(-0.08, 0.05, moonDir.y);
     }
+    float pix = 2.0 / (viewHeight * gbufferProjection[1][1]);
+#if SKY_VENUS > 0
+    // Vénus s'allume bien avant la nuit : elle ne suit pas le noir des étoiles.
+    result += eveningStar(d, pix);
+#endif
     if (night <= 0.001 || d.y < -0.05) return result;
     vec3 c = transpose(celestialFrame()) * d;
     // Plus d'air à traverser vers l'horizon : les astres bas pâlissent.
     float air = exp(-0.10 / max(d.y + 0.04, 0.02));
     float low = 1.0 - smoothstep(0.05, 0.5, d.y);
-    float full = 1.0 - abs(float(moonPhase) - 4.0) / 4.0;
-    float pix = 2.0 / (viewHeight * gbufferProjection[1][1]);
+    // La phase 0 est la pleine lune, la phase 4 la nouvelle lune.
+    float full = 1.0 - float(min(moonPhase, 8 - moonPhase)) / 4.0;
     float band = 0.0;
     vec3 sky = vec3(0.0);
 #if SKY_MILKY_WAY > 0
@@ -213,6 +331,16 @@ vec3 nightSky(vec3 d) {
 #endif
 #if SKY_METEORS > 0
     sky += meteors(c, pix) * 0.25;
+#endif
+#if SKY_COMET > 0
+    sky += comet(c, pix) * 0.30 * mix(1.0, 0.55, full);
+#endif
+#if SKY_ZODIACAL > 0
+    // Il faut une nuit vraiment noire : la lune et le crépuscule le noient.
+    sky += zodiacalLight(c) * 0.16 * (1.0 - smoothstep(-0.30, -0.22, gSunDir.y)) * (1.0 - full * 0.85);
+#endif
+#if SKY_AIRGLOW > 0
+    sky += airglow(d) * 0.035 * (1.0 - full * 0.8);
 #endif
     vec3 lights = vec3(0.0);
 #if SKY_AURORA > 0
