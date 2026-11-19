@@ -524,3 +524,7 @@ option.SKY_AIRGLOW=Airglow
 option.SKY_AIRGLOW.comment=On moonless nights, a very pale green band ripples about ten degrees above the horizon.
 value.SKY_AIRGLOW.0=Off
 value.SKY_AIRGLOW.1=On
+option.LAVA_STEAM=Steaming lava
+option.LAVA_STEAM.comment=In rain or snow, open lava boils and gives off thick white billows that rise and drift with the wind.
+value.LAVA_STEAM.0=Off
+value.LAVA_STEAM.1=On
