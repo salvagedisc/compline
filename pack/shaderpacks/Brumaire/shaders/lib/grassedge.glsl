@@ -1,6 +1,7 @@
 // L'herbe qui déborde : sur le côté d'un bloc d'herbe, la bordure verte du jeu (sa seconde couche, teinte par le
 // biome et découpée) s'arrête à trois ou quatre pixels, d'un trait presque droit. Elle descend ici de quelques
 // pixels de plus, d'une longueur qui change d'une colonne à l'autre, avec les mêmes gris que la bordure du jeu.
+// Sur une pente (GRASS_SLOPES), la contremarche entre deux paliers d'herbe se couvre d'herbe sur toute sa hauteur.
 // Lu par solid.fsh, avant la découpe.
 
 #if GRASS_OVERHANG > 0
@@ -25,4 +26,44 @@ vec4 grassOverhang(vec3 world, vec3 normal) {
     grey *= row >= reach - 1.0 ? 0.90 : 1.0;
     return vec4(vec3(grey), 1.0);
 }
+
+#if GRASS_SLOPES > 0 && VOXEL_REFLECTIONS > 0
+// Le volume autour de la caméra (lib/voxel.glsl) et la couleur du dessus de chaque bloc (passe d'ombre).
+#ifndef VOX_TOP_DECLARED
+#define VOX_TOP_DECLARED
+uniform usampler3D voxTopTex;
+#endif
+
+/**
+ * Vrai si cette face de côté d'un bloc d'herbe est la marche d'une pente : devant elle l'air, et sous cet air un
+ * bloc plein dont le dessus est vert (de l'herbe). Comme dans les packs qui « arrondissent » l'herbe, la marche se
+ * couvre alors d'herbe. Seulement dans le volume ; vers son bord, les faces basculent une à une, au hasard.
+ */
+bool grassSlope(vec3 world, vec3 normal) {
+    vec3 block = floor(world - normal * 0.01) + 0.5;
+    vec3 pos = block - cameraPosition;
+    float far = length(pos.xz);
+    if (far > 60.0) return false;
+    if (far > 44.0 && grassEdgeHash(block + normal * 7.3) < smoothstep(44.0, 60.0, far)) return false;
+    ivec3 front = voxelCell(pos + normal, fract(cameraPosition));
+    ivec3 below = front - ivec3(0, 1, 0);
+    if (!voxelInside(front) || !voxelInside(below)) return false;
+    if ((texelFetch(voxelTex, front, 0).r & VOX_SOLID) != 0u) return false;
+    if ((texelFetch(voxelTex, below, 0).r & VOX_SOLID) == 0u) return false;
+    uint top = texelFetch(voxTopTex, below, 0).r;
+    if (top == 0u) return false;
+    vec3 c = vec3(float(top & 255u), float((top >> 8) & 255u), float((top >> 16) & 255u)) / 255.0;
+    return c.g > c.r * 1.05 && c.g > c.b * 1.15;
+}
+
+/** Le texel d'herbe qui couvre une marche : les gris du dessus de l'herbe, tirés texel par texel. */
+vec4 grassRiser(vec3 world, vec3 normal) {
+    vec3 cell = floor(world - normal * 0.01);
+    float across = abs(normal.x) > 0.5 ? world.z : world.x;
+    vec2 px = floor(vec2(fract(across), fract(world.y)) * 16.0);
+    float g = grassEdgeHash(cell * 1.3 + normal * 5.0 + vec3(px, 0.0));
+    float grey = g < 0.2 ? 0.47 : (g < 0.45 ? 0.54 : (g < 0.7 ? 0.58 : (g < 0.9 ? 0.63 : 0.70)));
+    return vec4(vec3(grey), 1.0);
+}
+#endif
 #endif

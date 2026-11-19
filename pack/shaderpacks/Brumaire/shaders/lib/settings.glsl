@@ -180,6 +180,7 @@
 #define SHORE_ICE 1 // [0 1]
 #define GROUND_TINT 1 // [0 1]
 #define GRASS_OVERHANG 1 // [0 1]
+#define GRASS_SLOPES 1 // [0 1]
 // La matière de la neige posée : plaques, congères, rides du vent, éclats qui suivent le regard (lib/snow.glsl).
 #define SNOW_DETAIL 1 // [0 1]
 // La neige qui s'accumule pendant la chute : sous les arbres, sur les aiguilles, plaquée sur les faces au vent.

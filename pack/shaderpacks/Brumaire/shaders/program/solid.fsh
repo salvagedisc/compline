@@ -217,6 +217,11 @@ void main() {
         vec4 edge = grassOverhang(vPos + cameraPosition, normal);
         if (edge.a > 0.0) color = vec4(edge.rgb * vTint.rgb, 1.0);
     }
+#if GRASS_SLOPES > 0 && VOXEL_REFLECTIONS > 0
+    // La marche d'une pente d'herbe se couvre d'herbe sur toute sa hauteur, sa couche teinte devenue pleine.
+    if (vSurf == 22 && abs(normal.y) < 0.5 && min(vTint.r, min(vTint.g, vTint.b)) < 0.97 && grassSlope(vPos + cameraPosition, normal))
+        color = vec4(grassRiser(vPos + cameraPosition, normal).rgb * vTint.rgb, 1.0);
+#endif
 #endif
 #ifndef PROGRAM_CLRWL
     if (color.a < alphaTestRef) discard;
