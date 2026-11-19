@@ -147,6 +147,8 @@
 #define SEED_FLUFF 1 // [0 1]
 // Les papillons des journées chaudes au-dessus des prés (lib/butterflies.glsl).
 #define BUTTERFLIES 1 // [0 1]
+// Les libellules au-dessus de l'eau, les mêmes jours (demande les papillons et le volume de voxels).
+#define DRAGONFLIES 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]

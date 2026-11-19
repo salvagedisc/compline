@@ -452,6 +452,17 @@ void main() {
                     vec3 light = gAmbient * 1.2 + gLightColor * lit * (0.55 + 0.45 * max(gLightDir.y, 0.0));
                     color = mix(color, wingTint * light, fly);
                 }
+#if DRAGONFLIES > 0 && defined VOXELS
+                // Les libellules, au-dessus de l'eau seulement, éclairées de même.
+                fly = dragonfliesAlong(dir, min(len, 24.0), amount, flyDist, wingTint);
+                if (fly > 0.0) {
+                    vec3 p = gbufferModelViewInverse[3].xyz + dir * flyDist;
+                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
+                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
+                    vec3 light = gAmbient * 1.2 + gLightColor * lit * (0.55 + 0.45 * max(gLightDir.y, 0.0));
+                    color = mix(color, wingTint * light, fly);
+                }
+#endif
             }
         }
 #endif
