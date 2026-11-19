@@ -21,6 +21,7 @@ uniform float snowSoak;
 #include "/lib/shore.glsl"
 #include "/lib/alpenglow.glsl"
 #include "/lib/auroraglow.glsl"
+#include "/lib/groundtint.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -252,6 +253,10 @@ void main() {
 #if defined PROGRAM_TERRAIN || defined PROGRAM_WATER
     albedo = olive(albedo);
     if (vMat >= 1 && vMat <= 5) leaf = vMat == 4 ? 0.55 : 1.0;
+#endif
+#if defined PROGRAM_TERRAIN && GROUND_TINT > 0
+    // Les nuances du paysage, sur ce qui n'est ni lumière ni neige.
+    if (!emissive(vMat) && vMat != 9) albedo = groundTint(albedo, vPos + cameraPosition, groundGreen(vTint.rgb));
 #endif
     // La matière : rugosité, métal, éclat. Les minerais et la blackstone dorée la prennent texel par texel : le
     // minéral brille, la pierre autour reste mate. Un métal garde sa couleur pour ses reflets, pas pour sa diffusion.

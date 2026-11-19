@@ -9,6 +9,7 @@
 #ifdef PROGRAM_DH_TERRAIN
 #include "/lib/alpenglow.glsl"
 #include "/lib/auroraglow.glsl"
+#include "/lib/groundtint.glsl"
 #endif
 
 uniform sampler2D depthtex0;
@@ -44,6 +45,9 @@ void main() {
     vec3 normal = normalize(vNormal);
     vec3 albedo = olive(toLinear(vTint.rgb));
     float leaf = vMat == DH_BLOCK_LEAVES ? 0.55 : 0.0;
+#if defined PROGRAM_DH_TERRAIN && GROUND_TINT > 0
+    if (vMat != DH_BLOCK_ILLUMINATED && vMat != DH_BLOCK_LAVA) albedo = groundTint(albedo, vPos + cameraPosition, groundGreen(vTint.rgb));
+#endif
 
 #ifdef PROGRAM_DH_WATER
     if (vMat == DH_BLOCK_WATER) {
