@@ -170,6 +170,39 @@ float rainOnWater(vec3 world, float t, float rain, inout vec2 slope) {
 #endif
 }
 
+/**
+ * Les poissons qui gobent : sur une eau calme, de loin en loin un petit rond s'ouvre d'un point,
+ * suivi d'un second, et s'efface en trois secondes ; au point, un éclat d'écume d'un instant. Plus souvent le matin et
+ * le soir. Une chance par case de cinq blocs toutes les vingt secondes environ. calm : 0 eau agitée ou qui coule,
+ * pluie ou gel .. 1 eau dormante. Rend l'écume du gobage ; sheen : le liseré clair du rond (0..1).
+ */
+float fishRise(vec3 world, float t, float calm, inout vec2 slope, out float sheen) {
+    sheen = 0.0;
+#if FISH_RISES > 0
+    if (calm <= 0.01) return 0.0;
+    vec2 cell = floor(world.xz / 5.0);
+    float period = 17.0 + 9.0 * foamHash(cell + 31.7);
+    float clock = t + period * foamHash(cell + 5.3);
+    float era = floor(clock / period);
+    float age = fract(clock / period) * period;
+    float often = 0.18 + 0.30 * gDusk;
+    if (age > 3.0 || foamHash(cell * 1.31 + era * vec2(3.7, 1.9)) > often * calm) return 0.0;
+    vec2 centre = (cell + 0.32 + 0.36 * vec2(foamHash(cell + era * 0.71), foamHash(cell.yx + era * 1.37))) * 5.0;
+    centre = (floor(centre * 16.0) + 0.5) / 16.0;
+    vec2 p = (floor(world.xz * 16.0) + 0.5) / 16.0;
+    vec2 d = p - centre;
+    float r = length(d);
+    float fade = pow(1.0 - age / 3.0, 1.5);
+    float ring = exp(-sq((r - age * 0.50) / 0.09)) + 0.6 * exp(-sq((r - max(age - 0.6, 0.0) * 0.42) / 0.08)) * step(0.6, age);
+    slope += d / max(r, 1e-3) * ring * fade * 0.8 * calm;
+    // Le rond renvoie le ciel (un liseré clair, sheen) ; au point, l'éclat du gobage, le premier instant.
+    sheen = clamp(ring, 0.0, 1.0) * fade * calm;
+    return step(r, 0.09) * (1.0 - smoothstep(0.05, 0.25, age)) * calm;
+#else
+    return 0.0;
+#endif
+}
+
 /** L'eau de ce flanc tombe-t-elle (de l'eau juste au-dessus) ? pos : repère joueur, sur la face. */
 bool waterFalling(vec3 pos, vec3 normal) {
 #ifdef VOXELS
