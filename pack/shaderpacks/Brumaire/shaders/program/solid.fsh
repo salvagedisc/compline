@@ -18,6 +18,7 @@ uniform float snowSoak;
 #include "/lib/snow.glsl"
 #include "/lib/cave.glsl"
 #include "/lib/tracks.glsl"
+#include "/lib/shore.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -486,6 +487,14 @@ void main() {
         wet = max(wet, 0.9 * print);
     }
 #endif
+#if defined PROGRAM_TERRAIN && SHORE_WET > 0 && defined VOXELS
+    // Au bord de l'eau, le sol est mouillé, pluie ou pas.
+    float shore = 0.0;
+    if (leaf == 0.0 && !emissive(vMat) && (vMat < 9 || vMat > 13 || vMat == 12) && snow < 0.5) {
+        shore = shoreWet(world, normal, frameTimeCounter) * (1.0 - rainWet);
+        wet = max(wet, 0.9 * shore);
+    }
+#endif
     float splash = 0.0;
     if (wet > 0.0) {
         float puddle = rainWet > 0.0 ? puddleAt(vPos + cameraPosition, normal, rainWet) : 0.0;
@@ -494,6 +503,11 @@ void main() {
         float relief = clamp((luma(albedo) - luma(mean)) / max(luma(mean), 0.03) * 1.6, -1.0, 1.0);
         vec2 ws = rainWet > 0.0 ? wetSurface(world, normal, rainWet, relief) : vec2(0.0);
         ws = max(ws, vec2(0.9, 0.36) * print);
+#if defined PROGRAM_TERRAIN && SHORE_WET > 0 && defined VOXELS
+        ws = max(ws, vec2(0.85, 0.34) * shore);
+        // Le sable mouillé fonce bien plus que la pierre.
+        albedo *= 1.0 - (vMat == 12 ? 0.40 : 0.15) * shore;
+#endif
         vec2 riv = rainWet > 0.0 ? rivuletAt(world, normal, frameTimeCounter, rainWet) : vec2(0.0);
         float soak = max(ws.x * mix(0.55, 1.0, max(normal.y, 0.0)), riv.x);
         albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
