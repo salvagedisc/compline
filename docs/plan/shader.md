@@ -268,6 +268,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Wet ground** turns smooth as it soaks: the sun draws a bright streak on a wet road or a puddle.
 - Snow, packed ice and sand get their own roughness from their family.
 - **Items, armour and iron golems** (`MATERIALS`): `item.properties` and `entity.properties` number metal and gem items (vanilla tools, armour, ingots, buckets, the house black steel, Create's brass and zinc) and the iron golem like the blocks (10000 + 32 × material), read through `currentRenderedItemId` and `entityId`. Only the texels of the material take it, recognised by their colour (`itemTexel`): the grey blade of an iron sword, not its wooden handle; the cyan of diamond armour; the yellow of gold; the golem's iron, not its vines. They then get the sun's glint and, for metals, the reflected sky and block light, worn, held, dropped or in a frame.
+- **Ore glints** (`ORE_GLINTS`, 0 off, 1 on, 2 strong; needs `MATERIALS`): in `program/solid.fsh`, the mineral texels of ores and gilded blackstone, gem blocks and amethyst each get a hashed facet normal. A broad GGX lobe returns the nearby block light (from the side the voxel light comes from, else from the eyes, as for a held torch) and the sun; a view-dependent twinkle lights one facet in twelve, chosen again when the view direction moves. The glint is tinted a little by the texel's colour.
 
 ## Resource pack PBR maps
 
