@@ -19,6 +19,7 @@
 #include "/lib/spray.glsl"
 #include "/lib/fluff.glsl"
 #include "/lib/butterflies.glsl"
+#include "/lib/birds.glsl"
 #include "/lib/eaves.glsl"
 #include "/lib/soilsteam.glsl"
 #include "/lib/dustdevil.glsl"
@@ -463,6 +464,21 @@ void main() {
                     color = mix(color, wingTint * light, fly);
                 }
 #endif
+            }
+        }
+#endif
+#if BIRDS > 0
+        // Les oiseaux qui passent, silhouettes sombres sur le ciel, voilées par l'air qui les sépare de l'œil.
+        if (isEyeInWater == 0) {
+            float amount = birdAmount();
+            if (amount > 0.01) {
+                float birdDist;
+                float bird = birdsAlong(dir, min(len, 300.0), amount, birdDist);
+                if (bird > 0.0) {
+                    vec3 body = gAmbient * 0.18 + gLightColor * 0.03;
+                    float haze = 1.0 - exp(-birdDist / 260.0);
+                    color = mix(color, mix(body, color, haze), bird);
+                }
             }
         }
 #endif
