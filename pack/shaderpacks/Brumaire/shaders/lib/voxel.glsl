@@ -41,6 +41,24 @@ bool voxelInside(ivec3 c) {
 #if defined FSH && defined VOXELS
 // Le volume tel que la passe d'ombre l'a rangé à cette image (reflets hors écran, écume des rives).
 uniform usampler3D voxelTex;
+
+/**
+ * Vrai si la face de côté (normale horizontale) du bloc qui contient world est la contremarche d'un palier : devant
+ * elle rien de plein, et sous ce vide un bloc plein (la marche du dessous). below : la case de ce bloc. Loin du
+ * centre du volume, de 44 à 60 blocs, les faces renoncent une à une au hasard (seed), puis toutes.
+ */
+bool voxelRiser(vec3 world, vec3 normal, float seed, out ivec3 below) {
+    below = ivec3(0);
+    vec3 block = floor(world - normal * 0.01) + 0.5;
+    vec3 pos = block - cameraPosition;
+    float reach = length(pos.xz);
+    if (reach > 60.0 || seed < smoothstep(44.0, 60.0, reach)) return false;
+    ivec3 front = voxelCell(pos + normal, fract(cameraPosition));
+    below = front - ivec3(0, 1, 0);
+    if (!voxelInside(front) || !voxelInside(below)) return false;
+    if ((texelFetch(voxelTex, front, 0).r & VOX_SOLID) != 0u) return false;
+    return (texelFetch(voxelTex, below, 0).r & VOX_SOLID) != 0u;
+}
 #endif
 
 /** Couleur d'une lumière, par famille de blocs (numéros de block.properties et item.properties, 10000 + n). */

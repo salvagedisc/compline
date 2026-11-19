@@ -40,16 +40,8 @@ uniform usampler3D voxTopTex;
  * couvre alors d'herbe. Seulement dans le volume ; vers son bord, les faces basculent une à une, au hasard.
  */
 bool grassSlope(vec3 world, vec3 normal) {
-    vec3 block = floor(world - normal * 0.01) + 0.5;
-    vec3 pos = block - cameraPosition;
-    float far = length(pos.xz);
-    if (far > 60.0) return false;
-    if (far > 44.0 && grassEdgeHash(block + normal * 7.3) < smoothstep(44.0, 60.0, far)) return false;
-    ivec3 front = voxelCell(pos + normal, fract(cameraPosition));
-    ivec3 below = front - ivec3(0, 1, 0);
-    if (!voxelInside(front) || !voxelInside(below)) return false;
-    if ((texelFetch(voxelTex, front, 0).r & VOX_SOLID) != 0u) return false;
-    if ((texelFetch(voxelTex, below, 0).r & VOX_SOLID) == 0u) return false;
+    ivec3 below;
+    if (!voxelRiser(world, normal, grassEdgeHash(floor(world - normal * 0.01) + normal * 7.3), below)) return false;
     uint top = texelFetch(voxTopTex, below, 0).r;
     if (top == 0u) return false;
     vec3 c = vec3(float(top & 255u), float((top >> 8) & 255u), float((top >> 16) & 255u)) / 255.0;

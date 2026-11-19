@@ -402,6 +402,10 @@ void main() {
     bool snowTop = normal.y > 0.9 && vMat != 4;
     // Pendant une chute, la neige se plaque aussi sur les faces qui font front au vent.
     if ((vMat == 0 || vMat == 14) && !snowTop) snow = max(snow, snowPlaster(world, normal, lm.y, snowWind, luma(color.rgb / max(vTint.rgb, vec3(0.05)))));
+#if SNOW_SLOPES > 0 && defined VOXELS
+    // Sur un coteau en paliers, la marche entre deux paliers enneigés blanchit aussi (lib/snow.glsl).
+    if ((vMat == 0 || vMat == 14) && !snowTop) snow = max(snow, snowRiser(world, normal, lm.y));
+#endif
 #if SNOW_DETAIL > 0
     if (snowTop && snow > 0.0) {
         // Sous les arbres et autour des lumières, la neige ne fait plus un voile : elle se pose par plaques, et fond

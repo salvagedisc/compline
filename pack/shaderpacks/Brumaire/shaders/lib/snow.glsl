@@ -65,6 +65,28 @@ float snowPlaster(vec3 world, vec3 normal, float sky, vec2 wind, float grain) {
 #endif
 }
 
+#if SNOW_SLOPES > 0 && defined VOXELS
+/**
+ * La neige d'une contremarche (0..1 au texel) : sur un coteau en paliers, la marche entre deux paliers enneigés se
+ * couvre de neige sur presque toute sa hauteur, son pied découpé au pixel ; le coteau se lit blanc d'un seul tenant
+ * au lieu de bandes de terre. Seulement là où le dessus du bloc est à l'air (le bord du palier) et voit le ciel.
+ */
+float snowRiser(vec3 world, vec3 normal, float sky) {
+    if (abs(normal.y) > 0.2 || snowHere <= 0.0) return 0.0;
+    float amount = snowHere * smoothstep(0.80, 0.95, sky);
+    if (amount <= 0.01) return 0.0;
+    vec3 cell = floor(world - normal * 0.01);
+    ivec3 below;
+    if (!voxelRiser(world, normal, rainHash3(cell + normal * 5.1), below)) return 0.0;
+    ivec3 above = voxelCell(cell + vec3(0.5, 1.5, 0.5) - cameraPosition, fract(cameraPosition));
+    if (voxelInside(above) && (texelFetch(voxelTex, above, 0).r & VOX_SOLID) != 0u) return 0.0;
+    float col = floor(fract(abs(normal.x) > 0.5 ? world.z : world.x) * 16.0);
+    float row = floor(fract(world.y) * 16.0);
+    float foot = 1.0 + floor(rainHash3(cell + normal * 2.7 + vec3(col, 0.0, 3.0)) * 3.0);
+    return row >= foot ? amount : 0.0;
+}
+#endif
+
 /**
  * Pente de la neige au texel, sous forme de normale (repère monde) pour un dessus de bloc. depth : force des reliefs
  * (0..1). Les dérivées sont prises d'un texel à l'autre, pour un relief en marches de pixels.
