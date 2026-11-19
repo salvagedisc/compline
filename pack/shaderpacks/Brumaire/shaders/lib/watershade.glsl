@@ -255,6 +255,22 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         float spec = ggx(max(dot(n, h), 0.0), a) * smithG1(nl, a) * smithG1(max(cosV, 1e-3), a)
             * fresnel(max(dot(eye, h), 0.0), 1.0, WATER_IOR) / (4.0 * max(cosV, 0.05));
         color += gLightColor * lit * min(spec, 24.0) * (1.0 - 0.8 * rain);
+#if WATER_GLITTER > 0
+        // Le chemin de paillettes : sur les vaguelettes trop petites pour être dessinées, une facette ici ou là renvoie
+        // l'astre droit dans l'œil un instant. Elles sont semées dans un lobe plus large que l'éclat, qui s'allument et
+        // s'éteignent sans cesse ; au loin, trop fines, elles se fondent dans l'éclat.
+        if (top && !below) {
+            float aw = 0.20;
+            float lobe = ggx(max(dot(n, h), 0.0), aw) * aw * aw * 3.14159265;
+            vec2 cell = floor(world.xz * 9.0);
+            float seed = fract(sin(dot(cell, vec2(12.9898, 78.233))) * 43758.5453);
+            float frame = floor(t * 7.0 + seed * 7.0);
+            float hs = fract(sin(dot(cell + frame * vec2(0.37, 1.13), vec2(39.346, 11.135))) * 43758.5453);
+            float near_ = 1.0 - smoothstep(24.0, 64.0, length(vPos));
+            float spark = step(0.94, hs) * smoothstep(0.15, 0.6, lobe) * near_;
+            color += gLightColor * lit * spark * 5.0 * (1.0 - rain);
+        }
+#endif
     }
 
     // L'écume : une matière blanche et mate posée sur l'eau, qui prend le jour et le ciel et cache le reflet.
