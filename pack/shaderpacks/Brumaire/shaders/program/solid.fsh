@@ -19,6 +19,7 @@ uniform float snowSoak;
 #include "/lib/cave.glsl"
 #include "/lib/tracks.glsl"
 #include "/lib/shore.glsl"
+#include "/lib/alpenglow.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -571,6 +572,10 @@ void main() {
         float rim = pow(1.0 - max(dot(normal, -normalize(vPos)), 0.0), 3.0);
         lit += gLightColor * albedo * rim * 0.12 * (1.0 - indirect);
     }
+#endif
+#if defined PROGRAM_TERRAIN && ALPENGLOW > 0
+    // Les cimes enneigées gardent le soleil couchant un moment après la vallée.
+    if (vMat == 9 || snow > 0.3) lit += alpenglow(albedo, normal, world, lm.y * lm.y) * (vMat == 9 ? 1.0 : snow);
 #endif
 #if defined PROGRAM_TERRAIN && MATERIALS > 0
     // Le reflet de l'astre, sur la pente du texel quand le relief ou la neige en donnent une. Un sol trempé devient

@@ -6,6 +6,9 @@
 #ifdef PROGRAM_DH_WATER
 #include "/lib/mist.glsl"
 #endif
+#ifdef PROGRAM_DH_TERRAIN
+#include "/lib/alpenglow.glsl"
+#endif
 
 uniform sampler2D depthtex0;
 
@@ -70,5 +73,8 @@ void main() {
     float indirect;
     vec3 lit = shade(albedo, normal, vLm, 1.0, vPos, leaf, gl_FragCoord.xy, 1, indirect);
     if (vMat == DH_BLOCK_ILLUMINATED || vMat == DH_BLOCK_LAVA) lit += albedo * 1.5;
+#if defined PROGRAM_DH_TERRAIN && ALPENGLOW > 0 && defined DH_BLOCK_SNOW
+    if (vMat == DH_BLOCK_SNOW) lit += alpenglow(albedo, normal, vPos + cameraPosition, vLm.y * vLm.y);
+#endif
     outColor = vec4(lit, vTint.a);
 }
