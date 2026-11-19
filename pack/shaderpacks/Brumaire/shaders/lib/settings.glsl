@@ -34,6 +34,7 @@
 #define CLOUD_MULTISCATTER 4 // [1 2 3 4]
 #define CLOUD_LIGHT_STEPS 6 // [3 4 6 8]
 #define CLOUD_LIGHTNING 1 // [0 1]
+#define HEAT_LIGHTNING 1 // [0 1]
 
 // Ciel
 #define SKY_STARS 1 // [0 1]

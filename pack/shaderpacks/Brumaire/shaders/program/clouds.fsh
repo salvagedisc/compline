@@ -121,6 +121,42 @@ vec3 cloudLightning(vec3 p, float h) {
 #endif
 }
 
+#if HEAT_LIGHTNING > 0
+/**
+ * Les éclairs de chaleur : les nuits chaudes et lourdes d'été, sans pluie ici, des orages trop lointains pour qu'on
+ * les entende allument par moments, en silence, des bancs de nuages au ras de l'horizon. Trois foyers, chacun dans
+ * sa direction, qui changent tous les quarts d'heure ; une lueur qui clignote deux ou trois fois puis s'éteint.
+ */
+vec3 heatLightning(vec3 dir) {
+    float night = 1.0 - smoothstep(0.0, 0.25, gDay);
+    float sultry = smoothstep(0.62, 0.85, airHeat) * smoothstep(0.35, 0.65, airHumid) * (1.0 - rainStrength);
+    float amount = night * sultry;
+    if (amount <= 0.001 || dir.y < -0.02 || dir.y > 0.22) return vec3(0.0);
+    float watch = floor(frameTimeCounter / 900.0);
+    float az = atan(dir.z, dir.x);
+    vec3 glow = vec3(0.0);
+    for (int k = 0; k < 3; k++) {
+        vec3 id = vec3(watch, float(k) * 7.3, 2.9);
+        if (cloudHash(id) > 0.7) continue;
+        float centre = (cloudHash(id + 1.7) * 2.0 - 1.0) * 3.14159;
+        float off = abs(mod(az - centre + 3.14159, 6.28318) - 3.14159);
+        if (off > 0.45) continue;
+        // Des salves : un battement sur six environ s'allume, en deux ou trois éclats.
+        float beat = floor(frameTimeCounter * 0.9 + float(k) * 0.37);
+        if (cloudHash(vec3(beat, float(k), 5.1)) > 0.17) continue;
+        float age = fract(frameTimeCounter * 0.9 + float(k) * 0.37);
+        float pulse = exp(-age * 5.0) * max(sin(age * 38.0 + float(k)), 0.0) + exp(-max(age - 0.35, 0.0) * 9.0) * step(0.35, age) * 0.6;
+        // Le banc lointain : des tours bosselées au ras de l'horizon, plus claires dans leur cœur.
+        float bank = cloudNoise(vec3(az * 6.0, dir.y * 14.0, float(k) + watch * 0.13)).r;
+        float shape = smoothstep(0.30, 0.62, bank - dir.y * 1.4) * smoothstep(-0.02, 0.01, dir.y);
+        // Et l'air au-dessus, qui s'éclaire un peu autour du banc.
+        float haze = exp(-max(dir.y, 0.0) / 0.05);
+        glow += vec3(0.78, 0.74, 1.0) * pulse * exp(-sq(off / 0.22)) * (shape * 0.18 + haze * 0.04);
+    }
+    return glow * amount;
+}
+#endif
+
 /** La marche dans la couche de nuages. light et pass s'accumulent d'avant en arrière ; rend la distance moyenne vue. */
 float marchLayer(vec3 eye, vec3 dir, float sceneLen, float coverage, float noise, inout vec3 light, inout float pass) {
     if (abs(dir.y) < 1e-4) return 0.0;
@@ -247,6 +283,10 @@ void main() {
     cloudLight = mix(cloudLight, vec3(luma(cloudLight)) * 0.6, rainStrength * 0.6);
     light += pass * cloudLight;
     pass *= cloudPass;
+#if HEAT_LIGHTNING > 0
+    // Les orages lointains, derrière les nuages proches.
+    if (sky) light += pass * heatLightning(dir);
+#endif
 
     // Au-dessus : la nappe d'altocumulus, puis tout en haut le voile de cirrus et le halo que ses cristaux dessinent.
     if (sky && dir.y > 0.0) {

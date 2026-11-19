@@ -540,3 +540,7 @@ option.SKY_RAYS=Crepuscular rays
 option.SKY_RAYS.comment=At sunset and sunrise, between scattered clouds, bands of shadow and light fan out from the sun and meet again on the opposite side of the sky.
 value.SKY_RAYS.0=Off
 value.SKY_RAYS.1=On
+option.HEAT_LIGHTNING=Heat lightning
+option.HEAT_LIGHTNING.comment=On hot, sultry nights, storms too far away to be heard silently light up cloud banks low on the horizon.
+value.HEAT_LIGHTNING.0=Off
+value.HEAT_LIGHTNING.1=On
