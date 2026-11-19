@@ -552,3 +552,7 @@ option.WATER_STARS=Stars in the water
 option.WATER_STARS.comment=On clear nights, calm water and puddles reflect the stars, the Milky Way and the aurora.
 value.WATER_STARS.0=Off
 value.WATER_STARS.1=On
+option.FLOATING_LEAVES=Floating leaves
+option.FLOATING_LEAVES.comment=Under trees, a few fallen leaves float on calm water, drift slowly with the wind, then sink. Many more in autumn.
+value.FLOATING_LEAVES.0=Off
+value.FLOATING_LEAVES.1=On

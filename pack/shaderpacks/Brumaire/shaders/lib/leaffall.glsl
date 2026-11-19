@@ -4,6 +4,7 @@
 // Demande voxel.glsl et motes.glsl (moteHash) avant lui.
 
 #if (FALLING_LEAVES > 0 || CANOPY_DRIPS > 0 || LEAF_LITTER > 0) && defined VOXELS
+#define LEAFFALL_GLSL
 uniform sampler2D canopyTex;
 
 /**
