@@ -12,7 +12,6 @@
 #include "/lib/rain.glsl"
 
 uniform sampler2D colortex0;
-uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 uniform sampler2D colortex4;
 in vec2 vUv;
