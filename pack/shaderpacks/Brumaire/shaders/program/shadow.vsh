@@ -10,8 +10,10 @@ in vec2 mc_midTexCoord;
 out vec2 vUv;
 flat out int vWater;
 flat out int vGlass;
-#ifdef VOXELS
+#if defined VOXELS || LANTERN_SWAY > 0
 in vec4 at_midBlock;
+#endif
+#ifdef VOXELS
 layout(r32ui) uniform writeonly uimage3D voxelImg;
 uniform int renderStage;
 #if VOXEL_REFLECTIONS > 0
@@ -76,6 +78,15 @@ void main() {
         pos += windVertex(mat, gl_MultiTexCoord0.t < mc_midTexCoord.t, pos + cameraPosition, pos, lm.y);
         view = shadowModelView * vec4(pos, 1.0);
     }
+#if LANTERN_SWAY > 0
+    if (int(mc_Entity.x + 0.5) - 10000 >= 32 && (int(mc_Entity.x + 0.5) - 10000) / 32 == 23) {
+        vec3 pos = (shadowModelViewInverse * view).xyz;
+        vec3 pivot = pos + at_midBlock.xyz / 64.0 + vec3(0.0, 0.5, 0.0);
+        vec2 lm = lightCoord((gl_TextureMatrix[1] * gl_MultiTexCoord1).xy);
+        pos = pivot + lanternSwing(pos - pivot, pivot + cameraPosition, pos, lm.y);
+        view = shadowModelView * vec4(pos, 1.0);
+    }
+#endif
 #if WATER_PLANT_SWAY > 0
     if (mat == 7) {
         vec3 pos = (shadowModelViewInverse * view).xyz;

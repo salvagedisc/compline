@@ -116,3 +116,33 @@ vec3 currentVertex(vec3 world, vec3 rel, bool flat_) {
     return vec3(push.x, 0.0, push.y);
 }
 #endif
+
+#if LANTERN_SWAY > 0
+/** Tourne d (depuis le point d'attache) d'un angle a dans le plan vertical qui contient la direction horizontale s. */
+vec3 swingPlane(vec3 d, vec3 s, float a) {
+    float along = dot(d, s);
+    float c = cos(a), si = sin(a);
+    float al = along * c - d.y * si;
+    float v = along * si + d.y * c;
+    return d + s * (al - along) + vec3(0.0, v - d.y, 0.0);
+}
+
+/**
+ * Une lanterne suspendue se balance au vent autour de son point d'attache (le milieu du haut de son bloc) : un pendule
+ * poussé dans le sens du vent, un peu de roulis en travers, chacune à son rythme. À l'abri du ciel, elle ne bouge pas.
+ * d : le sommet depuis le point d'attache ; rend sa nouvelle position depuis ce point.
+ */
+vec3 lanternSwing(vec3 d, vec3 pivot, vec3 rel, float sky) {
+    vec2 dir;
+    float force, turbulence;
+    windAt(rel, dir, force, turbulence);
+    float amp = (0.04 + 0.10 * force) * smoothstep(0.35, 0.9, sky);
+    if (amp <= 0.0) return d;
+    float t = frameTimeCounter;
+    float phase = dot(pivot.xz, vec2(1.7, 2.3));
+    float swing = amp * (0.35 + (0.65 + 0.35 * sin(t * 0.37 + phase)) * sin(t * 1.9 + phase));
+    float roll = amp * (0.25 + turbulence * 0.3) * sin(t * 1.3 + phase * 1.7);
+    d = swingPlane(d, vec3(dir.x, 0.0, dir.y), swing);
+    return swingPlane(d, vec3(-dir.y, 0.0, dir.x), roll);
+}
+#endif

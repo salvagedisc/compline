@@ -26,6 +26,9 @@
 #include "/lib/wind.glsl"
 in vec2 mc_Entity;
 in vec2 mc_midTexCoord;
+#if LANTERN_SWAY > 0
+in vec4 at_midBlock;
+#endif
 #if defined PROGRAM_TERRAIN && RELIEF > 0
 in vec4 at_tangent;
 out vec4 vTangent;
@@ -89,6 +92,14 @@ void main() {
         vBend.y = (top ? 1.0 : 0.0) + (vMat == 3 ? 1.0 : 0.0);
 #endif
     }
+#if LANTERN_SWAY > 0
+    // Une lanterne suspendue se balance autour du haut de son bloc.
+    if (vSurf == 23) {
+        vec3 pivot = vPos + at_midBlock.xyz / 64.0 + vec3(0.0, 0.5, 0.0);
+        vPos = pivot + lanternSwing(vPos - pivot, pivot + cameraPosition, vPos, vLm.y);
+        view = gbufferModelView * vec4(vPos, 1.0);
+    }
+#endif
 #if WATER_PLANT_SWAY > 0
     // Les plantes de l'eau suivent le courant ; les nénuphars dansent sur les rides.
     if (vMat == 7) {

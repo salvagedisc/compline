@@ -99,6 +99,8 @@
 #define LEAF_FLUTTER 1 // [0 1]
 // Les herbes marines et les algues ondulent dans le courant, les nénuphars dansent sur les rides.
 #define WATER_PLANT_SWAY 1 // [0 1]
+// Les lanternes suspendues se balancent au vent.
+#define LANTERN_SWAY 1 // [0 1]
 // Le feuillage touffu : deux plans de plus par face de feuilles, décollés et penchés (program/bushy.gsh).
 #define BUSHY_LEAVES 1 // [0 1]
 // Jusqu'où (blocs) le feuillage est touffu.
