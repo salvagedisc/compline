@@ -48,6 +48,8 @@ bool grassSlope(vec3 world, vec3 normal) {
     return c.g > c.r * 1.05 && c.g > c.b * 1.15;
 }
 
+#endif
+
 /** Le texel d'herbe qui couvre une marche : les gris du dessus de l'herbe, tirés texel par texel. */
 vec4 grassRiser(vec3 world, vec3 normal) {
     vec3 cell = floor(world - normal * 0.01);
@@ -56,6 +58,18 @@ vec4 grassRiser(vec3 world, vec3 normal) {
     float g = grassEdgeHash(cell * 1.3 + normal * 5.0 + vec3(px, 0.0));
     float grey = g < 0.2 ? 0.47 : (g < 0.45 ? 0.54 : (g < 0.7 ? 0.58 : (g < 0.9 ? 0.63 : 0.70)));
     return vec4(vec3(grey), 1.0);
+}
+
+#if GRASS_FAR_SIDES > 0
+/**
+ * Vrai pour une face de côté d'un bloc d'herbe au loin : au-delà du volume (44 à 60 blocs, les mêmes faces qui
+ * quittent l'essai des marches), toute face d'herbe se couvre d'herbe, comme les collines de Distant Horizons, qui sont
+ * vertes sur leurs flancs. Sans cela, l'anneau entre le volume et le lointain se lirait brun.
+ */
+bool grassFarSide(vec3 world, vec3 normal) {
+    vec3 cell = floor(world - normal * 0.01);
+    float reach = length(cell.xz + 0.5 - cameraPosition.xz);
+    return grassEdgeHash(cell + normal * 7.3) < smoothstep(44.0, 60.0, reach);
 }
 #endif
 #endif
