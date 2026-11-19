@@ -536,3 +536,7 @@ option.DEW_HALO=Dew halo
 option.DEW_HALO.comment=On dewy grass, a white halo surrounds the shadow of your head and follows your gaze.
 value.DEW_HALO.0=Off
 value.DEW_HALO.1=On
+option.SKY_RAYS=Crepuscular rays
+option.SKY_RAYS.comment=At sunset and sunrise, between scattered clouds, bands of shadow and light fan out from the sun and meet again on the opposite side of the sky.
+value.SKY_RAYS.0=Off
+value.SKY_RAYS.1=On

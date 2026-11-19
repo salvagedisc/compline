@@ -44,6 +44,7 @@
 #define SKY_HALO 1 // [0 1]
 #define SKY_RAINBOW 1 // [0 1]
 #define SKY_TWILIGHT_BELT 1 // [0 1]
+#define SKY_RAYS 1 // [0 1]
 #define SKY_VENUS 1 // [0 1]
 #define SKY_COMET 1 // [0 1]
 #define SKY_ZODIACAL 1 // [0 1]

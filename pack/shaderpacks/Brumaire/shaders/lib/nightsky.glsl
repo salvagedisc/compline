@@ -204,6 +204,35 @@ vec3 twilightBelt(vec3 d, vec3 sky) {
 }
 #endif
 
+#if SKY_RAYS > 0
+/**
+ * Les rayons crépusculaires du ciel : quand le soleil bas passe entre des nuages épars, leurs ombres tracent dans l'air
+ * des bandes sombres et claires qui partent du soleil en éventail, traversent tout le ciel et se rejoignent au point
+ * opposé (rayons anticrépusculaires). Rend le ciel sky retouché.
+ */
+vec3 skyRays(vec3 d, vec3 sky) {
+    float e = gSunDir.y;
+    float twilight = smoothstep(-0.16, -0.10, e) * (1.0 - smoothstep(0.06, 0.14, e));
+    float c = cloudCoverage();
+    float amount = twilight * clamp(4.0 * c * (1.0 - c), 0.0, 1.0) * (1.0 - rainStrength);
+    if (amount <= 0.001 || d.y < -0.05) return sky;
+    vec3 u = normalize(cross(gSunDir, vec3(0.0, 1.0, 0.0)) + vec3(1e-5, 0.0, 0.0));
+    vec3 v = cross(u, gSunDir);
+    float phi = atan(dot(d, v), dot(d, u));
+    float theta = acos(clamp(dot(d, gSunDir), -1.0, 1.0));
+    // Les ombres des nuages, tirées au sort chaque jour, qui glissent à peine.
+    float n = cloudNoise(vec3(phi * 1.1, float(worldDay) * 0.37 + frameTimeCounter * 0.0015, 0.53)).r * 0.75
+            + cloudNoise(vec3(phi * 3.2, 0.21, float(worldDay) * 0.11)).r * 0.25;
+    float beam = smoothstep(0.30, 0.70, n);
+    // Nets près du soleil, plus pâles au milieu du ciel, qui se resserrent de nouveau à l'opposé.
+    float w = exp(-theta / 0.40) + 0.5 * exp(-(3.14159 - theta) / 0.35) + 0.05;
+    // Surtout bas sur l'horizon : vers le zénith, l'air est trop mince pour bien les montrer.
+    w *= smoothstep(-0.03, 0.06, d.y) * (0.35 + 0.65 * (1.0 - smoothstep(0.25, 0.75, d.y)));
+    float k = clamp(w * amount, 0.0, 1.0);
+    return sky * (1.0 - 0.24 * (1.0 - beam) * k) + sky * 0.10 * beam * k;
+}
+#endif
+
 #if SKY_VENUS > 0
 /**
  * L'étoile du berger : Vénus, à 25 à 46 degrés du soleil selon les semaines, qui s'allume avant toutes les étoiles
