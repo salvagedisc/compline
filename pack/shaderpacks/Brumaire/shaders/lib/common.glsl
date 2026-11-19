@@ -47,6 +47,8 @@ vec3 gAmbient;    // lumière du ciel
 float gDay;       // 0 la nuit, 1 le jour
 float gDusk;      // 1 quand le soleil rase l'horizon
 float gFlash;     // l'éclair qui illumine le ciel et le paysage, 0..1
+vec3 gLunar = vec3(1.0); // la teinte d'une lune d'Enhanced Celestials (lumière moyenne 1)
+float gLunarK = 0.0;     // sa part dans la nuit : 0 sans lune colorée ou le jour
 
 float luma(vec3 c) { return dot(c, LUMA); }
 float sq(float x) { return x * x; }
@@ -70,12 +72,31 @@ void initEnv() {
     // au ras de l'horizon) et de la lune (selon sa phase), tirée vers le bleu comme l'œil la voit la nuit.
     vec3 sun = skyRow(1) / vec3(0.97, 0.89, 0.78) * 3.4;
     vec3 moon = luma(skyRow(2)) * vec3(0.36, 0.48, 0.80) * 0.26;
+#if LUNAR_EVENTS > 0
+    // Les lunes d'Enhanced Celestials (de sang, bleue, des moissons) : le jeu teinte la texture de la lune, que
+    // gbuffers_skytextured.vsh range dans la table du ciel. Sa couleur gagne la nuit : la lune et son halo, la
+    // lumière qu'elle verse, le ciel et sa lueur. Une lune blanche ne change rien.
+    vec3 tint = skyRow(SKY_LUNAR);
+    float top = max(max(tint.r, tint.g), tint.b);
+    if (top > 0.05) {
+        vec3 hue = tint / top;
+        float sat = 1.0 - min(min(hue.r, hue.g), hue.b);
+        vec3 l = mix(vec3(1.0), hue, 0.75);
+        // Un jaune faible tourne au kaki dans la nuit : une lune chaude (rouge devant le vert, vert devant le bleu)
+        // penche vers l'orangé.
+        l.g *= 1.0 - 0.18 * sat * step(hue.b, hue.g) * step(hue.g, hue.r);
+        gLunar = l / mix(1.0, max(luma(l), 0.05), 0.7);
+        gLunarK = smoothstep(0.05, 0.30, sat) * (1.0 - smoothstep(-0.12, 0.0, e)) * LUNAR_EVENTS_STRENGTH;
+    }
+    moon = mix(moon, luma(moon) * gLunar, gLunarK);
+#endif
     gLightColor = (e > 0.0 ? sun : moon) * fade * (1.0 - 0.85 * rainStrength);
     // Lumière du ciel : sa moyenne, un peu désaturée (le ciel n'est jamais d'un seul bleu), plus le soleil renvoyé
     // par le sol et une lueur nocturne qui ne laisse jamais le noir complet.
     vec3 sky = skyRow(0);
     vec3 amb = mix(sky, vec3(luma(sky)) * vec3(1.02, 1.0, 0.95), 0.6) * 1.1 + (e > 0.0 ? sun * fade * 0.06 : vec3(0.0));
     amb += vec3(0.020, 0.026, 0.042);
+    amb = mix(amb, vec3(luma(amb)) * gLunar, 0.7 * gLunarK);
     gAmbient = mix(amb, vec3(luma(amb)) * vec3(0.95, 0.95, 0.93) * 0.75, rainStrength * 0.7);
     // Un éclair qui frappe blanchit tout d'un coup, en vacillant, moins quand il tombe loin.
     float flicker = 0.55 + 0.45 * sin(frameTimeCounter * 47.0) * sin(frameTimeCounter * 13.0 + 1.3);
@@ -89,6 +110,7 @@ vec3 skyAt(vec3 d) {
     // La nuit, l'œil voit en bleu.
     float night = 1.0 - smoothstep(-0.20, 0.0, gSunDir.y);
     c = mix(c, vec3(luma(c)) * vec3(0.55, 0.75, 1.30), night * 0.5);
+    c = mix(c, vec3(luma(c)) * gLunar * 1.1, 0.6 * gLunarK);
     // Un ciel d'été voilé : jamais d'un bleu profond.
     c = mix(c, vec3(luma(c)) * vec3(0.90, 0.96, 1.08), 0.22 * gDay);
     // Sous la pluie, un gris un peu chaud, celui des nuages chargés.

@@ -123,6 +123,8 @@ void main() {
     } else if (texel.x == 2) {
         color = toward(origin, -sun) * moon / MOON_POWER;
     } else {
+        // La case de la teinte de la lune appartient à gbuffers_skytextured.vsh.
+        if (texel.x == SKY_LUNAR) return;
         color = vec3(0.0);
     }
     imageStore(skyImg, texel, vec4(color, 1.0));
