@@ -47,7 +47,7 @@ float snowCover(vec3 world, vec3 normal, float sky, float leaf, float grain) {
     return 0.0;
 }
 
-#if FROST > 0 || DEW > 0 || WINDOW_FROST > 0
+#if FROST > 0 || DEW > 0 || WINDOW_FROST > 0 || PUDDLE_ICE > 0
 uniform float sunAngle;
 #endif
 #if WINDOW_FROST > 0
@@ -83,6 +83,37 @@ float frostCover(vec3 world, vec3 normal, vec2 lm, float plant, float grain) {
 }
 #else
 float frostCover(vec3 world, vec3 normal, vec2 lm, float plant, float grain) { return 0.0; }
+#endif
+
+#if PUDDLE_ICE > 0
+/**
+ * Les flaques qui gèlent (0..1) : après la pluie, par nuit froide dans un biome frais, l'eau des flaques prend en une
+ * glace mate jusqu'au milieu de la matinée. Plus froid qu'il ne faut pour le givre. lm : lumière (blocs, ciel).
+ */
+float puddleFreeze(vec2 lm) {
+    float cold = 1.0 - smoothstep(0.15, 0.50, airHeat);
+    float hour = sunAngle < 0.5 ? 1.0 - smoothstep(0.03, 0.13, sunAngle) : smoothstep(0.52, 0.72, sunAngle);
+    return cold * hour * (1.0 - rainStrength) * (1.0 - smoothstep(0.3, 0.6, lm.x));
+}
+
+/**
+ * La glace d'une flaque gelée au texel (repère monde) : quelques fêlures droites qui se croisent (rend 1 sur une
+ * fêlure), dessinées bloc par bloc.
+ */
+float puddleCrack(vec3 world, vec3 normal) {
+    vec2 q = floor(world.xz * 16.0 + normal.xz * 0.5) + 0.5;
+    vec2 cell = floor(q / 16.0);
+    float crack = 0.0;
+    for (int k = 0; k < 2; k++) {
+        float h = rainHash(cell * 1.71 + float(k) * 5.3);
+        if (h > 0.65) continue;
+        float a = h * 9.42;
+        vec2 n = vec2(cos(a), sin(a));
+        vec2 c = (cell + 0.5) * 16.0 + (vec2(rainHash(cell + 3.1), rainHash(cell + 7.7)) - 0.5) * 8.0;
+        crack = max(crack, step(abs(dot(q - c, n)), 0.5));
+    }
+    return crack;
+}
 #endif
 
 /**
