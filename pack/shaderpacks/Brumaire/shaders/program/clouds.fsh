@@ -281,6 +281,14 @@ void main() {
     cloudLight = mix(horizon * (1.0 - cloudPass), cloudLight, fade);
     // Sous la pluie, des nuages gris.
     cloudLight = mix(cloudLight, vec3(luma(cloudLight)) * 0.6, rainStrength * 0.6);
+#if CLOUD_IRIDESCENCE > 0
+    // Les franges minces d'un cumulus près de l'astre s'irisent aussi, moins qu'une nappe fine.
+    if (cloudPass < 0.98) {
+        float thin = 4.0 * cloudPass * (1.0 - cloudPass);
+        vec3 at = eye + dir * seen;
+        cloudLight *= max(vec3(1.0) + cloudIridescence(dir, at.xz) * thin * 0.5 * (1.0 - rainStrength), 0.0);
+    }
+#endif
     light += pass * cloudLight;
     pass *= cloudPass;
 #if HEAT_LIGHTNING > 0
