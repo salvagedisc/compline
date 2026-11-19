@@ -548,3 +548,7 @@ option.WATER_GLITTER=Paillettes sur l'eau
 option.WATER_GLITTER.comment=Sur l'eau au soleil, des vaguelettes trop petites pour être dessinées renvoient l'astre en paillettes qui s'allument et s'éteignent sans cesse.
 value.WATER_GLITTER.0=Non
 value.WATER_GLITTER.1=Oui
+option.WATER_STARS=Étoiles dans l'eau
+option.WATER_STARS.comment=Par nuit claire, l'eau calme et les flaques renvoient les étoiles, la Voie lactée et les aurores.
+value.WATER_STARS.0=Non
+value.WATER_STARS.1=Oui

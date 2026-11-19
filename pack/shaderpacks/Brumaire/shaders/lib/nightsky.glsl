@@ -4,6 +4,7 @@
 // La lune pleine pâlit la Voie lactée et noie les étoiles les plus faibles ; la pluie et l'aube les effacent.
 // Demande clouds.glsl avant lui (le bruit de la Voie lactée). Directions en repère monde.
 
+#define NIGHTSKY_GLSL
 uniform int moonPhase;
 uniform int worldDay;
 

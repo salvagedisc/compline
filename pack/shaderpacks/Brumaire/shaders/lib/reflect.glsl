@@ -92,6 +92,10 @@ vec3 skyReflection(vec3 world, vec3 r) {
         }
     }
 #endif
+#if WATER_STARS > 0 && defined NIGHTSKY_GLSL
+    // Par nuit calme, l'eau et les flaques renvoient les étoiles, la Voie lactée et l'aurore, que la brume voile.
+    if (r.y > 0.0) sky += nightSky(r) * 0.9;
+#endif
     return mix(sky, mistColor(r, 1.0), veil);
 }
 

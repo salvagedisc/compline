@@ -548,3 +548,7 @@ option.WATER_GLITTER=Water glitter
 option.WATER_GLITTER.comment=On sunlit water, ripples too small to be drawn flash the sun back in sparkles that come and go.
 value.WATER_GLITTER.0=Off
 value.WATER_GLITTER.1=On
+option.WATER_STARS=Stars in the water
+option.WATER_STARS.comment=On clear nights, calm water and puddles reflect the stars, the Milky Way and the aurora.
+value.WATER_STARS.0=Off
+value.WATER_STARS.1=On
