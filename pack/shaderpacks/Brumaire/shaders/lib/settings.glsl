@@ -207,6 +207,7 @@
 #define EXPOSURE_SPEED 1.0 // [0.5 1.0 2.0]
 #define DOF 0 // [0 1 2]
 #define PURKINJE 1 // [0 1]
+#define NIGHT_GRAIN 1 // [0 1]
 #define VIGNETTE 1 // [0 1]
 
 // Image
