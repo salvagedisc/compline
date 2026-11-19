@@ -23,6 +23,9 @@ uniform mat4 gbufferModelViewInverse;
 uniform ivec2 eyeBrightnessSmooth;
 uniform mat4 gbufferProjection;
 uniform float frameTimeCounter;
+#if NIGHT_GRAIN > 0
+uniform int frameCounter;
+#endif
 in vec2 vUv;
 
 /* RENDERTARGETS: 7 */
@@ -476,6 +479,10 @@ void main() {
     color += sunGlare() * smoothstep(-0.02, 0.06, sunUp);
 #endif
     color *= exposure;
+#if NIGHT_GRAIN > 0
+    // La clarté vue par l'œil, avant les bâtonnets : le grain ne vient que dans le noir.
+    float grainDark = 1.0 - smoothstep(0.003, 0.06, dot(color, LUMA));
+#endif
 #if PURKINJE > 0
     // Dans le noir, l'œil voit avec ses bâtonnets : les couleurs s'éteignent et l'image tire vers le bleu.
     float dark = 1.0 - smoothstep(0.004, 0.05, dot(color, LUMA));
@@ -497,6 +504,17 @@ void main() {
     // Une image mate : les noirs à peine levés, les blancs à peine retenus.
     color = color * 0.96 + 0.016;
     color = pow(max(color, 0.0), vec3(1.0 / 2.2));
+#if NIGHT_GRAIN > 0
+    // Le grain de la nuit : dans le noir, l'œil ne voit plus net et l'image fourmille d'un grain fin, sans couleur, qui
+    // change à chaque image. Il suit la clarté : rien sur ce qui est éclairé, un peu dans la pénombre, plus dans le noir.
+    if (grainDark > 0.01) {
+        vec2 seed = gl_FragCoord.xy + vec2(float(frameCounter % 64) * 17.0, float(frameCounter % 61) * 29.0);
+        float g1 = fract(sin(dot(seed, vec2(12.9898, 78.233))) * 43758.5453);
+        float g2 = fract(sin(dot(seed, vec2(39.3468, 11.1351))) * 24634.6345);
+        float grain = g1 + g2 - 1.0;
+        color += grain * grainDark * (0.012 + 0.22 * dot(color, LUMA));
+    }
+#endif
     color += (fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715)))) - 0.5) / 255.0;
     outColor = vec4(color, 1.0);
 }
