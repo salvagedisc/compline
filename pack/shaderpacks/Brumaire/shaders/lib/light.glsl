@@ -34,6 +34,30 @@ vec3 hemisphereLight(vec3 normal, float sky) {
     return mix(ground, fromAbove, smoothstep(0.0, 0.62, up)) * sky;
 }
 
+#if CANOPY_SHADE > 0 && defined FSH && defined VOXELS
+/**
+ * La part du ciel qui passe le feuillage au-dessus d'une surface. Le jeu ne retire qu'un cran de lumière du ciel par
+ * bloc de feuilles : sous une forêt, le sol reste presque aussi clair qu'en plein champ. On remonte la colonne du
+ * volume sur 24 blocs ; chaque feuillage en laisse passer les quatre cinquièmes, jamais moins d'un tiers en tout. La
+ * colonne part d'un point tiré au sort dans le bloc à chaque image : l'anticrénelage temporel en fait une ombre douce.
+ */
+float canopyShade(vec3 pos, vec3 normal, vec2 frag) {
+    vec2 jit = vec2(dither(frag + 1.7 * float(frameCounter & 31)), dither(frag.yx + 3.1 * float(frameCounter & 31))) - 0.5;
+    vec3 start = pos + normal * 0.3 + vec3(jit.x, 0.6, jit.y);
+    vec3 camF = fract(cameraPosition);
+    float leaves = 0.0;
+    for (int i = 0; i < 16; i++) {
+        ivec3 c = voxelCell(start + vec3(0.0, float(i) * 1.5, 0.0), camF);
+        if (!voxelInside(c)) break;
+        if ((texelFetch(voxelTex, c, 0).r & VOX_LEAF) != 0u) leaves += 1.5;
+    }
+    float pass = max(pow(0.8, leaves), 0.33);
+    // Loin de l'œil, le volume s'arrête : l'effet s'efface avant son bord.
+    float fade = 1.0 - smoothstep(40.0, 58.0, length(pos.xz));
+    return mix(1.0, pass, fade * (CANOPY_SHADE > 1 ? 1.0 : 0.75));
+}
+#endif
+
 // La lumière de l'astre qui atteint le dernier point éclairé par shade() (ombre, nuages, eau et vitraux compris).
 vec3 gSunReach = vec3(0.0);
 // La lumière des blocs au même point (gBlockReach), d'où elle vient (gBlockDir, unitaire) et combien elle vient d'un
@@ -129,6 +153,9 @@ vec3 shade(vec3 albedo, vec3 normal, vec2 lm, float ao, vec3 pos, float leaf, ve
     float direct = luma(light);
 
     float sky = lm.y * lm.y;
+#if CANOPY_SHADE > 0 && defined FSH && defined VOXELS
+    if (sky > 0.01) sky *= canopyShade(pos, normal, frag);
+#endif
     float occl = ao * ao;
     light += hemisphereLight(normal, sky) * occl;
     // La lumière des blocs prend la couleur de ce qui éclaire autour (lib/voxel.glsl) : orangée pour une flamme,
