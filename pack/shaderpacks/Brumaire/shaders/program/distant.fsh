@@ -61,6 +61,18 @@ void main() {
 #if defined PROGRAM_DH_TERRAIN && GROUND_TINT > 0
     if (vMat != DH_BLOCK_ILLUMINATED && vMat != DH_BLOCK_LAVA) albedo = groundTint(albedo, vPos + cameraPosition, groundGreen(vTint.rgb));
 #endif
+#if defined PROGRAM_DH_TERRAIN && FAR_CANOPY > 0
+    // Les forêts lointaines : chaque bloc de feuillage prend sa nuance (plus clair, plus sombre, un peu plus jaune ou
+    // plus bleu), comme la moyenne d'une texture trouée qui change d'un arbre à l'autre ; le dessous des couronnes,
+    // où la lumière n'entre pas, s'assombrit. Sans quoi le lointain n'est qu'une pâte verte unie.
+    if (vMat == DH_BLOCK_LEAVES) {
+        vec3 block = floor(vPos + cameraPosition - normal * 0.5);
+        float v = fract(sin(dot(block, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+        float w = fract(sin(dot(block, vec3(269.5, 183.3, 246.1))) * 43758.5453);
+        albedo *= mix(0.84, 1.10, v) * vec3(1.0 + 0.06 * (w - 0.5), 1.0, 1.0 - 0.06 * (w - 0.5));
+        albedo *= normal.y < -0.5 ? 0.78 : (normal.y < 0.5 ? 0.92 : 1.0);
+    }
+#endif
     float snowed = 0.0;
 #if defined PROGRAM_DH_TERRAIN && SNOW_COVER > 0
     // La neige que le terrain proche reçoit (lib/cover.glsl) gagne aussi le lointain : le dessus de ce qui voit le

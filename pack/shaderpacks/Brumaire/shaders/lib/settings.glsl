@@ -187,6 +187,8 @@
 #define AURORA_GLOW 1 // [0 1]
 #define SHORE_ICE 1 // [0 1]
 #define GROUND_TINT 1 // [0 1]
+// Les forêts lointaines (Distant Horizons) : une nuance par bloc de feuillage, le dessous des couronnes plus sombre.
+#define FAR_CANOPY 1 // [0 1]
 #define GRASS_OVERHANG 1 // [0 1]
 #define GRASS_SLOPES 1 // [0 1]
 // Au loin (passé 44 à 60 blocs), les flancs d'herbe se couvrent d'herbe, comme les collines de Distant Horizons.
