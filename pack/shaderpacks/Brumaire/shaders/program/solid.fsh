@@ -281,6 +281,7 @@ void main() {
     Surface surf = surfaceOf(0);
     vec3 f0 = vec3(0.04);
     float texelGlow = 0.0;
+    float glint = 0.0;
 #if defined PROGRAM_TERRAIN && MATERIALS > 0
     surf = surfaceOf(vSurf);
     if (vMat == 9) surf = Surface(0.62, 0.0, 0.0, 0.0);
@@ -292,7 +293,11 @@ void main() {
         surf.rough = mix(surf.rough, vSurf == 19 ? 0.28 : 0.22, mineral);
         surf.metal = vSurf == 19 ? mineral : mineral * 0.5;
         surf.gloss = 0.30 * mineral;
+        glint = mineral;
     }
+    // Les pierres précieuses et l'améthyste : toutes leurs facettes peuvent accrocher la lumière.
+    if (vSurf == 10) glint = 0.7;
+    else if (vSurf == 14) glint = 0.75;
     if (vSurf == 15) {
         // Le sculk : ses veines cyan luisent faiblement dans le noir.
         texelGlow = smoothstep(0.10, 0.30, (albedo.g + albedo.b) * 0.5 - albedo.r) * smoothstep(0.04, 0.16, luma(albedo));
@@ -690,6 +695,27 @@ void main() {
         lit += gSunReach * albedo * surf.sheen * pow(1.0 - max(dot(normal, eye), 0.0), 4.0) * 0.35;
         gloss = max(gloss, surf.gloss);
         lit += albedo * texelGlow * 1.4;
+#if ORE_GLINTS > 0
+        // Les paillettes des minerais et des pierres précieuses : chaque texel minéral a sa facette, qui renvoie en un
+        // point vif la torche posée près de là, celle qu'on tient (la lumière vient alors des yeux) ou le soleil,
+        // quand elle tombe dans le bon angle. En bougeant, d'autres facettes s'allument.
+        if (glint > 0.0 && leaf == 0.0) {
+            vec3 q = floor(world * 16.0 + normal * 0.5);
+            vec3 jit = vec3(rainHash(q.xz + q.y * 3.7), rainHash(q.zy + 1.9), rainHash(q.yx * 2.3 + 4.1)) - 0.5;
+            vec3 nG = normalize(normal + (jit - normal * dot(jit, normal)) * 0.8);
+            vec3 toLight = gBlockSide > 0.05 ? normalize(mix(eye, gBlockDir, gBlockSide * 0.7)) : eye;
+            vec3 reach = gBlockReach + gSunReach * max(dot(normal, gLightDir), 0.0);
+            vec3 spark = gBlockReach * sunSpecular(nG, eye, toLight, 0.42, vec3(0.6))
+                       + gSunReach * sunSpecular(nG, eye, gLightDir, 0.42, vec3(0.6));
+            // Le scintillement : chaque facette a son angle, qu'on croise en bougeant ; à un instant, une sur douze brille.
+            vec3 look = floor(eye * 7.0);
+            float twinkle = step(0.92, rainHash(q.xy * 0.37 + q.z * 2.9 + look.xz * 1.7 + look.y * 5.1));
+            spark += reach * twinkle * 2.5;
+            // L'éclat prend un peu la couleur de la pierre.
+            vec3 hue = mix(vec3(1.0), albedo / max(luma(albedo), 0.02), 0.4);
+            lit += min(spark, vec3(5.0)) * hue * glint * 0.5 * float(ORE_GLINTS);
+        }
+#endif
     }
 #endif
 #ifdef WRITE_SURFACE

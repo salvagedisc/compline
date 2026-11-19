@@ -220,6 +220,7 @@
 // Les cartes d'un pack de ressources labPBR (relief, matière, émission), à la place du relief tiré des textures.
 #define LABPBR 1 // [0 1]
 #define SPECULAR_STRENGTH 1.0 // [0.0 0.25 0.5 0.75 1.0 1.25 1.5 2.0]
+#define ORE_GLINTS 1 // [0 1 2]
 #define FROST 1 // [0 1]
 // La rosée des matins doux sur l'herbe et les plantes (lib/cover.glsl).
 #define DEW_HALO 1 // [0 1]
