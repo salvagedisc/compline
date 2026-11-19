@@ -13,6 +13,10 @@
 #if SNOW_COVER > 0
 uniform float snowHere;
 #endif
+#if WETNESS > 0
+uniform float wetness;
+uniform float rainHere;
+#endif
 #endif
 
 uniform sampler2D depthtex0;
@@ -51,6 +55,7 @@ void main() {
 #if defined PROGRAM_DH_TERRAIN && GROUND_TINT > 0
     if (vMat != DH_BLOCK_ILLUMINATED && vMat != DH_BLOCK_LAVA) albedo = groundTint(albedo, vPos + cameraPosition, groundGreen(vTint.rgb));
 #endif
+    float snowed = 0.0;
 #if defined PROGRAM_DH_TERRAIN && SNOW_COVER > 0
     // La neige que le terrain proche reçoit (lib/cover.glsl) gagne aussi le lointain : le dessus de ce qui voit le
     // ciel blanchit, un feuillage en partie, sans quoi l'hiver s'arrête net au bord des blocs du jeu. Le sable des
@@ -60,6 +65,20 @@ void main() {
         float top = smoothstep(0.5, 0.8, normal.y) * smoothstep(0.80, 0.95, vLm.y);
         float s = snowHere * top * (vMat == DH_BLOCK_LEAVES ? 0.65 : 1.0) * (1.0 - sandy);
         albedo = mix(albedo, vec3(0.56, 0.59, 0.64) * 0.95, s);
+        snowed = s;
+    }
+#endif
+#if defined PROGRAM_DH_TERRAIN && WETNESS > 0
+    // Le sol trempé du proche (solid.fsh) fonce aussi au loin, sans quoi l'averse s'arrête au bord des blocs du jeu :
+    // le dessus plus que les flancs, les feuillages un peu, le sable et la neige pas du tout.
+    if (vMat != DH_BLOCK_WATER && vMat != DH_BLOCK_LAVA && vMat != DH_BLOCK_ILLUMINATED && vMat != DH_BLOCK_SNOW) {
+        float wet = clamp(wetness * rainHere * WETNESS, 0.0, 1.0) * smoothstep(0.82, 0.96, vLm.y);
+        if (wet > 0.0) {
+            float sandy = smoothstep(0.10, 0.20, albedo.r - albedo.b) * step(albedo.g, albedo.r) * smoothstep(0.15, 0.30, luma(albedo));
+            float soak = wet * 0.75 * mix(0.55, 1.0, max(normal.y, 0.0)) * (1.0 - sandy) * (1.0 - snowed);
+            if (vMat == DH_BLOCK_LEAVES) albedo *= 1.0 - 0.10 * wet * (1.0 - snowed);
+            else albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
+        }
     }
 #endif
 
