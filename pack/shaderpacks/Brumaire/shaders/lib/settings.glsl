@@ -103,6 +103,9 @@
 #define BUSHY_LEAVES 1 // [0 1]
 // Jusqu'où (blocs) le feuillage est touffu.
 #define BUSHY_DISTANCE 64 // [32 48 64 96 128]
+// Les touffes plus fournies : chaque herbe, fleur ou culture proche reçoit une copie tournée (program/bushy.gsh),
+// jusqu'à la distance du feuillage touffu.
+#define GRASS_TUFTS 1 // [0 1]
 #define WATER_WAVES 1.0 // [0.0 0.5 1.0 1.5]
 #define WATER_MURK 1.0 // [0.5 0.75 1.0 1.5 2.0]
 #define WATER_PIXELS 1 // [0 1]
