@@ -152,3 +152,87 @@ float dragonfliesAlong(vec3 dir, float t1, float amount, out float dist, out vec
     return 0.0;
 }
 #endif
+
+#if MOTHS > 0 && defined VOXELS
+/** Combien de papillons de nuit (0..1) : la nuit, un air doux, sans pluie là où l'on est. */
+float mothAmount() {
+    float night = 1.0 - smoothstep(0.08, 0.3, gDay);
+    float warm = smoothstep(0.25, 0.45, airHeat) * (1.0 - smoothstep(1.4, 1.7, airHeat));
+    float open = float(eyeBrightnessSmooth.y) / 240.0;
+    return night * warm * (1.0 - smoothstep(0.1, 0.4, rainStrength * open));
+}
+
+/**
+ * Les papillons de nuit autour des lumières : le long d'un rayon jusqu'à t1 (24 cases d'un bloc au plus), chaque case
+ * qui contient une lumière forte (torche, lanterne, feu de camp…) ou se tient juste au-dessus d'elle porte un ou deux
+ * papillons de nuit qui tournent vite et de travers autour de la flamme, sans quitter la case. Pâles, éclairés par la
+ * lumière qu'ils visitent. Rend leur couverture, leur distance et leur couleur (linéaire).
+ */
+float mothsAlong(vec3 dir, float t1, float amount, out float dist, out vec3 tint) {
+    dist = 0.0;
+    tint = vec3(0.0);
+    if (t1 <= 0.5 || amount <= 0.01) return 0.0;
+    vec3 camFloor = floor(cameraPosition);
+    vec3 o = cameraPosition - camFloor;
+    vec3 d = vec3(abs(dir.x) < 1e-5 ? 1e-5 : dir.x, abs(dir.y) < 1e-5 ? 1e-5 : dir.y, abs(dir.z) < 1e-5 ? 1e-5 : dir.z);
+    vec3 cell = floor(o);
+    vec3 stepDir = sign(d);
+    vec3 tDelta = abs(1.0 / d);
+    vec3 next = (cell + max(stepDir, 0.0) - o) / d;
+    float time = frameTimeCounter;
+    vec3 right = normalize(cross(dir, vec3(0.0, 1.0, 0.0)) + vec3(1e-4, 0.0, 0.0));
+    vec3 up = cross(right, dir);
+    vec3 camFract = fract(cameraPosition);
+    for (int i = 0; i < 24; i++) {
+        float tExit = min(min(next.x, next.y), min(next.z, t1));
+        vec3 wc = cell + camFloor;
+        ivec3 vc = voxelCell(wc + 0.5 - cameraPosition, camFract);
+        if (voxelInside(vc) && voxelInside(vc - ivec3(0, 1, 0))) {
+            uint here = texelFetch(voxelTex, vc, 0).r;
+            uint under = texelFetch(voxelTex, vc - ivec3(0, 1, 0), 0).r;
+            bool own = (here & 15u) >= 11u;
+            uint lamp = own ? here : under;
+            // Ni au-dessus de la lave, ni sous l'eau.
+            if ((lamp & 15u) >= 11u && ((lamp >> 4) & 15u) != 2u && (here & VOX_WATER) == 0u) {
+                // La lumière (sa case) et une chance sur trois qu'aucun papillon ne la visite.
+                vec3 lc = own ? wc : wc - vec3(0.0, 1.0, 0.0);
+                float hl = moteHash(lc, 101.0);
+                int count = hl < 0.33 * amount ? 0 : (hl < 0.75 ? 1 : 2);
+                for (int k = 0; k < 2; k++) {
+                    if (k >= count) break;
+                    float ph = moteHash(lc + vec3(float(k) * 3.1, 0.0, 0.0), 102.0) * 6.2831853;
+                    float speed = (3.0 + 2.5 * moteHash(lc + float(k), 103.0)) * (k == 0 ? 1.0 : -1.0);
+                    float a = time * speed + ph + 0.8 * sin(time * 7.3 + ph * 2.0);
+                    float rad = 0.22 + 0.16 * (0.5 + 0.5 * sin(time * 2.1 + ph));
+                    vec3 at = wc + vec3(0.5 + cos(a) * rad, own ? 0.62 : 0.30, 0.5 + sin(a) * rad);
+                    at.y += 0.18 * sin(time * 5.7 + ph * 1.7) + 0.06 * sin(time * 23.0 + ph);
+                    at = clamp(at, wc + 0.04, wc + 0.96);
+                    vec3 rel = at - cameraPosition;
+                    float s = dot(rel, dir);
+                    if (s > 0.4 && s < t1) {
+                        vec3 miss = dir * s - rel;
+                        // Des pixels d'un vingtième de bloc : un petit papillon de nuit, ailes en triangle qui battent vite.
+                        vec2 q = floor(vec2(dot(miss, right), dot(miss, up)) * 20.0) + 0.5;
+                        float ax = abs(q.x);
+                        float beat = abs(sin(time * 31.0 + ph * 5.0));
+                        float span = 1.0 + floor(1.99 * beat);
+                        bool body = ax < 0.6 && abs(q.y) < 1.6;
+                        bool wing = ax > 0.5 && ax < span + 0.6 && q.y > -1.6 && q.y < 1.0 - (ax - 1.0) * 0.5;
+                        if (body || wing) {
+                            dist = s;
+                            vec3 glow = lightTint(int((lamp >> 4) & 15u));
+                            tint = (body ? vec3(0.22, 0.18, 0.14) : vec3(0.66, 0.60, 0.50)) * glow * 1.3;
+                            return 1.0 - smoothstep(t1 * 0.7, t1, s);
+                        }
+                    }
+                }
+            }
+        }
+        if (tExit >= t1) break;
+        if (next.x < next.y && next.x < next.z) { next.x += tDelta.x; cell.x += stepDir.x; }
+        else if (next.y < next.z) { next.y += tDelta.y; cell.y += stepDir.y; }
+        else { next.z += tDelta.z; cell.z += stepDir.z; }
+    }
+    return 0.0;
+}
+#endif
