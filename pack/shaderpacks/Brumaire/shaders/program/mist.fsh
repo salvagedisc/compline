@@ -482,6 +482,17 @@ void main() {
             }
         }
 #endif
+#if BATS > 0
+        // Au crépuscule, les chauves-souris : de petites silhouettes noires qui virevoltent sur le ciel du soir.
+        if (isEyeInWater == 0) {
+            float amount = batAmount();
+            if (amount > 0.01) {
+                float batDist;
+                float bat = batsAlong(dir, min(len, 80.0), amount, batDist);
+                if (bat > 0.0) color = mix(color, gAmbient * 0.06, bat * exp(-batDist / 120.0));
+            }
+        }
+#endif
 #if LAVA_EMBERS > 0 && defined VOXELS
         // Les braises de la lave : leur lumière s'ajoute, l'éclat (bloom) en fait des points qui rayonnent.
         if (isEyeInWater == 0) color += embersAlong(dir, min(len, 24.0));
