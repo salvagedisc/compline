@@ -514,6 +514,25 @@ void main() {
         albedo = mix(vec3(luma(albedo)), albedo, 1.0 + 0.2 * soak) * mix(1.0, 0.62, soak);
         albedo = mix(albedo, vec3(luma(albedo)) * 0.5, puddle * 0.8);
         gloss = max(max(ws.y, riv.y * 0.55), puddle);
+#if PUDDLE_ICE > 0
+        // Par nuit froide, la flaque gèle : une glace sombre et mate, rayée de fêlures blanches, ourlée de givre sur son
+        // bord, qui ne renvoie plus qu'un reflet terne.
+        if (puddle > 0.0) {
+            float ice = puddleFreeze(lm) * puddle;
+            if (ice > 0.01) {
+                // Le bord : un texel voisin hors de la flaque.
+                float inside = min(min(puddleAt(world + vec3(0.0625, 0.0, 0.0), normal, rainWet),
+                                       puddleAt(world - vec3(0.0625, 0.0, 0.0), normal, rainWet)),
+                                   min(puddleAt(world + vec3(0.0, 0.0, 0.0625), normal, rainWet),
+                                       puddleAt(world - vec3(0.0, 0.0, 0.0625), normal, rainWet)));
+                float rim = step(inside, puddle * 0.5);
+                vec3 iceTint = vec3(0.30, 0.34, 0.38) * (1.0 + 0.9 * puddleCrack(world, normal));
+                iceTint = mix(iceTint, vec3(0.75, 0.78, 0.82), rim);
+                albedo = mix(albedo, iceTint, ice);
+                gloss = mix(gloss, 0.10, ice);
+            }
+        }
+#endif
         splash = rainWet > 0.0 ? splashAt(world, normal, frameTimeCounter, rainWet * rainStrength * rainHere) : 0.0;
         // Au soleil, une pierre claire trempée paraît encore blanche : une semelle mouillée fonce davantage.
         albedo *= 1.0 - 0.55 * print;

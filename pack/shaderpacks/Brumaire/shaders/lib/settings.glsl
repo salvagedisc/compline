@@ -137,6 +137,7 @@
 #define WETNESS 1.0 // [0.0 0.5 0.75 1.0 1.25]
 #define PUDDLES 1 // [0 1]
 #define PUDDLE_AMOUNT 1.0 // [0.5 0.75 1.0 1.25 1.5]
+#define PUDDLE_ICE 1 // [0 1]
 #define PUDDLE_STEPS 1 // [0 1]
 #define RAIN_CURTAINS 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define PATCHY_DRYING 1 // [0 1]
