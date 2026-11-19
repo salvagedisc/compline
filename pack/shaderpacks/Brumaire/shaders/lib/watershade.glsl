@@ -164,6 +164,27 @@ float floatingLeaves(vec3 world, float flow, float footprint, float t, out vec3 
 }
 #endif
 
+#if WATER_GUSTS > 0
+/**
+ * Les risées : par vent faible ou moyen, des souffles passent sur l'eau libre en plaques étirées dans le sens du vent,
+ * qui avancent avec lui et se défont. Sous une risée l'eau se ride et ternit ; entre elles elle reste lisse et renvoie
+ * le ciel comme un miroir. Rend la part de risée (0..1) et la force du vent qui la dessine dans amount.
+ */
+float waterGust(vec2 p, float t, WaveEnv env, out float amount) {
+    // Rien sans vent ; par grand vent toute l'eau est ridée et les risées ne se voient plus.
+    amount = smoothstep(0.03, 0.15, env.force) * (1.0 - smoothstep(0.8, 1.0, env.force)) * smoothstep(0.2, 0.5, env.open)
+           * (1.0 - env.storm);
+    if (amount <= 0.0) return 0.0;
+    vec2 w = env.wind;
+    vec2 side = vec2(-w.y, w.x);
+    // Elles filent avec le vent, un peu plus vite que lui sur l'eau ; étirées dans son sens.
+    vec2 q = p - w * t * (1.2 + 3.0 * env.force);
+    vec2 r = vec2(dot(q, w) / 1.8, dot(q, side));
+    float n = cloudNoise(vec3(r * 0.010, 0.37 + t * 0.0025)).r * 0.7 + cloudNoise(vec3(r * 0.031, 0.81 + t * 0.006)).g * 0.3;
+    return smoothstep(0.42, 0.60, n);
+}
+#endif
+
 vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 world = vPos + cameraPosition;
     vec3 eye = normalize(-vPos);
@@ -217,6 +238,16 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
 #endif
         wave = waveField(p, t, env, WATER_WAVE_COUNT, footprint);
         vec2 slope = wave.slope;
+        float gustRough = 0.0;
+#if WATER_GUSTS > 0
+        if (normal.y > 0.5) {
+            float gustAmount;
+            float gust = waterGust(p, t, env, gustAmount);
+            // Sous une risée les rides se creusent ; entre elles la surface se calme.
+            slope *= mix(1.0, mix(0.35, 1.7, gust), gustAmount);
+            gustRough = 0.020 * gust * gustAmount;
+        }
+#endif
 #if WATER_WAKES > 0
         // Les rides de ce qui passe (lib/wakes.glsl).
         vec3 wake = wakeSlope(p);
@@ -238,7 +269,7 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
 #endif
         n = normalize(vec3(-slope.x, 1.0, -slope.y));
         // La rugosité : les rides trop fines pour le pixel, et la pluie qui grêle la surface.
-        rough = sqrt(2.0 * wave.variance + 0.0009 + 0.004 * rain);
+        rough = sqrt(2.0 * wave.variance + 0.0009 + 0.004 * rain + gustRough);
     } else {
         float streak;
         falling = waterFalling(vPos, normal);
