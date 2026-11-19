@@ -63,7 +63,7 @@ void main() {
     }
     EndPrimitive();
 #if BUSHY_LEAVES > 0
-    if (gMat[0] != 4) return;
+    if (gMat[0] == 4) {
     // Le centre de la face : le milieu du plus long côté (la diagonale du carré coupé en deux triangles).
     float d01 = distance(gPos[0], gPos[1]), d12 = distance(gPos[1], gPos[2]), d20 = distance(gPos[2], gPos[0]);
     vec3 centre = d01 >= d12 && d01 >= d20 ? (gPos[0] + gPos[1]) * 0.5 : (d12 >= d20 ? (gPos[1] + gPos[2]) * 0.5 : (gPos[2] + gPos[0]) * 0.5);
@@ -92,5 +92,41 @@ void main() {
         }
         EndPrimitive();
     }
+    return;
+    }
+#endif
+#if GRASS_TUFTS > 0
+    // Les touffes plus fournies : chaque plan d'herbe, de fleur ou de culture proche reçoit une copie tournée autour de
+    // l'axe de son bloc (de 30 à 60 degrés, tirés par colonne : les deux moitiés d'une grande herbe tournent ensemble),
+    // une herbe courte un peu plus haute ou plus basse. Une touffe en X devient une étoile, un champ en # se resserre.
+    if (gMat[0] < 1 || gMat[0] > 3) return;
+    vec3 n = normalize(gNormal[0]);
+    if (abs(n.y) > 0.5) return;
+    // Le centre du quad (le milieu de sa diagonale) reste dans son bloc, décalage du jeu compris : les deux triangles
+    // trouvent la même colonne.
+    float d01 = distance(gPos[0], gPos[1]), d12 = distance(gPos[1], gPos[2]), d20 = distance(gPos[2], gPos[0]);
+    vec3 mid = d01 >= d12 && d01 >= d20 ? (gPos[0] + gPos[1]) * 0.5 : (d12 >= d20 ? (gPos[1] + gPos[2]) * 0.5 : (gPos[2] + gPos[0]) * 0.5);
+    float reach = length(mid);
+    vec2 column = floor(mid.xz + cameraPosition.xz);
+    float pick = bushHash(vec3(column.x, 7.0, column.y));
+    if (reach > float(BUSHY_DISTANCE) || pick < smoothstep(float(BUSHY_DISTANCE) * 0.7, float(BUSHY_DISTANCE), reach)) return;
+    float angle = mix(0.52, 1.05, bushHash(vec3(column.x, 3.0, column.y)));
+    float c = cos(angle), si = sin(angle);
+    mat2 spin = mat2(c, si, -si, c);
+    vec2 axis = column + 0.5 - cameraPosition.xz;
+    float base = min(gPos[0].y, min(gPos[1].y, gPos[2].y));
+    float stretch = gMat[0] == 1 ? mix(0.75, 1.15, bushHash(vec3(column.x, 11.0, column.y))) : 1.0;
+    for (int i = 0; i < 3; i++) {
+        pass(i);
+        vec3 p = gPos[i];
+        p.xz = axis + spin * (p.xz - axis);
+        p.y = base + (p.y - base) * stretch;
+        vPos = p;
+        vec2 turned = spin * gNormal[i].xz;
+        vNormal = vec3(turned.x, gNormal[i].y, turned.y);
+        gl_Position = taaJitter(gbufferProjection * (gbufferModelView * vec4(p, 1.0)));
+        EmitVertex();
+    }
+    EndPrimitive();
 #endif
 }
