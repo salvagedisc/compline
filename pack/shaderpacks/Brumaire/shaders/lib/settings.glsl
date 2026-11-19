@@ -116,6 +116,7 @@
 #define WATER_FLOW 1 // [0 1]
 #define WATER_WHITECAPS 1 // [0 1]
 #define WATER_GLITTER 1 // [0 1]
+#define WATER_GUSTS 1 // [0 1]
 #define FLOATING_LEAVES 1 // [0 1]
 #define WATER_STARS 1 // [0 1]
 #define PLANKTON 1 // [0 1]
