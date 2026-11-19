@@ -7,7 +7,10 @@
 // Demande avant lui : common.glsl, shadow.glsl, clouds.glsl, voxel.glsl.
 
 #if VOXEL_REFLECTIONS > 0
+#ifndef VOX_TOP_DECLARED
+#define VOX_TOP_DECLARED
 uniform usampler3D voxTopTex;
+#endif
 uniform usampler3D voxSideTex;
 
 vec3 voxColor(uint v) {
