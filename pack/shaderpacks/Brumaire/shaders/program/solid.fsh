@@ -22,6 +22,7 @@ uniform float snowSoak;
 #include "/lib/alpenglow.glsl"
 #include "/lib/auroraglow.glsl"
 #include "/lib/groundtint.glsl"
+#include "/lib/grassedge.glsl"
 #endif
 #ifdef PROGRAM_WATER
 #include "/lib/mist.glsl"
@@ -210,6 +211,13 @@ void main() {
     return;
 #endif
 
+#if defined PROGRAM_TERRAIN && GRASS_OVERHANG > 0
+    // Le côté d'un bloc d'herbe : sa couche teinte (la bordure verte) descend un peu plus bas (lib/grassedge.glsl).
+    if (vSurf == 22 && color.a < alphaTestRef && abs(normal.y) < 0.5 && min(vTint.r, min(vTint.g, vTint.b)) < 0.97) {
+        vec4 edge = grassOverhang(vPos + cameraPosition, normal);
+        if (edge.a > 0.0) color = vec4(edge.rgb * vTint.rgb, 1.0);
+    }
+#endif
 #ifndef PROGRAM_CLRWL
     if (color.a < alphaTestRef) discard;
 #endif
