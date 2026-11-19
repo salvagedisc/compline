@@ -4,6 +4,7 @@
 
 #if WATER_STEAM > 0 && defined VOXELS
 uniform float sunAngle;
+#define HAS_SUN_ANGLE
 
 /** Combien l'eau fume ici (0..1) : fraîcheur du biome, heure (la nuit et le matin), ni pluie ni vent fort. */
 float steamAmount() {
