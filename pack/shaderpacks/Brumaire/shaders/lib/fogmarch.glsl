@@ -49,6 +49,13 @@ float fogMarch(vec3 dir, float reach, float sunAmount, out vec3 light) {
     beam += gLightColor * fogOptics(dir) * sunAmount;
 #endif
     float airGlow = (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
+#if MOON_SHAFTS > 0
+    // La nuit, l'œil fait à l'ombre voit les rayons de lune dans la brume bien plus nettement que la lumière qu'elle
+    // verse au sol ne le laisse croire : les faisceaux sont renforcés, la lumière des surfaces ne change pas.
+    float moonBoost = 1.0 + (1.0 - gDay) * 2.5 * float(MOON_SHAFTS);
+    beam *= moonBoost;
+    airGlow *= moonBoost;
+#endif
     bool sunUp = dot(gLightColor, vec3(1.0)) > 0.01;
     // Les bancs dérivent avec le vent, plus vite en haut.
     vec2 wind = brumaireLink > 0.5 && dot(brumaireWind.xy, brumaireWind.xy) > 0.01 ? normalize(brumaireWind.xy) * (0.6 + 1.2 * brumaireWind.z) : vec2(0.8, 0.35);

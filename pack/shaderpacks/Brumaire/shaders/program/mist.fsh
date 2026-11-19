@@ -329,7 +329,12 @@ void main() {
             float mu = dot(dir, gLightDir);
             float phase = 0.7 * mistPhase(mu, 0.75) + 0.3 * mistPhase(mu, 0.2);
             float open = smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
-            color += gLightColor * phase * litLength * (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * open;
+            float shaftGain = 1.0;
+#if MOON_SHAFTS > 0
+            // Les rayons de lune, renforcés comme dans lib/fogmarch.glsl.
+            shaftGain += (1.0 - gDay) * 2.5 * float(MOON_SHAFTS);
+#endif
+            color += gLightColor * phase * litLength * (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * open * shaftGain;
         }
 #endif
         if (veil > 0.003) {

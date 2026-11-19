@@ -69,6 +69,7 @@
 #define BLOCK_LIGHT_SHAPE 1 // [0 1]
 #define LIGHT_SHAFTS 10 // [0 6 10 16 24]
 #define SHAFT_STRENGTH 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5]
+#define MOON_SHAFTS 1 // [0 1 2]
 #define BLOOM
 #define AO_SAMPLES 10 // [0 6 10 16]
 #define AO_RADIUS 1.2 // [0.6 0.9 1.2 1.6 2.0]
