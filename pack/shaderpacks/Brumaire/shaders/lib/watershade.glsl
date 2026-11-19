@@ -74,6 +74,96 @@ vec3 screenRefraction(vec3 start, vec3 ray, float jitter, float surfaceZ) {
 #endif
 }
 
+#if FLOATING_LEAVES > 0 && defined VOXELS
+#ifndef LEAFFALL_GLSL
+uniform sampler2D canopyTex;
+#endif
+/**
+ * Le feuillage au-dessus d'une eau (repère monde) : sa couleur (sRGB) et 1 si la surface est sous lui, à moins de
+ * douze blocs de son dessous (shadowcomp2, program/canopy.csh). Comme pour les feuilles qui tombent, une colonne
+ * voisine de deux blocs au plus compte aussi : le vent porte les feuilles un peu au-delà du bord.
+ */
+vec4 canopyOverWater(vec3 at) {
+    ivec2 c0 = ivec2(floor(at.xz - cameraPosition.xz + fract(cameraPosition.xz))) + ivec2(VOX_W / 2);
+    for (int k = 0; k < 5; k++) {
+        ivec2 c = c0 + (k == 0 ? ivec2(0) : ivec2(k == 1 ? 2 : (k == 2 ? -2 : 0), k == 3 ? 2 : (k == 4 ? -2 : 0)));
+        if (any(lessThan(c, ivec2(0))) || any(greaterThanEqual(c, ivec2(VOX_W)))) continue;
+        vec4 v = texelFetch(canopyTex, c, 0);
+        float under = v.a + floor(cameraPosition.y);
+        if (v.a < -999.0 || at.y > under + 0.5 || at.y < under - 12.0) continue;
+        return vec4(v.rgb, 1.0);
+    }
+    return vec4(0.0);
+}
+
+/**
+ * Les feuilles tombées sur l'eau : sous un arbre, quelques feuilles flottent à plat, de la couleur du feuillage
+ * tirée vers le brun, et dérivent lentement dans le sens du vent en tournant sur elles-mêmes, puis s'enfoncent et
+ * disparaissent ; d'autres prennent leur place. Bien plus nombreuses sous un feuillage d'automne. Le courant les
+ * emporte : il n'en reste pas sur une eau qui coule vite. Rend la part de la surface couverte et sa couleur
+ * (linéaire) dans tint.
+ */
+float floatingLeaves(vec3 world, float flow, float footprint, float t, out vec3 tint) {
+    tint = vec3(0.0);
+    const float scale = 1.5;
+    float px = footprint * scale;
+    float keep = (1.0 - smoothstep(0.5, 1.4, flow)) * (1.0 - smoothstep(0.10, 0.22, px));
+    if (keep <= 0.01) return 0.0;
+    vec4 canopy = canopyOverWater(world);
+    if (canopy.a <= 0.0) return 0.0;
+    // Un feuillage d'automne, jaune ou roux, a autant de rouge que de vert ; celui de l'été, plus vert, en perd peu.
+    float autumn = smoothstep(-0.06, 0.06, canopy.r - canopy.g);
+    float density = 0.05 + 0.33 * autumn;
+    vec2 wind = brumaireLink > 0.5 ? normalize(brumaireWind.xy + vec2(1e-4, 0.0)) : vec2(0.8, 0.6);
+    float force = brumaireLink > 0.5 ? brumaireWind.z : 0.2;
+#if WATER_PIXELS > 0
+    // Au pixel de texture près, comme l'eau : une feuille dessinée par carrés de 1/16 de bloc.
+    vec2 p = (floor(world.xz * 16.0) + 0.5) / 16.0 * scale;
+    px = max(px, 1e-3) * 0.25;
+#else
+    vec2 p = world.xz * scale;
+#endif
+    vec2 base = floor(p);
+    float best = 0.0;
+    for (int k = 0; k < 9; k++) {
+        vec2 cell = base + vec2(k % 3 - 1, k / 3 - 1);
+        float hs = fract(sin(dot(cell, vec2(127.1, 311.7))) * 43758.5453);
+        if (hs >= density) continue;
+        float h2 = fract(sin(dot(cell, vec2(269.5, 183.3))) * 43758.5453);
+        float h3 = fract(sin(dot(cell, vec2(419.2, 371.9))) * 43758.5453);
+        // Sa vie : elle arrive au bord de sa case, la traverse sous le vent en une minute ou deux, puis coule.
+        float life = 60.0 + 80.0 * h2;
+        float u = fract(t * (1.0 + force) / life + h3);
+        vec2 side = vec2(-wind.y, wind.x);
+        vec2 centre = cell + 0.5 + (u - 0.5) * 0.9 * wind + side * (h2 - 0.5) * 0.5;
+        float angle = h3 * 6.2832 + (u - 0.5) * (h2 - 0.5) * 3.0 + 0.15 * sin(t * 0.5 + h2 * 20.0);
+        vec2 d = p - centre;
+        float ca = cos(angle), sa = sin(angle);
+        vec2 q = vec2(ca * d.x + sa * d.y, -sa * d.x + ca * d.y);
+        float len = 0.34 + 0.12 * hs / max(density, 1e-3);
+        float x = q.x / len;
+        // Sa queue : un trait derrière elle.
+        float stem = step(-1.3, x) * step(x, -0.9) * step(abs(q.y), 0.05);
+        if (abs(x) >= 1.0 && stem <= 0.0) continue;
+        // Une feuille : pointue au bout, plus large vers la queue.
+        float xc = clamp(x, -1.0, 1.0);
+        float halfWidth = len * 0.42 * pow(1.0 - xc * xc, 0.7) * (1.0 - 0.25 * xc);
+        float shape = max(1.0 - smoothstep(-px, px, abs(q.y) - halfWidth), stem);
+        float fade = smoothstep(0.0, 0.08, u) * (1.0 - smoothstep(0.82, 1.0, u));
+        float cover = shape * fade;
+        if (cover > best) {
+            best = cover;
+            vec3 leaf = toLinear(canopy.rgb);
+            tint = mix(leaf, vec3(0.30, 0.13, 0.04), 0.25 + 0.45 * h2) * (0.8 + 0.35 * h3);
+            // La nervure, plus sombre, et la feuille qui s'imbibe en s'enfonçant.
+            tint *= 1.0 - 0.3 * step(abs(q.y), 0.05) * step(x, 0.8);
+            tint *= 1.0 - 0.45 * smoothstep(0.6, 0.95, u);
+        }
+    }
+    return best * keep;
+}
+#endif
+
 vec4 water(vec3 biome, vec3 normal, vec2 lm) {
     vec3 world = vPos + cameraPosition;
     vec3 eye = normalize(-vPos);
@@ -280,6 +370,16 @@ vec4 water(vec3 biome, vec3 normal, vec2 lm) {
         vec3 light = gLightColor * lit * (0.25 + 0.75 * max(gLightDir.y, 0.0)) * 0.9 + gAmbient * max(sky, 0.1) * 0.9;
         color = mix(color, vec3(0.64, 0.68, 0.67) * light, 0.85 * cover);
     }
+#if FLOATING_LEAVES > 0 && defined VOXELS
+    if (top && !below && !falling) {
+        vec3 leafTint;
+        float leaf = floatingLeaves(world, length(env.flow), footprint, t, leafTint);
+        if (leaf > 0.0) {
+            vec3 light = gLightColor * lit * (0.25 + 0.75 * max(gLightDir.y, 0.0)) + gAmbient * max(sky, 0.1);
+            color = mix(color, leafTint * light, 0.95 * leaf);
+        }
+    }
+#endif
 #if PLANKTON > 0
     // Le plancton des mers chaudes : la nuit, ce qui remue l'eau (vagues qui déferlent, sillages, pluie) s'allume
     // d'un bleu froid, semé de points plus vifs qui clignent. Une eau chaude se reconnaît à sa teinte (vert-bleu).
