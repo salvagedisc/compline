@@ -250,6 +250,9 @@ void main() {
 #if SKY_TWILIGHT_BELT > 0
         painted = twilightBelt(dir, painted);
 #endif
+#if SKY_RAYS > 0
+        painted = skyRays(dir, painted);
+#endif
         color += painted + sunDisc(dir) + nightSky(dir);
     } else if (!hand) {
         vec4 surface = texture(colortex1, vUv);
