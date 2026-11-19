@@ -228,6 +228,12 @@ void main() {
         vec4 bow = rainbow(dir, wetness, eye);
         light += bow.rgb;
         pass *= bow.a;
+#if SKY_NOCTILUCENT > 0
+        light += noctilucent(dir);
+#endif
+#if SUN_PILLAR > 0
+        light += sunPillar(dir);
+#endif
     }
 
     vec3 cloudLight = vec3(0.0);

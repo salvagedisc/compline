@@ -156,3 +156,50 @@ vec4 rainbow(vec3 dir, float wet, vec3 eye) {
     return vec4(0.0, 0.0, 0.0, 1.0);
 #endif
 }
+
+#if SKY_NOCTILUCENT > 0
+uniform int worldDay;
+
+/**
+ * Les nuages noctulescents : un soir ou un matin sur trois, quand le soleil est de 4 à 16 degrés sous l'horizon, un
+ * voile de vaguelettes d'un bleu électrique, très haut, bas sur l'horizon du côté du soleil : encore au soleil quand
+ * tout le reste du ciel est dans l'ombre de la Terre.
+ */
+vec3 noctilucent(vec3 dir) {
+    float e = gSunDir.y;
+    float twilight = (1.0 - smoothstep(-0.10, -0.06, e)) * smoothstep(-0.30, -0.24, e);
+    if (twilight <= 0.0 || dir.y <= 0.0) return vec3(0.0);
+    if (fract(sin(float(worldDay) * 12.9898 + 4.1) * 43758.5453) > 0.35) return vec3(0.0);
+    vec2 sunH = normalize(gSunDir.xz + vec2(1e-5, 0.0));
+    vec2 dirH = normalize(dir.xz + vec2(1e-5, 0.0));
+    float side = smoothstep(-0.3, 0.7, dot(sunH, dirH));
+    float low = smoothstep(0.0, 0.03, dir.y) * (1.0 - smoothstep(0.10, 0.32, dir.y));
+    // Projeté sur une couche très haute : les vaguelettes s'y alignent en bandes qui dérivent à peine.
+    vec2 q = dir.xz / max(dir.y + 0.04, 0.04) * 0.6 + vec2(frameTimeCounter * 0.002, 0.0);
+    float base = cloudNoise(vec3(q * 0.35, 0.37)).r;
+    float ripple = 0.5 + 0.5 * sin(dot(q, vec2(5.3, 2.1)) * 2.0 + base * 6.0);
+    float veil = smoothstep(0.42, 0.72, base) * (0.5 + 0.5 * ripple);
+    float glow = luma(skyAt(dir)) * 2.5 + 0.0015;
+    return vec3(0.35, 0.68, 1.0) * glow * veil * side * low * twilight;
+}
+#endif
+
+#if SUN_PILLAR > 0
+/**
+ * Le pilier de soleil : par grand froid clair, au lever et au coucher, les plaquettes de glace en suspension renvoient
+ * le soleil bas en une colonne de lumière qui monte au-dessus de lui (et le prolonge un peu sous l'horizon).
+ */
+vec3 sunPillar(vec3 dir) {
+    float e = gSunDir.y;
+    float lowSun = smoothstep(-0.07, -0.01, e) * (1.0 - smoothstep(0.06, 0.18, e));
+    float cold = 1.0 - smoothstep(0.15, 0.50, airHeat);
+    float amount = lowSun * cold * (1.0 - smoothstep(0.05, 0.3, rainStrength));
+    if (amount <= 0.001) return vec3(0.0);
+    float az = angleBetween(normalize(vec3(dir.x, 0.0, dir.z) + vec3(1e-5, 0.0, 0.0)),
+                            normalize(vec3(gSunDir.x, 0.0, gSunDir.z) + vec3(1e-5, 0.0, 0.0)));
+    if (az > 4.0) return vec3(0.0);
+    float above = degrees(asin(clamp(dir.y, -1.0, 1.0)) - asin(clamp(e, -1.0, 1.0)));
+    float column = exp(-sq(az / 1.1)) * (above > 0.0 ? exp(-above / 7.0) : exp(above / 2.0) * 0.6);
+    return (gLightColor * 0.18 + vec3(luma(skyAt(dir))) * 1.4) * vec3(1.0, 0.85, 0.65) * column * amount;
+}
+#endif

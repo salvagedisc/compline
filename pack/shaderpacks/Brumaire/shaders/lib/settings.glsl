@@ -14,6 +14,7 @@
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
 #define CAVE_DETAIL 1 // [0 1]
 // Les gouttes qui tombent des voûtes des grottes, dans la lumière des torches (lib/cavedrips.glsl).
+#define GLOWWORMS 1 // [0 1]
 #define CAVE_DRIPS 1 // [0 1]
 #define LAVA_EMBERS 1 // [0 1]
 
@@ -40,6 +41,8 @@
 #define SKY_AURORA_STRENGTH 1.0 // [0.5 1.0 1.5 2.0]
 #define SKY_HALO 1 // [0 1]
 #define SKY_RAINBOW 1 // [0 1]
+#define SKY_NOCTILUCENT 1 // [0 1]
+#define SUN_PILLAR 1 // [0 1]
 #define SKY_MOONBOW 1 // [0 1]
 
 // Lumière
