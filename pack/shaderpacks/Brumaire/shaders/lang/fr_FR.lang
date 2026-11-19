@@ -544,3 +544,7 @@ option.HEAT_LIGHTNING=Éclairs de chaleur
 option.HEAT_LIGHTNING.comment=Les nuits chaudes et lourdes, des orages trop lointains pour être entendus allument en silence des bancs de nuages au ras de l'horizon.
 value.HEAT_LIGHTNING.0=Non
 value.HEAT_LIGHTNING.1=Oui
+option.WATER_GLITTER=Paillettes sur l'eau
+option.WATER_GLITTER.comment=Sur l'eau au soleil, des vaguelettes trop petites pour être dessinées renvoient l'astre en paillettes qui s'allument et s'éteignent sans cesse.
+value.WATER_GLITTER.0=Non
+value.WATER_GLITTER.1=Oui
