@@ -153,6 +153,7 @@
 // Les vols d'oiseaux qui traversent le ciel le jour (lib/birds.glsl).
 #define BIRDS 1 // [0 1]
 #define BATS 1 // [0 1]
+#define MOTHS 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]

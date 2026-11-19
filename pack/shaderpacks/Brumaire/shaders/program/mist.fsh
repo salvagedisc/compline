@@ -467,6 +467,18 @@ void main() {
             }
         }
 #endif
+#if MOTHS > 0 && defined VOXELS
+        // La nuit, les papillons de nuit qui tournent autour des torches et des lanternes, éclairés par elles.
+        {
+            float amount = mothAmount();
+            if (amount > 0.01) {
+                float mothDist;
+                vec3 mothTint;
+                float moth = mothsAlong(dir, min(len, 24.0), amount, mothDist, mothTint);
+                if (moth > 0.0) color = mix(color, mothTint, moth);
+            }
+        }
+#endif
 #if BIRDS > 0
         // Les oiseaux qui passent, silhouettes sombres sur le ciel, voilées par l'air qui les sépare de l'œil.
         if (isEyeInWater == 0) {
