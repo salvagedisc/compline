@@ -222,6 +222,11 @@ void main() {
     if (vSurf == 22 && abs(normal.y) < 0.5 && min(vTint.r, min(vTint.g, vTint.b)) < 0.97 && grassSlope(vPos + cameraPosition, normal))
         color = vec4(grassRiser(vPos + cameraPosition, normal).rgb * vTint.rgb, 1.0);
 #endif
+#if GRASS_FAR_SIDES > 0
+    // Au loin, les flancs d'herbe sous le ciel se couvrent d'herbe comme les collines lointaines.
+    if (vSurf == 22 && abs(normal.y) < 0.5 && min(vTint.r, min(vTint.g, vTint.b)) < 0.97 && vLm.y > 0.5 && grassFarSide(vPos + cameraPosition, normal))
+        color = vec4(grassRiser(vPos + cameraPosition, normal).rgb * vTint.rgb, 1.0);
+#endif
 #endif
 #ifndef PROGRAM_CLRWL
     if (color.a < alphaTestRef) discard;
