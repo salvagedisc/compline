@@ -9,6 +9,7 @@
 #define AIR_DENSITY 1.0 // [0.0 0.5 0.75 1.0 1.25 1.5 2.0]
 #define FOG_STEPS 12 // [0 8 12 16 24]
 #define FOG_RANGE 96.0 // [48.0 64.0 96.0 128.0]
+#define FOG_OPTICS 1 // [0 1]
 #define FOG_BILLOWS 1.0 // [0.0 0.5 1.0 1.5]
 #define FOG_BLOCK_GLOW 1.0 // [0.0 0.5 1.0 1.5 2.0]
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
@@ -180,6 +181,7 @@
 #define SPECULAR_STRENGTH 1.0 // [0.0 0.25 0.5 0.75 1.0 1.25 1.5 2.0]
 #define FROST 1 // [0 1]
 // La rosée des matins doux sur l'herbe et les plantes (lib/cover.glsl).
+#define DEW_HALO 1 // [0 1]
 #define DEW 1 // [0 1]
 #define WET_FOLIAGE 1 // [0 1]
 #define HEAT_SHIMMER 1 // [0 1]

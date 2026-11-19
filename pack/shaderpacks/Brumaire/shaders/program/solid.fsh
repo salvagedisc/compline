@@ -421,6 +421,12 @@ void main() {
 #endif
             gloss = max(gloss, 0.18 * dew);
             albedo *= 1.0 - 0.06 * dew;
+#if DEW_HALO > 0
+            // L'auréole de rosée : autour de l'ombre de la tête, chaque goutte renvoie le soleil droit vers l'œil et
+            // l'herbe s'éclaire d'un halo blanc qui suit le regard.
+            float fromShadow = acos(clamp(dot(normalize(vPos), -gLightDir), -1.0, 1.0));
+            albedo *= 1.0 + 1.4 * dew * exp(-sq(fromShadow / 0.10)) * float(dot(gLightDir, gSunDir) > 0.5);
+#endif
         }
 #endif
     }

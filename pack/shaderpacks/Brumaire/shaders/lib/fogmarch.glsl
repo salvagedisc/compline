@@ -1,6 +1,23 @@
 // La brume proche en volume (fogMarch), marchée dans le demi-écran de program/clouds.fsh et relue par mist.fsh.
 // Demande shadow.glsl, mist.glsl, clouds.glsl et voxel.glsl avant lui.
 
+#if FOG_OPTICS > 0
+/**
+ * Ce que les gouttelettes de la brume renvoient vers l'arrière, autour du point opposé à l'astre (l'ombre de la tête) :
+ * l'arc de brouillard, un arc blanc et large à 41 degrés, à peine orangé dehors et bleuté dedans ; et la gloire,
+ * quelques anneaux irisés serrés autour du centre. À ajouter à la fonction de phase de la brume.
+ */
+vec3 fogOptics(vec3 dir) {
+    float a = degrees(acos(clamp(dot(dir, -gLightDir), -1.0, 1.0)));
+    if (a > 46.0) return vec3(0.0);
+    vec3 bow = vec3(exp(-sq((a - 41.3) / 2.2)), exp(-sq((a - 40.7) / 2.2)), exp(-sq((a - 40.1) / 2.2)));
+    bow = mix(vec3(dot(bow, vec3(0.333))), bow, 0.35) * 0.045;
+    vec3 rings = (0.5 + 0.5 * cos(6.2832 * a / vec3(1.45, 1.25, 1.05))) * exp(-a / 2.2);
+    vec3 glory = rings * 0.10 + exp(-sq(a / 0.9)) * 0.05;
+    return bow + glory;
+}
+#endif
+
 /**
  * La brume proche en volume, marchée de l'œil jusqu'à reach (au plus FOG_RANGE) : des pas resserrés près de l'œil.
  * À chaque pas :
@@ -28,6 +45,9 @@ float fogMarch(vec3 dir, float reach, float sunAmount, out vec3 light) {
     float phaseAir = 0.7 * mistPhase(mu, 0.75) + 0.3 * mistPhase(mu, 0.2);
     vec3 body = mix(gAmbient, vec3(luma(gAmbient)), 0.75) * vec3(1.03, 1.0, 0.95) * 0.95 * mistTint();
     vec3 beam = gLightColor * (0.03 + 0.4 * phaseMist * SHAFT_STRENGTH) * sunAmount;
+#if FOG_OPTICS > 0
+    beam += gLightColor * fogOptics(dir) * sunAmount;
+#endif
     float airGlow = (0.0045 * SHAFT_STRENGTH) * mix(0.8, 1.6, airHumid) * smoothstep(0.2, 0.7, float(eyeBrightnessSmooth.y) / 240.0);
     bool sunUp = dot(gLightColor, vec3(1.0)) > 0.01;
     // Les bancs dérivent avec le vent, plus vite en haut.
