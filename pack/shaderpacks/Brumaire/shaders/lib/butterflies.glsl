@@ -79,3 +79,76 @@ float butterfliesAlong(vec3 dir, float t1, float amount, out float dist, out vec
     return 0.0;
 }
 #endif
+
+#if DRAGONFLIES > 0 && SHADER_RAIN > 0 && defined VOXELS
+const float DRAGONFLY_CELL = 4.0;
+
+/**
+ * Les libellules : au-dessus de l'eau seulement, les mêmes jours que les papillons. Une colonne de quatre blocs sur six
+ * en porte une, à trente centimètres à un bloc au-dessus de la surface ; elle reste en vol sur place, puis file d'un
+ * trait vers un autre point. Vue de côté : un corps long de cinq pixels (bleu, vert ou rouge) et des ailes pâles,
+ * translucides, qui vibrent. Rend sa couverture, sa distance et sa couleur.
+ */
+float dragonfliesAlong(vec3 dir, float t1, float amount, out float dist, out vec3 tint) {
+    dist = 0.0;
+    tint = vec3(0.0);
+    if (t1 <= 0.5 || amount <= 0.01) return 0.0;
+    vec3 eye = cameraPosition / DRAGONFLY_CELL;
+    vec3 camFloor = floor(eye);
+    vec3 o = eye - camFloor;
+    vec3 d = vec3(abs(dir.x) < 1e-5 ? 1e-5 : dir.x, abs(dir.y) < 1e-5 ? 1e-5 : dir.y, abs(dir.z) < 1e-5 ? 1e-5 : dir.z);
+    vec3 cell = floor(o);
+    vec3 stepDir = sign(d);
+    vec3 tDelta = abs(1.0 / d);
+    vec3 next = (cell + max(stepDir, 0.0) - o) / d;
+    float tc = t1 / DRAGONFLY_CELL;
+    float time = frameTimeCounter;
+    vec3 right = normalize(cross(dir, vec3(0.0, 1.0, 0.0)) + vec3(1e-4, 0.0, 0.0));
+    vec3 up = cross(right, dir);
+    for (int i = 0; i < 24; i++) {
+        float tExit = min(min(next.x, next.y), min(next.z, tc));
+        vec3 wc = cell + camFloor;
+        float h = moteHash(vec3(wc.x, 0.0, wc.z), 71.0);
+        if (h < 0.17 * amount) {
+            // Sur place, puis d'un trait vers le point suivant : deux points tirés par étape, le trajet en un quart d'étape.
+            float clock = time * 0.45 + h * 13.0;
+            float leg = floor(clock);
+            float go = smoothstep(0.75, 1.0, fract(clock));
+            vec3 a = vec3(moteHash(vec3(wc.x, leg, wc.z), 72.0), moteHash(vec3(wc.x, leg, wc.z), 73.0), moteHash(vec3(wc.x, leg, wc.z), 74.0));
+            vec3 b = vec3(moteHash(vec3(wc.x, leg + 1.0, wc.z), 72.0), moteHash(vec3(wc.x, leg + 1.0, wc.z), 73.0), moteHash(vec3(wc.x, leg + 1.0, wc.z), 74.0));
+            vec3 spot = mix(a, b, go);
+            vec3 at = vec3((wc.x + 0.15 + 0.7 * spot.x) * DRAGONFLY_CELL, 0.0, (wc.z + 0.15 + 0.7 * spot.z) * DRAGONFLY_CELL);
+            float surface = shelterAt(at.xz - cameraPosition.xz);
+            at.y = surface - 0.1 + 0.3 + 0.7 * spot.y + 0.02 * sin(time * 9.0 + h * 40.0);
+            if (floor(at.y / DRAGONFLY_CELL) == wc.y) {
+                ivec3 below = voxelCell(vec3(at.x, surface - 0.5, at.z) - cameraPosition, fract(cameraPosition));
+                if (voxelInside(below) && (texelFetch(voxelTex, below, 0).r & VOX_WATER) != 0u) {
+                    vec3 rel = at - cameraPosition;
+                    float s = dot(rel, dir);
+                    if (s > 0.6 && s < t1) {
+                        vec3 miss = dir * s - rel;
+                        vec2 q = floor(vec2(dot(miss, right), dot(miss, up)) * 12.0) + 0.5;
+                        // Tournée vers la gauche ou la droite selon sa colonne.
+                        if (moteHash(vec3(wc.x, 2.0, wc.z), 75.0) < 0.5) q.x = -q.x;
+                        bool body = abs(q.y) < 1.0 && q.x > -3.0 && q.x < 3.0;
+                        bool wings = q.y > 0.0 && q.y < 2.0 && q.x > -2.0 && q.x < 1.0;
+                        if (body || wings) {
+                            dist = s;
+                            float k = moteHash(vec3(wc.x, 3.0, wc.z), 76.0);
+                            vec3 c = k < 0.5 ? vec3(0.04, 0.18, 0.75) : (k < 0.8 ? vec3(0.06, 0.45, 0.12) : vec3(0.60, 0.06, 0.03));
+                            tint = body ? (q.x > 2.0 ? c * 0.4 : c) : vec3(0.75, 0.80, 0.85);
+                            float fade = 1.0 - smoothstep(t1 * 0.7, t1, s);
+                            return (body ? 1.0 : 0.35 + 0.2 * sin(time * 60.0)) * fade;
+                        }
+                    }
+                }
+            }
+        }
+        if (tExit >= tc) break;
+        if (next.x < next.y && next.x < next.z) { next.x += tDelta.x; cell.x += stepDir.x; }
+        else if (next.y < next.z) { next.y += tDelta.y; cell.y += stepDir.y; }
+        else { next.z += tDelta.z; cell.z += stepDir.z; }
+    }
+    return 0.0;
+}
+#endif
