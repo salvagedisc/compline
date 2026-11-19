@@ -51,6 +51,31 @@ vec3 iceHalo(vec3 dir) {
 #endif
 }
 
+#if CLOUD_IRIDESCENCE > 0
+/**
+ * L'irisation des nuages : près de l'astre, entre 3° et une vingtaine de degrés, les bords minces d'un nuage de
+ * gouttelettes se teintent de bandes pastel, rose, vert, bleu, qui changent avec la taille des gouttes (la diffraction).
+ * Les gouttes n'ont pas la même taille d'un bout du nuage à l'autre : les bandes ondulent. Rend une teinte de moyenne
+ * nulle à ajouter à 1 pour colorer la lumière d'un nuage, à pondérer par sa minceur. at : le point du nuage (xz).
+ */
+vec3 cloudIridescence(vec3 dir, vec2 at) {
+    float a = angleBetween(dir, gLightDir);
+    if (a < 2.0 || a > 30.0) return vec3(0.0);
+    vec2 q = (at + cloudDrift().xz) / 420.0;
+    vec2 n = cloudNoise(vec3(q, 0.19));
+    float fine = cloudNoise(vec3(q * 3.1, 0.61)).r;
+    // Pas d'anneaux réguliers : la taille des gouttes varie beaucoup d'un banc à l'autre, et seules quelques plages
+    // s'irisent vraiment.
+    float x = a / 5.0 * (0.55 + 1.1 * n.g) + fine * 0.9;
+    vec3 band = 0.5 + 0.5 * cos(6.2832 * (x + vec3(0.0, 0.33, 0.67)));
+    band -= vec3(dot(band, vec3(0.3333)));
+    float patch_ = smoothstep(0.25, 0.60, n.r);
+    // Plus vives près de l'astre, effacées loin de lui ; le disque lui-même éblouit trop pour les voir.
+    float w = smoothstep(2.0, 5.0, a) * (1.0 - smoothstep(12.0, 30.0, a)) * patch_;
+    return band * w * 0.45;
+}
+#endif
+
 /**
  * La nappe d'altocumulus vue le long de dir, depuis eye : sa lumière (rgb) et ce qu'elle cache du fond (a). Chaque
  * cellule a son côté d'ombre, à l'opposé de l'astre, et ses bords minces s'allument à contre-jour.
@@ -72,6 +97,10 @@ vec4 altoLayer(vec3 eye, vec3 dir) {
     float rim = (1.0 - d) * 0.012 * skyHG(mu, 0.85);
     vec3 lit = gLightColor * CLOUD_LIGHT * (0.32 * phase * (1.0 - 0.6 * occl) + rim) + gAmbient * 0.72;
     lit = mix(lit, vec3(luma(lit)) * 0.7, rainStrength * 0.7);
+#if CLOUD_IRIDESCENCE > 0
+    // Les cellules minces s'irisent près de l'astre.
+    lit *= max(vec3(1.0) + cloudIridescence(dir, p.xz) * (1.0 - d) * (1.0 - rainStrength), 0.0);
+#endif
     return vec4(lit * a, a * 0.92);
 #else
     return vec4(0.0);
