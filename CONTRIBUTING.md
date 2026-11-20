@@ -84,7 +84,8 @@ Datapacks go through KubeJS: NeoForge does not load a global datapack without an
 **Versions and release**
 
 - `0.x`: prototype, disposable worlds. `1.0.0`: launch of the permanent world. After `1.0.0`, any change that removes blocks or items or modifies worldgen is a **major version** and requires a world backup before updating.
-- To publish: move the `[Unreleased]` section of `CHANGELOG.md` under `[X.Y.Z]`, set the same version in `pack/pack.toml`, run `packwiz refresh`, then place the `vX.Y.Z` tag on `main`. The `release` workflow checks that they match, exports the `.mrpack` and creates the GitHub release. Publication to Modrinth stays disabled until `MODRINTH_PROJECT_ID` (variable) and `MODRINTH_TOKEN` (secret, entered by the owner) exist. The interface pack is CC BY-NC-SA, so the Modrinth project must keep monetisation off.
+- To publish: move the `[Unreleased]` section of `CHANGELOG.md` under `[X.Y.Z]`, set the same version in `pack/pack.toml`, run `packwiz refresh`, then place the `vX.Y.Z` tag on `main`. The `release` workflow checks that they match, exports the `.mrpack`, creates the GitHub release and uploads the version to the Modrinth project `fallow-pack` (`MODRINTH_PROJECT_ID` variable and `MODRINTH_TOKEN` secret, entered by the owner).
+- Test builds between releases: place a `vX.Y.Z-alpha.N` tag on `main` (X.Y.Z being the version in `pack/pack.toml`, N counting up) at the end of a series of changes, not after every merge. Nothing to edit: the workflow writes the version into the export, lists the pull requests merged since the previous tag as notes, and publishes a GitHub pre-release and an alpha version on Modrinth. While the Modrinth project is a draft, only its members see it.
 
 **Test instance**
 
