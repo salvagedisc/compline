@@ -45,12 +45,14 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("compat.IceThawMixin", List.of(ModIds.STREAMS_REFLOWING, ModIds.SPELUNKERY)),
             Map.entry("compat.InStructureMixin", List.of(ModIds.LITHOSTITCHED)),
             Map.entry("dinos.ChorusoatlArmorMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
+            Map.entry("dinos.ArmorModelCacheMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("zoo.CategoryTabsMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("zoo.GuidebookDataMixin", List.of(ModIds.ARCHIES_DINOSAURS)));
 
     private static final Map<String, List<String>> MEMBERS = Map.of(
             "horizon.ChunkyAccessorMixin", List.of("listenerBound", "tryRunFirstTimeSetup"),
             "dinos.ChorusoatlArmorMixin", List.of("hasAbility", "activateServerSetAbility"),
+            "dinos.ArmorModelCacheMixin", List.of("initArmorModel", "getLayerLocation"),
             "zoo.CategoryTabsMixin", List.of("book", "categorySubTabs", "<init>"),
             "zoo.GuidebookDataMixin", List.of("parseXML", "loadData"));
 

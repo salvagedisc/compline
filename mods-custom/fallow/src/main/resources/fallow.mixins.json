@@ -26,6 +26,8 @@
     "clairiere.MusicBiomeMixin",
     "clairiere.SodiumTintMixin",
     "compat.PunchyEquipMixin",
+    "dinos.ArmorModelCacheMixin",
+    "dinos.EntityModelSetAccessor",
     "horizon.FarFadeMixin",
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
