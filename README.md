@@ -78,3 +78,7 @@ Requirements: Node.js ≥ 20 and [packwiz](https://packwiz.infra.link/installati
 | `cd pack && packwiz mr export` | Produces the `.mrpack` locally |
 
 The full workflow (adding a mod, test branches, versions, release) is described in [CONTRIBUTING.md](CONTRIBUTING.md). The documentation is indexed in [docs/](docs/README.md).
+
+## License
+
+The content of this repository (configs, scripts, the custom `fallow` mod, the Brumaire shader pack and the docs) is released under the [MIT licence](LICENSE). The mods the pack downloads keep their own licences, as do the third-party jars committed in `pack/mods/` (LGPL for the atlas ports from `salvagedisc/fallow-atlas`, MIT for Cinematic Interactions) and SMAA in the shader pack (MIT, `pack/shaderpacks/Brumaire/shaders/textures/SMAA-LICENSE.txt`).
