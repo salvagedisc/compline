@@ -3,6 +3,13 @@ name: release
 on:
   push:
     tags: ['v*']
+  # Called by test-build.yml, which creates the tag itself: tags pushed by the
+  # workflow token do not start other workflows.
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
 
 permissions:
   contents: write
@@ -11,11 +18,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
+      TAG: ${{ inputs.tag || github.ref_name }}
       MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       MODRINTH_PROJECT_ID: ${{ vars.MODRINTH_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.tag || github.ref }}
           fetch-depth: 0
       - uses: actions/setup-go@v5
         with:
@@ -30,7 +39,7 @@ jobs:
         id: meta
         run: |
           base=$(sed -n 's/^version = "\(.*\)"/\1/p' pack/pack.toml)
-          version="${GITHUB_REF_NAME#v}"
+          version="${TAG#v}"
           case "$version" in
             "$base")
               pre=false
@@ -38,7 +47,7 @@ jobs:
               [ -s notes.md ] || { echo "::error::section [${version}] absente du CHANGELOG"; exit 1; } ;;
             "$base"-alpha.*|"$base"-beta.*)
               pre=true
-              prev=$(git describe --tags --abbrev=0 --match 'v[0-9]*' "${GITHUB_REF_NAME}^" 2>/dev/null || true)
+              prev=$(git describe --tags --abbrev=0 --match 'v[0-9]*' "${TAG}^" 2>/dev/null || true)
               if [ -z "$prev" ]; then
                 echo "First test build of the coming ${base}, for the people testing the pack." > notes.md
               else {
@@ -48,7 +57,7 @@ jobs:
                   | awk 'BEGIN { RS = "\036" } { sub(/^\n+/, ""); split($0, l, "\n"); if (l[1] != "") print "- " l[1] }' | head -n 200
               } > notes.md; fi
               sed -i "s/^version = \".*\"/version = \"${version}\"/" pack/pack.toml ;;
-            *) echo "::error::tag ${GITHUB_REF_NAME} ≠ pack.toml ${base}"; exit 1 ;;
+            *) echo "::error::tag ${TAG} ≠ pack.toml ${base}"; exit 1 ;;
           esac
           echo "version=${version}" >> "$GITHUB_OUTPUT"
           echo "pre=${pre}" >> "$GITHUB_OUTPUT"
@@ -65,7 +74,7 @@ jobs:
         run: |
           flags=()
           [ "${{ steps.meta.outputs.pre }}" = true ] && flags+=(--prerelease)
-          gh release create "${GITHUB_REF_NAME}" dist/*.mrpack --title "Fallow ${{ steps.meta.outputs.version }}" --notes-file notes.md "${flags[@]}"
+          gh release create "${TAG}" dist/*.mrpack --title "Fallow ${{ steps.meta.outputs.version }}" --notes-file notes.md "${flags[@]}"
 
       # Runs once the MODRINTH_PROJECT_ID variable and the MODRINTH_TOKEN secret exist (set by the
       # owner). While the project is a draft, the versions are only visible to its members.

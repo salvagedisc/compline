@@ -1,0 +1,41 @@
+name: test-build
+
+# A test build between releases: raise the number in .github/test-build in a pull
+# request at the end of a series of changes. Once merged, this workflow tags main
+# with vX.Y.Z-alpha.N (X.Y.Z from pack/pack.toml, N from the file) and runs the
+# release workflow on that tag: GitHub pre-release and alpha version on Modrinth.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/test-build']
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: tag
+        run: |
+          n=$(tr -d '[:space:]' < .github/test-build)
+          [ "$n" -ge 1 ] 2>/dev/null || { echo "::error::.github/test-build must hold a number from 1"; exit 1; }
+          base=$(sed -n 's/^version = "\(.*\)"/\1/p' pack/pack.toml)
+          tag="v${base}-alpha.${n}"
+          git fetch --tags --quiet
+          if git rev-parse -q --verify "refs/tags/${tag}" >/dev/null; then
+            echo "::error::${tag} already exists: raise the number in .github/test-build"; exit 1
+          fi
+          git tag "$tag" "$GITHUB_SHA"
+          git push origin "$tag"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: tag
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{ needs.tag.outputs.tag }}
+    secrets: inherit
