@@ -789,10 +789,6 @@ file = "kubejs/assets/chat_heads/lang/fr_fr.json"
 hash = "437498949c8a9fcf54e2385d51ed3d19103a0a0759107228a7060a711ff17f67"
 
 [[files]]
-file = "kubejs/assets/cinematic/lang/fr_fr.json"
-hash = "bd862e4d6a69287878d2bb6e2d1a43723df9384991c3b0b3708957b1710e7730"
-
-[[files]]
 file = "kubejs/assets/cloth-config2/lang/fr_fr.json"
 hash = "548808cf0a82c506e9c1b85f03d730ea65a4e9b3b85b1af117bc3a48e942052b"
 
@@ -3465,10 +3461,6 @@ metafile = true
 file = "mods/chat-heads.pw.toml"
 hash = "80455b28c3010ad153ccabc2998cb445b9854b26b386628243a9c8160b8d7e8e"
 metafile = true
-
-[[files]]
-file = "mods/cinematic-interactions-neoforge-1.21.1-0.18.30.jar"
-hash = "4a6bb18685bb8adbd2ee08a242b08088dbd5d9ddf0bf1c3d140269107ba4d7c5"
 
 [[files]]
 file = "mods/cloth-config.pw.toml"

@@ -60,7 +60,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Starcatcher | `starcatcher` | ✅ (3.3.10, added 2026-11-17, not seen in game) | CS | Fishing: skill minigame per fish, catches by biome, depth, hour, weather and bait, catalogue, trophies, aquarium, tackle box, hooks, bobbers, baits, rod skins; the vanilla rod merges into its rod; End catches removed, Nether ones moved to deep Overworld lava; its selling bin removed (no money) ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Hybrid Aquatic + Starcatcher Compatibility | `hybrid-aquatic-starcatcher-compatibility` | ✅ (0.6.3, added 2026-11-17) | CS | Hybrid Aquatic's fish, crates and hooks in Starcatcher; the species cut for another mod's model give that mod's fish or are no longer fished ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Starcatcher's Delight | `starcatchers-delight` | ✅ (3.2, added 2026-11-17, not seen in game) | CS | Fish dishes (nigiri, maki, fillets, stews) in Farmer's Delight's pot and on its board; its Farm & Charm copies are not copied again by `cuisine.js` ([0034](decisions/0034-starcatcher-fishing.md)) |
-| Cinematic Interactions | jar in `pack/mods/` | ✅ (0.18.30 beta, added 2026-11-15, not seen in game) | CS | First-person scenes with the hands at the vanilla stations instead of their windows; Sneak + use opens the normal window; MIT, CurseForge only; translated by the pack ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | [Let's Do] Farm & Charm | `lets-do-farm-charm` | ✅ (stay on 1.1.25) | CS | The farm only: fertiliser, sprinkler, silo, plough, cart, coop, troughs, mincer, barley, oat, corn, strawberry, lettuce, tomato, onion; its cooking stations are removed and their recipes moved to Farmer's Delight; its meats, pasta, dough, flour, dog food and rope merge into Farmer's Delight's, Create's and Supplementaries' ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | Ecliptic Seasons | `ecliptic-seasons` | ✅ (0.15.5) | CS | Seasons, farming only (`AGRICULTURE`), no heat stroke: Cold Sweat owns the temperature |
 | Cold Sweat | `cold-sweat` | ✅ (stays on 2.4.3.1 for Altitude) | CS | Temperature |
@@ -211,6 +210,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 
 | Mod | Reason |
 |---|---|
+| Cinematic Interactions | Removed on 2026-11-20 ([0040](decisions/0040-removing-cinematic-interactions.md)): a jar embedded in the pack because it is only on CurseForge, which held back the first Modrinth version; the vanilla stations open their usual windows again |
 | Chipped (with Athena), Beautify! | Removed on 2026-11-01: 6,980 blocks for Chipped, including 1,110 Nether and End variants; Beautify! duplicates Supplementaries, Amendments and Handcrafted ([pack sort](plan/tri-du-pack.md)) |
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Removed by the team on 2026-10-19 |
 | FallingTree, ItemPhysic Lite | Replaced by HT's TreeChop and ItemPhysic (team choice on 2026-10-19) |

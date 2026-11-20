@@ -43,6 +43,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0037](0037-ragdoll-corpse.md) | The body left behind | Sable: Ragdoll Corpse and Sable: Ragdolls: on death the inventory stays in a ragdoll body, no self-ragdoll key |
 | [0038](0038-house-tannery.md) | A house tannery instead of the Tannery mod | `tannerie` module: raw hide scraped on a fleshing beam, tanned in a vat with bark, dried on a frame by sun or fire; Tannery removed |
 | [0039](0039-back-to-fallow.md) | The pack is called Fallow again | Compline did not convince; Fallow was only blocked by a Modrinth slug: published as Fallow under `fallow-pack`; pack, custom mod, namespaces and repositories become Fallow / `fallow` |
+| [0040](0040-removing-cinematic-interactions.md) | Removing Cinematic Interactions | Its jar, embedded because the mod is only on CurseForge, held back the first Modrinth version; the vanilla stations open their usual windows again |
 
 ## Template
 
