@@ -2,30 +2,31 @@
 
 [![build](https://github.com/salvagedisc/fallow/actions/workflows/build.yml/badge.svg)](https://github.com/salvagedisc/fallow/actions/workflows/build.yml)
 
-A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends, in the spirit of the No Man's Land trailer (the mod itself is no longer in the pack): an almost empty, enigmatic world under the mist, which lifts wherever the players bring life back. Exploration, Create and aviation, farming and cooking, a zoo as a long-term goal. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment. Everything that can be read in game is in French.
+A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with friends: an almost empty, enigmatic world under the mist, which lifts wherever the players bring life back. Exploration, Create and airships, farming and cooking by hand, a zoo as a long-term goal. No minimap, no teleportation, no vanilla monsters: the difficulty comes from the environment. Everything that can be read in game is in French.
 
 | | |
 |---|---|
 | Minecraft | 1.21.1 |
 | Loader | NeoForge 21.1.265 |
-| Tooling | [packwiz](https://packwiz.infra.link/) → `.mrpack` export (Modrinth) |
-| Version | `0.1.0` in preparation, not released yet; `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
-| Status (2026-11-15) | 142 Modrinth mods, 6 resource packs, a house shader pack that gives the look (Brumaire, on by default), custom mod `fallow` 0.15.0; starts on a dedicated server, **not yet played**: see the [in-game tests](docs/tests-en-jeu.md) |
-| Content | see the [mod registry](docs/mods.md) |
+| Tooling | [packwiz](https://packwiz.infra.link/), exported as a Modrinth `.mrpack` |
+| Version | `0.1.0` in preparation; alpha test builds are published as [pre-releases](../../releases). `0.x` = prototype, disposable worlds; `1.0.0` = launch of the permanent world |
+| Status | About 150 Modrinth projects, the house shader pack Brumaire (on by default) and the custom `fallow` mod 0.35.1. The pack starts on a dedicated server but has **not been played through yet**: see the [in-game tests](docs/tests-en-jeu.md) |
+| Content | [Mod registry](docs/mods.md) |
 
 ## What the pack does today
 
 | Area | In game |
 |---|---|
 | The world | One continent on a disc 12 km wide, cold in the north and hot in the south, with an edge kept by the mist ([0022](docs/decisions/0022-disc-world.md)); Regions Unexplored and Geophilic biomes on Tectonic terrain (ranges, valleys) with Streams Reflowing streams, not yet seen in game ([0019](docs/decisions/0019-leaving-no-mans-land.md)); sparse structures, six Monoliths monuments with a codex to piece together; End removed and Nether closed |
+| The look | Brumaire, the pack's own shader pack (Iris), on from the first launch: light, sky, water, weather and seasons; K turns it off |
 | The mist | ATMOSPHERICS mist per biome (`fallow_v7` preset), snow and dust storms; Distant Horizons hidden in the mist and revealed where it lifts |
 | Clearings | Vigil fire (radius 16), clearing lantern (32) and the Create **dissipator** (64) turn the land around them into a clearing for good: light mist, vivid grass, far view, its own music |
 | Exploration | Hand-drawn Antique Atlas without coordinates, trains and ships on it; Lootr chests; Exposure photography and astrophotography |
-| Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; no experience at all (anvil by wear, enchanting through found books) |
-| Daily life | cooking by hand with Farmer's Delight and Hands-On Delight, Farm & Charm, a house tannery (hides scraped, tanned with bark, dried by sun or fire), a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
+| Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; on death a ragdoll body keeps the whole inventory; no experience at all (anvil by wear, enchanting through found books) |
+| Daily life | cooking by hand with Farmer's Delight and Hands-On Delight, Farm & Charm, a house tannery (hides scraped, tanned with bark, dried by sun or fire), fishing with Starcatcher, rest by the hearth, a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
 | Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
 | Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player |
-| Finish | Shoulder camera, 3D menus, animated arms, items with physics, particles, wakes, adaptive music with long silences |
+| Finish | Shoulder camera, animated combat (Better Combat), 3D menus, animated arms, items with physics, particles, wakes, adaptive music with long silences |
 | Safety | Hourly backups, crashing entities stopped instead of the world, crash assistant |
 
 The full list, with what was dropped and why, is in the [mod registry](docs/mods.md); what is planned next is in the [roadmap](docs/feuille-de-route.md).
@@ -33,7 +34,7 @@ The full list, with what was dropped and why, is in the [mod registry](docs/mods
 ## Play
 
 1. Install the [Modrinth App](https://modrinth.com/app).
-2. Accept the *Share* invitation you received, **or** download the `.mrpack` from the latest [release](../../releases) (or the artifact of the latest [build](../../actions/workflows/build.yml)) and use *+ → Import from file*.
+2. Download the `.mrpack` of the latest [release or pre-release](../../releases) and use *+ → Import from file* (or accept the *Share* invitation you received).
 3. To play the latest `main` without waiting for a release, download the `.mrpack` of the [`dev` pre-release](../../releases/tag/dev), rebuilt after every merge ([details](docs/dev-sync.md)).
 
 ## The repository
@@ -58,7 +59,7 @@ fallow/
 │   ├── plan/              ← living pages of each system
 │   ├── decisions/         ← one record per settled decision
 │   └── archive/           ← frozen plans, research, drafts
-├── .github/workflows/     ← build (every push) and release (tag vX.Y.Z)
+├── .github/workflows/     ← build and boot checks, dev pre-release, test builds and releases
 ├── CONTRIBUTING.md        ← working conventions
 └── CHANGELOG.md
 ```
