@@ -1,0 +1,7 @@
+// Fallow : fenêtres plus vives (docs/plan/interactions.md). Les réglages absents gardent la valeur du mod.
+{
+  "transitionDurationMs": 150,
+  "openAnimationDurationMs": 150,
+  "fadeDurationMs": 100,
+  "enableCloseAnimation": false
+}

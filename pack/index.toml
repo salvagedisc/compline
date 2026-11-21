@@ -57,6 +57,10 @@ file = "config/defaultoptions/extra/config/punchy/punchy_config.json"
 hash = "95d3212dcd24c753571ff47bbf34ff17ffbfcc66ac619f5b7b9f4dc7820b45f8"
 
 [[files]]
+file = "config/defaultoptions/extra/config/spatial-gui.json5"
+hash = "49ee6289997f3e9b174c8b7d2bbc9b202136518da0cdd4da39715971a7744c52"
+
+[[files]]
 file = "config/defaultoptions/extra/config/trueadaptivemusic/trueadaptivemusic.json"
 hash = "7357453b05f9e21fd96ff753f452fac766d52fcd20242e36ea81324958726357"
 
@@ -90,7 +94,7 @@ hash = "e835d69453c8f89e216418cec71966db955bc75ee264e3ac11275e5bff52cd93"
 
 [[files]]
 file = "config/handson_delight.properties"
-hash = "07f96a2860f85e6bfbc277eb52e6bfea6ce57d09a8eb7d0c42f6dacd5eb9fe34"
+hash = "ff02b4eb0216e8f43eb9536f75ed7a1a0b1adb94ecf3e31ef8798218f29c789d"
 
 [[files]]
 file = "config/hybrid_aquatic.json"
