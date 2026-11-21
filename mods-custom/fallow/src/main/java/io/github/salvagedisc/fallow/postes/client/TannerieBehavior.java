@@ -87,7 +87,7 @@ final class TannerieBehavior implements StationBehavior {
         }
         if ("book_open".equals(click.node())) {
             book.click(view, click.button());
-        } else if ("surface".equals(click.node())) {
+        } else if ("surface".equals(click.node()) || "pret".equals(click.node())) {
             view.sendAction(PostesTannerie.MAIN_VIDE, new CompoundTag());
         }
     }

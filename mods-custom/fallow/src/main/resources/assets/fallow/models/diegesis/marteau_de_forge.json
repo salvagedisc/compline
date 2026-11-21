@@ -1,0 +1,44 @@
+{
+  "textures": {
+    "manche": "minecraft:block/stripped_dark_oak_log",
+    "tete": "minecraft:block/anvil",
+    "particle": "minecraft:block/anvil"
+  },
+  "elements": [
+    {
+      "from": [0, 7, 7],
+      "to": [9, 8, 8],
+      "faces": {
+        "north": {"uv": [0, 7, 9, 8], "texture": "#manche"},
+        "south": {"uv": [0, 7, 9, 8], "texture": "#manche"},
+        "up": {"uv": [0, 6, 9, 7], "texture": "#manche"},
+        "down": {"uv": [0, 6, 9, 7], "texture": "#manche"},
+        "west": {"uv": [7, 7, 8, 8], "texture": "#manche"},
+        "east": {"uv": [7, 7, 8, 8], "texture": "#manche"}
+      }
+    },
+    {
+      "from": [5, 4.5, 6],
+      "to": [8, 10.5, 9],
+      "faces": {
+        "north": {"uv": [5, 4.5, 8, 10.5], "texture": "#tete"},
+        "south": {"uv": [8, 4.5, 11, 10.5], "texture": "#tete"},
+        "up": {"uv": [5, 6, 8, 9], "texture": "#tete"},
+        "down": {"uv": [5, 6, 8, 9], "texture": "#tete"},
+        "west": {"uv": [6, 4.5, 9, 10.5], "texture": "#tete"},
+        "east": {"uv": [6, 4.5, 9, 10.5], "texture": "#tete"}
+      }
+    },
+    {
+      "from": [5.5, 3.5, 6.5],
+      "to": [7.5, 4.5, 8.5],
+      "faces": {
+        "north": {"uv": [5, 3, 7, 4], "texture": "#tete"},
+        "south": {"uv": [5, 3, 7, 4], "texture": "#tete"},
+        "down": {"uv": [5, 5, 7, 7], "texture": "#tete"},
+        "west": {"uv": [6, 3, 8, 4], "texture": "#tete"},
+        "east": {"uv": [6, 3, 8, 4], "texture": "#tete"}
+      }
+    }
+  ]
+}

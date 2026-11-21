@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -53,8 +54,17 @@ final class CuveAllure implements Allure {
     private final boolean[] cuir = new boolean[4];
     private Item fantome;
     private final Envol envol = new Envol();
+    /** Le cuir prêt, qui flotte au-dessus de la cuve : un clic dessus le reprend. */
+    private final Flottant flottant = new Flottant(5.0F);
+    private ItemStack sortant = ItemStack.EMPTY;
     /** Les notes du cuir prêt, jouées l'une après l'autre. */
     private int carillon = -1;
+
+    @Override
+    public void onSceneReady(StationView view) {
+        view.node("pret").ifPresent(node -> node.setPainter((pose, buffers, light) ->
+                flottant.paint(view.level(), sortant, horloge, pose, buffers, light)));
+    }
 
     @Override
     public void onOpen(StationView view) {
@@ -77,6 +87,12 @@ final class CuveAllure implements Allure {
         boolean ready = hides > 0 && step >= CuveBlock.ETAPES;
         float soak = hides > 0 ? step / (float) CuveBlock.ETAPES : 0.0F;
         view.node("cuve").ifPresent(node -> node.setVisible(shown));
+        // Le cuir prêt sort de l'eau et flotte au-dessus, comme le résultat d'une enclume de Hands-On Vanilla.
+        sortant = shown && ready ? new ItemStack(TannerieModule.CUIR_MOUILLE.get(), hides) : ItemStack.EMPTY;
+        view.node("pret").ifPresent(node -> {
+            node.setVisible(!sortant.isEmpty());
+            flottant.frame(node, sortant, !sortant.isEmpty(), dt);
+        });
 
         view.node("eau").ifPresent(node -> {
             node.setVisible(shown && water);
