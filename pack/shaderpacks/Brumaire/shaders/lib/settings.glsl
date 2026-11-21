@@ -15,9 +15,7 @@
 #define CAVE_HAZE 1.0 // [0.0 0.5 1.0 1.5]
 #define CAVE_DETAIL 1 // [0 1]
 // Les gouttes qui tombent des voûtes des grottes, dans la lumière des torches (lib/cavedrips.glsl).
-#define GLOWWORMS 1 // [0 1]
 #define CAVE_DRIPS 1 // [0 1]
-#define LAVA_EMBERS 1 // [0 1]
 #define LAVA_STEAM 1 // [0 1]
 
 // Nuages
@@ -86,9 +84,6 @@
 // Des gouttes sur l'objectif sous la pluie, et en sortant de l'eau (program/grade.fsh).
 #define LENS_DROPS 1 // [0 1]
 #define LENS_SNOW 1 // [0 1]
-#define LENS_FROST 1 // [0 1]
-// La buée du souffle par grand froid, devant les yeux (program/grade.fsh).
-#define COLD_BREATH 1 // [0 1]
 #define COLORED_LIGHT 1 // [0 1]
 #define GLASS_TINT 1 // [0 1]
 // Le verre qui se raccorde à ses voisins : une verrière sans cadres entre ses blocs (lib/glass.glsl).
@@ -145,19 +140,7 @@
 #define SPRAY_RAINBOW 1 // [0 1]
 #define SHORE_WET 1 // [0 1]
 #define WATER_RAIN_RINGS 1 // [0 1]
-#define FISH_RISES 1 // [0 1]
 #define AIR_MOTES 1 // [0 1]
-// Les lucioles des nuits douces, dans les biomes tièdes et humides (lib/fireflies.glsl).
-#define FIREFLIES 1 // [0 1]
-#define SEED_FLUFF 1 // [0 1]
-// Les papillons des journées chaudes au-dessus des prés (lib/butterflies.glsl).
-#define BUTTERFLIES 1 // [0 1]
-// Les libellules au-dessus de l'eau, les mêmes jours (demande les papillons et le volume de voxels).
-#define DRAGONFLIES 1 // [0 1]
-// Les vols d'oiseaux qui traversent le ciel le jour (lib/birds.glsl).
-#define BIRDS 1 // [0 1]
-#define BATS 1 // [0 1]
-#define MOTHS 1 // [0 1]
 
 // Pluie
 #define SHADER_RAIN 1 // [0 1]
@@ -173,7 +156,6 @@
 #define WINDOW_RAIN 1 // [0 1]
 #define WINDOW_FROST 1 // [0 1]
 #define EAVES_DRIPS 1 // [0 1]
-#define ICICLES 1 // [0 1]
 // Les êtres et le joueur trempés sous la pluie, plus sombres et luisants (program/solid.fsh).
 #define SNOWY_ENTITIES 1 // [0 1]
 #define WET_ENTITIES 1 // [0 1]
@@ -200,7 +182,6 @@
 #define SNOW_COVER 1 // [0 1]
 #define ALPENGLOW 1 // [0 1]
 #define AURORA_GLOW 1 // [0 1]
-#define SHORE_ICE 1 // [0 1]
 #define GROUND_TINT 1 // [0 1]
 // Les forêts lointaines (Distant Horizons) : une nuance par bloc de feuillage, le dessous des couronnes plus sombre.
 #define FAR_CANOPY 1 // [0 1]
@@ -217,9 +198,6 @@
 #define SAND_DETAIL 1 // [0 1]
 // La glace fissurée, avec ses bulles (lib/snow.glsl).
 #define ICE_DETAIL 1 // [0 1]
-// Les feuilles qui tombent des arbres, plus nombreuses quand le feuillage a roussi (lib/leaffall.glsl).
-#define FALLING_LEAVES 1 // [0 1]
-#define LEAF_LITTER 1 // [0 1]
 // L'eau qui s'égoutte des arbres après la pluie, et la neige qui tombe des branches au vent (lib/leaffall.glsl).
 #define CANOPY_DRIPS 1 // [0 1]
 // Les matières des blocs : reflets de l'astre selon la rugosité, métaux, minerais, sculk (lib/material.glsl).

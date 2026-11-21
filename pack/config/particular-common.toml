@@ -1,6 +1,11 @@
 # Fallow : un peu plus de feuilles qui tombent (60 par défaut ; plus petit = plus
 # fréquent). Le module averse les pousse au vent et les laisse plus longtemps au sol.
+# Lucioles coupées : ce ne sont que des particules, les vraies lucioles du pack sont celles de
+# Naturalist (aucune créature dessinée qui n'existe pas dans le jeu).
 # Les autres clés gardent leur valeur par défaut, ajoutée par NeoForge au premier lancement.
+[general.enabledEffects]
+	fireflies = false
+
 [general.advancedSettings.fallingLeavesSettings]
 	spawnChance = 45
 	spawnRipples = true

@@ -11,15 +11,11 @@
 #include "/lib/precip.glsl"
 #include "/lib/motes.glsl"
 #include "/lib/leaffall.glsl"
-#include "/lib/fireflies.glsl"
 #include "/lib/cavedrips.glsl"
 #include "/lib/drift.glsl"
 #include "/lib/seasmoke.glsl"
 #include "/lib/embers.glsl"
 #include "/lib/spray.glsl"
-#include "/lib/fluff.glsl"
-#include "/lib/butterflies.glsl"
-#include "/lib/birds.glsl"
 #include "/lib/eaves.glsl"
 #include "/lib/soilsteam.glsl"
 #include "/lib/dustdevil.glsl"
@@ -418,102 +414,6 @@ void main() {
             }
         }
 #endif
-#if FIREFLIES > 0 && SHADER_RAIN > 0
-        // Les lucioles des nuits douces : leur lumière s'ajoute, l'éclat (bloom) en fait des points qui rayonnent.
-        {
-            float amount = fireflySeason();
-            if (amount > 0.01) color += vec3(0.62, 1.0, 0.22) * firefliesAlong(dir, min(len, 40.0), amount) * 0.9;
-        }
-#endif
-#if SEED_FLUFF > 0 && SHADER_RAIN > 0
-        // Les duvets des journées douces : blancs et translucides, ils s'allument à contre-jour.
-        {
-            float amount = fluffAmount();
-            if (amount > 0.01) {
-                float fluffDist;
-                float fluff = fluffAlong(dir, min(len, 32.0), amount, fluffDist);
-                if (fluff > 0.0) {
-                    vec3 p = gbufferModelViewInverse[3].xyz + dir * fluffDist;
-                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
-                    float mu = max(dot(dir, gLightDir), 0.0);
-                    vec3 light = gAmbient * 1.1 + gLightColor * lit * (0.45 + 2.2 * pow(mu, 6.0));
-                    color = mix(color, light, fluff * 0.65);
-                }
-            }
-        }
-#endif
-#if BUTTERFLIES > 0 && SHADER_RAIN > 0
-        // Les papillons des journées chaudes : opaques, éclairés par le ciel et le soleil (ombre comprise).
-        {
-            float amount = butterflyAmount();
-            if (amount > 0.01) {
-                float flyDist;
-                vec3 wingTint;
-                float fly = butterfliesAlong(dir, min(len, 24.0), amount, flyDist, wingTint);
-                if (fly > 0.0) {
-                    vec3 p = gbufferModelViewInverse[3].xyz + dir * flyDist;
-                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
-                    vec3 light = gAmbient * 1.2 + gLightColor * lit * (0.55 + 0.45 * max(gLightDir.y, 0.0));
-                    color = mix(color, wingTint * light, fly);
-                }
-#if DRAGONFLIES > 0 && defined VOXELS
-                // Les libellules, au-dessus de l'eau seulement, éclairées de même.
-                fly = dragonfliesAlong(dir, min(len, 24.0), amount, flyDist, wingTint);
-                if (fly > 0.0) {
-                    vec3 p = gbufferModelViewInverse[3].xyz + dir * flyDist;
-                    vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-                    float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
-                    vec3 light = gAmbient * 1.2 + gLightColor * lit * (0.55 + 0.45 * max(gLightDir.y, 0.0));
-                    color = mix(color, wingTint * light, fly);
-                }
-#endif
-            }
-        }
-#endif
-#if MOTHS > 0 && defined VOXELS
-        // La nuit, les papillons de nuit qui tournent autour des torches et des lanternes, éclairés par elles.
-        {
-            float amount = mothAmount();
-            if (amount > 0.01) {
-                float mothDist;
-                vec3 mothTint;
-                float moth = mothsAlong(dir, min(len, 24.0), amount, mothDist, mothTint);
-                if (moth > 0.0) color = mix(color, mothTint, moth);
-            }
-        }
-#endif
-#if BIRDS > 0
-        // Les oiseaux qui passent, silhouettes sombres sur le ciel, voilées par l'air qui les sépare de l'œil.
-        if (isEyeInWater == 0) {
-            float amount = birdAmount();
-            if (amount > 0.01) {
-                float birdDist;
-                float bird = birdsAlong(dir, min(len, 300.0), amount, birdDist);
-                if (bird > 0.0) {
-                    vec3 body = gAmbient * 0.18 + gLightColor * 0.03;
-                    float haze = 1.0 - exp(-birdDist / 260.0);
-                    color = mix(color, mix(body, color, haze), bird);
-                }
-            }
-        }
-#endif
-#if BATS > 0
-        // Au crépuscule, les chauves-souris : de petites silhouettes noires qui virevoltent sur le ciel du soir.
-        if (isEyeInWater == 0) {
-            float amount = batAmount();
-            if (amount > 0.01) {
-                float batDist;
-                float bat = batsAlong(dir, min(len, 80.0), amount, batDist);
-                if (bat > 0.0) color = mix(color, gAmbient * 0.06, bat * exp(-batDist / 120.0));
-            }
-        }
-#endif
-#if LAVA_EMBERS > 0 && defined VOXELS
-        // Les braises de la lave : leur lumière s'ajoute, l'éclat (bloom) en fait des points qui rayonnent.
-        if (isEyeInWater == 0) color += embersAlong(dir, min(len, 24.0));
-#endif
 #if FALL_SPRAY > 0 && defined VOXELS
         // Les embruns autour des cascades : un voile blanc de fines gouttes, éclairé par le ciel et le soleil.
         if (isEyeInWater == 0) {
@@ -536,21 +436,6 @@ void main() {
                 // Une vapeur blanche que le soleil traverse : plus vive à contre-jour.
                 vec3 vapour = gAmbient * 1.3 + gLightColor * (0.45 + 1.2 * pow(max(dot(dir, gLightDir), 0.0), 4.0));
                 color = mix(color, vapour, steam);
-            }
-        }
-#endif
-#if LEAF_LITTER > 0 && defined VOXELS
-        // Les feuilles mortes qui roulent au sol, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
-        {
-            float litterDist;
-            vec3 litterTint;
-            float litter = litterAlong(dir, min(len, 24.0), litterDist, litterTint);
-            if (litter > 0.0) {
-                vec3 p = gbufferModelViewInverse[3].xyz + dir * litterDist;
-                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
-                vec3 light = gAmbient * 0.9 + gLightColor * lit * max(gLightDir.y, 0.2) * 0.9;
-                color = mix(color, litterTint * light, litter);
             }
         }
 #endif
@@ -634,34 +519,6 @@ void main() {
             float eaveDist;
             float eave = eavesAlong(dir, min(len, 20.0), water, eaveDist);
             if (eave > 0.0) color = mix(color, gAmbient * 1.4 + gLightColor * 0.4, eave * 0.6);
-        }
-#endif
-#if ICICLES > 0 && SHADER_RAIN > 0 && defined VOXELS
-        // Par grand froid, des glaçons pendent au bord des toits : une glace bleutée, plus claire vers la pointe, qui
-        // prend l'éclat du soleil.
-        if (isEyeInWater == 0) {
-            float cold = max(snowHere, 1.0 - smoothstep(0.10, 0.45, airHeat));
-            float iceDist, iceTip;
-            float ice = iciclesAlong(dir, min(len, 24.0), cold, iceDist, iceTip);
-            if (ice > 0.0) {
-                vec3 iceColor = gAmbient * vec3(0.90, 1.0, 1.20) + gLightColor * (0.25 + 0.45 * iceTip);
-                color = mix(color, iceColor, ice * (0.40 + 0.30 * iceTip));
-            }
-        }
-#endif
-#if FALLING_LEAVES > 0 && defined VOXELS
-        // Les feuilles qui tombent des arbres proches, éclairées comme le feuillage : soleil (avec son ombre) et ciel.
-        {
-            float leafDist;
-            vec3 leafTint;
-            float leaf = leafAlong(dir, min(len, 16.0), leafDist, leafTint);
-            if (leaf > 0.0) {
-                vec3 p = gbufferModelViewInverse[3].xyz + dir * leafDist;
-                vec3 suv = shadowWarp((shadowProjection * (shadowModelView * vec4(p, 1.0))).xyz) * 0.5 + 0.5;
-                float lit = suv.z < 1.0 ? texture(shadowtex1, vec3(suv.xy, suv.z - 0.0002)) : 1.0;
-                vec3 light = gAmbient * 0.75 + gLightColor * lit * 0.55;
-                color = mix(color, leafTint * light, leaf);
-            }
         }
 #endif
         // Au loin, là où le jeu ne dessine plus de gouttes, les rideaux de pluie.

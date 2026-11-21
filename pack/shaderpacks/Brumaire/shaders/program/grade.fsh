@@ -235,7 +235,7 @@ vec4 lensDrop(vec2 uv, float wet, float t) {
 }
 #endif
 
-#if LENS_SNOW > 0 || LENS_FROST > 0
+#if LENS_SNOW > 0
 float frostHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 
 float frostNoise(vec2 p) {
@@ -283,97 +283,7 @@ vec2 lensFlake(vec2 uv, float amount, float t) {
 }
 #endif
 
-#if LENS_FROST > 0
-uniform float lensFrost;
 
-/**
- * Le givre sur l'objectif (0..1 en ce point) : il part des coins et gagne les bords en fougères, d'autant plus loin
- * que l'objectif a eu froid longtemps (amount).
- */
-float segDist(vec2 p, vec2 a, vec2 b) {
-    vec2 pa = p - a, ba = b - a;
-    return length(pa - ba * clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0));
-}
-
-/**
- * Les aiguilles du givre autour d'un point (en cases de taille size) : dans chaque case, une aiguille droite pointée
- * vers le centre de l'image, et deux paires de rameaux à soixante degrés, comme une fougère. 0..1.
- */
-float frostNeedles(vec2 p, vec2 centre, float size) {
-    vec2 g = p / size;
-    vec2 base = floor(g);
-    float best = 0.0;
-    for (int i = 0; i < 9; i++) {
-        vec2 cell = base + vec2(float(i % 3) - 1.0, float(i / 3) - 1.0);
-        vec2 c = cell + 0.5 + (vec2(frostHash(cell + 0.7), frostHash(cell + 2.9)) - 0.5) * 0.6;
-        vec2 inward = normalize(centre / size - c + 1e-4);
-        float a = (frostHash(cell + 5.3) - 0.5) * 0.8;
-        vec2 dir = mat2(cos(a), sin(a), -sin(a), cos(a)) * inward;
-        vec2 side = vec2(-dir.y, dir.x);
-        float d = segDist(g, c - dir * 0.9, c + dir * 0.9);
-        for (int k = 0; k < 2; k++) {
-            vec2 at = c + dir * (k == 0 ? 0.35 : -0.25);
-            float len = k == 0 ? 0.35 : 0.5;
-            d = min(d, segDist(g, at, at + (dir * 0.5 + side * 0.866) * len));
-            d = min(d, segDist(g, at, at + (dir * 0.5 - side * 0.866) * len));
-        }
-        best = max(best, exp(-d * d / 0.004));
-    }
-    return best;
-}
-
-float lensFrostAt(vec2 uv, float amount, out float crystal) {
-    vec2 aspect = vec2(viewWidth / viewHeight, 1.0);
-    vec2 q = (uv - 0.5) * aspect;
-    float v = length(q * vec2(0.85, 1.0)) / length(vec2(0.5 * aspect.x * 0.85, 0.5));
-    // Des aiguilles droites et ramifiées, en deux tailles, et un bruit large qui découpe le front.
-    vec2 p = uv * aspect;
-    vec2 centre = 0.5 * aspect;
-    crystal = max(frostNeedles(p, centre, 0.055), frostNeedles(p + 3.7, centre + 3.7, 0.024) * 0.8);
-    float fern = frostNoise(uv * 7.0 + 4.1) * 0.6 + frostNoise(uv * 19.0) * 0.4;
-    float front = 1.0 - 0.42 * amount;
-    float cover = smoothstep(front, front + 0.06, v + 0.22 * (fern - 0.5));
-    // Au front, il ne reste que les aiguilles ; plus loin dans le coin, un voile les relie.
-    float veil = smoothstep(front + 0.05, front + 0.25, v + 0.22 * (fern - 0.5));
-    crystal *= cover;
-    return max(crystal * 0.9, veil * 0.6) * amount;
-}
-#endif
-
-#if COLD_BREATH > 0
-uniform float airHeat;
-uniform float snowHere;
-#if LENS_DROPS == 0
-uniform int isEyeInWater;
-#endif
-
-float breathNoise(vec2 p) {
-    vec2 i = floor(p), f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-    float a = fract(sin(dot(i, vec2(127.1, 311.7))) * 43758.5453);
-    float b = fract(sin(dot(i + vec2(1.0, 0.0), vec2(127.1, 311.7))) * 43758.5453);
-    float c = fract(sin(dot(i + vec2(0.0, 1.0), vec2(127.1, 311.7))) * 43758.5453);
-    float d = fract(sin(dot(i + vec2(1.0, 1.0), vec2(127.1, 311.7))) * 43758.5453);
-    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-}
-
-/**
- * La buée du souffle par grand froid (0..1 en ce point de l'écran) : toutes les trois secondes et demie, un nuage pâle
- * sort du bas de l'image, monte en s'ouvrant et se dissipe en un peu plus d'une seconde.
- */
-float breathPuff(vec2 uv, float t) {
-    float cycle = 3.6;
-    float age = mod(t, cycle) / 1.4;
-    if (age > 1.0) return 0.0;
-    float n = floor(t / cycle);
-    vec2 aspect = vec2(viewWidth / viewHeight, 1.0);
-    vec2 centre = vec2(0.5 + 0.04 * sin(n * 2.3), -0.02 + 0.22 * sqrt(age));
-    vec2 q = (uv - centre) * aspect / (0.10 + 0.16 * age);
-    float body = 1.0 - smoothstep(0.35, 1.0, length(q * vec2(1.0, 1.25)));
-    float wisp = breathNoise(q * 2.2 + vec2(n * 7.1, -t * 0.8)) * 0.6 + breathNoise(q * 5.0 + n * 3.3) * 0.4;
-    return clamp(body * (wisp * 1.4 - 0.25), 0.0, 1.0) * smoothstep(0.0, 0.12, age) * (1.0 - smoothstep(0.35, 1.0, age));
-}
-#endif
 
 void main() {
     vec3 color = texture(colortex0, vUv).rgb;
@@ -426,33 +336,6 @@ void main() {
             vec3 soft = color;
 #endif
             color = mix(color, mix(white, soft * 1.08, flake.y), flake.x * mix(0.8, 0.5, flake.y));
-        }
-    }
-#endif
-#if LENS_FROST > 0
-    // Le givre des grands froids : un voile blanc et flou qui gagne les coins, semé de points qui brillent.
-    if (lensFrost > 0.01) {
-        float crystal;
-        float frost = lensFrostAt(vUv, lensFrost, crystal);
-        if (frost > 0.001) {
-#ifdef BLOOM
-            vec3 soft = textureLod(colortex0, vUv, 3.0).rgb;
-#else
-            vec3 soft = color;
-#endif
-            float glint = step(0.985, frostHash(floor(vUv * vec2(viewWidth, viewHeight) * 0.5)));
-            vec3 ice = soft * 0.8 + vec3(0.82, 0.90, 1.0) * max(lens.x, 0.02) * (1.5 + 4.0 * crystal + 6.0 * glint * crystal);
-            color = mix(color, ice, frost * 0.75);
-        }
-    }
-#endif
-#if COLD_BREATH > 0
-    // Par grand froid, le souffle fait de la buée devant les yeux : un voile pâle de la couleur de la lumière ambiante.
-    {
-        float cold = max(1.0 - smoothstep(0.05, 0.22, airHeat), snowHere * 0.8) * float(isEyeInWater == 0);
-        if (cold > 0.01) {
-            float puff = breathPuff(vUv, frameTimeCounter) * cold;
-            if (puff > 0.001) color = mix(color, color * 0.85 + vec3(0.92, 0.96, 1.0) * max(lens.x, 0.02) * 4.0, puff * 0.45);
         }
     }
 #endif

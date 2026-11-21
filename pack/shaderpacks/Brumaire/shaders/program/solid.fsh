@@ -88,7 +88,6 @@ layout(location = 0) out vec4 outColor;
 #endif
 
 #ifdef PROGRAM_WATER
-#include "/lib/shoreice.glsl"
 #include "/lib/watershade.glsl"
 
 /** La glace : sa couleur laisse voir au travers, sa surface lisse reflète le paysage, plus à jour frisant. */
@@ -728,22 +727,6 @@ void main() {
 #endif
     // Les grains de neige et de sable qui scintillent, là où le soleil donne.
     lit += gLightColor * (1.0 - indirect) * sparkle * 2.5;
-#if defined PROGRAM_TERRAIN && GLOWWORMS > 0
-    // Les vers luisants des grottes : au plafond des cavités noires, loin du ciel et des torches, des colonies de
-    // points bleus qui palpitent doucement, comme un ciel étoilé sous la roche.
-    if (vMat == 0 && normal.y < -0.9 && lm.y < 0.02 && lm.x < 0.35) {
-        vec3 w = vPos + cameraPosition;
-        float colony = smoothstep(0.55, 0.75, cloudNoise(vec3(w.xz * 0.06, w.y * 0.03 + 0.71)).r);
-        if (colony > 0.0) {
-            vec2 px = floor(w.xz * 16.0);
-            float h = fract(sin(dot(px, vec2(12.9898, 78.233)) + floor(w.y) * 3.7) * 43758.5453);
-            if (h < 0.02 * colony) {
-                float pulse = 0.6 + 0.4 * sin(frameTimeCounter * (0.6 + h * 40.0) + h * 300.0);
-                lit += vec3(0.20, 0.70, 1.0) * pulse * 1.6 * (1.0 - lm.x / 0.35);
-            }
-        }
-    }
-#endif
 #if defined PROGRAM_TERRAIN && LEAF_FLUTTER > 0
     // Dans le vent, des feuilles se retournent et renvoient le soleil un instant : quelques texels du feuillage
     // s'allument et s'éteignent, plus souvent quand il souffle fort.

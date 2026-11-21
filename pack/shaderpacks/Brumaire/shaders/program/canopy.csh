@@ -1,6 +1,6 @@
 // Le feuillage au-dessus de chaque colonne du volume (lib/voxel.glsl) : la hauteur du dessous du plus haut feuillage,
 // en blocs au-dessus du bloc de la caméra (a, -1000 sans feuillage), et sa couleur moyenne (rgb, sRGB) quand les
-// reflets hors écran la rangent. Relu par lib/leaffall.glsl pour les feuilles qui tombent.
+// reflets hors écran la rangent. Relu par lib/leaffall.glsl (gouttes des arbres) et lib/watershade.glsl (feuilles sur l'eau).
 #include "/lib/settings.glsl"
 #include "/lib/voxel.glsl"
 

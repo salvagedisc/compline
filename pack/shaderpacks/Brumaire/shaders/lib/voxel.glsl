@@ -22,7 +22,7 @@ const uint VOX_MIRROR = 2048u;
 const uint VOX_WATER = 4096u;
 // Bit 13 : du verre, bloc ou vitre (le verre se raccorde à ses voisins, lib/glass.glsl).
 const uint VOX_GLASS = 8192u;
-// Bit 14 : un feuillage (les feuilles qui tombent, lib/leaffall.glsl).
+// Bit 14 : un feuillage (program/canopy.csh).
 const uint VOX_LEAF = 16384u;
 
 #if COLORED_LIGHT > 0 || SHADER_RAIN > 0 || VOXEL_REFLECTIONS > 0
