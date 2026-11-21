@@ -31,6 +31,7 @@ final class SechoirAllure implements Allure {
     private float horloge;
     private float goutte;
     private float fumee;
+    private float lueur;
     /** Le séchage montré, qui rejoint doucement celui du bloc (il avance par paliers de 20 secondes). */
     private float montre = -1.0F;
     private SechoirBlock.Etat avant;
@@ -88,6 +89,22 @@ final class SechoirAllure implements Allure {
             node.setTint((int) (Mth.clamp(sec, 0.0F, 1.0F) * 255.0F) << 24 | 0xFFFFFF);
             node.scaleTo(serre, 0.0F);
         });
+        // Sec, le cuir est à prendre : il luit par moments, et s'entoure sous le curseur à main vide, comme ce qui sort d'un
+        // poste de Hands-On.
+        boolean pret = shown && view.isFocused() && etat == SechoirBlock.Etat.SEC;
+        LocalPlayer joueur = Minecraft.getInstance().player;
+        boolean mainVide = joueur != null && joueur.containerMenu.getCarried().isEmpty();
+        boolean survole = pret && mainVide && view.node("surface").map(node -> node.isHovered()).orElse(false);
+        view.node("cuir").ifPresent(node -> node.setOutlined(survole));
+        view.node("sec").ifPresent(node -> node.setOutlined(survole));
+        if (pret) {
+            lueur += dt;
+            if (lueur >= 1.8F) {
+                lueur = 0.0F;
+                view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(4.5F + random.nextFloat() * 7.0F, 4.0F + random.nextFloat() * 8.0F, 7.0F),
+                        new Vector3f(0.0F, 0.5F, -1.0F), 0.5F, 2, 0xFFFFF0D0);
+            }
+        }
 
         LocalPlayer player = Minecraft.getInstance().player;
         ItemStack carried = player == null ? ItemStack.EMPTY : player.inventoryMenu.getCarried();
