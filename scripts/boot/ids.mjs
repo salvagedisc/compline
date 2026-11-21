@@ -39,3 +39,29 @@ export function unknownItems(listed, registries) {
     return { id, file, why };
   });
 }
+
+// Creature ids written by hand in the `*_CREATURES*` lists of the server scripts (creatures cut from the
+// world): a typo would leave the creature spawning without any error.
+export function listedCreatures(file, source) {
+  const ids = [];
+  for (const list of source.matchAll(/const \w*_CREATURES\w* = \[([\s\S]*?)\]/g)) ids.push(...quotedIds(list[1]));
+  return [...new Set(ids)].map((id) => ({ id, file }));
+}
+
+export async function readListedCreatures(kubejsDir) {
+  const found = [];
+  const dir = join(kubejsDir, 'server_scripts');
+  for (const name of (await readdir(dir)).filter((n) => n.endsWith('.js')).sort()) {
+    found.push(...listedCreatures(`server_scripts/${name}`, await readFile(join(dir, name), 'utf8')));
+  }
+  return found;
+}
+
+export function unknownCreatures(listed, registries) {
+  const entities = new Set(registries.entity_type);
+  const mods = new Set(registries.mods);
+  return listed.filter(({ id }) => !entities.has(id)).map(({ id, file }) => {
+    const mod = id.split(':')[0];
+    return { id, file, why: !mods.has(mod) ? `mod ${mod} absent` : 'créature inconnue' };
+  });
+}

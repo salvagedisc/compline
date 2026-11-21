@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { readPackMods } from '../sync/pwtoml.mjs';
 import { loadJar } from '../deps/jars.mjs';
-import { readListedItems, unknownItems } from './ids.mjs';
+import { readListedCreatures, readListedItems, unknownCreatures, unknownItems } from './ids.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const packDir = join(root, 'pack');
@@ -110,14 +110,15 @@ for (const [error, count] of errors) {
 }
 console.log(`${errors.size} erreur(s) distincte(s) dans les journaux, ${accepted.length} acceptée(s) par known-errors.txt`);
 
-// 5. The world must have started, and every listed item must exist.
+// 5. The world must have started, and every listed item and creature must exist.
 if (!existsSync(registriesFile)) {
   const crashes = existsSync(join(work, 'crash-reports')) ? await readdir(join(work, 'crash-reports')) : [];
   annotate(`le serveur ne s'est pas lancé jusqu'au bout${crashes.length ? ` (rapport de plantage : ${crashes.join(', ')})` : ''}`);
   process.exit(1);
 }
 const registries = JSON.parse(await readFile(registriesFile, 'utf8'));
-const missing = unknownItems(await readListedItems(join(packDir, 'kubejs')), registries);
+const missing = unknownItems(await readListedItems(join(packDir, 'kubejs')), registries)
+  .concat(unknownCreatures(await readListedCreatures(join(packDir, 'kubejs')), registries));
 for (const { id, file, why } of missing) annotate(`${file} : ${id} (${why})`);
 console.log(`${registries.mods.length} mods chargés, ${registries.item.length} objets, ${registries.recipe.length} recettes ; ${missing.length} identifiant(s) inconnu(s) dans les listes KubeJS`);
 process.exit(failures || missing.length ? 1 : 0);
