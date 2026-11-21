@@ -3933,7 +3933,7 @@ metafile = true
 
 [[files]]
 file = "mods/questlog.pw.toml"
-hash = "f8d895c62092d3517e27db8ccbcf205ce2eec2238d2eda34e951a007f8e36320"
+hash = "4c2ae21fdeb425c50f1ebd169b0e7b9bc170dbe6bf513a9f54b84cb3f962155a"
 metafile = true
 
 [[files]]
