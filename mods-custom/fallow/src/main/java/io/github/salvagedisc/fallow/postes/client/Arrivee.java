@@ -26,10 +26,10 @@ final class Arrivee {
     static final float VOL = 0.32F;
     private static final float FLECHE = 2.5F;
     /** Le temps du jeu au dernier objet lâché du curseur sur un poste : ce qui arrive juste après vient de la main. */
-    private static long curseurA = Long.MIN_VALUE;
+    private static long curseurA = -1000L;
     /** La case de l'inventaire envoyée la dernière par Maj + clic, et quand : elle peut s'être vidée avant le vol. */
     private static int depart = -1;
-    private static long departA = Long.MIN_VALUE;
+    private static long departA = -1000L;
 
     private Arrivee() {
     }
@@ -87,7 +87,7 @@ final class Arrivee {
     }
 
     private static void son(StationView view, String nodeId, int rang) {
-        view.playSound(SoundEvents.ITEM_FRAME_ADD_ITEM, nodeId, 0.35F, 1.0F + 0.08F * Math.min(rang, 8));
+        Son.joue(view, SoundEvents.ITEM_FRAME_ADD_ITEM, nodeId, 0.35F, 1.0F + 0.08F * Math.min(rang, 8));
     }
 
     /**
@@ -145,7 +145,7 @@ final class Arrivee {
         private final Vol[] vols = { new Vol("arrivee_0"), new Vol("arrivee_1"), new Vol("arrivee_2") };
         private int suivant;
         private int rang;
-        private long rangA = Long.MIN_VALUE;
+        private long rangA = -1000L;
 
         void frame(StationView view, float dt) {
             for (Vol vol : vols) {
@@ -153,9 +153,20 @@ final class Arrivee {
             }
         }
 
+        /** Vrai tant qu'un objet de la volée est en l'air. */
+        boolean enVol() {
+            for (Vol vol : vols) {
+                if (vol.temps >= 0.0F) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** {@code item} arrive au point {@code at} de la scène : il vole de la barre, sauf s'il vient du curseur. */
         void arrive(StationView view, Item item, Vector3fc at) {
-            if (item == null || duCurseur(view)) {
+            // Ce qui arrive part de la barre de celui qui travaille : les autres ne le voient pas voler de la leur.
+            if (item == null || duCurseur(view) || !view.isFocused()) {
                 return;
             }
             long now = view.level().getGameTime();

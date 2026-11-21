@@ -89,7 +89,13 @@ final class ForgeBehavior implements StationBehavior {
         this.source = new ForgeBook(tier, debutGrille);
         this.book = new RecipeBook(source);
         this.caseOuvrage = debutGrille + 9;
+        this.pierre = tier == AnvilTier.STONE;
     }
+
+    /** L'enclume de pierre sonne la pierre et jette de la poussière ; les autres, le métal et des étincelles. */
+    private final boolean pierre;
+    /** Vrai quand l'ouvrage, encore à forger, porte la consigne du marteau en infobulle. */
+    private boolean consigne;
 
     @Override
     public void onSceneReady(StationView view) {
@@ -134,17 +140,23 @@ final class ForgeBehavior implements StationBehavior {
                 || net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath().equals("blueprint")) {
             return true;
         }
-        return utiles.computeIfAbsent(stack.getItem(), item -> {
-            ItemStack one = new ItemStack(item);
-            for (RecipeBook.Page page : source.pages(view)) {
-                for (Ingredient ingredient : page.ingredients()) {
-                    if (!ingredient.isEmpty() && ingredient.test(one)) {
-                        return true;
-                    }
-                }
+        Boolean deja = utiles.get(stack.getItem());
+        if (deja != null) {
+            return deja;
+        }
+        java.util.List<RecipeBook.Page> pages = source.pages(view);
+        ItemStack one = new ItemStack(stack.getItem());
+        boolean sert = false;
+        for (RecipeBook.Page page : pages) {
+            for (Ingredient ingredient : page.ingredients()) {
+                sert |= !ingredient.isEmpty() && ingredient.test(one);
             }
-            return false;
-        });
+        }
+        // Les recettes pas encore reçues ne disent rien : la réponse n'est gardée qu'une fois le livre rempli.
+        if (!pages.isEmpty()) {
+            utiles.put(stack.getItem(), sert);
+        }
+        return sert;
     }
 
     @Override
@@ -168,7 +180,15 @@ final class ForgeBehavior implements StationBehavior {
         horloge += deltaSeconds;
         tempsCoup += deltaSeconds;
         ItemStack fait = ouvrage(view);
-        view.node(PostesForge.OUVRAGE).ifPresent(node -> flottant.frame(node, fait, !enCoup(), deltaSeconds));
+        view.node(PostesForge.OUVRAGE).ifPresent(node -> {
+            flottant.frame(node, fait, !enCoup(), deltaSeconds);
+            // Tant que la pièce reste à forger, son emplacement rappelle comment faire (la légende ne dure que trois secondes).
+            boolean dire = fait.isEmpty() && !annonce.isEmpty();
+            if (dire != consigne) {
+                consigne = dire;
+                node.setTooltip(dire ? Component.translatable("postes.fallow.forge.pret", annonce.getHoverName()) : null);
+            }
+        });
         view.node("leve").ifPresent(node -> node.setVisible(!leve.isEmpty() && horloge - leveA < 0.3F));
         // Le marteau quitte sa place pendant le coup.
         view.node(PostesForge.MARTEAU).ifPresent(node -> node.setVisible(coup == Coup.REPOS));
@@ -261,7 +281,7 @@ final class ForgeBehavior implements StationBehavior {
         connu = true;
         // Comme l'enclume de Hands-On Vanilla : un tintement clair quand une pièce se pose, un glissement quand elle part.
         if (pose > 0) {
-            play(view, SoundEvents.ANVIL_PLACE, 0.08F, 1.7F + random.nextFloat() * 0.2F);
+            play(view, pierre ? SoundEvents.STONE_HIT : SoundEvents.ANVIL_PLACE, pierre ? 0.3F : 0.08F, 1.7F + random.nextFloat() * 0.2F);
             if (grille_chaude) {
                 play(view, SoundEvents.FIRE_EXTINGUISH, 0.12F, 1.6F + random.nextFloat() * 0.2F);
             }
@@ -275,14 +295,14 @@ final class ForgeBehavior implements StationBehavior {
             // L'ouvrage forgé arrive : une gerbe d'étincelles (il apparaît en grandissant au-dessus de sa place).
             view.spawnParticles(DiegesisParticles.SPARK, new Vector3f(-2.0F, 17.5F, 11.5F), new Vector3f(0.0F, 14.0F, 0.0F), 6.0F, 14, 0xFFFFC870);
             view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(-2.0F, 18.0F, 11.5F), new Vector3f(0.0F, 2.0F, 0.0F), 3.0F, 6, 0xFFFFF0D0);
-            view.playSound(SoundEvents.ANVIL_PLACE, PostesForge.OUVRAGE, 0.12F, 1.4F + random.nextFloat() * 0.2F);
+            Son.joue(view, pierre ? SoundEvents.STONE_PLACE : SoundEvents.ANVIL_PLACE, PostesForge.OUVRAGE, 0.12F, 1.4F + random.nextFloat() * 0.2F);
         }
         ouvrage = forge;
         ItemStack fera = enclume != null ? enclume.getGhostResult() : ItemStack.EMPTY;
         if (!fera.isEmpty() && !ItemStack.isSameItem(fera, annonce)) {
             view.showCaption(Component.translatable("postes.fallow.forge.pret", fera.getHoverName()), 3.0F);
             view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(-2.0F, 18.5F, 11.5F), new Vector3f(0.0F, 1.5F, 0.0F), 2.5F, 5, 0xFFFFF0D0);
-            view.playSound(SoundEvents.AMETHYST_BLOCK_CHIME, "fera", 0.4F, 1.4F + random.nextFloat() * 0.2F);
+            Son.joue(view, SoundEvents.AMETHYST_BLOCK_CHIME, "fera", 0.4F, 1.4F + random.nextFloat() * 0.2F);
         }
         annonce = fera.copy();
     }
@@ -298,7 +318,7 @@ final class ForgeBehavior implements StationBehavior {
         if (!prenable(view, all)) {
             if (!ouvrage(view).isEmpty()) {
                 view.node(PostesForge.OUVRAGE).ifPresent(node -> node.shake(0.35F, 0.2F));
-                view.playSound(SoundEvents.ANVIL_LAND, PostesForge.OUVRAGE, 0.08F, 1.9F);
+                Son.joue(view, SoundEvents.ANVIL_LAND, PostesForge.OUVRAGE, 0.08F, 1.9F);
             }
             return;
         }
@@ -367,10 +387,18 @@ final class ForgeBehavior implements StationBehavior {
             menu.click(caseOuvrage, 0, tout ? ClickType.QUICK_MOVE : ClickType.PICKUP);
         }
         Vector3f at = new Vector3f(8.0F, 16.6F, 8.0F);
-        view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(0.0F, 14.0F, 0.0F), 10.0F, tout ? 20 : 12, 0xFFFFC870);
-        view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(12.0F, 4.0F, 0.0F), 4.0F, 2, 0xFFFFC870);
-        view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(-12.0F, 4.0F, 0.0F), 4.0F, 2, 0xFFFFC870);
-        view.playSound(SoundEvents.ANVIL_USE, "leve", 0.25F, 1.0F + random.nextFloat() * 0.2F);
+        if (pierre) {
+            // Sur la pierre, le coup est sourd et soulève de la poussière ; seule la pièce chaude crache quelques étincelles.
+            view.spawnParticles(DiegesisParticles.DUST, at, new Vector3f(0.0F, 5.0F, 0.0F), 6.0F, tout ? 14 : 9, 0xFF9A9590);
+            view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(0.0F, 10.0F, 0.0F), 6.0F, chaude(leve) ? 6 : 0, 0xFFFFC870);
+            Son.joue(view, SoundEvents.STONE_HIT, "leve", 0.6F, 0.8F + random.nextFloat() * 0.2F);
+            Son.joue(view, SoundEvents.ANVIL_LAND, "leve", 0.06F, 1.6F + random.nextFloat() * 0.2F);
+        } else {
+            view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(0.0F, 14.0F, 0.0F), 10.0F, tout ? 20 : 12, 0xFFFFC870);
+            view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(12.0F, 4.0F, 0.0F), 4.0F, 2, 0xFFFFC870);
+            view.spawnParticles(DiegesisParticles.SPARK, at, new Vector3f(-12.0F, 4.0F, 0.0F), 4.0F, 2, 0xFFFFC870);
+            Son.joue(view, SoundEvents.ANVIL_USE, "leve", 0.25F, 1.0F + random.nextFloat() * 0.2F);
+        }
         view.node("leve").ifPresent(node -> node.shake(0.25F, 0.1F));
         view.node("coup").ifPresent(node -> node.rotateTo(0.0F, 0.0F, 10.0F, 0.04F));
         revenu = false;
@@ -403,7 +431,7 @@ final class ForgeBehavior implements StationBehavior {
     }
 
     private static void play(StationView view, SoundEvent sound, float volume, float pitch) {
-        view.playSound(sound, view.node("grille").isPresent() ? "grille" : null, volume, pitch);
+        Son.joue(view, sound, view.node("grille").isPresent() ? "grille" : null, volume, pitch);
     }
 
     @Override

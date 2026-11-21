@@ -74,6 +74,11 @@ public class ChevaletBlock extends HorizontalDirectionalBlock implements Ouvrage
                 sorti -> Block.popResourceFromFace(level, pos, Direction.UP, sorti));
     }
 
+    /** Vrai si le chevalet, dans cet état, prend {@code stack} : une peau brute s'il est nu, un couteau si une peau est tendue. */
+    public static boolean accepte(BlockState state, ItemStack stack) {
+        return state.getValue(PEAU) ? stack.is(TannerieModule.COUTEAUX) : stack.is(TannerieModule.PEAU_BRUTE.get());
+    }
+
     @Override
     public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
@@ -106,7 +111,7 @@ public class ChevaletBlock extends HorizontalDirectionalBlock implements Ouvrage
         }
         ServerLevel server = (ServerLevel) level;
         stack.hurtAndBreak(1, server, player, item -> server.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 0.8F, 1.0F));
-        server.playSound(null, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.3F);
+        server.playSound(null, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 0.55F, 0.8F + level.getRandom().nextFloat() * 0.3F);
         server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(TannerieModule.PEAU_BRUTE.get())),
                 pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5, 6, 0.2, 0.05, 0.2, 0.05);
         int done = state.getValue(RACLAGE) + 1;

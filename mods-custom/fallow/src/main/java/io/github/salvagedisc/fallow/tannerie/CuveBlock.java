@@ -72,6 +72,28 @@ public class CuveBlock extends Block implements Ouvrage {
         });
     }
 
+    /**
+     * Vrai si la cuve, dans cet état, prend {@code stack} (les mêmes règles que {@link #travailler}) : le poste le montre avant
+     * le clic, et tremble aussitôt sur un refus.
+     */
+    public static boolean accepte(BlockState state, ItemStack stack) {
+        boolean water = state.getValue(EAU);
+        int hides = state.getValue(PEAUX);
+        if (stack.is(Items.WATER_BUCKET)) {
+            return !water;
+        }
+        if (stack.is(Items.BUCKET)) {
+            return water && hides == 0;
+        }
+        if (!water || ready(state)) {
+            return false;
+        }
+        if (stack.is(TannerieModule.TANINS)) {
+            return state.getValue(TANIN) < 8;
+        }
+        return stack.is(TannerieModule.PEAU_RACLEE.get()) && hides < 4 && state.getValue(TANIN) > hides;
+    }
+
     @Override
     public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
@@ -83,7 +105,7 @@ public class CuveBlock extends Block implements Ouvrage {
             if (!level.isClientSide()) {
                 rendre.accept(ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
                 level.setBlock(pos, state.setValue(EAU, true), Block.UPDATE_ALL);
-                level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 0.7F, 1.0F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
@@ -95,7 +117,7 @@ public class CuveBlock extends Block implements Ouvrage {
                 rendre.accept(ItemUtils.createFilledResult(stack, player, new ItemStack(Items.WATER_BUCKET)));
                 // Seule l'eau s'en va : l'écorce reste au fond pour la prochaine eau.
                 level.setBlock(pos, state.setValue(EAU, false), Block.UPDATE_ALL);
-                level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+                level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.7F, 1.0F);
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }

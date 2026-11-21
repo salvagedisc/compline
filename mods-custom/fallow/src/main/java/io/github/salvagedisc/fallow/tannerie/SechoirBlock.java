@@ -84,6 +84,11 @@ public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage 
         });
     }
 
+    /** Vrai si le séchoir, dans cet état, prend {@code stack} : un cuir mouillé sur un cadre vide. */
+    public static boolean accepte(BlockState state, ItemStack stack) {
+        return state.getValue(ETAT) == Etat.VIDE && stack.is(TannerieModule.CUIR_MOUILLE.get());
+    }
+
     @Override
     public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
@@ -102,7 +107,7 @@ public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage 
             }
             stack.consume(1, player);
             level.setBlock(pos, state.setValue(ETAT, Etat.HUMIDE).setValue(SECHAGE, 0), Block.UPDATE_ALL);
-            level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.BLOCKS, 1.0F, 0.8F);
+            level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.BLOCKS, 0.7F, 0.8F);
             level.scheduleTick(pos, this, INTERVAL);
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide());

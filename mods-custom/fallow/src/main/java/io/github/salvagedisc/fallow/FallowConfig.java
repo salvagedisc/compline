@@ -31,6 +31,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
+    private static final ModConfigSpec.DoubleValue POSTES_SOUND_VOLUME;
     private static final ModConfigSpec.BooleanValue CIEL_MIST_WITHOUT_SHADER;
     private static final ModConfigSpec.IntValue CIEL_MIST_DISTANCE;
     private static final ModConfigSpec.IntValue CIEL_CLEARING_DISTANCE;
@@ -202,6 +203,13 @@ public final class FallowConfig {
                         "couleur du sable ; dans une tempête de neige, la neige est soufflée et la brume blanchit. Faux : rien de plus",
                         "que la neige du jeu (le froid et la soif restent).")
                 .define("stormVisuals", true);
+        client.pop();
+
+        client.comment("Module postes (client) : les postes de la tannerie, de la forge et du foyer.").push("postes");
+        POSTES_SOUND_VOLUME = client
+                .comment("Volume des bruits des postes (gestes, arrivées, refus, carillons), de 0 (muets) à 1. Les bruits du bloc",
+                        "lui-même, que les autres joueurs entendent aussi, n'en dépendent pas.")
+                .defineInRange("soundVolume", 1.0, 0.0, 1.0);
         client.pop();
 
         CLIENT_SPEC = client.build();
@@ -661,6 +669,10 @@ public final class FallowConfig {
     }
 
     /** Lit une valeur sans planter si la config n'est pas encore chargée. */
+    public static float postesSoundVolume() {
+        return (float) read(CLIENT_SPEC, POSTES_SOUND_VOLUME);
+    }
+
     static boolean read(ModConfigSpec spec, ModConfigSpec.BooleanValue value) {
         return spec.isLoaded() ? value.get() : value.getDefault();
     }

@@ -773,7 +773,7 @@ final class RecipeBook implements NodePainter {
 
     /** One of the book's sounds, as loud as the config's sound volume says. */
     private static void sound(net.minecraft.sounds.SoundEvent sound, float pitch, float volume) {
-        float loud = volume * 1.0F;
+        float loud = volume * io.github.salvagedisc.fallow.FallowConfig.postesSoundVolume();
         if (loud > 0.0F) {
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(sound, pitch, loud));
         }

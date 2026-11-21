@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le foyer de Cold Sweat (le bas, le bloc à grille) est le bloc lui-même, sa façade à z = 0 et sa grille en saillie (x 3 à 13, y 2 à 9). combustible : la case de la fenêtre de Cold Sweat, debout devant la grille. braises : la lueur du feu, peinte par le code dans les quatre fentes de la grille (x 4 à 12, y 4 à 8). jauge_chaud et jauge_froid : les jauges de la fenêtre, à plat sur la brique au-dessus de la grille, le chaud à gauche vu de devant, le froid à droite ; le code les peint et y met leur part en infobulle. La caméra se tient devant, un peu au-dessus.",
+  "$comment": "Le foyer de Cold Sweat (le bas, le bloc à grille) est le bloc lui-même, sa façade à z = 0 et sa grille en saillie (x 3 à 13, y 2 à 9). combustible : la case de la fenêtre de Cold Sweat, debout devant la grille. braises : la lueur du feu, peinte par le code dans les quatre fentes de la grille (x 4 à 12, y 4 à 8). jauge_chaud et jauge_froid : les jauges de la fenêtre, à plat sur la brique au-dessus de la grille, le chaud à gauche vu de devant, le froid à droite ; le code les peint et y met leur part en infobulle. La caméra se tient devant, un peu au-dessus. arrivee_0 à arrivee_2 dessinent le combustible envoyé par Maj + clic : il vole de sa case de la barre jusqu'à la grille, où le feu le prend.",
   "work_plane": 0,
   "idle_visible": false,
   "camera": {
@@ -127,6 +127,39 @@
           0.1
         ]
       }
+    },
+    {
+      "id": "arrivee_0",
+      "pos": [
+        8,
+        4,
+        -2
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true
+    },
+    {
+      "id": "arrivee_1",
+      "pos": [
+        8,
+        4,
+        -2
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true
+    },
+    {
+      "id": "arrivee_2",
+      "pos": [
+        8,
+        4,
+        -2
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true
     }
   ]
 }

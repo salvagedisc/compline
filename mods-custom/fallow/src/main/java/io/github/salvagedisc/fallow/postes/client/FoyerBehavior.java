@@ -49,6 +49,9 @@ final class FoyerBehavior implements StationBehavior {
     private float froid;
     private int chaudLu = -1;
     private int froidLu = -1;
+    /** Le combustible chaud et froid du foyer au tick d'avant. */
+    private int chaudBrut = -1;
+    private int froidBrut = -1;
     /** Les parts que montrent les jauges, qui rejoignent doucement les vraies. */
     private float montreChaud;
     private float montreFroid;
@@ -84,6 +87,9 @@ final class FoyerBehavior implements StationBehavior {
                 || stack.has(DataComponents.POTION_CONTENTS));
         chaudLu = -1;
         froidLu = -1;
+        chaudBrut = -1;
+        froidBrut = -1;
+        posee = -1;
         lire(view);
         montreChaud = chaud;
         montreFroid = froid;
@@ -96,7 +102,7 @@ final class FoyerBehavior implements StationBehavior {
         net.minecraft.client.player.LocalPlayer joueur = net.minecraft.client.Minecraft.getInstance().player;
         int tenu = joueur == null ? 0 : joueur.containerMenu.getCarried().getCount();
         ItemStack pose = view.menu() == null ? ItemStack.EMPTY : view.state().getItem(com.pockyl.diegesis.api.state.SlotRef.of("combustible", 0));
-        if (posee >= 0 && pose.getCount() > posee && tenu >= porte) {
+        if (posee >= 0 && pose.getCount() > posee && tenu >= porte && view.level().getGameTime() - jeteA >= 10L) {
             Arrivee.caseDepuisLaBarre(view, "combustible", pose.getItem(), 0);
         }
         posee = view.menu() == null ? -1 : pose.getCount();
@@ -104,7 +110,7 @@ final class FoyerBehavior implements StationBehavior {
         BlockState state = view.level().getBlockState(view.pos());
         boolean lit = state.hasProperty(HearthBottomBlock.LIT) && state.getValue(HearthBottomBlock.LIT);
         if (view.isFocused() && chaud > 0.0F && random.nextFloat() < (lit ? 0.03F + 0.1F * chaud : 0.01F + 0.02F * chaud)) {
-            view.playSound(SoundEvents.CAMPFIRE_CRACKLE, "combustible", 0.25F + 0.3F * chaud, 0.9F + random.nextFloat() * 0.2F);
+            Son.joue(view, SoundEvents.CAMPFIRE_CRACKLE, "combustible", 0.25F + 0.3F * chaud, 0.9F + random.nextFloat() * 0.2F);
         }
     }
 
@@ -115,8 +121,23 @@ final class FoyerBehavior implements StationBehavior {
     @Override
     public boolean onInventoryShiftClick(StationView view, int slot, ItemStack stack) {
         Arrivee.depuis(view, slot);
+        // Le foyer brûle aussitôt ce qu'il reçoit : la case ne le montre jamais. Le combustible vole donc de la barre jusqu'à
+        // la grille, et le feu ne répond qu'à son arrivée.
+        if (combustible(view.level(), view.pos(), stack)) {
+            volee.arrive(view, stack.getItem(), GRILLE);
+            jeteA = view.level().getGameTime();
+        }
         return false;
     }
+
+    /** Le point de la grille où arrive ce qu'on jette au foyer. */
+    private static final Vector3f GRILLE = new Vector3f(8.0F, 4.0F, -2.0F);
+    private final Arrivee.Volee volee = new Arrivee.Volee();
+    /** Le temps du jeu au dernier combustible envoyé par Maj + clic. */
+    private long jeteA = -1000L;
+    /** Ce que le feu doit encore montrer quand le combustible en vol arrive. */
+    private boolean chaudEnAttente;
+    private boolean froidEnAttente;
 
     /** La lueur des fentes : orange du feu (vive s'il brûle, sourde s'il couve), bleue du froid quand il domine. */
     private float lueur;
@@ -159,6 +180,15 @@ final class FoyerBehavior implements StationBehavior {
     @Override
     public void frame(StationView view, float deltaSeconds) {
         vacille += deltaSeconds;
+        volee.frame(view, deltaSeconds);
+        if (!volee.enVol()) {
+            if (chaudEnAttente) {
+                jaillit(view);
+            }
+            if (froidEnAttente) {
+                poudre(view);
+            }
+        }
         float pas = Math.min(1.0F, deltaSeconds * 2.5F);
         montreChaud += (chaud - montreChaud) * pas;
         montreFroid += (froid - montreFroid) * pas;
@@ -203,6 +233,22 @@ final class FoyerBehavior implements StationBehavior {
         }
     }
 
+    /** Jeté au feu : des étincelles jaillissent de la grille. */
+    private void jaillit(StationView view) {
+        chaudEnAttente = false;
+        view.spawnParticles(DiegesisParticles.SPARK, new Vector3f(8.0F, 5.0F, -1.3F), new Vector3f(0.0F, 14.0F, -6.0F), 4.0F, 14, 0xFFFFC870);
+        Son.joue(view, SoundEvents.FIRECHARGE_USE, "combustible", 0.15F, 1.3F + random.nextFloat() * 0.2F);
+        view.node("jauge_chaud").ifPresent(node -> node.shake(0.15F, 0.2F));
+    }
+
+    /** Un froid jeté au foyer : une poudre de neige. */
+    private void poudre(StationView view) {
+        froidEnAttente = false;
+        view.spawnParticles(DiegesisParticles.SPLASH, new Vector3f(8.0F, 4.5F, -1.2F), new Vector3f(0.0F, 3.0F, -4.0F), 4.0F, 12, 0xFFE8F4FF);
+        Son.joue(view, SoundEvents.POWDER_SNOW_PLACE, "combustible", 0.5F, 1.1F + random.nextFloat() * 0.2F);
+        view.node("jauge_froid").ifPresent(node -> node.shake(0.15F, 0.2F));
+    }
+
     private void lire(StationView view) {
         if (!(view.level().getBlockEntity(view.pos()) instanceof HearthBlockEntity hearth) || hearth.getMaxFuel() <= 0) {
             return;
@@ -211,18 +257,15 @@ final class FoyerBehavior implements StationBehavior {
         froid = Math.min(1.0F, hearth.getColdFuel() / (float) hearth.getMaxFuel());
         int chaudPct = Math.round(chaud * 100.0F);
         int froidPct = Math.round(froid * 100.0F);
-        if (chaudLu >= 0 && chaudPct > chaudLu) {
-            // Jeté au feu : des étincelles jaillissent de la grille.
-            view.spawnParticles(DiegesisParticles.SPARK, new Vector3f(8.0F, 5.0F, -1.3F), new Vector3f(0.0F, 14.0F, -6.0F), 4.0F, 14, 0xFFFFC870);
-            view.playSound(SoundEvents.FIRECHARGE_USE, "combustible", 0.15F, 1.3F + random.nextFloat() * 0.2F);
-            view.node("jauge_chaud").ifPresent(node -> node.shake(0.15F, 0.2F));
+        // Comparé au combustible lui-même, pas au pourcentage : un petit bout de bois se voit aussi.
+        if (chaudBrut >= 0 && hearth.getHotFuel() > chaudBrut) {
+            chaudEnAttente = true;
         }
-        if (froidLu >= 0 && froidPct > froidLu) {
-            // Un froid jeté au foyer : une poudre de neige.
-            view.spawnParticles(DiegesisParticles.SPLASH, new Vector3f(8.0F, 4.5F, -1.2F), new Vector3f(0.0F, 3.0F, -4.0F), 4.0F, 12, 0xFFE8F4FF);
-            view.playSound(SoundEvents.POWDER_SNOW_PLACE, "combustible", 0.5F, 1.1F + random.nextFloat() * 0.2F);
-            view.node("jauge_froid").ifPresent(node -> node.shake(0.15F, 0.2F));
+        if (froidBrut >= 0 && hearth.getColdFuel() > froidBrut) {
+            froidEnAttente = true;
         }
+        chaudBrut = hearth.getHotFuel();
+        froidBrut = hearth.getColdFuel();
         if (chaudPct != chaudLu) {
             chaudLu = chaudPct;
             view.node("jauge_chaud").ifPresent(node -> node.setTooltip(Component.translatable("postes.fallow.foyer.chaud", chaudPct)));

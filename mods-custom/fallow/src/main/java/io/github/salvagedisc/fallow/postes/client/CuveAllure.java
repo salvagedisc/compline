@@ -43,6 +43,8 @@ final class CuveAllure implements Allure {
     private int teinte = -1;
     private float horloge;
     private float bulles;
+    /** Le temps depuis que l'eau est partie : elle baisse doucement avant que le nœud se cache. */
+    private float videe = 9.0F;
     private int eau = -1;
     private int tanin = -1;
     private int peaux = -1;
@@ -67,7 +69,10 @@ final class CuveAllure implements Allure {
     public void onSceneReady(StationView view) {
         view.node("pret").ifPresent(node -> node.setPainter((pose, buffers, light) ->
                 flottant.paint(view.level(), sortant, horloge, pose, buffers, light)));
-        view.node("jauge").ifPresent(node -> node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers)));
+        view.node("jauge").ifPresent(node -> {
+            node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers));
+            node.setOnTop(true);
+        });
     }
 
     @Override
@@ -105,7 +110,9 @@ final class CuveAllure implements Allure {
         });
 
         view.node("eau").ifPresent(node -> {
-            node.setVisible(shown && water);
+            // Le niveau glisse de lui-même : vidée au seau, l'eau descend avant de disparaître.
+            videe = water ? 0.0F : videe + dt;
+            node.setVisible(shown && videe < 1.2F);
             node.showLiquid(LIQUIDE, water ? 1.0F : 0.0F);
             int clear = BiomeColors.getAverageWaterColor(view.level(), view.pos()) & 0xFFFFFF;
             float brown = Math.min(1.0F, bark / 2.0F) * 0.8F + soak * 0.15F;
@@ -152,7 +159,12 @@ final class CuveAllure implements Allure {
             });
         }
 
-        Item wanted = shown && view.isInUse() ? attendu(water, bark, hides, ready) : null;
+        // Le fantôme s'efface quand on tient déjà ce qu'il montre : la cuve s'entoure à sa place.
+        net.minecraft.client.player.LocalPlayer joueur = net.minecraft.client.Minecraft.getInstance().player;
+        ItemStack tenu = joueur == null ? ItemStack.EMPTY : joueur.containerMenu.getCarried();
+        Item attendu = shown && view.isFocused() ? attendu(water, bark, hides, ready) : null;
+        Item wanted = attendu != null && !tenu.is(attendu) && !(tenu.is(TannerieModule.TANINS) && attendu != Items.WATER_BUCKET
+                && attendu != TannerieModule.PEAU_RACLEE.get()) ? attendu : null;
         view.node("fantome").ifPresent(node -> {
             node.setVisible(wanted != null);
             if (wanted != fantome) {
@@ -228,7 +240,7 @@ final class CuveAllure implements Allure {
             // Trois notes qui montent, une tous les trois ticks, comme les étoiles d'un plat de Hands-On Delight.
             if (carillon % 3 == 0) {
                 float[] pitches = { 1.0F, 1.26F, 1.5F };
-                view.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), "eau", 0.35F, pitches[carillon / 3]);
+                Son.joue(view, SoundEvents.NOTE_BLOCK_CHIME.value(), "eau", 0.35F, pitches[carillon / 3]);
             }
             carillon = carillon >= 6 ? -1 : carillon + 1;
         }

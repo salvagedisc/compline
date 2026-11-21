@@ -23,7 +23,8 @@
     "sounds": false,
     "carry_lift": 1.5,
     "highlight_color": "#26FFFFFF",
-    "hover_outline": false
+    "hover_outline": true,
+    "outline_color": "#FFFFE8C0"
   },
   "inventory_drawer": {
     "layout": "hotbar",

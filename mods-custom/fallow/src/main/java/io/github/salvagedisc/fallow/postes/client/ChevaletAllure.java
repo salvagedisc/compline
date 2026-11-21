@@ -41,6 +41,8 @@ final class ChevaletAllure implements Allure {
     private boolean peau;
     private int raclage;
     private final Envol envol = new Envol();
+    /** Les coups cliqués pendant qu'un autre se donnait, joués à la suite. */
+    private int enAttente;
     private final Arrivee.Volee volee = new Arrivee.Volee();
     /** Faux jusqu'au premier tick du poste : une peau déjà tendue n'arrive pas. */
     private boolean connu;
@@ -64,6 +66,14 @@ final class ChevaletAllure implements Allure {
         }
         horloge += dt;
         coup += dt;
+        if (enAttente > 0 && coup >= COUP * 0.6F) {
+            enAttente--;
+            if (state.getValue(ChevaletBlock.PEAU)) {
+                coup(view);
+            } else {
+                enAttente = 0;
+            }
+        }
         envol.frame(view, dt);
         volee.frame(view, dt);
         boolean shown = view.isBlockHidden();
@@ -102,7 +112,7 @@ final class ChevaletAllure implements Allure {
         });
 
         // La poutre vide montre, pâle et battant doucement, la peau à y tendre ; la peau posée attend le couteau.
-        boolean inUse = shown && view.isInUse();
+        boolean inUse = shown && view.isFocused();
         boolean wantsHide = inUse && !hide && !carried.is(TannerieModule.PEAU_BRUTE.get());
         view.node("fantome").ifPresent(node -> {
             node.setVisible(wantsHide);
@@ -134,16 +144,26 @@ final class ChevaletAllure implements Allure {
     @Override
     public void geste(StationView view, ItemStack stack) {
         BlockState state = view.level().getBlockState(view.pos());
-        if (!(state.getBlock() instanceof ChevaletBlock) || !state.getValue(ChevaletBlock.PEAU) || !couteau(stack) || coup < COUP * 0.6F) {
+        if (!(state.getBlock() instanceof ChevaletBlock) || !state.getValue(ChevaletBlock.PEAU) || !couteau(stack)) {
             return;
         }
+        if (coup < COUP * 0.6F) {
+            // Cliqué plus vite que la lame : le coup attend son tour, comme les coups de marteau de Hands-On Vanilla.
+            enAttente = Math.min(8, enAttente + 1);
+            return;
+        }
+        coup(view);
+    }
+
+    /** Un coup de couteau : la lame part, les copeaux volent, la peau tremble. */
+    private void coup(StationView view) {
         coup = 0.0F;
         // Les copeaux partent de la lame, vers soi et un peu en l'air ; la peau tremble sous le coup.
         view.spawnParticles(DiegesisParticles.DUST, new Vector3f(8.0F, 13.7F, vise - 1.0F), new Vector3f(0.0F, 6.0F, -10.0F), 1.5F, 12, CHAIR);
         view.spawnParticles(DiegesisParticles.DUST, new Vector3f(8.0F, 13.7F, vise - 2.5F), new Vector3f(0.0F, 3.0F, -6.0F), 1.0F, 6, 0xFFE8D6C0);
         view.node("peau").ifPresent(node -> node.shake(0.25F, 0.15F));
         view.node("raclee").ifPresent(node -> node.shake(0.25F, 0.15F));
-        view.playSound(SoundEvents.SHEEP_SHEAR, "couteau", 0.18F, 1.5F + random.nextFloat() * 0.3F);
+        Son.joue(view, SoundEvents.SHEEP_SHEAR, "couteau", 0.18F, 1.5F + random.nextFloat() * 0.3F);
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             player.swing(net.minecraft.world.InteractionHand.MAIN_HAND, false);

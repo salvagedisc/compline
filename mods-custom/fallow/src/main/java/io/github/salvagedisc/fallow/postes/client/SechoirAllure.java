@@ -41,7 +41,10 @@ final class SechoirAllure implements Allure {
 
     @Override
     public void onSceneReady(StationView view) {
-        view.node("jauge").ifPresent(node -> node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers)));
+        view.node("jauge").ifPresent(node -> {
+            node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers));
+            node.setOnTop(true);
+        });
     }
 
     @Override
@@ -88,7 +91,7 @@ final class SechoirAllure implements Allure {
 
         LocalPlayer player = Minecraft.getInstance().player;
         ItemStack carried = player == null ? ItemStack.EMPTY : player.inventoryMenu.getCarried();
-        boolean wanted = shown && view.isInUse() && etat == SechoirBlock.Etat.VIDE && !carried.is(TannerieModule.CUIR_MOUILLE.get());
+        boolean wanted = shown && view.isFocused() && etat == SechoirBlock.Etat.VIDE && !carried.is(TannerieModule.CUIR_MOUILLE.get());
         view.node("fantome").ifPresent(node -> {
             node.setVisible(wanted);
             if (wanted) {
@@ -107,7 +110,7 @@ final class SechoirAllure implements Allure {
             view.spawnParticles(DiegesisParticles.DROPLET, new Vector3f(x, 3.4F, 8.0F), new Vector3f(0.0F, -2.0F, 0.0F), 0.2F, 1, EAU);
         }
         // La chaleur le fait fumer : un feu tout près, ou le plein soleil.
-        String cause = SechoirBlock.cause(view.level(), view.pos());
+        String cause = cause(view);
         float chaleur = "feu".equals(cause) ? 1.6F : "soleil".equals(cause) ? 0.6F : 0.0F;
         fumee += dt * chaleur * (1.0F - 0.6F * sec);
         while (fumee >= 1.0F) {
@@ -118,12 +121,22 @@ final class SechoirAllure implements Allure {
         }
     }
 
-    private static Component lecture(StationView view, SechoirBlock.Etat etat, float sec) {
+    private Component lecture(StationView view, SechoirBlock.Etat etat, float sec) {
         if (etat == SechoirBlock.Etat.SEC) {
             return Component.translatable("postes.fallow.sechoir.sec");
         }
         return Component.translatable("tannerie.fallow.sechoir.seche", Math.round(sec * 100.0F),
-                Component.translatable("tannerie.fallow.sechoir.cause." + SechoirBlock.cause(view.level(), view.pos())));
+                Component.translatable("tannerie.fallow.sechoir.cause." + cause(view)));
+    }
+
+    /** Ce qui sèche le cuir (un feu tout près, le soleil, l'air), relu à chaque tick : la recherche du feu coûte. */
+    private String causeLue;
+
+    private String cause(StationView view) {
+        if (causeLue == null) {
+            causeLue = SechoirBlock.cause(view.level(), view.pos());
+        }
+        return causeLue;
     }
 
     @Override
@@ -143,6 +156,7 @@ final class SechoirAllure implements Allure {
             return;
         }
         SechoirBlock.Etat etat = state.getValue(SechoirBlock.ETAT);
+        causeLue = SechoirBlock.cause(view.level(), view.pos());
         if (avant != null && avant != etat && view.isBlockHidden()) {
             switch (etat) {
                 case HUMIDE -> {
@@ -151,7 +165,7 @@ final class SechoirAllure implements Allure {
                 }
                 case SEC -> {
                     view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 1.5F, -1.0F), 5.0F, 10, 0xFFFFF0D0);
-                    view.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), "cuir", 0.6F, 1.3F);
+                    Son.joue(view, SoundEvents.ARMOR_EQUIP_LEATHER.value(), "cuir", 0.6F, 1.3F);
                 }
                 case VIDE -> {
                     view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 3.0F, -2.0F), 4.0F, 6, 0xFFFFF0D0);
