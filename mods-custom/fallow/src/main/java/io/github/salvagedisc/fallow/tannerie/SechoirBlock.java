@@ -224,6 +224,16 @@ public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage 
             level.addParticle(net.minecraft.core.particles.ParticleTypes.DRIPPING_WATER, pos.getX() + 0.2 + random.nextDouble() * 0.6,
                     pos.getY() + 0.2, pos.getZ() + 0.2 + random.nextDouble() * 0.6, 0.0, 0.0, 0.0);
         }
+        // Près d'un feu ou au soleil, le cuir mouillé fume un peu : on le voit sécher en passant (la recherche du feu, qui coûte,
+        // n'est faite qu'une fois sur quatre).
+        if (state.getValue(ETAT) == Etat.HUMIDE && random.nextInt(4) == 0) {
+            String cause = cause(level, pos);
+            int fois = "feu".equals(cause) ? 2 : "soleil".equals(cause) && random.nextBoolean() ? 1 : 0;
+            for (int i = 0; i < fois; i++) {
+                level.addParticle(net.minecraft.core.particles.ParticleTypes.WHITE_SMOKE, pos.getX() + 0.2 + random.nextDouble() * 0.6,
+                        pos.getY() + 0.35 + random.nextDouble() * 0.5, pos.getZ() + 0.45 + random.nextDouble() * 0.1, 0.0, 0.015, 0.0);
+            }
+        }
     }
 
     @Override

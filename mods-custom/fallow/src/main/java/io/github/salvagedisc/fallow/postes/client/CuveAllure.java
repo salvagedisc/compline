@@ -5,7 +5,6 @@ import java.util.List;
 import org.joml.Vector3f;
 
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -117,7 +116,7 @@ final class CuveAllure implements Allure {
             int clear = BiomeColors.getAverageWaterColor(view.level(), view.pos()) & 0xFFFFFF;
             float brown = Math.min(1.0F, bark / 2.0F) * 0.8F + soak * 0.15F;
             int alpha = (int) Mth.lerp(brown, 0xA0, 0xF0);
-            int target = alpha << 24 | melange(clear, TAN, brown);
+            int target = alpha << 24 | Jauge.melange(clear, TAN, brown);
             teinte = teinte == -1 ? target : approche(teinte, target, Math.min(1.0F, dt * 1.5F));
             node.setLiquidColor(teinte);
             node.setAgitation(hides > 0 && !ready ? 0.035F : 0.01F);
@@ -150,7 +149,7 @@ final class CuveAllure implements Allure {
                     node.setVisual(Visual.ofModel(ResourceLocation.fromNamespaceAndPath(Fallow.MOD_ID,
                             ready ? "diegesis/cuir_mouille" : "diegesis/peau_raclee")));
                 }
-                node.setTint(ready ? 0xFFFFFFFF : 0xFF000000 | melange(0xFFFFFF, CUIR & 0xFFFFFF, soak));
+                node.setTint(ready ? 0xFFFFFFFF : 0xFF000000 | Jauge.melange(0xFFFFFF, CUIR & 0xFFFFFF, soak));
                 // Arrivée : elle tombe de haut et s'enfonce ; ensuite elle bouge à peine avec l'eau.
                 float t = Math.min(1.0F, arrivees[index] / ARRIVEE);
                 float fall = (1.0F - t) * (1.0F - t) * 7.0F;
@@ -189,8 +188,7 @@ final class CuveAllure implements Allure {
             return Items.WATER_BUCKET;
         }
         if (bark <= hides) {
-            return BuiltInRegistries.ITEM.getTag(TannerieModule.TANINS).flatMap(tag -> tag.stream().findFirst())
-                    .map(holder -> holder.value()).orElse(null);
+            return TannerieBehavior.premier(TannerieModule.TANINS);
         }
         return TannerieModule.PEAU_RACLEE.get();
     }
@@ -261,8 +259,7 @@ final class CuveAllure implements Allure {
                 }
             }
         }
-        return BuiltInRegistries.ITEM.getTag(TannerieModule.TANINS).flatMap(tag -> tag.stream().findFirst()).map(holder -> holder.value())
-                .orElse(null);
+        return TannerieBehavior.premier(TannerieModule.TANINS);
     }
 
     private void eclabousse(StationView view, float x, float z, float force, int gouttes) {
@@ -271,15 +268,8 @@ final class CuveAllure implements Allure {
                 0xC0C8B89A);
     }
 
-    private static int melange(int a, int b, float t) {
-        int r = (int) Mth.lerp(t, a >> 16 & 0xFF, b >> 16 & 0xFF);
-        int g = (int) Mth.lerp(t, a >> 8 & 0xFF, b >> 8 & 0xFF);
-        int bl = (int) Mth.lerp(t, a & 0xFF, b & 0xFF);
-        return r << 16 | g << 8 | bl;
-    }
-
     private static int approche(int from, int to, float t) {
         int alpha = (int) Mth.lerp(t, from >>> 24, to >>> 24);
-        return alpha << 24 | melange(from & 0xFFFFFF, to & 0xFFFFFF, t);
+        return alpha << 24 | Jauge.melange(from & 0xFFFFFF, to & 0xFFFFFF, t);
     }
 }

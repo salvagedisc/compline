@@ -1,9 +1,9 @@
 package io.github.salvagedisc.fallow.postes;
 
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,17 +35,17 @@ final class OuvrageLogic implements StationLogic {
             return;
         }
         switch (action) {
-            case PostesTannerie.TRAVAILLER -> travailler(ouvrage, level, pos, player,
+            case PostesTannerie.TRAVAILLER -> travailler(station, ouvrage, level, pos, player,
                     data.contains(PostesTannerie.DEPUIS) ? data.getInt(PostesTannerie.DEPUIS) : -1);
             case PostesTannerie.MAIN_VIDE -> ouvrage.mainVide(state, level, pos, player);
-            case PostesTannerie.GARNIR -> garnir(ouvrage, level, pos, player, data.getBoolean(PostesTannerie.TOUT));
+            case PostesTannerie.GARNIR -> garnir(station, ouvrage, level, pos, player, data.getBoolean(PostesTannerie.TOUT));
             default -> {
             }
         }
     }
 
     /** L'objet du curseur ({@code depuis} = -1) ou d'une case de l'inventaire travaille ; ce qui le remplace y retourne. */
-    private static void travailler(Ouvrage ouvrage, Level level, BlockPos pos, Player player, int depuis) {
+    private static void travailler(StationContext station, Ouvrage ouvrage, Level level, BlockPos pos, Player player, int depuis) {
         if (depuis >= Inventory.INVENTORY_SIZE) {
             return;
         }
@@ -53,11 +53,18 @@ final class OuvrageLogic implements StationLogic {
         if (stack.isEmpty()) {
             return;
         }
+        // Ceux qui regardent voient le geste (le coup de couteau, le refus) ; celui qui le fait l'a déjà vu chez lui.
+        CompoundTag geste = new CompoundTag();
+        geste.putString(PostesTannerie.OBJET, BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+        geste.putUUID(PostesTannerie.ACTEUR, player.getUUID());
+        BlockState avant = level.getBlockState(pos);
         ouvrage.travailler(stack, level.getBlockState(pos), level, pos, player, rendu -> rendre(player, depuis, rendu),
                 sorti -> donner(player, sorti));
         if (depuis < 0 && player.inventoryMenu.getCarried() == stack && stack.isEmpty()) {
             player.inventoryMenu.setCarried(ItemStack.EMPTY);
         }
+        geste.putBoolean(PostesTannerie.PRIS, level.getBlockState(pos) != avant);
+        station.effect(PostesTannerie.GESTE, "", geste);
     }
 
     /**
@@ -65,21 +72,21 @@ final class OuvrageLogic implements StationLogic {
      * écorce et une peau raclée (avec {@code tout} : autant de paires que la cuve en tient) ; le chevalet une peau brute ; le
      * séchoir un cuir mouillé.
      */
-    private static void garnir(Ouvrage ouvrage, Level level, BlockPos pos, Player player, boolean tout) {
+    private static void garnir(StationContext station, Ouvrage ouvrage, Level level, BlockPos pos, Player player, boolean tout) {
         if (ouvrage instanceof ChevaletBlock) {
-            utiliser(ouvrage, level, pos, player, stack -> stack.is(TannerieModule.PEAU_BRUTE.get()));
+            utiliser(station, ouvrage, level, pos, player, stack -> stack.is(TannerieModule.PEAU_BRUTE.get()));
         } else if (ouvrage instanceof SechoirBlock) {
-            utiliser(ouvrage, level, pos, player, stack -> stack.is(TannerieModule.CUIR_MOUILLE.get()));
+            utiliser(station, ouvrage, level, pos, player, stack -> stack.is(TannerieModule.CUIR_MOUILLE.get()));
         } else if (ouvrage instanceof CuveBlock) {
             if (!level.getBlockState(pos).getValue(CuveBlock.EAU)) {
-                utiliser(ouvrage, level, pos, player, stack -> stack.is(Items.WATER_BUCKET));
+                utiliser(station, ouvrage, level, pos, player, stack -> stack.is(Items.WATER_BUCKET));
             }
             for (int fois = 0; fois < (tout ? 4 : 1); fois++) {
                 int peaux = level.getBlockState(pos).getValue(CuveBlock.PEAUX);
                 if (level.getBlockState(pos).getValue(CuveBlock.TANIN) <= peaux) {
-                    utiliser(ouvrage, level, pos, player, stack -> stack.is(TannerieModule.TANINS));
+                    utiliser(station, ouvrage, level, pos, player, stack -> stack.is(TannerieModule.TANINS));
                 }
-                if (!utiliser(ouvrage, level, pos, player, stack -> stack.is(TannerieModule.PEAU_RACLEE.get()))
+                if (!utiliser(station, ouvrage, level, pos, player, stack -> stack.is(TannerieModule.PEAU_RACLEE.get()))
                         || level.getBlockState(pos).getValue(CuveBlock.PEAUX) == peaux) {
                     break;
                 }
@@ -88,11 +95,12 @@ final class OuvrageLogic implements StationLogic {
     }
 
     /** La première case de l'inventaire qui convient travaille sur le bloc ; faux s'il n'y en a pas. */
-    private static boolean utiliser(Ouvrage ouvrage, Level level, BlockPos pos, Player player, Predicate<ItemStack> convient) {
+    private static boolean utiliser(StationContext station, Ouvrage ouvrage, Level level, BlockPos pos, Player player,
+            Predicate<ItemStack> convient) {
         Inventory inventory = player.getInventory();
         for (int slot = 0; slot < Inventory.INVENTORY_SIZE; slot++) {
             if (convient.test(inventory.getItem(slot))) {
-                travailler(ouvrage, level, pos, player, slot);
+                travailler(station, ouvrage, level, pos, player, slot);
                 return true;
             }
         }
@@ -108,11 +116,8 @@ final class OuvrageLogic implements StationLogic {
     }
 
     private static void donner(Player player, ItemStack sorti) {
-        Consumer<ItemStack> poser = stack -> {
-            if (!player.getInventory().add(stack)) {
-                player.drop(stack, false);
-            }
-        };
-        poser.accept(sorti);
+        if (!player.getInventory().add(sorti)) {
+            player.drop(sorti, false);
+        }
     }
 }

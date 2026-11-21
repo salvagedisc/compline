@@ -4,7 +4,6 @@ import org.joml.Vector3f;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -41,6 +40,8 @@ final class ChevaletAllure implements Allure {
     private boolean peau;
     private int raclage;
     private final Envol envol = new Envol();
+    /** Le couteau d'un autre joueur qui racle ici, vu par celui qui regarde. */
+    private Item autre;
     /** Les coups cliqués pendant qu'un autre se donnait, joués à la suite. */
     private int enAttente;
     private final Arrivee.Volee volee = new Arrivee.Volee();
@@ -88,15 +89,18 @@ final class ChevaletAllure implements Allure {
 
         LocalPlayer player = Minecraft.getInstance().player;
         ItemStack carried = player == null ? ItemStack.EMPTY : player.inventoryMenu.getCarried();
-        boolean knife = shown && view.isFocused() && hide && couteau(carried);
-        view.setCarriedHidden(knife);
+        boolean mien = shown && view.isFocused() && hide && couteau(carried);
+        view.setCarriedHidden(mien);
+        // Celui qui regarde voit le couteau de l'autre le temps de son coup.
+        Item lame = mien ? carried.getItem() : shown && hide && !view.isFocused() && coup < COUP ? autre : null;
+        boolean knife = lame != null;
         view.node("couteau").ifPresent(node -> {
             node.setVisible(knife);
             if (!knife) {
                 return;
             }
-            if (carried.getItem() != tenu) {
-                tenu = carried.getItem();
+            if (lame != tenu) {
+                tenu = lame;
                 node.setVisual(Visual.ofItem(tenu));
             }
             if (coup >= COUP) {
@@ -137,8 +141,7 @@ final class ChevaletAllure implements Allure {
 
     /** Le premier couteau à écharner connu, montré pâle quand la peau l'attend. */
     private static Item couteauAttendu() {
-        return BuiltInRegistries.ITEM.getTag(TannerieModule.COUTEAUX).flatMap(tag -> tag.stream().findFirst())
-                .map(holder -> holder.value()).orElse(null);
+        return TannerieBehavior.premier(TannerieModule.COUTEAUX);
     }
 
     @Override
@@ -146,6 +149,10 @@ final class ChevaletAllure implements Allure {
         BlockState state = view.level().getBlockState(view.pos());
         if (!(state.getBlock() instanceof ChevaletBlock) || !state.getValue(ChevaletBlock.PEAU) || !couteau(stack)) {
             return;
+        }
+        if (!view.isFocused()) {
+            autre = stack.getItem();
+            vise = 8.0F;
         }
         if (coup < COUP * 0.6F) {
             // Cliqué plus vite que la lame : le coup attend son tour, comme les coups de marteau de Hands-On Vanilla.
@@ -165,7 +172,7 @@ final class ChevaletAllure implements Allure {
         view.node("raclee").ifPresent(node -> node.shake(0.25F, 0.15F));
         Son.joue(view, SoundEvents.SHEEP_SHEAR, "couteau", 0.18F, 1.5F + random.nextFloat() * 0.3F);
         LocalPlayer player = Minecraft.getInstance().player;
-        if (player != null) {
+        if (player != null && view.isFocused()) {
             player.swing(net.minecraft.world.InteractionHand.MAIN_HAND, false);
         }
     }

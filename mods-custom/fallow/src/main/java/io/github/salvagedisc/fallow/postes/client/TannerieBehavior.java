@@ -45,6 +45,12 @@ final class TannerieBehavior implements StationBehavior {
                 || stack.is(Items.WATER_BUCKET) || stack.is(Items.BUCKET);
     }
 
+    /** Le premier objet connu d'une étiquette (le fantôme à montrer, l'écorce du livre), ou null si elle est vide. */
+    static net.minecraft.world.item.Item premier(net.minecraft.tags.TagKey<net.minecraft.world.item.Item> tag) {
+        return net.minecraft.core.registries.BuiltInRegistries.ITEM.getTag(tag).flatMap(set -> set.stream().findFirst())
+                .map(holder -> holder.value()).orElse(null);
+    }
+
     /** Vrai si le bloc du poste, tel qu'il est, prend {@code stack} : les mêmes règles que le bloc sur le serveur. */
     static boolean accepte(BlockState state, ItemStack stack) {
         if (state.getBlock() instanceof CuveBlock) {
@@ -106,6 +112,37 @@ final class TannerieBehavior implements StationBehavior {
         allure.tick(view);
     }
 
+    /** Le temps du jeu au dernier refus montré d'avance : le serveur qui le confirme ne le rejoue pas. */
+    private long refusA = -1000L;
+
+    /**
+     * Le serveur a travaillé un objet sur le bloc. Ceux qui regardent voient le geste ou le refus ; celui qui l'a fait l'a vu
+     * d'avance, sauf si le serveur a refusé ce que les règles du bloc laissaient passer.
+     */
+    @Override
+    public void onEffect(StationView view, net.minecraft.resources.ResourceLocation effect, String node, CompoundTag data) {
+        if (!PostesTannerie.GESTE.equals(effect)) {
+            return;
+        }
+        LocalPlayer player = Minecraft.getInstance().player;
+        boolean moi = player != null && data.hasUUID(PostesTannerie.ACTEUR) && player.getUUID().equals(data.getUUID(PostesTannerie.ACTEUR));
+        boolean pris = data.getBoolean(PostesTannerie.PRIS);
+        if (moi) {
+            if (!pris && view.level().getGameTime() - refusA > 20L) {
+                refus(view);
+            }
+            return;
+        }
+        if (!pris) {
+            refus(view);
+            return;
+        }
+        net.minecraft.resources.ResourceLocation id = net.minecraft.resources.ResourceLocation.tryParse(data.getString(PostesTannerie.OBJET));
+        if (id != null) {
+            net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(id).ifPresent(item -> allure.geste(view, new ItemStack(item)));
+        }
+    }
+
     @Override
     public void onEvent(StationView view, SceneEvent event) {
         if (!(event instanceof SceneEvent.Click click)) {
@@ -129,6 +166,7 @@ final class TannerieBehavior implements StationBehavior {
             allure.geste(view, stack);
         } else {
             refus(view);
+            refusA = view.level().getGameTime();
         }
         Arrivee.parLeCurseur(view);
         view.sendAction(PostesTannerie.TRAVAILLER, new CompoundTag());
@@ -150,6 +188,7 @@ final class TannerieBehavior implements StationBehavior {
         }
         if (!accepte(view.level().getBlockState(view.pos()), stack)) {
             refus(view);
+            refusA = view.level().getGameTime();
         }
         CompoundTag how = new CompoundTag();
         how.putInt(PostesTannerie.DEPUIS, slot);

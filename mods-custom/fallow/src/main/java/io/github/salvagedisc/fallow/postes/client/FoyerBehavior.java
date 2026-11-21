@@ -93,6 +93,12 @@ final class FoyerBehavior implements StationBehavior {
         lire(view);
         montreChaud = chaud;
         montreFroid = froid;
+        // On s'approche du feu : il crépite, plus fort s'il brûle ; froid, la grille tinte sous la main.
+        if (chaud > 0.0F) {
+            Son.joue(view, SoundEvents.CAMPFIRE_CRACKLE, "combustible", 0.3F + 0.3F * chaud, 0.9F + random.nextFloat() * 0.2F);
+        } else {
+            Son.joue(view, SoundEvents.CHAIN_HIT, "combustible", 0.25F, 1.2F + random.nextFloat() * 0.2F);
+        }
     }
 
     @Override

@@ -26,6 +26,14 @@ public final class PostesTannerie {
 
     /** {@code travailler} : l'objet du curseur, ou de la case {@link #DEPUIS} de l'inventaire, travaille sur le bloc. */
     public static final String TRAVAILLER = "travailler";
+    /**
+     * L'effet joué pour tous ceux qui voient le poste après chaque objet travaillé : {@link #OBJET} (l'id de l'objet),
+     * {@link #PRIS} (le bloc l'a pris) et {@link #ACTEUR} (qui l'a fait, qui l'a déjà vu chez lui).
+     */
+    public static final ResourceLocation GESTE = id("geste");
+    public static final String OBJET = "objet";
+    public static final String PRIS = "pris";
+    public static final String ACTEUR = "acteur";
     /** {@code main_vide} : reprendre ce qui est fini, ou lire où en est le travail. */
     public static final String MAIN_VIDE = "main_vide";
     /**

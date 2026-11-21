@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -73,8 +74,10 @@ final class TannerieBook implements RecipeBook.Source {
                 there.add(new ItemStack(Items.WATER_BUCKET));
             }
             int tanin = state.getValue(CuveBlock.TANIN) - state.getValue(CuveBlock.PEAUX);
-            BuiltInRegistries.ITEM.getTag(TannerieModule.TANINS).flatMap(tag -> tag.stream().findFirst())
-                    .filter(item -> tanin > 0).ifPresent(item -> there.add(new ItemStack(item.value(), tanin)));
+            Item bark = TannerieBehavior.premier(TannerieModule.TANINS);
+            if (bark != null && tanin > 0) {
+                there.add(new ItemStack(bark, tanin));
+            }
         } else if (state.getBlock() instanceof SechoirBlock && state.getValue(SechoirBlock.ETAT) == SechoirBlock.Etat.HUMIDE) {
             there.add(new ItemStack(TannerieModule.CUIR_MOUILLE.get()));
         }
