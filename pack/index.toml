@@ -3499,7 +3499,7 @@ metafile = true
 
 [[files]]
 file = "mods/companions-mod.pw.toml"
-hash = "261ad6cba6ea9accefcf8743d89c71c3ec1ee843398d0a4ab331418c9a91cad0"
+hash = "1ad3c797196faf38a3824349b55b8f2aad3508cf3167681e430975430afcc5bc"
 metafile = true
 
 [[files]]
