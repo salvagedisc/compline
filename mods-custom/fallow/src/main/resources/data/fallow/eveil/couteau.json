@@ -1,0 +1,15 @@
+{
+  "objets": "#c:tools/knife",
+  "actes": [
+    {
+      "acte": "vaincre",
+      "points": 15,
+      "enchantements": {
+        "farmersdelight:backstabbing": 2,
+        "minecraft:sharpness": 2,
+        "minecraft:looting": 2,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

@@ -27,6 +27,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [interactions.md](interactions.md) | The interaction language: menu, gesture and craft skill, their grammar, shared conventions (action bar, « vous », one book per domain, pace), the pack's loops by register; in-game tests IN1 to IN5 |
 | [tannerie.md](tannerie.md) | The house tannery (`tannerie` module): raw hides scraped on a fleshing beam, tanned in a vat with bark, dried on a frame |
 | [musique.md](musique.md) | The music: True Adaptive Music, the `fallow` pack tree, the server predicates, in-game tests ([0010](../decisions/0010-musique.md)) |
+| [eveil.md](eveil.md) | Awakening: enchanting as a deed, earned by an item's own deeds or a great beast's shard, forgotten when worn out; nothing found enchanted; in-game tests EV1 to EV9 ([0045](../decisions/0045-awakening.md)) |
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |
 | [traduction.md](traduction.md) | The French translation: where our texts live, the `check-fr` check, the glossary, what stays in English |
 | [quetes.md](quetes.md) | Quests and guides with Questlog: chapters, how to write a quest, what comes next |

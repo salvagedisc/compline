@@ -1,0 +1,16 @@
+{
+  "objets": "#minecraft:shovels",
+  "actes": [
+    {
+      "acte": "casser",
+      "cible": "#minecraft:mineable/shovel",
+      "points": 1,
+      "enchantements": {
+        "minecraft:efficiency": 3,
+        "minecraft:unbreaking": 1,
+        "minecraft:silk_touch": 0.5,
+        "minecraft:fortune": 0.5
+      }
+    }
+  ]
+}

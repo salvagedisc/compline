@@ -1,0 +1,14 @@
+{
+  "objets": "#c:tools/fishing_rod",
+  "actes": [
+    {
+      "acte": "pecher",
+      "points": 30,
+      "enchantements": {
+        "minecraft:luck_of_the_sea": 3,
+        "minecraft:lure": 3,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

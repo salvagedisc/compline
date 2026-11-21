@@ -1,6 +1,14 @@
 {
   "replace": false,
   "entries": [
-    "fallow:rendement_de_la_pioche"
+    "fallow:rendement_de_la_pioche",
+    "fallow:sans_enchantement",
+    "fallow:eclat_frostmaw",
+    "fallow:eclat_ferrous_wroughtnaut",
+    "fallow:eclat_umvuthi",
+    "fallow:eclat_naga",
+    "fallow:eclat_sculptor",
+    "fallow:eclat_sculksaur",
+    "fallow:eclat_obsidiceratops"
   ]
 }

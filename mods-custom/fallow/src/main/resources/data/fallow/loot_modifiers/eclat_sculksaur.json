@@ -1,0 +1,18 @@
+{
+  "type": "fallow:eclat_de_bete",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "ec_ad:entities/sculksaur"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "eclat": {
+    "enchantement": "minecraft:swift_sneak",
+    "niveau": 3,
+    "bete": "entity.ec_ad.sculksaur"
+  },
+  "chance": 0.25
+}

@@ -1,0 +1,12 @@
+{
+  "objets": "#c:tools/shield",
+  "actes": [
+    {
+      "acte": "bloquer",
+      "points": 5,
+      "enchantements": {
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

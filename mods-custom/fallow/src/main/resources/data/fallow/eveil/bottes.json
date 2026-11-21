@@ -1,0 +1,38 @@
+{
+  "objets": "#minecraft:foot_armor",
+  "actes": [
+    {
+      "acte": "encaisser",
+      "points": 5,
+      "enchantements": {
+        "minecraft:protection": 2,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "encaisser",
+      "cible": "#minecraft:is_fall",
+      "points": 10,
+      "enchantements": {
+        "minecraft:feather_falling": 4
+      }
+    },
+    {
+      "acte": "parcourir",
+      "cible": "marche",
+      "points": 0.05,
+      "enchantements": {
+        "minecraft:unbreaking": 2,
+        "minecraft:feather_falling": 1
+      }
+    },
+    {
+      "acte": "parcourir",
+      "cible": "nage",
+      "points": 1,
+      "enchantements": {
+        "minecraft:depth_strider": 3
+      }
+    }
+  ]
+}

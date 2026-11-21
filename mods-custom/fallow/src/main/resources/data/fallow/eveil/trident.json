@@ -1,0 +1,16 @@
+{
+  "objets": "#c:tools/spear",
+  "actes": [
+    {
+      "acte": "vaincre",
+      "points": 15,
+      "enchantements": {
+        "minecraft:impaling": 2,
+        "minecraft:loyalty": 2,
+        "minecraft:riptide": 1,
+        "minecraft:channeling": 0.5,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

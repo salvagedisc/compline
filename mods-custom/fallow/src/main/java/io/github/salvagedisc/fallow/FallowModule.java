@@ -67,6 +67,10 @@ public enum FallowModule {
     HOTES("hotes", null, bus -> io.github.salvagedisc.fallow.hotes.HotesModule.start(bus)),
     /** Les postes : les blocs de la tannerie travaillés à la main sur place, caméra au bloc et livre de recettes à côté, sur
      *  le modèle de Hands-On Delight et Hands-On Vanilla (client et serveur). Demande Diegesis. */
+    /** L'éveil : l'enchantement vient des hauts faits de l'objet et des éclats des grandes bêtes ; rien ne sort enchanté
+     *  d'un butin ni d'un échange (client et serveur : composants et éclat enregistrés des deux côtés). Aucun mod requis ;
+     *  la qualité de forge d'Overgeared et TreeChop sont lus s'ils sont là. */
+    EVEIL("eveil", null, bus -> io.github.salvagedisc.fallow.eveil.EveilModule.start(bus)),
     POSTES("postes", null, bus -> io.github.salvagedisc.fallow.postes.PostesModule.start(bus), ModIds.DIEGESIS);
 
     private final String id;

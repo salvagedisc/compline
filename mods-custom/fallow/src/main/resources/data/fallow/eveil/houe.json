@@ -1,0 +1,23 @@
+{
+  "objets": "#minecraft:hoes",
+  "actes": [
+    {
+      "acte": "casser",
+      "cible": "#minecraft:crops",
+      "points": 1,
+      "enchantements": {
+        "minecraft:fortune": 3,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "casser",
+      "cible": "#minecraft:mineable/hoe",
+      "points": 1,
+      "enchantements": {
+        "minecraft:efficiency": 3,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

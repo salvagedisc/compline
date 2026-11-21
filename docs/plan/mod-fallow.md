@@ -125,11 +125,11 @@ Fallow no longer has experience ([xp.md](xp.md)). Orbs and point gains are disab
 
 The mixin applies on both sides: the client also refuses to take the item if it thinks the levels are missing, and it colors the cost red. Client and server must have the same version of the mod and the same `xp.enabled` value. No mod in the pack patches `mayPickup`.
 
-**Enchantment merging (optional).** With `xp.blockEnchantMerge`, `XpModule` cancels `AnvilUpdateEvent` when the right-hand item carries enchantments (enchanted book or enchanted item): the anvil gives no result, and enchanting goes through the table. Off by default: the maintainer keeps merging.
+**Enchantment merging (optional).** With `xp.blockEnchantMerge`, `XpModule` cancels `AnvilUpdateEvent` when the right-hand item carries enchantments (enchanted book or enchanted item): the anvil gives no result. On by default since 0.44.0 ([0045](../decisions/0045-awakening.md)): an enchantment comes only from the item's awakening.
 
 **The hidden bar.** On the client, `XpClient` cancels the `VanillaGuiLayers.EXPERIENCE_BAR` and `EXPERIENCE_LEVEL` layers in `RenderGuiLayerEvent.Pre`. The horse jump meter (`JUMP_METER`) is another layer and stays. The space the bar left is taken back: `Gui.leftHeight` and `rightHeight`, reset to 39 at each frame, are set to 34 in the same event, just before the health and food layers read them. Hearts, armor, hunger, air and what mods stack above them with these fields (Thirst Was Reclaimed's thirst) come down 5 pixels, leaving one pixel above the hotbar's selection frame. Not while the jump meter is shown (on a horse), where everything keeps its vanilla height. Cold Sweat places its body temperature icon by itself: `pack/config/coldsweat/client.toml` moves it down by the same 5 pixels (`Body Temperature Icon Offset`, `Body Temperature Readout Offset`).
 
-Config (`serverconfig/fallow-server.toml`, `[xp]` section): `enabled` (true), `blockEnchantMerge` (false); `fallow-common.toml`, `[xp]` section: `hideBar` (true). The last two only matter if `enabled` is true. To roll back: `enabled = false` and delete `sans_xp.js`.
+Config (`serverconfig/fallow-server.toml`, `[xp]` section): `enabled` (true), `blockEnchantMerge` (true since 0.44.0); `fallow-common.toml`, `[xp]` section: `hideBar` (true). The last two only matter if `enabled` is true. To roll back: `enabled = false` and delete `sans_xp.js`.
 
 ## `horizon` module
 
@@ -419,6 +419,12 @@ Client and server, no required mod (the emissaries wear Archie's Dinosaurs' armo
 
 **Checked** on the bench client on 2026-11-21: see [hotes](hotes.md).
 
+## `eveil` module
+
+Client and server, no required mod (Overgeared's forging quality and TreeChop's chops are read when present). Enchanting as a deed ([eveil](eveil.md), [0045](../decisions/0045-awakening.md)): the components `fallow:eveil` (the item's id, places, awakenings, ready and faded states) and `fallow:eclat`, the item `fallow:eclat_de_bete`, the deed files `data/*/eveil/*.json` (reload listener `HautsFaits`), the deeds kept by the world (`Actes`, `data/fallow_eveil.dat`), the loot modifiers `fallow:sans_enchantement` (every table) and `fallow:eclat_de_bete` (seven `eclat_*` files), the trade filter, the enchanting table taken over (`RightClickBlock`, high priority, always cancelled) and its one-row choice window built on a server-side `ChestMenu`. Config `[eveil]` in `fallow-server.toml`.
+
+**Checked** on the test bench on 2026-11-21: the full pack's dedicated server starts with the module (15 families of deeds) and no new error. In a development client: a new iron pickaxe counts one point per stone block; with `/fallow eveil points 3000` it shimmers and the note shows; at the table the window shows Unbreaking I and Fortune I, the same two after closing and reopening; a click gives Fortune I with the tooltip line « day 1 » and « Awakenings: 1 of 1 »; a second right-click says the item has given all it could; set to its last point of durability it forgets Fortune I (grey note) and its points fall back to 0; a Frostmaw shard is refused on a sword and gives Frost Walker II to iron boots, then is used up; a stronghold library, a desert temple and an ancient city chest give plain books and an unenchanted hoe and leggings; four novice librarians and two novice weaponsmiths offer no enchanted book or sword. Not checked: Overgeared quality and places, a real kill of a great beast, the anvil, deeds of combat, armour, fishing and TreeChop (tests EV5 to EV9 in [eveil](eveil.md)).
+
 ## Compatibility fixes
 
 Fixes between two mods of the pack, outside any module: they have no switch and apply as soon as both mods are present. The fix for the inverted bell message of No Man's Land (`compat.InvertedBellMessageMixin`, 0.4.x) was removed in 0.7.0 with the mod.
@@ -491,7 +497,7 @@ None of this has been done. These tests are also gathered with those of the othe
 | X3 | Repairing the same item up to wear 40 | "Trop usé !", no result (except in creative) |
 | X4 | Dedicated server | The client takes the item without the slot rolling back |
 | X5 | `xp.enabled = false` | The anvil asks for levels again, the bar returns |
-| X6 | `xp.blockEnchantMerge = true`, enchanted book on the right | No result; a repair with ingots still works |
+| X6 | `xp.blockEnchantMerge = true` (default), enchanted item on the right | No result; a repair with ingots still works |
 | X7 | On foot, on horseback, aiming a Supplementaries cannon | No XP bar or number; the jump meter stays on horseback |
 | X8 | On foot, with thirst and Cold Sweat shown; then on a horse | On foot, hearts and hunger sit just above the hotbar, thirst above hunger, Cold Sweat's icon between them, nothing overlaps; on a horse, the bars go back up above the jump meter |
 | X8 | Enhanced Celestials blue moon | The displayed cost goes down |

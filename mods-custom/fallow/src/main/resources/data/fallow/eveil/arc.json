@@ -1,0 +1,16 @@
+{
+  "objets": "#c:tools/bow",
+  "actes": [
+    {
+      "acte": "vaincre",
+      "points": 15,
+      "enchantements": {
+        "minecraft:power": 3,
+        "minecraft:punch": 1,
+        "minecraft:flame": 0.5,
+        "minecraft:infinity": 0.3,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

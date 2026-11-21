@@ -11,7 +11,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0005](0005-quark.md) | Quark: the essentials only | Config provided |
 | [0006](0006-supplementaries.md) | Supplementaries: the essentials only | Config provided |
 | [0007](0007-ambiance-performance.md) | Atmosphere & performance | Kept; Distant Horizons kept by 0011 |
-| [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback |
+| [0008](0008-enchantement.md) | Enchanting | Immersive Enchanting kept; Quark's Matrix as fallback (superseded by 0045) |
 | [0009](0009-xp.md) | Removal of experience | Kept; `xp` module of the `fallow` mod 0.2.0 |
 | [0010](0010-musique.md) | Music | True Adaptive Music and the `fallow` pack kept; Reactive Music rejected |
 | [0011](0011-tectonic-streams-distant-horizons.md) | Terrain and far view | Tectonic + Streams Reflowing; Distant Horizons hidden by the mist, `horizon` module; the "on NML" part superseded by 0019 |
@@ -48,6 +48,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0042](0042-interaction-language.md) | One interaction language for the stations | Menu, gesture, craft skill; the pot cooks without stirring, faster Spatial GUI windows, « vous » in the tool hints |
 | [0043](0043-hands-on-vanilla.md) | Hands-On Vanilla for the vanilla stations | Crafting table, furnaces, anvil and other vanilla stations worked by hand; the `etabli` prototype removed |
 | [0044](0044-sable-and-create.md) | Sable and Create machines | Six mods bring Create machines and pack mods onto Sable ships; Loconautics waits for Modrinth |
+| [0045](0045-awakening.md) | Awakening: enchanting as a deed | An item awakens from its own deeds, great beasts leave shards, nothing is found enchanted; Immersive Enchanting removed (replaces 0008) |
 
 ## Template
 

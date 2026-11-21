@@ -21,7 +21,7 @@ const TABS = [
   'farm_and_charm:farm_and_charm', 'farmersdelight:farmersdelight', 'friendsandfoes:main_tab',
   'ghosts:ghosts_creative_tab', 'handcrafted:main', 'hybrid_aquatic:blocks', 'hybrid_aquatic:items',
   'hybrid_aquatic:spawn_eggs', 'icys-better-horses:stable_supplies',
-  'immersiveenchanting:enchanting', 'kubejs:tab', 'longwings:data/longwings', 'lootr:lootr',
+  'kubejs:tab', 'longwings:data/longwings', 'lootr:lootr',
   'minecraft:building_blocks', 'minecraft:colored_blocks', 'minecraft:combat',
   'minecraft:food_and_drinks', 'minecraft:functional_blocks', 'minecraft:ingredients',
   'minecraft:natural_blocks', 'minecraft:op_blocks', 'minecraft:redstone_blocks',

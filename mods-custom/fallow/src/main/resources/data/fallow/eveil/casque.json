@@ -1,0 +1,29 @@
+{
+  "objets": "#minecraft:head_armor",
+  "actes": [
+    {
+      "acte": "encaisser",
+      "points": 5,
+      "enchantements": {
+        "minecraft:protection": 3,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "encaisser",
+      "cible": "#minecraft:is_projectile",
+      "points": 5,
+      "enchantements": {
+        "minecraft:projectile_protection": 3
+      }
+    },
+    {
+      "acte": "sous_l_eau",
+      "points": 3,
+      "enchantements": {
+        "minecraft:respiration": 3,
+        "minecraft:aqua_affinity": 1
+      }
+    }
+  ]
+}

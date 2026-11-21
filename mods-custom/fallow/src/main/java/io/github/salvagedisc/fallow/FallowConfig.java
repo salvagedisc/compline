@@ -35,6 +35,10 @@ public final class FallowConfig {
     private static final ModConfigSpec.IntValue CIEL_MIST_DISTANCE;
     private static final ModConfigSpec.IntValue CIEL_CLEARING_DISTANCE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
+    private static final ModConfigSpec.BooleanValue EVEIL_ENABLED;
+    private static final ModConfigSpec.DoubleValue EVEIL_SEUIL;
+    private static final ModConfigSpec.DoubleValue EVEIL_FACTEUR;
+    private static final java.util.Map<String, ModConfigSpec.IntValue> EVEIL_PLACES = new java.util.LinkedHashMap<>();
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
     private static final ModConfigSpec.BooleanValue VENT_ENABLED;
     private static final ModConfigSpec.BooleanValue VENT_MOTES;
@@ -210,8 +214,8 @@ public final class FallowConfig {
                 .define("enabled", true);
         XP_BLOCK_ENCHANT_MERGE = server
                 .comment("L'enclume refuse un second objet qui porte des enchantements (livre enchanté, objet enchanté) :",
-                        "l'enchantement ne passe plus que par la table. Faux : l'enclume fusionne comme en vanilla.")
-                .define("blockEnchantMerge", false);
+                        "un enchantement ne vient que de l'éveil de l'objet (module eveil). Faux : l'enclume fusionne comme en vanilla.")
+                .define("blockEnchantMerge", true);
         server.pop();
 
         server.comment("Module outils : à mains nues, on ramasse mais on ne coupe pas. Le bois, brut ou travaillé (tag fallow:outil_requis),",
@@ -219,6 +223,28 @@ public final class FallowConfig {
         OUTILS_ENABLED = server
                 .comment("Interrupteur du module. Faux : on casse de nouveau tout à la main, comme en vanilla.")
                 .define("enabled", true);
+        server.pop();
+
+        server.comment("Module eveil : l'enchantement est un haut fait. Un objet compte ce qu'il a vécu (data/*/eveil/*.json),",
+                "s'éveille passé un seuil et révèle à la table d'enchantement deux enchantements tirés de ses actes ; les grandes",
+                "bêtes laissent un éclat ; à bout de durabilité, l'objet oublie son dernier éveil. Rien ne sort enchanté d'un butin",
+                "ni d'un échange.").push("eveil");
+        EVEIL_ENABLED = server
+                .comment("Interrupteur du module. Faux : plus d'éveil ni d'éclat, les butins et les échanges gardent leurs",
+                        "enchantements, la table d'enchantement redevient celle du jeu.")
+                .define("enabled", true);
+        EVEIL_SEUIL = server
+                .comment("Points d'actes pour le premier éveil (une pierre creusée vaut 1, un minerai 3, un zombie vaincu 15).")
+                .defineInRange("seuil", 3000.0, 1.0, 1.0E7);
+        EVEIL_FACTEUR = server
+                .comment("Chaque éveil suivant demande ce facteur de plus que le précédent (3 : 3 000, 9 000, 27 000).")
+                .defineInRange("facteur", 3.0, 1.0, 100.0);
+        server.comment("Nombre d'éveils qu'un objet peut porter, selon sa qualité de forge d'Overgeared (none : sans qualité).")
+                .push("places");
+        for (String[] q : new String[][] {{"none", "1"}, {"poor", "1"}, {"well", "1"}, {"expert", "2"}, {"perfect", "2"}, {"master", "3"}}) {
+            EVEIL_PLACES.put(q[0], server.defineInRange(q[0], Integer.parseInt(q[1]), 0, 16));
+        }
+        server.pop();
         server.pop();
         SERVER_SPEC = server.build();
 
@@ -445,6 +471,24 @@ public final class FallowConfig {
 
     public static boolean xpHideBar() {
         return xpEnabled() && read(COMMON_SPEC, XP_HIDE_BAR);
+    }
+
+    public static boolean eveilEnabled() {
+        return read(SERVER_SPEC, EVEIL_ENABLED);
+    }
+
+    public static double eveilSeuil() {
+        return SERVER_SPEC.isLoaded() ? EVEIL_SEUIL.get() : EVEIL_SEUIL.getDefault();
+    }
+
+    public static double eveilFacteur() {
+        return SERVER_SPEC.isLoaded() ? EVEIL_FACTEUR.get() : EVEIL_FACTEUR.getDefault();
+    }
+
+    /** Nombre d'éveils pour une qualité de forge ({@code none} si l'objet n'en a pas ou si elle est inconnue). */
+    public static int eveilPlaces(String qualite) {
+        ModConfigSpec.IntValue value = EVEIL_PLACES.getOrDefault(qualite, EVEIL_PLACES.get("none"));
+        return SERVER_SPEC.isLoaded() ? value.get() : value.getDefault();
     }
 
     public static boolean xpBlockEnchantMerge() {

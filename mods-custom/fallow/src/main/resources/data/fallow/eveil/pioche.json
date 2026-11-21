@@ -1,0 +1,25 @@
+{
+  "objets": "#minecraft:pickaxes",
+  "actes": [
+    {
+      "acte": "casser",
+      "cible": "#c:ores",
+      "points": 3,
+      "enchantements": {
+        "minecraft:fortune": 3,
+        "minecraft:efficiency": 1,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "casser",
+      "cible": "#minecraft:mineable/pickaxe",
+      "points": 1,
+      "enchantements": {
+        "minecraft:efficiency": 3,
+        "minecraft:unbreaking": 1,
+        "minecraft:silk_touch": 0.5
+      }
+    }
+  ]
+}

@@ -10,16 +10,15 @@ const ONGLETS_CREATIFS = [
   'farm_and_charm:farm_and_charm', 'farmersdelight:farmersdelight', 'friendsandfoes:main_tab',
   'ghosts:ghosts_creative_tab', 'handcrafted:main', 'hybrid_aquatic:blocks',
   'hybrid_aquatic:items', 'hybrid_aquatic:spawn_eggs', 'icys-better-horses:stable_supplies',
-  'immersiveenchanting:enchanting', 'kubejs:tab', 'longwings:data/longwings', 'lootr:lootr',
-  'minecraft:building_blocks', 'minecraft:colored_blocks', 'minecraft:combat',
-  'minecraft:food_and_drinks', 'minecraft:functional_blocks', 'minecraft:ingredients',
-  'minecraft:natural_blocks', 'minecraft:op_blocks', 'minecraft:redstone_blocks',
-  'minecraft:spawn_eggs', 'minecraft:tools_and_utilities', 'modonomicon:modonomicon',
-  'mowziesmobs:mowziesmobs_tab', 'naturalist:item_group', 'overgeared:blueprint_tab',
-  'overgeared:lingering_arrows_tab', 'overgeared:overgeared_tab', 'railways:main',
-  'railways:palettes', 'railways:tracks', 'regions_unexplored:main', 'simulated:main_tab',
-  'surfacesamples:surface_samples_blocks_tab', 'surfacesamples:surface_samples_items_tab',
-  'thirst:thirst', 'twigs:twig'
+  'kubejs:tab', 'longwings:data/longwings', 'lootr:lootr', 'minecraft:building_blocks',
+  'minecraft:colored_blocks', 'minecraft:combat', 'minecraft:food_and_drinks',
+  'minecraft:functional_blocks', 'minecraft:ingredients', 'minecraft:natural_blocks',
+  'minecraft:op_blocks', 'minecraft:redstone_blocks', 'minecraft:spawn_eggs',
+  'minecraft:tools_and_utilities', 'modonomicon:modonomicon', 'mowziesmobs:mowziesmobs_tab',
+  'naturalist:item_group', 'overgeared:blueprint_tab', 'overgeared:lingering_arrows_tab',
+  'overgeared:overgeared_tab', 'railways:main', 'railways:palettes', 'railways:tracks',
+  'regions_unexplored:main', 'simulated:main_tab', 'surfacesamples:surface_samples_blocks_tab',
+  'surfacesamples:surface_samples_items_tab', 'thirst:thirst', 'twigs:twig'
 ]
 
 const ONGLETS_RETIRES = [

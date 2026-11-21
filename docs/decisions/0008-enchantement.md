@@ -1,7 +1,7 @@
 # 0008 — Enchanting
 
 - **Date**: 2026-10-19
-- **Status**: kept (team choice); not tested in game
+- **Status**: superseded by [0045](0045-awakening.md) on 2026-11-21 (Immersive Enchanting removed); kept below as the record of the first choice
 
 ## Context
 The team wants enchanting to become a real stage of the game, like forging with Overgeared and cooking with Kaleidoscope, rather than a mere cost in levels. Full research: [enchantement.md](../archive/plan/recherche/2026-10-19/enchantement.md).

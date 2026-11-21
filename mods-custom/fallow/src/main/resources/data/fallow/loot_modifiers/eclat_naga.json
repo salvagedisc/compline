@@ -1,0 +1,18 @@
+{
+  "type": "fallow:eclat_de_bete",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "mowziesmobs:entities/naga"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "eclat": {
+    "enchantement": "minecraft:respiration",
+    "niveau": 3,
+    "bete": "entity.mowziesmobs.naga"
+  },
+  "chance": 1.0
+}

@@ -124,4 +124,4 @@ Not taken: hundreds of quests and kitchen-sink density, bundled shaders (Iris br
 ### Watch list
 - Sinytra Connector (beta) runs Antique Atlas 4 and Surveyor, two Fabric mods: keep an eye on it at every update.
 - Steam 'n' Rails is an unofficial NeoForge port (beta).
-- Immersive Enchanting, KubeJS Create, In Control! and Simple Backups are betas.
+- KubeJS Create, In Control! and Simple Backups are betas.

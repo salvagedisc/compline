@@ -1,0 +1,15 @@
+{
+  "objets": "#c:tools/crossbow",
+  "actes": [
+    {
+      "acte": "vaincre",
+      "points": 15,
+      "enchantements": {
+        "minecraft:quick_charge": 2,
+        "minecraft:piercing": 2,
+        "minecraft:multishot": 1,
+        "minecraft:unbreaking": 1
+      }
+    }
+  ]
+}

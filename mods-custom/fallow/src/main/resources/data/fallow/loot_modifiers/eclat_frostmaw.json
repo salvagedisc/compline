@@ -1,0 +1,18 @@
+{
+  "type": "fallow:eclat_de_bete",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "mowziesmobs:entities/frostmaw"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "eclat": {
+    "enchantement": "minecraft:frost_walker",
+    "niveau": 2,
+    "bete": "entity.mowziesmobs.frostmaw"
+  },
+  "chance": 1.0
+}

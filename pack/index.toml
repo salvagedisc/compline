@@ -1061,10 +1061,6 @@ file = "kubejs/assets/icys-better-horses/lang/fr_fr.json"
 hash = "e4ec5172661f94284afc945db73648de795fe9e26321dae14dadd7c64644ff53"
 
 [[files]]
-file = "kubejs/assets/immersiveenchanting/lang/fr_fr.json"
-hash = "6dea51c0c92d24bad830f737fe9332d08a8121a0bf9ac9816c175933f996377c"
-
-[[files]]
 file = "kubejs/assets/iris/lang/fr_fr.json"
 hash = "130457b4c1d2df63bad2a8af90a01904202104bae908feeba5b5a2cbfff8000a"
 
@@ -2557,138 +2553,6 @@ file = "kubejs/data/icys-better-horses/tags/worldgen/biome/spawns/thoroughbred.j
 hash = "eebda1001904c803aff288e163da22fd7465c4884d5dea62a8bedaa539861186"
 
 [[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/replicate.json"
-hash = "47649c899720f22da8e13b6d7ef16cb331dc32c84cf70a7d6a165b28be4b9cc3"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/immersiveenchanting/transmute.json"
-hash = "4ef49a2cfb99b570d150a79f15218448f044bc197e81cb4c308849ea124a125c"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/bane_of_arthropods.json"
-hash = "39b7b80552d4b844ba22bb420f0aef8089964de7a0ff4776c1bb8f2bc15a682d"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/blast_protection.json"
-hash = "2dfa0459d9ff2cad273ff6b9de9cd74382e405c8e86fc786f9c99704c40421bb"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/breach.json"
-hash = "93bda6fc358de5800604f0c86a05686cc4821e69d8f60e4e4aeca07c0ee9d52f"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/density.json"
-hash = "222de7e803ee5088547c59559d94b1969140580308ced7509ca06b9232384590"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/depth_strider.json"
-hash = "a3f1b2cf4ca398bd425b903d302286fdd94d5eaf140b401f3a2acac670673b8e"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/efficiency.json"
-hash = "e836783a7f87949f64491a4c341a037c1badc435db2bed75e93dc9e8f24d81fa"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/fire_aspect.json"
-hash = "4be2c435d3daae92b3f614ca0b5944e3acadb1e1e197ed8678a2b014329a5fbe"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/fire_protection.json"
-hash = "ce5dbebdf0e89fd93c887e3647d83aaa0fdcaabc130c31c9701af219c6428f53"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/impaling.json"
-hash = "94a0bec6e2fa70f2736cc3eeca8a436bdd84f847a2a16cfc2dc00c4f34bdc9cd"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/infinity.json"
-hash = "a6ffaaf56dbb8f010b29da5f6fb18d70c28d4584a8bfc2a57b4281ff89adc7ae"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/knockback.json"
-hash = "f4de7732da01ef4d1a169e80bbdba925eca42ce01f5edfb06d8c6f95504f5f2d"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/looting.json"
-hash = "34b6237a80eaac22f5eb16ea2972bf72dc092bde37f44e736bbe6b0660661096"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/loyalty.json"
-hash = "6066e65dab1078366d7a0860216cb3a75fe5c59c70f123ec43de217cced1e3bb"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/lunge.json"
-hash = "00dc7eccdb8f2cd5013fb01f3d018cec07c9dc6946ae96a002e3a1f71e698ee8"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/multishot.json"
-hash = "6c6044d7fbc016de4a9abe14e824b7c4548bff9bdc5d6c4bb76e4f2a6a57cdcb"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/piercing.json"
-hash = "5e2583a94943efe8d3abf938db7c94e452ce330374dfe784050e675646012ac8"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/power.json"
-hash = "27f68781e97075fc3dbd1996605a24ee4d0e4fa4a5e6b6b02decdee037dce193"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/protection.json"
-hash = "9fc391b6426de49f091a30ec8af5e3eab5b12a08ed87d78ee12fa3dedf13c57a"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/punch.json"
-hash = "f4de7732da01ef4d1a169e80bbdba925eca42ce01f5edfb06d8c6f95504f5f2d"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/quick_charge.json"
-hash = "cddfac30502c93ad158474b04f2a09ace48213c8922d1505dd1fb48ffa586d92"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/respiration.json"
-hash = "1825d3b70dae9df18746ff41abeccc1d9e186d68e51271eecbaeb9dad6d45a9b"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/sharpness.json"
-hash = "a33a6b940bdb9f5912bc2190e64e1bc12436da07f871bfbb28686bad0da6d3ef"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/silk_touch.json"
-hash = "171d7b1f3e0353e6b83c4702f6bf2fca5b6ee02b502fb11f75d93ed9eca52330"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/smite.json"
-hash = "d73fbb9a823581366dcefa4bbd63190bb38ca2b646e7a4e33216335f1886f080"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/soul_speed.json"
-hash = "7492eb3f02b679a9e0f0fe29ec2f764c1d8c33ff6fd1f3ac42d7d46541abaf2f"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/sweeping_edge.json"
-hash = "a9975f7aa49082a3725159bad3c792f69e3dc0396484214a30a7b4546a12628e"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/swift_sneak.json"
-hash = "6242d20c4d60af944558852e2d4c1d7421bf8a21cbf71739ff6e49f514dcfd3f"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/enchantment_costs/minecraft/wind_burst.json"
-hash = "a29962d5fda201783451a8c0cd993e0e5ece47e969bfc54aad6a3bbec16f7ed7"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_desert_biomes.json"
-hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_end_biomes.json"
-hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
-
-[[files]]
-file = "kubejs/data/immersiveenchanting/tags/worldgen/biome/ancient_library_jungle_biomes.json"
-hash = "bef4d172fc1bfb34d342e79090726c4a0c272dd404783c3ea022b992e0e0415e"
-
-[[files]]
 file = "kubejs/data/minecraft/recipe/netherite_upgrade_smithing_template.json"
 hash = "d3dccf42b20aa532b597f49bb8605e7b8b1cc4a2c4f3b6b24ae3bf4073523922"
 
@@ -3386,7 +3250,7 @@ hash = "bd6e56f32ece2d3d644397e3bc9b86327ddd3058fc24a4e5d0419d503a433c07"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
-hash = "4262e2a8c41d1af430533c2bd37cac5fdf66ca4e1d72dbba826f757ca3586a17"
+hash = "70029358f9c37a3b466a3b9d22d76ad72550c1009e931962034b3f0b533b4148"
 
 [[files]]
 file = "kubejs/startup_scripts/sante.js"
@@ -3415,11 +3279,6 @@ metafile = true
 [[files]]
 file = "mods/alexs-mobs-continued.pw.toml"
 hash = "c7fc68946b3f81f8e002024efea49a08b243665637e0c0313e02e399c5366a53"
-metafile = true
-
-[[files]]
-file = "mods/alfinolib.pw.toml"
-hash = "59ecca3af0a1fc9fa90c6027a0f4e275b1d77c9b5e4ae50caba9337c6d5f6eae"
 metafile = true
 
 [[files]]
@@ -3695,8 +3554,8 @@ hash = "2c88d3eceb7be9c5964ca32c24612ca08d7326b4cb06104e98d56efa777de640"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.43.0.jar"
-hash = "b123903e191e391778f8536bb7891ca50c9fa3b9a5a6cda309770bc4cea0e31a"
+file = "mods/fallow-0.44.0.jar"
+hash = "83b72f1c619d308749c8f3aa4fd04be93a9071146d5cefc4cbcc987d30971272"
 
 [[files]]
 file = "mods/farmers-delight.pw.toml"
@@ -3780,11 +3639,6 @@ metafile = true
 [[files]]
 file = "mods/immediatelyfast.pw.toml"
 hash = "4601b9be31b6e131dca8a148c974d015444bcac7c82fcb66fbd8751a67933a5d"
-metafile = true
-
-[[files]]
-file = "mods/immersive-enchanting.pw.toml"
-hash = "72de092d6670e19df4b34f4451e70f5868d7a488cbb26956907bf813de9ddeb6"
 metafile = true
 
 [[files]]

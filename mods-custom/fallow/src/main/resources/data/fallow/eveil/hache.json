@@ -1,0 +1,47 @@
+{
+  "objets": "#minecraft:axes",
+  "actes": [
+    {
+      "acte": "casser",
+      "cible": "#minecraft:logs",
+      "points": 1,
+      "enchantements": {
+        "minecraft:efficiency": 3,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "casser",
+      "cible": "#minecraft:mineable/axe",
+      "points": 0.5,
+      "enchantements": {
+        "minecraft:efficiency": 2,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "vaincre",
+      "points": 15,
+      "enchantements": {
+        "minecraft:sharpness": 2,
+        "minecraft:unbreaking": 1
+      }
+    },
+    {
+      "acte": "vaincre",
+      "cible": "#minecraft:undead",
+      "points": 15,
+      "enchantements": {
+        "minecraft:smite": 3
+      }
+    },
+    {
+      "acte": "vaincre",
+      "cible": "#minecraft:arthropod",
+      "points": 15,
+      "enchantements": {
+        "minecraft:bane_of_arthropods": 3
+      }
+    }
+  ]
+}

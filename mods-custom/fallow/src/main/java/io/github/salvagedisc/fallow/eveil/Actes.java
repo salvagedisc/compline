@@ -1,0 +1,89 @@
+package io.github.salvagedisc.fallow.eveil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.saveddata.SavedData;
+
+/**
+ * Les actes de chaque objet, par entrée des hauts faits : ce que la pioche a creusé, ce que l'épée a vaincu. Gardés
+ * par le monde (pas sur l'objet, qui ne change ainsi qu'à l'éveil), sous l'identifiant de l'objet ; un objet perdu
+ * laisse une petite ligne orpheline, sans effet.
+ */
+final class Actes extends SavedData {
+    private static final String NAME = "fallow_eveil";
+
+    private final Map<UUID, Map<String, Double>> objets = new HashMap<>();
+
+    static Actes get(MinecraftServer server) {
+        return server.overworld().getDataStorage().computeIfAbsent(
+                new SavedData.Factory<>(Actes::new, Actes::load, null), NAME);
+    }
+
+    void ajouter(UUID id, String cle, double points) {
+        if (points <= 0) {
+            return;
+        }
+        objets.computeIfAbsent(id, k -> new HashMap<>()).merge(cle, points, Double::sum);
+        setDirty();
+    }
+
+    double points(UUID id, String cle) {
+        Map<String, Double> map = objets.get(id);
+        return map == null ? 0.0 : map.getOrDefault(cle, 0.0);
+    }
+
+    double total(UUID id) {
+        Map<String, Double> map = objets.get(id);
+        return map == null ? 0.0 : map.values().stream().mapToDouble(Double::doubleValue).sum();
+    }
+
+    /** Ramène le total de l'objet à {@code cible} (jamais plus haut), chaque acte gardant sa part. */
+    void rabattre(UUID id, double cible) {
+        Map<String, Double> map = objets.get(id);
+        if (map == null) {
+            return;
+        }
+        double total = total(id);
+        if (total <= cible) {
+            return;
+        }
+        double ratio = total <= 0 ? 0 : Math.max(0, cible) / total;
+        map.replaceAll((k, v) -> v * ratio);
+        setDirty();
+    }
+
+    private static Actes load(CompoundTag tag, HolderLookup.Provider registries) {
+        Actes actes = new Actes();
+        CompoundTag all = tag.getCompound("objets");
+        for (String key : all.getAllKeys()) {
+            try {
+                UUID id = UUID.fromString(key);
+                CompoundTag entries = all.getCompound(key);
+                Map<String, Double> map = new HashMap<>();
+                for (String cle : entries.getAllKeys()) {
+                    map.put(cle, entries.getDouble(cle));
+                }
+                actes.objets.put(id, map);
+            } catch (IllegalArgumentException ignored) {
+                // une clé abîmée : on l'oublie
+            }
+        }
+        return actes;
+    }
+
+    @Override
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
+        CompoundTag all = new CompoundTag();
+        objets.forEach((id, map) -> {
+            CompoundTag entries = new CompoundTag();
+            map.forEach(entries::putDouble);
+            all.put(id.toString(), entries);
+        });
+        tag.put("objets", all);
+        return tag;
+    }
+}

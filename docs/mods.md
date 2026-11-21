@@ -63,7 +63,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | Farmer's Delight | `farmers-delight` | ✅ (1.21.1-1.3.4, added 2026-11-15) | CS | Cooking: cooking pot, cutting board, skillet, stove, keg, knives through the forge ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | Hands-On Delight + Diegesis | `handson-delight`, `diegesis-api` | ✅ (1.6.1 and 1.0.0-beta.14, added 2026-11-15, not seen in game) | CS | Farmer's Delight's stations used by hand in the world, first-person scenes; stirring stars give extra servings (no setting); translated by the pack ([0030](decisions/0030-farmers-delight-kitchen.md)) |
-| Hands-On Vanilla | jar in `pack/mods/` | ✅ (1.2.2, added 2026-11-21, seen on the bench) | C | The vanilla stations worked by hand in the world: crafting table with its recipe book beside it, furnace, smoker, blast furnace, stonecutter, smithing table, brewing stand, anvil, lectern, loom, cartography table; the enchanting table and the grindstone keep their windows (`config/handson_vanilla.properties`); MIT, CurseForge only, by the author of Hands-On Delight; tab names translated by the pack ([0043](decisions/0043-hands-on-vanilla.md)) |
+| Hands-On Vanilla | jar in `pack/mods/` | ✅ (1.2.2, added 2026-11-21, seen on the bench) | C | The vanilla stations worked by hand in the world: crafting table with its recipe book beside it, furnace, smoker, blast furnace, stonecutter, smithing table, brewing stand, anvil, lectern, loom, cartography table; the enchanting table (the `fallow` mod's awakening, [0045](decisions/0045-awakening.md)) and the grindstone are left alone (`config/handson_vanilla.properties`); MIT, CurseForge only, by the author of Hands-On Delight; tab names translated by the pack ([0043](decisions/0043-hands-on-vanilla.md)) |
 | Starcatcher | `starcatcher` | ✅ (3.3.10, added 2026-11-17, not seen in game) | CS | Fishing: skill minigame per fish, catches by biome, depth, hour, weather and bait, catalogue, trophies, aquarium, tackle box, hooks, bobbers, baits, rod skins; the vanilla rod merges into its rod; End catches removed, Nether ones moved to deep Overworld lava; its selling bin removed (no money) ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Hybrid Aquatic + Starcatcher Compatibility | `hybrid-aquatic-starcatcher-compatibility` | ✅ (0.6.3, added 2026-11-17) | CS | Hybrid Aquatic's fish, crates and hooks in Starcatcher; the species cut for another mod's model give that mod's fish or are no longer fished ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Starcatcher's Delight | `starcatchers-delight` | ✅ (3.2, added 2026-11-17, not seen in game) | CS | Fish dishes (nigiri, maki, fillets, stews) in Farmer's Delight's pot and on its board; its Farm & Charm copies are not copied again by `cuisine.js` ([0034](decisions/0034-starcatcher-fishing.md)) |
@@ -115,7 +115,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed; cobblestone bricks back since 2026-11-13 ([pack sort](plan/tri-du-pack.md)) |
 | Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including those of Regions Unexplored |
 | HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
-| Immersive Enchanting | `immersive-enchanting` | ✅ (beta) | CS | Enchanting becomes lore: ancient books found, shelved near the table, levels paid in materials ([0008](decisions/0008-enchantement.md)); structures disabled, French translation |
 
 ## Body, camera and gestures
 
@@ -210,7 +209,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 
 ## Libraries
 
-Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Teal Lib (Spawn), Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
+Already present: Configurable (Neruina), Architectury API, Balm, Cloth Config, CorgiLib, Data Anchor, Fragmentum, MRU, Puzzles Lib, CodxLib, CreativeCore, Curios API, Fzzy Config, GeckoLib, Hybrid API, Kiwi, Teal Lib (Spawn), Knight Lib, Kotlin for Forge, Lithostitched, McQoy, Modonomicon (required by Icy's Better Horses; its stable handbook has no recipe and is hidden from EMI), Moonlight Lib, Patchouli, Resourceful Config, Resourceful Lib, Rhino, YACL, Zeta, Create: Dragons Plus (Create: Central Kitchen), Diegesis (Hands-On Delight, listed with it above). Astemir Re-Lib (Archie's Dinosaurs) is not a packwiz file but a jar committed in `pack/mods/`: its author withdraws each build from Modrinth within a day ([0021](decisions/0021-spelunkery-and-dinosaurs.md)).
 
 ## Dropped or rejected
 
@@ -272,7 +271,8 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Create Villager Labor, Open Parties and Claims | Useless among friends |
 | Salt's Animal Farm, Animal Genders, Kaleidoscope Tavern, Thirst Canteen, Tide, Nutritional Balance | One more gauge or activity for a role already covered |
 | Reactive Music | Silence between tracks capped at 2 min, 295 MB jar, cuts vanilla music ([research](archive/plan/recherche/2026-10-19/musique.md)) |
-| Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](archive/plan/recherche/2026-10-19/enchantement.md)) |
+| Easy Magic | Replaces the vanilla table that the enchanting overhaul depends on ([research](archive/plan/recherche/2026-10-19/enchantement.md)); makes enchanting easier, against [0045](decisions/0045-awakening.md) |
+| Immersive Enchanting | Removed on 2026-11-21: a found book unlocked its enchantment for everyone without being used up ([0045](decisions/0045-awakening.md)) |
 | Better Archeology, Traveler's Titles, Create: New Beginnings, Let The Adventure Begin, MCG's RPG Campsites | Content without a strong mechanic, or breaks the mystery |
 | Kaleidoscope Cookery, Kaleidoscope Compat, KaleidoscopeCookery-Automation | Replaced on 2026-11-15 by Farmer's Delight, Hands-On Delight and Create: Central Kitchen ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | Legendary Survival Overhaul | Cold Sweat and Thirst Was Reclaimed kept |

@@ -1,0 +1,18 @@
+{
+  "type": "fallow:eclat_de_bete",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "mowziesmobs:entities/sculptor"
+    },
+    {
+      "condition": "minecraft:killed_by_player"
+    }
+  ],
+  "eclat": {
+    "enchantement": "minecraft:feather_falling",
+    "niveau": 4,
+    "bete": "entity.mowziesmobs.sculptor"
+  },
+  "chance": 1.0
+}
