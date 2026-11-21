@@ -22,6 +22,16 @@ public final class StormView {
     private StormView() {
     }
 
+    /** Force de la tempête de sable vue de la caméra, de 0 à 1 ; le module rendu la passe au pack de shaders. */
+    public static float sand() {
+        return sand;
+    }
+
+    /** Force de la tempête de neige vue de la caméra, de 0 à 1. */
+    public static float snow() {
+        return snow;
+    }
+
     /**
      * Ferme la brume ({@code r, g, b, début, fin}) et la teinte selon la tempête en cours. La teinte garde la
      * lumière du moment : la nuit, le sable reste sombre.

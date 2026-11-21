@@ -3,6 +3,7 @@ package io.github.salvagedisc.fallow.rendu;
 import io.github.salvagedisc.fallow.FallowConfig;
 import io.github.salvagedisc.fallow.clairiere.Clearing;
 import io.github.salvagedisc.fallow.clairiere.ClearingClient;
+import io.github.salvagedisc.fallow.climat.client.StormView;
 import io.github.salvagedisc.fallow.vent.Wind;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ public final class ShaderUniforms {
 
     private static final Vector4f MIST = new Vector4f();
     private static final Vector4f WIND_VALUE = new Vector4f();
+    private static final Vector4f STORM_VALUE = new Vector4f();
     private static final Vector4f[] CLEARING_VALUES = new Vector4f[CLEARINGS];
     private static final Vector4f[] GUST_VALUES = new Vector4f[GUSTS];
     private static final Vector4f[] PUSH_VALUES = new Vector4f[PUSHES];
@@ -108,6 +110,7 @@ public final class ShaderUniforms {
         uniforms.uniform1f(UniformUpdateFrequency.PER_FRAME, "brumaireLink", () -> FallowConfig.renduEnabled() ? 1.0F : 0.0F);
         uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireMist", () -> current(MIST));
         uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireWind", () -> current(WIND_VALUE));
+        uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireStorm", () -> current(STORM_VALUE));
         for (int i = 0; i < CLEARINGS; i++) {
             Vector4f value = CLEARING_VALUES[i];
             uniforms.uniform4f(UniformUpdateFrequency.PER_FRAME, "brumaireClearing" + i, () -> current(value));
@@ -157,6 +160,7 @@ public final class ShaderUniforms {
         WAKE_SPEEDS[0].zero();
         WAKE_SPEEDS[1].zero();
         WIND_VALUE.zero();
+        STORM_VALUE.zero();
 
         Minecraft minecraft = Minecraft.getInstance();
         ClientLevel level = minecraft.level;
@@ -178,6 +182,8 @@ public final class ShaderUniforms {
         MIST.set(lift, anchor, 0.0F, 0.0F);
 
         Wind.fill(WIND_VALUE, GUST_VALUES, camera);
+        // Les tempêtes du module climat (zéro sans lui) : x sable, y neige.
+        STORM_VALUE.set(StormView.sand(), StormView.snow(), 0.0F, 0.0F);
         pushes(level, camera, partial, seconds);
         wakes(level, camera, partial);
     }

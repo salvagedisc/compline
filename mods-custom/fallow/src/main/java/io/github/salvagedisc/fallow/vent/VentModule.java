@@ -8,7 +8,8 @@ import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * Module vent (client) : le vent de Fallow ({@link Wind}), que suivent la fumée des feux de camp
- * ({@link Smoke}) et, sous Iris, le pack de shaders Brumaire (plantes, pluie).
+ * ({@link Smoke}), les brins qui filent avec lui sans pack de shaders ({@link WindMotes}) et, sous Iris, le pack de
+ * shaders Brumaire (plantes, pluie).
  */
 public final class VentModule {
     private VentModule() {
@@ -19,6 +20,7 @@ public final class VentModule {
             Minecraft minecraft = Minecraft.getInstance();
             if (minecraft.level != null && !minecraft.isPaused()) {
                 Wind.tick(minecraft.level, minecraft.gameRenderer.getMainCamera().getPosition());
+                WindMotes.tick(minecraft.level, minecraft.gameRenderer.getMainCamera().getPosition());
             }
         });
         Fallow.LOGGER.info("vent : vent du pack et fumée des feux de camp");

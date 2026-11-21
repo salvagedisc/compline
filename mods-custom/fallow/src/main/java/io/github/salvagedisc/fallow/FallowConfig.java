@@ -31,9 +31,13 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CLAIRIERE_ENABLED;
     private static final ModConfigSpec.IntValue CLAIRIERE_RING_TICKS;
     private static final ModConfigSpec.DoubleValue CIEL_CLEARING_FADE;
+    private static final ModConfigSpec.BooleanValue CIEL_MIST_WITHOUT_SHADER;
+    private static final ModConfigSpec.IntValue CIEL_MIST_DISTANCE;
+    private static final ModConfigSpec.IntValue CIEL_CLEARING_DISTANCE;
     private static final ModConfigSpec.BooleanValue OUTILS_ENABLED;
     private static final ModConfigSpec.BooleanValue RENDU_ENABLED;
     private static final ModConfigSpec.BooleanValue VENT_ENABLED;
+    private static final ModConfigSpec.BooleanValue VENT_MOTES;
     private static final ModConfigSpec.BooleanValue BORD_ENABLED;
     private static final ModConfigSpec.BooleanValue ZOO_ENABLED;
     private static final ModConfigSpec.IntValue ZOO_SPOT_DISTANCE;
@@ -93,6 +97,17 @@ public final class FallowConfig {
                         "secondes pour passer d'une brume pleine à un ciel dégagé, ou l'inverse (le fondu ralentit en fin",
                         "de course ; la brume visible part dans les 4 ou 5 premières). 0 : fondu normal d'ATMOSPHERICS, presque immédiat.")
                 .defineInRange("clearingFadeSeconds", 10.0, 0.0, 30.0);
+        CIEL_MIST_WITHOUT_SHADER = client
+                .comment("Sans pack de shaders, la brume d'ATMOSPHERICS devient celle du pack : à l'air libre sur la Surface,",
+                        "elle finit à mistDistance (hors désert et badlands) et s'ouvre dans les clairières jusqu'à",
+                        "clearingDistance ; la nuit, les deux distances tombent à 55 %. Sans effet sous Brumaire, qui a sa brume.")
+                .define("mistWithoutShader", true);
+        CIEL_MIST_DISTANCE = client
+                .comment("Fin de la brume de jour hors des clairières, sans pack de shaders, en blocs.")
+                .defineInRange("mistDistance", 128, 32, 512);
+        CIEL_CLEARING_DISTANCE = client
+                .comment("Fin de la brume de jour dans une clairière, sans pack de shaders, en blocs.")
+                .defineInRange("clearingDistance", 480, 128, 1024);
         client.pop();
 
         client.comment("Module horizon (client) : le paysage lointain de Distant Horizons suit la brume du terrain.").push("horizon");
@@ -124,6 +139,10 @@ public final class FallowConfig {
                 .comment("Interrupteur de la fumée des feux de camp. Vrai : elle suit le vent, les feux voisins font un seul",
                         "panache, le feu des âmes bleuit sa fumée. Faux : la fumée du jeu.")
                 .define("enabled", true);
+        VENT_MOTES = client
+                .comment("Sans pack de shaders, de fins brins pâles filent avec le vent à l'air libre, pour qu'on lise d'où il",
+                        "souffle (il porte l'odeur du joueur vers les bêtes). Sans effet sous Brumaire, dont les herbes ondulent.")
+                .define("motes", true);
         client.pop();
 
         client.comment("Module ecran (client) : l'interface s'efface quand on ne fait rien.").push("ecran");
@@ -345,6 +364,18 @@ public final class FallowConfig {
         return cielEnabled() ? (float) read(CLIENT_SPEC, CIEL_CLEARING_FADE) : 0.0F;
     }
 
+    public static boolean cielMistWithoutShader() {
+        return cielEnabled() && read(CLIENT_SPEC, CIEL_MIST_WITHOUT_SHADER);
+    }
+
+    public static float cielMistDistance() {
+        return read(CLIENT_SPEC, CIEL_MIST_DISTANCE);
+    }
+
+    public static float cielClearingDistance() {
+        return read(CLIENT_SPEC, CIEL_CLEARING_DISTANCE);
+    }
+
     public static boolean horizonEnabled() {
         return read(CLIENT_SPEC, HORIZON_ENABLED);
     }
@@ -360,6 +391,10 @@ public final class FallowConfig {
 
     public static boolean ventEnabled() {
         return read(CLIENT_SPEC, VENT_ENABLED);
+    }
+
+    public static boolean ventMotes() {
+        return read(CLIENT_SPEC, VENT_MOTES);
     }
 
     public static boolean renduEnabled() {

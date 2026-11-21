@@ -528,6 +528,16 @@ void main() {
         curtain *= mix(0.35, 1.3, showerAt(cameraPosition.xz + dir.xz * min(len, 160.0)));
 #endif
         if (curtain > 0.0) color = mix(color, gAmbient * 1.25 + gLightColor * 0.1 + vec3(0.02), min(curtain * 0.2, 0.35));
+
+        // Les tempêtes du pack (module climat) : le sable ou la neige soufflés ferment la vue et teintent l'air, comme
+        // la brume sans shader (StormView) : à 22 blocs dans le sable, 36 dans la neige, le paysage est presque perdu.
+        if (brumaireLink > 0.5 && max(brumaireStorm.x, brumaireStorm.y) > 0.001) {
+            bool sand = brumaireStorm.x >= brumaireStorm.y;
+            float strength = sand ? brumaireStorm.x : brumaireStorm.y;
+            float storm = 1.0 - exp(-3.0 * strength * len / (sand ? 22.0 : 36.0));
+            vec3 tint = sand ? vec3(0.80, 0.66, 0.47) : vec3(0.86, 0.89, 0.93);
+            color = mix(color, tint * (luma(gAmbient) * 1.6 + luma(gLightColor) * 0.35), storm * 0.97);
+        }
     }
 #if SHADER_RAIN > 0
     if (isEyeInWater == 0 && rainStrength > 0.0) {

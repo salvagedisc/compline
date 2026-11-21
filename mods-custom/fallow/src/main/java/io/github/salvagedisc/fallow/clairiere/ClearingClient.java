@@ -17,11 +17,13 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -127,6 +129,28 @@ public final class ClearingClient {
     /** Rayon dégagé d'une clairière en ce moment, vague comprise, lissé d'une image à l'autre. */
     public static float radius(Clearing clearing, float partialTick) {
         return clearing.smoothRadiusAt(time + (double) partialTick, ringTicks);
+    }
+
+    /**
+     * Part de brume levée en ce point (0 hors des clairières, 1 à {@code blocks} blocs ou plus à l'intérieur du bord,
+     * adoucie entre les deux), là où le biome se dégage. Fil du client.
+     */
+    public static float liftAt(ClientLevel level, Vec3 at, float partialTick, double blocks) {
+        List<Clearing> open = open(level);
+        if (open.isEmpty() || !clears(level, BlockPos.containing(at))) {
+            return 0.0F;
+        }
+        double inside = 0.0;
+        for (Clearing clearing : open) {
+            float radius = radius(clearing, partialTick);
+            if (radius <= 0.0F || !clears(level, clearing.center())) {
+                continue;
+            }
+            double dx = clearing.center().getX() + 0.5 - at.x, dz = clearing.center().getZ() + 0.5 - at.z;
+            inside = Math.max(inside, radius - Math.sqrt(dx * dx + dz * dz));
+        }
+        float t = (float) Mth.clamp(inside / blocks, 0.0, 1.0);
+        return t * t * (3.0F - 2.0F * t);
     }
 
     /** Vrai si le biome de {@code pos} fait partie de ceux qui se dégagent (ni océan, ni plage, ni désert, ni grotte). */

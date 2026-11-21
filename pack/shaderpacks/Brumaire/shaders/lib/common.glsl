@@ -24,6 +24,7 @@ uniform ivec2 eyeBrightnessSmooth;
 // Liaison avec le mod du pack. Sans lui, Iris laisse ces valeurs à zéro et le shader garde ses replis.
 uniform float brumaireLink;
 uniform vec4 brumaireMist;      // x : part de brume levée autour de la caméra, y : altitude du sol lissée
+uniform vec4 brumaireStorm;     // x : force de la tempête de sable, y : de neige (module climat), de 0 à 1
 uniform vec4 brumaireWind;      // xy : direction, z : force, w : turbulence
 uniform vec4 brumaireClearing0; // xy : centre vu de la caméra, z : rayon, w : force
 uniform vec4 brumaireClearing1;

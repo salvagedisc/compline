@@ -3652,8 +3652,8 @@ hash = "2c88d3eceb7be9c5964ca32c24612ca08d7326b4cb06104e98d56efa777de640"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.35.2.jar"
-hash = "e9216d3b3c454ef7d0a78bdb7fbe1144b5997d7230a6e932cc6258f2fb1f87e3"
+file = "mods/fallow-0.36.0.jar"
+hash = "da5cb6d53d783d3a1e7f40df11da1bccf1af7ec34b388b7d342d0af3e7f3b768"
 
 [[files]]
 file = "mods/farmers-delight.pw.toml"
@@ -4483,7 +4483,7 @@ hash = "d3e3912228ad035402b02db2ae270f00285baea1c61e87a49313bc30555dda95"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/common.glsl"
-hash = "dc2c19b91663db55c769f6eeed0a659b8cb1eed77056ed7e2f0035d23253c98d"
+hash = "4130f856306e5fb113ac15af06a1bdb0569a06c17f57be8806aeacdc3938dd4b"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/lib/cover.glsl"
@@ -4731,7 +4731,7 @@ hash = "effac3ca4ede47835e907152fb2fbc3b4470185f798f6e7065f528085e57e29c"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/mist.fsh"
-hash = "af827df1a990faea8f2031fb234e3fddd4b1c3fd80f3e35ea1499e9d93cf7031"
+hash = "bd0de504ab0f5bea4883392ec978a1999db597abbfc5b41b0ccf64d812a4fbc2"
 
 [[files]]
 file = "shaderpacks/Brumaire/shaders/program/motion.fsh"
