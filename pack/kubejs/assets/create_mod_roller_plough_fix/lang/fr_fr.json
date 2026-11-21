@@ -1,0 +1,11 @@
+{
+  "create_mod_roller_plough_fix.simulated_locking.title": "Verrouillage sur engin simulé",
+  "create_mod_roller_plough_fix.simulated_locking.always_locked": "Toujours verrouillé",
+  "create_mod_roller_plough_fix.simulated_locking.unpowered_locked": "Sans signal -> verrouillé",
+  "create_mod_roller_plough_fix.simulated_locking.powered_locked": "Avec signal -> verrouillé",
+  "create_mod_roller_plough_fix.simulated_locking.always_unlocked": "Jamais verrouillé",
+  "create_mod_roller_plough_fix.ponder.roller_simulated.header": "Rouleaux mécaniques sur engin simulé",
+  "create_mod_roller_plough_fix.ponder.roller_simulated.text_1": "Ces rouleaux mécaniques sont montés sur un engin simulé",
+  "create_mod_roller_plough_fix.ponder.roller_simulated.text_2": "Les rouleaux mécaniques ne pavent que dans le sens où ils avancent.",
+  "create_mod_roller_plough_fix.ponder.roller_simulated.text_3": "Le verrouillage par redstone décide quand les rouleaux peuvent travailler."
+}
