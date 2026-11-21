@@ -59,6 +59,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.DoubleValue TANNERIE_BARK_CHANCE;
     private static final ModConfigSpec.DoubleValue TANNERIE_FAT_CHANCE;
     private static final ModConfigSpec.BooleanValue POSTES_TANNERIE;
+    private static final ModConfigSpec.BooleanValue POSTES_FORGE;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -337,6 +338,10 @@ public final class FallowConfig {
         POSTES_TANNERIE = common
                 .comment("Le chevalet, la cuve à tan et le séchoir s'ouvrent en postes. Faux : on y travaille au clic, comme avant.")
                 .define("tannerie", true);
+        POSTES_FORGE = common
+                .comment("Les enclumes de forge d'Overgeared s'ouvrent en postes : les pièces, le marteau et le plan se posent sur",
+                        "l'enclume, le livre de forge à côté ; on frappe toujours accroupi, le marteau en main. Faux : la fenêtre d'Overgeared.")
+                .define("forge", true);
         common.pop();
 
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
@@ -528,6 +533,10 @@ public final class FallowConfig {
 
     public static boolean postesTannerie() {
         return read(COMMON_SPEC, POSTES_TANNERIE);
+    }
+
+    public static boolean postesForge() {
+        return read(COMMON_SPEC, POSTES_FORGE);
     }
 
     public static int tannerieStrokes() {

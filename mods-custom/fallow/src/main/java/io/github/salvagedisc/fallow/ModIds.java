@@ -25,6 +25,7 @@ public final class ModIds {
     public static final String ECLIPTIC_SEASONS = "eclipticseasons";
     public static final String THIRST = "thirst";
     public static final String DIEGESIS = "diegesis";
+    public static final String OVERGEARED = "overgeared";
 
     private ModIds() {
     }

@@ -124,6 +124,7 @@ dependencies {
 
     // Module postes : les postes en monde de Diegesis (bibliothèque de Hands-On Delight et Hands-On Vanilla)
     compileOnly modrinth('diegesis-api')
+    compileOnly modrinth('overgeared') // le poste de l'enclume de forge
 
     // Module dissipateur
     compileOnly modrinth('create')

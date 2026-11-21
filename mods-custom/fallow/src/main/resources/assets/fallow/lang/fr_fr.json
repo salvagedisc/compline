@@ -209,5 +209,13 @@
   "postes.fallow.livre.sechage": "Soleil ou feu",
   "postes.fallow.livre.ailleurs.raclage": "La peau se racle sur le chevalet à écharner.",
   "postes.fallow.livre.ailleurs.tannage": "La peau raclée se tanne dans la cuve à tan.",
-  "postes.fallow.livre.ailleurs.sechage": "Le cuir mouillé sèche sur le séchoir."
+  "postes.fallow.livre.ailleurs.sechage": "Le cuir mouillé sèche sur le séchoir.",
+  "postes.fallow.livre.forge": "%s coups",
+  "postes.fallow.livre.onglet.tout": "Toutes les recettes",
+  "postes.fallow.livre.onglet.recent": "Faites récemment",
+  "postes.fallow.livre.onglet.tool_heads": "Têtes d'outils",
+  "postes.fallow.livre.onglet.armors": "Armures",
+  "postes.fallow.livre.onglet.misc": "Divers",
+  "postes.fallow.forge.manque": "Il vous manque : %s.",
+  "postes.fallow.forge.pret": "%s : accroupissez-vous, le marteau en main, et frappez l'enclume."
 }

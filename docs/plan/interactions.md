@@ -50,7 +50,7 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 | Crafting | Crafting table worked by hand with its recipe book beside it (Hands-On Vanilla, [0043](../decisions/0043-hands-on-vanilla.md)); knapping grid of Overgeared (a rock in each hand), drafting table | Gesture at the crafting table; menu elsewhere |
 | Smelting | Furnace, smoker, blast furnace worked by hand (Hands-On Vanilla); Overgeared's alloy and casting furnaces | Gesture; menu for Overgeared's |
 | Cooking a dish | Farmer's Delight's pot, board, skillet and stove through Hands-On Delight; campfire | Gesture, stirring as craft skill |
-| Smithing | Overgeared's anvil: ingredients in its window, then sneak + use with the hammer and strikes in the world | Menu, then craft skill |
+| Smithing | Overgeared's anvil worked as a station (`postes` module): pieces, hammer and blueprint laid on it, a forge book beside it; then sneak + use with the hammer and strikes in the world | Gesture, then craft skill |
 | Fishing | Starcatcher | Craft skill (classic bobber: none) |
 | Leather | House tannery: beam, vat, frame, each a station (`postes` module) | Gesture |
 | Grinding, polishing | Grindstone (Spelunkery's gems, Overgeared's grinding), Create's millstone and crushers | Menu / machines |

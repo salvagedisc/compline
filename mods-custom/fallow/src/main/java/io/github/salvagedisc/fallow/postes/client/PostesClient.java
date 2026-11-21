@@ -13,9 +13,10 @@ import net.neoforged.neoforge.common.NeoForge;
 
 import com.pockyl.diegesis.api.client.DiegesisClient;
 
+import io.github.salvagedisc.fallow.ModIds;
 import io.github.salvagedisc.fallow.postes.PostesTannerie;
 
-/** L'allure des postes sur le client : une conduite par poste, le livre de la tannerie ouvert à la page du bloc. */
+/** L'allure des postes sur le client : une conduite par poste, le livre de la tannerie ouvert à la page du bloc, la forge. */
 public final class PostesClient {
     private static final Set<ResourceLocation> TANNERIE = Set.of(PostesTannerie.CHEVALET, PostesTannerie.CUVE, PostesTannerie.SECHOIR);
 
@@ -32,6 +33,9 @@ public final class PostesClient {
         DiegesisClient.registerBehavior(PostesTannerie.SECHOIR, view -> new TannerieBehavior(TannerieBook.SECHAGE));
         NeoForge.EVENT_BUS.addListener(ClientChatReceivedEvent.System.class, PostesClient::auPoste);
         NeoForge.EVENT_BUS.addListener(InputEvent.InteractionKeyMappingTriggered.class, PostesClient::usage);
+        if (ModIds.isLoaded(ModIds.OVERGEARED)) {
+            PostesForge.register();
+        }
     }
 
     private static void usage(InputEvent.InteractionKeyMappingTriggered event) {
@@ -55,7 +59,7 @@ public final class PostesClient {
      */
     private static void auPoste(ClientChatReceivedEvent.System event) {
         if (event.isOverlay()) {
-            DiegesisClient.focusedStation().filter(view -> TANNERIE.contains(view.type().id())).ifPresent(view -> {
+            DiegesisClient.focusedStation().filter(view -> TANNERIE.contains(view.type().id()) || ForgeIds.estForge(view.type().id())).ifPresent(view -> {
                 view.showCaption(event.getMessage(), 2.5F);
                 event.setCanceled(true);
             });

@@ -1,0 +1,233 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
+  "$comment": "L'enclume de forge d'Overgeared est le bloc lui-même ; le poste tourne vers le joueur, la grille tient donc dans le carré du milieu de la table, commun aux deux sens de l'enclume (x et z de 3 à 13). grille_N : les neuf cases du menu d'Overgeared, dans son ordre, du fond à gauche (vu de la caméra) au devant à droite. marteau flotte à droite devant, ouvrage (ce que la forge a fini) à droite derrière. book_open est le livre de forge, ouvert en l'air à gauche ; rangé, il est posé au sol à gauche de l'enclume. grille est un pivot pour les bruits. La caméra se tient au-dessus du bord proche et regarde vers le bas.",
+  "work_plane": 16,
+  "idle_visible": false,
+  "camera": {
+    "position": [
+      8,
+      46,
+      -15
+    ],
+    "target": [
+      8,
+      16,
+      7
+    ],
+    "fov": 40,
+    "interactive_at": 0.6
+  },
+  "interface": {
+    "hide_player": true,
+    "inventory_panel": false,
+    "sounds": false,
+    "carry_lift": 1.5,
+    "highlight_color": "#26FFFFFF",
+    "hover_outline": false
+  },
+  "inventory_drawer": {
+    "layout": "hotbar",
+    "always_open": true,
+    "carry_size": 2.4
+  },
+  "nodes": [
+    {
+      "id": "grille",
+      "pos": [
+        8,
+        16,
+        8
+      ]
+    },
+    {
+      "id": "grille_0",
+      "pos": [
+        11,
+        16.02,
+        11
+      ],
+      "slot": {
+        "slot": "grille[0]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_1",
+      "pos": [
+        8,
+        16.02,
+        11
+      ],
+      "slot": {
+        "slot": "grille[1]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_2",
+      "pos": [
+        5,
+        16.02,
+        11
+      ],
+      "slot": {
+        "slot": "grille[2]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_3",
+      "pos": [
+        11,
+        16.02,
+        8
+      ],
+      "slot": {
+        "slot": "grille[3]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_4",
+      "pos": [
+        8,
+        16.02,
+        8
+      ],
+      "slot": {
+        "slot": "grille[4]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_5",
+      "pos": [
+        5,
+        16.02,
+        8
+      ],
+      "slot": {
+        "slot": "grille[5]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_6",
+      "pos": [
+        11,
+        16.02,
+        5
+      ],
+      "slot": {
+        "slot": "grille[6]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_7",
+      "pos": [
+        8,
+        16.02,
+        5
+      ],
+      "slot": {
+        "slot": "grille[7]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "grille_8",
+      "pos": [
+        5,
+        16.02,
+        5
+      ],
+      "slot": {
+        "slot": "grille[8]",
+        "size": 2.6,
+        "item_size": 2.4
+      }
+    },
+    {
+      "id": "marteau",
+      "pos": [
+        -2,
+        16.5,
+        4
+      ],
+      "slot": {
+        "slot": "marteau[0]",
+        "display": "floating",
+        "size": 3.4,
+        "ghost": [
+          "#overgeared:smithing_hammers"
+        ],
+        "ghost_alpha": 0.35
+      }
+    },
+    {
+      "id": "ouvrage",
+      "pos": [
+        -2,
+        17,
+        11.5
+      ],
+      "output": {
+        "output": "ouvrage",
+        "display": "floating",
+        "size": 3.4,
+        "count_facing": "camera"
+      }
+    },
+    {
+      "id": "book_open",
+      "pos": [
+        20,
+        22,
+        4
+      ],
+      "rotation": [
+        -56,
+        0,
+        0
+      ],
+      "scale": 0.85,
+      "hidden": true,
+      "collider": {
+        "from": [
+          -5.3,
+          -0.4,
+          -3.9
+        ],
+        "to": [
+          5.3,
+          1.4,
+          3.9
+        ]
+      },
+      "extra": {
+        "rest": {
+          "offset": [
+            -1,
+            -21.6,
+            2
+          ],
+          "turn": [
+            54.19,
+            20.81,
+            17.13
+          ],
+          "scale": 0.4
+        }
+      }
+    }
+  ]
+}

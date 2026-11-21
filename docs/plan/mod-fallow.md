@@ -44,7 +44,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
 | `indices` | client | none | 1, client (`indices.GuiOverlayAccessor`, an accessor on vanilla code) |
 | `hotes` | both (the emissaries and masks on the server, the dialogue window, masks and regalia on the client) | none; Archie's Dinosaurs for the beasts' armour | none |
-| `postes` | both (the stations and their work on the server, the scenes and the book on the client) | Diegesis | none |
+| `postes` | both (the stations and their work on the server, the scenes and the book on the client) | Diegesis; Overgeared for the forge | 3, client, with Overgeared: `postes.ForgeRendererMixin` (vanilla code), `postes.MenuOuvertureMixin` (NeoForge), `postes.MenuCreationMixin` (vanilla code) |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -399,17 +399,19 @@ Config (`fallow-common.toml`, `[tannerie]`): `enabled` (true), `strokes` (6), `t
 
 ## `postes` module
 
-Client and server, needs Diegesis (the library of Hands-On Vanilla and Hands-On Delight, by Pocky). Fallow's own blocks worked by hand in the world, on the model of those two mods, so that every station plays the same ([interactions](interactions.md)). The first ones are the three blocks of the tannery ([tannery](tannerie.md#at-the-station)).
+Client and server, needs Diegesis (the library of Hands-On Vanilla and Hands-On Delight, by Pocky). Fallow's own blocks and the pack's other mods' blocks worked by hand in the world, on the model of those two mods, so that every station plays the same ([interactions](interactions.md)): the three blocks of the tannery ([tannery](tannerie.md#at-the-station)) and Overgeared's smithing anvils.
 
 - **`PostesTannerie`**: one Diegesis station per block (`fallow:chevalet`, `fallow:cuve_a_tan`, `fallow:sechoir`), no slots of its own (empty schema), opened by a right-click unless crouching (the block then keeps its usual right-click) or when `[postes] tannerie` is off.
 - **`Ouvrage`** (in `tannerie`): the work of each block, shared by the right-click in the world and the station: `travailler` (an item works on the block; what replaces it and what comes out are handed back) and `mainVide` (take what is finished, or read how far it is).
 - **`OuvrageLogic`** (server): three custom actions. `travailler` takes the item on the cursor, or from inventory slot `depuis`; what comes out goes to the inventory, or to the ground when it is full. `main_vide` is the empty hand. `garnir` fills the block from the inventory, for the page picked in the book: the beam a raw hide, the frame a wet leather, the vat its water if missing, then one bark and one scraped hide (with `tout`, Shift: up to four).
 - **Client** (`postes.client`): the scenes in `assets/fallow/diegesis/scenes/` (camera, the block's clickable surface, the book's place), `TannerieBehavior` (the cursor laid on the block, Shift + click in the inventory, the empty hand on the block, coming to the block with a useful item in hand makes the first gesture once the camera has arrived, the inventory greys what the tannery does not use), `TannerieBook` (three pages: scraping, tanning, drying; the page of the block where one is; a page of another block says where it is done). While a station is open the action bar is hidden, so the blocks' messages become the scene's caption.
 - **Recipe book** (`RecipeBook`, `RecipeBookModel`, `BookTabs`, `IconLight`, `BookMath`): taken from Hands-On Vanilla 1.2.2 (MIT), its own textures under `textures/entity/livre_de_recettes*.png`; it remembers its page in `config/fallow-livres.properties`.
+- **The forge** (`PostesForge`, client only, as Hands-On Vanilla's stations): two menu stations bound to Overgeared's own menus, so the server sees the usual anvil window. `fallow:enclume_de_pierre` (the stone anvil: hammer, nine cells, result at menu slots 0, 1 to 9, 10) and `fallow:enclume` (the steel, tier A and tier B anvils: hammer, blueprint, cells, result at 0, 1, 2 to 10, 11; Overgeared's `enableBlueprintForging` must stay on). Scenes `enclume.json` and `enclume_de_pierre.json`: the grid on the middle of the anvil's top (the square both directions of the anvil share, as the station turns to the player), the hammer and the result floating to the right, the blueprint to the left behind the book. The station opens on a right-click, not crouching, and with the hammer in hand only while the grid is empty: crouch + use with the hammer still starts Overgeared's strikes, and use with the hammer strikes. `ForgeBook`: the forging recipes of the anvil's tier or lower, by Overgeared's tabs (tool heads, armour, misc), with their grid, strikes and blueprint; a page picked lays one piece per cell from the inventory with plain slot clicks, and says what is missing. `ForgeBehavior`: a metal sound when a piece lands or leaves, the caption « <result> : accroupissez-vous, le marteau en main, et frappez l'enclume. » when the grid makes a recipe, the inventory greying what does not forge here.
+- **Overgeared's menus and Diegesis**: Overgeared opens its anvils through NeoForge's menu with extra data (the block's position), which Diegesis does not hear (beta.14 in the pack, still so in beta.15): it waits for the vanilla open packet. `MenuOuvertureMixin` replays that NeoForge payload as the vanilla packet for these four menus only, and `MenuCreationMixin` makes the menu with its extra data while it is created, by Diegesis or by the vanilla screen. `ForgeRendererMixin` stops Overgeared's drawing of the pieces stacked on the anvil while the scene shows them in their cells.
 
-Config (`fallow-common.toml`, `[postes]`): `tannerie` (true).
+Config (`fallow-common.toml`, `[postes]`): `tannerie` (true), `forge` (true).
 
-**Checked** on the bench on 2026-11-21: each of the three stations, by the cursor, by the book (Shift on the vat) and coming with the item in hand; the caption of the frame.
+**Checked** on the bench on 2026-11-21: each of the three tannery stations, by the cursor, by the book (Shift on the vat) and coming with the item in hand; the caption of the frame. The steel anvil: shears laid from the book, the caption, crouch + hammer started the strikes, three strikes forged them, taken from the station; the stone anvil opens with its four pages and takes the hammer in its slot.
 
 ## `hotes` module
 
@@ -652,6 +654,15 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | # | Test | Expected |
 |---|---|---|
 | TA1 to TA8 | Hides, fleshing beam, bark, vat, drying frame, fat, quest, the three stations | See [tannerie.md](tannerie.md#in-game-tests) |
+
+### Forge station
+
+| # | Test | Expected |
+|---|---|---|
+| FO1 | Right-click a stone anvil, then a steel anvil, empty-handed | The camera comes over the anvil; the forge book beside it lists the recipes of that anvil (fewer on the stone one), with French tabs; the hammer's place shows a faint hammer, the steel anvil's blueprint place a faint blueprint |
+| FO2 | Pick a page with the ingots in the inventory | One ingot per cell, in the recipe's shape; the caption says to crouch and strike; a page with a missing piece says which |
+| FO3 | Leave, crouch + use with the hammer, then strike | Overgeared's strikes as before; once done, a right-click (hammer in hand or not) opens the station with the result floating to the right; a click takes it |
+| FO4 | `[postes] forge = false` | Overgeared's window, as before |
 
 ### Held items
 
