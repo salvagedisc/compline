@@ -39,7 +39,7 @@ Config (`fallow-common.toml`, `[climat]` section): `enabled` (true), `seasonStre
 
 - **Sand**: tawny dust blown along the pack's wind (`vent` module), up to 22 grains a tick around the camera, only where the sky is open; the mist closes to about 22 blocks and takes the colour of sand, darker at night.
 - **Snow storm**: blown snowflakes on top of the game's snow; the mist closes to about 36 blocks and turns white.
-- The strength follows the game's rain and thunder levels and eases in and out over about four seconds; under a roof the storm is still seen outside, at about a third. The mist goes through ATMOSPHERICS (the `ciel` module's hook on its smoothed fog, `StormView`), so it needs ATMOSPHERICS. **Brumaire draws its own mist** and does not know about storms yet: under the shader pack only the dust and flakes show. Passing the storm to Brumaire is left to the shader's own work.
+- The strength follows the game's rain and thunder levels and eases in and out over about four seconds; under a roof the storm is still seen outside, at about a third. The mist goes through ATMOSPHERICS (the `ciel` module's hook on its smoothed fog, `StormView`), so it needs ATMOSPHERICS. **Brumaire draws its own mist**: since `fallow` 0.36.0 the `rendu` module hands it the strength of the storm (`brumaireStorm`, x sand, y snow) and the shader closes the view the same way, at about 22 blocks in sand and 36 in snow, in the colour of the storm ([0041](../decisions/0041-gameplay-without-shader.md)).
 
 Config: `fallow-common.toml` `[climat]`: `snowCold` (0.12), `snowWet` (0.2), `sandThirst` (0.15); `fallow-client.toml` `[climat]`: `stormVisuals` (true).
 
@@ -79,7 +79,7 @@ Config: `fallow-common.toml` `[climat]`: `snowCold` (0.12), `snowWet` (0.2), `sa
 | CL4 | Go to the Nether in winter | `fallow:saison` adds 0 there |
 | CL5 | Set `seasonStrength = 0` in `fallow-common.toml`, then back to 1.5 | The season stops counting, then counts again, without restarting |
 | CL6 | In winter, `/weather thunder` in a forest, stand in the open for a minute, then go under a roof | `fallow:tempete` about −0.3 at once, then down to about −0.5 as snow settles; under the roof the falling snow stops counting and the settled snow melts within a minute |
-| CL7 | Snow storm, with and without Brumaire | Without shaders: blown flakes and a white mist at about 36 blocks; with Brumaire: the flakes only |
+| CL7 | Snow storm, with and without Brumaire | Both: blown flakes and a white mist at about 36 blocks |
 | CL8 | `/weather thunder` in a desert (or `/weather rain`), stand in the open | Dust blows with the wind, the mist closes to about 20 blocks and turns sand-coloured (without shaders); thirst drops about every 20 to 30 seconds |
 | CL9 | Same, under a roof or in a house | Thirst goes back to its usual pace; the storm is still seen outside, fainter |
 | CL10 | Savanna in Ecliptic's rainy season | Rain, not sand |

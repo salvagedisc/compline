@@ -192,6 +192,7 @@ All the geometry programs include `program/solid.vsh` and `program/solid.fsh` wi
 - **Frozen puddles** (`PUDDLE_ICE`; off in Very light): when the biome is cold (`airHeat` under about 0.5, colder than frost needs), at night and until mid-morning, with no rain falling and away from block light, puddles turn to ice: a dark grey-blue tint brightened along straight pixel cracks (up to two random lines per block), a pale frost rim where a neighbouring texel is out of the puddle, and the mirror reflection cut to a dull 0.10 gloss.
 - **Rain curtains**: beyond the game's drops, thin falling streaks over the distant landscape, leaning with the wind (`RAIN_CURTAINS`).
 - **The air** under rain turns a slightly warm grey and the mist thickens a little.
+- **Storms** (`brumaireStorm`, from the `climat` module): in a sand storm or a snow storm the view closes in the colour of the storm, almost lost at 22 blocks in sand and 36 in snow, like the fog without shader (`StormView`); laid over the mist, under the shader's own drops and flakes.
 - **Lightning**: the bolt (`gbuffers_lightning`) is a bright blue-white line that glows; while it strikes, the sky and the whole landscape flash, less when it falls far away (`lightningBoltPosition`).
 
 ### Rain and snow drawn by the shader
@@ -365,6 +366,7 @@ A mixin on Iris adds uniforms any program may declare. Without the mod they read
 | `brumairePush0..3` | Feet and reach of the living beings nearest the camera | no grass pushed aside |
 | `brumaireWake0..5`, `brumaireWakeSpeed0..1` | Surface point, half width and speed of the boats and swimmers nearest the camera | no wakes |
 | `brumaireGust0..1` | The two gust fronts nearest to passing | no gusts |
+| `brumaireStorm` | x: strength of the sand storm, y: of the snow storm (`climat` module), 0 to 1 | no storm |
 
 ## Other mods
 

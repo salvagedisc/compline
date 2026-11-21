@@ -58,6 +58,15 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **A clearing keeps its biome**: compare a clearing with the same biome ten blocks outside: same temperature (Cold Sweat), same rain or snow, same crop humidity and growth (Ecliptic Seasons), and the grass and leaves follow the season in both [K10]. The animals of the biome spawn in the clearing as elsewhere [K18]. A night in a clearing: no monster spawns inside; they do outside and can walk in [K17]. F3+T inside a clearing: the vivid colours stay [K20].
 - [ ] **Sky without shader**: sun, moon and stars bigger and brighter [R8]; no wind streaks or tumbleweeds from ATMOSPHERICS [R9]. (The wind, the swaying plants and the campfire smoke are tested under Brumaire, SH5 and SH14.)
 
+### Without the shader ([0041](decisions/0041-gameplay-without-shader.md))
+
+Press K to turn Brumaire off, play these, then press K again.
+
+- [ ] **Mist without shader** [NS1]: at noon in a forest or a plain, the landscape fades into the mist past about a hundred blocks (closer at night); in a desert it stays open. Light a vigil fire and walk to its centre: the mist withdraws over a few seconds and the far landscape appears; walk out and it comes back.
+- [ ] **Storms without and with shader** [NS2]: in a desert, `/weather thunder`: the view closes in sand-coloured air within about twenty blocks, with and without Brumaire; a snow storm (winter, taiga) closes it in white at about thirty-five.
+- [ ] **Wind without shader** [NS3]: in a plain with a breeze, pale motes drift low over the grass, all the same way, more and faster when the wind rises; turn Brumaire on: they stop and the grass sways instead.
+- [ ] **Nothing drawn that is not there** [NS4]: with Brumaire on, on a summer evening by a pond, every butterfly, moth, dragonfly, firefly, bird or bat seen can be hit or caught (an entity of a mod); no rings of fish, no icicles on roofs, no ice on the banks that is not a block.
+
 ### The look (Brumaire)
 
 > Brumaire is on from the first launch ([shader](plan/shader.md)), on a machine with a graphics card (not an Apple Silicon Mac). K turns it off. Note the frame rate of each profile next to the one without shader, and on the weakest machine of the group.
@@ -228,7 +237,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] **Altitude** (Cold Sweat: Altitude): it gets colder climbing a big Tectonic summit, less so under shelter.
 - [ ] Ecliptic seasons: they change the crops, with no heat stroke and no chat message.
 - [ ] **Seasons felt by the body** (`climat` module, [climat](plan/climat.md)): `/eclipticseasons solar set 64` (winter solstice), then `/temp debug @s world`: `fallow:saison` about −0.64 after the biome, the gauge falls outdoors [CL1]; `solar set 34` (greater heat) in a desert at noon: about +0.3 [CL2]; the offset moves a little each day, never in one jump [CL3]; nothing in the Nether [CL4]; `seasonStrength = 0` turns it off without a restart [CL5].
-- [ ] **Storms** (`climat` module, [climat](plan/climat.md#storms-second-step)): in winter, `/weather thunder` in a forest: falling snow chills at once, settled snow chills more within a minute and melts under a roof [CL6]; blown flakes and a white mist without shaders, flakes only with Brumaire [CL7]. In a desert under rain or thunder: dust in the wind, a sand-coloured mist, thirst about every 20 to 30 seconds in the open [CL8], the usual pace under a roof [CL9]; a savanna in its rainy season gets rain, not sand [CL10].
+- [ ] **Storms** (`climat` module, [climat](plan/climat.md#storms-second-step)): in winter, `/weather thunder` in a forest: falling snow chills at once, settled snow chills more within a minute and melts under a roof [CL6]; blown flakes and a white mist at about 36 blocks, with and without Brumaire [CL7]. In a desert under rain or thunder: dust in the wind, a sand-coloured mist, thirst about every 20 to 30 seconds in the open [CL8], the usual pace under a roof [CL9]; a savanna in its rainy season gets rain, not sand [CL10].
 - [ ] **Hot dishes** (Cold Sweat data, [climat](plan/climat.md#hot-dishes-third-step)): in winter, a beef stew warms the body by 25 for five minutes [CL11]; a second stew renews it, a hot cocoa adds a little more [CL12]; in a desert, a melon popsicle cools the body [CL13].
 - [ ] **Day length** (Better Days): time a day (30 min) and a night (15 min); the sky moves smoothly, also for a friend on the server; sleeping skips the night and Ecliptic counts the day; the Enhanced Celestials moon rises at dusk; the night music starts with the night [J1 to J5].
 - [ ] **Pack sort, recipes**: mincer refuses ores, stone and logs; Immersive Enchanting costs without Nether items; 3 flax for 2 ropes, rope arrow of 8, pulley with a cogwheel, kitchen knives through the forge; Farm & Charm crops follow the seasons [TR4 to TR7].

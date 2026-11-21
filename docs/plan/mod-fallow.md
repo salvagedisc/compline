@@ -48,6 +48,16 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 ## `ciel` module
 
+### The mist without shader
+
+Under Brumaire the mist and its clearings are the shader's. Without a shader pack (Apple Silicon Mac, K pressed, Iris absent) the mist is ATMOSPHERICS' own preset, which knows no clearing and stays light by day: lighting a vigil fire did not change it ([0041](../decisions/0041-gameplay-without-shader.md)). `PlainMist` takes ATMOSPHERICS' smoothed fog before `FogCache.smooth` (same `AtmosphericsFadeMixin` hook) and, only when Iris runs no shader pack, in the Overworld, with the camera in the open (the column's top under four blocks above it) and not in a fluid:
+
+- outside clearings, the end of the fog is brought down to `mistDistance` (128 blocks by day), except in desert and badlands biomes (`c:is_desert`, `c:is_badlands`);
+- in a clearing, it opens up to `clearingDistance` (480 blocks by day), from the share of lifted mist `ClearingClient.liftAt` gives (0 at the edge, 1 eight blocks inside, eased over 0.8 s), the same rule the `rendu` module hands the shader;
+- at night both distances fall to 55 %; the start keeps ATMOSPHERICS' proportion; storms (`StormView`) and the slow clearing fade still apply after it. The far landscape of Distant Horizons follows, through the `horizon` module.
+
+Config (`fallow-client.toml`, `[ciel]`): `mistWithoutShader` (true), `mistDistance` (128, 32 to 512), `clearingDistance` (480, 128 to 1,024).
+
 ### Enhanced Celestials' moon under ATMOSPHERICS
 
 **The problem.** ATMOSPHERICS cancels `LevelRenderer.renderSky` (injection at the start) and redraws the whole sky. Its moon still uses the vanilla `moon_phases.png` texture, at size 20 and in white. Enhanced Celestials' mixins on `renderSky` therefore no longer run: the white moon, the blood moon and the other events keep the appearance of the vanilla moon. The white moon is also smaller (14) than the vanilla moon: redrawing it on top is not enough, ATMOSPHERICS' moon must be hidden first.
@@ -222,7 +232,9 @@ Client, no other mod. `Wind` is the pack's wind, ticked on the client: a directi
 
 `Smoke` replaces the campfire smoke of `CampfireBlock.makeParticles` (client only): the same particle, led by the wind once it has risen, larger and longer-lived when several lit campfires stand within two blocks (their smokes draw together into one plume), bluish over a soul campfire; a block of Farm & Charm's `suppress_campfire_smoke_particles` tag above the fire still hides it. Built after the features of Better Smoke (MIT, Fabric only), without its code.
 
-Switch: `vent.enabled` in `config/fallow-client.toml` (the smoke; the wind itself always runs).
+`WindMotes` (0.36.0): without a shader pack, nothing else shows the wind that carries the player's scent to the animals (`approche`). In the open on the Overworld surface, fine pale motes are born near the ground within 12 blocks of the camera and drift along `Wind.velocity`: about one every eight ticks in a calm, up to three a tick in strong wind, half as many under thunder, darker at night, none under a storm's own dust. Under Brumaire the swaying plants show it and no mote is made.
+
+Switches in `config/fallow-client.toml`, `[vent]`: `enabled` (the smoke; the wind itself always runs), `motes` (true).
 
 ## `rendu` module
 
@@ -234,6 +246,7 @@ Client, needs Iris. It gives the house shader pack ([shader](shader.md)) what GL
 - `brumaireWind` and `brumaireGust0..1`: direction, strength, turbulence and the two nearest gust fronts of the pack's wind (`vent` module);
 - `brumairePush0..3`: the four living beings nearest the camera (feet seen from the camera, radius of grass they push aside), so the shader bends the grass under their steps.
 - `brumaireWet`: how wet the feet of those four beings are, in the same order: 1 while they touch water, then less with every block walked (dry after 24) and every second spent out of it (dry after 90 s), so the shader leaves wet prints behind them.
+- `brumaireStorm` (0.36.0): the strength of the sand storm (x) and the snow storm (y) seen from the camera, from `StormView` (`climat` module, zero without it), so Brumaire closes its mist in a storm as ATMOSPHERICS does without shader;
 - `brumaireWake0..5` and `brumaireWakeSpeed0..1`: the six boats, swimmers and wading animals nearest the camera within 28 blocks that straddle a water surface (point of the surface under them seen from the camera, half width, speed over the water); a passenger does not count, its boat does. The shader ripples the water and leaves a wake behind them.
 
 Switch: `rendu.enabled` in `config/fallow-client.toml`. Another shader pack never declares these uniforms and is not affected.
