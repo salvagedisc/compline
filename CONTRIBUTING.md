@@ -93,7 +93,7 @@ In-game testing is done in a **"Fallow test"** instance of the Modrinth App. `np
 
 ## Outside Git
 
-Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local exports; releases and the `dev` pre-release hold the built packs), `mods-custom/fallow/build/`, `mods-custom/fallow/run/` (Gradle dev client and server, with their worlds), `.gradle/`, `node_modules/`, `.cache/` (downloads of the scripts), `__pycache__/`. The only build outputs that are committed are the jars in `pack/mods/`: the `fallow` jar, the NeoForge ports of Surveyor, Antique Atlas and Antique Transport, built from the public repository `salvagedisc/fallow-atlas` (LGPL), and Astemir Re-Lib (withdrawn from Modrinth by its author, [0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)). Secrets live in the GitHub repository settings, never in files.
+Ignored by `.gitignore` and never committed: `dist/` and `*.mrpack` (local exports; releases and the `dev` pre-release hold the built packs), `mods-custom/fallow/build/`, `mods-custom/fallow/run/` (Gradle dev client and server, with their worlds), `.gradle/`, `node_modules/`, `.cache/` (downloads of the scripts), `__pycache__/`. The only build outputs that are committed are the jars in `pack/mods/`: the `fallow` jar, the NeoForge ports of Surveyor, Antique Atlas and Antique Transport, built from the public repository `salvagedisc/fallow-atlas` (LGPL), Astemir Re-Lib (withdrawn from Modrinth by its author, [0021](docs/decisions/0021-spelunkery-and-dinosaurs.md)) and Hands-On Vanilla (MIT, CurseForge only, [0043](docs/decisions/0043-hands-on-vanilla.md)). Secrets live in the GitHub repository settings, never in files.
 
 ## Current state
 

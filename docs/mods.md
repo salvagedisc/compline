@@ -57,6 +57,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 |---|---|---|---|---|
 | Farmer's Delight | `farmers-delight` | ✅ (1.21.1-1.3.4, added 2026-11-15) | CS | Cooking: cooking pot, cutting board, skillet, stove, keg, knives through the forge ([0030](decisions/0030-farmers-delight-kitchen.md)) |
 | Hands-On Delight + Diegesis | `handson-delight`, `diegesis-api` | ✅ (1.6.1 and 1.0.0-beta.14, added 2026-11-15, not seen in game) | CS | Farmer's Delight's stations used by hand in the world, first-person scenes; stirring stars give extra servings (no setting); translated by the pack ([0030](decisions/0030-farmers-delight-kitchen.md)) |
+| Hands-On Vanilla | jar in `pack/mods/` | ✅ (1.2.2, added 2026-11-21, seen on the bench) | C | The vanilla stations worked by hand in the world: crafting table with its recipe book beside it, furnace, smoker, blast furnace, stonecutter, smithing table, brewing stand, anvil, lectern, loom, cartography table; the enchanting table and the grindstone keep their windows (`config/handson_vanilla.properties`); MIT, CurseForge only, by the author of Hands-On Delight; tab names translated by the pack ([0043](decisions/0043-hands-on-vanilla.md)) |
 | Starcatcher | `starcatcher` | ✅ (3.3.10, added 2026-11-17, not seen in game) | CS | Fishing: skill minigame per fish, catches by biome, depth, hour, weather and bait, catalogue, trophies, aquarium, tackle box, hooks, bobbers, baits, rod skins; the vanilla rod merges into its rod; End catches removed, Nether ones moved to deep Overworld lava; its selling bin removed (no money) ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Hybrid Aquatic + Starcatcher Compatibility | `hybrid-aquatic-starcatcher-compatibility` | ✅ (0.6.3, added 2026-11-17) | CS | Hybrid Aquatic's fish, crates and hooks in Starcatcher; the species cut for another mod's model give that mod's fish or are no longer fished ([0034](decisions/0034-starcatcher-fishing.md)) |
 | Starcatcher's Delight | `starcatchers-delight` | ✅ (3.2, added 2026-11-17, not seen in game) | CS | Fish dishes (nigiri, maki, fillets, stews) in Farmer's Delight's pot and on its board; its Farm & Charm copies are not copied again by `cuisine.js` ([0034](decisions/0034-starcatcher-fishing.md)) |
@@ -108,7 +109,7 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed; cobblestone bricks back since 2026-11-13 ([pack sort](plan/tri-du-pack.md)) |
 | Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including those of Regions Unexplored |
 | HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
-| Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench |
+| Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench; the vanilla crafting table is left to Hands-On Vanilla (`visualworkbench:unaltered_workbenches`, [0043](decisions/0043-hands-on-vanilla.md)) |
 | Immersive Enchanting | `immersive-enchanting` | ✅ (beta) | CS | Enchanting becomes lore: ancient books found, shelved near the table, levels paid in materials ([0008](decisions/0008-enchantement.md)); structures disabled, French translation |
 
 ## Body, camera and gestures

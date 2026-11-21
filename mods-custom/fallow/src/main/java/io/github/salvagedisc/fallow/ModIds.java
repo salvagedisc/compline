@@ -24,7 +24,6 @@ public final class ModIds {
     public static final String COLD_SWEAT = "cold_sweat";
     public static final String ECLIPTIC_SEASONS = "eclipticseasons";
     public static final String THIRST = "thirst";
-    public static final String VISUAL_WORKBENCH = "visualworkbench";
 
     private ModIds() {
     }

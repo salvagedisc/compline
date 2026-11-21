@@ -1017,6 +1017,10 @@ file = "kubejs/assets/handson_delight/lang/fr_fr.json"
 hash = "abe5854da660e4b80d74100d48f42af7b74f2f8f2c3cb0dc350a0811c7a909da"
 
 [[files]]
+file = "kubejs/assets/handson_vanilla/lang/fr_fr.json"
+hash = "004bae7e2a39389c78bb687ad91332bb2f74877b351089790b7d28259a2785ae"
+
+[[files]]
 file = "kubejs/assets/hapi/lang/fr_fr.json"
 hash = "2cb9f05fac1b3d925cae5f48caa0186e1ddbe5870dce9fd8cc233ef6c5b5b70d"
 
@@ -3261,6 +3265,10 @@ file = "kubejs/data/twigs/neoforge/biome_modifier/add_ore_rhyolite.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
+file = "kubejs/data/visualworkbench/tags/block/unaltered_workbenches.json"
+hash = "9db24c74b14df1b62d578cc37e8eec810c3ecff1f3666bea24f153844938a465"
+
+[[files]]
 file = "kubejs/data/wildernature/tags/worldgen/biome/remove_wolf.json"
 hash = "a78669427b1a39bbc9dbb98b5f59e31a9225622094f6b51919064173047611ff"
 
@@ -3656,8 +3664,8 @@ hash = "2c88d3eceb7be9c5964ca32c24612ca08d7326b4cb06104e98d56efa777de640"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.40.0.jar"
-hash = "91b5ad8ca2cba3b9724256264bda3c5c28d041b8582cf323979e1ba42fd65543"
+file = "mods/fallow-0.41.0.jar"
+hash = "445911563ac4e8d4afbaa9783aa89dabce5f2377d5156df71df792b999bfd87c"
 
 [[files]]
 file = "mods/farmers-delight.pw.toml"
@@ -3708,6 +3716,10 @@ metafile = true
 file = "mods/handson-delight.pw.toml"
 hash = "7b283723696958ba22b39488c5938d943b4c49a72ffee901d06ee389cb42ad36"
 metafile = true
+
+[[files]]
+file = "mods/handson_vanilla-neoforge-1.21.1-1.2.2.jar"
+hash = "e3056af2272b05907e33d0a550b15242b941d30783ee1deeaa68e5ca737ff963"
 
 [[files]]
 file = "mods/hybrid-api.pw.toml"

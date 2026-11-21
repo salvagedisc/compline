@@ -23,7 +23,7 @@ A **Minecraft 1.21.1 / NeoForge** modpack for a permanent world shared with frie
 | Clearings | Vigil fire (radius 16), clearing lantern (32) and the Create **dissipator** (64) turn the land around them into a clearing for good: light mist, vivid grass, far view, its own music |
 | Exploration | Hand-drawn Antique Atlas without coordinates, trains and ships on it; Lootr chests; Exposure photography and astrophotography |
 | Survival | Cold Sweat temperature (colder with altitude), thirst, seasons for farming; one heart lost per death down to 5, shards of life to find; on death a ragdoll body keeps the whole inventory; no experience at all (anvil by wear, enchanting through found books) |
-| Daily life | cooking by hand with Farmer's Delight and Hands-On Delight, Farm & Charm, a house tannery (hides scraped, tanned with bark, dried by sun or fire), fishing with Starcatcher, rest by the hearth, a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
+| Daily life | cooking by hand with Farmer's Delight and Hands-On Delight, the crafting table, furnaces and anvil worked by hand (Hands-On Vanilla), Farm & Charm, a house tannery (hides scraped, tanned with bark, dried by sun or fire), fishing with Starcatcher, rest by the hearth, a simple bag on the back (Reliable Backpacks), stacks sized by kind of item, 30-minute days and 15-minute nights, mail by pigeon (Envelope) |
 | Technology | Overgeared forging, Create, Steam 'n' Rails, Create Aeronautics airships on Sable with recorded routes |
 | Fauna | One model per species across Naturalist, Alex's Mobs, Hybrid Aquatic and companions; vanilla animals with Fresh Animations; at most 8 hostile creatures per player |
 | Finish | Shoulder camera, animated combat (Better Combat), 3D menus, animated arms, items with physics, particles, wakes, adaptive music with long silences |
@@ -82,4 +82,4 @@ The full workflow (adding a mod, test branches, versions, release) is described 
 
 ## License
 
-The content of this repository (configs, scripts, the custom `fallow` mod, the Brumaire shader pack and the docs) is released under the [MIT licence](LICENSE). The mods the pack downloads keep their own licences, as do the third-party jars committed in `pack/mods/` (LGPL for the atlas ports from `salvagedisc/fallow-atlas`) and SMAA in the shader pack (MIT, `pack/shaderpacks/Brumaire/shaders/textures/SMAA-LICENSE.txt`).
+The content of this repository (configs, scripts, the custom `fallow` mod, the Brumaire shader pack and the docs) is released under the [MIT licence](LICENSE). The mods the pack downloads keep their own licences, as do the third-party jars committed in `pack/mods/` (LGPL for the atlas ports from `salvagedisc/fallow-atlas`, MIT for Hands-On Vanilla) and SMAA in the shader pack (MIT, `pack/shaderpacks/Brumaire/shaders/textures/SMAA-LICENSE.txt`).

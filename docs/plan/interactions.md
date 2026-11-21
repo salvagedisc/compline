@@ -8,7 +8,7 @@ Status: written on 2026-11-21, after Cinematic Interactions left the pack ([0040
 
 | Register | What it is for | How it feels |
 |---|---|---|
-| **Menu** (« le menu ») | Choosing among many things: a recipe grid or a pattern, a trade, a line of dialogue, a book; storing and sorting; machines that work on their own (furnaces, alloy and casting furnaces, Exposure's lightroom) | A window that opens at once and closes at once; nothing in it asks for timing |
+| **Menu** (« le menu ») | Choosing among many things: a recipe grid or a pattern, a trade, a line of dialogue, a book; storing and sorting; machines that work on their own (Overgeared's alloy and casting furnaces, Exposure's lightroom) | A window that opens at once and closes at once; nothing in it asks for timing |
 | **Gesture** (« le geste ») | Transforming a few items oneself at a station where the work shows on the block: cut, scrape, stir, fry, pour, stretch, hammer | Right clicks in the world, with the item or the tool in hand; the block shows what lies on it and how far it is |
 | **Craft skill** (« le savoir-faire ») | The few moments where the quality of one result is worth a test: forging a part, landing a fish, stirring a pot | A short timing test on the click; it earns a bonus, it is never the only way to get the result |
 
@@ -41,14 +41,14 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 - **Channels.** Hints and states go to the action bar, in one short sentence, at most every few seconds (tools, approach, rest, tannery, Overgeared's anvil); since `fallow` 0.38.0 the `indices` module draws every hint as a note in the left margin, with an icon for Fallow's own, while readings of what the player holds or rides (gauges, altimeter, jukebox, mount) stay above the hotbar ([mod-fallow](mod-fallow.md#indices-module)). The chat carries milestones only (a species mastered). A sound marks each step. No new gauge on the HUD.
 - **Voice.** Fallow's own texts address the player as « vous », like the quests and the other mods' French: « Il vous faut une hache. » (the tool hints used « tu » until 2026-11-21).
 - **One book per domain.** Recipes in EMI (R and U on any item; Hands-On Delight's book beside its stations shows the same recipes with their times); fauna and the zoo in Archie's guidebook (J); fish in Starcatcher's guide; quests in Questlog; places on the atlas; enchantments in Immersive Enchanting's ancient books. A new mod does not bring a second book for a domain that has one.
-- **Pace.** Opening an everyday window (chest, workbench, furnace) costs well under half a second: Spatial GUI's camera move and scale animation are 150 ms (300 ms by default) and closing has no animation (shipped as defaults for new installs in `pack/config/defaultoptions/extra/config/spatial-gui.json5`). The camera leaves the player only at Hands-On Delight's stations, where the hands are the point, and one key brings it back.
+- **Pace.** Opening an everyday window (chest, barrel, the grindstone) costs well under half a second: Spatial GUI's camera move and scale animation are 150 ms (300 ms by default) and closing has no animation (shipped as defaults for new installs in `pack/config/defaultoptions/extra/config/spatial-gui.json5`). The camera leaves the player only at Hands-On Delight's stations, where the hands are the point, and one key brings it back.
 
 ## The pack's loops, register by register
 
 | Vanilla mechanic | In Fallow | Register |
 |---|---|---|
-| Crafting | Workbench (Visual Workbench leaves the items on it), knapping grid of Overgeared (a rock in each hand), drafting table | Menu; at the workbench, gesture as a prototype ([etabli](etabli.md), off by default) |
-| Smelting | Furnace, smoker, blast furnace, Overgeared's alloy and casting furnaces | Menu (machines) |
+| Crafting | Crafting table worked by hand with its recipe book beside it (Hands-On Vanilla, [0043](../decisions/0043-hands-on-vanilla.md)); knapping grid of Overgeared (a rock in each hand), drafting table | Gesture at the crafting table; menu elsewhere |
+| Smelting | Furnace, smoker, blast furnace worked by hand (Hands-On Vanilla); Overgeared's alloy and casting furnaces | Gesture; menu for Overgeared's |
 | Cooking a dish | Farmer's Delight's pot, board, skillet and stove through Hands-On Delight; campfire | Gesture, stirring as craft skill |
 | Smithing | Overgeared's anvil: ingredients in its window, then sneak + use with the hammer and strikes in the world | Menu, then craft skill |
 | Fishing | Starcatcher | Craft skill (classic bobber: none) |
@@ -77,6 +77,6 @@ Before adding a station, a mod or a module: name its register; if it is a gestur
 |---|---|---|
 | IN1 | Put a soup's ingredients in the pot over a lit stove, leave the station | The soup cooks on its own in Farmer's Delight's time, without stars |
 | IN2 | Same, stirring at the station | The whole pot cooks at once, with stars and extra servings |
-| IN3 | Open and close a chest, the workbench and a furnace in a new instance | The window comes in about 150 ms and leaves at once; Spatial GUI's settings show 150 ms |
+| IN3 | Open and close a chest, a barrel and the grindstone in a new instance | The window comes in about 150 ms and leaves at once; Spatial GUI's settings show 150 ms |
 | IN4 | Bare hands on a log | « Il vous faut une hache. » |
 | IN5 | Fish with the classic bobber on the rod | The fish bites and comes in without the minigame |

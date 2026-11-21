@@ -43,7 +43,6 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
 | `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
 | `indices` | client | none | 1, client (`indices.GuiOverlayAccessor`, an accessor on vanilla code) |
-| `etabli` | both (the gestures and the notebook's pages on the server, the ghosts on the client) | Visual Workbench | none |
 | `hotes` | both (the emissaries and masks on the server, the dialogue window, masks and regalia on the client) | none; Archie's Dinosaurs for the beasts' armour | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
@@ -396,10 +395,6 @@ Client and server (blocks and items are registered on both sides), no other mod.
 Config (`fallow-common.toml`, `[tannerie]`): `enabled` (true), `strokes` (6), `tanningMinutes` (5.0), `dryingPoints` (15), `barkChance` (0.5), `fatChance` (0.33).
 
 **Checked** on the bench on 2026-11-18: see [tannery](tannerie.md).
-
-## `etabli` module
-
-Prototype, off by default (`fallow-common.toml`, `[etabli] enabled`). Crafting by hand on Visual Workbench's crafting table, and the workbench notebook (`fallow:carnet_d_etabli`) that shows one recipe as ghosts on the grid: see [etabli](etabli.md). Classes: `Etabli` (the gestures, decided the same way on both sides, applied on the server), `Grille` (which cell a click aims at, tested), `Tables` (Visual Workbench through reflection), `CarnetBlock` and `Pages` (the notebook and the open page, sent to the client by `EtabliPage`), `client.EtabliClient` (the ghosts).
 
 ## `hotes` module
 

@@ -68,7 +68,6 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CLIMAT_STORM_VISUALS;
     private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
     private static final ModConfigSpec.BooleanValue INDICES_ENABLED;
-    private static final ModConfigSpec.BooleanValue ETABLI_ENABLED;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> INDICES_IN_BAR;
     private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
     private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
@@ -304,14 +303,6 @@ public final class FallowConfig {
                 .comment("Minutes ajoutées par famille de confort trouvée (lit, siège, table, tapis, rangement, livres, lumière,",
                         "décoration, cuisine). Avec les 9 : 2 + 9 × 1,5 = 15,5 minutes.")
                 .defineInRange("minutesPerComfort", 1.5, 0.0, 10.0);
-        common.pop();
-
-        common.comment("Module etabli (prototype) : fabriquer à la main sur la table de craft de Visual Workbench.").push("etabli");
-        ETABLI_ENABLED = common
-                .comment("Vrai : sur le dessus de la table, un objet en main se pose dans la case visée, la main vide le reprend,",
-                        "accroupi main vide on fabrique ; le carnet de l'établi posé à côté montre une recette en fantôme.",
-                        "Main vide hors des objets, la fenêtre de la table s'ouvre comme avant. Faux : la table de toujours.")
-                .define("enabled", false);
         common.pop();
 
         common.comment("Module tannerie : la peau brute se racle au couteau sur le chevalet, trempe dans la cuve à tan (eau et",
@@ -568,10 +559,6 @@ public final class FallowConfig {
 
     public static boolean climatStormVisuals() {
         return read(CLIENT_SPEC, CLIMAT_STORM_VISUALS);
-    }
-
-    public static boolean etabliEnabled() {
-        return read(COMMON_SPEC, ETABLI_ENABLED);
     }
 
     public static boolean indicesEnabled() {
