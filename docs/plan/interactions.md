@@ -47,7 +47,7 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 
 | Vanilla mechanic | In Fallow | Register |
 |---|---|---|
-| Crafting | Workbench (Visual Workbench leaves the items on it), knapping grid of Overgeared (a rock in each hand), drafting table | Menu |
+| Crafting | Workbench (Visual Workbench leaves the items on it), knapping grid of Overgeared (a rock in each hand), drafting table | Menu; at the workbench, gesture as a prototype ([etabli](etabli.md), off by default) |
 | Smelting | Furnace, smoker, blast furnace, Overgeared's alloy and casting furnaces | Menu (machines) |
 | Cooking a dish | Farmer's Delight's pot, board, skillet and stove through Hands-On Delight; campfire | Gesture, stirring as craft skill |
 | Smithing | Overgeared's anvil: ingredients in its window, then sneak + use with the hammer and strikes in the world | Menu, then craft skill |

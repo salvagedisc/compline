@@ -203,5 +203,11 @@
   "screen.fallow.hote.silence.demande": "Very quietly. I'm listening.",
   "screen.fallow.hote.silence.question.bete": "The One Below. Archie says Sculksaur. She can't be tamed. She mustn't be woken. We keep her sleep.",
   "screen.fallow.hote.silence.question.saison": "No seasons, down below. We come on moonless nights. The dark is the same all year.",
-  "screen.fallow.hote.silence.question.lieu": "Very deep, under the dark stone, a dead city covered in sculk. The ground answers steps there. If it answers, back away."
+  "screen.fallow.hote.silence.question.lieu": "Very deep, under the dark stone, a dead city covered in sculk. The ground answers steps there. If it answers, back away.",
+  "block.fallow.carnet_d_etabli": "Workbench Notebook",
+  "etabli.fallow.case_prise": "That cell is taken: take back what lies there first.",
+  "etabli.fallow.carnet.sans_table": "Put this notebook next to a crafting table.",
+  "etabli.fallow.carnet.rien": "Nothing to craft with what you carry.",
+  "etabli.fallow.carnet.page": "Page %2$s of %3$s: %1$s",
+  "etabli.fallow.carnet.nombre": "%1$s × %2$s"
 }

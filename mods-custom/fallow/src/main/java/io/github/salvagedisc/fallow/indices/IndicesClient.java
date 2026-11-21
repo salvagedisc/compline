@@ -203,6 +203,12 @@ final class IndicesClient {
         if (key.startsWith("message.fallow.clairiere.") || key.startsWith("message.fallow.bord.")) {
             return new ItemStack(Items.LANTERN);
         }
+        if (key.startsWith("etabli.fallow.carnet.")) {
+            return new ItemStack(Items.BOOK);
+        }
+        if (key.startsWith("etabli.fallow.")) {
+            return new ItemStack(Items.CRAFTING_TABLE);
+        }
         if (key.startsWith("zoo.fallow.")) {
             return new ItemStack(Items.SPYGLASS);
         }

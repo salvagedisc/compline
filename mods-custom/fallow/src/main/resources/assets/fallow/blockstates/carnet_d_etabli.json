@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "fallow:block/carnet_d_etabli" },
+    "facing=east": { "model": "fallow:block/carnet_d_etabli", "y": 90 },
+    "facing=south": { "model": "fallow:block/carnet_d_etabli", "y": 180 },
+    "facing=west": { "model": "fallow:block/carnet_d_etabli", "y": 270 }
+  }
+}

@@ -203,5 +203,11 @@
   "screen.fallow.hote.silence.demande": "Tout bas. J'écoute.",
   "screen.fallow.hote.silence.question.bete": "Celle d'en dessous. Archie dit Sculksaur. On ne l'apprivoise pas. On ne la réveille pas. Nous gardons son sommeil.",
   "screen.fallow.hote.silence.question.saison": "Pas de saison, en bas. Nous venons les nuits sans lune. Le noir est le même toute l'année.",
-  "screen.fallow.hote.silence.question.lieu": "Très bas, sous la pierre sombre, une cité morte couverte de sculk. Le sol y répond aux pas. S'il répond, recule."
+  "screen.fallow.hote.silence.question.lieu": "Très bas, sous la pierre sombre, une cité morte couverte de sculk. Le sol y répond aux pas. S'il répond, recule.",
+  "block.fallow.carnet_d_etabli": "Carnet d'établi",
+  "etabli.fallow.case_prise": "Cette case est prise : reprenez d'abord ce qui y est.",
+  "etabli.fallow.carnet.sans_table": "Posez ce carnet à côté d'une table de craft.",
+  "etabli.fallow.carnet.rien": "Rien à fabriquer avec ce que vous portez.",
+  "etabli.fallow.carnet.page": "Page %2$s sur %3$s : %1$s",
+  "etabli.fallow.carnet.nombre": "%1$s × %2$s"
 }

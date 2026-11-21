@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    { "type": "neoforge:mod_loaded", "modid": "visualworkbench" }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:book" },
+    { "tag": "minecraft:coals" }
+  ],
+  "result": {
+    "id": "fallow:carnet_d_etabli",
+    "count": 1
+  }
+}

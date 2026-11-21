@@ -25,6 +25,7 @@ A permanent world, almost empty and enigmatic, in the spirit of the No Man's Lan
 | [premiers-gestes.md](premiers-gestes.md) | First gestures: no logs or rock by hand, flint from gravel, knapped stone tools (Overgeared), planks with an axe, flint campfire, the « Premiers gestes » quests ([0013](../decisions/0013-premiers-gestes.md)) |
 | [tri-du-pack.md](tri-du-pack.md) | Pack sort of 2026-11-01: Chipped and Beautify! removed, 11 defects fixed (levitite, mincer, enchanting costs, structures), settings, 313 items and about 1,110 Steam 'n' Rails variants removed, recipe levels (rope, pulley, kitchen knives) |
 | [interactions.md](interactions.md) | The interaction language: menu, gesture and craft skill, their grammar, shared conventions (action bar, « vous », one book per domain, pace), the pack's loops by register; in-game tests IN1 to IN5 |
+| [etabli.md](etabli.md) | Crafting by hand at the workbench (`etabli` module, prototype, off by default): ingredients laid by clicks on Visual Workbench's table, the workbench notebook's ghost recipes; in-game tests ET1 to ET7 |
 | [tannerie.md](tannerie.md) | The house tannery (`tannerie` module): raw hides scraped on a fleshing beam, tanned in a vat with bark, dried on a frame |
 | [musique.md](musique.md) | The music: True Adaptive Music, the `fallow` pack tree, the server predicates, in-game tests ([0010](../decisions/0010-musique.md)) |
 | [xp.md](xp.md) | Removing experience: study of the sources and uses, implementation ([0009](../decisions/0009-xp.md)) |

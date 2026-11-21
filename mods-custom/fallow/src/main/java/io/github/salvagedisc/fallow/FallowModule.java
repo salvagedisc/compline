@@ -64,6 +64,9 @@ public enum FallowModule {
      *  enregistrés des deux côtés). Aucun mod requis ; l'écorce est celle de Farmer's Delight, le gras celui de Naturalist. */
     TANNERIE("tannerie", null, bus -> io.github.salvagedisc.fallow.tannerie.TannerieModule.start(bus)),
     /** Les hôtes (pilote) : un peuple de la brume au modèle du joueur, vêtu de l'armure de sa bête (client et serveur). */
+    /** L'établi (prototype) : fabriquer à la main sur la table de craft de Visual Workbench, avec le carnet de l'établi
+     *  posé à côté (client et serveur). */
+    ETABLI("etabli", null, bus -> io.github.salvagedisc.fallow.etabli.EtabliModule.start(bus), ModIds.VISUAL_WORKBENCH),
     HOTES("hotes", null, bus -> io.github.salvagedisc.fallow.hotes.HotesModule.start(bus));
 
     private final String id;
