@@ -72,6 +72,9 @@ final class ForgeBehavior implements StationBehavior {
 
     private enum Coup { REPOS, ENTRE, FRAPPE, SONNE, SORT }
 
+    /** Ce que le curseur tenait au tick d'avant : s'il a baissé, la pièce posée vient de la main et ne vole pas. */
+    private int porte;
+
     /** Le marteau au repos, à sa place à droite de l'enclume, relevé, et frappant (décalages du nœud {@code coup}). */
     private static final Vector3f DEPUIS = new Vector3f(-12.0F, 6.0F, -4.0F);
     private static final Vector3f LEVE = new Vector3f(0.0F, 1.5F, 0.0F);
@@ -200,10 +203,18 @@ final class ForgeBehavior implements StationBehavior {
         int pose = 0;
         int pris = 0;
         boolean grille_chaude = false;
+        LocalPlayer joueur = Minecraft.getInstance().player;
+        int tenu = joueur == null ? 0 : joueur.containerMenu.getCarried().getCount();
+        boolean deLaMain = tenu < porte;
+        porte = tenu;
         for (int cell = 0; cell < grille.length; cell++) {
             ItemStack stack = view.state().getItem(SlotRef.of(PostesForge.GRILLE, cell));
             int now = stack.getCount();
             if (connu && now > grille[cell]) {
+                // Posée par Maj + clic ou par le livre : la pièce vole de la barre à sa case.
+                if (!deLaMain) {
+                    Arrivee.caseDepuisLaBarre(view, "grille_" + cell, stack.getItem(), pose);
+                }
                 pose++;
                 grille_chaude |= chaude(stack);
             } else if (connu && now < grille[cell]) {
@@ -378,6 +389,12 @@ final class ForgeBehavior implements StationBehavior {
             frappe(view, shift);
             return true;
         }
+        return false;
+    }
+
+    @Override
+    public boolean onInventoryShiftClick(StationView view, int slot, ItemStack stack) {
+        Arrivee.depuis(view, slot);
         return false;
     }
 

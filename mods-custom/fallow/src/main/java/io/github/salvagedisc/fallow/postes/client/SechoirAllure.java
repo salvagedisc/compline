@@ -35,6 +35,7 @@ final class SechoirAllure implements Allure {
     private float montre = -1.0F;
     private SechoirBlock.Etat avant;
     private final Envol envol = new Envol();
+    private final Arrivee.Volee volee = new Arrivee.Volee();
 
     @Override
     public void onOpen(StationView view) {
@@ -50,6 +51,7 @@ final class SechoirAllure implements Allure {
         }
         horloge += dt;
         envol.frame(view, dt);
+        volee.frame(view, dt);
         boolean shown = view.isBlockHidden();
         SechoirBlock.Etat etat = state.getValue(SechoirBlock.ETAT);
         float vise = switch (etat) {
@@ -135,7 +137,10 @@ final class SechoirAllure implements Allure {
         SechoirBlock.Etat etat = state.getValue(SechoirBlock.ETAT);
         if (avant != null && avant != etat && view.isBlockHidden()) {
             switch (etat) {
-                case HUMIDE -> view.node("cuir").ifPresent(node -> node.shake(0.4F, 0.25F));
+                case HUMIDE -> {
+                    volee.arrive(view, TannerieModule.CUIR_MOUILLE.get(), new Vector3f(8.0F, 8.5F, 7.0F));
+                    view.node("cuir").ifPresent(node -> node.shake(0.4F, 0.25F));
+                }
                 case SEC -> {
                     view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 1.5F, -1.0F), 5.0F, 10, 0xFFFFF0D0);
                     view.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), "cuir", 0.6F, 1.3F);

@@ -54,6 +54,7 @@ final class CuveAllure implements Allure {
     private final boolean[] cuir = new boolean[4];
     private Item fantome;
     private final Envol envol = new Envol();
+    private final Arrivee.Volee volee = new Arrivee.Volee();
     /** Le cuir prêt, qui flotte au-dessus de la cuve : un clic dessus le reprend. */
     private final Flottant flottant = new Flottant(5.0F);
     private ItemStack sortant = ItemStack.EMPTY;
@@ -74,6 +75,7 @@ final class CuveAllure implements Allure {
     @Override
     public void frame(StationView view, float dt) {
         envol.frame(view, dt);
+        volee.frame(view, dt);
         BlockState state = view.level().getBlockState(view.pos());
         if (!(state.getBlock() instanceof CuveBlock)) {
             return;
@@ -186,13 +188,19 @@ final class CuveAllure implements Allure {
         boolean ready = hides > 0 && step >= CuveBlock.ETAPES;
         boolean known = eau >= 0;
         if (known && view.isBlockHidden()) {
+            // Ce qui arrive par Maj + clic ou par le livre vole de la barre jusqu'à l'eau.
             if (water > eau) {
+                volee.arrive(view, Items.WATER_BUCKET, new Vector3f(8.0F, 15.0F, 8.0F));
                 eclabousse(view, 8.0F, 8.0F, 1.2F, 10);
             }
             if (bark > tanin) {
+                volee.arrive(view, ecorce(), new Vector3f(8.0F, 14.0F, 8.0F));
                 eclabousse(view, 5.0F + random.nextFloat() * 6.0F, 5.0F + random.nextFloat() * 6.0F, 0.6F, 4);
             }
             if (hides > peaux) {
+                for (int i = Math.max(0, peaux); i < hides; i++) {
+                    volee.arrive(view, TannerieModule.PEAU_RACLEE.get(), new Vector3f(8.0F, 14.0F, 8.0F));
+                }
                 for (int i = Math.max(0, peaux); i < hides; i++) {
                     arrivees[i] = 0.0F;
                 }
@@ -221,6 +229,20 @@ final class CuveAllure implements Allure {
         peaux = hides;
         tannage = step;
         pret = ready;
+    }
+
+    /** L'écorce qui part : celle de la barre si elle en tient, sinon la première des tanins. */
+    private static Item ecorce() {
+        net.minecraft.client.player.LocalPlayer player = net.minecraft.client.Minecraft.getInstance().player;
+        if (player != null) {
+            for (int i = 0; i < net.minecraft.world.entity.player.Inventory.getSelectionSize(); i++) {
+                if (player.getInventory().getItem(i).is(TannerieModule.TANINS)) {
+                    return player.getInventory().getItem(i).getItem();
+                }
+            }
+        }
+        return BuiltInRegistries.ITEM.getTag(TannerieModule.TANINS).flatMap(tag -> tag.stream().findFirst()).map(holder -> holder.value())
+                .orElse(null);
     }
 
     private void eclabousse(StationView view, float x, float z, float force, int gouttes) {

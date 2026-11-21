@@ -25,6 +25,10 @@ final class TannerieBehavior implements StationBehavior {
     private final Allure allure;
     /** La case de la main quand on est venu au bloc avec un objet ; le premier geste part quand le poste est ouvert côté serveur. */
     private int enMain = -1;
+    /** Le bloc et le curseur au moment d'un objet lâché sur le bloc : si rien n'a bougé un peu plus tard, le bloc l'a refusé. */
+    private net.minecraft.world.level.block.state.BlockState avantGeste;
+    private ItemStack tenuAvant = ItemStack.EMPTY;
+    private long gesteA = Long.MIN_VALUE;
 
     TannerieBehavior(String page, Allure allure) {
         this.book = new RecipeBook(new TannerieBook(page));
@@ -68,6 +72,7 @@ final class TannerieBehavior implements StationBehavior {
         if (enMain >= 0 && view.isFocused() && DiegesisClient.arrival() >= 1.0F) {
             CompoundTag how = new CompoundTag();
             how.putInt(PostesTannerie.DEPUIS, enMain);
+            Arrivee.parLeCurseur(view);
             view.sendAction(PostesTannerie.TRAVAILLER, how);
             enMain = -1;
         }
@@ -78,6 +83,14 @@ final class TannerieBehavior implements StationBehavior {
     @Override
     public void tick(StationView view) {
         allure.tick(view);
+        if (avantGeste != null && view.level().getGameTime() - gesteA >= 6L) {
+            LocalPlayer player = Minecraft.getInstance().player;
+            ItemStack tenu = player == null ? ItemStack.EMPTY : player.containerMenu.getCarried();
+            if (view.level().getBlockState(view.pos()) == avantGeste && ItemStack.matches(tenu, tenuAvant)) {
+                refus(view);
+            }
+            avantGeste = null;
+        }
     }
 
     @Override
@@ -99,8 +112,23 @@ final class TannerieBehavior implements StationBehavior {
             return true;
         }
         allure.geste(view, stack);
+        Arrivee.parLeCurseur(view);
+        // Le couteau peut racler à vide entre deux coups : seul un objet posé est guetté.
+        if (!stack.is(TannerieModule.COUTEAUX)) {
+            avantGeste = view.level().getBlockState(view.pos());
+            tenuAvant = stack.copy();
+            gesteA = view.level().getGameTime();
+        }
         view.sendAction(PostesTannerie.TRAVAILLER, new CompoundTag());
         return true;
+    }
+
+    /** Le bloc n'a pas pris l'objet : il tremble, avec un bruit de bois mat (le serveur dit pourquoi dans la légende). */
+    private static void refus(StationView view) {
+        for (String bloc : new String[] { "cuve", "chevalet", "cadre" }) {
+            view.node(bloc).ifPresent(node -> node.shake(0.35F, 0.2F));
+        }
+        view.playSound(net.minecraft.sounds.SoundEvents.WOOD_HIT, null, 0.5F, 0.7F);
     }
 
     @Override
@@ -110,6 +138,7 @@ final class TannerieBehavior implements StationBehavior {
         }
         CompoundTag how = new CompoundTag();
         how.putInt(PostesTannerie.DEPUIS, slot);
+        Arrivee.depuis(view, slot);
         view.sendAction(PostesTannerie.TRAVAILLER, how);
         return true;
     }

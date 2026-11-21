@@ -92,11 +92,30 @@ final class FoyerBehavior implements StationBehavior {
     @Override
     public void tick(StationView view) {
         lire(view);
+        // Le combustible posé par Maj + clic vole de la barre à sa place devant la grille ; lâché du curseur, il vient de la main.
+        net.minecraft.client.player.LocalPlayer joueur = net.minecraft.client.Minecraft.getInstance().player;
+        int tenu = joueur == null ? 0 : joueur.containerMenu.getCarried().getCount();
+        ItemStack pose = view.menu() == null ? ItemStack.EMPTY : view.state().getItem(com.pockyl.diegesis.api.state.SlotRef.of("combustible", 0));
+        if (posee >= 0 && pose.getCount() > posee && tenu >= porte) {
+            Arrivee.caseDepuisLaBarre(view, "combustible", pose.getItem(), 0);
+        }
+        posee = view.menu() == null ? -1 : pose.getCount();
+        porte = tenu;
         BlockState state = view.level().getBlockState(view.pos());
         boolean lit = state.hasProperty(HearthBottomBlock.LIT) && state.getValue(HearthBottomBlock.LIT);
         if (view.isFocused() && chaud > 0.0F && random.nextFloat() < (lit ? 0.03F + 0.1F * chaud : 0.01F + 0.02F * chaud)) {
             view.playSound(SoundEvents.CAMPFIRE_CRACKLE, "combustible", 0.25F + 0.3F * chaud, 0.9F + random.nextFloat() * 0.2F);
         }
+    }
+
+    /** Ce que tenaient la case du combustible et le curseur au tick d'avant. */
+    private int posee = -1;
+    private int porte;
+
+    @Override
+    public boolean onInventoryShiftClick(StationView view, int slot, ItemStack stack) {
+        Arrivee.depuis(view, slot);
+        return false;
     }
 
     /** La lueur des fentes : orange du feu (vive s'il brûle, sourde s'il couve), bleue du froid quand il domine. */

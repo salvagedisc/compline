@@ -41,11 +41,15 @@ final class ChevaletAllure implements Allure {
     private boolean peau;
     private int raclage;
     private final Envol envol = new Envol();
+    private final Arrivee.Volee volee = new Arrivee.Volee();
+    /** Faux jusqu'au premier tick du poste : une peau déjà tendue n'arrive pas. */
+    private boolean connu;
 
     @Override
     public void onOpen(StationView view) {
         tenu = null;
         fantome = null;
+        connu = false;
     }
 
     private static boolean couteau(ItemStack stack) {
@@ -61,6 +65,7 @@ final class ChevaletAllure implements Allure {
         horloge += dt;
         coup += dt;
         envol.frame(view, dt);
+        volee.frame(view, dt);
         boolean shown = view.isBlockHidden();
         boolean hide = state.getValue(ChevaletBlock.PEAU);
         float done = Math.min(1.0F, state.getValue(ChevaletBlock.RACLAGE) / (float) Math.max(1, Math.min(15, FallowConfig.tannerieStrokes())));
@@ -157,6 +162,10 @@ final class ChevaletAllure implements Allure {
             view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 13.8F, 8.0F), new Vector3f(0.0F, 4.0F, 0.0F), 4.0F, 8, 0xFFFFF0D0);
             envol.part(view, raclage > 0 ? TannerieModule.PEAU_RACLEE.get() : TannerieModule.PEAU_BRUTE.get(), new Vector3f(8.0F, 14.0F, 8.0F));
         }
+        if (connu && !peau && hide && view.isBlockHidden()) {
+            volee.arrive(view, TannerieModule.PEAU_BRUTE.get(), new Vector3f(8.0F, 14.0F, 8.0F));
+        }
+        connu = true;
         peau = hide;
         raclage = hide ? state.getValue(ChevaletBlock.RACLAGE) : 0;
     }
