@@ -50,7 +50,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             Map.entry("zoo.GuidebookDataMixin", List.of(ModIds.ARCHIES_DINOSAURS)),
             Map.entry("postes.ForgeRendererMixin", List.of(ModIds.OVERGEARED, ModIds.DIEGESIS)),
             Map.entry("postes.MenuOuvertureMixin", List.of(ModIds.DIEGESIS)),
-            Map.entry("postes.MenuCreationMixin", List.of(ModIds.DIEGESIS)));
+            Map.entry("postes.MenuCreationMixin", List.of(ModIds.DIEGESIS)),
+            Map.entry("postes.StationHoverMixin", List.of(ModIds.DIEGESIS, ModIds.HANDS_ON_VANILLA)));
 
     private static final Map<String, List<String>> MEMBERS = Map.of(
             "horizon.ChunkyAccessorMixin", List.of("listenerBound", "tryRunFirstTimeSetup"),
@@ -58,7 +59,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             "dinos.ArmorModelCacheMixin", List.of("initArmorModel", "getLayerLocation"),
             "zoo.CategoryTabsMixin", List.of("book", "categorySubTabs", "<init>"),
             "zoo.GuidebookDataMixin", List.of("parseXML", "loadData"),
-            "compat.PunchyEquipMixin", List.of("shouldIgnoreComponentForEquipDiff"));
+            "compat.PunchyEquipMixin", List.of("shouldIgnoreComponentForEquipDiff"),
+            "postes.StationHoverMixin", List.of("isOurs"));
 
     @Override
     public void onLoad(String mixinPackage) {

@@ -26,6 +26,7 @@ public final class ModIds {
     public static final String THIRST = "thirst";
     public static final String DIEGESIS = "diegesis";
     public static final String OVERGEARED = "overgeared";
+    public static final String HANDS_ON_VANILLA = "handson_vanilla";
 
     private ModIds() {
     }

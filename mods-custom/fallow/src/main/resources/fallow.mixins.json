@@ -37,6 +37,7 @@
     "postes.ForgeRendererMixin",
     "postes.MenuCreationMixin",
     "postes.MenuOuvertureMixin",
+    "postes.StationHoverMixin",
     "rendu.IrisUniformsMixin",
     "vent.CampfireBlockMixin",
     "vent.CampfireSmokeParticleMixin",
