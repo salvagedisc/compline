@@ -3858,6 +3858,11 @@ hash = "1cb80474d56ee7e47fc996361a7a03b92c297ff239a9b4126d79f47f1a491e58"
 metafile = true
 
 [[files]]
+file = "mods/lets-do-furniture-another-furniture-handcrafted-create-sable.pw.toml"
+hash = "9025a1b7ce5b2ac80188b05ee59eacdb8694221f32ef2f4ed019567e9ea0b364"
+metafile = true
+
+[[files]]
 file = "mods/lets-do-wildernature.pw.toml"
 hash = "abd10ac40f48de18718d8caf910364b077f0e41bf45f041e2303127c37e41a1c"
 metafile = true
