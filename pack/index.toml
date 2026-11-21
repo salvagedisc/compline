@@ -3403,6 +3403,11 @@ hash = "fd9698b3a981f1be9e64c2ef952a390f53cdd763199d567c6ec51e2b189772ad"
 metafile = true
 
 [[files]]
+file = "mods/aeronautics-display-link-fix.pw.toml"
+hash = "c7cd5fc886a0f8097e71da4251ff6db97903f55157d83de3db94719565f39e8c"
+metafile = true
+
+[[files]]
 file = "mods/aeronautics-wind-sound.pw.toml"
 hash = "980a23bd1d06f53cf9c912293cf0a9233c06c729d586c4e38fab26b6f4c125b7"
 metafile = true
