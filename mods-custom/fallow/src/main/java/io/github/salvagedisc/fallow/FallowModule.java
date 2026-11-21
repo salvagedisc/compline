@@ -32,6 +32,8 @@ public enum FallowModule {
     BORD("bord", null, bus -> io.github.salvagedisc.fallow.bord.BordModule.start(bus)),
     /** L'interface qui s'efface quand on ne fait rien (client). Aucun mod requis. */
     ECRAN("ecran", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.ecran.EcranModule.start(bus)),
+    /** Les messages de la barre d'action en notes discrètes, en marge à gauche (client). Aucun mod requis. */
+    INDICES("indices", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.indices.IndicesModule.start(bus)),
     /** Le vent du pack : direction, force, rafales, et la fumée des feux de camp qui le suit (client). Aucun mod requis. */
     VENT("vent", Dist.CLIENT, bus -> io.github.salvagedisc.fallow.vent.VentModule.start(bus)),
     /** Les clairières et le vent du pack donnés au pack de shaders de Fallow, sous Iris (client). */

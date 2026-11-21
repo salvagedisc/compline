@@ -32,6 +32,7 @@
     "horizon.FogRendererMixin",
     "horizon.GLStateMixin",
     "horizon.VanillaFadeMixin",
+    "indices.GuiOverlayAccessor",
     "patine.ArmorTextureMixin",
     "rendu.IrisUniformsMixin",
     "vent.CampfireBlockMixin",

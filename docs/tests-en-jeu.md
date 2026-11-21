@@ -26,6 +26,7 @@ The code in brackets, such as [K1], points to the detailed test in the repositor
 - [ ] The title screen and the loading screen (F3+T) are the game's own, with the Minecraft logo.
 - [ ] **First gestures**: bare hands do not break a log or stone, the hint is in French; flint from gravel, the Twigs pebble knapped into a rock, knapped stone axe, 2 planks per log with the axe, flint campfire, no wooden tools in EMI, the « Premiers gestes » quests [G1 to G12].
 - [ ] **Windows and hints**: a chest, the workbench and a furnace open in about 150 ms and close at once; the tool hints say « vous »; with the classic bobber on the rod, a fish comes in without the minigame [IN3 to IN5, [interactions](plan/interactions.md)].
+- [ ] **Margin notes**: hints and other mods' messages show as notes on the left, with an icon for Fallow's, never above the hotbar; a countdown at Overgeared's anvil stays one note; hidden with F1 and F3 [IN6 to IN8, [mod-fallow](plan/mod-fallow.md#margin-notes)].
 - [ ] No XP bar, on foot or on horseback (the jump gauge stays) [X7].
 - [ ] F5: only first person and the over-the-shoulder view, free camera with the mouse.
 - [ ] Open the inventory and a chest: the 3D menu from Spatial GUI, the camera moves to the shoulder. Books and the atlas stay flat.

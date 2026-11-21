@@ -67,6 +67,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.DoubleValue CLIMAT_SAND_THIRST;
     private static final ModConfigSpec.BooleanValue CLIMAT_STORM_VISUALS;
     private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
+    private static final ModConfigSpec.BooleanValue INDICES_ENABLED;
     private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
     private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> ECRAN_LAYERS;
@@ -163,6 +164,14 @@ public final class FallowConfig {
                         "les effets et les messages ne sont pas dans la liste et restent toujours visibles.")
                 .defineListAllowEmpty("layers", ECRAN_DEFAULT_LAYERS, () -> "minecraft:hotbar",
                         o -> o instanceof String text && ResourceLocation.tryParse(text) != null);
+        client.pop();
+
+        client.comment("Module indices (client) : les messages de la barre d'action en marge.").push("indices");
+        INDICES_ENABLED = client
+                .comment("Interrupteur du module. Vrai : les messages qui s'affichaient au-dessus de la barre d'inventaire",
+                        "(indices d'outils, approche, repos, tannerie, et ceux des autres mods) deviennent des notes à gauche de",
+                        "l'écran, qui glissent puis s'estompent. Faux : la barre d'action du jeu.")
+                .define("enabled", true);
         client.pop();
 
         client.comment("Module climat (client) : ce qu'on voit des tempêtes.").push("climat");
@@ -535,6 +544,10 @@ public final class FallowConfig {
 
     public static boolean climatStormVisuals() {
         return read(CLIENT_SPEC, CLIMAT_STORM_VISUALS);
+    }
+
+    public static boolean indicesEnabled() {
+        return read(CLIENT_SPEC, INDICES_ENABLED);
     }
 
     public static boolean ecranEnabled() {

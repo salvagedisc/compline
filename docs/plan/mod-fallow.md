@@ -42,6 +42,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `rendu` | client | Iris | 1, client (`rendu.IrisUniformsMixin`) |
 | `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
 | `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
+| `indices` | client | none | 1, client (`indices.GuiOverlayAccessor`, an accessor on vanilla code) |
 | `hotes` | both (the emissaries and masks on the server, the dialogue window, masks and regalia on the client) | none; Archie's Dinosaurs for the beasts' armour | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
@@ -327,6 +328,19 @@ Config (`fallow-client.toml`, `[ecran]` section): `enabled` (true; false: the ga
 
 **Checked** on the test bench on 2026-11-17 (full pack, Brumaire on): after a slot change the hotbar, hearts, food, thirst drops and Cold Sweat's gauge show, then fade together, items included, and are gone; the chat stays; a body temperature set to 70 kept the interface while the gauge read 56 and let it fade once it fell to 35; thirst read 17 to 18. The bench runs at a few frames per second, so the timing of the fades was not judged there (tests EC1 to EC5).
 
+## `indices` module
+
+Client only, no other mod. The action bar messages leave the space above the hotbar and become discreet notes in the left margin ([interactions](interactions.md#shared-conventions)): a thin gold rule, an icon for Fallow's own messages, the text in parchment colour over a dark shade that fades to the right. A note slides in from the left in 180 ms, stays long enough to be read (3 to 6.5 seconds, by length), then fades out in half a second. Up to three stack, the newest on top, from 40 % of the screen height down; a fourth sends the oldest away.
+
+- **What is caught**: everything that reaches the game's action bar, from the server or from a mod on the client (about fifty mods of the pack write there: Create, Overgeared, Farmer's Delight, Cold Sweat, Starcatcher…), through `Gui.overlayMessageString` and `overlayMessageTime`, read every frame (`indices.GuiOverlayAccessor`); a message set again (its timer back to 60) counts as new. The game's `overlay_message` layer is cancelled while the module is on.
+- **One note per message that changes**: a message with the same translation key as the newest note, or the same text once its numbers are removed, replaces it in place (Overgeared's « Coups restants : 4, 3, 2 » is one note); one already shown lower comes back to the top (`Notes`, tested without the game).
+- **Icons** (`IndicesClient.icon`, vanilla items only): the tool hints show the tool they ask for, the approach a feather, rest a campfire, the tannery leather, clearings and the world edge a lantern, the zoo a spyglass. Other mods' messages have no icon.
+- Hidden with the HUD (F1) and under the debug screen (F3); never faded by `ecran`. Lines wrap at 280 GUI pixels.
+
+Config (`fallow-client.toml`, `[indices]` section): `enabled` (true; false: the game's action bar).
+
+**Checked** on the dev client on 2026-11-21 (the `fallow` mod alone, a data pack sending messages with `/title @a actionbar`): the tool hint, the approach hint and a drying frame reading stack with their icons; « Coups restants : 5, 4, 3 » stays one note; notes slide in, fade out, and nothing shows above the hotbar (tests IN6 to IN8).
+
 ## `climat` module
 
 Server side (the integrated server in single player), with Cold Sweat (`cold_sweat`) and Ecliptic Seasons (`eclipticseasons`). The climate weighs on the body ([climat](climat.md)): Cold Sweat's body temperature follows Ecliptic's season.
@@ -586,6 +600,14 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | EC3 | Walk around for a minute without touching the hotbar | The interface stays hidden; with `showWhileMoving = true` it stays shown while walking |
 | EC4 | Dive under water, go down to 3 hearts, get hungry or thirsty, stand in a desert at noon | The interface stays shown as long as the air, health, food, thirst or body temperature need watching |
 | EC5 | Ride a horse, open Create's goggles on a machine, use Overgeared's anvil | Jump meter and horse health follow the hotbar; the goggles tooltip and the anvil minigame are never faded |
+
+### Margin notes
+
+| # | Test | Expected |
+|---|---|---|
+| IN6 | Bare hands on a log, then on stone, a few seconds apart | Two notes on the left with an axe and a pickaxe icon, newest on top; nothing above the hotbar |
+| IN7 | Forge at Overgeared's anvil | The remaining hits stay one note that counts down; the minigame overlay is not covered |
+| IN8 | Open the chat, press F1, press F3 | The notes stay clear of the chat; hidden with F1 and under F3 |
 
 ### Climate
 
