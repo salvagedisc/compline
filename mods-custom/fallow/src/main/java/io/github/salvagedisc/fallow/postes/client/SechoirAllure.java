@@ -34,6 +34,7 @@ final class SechoirAllure implements Allure {
     /** Le séchage montré, qui rejoint doucement celui du bloc (il avance par paliers de 20 secondes). */
     private float montre = -1.0F;
     private SechoirBlock.Etat avant;
+    private final Envol envol = new Envol();
 
     @Override
     public void onOpen(StationView view) {
@@ -48,6 +49,7 @@ final class SechoirAllure implements Allure {
             return;
         }
         horloge += dt;
+        envol.frame(view, dt);
         boolean shown = view.isBlockHidden();
         SechoirBlock.Etat etat = state.getValue(SechoirBlock.ETAT);
         float vise = switch (etat) {
@@ -138,7 +140,11 @@ final class SechoirAllure implements Allure {
                     view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 1.5F, -1.0F), 5.0F, 10, 0xFFFFF0D0);
                     view.playSound(SoundEvents.ARMOR_EQUIP_LEATHER.value(), "cuir", 0.6F, 1.3F);
                 }
-                case VIDE -> view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 3.0F, -2.0F), 4.0F, 6, 0xFFFFF0D0);
+                case VIDE -> {
+                    view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 8.5F, 7.0F), new Vector3f(0.0F, 3.0F, -2.0F), 4.0F, 6, 0xFFFFF0D0);
+                    envol.part(view, avant == SechoirBlock.Etat.SEC ? net.minecraft.world.item.Items.LEATHER : TannerieModule.CUIR_MOUILLE.get(),
+                            new Vector3f(8.0F, 7.0F, 6.5F));
+                }
             }
         }
         avant = etat;

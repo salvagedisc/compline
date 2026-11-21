@@ -1,18 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le chevalet à écharner, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : chevalet est sa copie sans peau, peau la peau brute tendue sur la poutre (x 5.5..10.5, dessus à 13.5), raclee la même peau raclée par-dessus, qui apparaît coup après coup. couteau est le couteau qu'on tient, dessiné par le poste le long de la poutre (le curseur ne le montre plus) : chaque clic donne un coup qui glisse vers soi, avec des copeaux. fantome montre ce qu'il faut poser ensuite. La caméra se tient au bout de la poutre et regarde le long de la peau. surface prend les clics. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche du bloc.",
+  "$comment": "Le chevalet à écharner, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : chevalet est sa copie sans peau, peau la peau brute tendue sur la poutre (x 5.5..10.5, dessus à 13.5), raclee la même peau raclée par-dessus, qui apparaît coup après coup. couteau est le couteau qu'on tient, dessiné par le poste le long de la poutre (le curseur ne le montre plus) : chaque clic donne un coup qui glisse vers soi, avec des copeaux. fantome montre, pâle et battant doucement, la peau à tendre sur la poutre vide ; fantome_couteau, le couteau quand la peau l'attend. La caméra se tient au bout de la poutre et regarde le long de la peau. surface prend les clics. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche du bloc. envol dessine ce qui sort du bloc, qui vole jusqu'à la barre d'inventaire.",
   "work_plane": 13,
   "idle_visible": false,
   "camera": {
     "position": [
       8,
-      34,
-      -14
+      40,
+      -17
     ],
     "target": [
       8,
-      12,
-      8
+      11,
+      6
     ],
     "fov": 36,
     "interactive_at": 0.6
@@ -94,15 +94,46 @@
       "id": "fantome",
       "pos": [
         8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_chevalet_brute",
+        "translucent": true,
+        "tint": "#60FFFFFF"
+      }
+    },
+    {
+      "id": "fantome_couteau",
+      "pos": [
+        8,
         15,
         8
       ],
       "rotation": [
         -90,
+        45,
+        0
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true
+    },
+    {
+      "id": "envol",
+      "pos": [
+        8,
+        14,
+        8
+      ],
+      "rotation": [
+        45,
         0,
         0
       ],
-      "scale": 0.32,
+      "scale": 0.3,
       "pickable": false,
       "hidden": true
     },

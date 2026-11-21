@@ -4,8 +4,16 @@
   "work_plane": 0,
   "idle_visible": false,
   "camera": {
-    "position": [8, 19, -36],
-    "target": [8, 8, 0],
+    "position": [
+      8,
+      22,
+      -40
+    ],
+    "target": [
+      8,
+      12,
+      2
+    ],
     "fov": 40,
     "interactive_at": 0.6
   },
@@ -23,37 +31,102 @@
     "carry_size": 3.2
   },
   "carry_planes": [
-    {"from": [-6, 0], "to": [22, 16], "height": 16, "blend": 3}
+    {
+      "from": [
+        -6,
+        0
+      ],
+      "to": [
+        22,
+        16
+      ],
+      "height": 16,
+      "blend": 3
+    }
   ],
   "nodes": [
     {
       "id": "braises",
-      "pos": [8, 0, -1.02],
+      "pos": [
+        8,
+        0,
+        -1.02
+      ],
       "pickable": false
     },
     {
       "id": "combustible",
-      "pos": [8, 2, -2.6],
+      "pos": [
+        8,
+        2,
+        -2.6
+      ],
       "slot": {
         "slot": "combustible[0]",
-        "ghost": ["minecraft:coal", "minecraft:lava_bucket", "minecraft:ice", "minecraft:snowball"],
+        "ghost": [
+          "minecraft:coal",
+          "minecraft:lava_bucket",
+          "minecraft:ice",
+          "minecraft:snowball"
+        ],
         "ghost_alpha": 0.35,
         "idle_highlight": 0.55,
         "display": "upright",
         "size": 3.4,
         "count_facing": "front"
       },
-      "collider": {"from": [-5, 0, -2], "to": [5, 7, 2.6]}
+      "collider": {
+        "from": [
+          -5,
+          0,
+          -2
+        ],
+        "to": [
+          5,
+          7,
+          2.6
+        ]
+      }
     },
     {
       "id": "jauge_chaud",
-      "pos": [11, 12.75, -0.05],
-      "collider": {"from": [-1.9, -1.9, -0.3], "to": [1.9, 1.9, 0.1]}
+      "pos": [
+        11,
+        12.75,
+        -0.05
+      ],
+      "collider": {
+        "from": [
+          -1.9,
+          -1.9,
+          -0.3
+        ],
+        "to": [
+          1.9,
+          1.9,
+          0.1
+        ]
+      }
     },
     {
       "id": "jauge_froid",
-      "pos": [5, 12.75, -0.05],
-      "collider": {"from": [-1.9, -1.9, -0.3], "to": [1.9, 1.9, 0.1]}
+      "pos": [
+        5,
+        12.75,
+        -0.05
+      ],
+      "collider": {
+        "from": [
+          -1.9,
+          -1.9,
+          -0.3
+        ],
+        "to": [
+          1.9,
+          1.9,
+          0.1
+        ]
+      }
     }
   ]
 }

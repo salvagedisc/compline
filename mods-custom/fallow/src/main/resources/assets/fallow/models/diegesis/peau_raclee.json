@@ -1,20 +1,41 @@
 {
   "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "peau": "fallow:block/peau_raclee_tendue",
-    "particle": "fallow:block/peau_raclee_tendue"
+    "peau": "fallow:item/peau_raclee",
+    "particle": "fallow:item/peau_raclee"
   },
   "elements": [
     {
-      "from": [3.5, 0, 4],
-      "to": [12.5, 0.6, 12],
+      "from": [
+        2.5,
+        0,
+        2.5
+      ],
+      "to": [
+        13.5,
+        0.3,
+        13.5
+      ],
       "faces": {
-        "up": {"uv": [3.5, 4, 12.5, 12], "texture": "#peau"},
-        "down": {"uv": [3.5, 4, 12.5, 12], "texture": "#peau"},
-        "north": {"uv": [3.5, 0, 12.5, 0.6], "texture": "#peau"},
-        "south": {"uv": [3.5, 0, 12.5, 0.6], "texture": "#peau"},
-        "west": {"uv": [4, 0, 12, 0.6], "texture": "#peau"},
-        "east": {"uv": [4, 0, 12, 0.6], "texture": "#peau"}
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#peau"
+        },
+        "down": {
+          "uv": [
+            0,
+            16,
+            16,
+            0
+          ],
+          "texture": "#peau"
+        }
       }
     }
   ]

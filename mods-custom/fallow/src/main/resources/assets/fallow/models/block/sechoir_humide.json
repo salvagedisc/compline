@@ -1,4 +1,5 @@
 {
+  "render_type": "minecraft:cutout",
   "textures": {
     "peau": "fallow:block/cuir_mouille_tendu",
     "particle": "fallow:block/cuir_mouille_tendu"

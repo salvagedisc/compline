@@ -39,6 +39,8 @@ final class ChevaletAllure implements Allure {
     private Item tenu;
     private Item fantome;
     private boolean peau;
+    private int raclage;
+    private final Envol envol = new Envol();
 
     @Override
     public void onOpen(StationView view) {
@@ -58,6 +60,7 @@ final class ChevaletAllure implements Allure {
         }
         horloge += dt;
         coup += dt;
+        envol.frame(view, dt);
         boolean shown = view.isBlockHidden();
         boolean hide = state.getValue(ChevaletBlock.PEAU);
         float done = Math.min(1.0F, state.getValue(ChevaletBlock.RACLAGE) / (float) Math.max(1, Math.min(15, FallowConfig.tannerieStrokes())));
@@ -93,13 +96,22 @@ final class ChevaletAllure implements Allure {
             node.rotateTo(t < 0.45F ? 12.0F * Mth.sin(t / 0.45F * Mth.PI) : 0.0F, 0.0F, 0.0F, 0.0F);
         });
 
-        Item wanted = shown && view.isInUse() ? attendu(hide, carried) : null;
+        // La poutre vide montre, pâle et battant doucement, la peau à y tendre ; la peau posée attend le couteau.
+        boolean inUse = shown && view.isInUse();
+        boolean wantsHide = inUse && !hide && !carried.is(TannerieModule.PEAU_BRUTE.get());
         view.node("fantome").ifPresent(node -> {
+            node.setVisible(wantsHide);
+            if (wantsHide) {
+                node.setTint((int) (110.0F + 45.0F * Mth.sin(horloge * 2.6F)) << 24 | 0xFFFFFF);
+            }
+        });
+        Item wanted = inUse && hide && !couteau(carried) ? couteauAttendu() : null;
+        view.node("fantome_couteau").ifPresent(node -> {
             node.setVisible(wanted != null);
             if (wanted != fantome) {
                 fantome = wanted;
                 if (wanted != null) {
-                    node.setVisual(Visual.ofItem(wanted).withTint(0x90FFFFFF).asTranslucent());
+                    node.setVisual(Visual.ofItem(wanted).withTint(0x70FFFFFF).asTranslucent());
                 }
             }
             if (wanted != null) {
@@ -108,14 +120,8 @@ final class ChevaletAllure implements Allure {
         });
     }
 
-    /** Ce qu'il faut poser ensuite : une peau brute sur le chevalet vide, un couteau quand la peau attend. */
-    private static Item attendu(boolean hide, ItemStack carried) {
-        if (!hide) {
-            return carried.is(TannerieModule.PEAU_BRUTE.get()) ? null : TannerieModule.PEAU_BRUTE.get();
-        }
-        if (couteau(carried)) {
-            return null;
-        }
+    /** Le premier couteau à écharner connu, montré pâle quand la peau l'attend. */
+    private static Item couteauAttendu() {
         return BuiltInRegistries.ITEM.getTag(TannerieModule.COUTEAUX).flatMap(tag -> tag.stream().findFirst())
                 .map(holder -> holder.value()).orElse(null);
     }
@@ -147,9 +153,11 @@ final class ChevaletAllure implements Allure {
         }
         boolean hide = state.getValue(ChevaletBlock.PEAU);
         if (peau && !hide && view.isBlockHidden()) {
-            // La peau est finie (ou reprise) : elle quitte le chevalet dans un éclat.
+            // La peau est finie (ou reprise) : elle quitte le chevalet dans un éclat et vole jusqu'à la barre.
             view.spawnParticles(DiegesisParticles.GLINT, new Vector3f(8.0F, 13.8F, 8.0F), new Vector3f(0.0F, 4.0F, 0.0F), 4.0F, 8, 0xFFFFF0D0);
+            envol.part(view, raclage > 0 ? TannerieModule.PEAU_RACLEE.get() : TannerieModule.PEAU_BRUTE.get(), new Vector3f(8.0F, 14.0F, 8.0F));
         }
         peau = hide;
+        raclage = hide ? state.getValue(ChevaletBlock.RACLAGE) : 0;
     }
 }

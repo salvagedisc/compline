@@ -1,20 +1,41 @@
 {
+  "render_type": "minecraft:cutout",
   "textures": {
-    "peau": "fallow:block/peau_raclee_tendue",
-    "particle": "fallow:block/peau_raclee_tendue"
+    "peau": "fallow:item/peau_raclee",
+    "particle": "fallow:item/peau_raclee"
   },
   "elements": [
     {
       "from": [
         3.5,
         13,
-        4
+        3.5
       ],
       "to": [
         12.5,
-        13.6,
-        12
+        13.3,
+        12.5
       ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#peau"
+        },
+        "down": {
+          "uv": [
+            0,
+            16,
+            16,
+            0
+          ],
+          "texture": "#peau"
+        }
+      },
       "rotation": {
         "angle": -22.5,
         "axis": "y",
@@ -23,23 +44,6 @@
           13,
           8
         ]
-      },
-      "faces": {
-        "north": {
-          "texture": "#peau"
-        },
-        "south": {
-          "texture": "#peau"
-        },
-        "east": {
-          "texture": "#peau"
-        },
-        "west": {
-          "texture": "#peau"
-        },
-        "up": {
-          "texture": "#peau"
-        }
       }
     }
   ]

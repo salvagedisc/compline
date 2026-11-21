@@ -33,7 +33,7 @@ final class CuveAllure implements Allure {
     /** Le liquide de la cuve : sa couleur est donnée à chaque image. */
     static final ResourceLocation LIQUIDE = ResourceLocation.fromNamespaceAndPath(Fallow.MOD_ID, "eau_de_cuve");
 
-    private static final int TAN = 0x7A4A1C;
+    private static final int TAN = 0x6B3A12;
     private static final int CUIR = 0xFF9A7452;
     private static final int ECORCE = 0xFF6B4A2E;
     private static final float ARRIVEE = 0.45F;
@@ -52,6 +52,7 @@ final class CuveAllure implements Allure {
     private final float[] arrivees = { 9.0F, 9.0F, 9.0F, 9.0F };
     private final boolean[] cuir = new boolean[4];
     private Item fantome;
+    private final Envol envol = new Envol();
     /** Les notes du cuir prêt, jouées l'une après l'autre. */
     private int carillon = -1;
 
@@ -62,6 +63,7 @@ final class CuveAllure implements Allure {
 
     @Override
     public void frame(StationView view, float dt) {
+        envol.frame(view, dt);
         BlockState state = view.level().getBlockState(view.pos());
         if (!(state.getBlock() instanceof CuveBlock)) {
             return;
@@ -81,7 +83,7 @@ final class CuveAllure implements Allure {
             node.showLiquid(LIQUIDE, water ? 1.0F : 0.0F);
             int clear = BiomeColors.getAverageWaterColor(view.level(), view.pos()) & 0xFFFFFF;
             float brown = Math.min(1.0F, bark / 2.0F) * 0.8F + soak * 0.15F;
-            int alpha = (int) Mth.lerp(brown, 0xA0, 0xE0);
+            int alpha = (int) Mth.lerp(brown, 0xA0, 0xF0);
             int target = alpha << 24 | melange(clear, TAN, brown);
             teinte = teinte == -1 ? target : approche(teinte, target, Math.min(1.0F, dt * 1.5F));
             node.setLiquidColor(teinte);
@@ -182,6 +184,8 @@ final class CuveAllure implements Allure {
             }
             if (hides < peaux) {
                 eclabousse(view, 8.0F, 8.0F, 0.7F, 6);
+                // Le cuir sort de la cuve et vole jusqu'à la barre (la peau reprise avant d'être prête aussi).
+                envol.part(view, pret ? TannerieModule.CUIR_MOUILLE.get() : TannerieModule.PEAU_RACLEE.get(), new Vector3f(8.0F, 13.0F, 8.0F));
             }
             if (ready && !pret) {
                 carillon = 0;

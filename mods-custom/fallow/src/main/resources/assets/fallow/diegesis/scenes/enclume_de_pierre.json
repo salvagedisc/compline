@@ -6,12 +6,12 @@
   "camera": {
     "position": [
       8,
-      46,
-      -15
+      50,
+      -19
     ],
     "target": [
       8,
-      16,
+      15,
       7
     ],
     "fov": 40,
@@ -195,7 +195,7 @@
         18.5,
         11.5
       ],
-      "scale": 0.3,
+      "scale": 0.24,
       "pickable": false,
       "hidden": true
     },
