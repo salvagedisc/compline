@@ -2,9 +2,16 @@ name: boot
 
 # Démarre un serveur dédié avec tout le pack (côté serveur) et le mod fallow de la PR : échoue sur
 # un plantage, une erreur des journaux non listée dans scripts/boot/known-errors.txt, ou un objet
-# inconnu dans les listes KubeJS. Une quinzaine de minutes : seulement pour les PR qui touchent au
-# pack, au mod ou au contrôle lui-même, ou à la demande.
+# inconnu dans les listes KubeJS. Une quinzaine de minutes : seulement pour les PR et les poussées
+# sur main qui touchent au pack, au mod ou au contrôle lui-même, ou à la demande.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'pack/**'
+      - 'mods-custom/**'
+      - 'scripts/boot/**'
+      - '.github/workflows/boot.yml'
   pull_request:
     paths:
       - 'pack/**'
