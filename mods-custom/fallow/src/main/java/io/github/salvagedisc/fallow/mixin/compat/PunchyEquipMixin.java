@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(targets = "punchy.client.state.HandEquipStateMachine", remap = false)
 abstract class PunchyEquipMixin {
-    @Inject(method = "shouldIgnoreComponentForEquipDiff", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "shouldIgnoreComponentForEquipDiff", at = @At("HEAD"), cancellable = true, require = 0)
     private void fallow$ignoreStackSize(DataComponentType<?> type, CallbackInfoReturnable<Boolean> cir) {
         if (type == DataComponents.MAX_STACK_SIZE) {
             cir.setReturnValue(true);

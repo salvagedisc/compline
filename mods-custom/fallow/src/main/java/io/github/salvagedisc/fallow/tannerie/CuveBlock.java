@@ -204,7 +204,7 @@ public class CuveBlock extends Block {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && state.getValue(PEAUX) > 0) {
+        if (!movedByPiston && !state.is(newState.getBlock()) && state.getValue(PEAUX) > 0) {
             Block.popResource(level, pos, new ItemStack(ready(state) ? TannerieModule.CUIR_MOUILLE.get()
                     : TannerieModule.PEAU_RACLEE.get(), state.getValue(PEAUX)));
         }

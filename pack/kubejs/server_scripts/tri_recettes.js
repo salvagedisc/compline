@@ -10,13 +10,15 @@ const TRI_HACHOIR_GARDE = [
   'farm_and_charm:mincer/flour', 'farm_and_charm:mincer/raw_pasta',
   'farm_and_charm:mincer/melon_slice'
 ]
+// fusions.js recopie celles dont le résultat est fondu (farine, pâtes) sous fallow:fusion/… : les garder aussi.
+const TRI_HACHOIR_GARDE_IDS = TRI_HACHOIR_GARDE.concat(TRI_HACHOIR_GARDE.map(id => 'fallow:fusion/' + id.replace(':', '/')))
 
 ServerEvents.recipes(event => {
   const hachoir = []
   event.forEachRecipe({ type: 'farm_and_charm:mincer' }, recipe => {
     const id = String(recipe.getId())
     const json = JSON.parse(recipe.json.toString())
-    if (json.recipe_type !== 'MEAT' && TRI_HACHOIR_GARDE.indexOf(id) < 0) hachoir.push(id)
+    if (json.recipe_type !== 'MEAT' && TRI_HACHOIR_GARDE_IDS.indexOf(id) < 0) hachoir.push(id)
   })
   hachoir.forEach(id => event.remove({ id: id }))
 

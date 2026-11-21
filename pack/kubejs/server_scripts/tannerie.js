@@ -39,7 +39,8 @@ ServerEvents.recipes(event => {
 
   // Quatre peaux de reptile de Koopa's Critters font une peau brute.
   if (Platform.isLoaded('koopascritters')) {
-    event.shapeless('fallow:peau_brute', ['4x koopascritters:reptile_hide'])
+    event.shapeless('fallow:peau_brute', ['koopascritters:reptile_hide', 'koopascritters:reptile_hide',
+      'koopascritters:reptile_hide', 'koopascritters:reptile_hide'])
       .id('fallow:tannerie/peau_de_reptile')
   }
 

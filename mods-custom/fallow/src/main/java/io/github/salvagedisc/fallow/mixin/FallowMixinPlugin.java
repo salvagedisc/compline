@@ -54,7 +54,8 @@ public final class FallowMixinPlugin implements IMixinConfigPlugin {
             "dinos.ChorusoatlArmorMixin", List.of("hasAbility", "activateServerSetAbility"),
             "dinos.ArmorModelCacheMixin", List.of("initArmorModel", "getLayerLocation"),
             "zoo.CategoryTabsMixin", List.of("book", "categorySubTabs", "<init>"),
-            "zoo.GuidebookDataMixin", List.of("parseXML", "loadData"));
+            "zoo.GuidebookDataMixin", List.of("parseXML", "loadData"),
+            "compat.PunchyEquipMixin", List.of("shouldIgnoreComponentForEquipDiff"));
 
     @Override
     public void onLoad(String mixinPackage) {

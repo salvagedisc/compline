@@ -211,7 +211,7 @@ public class SechoirBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && state.getValue(ETAT) != Etat.VIDE) {
+        if (!movedByPiston && !state.is(newState.getBlock()) && state.getValue(ETAT) != Etat.VIDE) {
             Block.popResource(level, pos, new ItemStack(state.getValue(ETAT) == Etat.SEC ? Items.LEATHER
                     : TannerieModule.CUIR_MOUILLE.get()));
         }

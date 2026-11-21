@@ -137,7 +137,7 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && state.getValue(PEAU)) {
+        if (!movedByPiston && !state.is(newState.getBlock()) && state.getValue(PEAU)) {
             Block.popResource(level, pos, new ItemStack(TannerieModule.PEAU_BRUTE.get()));
         }
         super.onRemove(state, level, pos, newState, movedByPiston);

@@ -38,7 +38,7 @@ ServerEvents.recipes(event => {
   let planches = []
   event.forEachRecipe({ type: 'minecraft:crafting_shapeless', output: '#minecraft:planks' }, recipe => {
     let ingredients = recipe.json.getAsJsonArray('ingredients')
-    if (ingredients == null || ingredients.size() !== 1) return
+    if (ingredients == null || ingredients.size() !== 1 || !ingredients.get(0).isJsonObject()) return
     let bois = premiersGestesIngredient(ingredients.get(0).getAsJsonObject())
     let resultat = recipe.json.getAsJsonObject('result')
     if (bois == null || resultat == null) return

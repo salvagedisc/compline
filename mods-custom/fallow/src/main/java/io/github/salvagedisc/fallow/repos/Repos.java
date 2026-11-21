@@ -56,7 +56,8 @@ public final class Repos {
             }
             State state = STATES.computeIfAbsent(player.getUUID(), id -> new State());
             Vec3 here = player.position();
-            boolean still = player.isPassenger() || (state.last != null && state.last.distanceTo(here) < STILL);
+            // Assis sur un siège, on ne bouge pas ; dans un bateau ou un wagonnet qui avance, on bouge.
+            boolean still = state.last != null && state.last.distanceTo(here) < STILL;
             state.last = here;
             ServerLevel level = player.serverLevel();
             if (!still || !sheltered(level, player) || !nearFire(level, player.blockPosition())) {

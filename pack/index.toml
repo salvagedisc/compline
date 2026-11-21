@@ -3314,7 +3314,7 @@ hash = "51ec670c46e79849de4709190a52923c9ca72c3eae8b4b13ae512189febe0ea0"
 
 [[files]]
 file = "kubejs/server_scripts/premiers_gestes.js"
-hash = "6977db9d42afe70affdfe2c1c0dece11c7c8589900177e609cb867db4e94db4d"
+hash = "60eddda40df4e2979a54505074c2f7f380fd6fb6150f7bc822103f8ee05b9eac"
 
 [[files]]
 file = "kubejs/server_scripts/sans_lapin.js"
@@ -3326,7 +3326,7 @@ hash = "6387e8f42e052ce80acde6f4cb669de7a7e12c40bf2ce299e2473342ec312a97"
 
 [[files]]
 file = "kubejs/server_scripts/sans_xp.js"
-hash = "8f486b966b9f9ef7ec35057cea83229e6e6795a3c1038411555e65916eb27a38"
+hash = "f4ee6e2c2cee75bf1d9fc58f85dbbad3a31b0586c5135ac4ed086eb957aff125"
 
 [[files]]
 file = "kubejs/server_scripts/sante.js"
@@ -3338,7 +3338,7 @@ hash = "055952c50c8390932081f707040d3997df54a5295a42cf9260abd67e447607b2"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie.js"
-hash = "c6cc59327b3f9275019ca03cac14d936b9ba80c0f03f6189fe9956b57bf55e43"
+hash = "febfcf822314729fe6d7c84e323442118c8d2a7cd211b0cc70e678312c97cc44"
 
 [[files]]
 file = "kubejs/server_scripts/tannerie_butin.js"
@@ -3350,7 +3350,7 @@ hash = "66ccbb5904f56ffb370728deda4fd2bf4fdcbcb8a5313c2c13cb9616671fd16c"
 
 [[files]]
 file = "kubejs/server_scripts/tri_recettes.js"
-hash = "22bdad78bea5975316b0d0517de14106257a3ed15ddbb1a073945e6795f87f06"
+hash = "bd6e56f32ece2d3d644397e3bc9b86327ddd3058fc24a4e5d0419d503a433c07"
 
 [[files]]
 file = "kubejs/startup_scripts/onglets_creatifs.js"
@@ -3648,8 +3648,8 @@ hash = "2c88d3eceb7be9c5964ca32c24612ca08d7326b4cb06104e98d56efa777de640"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.35.1.jar"
-hash = "dd5e736986571510d458657905bc8d897c7293d75febdf90a78b932d5a766f4a"
+file = "mods/fallow-0.35.2.jar"
+hash = "e9216d3b3c454ef7d0a78bdb7fbe1144b5997d7230a6e932cc6258f2fb1f87e3"
 
 [[files]]
 file = "mods/farmers-delight.pw.toml"
