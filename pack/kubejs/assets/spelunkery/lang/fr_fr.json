@@ -256,5 +256,8 @@
   "container.spelunkery.sluice": "Écluse",
   "death.attack.stonecutter": "%1$s a été scié en deux",
   "death.attack.stonecutter.player": "%1$s a été scié en deux en combattant %2$s",
-  "item.spelunkery.eggplant": "Aubergine"
+  "item.spelunkery.eggplant": "Aubergine",
+  "tooltip.spelunkery.depth_gauge_depth": "Altitude actuelle : Y = %1$s",
+  "tooltip.spelunkery.magnetite_pos": "Votre boussole est attirée vers %1$s, %2$s",
+  "tooltip.spelunkery.player_pos": "Position actuelle : %1$s, %2$s"
 }

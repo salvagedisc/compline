@@ -10,7 +10,7 @@ Status: checked on a dedicated server of the full pack with one player on 2026-1
 - **Sight**: an animal that sees the player with nothing in between notices them at 14 blocks standing, about 6 crouched, 18 sprinting, and only 60 % as far in the dark.
 - **Hearing**: 6 blocks walking, 12 sprinting, under 2 crouched, through walls and grass.
 - **Alert, then flight**: an animal that notices the player from afar first stops and stares for about a second and a half. A player who stops or crouches can stay unseen; one who keeps coming makes it bolt. Close by, it bolts at once. It runs away for about seven seconds, longer while it still perceives the player, and is warier (a quarter further) while it is on edge. Animals of the same species within 12 blocks flee with it.
-- **A word now and then**: when an animal flees, the action bar may say what gave the player away (« Le vent a porté votre odeur jusqu'à lui. », « Il vous a vu : accroupissez-vous pour approcher. », « Il vous a entendu. »), at most once every 90 seconds.
+- **A word now and then**: when an animal flees, the action bar may say what gave the player away naming the species (« Cerf : le vent lui a porté votre odeur. », « Cerf : vous avez été vu. Accroupissez-vous pour approcher. », « Cerf : vous avez été entendu. »), at most once every 90 seconds.
 - **Reading the wind**: the wind is the pack's own (the `vent` module): campfire smoke leans with it, and under Brumaire grass and leaves bend with it. The server computes the same wind as every client from the world time and weather.
 - **The spyglass**: looking through it, an animal at the centre of the image (within 8°) earns the zoo's « Apercevoir » stamp up to 64 blocks away instead of 25.
 
@@ -57,7 +57,7 @@ Not checked on the bench: the herd fleeing together, the hint messages, the spyg
 
 | # | Test | Expected |
 |---|---|---|
-| AP1 | Find a herd of deer in a plain; light a campfire to read the wind; walk toward them with the smoke blowing toward them | They flee from 25 to 35 blocks away, all together; « Le vent a porté votre odeur jusqu'à lui. » |
+| AP1 | Find a herd of deer in a plain; light a campfire to read the wind; walk toward them with the smoke blowing toward them | They flee from 25 to 35 blocks away, all together; « Cerf : le vent lui a porté votre odeur. » |
 | AP2 | Go round them and come back against the wind, standing | They raise their head at about 14 blocks and stare; keep walking: they bolt |
 | AP3 | Same, crouched | You get within 6 or 7 blocks without them fleeing; enough for the zoo's observation (16 blocks) and a photo |
 | AP4 | Sprint toward an animal across the wind | It hears you at about 12 blocks |

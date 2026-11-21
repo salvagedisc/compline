@@ -730,7 +730,7 @@ hash = "75dea3166a3ea92ec6583fab2e817f83e9b45d0469427c8e3326f7efa1a72b08"
 
 [[files]]
 file = "kubejs/assets/alexsmobs/lang/fr_fr.json"
-hash = "5f3ee835c2b5df2600f147da6b8f760c8d3f4747ac5ec7fd3ae49436fe14cdac"
+hash = "e920ab2af9113aaa45277be8bbe9505e2d46d0875efd0b3e3dfc6a97778dba7b"
 
 [[files]]
 file = "kubejs/assets/alfinolib/lang/fr_fr.json"
@@ -778,7 +778,7 @@ hash = "0bfa3617009ba1661b14af3d60ef9fa677a4275ea221b00da2c0f4010dac2382"
 
 [[files]]
 file = "kubejs/assets/bettercombat/lang/fr_fr.json"
-hash = "b34fe301c3cc67c2410debc0cefb11c2829bfc7a996016452532f245e065134e"
+hash = "ecb9d586f358988e08002e6ef51626b20352480d81ff661d0b27c3fc66a0ef41"
 
 [[files]]
 file = "kubejs/assets/biolith/lang/fr_fr.json"
@@ -814,7 +814,7 @@ hash = "44b6a7b46083cda749335ca335b93405afdc747578ad9a5214911b9794e3fa7b"
 
 [[files]]
 file = "kubejs/assets/comforts/lang/fr_fr.json"
-hash = "fddaf40623ac3e4e3d744a9483d179e9234ffb39642f21500d9f25715c8d8f69"
+hash = "6a6c0ae46fecb6d29eae8ff610aee8290f395265e3a1959be7b4f89d236c8369"
 
 [[files]]
 file = "kubejs/assets/companion/lang/fr_fr.json"
@@ -1077,6 +1077,10 @@ file = "kubejs/assets/longwings/lang/fr_fr.json"
 hash = "7108898b444c5b9cb7cb55cdd9a63ba9bd1d2e52867f46e592d326562074aca6"
 
 [[files]]
+file = "kubejs/assets/lootr/lang/fr_fr.json"
+hash = "ea44e00e7d52dc249e6283b55e594c51dc49fd9eaa1ecb0f52a597ac29e6a3dd"
+
+[[files]]
 file = "kubejs/assets/minecraft/lang/en_us.json"
 hash = "2613b535223fe0842411931622d675814121b67ebb23bf2940ed35b64d46054d"
 
@@ -1226,7 +1230,7 @@ hash = "e10eca48fde63c271d4b0626e6921a4d92f75ae9ef052cb79b070fce9bc8d598"
 
 [[files]]
 file = "kubejs/assets/spelunkery/lang/fr_fr.json"
-hash = "6d2e113d3f923ff84026fbad972b8b941153f49288c3c8646748fdf21bfb7745"
+hash = "f4ec962ff34f537d5f27b719c51eaf4424d38b7b8ebc5e8b4767526f3e09ed0d"
 
 [[files]]
 file = "kubejs/assets/starcatcher/lang/fr_fr.json"
@@ -1246,7 +1250,7 @@ hash = "b265aa9e35aaeb8ae8e4c95824d5ab481951b2d18407269b097e6284f0ac2ebf"
 
 [[files]]
 file = "kubejs/assets/supplementaries/lang/fr_fr.json"
-hash = "dd0fd1b0b1600e850c6a56168ccc69a45bfe65f1d1b905b0b67a263f051820ba"
+hash = "0d8d2d4f9741abe6bb96e00063fa6f3c7cc287f1a640331cfcd1d51cd2cb7313"
 
 [[files]]
 file = "kubejs/assets/surfacesamples/lang/fr_fr.json"
@@ -3652,8 +3656,8 @@ hash = "2c88d3eceb7be9c5964ca32c24612ca08d7326b4cb06104e98d56efa777de640"
 metafile = true
 
 [[files]]
-file = "mods/fallow-0.38.0.jar"
-hash = "606751837c50de3ebb206cfc33fffc4756cd6da324580642079a7b1cecd18f1c"
+file = "mods/fallow-0.39.0.jar"
+hash = "05cfed860f8681a155bd9074add7e89f6342cdf88709f37817d23e31d9054dc6"
 
 [[files]]
 file = "mods/farmers-delight.pw.toml"

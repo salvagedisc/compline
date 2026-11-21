@@ -901,5 +901,7 @@
   "supplementaries.configuration.flute.note_particles": "Particules de notes",
   "supplementaries.configuration.flute.note_particles.description": "Affiche des particules en jouant de la flûte",
   "supplementaries.configuration.plunderer.galleon.description": "Les galions sont automatiquement désactivés si la fonction « corde » est désactivée",
-  "supplementaries.configuration.globe.sepia_globe.description": "Les globes sépia sont automatiquement désactivés si la fonction « encre antique » est désactivée"
+  "supplementaries.configuration.globe.sepia_globe.description": "Les globes sépia sont automatiquement désactivés si la fonction « encre antique » est désactivée",
+  "message.supplementaries.present.info": "Ce cadeau est adressé à : %s",
+  "message.supplementaries.safe.assigned_key": "Ce coffre-fort s'ouvre à présent avec la clé nommée « %s »"
 }

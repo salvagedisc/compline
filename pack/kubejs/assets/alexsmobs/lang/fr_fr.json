@@ -24,5 +24,6 @@
   "alexsmobs.sound.subtitle.sunbird_hurt": "Un oiseau de soleil crie",
   "alexsmobs.sound.subtitle.triops_hurt": "Un triops couine",
   "alexsmobs.sound.subtitle.comb_jelly_hurt": "Un cténophore est blessé",
-  "advancements.alexsmobs.rainbow_jelly.desc": "Obtenez de la gelée arc-en-ciel d'un cténophore. Utilisez une éponge si le résultat ne vous plaît pas…"
+  "advancements.alexsmobs.rainbow_jelly.desc": "Obtenez de la gelée arc-en-ciel d'un cténophore. Utilisez une éponge si le résultat ne vous plaît pas…",
+  "entity.alexsmobs.crow.command_3": "%s ramasse des objets"
 }

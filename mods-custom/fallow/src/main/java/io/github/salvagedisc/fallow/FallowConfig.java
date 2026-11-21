@@ -68,6 +68,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.BooleanValue CLIMAT_STORM_VISUALS;
     private static final ModConfigSpec.BooleanValue ECRAN_ENABLED;
     private static final ModConfigSpec.BooleanValue INDICES_ENABLED;
+    private static final ModConfigSpec.ConfigValue<List<? extends String>> INDICES_IN_BAR;
     private static final ModConfigSpec.IntValue ECRAN_IDLE_SECONDS;
     private static final ModConfigSpec.BooleanValue ECRAN_SHOW_WHILE_MOVING;
     private static final ModConfigSpec.ConfigValue<List<? extends String>> ECRAN_LAYERS;
@@ -78,6 +79,15 @@ public final class FallowConfig {
             "minecraft:armor_level", "minecraft:food_level", "minecraft:vehicle_health", "minecraft:air_level",
             "minecraft:selected_item_name", "minecraft:experience_level",
             "create:remaining_air", "cold_sweat:body_temp", "cold_sweat:vague_temp");
+
+    /** Les relevés qui restent au-dessus de la barre d'inventaire : début de clé de traduction. */
+    private static final List<String> INDICES_DEFAULT_IN_BAR = List.of(
+            "record.nowPlaying", "mount.onboard", "create.mount.onboard", "create.track.", "create.train.relocate",
+            "create.weighted_ejector.targeting", "create.factory_panel.click", "create.contraption.controls.",
+            "tooltip.spelunkery.", "message.supplementaries.altimeter", "message.supplementaries.compass",
+            "message.supplementaries.speedometer", "message.supplementaries.cannon.maneuver", "hud.bettercombat.",
+            "item.throw", "camera_type.", "info.eclipticseasons.calendar", "title.longwings.",
+            "spawn.mob_perching.onboard");
 
     static {
         ModConfigSpec.Builder client = new ModConfigSpec.Builder();
@@ -172,6 +182,11 @@ public final class FallowConfig {
                         "(indices d'outils, approche, repos, tannerie, et ceux des autres mods) deviennent des notes à gauche de",
                         "l'écran, qui glissent puis s'estompent. Faux : la barre d'action du jeu.")
                 .define("enabled", true);
+        INDICES_IN_BAR = client
+                .comment("Débuts de clés de traduction des relevés qui restent au-dessus de la barre d'inventaire, à côté de",
+                        "l'objet ou de la monture dont ils parlent (altimètre, vitesse, disque qui joue, rail qu'on pose...).",
+                        "S'y ajoutent les textes sans clé (souvent des nombres) et ceux qui reviennent trois fois en deux secondes.")
+                .defineListAllowEmpty("inBar", INDICES_DEFAULT_IN_BAR, () -> "record.nowPlaying", o -> o instanceof String);
         client.pop();
 
         client.comment("Module climat (client) : ce qu'on voit des tempêtes.").push("climat");
@@ -548,6 +563,10 @@ public final class FallowConfig {
 
     public static boolean indicesEnabled() {
         return read(CLIENT_SPEC, INDICES_ENABLED);
+    }
+
+    public static List<? extends String> indicesInBar() {
+        return CLIENT_SPEC.isLoaded() ? INDICES_IN_BAR.get() : INDICES_DEFAULT_IN_BAR;
     }
 
     public static boolean ecranEnabled() {

@@ -332,12 +332,13 @@ Config (`fallow-client.toml`, `[ecran]` section): `enabled` (true; false: the ga
 
 Client only, no other mod. The action bar messages leave the space above the hotbar and become discreet notes in the left margin ([interactions](interactions.md#shared-conventions)): a thin gold rule, an icon for Fallow's own messages, the text in parchment colour over a dark shade that fades to the right. A note slides in from the left in 180 ms, stays long enough to be read (3 to 6.5 seconds, by length), then fades out in half a second. Up to three stack, the newest on top, from 40 % of the screen height down; a fourth sends the oldest away.
 
-- **What is caught**: everything that reaches the game's action bar, from the server or from a mod on the client (about fifty mods of the pack write there: Create, Overgeared, Farmer's Delight, Cold Sweat, Starcatcher…), through `Gui.overlayMessageString` and `overlayMessageTime`, read every frame (`indices.GuiOverlayAccessor`); a message set again (its timer back to 60) counts as new. The game's `overlay_message` layer is cancelled while the module is on.
+- **What is caught**: everything that reaches the game's action bar, from the server or from a mod on the client (about fifty mods of the pack write there: Create, Overgeared, Farmer's Delight, Cold Sweat, Starcatcher…), through `Gui.overlayMessageString` and `overlayMessageTime`, read every frame (`indices.GuiOverlayAccessor`); a message set again (its timer back to 60) counts as new. The game's `overlay_message` layer is cancelled while a note is shown.
+- **Readouts stay in the bar** (`Routage`, tested without the game, since 0.39.0): a hint becomes a note, but a reading tied to what the player holds or rides stays above the hotbar, where the eye already is and where it updates every tick: Spelunkery's depth gauge and magnetite, Supplementaries' altimeter, compass, speedometer and cannon, the jukebox's « En cours de lecture », a mount's dismount key, Create's track and train placement, Better Combat's mining toggle, ItemPhysic's throw power, Sable's camera, Longwings' readings. A message stays there when its translation key starts with one of `inBar`, when it has no key (a text assembled on the fly: Icy's horses, Cold Sweat's thermometers), or when the same key comes back three times in two seconds; it turns back into a note after five quiet seconds. Fallow's own messages are always notes.
 - **One note per message that changes**: a message with the same translation key as the newest note, or the same text once its numbers are removed, replaces it in place (Overgeared's « Coups restants : 4, 3, 2 » is one note); one already shown lower comes back to the top (`Notes`, tested without the game).
 - **Icons** (`IndicesClient.icon`, vanilla items only): the tool hints show the tool they ask for, the approach a feather, rest a campfire, the tannery leather, clearings and the world edge a lantern, the zoo a spyglass. Other mods' messages have no icon.
 - Hidden with the HUD (F1) and under the debug screen (F3); never faded by `ecran`. Lines wrap at 280 GUI pixels.
 
-Config (`fallow-client.toml`, `[indices]` section): `enabled` (true; false: the game's action bar).
+Config (`fallow-client.toml`, `[indices]` section): `enabled` (true; false: the game's action bar); `inBar` (the key prefixes of readouts kept in the bar, listed above).
 
 **Checked** on the dev client on 2026-11-21 (the `fallow` mod alone, a data pack sending messages with `/title @a actionbar`): the tool hint, the approach hint and a drying frame reading stack with their icons; « Coups restants : 5, 4, 3 » stays one note; notes slide in, fade out, and nothing shows above the hotbar (tests IN6 to IN8).
 
@@ -608,6 +609,8 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 | IN6 | Bare hands on a log, then on stone, a few seconds apart | Two notes on the left with an axe and a pickaxe icon, newest on top; nothing above the hotbar |
 | IN7 | Forge at Overgeared's anvil | The remaining hits stay one note that counts down; the minigame overlay is not covered |
 | IN8 | Open the chat, press F1, press F3 | The notes stay clear of the chat; hidden with F1 and under F3 |
+| IN9 | Hold Spelunkery's depth gauge, then Supplementaries' altimeter; play a disc in a jukebox; ride a horse | The readings stay above the hotbar and update; no note on the left |
+| IN10 | Approach a deer standing, then read a tanning vat and a drying frame | « Cerf : vous avez été vu. Accroupissez-vous pour approcher. », « Trempage des peaux à … % (… dans la cuve). », « Séchage du cuir à … %. … » as notes |
 
 ### Climate
 

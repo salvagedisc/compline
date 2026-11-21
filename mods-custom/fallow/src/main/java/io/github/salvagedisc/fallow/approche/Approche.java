@@ -201,7 +201,7 @@ public final class Approche {
             Alarm herd = ALARMS.computeIfAbsent(other, m -> new Alarm());
             flee(other, herd, player.position());
         }
-        hint(player, sense);
+        hint(player, sense, mob);
     }
 
     private static void flee(PathfinderMob mob, Alarm alarm, Vec3 from) {
@@ -210,8 +210,8 @@ public final class Approche {
         alarm.fleeTicks = FLEE_TICKS;
     }
 
-    /** Un mot au joueur, de temps en temps, pour qu'il comprenne ce qui l'a trahi. */
-    private static void hint(ServerPlayer player, Sense sense) {
+    /** Un mot au joueur, de temps en temps, pour qu'il comprenne ce qui l'a trahi ; la bête est nommée, la note se lit seule. */
+    private static void hint(ServerPlayer player, Sense sense, PathfinderMob mob) {
         if (!FallowConfig.approcheHints()) {
             return;
         }
@@ -221,6 +221,7 @@ public final class Approche {
             return;
         }
         HINTS.put(player.getUUID(), now);
-        player.displayClientMessage(Component.translatable("approche.fallow.indice." + sense.name().toLowerCase()), true);
+        player.displayClientMessage(Component.translatable("approche.fallow.indice." + sense.name().toLowerCase(),
+                mob.getType().getDescription()), true);
     }
 }

@@ -10,5 +10,7 @@
   "text.autoconfig.bettercombat.option.client.firstPersonAnimations": "Animations du joueur en première personne",
   "text.autoconfig.bettercombat.option.client.firstPersonAnimations.@Tooltip": "Animations d'attaque montrées en première personne. À changer seulement avec un mod de caméra particulier.",
   "text.autoconfig.bettercombat.option.client.legAnimationThreshold": "Couper l'animation des jambes",
-  "text.autoconfig.bettercombat.option.client.legAnimationThreshold.@Tooltip": "EXPÉRIMENTAL : coupe l'animation des jambes au-delà de cette vitesse de course"
+  "text.autoconfig.bettercombat.option.client.legAnimationThreshold.@Tooltip": "EXPÉRIMENTAL : coupe l'animation des jambes au-delà de cette vitesse de course",
+  "hud.bettercombat.mine_with_weapons_on": "Miner avec une arme : oui",
+  "hud.bettercombat.mine_with_weapons_off": "Miner avec une arme : non"
 }

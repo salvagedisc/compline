@@ -22,7 +22,7 @@ The same four moves at every gesture station, house or not:
 |---|---|---|
 | Use with the item | Put it on the station | a hide on the fleshing beam, food on the cutting board, wet leather on the drying frame, water and bark in the tanning vat |
 | Use with the tool | Work it, one stroke per click | the knife on the beam or the board, the spoon in the pot, the hammer on the anvil |
-| Use with an empty hand | Read how far it is, or take back what lies there | the vat (« 2 peau(x) dans le tan : 60 % du trempage. »), the drying frame, the beam |
+| Use with an empty hand | Read how far it is, or take back what lies there | the vat (« Trempage des peaux à 60 % (2 dans la cuve). »), the drying frame, the beam |
 | Sneak + use | The other way of the same block | Farmer's Delight's own window on the pot, turning stone or an anvil into a forging anvil, starting the forge's strikes |
 
 Waiting happens on the block, never with the player held: the vat soaks, the frame dries and the pot cooks while the player does something else. A station takes a batch where it makes sense (four hides in the vat, a whole pot).
@@ -38,7 +38,7 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 
 ## Shared conventions
 
-- **Channels.** Hints and states go to the action bar, in one short sentence, at most every few seconds (tools, approach, rest, tannery, Overgeared's anvil); since `fallow` 0.38.0 the `indices` module draws every action bar message as a note in the left margin, with an icon for Fallow's own ([mod-fallow](mod-fallow.md#indices-module)). The chat carries milestones only (a species mastered). A sound marks each step. No new gauge on the HUD.
+- **Channels.** Hints and states go to the action bar, in one short sentence, at most every few seconds (tools, approach, rest, tannery, Overgeared's anvil); since `fallow` 0.38.0 the `indices` module draws every hint as a note in the left margin, with an icon for Fallow's own, while readings of what the player holds or rides (gauges, altimeter, jukebox, mount) stay above the hotbar ([mod-fallow](mod-fallow.md#indices-module)). The chat carries milestones only (a species mastered). A sound marks each step. No new gauge on the HUD.
 - **Voice.** Fallow's own texts address the player as « vous », like the quests and the other mods' French: « Il vous faut une hache. » (the tool hints used « tu » until 2026-11-21).
 - **One book per domain.** Recipes in EMI (R and U on any item; Hands-On Delight's book beside its stations shows the same recipes with their times); fauna and the zoo in Archie's guidebook (J); fish in Starcatcher's guide; quests in Questlog; places on the atlas; enchantments in Immersive Enchanting's ancient books. A new mod does not bring a second book for a domain that has one.
 - **Pace.** Opening an everyday window (chest, workbench, furnace) costs well under half a second: Spatial GUI's camera move and scale animation are 150 ms (300 ms by default) and closing has no animation (shipped as defaults for new installs in `pack/config/defaultoptions/extra/config/spatial-gui.json5`). The camera leaves the player only at Hands-On Delight's stations, where the hands are the point, and one key brings it back.

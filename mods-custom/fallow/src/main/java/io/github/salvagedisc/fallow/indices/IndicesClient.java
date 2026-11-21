@@ -31,8 +31,8 @@ import org.joml.Matrix4f;
  * entrant, reste le temps de la lire, puis s'estompe ; trois au plus s'empilent, la plus récente en haut.
  *
  * <p>Chaque image, on lit le message que le jeu vient de poser ({@link GuiOverlayAccessor}) : un nouveau message, ou
- * le même posé de nouveau (son compteur repart à 60), entre dans la pile. La couche du jeu qui l'aurait dessiné au-dessus
- * de la barre d'inventaire n'est plus dessinée.
+ * le même posé de nouveau (son compteur repart à 60), entre dans la pile, sauf un relevé ({@link Routage}), que la couche
+ * du jeu continue de dessiner au-dessus de la barre d'inventaire.
  */
 final class IndicesClient {
     private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath("fallow", "indices");
@@ -50,8 +50,11 @@ final class IndicesClient {
     private static final int SHADE_ALPHA = 135;
 
     private static final Notes<Component> NOTES = new Notes<>();
+    private static final Routage ROUTAGE = new Routage();
     private static Component lastMessage;
     private static int lastTime;
+    /** Le message que le jeu affiche en ce moment est un relevé : sa couche reste dessinée. */
+    private static boolean inBar;
 
     private IndicesClient() {
     }
@@ -61,13 +64,18 @@ final class IndicesClient {
                 event -> event.registerAbove(VanillaGuiLayers.OVERLAY_MESSAGE, LAYER, IndicesClient::render));
         NeoForge.EVENT_BUS.addListener(RenderGuiLayerEvent.Pre.class, event -> {
             if (FallowConfig.indicesEnabled() && VanillaGuiLayers.OVERLAY_MESSAGE.equals(event.getName())) {
-                event.setCanceled(true);
+                watch(Util.getMillis());
+                if (!inBar) {
+                    event.setCanceled(true);
+                }
             }
         });
         NeoForge.EVENT_BUS.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> {
             NOTES.clear();
+            ROUTAGE.clear();
             lastMessage = null;
             lastTime = 0;
+            inBar = false;
         });
     }
 
@@ -78,16 +86,14 @@ final class IndicesClient {
         int time = gui.fallow$overlayTime();
         if (message != null && time > 0 && (message != lastMessage || time > lastTime)) {
             String text = message.getString();
-            if (!text.isBlank()) {
-                NOTES.push(message, key(message, text), text, now);
+            String translation = message.getContents() instanceof TranslatableContents translatable ? translatable.getKey() : null;
+            inBar = ROUTAGE.inBar(translation, FallowConfig.indicesInBar(), now);
+            if (!inBar && !text.isBlank()) {
+                NOTES.push(message, translation != null ? translation : Notes.literalKey(text), text, now);
             }
         }
         lastMessage = message;
         lastTime = time;
-    }
-
-    private static String key(Component message, String text) {
-        return message.getContents() instanceof TranslatableContents translatable ? translatable.getKey() : Notes.literalKey(text);
     }
 
     private static void render(GuiGraphics graphics, DeltaTracker delta) {
