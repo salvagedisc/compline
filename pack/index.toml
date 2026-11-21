@@ -3614,7 +3614,7 @@ metafile = true
 
 [[files]]
 file = "mods/enhanced-celestials-2-default-lunar-events.pw.toml"
-hash = "70f586b80beb657a8676b1147b1b96c4abd0aa421c819aa138038e082c41bc4d"
+hash = "631b478954b07af5f974eac7a56bb7fb9cea2454fda79a1d3b8cfff0f5db27cf"
 metafile = true
 
 [[files]]
