@@ -104,6 +104,8 @@ public class ChevaletBlock extends HorizontalDirectionalBlock implements Ouvrage
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         if (level.isClientSide()) {
+            // Dans le monde, le raclement s'entend tout de suite chez celui qui racle ; le serveur le fait entendre aux autres.
+            level.playSound(player, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 0.55F, 0.8F + level.getRandom().nextFloat() * 0.3F);
             return ItemInteractionResult.SUCCESS;
         }
         if (!FallowConfig.tannerieEnabled()) {
@@ -111,7 +113,7 @@ public class ChevaletBlock extends HorizontalDirectionalBlock implements Ouvrage
         }
         ServerLevel server = (ServerLevel) level;
         stack.hurtAndBreak(1, server, player, item -> server.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 0.8F, 1.0F));
-        server.playSound(null, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 0.55F, 0.8F + level.getRandom().nextFloat() * 0.3F);
+        server.playSound(player, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 0.55F, 0.8F + level.getRandom().nextFloat() * 0.3F);
         server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(TannerieModule.PEAU_BRUTE.get())),
                 pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5, 6, 0.2, 0.05, 0.2, 0.05);
         int done = state.getValue(RACLAGE) + 1;

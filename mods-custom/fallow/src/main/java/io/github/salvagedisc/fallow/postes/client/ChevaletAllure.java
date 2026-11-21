@@ -42,6 +42,8 @@ final class ChevaletAllure implements Allure {
     private final Envol envol = new Envol();
     /** Le couteau d'un autre joueur qui racle ici, vu par celui qui regarde. */
     private Item autre;
+    /** Vrai pendant un coup donné par un autre joueur. */
+    private boolean coupAutre;
     /** Les coups cliqués pendant qu'un autre se donnait, joués à la suite. */
     private int enAttente;
     private final Arrivee.Volee volee = new Arrivee.Volee();
@@ -69,6 +71,7 @@ final class ChevaletAllure implements Allure {
         coup += dt;
         if (enAttente > 0 && coup >= COUP * 0.6F) {
             enAttente--;
+            coupAutre = false;
             if (state.getValue(ChevaletBlock.PEAU)) {
                 coup(view);
             } else {
@@ -92,7 +95,7 @@ final class ChevaletAllure implements Allure {
         boolean mien = shown && view.isFocused() && hide && couteau(carried);
         view.setCarriedHidden(mien);
         // Celui qui regarde voit le couteau de l'autre le temps de son coup.
-        Item lame = mien ? carried.getItem() : shown && hide && !view.isFocused() && coup < COUP ? autre : null;
+        Item lame = shown && hide && coupAutre && coup < COUP ? autre : mien ? carried.getItem() : null;
         boolean knife = lame != null;
         view.node("couteau").ifPresent(node -> {
             node.setVisible(knife);
@@ -150,15 +153,27 @@ final class ChevaletAllure implements Allure {
         if (!(state.getBlock() instanceof ChevaletBlock) || !state.getValue(ChevaletBlock.PEAU) || !couteau(stack)) {
             return;
         }
-        if (!view.isFocused()) {
-            autre = stack.getItem();
-            vise = 8.0F;
-        }
         if (coup < COUP * 0.6F) {
             // Cliqué plus vite que la lame : le coup attend son tour, comme les coups de marteau de Hands-On Vanilla.
             enAttente = Math.min(8, enAttente + 1);
             return;
         }
+        coupAutre = false;
+        coup(view);
+    }
+
+    @Override
+    public void gesteAutre(StationView view, ItemStack stack) {
+        BlockState state = view.level().getBlockState(view.pos());
+        if (!(state.getBlock() instanceof ChevaletBlock) || !state.getValue(ChevaletBlock.PEAU) || !couteau(stack) || coup < COUP * 0.6F) {
+            return;
+        }
+        // Le coup d'un autre : son couteau à lui, au milieu de la peau ; son bruit vient du bloc, son bras n'est pas le nôtre.
+        autre = stack.getItem();
+        if (!view.isFocused()) {
+            vise = 8.0F;
+        }
+        coupAutre = true;
         coup(view);
     }
 
@@ -170,7 +185,11 @@ final class ChevaletAllure implements Allure {
         view.spawnParticles(DiegesisParticles.DUST, new Vector3f(8.0F, 13.7F, vise - 2.5F), new Vector3f(0.0F, 3.0F, -6.0F), 1.0F, 6, 0xFFE8D6C0);
         view.node("peau").ifPresent(node -> node.shake(0.25F, 0.15F));
         view.node("raclee").ifPresent(node -> node.shake(0.25F, 0.15F));
-        Son.joue(view, SoundEvents.SHEEP_SHEAR, "couteau", 0.18F, 1.5F + random.nextFloat() * 0.3F);
+        if (coupAutre) {
+            return;
+        }
+        // Le même raclement que le bloc, que le serveur fait entendre aux autres et pas à nous.
+        Son.joue(view, SoundEvents.BRUSH_GENERIC, "couteau", 0.45F, 0.8F + random.nextFloat() * 0.3F);
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null && view.isFocused()) {
             player.swing(net.minecraft.world.InteractionHand.MAIN_HAND, false);

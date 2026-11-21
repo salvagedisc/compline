@@ -318,7 +318,8 @@ final class ForgeBehavior implements StationBehavior {
         if (!prenable(view, all)) {
             if (!ouvrage(view).isEmpty()) {
                 view.node(PostesForge.OUVRAGE).ifPresent(node -> node.shake(0.35F, 0.2F));
-                Son.joue(view, SoundEvents.ANVIL_LAND, PostesForge.OUVRAGE, 0.08F, 1.9F);
+                Son.joue(view, pierre ? SoundEvents.STONE_HIT : SoundEvents.ANVIL_LAND, PostesForge.OUVRAGE, pierre ? 0.4F : 0.08F,
+                        pierre ? 0.7F : 1.9F);
             }
             return;
         }

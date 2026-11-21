@@ -142,25 +142,42 @@ final class Arrivee {
 
     /** Les trois nœuds de vol d'une scène de la tannerie ({@code arrivee_0} à {@code arrivee_2}), pris à tour de rôle. */
     static final class Volee {
+        /** L'écart entre deux départs, comme chez Hands-On Vanilla ({@code FLIGHT_GAP}). */
+        private static final float ECART = 0.06F;
         private final Vol[] vols = { new Vol("arrivee_0"), new Vol("arrivee_1"), new Vol("arrivee_2") };
-        private int suivant;
         private int rang;
         private long rangA = -1000L;
+        /** Ce qui attend un nœud libre : le livre peut poser neuf objets d'un coup, trois volent à la fois. */
+        private final java.util.ArrayDeque<Object[]> attente = new java.util.ArrayDeque<>();
+        private float depuisDepart = 9.0F;
 
         void frame(StationView view, float dt) {
             for (Vol vol : vols) {
                 vol.frame(view, dt);
             }
+            depuisDepart += dt;
+            if (!attente.isEmpty() && depuisDepart >= ECART) {
+                Vol libre = libre();
+                if (libre != null) {
+                    Object[] suite = attente.poll();
+                    depuisDepart = 0.0F;
+                    objetDepuisLaBarre(view, libre, (Item) suite[0], (Vector3fc) suite[1], (Integer) suite[2]);
+                }
+            }
+        }
+
+        private Vol libre() {
+            for (Vol vol : vols) {
+                if (vol.temps < 0.0F) {
+                    return vol;
+                }
+            }
+            return null;
         }
 
         /** Vrai tant qu'un objet de la volée est en l'air. */
         boolean enVol() {
-            for (Vol vol : vols) {
-                if (vol.temps >= 0.0F) {
-                    return true;
-                }
-            }
-            return false;
+            return !attente.isEmpty() || java.util.Arrays.stream(vols).anyMatch(vol -> vol.temps >= 0.0F);
         }
 
         /** {@code item} arrive au point {@code at} de la scène : il vole de la barre, sauf s'il vient du curseur. */
@@ -172,8 +189,7 @@ final class Arrivee {
             long now = view.level().getGameTime();
             rang = now - rangA < 4L ? rang + 1 : 0;
             rangA = now;
-            objetDepuisLaBarre(view, vols[suivant], item, at, rang);
-            suivant = (suivant + 1) % vols.length;
+            attente.add(new Object[] { item, new Vector3f(at), rang });
         }
     }
 }

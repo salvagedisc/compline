@@ -129,9 +129,14 @@ final class FoyerBehavior implements StationBehavior {
         Arrivee.depuis(view, slot);
         // Le foyer brûle aussitôt ce qu'il reçoit : la case ne le montre jamais. Le combustible vole donc de la barre jusqu'à
         // la grille, et le feu ne répond qu'à son arrivée.
-        if (combustible(view.level(), view.pos(), stack)) {
-            volee.arrive(view, stack.getItem(), GRILLE);
-            jeteA = view.level().getGameTime();
+        // Foyer plein de ce combustible : il reste dans la case, où il vole comme toute pièce posée (voir tick).
+        if (view.level().getBlockEntity(view.pos()) instanceof HearthBlockEntity hearth && hearth.getMaxFuel() > 0) {
+            int fuel = hearth.getItemFuel(stack);
+            boolean plein = fuel > 0 ? hearth.getHotFuel() >= hearth.getMaxFuel() : fuel < 0 && hearth.getColdFuel() >= hearth.getMaxFuel();
+            if (fuel != 0 && !plein) {
+                volee.arrive(view, stack.getItem(), GRILLE);
+                jeteA = view.level().getGameTime();
+            }
         }
         return false;
     }

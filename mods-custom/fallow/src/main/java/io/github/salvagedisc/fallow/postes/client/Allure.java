@@ -23,6 +23,11 @@ interface Allure {
     default void geste(StationView view, net.minecraft.world.item.ItemStack stack) {
     }
 
+    /** Le même geste, fait par un autre joueur : le serveur l'a annoncé à ceux qui voient le poste. */
+    default void gesteAutre(StationView view, net.minecraft.world.item.ItemStack stack) {
+        geste(view, stack);
+    }
+
     Allure AUCUNE = new Allure() {
     };
 }

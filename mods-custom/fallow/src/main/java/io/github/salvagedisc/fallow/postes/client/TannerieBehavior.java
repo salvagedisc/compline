@@ -92,7 +92,11 @@ final class TannerieBehavior implements StationBehavior {
         if (enMain >= 0 && view.isFocused() && DiegesisClient.arrival() >= 1.0F) {
             CompoundTag how = new CompoundTag();
             how.putInt(PostesTannerie.DEPUIS, enMain);
-            Arrivee.parLeCurseur(view);
+            // Le premier geste se voit comme les autres : le coup de couteau part, ce qui se pose vole de la main au bloc.
+            LocalPlayer venu = Minecraft.getInstance().player;
+            ItemStack main = venu == null ? ItemStack.EMPTY : venu.getInventory().getItem(enMain);
+            montre(view, main);
+            Arrivee.depuis(view, enMain);
             view.sendAction(PostesTannerie.TRAVAILLER, how);
             enMain = -1;
         }
@@ -101,7 +105,8 @@ final class TannerieBehavior implements StationBehavior {
         // Ce qu'on tient et que le bloc prendrait : le bloc s'entoure, comme la marmite de Hands-On Delight sous un bol.
         LocalPlayer player = Minecraft.getInstance().player;
         ItemStack tenu = player == null ? ItemStack.EMPTY : player.containerMenu.getCarried();
-        boolean offre = view.isFocused() && view.isBlockHidden() && !tenu.isEmpty() && accepte(view.level().getBlockState(view.pos()), tenu);
+        boolean offre = view.isFocused() && view.isBlockHidden() && !tenu.isEmpty() && accepte(view.level().getBlockState(view.pos()), tenu)
+                && view.node("surface").map(node -> node.isHovered()).orElse(false);
         for (String bloc : new String[] { "cuve", "chevalet", "cadre" }) {
             view.node(bloc).ifPresent(node -> node.setOutlined(offre));
         }
@@ -128,7 +133,9 @@ final class TannerieBehavior implements StationBehavior {
         boolean moi = player != null && data.hasUUID(PostesTannerie.ACTEUR) && player.getUUID().equals(data.getUUID(PostesTannerie.ACTEUR));
         boolean pris = data.getBoolean(PostesTannerie.PRIS);
         if (moi) {
-            if (!pris && view.level().getGameTime() - refusA > 20L) {
+            // Un coup de couteau de trop (la peau finie entre-temps) n'est pas un refus à montrer.
+            boolean couteau = data.getString(PostesTannerie.OBJET).contains("knife") || data.getString(PostesTannerie.OBJET).contains("couteau");
+            if (!pris && !couteau && view.level().getGameTime() - refusA > 20L) {
                 refus(view);
             }
             return;
@@ -139,7 +146,7 @@ final class TannerieBehavior implements StationBehavior {
         }
         net.minecraft.resources.ResourceLocation id = net.minecraft.resources.ResourceLocation.tryParse(data.getString(PostesTannerie.OBJET));
         if (id != null) {
-            net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(id).ifPresent(item -> allure.geste(view, new ItemStack(item)));
+            net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(id).ifPresent(item -> allure.gesteAutre(view, new ItemStack(item)));
         }
     }
 
@@ -161,16 +168,23 @@ final class TannerieBehavior implements StationBehavior {
             book.click(view, button);
             return true;
         }
-        // Le refus se sait tout de suite, par les règles du bloc : il tremble sans attendre le serveur, qui dit pourquoi.
+        montre(view, stack);
+        Arrivee.parLeCurseur(view);
+        view.sendAction(PostesTannerie.TRAVAILLER, new CompoundTag());
+        return true;
+    }
+
+    /** Le refus se sait tout de suite, par les règles du bloc : il tremble sans attendre le serveur, qui dit pourquoi ; sinon le geste se voit. */
+    private void montre(StationView view, ItemStack stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
         if (accepte(view.level().getBlockState(view.pos()), stack)) {
             allure.geste(view, stack);
         } else {
             refus(view);
             refusA = view.level().getGameTime();
         }
-        Arrivee.parLeCurseur(view);
-        view.sendAction(PostesTannerie.TRAVAILLER, new CompoundTag());
-        return true;
     }
 
     /** Le bloc n'a pas pris l'objet : il tremble, avec un bruit de bois mat (le serveur dit pourquoi dans la légende). */
@@ -186,10 +200,7 @@ final class TannerieBehavior implements StationBehavior {
         if (!utile(stack)) {
             return false;
         }
-        if (!accepte(view.level().getBlockState(view.pos()), stack)) {
-            refus(view);
-            refusA = view.level().getGameTime();
-        }
+        montre(view, stack);
         CompoundTag how = new CompoundTag();
         how.putInt(PostesTannerie.DEPUIS, slot);
         Arrivee.depuis(view, slot);
