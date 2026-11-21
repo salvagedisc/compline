@@ -20,4 +20,9 @@ final class Son {
             view.playSound(sound, node, scaled, pitch);
         }
     }
+
+    /** Un bruit continu du poste, à appeler à chaque image : il glisse vers ce volume, et s'éteint à 0. */
+    static void boucle(StationView view, String nom, SoundEvent sound, float volume, float pitch) {
+        view.loopSound(nom, sound, volume * FallowConfig.postesSoundVolume(), pitch);
+    }
 }

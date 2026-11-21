@@ -198,10 +198,13 @@ final class FoyerBehavior implements StationBehavior {
         float pas = Math.min(1.0F, deltaSeconds * 2.5F);
         montreChaud += (chaud - montreChaud) * pas;
         montreFroid += (froid - montreFroid) * pas;
+        BlockState state = view.level().getBlockState(view.pos());
+        boolean allume = state.hasProperty(HearthBottomBlock.LIT) && state.getValue(HearthBottomBlock.LIT);
+        // Le feu ronfle sous la grille tant qu'il brûle, plus fort avec le combustible chaud.
+        Son.boucle(view, "feu", SoundEvents.FIRE_AMBIENT, view.isFocused() && allume ? 0.2F + 0.3F * montreChaud : 0.0F, 0.9F);
         if (!view.isFocused()) {
             return;
         }
-        BlockState state = view.level().getBlockState(view.pos());
         if (!state.hasProperty(HearthBottomBlock.LIT)) {
             return;
         }

@@ -1,8 +1,8 @@
 {
   "textures": {
     "manche": "minecraft:block/stripped_dark_oak_log",
-    "tete": "minecraft:block/anvil",
-    "particle": "minecraft:block/anvil"
+    "tete": "fallow:block/marteau_tete",
+    "particle": "fallow:block/marteau_tete"
   },
   "elements": [
     {

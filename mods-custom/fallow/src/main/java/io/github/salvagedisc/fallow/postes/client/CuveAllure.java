@@ -127,6 +127,8 @@ final class CuveAllure implements Allure {
                 node.setFloating(List.of(new Floater(Floater.SHRED, ECORCE, 2.0F), new Floater(Floater.LEAF, 0xFF7E5B36, 1.6F)), floating);
             }
         });
+        // Tant que les peaux trempent, la cuve glougloute doucement, comme la marmite de Hands-On Delight qui mijote.
+        Son.boucle(view, "trempe", SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, shown && view.isFocused() && water && hides > 0 && !ready ? 0.08F : 0.0F, 1.5F);
         if (shown && water && hides > 0 && !ready) {
             bulles += dt * 0.9F;
             if (bulles >= 1.0F) {
