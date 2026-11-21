@@ -1,20 +1,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le chevalet à écharner est le bloc lui-même : la poutre court de l'avant à l'arrière (x 6.5..9.5, dessus à 13), la peau tendue dessus (modèle chevalet_peau) est dessinée par le monde. La caméra se tient au bout de la poutre, comme celle du métier à tisser de Hands-On Vanilla, et regarde le long de la peau. surface prend les clics : ce qu'on lâche dessus travaille (peau, couteau), la main vide reprend la peau. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche du bloc.",
+  "$comment": "Le chevalet à écharner, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : chevalet est sa copie sans peau, peau la peau brute tendue sur la poutre (x 5.5..10.5, dessus à 13.5), raclee la même peau raclée par-dessus, qui apparaît coup après coup. couteau est le couteau qu'on tient, dessiné par le poste le long de la poutre (le curseur ne le montre plus) : chaque clic donne un coup qui glisse vers soi, avec des copeaux. fantome montre ce qu'il faut poser ensuite. La caméra se tient au bout de la poutre et regarde le long de la peau. surface prend les clics. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche du bloc.",
   "work_plane": 13,
   "idle_visible": false,
   "camera": {
     "position": [
       8,
-      36.5,
-      -15
+      34,
+      -14
     ],
     "target": [
       8,
-      13,
+      12,
       8
     ],
-    "fov": 40,
+    "fov": 36,
     "interactive_at": 0.6
   },
   "interface": {
@@ -31,6 +31,81 @@
     "carry_size": 2.6
   },
   "nodes": [
+    {
+      "id": "chevalet",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "block": "fallow:chevalet[facing=north,peau=false]",
+        "lit_as_block": true
+      }
+    },
+    {
+      "id": "peau",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_chevalet_brute",
+        "lit_as_block": true
+      }
+    },
+    {
+      "id": "raclee",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_chevalet_raclee",
+        "translucent": true,
+        "tint": "#00FFFFFF"
+      }
+    },
+    {
+      "id": "couteau",
+      "pos": [
+        8,
+        14.2,
+        8
+      ],
+      "rotation": [
+        -90,
+        45,
+        0
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true
+    },
+    {
+      "id": "fantome",
+      "pos": [
+        8,
+        15,
+        8
+      ],
+      "rotation": [
+        -90,
+        0,
+        0
+      ],
+      "scale": 0.32,
+      "pickable": false,
+      "hidden": true
+    },
     {
       "id": "surface",
       "collider": {

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le séchoir est le bloc lui-même : un cadre debout (z 7..9) où le cuir est tendu (modèles sechoir_humide et sechoir_sec), dessiné par le monde. La caméra se tient devant le cadre, un peu au-dessus, comme devant le four de Hands-On Vanilla. surface prend les clics : le cuir mouillé lâché dessus s'y tend, la main vide prend le cuir sec ou dit où en est le séchage. Le livre de la tannerie est à gauche, presque debout face à la caméra ; rangé, il est posé au sol à gauche du cadre.",
+  "$comment": "Le séchoir, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : cadre est sa copie vide, cuir le cuir mouillé tendu (z 7.5..8.5), sec le même cuir sec par-dessus, qui apparaît à mesure qu'il sèche ; le cuir rétrécit un peu en séchant. Tant qu'il est mouillé, il goutte par le bas, et fume près d'un feu ou au soleil. fantome montre, pâle et battant doucement, le cuir à tendre quand le cadre est vide. La caméra se tient devant le cadre, un peu au-dessus, comme devant le four de Hands-On Vanilla. surface prend les clics : le cuir mouillé lâché dessus s'y tend, la main vide prend le cuir sec ou dit où en est le séchage. Le livre de la tannerie est à gauche, presque debout face à la caméra ; rangé, il est posé au sol à gauche du cadre.",
   "work_plane": 8,
   "idle_visible": false,
   "camera": {
@@ -31,6 +31,64 @@
     "carry_size": 2.6
   },
   "nodes": [
+    {
+      "id": "cadre",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "block": "fallow:sechoir[facing=north,etat=vide]",
+        "lit_as_block": true
+      }
+    },
+    {
+      "id": "cuir",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/cuir_tendu_humide",
+        "lit_as_block": true
+      }
+    },
+    {
+      "id": "sec",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/cuir_tendu_sec",
+        "translucent": true,
+        "tint": "#00FFFFFF"
+      }
+    },
+    {
+      "id": "fantome",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/cuir_tendu_humide",
+        "translucent": true,
+        "tint": "#60FFFFFF"
+      }
+    },
     {
       "id": "surface",
       "collider": {

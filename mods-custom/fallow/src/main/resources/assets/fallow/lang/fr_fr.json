@@ -240,5 +240,6 @@
   "eveil.fallow.tooltip.eteint": "À bout : un éveil s'est éteint",
   "eveil.fallow.tooltip.places": "Éveils : %s sur %s",
   "postes.fallow.foyer.chaud": "Combustible chaud : %s %%",
-  "postes.fallow.foyer.froid": "Combustible froid : %s %%"
+  "postes.fallow.foyer.froid": "Combustible froid : %s %%",
+  "postes.fallow.sechoir.sec": "Le cuir est sec : prenez-le à main vide."
 }

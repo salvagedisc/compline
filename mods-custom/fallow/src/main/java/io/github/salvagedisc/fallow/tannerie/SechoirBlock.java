@@ -137,7 +137,7 @@ public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage 
         return InteractionResult.CONSUME;
     }
 
-    private static int needed() {
+    public static int needed() {
         return Math.max(1, Math.min(15, FallowConfig.tannerieDryingPoints()));
     }
 
@@ -189,7 +189,7 @@ public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage 
         return rate;
     }
 
-    private static String cause(Level level, BlockPos pos) {
+    public static String cause(Level level, BlockPos pos) {
         BlockPos above = pos.above();
         boolean sky = level.canSeeSky(above);
         if (sky && level.isRainingAt(above)) {

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le foyer de Cold Sweat (le bas, le bloc à grille) est le bloc lui-même, sa façade à z = 0 et sa grille en saillie (x 3 à 13, y 2 à 9). combustible : la case de la fenêtre de Cold Sweat, debout devant la grille. jauge_chaud et jauge_froid : les jauges de la fenêtre, à plat sur la brique au-dessus de la grille, le chaud à gauche vu de devant, le froid à droite ; le code les peint et y met leur part en infobulle. La caméra se tient devant, un peu au-dessus.",
+  "$comment": "Le foyer de Cold Sweat (le bas, le bloc à grille) est le bloc lui-même, sa façade à z = 0 et sa grille en saillie (x 3 à 13, y 2 à 9). combustible : la case de la fenêtre de Cold Sweat, debout devant la grille. braises : la lueur du feu, peinte par le code dans les quatre fentes de la grille (x 4 à 12, y 4 à 8). jauge_chaud et jauge_froid : les jauges de la fenêtre, à plat sur la brique au-dessus de la grille, le chaud à gauche vu de devant, le froid à droite ; le code les peint et y met leur part en infobulle. La caméra se tient devant, un peu au-dessus.",
   "work_plane": 0,
   "idle_visible": false,
   "camera": {
@@ -27,12 +27,18 @@
   ],
   "nodes": [
     {
+      "id": "braises",
+      "pos": [8, 0, -1.02],
+      "pickable": false
+    },
+    {
       "id": "combustible",
       "pos": [8, 2, -2.6],
       "slot": {
         "slot": "combustible[0]",
         "ghost": ["minecraft:coal", "minecraft:lava_bucket", "minecraft:ice", "minecraft:snowball"],
         "ghost_alpha": 0.35,
+        "idle_highlight": 0.55,
         "display": "upright",
         "size": 3.4,
         "count_facing": "front"

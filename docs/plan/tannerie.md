@@ -21,6 +21,8 @@ Since `fallow` 0.42.0 (`postes` module, Diegesis), a right-click on one of the t
 - **Empty hand** on the block: takes what is finished, or reads how far it is, in the caption of the scene.
 - **The book** opens at the page of the block (scraping, tanning, drying), with what it takes and the time. Picking that page fills the block from the inventory; Shift on the vat puts in as many barks and hides as it holds. A page of another block says where it is done.
 
+- **What it shows** (0.46.0): the vat's water fills, browns with the bark and the soak and bubbles, bark floats on it, the hides drop in with a splash and turn to leather; on the beam the knife lies on the hide and each click draws a stroke that throws scraps while the hide pales; the leather on the frame drips, lightens and tightens as it dries, steams in the sun or by a fire, and its drying shows on hover. Each block shows faintly what to lay next.
+
 `fallow-common.toml`, `[postes] tannerie = false` brings back the right-click alone.
 
 ## Drying
@@ -82,4 +84,4 @@ Kept, because they recycle leather that already exists or come from rare loot: C
 - **TA5**: drying frame in the sun: dry in about 2 min 30; under a roof by a campfire, faster; in the rain it gets wet (the message says so); an empty hand gives the leather.
 - **TA6**: fat + stick → 2 torches; fat + string → candle; EMI shows the three blocks and their recipes, in French.
 - **TA7**: the quest « La tannerie » appears with the first raw hide and completes with the leather.
-- **TA8**: the three stations: a right-click brings the camera to the block, the book beside it at the block's page; a hide dropped from the cursor lays on the beam and a knife strokes it; Shift on the vat's page fills water, bark and hides; the frame reads its drying in the caption; coming with the item in hand makes the first gesture; crouched, the right-click works as before.
+- **TA8**: the three stations: a right-click brings the camera to the block, the book beside it at the block's page; a hide dropped from the cursor lays on the beam and a knife strokes it; Shift on the vat's page fills water, bark and hides; the frame reads its drying in the caption; coming with the item in hand makes the first gesture; crouched, the right-click works as before. Since 0.46.0: the water and hides of the vat change colour as they soak, the knife is drawn on the beam's hide with scraps at each stroke, the frame's leather lightens as it dries and its drying shows on hover, and a faint ghost shows what goes next.

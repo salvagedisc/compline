@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import com.pockyl.diegesis.api.Diegesis;
 import com.pockyl.diegesis.api.state.StationSchema;
+import com.pockyl.diegesis.api.state.TankSpec;
 import com.pockyl.diegesis.api.station.StationType;
 
 import io.github.salvagedisc.fallow.Fallow;
@@ -35,6 +36,8 @@ public final class PostesTannerie {
     public static final String DEPUIS = "depuis";
     public static final String PAGE = "page";
     public static final String TOUT = "tout";
+    /** Le réservoir de la cuve, que la scène montre plein d'eau quand il y en a. */
+    public static final String EAU = "eau";
 
     private PostesTannerie() {
     }
@@ -44,9 +47,11 @@ public final class PostesTannerie {
     }
 
     static void register() {
-        Diegesis.register(station(CHEVALET).block(TannerieModule.CHEVALET).build());
-        Diegesis.register(station(CUVE).block(TannerieModule.CUVE_A_TAN).build());
-        Diegesis.register(station(SECHOIR).block(TannerieModule.SECHOIR).build());
+        Diegesis.register(station(CHEVALET).block(TannerieModule.CHEVALET).hidesBlock().build());
+        // La cuve est redessinée par la scène (son eau, ses peaux) : elle a un réservoir pour que l'eau y ondule.
+        Diegesis.register(station(CUVE).block(TannerieModule.CUVE_A_TAN).hidesBlock()
+                .schema(StationSchema.builder().tank(EAU, TankSpec.of(100)).build()).build());
+        Diegesis.register(station(SECHOIR).block(TannerieModule.SECHOIR).hidesBlock().build());
     }
 
     private static StationType.Builder station(ResourceLocation id) {

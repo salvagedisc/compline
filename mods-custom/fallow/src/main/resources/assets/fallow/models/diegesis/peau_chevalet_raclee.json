@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "peau": "fallow:block/peau_raclee_tendue",
+    "particle": "fallow:block/peau_raclee_tendue"
+  },
+  "elements": [
+    {
+      "from": [
+        5.44,
+        7.5,
+        0.94
+      ],
+      "to": [
+        10.56,
+        13.56,
+        15.06
+      ],
+      "faces": {
+        "north": {
+          "texture": "#peau"
+        },
+        "south": {
+          "texture": "#peau"
+        },
+        "east": {
+          "texture": "#peau"
+        },
+        "west": {
+          "texture": "#peau"
+        },
+        "up": {
+          "texture": "#peau"
+        }
+      }
+    }
+  ]
+}

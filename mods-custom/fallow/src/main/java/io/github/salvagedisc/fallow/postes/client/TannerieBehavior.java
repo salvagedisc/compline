@@ -22,11 +22,13 @@ import io.github.salvagedisc.fallow.tannerie.TannerieModule;
  */
 final class TannerieBehavior implements StationBehavior {
     private final RecipeBook book;
+    private final Allure allure;
     /** La case de la main quand on est venu au bloc avec un objet ; le premier geste part quand le poste est ouvert côté serveur. */
     private int enMain = -1;
 
-    TannerieBehavior(String page) {
+    TannerieBehavior(String page, Allure allure) {
         this.book = new RecipeBook(new TannerieBook(page));
+        this.allure = allure;
     }
 
     /** Ce qui sert à la tannerie : le reste de l'inventaire est grisé. */
@@ -39,11 +41,13 @@ final class TannerieBehavior implements StationBehavior {
     @Override
     public void onSceneReady(StationView view) {
         view.node("book_open").ifPresent(node -> node.setPainter(book));
+        allure.onSceneReady(view);
     }
 
     @Override
     public void onOpen(StationView view) {
         book.opened(view);
+        allure.onOpen(view);
         view.setInventoryFilter(TannerieBehavior::utile);
         LocalPlayer player = Minecraft.getInstance().player;
         enMain = player != null && PostesClient.venuParUsage(view.pos()) && utile(player.getMainHandItem()) && player.inventoryMenu.getCarried().isEmpty()
@@ -68,6 +72,12 @@ final class TannerieBehavior implements StationBehavior {
             enMain = -1;
         }
         book.frame(view, deltaSeconds);
+        allure.frame(view, deltaSeconds);
+    }
+
+    @Override
+    public void tick(StationView view) {
+        allure.tick(view);
     }
 
     @Override
@@ -88,6 +98,7 @@ final class TannerieBehavior implements StationBehavior {
             book.click(view, button);
             return true;
         }
+        allure.geste(view, stack);
         view.sendAction(PostesTannerie.TRAVAILLER, new CompoundTag());
         return true;
     }

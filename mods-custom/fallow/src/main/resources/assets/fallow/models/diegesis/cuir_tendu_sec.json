@@ -1,0 +1,16 @@
+{
+  "textures": {
+    "peau": "fallow:block/cuir_sec_tendu",
+    "particle": "fallow:block/cuir_sec_tendu"
+  },
+  "elements": [
+    {
+      "from": [2.45, 3.45, 7.45],
+      "to": [13.55, 13.55, 8.55],
+      "faces": {
+        "north": {"texture": "#peau"},
+        "south": {"texture": "#peau"}
+      }
+    }
+  ]
+}

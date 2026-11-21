@@ -12,6 +12,7 @@ import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
 import com.pockyl.diegesis.api.client.DiegesisClient;
+import com.pockyl.diegesis.api.client.LiquidLook;
 
 import io.github.salvagedisc.fallow.ModIds;
 import io.github.salvagedisc.fallow.postes.PostesTannerie;
@@ -28,9 +29,10 @@ public final class PostesClient {
     }
 
     public static void init() {
-        DiegesisClient.registerBehavior(PostesTannerie.CHEVALET, view -> new TannerieBehavior(TannerieBook.RACLAGE));
-        DiegesisClient.registerBehavior(PostesTannerie.CUVE, view -> new TannerieBehavior(TannerieBook.TANNAGE));
-        DiegesisClient.registerBehavior(PostesTannerie.SECHOIR, view -> new TannerieBehavior(TannerieBook.SECHAGE));
+        DiegesisClient.registerBehavior(PostesTannerie.CHEVALET, view -> new TannerieBehavior(TannerieBook.RACLAGE, new ChevaletAllure()));
+        DiegesisClient.registerBehavior(PostesTannerie.CUVE, view -> new TannerieBehavior(TannerieBook.TANNAGE, new CuveAllure()));
+        DiegesisClient.registerBehavior(PostesTannerie.SECHOIR, view -> new TannerieBehavior(TannerieBook.SECHAGE, new SechoirAllure()));
+        DiegesisClient.registerLiquid(CuveAllure.LIQUIDE, new LiquidLook(0xA03F76E4, LiquidLook.WATER_SPRITE, false));
         NeoForge.EVENT_BUS.addListener(ClientChatReceivedEvent.System.class, PostesClient::auPoste);
         NeoForge.EVENT_BUS.addListener(InputEvent.InteractionKeyMappingTriggered.class, PostesClient::usage);
         if (ModIds.isLoaded(ModIds.OVERGEARED)) {

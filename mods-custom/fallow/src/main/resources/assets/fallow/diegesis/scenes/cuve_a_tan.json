@@ -1,20 +1,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "La cuve à tan est le bloc lui-même, ouverte en haut (parois de 2 px, fond à 2, eau jusqu'à 13), son contenu dessiné par le monde. La caméra regarde dedans d'en haut, comme au métier à tisser de Hands-On Vanilla. surface prend les clics : ce qu'on lâche dedans y va (eau, écorce, peaux raclées, seau vide pour vider l'eau), la main vide sort le cuir mouillé ou dit où en est le trempage. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche de la cuve.",
+  "$comment": "La cuve à tan, dessinée par la scène pendant qu'on y travaille (le poste cache le bloc) : cuve est sa copie, eau le liquide (de 2 à 13 px, l'eau qui prend la couleur du tan), peau_0 à peau_3 les peaux qui trempent sous la surface, fantome ce qu'il faut y mettre ensuite, flottant au-dessus. surface prend les clics : ce qu'on lâche dedans y va (eau, écorce, peaux raclées, seau vide pour vider l'eau), la main vide sort le cuir mouillé ou dit où en est le trempage. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche de la cuve.",
   "work_plane": 13,
   "idle_visible": false,
   "camera": {
     "position": [
       8,
-      40,
-      -13
+      38,
+      -12
     ],
     "target": [
       8,
-      13,
+      11,
       8
     ],
-    "fov": 40,
+    "fov": 36,
     "interactive_at": 0.6
   },
   "interface": {
@@ -31,6 +31,127 @@
     "carry_size": 2.6
   },
   "nodes": [
+    {
+      "id": "cuve",
+      "pos": [
+        8,
+        0,
+        8
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "block": "fallow:cuve_a_tan",
+        "lit_as_block": true
+      }
+    },
+    {
+      "id": "eau",
+      "pickable": false,
+      "tank": {
+        "tank": "eau",
+        "inner": {
+          "from": [
+            2,
+            2,
+            2
+          ],
+          "to": [
+            14,
+            13,
+            14
+          ]
+        }
+      }
+    },
+    {
+      "id": "peau_0",
+      "pos": [
+        8,
+        10.2,
+        8
+      ],
+      "rotation": [
+        0,
+        -22,
+        0
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_raclee"
+      }
+    },
+    {
+      "id": "peau_1",
+      "pos": [
+        7.4,
+        10.9,
+        8.6
+      ],
+      "rotation": [
+        0,
+        31,
+        0
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_raclee"
+      }
+    },
+    {
+      "id": "peau_2",
+      "pos": [
+        8.7,
+        11.5,
+        7.5
+      ],
+      "rotation": [
+        0,
+        -64,
+        0
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_raclee"
+      }
+    },
+    {
+      "id": "peau_3",
+      "pos": [
+        7.8,
+        12.1,
+        8.2
+      ],
+      "rotation": [
+        0,
+        12,
+        0
+      ],
+      "pickable": false,
+      "hidden": true,
+      "visual": {
+        "model": "fallow:diegesis/peau_raclee"
+      }
+    },
+    {
+      "id": "fantome",
+      "pos": [
+        8,
+        14.5,
+        8
+      ],
+      "scale": 0.3,
+      "pickable": false,
+      "hidden": true,
+      "rotation": [
+        -90,
+        0,
+        0
+      ]
+    },
     {
       "id": "surface",
       "collider": {
