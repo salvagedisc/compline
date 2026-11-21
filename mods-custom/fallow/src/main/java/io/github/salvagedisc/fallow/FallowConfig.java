@@ -64,6 +64,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.DoubleValue TANNERIE_FAT_CHANCE;
     private static final ModConfigSpec.BooleanValue POSTES_TANNERIE;
     private static final ModConfigSpec.BooleanValue POSTES_FORGE;
+    private static final ModConfigSpec.BooleanValue POSTES_FOYER;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -368,6 +369,10 @@ public final class FallowConfig {
                 .comment("Les enclumes de forge d'Overgeared s'ouvrent en postes : les pièces, le marteau et le plan se posent sur",
                         "l'enclume, le livre de forge à côté ; on frappe toujours accroupi, le marteau en main. Faux : la fenêtre d'Overgeared.")
                 .define("forge", true);
+        POSTES_FOYER = common
+                .comment("Le foyer de Cold Sweat s'ouvre en poste : le combustible se pose devant la grille, ses deux jauges (chaud,",
+                        "froid) sur la façade. Un combustible en main se jette toujours au foyer d'un clic. Faux : la fenêtre de Cold Sweat.")
+                .define("foyer", true);
         common.pop();
 
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
@@ -581,6 +586,10 @@ public final class FallowConfig {
 
     public static boolean postesForge() {
         return read(COMMON_SPEC, POSTES_FORGE);
+    }
+
+    public static boolean postesFoyer() {
+        return read(COMMON_SPEC, POSTES_FOYER);
     }
 
     public static int tannerieStrokes() {

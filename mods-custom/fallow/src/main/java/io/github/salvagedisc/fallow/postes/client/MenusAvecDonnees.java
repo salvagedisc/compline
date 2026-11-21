@@ -11,8 +11,8 @@ import net.neoforged.neoforge.network.connection.ConnectionType;
 import net.neoforged.neoforge.network.payload.AdvancedOpenScreenPayload;
 
 /**
- * Overgeared ouvre ses enclumes par le chemin de NeoForge (un menu avec des données en plus, la position du bloc), que Diegesis
- * n'écoute pas : il n'attend que le paquet vanilla d'ouverture. Pour ces menus-là seulement, le paquet de NeoForge est rejoué en
+ * Overgeared (ses enclumes) et Cold Sweat (son foyer) ouvrent leurs menus par le chemin de NeoForge (un menu avec des données
+ * en plus, la position du bloc), que Diegesis n'écoute pas : il n'attend que le paquet vanilla d'ouverture. Pour ces menus-là seulement, le paquet de NeoForge est rejoué en
  * paquet vanilla ; ses données attendent ici le temps que le menu soit créé, par Diegesis s'il le prend pour son poste, par
  * l'écran vanilla sinon (mixins {@code postes.MenuOuvertureMixin} et {@code postes.MenuCreationMixin}).
  */
@@ -51,9 +51,10 @@ public final class MenusAvecDonnees {
                 connexion);
     }
 
-    /** Les menus des enclumes de forge d'Overgeared, ceux des postes de forge. */
+    /** Les menus des enclumes de forge d'Overgeared et celui du foyer de Cold Sweat : ceux des postes. */
     private static boolean pourUnPoste(MenuType<?> type) {
         ResourceLocation id = BuiltInRegistries.MENU.getKey(type);
-        return id != null && id.getNamespace().equals("overgeared") && id.getPath().endsWith("smithing_anvil_menu");
+        return id != null && (id.getNamespace().equals("overgeared") && id.getPath().endsWith("smithing_anvil_menu")
+                || id.equals(PostesFoyer.MENU));
     }
 }

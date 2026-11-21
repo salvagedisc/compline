@@ -59,6 +59,7 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 | Storage | Chests, the bag, sacks | Menu |
 | Trading, talking | Archie's trades, the emissaries of the Peoples | Menu |
 | Photography | Exposure's camera in the world, the lightroom | Gesture, then menu (machine) |
+| Heating, cooling | Cold Sweat's hearth worked as a station (`postes` module): fuel laid before its grate, its gauges on its front; fuel in hand still thrown in by a click | Gesture |
 | Rest, sleep, drink | Rest by the hearth, beds and Comforts, Thirst Was Reclaimed | In the world, no station |
 
 ## Divergences kept on purpose

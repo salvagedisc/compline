@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
+  "$comment": "Le foyer de Cold Sweat (le bas, le bloc à grille) est le bloc lui-même, sa façade à z = 0 et sa grille en saillie (x 3 à 13, y 2 à 9). combustible : la case de la fenêtre de Cold Sweat, debout devant la grille. jauge_chaud et jauge_froid : les jauges de la fenêtre, à plat sur la brique au-dessus de la grille, le chaud à gauche vu de devant, le froid à droite ; le code les peint et y met leur part en infobulle. La caméra se tient devant, un peu au-dessus.",
+  "work_plane": 0,
+  "idle_visible": false,
+  "camera": {
+    "position": [8, 19, -36],
+    "target": [8, 8, 0],
+    "fov": 40,
+    "interactive_at": 0.6
+  },
+  "interface": {
+    "hide_player": true,
+    "inventory_panel": false,
+    "sounds": false,
+    "carry_lift": 0.5,
+    "highlight_color": "#26FFFFFF",
+    "hover_outline": false
+  },
+  "inventory_drawer": {
+    "layout": "hotbar",
+    "always_open": true,
+    "carry_size": 3.2
+  },
+  "carry_planes": [
+    {"from": [-6, 0], "to": [22, 16], "height": 16, "blend": 3}
+  ],
+  "nodes": [
+    {
+      "id": "combustible",
+      "pos": [8, 2, -2.6],
+      "slot": {
+        "slot": "combustible[0]",
+        "ghost": ["minecraft:coal", "minecraft:lava_bucket", "minecraft:ice", "minecraft:snowball"],
+        "ghost_alpha": 0.35,
+        "display": "upright",
+        "size": 3.4,
+        "count_facing": "front"
+      },
+      "collider": {"from": [-5, 0, -2], "to": [5, 7, 2.6]}
+    },
+    {
+      "id": "jauge_chaud",
+      "pos": [11, 12.75, -0.05],
+      "collider": {"from": [-1.9, -1.9, -0.3], "to": [1.9, 1.9, 0.1]}
+    },
+    {
+      "id": "jauge_froid",
+      "pos": [5, 12.75, -0.05],
+      "collider": {"from": [-1.9, -1.9, -0.3], "to": [1.9, 1.9, 0.1]}
+    }
+  ]
+}

@@ -16,7 +16,7 @@ import com.pockyl.diegesis.api.client.DiegesisClient;
 import io.github.salvagedisc.fallow.ModIds;
 import io.github.salvagedisc.fallow.postes.PostesTannerie;
 
-/** L'allure des postes sur le client : une conduite par poste, le livre de la tannerie ouvert à la page du bloc, la forge. */
+/** L'allure des postes sur le client : une conduite par poste, le livre de la tannerie ouvert à la page du bloc, la forge, le foyer. */
 public final class PostesClient {
     private static final Set<ResourceLocation> TANNERIE = Set.of(PostesTannerie.CHEVALET, PostesTannerie.CUVE, PostesTannerie.SECHOIR);
 
@@ -36,9 +36,15 @@ public final class PostesClient {
         if (ModIds.isLoaded(ModIds.OVERGEARED)) {
             PostesForge.register();
         }
+        if (ModIds.isLoaded(ModIds.COLD_SWEAT)) {
+            PostesFoyer.register();
+        }
     }
 
     private static void usage(InputEvent.InteractionKeyMappingTriggered event) {
+        if (event.isUseItem() && ModIds.isLoaded(ModIds.COLD_SWEAT)) {
+            PostesFoyer.viserLeBas(Minecraft.getInstance());
+        }
         if (event.isUseItem() && Minecraft.getInstance().hitResult instanceof BlockHitResult hit) {
             dernierUsage = hit.getBlockPos();
             dernierUsageA = Util.getMillis();
@@ -59,7 +65,8 @@ public final class PostesClient {
      */
     private static void auPoste(ClientChatReceivedEvent.System event) {
         if (event.isOverlay()) {
-            DiegesisClient.focusedStation().filter(view -> TANNERIE.contains(view.type().id()) || ForgeIds.estForge(view.type().id())).ifPresent(view -> {
+            DiegesisClient.focusedStation().filter(view -> TANNERIE.contains(view.type().id()) || ForgeIds.estForge(view.type().id())
+                    || PostesFoyer.FOYER.equals(view.type().id())).ifPresent(view -> {
                 view.showCaption(event.getMessage(), 2.5F);
                 event.setCanceled(true);
             });

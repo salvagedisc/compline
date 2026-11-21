@@ -238,5 +238,7 @@
   "eveil.fallow.trace.eclat": "%1$s: day %2$s, %3$s, shard of %4$s",
   "eveil.fallow.tooltip.pret": "An awakening awaits, at the enchanting table",
   "eveil.fallow.tooltip.eteint": "Worn out: an awakening has faded",
-  "eveil.fallow.tooltip.places": "Awakenings: %s of %s"
+  "eveil.fallow.tooltip.places": "Awakenings: %s of %s",
+  "postes.fallow.foyer.chaud": "Hot fuel: %s%%",
+  "postes.fallow.foyer.froid": "Cold fuel: %s%%"
 }

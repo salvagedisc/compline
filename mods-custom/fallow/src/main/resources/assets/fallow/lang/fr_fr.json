@@ -238,5 +238,7 @@
   "eveil.fallow.trace.eclat": "%1$s : jour %2$s, %3$s, éclat de %4$s",
   "eveil.fallow.tooltip.pret": "Un éveil attend, à la table d'enchantement",
   "eveil.fallow.tooltip.eteint": "À bout : un éveil s'est éteint",
-  "eveil.fallow.tooltip.places": "Éveils : %s sur %s"
+  "eveil.fallow.tooltip.places": "Éveils : %s sur %s",
+  "postes.fallow.foyer.chaud": "Combustible chaud : %s %%",
+  "postes.fallow.foyer.froid": "Combustible froid : %s %%"
 }
