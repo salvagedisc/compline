@@ -49,7 +49,15 @@ These updates exist on Modrinth but change something that must first be seen in 
 | Icy's Better Horses | 2.0.1 | 2.1.x | Revival costs experience levels, which no longer exist ([0009](decisions/0009-xp.md)): a replacement cost is needed |
 | Cold Sweat | 2.4.3.1 | 2.4.4 | Breaks Cold Sweat: Altitude until Altitude follows |
 | Lithium | 0.15.4 | — | To remove if the world freezes with Sable airships |
-| Subtle Effects, More Darkness | 1.15.1, 2.0.1 | — | Client keys to read in game before tuning ([0007](decisions/0007-ambiance-performance.md)) |
+| Subtle Effects, More Darkness | 1.15.3, 2.0.1 | — | Client keys to read in game before tuning ([0007](decisions/0007-ambiance-performance.md)) |
+| Archie's Dinosaurs + Astemir RE Lib | 1.0.4, 1.2.985 (jar) | 1.0.8, 1.2.987 | The `fallow` mixins into Archie (zoo guide, armour models, Chorusoatl) must be checked against the new classes; the library is only published as snapshots |
+| Ghost | 1.3.4 | 1.4.0 | Puts kodama in every forest at world generation and changes the spawns: to look at in game first |
+| Overgeared | 1.6.19 | 1.7.x | A rewrite (anvils renamed, tiers moved to `overgeared-anvil-tiers.json`, two hotfixes in six days): our tier-A setup and the Questlog ids must be redone |
+| Let's Do Farm & Charm | 1.1.25 | 1.1.29 | Adds a cutting board, cleavers and a stove grill that overlap Farmer's Delight; `cuisine.js` and [0030](decisions/0030-farmers-delight-hands-on.md) to re-read |
+| Punchy! | 2.8g | 3.2b | Version pinned on purpose: the 3.x menu and Mix Packs, and the Create and Aeronautics blacklist, to re-check |
+| Amendments | 1.21-2.1.11 | 2.2.7 | Goes with the Supplementaries 4.x retest; its new pet teleport must stay off |
+| Spelunkery | 0.4.4 | 0.4.5 | No changelog published; to compare with the jar first |
+| JEI | 19.51 | 19.64 (release) | 19.55 and later need the Mezz Config library; goes with the Envelope retest |
 
 ## Open work items arising from the decisions
 
