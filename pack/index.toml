@@ -3634,7 +3634,7 @@ metafile = true
 
 [[files]]
 file = "mods/every-compat.pw.toml"
-hash = "a95238f217d2d24bfaf37cd26df6f578b9d4d7e3eca0ff697bad2ad4f6f84585"
+hash = "b1beeafce95e233dc631a3f3dfc520c313a2ee1fd6760b64f006380a03cbcf72"
 metafile = true
 
 [[files]]
