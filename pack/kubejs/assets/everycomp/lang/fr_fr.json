@@ -1206,5 +1206,7 @@
   "leaves_type.minecraft.mangrove": "palétuvier",
   "leaves_type.minecraft.cherry": "cerisier",
   "leaves_type.minecraft.azalea": "azalée",
-  "leaves_type.minecraft.flowering_azalea": "azalée fleurie"
+  "leaves_type.minecraft.flowering_azalea": "azalée fleurie",
+  "block_type.unusual_furniture.carved_planks": "Planches sculptées en %s",
+  "block_type.unusual_furniture.ceiling_lamp": "Plafonnier en %s"
 }

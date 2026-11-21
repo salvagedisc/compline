@@ -46,5 +46,9 @@
   "contraptionlights.sodium.worldToContraption": "Engins",
   "contraptionlights.sodium.worldToSubLevel": "Sous-niveaux",
   "contraptionlights.sodium.worldToFlywheel": "Rendu par Flywheel",
-  "contraptionlights.sodium.worldToStructureVeil": "Engins et sous-niveaux"
+  "contraptionlights.sodium.worldToStructureVeil": "Engins et sous-niveaux",
+  "contraptionlights.configuration.fixesAndImprovements": "Correctifs et améliorations",
+  "contraptionlights.configuration.worldWallsBlockLight": "Les murs arrêtent la lumière en mouvement",
+  "contraptionlights.sodium.group.movingLight": "Lumière en mouvement",
+  "contraptionlights.sodium.group.iris": "Iris"
 }

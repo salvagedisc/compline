@@ -822,7 +822,7 @@ hash = "0e4b412e086d336e20f5d8735c6c75096256918cc92b5e88ae84c2d103de93da"
 
 [[files]]
 file = "kubejs/assets/contraptionlights/lang/fr_fr.json"
-hash = "f189e28c0a7b2c224446b6e94a068fc32024c05e2cd2479d3bd33a8c5b3a8a3d"
+hash = "599f6ca1b9842dbdf700a199aa675e8c5f2545dae0cc9f07684354fcef23bb4d"
 
 [[files]]
 file = "kubejs/assets/controlling/lang/fr_fr.json"
@@ -942,7 +942,7 @@ hash = "529a40c64afae1ca243f828cc69867efa37e87979bba62a5114b501088d5380d"
 
 [[files]]
 file = "kubejs/assets/everycomp/lang/fr_fr.json"
-hash = "c6bc90c7b4741731f154529c27192a8a69ad244b6af9ffdc02eb7628cd1d7788"
+hash = "a248eddf3df034e6e7726537122151dafaaa53a8a6409995dfc7a9803c85dc66"
 
 [[files]]
 file = "kubejs/assets/exposure/lang/fr_fr.json"
@@ -1010,7 +1010,7 @@ hash = "e33de2fa6e92e58ad969161a7ad84727551845ab1f7aa31c1df56ac4581148af"
 
 [[files]]
 file = "kubejs/assets/handson_delight/lang/fr_fr.json"
-hash = "fff2e7591152a3aaa84f85059a184d50436728330ce56f38862a6d3829264d33"
+hash = "abe5854da660e4b80d74100d48f42af7b74f2f8f2c3cb0dc350a0811c7a909da"
 
 [[files]]
 file = "kubejs/assets/hapi/lang/fr_fr.json"
@@ -1086,11 +1086,11 @@ hash = "85211634a0f3912a87f3048520a1180cebc3447fe9e399399353ba38130262b3"
 
 [[files]]
 file = "kubejs/assets/modonomicon/lang/fr_fr.json"
-hash = "a234b01676cfe02159ab2db2c6cd7faf4ce89c79f79624314df6c0797d6738ef"
+hash = "290fad03db5e382dc2ebd8812e2bdc165fc32296af06c4f508595fbbaf6e9a1e"
 
 [[files]]
 file = "kubejs/assets/moonlight/lang/fr_fr.json"
-hash = "d4df27afd675568a9328df58897b153f791094517a44fa90016c915dfd420506"
+hash = "92ec580a467c5aaeeb7a07b8cb10206b82eb745715a61a90d46bd30ac3822971"
 
 [[files]]
 file = "kubejs/assets/mowziesmobs/lang/fr_fr.json"

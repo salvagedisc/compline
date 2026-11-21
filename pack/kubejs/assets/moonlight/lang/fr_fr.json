@@ -260,5 +260,6 @@
   "moonlight.configuration.test_category.test_schema_advanced": "Schéma avancé de test",
   "moonlight.configuration.test_category.test_schema_advanced.description": "formulaire de schéma : long, couleur hex, motif, optionnels, liste bornée, paire, dispatch, either, table dispatchée, récursif, brut",
   "moonlight.configuration.test_category.test_schema_map": "Table de schéma de test",
-  "moonlight.configuration.test_category.test_schema_map.description": "table de schéma"
+  "moonlight.configuration.test_category.test_schema_map.description": "table de schéma",
+  "gui.moonlight.config.general": "Général"
 }
