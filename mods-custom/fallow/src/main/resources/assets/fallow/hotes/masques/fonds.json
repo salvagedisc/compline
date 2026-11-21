@@ -1,0 +1,199 @@
+{
+ "note": "Masque des Fonds : plaque d'os blanchi, tachée de vert d'eau et semée de bernacles, un grand corail rose à gauche et un petit corail bleu à droite, chacun en croix. Unités : texels, repère de la tête (y vers le bas, -z devant). « porte_seulement » : pièce du masque porté, absente de l'objet et de l'icône.",
+ "pieces": [
+  {
+   "nom": "plaque",
+   "uv": [
+    0,
+    0
+   ],
+   "boite": [
+    -4,
+    -9,
+    -5.2,
+    8,
+    10,
+    1
+   ]
+  },
+  {
+   "nom": "arete",
+   "uv": [
+    20,
+    0
+   ],
+   "boite": [
+    -1,
+    -7,
+    -6.2,
+    2,
+    5,
+    1
+   ]
+  },
+  {
+   "nom": "attache_d",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    -5,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ]
+  },
+  {
+   "nom": "attache_g",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    4,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ],
+   "miroir": true
+  },
+  {
+   "nom": "corail_a",
+   "uv": [
+    0,
+    36
+   ],
+   "boite": [
+    -2,
+    -4,
+    0,
+    4,
+    4,
+    0
+   ],
+   "pivot": [
+    -2.4,
+    -8.0,
+    -5.4
+   ],
+   "rotation": [
+    0,
+    0.785,
+    0
+   ]
+  },
+  {
+   "nom": "corail_b",
+   "uv": [
+    0,
+    36
+   ],
+   "boite": [
+    -2,
+    -4,
+    0,
+    4,
+    4,
+    0
+   ],
+   "pivot": [
+    -2.4,
+    -8.0,
+    -5.4
+   ],
+   "rotation": [
+    0,
+    -0.785,
+    0
+   ]
+  },
+  {
+   "nom": "corail_petit_a",
+   "uv": [
+    10,
+    36
+   ],
+   "boite": [
+    -1.5,
+    -4,
+    0,
+    3,
+    4,
+    0
+   ],
+   "pivot": [
+    2.6,
+    -8.0,
+    -5.4
+   ],
+   "rotation": [
+    0,
+    0.785,
+    0
+   ]
+  },
+  {
+   "nom": "corail_petit_b",
+   "uv": [
+    10,
+    36
+   ],
+   "boite": [
+    -1.5,
+    -4,
+    0,
+    3,
+    4,
+    0
+   ],
+   "pivot": [
+    2.6,
+    -8.0,
+    -5.4
+   ],
+   "rotation": [
+    0,
+    -0.785,
+    0
+   ]
+  },
+  {
+   "nom": "lien",
+   "uv": [
+    0,
+    24
+   ],
+   "boite": [
+    -4,
+    -6,
+    -4,
+    8,
+    1,
+    8
+   ],
+   "gonfle": 0.35,
+   "porte_seulement": true
+  },
+  {
+   "nom": "noeud",
+   "uv": [
+    36,
+    8
+   ],
+   "boite": [
+    -1,
+    -6.6,
+    4.2,
+    2,
+    2,
+    1
+   ],
+   "porte_seulement": true
+  }
+ ]
+}

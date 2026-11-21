@@ -1,0 +1,209 @@
+{
+ "note": "Masque de l'Écorce : plaque de pierre striée, arête, trois créneaux, touffe de mousse, attaches, fleur rose en croix, lien de lianes noué derrière. Unités : texels, repère de la tête (y vers le bas, -z devant). « porte_seulement » : pièce du masque porté, absente de l'objet et de l'icône (le lien qui fait le tour de la tête).",
+ "pieces": [
+  {
+   "nom": "plaque",
+   "uv": [
+    0,
+    0
+   ],
+   "boite": [
+    -4,
+    -9,
+    -5.2,
+    8,
+    10,
+    1
+   ]
+  },
+  {
+   "nom": "arete",
+   "uv": [
+    20,
+    0
+   ],
+   "boite": [
+    -1,
+    -7,
+    -6.2,
+    2,
+    5,
+    1
+   ]
+  },
+  {
+   "nom": "creneau_d",
+   "uv": [
+    28,
+    0
+   ],
+   "boite": [
+    -3.6,
+    -11.5,
+    -5.3,
+    2,
+    3,
+    1
+   ]
+  },
+  {
+   "nom": "creneau_m",
+   "uv": [
+    28,
+    0
+   ],
+   "boite": [
+    -1,
+    -12,
+    -5.3,
+    2,
+    3,
+    1
+   ]
+  },
+  {
+   "nom": "creneau_g",
+   "uv": [
+    28,
+    0
+   ],
+   "boite": [
+    1.6,
+    -11.5,
+    -5.3,
+    2,
+    3,
+    1
+   ]
+  },
+  {
+   "nom": "touffe",
+   "uv": [
+    0,
+    12
+   ],
+   "boite": [
+    -4.5,
+    -9.5,
+    -5.7,
+    5,
+    2,
+    2
+   ]
+  },
+  {
+   "nom": "attache_d",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    -5,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ]
+  },
+  {
+   "nom": "attache_g",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    4,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ],
+   "miroir": true
+  },
+  {
+   "nom": "fleur_a",
+   "uv": [
+    16,
+    16
+   ],
+   "boite": [
+    -1.5,
+    -1.5,
+    0,
+    3,
+    3,
+    0
+   ],
+   "pivot": [
+    3,
+    -8,
+    -5.5
+   ],
+   "rotation": [
+    0,
+    0.785,
+    0
+   ]
+  },
+  {
+   "nom": "fleur_b",
+   "uv": [
+    16,
+    16
+   ],
+   "boite": [
+    -1.5,
+    -1.5,
+    0,
+    3,
+    3,
+    0
+   ],
+   "pivot": [
+    3,
+    -8,
+    -5.5
+   ],
+   "rotation": [
+    0,
+    -0.785,
+    0
+   ]
+  },
+  {
+   "nom": "lien",
+   "uv": [
+    0,
+    24
+   ],
+   "boite": [
+    -4,
+    -6,
+    -4,
+    8,
+    1,
+    8
+   ],
+   "gonfle": 0.35,
+   "porte_seulement": true
+  },
+  {
+   "nom": "noeud",
+   "uv": [
+    36,
+    8
+   ],
+   "boite": [
+    -1,
+    -6.6,
+    4.2,
+    2,
+    2,
+    1
+   ],
+   "porte_seulement": true
+  }
+ ]
+}

@@ -1,0 +1,645 @@
+{
+  "credit": "Fallow",
+  "texture_size": [
+    64,
+    64
+  ],
+  "textures": {
+    "masque": "fallow:item/masque_de_la_braise_modele",
+    "particle": "fallow:item/masque_de_la_braise"
+  },
+  "elements": [
+    {
+      "name": "collerette",
+      "from": [
+        2.0,
+        11.0,
+        8.1
+      ],
+      "to": [
+        14.0,
+        16.0,
+        9.1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.25,
+            9.25,
+            3.25,
+            10.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            3.5,
+            9.25,
+            6.5,
+            10.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            3.25,
+            9.25,
+            3.5,
+            10.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            9.25,
+            0.25,
+            10.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            0.25,
+            9.0,
+            3.25,
+            9.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            3.25,
+            9.0,
+            6.25,
+            9.25
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "plaque",
+      "from": [
+        4.0,
+        3.0,
+        7.5
+      ],
+      "to": [
+        12.0,
+        13.0,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.25,
+            0.25,
+            2.25,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            2.5,
+            0.25,
+            4.5,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            2.25,
+            0.25,
+            2.5,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.25,
+            0.25,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            0.25,
+            0.0,
+            2.25,
+            0.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            2.25,
+            0.0,
+            4.25,
+            0.25
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "arete",
+      "from": [
+        7.0,
+        6.0,
+        6.5
+      ],
+      "to": [
+        9.0,
+        11.0,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.25,
+            0.25,
+            5.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.25,
+            6.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            5.75,
+            0.25,
+            6.0,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            0.25,
+            5.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            5.25,
+            0.0,
+            5.75,
+            0.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            5.75,
+            0.0,
+            6.25,
+            0.25
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "corne_g",
+      "from": [
+        5.0,
+        13.0,
+        7.2
+      ],
+      "to": [
+        6.0,
+        16.0,
+        8.2
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.25,
+            9.25,
+            7.5,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            7.75,
+            9.25,
+            8.0,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            7.5,
+            9.25,
+            7.75,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            7.0,
+            9.25,
+            7.25,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            7.25,
+            9.0,
+            7.5,
+            9.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            7.5,
+            9.0,
+            7.75,
+            9.25
+          ],
+          "texture": "#masque"
+        }
+      },
+      "rotation": {
+        "origin": [
+          5.5,
+          13.0,
+          7.7
+        ],
+        "axis": "z",
+        "angle": 22.5
+      }
+    },
+    {
+      "name": "corne_d",
+      "from": [
+        10.0,
+        13.0,
+        7.2
+      ],
+      "to": [
+        11.0,
+        16.0,
+        8.2
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.5,
+            9.25,
+            7.25,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            8.0,
+            9.25,
+            7.75,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            7.75,
+            9.25,
+            7.5,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            7.25,
+            9.25,
+            7.0,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            7.5,
+            9.0,
+            7.25,
+            9.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            7.75,
+            9.0,
+            7.5,
+            9.25
+          ],
+          "texture": "#masque"
+        }
+      },
+      "rotation": {
+        "origin": [
+          10.5,
+          13.0,
+          7.7
+        ],
+        "axis": "z",
+        "angle": -22.5
+      }
+    },
+    {
+      "name": "corne_nez",
+      "from": [
+        7.5,
+        6.5,
+        5.6
+      ],
+      "to": [
+        8.5,
+        8.5,
+        6.6
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8.75,
+            9.25,
+            9.0,
+            9.75
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            9.25,
+            9.25,
+            9.5,
+            9.75
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            9.0,
+            9.25,
+            9.25,
+            9.75
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            8.5,
+            9.25,
+            8.75,
+            9.75
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            8.75,
+            9.0,
+            9.0,
+            9.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            9.0,
+            9.0,
+            9.25,
+            9.25
+          ],
+          "texture": "#masque"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8.0,
+          6.5,
+          6.1
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    },
+    {
+      "name": "attache_d",
+      "from": [
+        12.0,
+        7.0,
+        7.5
+      ],
+      "to": [
+        13.0,
+        11.0,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.5,
+            0.5,
+            9.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            10.25,
+            0.5,
+            10.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            9.75,
+            0.5,
+            10.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            9.0,
+            0.5,
+            9.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            9.5,
+            0.0,
+            9.75,
+            0.5
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            9.75,
+            0.0,
+            10.0,
+            0.5
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "attache_g",
+      "from": [
+        3.0,
+        7.0,
+        7.5
+      ],
+      "to": [
+        4.0,
+        11.0,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.75,
+            0.5,
+            9.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            10.5,
+            0.5,
+            10.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            10.25,
+            0.5,
+            9.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            9.5,
+            0.5,
+            9.0,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            9.75,
+            0.0,
+            9.5,
+            0.5
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            10.0,
+            0.0,
+            9.75,
+            0.5
+          ],
+          "texture": "#masque"
+        }
+      }
+    }
+  ],
+  "display": {
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1.1,
+        1.1,
+        1.1
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

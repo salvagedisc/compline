@@ -1,0 +1,39 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "fallow:item/masque_des_fonds_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_des_fonds"
+      }
+    },
+    "firstperson_righthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_des_fonds"
+      }
+    },
+    "firstperson_lefthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_des_fonds"
+      }
+    },
+    "thirdperson_righthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_des_fonds"
+      }
+    },
+    "thirdperson_lefthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_des_fonds"
+      }
+    }
+  }
+}

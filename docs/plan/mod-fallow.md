@@ -42,6 +42,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `rendu` | client | Iris | 1, client (`rendu.IrisUniformsMixin`) |
 | `zoo` | both (stamps and species list on the server, the guidebook pages on the client) | none for the stamps; Archie's Dinosaurs for the pages, Exposure for the photo stamp | 2, client: `zoo.GuidebookDataMixin`, `zoo.CategoryTabsMixin` |
 | `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
+| `hotes` | both (the emissaries and masks on the server, the dialogue window, masks and regalia on the client) | none; Archie's Dinosaurs for the beasts' armour | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -379,6 +380,12 @@ Client and server (blocks and items are registered on both sides), no other mod.
 Config (`fallow-common.toml`, `[tannerie]`): `enabled` (true), `strokes` (6), `tanningMinutes` (5.0), `dryingPoints` (15), `barkChance` (0.5), `fatChance` (0.33).
 
 **Checked** on the bench on 2026-11-18: see [tannery](tannerie.md).
+
+## `hotes` module
+
+Client and server, no required mod (the emissaries wear Archie's Dinosaurs' armour when it is there). The six masked peoples and their emissaries, a pilot ([hotes](hotes.md)): the `fallow:hote` entity, one mask helmet per people, the dialogue window with its portrait, the worn masks and regalia drawn from `assets/fallow/hotes/`. Emissaries come only through `/fallow hotes appeler <peuple>` (operators).
+
+**Checked** on the bench client on 2026-11-21: see [hotes](hotes.md).
 
 ## Compatibility fixes
 

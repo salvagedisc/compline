@@ -60,7 +60,9 @@ public enum FallowModule {
     REPOS("repos", null, bus -> io.github.salvagedisc.fallow.repos.ReposModule.start(bus)),
     /** La tannerie : chevalet, cuve à tan et séchoir, de la peau brute au cuir (client et serveur : blocs et objets
      *  enregistrés des deux côtés). Aucun mod requis ; l'écorce est celle de Farmer's Delight, le gras celui de Naturalist. */
-    TANNERIE("tannerie", null, bus -> io.github.salvagedisc.fallow.tannerie.TannerieModule.start(bus));
+    TANNERIE("tannerie", null, bus -> io.github.salvagedisc.fallow.tannerie.TannerieModule.start(bus)),
+    /** Les hôtes (pilote) : un peuple de la brume au modèle du joueur, vêtu de l'armure de sa bête (client et serveur). */
+    HOTES("hotes", null, bus -> io.github.salvagedisc.fallow.hotes.HotesModule.start(bus));
 
     private final String id;
     private final Dist side;

@@ -1,0 +1,459 @@
+{
+  "credit": "Fallow",
+  "texture_size": [
+    64,
+    64
+  ],
+  "textures": {
+    "masque": "fallow:item/masque_des_sables_modele",
+    "particle": "fallow:item/masque_des_sables"
+  },
+  "elements": [
+    {
+      "name": "plaque",
+      "from": [
+        4.0,
+        3.0,
+        7.5
+      ],
+      "to": [
+        12.0,
+        13.0,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.25,
+            0.25,
+            2.25,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            2.5,
+            0.25,
+            4.5,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            2.25,
+            0.25,
+            2.5,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            0.25,
+            0.25,
+            2.75
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            0.25,
+            0.0,
+            2.25,
+            0.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            2.25,
+            0.0,
+            4.25,
+            0.25
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "arete",
+      "from": [
+        7.0,
+        6.0,
+        6.5
+      ],
+      "to": [
+        9.0,
+        11.0,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.25,
+            0.25,
+            5.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            6.0,
+            0.25,
+            6.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            5.75,
+            0.25,
+            6.0,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            0.25,
+            5.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            5.25,
+            0.0,
+            5.75,
+            0.25
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            5.75,
+            0.0,
+            6.25,
+            0.25
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "attache_d",
+      "from": [
+        12.0,
+        7.0,
+        7.5
+      ],
+      "to": [
+        13.0,
+        11.0,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.5,
+            0.5,
+            9.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            10.25,
+            0.5,
+            10.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            9.75,
+            0.5,
+            10.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            9.0,
+            0.5,
+            9.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            9.5,
+            0.0,
+            9.75,
+            0.5
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            9.75,
+            0.0,
+            10.0,
+            0.5
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "attache_g",
+      "from": [
+        3.0,
+        7.0,
+        7.5
+      ],
+      "to": [
+        4.0,
+        11.0,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            9.75,
+            0.5,
+            9.5,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            10.5,
+            0.5,
+            10.25,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "west": {
+          "uv": [
+            10.25,
+            0.5,
+            9.75,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "east": {
+          "uv": [
+            9.5,
+            0.5,
+            9.0,
+            1.5
+          ],
+          "texture": "#masque"
+        },
+        "up": {
+          "uv": [
+            9.75,
+            0.0,
+            9.5,
+            0.5
+          ],
+          "texture": "#masque"
+        },
+        "down": {
+          "uv": [
+            10.0,
+            0.0,
+            9.75,
+            0.5
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "feuille_g",
+      "from": [
+        8.6,
+        12.0,
+        7.3
+      ],
+      "to": [
+        10.6,
+        16.0,
+        7.3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.0,
+            0.5,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            9.0,
+            1.0,
+            10.0
+          ],
+          "texture": "#masque"
+        }
+      },
+      "rotation": {
+        "origin": [
+          9.6,
+          12.0,
+          7.3
+        ],
+        "axis": "z",
+        "angle": -22.5
+      }
+    },
+    {
+      "name": "feuille_m",
+      "from": [
+        7.0,
+        12.0,
+        7.2
+      ],
+      "to": [
+        9.0,
+        16.0,
+        7.2
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.0,
+            0.5,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            9.0,
+            1.0,
+            10.0
+          ],
+          "texture": "#masque"
+        }
+      }
+    },
+    {
+      "name": "feuille_d",
+      "from": [
+        5.4,
+        12.0,
+        7.3
+      ],
+      "to": [
+        7.4,
+        16.0,
+        7.3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.5,
+            9.0,
+            0.0,
+            10.0
+          ],
+          "texture": "#masque"
+        },
+        "south": {
+          "uv": [
+            1.0,
+            9.0,
+            0.5,
+            10.0
+          ],
+          "texture": "#masque"
+        }
+      },
+      "rotation": {
+        "origin": [
+          6.4,
+          12.0,
+          7.3
+        ],
+        "axis": "z",
+        "angle": 22.5
+      }
+    }
+  ],
+  "display": {
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1.1,
+        1.1,
+        1.1
+      ]
+    },
+    "head": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

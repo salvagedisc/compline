@@ -1,0 +1,39 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "fallow:item/masque_de_la_braise_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_de_la_braise"
+      }
+    },
+    "firstperson_righthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_de_la_braise"
+      }
+    },
+    "firstperson_lefthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_de_la_braise"
+      }
+    },
+    "thirdperson_righthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_de_la_braise"
+      }
+    },
+    "thirdperson_lefthand": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "fallow:item/masque_de_la_braise"
+      }
+    }
+  }
+}

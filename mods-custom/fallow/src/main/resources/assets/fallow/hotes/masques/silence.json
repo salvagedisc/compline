@@ -1,0 +1,170 @@
+{
+ "note": "Masque du Silence : plaque d'os pâle gagnée par le sculk depuis le bas, veinée de cyan, un capteur sur le front d'où montent deux vrilles à la pointe allumée. Unités : texels, repère de la tête (y vers le bas, -z devant). « porte_seulement » : pièce du masque porté, absente de l'objet et de l'icône.",
+ "pieces": [
+  {
+   "nom": "plaque",
+   "uv": [
+    0,
+    0
+   ],
+   "boite": [
+    -4,
+    -9,
+    -5.2,
+    8,
+    10,
+    1
+   ]
+  },
+  {
+   "nom": "arete",
+   "uv": [
+    20,
+    0
+   ],
+   "boite": [
+    -1,
+    -7,
+    -6.2,
+    2,
+    5,
+    1
+   ]
+  },
+  {
+   "nom": "attache_d",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    -5,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ]
+  },
+  {
+   "nom": "attache_g",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    4,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ],
+   "miroir": true
+  },
+  {
+   "nom": "capteur",
+   "uv": [
+    0,
+    36
+   ],
+   "boite": [
+    -2,
+    -1,
+    -1,
+    4,
+    1,
+    2
+   ],
+   "pivot": [
+    0,
+    -9,
+    -4.6
+   ]
+  },
+  {
+   "nom": "vrille_g",
+   "uv": [
+    14,
+    36
+   ],
+   "boite": [
+    -0.5,
+    -3,
+    -0.5,
+    1,
+    3,
+    1
+   ],
+   "pivot": [
+    1.5,
+    -9.0,
+    -4.6
+   ],
+   "rotation": [
+    0,
+    0,
+    0.3927
+   ]
+  },
+  {
+   "nom": "vrille_d",
+   "uv": [
+    14,
+    36
+   ],
+   "boite": [
+    -0.5,
+    -3,
+    -0.5,
+    1,
+    3,
+    1
+   ],
+   "miroir": true,
+   "pivot": [
+    -1.5,
+    -9.0,
+    -4.6
+   ],
+   "rotation": [
+    0,
+    0,
+    -0.3927
+   ]
+  },
+  {
+   "nom": "lien",
+   "uv": [
+    0,
+    24
+   ],
+   "boite": [
+    -4,
+    -6,
+    -4,
+    8,
+    1,
+    8
+   ],
+   "gonfle": 0.35,
+   "porte_seulement": true
+  },
+  {
+   "nom": "noeud",
+   "uv": [
+    36,
+    8
+   ],
+   "boite": [
+    -1,
+    -6.6,
+    4.2,
+    2,
+    2,
+    1
+   ],
+   "porte_seulement": true
+  }
+ ]
+}

@@ -1,0 +1,252 @@
+{
+ "note": "Masque du Givre : plaque de pierre pâle marquée de violet, trois branches de chorus de chaque côté, comme des branchies, la pointe en fleur. Unités : texels, repère de la tête. « porte_seulement » : absente de l'objet et de l'icône.",
+ "pieces": [
+  {
+   "nom": "plaque",
+   "uv": [
+    0,
+    0
+   ],
+   "boite": [
+    -4,
+    -9,
+    -5.2,
+    8,
+    10,
+    1
+   ]
+  },
+  {
+   "nom": "arete",
+   "uv": [
+    20,
+    0
+   ],
+   "boite": [
+    -1,
+    -7,
+    -6.2,
+    2,
+    5,
+    1
+   ]
+  },
+  {
+   "nom": "attache_d",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    -5,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ]
+  },
+  {
+   "nom": "attache_g",
+   "uv": [
+    36,
+    0
+   ],
+   "boite": [
+    4,
+    -7,
+    -5.2,
+    1,
+    4,
+    2
+   ],
+   "miroir": true
+  },
+  {
+   "nom": "branchie_g0",
+   "uv": [
+    36,
+    36
+   ],
+   "boite": [
+    0,
+    -0.5,
+    -0.5,
+    4,
+    1,
+    1
+   ],
+   "pivot": [
+    2.5,
+    -9.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    -0.785
+   ]
+  },
+  {
+   "nom": "branchie_d0",
+   "uv": [
+    36,
+    36
+   ],
+   "boite": [
+    -4,
+    -0.5,
+    -0.5,
+    4,
+    1,
+    1
+   ],
+   "miroir": true,
+   "pivot": [
+    -2.5,
+    -9.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    0.785
+   ]
+  },
+  {
+   "nom": "branchie_g1",
+   "uv": [
+    28,
+    36
+   ],
+   "boite": [
+    0,
+    -0.5,
+    -0.5,
+    2,
+    1,
+    1
+   ],
+   "pivot": [
+    4.0,
+    -7.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    -0.3927
+   ]
+  },
+  {
+   "nom": "branchie_d1",
+   "uv": [
+    28,
+    36
+   ],
+   "boite": [
+    -2,
+    -0.5,
+    -0.5,
+    2,
+    1,
+    1
+   ],
+   "miroir": true,
+   "pivot": [
+    -4.0,
+    -7.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    0.3927
+   ]
+  },
+  {
+   "nom": "branchie_g2",
+   "uv": [
+    28,
+    36
+   ],
+   "boite": [
+    0,
+    -0.5,
+    -0.5,
+    2,
+    1,
+    1
+   ],
+   "pivot": [
+    4.0,
+    -5.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    -0.0
+   ]
+  },
+  {
+   "nom": "branchie_d2",
+   "uv": [
+    28,
+    36
+   ],
+   "boite": [
+    -2,
+    -0.5,
+    -0.5,
+    2,
+    1,
+    1
+   ],
+   "miroir": true,
+   "pivot": [
+    -4.0,
+    -5.0,
+    -4.8
+   ],
+   "rotation": [
+    0,
+    0,
+    0.0
+   ]
+  },
+  {
+   "nom": "lien",
+   "uv": [
+    0,
+    24
+   ],
+   "boite": [
+    -4,
+    -6,
+    -4,
+    8,
+    1,
+    8
+   ],
+   "gonfle": 0.35,
+   "porte_seulement": true
+  },
+  {
+   "nom": "noeud",
+   "uv": [
+    36,
+    8
+   ],
+   "boite": [
+    -1,
+    -6.6,
+    4.2,
+    2,
+    2,
+    1
+   ],
+   "porte_seulement": true
+  }
+ ]
+}
