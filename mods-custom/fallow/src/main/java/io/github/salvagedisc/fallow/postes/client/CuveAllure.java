@@ -55,6 +55,8 @@ final class CuveAllure implements Allure {
     private Item fantome;
     private final Envol envol = new Envol();
     private final Arrivee.Volee volee = new Arrivee.Volee();
+    /** Le trempage des peaux, de la peau pâle au tan. */
+    private final Jauge jauge = new Jauge(0xE8D6C0, 0xA0642C);
     /** Le cuir prêt, qui flotte au-dessus de la cuve : un clic dessus le reprend. */
     private final Flottant flottant = new Flottant(5.0F);
     private ItemStack sortant = ItemStack.EMPTY;
@@ -65,6 +67,7 @@ final class CuveAllure implements Allure {
     public void onSceneReady(StationView view) {
         view.node("pret").ifPresent(node -> node.setPainter((pose, buffers, light) ->
                 flottant.paint(view.level(), sortant, horloge, pose, buffers, light)));
+        view.node("jauge").ifPresent(node -> node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers)));
     }
 
     @Override
@@ -91,6 +94,11 @@ final class CuveAllure implements Allure {
         view.node("cuve").ifPresent(node -> node.setVisible(shown));
         // Le cuir prêt sort de l'eau et flotte au-dessus, comme le résultat d'une enclume de Hands-On Vanilla.
         sortant = shown && ready ? new ItemStack(TannerieModule.CUIR_MOUILLE.get(), hides) : ItemStack.EMPTY;
+        // Tant que les peaux trempent, une jauge au-dessus de la cuve, et le survol de l'eau dit où en est le trempage.
+        boolean trempe = shown && water && hides > 0 && !ready;
+        jauge.frame(trempe ? soak : -1.0F, dt);
+        view.node("surface").ifPresent(node -> node.setTooltip(trempe
+                ? net.minecraft.network.chat.Component.translatable("tannerie.fallow.cuve.trempe", hides, Math.round(soak * 100.0F)) : null));
         view.node("pret").ifPresent(node -> {
             node.setVisible(!sortant.isEmpty());
             flottant.frame(node, sortant, !sortant.isEmpty(), dt);

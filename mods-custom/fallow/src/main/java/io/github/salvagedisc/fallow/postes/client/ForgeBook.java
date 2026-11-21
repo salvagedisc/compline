@@ -120,6 +120,17 @@ final class ForgeBook implements RecipeBook.Source {
         return there;
     }
 
+    /** La grille de la dernière page choisie, case par case : le poste montre, pâles, les pièces qui y manquent. */
+    private List<Ingredient> attendus = List.of();
+
+    List<Ingredient> attendus() {
+        return attendus;
+    }
+
+    void oublie() {
+        attendus = List.of();
+    }
+
     @Override
     public void picked(StationView view, RecipeBook.Page page) {
         MenuAccess menu = view.menu();
@@ -132,6 +143,7 @@ final class ForgeBook implements RecipeBook.Source {
             return;
         }
         List<Ingredient> voulu = grille(recipe);
+        attendus = voulu;
         List<Component> manque = poser(menu, voulu);
         if (!manque.isEmpty()) {
             view.showCaption(Component.translatable("postes.fallow.forge.manque", manque.get(0)), 2.5F);

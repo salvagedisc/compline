@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
-  "$comment": "Le séchoir, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : cadre est sa copie vide, cuir le cuir mouillé tendu (z 7.5..8.5), sec le même cuir sec par-dessus, qui apparaît à mesure qu'il sèche ; le cuir rétrécit un peu en séchant. Tant qu'il est mouillé, il goutte par le bas, et fume près d'un feu ou au soleil. fantome montre, pâle et battant doucement, le cuir à tendre quand le cadre est vide. La caméra se tient devant le cadre, un peu au-dessus, comme devant le four de Hands-On Vanilla. surface prend les clics : le cuir mouillé lâché dessus s'y tend, la main vide prend le cuir sec ou dit où en est le séchage. Le livre de la tannerie est à gauche, presque debout face à la caméra ; rangé, il est posé au sol à gauche du cadre. envol dessine ce qui sort du bloc, qui vole jusqu'à la barre d'inventaire. arrivee_0 à arrivee_2 dessinent ce qui arrive sans passer par le curseur (Maj + clic, le livre) : il vole de sa case de la barre jusqu'au bloc.",
+  "$comment": "Le séchoir, redessiné par la scène pendant qu'on y travaille (le poste cache le bloc) : cadre est sa copie vide, cuir le cuir mouillé tendu (z 7.5..8.5), sec le même cuir sec par-dessus, qui apparaît à mesure qu'il sèche ; le cuir rétrécit un peu en séchant. Tant qu'il est mouillé, il goutte par le bas, et fume près d'un feu ou au soleil. fantome montre, pâle et battant doucement, le cuir à tendre quand le cadre est vide. La caméra se tient devant le cadre, un peu au-dessus, comme devant le four de Hands-On Vanilla. surface prend les clics : le cuir mouillé lâché dessus s'y tend, la main vide prend le cuir sec ou dit où en est le séchage. Le livre de la tannerie est à gauche, presque debout face à la caméra ; rangé, il est posé au sol à gauche du cadre. envol dessine ce qui sort du bloc, qui vole jusqu'à la barre d'inventaire. arrivee_0 à arrivee_2 dessinent ce qui arrive sans passer par le curseur (Maj + clic, le livre) : il vole de sa case de la barre jusqu'au bloc. jauge, au-dessus du cadre, montre le séchage (peinte par le poste).",
   "work_plane": 8,
   "idle_visible": false,
   "camera": {
@@ -209,6 +209,20 @@
           "scale": 0.4
         }
       }
+    },
+    {
+      "id": "jauge",
+      "pos": [
+        8,
+        17,
+        8
+      ],
+      "rotation": [
+        12,
+        0,
+        0
+      ],
+      "pickable": false
     }
   ]
 }

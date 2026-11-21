@@ -36,6 +36,13 @@ final class SechoirAllure implements Allure {
     private SechoirBlock.Etat avant;
     private final Envol envol = new Envol();
     private final Arrivee.Volee volee = new Arrivee.Volee();
+    /** Le séchage, du cuir mouillé au cuir sec. */
+    private final Jauge jauge = new Jauge(0x6E4A2E, 0xE0B070);
+
+    @Override
+    public void onSceneReady(StationView view) {
+        view.node("jauge").ifPresent(node -> node.setPainter((pose, buffers, light) -> jauge.paint(pose, buffers)));
+    }
 
     @Override
     public void onOpen(StationView view) {
@@ -63,6 +70,7 @@ final class SechoirAllure implements Allure {
         float sec = montre;
 
         view.node("cadre").ifPresent(node -> node.setVisible(shown));
+        jauge.frame(shown && etat == SechoirBlock.Etat.HUMIDE ? sec : -1.0F, dt);
         boolean tendu = shown && etat != SechoirBlock.Etat.VIDE;
         // En séchant, le cuir se resserre : 4 % de moins quand il est sec.
         float serre = 1.0F - 0.04F * sec;

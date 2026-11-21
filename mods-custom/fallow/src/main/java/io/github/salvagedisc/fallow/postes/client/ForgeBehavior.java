@@ -72,6 +72,12 @@ final class ForgeBehavior implements StationBehavior {
 
     private enum Coup { REPOS, ENTRE, FRAPPE, SONNE, SORT }
 
+    /** La case de la main quand on est venu à l'enclume avec une pièce : elle s'y pose quand la caméra est arrivée. */
+    private int enMain = -1;
+
+    /** La pièce que montre, pâle, chaque case vide de la dernière page choisie. */
+    private final Item[] manques = new Item[9];
+
     /** Ce que le curseur tenait au tick d'avant : s'il a baissé, la pièce posée vient de la main et ne vole pas. */
     private int porte;
 
@@ -115,6 +121,9 @@ final class ForgeBehavior implements StationBehavior {
         annonce = ItemStack.EMPTY;
         fantome = null;
         ouvrage = -1;
+        LocalPlayer venu = Minecraft.getInstance().player;
+        enMain = venu != null && PostesClient.venuParUsage(view.pos()) && !venu.getMainHandItem().is(ModTags.Items.SMITHING_HAMMERS)
+                && !venu.getMainHandItem().isEmpty() && utile(view, venu.getMainHandItem()) ? venu.getInventory().selected : -1;
         coup = Coup.REPOS;
         leve = ItemStack.EMPTY;
         view.node("coup").ifPresent(node -> node.setVisible(false));
@@ -141,6 +150,7 @@ final class ForgeBehavior implements StationBehavior {
     @Override
     public void onClose(StationView view) {
         book.shut(view);
+        source.oublie();
         connu = false;
         coup = Coup.REPOS;
         view.node("coup").ifPresent(node -> node.setVisible(false));
@@ -148,6 +158,12 @@ final class ForgeBehavior implements StationBehavior {
 
     @Override
     public void frame(StationView view, float deltaSeconds) {
+        // Venu avec une pièce en main : elle se pose sur l'enclume (comme le four de Hands-On Vanilla), une fois le menu là.
+        if (enMain >= 0 && view.menu() != null && com.pockyl.diegesis.api.client.DiegesisClient.arrival() >= 1.0F) {
+            Arrivee.depuis(view, enMain);
+            view.menu().quickMoveFromInventory(enMain);
+            enMain = -1;
+        }
         book.frame(view, deltaSeconds);
         horloge += deltaSeconds;
         tempsCoup += deltaSeconds;
@@ -169,6 +185,26 @@ final class ForgeBehavior implements StationBehavior {
             }
         });
         fantome = fera;
+        // Les pièces qui manquent à la page choisie, pâles dans leurs cases vides, comme la table de Hands-On Vanilla ; quand
+        // l'ingrédient en admet plusieurs, elles se relaient chaque seconde.
+        java.util.List<Ingredient> attendus = source.attendus();
+        if (fini) {
+            source.oublie();
+        }
+        for (int cell = 0; cell < 9; cell++) {
+            Ingredient want = cell < attendus.size() ? attendus.get(cell) : Ingredient.EMPTY;
+            ItemStack[] choix = want.isEmpty() ? new ItemStack[0] : want.getItems();
+            boolean vide = view.menu() != null && view.state().getItem(SlotRef.of(PostesForge.GRILLE, cell)).isEmpty();
+            Item montre = view.isFocused() && vide && choix.length > 0 ? choix[(int) horloge % choix.length].getItem() : null;
+            final int index = cell;
+            view.node("manque_" + cell).ifPresent(node -> {
+                node.setVisible(montre != null);
+                if (montre != null && montre != manques[index]) {
+                    node.setVisual(Visual.ofItem(montre).withTint(0x70FFFFFF).asTranslucent());
+                }
+            });
+            manques[cell] = montre;
+        }
         // Les pièces chaudes fument dans leur case.
         if (!view.isFocused()) {
             return;
