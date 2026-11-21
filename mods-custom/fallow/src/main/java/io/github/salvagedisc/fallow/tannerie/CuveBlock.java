@@ -33,7 +33,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * {@link FallowConfig#tannerieTanningMinutes()} minutes, toutes ensemble ; une peau ajoutée en route relance le
  * trempage. Main vide, on sort le cuir mouillé, qui doit encore sécher.
  */
-public class CuveBlock extends Block {
+public class CuveBlock extends Block implements Ouvrage {
     public static final BooleanProperty EAU = BooleanProperty.create("eau");
     public static final IntegerProperty TANIN = IntegerProperty.create("tanin", 0, 8);
     public static final IntegerProperty PEAUX = IntegerProperty.create("peaux", 0, 4);
@@ -68,13 +68,20 @@ public class CuveBlock extends Block {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             InteractionHand hand, BlockHitResult hit) {
+        return travailler(stack, state, level, pos, player, rendu -> player.setItemInHand(hand, rendu), sorti -> {
+        });
+    }
+
+    @Override
+    public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+            java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
         boolean water = state.getValue(EAU);
         if (stack.is(Items.WATER_BUCKET)) {
             if (water) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
             if (!level.isClientSide()) {
-                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
+                rendre.accept(ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
                 level.setBlock(pos, state.setValue(EAU, true), Block.UPDATE_ALL);
                 level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
@@ -85,7 +92,7 @@ public class CuveBlock extends Block {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
             if (!level.isClientSide()) {
-                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.WATER_BUCKET)));
+                rendre.accept(ItemUtils.createFilledResult(stack, player, new ItemStack(Items.WATER_BUCKET)));
                 // Seule l'eau s'en va : l'écorce reste au fond pour la prochaine eau.
                 level.setBlock(pos, state.setValue(EAU, false), Block.UPDATE_ALL);
                 level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -139,6 +146,11 @@ public class CuveBlock extends Block {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        return mainVide(state, level, pos, player);
+    }
+
+    @Override
+    public InteractionResult mainVide(BlockState state, Level level, BlockPos pos, Player player) {
         int hides = state.getValue(PEAUX);
         if (hides == 0) {
             return InteractionResult.PASS;

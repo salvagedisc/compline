@@ -52,7 +52,7 @@ Waiting happens on the block, never with the player held: the vat soaks, the fra
 | Cooking a dish | Farmer's Delight's pot, board, skillet and stove through Hands-On Delight; campfire | Gesture, stirring as craft skill |
 | Smithing | Overgeared's anvil: ingredients in its window, then sneak + use with the hammer and strikes in the world | Menu, then craft skill |
 | Fishing | Starcatcher | Craft skill (classic bobber: none) |
-| Leather | House tannery: beam, vat, frame | Gesture |
+| Leather | House tannery: beam, vat, frame, each a station (`postes` module) | Gesture |
 | Grinding, polishing | Grindstone (Spelunkery's gems, Overgeared's grinding), Create's millstone and crushers | Menu / machines |
 | Enchanting | Immersive Enchanting at the table, ancient books on the shelves around it | Menu |
 | Brewing, fermenting | Farmer's Delight's keg through Hands-On Delight | Gesture |

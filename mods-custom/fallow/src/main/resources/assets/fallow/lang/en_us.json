@@ -203,5 +203,11 @@
   "screen.fallow.hote.silence.demande": "Very quietly. I'm listening.",
   "screen.fallow.hote.silence.question.bete": "The One Below. Archie says Sculksaur. She can't be tamed. She mustn't be woken. We keep her sleep.",
   "screen.fallow.hote.silence.question.saison": "No seasons, down below. We come on moonless nights. The dark is the same all year.",
-  "screen.fallow.hote.silence.question.lieu": "Very deep, under the dark stone, a dead city covered in sculk. The ground answers steps there. If it answers, back away."
+  "screen.fallow.hote.silence.question.lieu": "Very deep, under the dark stone, a dead city covered in sculk. The ground answers steps there. If it answers, back away.",
+  "postes.fallow.livre.raclage": "%s strokes",
+  "postes.fallow.livre.tannage": "%s min",
+  "postes.fallow.livre.sechage": "Sun or fire",
+  "postes.fallow.livre.ailleurs.raclage": "The hide is scraped on the fleshing beam.",
+  "postes.fallow.livre.ailleurs.tannage": "The scraped hide is tanned in the tanning vat.",
+  "postes.fallow.livre.ailleurs.sechage": "The wet leather dries on the drying frame."
 }

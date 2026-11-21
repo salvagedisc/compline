@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
+  "$comment": "La cuve à tan est le bloc lui-même, ouverte en haut (parois de 2 px, fond à 2, eau jusqu'à 13), son contenu dessiné par le monde. La caméra regarde dedans d'en haut, comme au métier à tisser de Hands-On Vanilla. surface prend les clics : ce qu'on lâche dedans y va (eau, écorce, peaux raclées, seau vide pour vider l'eau), la main vide sort le cuir mouillé ou dit où en est le trempage. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche de la cuve.",
+  "work_plane": 13,
+  "idle_visible": false,
+  "camera": {
+    "position": [
+      8,
+      40,
+      -13
+    ],
+    "target": [
+      8,
+      13,
+      8
+    ],
+    "fov": 40,
+    "interactive_at": 0.6
+  },
+  "interface": {
+    "hide_player": true,
+    "inventory_panel": false,
+    "sounds": false,
+    "carry_lift": 1.5,
+    "highlight_color": "#26FFFFFF",
+    "hover_outline": false
+  },
+  "inventory_drawer": {
+    "layout": "hotbar",
+    "always_open": true,
+    "carry_size": 2.6
+  },
+  "nodes": [
+    {
+      "id": "surface",
+      "collider": {
+        "from": [
+          0,
+          0,
+          0
+        ],
+        "to": [
+          16,
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "id": "book_open",
+      "pos": [
+        19.5,
+        17,
+        4
+      ],
+      "rotation": [
+        -56,
+        0,
+        0
+      ],
+      "scale": 0.85,
+      "hidden": true,
+      "collider": {
+        "from": [
+          -5.3,
+          -0.4,
+          -3.9
+        ],
+        "to": [
+          5.3,
+          1.4,
+          3.9
+        ]
+      },
+      "extra": {
+        "rest": {
+          "offset": [
+            0.5,
+            -16.8,
+            4
+          ],
+          "turn": [
+            54.19,
+            20.81,
+            17.13
+          ],
+          "scale": 0.4
+        }
+      }
+    }
+  ]
+}

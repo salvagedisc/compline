@@ -28,7 +28,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 
 - **One module = one switch.** Each module has its `enabled` boolean in the config: `config/fallow-client.toml` for `ciel`, `config/fallow-common.toml` for most modules, and the world's `serverconfig/fallow-server.toml` for the switches the client must share with the server (`xp`, `outils`): NeoForge sends that file to every player who joins. The values are re-read at each use, so a change in game takes effect immediately. Exceptions: `dissipateur` follows the `clairiere` switch; `monuments`, `acier_noir`, `minage` and `filons` have none, because they register content (a structure type, items, a tool tier, a feature) that saved worlds and the pack's data name, or are pure data rules; turning them off would break a world rather than disable a feature.
 - **A module loads only if its mods are present.** At startup, `Fallow` checks with `ModList` the mods each module depends on. It writes "Module X chargé" or "Module X ignoré" to the log. Mixins go through `FallowMixinPlugin`, which applies them only if the targeted mods are in `LoadingModList`. The only hard dependency is NeoForge.
-- **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible.
+- **No copied code.** The mod goes through the targeted mods' public APIs and through targeted mixins, on vanilla code when possible. One exception: the recipe book of the `postes` module is taken from Hands-On Vanilla 1.2.2 (MIT, by Pocky), with its licence in `META-INF/LICENSE_handson_vanilla` and its notice at the top of each file.
 
 | Module | Side | Required mods | Mixins |
 |---|---|---|---|
@@ -44,6 +44,7 @@ The version is set in `gradle.properties` (`mod_version`). The targeted mods are
 | `ecran` | client | none; Thirst Was Reclaimed and Cold Sweat each for its gauge | none |
 | `indices` | client | none | 1, client (`indices.GuiOverlayAccessor`, an accessor on vanilla code) |
 | `hotes` | both (the emissaries and masks on the server, the dialogue window, masks and regalia on the client) | none; Archie's Dinosaurs for the beasts' armour | none |
+| `postes` | both (the stations and their work on the server, the scenes and the book on the client) | Diegesis | none |
 | (compatibility fix) | client | Punchy! and Sensible Stackables | 1, client (`compat.PunchyEquipMixin`) |
 | (compatibility fix) | both | Streams Reflowing and Spelunkery | 1 (`compat.IceThawMixin`) |
 | (compatibility fix) | both | Lithostitched (used by Regions Unexplored) | 1 (`compat.InStructureMixin`) |
@@ -396,6 +397,20 @@ Config (`fallow-common.toml`, `[tannerie]`): `enabled` (true), `strokes` (6), `t
 
 **Checked** on the bench on 2026-11-18: see [tannery](tannerie.md).
 
+## `postes` module
+
+Client and server, needs Diegesis (the library of Hands-On Vanilla and Hands-On Delight, by Pocky). Fallow's own blocks worked by hand in the world, on the model of those two mods, so that every station plays the same ([interactions](interactions.md)). The first ones are the three blocks of the tannery ([tannery](tannerie.md#at-the-station)).
+
+- **`PostesTannerie`**: one Diegesis station per block (`fallow:chevalet`, `fallow:cuve_a_tan`, `fallow:sechoir`), no slots of its own (empty schema), opened by a right-click unless crouching (the block then keeps its usual right-click) or when `[postes] tannerie` is off.
+- **`Ouvrage`** (in `tannerie`): the work of each block, shared by the right-click in the world and the station: `travailler` (an item works on the block; what replaces it and what comes out are handed back) and `mainVide` (take what is finished, or read how far it is).
+- **`OuvrageLogic`** (server): three custom actions. `travailler` takes the item on the cursor, or from inventory slot `depuis`; what comes out goes to the inventory, or to the ground when it is full. `main_vide` is the empty hand. `garnir` fills the block from the inventory, for the page picked in the book: the beam a raw hide, the frame a wet leather, the vat its water if missing, then one bark and one scraped hide (with `tout`, Shift: up to four).
+- **Client** (`postes.client`): the scenes in `assets/fallow/diegesis/scenes/` (camera, the block's clickable surface, the book's place), `TannerieBehavior` (the cursor laid on the block, Shift + click in the inventory, the empty hand on the block, coming to the block with a useful item in hand makes the first gesture once the camera has arrived, the inventory greys what the tannery does not use), `TannerieBook` (three pages: scraping, tanning, drying; the page of the block where one is; a page of another block says where it is done). While a station is open the action bar is hidden, so the blocks' messages become the scene's caption.
+- **Recipe book** (`RecipeBook`, `RecipeBookModel`, `BookTabs`, `IconLight`, `BookMath`): taken from Hands-On Vanilla 1.2.2 (MIT), its own textures under `textures/entity/livre_de_recettes*.png`; it remembers its page in `config/fallow-livres.properties`.
+
+Config (`fallow-common.toml`, `[postes]`): `tannerie` (true).
+
+**Checked** on the bench on 2026-11-21: each of the three stations, by the cursor, by the book (Shift on the vat) and coming with the item in hand; the caption of the frame.
+
 ## `hotes` module
 
 Client and server, no required mod (the emissaries wear Archie's Dinosaurs' armour when it is there). The six masked peoples and their emissaries, a pilot ([hotes](hotes.md)): the `fallow:hote` entity, one mask helmet per people, the dialogue window with its portrait, the worn masks and regalia drawn from `assets/fallow/hotes/`. Emissaries come only through `/fallow hotes appeler <peuple>` (operators).
@@ -636,7 +651,7 @@ The G tests of [premiers-gestes](premiers-gestes.md#in-game-tests).
 
 | # | Test | Expected |
 |---|---|---|
-| TA1 to TA7 | Hides, fleshing beam, bark, vat, drying frame, fat, quest | See [tannerie.md](tannerie.md#in-game-tests) |
+| TA1 to TA8 | Hides, fleshing beam, bark, vat, drying frame, fat, quest, the three stations | See [tannerie.md](tannerie.md#in-game-tests) |
 
 ### Held items
 

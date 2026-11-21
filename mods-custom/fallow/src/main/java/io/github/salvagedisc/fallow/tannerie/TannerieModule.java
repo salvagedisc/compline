@@ -53,7 +53,7 @@ public final class TannerieModule {
     public static final TagKey<Block> SANS_ECORCE = TagKey.create(Registries.BLOCK, id("sans_ecorce"));
 
     static final ResourceLocation ECORCE = ResourceLocation.fromNamespaceAndPath("farmersdelight", "tree_bark");
-    static final ResourceLocation GRAS = ResourceLocation.fromNamespaceAndPath("naturalist", "fat");
+    public static final ResourceLocation GRAS = ResourceLocation.fromNamespaceAndPath("naturalist", "fat");
 
     public static final DeferredItem<Item> PEAU_BRUTE = ITEMS.registerSimpleItem("peau_brute");
     public static final DeferredItem<Item> PEAU_RACLEE = ITEMS.registerSimpleItem("peau_raclee");

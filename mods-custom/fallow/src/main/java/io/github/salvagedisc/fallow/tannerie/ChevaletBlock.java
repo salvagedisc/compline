@@ -14,7 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * (quelques coups, {@link FallowConfig#tannerieStrokes()}) ; elle tombe raclée, parfois avec un morceau de gras.
  * Main vide, on reprend la peau.
  */
-public class ChevaletBlock extends HorizontalDirectionalBlock {
+public class ChevaletBlock extends HorizontalDirectionalBlock implements Ouvrage {
     public static final MapCodec<ChevaletBlock> CODEC = simpleCodec(ChevaletBlock::new);
     public static final BooleanProperty PEAU = BooleanProperty.create("peau");
     /** Coups déjà donnés sur la peau posée (le réglage s'arrête à 15). */
@@ -71,6 +70,13 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             InteractionHand hand, BlockHitResult hit) {
+        return travailler(stack, state, level, pos, player, rendu -> player.setItemInHand(hand, rendu),
+                sorti -> Block.popResourceFromFace(level, pos, Direction.UP, sorti));
+    }
+
+    @Override
+    public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+            java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
         if (!state.getValue(PEAU)) {
             if (!stack.is(TannerieModule.PEAU_BRUTE.get())) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -99,7 +105,7 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.FAIL;
         }
         ServerLevel server = (ServerLevel) level;
-        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+        stack.hurtAndBreak(1, server, player, item -> server.playSound(null, pos, SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 0.8F, 1.0F));
         server.playSound(null, pos, SoundEvents.BRUSH_GENERIC, SoundSource.BLOCKS, 1.0F, 0.8F + level.getRandom().nextFloat() * 0.3F);
         server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(TannerieModule.PEAU_BRUTE.get())),
                 pos.getX() + 0.5, pos.getY() + 0.85, pos.getZ() + 0.5, 6, 0.2, 0.05, 0.2, 0.05);
@@ -110,10 +116,10 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.SUCCESS;
         }
         level.setBlock(pos, state.setValue(PEAU, false).setValue(RACLAGE, 0), Block.UPDATE_ALL);
-        Block.popResourceFromFace(level, pos, Direction.UP, new ItemStack(TannerieModule.PEAU_RACLEE.get()));
+        produit.accept(new ItemStack(TannerieModule.PEAU_RACLEE.get()));
         if (level.getRandom().nextDouble() < FallowConfig.tannerieFatChance()) {
             BuiltInRegistries.ITEM.getOptional(TannerieModule.GRAS).filter(item -> item != Items.AIR)
-                    .ifPresent(item -> Block.popResourceFromFace(level, pos, Direction.UP, new ItemStack(item)));
+                    .ifPresent(item -> produit.accept(new ItemStack(item)));
         }
         level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.BLOCKS, 1.0F, 1.2F);
         return ItemInteractionResult.SUCCESS;
@@ -122,7 +128,15 @@ public class ChevaletBlock extends HorizontalDirectionalBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         // Main vide seulement : un bloc en main se pose contre le chevalet au lieu de reprendre la peau.
-        if (!state.getValue(PEAU) || !player.getMainHandItem().isEmpty()) {
+        if (!player.getMainHandItem().isEmpty()) {
+            return InteractionResult.PASS;
+        }
+        return mainVide(state, level, pos, player);
+    }
+
+    @Override
+    public InteractionResult mainVide(BlockState state, Level level, BlockPos pos, Player player) {
+        if (!state.getValue(PEAU)) {
             return InteractionResult.PASS;
         }
         if (!level.isClientSide()) {

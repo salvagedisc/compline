@@ -203,5 +203,11 @@
   "screen.fallow.hote.silence.demande": "Tout bas. J'écoute.",
   "screen.fallow.hote.silence.question.bete": "Celle d'en dessous. Archie dit Sculksaur. On ne l'apprivoise pas. On ne la réveille pas. Nous gardons son sommeil.",
   "screen.fallow.hote.silence.question.saison": "Pas de saison, en bas. Nous venons les nuits sans lune. Le noir est le même toute l'année.",
-  "screen.fallow.hote.silence.question.lieu": "Très bas, sous la pierre sombre, une cité morte couverte de sculk. Le sol y répond aux pas. S'il répond, recule."
+  "screen.fallow.hote.silence.question.lieu": "Très bas, sous la pierre sombre, une cité morte couverte de sculk. Le sol y répond aux pas. S'il répond, recule.",
+  "postes.fallow.livre.raclage": "%s coups",
+  "postes.fallow.livre.tannage": "%s min",
+  "postes.fallow.livre.sechage": "Soleil ou feu",
+  "postes.fallow.livre.ailleurs.raclage": "La peau se racle sur le chevalet à écharner.",
+  "postes.fallow.livre.ailleurs.tannage": "La peau raclée se tanne dans la cuve à tan.",
+  "postes.fallow.livre.ailleurs.sechage": "Le cuir mouillé sèche sur le séchoir."
 }

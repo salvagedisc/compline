@@ -64,7 +64,10 @@ public enum FallowModule {
      *  enregistrés des deux côtés). Aucun mod requis ; l'écorce est celle de Farmer's Delight, le gras celui de Naturalist. */
     TANNERIE("tannerie", null, bus -> io.github.salvagedisc.fallow.tannerie.TannerieModule.start(bus)),
     /** Les hôtes (pilote) : un peuple de la brume au modèle du joueur, vêtu de l'armure de sa bête (client et serveur). */
-    HOTES("hotes", null, bus -> io.github.salvagedisc.fallow.hotes.HotesModule.start(bus));
+    HOTES("hotes", null, bus -> io.github.salvagedisc.fallow.hotes.HotesModule.start(bus)),
+    /** Les postes : les blocs de la tannerie travaillés à la main sur place, caméra au bloc et livre de recettes à côté, sur
+     *  le modèle de Hands-On Delight et Hands-On Vanilla (client et serveur). Demande Diegesis. */
+    POSTES("postes", null, bus -> io.github.salvagedisc.fallow.postes.PostesModule.start(bus), ModIds.DIEGESIS);
 
     private final String id;
     private final Dist side;

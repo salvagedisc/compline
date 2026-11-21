@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
+  "$comment": "Le chevalet à écharner est le bloc lui-même : la poutre court de l'avant à l'arrière (x 6.5..9.5, dessus à 13), la peau tendue dessus (modèle chevalet_peau) est dessinée par le monde. La caméra se tient au bout de la poutre, comme celle du métier à tisser de Hands-On Vanilla, et regarde le long de la peau. surface prend les clics : ce qu'on lâche dessus travaille (peau, couteau), la main vide reprend la peau. Le livre de la tannerie est à gauche ; rangé, il est posé au sol à gauche du bloc.",
+  "work_plane": 13,
+  "idle_visible": false,
+  "camera": {
+    "position": [
+      8,
+      36.5,
+      -15
+    ],
+    "target": [
+      8,
+      13,
+      8
+    ],
+    "fov": 40,
+    "interactive_at": 0.6
+  },
+  "interface": {
+    "hide_player": true,
+    "inventory_panel": false,
+    "sounds": false,
+    "carry_lift": 1.5,
+    "highlight_color": "#26FFFFFF",
+    "hover_outline": false
+  },
+  "inventory_drawer": {
+    "layout": "hotbar",
+    "always_open": true,
+    "carry_size": 2.6
+  },
+  "nodes": [
+    {
+      "id": "surface",
+      "collider": {
+        "from": [
+          3,
+          0,
+          0
+        ],
+        "to": [
+          13,
+          14,
+          16
+        ]
+      }
+    },
+    {
+      "id": "book_open",
+      "pos": [
+        19.5,
+        17,
+        4
+      ],
+      "rotation": [
+        -56,
+        0,
+        0
+      ],
+      "scale": 0.85,
+      "hidden": true,
+      "collider": {
+        "from": [
+          -5.3,
+          -0.4,
+          -3.9
+        ],
+        "to": [
+          5.3,
+          1.4,
+          3.9
+        ]
+      },
+      "extra": {
+        "rest": {
+          "offset": [
+            0.5,
+            -16.8,
+            4
+          ],
+          "turn": [
+            54.19,
+            20.81,
+            17.13
+          ],
+          "scale": 0.4
+        }
+      }
+    }
+  ]
+}

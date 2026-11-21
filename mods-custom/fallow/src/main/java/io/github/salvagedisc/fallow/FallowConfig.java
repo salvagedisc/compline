@@ -58,6 +58,7 @@ public final class FallowConfig {
     private static final ModConfigSpec.IntValue TANNERIE_DRYING_POINTS;
     private static final ModConfigSpec.DoubleValue TANNERIE_BARK_CHANCE;
     private static final ModConfigSpec.DoubleValue TANNERIE_FAT_CHANCE;
+    private static final ModConfigSpec.BooleanValue POSTES_TANNERIE;
     private static final ModConfigSpec.BooleanValue PATINE_ENABLED;
     private static final ModConfigSpec.IntValue PATINE_MINUTES;
     private static final ModConfigSpec.BooleanValue CLIMAT_ENABLED;
@@ -330,6 +331,14 @@ public final class FallowConfig {
                 .defineInRange("fatChance", 0.33, 0.0, 1.0);
         common.pop();
 
+        common.comment("Module postes : les blocs de Fallow travaillés à la main, sur place, comme ceux de Hands-On Delight et",
+                "Hands-On Vanilla (bibliothèque Diegesis) : la caméra vient au bloc, on y pose ce qu'on prend dans l'inventaire",
+                "et le livre de recettes est à côté. Accroupi, le bloc garde son usage d'avant.").push("postes");
+        POSTES_TANNERIE = common
+                .comment("Le chevalet, la cuve à tan et le séchoir s'ouvrent en postes. Faux : on y travaille au clic, comme avant.")
+                .define("tannerie", true);
+        common.pop();
+
         common.comment("Module patine : les armures portées se salissent (marche, terre, combat) et se lavent dans l'eau ; la pluie",
                 "les rince lentement. La saleté reste sur l'objet.").push("patine");
         PATINE_ENABLED = common
@@ -515,6 +524,10 @@ public final class FallowConfig {
 
     public static boolean tannerieEnabled() {
         return read(COMMON_SPEC, TANNERIE_ENABLED);
+    }
+
+    public static boolean postesTannerie() {
+        return read(COMMON_SPEC, POSTES_TANNERIE);
     }
 
     public static int tannerieStrokes() {

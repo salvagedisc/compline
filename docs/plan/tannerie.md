@@ -13,6 +13,16 @@ Status: checked on a dedicated server of the full pack with one player on 2026-1
 
 Bark (Farmer's Delight's tree bark) drops half of the time when a log or wood is stripped with an axe, and still comes from Farmer's Delight's cutting board. Fat makes two torches with a stick, or a candle with a string.
 
+## At the station
+
+Since `fallow` 0.42.0 (`postes` module, Diegesis), a right-click on one of the three blocks brings the camera to it, as Hands-On Vanilla does for the crafting table and Hands-On Delight for the cutting board; crouching keeps the old right-click. The hotbar stays open under the block, and the tannery book lies beside it.
+
+- **Laying**: an item taken on the cursor and dropped on the block works as the right-click did (the hide lays on the beam, the knife strokes, water, bark and hides go into the vat, the wet leather stretches on the frame); a bucket or what comes out goes back to the inventory. Shift + click on a slot sends that stack. Coming to the block with a useful item in hand makes the first gesture by itself.
+- **Empty hand** on the block: takes what is finished, or reads how far it is, in the caption of the scene.
+- **The book** opens at the page of the block (scraping, tanning, drying), with what it takes and the time. Picking that page fills the block from the inventory; Shift on the vat puts in as many barks and hides as it holds. A page of another block says where it is done.
+
+`fallow-common.toml`, `[postes] tannerie = false` brings back the right-click alone.
+
 ## Drying
 
 Every 20 seconds the frame gains drying points; at 15 the leather is dry.
@@ -58,6 +68,7 @@ Kept, because they recycle leather that already exists or come from rare loot: C
 ## Files
 
 - `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/tannerie/`: the module, the three blocks.
+- `mods-custom/fallow/src/main/java/io/github/salvagedisc/fallow/postes/` and `assets/fallow/diegesis/scenes/`: the three stations ([mod-fallow](mod-fallow.md#postes-module)).
 - `mods-custom/fallow/src/main/resources/`: block states, models, textures, loot of the blocks, recipes, tags `fallow:tanins` (items that tan: Farmer's Delight's bark), `fallow:sans_ecorce` (logs that never give bark: stripped ones), `minecraft:mineable/axe`, texts.
 - `pack/kubejs/server_scripts/tannerie.js`, `tannerie_butin.js`: recipes and loot.
 - Quest « La tannerie » (`pack/config/questlog/quests/metiers_tannerie.json`): appears with the first raw hide; scraped hide, wet leather, leather.
@@ -71,3 +82,4 @@ Kept, because they recycle leather that already exists or come from rare loot: C
 - **TA5**: drying frame in the sun: dry in about 2 min 30; under a roof by a campfire, faster; in the rain it gets wet (the message says so); an empty hand gives the leather.
 - **TA6**: fat + stick → 2 torches; fat + string → candle; EMI shows the three blocks and their recipes, in French.
 - **TA7**: the quest « La tannerie » appears with the first raw hide and completes with the leather.
+- **TA8**: the three stations: a right-click brings the camera to the block, the book beside it at the block's page; a hide dropped from the cursor lays on the beam and a knife strokes it; Shift on the vat's page fills water, bark and hides; the frame reads its drying in the caption; coming with the item in hand makes the first gesture; crouched, the right-click works as before.

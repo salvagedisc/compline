@@ -35,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * Le séchoir : un cadre de bois où le cuir mouillé est tendu. Il sèche par à-coups (toutes les 20 secondes) selon
  * l'endroit, voir {@link #rate}. Main vide, on décroche le cuir sec, ou on lit où en est le séchage.
  */
-public class SechoirBlock extends HorizontalDirectionalBlock {
+public class SechoirBlock extends HorizontalDirectionalBlock implements Ouvrage {
     public static final MapCodec<SechoirBlock> CODEC = simpleCodec(SechoirBlock::new);
     public static final EnumProperty<Etat> ETAT = EnumProperty.create("etat", Etat.class);
     public static final IntegerProperty SECHAGE = IntegerProperty.create("sechage", 0, 15);
@@ -80,6 +80,13 @@ public class SechoirBlock extends HorizontalDirectionalBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
             InteractionHand hand, BlockHitResult hit) {
+        return travailler(stack, state, level, pos, player, rendu -> player.setItemInHand(hand, rendu), sorti -> {
+        });
+    }
+
+    @Override
+    public ItemInteractionResult travailler(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
+            java.util.function.Consumer<ItemStack> rendre, java.util.function.Consumer<ItemStack> produit) {
         if (!stack.is(TannerieModule.CUIR_MOUILLE.get())) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -103,6 +110,11 @@ public class SechoirBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        return mainVide(state, level, pos, player);
+    }
+
+    @Override
+    public InteractionResult mainVide(BlockState state, Level level, BlockPos pos, Player player) {
         Etat etat = state.getValue(ETAT);
         if (etat == Etat.VIDE) {
             return InteractionResult.PASS;

@@ -122,6 +122,9 @@ dependencies {
     compileOnly modrinth('ecliptic-seasons')
     compileOnly modrinth('thirst-was-reclaimed') // la soif du vent de sable
 
+    // Module postes : les postes en monde de Diegesis (bibliothèque de Hands-On Delight et Hands-On Vanilla)
+    compileOnly modrinth('diegesis-api')
+
     // Module dissipateur
     compileOnly modrinth('create')
     // Ponder et Flywheel, nécessaires pour compiler contre les classes de Create : pris dans le jar

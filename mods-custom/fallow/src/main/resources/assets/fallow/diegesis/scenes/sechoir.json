@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Pocky-l/diegesis/main/docs/schema/scene.schema.json",
+  "$comment": "Le séchoir est le bloc lui-même : un cadre debout (z 7..9) où le cuir est tendu (modèles sechoir_humide et sechoir_sec), dessiné par le monde. La caméra se tient devant le cadre, un peu au-dessus, comme devant le four de Hands-On Vanilla. surface prend les clics : le cuir mouillé lâché dessus s'y tend, la main vide prend le cuir sec ou dit où en est le séchage. Le livre de la tannerie est à gauche, presque debout face à la caméra ; rangé, il est posé au sol à gauche du cadre.",
+  "work_plane": 8,
+  "idle_visible": false,
+  "camera": {
+    "position": [
+      8,
+      15,
+      -24
+    ],
+    "target": [
+      8,
+      8,
+      8
+    ],
+    "fov": 40,
+    "interactive_at": 0.6
+  },
+  "interface": {
+    "hide_player": true,
+    "inventory_panel": false,
+    "sounds": false,
+    "carry_lift": 1.5,
+    "highlight_color": "#26FFFFFF",
+    "hover_outline": false
+  },
+  "inventory_drawer": {
+    "layout": "hotbar",
+    "always_open": true,
+    "carry_size": 2.6
+  },
+  "nodes": [
+    {
+      "id": "surface",
+      "collider": {
+        "from": [
+          0,
+          0,
+          5
+        ],
+        "to": [
+          16,
+          16,
+          11
+        ]
+      }
+    },
+    {
+      "id": "book_open",
+      "pos": [
+        19,
+        11.5,
+        4
+      ],
+      "rotation": [
+        -78,
+        0,
+        0
+      ],
+      "scale": 0.85,
+      "hidden": true,
+      "collider": {
+        "from": [
+          -5.3,
+          -0.4,
+          -3.9
+        ],
+        "to": [
+          5.3,
+          1.4,
+          3.9
+        ]
+      },
+      "extra": {
+        "rest": {
+          "offset": [
+            -1.5,
+            -10.8,
+            -2
+          ],
+          "turn": [
+            76.19,
+            20.81,
+            17.13
+          ],
+          "scale": 0.4
+        }
+      }
+    }
+  ]
+}
