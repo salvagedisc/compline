@@ -765,5 +765,20 @@
   "config.subtle_effects.general.nightVisionFading.desc": "La vision nocturne s'estompe progressivement au lieu de clignoter",
   "config.subtle_effects.general.nightVisionFadingTime": "Durée d'estompage de la vision nocturne",
   "config.subtle_effects.general.nightVisionFadingTime.desc": "Durée en ticks de l'estompage de la vision nocturne",
-  "config.subtle_effects.general.enableEasterEggs": "Activer les easter eggs"
+  "config.subtle_effects.general.enableEasterEggs": "Activer les easter eggs",
+  "config.subtle_effects.blocks.decoratedPotsInteractionBubbles": "Bulles des pots décorés",
+  "config.subtle_effects.blocks.decoratedPotsInteractionBubbles.desc": "Les pots décorés font-ils des bulles quand on s'en sert, par exemple en y rangeant un objet",
+  "config.subtle_effects.entities.damage_taken": "Dégâts reçus",
+  "config.subtle_effects.entities.damage_taken.desc": "Particules émises par une créature quand elle est blessée",
+  "config.subtle_effects.entities.damage_taken.damageTypes": "Types de dégâts",
+  "config.subtle_effects.entities.damage_taken.damageTypes.desc": "Liste des types de dégâts qui déclenchent les effets de créature blessée",
+  "config.subtle_effects.entities.damage_taken.damagedChickenFeathers": "Plumes de poule blessée",
+  "config.subtle_effects.entities.damage_taken.damagedParrotFeathers": "Plumes de perroquet blessé",
+  "config.subtle_effects.entities.damage_taken.damagedSnowGolemSnowflakes": "Flocons de golem de neige blessé",
+  "config.subtle_effects.entities.damage_taken.damagedSheepFluff": "Laine de mouton blessé",
+  "config.subtle_effects.entities.damage_taken.damagedSlimeSlime": "Gelée de slime blessé",
+  "config.subtle_effects.entities.damage_taken.damagedSkeletonBones": "Os de squelette blessé",
+  "config.subtle_effects.entities.damage_taken.damagedSkeletonHorseBones": "Os de cheval squelette blessé",
+  "config.subtle_effects.general.disableShriekRotation": "Désactiver la rotation des hurlements",
+  "config.subtle_effects.general.disableShriekRotation.desc": "Retire la légère rotation des particules de hurlement émises quand un hurleur de sculk s'active"
 }
