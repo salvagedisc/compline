@@ -44,6 +44,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0038](0038-house-tannery.md) | A house tannery instead of the Tannery mod | `tannerie` module: raw hide scraped on a fleshing beam, tanned in a vat with bark, dried on a frame by sun or fire; Tannery removed |
 | [0039](0039-pack-name.md) | The pack's name: Fallow, under the `fallow-pack` slug | Kept: titled Fallow on Modrinth (`fallow-pack`) and CurseForge (`fallow`); every identifier uses `fallow` |
 | [0040](0040-removing-cinematic-interactions.md) | Removing Cinematic Interactions | Its jar, embedded because the mod is only on CurseForge, held back the first Modrinth version; the vanilla stations open their usual windows again |
+| [0042](0042-interaction-language.md) | One interaction language for the stations | Menu, gesture, craft skill; the pot cooks without stirring, faster Spatial GUI windows, « vous » in the tool hints |
 
 ## Template
 
