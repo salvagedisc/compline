@@ -4013,6 +4013,11 @@ hash = "e55ca32b338a0e0540f4fec5170675d860566255ae0f45692a00cb4ebf2eb535"
 metafile = true
 
 [[files]]
+file = "mods/sable-fix-mod.pw.toml"
+hash = "204e2f1c98a6538a8c6d39b302ba21f20a3443740a53c5ad68f221a638c167c0"
+metafile = true
+
+[[files]]
 file = "mods/sable-ragdoll-corpse.pw.toml"
 hash = "9c418d8a79d2e1cbe199b2e1e78d36dd51e18a0858c7de90de4e64ac7dc5484f"
 metafile = true
