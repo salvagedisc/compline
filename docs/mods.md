@@ -47,6 +47,12 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Create Aeronautics: Automated Logistics | `create-aeronautics-automated-logistics` | ✅ (added 2026-10-25) | CS | Recorded airship routes, airship stations, transponders: an air network as a long-term goal |
 | Sable: Physics Compat | `sablecompat` | ✅ (added 2026-10-25) | CS | Mass, buoyancy and friction for the blocks of about 100 mods on Sable ships (its `sable:bouncy` tag fails to load, harmless) |
 | Aeronautics Wind Sound | `aeronautics-wind-sound` | ✅ (added 2026-10-25) | C | Wind in flight, by speed and shelter |
+| Sable Beyond | `sable_beyond` | ✅ (0.5.0 alpha, added 2026-11-21, MIT) | CS | Create machines on Sable ships: the mechanical arm reaches across sub-levels, encased fans push and pull them, water wheels turning in water drive a boat, fire spreads between a ship and the world and goes out in water; its push from flowing fluids is off (Streams Reflowing already carries hulls) and so are its menu buttons (`config/sable_beyond/`) ([0044](decisions/0044-sable-and-create.md)) |
+| Create Aeronautics Addon: Plough & Roll! | `createaeroploughroll` | ✅ (1.2.0 alpha, added 2026-11-21, MIT) | CS | Mechanical ploughs and rollers mounted on a Sable ship work the ground below as it moves; normal rollers replace existing roadbed again |
+| Aeronautics Display Link Fix | `aeronautics-display-link-fix` | ✅ (1.3, added 2026-11-21, MIT) | CS | A display link keeps its target when its ship is assembled or set down |
+| Sable Fix Mod | `sable-fix-mod` | ✅ (1.1.0, added 2026-11-21, MIT) | S | No more duplicated items, rails, torches, redstone or crops when a ship is assembled or set down |
+| Create Aeronautics: Compatibility | `create-aeronautics-compatability` | ✅ (1.1.3, added 2026-11-21, MIT) | CS | Alex's Mobs creatures no longer exhaust the memory trying to path-find on a ship |
+| Furniture with Create and Sable compat | `lets-do-furniture-another-furniture-handcrafted-create-sable` | ✅ (5.0, added 2026-11-21, ARR) | CS | Handcrafted, Quark and Every Compat seats stay usable on a Create contraption or a Sable ship |
 | Create: Steam 'n' Rails | `create-steam-n-rails-1.21.1` | ✅ | CS | The railway (beta) |
 | Overgeared | `overgeared` | ✅ | CS | Forging: blast furnace, hammering, quenching, quality, blueprints |
 | Create: Central Kitchen | `create-central-kitchen` | ✅ (2.6.2b, added 2026-11-15) | CS | Create automates Farmer's Delight: deployers cut on the board, the mechanical arm feeds the cooking pot; requires Create: Dragons Plus 1.11.9 ([0030](decisions/0030-farmers-delight-kitchen.md)) |
@@ -211,6 +217,13 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 | Mod | Reason |
 |---|---|
 | Visual Workbench | Removed on 2026-11-21 ([0043](decisions/0043-hands-on-vanilla.md)): it only changed the vanilla crafting table, into a block of its own that Hands-On Vanilla does not open; the pack has no other crafting table. Puzzles Lib stays for Pick Up Notifier |
+| Create: Loconautics | Trains as Sable sub-levels (MIT code, art all rights reserved): only on CurseForge for now, its Modrinth page is announced; to add once it is published ([0044](decisions/0044-sable-and-create.md)) |
+| Create: Train Functionality | Buildable train carriages on Sable: only on CurseForge, no source ([0044](decisions/0044-sable-and-create.md)) |
+| Cold Sweat Sable Compat, Cold Sweat x Aeronautics | Cold Sweat supports Sable itself since 2.4.1 |
+| MassWeightCompat, Sable Weighted | Duplicate Sable: Physics Compat for the mods of the pack |
+| Sable Assembly Fix, Aeronautics: Addition, Create Aeronautics Roller Fix | Covered by Sable Fix Mod, Sable Beyond and Plough & Roll! |
+| Create: Sable Train Overlay Compat | Shows trains on ships on Create's train map, which needs a map mod the pack does not have (the atlas already marks ships) |
+| Sound Physics Aeronautics | A fork that replaces Sound Physics Remastered to add ship acoustics; held for the team's choice ([0044](decisions/0044-sable-and-create.md)) |
 | Cinematic Interactions | Removed on 2026-11-20 ([0040](decisions/0040-removing-cinematic-interactions.md)): a jar embedded in the pack because it is only on CurseForge, which held back the first Modrinth version; the vanilla stations open their usual windows again |
 | Chipped (with Athena), Beautify! | Removed on 2026-11-01: 6,980 blocks for Chipped, including 1,110 Nether and End variants; Beautify! duplicates Supplementaries, Amendments and Handcrafted ([pack sort](plan/tri-du-pack.md)) |
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Removed by the team on 2026-10-19 |

@@ -47,6 +47,7 @@ One record per settled decision: the context, the options compared, the choice a
 | [0041](0041-gameplay-without-shader.md) | The game does not depend on the shader | Brumaire is a visual layer: the mod gives the clearing mist, the storms and the wind without it; the shader draws no creature or solid thing the world does not hold, nor what a mod already draws |
 | [0042](0042-interaction-language.md) | One interaction language for the stations | Menu, gesture, craft skill; the pot cooks without stirring, faster Spatial GUI windows, « vous » in the tool hints |
 | [0043](0043-hands-on-vanilla.md) | Hands-On Vanilla for the vanilla stations | Crafting table, furnaces, anvil and other vanilla stations worked by hand; the `etabli` prototype removed |
+| [0044](0044-sable-and-create.md) | Sable and Create machines | Six mods bring Create machines and pack mods onto Sable ships; Loconautics waits for Modrinth |
 
 ## Template
 
