@@ -81,7 +81,7 @@ public final class OutilsModule {
         }
     }
 
-    /** « Il te faut une hache », ou « Ton outil n'est pas assez solide » si c'est le bon genre d'outil. */
+    /** « Il vous faut une hache », ou « Votre outil n'est pas assez solide » si c'est le bon genre d'outil. */
     static Component hint(ItemStack held, BlockState state) {
         String tool = toolFor(state);
         if (tool != null && held.is(toolTag(tool))) {

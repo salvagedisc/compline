@@ -6,7 +6,7 @@ Status: written on 2026-10-29. Checked on a test server on 2026-10-29 (NeoForge 
 
 ## The chain, for a player
 
-1. **Bare hands.** Pick up gravel (flint), since 2026-11-13 the only source of flint on the ground (the No Man's Land pebble, one chance in two of flint, left with the mod), Twigs twigs (two sticks each, in forests, taigas and swamps), leaves (a stick 8% of the time). A trunk or a rock does not give way: the action bar says « Il te faut une hache » / « Il te faut une pioche » ("you need an axe / a pickaxe").
+1. **Bare hands.** Pick up gravel (flint), since 2026-11-13 the only source of flint on the ground (the No Man's Land pebble, one chance in two of flint, left with the mod), Twigs twigs (two sticks each, in forests, taigas and swamps), leaves (a stick 8% of the time). A trunk or a rock does not give way: the action bar says « Il vous faut une hache » / « Il vous faut une pioche » ("you need an axe / a pickaxe"; « tu » until 2026-11-21, [interactions](interactions.md)).
 2. **Knapped stone.** Flint used on bare `minecraft:stone` gives a knappable rock (Overgeared, 30% per strike, the flint breaks 15% of the time). A Twigs pebble also turns into a knappable rock in the inventory grid. Right-click with the rock opens Overgeared's knapping grid: axe, pickaxe, shovel, hoe heads, sword blade, hammer head. Head + stick in the 2 × 2 grid = the stone tool (Overgeared's own recipes).
 3. **Wood.** The stone axe fells the tree block by block (TreeChop); each chop costs durability. A log and an axe in the grid give **2 planks**; the axe stays in the grid and loses one point. Create's mechanical saw later gives 6 planks per log.
 4. **Fire.** A campfire is three sticks, three logs and **a flint** instead of coal: fire on the first day, before the furnace. It cooks and purifies water (Thirst Was Reclaimed).
@@ -14,7 +14,7 @@ Status: written on 2026-10-29. Checked on a test server on 2026-10-29 (NeoForge 
 
 ## The rule
 
-The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Ton outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, cut sugar cane and, since 2026-11-13, Regions Unexplored's cattail (No Man's Land's plants left the tag with the mod), Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
+The `outils` module of the `fallow` mod ([mod-fallow](mod-fallow.md#outils-module)). A block needs a tool when it is in the `fallow:outil_requis` block tag (`#minecraft:logs` and `#minecraft:mineable/axe`: every wooden block, crafted or not, from every mod that tags its blocks for the axe) or when it would drop nothing without the correct tool (vanilla `requiresCorrectToolForDrops`: stone, ores, bricks, metal blocks, lanterns). Without the correct tool in the main hand, the mining speed is 0 on both sides (no ghost block), harvesting is refused, and a hint shows at most every two seconds. A tool of the right kind but too weak gets « Votre outil n'est pas assez solide » ("your tool is not strong enough"). The `fallow:sans_outil` tag keeps what grows breakable by hand even when it is tagged for the axe: `#minecraft:sword_efficient` (plants, crops, saplings, pumpkins, melons, cocoa, vines, mushrooms), bamboo, azaleas, cut sugar cane and, since 2026-11-13, Regions Unexplored's cattail (No Man's Land's plants left the tag with the mod), Supplementaries' placed stick, Farm & Charm's rope; and snow. Creative mode and fake players (Create deployers) are not affected.
 
 The team chose on 2026-10-29 that crafted wooden blocks need an axe too (planks, furniture, chests, crafting table, Create's wooden parts). To go back to raw wood only, replace `#minecraft:mineable/axe` by nothing in `fallow:outil_requis` with a datapack (`"replace": true`, `#minecraft:logs` alone); no recompilation.
 
@@ -46,10 +46,10 @@ New chapter « Premiers gestes » (order 1, after Arriver; the other chapters mo
 
 | Code | Test | Expected |
 |---|---|---|
-| G1 | New world, bare hands on a log, then on stone | Nothing breaks; « Il te faut une hache », then « Il te faut une pioche », in French, not spammed |
-| G2 | Stone pickaxe on a diamond ore | « Ton outil n'est pas assez solide », the ore does not break |
+| G1 | New world, bare hands on a log, then on stone | Nothing breaks; « Il vous faut une hache », then « Il vous faut une pioche », in French, not spammed |
+| G2 | Stone pickaxe on a diamond ore | « Votre outil n'est pas assez solide », the ore does not break |
 | G3 | Dirt, sand, gravel, leaves, snow, flowers, wheat, a pumpkin, cocoa, bamboo, reeds by hand | Break as in vanilla |
-| G3b | A crafting table, a chest, planks, a Handcrafted chair by hand, then with an axe | « Il te faut une hache », then they break |
+| G3b | A crafting table, a chest, planks, a Handcrafted chair by hand, then with an axe | « Il vous faut une hache », then they break |
 | G4 | Walk around spawn | A flint within about 5 minutes (gravel; the number to note, since the NML pebble is gone) |
 | G5 | Flint on stone, knap an axe head, head + stick | A stone axe; the tree falls with TreeChop; note the durability used per tree |
 | G6 | Oak log + axe; Regions Unexplored maple log + axe | 2 planks each, the axe stays in the grid with one point less; the server log says how many planks recipes were rewritten |
