@@ -97,6 +97,10 @@ file = "config/handson_delight.properties"
 hash = "ff02b4eb0216e8f43eb9536f75ed7a1a0b1adb94ecf3e31ef8798218f29c789d"
 
 [[files]]
+file = "config/handson_vanilla.properties"
+hash = "d232f799b322a5d4c5b4ad9e0f119666bd7a26bd874c384db79ff4f68b49087d"
+
+[[files]]
 file = "config/hybrid_aquatic.json"
 hash = "12ee2cf37f37fe0ad796fa054e4851b64fbd762d12cb5ad3745191779f2dcd3d"
 
@@ -1295,10 +1299,6 @@ hash = "ea856d563dfe4f9910145de8d4e60ef7d0122a598694f5ca8f615b30f8c18ec8"
 [[files]]
 file = "kubejs/assets/veil/lang/fr_fr.json"
 hash = "60c5a115f610acfe0fda6915262b8f3e5f15d1f1d814656af9eadfa66b9767bb"
-
-[[files]]
-file = "kubejs/assets/visualworkbench/lang/fr_fr.json"
-hash = "5f3dc2e3ddcc9f0b182e143fbacb9a8625f569a7b8c1d53828726c78327ed8ac"
 
 [[files]]
 file = "kubejs/assets/wakes/lang/fr_fr.json"
@@ -3265,10 +3265,6 @@ file = "kubejs/data/twigs/neoforge/biome_modifier/add_ore_rhyolite.json"
 hash = "99b969132018e9da1071065a8593ba9564928b1ed0aa5ae3ab45f9dac071f7d5"
 
 [[files]]
-file = "kubejs/data/visualworkbench/tags/block/unaltered_workbenches.json"
-hash = "9db24c74b14df1b62d578cc37e8eec810c3ecff1f3666bea24f153844938a465"
-
-[[files]]
 file = "kubejs/data/wildernature/tags/worldgen/biome/remove_wolf.json"
 hash = "a78669427b1a39bbc9dbb98b5f59e31a9225622094f6b51919064173047611ff"
 
@@ -4138,11 +4134,6 @@ metafile = true
 [[files]]
 file = "mods/twigs.pw.toml"
 hash = "98ef5714a273c9153fbfaca195806d36f568556819dde7b90ec6561646bede98"
-metafile = true
-
-[[files]]
-file = "mods/visual-workbench.pw.toml"
-hash = "2684f71394862cff4c20d0f4d8491c0f86f12e66879381295e9088e0eded025d"
 metafile = true
 
 [[files]]

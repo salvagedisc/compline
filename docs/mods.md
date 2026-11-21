@@ -109,7 +109,6 @@ Side: C = client, S = server, CS = both. Versions checked on Modrinth for NeoFor
 | Twigs | `twigs` | ✅ | CS | Small decor; rhyolite generation off, tables, Nether blocks and duplicates removed; cobblestone bricks back since 2026-11-13 ([pack sort](plan/tri-du-pack.md)) |
 | Every Compat | `every-compat` | ✅ | CS | Furniture and decor in every wood, including those of Regions Unexplored |
 | HT's TreeChop | `treechop` | ✅ | CS | Chop a tree block by block, the trunk falls last |
-| Visual Workbench | `visual-workbench` | ✅ | CS | Items stay laid out on the workbench; the vanilla crafting table is left to Hands-On Vanilla (`visualworkbench:unaltered_workbenches`, [0043](decisions/0043-hands-on-vanilla.md)) |
 | Immersive Enchanting | `immersive-enchanting` | ✅ (beta) | CS | Enchanting becomes lore: ancient books found, shelved near the table, levels paid in materials ([0008](decisions/0008-enchantement.md)); structures disabled, French translation |
 
 ## Body, camera and gestures
@@ -211,6 +210,7 @@ Already present: AlfinoLib, Configurable (Neruina), Architectury API, Balm, Clot
 
 | Mod | Reason |
 |---|---|
+| Visual Workbench | Removed on 2026-11-21 ([0043](decisions/0043-hands-on-vanilla.md)): it only changed the vanilla crafting table, into a block of its own that Hands-On Vanilla does not open; the pack has no other crafting table. Puzzles Lib stays for Pick Up Notifier |
 | Cinematic Interactions | Removed on 2026-11-20 ([0040](decisions/0040-removing-cinematic-interactions.md)): a jar embedded in the pack because it is only on CurseForge, which held back the first Modrinth version; the vanilla stations open their usual windows again |
 | Chipped (with Athena), Beautify! | Removed on 2026-11-01: 6,980 blocks for Chipped, including 1,110 Nether and End variants; Beautify! duplicates Supplementaries, Amendments and Handcrafted ([pack sort](plan/tri-du-pack.md)) |
 | Bosses of Mass Destruction, Create Ore Excavation, GraveStone Mod, Cosy Critters & Creepy Crawlies, Macaw's Roofs, Macaw's Windows, Real Camera, MB-3D Items | Removed by the team on 2026-10-19 |
